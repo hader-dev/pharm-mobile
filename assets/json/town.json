@@ -1,0 +1,7687 @@
+[
+    {
+        "id": 1,
+        "label": "Adrar",
+        "wilayaId": 1
+    },
+    {
+        "id": 6,
+        "label": "Bouda",
+        "wilayaId": 1
+    },
+    {
+        "id": 13,
+        "label": "Ouled Ahmed Timmi",
+        "wilayaId": 1
+    },
+    {
+        "id": 16,
+        "label": "Reggane",
+        "wilayaId": 1
+    },
+    {
+        "id": 17,
+        "label": "Sali",
+        "wilayaId": 1
+    },
+    {
+        "id": 18,
+        "label": "Sebaa",
+        "wilayaId": 1
+    },
+    {
+        "id": 27,
+        "label": "Tsabit",
+        "wilayaId": 1
+    },
+    {
+        "id": 10,
+        "label": "In Zghmir",
+        "wilayaId": 1
+    },
+    {
+        "id": 28,
+        "label": "Zaouiet Kounta",
+        "wilayaId": 1
+    },
+    {
+        "id": 2,
+        "label": "Akabli",
+        "wilayaId": 1
+    },
+    {
+        "id": 4,
+        "label": "Aoulef",
+        "wilayaId": 1
+    },
+    {
+        "id": 22,
+        "label": "Timekten",
+        "wilayaId": 1
+    },
+    {
+        "id": 26,
+        "label": "Tit",
+        "wilayaId": 1
+    },
+    {
+        "id": 9,
+        "label": "Fenoughil",
+        "wilayaId": 1
+    },
+    {
+        "id": 20,
+        "label": "Tamantit",
+        "wilayaId": 1
+    },
+    {
+        "id": 21,
+        "label": "Tamest",
+        "wilayaId": 1
+    },
+    {
+        "id": 39,
+        "label": "Chlef",
+        "wilayaId": 2
+    },
+    {
+        "id": 54,
+        "label": "Oum Drou",
+        "wilayaId": 2
+    },
+    {
+        "id": 55,
+        "label": "Sendjas",
+        "wilayaId": 2
+    },
+    {
+        "id": 56,
+        "label": "Sidi Abderrahmane",
+        "wilayaId": 2
+    },
+    {
+        "id": 57,
+        "label": "Sidi Akkacha",
+        "wilayaId": 2
+    },
+    {
+        "id": 62,
+        "label": "Tenes",
+        "wilayaId": 2
+    },
+    {
+        "id": 32,
+        "label": "Beni  Bouattab",
+        "wilayaId": 2
+    },
+    {
+        "id": 42,
+        "label": "El Karimia",
+        "wilayaId": 2
+    },
+    {
+        "id": 44,
+        "label": "Harchoun",
+        "wilayaId": 2
+    },
+    {
+        "id": 40,
+        "label": "Dahra",
+        "wilayaId": 2
+    },
+    {
+        "id": 61,
+        "label": "Taougrit",
+        "wilayaId": 2
+    },
+    {
+        "id": 33,
+        "label": "Beni Haoua",
+        "wilayaId": 2
+    },
+    {
+        "id": 37,
+        "label": "Breira",
+        "wilayaId": 2
+    },
+    {
+        "id": 49,
+        "label": "Oued Goussine",
+        "wilayaId": 2
+    },
+    {
+        "id": 38,
+        "label": "Chettia",
+        "wilayaId": 2
+    },
+    {
+        "id": 46,
+        "label": "Labiod Medjadja",
+        "wilayaId": 2
+    },
+    {
+        "id": 53,
+        "label": "Ouled Fares",
+        "wilayaId": 2
+    },
+    {
+        "id": 35,
+        "label": "Boukadir",
+        "wilayaId": 2
+    },
+    {
+        "id": 50,
+        "label": "Oued Sly",
+        "wilayaId": 2
+    },
+    {
+        "id": 58,
+        "label": "Sobha",
+        "wilayaId": 2
+    },
+    {
+        "id": 31,
+        "label": "Benairia",
+        "wilayaId": 2
+    },
+    {
+        "id": 36,
+        "label": "Bouzeghaia",
+        "wilayaId": 2
+    },
+    {
+        "id": 63,
+        "label": "Zeboudja",
+        "wilayaId": 2
+    },
+    {
+        "id": 29,
+        "label": "Abou El Hassane",
+        "wilayaId": 2
+    },
+    {
+        "id": 59,
+        "label": "Tadjena",
+        "wilayaId": 2
+    },
+    {
+        "id": 60,
+        "label": "Talassa",
+        "wilayaId": 2
+    },
+    {
+        "id": 43,
+        "label": "El Marsa",
+        "wilayaId": 2
+    },
+    {
+        "id": 47,
+        "label": "Moussadek",
+        "wilayaId": 2
+    },
+    {
+        "id": 34,
+        "label": "Beni Rached",
+        "wilayaId": 2
+    },
+    {
+        "id": 48,
+        "label": "Oued Fodda",
+        "wilayaId": 2
+    },
+    {
+        "id": 51,
+        "label": "Ouled Abbes",
+        "wilayaId": 2
+    },
+    {
+        "id": 41,
+        "label": "El Hadjadj",
+        "wilayaId": 2
+    },
+    {
+        "id": 52,
+        "label": "Ouled Ben Abdelkader",
+        "wilayaId": 2
+    },
+    {
+        "id": 30,
+        "label": "Ain Merane",
+        "wilayaId": 2
+    },
+    {
+        "id": 45,
+        "label": "Herenfa",
+        "wilayaId": 2
+    },
+    {
+        "id": 79,
+        "label": "Laghouat",
+        "wilayaId": 3
+    },
+    {
+        "id": 68,
+        "label": "Benacer Benchohra",
+        "wilayaId": 3
+    },
+    {
+        "id": 78,
+        "label": "Ksar El Hirane",
+        "wilayaId": 3
+    },
+    {
+        "id": 70,
+        "label": "El Assafia",
+        "wilayaId": 3
+    },
+    {
+        "id": 84,
+        "label": "Sidi Makhlouf",
+        "wilayaId": 3
+    },
+    {
+        "id": 75,
+        "label": "Hassi Delaa",
+        "wilayaId": 3
+    },
+    {
+        "id": 76,
+        "label": "Hassi R'mel",
+        "wilayaId": 3
+    },
+    {
+        "id": 65,
+        "label": "Ain Madhi",
+        "wilayaId": 3
+    },
+    {
+        "id": 72,
+        "label": "El Haouaita",
+        "wilayaId": 3
+    },
+    {
+        "id": 77,
+        "label": "Kheneg",
+        "wilayaId": 3
+    },
+    {
+        "id": 85,
+        "label": "Tadjemout",
+        "wilayaId": 3
+    },
+    {
+        "id": 86,
+        "label": "Tadjrouna",
+        "wilayaId": 3
+    },
+    {
+        "id": 66,
+        "label": "Ain Sidi Ali",
+        "wilayaId": 3
+    },
+    {
+        "id": 67,
+        "label": "El Beidha",
+        "wilayaId": 3
+    },
+    {
+        "id": 73,
+        "label": "Gueltat Sidi Saad",
+        "wilayaId": 3
+    },
+    {
+        "id": 69,
+        "label": "Brida",
+        "wilayaId": 3
+    },
+    {
+        "id": 74,
+        "label": "Hadj Mechri",
+        "wilayaId": 3
+    },
+    {
+        "id": 87,
+        "label": "Taouiala",
+        "wilayaId": 3
+    },
+    {
+        "id": 71,
+        "label": "El Ghicha",
+        "wilayaId": 3
+    },
+    {
+        "id": 64,
+        "label": "Aflou",
+        "wilayaId": 3
+    },
+    {
+        "id": 82,
+        "label": "Sebgag",
+        "wilayaId": 3
+    },
+    {
+        "id": 83,
+        "label": "Sidi Bouzid",
+        "wilayaId": 3
+    },
+    {
+        "id": 80,
+        "label": "Oued Morra",
+        "wilayaId": 3
+    },
+    {
+        "id": 81,
+        "label": "Oued M'zi",
+        "wilayaId": 3
+    },
+    {
+        "id": 94,
+        "label": "Ain Zitoun",
+        "wilayaId": 4
+    },
+    {
+        "id": 112,
+        "label": "Oum El Bouaghi",
+        "wilayaId": 4
+    },
+    {
+        "id": 89,
+        "label": "Ain Beida",
+        "wilayaId": 4
+    },
+    {
+        "id": 96,
+        "label": "Berriche",
+        "wilayaId": 4
+    },
+    {
+        "id": 116,
+        "label": "Zorg",
+        "wilayaId": 4
+    },
+    {
+        "id": 93,
+        "label": "Ain M'lila",
+        "wilayaId": 4
+    },
+    {
+        "id": 109,
+        "label": "Ouled Gacem",
+        "wilayaId": 4
+    },
+    {
+        "id": 110,
+        "label": "Ouled Hamla",
+        "wilayaId": 4
+    },
+    {
+        "id": 99,
+        "label": "El Amiria",
+        "wilayaId": 4
+    },
+    {
+        "id": 114,
+        "label": "Sigus",
+        "wilayaId": 4
+    },
+    {
+        "id": 88,
+        "label": "Ain Babouche",
+        "wilayaId": 4
+    },
+    {
+        "id": 90,
+        "label": "Ain Diss",
+        "wilayaId": 4
+    },
+    {
+        "id": 98,
+        "label": "Dhalaa",
+        "wilayaId": 4
+    },
+    {
+        "id": 101,
+        "label": "El Djazia",
+        "wilayaId": 4
+    },
+    {
+        "id": 92,
+        "label": "Ain Kercha",
+        "wilayaId": 4
+    },
+    {
+        "id": 103,
+        "label": "El Harmilia",
+        "wilayaId": 4
+    },
+    {
+        "id": 105,
+        "label": "Hanchir Toumghani",
+        "wilayaId": 4
+    },
+    {
+        "id": 104,
+        "label": "Fkirina",
+        "wilayaId": 4
+    },
+    {
+        "id": 108,
+        "label": "Oued Nini",
+        "wilayaId": 4
+    },
+    {
+        "id": 97,
+        "label": "Bir Chouhada",
+        "wilayaId": 4
+    },
+    {
+        "id": 111,
+        "label": "Ouled Zouai",
+        "wilayaId": 4
+    },
+    {
+        "id": 115,
+        "label": "Souk Naamane",
+        "wilayaId": 4
+    },
+    {
+        "id": 106,
+        "label": "Ksar Sbahi",
+        "wilayaId": 4
+    },
+    {
+        "id": 95,
+        "label": "Behir Chergui",
+        "wilayaId": 4
+    },
+    {
+        "id": 100,
+        "label": "El Belala",
+        "wilayaId": 4
+    },
+    {
+        "id": 107,
+        "label": "Meskiana",
+        "wilayaId": 4
+    },
+    {
+        "id": 113,
+        "label": "Rahia",
+        "wilayaId": 4
+    },
+    {
+        "id": 91,
+        "label": "Ain Fekroun",
+        "wilayaId": 4
+    },
+    {
+        "id": 102,
+        "label": "El Fedjoudj Boughrara Sa",
+        "wilayaId": 4
+    },
+    {
+        "id": 123,
+        "label": "Batna",
+        "wilayaId": 5
+    },
+    {
+        "id": 136,
+        "label": "Fesdis",
+        "wilayaId": 5
+    },
+    {
+        "id": 154,
+        "label": "Oued Chaaba",
+        "wilayaId": 5
+    },
+    {
+        "id": 141,
+        "label": "Hidoussa",
+        "wilayaId": 5
+    },
+    {
+        "id": 145,
+        "label": "Ksar Bellezma",
+        "wilayaId": 5
+    },
+    {
+        "id": 152,
+        "label": "Merouana",
+        "wilayaId": 5
+    },
+    {
+        "id": 155,
+        "label": "Oued El Ma",
+        "wilayaId": 5
+    },
+    {
+        "id": 147,
+        "label": "Lazrou",
+        "wilayaId": 5
+    },
+    {
+        "id": 167,
+        "label": "Seriana",
+        "wilayaId": 5
+    },
+    {
+        "id": 177,
+        "label": "Zanet El Beida",
+        "wilayaId": 5
+    },
+    {
+        "id": 151,
+        "label": "Menaa",
+        "wilayaId": 5
+    },
+    {
+        "id": 174,
+        "label": "Tigharghar",
+        "wilayaId": 5
+    },
+    {
+        "id": 119,
+        "label": "Ain Yagout",
+        "wilayaId": 5
+    },
+    {
+        "id": 128,
+        "label": "Boumia",
+        "wilayaId": 5
+    },
+    {
+        "id": 132,
+        "label": "Djerma",
+        "wilayaId": 5
+    },
+    {
+        "id": 135,
+        "label": "El Madher",
+        "wilayaId": 5
+    },
+    {
+        "id": 162,
+        "label": "Ouyoun El Assafir",
+        "wilayaId": 5
+    },
+    {
+        "id": 171,
+        "label": "Tazoult",
+        "wilayaId": 5
+    },
+    {
+        "id": 127,
+        "label": "Boumagueur",
+        "wilayaId": 5
+    },
+    {
+        "id": 153,
+        "label": "N Gaous",
+        "wilayaId": 5
+    },
+    {
+        "id": 165,
+        "label": "Sefiane",
+        "wilayaId": 5
+    },
+    {
+        "id": 120,
+        "label": "Arris",
+        "wilayaId": 5
+    },
+    {
+        "id": 173,
+        "label": "Tighanimine",
+        "wilayaId": 5
+    },
+    {
+        "id": 117,
+        "label": "Ain Djasser",
+        "wilayaId": 5
+    },
+    {
+        "id": 134,
+        "label": "El Hassi",
+        "wilayaId": 5
+    },
+    {
+        "id": 166,
+        "label": "Seggana",
+        "wilayaId": 5
+    },
+    {
+        "id": 175,
+        "label": "Tilatou",
+        "wilayaId": 5
+    },
+    {
+        "id": 137,
+        "label": "Foum Toub",
+        "wilayaId": 5
+    },
+    {
+        "id": 142,
+        "label": "Ichemoul",
+        "wilayaId": 5
+    },
+    {
+        "id": 143,
+        "label": "Inoughissen",
+        "wilayaId": 5
+    },
+    {
+        "id": 129,
+        "label": "Bouzina",
+        "wilayaId": 5
+    },
+    {
+        "id": 146,
+        "label": "Larbaa",
+        "wilayaId": 5
+    },
+    {
+        "id": 126,
+        "label": "Boulhilat",
+        "wilayaId": 5
+    },
+    {
+        "id": 130,
+        "label": "Chemora",
+        "wilayaId": 5
+    },
+    {
+        "id": 122,
+        "label": "Barika",
+        "wilayaId": 5
+    },
+    {
+        "id": 125,
+        "label": "Bitam",
+        "wilayaId": 5
+    },
+    {
+        "id": 149,
+        "label": "M Doukal",
+        "wilayaId": 5
+    },
+    {
+        "id": 121,
+        "label": "Azil Abedelkader",
+        "wilayaId": 5
+    },
+    {
+        "id": 133,
+        "label": "Djezzar",
+        "wilayaId": 5
+    },
+    {
+        "id": 157,
+        "label": "Ouled Ammar",
+        "wilayaId": 5
+    },
+    {
+        "id": 138,
+        "label": "Ghassira",
+        "wilayaId": 5
+    },
+    {
+        "id": 144,
+        "label": "Kimmel",
+        "wilayaId": 5
+    },
+    {
+        "id": 168,
+        "label": "T Kout",
+        "wilayaId": 5
+    },
+    {
+        "id": 118,
+        "label": "Ain Touta",
+        "wilayaId": 5
+    },
+    {
+        "id": 124,
+        "label": "Beni Foudhala El Hakania",
+        "wilayaId": 5
+    },
+    {
+        "id": 150,
+        "label": "Maafa",
+        "wilayaId": 5
+    },
+    {
+        "id": 158,
+        "label": "Ouled Aouf",
+        "wilayaId": 5
+    },
+    {
+        "id": 131,
+        "label": "Chir",
+        "wilayaId": 5
+    },
+    {
+        "id": 156,
+        "label": "Oued Taga",
+        "wilayaId": 5
+    },
+    {
+        "id": 172,
+        "label": "Teniet El Abed",
+        "wilayaId": 5
+    },
+    {
+        "id": 159,
+        "label": "Ouled Fadel",
+        "wilayaId": 5
+    },
+    {
+        "id": 176,
+        "label": "Timgad",
+        "wilayaId": 5
+    },
+    {
+        "id": 139,
+        "label": "Gosbat",
+        "wilayaId": 5
+    },
+    {
+        "id": 140,
+        "label": "Guigba",
+        "wilayaId": 5
+    },
+    {
+        "id": 160,
+        "label": "Ouled Sellem",
+        "wilayaId": 5
+    },
+    {
+        "id": 163,
+        "label": "Rahbat",
+        "wilayaId": 5
+    },
+    {
+        "id": 164,
+        "label": "Ras El Aioun",
+        "wilayaId": 5
+    },
+    {
+        "id": 169,
+        "label": "Talkhamt",
+        "wilayaId": 5
+    },
+    {
+        "id": 148,
+        "label": "Lemcene",
+        "wilayaId": 5
+    },
+    {
+        "id": 161,
+        "label": "Ouled Si Slimane",
+        "wilayaId": 5
+    },
+    {
+        "id": 170,
+        "label": "Taxlent",
+        "wilayaId": 5
+    },
+    {
+        "id": 187,
+        "label": "Bejaia",
+        "wilayaId": 6
+    },
+    {
+        "id": 210,
+        "label": "Oued Ghir",
+        "wilayaId": 6
+    },
+    {
+        "id": 184,
+        "label": "Amizour",
+        "wilayaId": 6
+    },
+    {
+        "id": 188,
+        "label": "Beni Djellil",
+        "wilayaId": 6
+    },
+    {
+        "id": 202,
+        "label": "Feraoun",
+        "wilayaId": 6
+    },
+    {
+        "id": 214,
+        "label": "Smaoun",
+        "wilayaId": 6
+    },
+    {
+        "id": 226,
+        "label": "Timezrit",
+        "wilayaId": 6
+    },
+    {
+        "id": 209,
+        "label": "Melbou",
+        "wilayaId": 6
+    },
+    {
+        "id": 215,
+        "label": "Souk El Tenine",
+        "wilayaId": 6
+    },
+    {
+        "id": 219,
+        "label": "Tamridjet",
+        "wilayaId": 6
+    },
+    {
+        "id": 194,
+        "label": "Boukhelifa",
+        "wilayaId": 6
+    },
+    {
+        "id": 217,
+        "label": "Tala Hamza",
+        "wilayaId": 6
+    },
+    {
+        "id": 224,
+        "label": "Tichy",
+        "wilayaId": 6
+    },
+    {
+        "id": 179,
+        "label": "Ait R'zine",
+        "wilayaId": 6
+    },
+    {
+        "id": 204,
+        "label": "Ighil-Ali",
+        "wilayaId": 6
+    },
+    {
+        "id": 180,
+        "label": "Ait-Smail",
+        "wilayaId": 6
+    },
+    {
+        "id": 197,
+        "label": "Darguina",
+        "wilayaId": 6
+    },
+    {
+        "id": 221,
+        "label": "Taskriout",
+        "wilayaId": 6
+    },
+    {
+        "id": 185,
+        "label": "Aokas",
+        "wilayaId": 6
+    },
+    {
+        "id": 228,
+        "label": "Tizi-N'berber",
+        "wilayaId": 6
+    },
+    {
+        "id": 178,
+        "label": "Adekar",
+        "wilayaId": 6
+    },
+    {
+        "id": 189,
+        "label": "Beni K'sila",
+        "wilayaId": 6
+    },
+    {
+        "id": 220,
+        "label": "Taourit Ighil",
+        "wilayaId": 6
+    },
+    {
+        "id": 181,
+        "label": "Akbou",
+        "wilayaId": 6
+    },
+    {
+        "id": 195,
+        "label": "Chellata",
+        "wilayaId": 6
+    },
+    {
+        "id": 205,
+        "label": "Ighram",
+        "wilayaId": 6
+    },
+    {
+        "id": 218,
+        "label": "Tamokra",
+        "wilayaId": 6
+    },
+    {
+        "id": 183,
+        "label": "Amalou",
+        "wilayaId": 6
+    },
+    {
+        "id": 193,
+        "label": "Bouhamza",
+        "wilayaId": 6
+    },
+    {
+        "id": 208,
+        "label": "M'cisna",
+        "wilayaId": 6
+    },
+    {
+        "id": 211,
+        "label": "Seddouk",
+        "wilayaId": 6
+    },
+    {
+        "id": 190,
+        "label": "Beni-Mallikeche",
+        "wilayaId": 6
+    },
+    {
+        "id": 192,
+        "label": "Boudjellil",
+        "wilayaId": 6
+    },
+    {
+        "id": 222,
+        "label": "Tazmalt",
+        "wilayaId": 6
+    },
+    {
+        "id": 182,
+        "label": "Akfadou",
+        "wilayaId": 6
+    },
+    {
+        "id": 196,
+        "label": "Chemini",
+        "wilayaId": 6
+    },
+    {
+        "id": 216,
+        "label": "Souk Oufella",
+        "wilayaId": 6
+    },
+    {
+        "id": 223,
+        "label": "Tibane",
+        "wilayaId": 6
+    },
+    {
+        "id": 186,
+        "label": "Barbacha",
+        "wilayaId": 6
+    },
+    {
+        "id": 206,
+        "label": "Kendira",
+        "wilayaId": 6
+    },
+    {
+        "id": 203,
+        "label": "Ouzellaguen",
+        "wilayaId": 6
+    },
+    {
+        "id": 199,
+        "label": "Leflaye",
+        "wilayaId": 6
+    },
+    {
+        "id": 212,
+        "label": "Sidi Ayad",
+        "wilayaId": 6
+    },
+    {
+        "id": 213,
+        "label": "Sidi-Aich",
+        "wilayaId": 6
+    },
+    {
+        "id": 225,
+        "label": "Tifra",
+        "wilayaId": 6
+    },
+    {
+        "id": 227,
+        "label": "Tinebdar",
+        "wilayaId": 6
+    },
+    {
+        "id": 200,
+        "label": "El Kseur",
+        "wilayaId": 6
+    },
+    {
+        "id": 201,
+        "label": "Fenaia Il Maten",
+        "wilayaId": 6
+    },
+    {
+        "id": 229,
+        "label": "Toudja",
+        "wilayaId": 6
+    },
+    {
+        "id": 198,
+        "label": "Dra El Caid",
+        "wilayaId": 6
+    },
+    {
+        "id": 207,
+        "label": "Kherrata",
+        "wilayaId": 6
+    },
+    {
+        "id": 191,
+        "label": "Benimaouche",
+        "wilayaId": 6
+    },
+    {
+        "id": 233,
+        "label": "Biskra",
+        "wilayaId": 7
+    },
+    {
+        "id": 243,
+        "label": "El Hadjab",
+        "wilayaId": 7
+    },
+    {
+        "id": 230,
+        "label": "Ain Naga",
+        "wilayaId": 7
+    },
+    {
+        "id": 238,
+        "label": "Chetma",
+        "wilayaId": 7
+    },
+    {
+        "id": 244,
+        "label": "El Haouch",
+        "wilayaId": 7
+    },
+    {
+        "id": 260,
+        "label": "Sidi Okba",
+        "wilayaId": 7
+    },
+    {
+        "id": 251,
+        "label": "M'chouneche",
+        "wilayaId": 7
+    },
+    {
+        "id": 241,
+        "label": "El Feidh",
+        "wilayaId": 7
+    },
+    {
+        "id": 248,
+        "label": "Khenguet Sidi Nadji",
+        "wilayaId": 7
+    },
+    {
+        "id": 253,
+        "label": "Meziraa",
+        "wilayaId": 7
+    },
+    {
+        "id": 262,
+        "label": "Zeribet El Oued",
+        "wilayaId": 7
+    },
+    {
+        "id": 231,
+        "label": "Ain Zaatout",
+        "wilayaId": 7
+    },
+    {
+        "id": 245,
+        "label": "El Kantara",
+        "wilayaId": 7
+    },
+    {
+        "id": 246,
+        "label": "El Outaya",
+        "wilayaId": 7
+    },
+    {
+        "id": 236,
+        "label": "Branis",
+        "wilayaId": 7
+    },
+    {
+        "id": 239,
+        "label": "Djemorah",
+        "wilayaId": 7
+    },
+    {
+        "id": 234,
+        "label": "Bordj Ben Azzouz",
+        "wilayaId": 7
+    },
+    {
+        "id": 235,
+        "label": "Bouchakroun",
+        "wilayaId": 7
+    },
+    {
+        "id": 249,
+        "label": "Lichana",
+        "wilayaId": 7
+    },
+    {
+        "id": 261,
+        "label": "Tolga",
+        "wilayaId": 7
+    },
+    {
+        "id": 250,
+        "label": "Lioua",
+        "wilayaId": 7
+    },
+    {
+        "id": 252,
+        "label": "Mekhadma",
+        "wilayaId": 7
+    },
+    {
+        "id": 254,
+        "label": "M'lili",
+        "wilayaId": 7
+    },
+    {
+        "id": 256,
+        "label": "Oumache",
+        "wilayaId": 7
+    },
+    {
+        "id": 257,
+        "label": "Ourlal",
+        "wilayaId": 7
+    },
+    {
+        "id": 242,
+        "label": "El Ghrous",
+        "wilayaId": 7
+    },
+    {
+        "id": 247,
+        "label": "Foughala",
+        "wilayaId": 7
+    },
+    {
+        "id": 264,
+        "label": "Bechar",
+        "wilayaId": 8
+    },
+    {
+        "id": 268,
+        "label": "Boukais",
+        "wilayaId": 8
+    },
+    {
+        "id": 275,
+        "label": "Lahmar",
+        "wilayaId": 8
+    },
+    {
+        "id": 278,
+        "label": "Mogheul",
+        "wilayaId": 8
+    },
+    {
+        "id": 272,
+        "label": "Kenadsa",
+        "wilayaId": 8
+    },
+    {
+        "id": 277,
+        "label": "Meridja",
+        "wilayaId": 8
+    },
+    {
+        "id": 280,
+        "label": "Tabelbala",
+        "wilayaId": 8
+    },
+    {
+        "id": 281,
+        "label": "Taghit",
+        "wilayaId": 8
+    },
+    {
+        "id": 263,
+        "label": "Abadla",
+        "wilayaId": 8
+    },
+    {
+        "id": 270,
+        "label": "Erg-Ferradj",
+        "wilayaId": 8
+    },
+    {
+        "id": 276,
+        "label": "Machraa-Houari-Boumediene",
+        "wilayaId": 8
+    },
+    {
+        "id": 267,
+        "label": "Beni-Ounif",
+        "wilayaId": 8
+    },
+    {
+        "id": 288,
+        "label": "Blida",
+        "wilayaId": 9
+    },
+    {
+        "id": 289,
+        "label": "Bouarfa",
+        "wilayaId": 9
+    },
+    {
+        "id": 292,
+        "label": "Bouinan",
+        "wilayaId": 9
+    },
+    {
+        "id": 293,
+        "label": "Chebli",
+        "wilayaId": 9
+    },
+    {
+        "id": 286,
+        "label": "Beni-Tamou",
+        "wilayaId": 9
+    },
+    {
+        "id": 287,
+        "label": "Benkhelil",
+        "wilayaId": 9
+    },
+    {
+        "id": 304,
+        "label": "Oued El Alleug",
+        "wilayaId": 9
+    },
+    {
+        "id": 285,
+        "label": "Beni Mered",
+        "wilayaId": 9
+    },
+    {
+        "id": 295,
+        "label": "Chrea",
+        "wilayaId": 9
+    },
+    {
+        "id": 306,
+        "label": "Ouled Yaich",
+        "wilayaId": 9
+    },
+    {
+        "id": 297,
+        "label": "El-Affroun",
+        "wilayaId": 9
+    },
+    {
+        "id": 303,
+        "label": "Oued  Djer",
+        "wilayaId": 9
+    },
+    {
+        "id": 284,
+        "label": "Ain Romana",
+        "wilayaId": 9
+    },
+    {
+        "id": 294,
+        "label": "Chiffa",
+        "wilayaId": 9
+    },
+    {
+        "id": 302,
+        "label": "Mouzaia",
+        "wilayaId": 9
+    },
+    {
+        "id": 296,
+        "label": "Djebabra",
+        "wilayaId": 9
+    },
+    {
+        "id": 301,
+        "label": "Meftah",
+        "wilayaId": 9
+    },
+    {
+        "id": 290,
+        "label": "Boufarik",
+        "wilayaId": 9
+    },
+    {
+        "id": 298,
+        "label": "Guerrouaou",
+        "wilayaId": 9
+    },
+    {
+        "id": 308,
+        "label": "Soumaa",
+        "wilayaId": 9
+    },
+    {
+        "id": 300,
+        "label": "Larbaa",
+        "wilayaId": 9
+    },
+    {
+        "id": 307,
+        "label": "Souhane",
+        "wilayaId": 9
+    },
+    {
+        "id": 291,
+        "label": "Bougara",
+        "wilayaId": 9
+    },
+    {
+        "id": 299,
+        "label": "Hammam Elouane",
+        "wilayaId": 9
+    },
+    {
+        "id": 305,
+        "label": "Ouled Slama",
+        "wilayaId": 9
+    },
+    {
+        "id": 313,
+        "label": "Ain Turk",
+        "wilayaId": 10
+    },
+    {
+        "id": 315,
+        "label": "Ait Laaziz",
+        "wilayaId": 10
+    },
+    {
+        "id": 321,
+        "label": "Bouira",
+        "wilayaId": 10
+    },
+    {
+        "id": 332,
+        "label": "El-Mokrani",
+        "wilayaId": 10
+    },
+    {
+        "id": 348,
+        "label": "Souk El Khemis",
+        "wilayaId": 10
+    },
+    {
+        "id": 316,
+        "label": "Aomar",
+        "wilayaId": 10
+    },
+    {
+        "id": 326,
+        "label": "Djebahia",
+        "wilayaId": 10
+    },
+    {
+        "id": 337,
+        "label": "Kadiria",
+        "wilayaId": 10
+    },
+    {
+        "id": 335,
+        "label": "Haizer",
+        "wilayaId": 10
+    },
+    {
+        "id": 350,
+        "label": "Taghzout",
+        "wilayaId": 10
+    },
+    {
+        "id": 320,
+        "label": "Bouderbala",
+        "wilayaId": 10
+    },
+    {
+        "id": 322,
+        "label": "Boukram",
+        "wilayaId": 10
+    },
+    {
+        "id": 333,
+        "label": "Guerrouma",
+        "wilayaId": 10
+    },
+    {
+        "id": 338,
+        "label": "Lakhdaria",
+        "wilayaId": 10
+    },
+    {
+        "id": 340,
+        "label": "Maala",
+        "wilayaId": 10
+    },
+    {
+        "id": 353,
+        "label": "Z'barbar (El Isseri )",
+        "wilayaId": 10
+    },
+    {
+        "id": 329,
+        "label": "El Hachimia",
+        "wilayaId": 10
+    },
+    {
+        "id": 343,
+        "label": "Oued El Berdi",
+        "wilayaId": 10
+    },
+    {
+        "id": 319,
+        "label": "Bordj Okhriss",
+        "wilayaId": 10
+    },
+    {
+        "id": 334,
+        "label": "Hadjera Zerga",
+        "wilayaId": 10
+    },
+    {
+        "id": 342,
+        "label": "Mezdour",
+        "wilayaId": 10
+    },
+    {
+        "id": 351,
+        "label": "Taguedite",
+        "wilayaId": 10
+    },
+    {
+        "id": 310,
+        "label": "Ahl El Ksar",
+        "wilayaId": 10
+    },
+    {
+        "id": 317,
+        "label": "Bechloul",
+        "wilayaId": 10
+    },
+    {
+        "id": 327,
+        "label": "El Adjiba",
+        "wilayaId": 10
+    },
+    {
+        "id": 328,
+        "label": "El Asnam",
+        "wilayaId": 10
+    },
+    {
+        "id": 344,
+        "label": "Ouled Rached",
+        "wilayaId": 10
+    },
+    {
+        "id": 311,
+        "label": "Ain El Hadjar",
+        "wilayaId": 10
+    },
+    {
+        "id": 312,
+        "label": "Ain Laloui",
+        "wilayaId": 10
+    },
+    {
+        "id": 314,
+        "label": "Ain-Bessem",
+        "wilayaId": 10
+    },
+    {
+        "id": 318,
+        "label": "Bir Ghbalou",
+        "wilayaId": 10
+    },
+    {
+        "id": 330,
+        "label": "El Khabouzia",
+        "wilayaId": 10
+    },
+    {
+        "id": 345,
+        "label": "Raouraoua",
+        "wilayaId": 10
+    },
+    {
+        "id": 309,
+        "label": "Aghbalou",
+        "wilayaId": 10
+    },
+    {
+        "id": 323,
+        "label": "Chorfa",
+        "wilayaId": 10
+    },
+    {
+        "id": 336,
+        "label": "Hanif",
+        "wilayaId": 10
+    },
+    {
+        "id": 339,
+        "label": "M Chedallah",
+        "wilayaId": 10
+    },
+    {
+        "id": 347,
+        "label": "Saharidj",
+        "wilayaId": 10
+    },
+    {
+        "id": 352,
+        "label": "Ath Mansour",
+        "wilayaId": 10
+    },
+    {
+        "id": 324,
+        "label": "Dechmia",
+        "wilayaId": 10
+    },
+    {
+        "id": 325,
+        "label": "Dirah",
+        "wilayaId": 10
+    },
+    {
+        "id": 331,
+        "label": "El-Hakimia",
+        "wilayaId": 10
+    },
+    {
+        "id": 341,
+        "label": "Maamora",
+        "wilayaId": 10
+    },
+    {
+        "id": 346,
+        "label": "Ridane",
+        "wilayaId": 10
+    },
+    {
+        "id": 349,
+        "label": "Sour El Ghozlane",
+        "wilayaId": 10
+    },
+    {
+        "id": 355,
+        "label": "Ain Amguel",
+        "wilayaId": 11
+    },
+    {
+        "id": 361,
+        "label": "Tamanrasset",
+        "wilayaId": 11
+    },
+    {
+        "id": 354,
+        "label": "Abelsa",
+        "wilayaId": 11
+    },
+    {
+        "id": 359,
+        "label": "Idles",
+        "wilayaId": 11
+    },
+    {
+        "id": 362,
+        "label": "Tazrouk",
+        "wilayaId": 11
+    },
+    {
+        "id": 390,
+        "label": "Tebessa",
+        "wilayaId": 12
+    },
+    {
+        "id": 369,
+        "label": "Bir-El-Ater",
+        "wilayaId": 12
+    },
+    {
+        "id": 378,
+        "label": "El Ogla El Malha",
+        "wilayaId": 12
+    },
+    {
+        "id": 372,
+        "label": "Cheria",
+        "wilayaId": 12
+    },
+    {
+        "id": 391,
+        "label": "Telidjen",
+        "wilayaId": 12
+    },
+    {
+        "id": 370,
+        "label": "Boukhadra",
+        "wilayaId": 12
+    },
+    {
+        "id": 379,
+        "label": "El-Aouinet",
+        "wilayaId": 12
+    },
+    {
+        "id": 381,
+        "label": "Ferkane",
+        "wilayaId": 12
+    },
+    {
+        "id": 385,
+        "label": "Negrine",
+        "wilayaId": 12
+    },
+    {
+        "id": 368,
+        "label": "Bir Mokkadem",
+        "wilayaId": 12
+    },
+    {
+        "id": 382,
+        "label": "Guorriguer",
+        "wilayaId": 12
+    },
+    {
+        "id": 383,
+        "label": "Hammamet",
+        "wilayaId": 12
+    },
+    {
+        "id": 366,
+        "label": "Bekkaria",
+        "wilayaId": 12
+    },
+    {
+        "id": 371,
+        "label": "Boulhaf Dyr",
+        "wilayaId": 12
+    },
+    {
+        "id": 373,
+        "label": "El Kouif",
+        "wilayaId": 12
+    },
+    {
+        "id": 367,
+        "label": "Bir Dheheb",
+        "wilayaId": 12
+    },
+    {
+        "id": 384,
+        "label": "Morsott",
+        "wilayaId": 12
+    },
+    {
+        "id": 365,
+        "label": "Bedjene",
+        "wilayaId": 12
+    },
+    {
+        "id": 376,
+        "label": "El Mezeraa",
+        "wilayaId": 12
+    },
+    {
+        "id": 377,
+        "label": "El Ogla",
+        "wilayaId": 12
+    },
+    {
+        "id": 389,
+        "label": "Stah Guentis",
+        "wilayaId": 12
+    },
+    {
+        "id": 364,
+        "label": "Ain Zerga",
+        "wilayaId": 12
+    },
+    {
+        "id": 375,
+        "label": "El Meridj",
+        "wilayaId": 12
+    },
+    {
+        "id": 386,
+        "label": "Ouenza",
+        "wilayaId": 12
+    },
+    {
+        "id": 374,
+        "label": "El Malabiod",
+        "wilayaId": 12
+    },
+    {
+        "id": 380,
+        "label": "El-Houidjbet",
+        "wilayaId": 12
+    },
+    {
+        "id": 387,
+        "label": "Oum Ali",
+        "wilayaId": 12
+    },
+    {
+        "id": 388,
+        "label": "Saf Saf El Ouesra",
+        "wilayaId": 12
+    },
+    {
+        "id": 443,
+        "label": "Tlemcen",
+        "wilayaId": 13
+    },
+    {
+        "id": 396,
+        "label": "Ain Nehala",
+        "wilayaId": 13
+    },
+    {
+        "id": 397,
+        "label": "Ain Tellout",
+        "wilayaId": 13
+    },
+    {
+        "id": 398,
+        "label": "Ain Youcef",
+        "wilayaId": 13
+    },
+    {
+        "id": 405,
+        "label": "Beni Ouarsous",
+        "wilayaId": 13
+    },
+    {
+        "id": 416,
+        "label": "El Fehoul",
+        "wilayaId": 13
+    },
+    {
+        "id": 431,
+        "label": "Remchi",
+        "wilayaId": 13
+    },
+    {
+        "id": 433,
+        "label": "Sebbaa Chioukh",
+        "wilayaId": 13
+    },
+    {
+        "id": 409,
+        "label": "Bouhlou",
+        "wilayaId": 13
+    },
+    {
+        "id": 432,
+        "label": "Sabra",
+        "wilayaId": 13
+    },
+    {
+        "id": 412,
+        "label": "Dar Yaghmoracen",
+        "wilayaId": 13
+    },
+    {
+        "id": 419,
+        "label": "Ghazaouet",
+        "wilayaId": 13
+    },
+    {
+        "id": 438,
+        "label": "Souahlia",
+        "wilayaId": 13
+    },
+    {
+        "id": 442,
+        "label": "Tianet",
+        "wilayaId": 13
+    },
+    {
+        "id": 406,
+        "label": "Beni Smiel",
+        "wilayaId": 13
+    },
+    {
+        "id": 428,
+        "label": "Oued Lakhdar",
+        "wilayaId": 13
+    },
+    {
+        "id": 429,
+        "label": "Ouled Mimoun",
+        "wilayaId": 13
+    },
+    {
+        "id": 401,
+        "label": "Beni Bahdel",
+        "wilayaId": 13
+    },
+    {
+        "id": 407,
+        "label": "Beni Snous",
+        "wilayaId": 13
+    },
+    {
+        "id": 415,
+        "label": "Azail",
+        "wilayaId": 13
+    },
+    {
+        "id": 400,
+        "label": "Bab El Assa",
+        "wilayaId": 13
+    },
+    {
+        "id": 439,
+        "label": "Souani",
+        "wilayaId": 13
+    },
+    {
+        "id": 440,
+        "label": "Souk Tleta",
+        "wilayaId": 13
+    },
+    {
+        "id": 392,
+        "label": "Ain Fetah",
+        "wilayaId": 13
+    },
+    {
+        "id": 395,
+        "label": "Ain Kebira",
+        "wilayaId": 13
+    },
+    {
+        "id": 418,
+        "label": "Fellaoucene",
+        "wilayaId": 13
+    },
+    {
+        "id": 408,
+        "label": "Bensekrane",
+        "wilayaId": 13
+    },
+    {
+        "id": 435,
+        "label": "Sidi Abdelli",
+        "wilayaId": 13
+    },
+    {
+        "id": 421,
+        "label": "Hennaya",
+        "wilayaId": 13
+    },
+    {
+        "id": 430,
+        "label": "Ouled Riyah",
+        "wilayaId": 13
+    },
+    {
+        "id": 444,
+        "label": "Zenata",
+        "wilayaId": 13
+    },
+    {
+        "id": 420,
+        "label": "Hammam Boughrara",
+        "wilayaId": 13
+    },
+    {
+        "id": 423,
+        "label": "Maghnia",
+        "wilayaId": 13
+    },
+    {
+        "id": 414,
+        "label": "El Aricha",
+        "wilayaId": 13
+    },
+    {
+        "id": 417,
+        "label": "El Gor",
+        "wilayaId": 13
+    },
+    {
+        "id": 434,
+        "label": "Sebdou",
+        "wilayaId": 13
+    },
+    {
+        "id": 402,
+        "label": "Beni Boussaid",
+        "wilayaId": 13
+    },
+    {
+        "id": 437,
+        "label": "Sidi Medjahed",
+        "wilayaId": 13
+    },
+    {
+        "id": 425,
+        "label": "Marsa Ben M'hidi",
+        "wilayaId": 13
+    },
+    {
+        "id": 426,
+        "label": "M'sirda Fouaga",
+        "wilayaId": 13
+    },
+    {
+        "id": 413,
+        "label": "Djebala",
+        "wilayaId": 13
+    },
+    {
+        "id": 427,
+        "label": "Nedroma",
+        "wilayaId": 13
+    },
+    {
+        "id": 410,
+        "label": "Bouihi",
+        "wilayaId": 13
+    },
+    {
+        "id": 436,
+        "label": "Sidi Djillali",
+        "wilayaId": 13
+    },
+    {
+        "id": 403,
+        "label": "Beni Khellad",
+        "wilayaId": 13
+    },
+    {
+        "id": 422,
+        "label": "Honnaine",
+        "wilayaId": 13
+    },
+    {
+        "id": 393,
+        "label": "Ain Fezza",
+        "wilayaId": 13
+    },
+    {
+        "id": 399,
+        "label": "Amieur",
+        "wilayaId": 13
+    },
+    {
+        "id": 411,
+        "label": "Chetouane",
+        "wilayaId": 13
+    },
+    {
+        "id": 394,
+        "label": "Ain Ghoraba",
+        "wilayaId": 13
+    },
+    {
+        "id": 404,
+        "label": "Beni Mester",
+        "wilayaId": 13
+    },
+    {
+        "id": 424,
+        "label": "Mansourah",
+        "wilayaId": 13
+    },
+    {
+        "id": 441,
+        "label": "Terny Beni Hediel",
+        "wilayaId": 13
+    },
+    {
+        "id": 483,
+        "label": "Tiaret",
+        "wilayaId": 14
+    },
+    {
+        "id": 464,
+        "label": "Medroussa",
+        "wilayaId": 14
+    },
+    {
+        "id": 466,
+        "label": "Mellakou",
+        "wilayaId": 14
+    },
+    {
+        "id": 478,
+        "label": "Sidi Bakhti",
+        "wilayaId": 14
+    },
+    {
+        "id": 446,
+        "label": "Ain Deheb",
+        "wilayaId": 14
+    },
+    {
+        "id": 451,
+        "label": "Chehaima",
+        "wilayaId": 14
+    },
+    {
+        "id": 468,
+        "label": "Naima",
+        "wilayaId": 14
+    },
+    {
+        "id": 445,
+        "label": "Ain Bouchekif",
+        "wilayaId": 14
+    },
+    {
+        "id": 452,
+        "label": "Dahmouni",
+        "wilayaId": 14
+    },
+    {
+        "id": 457,
+        "label": "Guertoufa",
+        "wilayaId": 14
+    },
+    {
+        "id": 470,
+        "label": "Rahouia",
+        "wilayaId": 14
+    },
+    {
+        "id": 447,
+        "label": "Ain Dzarit",
+        "wilayaId": 14
+    },
+    {
+        "id": 461,
+        "label": "Mahdia",
+        "wilayaId": 14
+    },
+    {
+        "id": 467,
+        "label": "Nadorah",
+        "wilayaId": 14
+    },
+    {
+        "id": 472,
+        "label": "Sebaine",
+        "wilayaId": 14
+    },
+    {
+        "id": 455,
+        "label": "Faidja",
+        "wilayaId": 14
+    },
+    {
+        "id": 475,
+        "label": "Si Abdelghani",
+        "wilayaId": 14
+    },
+    {
+        "id": 480,
+        "label": "Sougueur",
+        "wilayaId": 14
+    },
+    {
+        "id": 485,
+        "label": "Tousnina",
+        "wilayaId": 14
+    },
+    {
+        "id": 465,
+        "label": "Meghila",
+        "wilayaId": 14
+    },
+    {
+        "id": 473,
+        "label": "Sebt",
+        "wilayaId": 14
+    },
+    {
+        "id": 479,
+        "label": "Sidi Hosni",
+        "wilayaId": 14
+    },
+    {
+        "id": 448,
+        "label": "Ain El Hadid",
+        "wilayaId": 14
+    },
+    {
+        "id": 456,
+        "label": "Frenda",
+        "wilayaId": 14
+    },
+    {
+        "id": 482,
+        "label": "Takhemaret",
+        "wilayaId": 14
+    },
+    {
+        "id": 449,
+        "label": "Ain Kermes",
+        "wilayaId": 14
+    },
+    {
+        "id": 453,
+        "label": "Djebilet Rosfa",
+        "wilayaId": 14
+    },
+    {
+        "id": 460,
+        "label": "Madna",
+        "wilayaId": 14
+    },
+    {
+        "id": 463,
+        "label": "Medrissa",
+        "wilayaId": 14
+    },
+    {
+        "id": 476,
+        "label": "Sidi Abderrahmane",
+        "wilayaId": 14
+    },
+    {
+        "id": 459,
+        "label": "Ksar Chellala",
+        "wilayaId": 14
+    },
+    {
+        "id": 474,
+        "label": "Serghine",
+        "wilayaId": 14
+    },
+    {
+        "id": 486,
+        "label": "Zmalet El Emir Abdelkade",
+        "wilayaId": 14
+    },
+    {
+        "id": 469,
+        "label": "Oued Lilli",
+        "wilayaId": 14
+    },
+    {
+        "id": 477,
+        "label": "Sidi Ali Mellal",
+        "wilayaId": 14
+    },
+    {
+        "id": 484,
+        "label": "Tidda",
+        "wilayaId": 14
+    },
+    {
+        "id": 454,
+        "label": "Djillali Ben Amar",
+        "wilayaId": 14
+    },
+    {
+        "id": 462,
+        "label": "Mechraa Safa",
+        "wilayaId": 14
+    },
+    {
+        "id": 481,
+        "label": "Tagdempt",
+        "wilayaId": 14
+    },
+    {
+        "id": 450,
+        "label": "Bougara",
+        "wilayaId": 14
+    },
+    {
+        "id": 458,
+        "label": "Hamadia",
+        "wilayaId": 14
+    },
+    {
+        "id": 471,
+        "label": "Rechaiga",
+        "wilayaId": 14
+    },
+    {
+        "id": 549,
+        "label": "Tizi-Ouzou",
+        "wilayaId": 15
+    },
+    {
+        "id": 487,
+        "label": "Abi-Youcef",
+        "wilayaId": 15
+    },
+    {
+        "id": 490,
+        "label": "Ain-El-Hammam",
+        "wilayaId": 15
+    },
+    {
+        "id": 502,
+        "label": "Ait-Yahia",
+        "wilayaId": 15
+    },
+    {
+        "id": 503,
+        "label": "Akbil",
+        "wilayaId": 15
+    },
+    {
+        "id": 514,
+        "label": "Boudjima",
+        "wilayaId": 15
+    },
+    {
+        "id": 532,
+        "label": "Makouda",
+        "wilayaId": 15
+    },
+    {
+        "id": 491,
+        "label": "Ain-Zaouia",
+        "wilayaId": 15
+    },
+    {
+        "id": 496,
+        "label": "Ait Yahia Moussa",
+        "wilayaId": 15
+    },
+    {
+        "id": 518,
+        "label": "Draa-El-Mizan",
+        "wilayaId": 15
+    },
+    {
+        "id": 520,
+        "label": "Frikat",
+        "wilayaId": 15
+    },
+    {
+        "id": 536,
+        "label": "M'kira",
+        "wilayaId": 15
+    },
+    {
+        "id": 548,
+        "label": "Tizi-Gheniff",
+        "wilayaId": 15
+    },
+    {
+        "id": 523,
+        "label": "Iferhounene",
+        "wilayaId": 15
+    },
+    {
+        "id": 526,
+        "label": "Illilten",
+        "wilayaId": 15
+    },
+    {
+        "id": 528,
+        "label": "Imsouhal",
+        "wilayaId": 15
+    },
+    {
+        "id": 506,
+        "label": "Azazga",
+        "wilayaId": 15
+    },
+    {
+        "id": 519,
+        "label": "Freha",
+        "wilayaId": 15
+    },
+    {
+        "id": 524,
+        "label": "Ifigha",
+        "wilayaId": 15
+    },
+    {
+        "id": 551,
+        "label": "Yakourene",
+        "wilayaId": 15
+    },
+    {
+        "id": 553,
+        "label": "Zekri",
+        "wilayaId": 15
+    },
+    {
+        "id": 492,
+        "label": "Ait Aggouacha",
+        "wilayaId": 15
+    },
+    {
+        "id": 529,
+        "label": "Irdjen",
+        "wilayaId": 15
+    },
+    {
+        "id": 530,
+        "label": "Larbaa Nath Irathen",
+        "wilayaId": 15
+    },
+    {
+        "id": 500,
+        "label": "Ait-Oumalou",
+        "wilayaId": 15
+    },
+    {
+        "id": 550,
+        "label": "Tizi-Rached",
+        "wilayaId": 15
+    },
+    {
+        "id": 497,
+        "label": "Ait-Aissa-Mimoun",
+        "wilayaId": 15
+    },
+    {
+        "id": 539,
+        "label": "Ouaguenoun",
+        "wilayaId": 15
+    },
+    {
+        "id": 545,
+        "label": "Timizart",
+        "wilayaId": 15
+    },
+    {
+        "id": 531,
+        "label": "Maatkas",
+        "wilayaId": 15
+    },
+    {
+        "id": 542,
+        "label": "Souk-El-Tenine",
+        "wilayaId": 15
+    },
+    {
+        "id": 499,
+        "label": "Ait-Mahmoud",
+        "wilayaId": 15
+    },
+    {
+        "id": 508,
+        "label": "Beni Zmenzer",
+        "wilayaId": 15
+    },
+    {
+        "id": 509,
+        "label": "Beni-Aissi",
+        "wilayaId": 15
+    },
+    {
+        "id": 510,
+        "label": "Beni-Douala",
+        "wilayaId": 15
+    },
+    {
+        "id": 512,
+        "label": "Beni-Zikki",
+        "wilayaId": 15
+    },
+    {
+        "id": 516,
+        "label": "Bouzeguene",
+        "wilayaId": 15
+    },
+    {
+        "id": 522,
+        "label": "Idjeur",
+        "wilayaId": 15
+    },
+    {
+        "id": 527,
+        "label": "Illoula Oumalou",
+        "wilayaId": 15
+    },
+    {
+        "id": 489,
+        "label": "Agouni-Gueghrane",
+        "wilayaId": 15
+    },
+    {
+        "id": 493,
+        "label": "Ait Bouaddou",
+        "wilayaId": 15
+    },
+    {
+        "id": 538,
+        "label": "Ouadhias",
+        "wilayaId": 15
+    },
+    {
+        "id": 547,
+        "label": "Tizi N'tleta",
+        "wilayaId": 15
+    },
+    {
+        "id": 488,
+        "label": "Aghribs",
+        "wilayaId": 15
+    },
+    {
+        "id": 498,
+        "label": "Ait-Chafaa",
+        "wilayaId": 15
+    },
+    {
+        "id": 504,
+        "label": "Akerrou",
+        "wilayaId": 15
+    },
+    {
+        "id": 507,
+        "label": "Azeffoun",
+        "wilayaId": 15
+    },
+    {
+        "id": 525,
+        "label": "Iflissen",
+        "wilayaId": 15
+    },
+    {
+        "id": 535,
+        "label": "Mizrana",
+        "wilayaId": 15
+    },
+    {
+        "id": 544,
+        "label": "Tigzirt",
+        "wilayaId": 15
+    },
+    {
+        "id": 505,
+        "label": "Assi-Youcef",
+        "wilayaId": 15
+    },
+    {
+        "id": 513,
+        "label": "Boghni",
+        "wilayaId": 15
+    },
+    {
+        "id": 515,
+        "label": "Bounouh",
+        "wilayaId": 15
+    },
+    {
+        "id": 533,
+        "label": "Mechtras",
+        "wilayaId": 15
+    },
+    {
+        "id": 517,
+        "label": "Draa-Ben-Khedda",
+        "wilayaId": 15
+    },
+    {
+        "id": 540,
+        "label": "Sidi Namane",
+        "wilayaId": 15
+    },
+    {
+        "id": 543,
+        "label": "Tadmait",
+        "wilayaId": 15
+    },
+    {
+        "id": 546,
+        "label": "Tirmitine",
+        "wilayaId": 15
+    },
+    {
+        "id": 494,
+        "label": "Ait Boumahdi",
+        "wilayaId": 15
+    },
+    {
+        "id": 501,
+        "label": "Ait-Toudert",
+        "wilayaId": 15
+    },
+    {
+        "id": 537,
+        "label": "Ouacif",
+        "wilayaId": 15
+    },
+    {
+        "id": 495,
+        "label": "Ait Khellili",
+        "wilayaId": 15
+    },
+    {
+        "id": 534,
+        "label": "Mekla",
+        "wilayaId": 15
+    },
+    {
+        "id": 541,
+        "label": "Souama",
+        "wilayaId": 15
+    },
+    {
+        "id": 511,
+        "label": "Beni-Yenni",
+        "wilayaId": 15
+    },
+    {
+        "id": 521,
+        "label": "Iboudrarene",
+        "wilayaId": 15
+    },
+    {
+        "id": 552,
+        "label": "Yatafene",
+        "wilayaId": 15
+    },
+    {
+        "id": 556,
+        "label": "Alger Centre",
+        "wilayaId": 16
+    },
+    {
+        "id": 582,
+        "label": "El Madania",
+        "wilayaId": 16
+    },
+    {
+        "id": 585,
+        "label": "El Mouradia",
+        "wilayaId": 16
+    },
+    {
+        "id": 605,
+        "label": "Sidi M'hamed",
+        "wilayaId": 16
+    },
+    {
+        "id": 557,
+        "label": "Bab El Oued",
+        "wilayaId": 16
+    },
+    {
+        "id": 567,
+        "label": "Bologhine Ibnou Ziri",
+        "wilayaId": 16
+    },
+    {
+        "id": 572,
+        "label": "Casbah",
+        "wilayaId": 16
+    },
+    {
+        "id": 596,
+        "label": "Oued Koriche",
+        "wilayaId": 16
+    },
+    {
+        "id": 601,
+        "label": "Rais Hamidou",
+        "wilayaId": 16
+    },
+    {
+        "id": 564,
+        "label": "Bir Mourad Rais",
+        "wilayaId": 16
+    },
+    {
+        "id": 565,
+        "label": "Birkhadem",
+        "wilayaId": 16
+    },
+    {
+        "id": 576,
+        "label": "Djasr Kasentina",
+        "wilayaId": 16
+    },
+    {
+        "id": 589,
+        "label": "Hydra",
+        "wilayaId": 16
+    },
+    {
+        "id": 604,
+        "label": "Sehaoula",
+        "wilayaId": 16
+    },
+    {
+        "id": 562,
+        "label": "Ben Aknoun",
+        "wilayaId": 16
+    },
+    {
+        "id": 563,
+        "label": "Beni Messous",
+        "wilayaId": 16
+    },
+    {
+        "id": 571,
+        "label": "Bouzareah",
+        "wilayaId": 16
+    },
+    {
+        "id": 580,
+        "label": "El Biar",
+        "wilayaId": 16
+    },
+    {
+        "id": 560,
+        "label": "Bachedjerah",
+        "wilayaId": 16
+    },
+    {
+        "id": 570,
+        "label": "Bourouba",
+        "wilayaId": 16
+    },
+    {
+        "id": 581,
+        "label": "El Harrach",
+        "wilayaId": 16
+    },
+    {
+        "id": 597,
+        "label": "Oued Smar",
+        "wilayaId": 16
+    },
+    {
+        "id": 561,
+        "label": "Baraki",
+        "wilayaId": 16
+    },
+    {
+        "id": 592,
+        "label": "Les Eucalyptus",
+        "wilayaId": 16
+    },
+    {
+        "id": 606,
+        "label": "Sidi Moussa",
+        "wilayaId": 16
+    },
+    {
+        "id": 583,
+        "label": "El Magharia",
+        "wilayaId": 16
+    },
+    {
+        "id": 588,
+        "label": "Hussein Dey",
+        "wilayaId": 16
+    },
+    {
+        "id": 591,
+        "label": "Kouba",
+        "wilayaId": 16
+    },
+    {
+        "id": 594,
+        "label": "Mohamed Belouzdad",
+        "wilayaId": 16
+    },
+    {
+        "id": 555,
+        "label": "Ain Taya",
+        "wilayaId": 16
+    },
+    {
+        "id": 558,
+        "label": "Bab Ezzouar",
+        "wilayaId": 16
+    },
+    {
+        "id": 568,
+        "label": "Bordj El Bahri",
+        "wilayaId": 16
+    },
+    {
+        "id": 569,
+        "label": "Bordj El Kiffan",
+        "wilayaId": 16
+    },
+    {
+        "id": 574,
+        "label": "Dar El Beida",
+        "wilayaId": 16
+    },
+    {
+        "id": 584,
+        "label": "El Marsa",
+        "wilayaId": 16
+    },
+    {
+        "id": 595,
+        "label": "Mohammadia",
+        "wilayaId": 16
+    },
+    {
+        "id": 566,
+        "label": "Bir Touta",
+        "wilayaId": 16
+    },
+    {
+        "id": 598,
+        "label": "Ouled Chebel",
+        "wilayaId": 16
+    },
+    {
+        "id": 609,
+        "label": "Tessala El Merdja",
+        "wilayaId": 16
+    },
+    {
+        "id": 587,
+        "label": "Herraoua",
+        "wilayaId": 16
+    },
+    {
+        "id": 602,
+        "label": "Reghaia",
+        "wilayaId": 16
+    },
+    {
+        "id": 603,
+        "label": "Rouiba",
+        "wilayaId": 16
+    },
+    {
+        "id": 593,
+        "label": "Maalma",
+        "wilayaId": 16
+    },
+    {
+        "id": 600,
+        "label": "Rahmania",
+        "wilayaId": 16
+    },
+    {
+        "id": 607,
+        "label": "Souidania",
+        "wilayaId": 16
+    },
+    {
+        "id": 608,
+        "label": "Staoueli",
+        "wilayaId": 16
+    },
+    {
+        "id": 610,
+        "label": "Zeralda",
+        "wilayaId": 16
+    },
+    {
+        "id": 559,
+        "label": "Baba Hassen",
+        "wilayaId": 16
+    },
+    {
+        "id": 577,
+        "label": "Douira",
+        "wilayaId": 16
+    },
+    {
+        "id": 578,
+        "label": "Draria",
+        "wilayaId": 16
+    },
+    {
+        "id": 579,
+        "label": "El Achour",
+        "wilayaId": 16
+    },
+    {
+        "id": 590,
+        "label": "Khraissia",
+        "wilayaId": 16
+    },
+    {
+        "id": 554,
+        "label": "Ain Benian",
+        "wilayaId": 16
+    },
+    {
+        "id": 573,
+        "label": "Cheraga",
+        "wilayaId": 16
+    },
+    {
+        "id": 575,
+        "label": "Dely Ibrahim",
+        "wilayaId": 16
+    },
+    {
+        "id": 586,
+        "label": "Hammamet",
+        "wilayaId": 16
+    },
+    {
+        "id": 599,
+        "label": "Ouled Fayet",
+        "wilayaId": 16
+    },
+    {
+        "id": 624,
+        "label": "Djelfa",
+        "wilayaId": 17
+    },
+    {
+        "id": 614,
+        "label": "Ain Maabed",
+        "wilayaId": 17
+    },
+    {
+        "id": 633,
+        "label": "Hassi Bahbah",
+        "wilayaId": 17
+    },
+    {
+        "id": 634,
+        "label": "Hassi El Euch",
+        "wilayaId": 17
+    },
+    {
+        "id": 645,
+        "label": "Zaafrane",
+        "wilayaId": 17
+    },
+    {
+        "id": 616,
+        "label": "Amourah",
+        "wilayaId": 17
+    },
+    {
+        "id": 629,
+        "label": "Faidh El Botma",
+        "wilayaId": 17
+    },
+    {
+        "id": 639,
+        "label": "Oum Laadham",
+        "wilayaId": 17
+    },
+    {
+        "id": 617,
+        "label": "Benhar",
+        "wilayaId": 17
+    },
+    {
+        "id": 619,
+        "label": "Birine",
+        "wilayaId": 17
+    },
+    {
+        "id": 611,
+        "label": "Ain Chouhada",
+        "wilayaId": 17
+    },
+    {
+        "id": 625,
+        "label": "Douis",
+        "wilayaId": 17
+    },
+    {
+        "id": 627,
+        "label": "El Idrissia",
+        "wilayaId": 17
+    },
+    {
+        "id": 623,
+        "label": "Deldoul",
+        "wilayaId": 17
+    },
+    {
+        "id": 631,
+        "label": "Guettara",
+        "wilayaId": 17
+    },
+    {
+        "id": 636,
+        "label": "Messaad",
+        "wilayaId": 17
+    },
+    {
+        "id": 640,
+        "label": "Sed Rahal",
+        "wilayaId": 17
+    },
+    {
+        "id": 641,
+        "label": "Selmana",
+        "wilayaId": 17
+    },
+    {
+        "id": 628,
+        "label": "El Khemis",
+        "wilayaId": 17
+    },
+    {
+        "id": 635,
+        "label": "Hassi Fedoul",
+        "wilayaId": 17
+    },
+    {
+        "id": 643,
+        "label": "Sidi Laadjel",
+        "wilayaId": 17
+    },
+    {
+        "id": 613,
+        "label": "Ain Fekka",
+        "wilayaId": 17
+    },
+    {
+        "id": 620,
+        "label": "Bouira Lahdab",
+        "wilayaId": 17
+    },
+    {
+        "id": 632,
+        "label": "Had Sahary",
+        "wilayaId": 17
+    },
+    {
+        "id": 622,
+        "label": "Dar Chioukh",
+        "wilayaId": 17
+    },
+    {
+        "id": 637,
+        "label": "M'liliha",
+        "wilayaId": 17
+    },
+    {
+        "id": 642,
+        "label": "Sidi Baizid",
+        "wilayaId": 17
+    },
+    {
+        "id": 618,
+        "label": "Benyagoub",
+        "wilayaId": 17
+    },
+    {
+        "id": 621,
+        "label": "Charef",
+        "wilayaId": 17
+    },
+    {
+        "id": 626,
+        "label": "El Guedid",
+        "wilayaId": 17
+    },
+    {
+        "id": 612,
+        "label": "Ain El Ibel",
+        "wilayaId": 17
+    },
+    {
+        "id": 638,
+        "label": "Moudjebara",
+        "wilayaId": 17
+    },
+    {
+        "id": 644,
+        "label": "Taadmit",
+        "wilayaId": 17
+    },
+    {
+        "id": 646,
+        "label": "Zaccar",
+        "wilayaId": 17
+    },
+    {
+        "id": 615,
+        "label": "Ain Oussera",
+        "wilayaId": 17
+    },
+    {
+        "id": 630,
+        "label": "Guernini",
+        "wilayaId": 17
+    },
+    {
+        "id": 662,
+        "label": "Jijel",
+        "wilayaId": 18
+    },
+    {
+        "id": 656,
+        "label": "El Aouana",
+        "wilayaId": 18
+    },
+    {
+        "id": 668,
+        "label": "Selma Benziada",
+        "wilayaId": 18
+    },
+    {
+        "id": 660,
+        "label": "Erraguene Souissi",
+        "wilayaId": 18
+    },
+    {
+        "id": 674,
+        "label": "Ziama Mansouriah",
+        "wilayaId": 18
+    },
+    {
+        "id": 650,
+        "label": "Boussif Ouled Askeur",
+        "wilayaId": 18
+    },
+    {
+        "id": 651,
+        "label": "Chahna",
+        "wilayaId": 18
+    },
+    {
+        "id": 659,
+        "label": "Emir Abdelkader",
+        "wilayaId": 18
+    },
+    {
+        "id": 665,
+        "label": "Oudjana",
+        "wilayaId": 18
+    },
+    {
+        "id": 672,
+        "label": "Taher",
+        "wilayaId": 18
+    },
+    {
+        "id": 647,
+        "label": "Bordj T'har",
+        "wilayaId": 18
+    },
+    {
+        "id": 652,
+        "label": "Chekfa",
+        "wilayaId": 18
+    },
+    {
+        "id": 657,
+        "label": "El Kennar Nouchfi",
+        "wilayaId": 18
+    },
+    {
+        "id": 670,
+        "label": "Sidi Abdelaziz",
+        "wilayaId": 18
+    },
+    {
+        "id": 658,
+        "label": "El Milia",
+        "wilayaId": 18
+    },
+    {
+        "id": 667,
+        "label": "Ouled Yahia Khadrouch",
+        "wilayaId": 18
+    },
+    {
+        "id": 666,
+        "label": "Ouled Rabah",
+        "wilayaId": 18
+    },
+    {
+        "id": 671,
+        "label": "Sidi Marouf",
+        "wilayaId": 18
+    },
+    {
+        "id": 661,
+        "label": "Ghebala",
+        "wilayaId": 18
+    },
+    {
+        "id": 669,
+        "label": "Settara",
+        "wilayaId": 18
+    },
+    {
+        "id": 649,
+        "label": "Bouraoui Belhadef",
+        "wilayaId": 18
+    },
+    {
+        "id": 653,
+        "label": "Djemaa Beni Habibi",
+        "wilayaId": 18
+    },
+    {
+        "id": 655,
+        "label": "El Ancer",
+        "wilayaId": 18
+    },
+    {
+        "id": 664,
+        "label": "Khiri Oued Adjoul",
+        "wilayaId": 18
+    },
+    {
+        "id": 648,
+        "label": "Boudria Beniyadjis",
+        "wilayaId": 18
+    },
+    {
+        "id": 654,
+        "label": "Djimla",
+        "wilayaId": 18
+    },
+    {
+        "id": 663,
+        "label": "Kaous",
+        "wilayaId": 18
+    },
+    {
+        "id": 673,
+        "label": "Texenna",
+        "wilayaId": 18
+    },
+    {
+        "id": 729,
+        "label": "Setif",
+        "wilayaId": 19
+    },
+    {
+        "id": 678,
+        "label": "Ain El Kebira",
+        "wilayaId": 19
+    },
+    {
+        "id": 703,
+        "label": "Dehamcha",
+        "wilayaId": 19
+    },
+    {
+        "id": 722,
+        "label": "Ouled Addouane",
+        "wilayaId": 19
+    },
+    {
+        "id": 683,
+        "label": "Ain-Sebt",
+        "wilayaId": 19
+    },
+    {
+        "id": 695,
+        "label": "Beni-Aziz",
+        "wilayaId": 19
+    },
+    {
+        "id": 718,
+        "label": "Maaouia",
+        "wilayaId": 19
+    },
+    {
+        "id": 690,
+        "label": "Bellaa",
+        "wilayaId": 19
+    },
+    {
+        "id": 698,
+        "label": "Bir-El-Arch",
+        "wilayaId": 19
+    },
+    {
+        "id": 708,
+        "label": "El-Ouldja",
+        "wilayaId": 19
+    },
+    {
+        "id": 730,
+        "label": "Tachouda",
+        "wilayaId": 19
+    },
+    {
+        "id": 687,
+        "label": "Babor",
+        "wilayaId": 19
+    },
+    {
+        "id": 728,
+        "label": "Serdj-El-Ghoul",
+        "wilayaId": 19
+    },
+    {
+        "id": 712,
+        "label": "Guidjel",
+        "wilayaId": 19
+    },
+    {
+        "id": 723,
+        "label": "Ouled Sabor",
+        "wilayaId": 19
+    },
+    {
+        "id": 688,
+        "label": "Bazer-Sakra",
+        "wilayaId": 19
+    },
+    {
+        "id": 706,
+        "label": "El Eulma",
+        "wilayaId": 19
+    },
+    {
+        "id": 710,
+        "label": "Guelta Zerka",
+        "wilayaId": 19
+    },
+    {
+        "id": 692,
+        "label": "Beni Fouda",
+        "wilayaId": 19
+    },
+    {
+        "id": 704,
+        "label": "Djemila",
+        "wilayaId": 19
+    },
+    {
+        "id": 681,
+        "label": "Ain-Legradj",
+        "wilayaId": 19
+    },
+    {
+        "id": 691,
+        "label": "Beni Chebana",
+        "wilayaId": 19
+    },
+    {
+        "id": 693,
+        "label": "Beni Ourtilane",
+        "wilayaId": 19
+    },
+    {
+        "id": 696,
+        "label": "Beni-Mouhli",
+        "wilayaId": 19
+    },
+    {
+        "id": 675,
+        "label": "Ain Abessa",
+        "wilayaId": 19
+    },
+    {
+        "id": 676,
+        "label": "Ain Arnat",
+        "wilayaId": 19
+    },
+    {
+        "id": 707,
+        "label": "El Ouricia",
+        "wilayaId": 19
+    },
+    {
+        "id": 720,
+        "label": "Mezloug",
+        "wilayaId": 19
+    },
+    {
+        "id": 686,
+        "label": "Amoucha",
+        "wilayaId": 19
+    },
+    {
+        "id": 721,
+        "label": "Oued El Bared",
+        "wilayaId": 19
+    },
+    {
+        "id": 734,
+        "label": "Tizi N'bechar",
+        "wilayaId": 19
+    },
+    {
+        "id": 680,
+        "label": "Ain Oulmene",
+        "wilayaId": 19
+    },
+    {
+        "id": 709,
+        "label": "Guellal",
+        "wilayaId": 19
+    },
+    {
+        "id": 717,
+        "label": "Kasr El Abtal",
+        "wilayaId": 19
+    },
+    {
+        "id": 724,
+        "label": "Ouled Si Ahmed",
+        "wilayaId": 19
+    },
+    {
+        "id": 684,
+        "label": "Ait Naoual Mezada",
+        "wilayaId": 19
+    },
+    {
+        "id": 685,
+        "label": "Ait-Tizi",
+        "wilayaId": 19
+    },
+    {
+        "id": 699,
+        "label": "Bouandas",
+        "wilayaId": 19
+    },
+    {
+        "id": 701,
+        "label": "Bousselam",
+        "wilayaId": 19
+    },
+    {
+        "id": 713,
+        "label": "Hamam Soukhna",
+        "wilayaId": 19
+    },
+    {
+        "id": 732,
+        "label": "Taya",
+        "wilayaId": 19
+    },
+    {
+        "id": 733,
+        "label": "Tella",
+        "wilayaId": 19
+    },
+    {
+        "id": 702,
+        "label": "Boutaleb",
+        "wilayaId": 19
+    },
+    {
+        "id": 714,
+        "label": "Hamma",
+        "wilayaId": 19
+    },
+    {
+        "id": 725,
+        "label": "Ouled Tebben",
+        "wilayaId": 19
+    },
+    {
+        "id": 726,
+        "label": "Rosfa",
+        "wilayaId": 19
+    },
+    {
+        "id": 727,
+        "label": "Salah Bey",
+        "wilayaId": 19
+    },
+    {
+        "id": 677,
+        "label": "Ain Azel",
+        "wilayaId": 19
+    },
+    {
+        "id": 679,
+        "label": "Ain Lahdjar",
+        "wilayaId": 19
+    },
+    {
+        "id": 689,
+        "label": "Beidha Bordj",
+        "wilayaId": 19
+    },
+    {
+        "id": 697,
+        "label": "Bir Haddada",
+        "wilayaId": 19
+    },
+    {
+        "id": 711,
+        "label": "Guenzet",
+        "wilayaId": 19
+    },
+    {
+        "id": 716,
+        "label": "Harbil",
+        "wilayaId": 19
+    },
+    {
+        "id": 682,
+        "label": "Ain-Roua",
+        "wilayaId": 19
+    },
+    {
+        "id": 694,
+        "label": "Beni Oussine",
+        "wilayaId": 19
+    },
+    {
+        "id": 700,
+        "label": "Bougaa",
+        "wilayaId": 19
+    },
+    {
+        "id": 705,
+        "label": "Draa-Kebila",
+        "wilayaId": 19
+    },
+    {
+        "id": 715,
+        "label": "Hammam Guergour",
+        "wilayaId": 19
+    },
+    {
+        "id": 719,
+        "label": "Maouaklane",
+        "wilayaId": 19
+    },
+    {
+        "id": 731,
+        "label": "Tala-Ifacene",
+        "wilayaId": 19
+    },
+    {
+        "id": 745,
+        "label": "Saida",
+        "wilayaId": 20
+    },
+    {
+        "id": 735,
+        "label": "Ain El Hadjar",
+        "wilayaId": 20
+    },
+    {
+        "id": 742,
+        "label": "Moulay Larbi",
+        "wilayaId": 20
+    },
+    {
+        "id": 746,
+        "label": "Sidi Ahmed",
+        "wilayaId": 20
+    },
+    {
+        "id": 738,
+        "label": "Doui Thabet",
+        "wilayaId": 20
+    },
+    {
+        "id": 750,
+        "label": "Youb",
+        "wilayaId": 20
+    },
+    {
+        "id": 740,
+        "label": "Hounet",
+        "wilayaId": 20
+    },
+    {
+        "id": 744,
+        "label": "Ouled Khaled",
+        "wilayaId": 20
+    },
+    {
+        "id": 747,
+        "label": "Sidi Amar",
+        "wilayaId": 20
+    },
+    {
+        "id": 748,
+        "label": "Sidi Boubekeur",
+        "wilayaId": 20
+    },
+    {
+        "id": 736,
+        "label": "Ain Sekhouna",
+        "wilayaId": 20
+    },
+    {
+        "id": 739,
+        "label": "El Hassasna",
+        "wilayaId": 20
+    },
+    {
+        "id": 741,
+        "label": "Maamora",
+        "wilayaId": 20
+    },
+    {
+        "id": 737,
+        "label": "Ain Soltane",
+        "wilayaId": 20
+    },
+    {
+        "id": 743,
+        "label": "Ouled Brahim",
+        "wilayaId": 20
+    },
+    {
+        "id": 749,
+        "label": "Tircine",
+        "wilayaId": 20
+    },
+    {
+        "id": 772,
+        "label": "Filfila",
+        "wilayaId": 21
+    },
+    {
+        "id": 773,
+        "label": "Hammadi Krouma",
+        "wilayaId": 21
+    },
+    {
+        "id": 785,
+        "label": "Skikda",
+        "wilayaId": 21
+    },
+    {
+        "id": 754,
+        "label": "Ain Zouit",
+        "wilayaId": 21
+    },
+    {
+        "id": 762,
+        "label": "Bouchetata",
+        "wilayaId": 21
+    },
+    {
+        "id": 768,
+        "label": "El Hadaiek",
+        "wilayaId": 21
+    },
+    {
+        "id": 752,
+        "label": "Ain Charchar",
+        "wilayaId": 21
+    },
+    {
+        "id": 755,
+        "label": "Azzaba",
+        "wilayaId": 21
+    },
+    {
+        "id": 765,
+        "label": "Djendel Saadi Mohamed",
+        "wilayaId": 21
+    },
+    {
+        "id": 767,
+        "label": "El Ghedir",
+        "wilayaId": 21
+    },
+    {
+        "id": 771,
+        "label": "Es Sebt",
+        "wilayaId": 21
+    },
+    {
+        "id": 756,
+        "label": "Bekkouche Lakhdar",
+        "wilayaId": 21
+    },
+    {
+        "id": 757,
+        "label": "Ben Azzouz",
+        "wilayaId": 21
+    },
+    {
+        "id": 769,
+        "label": "El Marsa",
+        "wilayaId": 21
+    },
+    {
+        "id": 760,
+        "label": "Beni Zid",
+        "wilayaId": 21
+    },
+    {
+        "id": 763,
+        "label": "Cheraia",
+        "wilayaId": 21
+    },
+    {
+        "id": 764,
+        "label": "Collo",
+        "wilayaId": 21
+    },
+    {
+        "id": 776,
+        "label": "Khenag Maoune",
+        "wilayaId": 21
+    },
+    {
+        "id": 777,
+        "label": "Oued Zhour",
+        "wilayaId": 21
+    },
+    {
+        "id": 779,
+        "label": "Ouled Attia",
+        "wilayaId": 21
+    },
+    {
+        "id": 774,
+        "label": "Kanoua",
+        "wilayaId": 21
+    },
+    {
+        "id": 788,
+        "label": "Zitouna",
+        "wilayaId": 21
+    },
+    {
+        "id": 766,
+        "label": "El Arrouch",
+        "wilayaId": 21
+    },
+    {
+        "id": 770,
+        "label": "Emjez Edchich",
+        "wilayaId": 21
+    },
+    {
+        "id": 780,
+        "label": "Ouled Habbaba",
+        "wilayaId": 21
+    },
+    {
+        "id": 783,
+        "label": "Salah Bouchaour",
+        "wilayaId": 21
+    },
+    {
+        "id": 787,
+        "label": "Zerdezas",
+        "wilayaId": 21
+    },
+    {
+        "id": 751,
+        "label": "Ain Bouziane",
+        "wilayaId": 21
+    },
+    {
+        "id": 759,
+        "label": "Beni Oulbane",
+        "wilayaId": 21
+    },
+    {
+        "id": 784,
+        "label": "Sidi Mezghiche",
+        "wilayaId": 21
+    },
+    {
+        "id": 758,
+        "label": "Beni Bechir",
+        "wilayaId": 21
+    },
+    {
+        "id": 782,
+        "label": "Ramdane Djamel",
+        "wilayaId": 21
+    },
+    {
+        "id": 761,
+        "label": "Bin El Ouiden",
+        "wilayaId": 21
+    },
+    {
+        "id": 775,
+        "label": "Kerkara",
+        "wilayaId": 21
+    },
+    {
+        "id": 786,
+        "label": "Tamalous",
+        "wilayaId": 21
+    },
+    {
+        "id": 753,
+        "label": "Ain Kechra",
+        "wilayaId": 21
+    },
+    {
+        "id": 778,
+        "label": "Ouldja Boulbalout",
+        "wilayaId": 21
+    },
+    {
+        "id": 781,
+        "label": "Oum Toub",
+        "wilayaId": 21
+    },
+    {
+        "id": 824,
+        "label": "Sidi Bel-Abbes",
+        "wilayaId": 22
+    },
+    {
+        "id": 791,
+        "label": "Ain Thrid",
+        "wilayaId": 22
+    },
+    {
+        "id": 820,
+        "label": "Sehala Thaoura",
+        "wilayaId": 22
+    },
+    {
+        "id": 838,
+        "label": "Tessala",
+        "wilayaId": 22
+    },
+    {
+        "id": 796,
+        "label": "Belarbi",
+        "wilayaId": 22
+    },
+    {
+        "id": 813,
+        "label": "Mostefa  Ben Brahim",
+        "wilayaId": 22
+    },
+    {
+        "id": 839,
+        "label": "Tilmouni",
+        "wilayaId": 22
+    },
+    {
+        "id": 840,
+        "label": "Zerouala",
+        "wilayaId": 22
+    },
+    {
+        "id": 803,
+        "label": "Dhaya",
+        "wilayaId": 22
+    },
+    {
+        "id": 812,
+        "label": "Mezaourou",
+        "wilayaId": 22
+    },
+    {
+        "id": 835,
+        "label": "Teghalimet",
+        "wilayaId": 22
+    },
+    {
+        "id": 836,
+        "label": "Telagh",
+        "wilayaId": 22
+    },
+    {
+        "id": 790,
+        "label": "Ain Kada",
+        "wilayaId": 22
+    },
+    {
+        "id": 807,
+        "label": "Lamtar",
+        "wilayaId": 22
+    },
+    {
+        "id": 823,
+        "label": "Sidi Ali Boussidi",
+        "wilayaId": 22
+    },
+    {
+        "id": 827,
+        "label": "Sidi Dahou Zairs",
+        "wilayaId": 22
+    },
+    {
+        "id": 799,
+        "label": "Bir El Hammam",
+        "wilayaId": 22
+    },
+    {
+        "id": 809,
+        "label": "Marhoum",
+        "wilayaId": 22
+    },
+    {
+        "id": 826,
+        "label": "Sidi Chaib",
+        "wilayaId": 22
+    },
+    {
+        "id": 794,
+        "label": "Amarnas",
+        "wilayaId": 22
+    },
+    {
+        "id": 829,
+        "label": "Sidi Khaled",
+        "wilayaId": 22
+    },
+    {
+        "id": 830,
+        "label": "Sidi Lahcene",
+        "wilayaId": 22
+    },
+    {
+        "id": 831,
+        "label": "Sidi Yacoub",
+        "wilayaId": 22
+    },
+    {
+        "id": 798,
+        "label": "Benachiba Chelia",
+        "wilayaId": 22
+    },
+    {
+        "id": 805,
+        "label": "Hassi Dahou",
+        "wilayaId": 22
+    },
+    {
+        "id": 816,
+        "label": "Oued Sefioun",
+        "wilayaId": 22
+    },
+    {
+        "id": 837,
+        "label": "Tenira",
+        "wilayaId": 22
+    },
+    {
+        "id": 792,
+        "label": "Ain Tindamine",
+        "wilayaId": 22
+    },
+    {
+        "id": 804,
+        "label": "El Hacaiba",
+        "wilayaId": 22
+    },
+    {
+        "id": 814,
+        "label": "Moulay Slissen",
+        "wilayaId": 22
+    },
+    {
+        "id": 811,
+        "label": "Merine",
+        "wilayaId": 22
+    },
+    {
+        "id": 817,
+        "label": "Oued Taourira",
+        "wilayaId": 22
+    },
+    {
+        "id": 833,
+        "label": "Taoudmout",
+        "wilayaId": 22
+    },
+    {
+        "id": 834,
+        "label": "Tefessour",
+        "wilayaId": 22
+    },
+    {
+        "id": 815,
+        "label": "Oued Sebaa",
+        "wilayaId": 22
+    },
+    {
+        "id": 818,
+        "label": "Ras El Ma",
+        "wilayaId": 22
+    },
+    {
+        "id": 819,
+        "label": "Redjem Demouche",
+        "wilayaId": 22
+    },
+    {
+        "id": 789,
+        "label": "Ain El Berd",
+        "wilayaId": 22
+    },
+    {
+        "id": 808,
+        "label": "Makedra",
+        "wilayaId": 22
+    },
+    {
+        "id": 825,
+        "label": "Sidi Brahim",
+        "wilayaId": 22
+    },
+    {
+        "id": 828,
+        "label": "Sidi Hamadouche",
+        "wilayaId": 22
+    },
+    {
+        "id": 793,
+        "label": "Ain- Adden",
+        "wilayaId": 22
+    },
+    {
+        "id": 800,
+        "label": "Boudjebaa El Bordj",
+        "wilayaId": 22
+    },
+    {
+        "id": 810,
+        "label": "M'cid",
+        "wilayaId": 22
+    },
+    {
+        "id": 821,
+        "label": "Sfisef",
+        "wilayaId": 22
+    },
+    {
+        "id": 795,
+        "label": "Bedrabine El Mokrani",
+        "wilayaId": 22
+    },
+    {
+        "id": 797,
+        "label": "Ben Badis",
+        "wilayaId": 22
+    },
+    {
+        "id": 802,
+        "label": "Chetouane Belaila",
+        "wilayaId": 22
+    },
+    {
+        "id": 806,
+        "label": "Hassi Zahana",
+        "wilayaId": 22
+    },
+    {
+        "id": 801,
+        "label": "Boukhanefis",
+        "wilayaId": 22
+    },
+    {
+        "id": 822,
+        "label": "Sidi Ali Benyoub",
+        "wilayaId": 22
+    },
+    {
+        "id": 832,
+        "label": "Tabia",
+        "wilayaId": 22
+    },
+    {
+        "id": 842,
+        "label": "Annaba",
+        "wilayaId": 23
+    },
+    {
+        "id": 850,
+        "label": "Seraidi",
+        "wilayaId": 23
+    },
+    {
+        "id": 843,
+        "label": "Berrahal",
+        "wilayaId": 23
+    },
+    {
+        "id": 849,
+        "label": "Oued El Aneb",
+        "wilayaId": 23
+    },
+    {
+        "id": 852,
+        "label": "Treat",
+        "wilayaId": 23
+    },
+    {
+        "id": 848,
+        "label": "El Hadjar",
+        "wilayaId": 23
+    },
+    {
+        "id": 851,
+        "label": "Sidi Amar",
+        "wilayaId": 23
+    },
+    {
+        "id": 846,
+        "label": "El Bouni",
+        "wilayaId": 23
+    },
+    {
+        "id": 841,
+        "label": "Ain El Berda",
+        "wilayaId": 23
+    },
+    {
+        "id": 845,
+        "label": "Cheurfa",
+        "wilayaId": 23
+    },
+    {
+        "id": 847,
+        "label": "El Eulma",
+        "wilayaId": 23
+    },
+    {
+        "id": 844,
+        "label": "Chetaibi",
+        "wilayaId": 23
+    },
+    {
+        "id": 859,
+        "label": "Bendjarah",
+        "wilayaId": 24
+    },
+    {
+        "id": 871,
+        "label": "Guelma",
+        "wilayaId": 24
+    },
+    {
+        "id": 856,
+        "label": "Ain Regada",
+        "wilayaId": 24
+    },
+    {
+        "id": 861,
+        "label": "Bordj Sabath",
+        "wilayaId": 24
+    },
+    {
+        "id": 882,
+        "label": "Oued Zenati",
+        "wilayaId": 24
+    },
+    {
+        "id": 854,
+        "label": "Ain Larbi",
+        "wilayaId": 24
+    },
+    {
+        "id": 855,
+        "label": "Ain Makhlouf",
+        "wilayaId": 24
+    },
+    {
+        "id": 886,
+        "label": "Tamlouka",
+        "wilayaId": 24
+    },
+    {
+        "id": 857,
+        "label": "Ain Sandel",
+        "wilayaId": 24
+    },
+    {
+        "id": 862,
+        "label": "Bou Hachana",
+        "wilayaId": 24
+    },
+    {
+        "id": 876,
+        "label": "Khezaras",
+        "wilayaId": 24
+    },
+    {
+        "id": 858,
+        "label": "Belkheir",
+        "wilayaId": 24
+    },
+    {
+        "id": 860,
+        "label": "Beni Mezline",
+        "wilayaId": 24
+    },
+    {
+        "id": 866,
+        "label": "Boumahra Ahmed",
+        "wilayaId": 24
+    },
+    {
+        "id": 868,
+        "label": "Djeballah Khemissi",
+        "wilayaId": 24
+    },
+    {
+        "id": 870,
+        "label": "Guelaat Bou Sbaa",
+        "wilayaId": 24
+    },
+    {
+        "id": 875,
+        "label": "Nechmaya",
+        "wilayaId": 24
+    },
+    {
+        "id": 863,
+        "label": "Bou Hamdane",
+        "wilayaId": 24
+    },
+    {
+        "id": 872,
+        "label": "Hammam Debagh",
+        "wilayaId": 24
+    },
+    {
+        "id": 884,
+        "label": "Roknia",
+        "wilayaId": 24
+    },
+    {
+        "id": 867,
+        "label": "Dahouara",
+        "wilayaId": 24
+    },
+    {
+        "id": 873,
+        "label": "Hammam N'bail",
+        "wilayaId": 24
+    },
+    {
+        "id": 880,
+        "label": "Oued Cheham",
+        "wilayaId": 24
+    },
+    {
+        "id": 853,
+        "label": "Ain Ben Beida",
+        "wilayaId": 24
+    },
+    {
+        "id": 865,
+        "label": "Bouchegouf",
+        "wilayaId": 24
+    },
+    {
+        "id": 878,
+        "label": "Medjez Sfa",
+        "wilayaId": 24
+    },
+    {
+        "id": 881,
+        "label": "Oued Ferragha",
+        "wilayaId": 24
+    },
+    {
+        "id": 864,
+        "label": "Bouati Mahmoud",
+        "wilayaId": 24
+    },
+    {
+        "id": 869,
+        "label": "El Fedjoudj",
+        "wilayaId": 24
+    },
+    {
+        "id": 874,
+        "label": "Heliopolis",
+        "wilayaId": 24
+    },
+    {
+        "id": 877,
+        "label": "Medjez Amar",
+        "wilayaId": 24
+    },
+    {
+        "id": 879,
+        "label": "Houari Boumedienne",
+        "wilayaId": 24
+    },
+    {
+        "id": 883,
+        "label": "Ras El Agba",
+        "wilayaId": 24
+    },
+    {
+        "id": 885,
+        "label": "Sellaoua Announa",
+        "wilayaId": 24
+    },
+    {
+        "id": 891,
+        "label": "Constantine",
+        "wilayaId": 25
+    },
+    {
+        "id": 892,
+        "label": "Didouche Mourad",
+        "wilayaId": 25
+    },
+    {
+        "id": 894,
+        "label": "Hamma Bouziane",
+        "wilayaId": 25
+    },
+    {
+        "id": 890,
+        "label": "Beni Hamidane",
+        "wilayaId": 25
+    },
+    {
+        "id": 898,
+        "label": "Zighoud Youcef",
+        "wilayaId": 25
+    },
+    {
+        "id": 888,
+        "label": "Ain Smara",
+        "wilayaId": 25
+    },
+    {
+        "id": 893,
+        "label": "El Khroub",
+        "wilayaId": 25
+    },
+    {
+        "id": 897,
+        "label": "Ouled Rahmoun",
+        "wilayaId": 25
+    },
+    {
+        "id": 887,
+        "label": "Ain Abid",
+        "wilayaId": 25
+    },
+    {
+        "id": 889,
+        "label": "Ben Badis",
+        "wilayaId": 25
+    },
+    {
+        "id": 895,
+        "label": "Ibn Ziad",
+        "wilayaId": 25
+    },
+    {
+        "id": 896,
+        "label": "Messaoud Boudjeriou",
+        "wilayaId": 25
+    },
+    {
+        "id": 919,
+        "label": "Draa Esmar",
+        "wilayaId": 26
+    },
+    {
+        "id": 931,
+        "label": "Medea",
+        "wilayaId": 26
+    },
+    {
+        "id": 959,
+        "label": "Tamesguida",
+        "wilayaId": 26
+    },
+    {
+        "id": 904,
+        "label": "Ben Chicao",
+        "wilayaId": 26
+    },
+    {
+        "id": 922,
+        "label": "El Hamdania",
+        "wilayaId": 26
+    },
+    {
+        "id": 945,
+        "label": "Ouzera",
+        "wilayaId": 26
+    },
+    {
+        "id": 960,
+        "label": "Tizi Mahdi",
+        "wilayaId": 26
+    },
+    {
+        "id": 899,
+        "label": "Ain Boucif",
+        "wilayaId": 26
+    },
+    {
+        "id": 925,
+        "label": "El Ouinet",
+        "wilayaId": 26
+    },
+    {
+        "id": 927,
+        "label": "Kef Lakhdar",
+        "wilayaId": 26
+    },
+    {
+        "id": 942,
+        "label": "Ouled Emaaraf",
+        "wilayaId": 26
+    },
+    {
+        "id": 951,
+        "label": "Sidi Demed",
+        "wilayaId": 26
+    },
+    {
+        "id": 903,
+        "label": "Baata",
+        "wilayaId": 26
+    },
+    {
+        "id": 924,
+        "label": "El Omaria",
+        "wilayaId": 26
+    },
+    {
+        "id": 940,
+        "label": "Ouled Brahim",
+        "wilayaId": 26
+    },
+    {
+        "id": 907,
+        "label": "Bir Ben Laabed",
+        "wilayaId": 26
+    },
+    {
+        "id": 921,
+        "label": "El Guelbelkebir",
+        "wilayaId": 26
+    },
+    {
+        "id": 948,
+        "label": "Sedraya",
+        "wilayaId": 26
+    },
+    {
+        "id": 900,
+        "label": "Ain Ouksir",
+        "wilayaId": 26
+    },
+    {
+        "id": 915,
+        "label": "Chelalet El Adhaoura",
+        "wilayaId": 26
+    },
+    {
+        "id": 916,
+        "label": "Cheniguel",
+        "wilayaId": 26
+    },
+    {
+        "id": 958,
+        "label": "Tafraout",
+        "wilayaId": 26
+    },
+    {
+        "id": 911,
+        "label": "Bouchrahil",
+        "wilayaId": 26
+    },
+    {
+        "id": 928,
+        "label": "Khams Djouamaa",
+        "wilayaId": 26
+    },
+    {
+        "id": 952,
+        "label": "Sidi Naamane",
+        "wilayaId": 26
+    },
+    {
+        "id": 902,
+        "label": "Aziz",
+        "wilayaId": 26
+    },
+    {
+        "id": 917,
+        "label": "Derrag",
+        "wilayaId": 26
+    },
+    {
+        "id": 944,
+        "label": "Oum El Djellil",
+        "wilayaId": 26
+    },
+    {
+        "id": 918,
+        "label": "Djouab",
+        "wilayaId": 26
+    },
+    {
+        "id": 954,
+        "label": "Sidi Zahar",
+        "wilayaId": 26
+    },
+    {
+        "id": 955,
+        "label": "Sidi Ziane",
+        "wilayaId": 26
+    },
+    {
+        "id": 956,
+        "label": "Souagui",
+        "wilayaId": 26
+    },
+    {
+        "id": 929,
+        "label": "Ksar El Boukhari",
+        "wilayaId": 26
+    },
+    {
+        "id": 934,
+        "label": "M'fatha",
+        "wilayaId": 26
+    },
+    {
+        "id": 947,
+        "label": "Saneg",
+        "wilayaId": 26
+    },
+    {
+        "id": 920,
+        "label": "El Azizia",
+        "wilayaId": 26
+    },
+    {
+        "id": 930,
+        "label": "Maghraoua",
+        "wilayaId": 26
+    },
+    {
+        "id": 935,
+        "label": "Mihoub",
+        "wilayaId": 26
+    },
+    {
+        "id": 909,
+        "label": "Bouaiche",
+        "wilayaId": 26
+    },
+    {
+        "id": 912,
+        "label": "Boughzoul",
+        "wilayaId": 26
+    },
+    {
+        "id": 914,
+        "label": "Chabounia",
+        "wilayaId": 26
+    },
+    {
+        "id": 926,
+        "label": "Hannacha",
+        "wilayaId": 26
+    },
+    {
+        "id": 936,
+        "label": "Ouamri",
+        "wilayaId": 26
+    },
+    {
+        "id": 937,
+        "label": "Oued Harbil",
+        "wilayaId": 26
+    },
+    {
+        "id": 910,
+        "label": "Bouaichoune",
+        "wilayaId": 26
+    },
+    {
+        "id": 939,
+        "label": "Ouled Bouachra",
+        "wilayaId": 26
+    },
+    {
+        "id": 950,
+        "label": "Si Mahdjoub",
+        "wilayaId": 26
+    },
+    {
+        "id": 905,
+        "label": "Beni Slimane",
+        "wilayaId": 26
+    },
+    {
+        "id": 913,
+        "label": "Bouskene",
+        "wilayaId": 26
+    },
+    {
+        "id": 953,
+        "label": "Sidi Rabie",
+        "wilayaId": 26
+    },
+    {
+        "id": 906,
+        "label": "Berrouaghia",
+        "wilayaId": 26
+    },
+    {
+        "id": 941,
+        "label": "Ouled Deid",
+        "wilayaId": 26
+    },
+    {
+        "id": 946,
+        "label": "Rebaia",
+        "wilayaId": 26
+    },
+    {
+        "id": 932,
+        "label": "Medjebar",
+        "wilayaId": 26
+    },
+    {
+        "id": 949,
+        "label": "Seghouane",
+        "wilayaId": 26
+    },
+    {
+        "id": 961,
+        "label": "Tletat Ed Douair",
+        "wilayaId": 26
+    },
+    {
+        "id": 962,
+        "label": "Zoubiria",
+        "wilayaId": 26
+    },
+    {
+        "id": 901,
+        "label": "Aissaouia",
+        "wilayaId": 26
+    },
+    {
+        "id": 923,
+        "label": "El Haoudane",
+        "wilayaId": 26
+    },
+    {
+        "id": 933,
+        "label": "Mezerana",
+        "wilayaId": 26
+    },
+    {
+        "id": 957,
+        "label": "Tablat",
+        "wilayaId": 26
+    },
+    {
+        "id": 908,
+        "label": "Boghar",
+        "wilayaId": 26
+    },
+    {
+        "id": 938,
+        "label": "Ouled Antar",
+        "wilayaId": 26
+    },
+    {
+        "id": 943,
+        "label": "Ouled Hellal",
+        "wilayaId": 26
+    },
+    {
+        "id": 979,
+        "label": "Mostaganem",
+        "wilayaId": 27
+    },
+    {
+        "id": 965,
+        "label": "Ain-Nouissy",
+        "wilayaId": 27
+    },
+    {
+        "id": 970,
+        "label": "Fornaka",
+        "wilayaId": 27
+    },
+    {
+        "id": 973,
+        "label": "Hassiane",
+        "wilayaId": 27
+    },
+    {
+        "id": 972,
+        "label": "Hassi Mameche",
+        "wilayaId": 27
+    },
+    {
+        "id": 977,
+        "label": "Mazagran",
+        "wilayaId": 27
+    },
+    {
+        "id": 992,
+        "label": "Stidia",
+        "wilayaId": 27
+    },
+    {
+        "id": 967,
+        "label": "Ain-Tedles",
+        "wilayaId": 27
+    },
+    {
+        "id": 981,
+        "label": "Oued El Kheir",
+        "wilayaId": 27
+    },
+    {
+        "id": 987,
+        "label": "Sidi Belaattar",
+        "wilayaId": 27
+    },
+    {
+        "id": 991,
+        "label": "Sour",
+        "wilayaId": 27
+    },
+    {
+        "id": 964,
+        "label": "Ain-Boudinar",
+        "wilayaId": 27
+    },
+    {
+        "id": 975,
+        "label": "Kheir-Eddine",
+        "wilayaId": 27
+    },
+    {
+        "id": 985,
+        "label": "Sayada",
+        "wilayaId": 27
+    },
+    {
+        "id": 983,
+        "label": "Ouled-Maalah",
+        "wilayaId": 27
+    },
+    {
+        "id": 986,
+        "label": "Sidi Ali",
+        "wilayaId": 27
+    },
+    {
+        "id": 993,
+        "label": "Tazgait",
+        "wilayaId": 27
+    },
+    {
+        "id": 968,
+        "label": "Benabdelmalek Ramdane",
+        "wilayaId": 27
+    },
+    {
+        "id": 971,
+        "label": "Hadjadj",
+        "wilayaId": 27
+    },
+    {
+        "id": 988,
+        "label": "Sidi-Lakhdar",
+        "wilayaId": 27
+    },
+    {
+        "id": 963,
+        "label": "Achaacha",
+        "wilayaId": 27
+    },
+    {
+        "id": 974,
+        "label": "Khadra",
+        "wilayaId": 27
+    },
+    {
+        "id": 980,
+        "label": "Nekmaria",
+        "wilayaId": 27
+    },
+    {
+        "id": 982,
+        "label": "Ouled Boughalem",
+        "wilayaId": 27
+    },
+    {
+        "id": 969,
+        "label": "Bouguirat",
+        "wilayaId": 27
+    },
+    {
+        "id": 984,
+        "label": "Safsaf",
+        "wilayaId": 27
+    },
+    {
+        "id": 989,
+        "label": "Sirat",
+        "wilayaId": 27
+    },
+    {
+        "id": 990,
+        "label": "Souaflia",
+        "wilayaId": 27
+    },
+    {
+        "id": 966,
+        "label": "Ain-Sidi Cherif",
+        "wilayaId": 27
+    },
+    {
+        "id": 976,
+        "label": "Mansourah",
+        "wilayaId": 27
+    },
+    {
+        "id": 978,
+        "label": "Mesra",
+        "wilayaId": 27
+    },
+    {
+        "id": 994,
+        "label": "Touahria",
+        "wilayaId": 27
+    },
+    {
+        "id": 1023,
+        "label": "M'sila",
+        "wilayaId": 28
+    },
+    {
+        "id": 1013,
+        "label": "Hammam Dalaa",
+        "wilayaId": 28
+    },
+    {
+        "id": 1025,
+        "label": "Ouanougha",
+        "wilayaId": 28
+    },
+    {
+        "id": 1029,
+        "label": "Ouled Mansour",
+        "wilayaId": 28
+    },
+    {
+        "id": 1040,
+        "label": "Tarmount",
+        "wilayaId": 28
+    },
+    {
+        "id": 1016,
+        "label": "Maadid",
+        "wilayaId": 28
+    },
+    {
+        "id": 1024,
+        "label": "M'tarfa",
+        "wilayaId": 28
+    },
+    {
+        "id": 1026,
+        "label": "Ouled Addi Guebala",
+        "wilayaId": 28
+    },
+    {
+        "id": 1027,
+        "label": "Ouled Derradj",
+        "wilayaId": 28
+    },
+    {
+        "id": 1038,
+        "label": "Souamaa",
+        "wilayaId": 28
+    },
+    {
+        "id": 1012,
+        "label": "El Houamed",
+        "wilayaId": 28
+    },
+    {
+        "id": 1015,
+        "label": "Khoubana",
+        "wilayaId": 28
+    },
+    {
+        "id": 1019,
+        "label": "M'cif",
+        "wilayaId": 28
+    },
+    {
+        "id": 1008,
+        "label": "Chellal",
+        "wilayaId": 28
+    },
+    {
+        "id": 1014,
+        "label": "Khettouti Sed-El-Jir",
+        "wilayaId": 28
+    },
+    {
+        "id": 1017,
+        "label": "Maarif",
+        "wilayaId": 28
+    },
+    {
+        "id": 1028,
+        "label": "Ouled Madhi",
+        "wilayaId": 28
+    },
+    {
+        "id": 998,
+        "label": "Ain Khadra",
+        "wilayaId": 28
+    },
+    {
+        "id": 1000,
+        "label": "Belaiba",
+        "wilayaId": 28
+    },
+    {
+        "id": 1004,
+        "label": "Berhoum",
+        "wilayaId": 28
+    },
+    {
+        "id": 1009,
+        "label": "Dehahna",
+        "wilayaId": 28
+    },
+    {
+        "id": 1018,
+        "label": "Magra",
+        "wilayaId": 28
+    },
+    {
+        "id": 1002,
+        "label": "Beni Ilmane",
+        "wilayaId": 28
+    },
+    {
+        "id": 1007,
+        "label": "Bouti Sayeh",
+        "wilayaId": 28
+    },
+    {
+        "id": 1033,
+        "label": "Sidi Aissa",
+        "wilayaId": 28
+    },
+    {
+        "id": 995,
+        "label": "Ain El Hadjel",
+        "wilayaId": 28
+    },
+    {
+        "id": 1035,
+        "label": "Sidi Hadjeres",
+        "wilayaId": 28
+    },
+    {
+        "id": 1006,
+        "label": "Bou Saada",
+        "wilayaId": 28
+    },
+    {
+        "id": 1011,
+        "label": "El Hamel",
+        "wilayaId": 28
+    },
+    {
+        "id": 1032,
+        "label": "Oulteme",
+        "wilayaId": 28
+    },
+    {
+        "id": 1003,
+        "label": "Benzouh",
+        "wilayaId": 28
+    },
+    {
+        "id": 1030,
+        "label": "Ouled Sidi Brahim",
+        "wilayaId": 28
+    },
+    {
+        "id": 1034,
+        "label": "Sidi Ameur",
+        "wilayaId": 28
+    },
+    {
+        "id": 1039,
+        "label": "Tamsa",
+        "wilayaId": 28
+    },
+    {
+        "id": 1001,
+        "label": "Ben Srour",
+        "wilayaId": 28
+    },
+    {
+        "id": 1022,
+        "label": "Mohamed Boudiaf",
+        "wilayaId": 28
+    },
+    {
+        "id": 1031,
+        "label": "Ouled Slimane",
+        "wilayaId": 28
+    },
+    {
+        "id": 1041,
+        "label": "Zarzour",
+        "wilayaId": 28
+    },
+    {
+        "id": 996,
+        "label": "Ain El Melh",
+        "wilayaId": 28
+    },
+    {
+        "id": 997,
+        "label": "Ain Fares",
+        "wilayaId": 28
+    },
+    {
+        "id": 999,
+        "label": "Ain Rich",
+        "wilayaId": 28
+    },
+    {
+        "id": 1005,
+        "label": "Bir Foda",
+        "wilayaId": 28
+    },
+    {
+        "id": 1036,
+        "label": "Sidi M'hamed",
+        "wilayaId": 28
+    },
+    {
+        "id": 1020,
+        "label": "Medjedel",
+        "wilayaId": 28
+    },
+    {
+        "id": 1021,
+        "label": "Menaa",
+        "wilayaId": 28
+    },
+    {
+        "id": 1010,
+        "label": "Djebel Messaad",
+        "wilayaId": 28
+    },
+    {
+        "id": 1037,
+        "label": "Slim",
+        "wilayaId": 28
+    },
+    {
+        "id": 1069,
+        "label": "Mascara",
+        "wilayaId": 29
+    },
+    {
+        "id": 1050,
+        "label": "Bouhanifia",
+        "wilayaId": 29
+    },
+    {
+        "id": 1055,
+        "label": "El Gueitena",
+        "wilayaId": 29
+    },
+    {
+        "id": 1065,
+        "label": "Hacine",
+        "wilayaId": 29
+    },
+    {
+        "id": 1057,
+        "label": "El Keurt",
+        "wilayaId": 29
+    },
+    {
+        "id": 1061,
+        "label": "Froha",
+        "wilayaId": 29
+    },
+    {
+        "id": 1086,
+        "label": "Tizi",
+        "wilayaId": 29
+    },
+    {
+        "id": 1079,
+        "label": "Sehailia",
+        "wilayaId": 29
+    },
+    {
+        "id": 1083,
+        "label": "Sidi Kada",
+        "wilayaId": 29
+    },
+    {
+        "id": 1085,
+        "label": "Tighennif",
+        "wilayaId": 29
+    },
+    {
+        "id": 1056,
+        "label": "El Hachem",
+        "wilayaId": 29
+    },
+    {
+        "id": 1073,
+        "label": "Nesmot",
+        "wilayaId": 29
+    },
+    {
+        "id": 1088,
+        "label": "Zelamta",
+        "wilayaId": 29
+    },
+    {
+        "id": 1044,
+        "label": "Ain Ferah",
+        "wilayaId": 29
+    },
+    {
+        "id": 1075,
+        "label": "Oued El Abtal",
+        "wilayaId": 29
+    },
+    {
+        "id": 1080,
+        "label": "Sidi Abdeldjebar",
+        "wilayaId": 29
+    },
+    {
+        "id": 1063,
+        "label": "Ghriss",
+        "wilayaId": 29
+    },
+    {
+        "id": 1067,
+        "label": "Makhda",
+        "wilayaId": 29
+    },
+    {
+        "id": 1068,
+        "label": "Maoussa",
+        "wilayaId": 29
+    },
+    {
+        "id": 1070,
+        "label": "Matemore",
+        "wilayaId": 29
+    },
+    {
+        "id": 1082,
+        "label": "Sidi Boussaid",
+        "wilayaId": 29
+    },
+    {
+        "id": 1052,
+        "label": "El Bordj",
+        "wilayaId": 29
+    },
+    {
+        "id": 1059,
+        "label": "El Menaouer",
+        "wilayaId": 29
+    },
+    {
+        "id": 1066,
+        "label": "Khalouia",
+        "wilayaId": 29
+    },
+    {
+        "id": 1043,
+        "label": "Ain Fekan",
+        "wilayaId": 29
+    },
+    {
+        "id": 1045,
+        "label": "Ain Frass",
+        "wilayaId": 29
+    },
+    {
+        "id": 1064,
+        "label": "Guerdjoum",
+        "wilayaId": 29
+    },
+    {
+        "id": 1076,
+        "label": "Oued Taria",
+        "wilayaId": 29
+    },
+    {
+        "id": 1047,
+        "label": "Aouf",
+        "wilayaId": 29
+    },
+    {
+        "id": 1048,
+        "label": "Benian",
+        "wilayaId": 29
+    },
+    {
+        "id": 1062,
+        "label": "Gharrous",
+        "wilayaId": 29
+    },
+    {
+        "id": 1042,
+        "label": "Ain Fares",
+        "wilayaId": 29
+    },
+    {
+        "id": 1058,
+        "label": "El Mamounia",
+        "wilayaId": 29
+    },
+    {
+        "id": 1049,
+        "label": "Bou Henni",
+        "wilayaId": 29
+    },
+    {
+        "id": 1051,
+        "label": "Chorfa",
+        "wilayaId": 29
+    },
+    {
+        "id": 1084,
+        "label": "Sig",
+        "wilayaId": 29
+    },
+    {
+        "id": 1046,
+        "label": "Alaimia",
+        "wilayaId": 29
+    },
+    {
+        "id": 1074,
+        "label": "Oggaz",
+        "wilayaId": 29
+    },
+    {
+        "id": 1077,
+        "label": "Ras El Ain Amirouche",
+        "wilayaId": 29
+    },
+    {
+        "id": 1053,
+        "label": "El Gaada",
+        "wilayaId": 29
+    },
+    {
+        "id": 1087,
+        "label": "Zahana",
+        "wilayaId": 29
+    },
+    {
+        "id": 1054,
+        "label": "El Ghomri",
+        "wilayaId": 29
+    },
+    {
+        "id": 1060,
+        "label": "Ferraguig",
+        "wilayaId": 29
+    },
+    {
+        "id": 1071,
+        "label": "Mocta-Douz",
+        "wilayaId": 29
+    },
+    {
+        "id": 1072,
+        "label": "Mohammadia",
+        "wilayaId": 29
+    },
+    {
+        "id": 1078,
+        "label": "Sedjerara",
+        "wilayaId": 29
+    },
+    {
+        "id": 1081,
+        "label": "Sidi Abdelmoumene",
+        "wilayaId": 29
+    },
+    {
+        "id": 1101,
+        "label": "Ouargla",
+        "wilayaId": 30
+    },
+    {
+        "id": 1102,
+        "label": "Rouissat",
+        "wilayaId": 30
+    },
+    {
+        "id": 1100,
+        "label": "N'goussa",
+        "wilayaId": 30
+    },
+    {
+        "id": 1096,
+        "label": "Hassi Messaoud",
+        "wilayaId": 30
+    },
+    {
+        "id": 1089,
+        "label": "Ain Beida",
+        "wilayaId": 30
+    },
+    {
+        "id": 1095,
+        "label": "Hassi Ben Abdellah",
+        "wilayaId": 30
+    },
+    {
+        "id": 1103,
+        "label": "Sidi Khouiled",
+        "wilayaId": 30
+    },
+    {
+        "id": 1093,
+        "label": "El Borma",
+        "wilayaId": 30
+    },
+    {
+        "id": 1131,
+        "label": "Oran",
+        "wilayaId": 31
+    },
+    {
+        "id": 1114,
+        "label": "Ben Freha",
+        "wilayaId": 31
+    },
+    {
+        "id": 1124,
+        "label": "Gdyel",
+        "wilayaId": 31
+    },
+    {
+        "id": 1127,
+        "label": "Hassi Mefsoukh",
+        "wilayaId": 31
+    },
+    {
+        "id": 1116,
+        "label": "Bir El Djir",
+        "wilayaId": 31
+    },
+    {
+        "id": 1125,
+        "label": "Hassi Ben Okba",
+        "wilayaId": 31
+    },
+    {
+        "id": 1126,
+        "label": "Hassi Bounif",
+        "wilayaId": 31
+    },
+    {
+        "id": 1122,
+        "label": "El Kerma",
+        "wilayaId": 31
+    },
+    {
+        "id": 1123,
+        "label": "Es Senia",
+        "wilayaId": 31
+    },
+    {
+        "id": 1134,
+        "label": "Sidi Chami",
+        "wilayaId": 31
+    },
+    {
+        "id": 1113,
+        "label": "Arzew",
+        "wilayaId": 31
+    },
+    {
+        "id": 1133,
+        "label": "Sidi Ben Yebka",
+        "wilayaId": 31
+    },
+    {
+        "id": 1110,
+        "label": "Ain Biya",
+        "wilayaId": 31
+    },
+    {
+        "id": 1115,
+        "label": "Bethioua",
+        "wilayaId": 31
+    },
+    {
+        "id": 1128,
+        "label": "Marsat El Hadjadj",
+        "wilayaId": 31
+    },
+    {
+        "id": 1112,
+        "label": "Ain Turk",
+        "wilayaId": 31
+    },
+    {
+        "id": 1118,
+        "label": "Bousfer",
+        "wilayaId": 31
+    },
+    {
+        "id": 1120,
+        "label": "El Ancor",
+        "wilayaId": 31
+    },
+    {
+        "id": 1129,
+        "label": "Mers El Kebir",
+        "wilayaId": 31
+    },
+    {
+        "id": 1117,
+        "label": "Boufatis",
+        "wilayaId": 31
+    },
+    {
+        "id": 1121,
+        "label": "El Braya",
+        "wilayaId": 31
+    },
+    {
+        "id": 1132,
+        "label": "Oued Tlelat",
+        "wilayaId": 31
+    },
+    {
+        "id": 1135,
+        "label": "Tafraoui",
+        "wilayaId": 31
+    },
+    {
+        "id": 1111,
+        "label": "Ain Kerma",
+        "wilayaId": 31
+    },
+    {
+        "id": 1119,
+        "label": "Boutlelis",
+        "wilayaId": 31
+    },
+    {
+        "id": 1130,
+        "label": "Messerghin",
+        "wilayaId": 31
+    },
+    {
+        "id": 1144,
+        "label": "El Bayadh",
+        "wilayaId": 32
+    },
+    {
+        "id": 1139,
+        "label": "Bougtoub",
+        "wilayaId": 32
+    },
+    {
+        "id": 1152,
+        "label": "Rogassa",
+        "wilayaId": 32
+    },
+    {
+        "id": 1155,
+        "label": "Sidi Tiffour",
+        "wilayaId": 32
+    },
+    {
+        "id": 1141,
+        "label": "Brezina",
+        "wilayaId": 32
+    },
+    {
+        "id": 1149,
+        "label": "Ghassoul",
+        "wilayaId": 32
+    },
+    {
+        "id": 1151,
+        "label": "Krakda",
+        "wilayaId": 32
+    },
+    {
+        "id": 1142,
+        "label": "Cheguig",
+        "wilayaId": 32
+    },
+    {
+        "id": 1542,
+        "label": "Labiodh Sidi Cheikh",
+        "wilayaId": 32
+    },
+    {
+        "id": 1146,
+        "label": "El Bnoud",
+        "wilayaId": 32
+    },
+    {
+        "id": 1137,
+        "label": "Arbaouat",
+        "wilayaId": 32
+    },
+    {
+        "id": 1543,
+        "label": "Ain El Orak",
+        "wilayaId": 32
+    },
+    {
+        "id": 1147,
+        "label": "El Kheither",
+        "wilayaId": 32
+    },
+    {
+        "id": 1150,
+        "label": "Kef El Ahmar",
+        "wilayaId": 32
+    },
+    {
+        "id": 1138,
+        "label": "Boualem",
+        "wilayaId": 32
+    },
+    {
+        "id": 1156,
+        "label": "Stitten",
+        "wilayaId": 32
+    },
+    {
+        "id": 1143,
+        "label": "Chellala",
+        "wilayaId": 32
+    },
+    {
+        "id": 1148,
+        "label": "El Mehara",
+        "wilayaId": 32
+    },
+    {
+        "id": 1162,
+        "label": "Illizi",
+        "wilayaId": 33
+    },
+    {
+        "id": 1159,
+        "label": "Bordj Omar Driss",
+        "wilayaId": 33
+    },
+    {
+        "id": 1160,
+        "label": "Debdeb",
+        "wilayaId": 33
+    },
+    {
+        "id": 1163,
+        "label": "In Amenas",
+        "wilayaId": 33
+    },
+    {
+        "id": 1166,
+        "label": "B. B. Arreridj",
+        "wilayaId": 34
+    },
+    {
+        "id": 1165,
+        "label": "Ain Tesra",
+        "wilayaId": 34
+    },
+    {
+        "id": 1187,
+        "label": "Ouled Brahem",
+        "wilayaId": 34
+    },
+    {
+        "id": 1191,
+        "label": "Ras El Oued",
+        "wilayaId": 34
+    },
+    {
+        "id": 1171,
+        "label": "Bordj Zemmoura",
+        "wilayaId": 34
+    },
+    {
+        "id": 1188,
+        "label": "Ouled Dahmane",
+        "wilayaId": 34
+    },
+    {
+        "id": 1195,
+        "label": "Tassamert",
+        "wilayaId": 34
+    },
+    {
+        "id": 1168,
+        "label": "Ben Daoud",
+        "wilayaId": 34
+    },
+    {
+        "id": 1179,
+        "label": "El M'hir",
+        "wilayaId": 34
+    },
+    {
+        "id": 1181,
+        "label": "Haraza",
+        "wilayaId": 34
+    },
+    {
+        "id": 1185,
+        "label": "Mansoura",
+        "wilayaId": 34
+    },
+    {
+        "id": 1189,
+        "label": "Ouled Sidi-Brahim",
+        "wilayaId": 34
+    },
+    {
+        "id": 1164,
+        "label": "Ain Taghrout",
+        "wilayaId": 34
+    },
+    {
+        "id": 1197,
+        "label": "Tixter",
+        "wilayaId": 34
+    },
+    {
+        "id": 1167,
+        "label": "Belimour",
+        "wilayaId": 34
+    },
+    {
+        "id": 1170,
+        "label": "Bordj Ghedir",
+        "wilayaId": 34
+    },
+    {
+        "id": 1176,
+        "label": "El Annasseur",
+        "wilayaId": 34
+    },
+    {
+        "id": 1180,
+        "label": "Ghailasa",
+        "wilayaId": 34
+    },
+    {
+        "id": 1194,
+        "label": "Taglait",
+        "wilayaId": 34
+    },
+    {
+        "id": 1174,
+        "label": "El Euch",
+        "wilayaId": 34
+    },
+    {
+        "id": 1177,
+        "label": "Elhammadia",
+        "wilayaId": 34
+    },
+    {
+        "id": 1184,
+        "label": "Ksour",
+        "wilayaId": 34
+    },
+    {
+        "id": 1190,
+        "label": "Rabta",
+        "wilayaId": 34
+    },
+    {
+        "id": 1175,
+        "label": "El Achir",
+        "wilayaId": 34
+    },
+    {
+        "id": 1182,
+        "label": "Hasnaoua",
+        "wilayaId": 34
+    },
+    {
+        "id": 1186,
+        "label": "Medjana",
+        "wilayaId": 34
+    },
+    {
+        "id": 1196,
+        "label": "Teniet En Nasr",
+        "wilayaId": 34
+    },
+    {
+        "id": 1172,
+        "label": "Colla",
+        "wilayaId": 34
+    },
+    {
+        "id": 1173,
+        "label": "Djaafra",
+        "wilayaId": 34
+    },
+    {
+        "id": 1178,
+        "label": "El Main",
+        "wilayaId": 34
+    },
+    {
+        "id": 1193,
+        "label": "Tefreg",
+        "wilayaId": 34
+    },
+    {
+        "id": 1169,
+        "label": "Bir Kasdali",
+        "wilayaId": 34
+    },
+    {
+        "id": 1183,
+        "label": "Khelil",
+        "wilayaId": 34
+    },
+    {
+        "id": 1192,
+        "label": "Sidi-Embarek",
+        "wilayaId": 34
+    },
+    {
+        "id": 1206,
+        "label": "Boumerdes",
+        "wilayaId": 35
+    },
+    {
+        "id": 1209,
+        "label": "Corso",
+        "wilayaId": 35
+    },
+    {
+        "id": 1227,
+        "label": "Tidjelabine",
+        "wilayaId": 35
+    },
+    {
+        "id": 1204,
+        "label": "Boudouaou",
+        "wilayaId": 35
+    },
+    {
+        "id": 1205,
+        "label": "Boudouaou El Bahri",
+        "wilayaId": 35
+    },
+    {
+        "id": 1207,
+        "label": "Bouzegza Keddara",
+        "wilayaId": 35
+    },
+    {
+        "id": 1212,
+        "label": "El Kharrouba",
+        "wilayaId": 35
+    },
+    {
+        "id": 1220,
+        "label": "Ouled Hedadj",
+        "wilayaId": 35
+    },
+    {
+        "id": 1203,
+        "label": "Bordj Menaiel",
+        "wilayaId": 35
+    },
+    {
+        "id": 1211,
+        "label": "Djinet",
+        "wilayaId": 35
+    },
+    {
+        "id": 1217,
+        "label": "Leghata",
+        "wilayaId": 35
+    },
+    {
+        "id": 1229,
+        "label": "Zemmouri",
+        "wilayaId": 35
+    },
+    {
+        "id": 1200,
+        "label": "Baghlia",
+        "wilayaId": 35
+    },
+    {
+        "id": 1223,
+        "label": "Sidi Daoud",
+        "wilayaId": 35
+    },
+    {
+        "id": 1225,
+        "label": "Taourga",
+        "wilayaId": 35
+    },
+    {
+        "id": 1218,
+        "label": "Naciria",
+        "wilayaId": 35
+    },
+    {
+        "id": 1219,
+        "label": "Ouled Aissa",
+        "wilayaId": 35
+    },
+    {
+        "id": 1208,
+        "label": "Chabet El Ameur",
+        "wilayaId": 35
+    },
+    {
+        "id": 1214,
+        "label": "Isser",
+        "wilayaId": 35
+    },
+    {
+        "id": 1222,
+        "label": "Si Mustapha",
+        "wilayaId": 35
+    },
+    {
+        "id": 1228,
+        "label": "Timezrit",
+        "wilayaId": 35
+    },
+    {
+        "id": 1199,
+        "label": "Ammal",
+        "wilayaId": 35
+    },
+    {
+        "id": 1202,
+        "label": "Beni Amrane",
+        "wilayaId": 35
+    },
+    {
+        "id": 1224,
+        "label": "Souk El Had",
+        "wilayaId": 35
+    },
+    {
+        "id": 1226,
+        "label": "Thenia",
+        "wilayaId": 35
+    },
+    {
+        "id": 1198,
+        "label": "Afir",
+        "wilayaId": 35
+    },
+    {
+        "id": 1201,
+        "label": "Ben Choud",
+        "wilayaId": 35
+    },
+    {
+        "id": 1210,
+        "label": "Dellys",
+        "wilayaId": 35
+    },
+    {
+        "id": 1213,
+        "label": "Hammedi",
+        "wilayaId": 35
+    },
+    {
+        "id": 1215,
+        "label": "Khemis El Khechna",
+        "wilayaId": 35
+    },
+    {
+        "id": 1216,
+        "label": "Larbatache",
+        "wilayaId": 35
+    },
+    {
+        "id": 1221,
+        "label": "Ouled Moussa",
+        "wilayaId": 35
+    },
+    {
+        "id": 1230,
+        "label": "Ain El Assel",
+        "wilayaId": 36
+    },
+    {
+        "id": 1236,
+        "label": "Bougous",
+        "wilayaId": 36
+    },
+    {
+        "id": 1246,
+        "label": "El Tarf",
+        "wilayaId": 36
+    },
+    {
+        "id": 1253,
+        "label": "Zitouna",
+        "wilayaId": 36
+    },
+    {
+        "id": 1231,
+        "label": "Ain Kerma",
+        "wilayaId": 36
+    },
+    {
+        "id": 1237,
+        "label": "Bouhadjar",
+        "wilayaId": 36
+    },
+    {
+        "id": 1247,
+        "label": "Hammam Beni Salah",
+        "wilayaId": 36
+    },
+    {
+        "id": 1249,
+        "label": "Oued Zitoun",
+        "wilayaId": 36
+    },
+    {
+        "id": 1233,
+        "label": "Ben M Hidi",
+        "wilayaId": 36
+    },
+    {
+        "id": 1234,
+        "label": "Berrihane",
+        "wilayaId": 36
+    },
+    {
+        "id": 1243,
+        "label": "Echatt",
+        "wilayaId": 36
+    },
+    {
+        "id": 1244,
+        "label": "El Aioun",
+        "wilayaId": 36
+    },
+    {
+        "id": 1245,
+        "label": "El Kala",
+        "wilayaId": 36
+    },
+    {
+        "id": 1250,
+        "label": "Raml Souk",
+        "wilayaId": 36
+    },
+    {
+        "id": 1251,
+        "label": "Souarekh",
+        "wilayaId": 36
+    },
+    {
+        "id": 1238,
+        "label": "Bouteldja",
+        "wilayaId": 36
+    },
+    {
+        "id": 1240,
+        "label": "Chefia",
+        "wilayaId": 36
+    },
+    {
+        "id": 1248,
+        "label": "Lac Des Oiseaux",
+        "wilayaId": 36
+    },
+    {
+        "id": 1239,
+        "label": "Chebaita Mokhtar",
+        "wilayaId": 36
+    },
+    {
+        "id": 1241,
+        "label": "Chihani",
+        "wilayaId": 36
+    },
+    {
+        "id": 1242,
+        "label": "Drean",
+        "wilayaId": 36
+    },
+    {
+        "id": 1232,
+        "label": "Asfour",
+        "wilayaId": 36
+    },
+    {
+        "id": 1235,
+        "label": "Besbes",
+        "wilayaId": 36
+    },
+    {
+        "id": 1252,
+        "label": "Zerizer",
+        "wilayaId": 36
+    },
+    {
+        "id": 1254,
+        "label": "Oum El Assel",
+        "wilayaId": 37
+    },
+    {
+        "id": 1255,
+        "label": "Tindouf",
+        "wilayaId": 37
+    },
+    {
+        "id": 1269,
+        "label": "Ouled Bessam",
+        "wilayaId": 38
+    },
+    {
+        "id": 1276,
+        "label": "Tissemsilt",
+        "wilayaId": 38
+    },
+    {
+        "id": 1257,
+        "label": "Beni Chaib",
+        "wilayaId": 38
+    },
+    {
+        "id": 1258,
+        "label": "Beni Lahcene",
+        "wilayaId": 38
+    },
+    {
+        "id": 1259,
+        "label": "Bordj Bounaama",
+        "wilayaId": 38
+    },
+    {
+        "id": 1273,
+        "label": "Sidi Slimane",
+        "wilayaId": 38
+    },
+    {
+        "id": 1271,
+        "label": "Sidi Boutouchent",
+        "wilayaId": 38
+    },
+    {
+        "id": 1275,
+        "label": "Theniet El Had",
+        "wilayaId": 38
+    },
+    {
+        "id": 1261,
+        "label": "Boucaid",
+        "wilayaId": 38
+    },
+    {
+        "id": 1263,
+        "label": "Larbaa",
+        "wilayaId": 38
+    },
+    {
+        "id": 1266,
+        "label": "Lazharia",
+        "wilayaId": 38
+    },
+    {
+        "id": 1264,
+        "label": "Lardjem",
+        "wilayaId": 38
+    },
+    {
+        "id": 1268,
+        "label": "Melaab",
+        "wilayaId": 38
+    },
+    {
+        "id": 1272,
+        "label": "Sidi Lantri",
+        "wilayaId": 38
+    },
+    {
+        "id": 1274,
+        "label": "Tamellahet",
+        "wilayaId": 38
+    },
+    {
+        "id": 1260,
+        "label": "Bordj El Emir Abdelkader",
+        "wilayaId": 38
+    },
+    {
+        "id": 1277,
+        "label": "Youssoufia",
+        "wilayaId": 38
+    },
+    {
+        "id": 1262,
+        "label": "Khemisti",
+        "wilayaId": 38
+    },
+    {
+        "id": 1265,
+        "label": "Layoune",
+        "wilayaId": 38
+    },
+    {
+        "id": 1256,
+        "label": "Ammari",
+        "wilayaId": 38
+    },
+    {
+        "id": 1267,
+        "label": "Maacem",
+        "wilayaId": 38
+    },
+    {
+        "id": 1270,
+        "label": "Sidi Abed",
+        "wilayaId": 38
+    },
+    {
+        "id": 1285,
+        "label": "El-Oued",
+        "wilayaId": 39
+    },
+    {
+        "id": 1290,
+        "label": "Kouinine",
+        "wilayaId": 39
+    },
+    {
+        "id": 1283,
+        "label": "El Ogla",
+        "wilayaId": 39
+    },
+    {
+        "id": 1294,
+        "label": "Nakhla",
+        "wilayaId": 39
+    },
+    {
+        "id": 1299,
+        "label": "Robbah",
+        "wilayaId": 39
+    },
+    {
+        "id": 1278,
+        "label": "Bayadha",
+        "wilayaId": 39
+    },
+    {
+        "id": 1286,
+        "label": "Guemar",
+        "wilayaId": 39
+    },
+    {
+        "id": 1297,
+        "label": "Ourmes",
+        "wilayaId": 39
+    },
+    {
+        "id": 1304,
+        "label": "Taghzout",
+        "wilayaId": 39
+    },
+    {
+        "id": 1287,
+        "label": "Hamraia",
+        "wilayaId": 39
+    },
+    {
+        "id": 1298,
+        "label": "Reguiba",
+        "wilayaId": 39
+    },
+    {
+        "id": 1280,
+        "label": "Debila",
+        "wilayaId": 39
+    },
+    {
+        "id": 1288,
+        "label": "Hassani Abdelkrim",
+        "wilayaId": 39
+    },
+    {
+        "id": 1289,
+        "label": "Hassi Khalifa",
+        "wilayaId": 39
+    },
+    {
+        "id": 1307,
+        "label": "Trifaoui",
+        "wilayaId": 39
+    },
+    {
+        "id": 1279,
+        "label": "Ben Guecha",
+        "wilayaId": 39
+    },
+    {
+        "id": 1282,
+        "label": "Douar El Maa",
+        "wilayaId": 39
+    },
+    {
+        "id": 1305,
+        "label": "Taleb Larbi",
+        "wilayaId": 39
+    },
+    {
+        "id": 1291,
+        "label": "Magrane",
+        "wilayaId": 39
+    },
+    {
+        "id": 1301,
+        "label": "Sidi Aoun",
+        "wilayaId": 39
+    },
+    {
+        "id": 1292,
+        "label": "Mih Ouansa",
+        "wilayaId": 39
+    },
+    {
+        "id": 1295,
+        "label": "Oued El Alenda",
+        "wilayaId": 39
+    },
+    {
+        "id": 1320,
+        "label": "Khenchela",
+        "wilayaId": 40
+    },
+    {
+        "id": 1319,
+        "label": "Kais",
+        "wilayaId": 40
+    },
+    {
+        "id": 1325,
+        "label": "Remila",
+        "wilayaId": 40
+    },
+    {
+        "id": 1327,
+        "label": "Taouzianat",
+        "wilayaId": 40
+    },
+    {
+        "id": 1310,
+        "label": "Baghai",
+        "wilayaId": 40
+    },
+    {
+        "id": 1315,
+        "label": "El Hamma",
+        "wilayaId": 40
+    },
+    {
+        "id": 1318,
+        "label": "Ensigha",
+        "wilayaId": 40
+    },
+    {
+        "id": 1326,
+        "label": "Tamza",
+        "wilayaId": 40
+    },
+    {
+        "id": 1308,
+        "label": "Ain Touila",
+        "wilayaId": 40
+    },
+    {
+        "id": 1323,
+        "label": "M'toussa",
+        "wilayaId": 40
+    },
+    {
+        "id": 1311,
+        "label": "Bouhmama",
+        "wilayaId": 40
+    },
+    {
+        "id": 1313,
+        "label": "Chelia",
+        "wilayaId": 40
+    },
+    {
+        "id": 1322,
+        "label": "M'sara",
+        "wilayaId": 40
+    },
+    {
+        "id": 1328,
+        "label": "Yabous",
+        "wilayaId": 40
+    },
+    {
+        "id": 1312,
+        "label": "Chechar",
+        "wilayaId": 40
+    },
+    {
+        "id": 1314,
+        "label": "Djellal",
+        "wilayaId": 40
+    },
+    {
+        "id": 1317,
+        "label": "El Oueldja",
+        "wilayaId": 40
+    },
+    {
+        "id": 1321,
+        "label": "Khirane",
+        "wilayaId": 40
+    },
+    {
+        "id": 1309,
+        "label": "Babar",
+        "wilayaId": 40
+    },
+    {
+        "id": 1316,
+        "label": "El Mahmal",
+        "wilayaId": 40
+    },
+    {
+        "id": 1324,
+        "label": "Ouled Rechache",
+        "wilayaId": 40
+    },
+    {
+        "id": 1349,
+        "label": "Souk Ahras",
+        "wilayaId": 41
+    },
+    {
+        "id": 1329,
+        "label": "Ain Soltane",
+        "wilayaId": 41
+    },
+    {
+        "id": 1336,
+        "label": "Khemissa",
+        "wilayaId": 41
+    },
+    {
+        "id": 1347,
+        "label": "Sedrata",
+        "wilayaId": 41
+    },
+    {
+        "id": 1334,
+        "label": "Hanencha",
+        "wilayaId": 41
+    },
+    {
+        "id": 1337,
+        "label": "Machroha",
+        "wilayaId": 41
+    },
+    {
+        "id": 1330,
+        "label": "Ain Zana",
+        "wilayaId": 41
+    },
+    {
+        "id": 1341,
+        "label": "Ouled Driss",
+        "wilayaId": 41
+    },
+    {
+        "id": 1332,
+        "label": "Drea",
+        "wilayaId": 41
+    },
+    {
+        "id": 1350,
+        "label": "Taoura",
+        "wilayaId": 41
+    },
+    {
+        "id": 1353,
+        "label": "Zaarouria",
+        "wilayaId": 41
+    },
+    {
+        "id": 1333,
+        "label": "Haddada",
+        "wilayaId": 41
+    },
+    {
+        "id": 1335,
+        "label": "Khedara",
+        "wilayaId": 41
+    },
+    {
+        "id": 1342,
+        "label": "Ouled Moumen",
+        "wilayaId": 41
+    },
+    {
+        "id": 1339,
+        "label": "Merahna",
+        "wilayaId": 41
+    },
+    {
+        "id": 1344,
+        "label": "Ouillen",
+        "wilayaId": 41
+    },
+    {
+        "id": 1348,
+        "label": "Sidi Fredj",
+        "wilayaId": 41
+    },
+    {
+        "id": 1331,
+        "label": "Bir Bouhouche",
+        "wilayaId": 41
+    },
+    {
+        "id": 1346,
+        "label": "Safel El Ouiden",
+        "wilayaId": 41
+    },
+    {
+        "id": 1354,
+        "label": "Zouabi",
+        "wilayaId": 41
+    },
+    {
+        "id": 1338,
+        "label": "M'daourouche",
+        "wilayaId": 41
+    },
+    {
+        "id": 1345,
+        "label": "Ragouba",
+        "wilayaId": 41
+    },
+    {
+        "id": 1352,
+        "label": "Tiffech",
+        "wilayaId": 41
+    },
+    {
+        "id": 1340,
+        "label": "Oued Kebrit",
+        "wilayaId": 41
+    },
+    {
+        "id": 1343,
+        "label": "Oum El Adhaim",
+        "wilayaId": 41
+    },
+    {
+        "id": 1351,
+        "label": "Terraguelt",
+        "wilayaId": 41
+    },
+    {
+        "id": 1382,
+        "label": "Tipaza",
+        "wilayaId": 42
+    },
+    {
+        "id": 1369,
+        "label": "Hadjout",
+        "wilayaId": 42
+    },
+    {
+        "id": 1375,
+        "label": "Merad",
+        "wilayaId": 42
+    },
+    {
+        "id": 1374,
+        "label": "Menaceur",
+        "wilayaId": 42
+    },
+    {
+        "id": 1377,
+        "label": "Nador",
+        "wilayaId": 42
+    },
+    {
+        "id": 1381,
+        "label": "Sidi-Amar",
+        "wilayaId": 42
+    },
+    {
+        "id": 1355,
+        "label": "Aghbal",
+        "wilayaId": 42
+    },
+    {
+        "id": 1368,
+        "label": "Gouraya",
+        "wilayaId": 42
+    },
+    {
+        "id": 1376,
+        "label": "Messelmoun",
+        "wilayaId": 42
+    },
+    {
+        "id": 1364,
+        "label": "Cherchell",
+        "wilayaId": 42
+    },
+    {
+        "id": 1370,
+        "label": "Hadjret Ennous",
+        "wilayaId": 42
+    },
+    {
+        "id": 1378,
+        "label": "Sidi Ghiles",
+        "wilayaId": 42
+    },
+    {
+        "id": 1380,
+        "label": "Sidi Semiane",
+        "wilayaId": 42
+    },
+    {
+        "id": 1359,
+        "label": "Beni Mileuk",
+        "wilayaId": 42
+    },
+    {
+        "id": 1365,
+        "label": "Damous",
+        "wilayaId": 42
+    },
+    {
+        "id": 1373,
+        "label": "Larhat",
+        "wilayaId": 42
+    },
+    {
+        "id": 1366,
+        "label": "Douaouda",
+        "wilayaId": 42
+    },
+    {
+        "id": 1367,
+        "label": "Fouka",
+        "wilayaId": 42
+    },
+    {
+        "id": 1357,
+        "label": "Ain Tagourait",
+        "wilayaId": 42
+    },
+    {
+        "id": 1360,
+        "label": "Bou Haroun",
+        "wilayaId": 42
+    },
+    {
+        "id": 1361,
+        "label": "Bou Ismail",
+        "wilayaId": 42
+    },
+    {
+        "id": 1371,
+        "label": "Khemisti",
+        "wilayaId": 42
+    },
+    {
+        "id": 1356,
+        "label": "Ahmer El Ain",
+        "wilayaId": 42
+    },
+    {
+        "id": 1362,
+        "label": "Bourkika",
+        "wilayaId": 42
+    },
+    {
+        "id": 1379,
+        "label": "Sidi Rached",
+        "wilayaId": 42
+    },
+    {
+        "id": 1358,
+        "label": "Attatba",
+        "wilayaId": 42
+    },
+    {
+        "id": 1363,
+        "label": "Chaiba",
+        "wilayaId": 42
+    },
+    {
+        "id": 1372,
+        "label": "Kolea",
+        "wilayaId": 42
+    },
+    {
+        "id": 1386,
+        "label": "Ain Tine",
+        "wilayaId": 43
+    },
+    {
+        "id": 1398,
+        "label": "Mila",
+        "wilayaId": 43
+    },
+    {
+        "id": 1405,
+        "label": "Sidi Khelifa",
+        "wilayaId": 43
+    },
+    {
+        "id": 1395,
+        "label": "Ferdjioua",
+        "wilayaId": 43
+    },
+    {
+        "id": 1413,
+        "label": "Yahia Beniguecha",
+        "wilayaId": 43
+    },
+    {
+        "id": 1385,
+        "label": "Ain Mellouk",
+        "wilayaId": 43
+    },
+    {
+        "id": 1390,
+        "label": "Chelghoum Laid",
+        "wilayaId": 43
+    },
+    {
+        "id": 1400,
+        "label": "Oued Athmenia",
+        "wilayaId": 43
+    },
+    {
+        "id": 1394,
+        "label": "El Mechira",
+        "wilayaId": 43
+    },
+    {
+        "id": 1402,
+        "label": "Oued Seguen",
+        "wilayaId": 43
+    },
+    {
+        "id": 1409,
+        "label": "Teleghma",
+        "wilayaId": 43
+    },
+    {
+        "id": 1388,
+        "label": "Benyahia Abderrahmane",
+        "wilayaId": 43
+    },
+    {
+        "id": 1403,
+        "label": "Ouled Khalouf",
+        "wilayaId": 43
+    },
+    {
+        "id": 1407,
+        "label": "Tadjenanet",
+        "wilayaId": 43
+    },
+    {
+        "id": 1383,
+        "label": "Ahmed Rachedi",
+        "wilayaId": 43
+    },
+    {
+        "id": 1401,
+        "label": "Oued Endja",
+        "wilayaId": 43
+    },
+    {
+        "id": 1414,
+        "label": "Zeghaia",
+        "wilayaId": 43
+    },
+    {
+        "id": 1389,
+        "label": "Bouhatem",
+        "wilayaId": 43
+    },
+    {
+        "id": 1392,
+        "label": "Derrahi Bousselah",
+        "wilayaId": 43
+    },
+    {
+        "id": 1404,
+        "label": "Rouached",
+        "wilayaId": 43
+    },
+    {
+        "id": 1412,
+        "label": "Tiberguent",
+        "wilayaId": 43
+    },
+    {
+        "id": 1396,
+        "label": "Grarem Gouga",
+        "wilayaId": 43
+    },
+    {
+        "id": 1397,
+        "label": "Hamala",
+        "wilayaId": 43
+    },
+    {
+        "id": 1391,
+        "label": "Chigara",
+        "wilayaId": 43
+    },
+    {
+        "id": 1406,
+        "label": "Sidi Merouane",
+        "wilayaId": 43
+    },
+    {
+        "id": 1399,
+        "label": "Minar Zarza",
+        "wilayaId": 43
+    },
+    {
+        "id": 1408,
+        "label": "Tassadane Haddada",
+        "wilayaId": 43
+    },
+    {
+        "id": 1387,
+        "label": "Amira Arres",
+        "wilayaId": 43
+    },
+    {
+        "id": 1410,
+        "label": "Terrai Bainen",
+        "wilayaId": 43
+    },
+    {
+        "id": 1411,
+        "label": "Tassala Lematai",
+        "wilayaId": 43
+    },
+    {
+        "id": 1384,
+        "label": "Ain Beida Harriche",
+        "wilayaId": 43
+    },
+    {
+        "id": 1393,
+        "label": "El Ayadi Barbes",
+        "wilayaId": 43
+    },
+    {
+        "id": 1417,
+        "label": "Ain-Defla",
+        "wilayaId": 44
+    },
+    {
+        "id": 1425,
+        "label": "Ben Allal",
+        "wilayaId": 44
+    },
+    {
+        "id": 1442,
+        "label": "Miliana",
+        "wilayaId": 44
+    },
+    {
+        "id": 1428,
+        "label": "Boumedfaa",
+        "wilayaId": 44
+    },
+    {
+        "id": 1439,
+        "label": "Hoceinia",
+        "wilayaId": 44
+    },
+    {
+        "id": 1440,
+        "label": "Khemis-Miliana",
+        "wilayaId": 44
+    },
+    {
+        "id": 1446,
+        "label": "Sidi-Lakhdar",
+        "wilayaId": 44
+    },
+    {
+        "id": 1415,
+        "label": "Ain-Benian",
+        "wilayaId": 44
+    },
+    {
+        "id": 1420,
+        "label": "Ain-Torki",
+        "wilayaId": 44
+    },
+    {
+        "id": 1437,
+        "label": "Hammam-Righa",
+        "wilayaId": 44
+    },
+    {
+        "id": 1429,
+        "label": "Bourached",
+        "wilayaId": 44
+    },
+    {
+        "id": 1430,
+        "label": "Djelida",
+        "wilayaId": 44
+    },
+    {
+        "id": 1431,
+        "label": "Djemaa Ouled Cheikh",
+        "wilayaId": 44
+    },
+    {
+        "id": 1421,
+        "label": "Arib",
+        "wilayaId": 44
+    },
+    {
+        "id": 1434,
+        "label": "El-Amra",
+        "wilayaId": 44
+    },
+    {
+        "id": 1441,
+        "label": "Mekhatria",
+        "wilayaId": 44
+    },
+    {
+        "id": 1435,
+        "label": "El-Attaf",
+        "wilayaId": 44
+    },
+    {
+        "id": 1449,
+        "label": "Tiberkanine",
+        "wilayaId": 44
+    },
+    {
+        "id": 1416,
+        "label": "Ain-Bouyahia",
+        "wilayaId": 44
+    },
+    {
+        "id": 1433,
+        "label": "El-Abadia",
+        "wilayaId": 44
+    },
+    {
+        "id": 1447,
+        "label": "Tacheta Zegagha",
+        "wilayaId": 44
+    },
+    {
+        "id": 1422,
+        "label": "Birbouche",
+        "wilayaId": 44
+    },
+    {
+        "id": 1432,
+        "label": "Djendel",
+        "wilayaId": 44
+    },
+    {
+        "id": 1443,
+        "label": "Oued Chorfa",
+        "wilayaId": 44
+    },
+    {
+        "id": 1418,
+        "label": "Ain-Lechiakh",
+        "wilayaId": 44
+    },
+    {
+        "id": 1419,
+        "label": "Ain-Soltane",
+        "wilayaId": 44
+    },
+    {
+        "id": 1444,
+        "label": "Oued Djemaa",
+        "wilayaId": 44
+    },
+    {
+        "id": 1436,
+        "label": "El-Maine",
+        "wilayaId": 44
+    },
+    {
+        "id": 1445,
+        "label": "Rouina",
+        "wilayaId": 44
+    },
+    {
+        "id": 1450,
+        "label": "Zeddine",
+        "wilayaId": 44
+    },
+    {
+        "id": 1426,
+        "label": "Bir-Ould-Khelifa",
+        "wilayaId": 44
+    },
+    {
+        "id": 1427,
+        "label": "Bordj-Emir-Khaled",
+        "wilayaId": 44
+    },
+    {
+        "id": 1448,
+        "label": "Tarik-Ibn-Ziad",
+        "wilayaId": 44
+    },
+    {
+        "id": 1423,
+        "label": "Bathia",
+        "wilayaId": 44
+    },
+    {
+        "id": 1424,
+        "label": "Belaas",
+        "wilayaId": 44
+    },
+    {
+        "id": 1438,
+        "label": "Hassania",
+        "wilayaId": 44
+    },
+    {
+        "id": 1460,
+        "label": "Naama",
+        "wilayaId": 45
+    },
+    {
+        "id": 1451,
+        "label": "Ain Ben Khelil",
+        "wilayaId": 45
+    },
+    {
+        "id": 1455,
+        "label": "El Biodh",
+        "wilayaId": 45
+    },
+    {
+        "id": 1458,
+        "label": "Mecheria",
+        "wilayaId": 45
+    },
+    {
+        "id": 1452,
+        "label": "Ain Sefra",
+        "wilayaId": 45
+    },
+    {
+        "id": 1462,
+        "label": "Tiout",
+        "wilayaId": 45
+    },
+    {
+        "id": 1461,
+        "label": "Sfissifa",
+        "wilayaId": 45
+    },
+    {
+        "id": 1454,
+        "label": "Djenienne Bourezg",
+        "wilayaId": 45
+    },
+    {
+        "id": 1459,
+        "label": "Moghrar",
+        "wilayaId": 45
+    },
+    {
+        "id": 1453,
+        "label": "Asla",
+        "wilayaId": 45
+    },
+    {
+        "id": 1456,
+        "label": "Kasdir",
+        "wilayaId": 45
+    },
+    {
+        "id": 1457,
+        "label": "Makmen Ben Amar",
+        "wilayaId": 45
+    },
+    {
+        "id": 1466,
+        "label": "Ain Temouchent",
+        "wilayaId": 46
+    },
+    {
+        "id": 1485,
+        "label": "Sidi Ben Adda",
+        "wilayaId": 46
+    },
+    {
+        "id": 1472,
+        "label": "Chentouf",
+        "wilayaId": 46
+    },
+    {
+        "id": 1477,
+        "label": "Hammam Bou Hadjar",
+        "wilayaId": 46
+    },
+    {
+        "id": 1478,
+        "label": "Hassasna",
+        "wilayaId": 46
+    },
+    {
+        "id": 1480,
+        "label": "Oued Berkeche",
+        "wilayaId": 46
+    },
+    {
+        "id": 1464,
+        "label": "Ain El Arbaa",
+        "wilayaId": 46
+    },
+    {
+        "id": 1481,
+        "label": "Oued Sebbah",
+        "wilayaId": 46
+    },
+    {
+        "id": 1486,
+        "label": "Sidi Boumediene",
+        "wilayaId": 46
+    },
+    {
+        "id": 1489,
+        "label": "Tamzoura",
+        "wilayaId": 46
+    },
+    {
+        "id": 1471,
+        "label": "Chaabat El Ham",
+        "wilayaId": 46
+    },
+    {
+        "id": 1474,
+        "label": "El Maleh",
+        "wilayaId": 46
+    },
+    {
+        "id": 1483,
+        "label": "Ouled Kihal",
+        "wilayaId": 46
+    },
+    {
+        "id": 1490,
+        "label": "Terga",
+        "wilayaId": 46
+    },
+    {
+        "id": 1470,
+        "label": "Bouzedjar",
+        "wilayaId": 46
+    },
+    {
+        "id": 1473,
+        "label": "El Amria",
+        "wilayaId": 46
+    },
+    {
+        "id": 1475,
+        "label": "El Messaid",
+        "wilayaId": 46
+    },
+    {
+        "id": 1479,
+        "label": "Hassi El Ghella",
+        "wilayaId": 46
+    },
+    {
+        "id": 1482,
+        "label": "Ouled Boudjemaa",
+        "wilayaId": 46
+    },
+    {
+        "id": 1463,
+        "label": "Aghlal",
+        "wilayaId": 46
+    },
+    {
+        "id": 1465,
+        "label": "Ain Kihal",
+        "wilayaId": 46
+    },
+    {
+        "id": 1467,
+        "label": "Ain Tolba",
+        "wilayaId": 46
+    },
+    {
+        "id": 1468,
+        "label": "Aoubellil",
+        "wilayaId": 46
+    },
+    {
+        "id": 1469,
+        "label": "Beni Saf",
+        "wilayaId": 46
+    },
+    {
+        "id": 1476,
+        "label": "Emir Abdelkader",
+        "wilayaId": 46
+    },
+    {
+        "id": 1488,
+        "label": "Sidi Safi",
+        "wilayaId": 46
+    },
+    {
+        "id": 1484,
+        "label": "Oulhaca El Gheraba",
+        "wilayaId": 46
+    },
+    {
+        "id": 1487,
+        "label": "Sidi Ouriache",
+        "wilayaId": 46
+    },
+    {
+        "id": 1496,
+        "label": "Ghardaia",
+        "wilayaId": 47
+    },
+    {
+        "id": 1493,
+        "label": "Dhayet Bendhahoua",
+        "wilayaId": 47
+    },
+    {
+        "id": 1491,
+        "label": "Berriane",
+        "wilayaId": 47
+    },
+    {
+        "id": 1501,
+        "label": "Metlili",
+        "wilayaId": 47
+    },
+    {
+        "id": 1502,
+        "label": "Sebseb",
+        "wilayaId": 47
+    },
+    {
+        "id": 1497,
+        "label": "El Guerrara",
+        "wilayaId": 47
+    },
+    {
+        "id": 1503,
+        "label": "Zelfana",
+        "wilayaId": 47
+    },
+    {
+        "id": 1492,
+        "label": "Bounoura",
+        "wilayaId": 47
+    },
+    {
+        "id": 1494,
+        "label": "El Atteuf",
+        "wilayaId": 47
+    },
+    {
+        "id": 1508,
+        "label": "Bendaoud",
+        "wilayaId": 48
+    },
+    {
+        "id": 1533,
+        "label": "Relizane",
+        "wilayaId": 48
+    },
+    {
+        "id": 1521,
+        "label": "Lahlef",
+        "wilayaId": 48
+    },
+    {
+        "id": 1525,
+        "label": "Merdja Sidi Abed",
+        "wilayaId": 48
+    },
+    {
+        "id": 1526,
+        "label": "Ouarizane",
+        "wilayaId": 48
+    },
+    {
+        "id": 1529,
+        "label": "Oued-Rhiou",
+        "wilayaId": 48
+    },
+    {
+        "id": 1514,
+        "label": "El H'madna",
+        "wilayaId": 48
+    },
+    {
+        "id": 1527,
+        "label": "Oued El Djemaa",
+        "wilayaId": 48
+    },
+    {
+        "id": 1510,
+        "label": "Beni Zentis",
+        "wilayaId": 48
+    },
+    {
+        "id": 1523,
+        "label": "Mediouna",
+        "wilayaId": 48
+    },
+    {
+        "id": 1536,
+        "label": "Sidi M'hamed Benali",
+        "wilayaId": 48
+    },
+    {
+        "id": 1506,
+        "label": "Ammi Moussa",
+        "wilayaId": 48
+    },
+    {
+        "id": 1513,
+        "label": "El Hassi",
+        "wilayaId": 48
+    },
+    {
+        "id": 1515,
+        "label": "El Ouldja",
+        "wilayaId": 48
+    },
+    {
+        "id": 1530,
+        "label": "Ouled Aiche",
+        "wilayaId": 48
+    },
+    {
+        "id": 1509,
+        "label": "Beni Dergoun",
+        "wilayaId": 48
+    },
+    {
+        "id": 1511,
+        "label": "Dar Ben Abdelah",
+        "wilayaId": 48
+    },
+    {
+        "id": 1541,
+        "label": "Zemmoura",
+        "wilayaId": 48
+    },
+    {
+        "id": 1512,
+        "label": "Djidiouia",
+        "wilayaId": 48
+    },
+    {
+        "id": 1519,
+        "label": "Hamri",
+        "wilayaId": 48
+    },
+    {
+        "id": 1531,
+        "label": "Ouled Sidi Mihoub",
+        "wilayaId": 48
+    },
+    {
+        "id": 1507,
+        "label": "Belaassel Bouzagza",
+        "wilayaId": 48
+    },
+    {
+        "id": 1517,
+        "label": "El-Matmar",
+        "wilayaId": 48
+    },
+    {
+        "id": 1534,
+        "label": "Sidi Khettab",
+        "wilayaId": 48
+    },
+    {
+        "id": 1537,
+        "label": "Sidi M'hamed Benaouda",
+        "wilayaId": 48
+    },
+    {
+        "id": 1505,
+        "label": "Ain-Tarek",
+        "wilayaId": 48
+    },
+    {
+        "id": 1518,
+        "label": "Had Echkalla",
+        "wilayaId": 48
+    },
+    {
+        "id": 1516,
+        "label": "El-Guettar",
+        "wilayaId": 48
+    },
+    {
+        "id": 1522,
+        "label": "Mazouna",
+        "wilayaId": 48
+    },
+    {
+        "id": 1504,
+        "label": "Ain Rahma",
+        "wilayaId": 48
+    },
+    {
+        "id": 1520,
+        "label": "Kalaa",
+        "wilayaId": 48
+    },
+    {
+        "id": 1538,
+        "label": "Sidi Saada",
+        "wilayaId": 48
+    },
+    {
+        "id": 1540,
+        "label": "Yellel",
+        "wilayaId": 48
+    },
+    {
+        "id": 1532,
+        "label": "Ramka",
+        "wilayaId": 48
+    },
+    {
+        "id": 1539,
+        "label": "Souk El Had",
+        "wilayaId": 48
+    },
+    {
+        "id": 1524,
+        "label": "Mendes",
+        "wilayaId": 48
+    },
+    {
+        "id": 1528,
+        "label": "Oued Essalem",
+        "wilayaId": 48
+    },
+    {
+        "id": 1535,
+        "label": "Sidi Lazreg",
+        "wilayaId": 48
+    },
+    {
+        "id": 15,
+        "label": "Ouled Said",
+        "wilayaId": 49
+    },
+    {
+        "id": 24,
+        "label": "Timimoun",
+        "wilayaId": 49
+    },
+    {
+        "id": 3,
+        "label": "Aougrout",
+        "wilayaId": 49
+    },
+    {
+        "id": 8,
+        "label": "Deldoul",
+        "wilayaId": 49
+    },
+    {
+        "id": 12,
+        "label": "Metarfa",
+        "wilayaId": 49
+    },
+    {
+        "id": 7,
+        "label": "Charouine",
+        "wilayaId": 49
+    },
+    {
+        "id": 14,
+        "label": "Ouled Aissa",
+        "wilayaId": 49
+    },
+    {
+        "id": 19,
+        "label": "Talmine",
+        "wilayaId": 49
+    },
+    {
+        "id": 11,
+        "label": "Ksar Kaddour",
+        "wilayaId": 49
+    },
+    {
+        "id": 25,
+        "label": "Tinerkouk",
+        "wilayaId": 49
+    },
+    {
+        "id": 5,
+        "label": "Bordj Badji Mokhtar",
+        "wilayaId": 50
+    },
+    {
+        "id": 23,
+        "label": "Timiaouine",
+        "wilayaId": 50
+    },
+    {
+        "id": 237,
+        "label": "Chaiba",
+        "wilayaId": 51
+    },
+    {
+        "id": 240,
+        "label": "Doucen",
+        "wilayaId": 51
+    },
+    {
+        "id": 255,
+        "label": "Ouled Djellal",
+        "wilayaId": 51
+    },
+    {
+        "id": 232,
+        "label": "Besbes",
+        "wilayaId": 51
+    },
+    {
+        "id": 258,
+        "label": "Ras El Miad",
+        "wilayaId": 51
+    },
+    {
+        "id": 259,
+        "label": "Sidi Khaled",
+        "wilayaId": 51
+    },
+    {
+        "id": 265,
+        "label": "Beni-Abbes",
+        "wilayaId": 52
+    },
+    {
+        "id": 282,
+        "label": "Tamtert",
+        "wilayaId": 52
+    },
+    {
+        "id": 271,
+        "label": "Igli",
+        "wilayaId": 52
+    },
+    {
+        "id": 269,
+        "label": "El Ouata",
+        "wilayaId": 52
+    },
+    {
+        "id": 274,
+        "label": "Ksabi",
+        "wilayaId": 52
+    },
+    {
+        "id": 279,
+        "label": "Ouled-Khodeir",
+        "wilayaId": 52
+    },
+    {
+        "id": 266,
+        "label": "Beni-Ikhlef",
+        "wilayaId": 52
+    },
+    {
+        "id": 273,
+        "label": "Kerzaz",
+        "wilayaId": 52
+    },
+    {
+        "id": 283,
+        "label": "Timoudi",
+        "wilayaId": 52
+    },
+    {
+        "id": 357,
+        "label": "Ain Salah",
+        "wilayaId": 53
+    },
+    {
+        "id": 358,
+        "label": "Foggaret Ezzoua",
+        "wilayaId": 53
+    },
+    {
+        "id": 360,
+        "label": "Inghar",
+        "wilayaId": 53
+    },
+    {
+        "id": 356,
+        "label": "Ain Guezzam",
+        "wilayaId": 54
+    },
+    {
+        "id": 363,
+        "label": "Tin Zouatine",
+        "wilayaId": 54
+    },
+    {
+        "id": 1099,
+        "label": "Nezla",
+        "wilayaId": 55
+    },
+    {
+        "id": 1106,
+        "label": "Tebesbest",
+        "wilayaId": 55
+    },
+    {
+        "id": 1108,
+        "label": "Touggourt",
+        "wilayaId": 55
+    },
+    {
+        "id": 1109,
+        "label": "Zaouia El Abidia",
+        "wilayaId": 55
+    },
+    {
+        "id": 1091,
+        "label": "Blidet Amor",
+        "wilayaId": 55
+    },
+    {
+        "id": 1107,
+        "label": "Temacine",
+        "wilayaId": 55
+    },
+    {
+        "id": 1097,
+        "label": "Megarine",
+        "wilayaId": 55
+    },
+    {
+        "id": 1104,
+        "label": "Sidi Slimane",
+        "wilayaId": 55
+    },
+    {
+        "id": 1090,
+        "label": "Benaceur",
+        "wilayaId": 55
+    },
+    {
+        "id": 1098,
+        "label": "M'naguer",
+        "wilayaId": 55
+    },
+    {
+        "id": 1105,
+        "label": "Taibet",
+        "wilayaId": 55
+    },
+    {
+        "id": 1092,
+        "label": "El Alia",
+        "wilayaId": 55
+    },
+    {
+        "id": 1094,
+        "label": "El-Hadjira",
+        "wilayaId": 55
+    },
+    {
+        "id": 1158,
+        "label": "Bordj El Haouass",
+        "wilayaId": 56
+    },
+    {
+        "id": 1161,
+        "label": "Djanet",
+        "wilayaId": 56
+    },
+    {
+        "id": 1284,
+        "label": "El-M'ghaier",
+        "wilayaId": 57
+    },
+    {
+        "id": 1296,
+        "label": "Oum Touyour",
+        "wilayaId": 57
+    },
+    {
+        "id": 1302,
+        "label": "Sidi Khelil",
+        "wilayaId": 57
+    },
+    {
+        "id": 1303,
+        "label": "Still",
+        "wilayaId": 57
+    },
+    {
+        "id": 1281,
+        "label": "Djamaa",
+        "wilayaId": 57
+    },
+    {
+        "id": 1293,
+        "label": "M'rara",
+        "wilayaId": 57
+    },
+    {
+        "id": 1300,
+        "label": "Sidi Amrane",
+        "wilayaId": 57
+    },
+    {
+        "id": 1306,
+        "label": "Tenedla",
+        "wilayaId": 57
+    },
+    {
+        "id": 1495,
+        "label": "El Meniaa",
+        "wilayaId": 58
+    },
+    {
+        "id": 1499,
+        "label": "Hassi Gara",
+        "wilayaId": 58
+    },
+    {
+        "id": 1498,
+        "label": "Hassi Fehal",
+        "wilayaId": 58
+    },
+    {
+        "id": 1500,
+        "label": "Mansoura",
+        "wilayaId": 58
+    }
+]

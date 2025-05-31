@@ -1,0 +1,26 @@
+[
+    {
+        "img_path": "http://192.168.2.88:5050/api/v1/files/public/temp/1.png"
+    },
+    {
+        "img_path": "http://192.168.2.88:5050/api/v1/files/public/temp/2.png"
+    },
+    {
+        "img_path": "http://192.168.2.88:5050/api/v1/files/public/temp/3.png"
+    },
+    {
+        "img_path": "http://192.168.2.88:5050/api/v1/files/public/temp/4.jpg"
+    },
+    {
+        "img_path": "http://192.168.2.88:5050/api/v1/files/public/temp/5.jpg"
+    },
+    {
+        "img_path": "http://192.168.2.88:5050/api/v1/files/public/temp/6.jpg"
+    },
+    {
+        "img_path": "http://192.168.2.88:5050/api/v1/files/public/temp/7.jpg"
+    },
+    {
+        "img_path": "http://192.168.2.88:5050/api/v1/files/public/temp/8.png"
+    }
+]
