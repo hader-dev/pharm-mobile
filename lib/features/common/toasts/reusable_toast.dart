@@ -1,0 +1,101 @@
+import 'package:flutter/material.dart';
+
+import '../../../utils/toast_helper.dart';
+
+class CustomToastWidget extends StatefulWidget {
+  final String title;
+  final String? message;
+  final ToastType type;
+  final VoidCallback? onClose;
+  final VoidCallback? onAction;
+  final String? actionText;
+
+  const CustomToastWidget({
+    super.key,
+    required this.title,
+    this.message,
+    this.type = ToastType.success,
+    this.onClose,
+    this.onAction,
+    this.actionText,
+  });
+
+  @override
+  State<CustomToastWidget> createState() => _CustomToastWidgetState();
+}
+
+class _CustomToastWidgetState extends State<CustomToastWidget> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _fade;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 300),
+    );
+    _fade = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
+    _controller.forward();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      bottom: 20,
+      left: 20,
+      right: 20,
+      child: FadeTransition(
+        opacity: _fade,
+        child: Material(
+          child: Container(
+            margin: const EdgeInsets.symmetric(vertical: 6),
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              gradient:
+                  LinearGradient(colors: widget.type.colors, begin: Alignment.centerLeft, end: Alignment.centerRight),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Row(
+              children: [
+                Icon(widget.type.icon, color: Colors.white),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(widget.title,
+                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white)),
+                      if (widget.message != null)
+                        Text(widget.message!,
+                            style: const TextStyle(
+                              fontSize: 14,
+                              color: Colors.white70,
+                            )),
+                    ],
+                  ),
+                ),
+                if (widget.actionText != null)
+                  TextButton(
+                    onPressed: widget.onAction,
+                    style: TextButton.styleFrom(foregroundColor: Colors.white),
+                    child: Text(widget.actionText!),
+                  ),
+                IconButton(
+                  icon: const Icon(Icons.close, color: Colors.white),
+                  onPressed: widget.onClose ?? () {},
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+}
