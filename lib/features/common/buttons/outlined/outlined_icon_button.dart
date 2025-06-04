@@ -5,19 +5,13 @@ import 'package:iconsax/iconsax.dart';
 
 import '../base_icon_button.dart';
 
-class OutlinedIconButton extends StatelessWidget {
-  final IconData icon;
-  final Color bgColor;
-  final bool isBordered;
-  const OutlinedIconButton({super.key, required this.icon, this.bgColor = Colors.transparent, this.isBordered = false});
-
-  @override
-  Widget build(BuildContext context) {
-    return BaseIconButton(
-      icon: Icon(Iconsax.arrow_right_2, color: AppColors.accent1Shade1),
-      isBordered: true,
-      borderColor: AppColors.accent1Shade1,
-      onPressed: () {},
-    );
-  }
+class OutlinedIconButton extends BaseIconButton {
+  const OutlinedIconButton({
+    super.key,
+    required super.icon,
+    super.bgColor = Colors.transparent,
+    super.isBordered = true,
+    super.onPressed,
+    super.borderColor = AppColors.accent1Shade2,
+  });
 }

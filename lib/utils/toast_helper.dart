@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../features/common/toasts/reusable_toast.dart';
+import '../features/common/toasts/custom_toast.dart';
 
 enum ToastType {
   success(colors: [Color.fromARGB(255, 102, 187, 106), Color.fromARGB(255, 67, 160, 71)], icon: Icons.check_circle),

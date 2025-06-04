@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../utils/constants.dart';
 import '../../../utils/toast_helper.dart';
 
 class CustomToastWidget extends StatefulWidget {
@@ -9,6 +10,7 @@ class CustomToastWidget extends StatefulWidget {
   final VoidCallback? onClose;
   final VoidCallback? onAction;
   final String? actionText;
+  final Duration animationDuration;
 
   const CustomToastWidget({
     super.key,
@@ -18,6 +20,7 @@ class CustomToastWidget extends StatefulWidget {
     this.onClose,
     this.onAction,
     this.actionText,
+    this.animationDuration = const Duration(seconds: 3),
   });
 
   @override
@@ -33,7 +36,7 @@ class _CustomToastWidgetState extends State<CustomToastWidget> with SingleTicker
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 300),
+      duration: widget.animationDuration,
     );
     _fade = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
     _controller.forward();
@@ -49,17 +52,17 @@ class _CustomToastWidgetState extends State<CustomToastWidget> with SingleTicker
         opacity: _fade,
         child: Material(
           child: Container(
-            margin: const EdgeInsets.symmetric(vertical: 6),
-            padding: const EdgeInsets.all(16),
+            margin: EdgeInsets.symmetric(vertical: AppSizesManager.p8),
+            padding: const EdgeInsets.all(AppSizesManager.p16),
             decoration: BoxDecoration(
               gradient:
                   LinearGradient(colors: widget.type.colors, begin: Alignment.centerLeft, end: Alignment.centerRight),
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(AppSizesManager.r12),
             ),
             child: Row(
               children: [
                 Icon(widget.type.icon, color: Colors.white),
-                const SizedBox(width: 12),
+                const SizedBox(width: AppSizesManager.s12),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

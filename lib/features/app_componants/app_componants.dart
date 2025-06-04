@@ -1,0 +1,155 @@
+import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/config/theme/light_theme.dart';
+import 'package:hader_pharm_mobile/utils/constants.dart';
+
+import 'package:hader_pharm_mobile/utils/toast_helper.dart';
+import 'package:iconsax/iconsax.dart';
+
+import '../../utils/enums.dart';
+import '../app_nav_bar/app_nav_bar.dart';
+import '../common/app_bars/custom_app_bar.dart';
+
+import '../common/buttons/outlined/outlined_filled_text_button.dart';
+import '../common/buttons/outlined/outlined_icon_button.dart';
+import '../common/buttons/outlined/outlined_text_button.dart';
+import '../common/buttons/solid/primary_icon_button.dart';
+import '../common/buttons/solid/primary_text_button.dart';
+import '../common/buttons/solid/secondary_icon_button.dart';
+import '../common/buttons/solid/secondary_text_button.dart';
+import '../common/floating_buttons/custom_solid_fab.dart';
+
+class AppComponentsScreen extends StatefulWidget {
+  const AppComponentsScreen({super.key, required this.title});
+
+  final String title;
+
+  @override
+  State<AppComponentsScreen> createState() => _AppComponanatsPageState();
+}
+
+class _AppComponanatsPageState extends State<AppComponentsScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        bottomNavigationBar: AppNavBar(),
+        appBar: CustomAppBar(
+            bgColor: AppColors.bgWhite,
+            topPadding: MediaQuery.of(context).padding.top,
+            bottomPadding: MediaQuery.of(context).padding.bottom,
+            leading: IconButton(
+              icon: const Icon(Iconsax.arrow_left_2),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            trailing: [
+              IconButton(
+                icon: const Icon(Iconsax.search_normal),
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: const Icon(Iconsax.notification),
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: const Icon(Iconsax.notification),
+                onPressed: () {},
+              ),
+            ],
+            title: Text(
+              widget.title,
+              softWrap: true,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            )),
+        floatingActionButton: SolidFAB(
+          icon: Icons.add,
+          color: AppColors.accent1Shade1,
+          onPressed: () {
+            ToastManager().showToast(
+              context: context,
+            );
+          },
+        )
+        //  GradientFAB(
+        //     icon: Icons.add,
+        //     gradientColors: [
+        //       AppColors.accentGreenShade2,
+        //       AppColors.accent1Shade1,
+        //     ],
+        //     onPressed: () {
+        //       ToastManager().showToast(
+        //         context: context,
+        //       );
+        //     }
+        //     //   },
+        //     ),
+        ,
+        body: SingleChildScrollView(
+          child: Column(children: [
+            // PrimaryTextButton(),
+            // SecondaryTextButton(),
+            // OutLinedTextButton(),
+            OutLinedFilledTextButton(),
+            Row(
+              children: [
+                // PrimaryIconButton(
+                //   icon: Iconsax.arrow_right_2,
+                // ),
+                // SecondaryIconButton(
+                //   icon: Iconsax.arrow_right_2,
+                // ),
+                // OutlinedIconButton(
+                //   icon: Iconsax.arrow_right_2,
+                // ),
+                // OutlinedFilledIconButton(
+                //   icon: Iconsax.arrow_right_2,
+                // ),
+              ],
+            ),
+            // Padding(
+            //   padding: const EdgeInsets.all(8.0),
+            //   child: CustomTextField(
+            //     label: "Label",
+            //     value: "",
+            //     state: FieldState.error,
+            //     isOutlined: true,
+            //     onChanged: (value) {
+            //       print("Text changed: $value");
+            //     },
+            //   ),
+            // ),
+            // Padding(
+            //   padding: const EdgeInsets.all(8.0),
+            //   child: CustomTextField(
+            //     label: "Label",
+            //     value: "",
+            //     state: FieldState.warning,
+            //     isOutlined: true,
+            //     onChanged: (value) {
+            //       print("Text changed: $value");
+            //     },
+            //   ),
+            // ),
+            // Padding(
+            //   padding: const EdgeInsets.all(8.0),
+            //   child: CustomTextField(
+            //     label: "Label",
+            //     value: "",
+            //     state: FieldState.success,
+            //     isOutlined: true,
+            //     onChanged: (value) {
+            //       print("Text changed: $value");
+            //     },
+            //   ),
+            // )
+          ]),
+        ));
+  }
+}

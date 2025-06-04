@@ -1,23 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
-import 'package:iconsax/iconsax.dart';
 
 import '../base_button.dart';
 
 class SecondaryTextButton extends StatelessWidget {
-  const SecondaryTextButton({super.key});
+  final Color fillColor;
+  final VoidCallback? onTap;
+  final String label;
+  final IconData? leadingIcon;
+  final IconData? trailingIcon;
+
+  const SecondaryTextButton({
+    super.key,
+    this.onTap,
+    this.fillColor = AppColors.bgWhite,
+    required this.label,
+    this.leadingIcon,
+    this.trailingIcon,
+  });
 
   @override
   Widget build(BuildContext context) {
     return BaseButton(
-      color: AppColors.accent1Shade1,
+      color: fillColor,
       radiusValue: AppSizesManager.r4,
-      onTap: () {},
+      onTap: onTap,
       height: AppSizesManager.buttonHeight,
-      leadingIcon: Iconsax.arrow_right_2,
-      trailingIcon: Iconsax.arrow_right_2,
-      label: 'Primary Text Button',
+      leadingIcon: leadingIcon,
+      trailingIcon: trailingIcon,
+      label: label,
     );
   }
 }

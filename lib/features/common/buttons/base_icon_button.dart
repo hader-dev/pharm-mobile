@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 
 class BaseIconButton extends StatelessWidget {
-  final Icon icon;
+  final Widget icon;
   final Color bgColor;
   final bool isBordered;
   final Color borderColor;

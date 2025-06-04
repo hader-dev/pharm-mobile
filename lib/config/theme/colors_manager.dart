@@ -1,15 +1,5 @@
 import 'package:flutter/material.dart';
 
-enum BackGroundColors {
-  bgWhite(color: Color.fromARGB(255, 255, 255, 255)),
-  bgDarken(color: Color.fromARGB(255, 242, 244, 247)),
-  bgDarken2(color: Color.fromARGB(255, 230, 230, 230)),
-  bgDisabled(color: Color.fromARGB(255, 230, 230, 230));
-
-  final Color color;
-  const BackGroundColors({this.color = Colors.transparent});
-}
-
 enum TextColors {
   primary(color: Color.fromARGB(255, 47, 47, 47)),
   secondary(color: Color.fromARGB(255, 80, 80, 80)),
@@ -21,7 +11,7 @@ enum TextColors {
 }
 
 enum StrokeColors {
-  normal(color: Color.fromARGB(255, 47, 47, 47)),
+  normal(color: Color(0xFFE5E5E5)),
   focused(color: Color.fromARGB(255, 22, 125, 133));
 
   final Color color;
@@ -29,6 +19,7 @@ enum StrokeColors {
 }
 
 enum SystemColors {
+  defaultState(),
   orange(
     primary: Color.fromARGB(255, 255, 108, 61),
     secondary: Color.fromARGB(255, 255, 198, 180),
@@ -55,53 +46,25 @@ enum SystemColors {
   final Color secondary;
   final Color ternary;
   const SystemColors({
-    this.primary = Colors.transparent,
-    this.secondary = Colors.transparent,
-    this.ternary = Colors.transparent,
+    this.primary = const Color(0xFF9E9E9E),
+    this.secondary = Colors.grey,
+    this.ternary = Colors.grey,
   });
 }
 
+class AppColors {
+  //Background Colors
+  static const bgWhite = Color(0xFFFFFFFF);
+  static const bgDarken = Color(0xFFF2F4F7);
+  static const bgDarken2 = Color(0xFFE6E6E6);
+  static const bgDisabled = Color(0xFFE6E6E6);
+  // Accent-1
+  static const Color accent1Shade1 = Color(0xFF167D85);
+  static const Color accent1Shade2 = Color(0xFF12646A);
+  static const Color accent1Shade3 = Color(0xFFE8F2F3);
 
-
-
-// class AppColorsManager {
-
-
-//   backGround
-//   // static const List<Color> lightAccentsColors = <Color>[
-//   //   Color.fromARGB(255, 255, 255, 255),
-//   //   Color.fromARGB(255, 230, 230, 230),
-//   //   Color.fromARGB(255, 204, 204, 204),
-//   //   Color.fromARGB(255, 179, 179, 179)
-//   // ];
-//   // static const List<Color> darkAccentsColors = <Color>[
-//   //   Color.fromARGB(255, 0, 0, 0),
-//   //   Color.fromARGB(255, 42, 42, 42),
-//   //   Color.fromARGB(255, 67, 67, 67),
-//   //   Color.fromARGB(255, 118, 118, 118)
-//   // ];
-//   // static const List<Color> primaryColors = <Color>[
-//   //   Color.fromARGB(255, 81, 78, 183),
-//   //   Color.fromARGB(255, 116, 113, 197),
-//   //   Color.fromARGB(255, 133, 131, 205),
-//   //   Color.fromARGB(255, 203, 202, 233)
-//   // ];
-
-//   // static final Color appLightBgColor = lightAccentsColors.first;
-//   // static final Color appDarkBgColor = darkAccentsColors[3];
-
-//   // static BoxShadow cardShadow = BoxShadow(
-//   //     color: AppColorsManager.lightAccentsColors[2].withOpacity(.5), blurRadius: 4, blurStyle: BlurStyle.outer);
-
-//   // static BoxDecoration cardDecoration(
-//   //   Color? cardColor,
-//   // ) =>
-//   //     BoxDecoration(
-//   //         color: cardColor ?? AppColorsManager.lightAccentsColors.first,
-//   //         boxShadow: <BoxShadow>[AppColorsManager.cardShadow],
-//   //         border: Border.all(
-//   //           color: AppColorsManager.lightAccentsColors[1].withOpacity(.5),
-//   //           width: 1,
-//   //         ),
-//   //         borderRadius: BorderRadius.circular(AppSizes.extraSmallRadius));
-// }
+  // Accent Green
+  static const Color accentGreenShade1 = Color(0xFF147082);
+  static const Color accentGreenShade2 = Color(0xFF11606D);
+  static const Color accentGreenShade3 = Color(0xFFE3EEF0);
+}
