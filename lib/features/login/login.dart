@@ -36,6 +36,7 @@ class LoginScreen extends StatelessWidget {
                 onTap: () {},
                 borderColor: AppColors.accent1Shade1,
               ),
+              Gap(AppSizesManager.s16),
             ],
           ),
         ),

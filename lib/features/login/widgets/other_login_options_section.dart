@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
-import 'package:hader_pharm_mobile/features/common/buttons/outlined/outlined_text_button.dart';
+
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 
-import '../../common/buttons/outlined/outlined_icon_button.dart';
-import 'social_media_button.dart';
+import '../../common/widgets/social_media_button.dart';
 
 class OtherLoginOptionsSection extends StatelessWidget {
   const OtherLoginOptionsSection({super.key});
@@ -33,14 +32,17 @@ class OtherLoginOptionsSection extends StatelessWidget {
           children: [
             SocialMediaButton(
               iconPath: DrawableAssetStrings.appleIcon,
+              onTap: () {},
             ),
             Gap(AppSizesManager.s8),
             SocialMediaButton(
               iconPath: DrawableAssetStrings.googleIcon,
+              onTap: () {},
             ),
             Gap(AppSizesManager.s8),
             SocialMediaButton(
               iconPath: DrawableAssetStrings.facebookIcon,
+              onTap: () {},
             ),
           ],
         ),
