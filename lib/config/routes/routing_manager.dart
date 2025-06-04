@@ -3,6 +3,9 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../features/app_componants/app_componants.dart';
+import '../../features/login/login.dart';
+
 // import '../../view/screens/login/login.dart';
 // import '../../view/screens/splash/splash.dart';
 
@@ -10,51 +13,67 @@ class RoutingManager {
   static List<String> screenStack = [];
 
   //static const String placeHolderScreenPath = '/PlaceHolderScreenPath';
-  static const String splashScreen = '/splashScreen';
+  static const String appComponentsScreen = '/appComponentsScreen';
   static const String loginScreen = '/loginScreen';
-  static const String onboardingScreen = '/onboardingScreen';
-  static const String shopScreen = '/shopScreen';
-  static const String cartScreen = 'CartScreen';
-  static const String productDetailsScreen = '/ProductDetailsScreen';
-  static const String productPicturesView = '/ProductPicturesView';
-  static const String searchScreen = '/searchScreen';
-  static const String myOrdersScreen = '/myOrdersScreen';
-  static const String trackOrderScreen = '/trackOrderScreen';
-  static const String checkOutScreen = 'CheckOutScreen';
-  static const String locationSelectionScreen = '/locationSelectionScreen';
-  static const String mapSelectionScreen = '/mapSelectionScreen';
-  static const String notificationScreen = '/NotificationScreen';
-  static const String helpCenterScreen = '/helpCenterScreen';
-  static const String settingsScreen = '/settingsScreen';
-  static const String legalPoliciesScreen = '/legalPoliciesScreen';
-  static const String languageScreen = '/LanguageScreen';
-  static const String changePasswordScreen = '/ChangePasswordScreen';
-  static const String addNewPaymentCardScreen = '/AddNewPaymentCardScreen';
-  static const String editProfileScreen = '/EditProfileScreen';
-  static const String notificationSettingsScreen = '/NotificationSettingsScreen';
-  static const String homeScreen = '/homeScreen';
-  static const String profileScreen = '/ProfileScreen';
-  static const String orderDetailsScreen = '/orderDetailsScreen';
-  static const String searchFilterPage = '/searchFilterPage';
-  static const String supCategories = '/supCategories';
+  // static const String onboardingScreen = '/onboardingScreen';
+  // static const String shopScreen = '/shopScreen';
+  // static const String cartScreen = 'CartScreen';
+  // static const String productDetailsScreen = '/ProductDetailsScreen';
+  // static const String productPicturesView = '/ProductPicturesView';
+  // static const String searchScreen = '/searchScreen';
+  // static const String myOrdersScreen = '/myOrdersScreen';
+  // static const String trackOrderScreen = '/trackOrderScreen';
+  // static const String checkOutScreen = 'CheckOutScreen';
+  // static const String locationSelectionScreen = '/locationSelectionScreen';
+  // static const String mapSelectionScreen = '/mapSelectionScreen';
+  // static const String notificationScreen = '/NotificationScreen';
+  // static const String helpCenterScreen = '/helpCenterScreen';
+  // static const String settingsScreen = '/settingsScreen';
+  // static const String legalPoliciesScreen = '/legalPoliciesScreen';
+  // static const String languageScreen = '/LanguageScreen';
+  // static const String changePasswordScreen = '/ChangePasswordScreen';
+  // static const String addNewPaymentCardScreen = '/AddNewPaymentCardScreen';
+  // static const String editProfileScreen = '/EditProfileScreen';
+  // static const String notificationSettingsScreen = '/NotificationSettingsScreen';
+  // static const String homeScreen = '/homeScreen';
+  // static const String profileScreen = '/ProfileScreen';
+  // static const String orderDetailsScreen = '/orderDetailsScreen';
+  // static const String searchFilterPage = '/searchFilterPage';
+  // static const String supCategories = '/supCategories';
 
-  static const String subBrandsLayout = '/subBrandsLayout';
+  // static const String subBrandsLayout = '/subBrandsLayout';
 
-  static const String supBrands = '/SupBrands';
+  // static const String supBrands = '/SupBrands';
 
-  static const String allCategories = '/AllCategories';
-  static const String allBrands = '/allBrands';
-  static const String screenAllProducts = '/screenAllProducts';
+  // static const String allCategories = '/AllCategories';
+  // static const String allBrands = '/allBrands';
+  // static const String screenAllProducts = '/screenAllProducts';
 
   static final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
-  static List<int> listIdScreenBrand = [];
-  static List<int> listIdScreenCategory = [];
+  // static List<int> listIdScreenBrand = [];
+  // static List<int> listIdScreenCategory = [];
 
-  // static final GoRouter router = GoRouter(
-  //   navigatorKey: rootNavigatorKey,
-  //   initialLocation: splashScreen,
-  //   debugLogDiagnostics: true,
-  //   routes: <RouteBase>[
+  static final GoRouter router = GoRouter(
+      navigatorKey: rootNavigatorKey,
+      initialLocation: loginScreen,
+      debugLogDiagnostics: true,
+      routes: <RouteBase>[
+        GoRoute(
+          name: appComponentsScreen,
+          path: appComponentsScreen,
+          builder: (BuildContext context, GoRouterState state) {
+            return const AppComponentsScreen(
+              title: "I'm the best Mobile dev ever ",
+            );
+          },
+        ),
+        GoRoute(
+            name: loginScreen,
+            path: loginScreen,
+            builder: (BuildContext context, GoRouterState state) {
+              return LoginScreen();
+            }),
+      ]);
   //     GoRoute(
   //         name: homeScreen,
   //         path: homeScreen,
@@ -102,12 +121,7 @@ class RoutingManager {
   //         builder: (BuildContext context, GoRouterState state) {
   //           return const OnboardingScreen();
   //         }),
-  //     GoRoute(
-  //         name: loginScreen,
-  //         path: loginScreen,
-  //         builder: (BuildContext context, GoRouterState state) {
-  //           return LoginScreen();
-  //         }),
+
   //     GoRoute(
   //         name: notificationSettingsScreen,
   //         path: notificationSettingsScreen,
