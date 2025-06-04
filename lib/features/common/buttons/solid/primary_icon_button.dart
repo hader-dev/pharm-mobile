@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 
+import '../../../../config/theme/colors_manager.dart';
 import '../base_icon_button.dart';
 
 class PrimaryIconButton extends BaseIconButton {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 
 import '../../utils/constants.dart';
+import 'colors_manager.dart';
 import 'typoghrapy_manager.dart';
 
 class LightTheme {

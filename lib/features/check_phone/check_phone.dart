@@ -4,10 +4,6 @@ import 'package:gap/gap.dart';
 import '../../config/theme/colors_manager.dart';
 import '../../config/theme/typoghrapy_manager.dart';
 import '../../utils/constants.dart';
-import '../common/buttons/outlined/outlined_text_button.dart';
-
-import '../check_email/widgets/check_email_otp_input_section.dart';
-
 import 'widgets/check_phone_header_section.dart';
 import 'widgets/check_phone_otp_input_section.dart';
 

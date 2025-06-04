@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:gap/gap.dart';
-import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
-import 'package:hader_pharm_mobile/utils/assets_strings.dart';
-
-import 'package:hader_pharm_mobile/utils/constants.dart';
-import 'package:iconsax/iconsax.dart';
-
-import '../../../utils/enums.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
+import 'package:gap/gap.dart';
+
+import '../../../config/theme/colors_manager.dart';
+import '../../../config/theme/typoghrapy_manager.dart';
+import '../../../utils/constants.dart';
 import '../../common/buttons/solid/primary_text_button.dart';
-import '../../common/text_fields/custom_text_field.dart';
 
 class CheckEmailOtpInputSection extends StatelessWidget {
   late List<TextEditingController?> controls;

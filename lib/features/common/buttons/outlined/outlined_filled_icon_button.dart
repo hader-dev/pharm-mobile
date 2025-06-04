@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import '../../../../config/theme/colors_manager.dart';
 
 import 'package:iconsax/iconsax.dart';
 

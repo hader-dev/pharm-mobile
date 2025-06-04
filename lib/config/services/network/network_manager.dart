@@ -1,10 +1,9 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 
 import '../../../utils/urls.dart';
 import '../auth/token_manager.dart';
-
-import 'dart:convert';
-
 import 'network_interface.dart';
 
 class NetworkManager extends INetworkService {

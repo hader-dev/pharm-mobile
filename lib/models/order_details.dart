@@ -1,7 +1,6 @@
-import 'package:hader_pharm_mobile/models/order.dart';
-import 'package:hader_pharm_mobile/models/tracking_history.dart' show OrderHistory;
-
+import 'order.dart';
 import 'order_Item.dart';
+import 'tracking_history.dart' show OrderHistory;
 
 class OrderDetailsModel extends Order {
   final List<OrderItem> orderItems;

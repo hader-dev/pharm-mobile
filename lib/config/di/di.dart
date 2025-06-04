@@ -1,12 +1,4 @@
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
-import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
-
-import '../services/auth/token_manager.dart';
-import '../services/auth/user_manager.dart';
-import '../services/location/user_location.dart';
-import '../services/network/network_manager.dart';
 
 GetIt getItInstance = GetIt.instance;
 

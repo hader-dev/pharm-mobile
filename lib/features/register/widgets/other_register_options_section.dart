@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
+import '../../../config/theme/colors_manager.dart';
+import '../../../config/theme/typoghrapy_manager.dart';
 
-import 'package:hader_pharm_mobile/utils/assets_strings.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
+import '../../../utils/assets_strings.dart';
+import '../../../utils/constants.dart';
 
 import '../../common/widgets/social_media_button.dart';
 

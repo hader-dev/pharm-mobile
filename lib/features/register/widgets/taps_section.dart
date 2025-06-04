@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 
+import '../../../config/theme/colors_manager.dart';
+import '../../../utils/constants.dart';
 import '../../common/buttons/solid/primary_text_button.dart';
 
 class TabsSection extends StatelessWidget {

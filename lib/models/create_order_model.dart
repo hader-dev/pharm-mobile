@@ -1,4 +1,4 @@
-import 'package:hader_pharm_mobile/models/create_cart_item.dart';
+import 'create_cart_item.dart';
 
 class CreateOrderModel {
   String? note;

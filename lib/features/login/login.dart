@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:hader_pharm_mobile/features/common/buttons/outlined/outlined_text_button.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 
 import '../../config/theme/colors_manager.dart';
-import '../common/buttons/solid/primary_text_button.dart';
+import '../../utils/constants.dart';
+import '../common/buttons/outlined/outlined_text_button.dart';
 import 'widgets/login_form_section.dart';
 import 'widgets/login_header_section.dart';
 import 'widgets/other_login_options_section.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
+import '../../../../config/theme/colors_manager.dart';
+import '../../../../utils/constants.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../base_button.dart';

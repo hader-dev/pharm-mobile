@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:hader_pharm_mobile/features/register/widgets/email_register_form_section.dart';
+import 'widgets/email_register_form_section.dart';
 
 import '../../config/theme/colors_manager.dart';
 import '../../utils/constants.dart';

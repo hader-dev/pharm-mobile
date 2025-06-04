@@ -2,9 +2,7 @@ import 'package:http/src/response.dart';
 
 import '../../../config/services/network/network_manager.dart';
 import '../../../config/services/network/network_response_handler.dart';
-
 import '../../../models/payment_method.dart';
-
 import '../../../utils/urls.dart';
 import 'payment_method_repository.dart';
 
