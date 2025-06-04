@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -7,6 +5,7 @@ import '../../features/app_componants/app_componants.dart';
 import '../../features/check_email/check_email.dart';
 import '../../features/check_phone/check_phone.dart';
 import '../../features/login/login.dart';
+import '../../features/profile_picture_setup/profile_picture_setup.dart';
 import '../../features/register/register.dart';
 
 // import '../../view/screens/login/login.dart';
@@ -21,6 +20,7 @@ class RoutingManager {
   static const String registerScreen = '/RegisterScreen';
   static const String checkEmailScreen = '/CheckEmailScreen';
   static const String checkPhoneScreen = '/CheckPhoneScreen';
+  static const String profilePictureSetup = '/ProfilePictureSetup';
   // static const String onboardingScreen = '/onboardingScreen';
   // static const String shopScreen = '/shopScreen';
   // static const String cartScreen = 'CartScreen';
@@ -61,7 +61,7 @@ class RoutingManager {
 
   static final GoRouter router = GoRouter(
       navigatorKey: rootNavigatorKey,
-      initialLocation: checkPhoneScreen,
+      initialLocation: profilePictureSetup,
       debugLogDiagnostics: true,
       routes: <RouteBase>[
         GoRoute(
@@ -96,6 +96,12 @@ class RoutingManager {
             path: checkPhoneScreen,
             builder: (BuildContext context, GoRouterState state) {
               return CheckPhoneScreen();
+            }),
+        GoRoute(
+            name: profilePictureSetup,
+            path: profilePictureSetup,
+            builder: (BuildContext context, GoRouterState state) {
+              return const ProfilePictureSetup();
             }),
       ]);
   //     GoRoute(
