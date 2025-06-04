@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../features/app_componants/app_componants.dart';
 import '../../features/login/login.dart';
+import '../../features/register/register.dart';
 
 // import '../../view/screens/login/login.dart';
 // import '../../view/screens/splash/splash.dart';
@@ -15,6 +16,7 @@ class RoutingManager {
   //static const String placeHolderScreenPath = '/PlaceHolderScreenPath';
   static const String appComponentsScreen = '/appComponentsScreen';
   static const String loginScreen = '/loginScreen';
+  static const String registerScreen = '/RegisterScreen';
   // static const String onboardingScreen = '/onboardingScreen';
   // static const String shopScreen = '/shopScreen';
   // static const String cartScreen = 'CartScreen';
@@ -55,7 +57,7 @@ class RoutingManager {
 
   static final GoRouter router = GoRouter(
       navigatorKey: rootNavigatorKey,
-      initialLocation: loginScreen,
+      initialLocation: registerScreen,
       debugLogDiagnostics: true,
       routes: <RouteBase>[
         GoRoute(
@@ -72,6 +74,12 @@ class RoutingManager {
             path: loginScreen,
             builder: (BuildContext context, GoRouterState state) {
               return LoginScreen();
+            }),
+        GoRoute(
+            name: registerScreen,
+            path: registerScreen,
+            builder: (BuildContext context, GoRouterState state) {
+              return RegisterScreen();
             }),
       ]);
   //     GoRoute(

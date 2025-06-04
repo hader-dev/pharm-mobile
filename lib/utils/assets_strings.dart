@@ -21,6 +21,7 @@ class DrawableAssetStrings {
   //app icons
 
   static const String appleIcon = 'assets/icons/apple.svg';
+  static const String algeriaFlagIcon = 'assets/icons/algeria_flag.svg';
   static const String googleIcon = 'assets/icons/google.svg';
   static const String facebookIcon = 'assets/icons/facebook.svg';
 
