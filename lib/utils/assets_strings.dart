@@ -6,6 +6,12 @@ class DrawableAssetStrings {
 //   static const String board4Svg = 'assets/icons/b4.svg';
 
 // //app images
+
+  static const String congratsIllustrationImg = 'assets/images/congrats_illustration.svg';
+  static const String companyIllustration1 = 'assets/images/company_illustration_1.svg';
+  static const String companyIllustration2 = 'assets/images/company_illustration_2.svg';
+  static const String companyIllustration3 = 'assets/images/company_illustration_3.svg';
+
 //   static const String logoImg = 'assets/images/logo.png';
 //   static const String emptyListImg = 'assets/images/empty_result.png';
 //   static const String loginBg = 'assets/images/login_bg.png';
@@ -18,12 +24,14 @@ class DrawableAssetStrings {
 //   static const String noCompanyImg = 'assets/images/company.png';
 //   static const String maleProfileImg = 'assets/images/male_profile.jpg';
 //   static const String femaleProfileImg = 'assets/images/female_profile.jpg';
+
   //app icons
 
   static const String appleIcon = 'assets/icons/apple.svg';
   static const String algeriaFlagIcon = 'assets/icons/algeria_flag.svg';
   static const String googleIcon = 'assets/icons/google.svg';
   static const String facebookIcon = 'assets/icons/facebook.svg';
+  static const String tickCircleIcon = 'assets/icons/tick-circle.svg';
   static const String defaultProfileImgIcon = 'assets/icons/profile_setup.svg';
 
   // //app animations

@@ -34,6 +34,7 @@ class AppSizesManager {
   static const double iconSize20 = 20;
   static const double iconSize25 = 25;
   static const double iconSize30 = 30;
+  static const double iconSize48 = 48;
 
   //common button height
   static const double buttonHeight = 40;
