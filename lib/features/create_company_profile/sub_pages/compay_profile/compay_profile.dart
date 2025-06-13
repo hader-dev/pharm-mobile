@@ -1,0 +1,65 @@
+import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import 'package:iconsax/iconsax.dart';
+
+import '../../../../../config/theme/colors_manager.dart';
+import '../../../../../config/theme/typoghrapy_manager.dart';
+import '../../../../../utils/constants.dart';
+import '../../../../utils/enums.dart';
+import '../../../common/buttons/solid/primary_icon_button.dart';
+import '../../../common/text_fields/custom_text_field.dart';
+
+class CompanyProfilePage extends StatelessWidget {
+  const CompanyProfilePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p16),
+      child: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Column(
+          children: [
+            Align(
+                alignment: Alignment.centerLeft,
+                child: Text("Logo", style: AppTypography.body3MediumStyle.copyWith(color: TextColors.ternary.color))),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: AppSizesManager.p24),
+              child: Stack(
+                children: [
+                  Container(
+                    height: MediaQuery.sizeOf(context).height * 0.3,
+                    width: MediaQuery.sizeOf(context).height * 0.3,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: AppColors.bgDarken,
+                        border: Border.all(color: AppColors.bgDarken2)),
+                  ),
+                  Positioned(
+                    bottom: AppSizesManager.s16,
+                    right: AppSizesManager.s16,
+                    child: PrimaryIconButton(
+                      icon: Icon(
+                        Iconsax.camera,
+                        color: AppColors.bgWhite,
+                      ),
+                      onPressed: () {},
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Gap(AppSizesManager.s16),
+            CustomTextField(
+              label: 'Description',
+              value: '',
+              state: FieldState.normal,
+              maxLines: 8,
+              validationFunc: () {},
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

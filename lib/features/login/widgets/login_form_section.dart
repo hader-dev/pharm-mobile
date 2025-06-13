@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import '../../../config/theme/colors_manager.dart';
-import '../../../config/theme/typoghrapy_manager.dart';
-import '../../../utils/constants.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../../../config/theme/colors_manager.dart';
+import '../../../utils/constants.dart';
 import '../../../utils/enums.dart';
 import '../../common/buttons/solid/primary_text_button.dart';
 import '../../common/text_fields/custom_text_field.dart';

@@ -213,12 +213,12 @@ class OptionValue extends BaseOptionValue with EquatableMixin {
   final Option option;
 
   OptionValue({
-    required int id,
+    required super.id,
     this.syncId,
-    required String value,
+    required super.value,
     required this.optionId,
     required this.option,
-  }) : super(id: id, value: value);
+  });
 
   @override
   List<Object?> get props => <Object?>[id, syncId, value, optionId, option];

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
+
 import '../../../config/theme/colors_manager.dart';
 import '../../../config/theme/typoghrapy_manager.dart';
 import '../../../utils/constants.dart';
-import '../../../utils/extensions/app_context_helper.dart';
-
 import '../../../utils/enums.dart';
+import '../../../utils/extensions/app_context_helper.dart';
 
 class CustomTextField extends StatelessWidget {
   final String label;
@@ -42,8 +42,8 @@ class CustomTextField extends StatelessWidget {
 
   CustomTextField({
     super.key,
-    required this.label,
-    required this.value,
+    this.label = '',
+    this.value = '',
     this.state = FieldState.normal,
     this.onChanged,
     this.onTap,

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../config/theme/colors_manager.dart';
-import '../../../../utils/constants.dart';
-import 'package:iconsax/iconsax.dart';
 
+import '../../../../utils/constants.dart';
 import '../base_button.dart';
 
 class OutLinedTextButton extends BaseButton {

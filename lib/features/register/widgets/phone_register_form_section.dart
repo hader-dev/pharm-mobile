@@ -8,7 +8,6 @@ import '../../../utils/constants.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../utils/enums.dart';
-import '../../common/buttons/solid/primary_text_button.dart';
 import '../../common/text_fields/custom_text_field.dart';
 
 class PhoneRegisterFormSection extends StatelessWidget {

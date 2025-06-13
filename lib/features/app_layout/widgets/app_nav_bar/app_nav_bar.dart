@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
-import '../../utils/constants.dart';
-import '../../utils/extensions/app_context_helper.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:iconsax/iconsax.dart';
+
+import '../../../../utils/constants.dart';
+import '../../../../utils/extensions/app_context_helper.dart';
+import '../../cubit/app_layout_cubit.dart';
 
 class AppNavBar extends StatelessWidget {
   const AppNavBar({super.key});
@@ -21,38 +26,42 @@ class AppNavBar extends StatelessWidget {
             ),
             NavBarIndicator(
               tapsCount: 5,
-              selectedIndex: 0,
+              selectedIndex: BlocProvider.of<AppLayoutCubit>(context).pageIndex,
             ),
           ],
         ),
         BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           selectedItemColor: context.theme.primaryColor,
-          unselectedItemColor: Colors.black87,
-          currentIndex: 0,
+          unselectedItemColor: TextColors.secondary.color,
+          currentIndex: BlocProvider.of<AppLayoutCubit>(context).pageIndex,
+          selectedLabelStyle: AppTypography.bodyXSmallStyle,
+          unselectedLabelStyle: AppTypography.bodyXSmallStyle,
           showSelectedLabels: true,
-          onTap: (index) {},
+          onTap: (index) {
+            BlocProvider.of<AppLayoutCubit>(context).changePage(index);
+          },
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Padding(padding: EdgeInsets.symmetric(vertical: AppSizesManager.p8), child: Icon(Iconsax.home)),
+              icon: Padding(padding: EdgeInsets.symmetric(vertical: AppSizesManager.p6), child: Icon(Iconsax.home)),
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Padding(padding: EdgeInsets.symmetric(vertical: AppSizesManager.p8), child: Icon(Iconsax.shop)),
+              icon: Padding(padding: EdgeInsets.symmetric(vertical: AppSizesManager.p6), child: Icon(Iconsax.shop)),
               label: 'MarketPlace',
             ),
             BottomNavigationBarItem(
-              icon: Padding(padding: EdgeInsets.symmetric(vertical: AppSizesManager.p8), child: Icon(Iconsax.activity)),
+              icon: Padding(padding: EdgeInsets.symmetric(vertical: AppSizesManager.p6), child: Icon(Iconsax.activity)),
               label: 'Dashboard',
             ),
             BottomNavigationBarItem(
               icon: Padding(
-                  padding: EdgeInsets.symmetric(vertical: AppSizesManager.p8), child: Icon(Iconsax.element_plus)),
+                  padding: EdgeInsets.symmetric(vertical: AppSizesManager.p6), child: Icon(Iconsax.element_plus)),
               label: 'Applications',
             ),
             BottomNavigationBarItem(
               icon:
-                  Padding(padding: EdgeInsets.symmetric(vertical: AppSizesManager.p8), child: Icon(Iconsax.setting_2)),
+                  Padding(padding: EdgeInsets.symmetric(vertical: AppSizesManager.p6), child: Icon(Iconsax.setting_2)),
               label: 'Settings',
             ),
           ],

@@ -3,10 +3,12 @@ import 'package:iconsax/iconsax.dart';
 
 import '../../config/theme/colors_manager.dart';
 import '../../utils/toast_helper.dart';
-import '../app_nav_bar/app_nav_bar.dart';
+import '../app_layout/widgets/app_nav_bar/app_nav_bar.dart';
 import '../common/app_bars/custom_app_bar.dart';
 import '../common/buttons/outlined/outlined_filled_text_button.dart';
 import '../common/floating_buttons/custom_solid_fab.dart';
+import '../common/widgets/product_widget_1.dart';
+import '../common/widgets/product_widget_2.dart';
 
 class AppComponentsScreen extends StatefulWidget {
   const AppComponentsScreen({super.key, required this.title});
@@ -85,22 +87,23 @@ class _AppComponanatsPageState extends State<AppComponentsScreen> {
             // SecondaryTextButton(),
             // OutLinedTextButton(),
             OutLinedFilledTextButton(),
-            Row(
-              children: [
-                // PrimaryIconButton(
-                //   icon: Iconsax.arrow_right_2,
-                // ),
-                // SecondaryIconButton(
-                //   icon: Iconsax.arrow_right_2,
-                // ),
-                // OutlinedIconButton(
-                //   icon: Iconsax.arrow_right_2,
-                // ),
-                // OutlinedFilledIconButton(
-                //   icon: Iconsax.arrow_right_2,
-                // ),
-              ],
-            ),
+            ProductWidget1(),
+            ProductWidget2(),
+            //   Row(
+            //    children: [
+            // PrimaryIconButton(
+            //   icon: Iconsax.arrow_right_2,
+            // ),
+            // SecondaryIconButton(
+            //   icon: Iconsax.arrow_right_2,
+            // ),
+            // OutlinedIconButton(
+            //   icon: Iconsax.arrow_right_2,
+            // ),
+            // OutlinedFilledIconButton(
+            //   icon: Iconsax.arrow_right_2,
+            // ),
+            //
             // Padding(
             //   padding: const EdgeInsets.all(8.0),
             //   child: CustomTextField(

@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../../config/theme/colors_manager.dart';
-
-import 'package:iconsax/iconsax.dart';
 
 import '../base_icon_button.dart';
 

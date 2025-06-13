@@ -14,7 +14,7 @@ class ProductWidget2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(AppSizesManager.p8),
+      padding: const EdgeInsets.symmetric(horizontal: AppSizesManager.p8, vertical: AppSizesManager.p12),
       child: Row(
         children: [
           Container(

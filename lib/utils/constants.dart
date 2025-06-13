@@ -1,6 +1,7 @@
 class AppSizesManager {
   //padding
   static const double p4 = 4;
+  static const double p6 = 6;
   static const double p8 = 8;
   static const double p10 = 10;
   static const double p12 = 12;
@@ -9,6 +10,7 @@ class AppSizesManager {
   static const double p32 = 32;
   static const double p64 = 64;
   //spacing
+  static const double s2 = 2;
   static const double s4 = 4;
   static const double s6 = 6;
   static const double s8 = 8;
@@ -20,6 +22,7 @@ class AppSizesManager {
   static const double s52 = 52;
   //radius
   static const double r4 = 4;
+  static const double r6 = 6;
   static const double r8 = 8;
   static const double r10 = 10;
   static const double r12 = 12;

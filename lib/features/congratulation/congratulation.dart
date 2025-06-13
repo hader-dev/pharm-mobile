@@ -3,8 +3,8 @@ import 'package:gap/gap.dart';
 
 import '../../config/theme/colors_manager.dart';
 import '../../utils/constants.dart';
-import 'widgets/content_section.dart';
 import 'widgets/congratulation_header_section.dart';
+import 'widgets/content_section.dart';
 
 class CongratulationScreen extends StatelessWidget {
   const CongratulationScreen({super.key});
