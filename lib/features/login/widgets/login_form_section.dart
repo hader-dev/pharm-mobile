@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:hader_pharm_mobile/features/login/cubit/login_cubit.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../config/theme/colors_manager.dart';
@@ -17,17 +19,21 @@ class LoginFormSection extends StatelessWidget {
       children: [
         CustomTextField(
           label: 'Email or phone Number',
-          value: '',
+          controller: BlocProvider.of<LoginCubit>(context).userNameController,
           state: FieldState.normal,
           validationFunc: () {},
         ),
         Gap(AppSizesManager.s4),
         CustomTextField(
           label: 'Password',
-          value: '',
+          controller: BlocProvider.of<LoginCubit>(context).passwordController,
           onChanged: (value) {},
-          isObscure: true,
-          suffixIcon: Icon(Iconsax.eye, color: AppColors.accent1Shade1),
+          isObscure: BlocProvider.of<LoginCubit>(context).isObscured,
+          suffixIcon: InkWell(
+              onTap: () => BlocProvider.of<LoginCubit>(context).showPassword(),
+              child: BlocProvider.of<LoginCubit>(context).isObscured
+                  ? const Icon(Iconsax.eye, color: AppColors.accent1Shade1)
+                  : const Icon(Iconsax.eye_slash, color: AppColors.accent1Shade1)),
           state: FieldState.normal,
           validationFunc: () {},
         ),
@@ -46,7 +52,12 @@ class LoginFormSection extends StatelessWidget {
         Gap(AppSizesManager.s24),
         PrimaryTextButton(
           label: "Login",
-          onTap: () {},
+          onTap: () {
+            BlocProvider.of<LoginCubit>(context).login(
+              context.read<LoginCubit>().userNameController.text,
+              context.read<LoginCubit>().passwordController.text,
+            );
+          },
           color: AppColors.accent1Shade1,
         ),
       ],
