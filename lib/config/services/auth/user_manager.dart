@@ -22,6 +22,22 @@ class UserManager {
     return _instance;
   }
 
+  /// Registers a new user with the provided email, full name and password.
+  Future<void> emailSignUp({
+    required String email,
+    required String fullName,
+    required String password,
+  }) async {
+    await userRepo.emailSignUp(email, fullName, password);
+  }
+
+  /// Logs in a user with the provided username and password.
+  ///
+  /// After a successful login, this method stores the received token in the
+  /// [TokenManager] and initializes the default headers in the [DioNetworkManager]
+  /// with the token. Additionally, it calls [getMe] to update the [currentUser].
+  ///
+  /// Returns `true` on success.
   Future<bool> login({
     required String userName,
     required String password,
@@ -33,10 +49,18 @@ class UserManager {
     return true;
   }
 
+  /// Gets the current user's data and updates the [currentUser].
+  ///
+  /// This method is used to update the [currentUser] after a successful login.
+
   Future<void> getMe() async {
     final UserModel userData = await userRepo.getCurrentUserData();
     currentUser = userData;
   }
+
+  /// Logs out the current user by removing the stored authentication token.
+  ///
+  /// This method clears the token from [TokenManager], effectively logging out the user.
 
   Future<void> logout() async {
     await tokenManagerInstance.removeToken();
