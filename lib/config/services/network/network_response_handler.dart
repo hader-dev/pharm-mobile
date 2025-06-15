@@ -1,14 +1,12 @@
-import 'dart:convert';
-
-import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 
 import '../../../utils/app_exceptions/exceptions.dart';
+import '../../../utils/urls.dart';
 
 class ResponseHandler {
-  static dynamic processResponse(http.Response response) {
-    final dynamic decodedResponse = decodeResponseBody(response);
-    print("Response: ${response.body}");
-    switch (response.statusCode) {
+  static dynamic processResponse(dynamic response) {
+    final dynamic decodedResponse = decodeResponse(response);
+    switch (response.statusCode!) {
       case >= 200 && < 300:
         return decodedResponse;
       case 400: //Bad request
@@ -27,7 +25,7 @@ class ResponseHandler {
     }
   }
 
-  static dynamic decodeResponseBody(http.Response response) {
-    return jsonDecode(response.body.isEmpty ? jsonEncode("done") : response.body);
+  static dynamic decodeResponse(Response response) {
+    return response.data;
   }
 }

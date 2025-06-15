@@ -40,7 +40,7 @@ dependencies:
   go_router: ^13.2.4
 
   # Networking:
-  http: ^1.2.1
+  dio: ^5.8.0+1
   connectivity_plus: ^6.0.2
 
   # State Management:
@@ -93,6 +93,9 @@ dependencies:
   gap: ^3.0.1
   flutter_otp_text_field: ^1.5.1+1
   cached_network_image_plus: ^0.0.5
+  cookie_jar: ^4.0.8
+  
+  
 
 dev_dependencies:
   flutter_test:

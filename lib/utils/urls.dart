@@ -1,37 +1,22 @@
 class Urls {
-  //static String schema = 'https://';
-
-  //person endpoint
-  static String get person => "/persons";
+  //users endpoint
+  static String get users => "/users";
 
   //Auth endpoint
 
   static String get auth => "/auth";
+  static String get refreshToken => "$auth/refresh-token";
 
-  static String get me => "$auth/me";
+  static String get logIn => "$auth/log-in";
+  static String get signUp => "$auth/sign-up";
+
+  static String get me => "$users/me";
 
   //Client
   static String get client => "/clients";
 
   //get Remote Stored Images
   //static String get images => "$schema$domainName/uploads";
-
-  // products
-  static String get product => "/products";
-  //orders
-  static String get order => "/orders";
-  //files
-  static String get file => "/files/";
-  //item cart
-  static String get cartItem => "/cart-items";
-  static String get cartItemBulkRemove => "/cart-items/bulk-remove";
-  //payment Methods
-  static String get paymentMethod => "/payment-methods";
-  // categories
-  static String get categories => "/categories";
-
-  //brands
-  static String get brands => "/brands";
 
   //api error mapping key
   static const String apiErrorKey = 'message';
