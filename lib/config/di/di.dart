@@ -1,27 +1,38 @@
+import 'package:dio/dio.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:win32/win32.dart';
+
+import '../../repositories/remote/user/user_repository_impl.dart';
+import '../../utils/env_helper.dart';
+import '../../utils/shared_prefs.dart';
+import '../services/auth/token_manager.dart';
+import '../services/auth/user_manager.dart';
+import '../services/network/dio/dio_network_manager.dart';
+import '../services/network/network_interface.dart';
 
 GetIt getItInstance = GetIt.instance;
 
 initAppDependencies() async {
-  // final SharedPreferences storage = await Prefs.init();
-  // const FlutterSecureStorage securedStorage = FlutterSecureStorage();
+  final SharedPreferences storage = await Prefs.init();
+  const FlutterSecureStorage securedStorage = FlutterSecureStorage();
   // final ValidateActionDialog dialogManager = ValidateActionDialog();
-  // //final HiveDbManager hiveStorage = HiveDbManager.getInstance;
-  // getItInstance.registerLazySingleton<SharedPreferences>(() => storage);
-  // getItInstance.registerLazySingleton<FlutterSecureStorage>(() => securedStorage);
-  // //getItInstance.registerLazySingleton<HiveDbManager>(() => hiveStorage);
+  //final HiveDbManager hiveStorage = HiveDbManager.getInstance;
+  getItInstance.registerLazySingleton<SharedPreferences>(() => storage);
+  getItInstance.registerLazySingleton<FlutterSecureStorage>(() => securedStorage);
+  //getItInstance.registerLazySingleton<HiveDbManager>(() => hiveStorage);
   // getItInstance.registerLazySingleton<ValidateActionDialog>(() => dialogManager);
-  // final TokenManager tokenManager = TokenManager.instance;
-  // tokenManager.init(getItInstance());
-  // getItInstance.registerLazySingleton<TokenManager>(() => tokenManager);
+  final TokenManager tokenManager = TokenManager.instance;
+  tokenManager.init(getItInstance());
+  getItInstance.registerLazySingleton<TokenManager>(() => tokenManager);
 
-  // final NetworkManager networkManager = NetworkManager.instance;
-  // networkManager.init(
-  //     '''${EnvHelper.getStoredEnvValue(EnvHelper.schemaEnvKey)}://${EnvHelper.getStoredEnvValue(EnvHelper.baseUrlEnvKey)}
-  //     /${EnvHelper.getStoredEnvValue(EnvHelper.apiVersionEnvKey)}''', http.Client(), tokenManager);
+  final DioNetworkManager dioNetworkManager = DioNetworkManager.instance;
+  await dioNetworkManager.init(
+      '''${EnvHelper.getStoredEnvValue(EnvHelper.schemaEnvKey)}://${EnvHelper.getStoredEnvValue(EnvHelper.baseUrlEnvKey)}
+      /${EnvHelper.getStoredEnvValue(EnvHelper.apiVersionEnvKey)}''', Dio(), tokenManager);
 
-  // getItInstance.registerLazySingleton<NetworkManager>(() => networkManager);
-  // getItInstance.registerLazySingleton<UserManager>(() => UserManager.init(
-  //     userRepository: UserRepository(client: getItInstance.get<NetworkManager>()), tokenManager: getItInstance()));
-  // getItInstance.registerLazySingleton<LocationManager>(() => LocationManager.instance);
+  getItInstance.registerLazySingleton<INetworkService>(() => dioNetworkManager);
+  getItInstance.registerLazySingleton<UserManager>(
+      () => UserManager.init(userRepository: UserRepository(client: getItInstance()), tokenManager: getItInstance()));
 }
