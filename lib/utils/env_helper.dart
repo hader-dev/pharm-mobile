@@ -7,7 +7,7 @@ class EnvHelper {
   static const String apiVersionEnvKey = 'API_VERSION';
   static const String fileUrl = 'FILE_URL';
 
-  static Future<void> loadAppEnvFile() async {
+  static Future<void> loadAppEnvVars() async {
     await dotenv.load(fileName: kDebugMode ? ".env" : ".env.production");
   }
 

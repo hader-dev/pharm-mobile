@@ -1,13 +1,14 @@
+import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:http/src/response.dart';
 
-import '../../../config/services/network/network_manager.dart';
+import '../../../config/services/network/dio/dio_network_manager.dart';
 import '../../../config/services/network/network_response_handler.dart';
 import '../../../models/user.dart';
 import '../../../utils/urls.dart';
 import 'user_repository.dart';
 
 class UserRepository implements IUserRepository {
-  final NetworkManager client;
+  final INetworkService client;
   UserRepository({required this.client});
 
   @override
@@ -15,19 +16,15 @@ class UserRepository implements IUserRepository {
     String username,
     String password,
   ) async {
-    final Response response = await client.sendRequest(
-        () => client.post(Urls.auth, payload: <String, String>{"username": username, "password": password}));
+    var decodedResponse = await client
+        .sendRequest(() => client.post(Urls.logIn, payload: <String, String>{"email": username, "password": password}));
 
-    var decodedResponse = ResponseHandler.processResponse(response);
-
-    return decodedResponse["token"];
+    return decodedResponse["accessToken"];
   }
 
   @override
   Future<UserModel> getCurrentUserData() async {
-    final Response response = await client.sendRequest(() => client.get(Urls.me));
-
-    var decodedResponse = ResponseHandler.processResponse(response);
+    var decodedResponse = await client.sendRequest(() => client.get(Urls.me));
 
     return UserModel.fromJson(decodedResponse);
   }
@@ -42,6 +39,14 @@ class UserRepository implements IUserRepository {
     var decodedResponse = ResponseHandler.processResponse(response);
 
     if (!decodedResponse["success"]) throw "Failed to change password";
+  }
+
+  @override
+  Future<String> emailSignUp(String email, String fullName, String password) async {
+    var decodedResponse = await client.sendRequest(() => client
+        .post(Urls.signUp, payload: <String, String>{"email": email, "fullName": fullName, "password": password}));
+
+    return decodedResponse["message"];
   }
 
   // @override
