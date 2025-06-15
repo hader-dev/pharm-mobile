@@ -1,9 +1,13 @@
+import 'package:win32/win32.dart';
+
 import '../../../models/user.dart';
 import '../../../repositories/remote/user/user_repository_impl.dart';
 import '../../di/di.dart';
-import '../network/network_manager.dart';
+import '../network/dio/dio_network_manager.dart';
+import '../network/network_interface.dart';
 import 'token_manager.dart';
 
+//TODO:I need to refactore this class
 class UserManager {
   static late UserRepository userRepo;
   late UserModel currentUser;
@@ -24,8 +28,7 @@ class UserManager {
   }) async {
     final String token = await userRepo.login(userName, password);
     await tokenManagerInstance.storeAccessToken(token);
-    await tokenManagerInstance.refreshToken();
-    getItInstance.get<NetworkManager>().initDefaultHeaders(token);
+    (getItInstance.get<INetworkService>() as DioNetworkManager).initDefaultHeaders(token);
     await getMe();
     return true;
   }

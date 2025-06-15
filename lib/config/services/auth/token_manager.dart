@@ -1,6 +1,10 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
+
+import '../../../utils/urls.dart';
 
 class TokenManager {
+  static final tokenHeaderKey = "Authorization";
   String? token;
   static final TokenManager _instance = TokenManager._();
   static TokenManager get instance => _instance;
@@ -22,8 +26,11 @@ class TokenManager {
     await secureStorage.write(key: accessTokenStoreKey, value: accessToken);
   }
 
-  Future<void> refreshToken() async {
-    token = await getAccessToken();
+  Future<void> refreshToken(INetworkService client) async {
+    var decodedResponse = await client.sendRequest(() => client.post(Urls.refreshToken));
+    var newToken = decodedResponse[accessTokenStoreKey];
+    await storeAccessToken(newToken);
+    token = newToken;
   }
 
   Future<String?> getAccessToken() async => await secureStorage.read(key: accessTokenStoreKey);
