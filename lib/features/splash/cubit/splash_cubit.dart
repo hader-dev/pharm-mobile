@@ -2,13 +2,18 @@ import 'package:bloc/bloc.dart';
 
 import 'package:flutter/material.dart';
 
+import '../../../repositories/remote/user/user_repository_impl.dart';
+
 part 'splash_state.dart';
 
 class SplashCubit extends Cubit<SplashState> {
-  // final UserRepository userRepo;
+  final UserRepository userRepo;
   //late Person currentUser;
-  //SplashCubit(this.userRepo) : super(SplashInitial());
-  SplashCubit() : super(SplashInitial());
+  SplashCubit(this.userRepo) : super(SplashInitial());
+  init() async {
+    await userRepo.getCurrentUserData();
+  }
+  //SplashCubit() : super(SplashInitial());
 
   // Future<void> refreshUserData(BuildContext context) async {
   //   // try {

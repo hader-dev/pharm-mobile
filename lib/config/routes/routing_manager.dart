@@ -11,6 +11,7 @@ import '../../features/login/login.dart';
 import '../../features/product_details/product_details.dart';
 import '../../features/profile_picture_setup/profile_picture_setup.dart';
 import '../../features/register/register.dart';
+import '../../features/splash/splash.dart';
 
 // import '../../view/screens/login/login.dart';
 // import '../../view/screens/splash/splash.dart';
@@ -21,6 +22,7 @@ class RoutingManager {
   //static const String placeHolderScreenPath = '/PlaceHolderScreenPath';
   static const String appComponentsScreen = '/appComponentsScreen';
   static const String appLayout = '/AppLayout';
+  static const String splashScreen = '/SplashScreen';
   static const String loginScreen = '/loginScreen';
   static const String registerScreen = '/RegisterScreen';
   static const String checkEmailScreen = '/CheckEmailScreen';
@@ -34,9 +36,16 @@ class RoutingManager {
 
   static final GoRouter router = GoRouter(
       navigatorKey: rootNavigatorKey,
-      initialLocation: appLayout,
+      initialLocation: splashScreen,
       debugLogDiagnostics: true,
       routes: <RouteBase>[
+        GoRoute(
+          name: splashScreen,
+          path: splashScreen,
+          builder: (BuildContext context, GoRouterState state) {
+            return const SplashScreen();
+          },
+        ),
         GoRoute(
           name: appLayout,
           path: appLayout,

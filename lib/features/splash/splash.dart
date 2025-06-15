@@ -1,5 +1,7 @@
 import '../../../repositories/remote/user/user_repository_impl.dart';
 import '../../../utils/shared_prefs.dart';
+import '../../config/di/di.dart';
+import '../../config/services/network/network_interface.dart';
 import 'cubit/splash_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,16 +15,14 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Builder(builder: (context) {
       return BlocProvider(
-        create: (context) => SplashCubit(),
+        create: (context) => SplashCubit(UserRepository(client: getItInstance.get<INetworkService>()))..init(),
         child: BlocBuilder<SplashCubit, SplashState>(
           builder: (context, state) {
             return Scaffold(
               body: Center(
-                child: Image.asset(
-                  DrawableAssetStrings.algeriaFlagIcon,
-                  width: MediaQuery.of(context).size.width * 1.5 / 4,
-                ),
-              ),
+                  child: Text(
+                'Splash Screen',
+              )),
             );
           },
         ),
