@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:hader_pharm_mobile/features/check_email/cubit/check_email_cubit.dart';
 
 import '../../../config/theme/colors_manager.dart';
 import '../../../config/theme/typoghrapy_manager.dart';
 import '../../../utils/constants.dart';
 
 class CheckEmailHeaderSection extends StatelessWidget {
-  const CheckEmailHeaderSection({super.key});
+  const CheckEmailHeaderSection({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +30,7 @@ class CheckEmailHeaderSection extends StatelessWidget {
           ),
           Gap(AppSizesManager.s4),
           Text(
-            'virtuosojhin44@gmail.com',
+            BlocProvider.of<CheckEmailCubit>(context).userEmail,
             style: AppTypography.body3MediumStyle.copyWith(color: TextColors.primary.color),
           ),
         ],
