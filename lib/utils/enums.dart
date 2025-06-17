@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../config/theme/colors_manager.dart';
+import 'assets_strings.dart';
 
 // enum OrderStatus {
 //   newStat(
@@ -75,6 +76,20 @@ import '../config/theme/colors_manager.dart';
 //     // }
 //   }
 // }
+
+enum CompanyType {
+  pharmacy(id: 0, imgPath: DrawableAssetStrings.companyIllustration1),
+  distributor(id: 1, imgPath: DrawableAssetStrings.companyIllustration2),
+  paraPharmSeller(id: 2, imgPath: DrawableAssetStrings.companyIllustration3);
+
+  final int id;
+  final String imgPath;
+
+  const CompanyType({
+    required this.id,
+    required this.imgPath,
+  });
+}
 
 enum DialogType {
   info(

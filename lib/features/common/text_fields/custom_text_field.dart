@@ -141,7 +141,8 @@ class CustomTextField extends StatelessWidget {
           child: Text(label, style: AppTypography.body3MediumStyle.copyWith(color: TextColors.ternary.color)),
         ),
         const Gap(AppSizesManager.s6),
-        TextField(
+        TextFormField(
+          validator: (value) => validationFunc(value),
           cursorColor: context.theme.primaryColor,
           onChanged: onChanged,
           focusNode: fieldFocusNode,

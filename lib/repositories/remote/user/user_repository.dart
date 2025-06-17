@@ -12,4 +12,5 @@ abstract class IUserRepository {
   );
   Future<UserModel> getCurrentUserData();
   Future<void> changePassword({required String oldPassword, required String newPassword});
+  Future<void> checkUserEmail({required String email, required String otp});
 }

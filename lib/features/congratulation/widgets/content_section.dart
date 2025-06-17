@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
+import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 
 import '../../../config/theme/colors_manager.dart';
 import '../../../config/theme/typoghrapy_manager.dart';
@@ -31,7 +33,9 @@ class ContentSection extends StatelessWidget {
         ),
         PrimaryTextButton(
           label: "Create a company profile",
-          onTap: () {},
+          onTap: () {
+            GoRouter.of(context).pushReplacementNamed(RoutingManager.createCompanyProfile);
+          },
           color: AppColors.accent1Shade1,
         ),
         Gap(AppSizesManager.s12),

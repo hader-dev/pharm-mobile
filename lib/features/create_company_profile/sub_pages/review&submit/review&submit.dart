@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
+import '../../cubit/create_company_profile_cubit.dart';
 import 'widgets/info_row.dart';
 
 class ReviewSubmitPage extends StatelessWidget {
@@ -36,8 +38,7 @@ class ReviewSubmitPage extends StatelessWidget {
             const Gap(AppSizesManager.s12),
 
             Text(
-              "El Amine Pharma is a certified Algerian pharmaceutical producer specializing in generic medicines and over-the-counter drugs. "
-              "Established in 2012, we supply hospitals and pharmacies across 28 wilayas.",
+              "${BlocProvider.of<CreateCompanyProfileCubit>(context).companyData.description}.",
               textAlign: TextAlign.center,
               style: AppTypography.body2RegularStyle.copyWith(color: TextColors.ternary.color),
             ),
@@ -46,7 +47,12 @@ class ReviewSubmitPage extends StatelessWidget {
             // General information
             const InfoRow(icon: Icons.email, label: "Email", dataValue: "Support@yassir.com"),
             const InfoRow(icon: Icons.phone, label: "Phone", dataValue: "+213 776 43 08 84"),
-            const InfoRow(icon: Icons.language, label: "Website", dataValue: "www.yassir.com"),
+            InfoRow(
+                icon: Icons.language,
+                label: "Website",
+                dataValue: BlocProvider.of<CreateCompanyProfileCubit>(context).companyData.website.isEmpty
+                    ? "/"
+                    : BlocProvider.of<CreateCompanyProfileCubit>(context).companyData.website),
             Padding(
               padding: EdgeInsets.symmetric(vertical: AppSizesManager.p16),
               child: Divider(
@@ -55,11 +61,15 @@ class ReviewSubmitPage extends StatelessWidget {
             ),
 
             // Legal information
-            const InfoRow(label: "NIF", dataValue: "4564897451231"),
-            const InfoRow(label: "NIS", dataValue: "584545"),
-            const InfoRow(label: "RC", dataValue: "454967/87"),
-            const InfoRow(label: "AI", dataValue: "1246476"),
-            const InfoRow(label: "Credit Limit", dataValue: "15000000"),
+            InfoRow(label: "NIF", dataValue: BlocProvider.of<CreateCompanyProfileCubit>(context).companyData.nif),
+            InfoRow(label: "NIS", dataValue: BlocProvider.of<CreateCompanyProfileCubit>(context).companyData.nis),
+            InfoRow(
+                label: "RC",
+                dataValue: BlocProvider.of<CreateCompanyProfileCubit>(context).companyData.commercialRegNumber),
+            InfoRow(label: "AI", dataValue: BlocProvider.of<CreateCompanyProfileCubit>(context).companyData.ai),
+            InfoRow(
+                label: "Credit Limit",
+                dataValue: BlocProvider.of<CreateCompanyProfileCubit>(context).companyData.creditLimit),
           ],
         ),
       ),

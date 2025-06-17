@@ -49,6 +49,12 @@ class UserRepository implements IUserRepository {
     return decodedResponse["message"];
   }
 
+  @override
+  Future<void> checkUserEmail({required String email, required String otp}) async {
+    await client
+        .sendRequest(() => client.post(Urls.verifyEmail, payload: <String, String>{"email": email, "otp": otp}));
+  }
+
   // @override
   // Future<void> changePassword({
   //   required String oldPassword,

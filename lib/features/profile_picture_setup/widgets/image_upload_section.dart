@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
+import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../config/theme/colors_manager.dart';
@@ -44,7 +46,9 @@ class ImageUploadSection extends StatelessWidget {
         Gap(AppSizesManager.s12),
         PrimaryTextButton(
           label: "Ignore",
-          onTap: () {},
+          onTap: () {
+            GoRouter.of(context).pushReplacementNamed(RoutingManager.congratulationScreen);
+          },
           labelColor: AppColors.accent1Shade1,
         ),
       ],

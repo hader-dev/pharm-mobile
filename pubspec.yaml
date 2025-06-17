@@ -94,6 +94,7 @@ dependencies:
   flutter_otp_text_field: ^1.5.1+1
   cached_network_image_plus: ^0.0.5
   cookie_jar: ^4.0.8
+  flutter_hooks: ^0.21.2
   
   
 
