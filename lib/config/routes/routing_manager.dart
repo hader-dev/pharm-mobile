@@ -36,7 +36,7 @@ class RoutingManager {
 
   static final GoRouter router = GoRouter(
       navigatorKey: rootNavigatorKey,
-      initialLocation: splashScreen,
+      initialLocation: createCompanyProfile,
       debugLogDiagnostics: true,
       routes: <RouteBase>[
         GoRoute(
@@ -78,7 +78,9 @@ class RoutingManager {
             name: checkEmailScreen,
             path: checkEmailScreen,
             builder: (BuildContext context, GoRouterState state) {
-              return CheckEmailScreen();
+              return CheckEmailScreen(
+                email: state.extra as String,
+              );
             }),
         GoRoute(
             name: checkPhoneScreen,
@@ -99,11 +101,14 @@ class RoutingManager {
               return const CongratulationScreen();
             }),
         GoRoute(
-            name: createCompanyProfile,
-            path: createCompanyProfile,
-            builder: (BuildContext context, GoRouterState state) {
-              return const CreateCompanyProfile();
-            }),
+          name: createCompanyProfile,
+          path: createCompanyProfile,
+          pageBuilder: (context, state) => CustomTransitionPage(
+            child: const CreateCompanyProfile(),
+            transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+                FadeTransition(opacity: animation, child: child),
+          ),
+        ),
         GoRoute(
             name: productDetailsScreen,
             path: productDetailsScreen,
