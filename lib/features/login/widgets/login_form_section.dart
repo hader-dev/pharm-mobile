@@ -15,52 +15,57 @@ class LoginFormSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        CustomTextField(
-          label: 'Email or phone Number',
-          controller: BlocProvider.of<LoginCubit>(context).userNameController,
-          state: FieldState.normal,
-          validationFunc: () {},
-        ),
-        Gap(AppSizesManager.s4),
-        CustomTextField(
-          label: 'Password',
-          controller: BlocProvider.of<LoginCubit>(context).passwordController,
-          onChanged: (value) {},
-          isObscure: BlocProvider.of<LoginCubit>(context).isObscured,
-          suffixIcon: InkWell(
-              onTap: () => BlocProvider.of<LoginCubit>(context).showPassword(),
-              child: BlocProvider.of<LoginCubit>(context).isObscured
-                  ? const Icon(Iconsax.eye, color: AppColors.accent1Shade1)
-                  : const Icon(Iconsax.eye_slash, color: AppColors.accent1Shade1)),
-          state: FieldState.normal,
-          validationFunc: () {},
-        ),
-        Gap(AppSizesManager.s12),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return BlocBuilder<LoginCubit, LoginState>(
+      builder: (context, state) {
+        return Column(
           children: [
-            Spacer(),
+            CustomTextField(
+              label: 'Email or phone Number',
+              controller: BlocProvider.of<LoginCubit>(context).userNameController,
+              state: FieldState.normal,
+              validationFunc: () {},
+            ),
+            Gap(AppSizesManager.s4),
+            CustomTextField(
+              label: 'Password',
+              controller: BlocProvider.of<LoginCubit>(context).passwordController,
+              onChanged: (value) {},
+              isObscure: BlocProvider.of<LoginCubit>(context).isObscured,
+              suffixIcon: InkWell(
+                  onTap: () => BlocProvider.of<LoginCubit>(context).showPassword(),
+                  child: BlocProvider.of<LoginCubit>(context).isObscured
+                      ? const Icon(Iconsax.eye, color: AppColors.accent1Shade1)
+                      : const Icon(Iconsax.eye_slash, color: AppColors.accent1Shade1)),
+              state: FieldState.normal,
+              validationFunc: () {},
+            ),
+            Gap(AppSizesManager.s12),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Spacer(),
+                PrimaryTextButton(
+                  label: "Forgot Password?",
+                  onTap: () {},
+                  labelColor: AppColors.accent1Shade1,
+                ),
+              ],
+            ),
+            Gap(AppSizesManager.s24),
             PrimaryTextButton(
-              label: "Forgot Password?",
-              onTap: () {},
-              labelColor: AppColors.accent1Shade1,
+              label: "Login",
+              isLoading: state is LoginLoading,
+              onTap: () {
+                BlocProvider.of<LoginCubit>(context).login(
+                  context.read<LoginCubit>().userNameController.text,
+                  context.read<LoginCubit>().passwordController.text,
+                );
+              },
+              color: AppColors.accent1Shade1,
             ),
           ],
-        ),
-        Gap(AppSizesManager.s24),
-        PrimaryTextButton(
-          label: "Login",
-          onTap: () {
-            BlocProvider.of<LoginCubit>(context).login(
-              context.read<LoginCubit>().userNameController.text,
-              context.read<LoginCubit>().passwordController.text,
-            );
-          },
-          color: AppColors.accent1Shade1,
-        ),
-      ],
+        );
+      },
     );
   }
 }

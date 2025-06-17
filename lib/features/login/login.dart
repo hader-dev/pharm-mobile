@@ -39,11 +39,7 @@ class LoginScreen extends StatelessWidget {
                 children: [
                   LoginHeaderSection(),
                   Gap(AppSizesManager.s32),
-                  BlocBuilder<LoginCubit, LoginState>(
-                    builder: (context, state) {
-                      return LoginFormSection();
-                    },
-                  ),
+                  LoginFormSection(),
                   Gap(AppSizesManager.s32),
                   OtherLoginOptionsSection(),
                   Gap(AppSizesManager.s52),
