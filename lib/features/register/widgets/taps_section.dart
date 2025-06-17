@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
 import '../../../config/theme/colors_manager.dart';
 import '../../../utils/constants.dart';
 import '../../common/buttons/solid/primary_text_button.dart';
+import '../cubit/register_cubit.dart';
 
 class TabsSection extends StatelessWidget {
   final int selectedTab;
@@ -28,7 +30,9 @@ class TabsSection extends StatelessWidget {
               label: "Email",
               height: 32,
               labelColor: selectedTab == 0 ? TextColors.white.color : TextColors.ternary.color,
-              onTap: () {},
+              onTap: () {
+                BlocProvider.of<RegisterCubit>(context).changeTab(0);
+              },
               color: selectedTab == 0 ? AppColors.accent1Shade1 : AppColors.bgWhite,
             ),
           ),
@@ -37,7 +41,9 @@ class TabsSection extends StatelessWidget {
             child: PrimaryTextButton(
               label: "Phone Number",
               height: 32,
-              onTap: () {},
+              onTap: () {
+                BlocProvider.of<RegisterCubit>(context).changeTab(1);
+              },
               labelColor: selectedTab == 1 ? TextColors.white.color : TextColors.ternary.color,
               color: selectedTab == 1 ? AppColors.accent1Shade1 : AppColors.bgWhite,
             ),
