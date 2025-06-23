@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../config/routes/routing_manager.dart';
 import '../features/common/toasts/custom_toast.dart';
 
 enum ToastType {
@@ -25,34 +26,30 @@ class ToastManager {
   OverlayEntry? _overlayEntry;
 
   void showToast({
-    required BuildContext context,
-    Duration duration = const Duration(seconds: 3),
+    required ToastType type,
+    String? message,
+    Duration duration = const Duration(milliseconds: 150),
   }) async {
-    // Remove existing toast if visible
-    _overlayEntry?.remove();
+    Future<void> hideToast() async {
+      _overlayEntry?.remove();
+      _overlayEntry = null;
+    }
 
+    if (_overlayEntry != null) {
+      await hideToast();
+    }
     _overlayEntry = OverlayEntry(
       maintainState: true,
       builder: (_) => CustomToastWidget(
-          title: 'Success',
-          message: 'Custom toast via OverlayEntry!',
-          type: ToastType.error,
-          actionText: "Undo",
-          onAction: () => print("Action pressed"),
+          title: type.name,
+          message: message ?? 'Custom toast via OverlayEntry!',
+          type: type,
+          animationDuration: duration,
           onClose: () {
             hideToast();
           }),
     );
 
-    Overlay.of(context).insert(_overlayEntry!);
-
-    await Future.delayed(duration, () async {
-      hideToast();
-    });
-  }
-
-  void hideToast() {
-    _overlayEntry?.remove();
-    _overlayEntry = null;
+    Overlay.of(RoutingManager.rootNavigatorKey.currentContext!).insert(_overlayEntry!);
   }
 }

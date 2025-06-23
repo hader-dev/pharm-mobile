@@ -1,45 +1,54 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
+
+import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 
 // import 'package:sentry_flutter/sentry_flutter.dart';
 
+import '../enums.dart';
 import 'exceptions.dart';
 
 class GlobalExceptionHandler {
   static void handle({dynamic exception, StackTrace? exceptionStackTrace}) async {
-    if (exception is SocketException || exception is TimeoutException || exception is http.ClientException) {
-      // Fluttertoast.showToast(msg: localization.connectionProblem);
-    } else if (exception is UnAuthorizedException) {
-      Fluttertoast.showToast(
-        msg: exception.toString(),
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        textColor: Colors.black,
+    ToastManager toastManager = getItInstance.get<ToastManager>();
+    if (exception is SocketException ||
+        exception is TimeoutException ||
+        exception is DioException &&
+            [
+              DioExceptionType.connectionTimeout,
+              DioExceptionType.receiveTimeout,
+              DioExceptionType.sendTimeout,
+              DioExceptionType.connectionError
+            ].contains(exception.type)) {
+      toastManager.showToast(
+        type: ToastType.error,
+        message: "Connection problem or timeout. Please check your internet connection.",
       );
-    } else if (exception is UnAuthenticatedException) {
-      Fluttertoast.showToast(
-        msg: exception.toString(),
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        textColor: Colors.black,
+    } else if (exception is UnAuthorizedException || exception is UnAuthenticatedException) {
+      toastManager.showToast(
+        type: ToastType.error,
+        message: exception.errorCode != null
+            ? ApiErrorCodes.values.firstWhere((e) => e.label == exception.errorCode).errorMessage
+            : exception.message,
       );
-    } else if (exception is AccountNotActiveException) {
-      Fluttertoast.showToast(
-        msg: exception.toString(),
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        textColor: Colors.black,
+    } else if (exception is TooManyRequestsException) {
+      toastManager.showToast(
+        type: ToastType.warning,
+        message: exception.message,
+      );
+    } else if (exception is DataValidationException) {
+      toastManager.showToast(
+        type: ToastType.error,
+        message:
+            "${exception.message}\n${exception.errors != null ? exception.errors!.map((e) => e.message).join("\n") : ""}",
       );
     } else {
-      Fluttertoast.showToast(
-        msg: exception.toString(),
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        textColor: Colors.black,
+      toastManager.showToast(
+        type: ToastType.error,
+        message: (exception as TemplateException).message ?? "An unexpected error occurred. Please try again later.",
       );
     }
   }

@@ -78,9 +78,8 @@ import 'assets_strings.dart';
 // }
 
 enum CompanyType {
-  pharmacy(id: 0, imgPath: DrawableAssetStrings.companyIllustration1),
   distributor(id: 1, imgPath: DrawableAssetStrings.companyIllustration2),
-  paraPharmSeller(id: 2, imgPath: DrawableAssetStrings.companyIllustration3);
+  pharmacy(id: 2, imgPath: DrawableAssetStrings.companyIllustration1);
 
   final int id;
   final String imgPath;
@@ -88,6 +87,24 @@ enum CompanyType {
   const CompanyType({
     required this.id,
     required this.imgPath,
+  });
+}
+
+enum DistributorCategory {
+  pharmacy(
+    id: 1,
+  ),
+  paraPharmacy(
+    id: 2,
+  ),
+  both(
+    id: 3,
+  );
+
+  final int id;
+
+  const DistributorCategory({
+    required this.id,
   });
 }
 
@@ -141,4 +158,27 @@ enum FieldState {
   final IconData? icon;
   final String wordKey;
   const FieldState({this.wordKey = '', required this.color, this.icon});
+}
+
+enum ApiErrorCodes {
+  UNKNOWN('UNKNOWN', 'UNKNOWN'),
+  // Auth
+  NO_TOKEN('NO_TOKEN', 'No token provided'),
+  TOKEN_EXPIRED('TOKEN_EXPIRED', 'Token has expired'),
+
+  TOKEN_REUSED('TOKEN_REUSED', 'Token has been reused'),
+  REFRESH_TOKEN_REUSED('REFRESH_TOKEN_REUSED', 'Refresh token has been reused'),
+  REFRESH_TOKEN_EXPIRED('REFRESH_TOKEN_EXPIRED', 'Refresh token has expired'),
+  INVALID_TOKEN('INVALID_TOKEN', 'Invalid token'),
+  INVALID_REFRESH_TOKEN('INVALID_REFRESH_TOKEN', 'Invalid refresh token'),
+  INVALID_CREDENTIALS('INVALID_CREDENTIALS', 'Email or password is incorrect'),
+  INVALID_PASSWORD('INVALID_PASSWORD', 'Invalid password'),
+  INVALID_OTP('INVALID_OTP', 'Invalid OTP'),
+  INVALID_PASSWORD_RESET_TOKEN('INVALID_PASSWORD_RESET_TOKEN', 'Invalid password reset token'),
+  EMAIL_NOT_VERIFIED('EMAIL_NOT_VERIFIED', 'Email not verified'),
+  INCORRECT_PASSWORD('INCORRECT_PASSWORD', 'Incorrect password');
+
+  final String label;
+  final String errorMessage;
+  const ApiErrorCodes(this.label, this.errorMessage);
 }
