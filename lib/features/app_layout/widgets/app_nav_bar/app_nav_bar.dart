@@ -48,16 +48,15 @@ class AppNavBar extends StatelessWidget {
             ),
             BottomNavigationBarItem(
               icon: Padding(padding: EdgeInsets.symmetric(vertical: AppSizesManager.p6), child: Icon(Iconsax.shop)),
-              label: 'MarketPlace',
+              label: 'Market',
             ),
             BottomNavigationBarItem(
-              icon: Padding(padding: EdgeInsets.symmetric(vertical: AppSizesManager.p6), child: Icon(Iconsax.activity)),
-              label: 'Dashboard',
+              icon: Padding(padding: EdgeInsets.symmetric(vertical: AppSizesManager.p6), child: Icon(Iconsax.bag_2)),
+              label: 'Cart',
             ),
             BottomNavigationBarItem(
-              icon: Padding(
-                  padding: EdgeInsets.symmetric(vertical: AppSizesManager.p6), child: Icon(Iconsax.element_plus)),
-              label: 'Applications',
+              icon: Padding(padding: EdgeInsets.symmetric(vertical: AppSizesManager.p6), child: Icon(Iconsax.box)),
+              label: 'Orders',
             ),
             BottomNavigationBarItem(
               icon:

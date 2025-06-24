@@ -1,9 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
+import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:win32/win32.dart';
 
+import '../../features/common/dialog/validation_dialog.dart';
 import '../../repositories/remote/user/user_repository_impl.dart';
 import '../../utils/env_helper.dart';
 import '../../utils/shared_prefs.dart';
@@ -17,7 +18,9 @@ GetIt getItInstance = GetIt.instance;
 initAppDependencies() async {
   final SharedPreferences storage = await Prefs.init();
   const FlutterSecureStorage securedStorage = FlutterSecureStorage();
-  // final ValidateActionDialog dialogManager = ValidateActionDialog();
+
+  getItInstance.registerLazySingleton<ToastManager>(() => ToastManager());
+  final ValidateActionDialog dialogManager = ValidateActionDialog();
   //final HiveDbManager hiveStorage = HiveDbManager.getInstance;
   getItInstance.registerLazySingleton<SharedPreferences>(() => storage);
   getItInstance.registerLazySingleton<FlutterSecureStorage>(() => securedStorage);

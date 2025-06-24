@@ -2,7 +2,6 @@ import 'package:flutter/widgets.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 
-import '../../../../utils/extensions/app_context_helper.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../utils/constants.dart';

@@ -34,6 +34,7 @@ class AppSizesManager {
   static const double iconSize10 = 10;
   static const double iconSize14 = 14;
   static const double iconSize16 = 16;
+  static const double iconSize18 = 18;
   static const double iconSize20 = 20;
   static const double iconSize25 = 25;
   static const double iconSize30 = 30;
@@ -44,3 +45,9 @@ class AppSizesManager {
   //common widgets radius
   static const double commonWidgetsRadius = r4;
 }
+
+class PaginationConstants {
+  static const int resultsPerPage = 8;
+}
+
+RegExp emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');

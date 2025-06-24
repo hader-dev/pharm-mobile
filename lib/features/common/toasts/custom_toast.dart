@@ -38,61 +38,80 @@ class _CustomToastWidgetState extends State<CustomToastWidget> with SingleTicker
       vsync: this,
       duration: widget.animationDuration,
     );
-    _fade = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
+    _fade = CurvedAnimation(parent: _controller, curve: Curves.easeInCubic);
     _controller.forward();
   }
 
   @override
   Widget build(BuildContext context) {
+    _controller.addListener(() async {
+      if (_controller.isForwardOrCompleted) {
+        await Future.delayed(Duration(seconds: 2, milliseconds: 600));
+        _controller.reverse();
+      }
+      if (_controller.isDismissed) {
+        _controller.removeListener(
+          () {},
+        );
+        await Future.delayed(widget.animationDuration);
+        widget.onClose?.call();
+      }
+    });
     return Positioned(
       bottom: 20,
       left: 20,
       right: 20,
-      child: FadeTransition(
-        opacity: _fade,
-        child: Material(
-          child: Container(
-            margin: EdgeInsets.symmetric(vertical: AppSizesManager.p8),
-            padding: const EdgeInsets.all(AppSizesManager.p16),
-            decoration: BoxDecoration(
-              gradient:
-                  LinearGradient(colors: widget.type.colors, begin: Alignment.centerLeft, end: Alignment.centerRight),
-              borderRadius: BorderRadius.circular(AppSizesManager.r12),
-            ),
-            child: Row(
-              children: [
-                Icon(widget.type.icon, color: Colors.white),
-                const SizedBox(width: AppSizesManager.s12),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+      child: AnimatedBuilder(
+          animation: _controller,
+          builder: (context, child) {
+            return AnimatedOpacity(
+              duration: _controller.duration!,
+              opacity: _fade.value,
+              child: Material(
+                color: Colors.transparent,
+                child: Container(
+                  margin: EdgeInsets.symmetric(vertical: AppSizesManager.p8),
+                  padding: const EdgeInsets.all(AppSizesManager.p16),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                        colors: widget.type.colors, begin: Alignment.centerLeft, end: Alignment.centerRight),
+                    borderRadius: BorderRadius.circular(AppSizesManager.r12),
+                  ),
+                  child: Row(
                     children: [
-                      Text(widget.title,
-                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white)),
-                      if (widget.message != null)
-                        Text(widget.message!,
-                            style: const TextStyle(
-                              fontSize: 14,
-                              color: Colors.white70,
-                            )),
+                      Icon(widget.type.icon, color: Colors.white),
+                      const SizedBox(width: AppSizesManager.s12),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(widget.title,
+                                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white)),
+                            if (widget.message != null)
+                              Text(widget.message!,
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.white70,
+                                  )),
+                          ],
+                        ),
+                      ),
+                      if (widget.actionText != null)
+                        TextButton(
+                          onPressed: widget.onAction,
+                          style: TextButton.styleFrom(foregroundColor: Colors.white),
+                          child: Text(widget.actionText!),
+                        ),
+                      IconButton(
+                        icon: const Icon(Icons.close, color: Colors.white),
+                        onPressed: widget.onClose ?? () {},
+                      ),
                     ],
                   ),
                 ),
-                if (widget.actionText != null)
-                  TextButton(
-                    onPressed: widget.onAction,
-                    style: TextButton.styleFrom(foregroundColor: Colors.white),
-                    child: Text(widget.actionText!),
-                  ),
-                IconButton(
-                  icon: const Icon(Icons.close, color: Colors.white),
-                  onPressed: widget.onClose ?? () {},
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
+              ),
+            );
+          }),
     );
   }
 

@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../config/services/network/network_manager.dart';
+import '../config/services/network/dio/dio_network_manager.dart';
 import 'create_cart_item.dart';
 
 class ProductDetailsModel {
@@ -71,12 +71,8 @@ class ProductDetailsModel {
       isActive: json['isActive'],
       brandId: json['brandId'] ?? 0,
       categoryId: json['categoryId'] ?? 0,
-      gallery: (json['gallery'] as List)
-          .map((item) => ArticleGallery.fromJson(item))
-          .toList(),
-      articles: (json['articles'] as List)
-          .map((item) => Article.fromJson(item))
-          .toList(),
+      gallery: (json['gallery'] as List).map((item) => ArticleGallery.fromJson(item)).toList(),
+      articles: (json['articles'] as List).map((item) => Article.fromJson(item)).toList(),
     );
   }
 }
@@ -99,7 +95,7 @@ class ArticleGallery {
   factory ArticleGallery.fromJson(Map<String, dynamic> json) {
     return ArticleGallery(
       id: json['id'],
-      path: NetworkManager.instance.getImagePath(
+      path: DioNetworkManager.instance.getImagePath(
         json['path'],
       ),
       createdAt: DateTime.parse(json['createdAt']),
@@ -121,8 +117,7 @@ class BaseArticle {
   });
 
   factory BaseArticle.fromJson(Map<String, dynamic> json) {
-    return BaseArticle(
-        id: json['id'], label: json['label'], imgPath: json['imgPath']);
+    return BaseArticle(id: json['id'], label: json['label'], imgPath: json['imgPath']);
   }
 }
 
@@ -164,14 +159,10 @@ class Article extends BaseArticle with EquatableMixin {
     return Article(
       id: json['id'],
       syncId: json['syncId'],
-      createdAt: json['createdAt'] != null
-          ? DateTime.tryParse(json['createdAt'])
-          : null,
-      updatedAt: json['updatedAt'] != null
-          ? DateTime.tryParse(json['updatedAt'])
-          : null,
+      createdAt: json['createdAt'] != null ? DateTime.tryParse(json['createdAt']) : null,
+      updatedAt: json['updatedAt'] != null ? DateTime.tryParse(json['updatedAt']) : null,
       label: json['label'] ?? "",
-      imgPath: NetworkManager.instance.getImagePath(json['imgPath']) ?? "",
+      imgPath: DioNetworkManager.instance.getImagePath(json['imgPath']) ?? "",
       ref: json['ref'] ?? "",
       note: json['note'] ?? "",
       tvaPercentage: json['tvaPercentage'] ?? 0,
@@ -179,10 +170,8 @@ class Article extends BaseArticle with EquatableMixin {
       price: json['price'] ?? "",
       isActive: json['isActive'] ?? false,
       productId: json['productId'] ?? 0,
-      optionValues: (json['optionValues'] as List?)
-              ?.map((item) => OptionValue.fromJson(item))
-              .toList() ??
-          <OptionValue>[],
+      optionValues:
+          (json['optionValues'] as List?)?.map((item) => OptionValue.fromJson(item)).toList() ?? <OptionValue>[],
     );
   }
   CreateCartItemModel createCartItem(int quantity) {

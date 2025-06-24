@@ -75,7 +75,6 @@ dependencies:
   lucide_icons: ^0.257.0
   pinch_zoom: ^2.0.0
   timelines_plus: ^1.0.6
-  flutter_osm_plugin: any
   latlong2: ^0.9.1
   geocoding: ^3.0.0
   geolocator: ^13.0.4
@@ -95,6 +94,7 @@ dependencies:
   cached_network_image_plus: ^0.0.5
   cookie_jar: ^4.0.8
   flutter_hooks: ^0.21.2
+  image_picker: ^1.1.2
   
   
 

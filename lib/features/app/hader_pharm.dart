@@ -4,7 +4,6 @@ import '../../config/routes/routing_manager.dart';
 import '../../config/theme/light_theme.dart';
 
 class HaderPharmApp extends StatelessWidget {
-  // This widget is the root of your application.
   const HaderPharmApp({super.key});
 
   @override
@@ -14,6 +13,9 @@ class HaderPharmApp extends StatelessWidget {
       title: 'Hader Pharm',
       theme: LightTheme.theme,
       routerConfig: RoutingManager.router,
+      builder: (context, child) => Overlay(
+        initialEntries: [OverlayEntry(builder: (_) => child!)],
+      ),
     );
   }
 }

@@ -1,5 +1,3 @@
-import 'package:win32/win32.dart';
-
 import '../../../models/user.dart';
 import '../../../repositories/remote/user/user_repository_impl.dart';
 import '../../di/di.dart';
@@ -7,7 +5,6 @@ import '../network/dio/dio_network_manager.dart';
 import '../network/network_interface.dart';
 import 'token_manager.dart';
 
-//TODO:I need to refactore this class
 class UserManager {
   static late UserRepository userRepo;
   late UserModel currentUser;
@@ -27,8 +24,9 @@ class UserManager {
     required String email,
     required String fullName,
     required String password,
+    String? userImagePath,
   }) async {
-    await userRepo.emailSignUp(email, fullName, password);
+    await userRepo.emailSignUp(email, fullName, password, userImagePath: userImagePath);
   }
 
   /// Logs in a user with the provided username and password.
@@ -45,7 +43,7 @@ class UserManager {
     final String token = await userRepo.login(userName, password);
     await tokenManagerInstance.storeAccessToken(token);
     (getItInstance.get<INetworkService>() as DioNetworkManager).initDefaultHeaders(token);
-    await getMe();
+    // await getMe();
     return true;
   }
 
@@ -56,6 +54,21 @@ class UserManager {
   Future<void> getMe() async {
     final UserModel userData = await userRepo.getCurrentUserData();
     currentUser = userData;
+  }
+
+  /// Checks the provided OTP for the given email.
+  ///
+  /// This method is used in the "check email" feature to verify the OTP sent to the
+  /// user's email.
+  ///
+  /// Returns `true` on success.
+  Future<void> checkUserEmailOtp({
+    required String email,
+    required String otp,
+  }) async {
+    String token = await userRepo.checkUserEmail(email: email, otp: otp);
+    await tokenManagerInstance.storeAccessToken(token);
+    (getItInstance.get<INetworkService>() as DioNetworkManager).initDefaultHeaders(token);
   }
 
   /// Logs out the current user by removing the stored authentication token.

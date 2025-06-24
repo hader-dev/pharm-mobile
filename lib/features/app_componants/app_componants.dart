@@ -2,13 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../config/theme/colors_manager.dart';
-import '../../utils/toast_helper.dart';
 import '../app_layout/widgets/app_nav_bar/app_nav_bar.dart';
 import '../common/app_bars/custom_app_bar.dart';
 import '../common/buttons/outlined/outlined_filled_text_button.dart';
 import '../common/floating_buttons/custom_solid_fab.dart';
-import '../common/widgets/product_widget_1.dart';
-import '../common/widgets/product_widget_2.dart';
 
 class AppComponentsScreen extends StatefulWidget {
   const AppComponentsScreen({super.key, required this.title});
@@ -62,9 +59,7 @@ class _AppComponanatsPageState extends State<AppComponentsScreen> {
           icon: Icons.add,
           color: AppColors.accent1Shade1,
           onPressed: () {
-            ToastManager().showToast(
-              context: context,
-            );
+            //  ToastManager().showToast();
           },
         )
         //  GradientFAB(
@@ -87,8 +82,8 @@ class _AppComponanatsPageState extends State<AppComponentsScreen> {
             // SecondaryTextButton(),
             // OutLinedTextButton(),
             OutLinedFilledTextButton(),
-            ProductWidget1(),
-            ProductWidget2(),
+            //MedicineWidget1(),
+            // ProductWidget2(),
             //   Row(
             //    children: [
             // PrimaryIconButton(

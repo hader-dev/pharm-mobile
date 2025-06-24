@@ -1,99 +1,79 @@
-class Order {
-  final int orderId;
-  final String? note;
-  final double discount;
-  final int discountPercentage;
-  final String clientFirstName;
-  final String clientLastName;
-  final String deliveryAddress;
-  final String clientMobile;
-  final String clientFax;
-  final String clientPhone;
-  final double stampDuty;
-  final double amountHt;
-  final double netAmountTtc;
-  final double netToPay;
-  final double totalTva;
-  final String? ref;
-  final DateTime createdAt;
-  final DateTime updatedAt;
-  final int clientId;
-  final int paymentMethodId;
-  final int status;
-  final double latitude;
-  final double longitude;
+class OrderModel {
+  final String id;
+  final String clientCompanyId;
+  final String sellerCompanyId;
+  final String delegateUserId;
+  final String operatorUserId;
+  final String managerUserId;
+  final String stockUserId;
+  final String status;
+  final double totalAmountExclTax;
+  final double totalAmountInclTax;
+  final String paymentMethod;
+  final String invoiceType;
+  final DateTime placedAt;
+  final DateTime statusChangedAt;
+  final String? clientNote;
+  final String? privateNote;
 
-  // final List<OrderItem> orderItems;
-  // final List<TrackingHistory> trackingHistory;
-
-  Order({
-    required this.orderId,
-    this.note,
-    required this.discount,
-    required this.discountPercentage,
-    required this.clientFirstName,
-    required this.clientLastName,
-    required this.deliveryAddress,
-    required this.clientMobile,
-    required this.clientFax,
-    required this.clientPhone,
-    required this.stampDuty,
-    required this.amountHt,
-    required this.netAmountTtc,
-    required this.netToPay,
-    required this.totalTva,
-    this.ref,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.clientId,
-    required this.paymentMethodId,
+  OrderModel({
+    required this.id,
+    required this.clientCompanyId,
+    required this.sellerCompanyId,
+    required this.delegateUserId,
+    required this.operatorUserId,
+    required this.managerUserId,
+    required this.stockUserId,
     required this.status,
-    required this.latitude,
-    required this.longitude,
+    required this.totalAmountExclTax,
+    required this.totalAmountInclTax,
+    required this.paymentMethod,
+    required this.invoiceType,
+    required this.placedAt,
+    required this.statusChangedAt,
+    this.clientNote,
+    this.privateNote,
   });
 
-  factory Order.fromJson(Map<String, dynamic> json) {
-    return Order(
-      orderId: json['id'],
-      note: json['note'],
-      discount: double.parse(json['discount']),
-      discountPercentage: json['discountPercentage'],
-      clientFirstName: json['clientFirstName'],
-      clientLastName: json['clientLastName'],
-      deliveryAddress: json['deliveryAddress'],
-      clientMobile: json['clientMobile'],
-      clientFax: json['clientFax'],
-      clientPhone: json['clientPhone'],
-      stampDuty: double.parse(json['stampDuty']),
-      amountHt: double.parse(json['amountHt']),
-      netAmountTtc: double.parse(json['netAmountTtc']),
-      netToPay: double.parse(json['netToPay']),
-      totalTva: double.parse(json['totalTva']),
-      ref: json['ref'],
-      createdAt: DateTime.parse(json['createdAt']),
-      updatedAt: DateTime.parse(json['updatedAt']),
-      clientId: json['clientId'],
-      paymentMethodId: json['paymentMethodId'],
-      status: json['statusId'],
-      latitude: double.parse(json['latitude'] ?? "0.0"),
-      longitude: double.parse(json['longitude'] ?? "0.0"),
+  factory OrderModel.fromJson(Map<String, dynamic> json) {
+    return OrderModel(
+      id: json['id'],
+      clientCompanyId: json['client_company_id'],
+      sellerCompanyId: json['seller_company_id'],
+      delegateUserId: json['delegate_user_id'],
+      operatorUserId: json['operator_user_id'],
+      managerUserId: json['manager_user_id'],
+      stockUserId: json['stock_user_id'],
+      status: json['status'],
+      totalAmountExclTax: (json['total_amount_excl_tax'] as num).toDouble(),
+      totalAmountInclTax: (json['total_amount_incl_tax'] as num).toDouble(),
+      paymentMethod: json['payment_method'],
+      invoiceType: json['invoice_type'],
+      placedAt: DateTime.parse(json['placed_at']),
+      statusChangedAt: DateTime.parse(json['status_changed_at']),
+      clientNote: json['client_note'],
+      privateNote: json['private_note'],
     );
   }
-}
 
-class Status {
-  final int statusId;
-  final String label;
-
-  Status({
-    required this.statusId,
-    required this.label,
-  });
-
-  factory Status.fromJson(Map<String, dynamic> json) {
-    return Status(
-      statusId: json['status_id'],
-      label: json['label'],
-    );
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'client_company_id': clientCompanyId,
+      'seller_company_id': sellerCompanyId,
+      'delegate_user_id': delegateUserId,
+      'operator_user_id': operatorUserId,
+      'manager_user_id': managerUserId,
+      'stock_user_id': stockUserId,
+      'status': status,
+      'total_amount_excl_tax': totalAmountExclTax,
+      'total_amount_incl_tax': totalAmountInclTax,
+      'payment_method': paymentMethod,
+      'invoice_type': invoiceType,
+      'placed_at': placedAt.toIso8601String(),
+      'status_changed_at': statusChangedAt.toIso8601String(),
+      'client_note': clientNote,
+      'private_note': privateNote,
+    };
   }
 }

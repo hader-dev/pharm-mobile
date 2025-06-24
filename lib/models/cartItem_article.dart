@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../config/services/network/network_manager.dart';
+import '../config/services/network/dio/dio_network_manager.dart';
 import 'create_cart_item.dart';
 import 'productDetails.dart';
 
@@ -32,7 +32,7 @@ class CartItemArticle extends BaseArticle with EquatableMixin {
       createdAt: json['createdAt'] != null ? DateTime.tryParse(json['createdAt']) : null,
       updatedAt: json['updatedAt'] != null ? DateTime.tryParse(json['updatedAt']) : null,
       label: json['label'] ?? "",
-      imgPath: NetworkManager.instance.getImagePath(json['imgPath']) ?? "",
+      imgPath: DioNetworkManager.instance.getImagePath(json['imgPath']) ?? "",
       tvaPercentage: json['tvaPercentage'] ?? 0,
       price: json['price'] ?? "",
       optionValues: (json['optionValues'] as List?)?.map((item) => BaseOptionValue.fromJson(item)).toList() ??

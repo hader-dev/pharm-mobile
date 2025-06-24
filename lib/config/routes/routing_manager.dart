@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/para_pharma_catalog_details.dart';
 
 import '../../features/app_componants/app_componants.dart';
 import '../../features/app_layout/app_layout.dart';
-import '../../features/check_email/check_email.dart';
-import '../../features/check_phone/check_phone.dart';
-import '../../features/congratulation/congratulation.dart';
-import '../../features/create_company_profile/create_company_profile.dart';
-import '../../features/login/login.dart';
-import '../../features/product_details/product_details.dart';
-import '../../features/profile_picture_setup/profile_picture_setup.dart';
-import '../../features/register/register.dart';
-import '../../features/splash/splash.dart';
+import '../../features/common_features/check_email/check_email.dart';
+import '../../features/common_features/check_phone/check_phone.dart';
+import '../../features/common_features/congratulation/congratulation.dart';
+import '../../features/common_features/create_company_profile/create_company_profile.dart';
+import '../../features/common_features/login/login.dart';
+import '../../features/common_features/medicine_catalog_details/medicine_catalog_details.dart';
+import '../../features/common_features/onboarding/onboarding.dart';
+import '../../features/common_features/orders/orders.dart';
+
+import '../../features/common_features/register/register.dart';
+import '../../features/common_features/splash/splash.dart';
 
 // import '../../view/screens/login/login.dart';
 // import '../../view/screens/splash/splash.dart';
@@ -27,18 +30,28 @@ class RoutingManager {
   static const String registerScreen = '/RegisterScreen';
   static const String checkEmailScreen = '/CheckEmailScreen';
   static const String checkPhoneScreen = '/CheckPhoneScreen';
-  static const String profilePictureSetup = '/ProfilePictureSetup';
+
   static const String congratulationScreen = '/CongratulationScreen';
   static const String createCompanyProfile = '/CreateCompanyProfile';
-  static const String productDetailsScreen = '/ProductDetailsScreen';
+  static const String medicineDetailsScreen = '/MedicineDetailsScreen';
+  static const String paraPharmaDetailsScreen = '/ParaPharmaDetailsScreen';
+  static const String ordersScreen = '/OrdersScreen';
+  static const String onboardingScreen = '/OnboardingScreen';
 
   static final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
 
   static final GoRouter router = GoRouter(
       navigatorKey: rootNavigatorKey,
-      initialLocation: createCompanyProfile,
+      initialLocation: splashScreen,
       debugLogDiagnostics: true,
       routes: <RouteBase>[
+        GoRoute(
+          name: onboardingScreen,
+          path: onboardingScreen,
+          builder: (BuildContext context, GoRouterState state) {
+            return const OnboardingScreen();
+          },
+        ),
         GoRoute(
           name: splashScreen,
           path: splashScreen,
@@ -89,12 +102,6 @@ class RoutingManager {
               return CheckPhoneScreen();
             }),
         GoRoute(
-            name: profilePictureSetup,
-            path: profilePictureSetup,
-            builder: (BuildContext context, GoRouterState state) {
-              return const ProfilePictureSetup();
-            }),
-        GoRoute(
             name: congratulationScreen,
             path: congratulationScreen,
             builder: (BuildContext context, GoRouterState state) {
@@ -110,11 +117,27 @@ class RoutingManager {
           ),
         ),
         GoRoute(
-            name: productDetailsScreen,
-            path: productDetailsScreen,
+            name: medicineDetailsScreen,
+            path: medicineDetailsScreen,
             builder: (BuildContext context, GoRouterState state) {
-              return const ProductDetailsScreen();
+              return MedicineCatalogDetailsScreen(
+                medicineCatalogId: state.extra as String,
+              );
             }),
+        GoRoute(
+            name: paraPharmaDetailsScreen,
+            path: paraPharmaDetailsScreen,
+            builder: (BuildContext context, GoRouterState state) {
+              return ParaPharmaCatalogDetailsScreen(
+                paraPharmaCatalogId: state.extra as String,
+              );
+            }),
+        GoRoute(
+            name: ordersScreen,
+            path: ordersScreen,
+            builder: (BuildContext context, GoRouterState state) {
+              return OrdersScreen();
+            })
       ]);
 
   static Future<void> popUntilPath(BuildContext context, String routePath) async {

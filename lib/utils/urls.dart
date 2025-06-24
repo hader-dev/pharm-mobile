@@ -16,6 +16,23 @@ class Urls {
   //Client
   static String get client => "/clients";
 
+  //Company
+  static String get company => "/companies";
+
+  //Medicines
+  static String get medicinesCatalog => "/medicines-catalog";
+
+  //Medicine parapharm-catalog
+  static String get paraPharamaCatalog => "/parapharm-catalog";
+
+  //Orders
+  static String get orders => "/orders";
+
+  //Cart Items
+  static String get cartItems => "/cart-items";
+
+  static String get cartItemsBulkRemove => "$cartItems/bulk-remove";
+
   //get Remote Stored Images
   //static String get images => "$schema$domainName/uploads";
 

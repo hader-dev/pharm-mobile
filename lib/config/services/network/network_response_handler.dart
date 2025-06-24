@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 
 import '../../../utils/app_exceptions/exceptions.dart';
-import '../../../utils/urls.dart';
 
 class ResponseHandler {
   static dynamic processResponse(dynamic response) {
@@ -10,13 +9,16 @@ class ResponseHandler {
       case >= 200 && < 300:
         return decodedResponse;
       case 400: //Bad request
-        throw BadRequestException.fromJson(decodedResponse);
-      case 401: //Unauthorized
+        throw getBadRequestException(decodedResponse);
+
+      case 401: //Unauthenticated
         throw UnAuthenticatedException.fromJson(decodedResponse);
-      case 403: //Forbidden
+      case 403: //Unauthorized
         throw UnAuthorizedException.fromJson(decodedResponse);
       case 404: //Resource Not Found
         throw NotFoundException.fromJson(decodedResponse);
+      case 429: //Too Many Requests
+        throw TooManyRequestsException.fromJson(decodedResponse);
 
       case 500: //Internal Server Error
         throw InternalServerErrorException.fromJson(decodedResponse);
@@ -27,5 +29,15 @@ class ResponseHandler {
 
   static dynamic decodeResponse(Response response) {
     return response.data;
+  }
+}
+
+dynamic getBadRequestException(dynamic decodedResponse) {
+  switch (decodedResponse["type"]) {
+    case 'validation.error':
+      throw DataValidationException.fromJson(decodedResponse);
+
+    default:
+      throw BadRequestException.fromJson(decodedResponse);
   }
 }

@@ -6,7 +6,6 @@ import 'package:dio/dio.dart';
 import 'package:hader_pharm_mobile/config/services/network/dio/interceptor/request_token_interceptor.dart';
 import 'package:path_provider/path_provider.dart';
 
-import '../../../../utils/urls.dart';
 import '../../auth/token_manager.dart';
 import '../network_interface.dart';
 import '../network_response_handler.dart';
@@ -57,16 +56,25 @@ class DioNetworkManager extends INetworkService {
 
   @override
   Future<dynamic> sendRequest(Function sendFunc) async {
-    Response response = await sendFunc();
-    var decodedResponse = ResponseHandler.processResponse(response);
-    return decodedResponse;
+    try {
+      Response response = await sendFunc();
+      var decodedResponse = ResponseHandler.processResponse(response);
+      return decodedResponse;
+    } on DioException catch (e) {
+      var decodedResponse = ResponseHandler.processResponse(e.response);
+      return decodedResponse;
+    }
   }
 
   @override
   Future<Response> patch(String url,
       {Map<String, String>? headers, Map<String, String>? queryParams, dynamic payload}) async {
     Response apiResponse = await _client.patchUri(prepareUrl(url, queryParams: queryParams),
-        data: payload != null ? jsonEncode(payload) : null,
+        data: payload != null
+            ? payload is FormData
+                ? payload
+                : jsonEncode(payload)
+            : null,
         options: Options(headers: _mergeCustomHeaders(headers ?? <String, String>{})));
     return apiResponse;
   }
@@ -97,7 +105,11 @@ class DioNetworkManager extends INetworkService {
     payload,
   }) async {
     Response apiResponse = await _client.postUri(prepareUrl(url, queryParams: queryParams),
-        data: payload != null ? jsonEncode(payload) : null,
+        data: payload != null
+            ? payload is FormData
+                ? payload
+                : jsonEncode(payload)
+            : null,
         options: Options(headers: _mergeCustomHeaders(headers ?? <String, String>{})));
     return apiResponse;
   }
@@ -115,7 +127,7 @@ class DioNetworkManager extends INetworkService {
   // }
 
   void initDefaultHeaders(String? token) async {
-    defaultHeaders['Accept'] = 'application/json';
+    defaultHeaders['Accept'] = 'Accept: */*';
     defaultHeaders['Content-Type'] = 'application/json';
     if (token != null) {
       defaultHeaders[TokenManager.tokenHeaderKey] = "Bearer $token";
@@ -138,6 +150,7 @@ class DioNetworkManager extends INetworkService {
   @override
   String getImagePath(String? imageName) {
     if (imageName == null) return "";
-    return baseUrl + Urls.file + imageName;
+    //TODO: dont forget to refactore this
+    return "baseUrl + Urls.file + imageName";
   }
 }

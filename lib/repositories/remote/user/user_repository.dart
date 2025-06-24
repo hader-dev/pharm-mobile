@@ -5,12 +5,8 @@ abstract class IUserRepository {
     String username,
     String password,
   );
-  Future<String> emailSignUp(
-    String email,
-    String fullName,
-    String password,
-  );
+  Future<String> emailSignUp(String email, String fullName, String password, {String? userImagePath});
   Future<UserModel> getCurrentUserData();
   Future<void> changePassword({required String oldPassword, required String newPassword});
-  Future<void> checkUserEmail({required String email, required String otp});
+  Future<String> checkUserEmail({required String email, required String otp});
 }

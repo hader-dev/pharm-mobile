@@ -1,10 +1,51 @@
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import '../config/di/di.dart';
+import '../features/common/dialog/validation_dialog.dart';
 import 'device_infos_helper.dart';
+import 'enums.dart';
 
 class AppPermissionsHelper {
+  static var dialog = getItInstance.get<ValidateActionDialog>();
+
+  static Future<PermissionStatus> checkPhotosPermission() async {
+    PermissionStatus isPermissionGranted = await DeviceInfo.getSdkInt() <= 32
+        ? await Permission.storage
+            .onDeniedCallback(() => dialog.showValidateActionDialog(
+                dialogType: DialogType.error,
+                title: Text(
+                  "localization.permissionDenied",
+                  textAlign: TextAlign.center,
+                ),
+                content: Text(
+                  "localization.allowAccessToPhotos",
+                  textAlign: TextAlign.center,
+                  // style: context.theme.textTheme.bodySmall!.copyWith(),
+                ),
+                onValidate: () async => await Permission.storage.request(),
+                onCancel: () {}))
+            .request()
+        : await Permission.photos
+            .onDeniedCallback(() => dialog.showValidateActionDialog(
+                dialogType: DialogType.error,
+                title: Text(
+                  'localization.permissionDenied',
+                  textAlign: TextAlign.center,
+                ),
+                content: Text(
+                  "localization.allowAccessToPhotos",
+                  textAlign: TextAlign.center,
+                  //style: context.theme.textTheme.bodySmall!.copyWith(),
+                ),
+                onValidate: () async => await Permission.photos.request(),
+                onCancel: () {}))
+            .request();
+    return isPermissionGranted;
+  }
+
   static Future<void> appPermission() async {
     bool permissionsGranted = false;
     int attempts = 1;
@@ -28,8 +69,7 @@ class AppPermissionsHelper {
 
       if (Platform.isAndroid) {
         if (sdkInt > 29) {
-          if ((statuses[Permission.manageExternalStorage] ==
-              PermissionStatus.granted)) {
+          if ((statuses[Permission.manageExternalStorage] == PermissionStatus.granted)) {
             permissionsGranted = true;
             break;
           }

@@ -1,4 +1,4 @@
-import '../config/services/network/network_manager.dart';
+import '../config/services/network/dio/dio_network_manager.dart';
 
 class Product {
   int id;
@@ -52,7 +52,7 @@ class Product {
       createdAt: json["createdAt"] ?? '',
       updatedAt: json["updatedAt"] ?? '',
       code: json["code"] ?? '',
-      imgPath: NetworkManager.instance.getImagePath(json["defaultImgPath"]),
+      imgPath: DioNetworkManager.instance.getImagePath(json["defaultImgPath"]),
       ref: json["ref"] ?? '',
       label: json["label"] ?? '',
       label2: json["label2"] ?? '',

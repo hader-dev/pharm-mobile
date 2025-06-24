@@ -38,7 +38,7 @@ class OnboardingCubit extends Cubit<OnboardingState> {
   }
 
   void redirectToLoginPage(BuildContext context) async {
-    getItInstance.get<SharedPreferences>().setBool(SPKeys.isFirstTime, false);
+    getItInstance.get<SharedPreferences>().setBool(SPKeys.isFirstLoggin, false);
     GoRouter.of(context).pushReplacementNamed(RoutingManager.loginScreen);
   }
 }

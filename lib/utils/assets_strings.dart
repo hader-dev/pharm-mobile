@@ -11,6 +11,16 @@ class DrawableAssetStrings {
   static const String companyIllustration1 = 'assets/images/company_illustration_1.svg';
   static const String companyIllustration2 = 'assets/images/company_illustration_2.svg';
   static const String companyIllustration3 = 'assets/images/company_illustration_3.svg';
+  static const String companyPlaceHolderImg = 'assets/images/company_place_holder.webp';
+  static const String medicinePlaceHolderImg = 'assets/images/medicine_place_holder.webp';
+  static const String paraPharmaPlaceHolderImg = 'assets/images/para_pharm_place_holder.webp';
+  static const String board1Img = 'assets/images/board_1.webp';
+  static const String board2Img = 'assets/images/board_2.webp';
+  static const String board3Img = 'assets/images/board_3.webp';
+  static const String doctoreIllustration = 'assets/images/doctore.webp';
+  static const String welcomingBg = 'assets/images/welcoming_bg.webp';
+  static const String logoBg = 'assets/images/Logo.png';
+  static const String logoImg = 'assets/images/Logo.svg';
 
 //   static const String logoImg = 'assets/images/logo.png';
 //   static const String emptyListImg = 'assets/images/empty_result.png';
@@ -33,6 +43,7 @@ class DrawableAssetStrings {
   static const String facebookIcon = 'assets/icons/facebook.svg';
   static const String tickCircleIcon = 'assets/icons/tick-circle.svg';
   static const String defaultProfileImgIcon = 'assets/icons/profile_setup.svg';
+  static const String emptyListIcon = 'assets/icons/empty_list.svg';
 
   // //app animations
   // static const String anim1 = 'assets/animations/anim_1.json';
