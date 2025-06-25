@@ -49,7 +49,7 @@ class _CheckEmailOtpInputSectionState extends State<CheckEmailOtpInputSection> {
             builder: (context, state) {
               return InkWell(
                 onTap: context.read<CheckEmailCubit>().isResendActive
-                    ? () => context.read<CheckEmailCubit>().resendOtp("userEmail")
+                    ? () => context.read<CheckEmailCubit>().resendOtp(context.read<CheckEmailCubit>().userEmail)
                     : null,
                 child: Text.rich(TextSpan(
                   children: [

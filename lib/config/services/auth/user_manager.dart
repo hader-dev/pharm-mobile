@@ -29,6 +29,18 @@ class UserManager {
     await userRepo.emailSignUp(email, fullName, password, userImagePath: userImagePath);
   }
 
+  /// Resends the OTP code for the given email.
+  ///
+  /// This method is used when the user requests to resend the OTP code.
+  ///
+  Future<void> resendOtpCode({
+    required String email,
+  }) async {
+    await userRepo.resendOtp(
+      email: email,
+    );
+  }
+
   /// Logs in a user with the provided username and password.
   ///
   /// After a successful login, this method stores the received token in the

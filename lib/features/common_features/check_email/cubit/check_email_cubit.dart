@@ -1,6 +1,7 @@
 import 'dart:async' show Timer;
 
 import 'package:bloc/bloc.dart';
+import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler.dart';
 
 import '../../../../config/di/di.dart';
 import '../../../../config/services/auth/user_manager.dart';
@@ -34,9 +35,9 @@ class CheckEmailCubit extends Cubit<CheckEmailState> {
 
   resendOtp(String email) async {
     try {
-      emit(CheckEmailLoading());
-
-      int counter = 5;
+      emit(resendOtpLoading());
+      await userManager.resendOtpCode(email: userEmail);
+      int counter = 10;
       Timer.periodic(const Duration(seconds: 1), (timer) {
         isResendActive = false;
         counter--;
@@ -47,6 +48,7 @@ class CheckEmailCubit extends Cubit<CheckEmailState> {
         emit(TimerCountChanged(count: counter));
       });
     } catch (e) {
+      GlobalExceptionHandler.handle(exception: e);
       emit(CheckEmailFailed());
     }
   }

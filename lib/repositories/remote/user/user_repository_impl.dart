@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
+import 'package:http_parser/http_parser.dart';
 
 import '../../../config/services/network/network_response_handler.dart';
 import '../../../models/user.dart';
@@ -42,12 +43,22 @@ class UserRepository implements IUserRepository {
 
   @override
   Future<String> emailSignUp(String email, String fullName, String password, {String? userImagePath}) async {
+    late MultipartFile file;
+    if (userImagePath != null) {
+      String fileName = userImagePath.split('/').last;
+      file = await MultipartFile.fromFile(
+        userImagePath,
+        filename: fileName,
+        contentType: MediaType('image', fileName.split('.').last),
+      );
+    }
     FormData formData = FormData.fromMap({
       "email": email,
       "fullName": fullName,
       "password": password,
-      if (userImagePath != null)
-        'image': await MultipartFile.fromFile(userImagePath, filename: userImagePath.split('/').last),
+      if (userImagePath != null) ...{
+        'image': file,
+      }
     });
     var decodedResponse = await client.sendRequest(() => client.post(Urls.signUp, payload: formData));
 
@@ -58,6 +69,15 @@ class UserRepository implements IUserRepository {
   Future<String> checkUserEmail({required String email, required String otp}) async {
     var decodedResponse = await client
         .sendRequest(() => client.post(Urls.verifyEmail, payload: <String, String>{"email": email, "otp": otp}));
+
+    return decodedResponse["accessToken"];
+  }
+
+  @override
+  Future<void> resendOtp({required String email}) async {
+    var decodedResponse = await client.sendRequest(() => client.post(Urls.resendOtp, payload: <String, String>{
+          "email": email,
+        }));
 
     return decodedResponse["accessToken"];
   }

@@ -10,6 +10,7 @@ class Urls {
   static String get logIn => "$auth/log-in";
   static String get signUp => "$auth/sign-up";
   static String get verifyEmail => "$auth/verify-email";
+  static String get resendOtp => "$auth/resend-email-otp";
 
   static String get me => "$users/me";
 
