@@ -15,6 +15,9 @@ final class RegisterSuccuss extends RegisterState {
 
 final class RegisterFailed extends RegisterState {}
 
+//Password visibility changed
+final class PasswordVisibilityChanged extends RegisterState {}
+
 //Tap chanage state
 final class TapChanged extends RegisterState {}
 

@@ -57,8 +57,12 @@ class EmailRegisterFormSection extends HookWidget {
           CustomTextField(
             label: 'Password*',
             value: formData.value.password,
-            isObscure: true,
-            suffixIcon: Icon(Iconsax.eye, color: AppColors.accent1Shade1),
+            isObscure: BlocProvider.of<RegisterCubit>(context).isObscured,
+            suffixIcon: InkWell(
+                onTap: () => BlocProvider.of<RegisterCubit>(context).showPassword(),
+                child: BlocProvider.of<RegisterCubit>(context).isObscured
+                    ? const Icon(Iconsax.eye, color: AppColors.accent1Shade1)
+                    : const Icon(Iconsax.eye_slash, color: AppColors.accent1Shade1)),
             state: FieldState.normal,
             validationFunc: (value) {
               if (value == null || value.isEmpty) {
@@ -70,23 +74,31 @@ class EmailRegisterFormSection extends HookWidget {
             },
           ),
           Gap(AppSizesManager.s4),
-          CustomTextField(
-            label: 'Confirme Password*',
-            value: formData.value.confirmPassword,
-            onChanged: (newValue) {
-              formData.value = formData.value.copyWith(confirmPassword: newValue);
-            },
-            isObscure: true,
-            suffixIcon: Icon(Iconsax.eye, color: AppColors.accent1Shade1),
-            state: FieldState.normal,
-            validationFunc: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Confirme Password is required';
-              }
-              if (formData.value.password != formData.value.confirmPassword) {
-                return 'Passwords do not match';
-              }
-              return null;
+          BlocBuilder<RegisterCubit, RegisterState>(
+            builder: (context, state) {
+              return CustomTextField(
+                label: 'Confirme Password*',
+                value: formData.value.confirmPassword,
+                onChanged: (newValue) {
+                  formData.value = formData.value.copyWith(confirmPassword: newValue);
+                },
+                isObscure: BlocProvider.of<RegisterCubit>(context).isObscured,
+                suffixIcon: InkWell(
+                    onTap: () => BlocProvider.of<RegisterCubit>(context).showPassword(),
+                    child: BlocProvider.of<RegisterCubit>(context).isObscured
+                        ? const Icon(Iconsax.eye, color: AppColors.accent1Shade1)
+                        : const Icon(Iconsax.eye_slash, color: AppColors.accent1Shade1)),
+                state: FieldState.normal,
+                validationFunc: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Confirme Password is required';
+                  }
+                  if (formData.value.password != formData.value.confirmPassword) {
+                    return 'Passwords do not match';
+                  }
+                  return null;
+                },
+              );
             },
           ),
           Gap(AppSizesManager.s24),

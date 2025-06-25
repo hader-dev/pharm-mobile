@@ -9,6 +9,7 @@ import '../../../utils/enums.dart';
 import '../../../utils/extensions/app_context_helper.dart';
 
 class CustomTextField extends StatelessWidget {
+  final GlobalKey<FormFieldState>? fieldKey;
   final String label;
   final String value;
   final FieldState state;
@@ -42,6 +43,7 @@ class CustomTextField extends StatelessWidget {
 
   CustomTextField({
     super.key,
+    this.fieldKey,
     this.label = '',
     this.value = '',
     this.state = FieldState.normal,
@@ -142,6 +144,7 @@ class CustomTextField extends StatelessWidget {
         ),
         const Gap(AppSizesManager.s6),
         TextFormField(
+          key: fieldKey,
           validator: (value) => validationFunc(value),
           cursorColor: context.theme.primaryColor,
           onChanged: onChanged,

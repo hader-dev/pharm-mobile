@@ -13,6 +13,7 @@ part 'register_state.dart';
 
 class RegisterCubit extends Cubit<RegisterState> {
   int selectedTapIndex = 0;
+  bool isObscured = true;
   final UserManager userManager;
   XFile? pickedImage;
   RegisterCubit({required this.userManager}) : super(RegisterInitial());
@@ -52,6 +53,11 @@ class RegisterCubit extends Cubit<RegisterState> {
     } catch (e) {
       debugPrint(e.toString());
     }
+  }
+
+  void showPassword() {
+    isObscured = !isObscured;
+    emit(PasswordVisibilityChanged());
   }
 
   void removeImage() {
