@@ -9,10 +9,12 @@ import 'package:hader_pharm_mobile/repositories/remote/user/user_repository_impl
 
 import '../../../config/services/network/network_interface.dart';
 import '../../../config/theme/colors_manager.dart';
+import '../../../utils/bottom_sheet_helper.dart';
 import '../../../utils/constants.dart';
 import '../../common/buttons/outlined/outlined_text_button.dart';
 import 'widgets/login_form_section.dart';
 import 'widgets/login_header_section.dart';
+import 'widgets/reset_password_link_sent_bottom_sheet.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -26,6 +28,9 @@ class LoginScreen extends StatelessWidget {
           listener: (BuildContext context, LoginState state) {
             if (state is LoginSuccessful) {
               context.goNamed(RoutingManager.appLayout);
+            }
+            if (state is ResetLinkSent) {
+              BottomSheetHelper.showCommonBottomSheet(context: context, child: CheckYourMailScreen());
             }
           },
           child: Scaffold(

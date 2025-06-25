@@ -49,7 +49,6 @@ class UserRepository implements IUserRepository {
       file = await MultipartFile.fromFile(
         userImagePath,
         filename: fileName,
-        contentType: MediaType('image', fileName.split('.').last),
       );
     }
     FormData formData = FormData.fromMap({
@@ -60,7 +59,11 @@ class UserRepository implements IUserRepository {
         'image': file,
       }
     });
-    var decodedResponse = await client.sendRequest(() => client.post(Urls.signUp, payload: formData));
+    var decodedResponse = await client.sendRequest(() => client.post(
+          Urls.signUp,
+          payload: formData,
+          headers: {'Content-Type': 'multipart/form-data'},
+        ));
 
     return decodedResponse["message"];
   }
@@ -80,6 +83,13 @@ class UserRepository implements IUserRepository {
         }));
 
     return decodedResponse["accessToken"];
+  }
+
+  @override
+  Future<void> sendResetPasswordMail({required String email}) {
+    return client.sendRequest(() => client.post(Urls.forgotPassword, payload: <String, String>{
+          "email": email,
+        }));
   }
 
   // @override

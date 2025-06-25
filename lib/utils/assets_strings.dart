@@ -44,6 +44,7 @@ class DrawableAssetStrings {
   static const String tickCircleIcon = 'assets/icons/tick-circle.svg';
   static const String defaultProfileImgIcon = 'assets/icons/profile_setup.svg';
   static const String emptyListIcon = 'assets/icons/empty_list.svg';
+  static const String emailIcon = 'assets/icons/email.svg';
 
   // //app animations
   // static const String anim1 = 'assets/animations/anim_1.json';

@@ -20,3 +20,5 @@ final class LoadingUsersFailed extends LoginState {}
 final class PasswordVisibilityChanged extends LoginState {}
 
 final class LoggedOut extends LoginState {}
+
+final class ResetLinkSent extends LoginState {}

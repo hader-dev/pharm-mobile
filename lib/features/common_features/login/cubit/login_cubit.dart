@@ -9,6 +9,7 @@ import '../../../../../../../utils/app_exceptions/global_expcetion_handler.dart'
 
 import '../../../../../repositories/remote/user/user_repository_impl.dart';
 import '../../../../../utils/app_exceptions/exceptions.dart';
+import '../../../../utils/toast_helper.dart';
 
 part 'login_state.dart';
 
@@ -27,15 +28,20 @@ class LoginCubit extends Cubit<LoginState> {
       emit(LoginLoading());
       var token = await getItInstance.get<UserManager>().login(userName: userName, password: password);
       emit(LoginSuccessful());
-    } on BadRequestException catch (e, stackTrace) {
-      Fluttertoast.showToast(msg: e.toString());
-      GlobalExceptionHandler.handle(exception: e, exceptionStackTrace: stackTrace);
-      emit(LoginFailed());
-    } on UnAuthorizedException {
-      //TODO:Here we should redirect user to verify  email screen to verify his account with the new otp code
     } catch (e, stackTrace) {
       GlobalExceptionHandler.handle(exception: e, exceptionStackTrace: stackTrace);
       emit(LoginFailed());
+    }
+  }
+
+  void forgetPassword() async {
+    try {
+      await getItInstance.get<UserManager>().sendResetPasswordMail(email: userNameController.text);
+      emit(ResetLinkSent());
+    } catch (e) {
+      GlobalExceptionHandler.handle(
+        exception: e,
+      );
     }
   }
 

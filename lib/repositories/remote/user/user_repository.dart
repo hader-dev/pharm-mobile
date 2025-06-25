@@ -10,4 +10,5 @@ abstract class IUserRepository {
   Future<void> changePassword({required String oldPassword, required String newPassword});
   Future<String> checkUserEmail({required String email, required String otp});
   Future<void> resendOtp({required String email});
+  Future<void> sendResetPasswordMail({required String email});
 }
