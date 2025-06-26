@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/features/common/dialog/log_out_dialog.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -12,7 +11,6 @@ import '../../../config/theme/typoghrapy_manager.dart';
 import '../../../utils/constants.dart';
 
 import '../../common/app_bars/custom_app_bar.dart';
-import '../../common/dialog/validation_dialog.dart';
 import 'widgets/profile_header.dart';
 import 'widgets/section_title.dart';
 import 'widgets/settings_tile.dart';
@@ -40,22 +38,9 @@ class ProfileScreen extends StatelessWidget {
             "Account",
             style: AppTypography.headLine3SemiBoldStyle,
           ),
-          // trailing: [
-          //   // IconButton(
-          //   //   icon: const Icon(Iconsax.search_normal),
-          //   //   onPressed: () {},
-          //   // ),
-          //   // IconButton(
-          //   //   icon: const Icon(Iconsax.notification),
-          //   //   onPressed: () {},
-          //   // ),
-          // ],
         ),
         body: Column(
           children: <Widget>[
-            // ProfileAppBar(
-            //   isBackButtonEnabled: openedFrom == 'from shop' ? true : false,
-            // ),
             const Padding(
               padding: EdgeInsets.only(left: AppSizesManager.p4),
               child: ProfileHeader(),
@@ -72,33 +57,13 @@ class ProfileScreen extends StatelessWidget {
                             const EdgeInsets.symmetric(horizontal: AppSizesManager.p8, vertical: AppSizesManager.p10),
                         child: SectionTitle(title: "Account Settings"),
                       ),
-                      // SettingsTile(
-                      //   icon: LucideIcons.user,
-                      //   title: 'Edit Profile',
-                      //   onTap: () {
-                      //     GoRouter.of(context).pushNamed(RoutingManager.editProfileScreen);
-                      //   },
-                      // ),
                       SettingsTile(
                           icon: LucideIcons.lock,
                           title: "Change Password",
                           onTap: () {
-                            // GoRouter.of(context).pushNamed(RoutingManager.changePasswordScreen);
+                            GoRouter.of(context).pushNamed(RoutingManager.changePasswordScreen);
                           }),
-                      // SettingsTile(
-                      //     icon: LucideIcons.bell,
-                      //     title: 'Notifications',
-                      //     onTap: () {
-                      //       GoRouter.of(context).pushNamed(RoutingManager.notificationSettingsScreen);
-                      //     }),
-                      SettingsTile(
-                          icon: LucideIcons.globe,
-                          title: "language",
-                          // trailing: Text(LanguageHelper.getLanguageName(context.read<LangCubit>().appLang),
-                          //     style: const TextStyle(color: Colors.grey)),
-                          onTap: () {
-                            // GoRouter.of(context).pushNamed(RoutingManager.languageScreen);
-                          }),
+                      SettingsTile(icon: LucideIcons.globe, title: "language", onTap: () {}),
                       Padding(
                         padding:
                             const EdgeInsets.symmetric(horizontal: AppSizesManager.p6, vertical: AppSizesManager.p8),
@@ -107,16 +72,10 @@ class ProfileScreen extends StatelessWidget {
                       SettingsTile(
                         icon: LucideIcons.fileText,
                         title: "legal And Policies",
-                        // onTap: () {
-                        //   GoRouter.of(context).pushNamed(RoutingManager.legalPoliciesScreen);
-                        // }
                       ),
                       SettingsTile(
                         icon: LucideIcons.helpCircle,
                         title: "help And Support",
-                        // onTap: () {
-                        //   GoRouter.of(context).pushNamed(RoutingManager.helpCenterScreen);
-                        // }
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(
@@ -128,7 +87,7 @@ class ProfileScreen extends StatelessWidget {
                           onTap: () async {
                             await AppDialogs.showLogoutDialogLogout();
 
-                            GoRouter.of(context).goNamed(RoutingManager.loginScreen);
+                            GoRouter.of(context).pushReplacementNamed(RoutingManager.loginScreen);
                           },
                         ),
                       ),

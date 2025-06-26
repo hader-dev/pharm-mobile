@@ -2,15 +2,12 @@ import 'package:bloc/bloc.dart';
 
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
-import 'package:hader_pharm_mobile/config/services/auth/token_manager.dart';
 
 import 'package:hader_pharm_mobile/repositories/remote/company/company_repository_impl.dart';
 import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler.dart';
 import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../../../config/services/network/dio/dio_network_manager.dart';
-import '../../../../config/services/network/network_interface.dart';
 import '../../../../utils/device_gallery_helper.dart';
 import '../hooks_data_model/create_company_profile_form.dart';
 

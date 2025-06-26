@@ -2,11 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
-import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 
 import '../../../../config/services/auth/user_manager.dart';
-import '../../../../utils/constants.dart';
 
 class UserImage extends StatelessWidget {
   const UserImage({

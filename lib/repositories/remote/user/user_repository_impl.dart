@@ -1,8 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
-import 'package:http_parser/http_parser.dart';
 
-import '../../../config/services/network/network_response_handler.dart';
 import '../../../models/user.dart';
 import '../../../utils/urls.dart';
 import 'user_repository.dart';
@@ -30,15 +28,9 @@ class UserRepository implements IUserRepository {
   }
 
   @override
-  Future<void> changePassword({required String oldPassword, required String newPassword}) async {
-    final Response response =
-        await client.sendRequest(() => client.patch("${Urls.client}/me", payload: <String, Map<String, String>>{
-              "user": <String, String>{"oldPassword": oldPassword, "newPassword": newPassword}
-            }));
-
-    var decodedResponse = ResponseHandler.processResponse(response);
-
-    if (!decodedResponse["success"]) throw "Failed to change password";
+  Future<void> changePassword({required String currentPassword, required String newPassword}) async {
+    await client.sendRequest(() =>
+        client.post(Urls.changePassword, payload: {"currentPassword": currentPassword, "newPassword": newPassword}));
   }
 
   @override
@@ -91,25 +83,4 @@ class UserRepository implements IUserRepository {
           "email": email,
         }));
   }
-
-  // @override
-  // Future<void> changePassword({
-  //   required String oldPassword,
-  //   required String newPassword,
-  // }) async {
-  //   var uri = Uri.parse(Urls.me);
-
-  //   final response = await http.put(
-  //     uri,
-  //     headers: _headers,
-  //     body: jsonEncode({
-  //       "user": {
-  //         'oldPassword': oldPassword,
-  //         'newPassword': newPassword,
-  //       }
-  //     }),
-  //   );
-
-  //   ResponseHandler.processResponse(response);
-  // }
 }

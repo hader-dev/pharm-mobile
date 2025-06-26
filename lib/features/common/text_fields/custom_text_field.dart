@@ -154,6 +154,14 @@ class CustomTextField extends StatelessWidget {
           readOnly: isReadOnly,
           onTap: onTap,
           enabled: isEnabled,
+          errorBuilder: (context, errorText) {
+            return Flexible(
+              child: Text(
+                errorText,
+                style: AppTypography.bodyXSmallStyle.copyWith(color: Colors.red),
+              ),
+            );
+          },
           inputFormatters: formatters,
           controller: controller,
           obscureText: isObscure,

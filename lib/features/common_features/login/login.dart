@@ -2,12 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/features/common_features/login/cubit/login_cubit.dart';
-import 'package:hader_pharm_mobile/repositories/remote/user/user_repository_impl.dart';
 
-import '../../../config/services/network/network_interface.dart';
 import '../../../config/theme/colors_manager.dart';
 import '../../../utils/bottom_sheet_helper.dart';
 import '../../../utils/constants.dart';
@@ -23,7 +20,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: BlocProvider(
-        create: (context) => LoginCubit(userRepository: UserRepository(client: getItInstance.get<INetworkService>())),
+        create: (context) => LoginCubit(),
         child: BlocListener<LoginCubit, LoginState>(
           listener: (BuildContext context, LoginState state) {
             if (state is LoginSuccessful) {

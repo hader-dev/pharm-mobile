@@ -1,16 +1,14 @@
-import 'dart:math';
 
 import 'package:bloc/bloc.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+
 import 'package:hader_pharm_mobile/utils/enums.dart';
 
 import '../../../../../../../utils/app_exceptions/global_expcetion_handler.dart';
 
-import '../../../../../repositories/remote/user/user_repository_impl.dart';
 import '../../../../../utils/app_exceptions/exceptions.dart';
 import '../../../../utils/toast_helper.dart';
 
@@ -22,9 +20,7 @@ class LoginCubit extends Cubit<LoginState> {
   TextEditingController emailController = TextEditingController(text: "mail4@mail.com");
   TextEditingController passwordController = TextEditingController(text: "Strong@12");
 
-  final UserRepository userRepository;
-
-  LoginCubit({required this.userRepository}) : super(LoginInitial());
+  LoginCubit() : super(LoginInitial());
 
   Future<void> login(String userName, String password) async {
     try {

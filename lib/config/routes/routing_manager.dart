@@ -5,6 +5,7 @@ import 'package:hader_pharm_mobile/features/common_features/profile/profile.dart
 
 import '../../features/app_componants/app_componants.dart';
 import '../../features/app_layout/app_layout.dart';
+import '../../features/common_features/change_password/change_password.dart';
 import '../../features/common_features/check_email/check_email.dart';
 import '../../features/common_features/check_phone/check_phone.dart';
 import '../../features/common_features/congratulation/congratulation.dart';
@@ -39,6 +40,7 @@ class RoutingManager {
   static const String ordersScreen = '/OrdersScreen';
   static const String onboardingScreen = '/OnboardingScreen';
   static const String profileScreen = '/ProfileScreen';
+  static const String changePasswordScreen = 'ChangePasswordScreen';
 
   static final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -71,6 +73,15 @@ class RoutingManager {
         GoRoute(
           name: profileScreen,
           path: profileScreen,
+          routes: [
+            GoRoute(
+              name: changePasswordScreen,
+              path: changePasswordScreen,
+              builder: (BuildContext context, GoRouterState state) {
+                return const ChangePasswordScreen();
+              },
+            ),
+          ],
           builder: (BuildContext context, GoRouterState state) {
             return const ProfileScreen(
               openedFrom: "",

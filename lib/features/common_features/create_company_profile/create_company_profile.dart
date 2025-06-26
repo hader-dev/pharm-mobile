@@ -14,7 +14,6 @@ import '../../../config/di/di.dart';
 import '../../../config/routes/routing_manager.dart';
 import '../../../utils/constants.dart';
 import '../../../utils/toast_helper.dart';
-import '../../common/widgets/welcoming_widget.dart';
 import '../../distributor/create_distributor/sub_pages/compay_profile/compay_profile.dart';
 import '../../distributor/create_distributor/sub_pages/general_information/general_information.dart';
 import '../../distributor/create_distributor/sub_pages/legal_information/legal_information.dart';

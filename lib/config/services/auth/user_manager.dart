@@ -91,6 +91,22 @@ class UserManager {
     );
   }
 
+  /// Changes the password for the current user.
+  ///
+  /// This method is used in the "change password" feature to update the user's
+  /// password.
+  ///
+  /// Returns `true` on success.
+  Future<void> changePassword({
+    required String currentPassword,
+    required String newPassword,
+  }) async {
+    await userRepo.changePassword(
+      currentPassword: currentPassword,
+      newPassword: newPassword,
+    );
+  }
+
   /// Logs out the current user by removing the stored authentication token.
   ///
   /// This method clears the token from [TokenManager], effectively logging out the user.

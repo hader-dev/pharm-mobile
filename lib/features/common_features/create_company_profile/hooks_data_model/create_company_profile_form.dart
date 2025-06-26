@@ -1,5 +1,4 @@
 //-----------------------------------
-import 'package:hader_pharm_mobile/utils/enums.dart';
 
 class CreateCompanyProfileFormDataModel {
   // Step 1: Company Type

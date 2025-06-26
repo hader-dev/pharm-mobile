@@ -84,7 +84,9 @@ class _LoginFormSectionState extends State<LoginFormSection> {
                 label: "Login",
                 isLoading: state is LoginLoading,
                 onTap: () {
-                  if (!formKey.currentState!.validate()) {}
+                  if (!formKey.currentState!.validate()) {
+                    return;
+                  }
                   BlocProvider.of<LoginCubit>(context).login(
                     context.read<LoginCubit>().emailController.text,
                     context.read<LoginCubit>().passwordController.text,

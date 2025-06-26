@@ -12,6 +12,7 @@ class Urls {
   static String get verifyEmail => "$auth/verify-email";
   static String get resendOtp => "$auth/resend-email-otp";
   static String get forgotPassword => "$auth/forgot-password";
+  static String get changePassword => "$auth/change-password";
 
   static String get me => "$users/me";
 
