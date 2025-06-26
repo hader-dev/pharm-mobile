@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
+import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 
 import '../../../utils/constants.dart';
 import '../../../utils/enums.dart';
@@ -41,11 +43,11 @@ class ValidateActionDialog {
                       padding: const EdgeInsets.all(AppSizesManager.p16),
                       child: CircleAvatar(
                         backgroundColor: dialogType.color.withOpacity(.2),
-                        minRadius: AppSizesManager.iconSize20,
+                        minRadius: AppSizesManager.r30,
                         child: Icon(
                           dialogType.icon,
                           color: dialogType.color,
-                          size: AppSizesManager.iconSize20,
+                          size: AppSizesManager.iconSize25,
                         ),
                       ),
                     ),
@@ -62,7 +64,11 @@ class ValidateActionDialog {
                               onPressed: () async {
                                 Navigator.of(context).pop();
                               },
-                              child: Text(cancelText),
+                              child: Text(
+                                cancelText,
+                                style: AppTypography.body3MediumStyle
+                                    .copyWith(color: AppColors.accentGreenShade2.withAlpha(200)),
+                              ),
                             ),
                           if (okEnabled)
                             TextButton(
@@ -70,7 +76,10 @@ class ValidateActionDialog {
                                 result = true;
                                 Navigator.of(context).pop();
                               },
-                              child: Text(agreeText),
+                              child: Text(
+                                agreeText,
+                                style: AppTypography.body3MediumStyle.copyWith(color: AppColors.accentGreenShade2),
+                              ),
                             ),
                         ],
                       ),

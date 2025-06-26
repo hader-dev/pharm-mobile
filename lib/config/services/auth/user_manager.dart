@@ -55,7 +55,7 @@ class UserManager {
     final String token = await userRepo.login(userName, password);
     await tokenManagerInstance.storeAccessToken(token);
     (getItInstance.get<INetworkService>() as DioNetworkManager).initDefaultHeaders(token);
-    // await getMe();
+    await getMe();
     return true;
   }
 

@@ -25,7 +25,7 @@ initAppDependencies() async {
   getItInstance.registerLazySingleton<SharedPreferences>(() => storage);
   getItInstance.registerLazySingleton<FlutterSecureStorage>(() => securedStorage);
   //getItInstance.registerLazySingleton<HiveDbManager>(() => hiveStorage);
-  // getItInstance.registerLazySingleton<ValidateActionDialog>(() => dialogManager);
+  getItInstance.registerLazySingleton<ValidateActionDialog>(() => dialogManager);
   final TokenManager tokenManager = TokenManager.instance;
   tokenManager.init(getItInstance());
   getItInstance.registerLazySingleton<TokenManager>(() => tokenManager);

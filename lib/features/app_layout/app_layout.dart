@@ -10,12 +10,21 @@ import '../../config/routes/routing_manager.dart';
 import '../common/widgets/welcoming_widget.dart';
 import '../common_features/cart/cart.dart';
 import '../common_features/market_place/market_place.dart';
+import '../common_features/profile/profile.dart';
 import 'widgets/app_nav_bar/app_nav_bar.dart';
 
 import 'cubit/app_layout_cubit.dart';
 
 class AppLayout extends StatelessWidget {
-  final List<Widget> screens = const [HomeScreen(), MarketPlaceScreen(), CartScreen(), OrdersScreen(), HomeScreen()];
+  final List<Widget> screens = const [
+    HomeScreen(),
+    MarketPlaceScreen(),
+    CartScreen(),
+    OrdersScreen(),
+    ProfileScreen(
+      openedFrom: "",
+    )
+  ];
   const AppLayout({super.key});
 
   void showWelcomingDialog() {

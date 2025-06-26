@@ -59,9 +59,9 @@ class AppNavBar extends StatelessWidget {
               label: 'Orders',
             ),
             BottomNavigationBarItem(
-              icon:
-                  Padding(padding: EdgeInsets.symmetric(vertical: AppSizesManager.p6), child: Icon(Iconsax.setting_2)),
-              label: 'Settings',
+              icon: Padding(
+                  padding: EdgeInsets.symmetric(vertical: AppSizesManager.p6), child: Icon(Iconsax.profile_circle)),
+              label: 'Account',
             ),
           ],
         ),

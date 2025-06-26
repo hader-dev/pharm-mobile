@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/para_pharma_catalog_details.dart';
+import 'package:hader_pharm_mobile/features/common_features/profile/profile.dart';
 
 import '../../features/app_componants/app_componants.dart';
 import '../../features/app_layout/app_layout.dart';
@@ -37,6 +38,7 @@ class RoutingManager {
   static const String paraPharmaDetailsScreen = '/ParaPharmaDetailsScreen';
   static const String ordersScreen = '/OrdersScreen';
   static const String onboardingScreen = '/OnboardingScreen';
+  static const String profileScreen = '/ProfileScreen';
 
   static final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -64,6 +66,15 @@ class RoutingManager {
           path: appLayout,
           builder: (BuildContext context, GoRouterState state) {
             return const AppLayout();
+          },
+        ),
+        GoRoute(
+          name: profileScreen,
+          path: profileScreen,
+          builder: (BuildContext context, GoRouterState state) {
+            return const ProfileScreen(
+              openedFrom: "",
+            );
           },
         ),
         GoRoute(
