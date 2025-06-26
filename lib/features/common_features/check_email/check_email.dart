@@ -15,7 +15,8 @@ import 'widgets/check_email_otp_input_section.dart';
 
 class CheckEmailScreen extends StatelessWidget {
   final String email;
-  const CheckEmailScreen({super.key, required this.email});
+  final String redirectTo;
+  const CheckEmailScreen({super.key, required this.email, this.redirectTo = RoutingManager.congratulationScreen});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class CheckEmailScreen extends StatelessWidget {
         child: BlocListener<CheckEmailCubit, CheckEmailState>(
           listener: (context, state) {
             if (state is CheckEmailSuccuss) {
-              GoRouter.of(context).pushReplacementNamed(RoutingManager.congratulationScreen);
+              GoRouter.of(context).pushReplacementNamed(redirectTo);
             }
           },
           child: Scaffold(

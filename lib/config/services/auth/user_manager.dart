@@ -74,13 +74,21 @@ class UserManager {
   /// user's email.
   ///
   /// Returns `true` on success.
-  Future<void> checkUserEmailOtp({
+  Future<void> sendUserEmailCheckOtpCode({
     required String email,
     required String otp,
   }) async {
-    String token = await userRepo.checkUserEmail(email: email, otp: otp);
+    String token = await userRepo.sendUserEmailCheckOtpCode(email: email, otp: otp);
     await tokenManagerInstance.storeAccessToken(token);
     (getItInstance.get<INetworkService>() as DioNetworkManager).initDefaultHeaders(token);
+  }
+
+  Future<void> sendResetPasswordMail({
+    required String email,
+  }) async {
+    await userRepo.sendResetPasswordMail(
+      email: email,
+    );
   }
 
   /// Logs out the current user by removing the stored authentication token.

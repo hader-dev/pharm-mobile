@@ -127,8 +127,6 @@ class DioNetworkManager extends INetworkService {
   // }
 
   void initDefaultHeaders(String? token) async {
-    defaultHeaders['Accept'] = 'Accept: */*';
-    defaultHeaders['Content-Type'] = 'application/json';
     if (token != null) {
       defaultHeaders[TokenManager.tokenHeaderKey] = "Bearer $token";
     }

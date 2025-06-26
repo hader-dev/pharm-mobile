@@ -23,7 +23,7 @@ class CheckEmailCubit extends Cubit<CheckEmailState> {
   void checkEmail(String otp) async {
     try {
       emit(CheckEmailLoading());
-      await userManager.checkUserEmailOtp(email: userEmail, otp: otp);
+      await userManager.sendUserEmailCheckOtpCode(email: userEmail, otp: otp);
       getItInstance
           .get<ToastManager>()
           .showToast(message: "Verification successful for $userEmail ", type: ToastType.success);

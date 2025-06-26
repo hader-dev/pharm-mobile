@@ -244,6 +244,28 @@ class UnAuthorizedException extends TemplateException {
       );
 }
 
+class EmailNotVerifiedException extends TemplateException {
+  EmailNotVerifiedException(
+      {super.message,
+      super.statusCode,
+      super.error,
+      super.errorType,
+      super.path,
+      super.timestamp,
+      super.errors,
+      super.errorCode});
+  factory EmailNotVerifiedException.fromJson(Map<String, dynamic> json) => EmailNotVerifiedException(
+        message: json['message'],
+        statusCode: json['statusCode'],
+        error: json['error'],
+        errorType: json['type'],
+        path: json['path'],
+        timestamp: json['timestamp'],
+        errors: json['errors'] == null ? null : (json['errors'] as List).map((e) => FieldError.fromJson(e)).toList(),
+        errorCode: json['code'],
+      );
+}
+
 class UnAuthenticatedException extends TemplateException {
   UnAuthenticatedException(
       {super.message,

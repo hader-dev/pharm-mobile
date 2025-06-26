@@ -22,3 +22,9 @@ final class PasswordVisibilityChanged extends LoginState {}
 final class LoggedOut extends LoginState {}
 
 final class ResetLinkSent extends LoginState {}
+
+final class EmailOtpResentSuccessfully extends LoginState {
+  final String email;
+
+  EmailOtpResentSuccessfully({required this.email});
+}

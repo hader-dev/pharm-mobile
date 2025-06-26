@@ -31,7 +31,7 @@ class _LoginFormSectionState extends State<LoginFormSection> {
               CustomTextField(
                 fieldKey: emailFieldKey,
                 label: 'Email*',
-                controller: BlocProvider.of<LoginCubit>(context).userNameController,
+                controller: BlocProvider.of<LoginCubit>(context).emailController,
                 state: FieldState.normal,
                 validationFunc: (value) {
                   if (value == null || value.isEmpty) {
@@ -56,7 +56,7 @@ class _LoginFormSectionState extends State<LoginFormSection> {
                 state: FieldState.normal,
                 validationFunc: (value) {
                   if ((value == null || value.isEmpty) &&
-                      BlocProvider.of<LoginCubit>(context).userNameController.text.isNotEmpty) {
+                      BlocProvider.of<LoginCubit>(context).emailController.text.isNotEmpty) {
                     return 'field is required';
                   }
                   if (value.length < 6) {
@@ -86,7 +86,7 @@ class _LoginFormSectionState extends State<LoginFormSection> {
                 onTap: () {
                   if (!formKey.currentState!.validate()) {}
                   BlocProvider.of<LoginCubit>(context).login(
-                    context.read<LoginCubit>().userNameController.text,
+                    context.read<LoginCubit>().emailController.text,
                     context.read<LoginCubit>().passwordController.text,
                   );
                 },

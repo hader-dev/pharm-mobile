@@ -91,8 +91,10 @@ class RoutingManager {
             name: checkEmailScreen,
             path: checkEmailScreen,
             builder: (BuildContext context, GoRouterState state) {
+              Map<String, dynamic> prams = state.extra as Map<String, dynamic>;
               return CheckEmailScreen(
-                email: state.extra as String,
+                email: prams["email"],
+                redirectTo: prams["redirectTo"],
               );
             }),
         GoRoute(

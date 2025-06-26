@@ -32,6 +32,10 @@ class LoginScreen extends StatelessWidget {
             if (state is ResetLinkSent) {
               BottomSheetHelper.showCommonBottomSheet(context: context, child: CheckYourMailScreen());
             }
+            if (state is EmailOtpResentSuccessfully) {
+              GoRouter.of(context).goNamed(RoutingManager.checkEmailScreen,
+                  extra: {"email": state.email, "redirectTo": RoutingManager.loginScreen});
+            }
           },
           child: Scaffold(
             backgroundColor: AppColors.bgWhite,
