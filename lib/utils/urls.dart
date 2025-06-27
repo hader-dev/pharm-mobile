@@ -35,11 +35,5 @@ class Urls {
   static String get cartItems => "/cart-items";
 
   static String get cartItemsBulkRemove => "$cartItems/bulk-remove";
-
-  //get Remote Stored Images
-  //static String get images => "$schema$domainName/uploads";
-
-  //api error mapping key
-  static const String apiErrorKey = 'message';
-  static const String apiErrorCodeKey = 'statusCode';
+  static String get publicFiles => "/files";
 }

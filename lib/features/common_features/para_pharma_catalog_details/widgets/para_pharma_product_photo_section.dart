@@ -6,6 +6,8 @@ import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../../../../config/di/di.dart';
+import '../../../../config/services/network/network_interface.dart';
 import '../../../../config/theme/typoghrapy_manager.dart';
 import '../../../common/app_bars/custom_app_bar.dart';
 import '../cubit/para_pharma_details_cubit.dart';
@@ -21,7 +23,11 @@ class ParaPharmaProductPhotoSection extends StatelessWidget {
           height: 320,
           width: double.maxFinite,
           boxFit: BoxFit.fill,
-          imageUrl: BlocProvider.of<ParaPharmaDetailsCubit>(context).paraPharmaCatalogData?.image ?? "",
+          imageUrl: BlocProvider.of<ParaPharmaDetailsCubit>(context).paraPharmaCatalogData?.image != null
+              ? getItInstance
+                  .get<INetworkService>()
+                  .getFilesPath(BlocProvider.of<ParaPharmaDetailsCubit>(context).paraPharmaCatalogData!.image!.path)
+              : "",
           errorWidget: Column(
             children: [
               Spacer(),

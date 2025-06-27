@@ -14,5 +14,5 @@ abstract class INetworkService {
   Future<dynamic> put(String url, {Map<String, String>? headers, Map<String, String>? queryParams, dynamic payload});
   Future<dynamic> delete(String url, {Map<String, String>? headers, Map<String, String>? queryParams, dynamic payload});
 
-  String getImagePath(String imageName);
+  String getFilesPath(String imageName);
 }

@@ -3,6 +3,8 @@ import 'package:cached_network_image_plus/flutter_cached_network_image_plus.dart
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -21,7 +23,11 @@ class MedicineProductPhotoSection extends StatelessWidget {
           height: 320,
           width: double.maxFinite,
           boxFit: BoxFit.fill,
-          imageUrl: BlocProvider.of<MedicineDetailsCubit>(context).medicineCatalogData?.image ?? "",
+          imageUrl: BlocProvider.of<MedicineDetailsCubit>(context).medicineCatalogData?.image != null
+              ? getItInstance
+                  .get<INetworkService>()
+                  .getFilesPath(BlocProvider.of<MedicineDetailsCubit>(context).medicineCatalogData!.image!.path)
+              : "",
           errorWidget: Column(
             children: [
               Spacer(),

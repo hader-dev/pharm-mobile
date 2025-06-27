@@ -6,6 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:hader_pharm_mobile/config/services/network/dio/interceptor/request_token_interceptor.dart';
 import 'package:path_provider/path_provider.dart';
 
+import '../../../../utils/urls.dart';
 import '../../auth/token_manager.dart';
 import '../network_interface.dart';
 import '../network_response_handler.dart';
@@ -146,9 +147,9 @@ class DioNetworkManager extends INetworkService {
   }
 
   @override
-  String getImagePath(String? imageName) {
+  String getFilesPath(String? imageName) {
     if (imageName == null) return "";
-    //TODO: dont forget to refactore this
-    return "baseUrl + Urls.file + imageName";
+
+    return "$baseUrl${Urls.publicFiles}/$imageName";
   }
 }

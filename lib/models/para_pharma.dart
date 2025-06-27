@@ -1,10 +1,12 @@
 import 'package:hader_pharm_mobile/models/company.dart';
 
+import 'image.dart';
+
 class BaseParaPharmaCatalogModel {
   final String id;
   final String unitPriceHt;
   final dynamic thumbnailImage;
-  final dynamic image;
+  final ImageModel? image;
   final String name;
   final int stockQuantity;
   final bool isActive;
@@ -26,7 +28,7 @@ class BaseParaPharmaCatalogModel {
       id: json['id'],
       unitPriceHt: json['unitPriceHt'],
       thumbnailImage: json['thumbnailImage'],
-      image: json['image'],
+      image: json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
       name: json['name'],
       stockQuantity: json['stockQuantity'],
       isActive: json['isActive'],
@@ -119,7 +121,7 @@ class ParaPharmaCatalogModel extends BaseParaPharmaCatalogModel {
       unitPriceTtc: json['unitPriceTtc'],
       tvaPercentage: json['tvaPercentage'],
       thumbnailImage: json['thumbnailImage'],
-      image: json['image'],
+      image: json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
       name: json['name'],
       stockQuantity: json['stockQuantity'],
       isActive: json['isActive'],

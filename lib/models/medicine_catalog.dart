@@ -1,4 +1,5 @@
 import 'package:hader_pharm_mobile/models/company.dart';
+import 'package:hader_pharm_mobile/models/image.dart';
 import 'package:hader_pharm_mobile/models/medicine.dart';
 
 class BaseMedicineCatalog {
@@ -7,7 +8,7 @@ class BaseMedicineCatalog {
   final String unitPriceHt;
   final String tvaPercentage;
   final dynamic thumbnailImage;
-  final dynamic image;
+  final ImageModel? image;
   final DateTime createdAt;
   final DateTime updatedAt;
   final String companyId;
@@ -61,7 +62,7 @@ class BaseMedicineCatalog {
       unitPriceHt: json["unitPriceHt"] ?? "",
       tvaPercentage: json["tvaPercentage"] ?? "",
       thumbnailImage: json["thumbnailImage"],
-      image: json["image"],
+      image: json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
       createdAt: DateTime.parse(json["createdAt"]),
       updatedAt: DateTime.parse(json["updatedAt"]),
       companyId: json["companyId"] ?? "",
@@ -128,7 +129,7 @@ class MedicineCatalogModel extends BaseMedicineCatalog {
       unitPriceHt: json["unitPriceHt"] ?? "",
       tvaPercentage: json["tvaPercentage"] ?? "",
       thumbnailImage: json["thumbnailImage"],
-      image: json["image"],
+      image: json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
       createdAt: DateTime.parse(json["createdAt"]),
       updatedAt: DateTime.parse(json["updatedAt"]),
       companyId: json["companyId"] ?? "",
