@@ -31,7 +31,7 @@ class QuantitySection extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: AppSizesManager.p8),
           child: Transform.scale(
             alignment: Alignment.centerRight,
-            scale: 0.85,
+            scale: 0.82,
             child: Row(children: [
               PrimaryIconButton(
                 borderColor: StrokeColors.normal.color,

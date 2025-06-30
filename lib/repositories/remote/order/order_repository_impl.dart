@@ -32,4 +32,12 @@ class OrderRepository extends IOrderRepository {
     var decodedResponse = await client.sendRequest(() => client.get("${Urls.orders}/$id"));
     return MedicineCatalogModel.fromJson(decodedResponse);
   }
+
+  @override
+  Future<void> createOrder(List<String> cartItemsIds) async {
+    await client.sendRequest(() => client.post(
+          Urls.orders,
+          payload: <String, dynamic>{"cartItemsIds": cartItemsIds},
+        ));
+  }
 }

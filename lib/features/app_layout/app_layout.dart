@@ -4,6 +4,7 @@ import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/features/common_features/cart/cubit/cart_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/home.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders/orders.dart';
+import 'package:hader_pharm_mobile/repositories/remote/order/order_repository_impl.dart';
 import 'package:hader_pharm_mobile/utils/shared_prefs.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -52,9 +53,9 @@ class AppLayout extends StatelessWidget {
             create: (context) => AppLayoutCubit(),
           ),
           BlocProvider(
-            create: (context) =>
-                CartCubit(CartItemRepository(client: getItInstance.get<INetworkService>()), ScrollController())
-                  ..getCartItem(),
+            create: (context) => CartCubit(CartItemRepository(client: getItInstance.get<INetworkService>()),
+                ScrollController(), OrderRepository(client: getItInstance.get<INetworkService>()))
+              ..getCartItem(),
           ),
         ],
         child: BlocBuilder<CartCubit, CartState>(

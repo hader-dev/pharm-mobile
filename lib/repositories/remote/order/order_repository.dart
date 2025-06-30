@@ -9,4 +9,5 @@ abstract class IOrderRepository {
     String sortDirection = 'ASC',
   });
   Future<MedicineCatalogModel> getMOrderById(String id);
+  Future<void> createOrder(List<String> cartItemsIds);
 }

@@ -4,11 +4,14 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/utils/app_exceptions/exceptions.dart';
 import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler.dart';
+import 'package:hader_pharm_mobile/utils/enums.dart';
 
 import '../../../../models/cart_item.dart';
 import '../../../../models/cart_items_response.dart';
 import '../../../../models/create_cart_item.dart';
+
 import '../../../../repositories/remote/cart_items/cart_items_repository_impl.dart';
+import '../../../../repositories/remote/order/order_repository_impl.dart';
 
 part 'cart_state.dart';
 
@@ -16,14 +19,17 @@ class CartCubit extends Cubit<CartState> {
   num totalHtAmount = 0;
   num totalTTCAmount = 0;
   Timer? _debounce;
+  PaymentMethods? selectedPaymentMethod;
+  InvoiceTypes? selectedInvoiceType;
   // int totalItemsCount = 0;
   // int offSet = 0;
   List<CartItemModel> cartItems = <CartItemModel>[];
   Map<String, List<String>> cartItemsByVendor = {};
 
   final CartItemRepository cartItemRepository;
+  final OrderRepository ordersRepository;
   final ScrollController scrollController;
-  CartCubit(this.cartItemRepository, this.scrollController) : super(CartInitial()) {
+  CartCubit(this.cartItemRepository, this.scrollController, this.ordersRepository) : super(CartInitial()) {
     _onScroll();
   }
   _onScroll() {
@@ -172,55 +178,18 @@ class CartCubit extends Cubit<CartState> {
     });
   }
 
-  // Future<void> removeAll() async {
-  //   try {
-  //     emit(CartLoadingUpdate());
+  void changeInvoiceType(InvoiceTypes invoiceType) {
+    selectedInvoiceType = invoiceType;
+    emit(InvoiceTypeChanged());
+  }
 
-  //     final ids = json.encode(selectedItems.map((e) => {"id": e.id}).toList());
+  void changePaymentMethod(PaymentMethods paymentMethod) {
+    selectedPaymentMethod = paymentMethod;
+    emit(PaymentMethodChanged());
+  }
 
-  //     await cartItemRepository.removeAll(ids).then((_) {
-  //       // Collect IDs to remove
-  //       final idsToRemove = selectedItems.map((e) => e.id).toSet();
-  //       cartItems.removeWhere((element) => idsToRemove.contains(element.id));
-  //       selectedItems.clear();
-  //       totalAmount();
-  //       emit(CartLoadingSuccess());
-  //     });
-  //   } catch (e) {
-  //     print(e.toString());
-  //     print(cartItems.length.toString());
+  passOrder() async {
+    ordersRepository.
 
-  //     emit(CartError(error: e.toString()));
-  //   }
-  // }
-
-  // double totalAmountOfSelectedItems() {
-  //   total = 0;
-  //   for (var item in selectedItems) {
-  //     total += (double.parse(item.article!.price!) * double.parse(item.quantity.toString()));
-  //   }
-  //   totalAmount();
-  //   return total;
-  // }
-
-  // void selectAll() {
-  //   selectedItems = [];
-  //   selectedItems.addAll(cartItems);
-  //   totalAmount();
-  //   emit(AllItemsSelected());
-  // }
-
-  // void unSelectAll() {
-  //   selectedItems = [];
-  //   totalHtAmount = 0;
-  //   totalTTCAmount = 0;
-  //   totalAmount();
-  //   emit(AllItemsUnSelected());
-  // }
-
-  // void unSelectItem(CartItemModel cartItem) {
-  //   selectedItems.removeWhere((element) => element.id == cartItem.id);
-  //   totalAmount();
-  //   emit(CartLoadingSuccess());
-  // }
+  }
 }

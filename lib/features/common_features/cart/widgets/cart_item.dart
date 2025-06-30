@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/formatted_price.dart';
+import 'package:hader_pharm_mobile/features/common_features/create_company_profile/sub_pages/review&submit/widgets/info_row.dart';
 import 'package:hader_pharm_mobile/models/cart_item.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:iconsax/iconsax.dart';
@@ -79,23 +80,28 @@ class CartItemWidget extends StatelessWidget {
                   ],
                 ),
                 const Gap(AppSizesManager.s12),
-                Row(
+                Column(
                   children: [
-                    FormattedPrice(
-                        price: num.parse(cartItemData.unitPriceHt),
-                        valueStyle: AppTypography.headLine5SemiBoldStyle.copyWith(color: AppColors.accent1Shade1),
-                        unitStyle: AppTypography.bodyXSmallStyle
-                            .copyWith(fontSize: AppTypography.bodyXSmall / 1.5, color: TextColors.ternary.color)),
-                    Spacer(),
-                    QuantitySection(
-                      cartData: cartItemData,
+                    InfoRow(
+                      label: 'Unit HT price',
+                      dataValue: num.parse(cartItemData.unitPriceHt).toStringAsFixed(2),
                     ),
-                    // Text(
-                    //   'quantity : ${cartItemData.quantity}',
-                    //   softWrap: true,
-                    //   overflow: TextOverflow.ellipsis,
-                    //   style: AppTypography.body3MediumStyle,
-                    // ),
+                    InfoRow(
+                      label: 'Unit TTC price',
+                      dataValue: num.parse(cartItemData.unitPriceTtc).toStringAsFixed(2),
+                    ),
+                    InfoRow(
+                      label: 'Tva %',
+                      dataValue: num.parse(cartItemData.tvaPercentage).toStringAsFixed(2),
+                    ),
+                    Row(
+                      children: [
+                        Spacer(),
+                        QuantitySection(
+                          cartData: cartItemData,
+                        ),
+                      ],
+                    ),
                   ],
                 )
               ],
