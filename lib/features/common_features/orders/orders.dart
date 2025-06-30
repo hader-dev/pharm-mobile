@@ -12,7 +12,7 @@ import '../../../config/theme/typoghrapy_manager.dart';
 import '../../../utils/constants.dart';
 import '../../common/app_bars/custom_app_bar.dart';
 import '../../common/widgets/end_of_load_result_widget.dart';
-import 'cubit/medicine_products_cubit.dart';
+import 'cubit/orders_cubit.dart';
 
 class OrdersScreen extends StatelessWidget {
   const OrdersScreen({super.key});

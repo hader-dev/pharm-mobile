@@ -1,8 +1,18 @@
+import 'package:hader_pharm_mobile/utils/enums.dart';
+
 class CreateCartItemModel {
-  final int articleId;
+  final String productId;
   final int quantity;
-  final int offset;
+  final ProductTypes productType;
+
   String note;
-  CreateCartItemModel({required this.articleId, required this.quantity, this.offset = 0, this.note = ''});
-  Map<String, Object> toMap() => {'articleId': articleId, 'quantity': quantity, 'offset': offset, 'note': note};
+  CreateCartItemModel({required this.productId, required this.quantity, required this.productType, this.note = ''});
+  Map<String, dynamic> toMap() => {
+        if (productType == ProductTypes.medicine) ...{
+          'medicinesCatalogId': productId
+        } else ...{
+          'parapharmCatalogId': productId
+        },
+        'quantity': quantity,
+      };
 }

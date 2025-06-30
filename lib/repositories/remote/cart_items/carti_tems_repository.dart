@@ -3,8 +3,8 @@ import '../../../models/create_cart_item.dart';
 
 abstract class ICartItemsRepository {
   Future<CartItemsResponse> getCartItem();
-  Future deleteItem(int id);
+  Future deleteItem(String id);
   Future removeAll(payload);
-  Future updateItem(int id, Map<String, dynamic> cartItem);
-  Future addItem(CreateCartItemModel cartItem);
+  Future updateItem(String id, Map<String, dynamic> cartItem);
+  Future addCartItem(CreateCartItemModel cartItem);
 }

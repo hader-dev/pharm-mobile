@@ -1,4 +1,4 @@
-part of 'medicine_products_cubit.dart';
+part of 'orders_cubit.dart';
 
 sealed class OrdersState {}
 

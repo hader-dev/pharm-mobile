@@ -84,6 +84,7 @@ class _LoginFormSectionState extends State<LoginFormSection> {
                 label: "Login",
                 isLoading: state is LoginLoading,
                 onTap: () {
+                  FocusScope.of(context).unfocus();
                   if (!formKey.currentState!.validate()) {
                     return;
                   }

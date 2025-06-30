@@ -1,4 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hader_pharm_mobile/features/app_layout/app_layout.dart';
+import 'package:hader_pharm_mobile/features/common_features/cart/widgets/cart_summary.dart';
+import 'package:iconsax/iconsax.dart';
+import '../../../config/theme/colors_manager.dart';
+import '../../../config/theme/typoghrapy_manager.dart';
+import '../../../utils/assets_strings.dart';
+import '../../../utils/constants.dart';
+import '../../common/app_bars/custom_app_bar.dart';
+import '../../common/widgets/empty_list.dart';
+import 'cubit/cart_cubit.dart';
+
+import 'widgets/vendor_cart_items_set.dart';
 
 class CartScreen extends StatelessWidget {
   final bool isInHome;
@@ -6,198 +19,87 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Placeholder();
-    // BlocProvider.value(
-    //   value: HomeScreen.scaffoldKey.currentContext!.read<CartCubit>(),
-    //   child: Scaffold(
-    //     body: SafeArea(
-    //         child: Padding(
-    //       padding: const EdgeInsets.symmetric(
-    //         horizontal: AppSizes.smallPadding,
-    //       ),
-    //       child: Stack(
-    //         children: [
-    //           Column(
-    //             children: <Widget>[
-    //               AppBarWidget(
-    //                 topPadding: AppSizes.mediumPadding,
-    //                 bottomPadding: AppSizes.mediumPadding,
-    //                 title: Text(
-    //                   context.translation!.my_cart,
-    //                   style: context.theme.textTheme.headlineSmall!.copyWith(fontSize: AppTypography.appFontSize3),
-    //                 ),
-    //                 trailling: <Widget>[
-    //                   BlocBuilder<CartCubit, CartState>(
-    //                     builder: (context, state) {
-    //                       return InkWell(
-    //                         overlayColor: const WidgetStatePropertyAll(Colors.transparent),
-    //                         onTap: () {
-    //                           ValidateActionDialog().showValidateActionDialog(
-    //                             context: context,
-    //                             title: Text(
-    //                               context.translation!.clear_cart,
-    //                               style: context.theme.textTheme.headlineSmall,
-    //                             ),
-    //                             content: Text(
-    //                               context.translation!.clear_cart_confirmation,
-    //                             ),
-    //                             agreeText: context.translation!.clear,
-    //                             cancelText: context.translation!.cancel,
-    //                             onValidate: () {
-    //                               context.read<CartCubit>().removeAll();
-    //                             },
-    //                             dialogType: DialogType.warning,
-    //                           );
-    //                         },
-    //                         child: Padding(
-    //                           padding: const EdgeInsets.all(4),
-    //                           child: Icon(
-    //                             LucideIcons.trash2,
-    //                             color: Colors.redAccent[400],
-    //                           ),
-    //                         ),
-    //                       );
-    //                     },
-    //                   )
-    //                 ],
-    //                 leading: isInHome
-    //                     ? const SizedBox.shrink()
-    //                     : GestureDetector(
-    //                         onTap: () {
-    //                           GoRouter.of(context).pop();
-    //                         },
-    //                         child: const Icon(
-    //                           Icons.arrow_back_ios_new,
-    //                         ),
-    //                       ),
-    //               ),
-    //               Expanded(child: BlocBuilder<CartCubit, CartState>(
-    //                 builder: (BuildContext context, CartState state) {
-    //                   if (state is CartLoading) {
-    //                     return const LoadingWidget();
-    //                   } else if (state is CartError) {
-    //                     return const CustomErrorWidget();
-    //                   }
-    //                   if (state is CartLoadingSuccess && context.read<CartCubit>().cartItems.isEmpty) {
-    //                     return Center(
-    //                       child: EmptyResultWidget(
-    //                         onRefresh: () async {
-    //                           await context.read<CartCubit>().getCartItem();
-    //                         },
-    //                       ),
-    //                     );
-    //                   }
-    //                   return Column(
-    //                     children: <Widget>[
-    //                       if (context.read<CartCubit>().isSelectedMode)
-    //                         if (context.read<CartCubit>().cartItems.isNotEmpty)
-    //                           Padding(
-    //                             padding: const EdgeInsets.only(top: AppSizes.mediumPadding),
-    //                             child: Row(
-    //                               children: <Widget>[
-    //                                 SizedBox(
-    //                                     height: 25,
-    //                                     width: 25,
-    //                                     child: Checkbox(
-    //                                         value: context.read<CartCubit>().selectedItems.length ==
-    //                                             context.read<CartCubit>().cartItems.length,
-    //                                         activeColor: AppColorsPallette.primaryColors.first,
-    //                                         side:
-    //                                             BorderSide(color: AppColorsPallette.primaryColors.first.withAlpha(80)),
-    //                                         shape: const RoundedRectangleBorder(
-    //                                             borderRadius: BorderRadius.horizontal(
-    //                                                 right: Radius.circular(AppSizes.tinyRadius),
-    //                                                 left: Radius.circular(AppSizes.tinyRadius))),
-    //                                         onChanged: (bool? value) {
-    //                                           context.read<CartCubit>().selectedItems.length ==
-    //                                                   context.read<CartCubit>().cartItems.length
-    //                                               ? context.read<CartCubit>().unSelectAll()
-    //                                               : context.read<CartCubit>().selectAll();
-    //                                         })),
-    //                                 const SizedBox(
-    //                                   width: AppSizes.smallSpacing,
-    //                                 ),
-    //                                 Text(
-    //                                   context.translation!.select_all,
-    //                                   style: context.theme.textTheme.bodySmall!
-    //                                       .copyWith(fontWeight: AppTypography.appFontSemiBold),
-    //                                 ),
-    //                               ],
-    //                             ),
-    //                           ),
-    //                       Expanded(
-    //                         child: RefreshIndicator(
-    //                           onRefresh: () async {
-    //                             await context.read<CartCubit>().getCartItem();
-    //                           },
-    //                           child: ListView.builder(
-    //                             physics: const AlwaysScrollableScrollPhysics(),
-    //                             shrinkWrap: true,
-    //                             itemCount: context.read<CartCubit>().cartItems.length,
-    //                             itemBuilder: (BuildContext context, int index) {
-    //                               return Column(
-    //                                 children: [
-    //                                   CartItemWidget(
-    //                                     cart_item: context.read<CartCubit>().cartItems[index],
-    //                                   ),
-    //                                   if (index < context.read<CartCubit>().cartItems.length - 1)
-    //                                     Padding(
-    //                                       padding:
-    //                                           const EdgeInsets.only(left: 39, right: AppSizes.smallToMediumPadding),
-    //                                       child: Divider(
-    //                                         color: Colors.grey.shade200,
-    //                                         height: 0.5,
-    //                                       ),
-    //                                     ),
-    //                                 ],
-    //                               );
-    //                             },
-    //                           ),
-    //                         ),
-    //                       ),
-    //                     ],
-    //                   );
-    //                 },
-    //               )),
-    //               CartSummary(),
-    //             ],
-    //           ),
-    //           BlocBuilder<CartCubit, CartState>(
-    //             builder: (context, state) {
-    //               if (state is CartLoadingUpdate) {
-    //                 return Positioned(
-    //                   top: 0,
-    //                   bottom: 0,
-    //                   left: 0,
-    //                   right: 0,
-    //                   child: InkWell(
-    //                     onTap: () {},
-    //                     child: Container(
-    //                       child: Column(
-    //                         mainAxisAlignment: MainAxisAlignment.center,
-    //                         children: [
-    //                           Container(
-    //                               height: 50,
-    //                               width: 50,
-    //                               alignment: Alignment.center,
-    //                               decoration: BoxDecoration(
-    //                                   border: Border.all(color: Colors.grey, width: 1),
-    //                                   color: Colors.white,
-    //                                   borderRadius: BorderRadius.circular(AppSizes.tinyRadius)),
-    //                               child: const LoadingWidget()),
-    //                         ],
-    //                       ),
-    //                     ),
-    //                   ),
-    //                 );
-    //               }
-    //               return const SizedBox.shrink();
-    //             },
-    //           ),
-    //         ],
-    //       ),
-    //     )),
-    //   ),
-    // );
+    return SafeArea(
+      child: BlocProvider.value(
+        value: AppLayout.appLayoutScaffoldKey.currentContext!.read<CartCubit>(),
+        child: Scaffold(
+          appBar: CustomAppBar(
+            bgColor: AppColors.bgWhite,
+            topPadding: MediaQuery.of(context).padding.top,
+            bottomPadding: MediaQuery.of(context).padding.bottom,
+            leading: IconButton(
+              icon: const Icon(
+                Iconsax.bag_2,
+                size: AppSizesManager.iconSize25,
+              ),
+              onPressed: () {},
+            ),
+            title: BlocBuilder<CartCubit, CartState>(
+              builder: (context, state) {
+                return Text.rich(
+                  TextSpan(
+                    text: "Cart",
+                    style: AppTypography.headLine3SemiBoldStyle,
+                    children: [
+                      TextSpan(
+                          text: " (${BlocProvider.of<CartCubit>(context).cartItems.length})",
+                          style: AppTypography.bodySmallStyle.copyWith(color: TextColors.ternary.color)),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              BlocBuilder<CartCubit, CartState>(builder: (context, state) {
+                if (state is CartQuantityUpdated) {}
+                if (state is CartLoading) {
+                  return Expanded(
+                    child: Container(alignment: Alignment.center, child: const CircularProgressIndicator()),
+                  );
+                }
+                if (state is CartLoadingSuccess && BlocProvider.of<CartCubit>(context).cartItems.isEmpty) {
+                  return Expanded(
+                    child: EmptyListWidget(
+                      emptyIllustrationPath: DrawableAssetStrings.emptyCartIcon,
+                      onRefresh: () {
+                        BlocProvider.of<CartCubit>(context).getCartItem();
+                      },
+                    ),
+                  );
+                }
+                return Expanded(
+                  child: RefreshIndicator(
+                    onRefresh: () {
+                      return BlocProvider.of<CartCubit>(context).getCartItem();
+                    },
+                    child: ListView(
+                        controller: BlocProvider.of<CartCubit>(context).scrollController,
+                        shrinkWrap: true,
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        children: BlocProvider.of<CartCubit>(context)
+                            .cartItemsByVendor
+                            .keys
+                            .map((vendor) => VendorCartSection(
+                                  vendorData: BlocProvider.of<CartCubit>(context)
+                                      .cartItems
+                                      .firstWhere((element) => element.sellerCompanyId == vendor)
+                                      .sellerCompany,
+                                  cartItems: BlocProvider.of<CartCubit>(context).cartItemsByVendor[vendor] ?? [],
+                                ))
+                            .toList()),
+                  ),
+                );
+                // if (state is LoadingMoreOrders) const Center(child: CircularProgressIndicator()),
+                // if (state is OrdersLoadLimitReached) EndOfLoadResultWidget(),
+              }),
+              CartSummarySection()
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

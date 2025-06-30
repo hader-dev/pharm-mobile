@@ -1,4 +1,3 @@
-
 import 'package:bloc/bloc.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
@@ -18,7 +17,7 @@ class LoginCubit extends Cubit<LoginState> {
   bool isObscured = true;
 
   TextEditingController emailController = TextEditingController(text: "mail4@mail.com");
-  TextEditingController passwordController = TextEditingController(text: "Strong@12");
+  TextEditingController passwordController = TextEditingController(text: "Strong@1222");
 
   LoginCubit() : super(LoginInitial());
 

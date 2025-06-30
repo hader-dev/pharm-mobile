@@ -77,6 +77,8 @@ import 'assets_strings.dart';
 //   }
 // }
 
+enum ProductTypes { medicine, para_pharmacy }
+
 enum CompanyType {
   distributor(id: 1, imgPath: DrawableAssetStrings.companyIllustration2),
   pharmacy(id: 2, imgPath: DrawableAssetStrings.companyIllustration1);

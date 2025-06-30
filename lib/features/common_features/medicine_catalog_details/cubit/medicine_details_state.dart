@@ -11,3 +11,5 @@ final class MedicineDetailsLoaded extends MedicineDetailsState {}
 final class MedicineDetailsLoadError extends MedicineDetailsState {}
 
 final class MedicineDetailsTapIndexChanged extends MedicineDetailsState {}
+
+final class MedicineQuantityChanged extends MedicineDetailsState {}

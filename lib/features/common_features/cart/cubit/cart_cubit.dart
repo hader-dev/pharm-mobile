@@ -1,209 +1,226 @@
-import 'dart:async';
-import 'dart:convert';
+import 'dart:async' show Timer;
 
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
+import 'package:hader_pharm_mobile/utils/app_exceptions/exceptions.dart';
+import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler.dart';
+
 import '../../../../models/cart_item.dart';
 import '../../../../models/cart_items_response.dart';
+import '../../../../models/create_cart_item.dart';
 import '../../../../repositories/remote/cart_items/cart_items_repository_impl.dart';
 
 part 'cart_state.dart';
 
 class CartCubit extends Cubit<CartState> {
+  num totalHtAmount = 0;
+  num totalTTCAmount = 0;
+  Timer? _debounce;
+  // int totalItemsCount = 0;
+  // int offSet = 0;
   List<CartItemModel> cartItems = <CartItemModel>[];
-  List<CartItemModel> selectedItems = <CartItemModel>[];
-  bool selectAllBox = false;
-  double total = 0;
-  bool isSelectedMode = true;
-  final CartItemRepository cartItemRepository;
-  double totalHtAmount = 0;
-  double totalTTCAmount = 0;
-  CartCubit(this.cartItemRepository) : super(CartInitial());
+  Map<String, List<String>> cartItemsByVendor = {};
 
-  void isSelectedModeChanged() {
-    isSelectedMode = !isSelectedMode;
-    emit(CartLoadingSuccess());
+  final CartItemRepository cartItemRepository;
+  final ScrollController scrollController;
+  CartCubit(this.cartItemRepository, this.scrollController) : super(CartInitial()) {
+    _onScroll();
+  }
+  _onScroll() {
+    // scrollController.addListener(() async {
+    //   if (scrollController.position.pixels >= scrollController.position.maxScrollExtent) {
+    //     if (offSet < totalItemsCount) {
+    //       //  await loadMoreOrders();
+    //     } else {
+    //       emit(CartLoadLimitReached());
+    //     }
+    //   }
+    // });
   }
 
-  void selectItem(CartItemModel cartItem) {
-    if (selectedItems.contains(cartItem)) {
-      unSelectItem(cartItem);
-      return;
+  Future<void> addToCart(CreateCartItemModel cartItem) async {
+    try {
+      emit(AddCartItemLoading());
+      await cartItemRepository.addCartItem(cartItem);
+      getCartItem();
+      emit(CartItemAdded());
+    } catch (e) {
+      GlobalExceptionHandler.handle(exception: e);
     }
-    selectedItems.add(cartItem);
-    totalAmount();
-    emit(CartLoadingSuccess());
+  }
+
+  Future<Map<String, List<String>>> prepareOrderCartitemsByVendor(List<CartItemModel> cartItems) async {
+    var reslutMap = <String, List<String>>{};
+    await Future.forEach(
+      cartItems,
+      (item) {
+        if (reslutMap.containsKey(item.sellerCompany.id)) {
+          reslutMap[item.sellerCompany.id]!.add(item.id);
+        } else {
+          reslutMap[item.sellerCompany.id] = [item.id];
+        }
+      },
+    );
+    return reslutMap;
   }
 
   Future<void> getCartItem() async {
     try {
       cartItems = <CartItemModel>[];
-      selectedItems = <CartItemModel>[];
+      cartItemsByVendor = {};
+
       emit(CartLoading());
 
       CartItemsResponse response = await cartItemRepository.getCartItem();
       cartItems = response.data;
+      cartItemsByVendor = await prepareOrderCartitemsByVendor(cartItems);
 
-      selectedItems.addAll(cartItems);
-      totalAmount();
+      updateTotals();
+
       emit(CartLoadingSuccess());
     } catch (e) {
-      print(e.toString());
+      GlobalExceptionHandler.handle(exception: e);
       emit(CartError(error: e.toString()));
     }
   }
 
-  Future<void> removeArticle(int articleId) async {
-    emit(CartLoadingUpdate());
+  void decreaseCartItemQuantity(String cartItemId) {
     try {
-      await cartItemRepository.deleteItem(articleId).then((_) {
-        cartItems.removeWhere((element) => element.id == articleId);
-        selectedItems.removeWhere((element) => element.id == articleId);
-        totalAmount();
-        emit(CartLoadingSuccess());
-      });
-    } catch (e) {
-      print(e.toString());
-      emit(CartError(error: e.toString()));
-    }
-  }
-
-  Future<void> removeAll() async {
-    try {
-      emit(CartLoadingUpdate());
-
-      final ids = json.encode(selectedItems.map((e) => {"id": e.id}).toList());
-
-      await cartItemRepository.removeAll(ids).then((_) {
-        // Collect IDs to remove
-        final idsToRemove = selectedItems.map((e) => e.id).toSet();
-        cartItems.removeWhere((element) => idsToRemove.contains(element.id));
-        selectedItems.clear();
-        totalAmount();
-        emit(CartLoadingSuccess());
-      });
-    } catch (e) {
-      print(e.toString());
-      print(cartItems.length.toString());
-
-      emit(CartError(error: e.toString()));
-    }
-  }
-
-  void updateCartItemQuantity(CartItemModel cartItem, int quantity) {
-    emit(CartLoadingUpdate());
-    try {
-      cartItem.quantity = quantity;
-
-      cartItemRepository.updateItem(cartItem.id!, {
-        "quantity": cartItem.quantity,
-      }).then((_) {
-        totalAmount();
-        emit(CartLoadingSuccess());
-      });
-    } catch (e) {
-      print(e.toString());
-      emit(CartError(error: e.toString()));
-    }
-  }
-
-  void decreaseCartItemQuantity(CartItemModel cartItem) {
-    if (cartItem.quantity > 1) {
-      emit(CartLoadingUpdate());
-
-      try {
-        cartItem.quantity--;
-        cartItemRepository.updateItem(cartItem.id!, {
-          "quantity": cartItem.quantity,
-        }).then((_) {
-          totalAmount();
-          emit(CartLoadingSuccess());
-        });
-      } catch (e) {
-        print(e.toString());
-        emit(CartError(error: e.toString()));
+      int cartItemIndex = cartItems.lastIndexWhere((element) => element.id == cartItemId);
+      if (cartItems[cartItemIndex].quantity <= 1) {
+        throw TemplateException(message: "quantity should be greater than or equal 1.");
       }
-    } else {
-      totalAmount();
+
+      cartItems[cartItemIndex] = cartItems[cartItemIndex].copyWith(quantity: cartItems[cartItemIndex].quantity - 1);
+      updateTotals();
+      _debounceFunction(() async {
+        updateItemQuantity(cartItemId, cartItems[cartItemIndex].quantity);
+      });
+      emit(CartQuantityUpdated(updatedItemId: cartItemId));
+    } catch (e) {
+      GlobalExceptionHandler.handle(exception: e);
+    }
+  }
+
+  void increaseCartItemQuantity(String cartItemId) {
+    try {
+      int cartItemIndex = cartItems.lastIndexWhere((element) => element.id == cartItemId);
+      if (cartItems[cartItemIndex].quantity == cartItems[cartItemIndex].medicinesCatalog.stockQuantity) {
+        throw TemplateException(message: "you reached the limit of the stock.");
+      }
+
+      cartItems[cartItemIndex] = cartItems[cartItemIndex].copyWith(quantity: cartItems[cartItemIndex].quantity + 1);
+      updateTotals();
+      _debounceFunction(() async {
+        updateItemQuantity(cartItemId, cartItems[cartItemIndex].quantity);
+      });
+      emit(CartQuantityUpdated(updatedItemId: cartItemId));
+    } catch (e) {
+      GlobalExceptionHandler.handle(exception: e);
+      emit(CartError(error: e.toString()));
+    }
+  }
+
+  deleteCartItem(String cartItemId) async {
+    try {
+      await cartItemRepository.deleteItem(cartItemId);
+      cartItems.removeWhere((element) => element.id == cartItemId);
+      cartItemsByVendor = await prepareOrderCartitemsByVendor(cartItems);
+      updateTotals();
       emit(CartLoadingSuccess());
-    }
-  }
-
-  void addNote({required int id, required String note}) {
-    emit(CartLoadingUpdate());
-
-    try {
-      cartItemRepository.updateItem(id, {
-        "note": note,
-      }).then((_) {
-        emit(CartLoadingSuccess());
-      });
-      cartItems.firstWhere((element) => element.id == id).note = note;
     } catch (e) {
-      print(e.toString());
+      GlobalExceptionHandler.handle(exception: e);
       emit(CartError(error: e.toString()));
     }
   }
 
-  void addCartItem(CartItemModel cartItem) {
-    emit(CartLoadingUpdate());
+  Future<void> updateItemQuantity(String cartItemId, int quantity) async {
     try {
-      cartItem.quantity++;
-      cartItemRepository.updateItem(cartItem.id!, {
-        "quantity": cartItem.quantity,
-      }).then((_) {
-        totalAmount();
-        emit(CartLoadingSuccess());
-      });
+      await cartItemRepository.updateItem(cartItemId, {"quantity": quantity});
     } catch (e) {
-      print(e.toString());
+      GlobalExceptionHandler.handle(exception: e);
       emit(CartError(error: e.toString()));
     }
   }
 
-  void totalAmount() {
-    total = 0;
-    totalHtAmount = 0;
-    totalTTCAmount = 0;
-    for (var item in selectedItems) {
-      total += (double.parse(item.article!.price!) * double.parse(item.quantity.toString()));
+  updateTotals() {
+    totalHtAmount = calculateTotalAmountHt(cartItems);
+    totalTTCAmount = calculateTotalAmountTtc(cartItems);
+  }
+
+  num calculateTotalAmountTtc(List<CartItemModel> cartItems) {
+    double totalAmount = 0;
+    for (var element in cartItems) {
+      totalAmount += element.getTotalPrice()["totalTTCPrice"]!;
     }
-    for (CartItemModel item in selectedItems) {
-      Map totals = item.getTotalPrice();
-      double itemTotalHtPrice = totals["totalHtPrice"];
-      double itemTotalTTCPrice = totals["totalTTCPrice"];
-      totalHtAmount += itemTotalHtPrice;
-      totalTTCAmount += itemTotalTTCPrice;
+    return totalAmount;
+  }
+
+  num calculateTotalAmountHt(List<CartItemModel> cartItems) {
+    num totalAmount = 0;
+    for (var element in cartItems) {
+      totalAmount += element.getTotalPrice()["totalHtPrice"]!;
     }
-    emit(CartLoadingSuccess());
+    return totalAmount;
   }
 
-  double totalAmountOfSelectedItems() {
-    total = 0;
-    for (var item in selectedItems) {
-      total += (double.parse(item.article!.price!) * double.parse(item.quantity.toString()));
-    }
-    totalAmount();
-    return total;
+  Future<void> _debounceFunction(Future<void> Function() func, [int milliseconds = 500]) async {
+    if (_debounce?.isActive ?? false) _debounce?.cancel();
+    _debounce = Timer(Duration(milliseconds: milliseconds), () async {
+      await func();
+      _debounce = null;
+    });
   }
 
-  void selectAll() {
-    selectedItems = [];
-    selectedItems.addAll(cartItems);
-    totalAmount();
-    emit(AllItemsSelected());
-  }
+  // Future<void> removeAll() async {
+  //   try {
+  //     emit(CartLoadingUpdate());
 
-  void unSelectAll() {
-    selectedItems = [];
-    totalHtAmount = 0;
-    totalTTCAmount = 0;
-    totalAmount();
-    emit(AllItemsUnSelected());
-  }
+  //     final ids = json.encode(selectedItems.map((e) => {"id": e.id}).toList());
 
-  void unSelectItem(CartItemModel cartItem) {
-    selectedItems.removeWhere((element) => element.id == cartItem.id);
-    totalAmount();
-    emit(CartLoadingSuccess());
-  }
+  //     await cartItemRepository.removeAll(ids).then((_) {
+  //       // Collect IDs to remove
+  //       final idsToRemove = selectedItems.map((e) => e.id).toSet();
+  //       cartItems.removeWhere((element) => idsToRemove.contains(element.id));
+  //       selectedItems.clear();
+  //       totalAmount();
+  //       emit(CartLoadingSuccess());
+  //     });
+  //   } catch (e) {
+  //     print(e.toString());
+  //     print(cartItems.length.toString());
+
+  //     emit(CartError(error: e.toString()));
+  //   }
+  // }
+
+  // double totalAmountOfSelectedItems() {
+  //   total = 0;
+  //   for (var item in selectedItems) {
+  //     total += (double.parse(item.article!.price!) * double.parse(item.quantity.toString()));
+  //   }
+  //   totalAmount();
+  //   return total;
+  // }
+
+  // void selectAll() {
+  //   selectedItems = [];
+  //   selectedItems.addAll(cartItems);
+  //   totalAmount();
+  //   emit(AllItemsSelected());
+  // }
+
+  // void unSelectAll() {
+  //   selectedItems = [];
+  //   totalHtAmount = 0;
+  //   totalTTCAmount = 0;
+  //   totalAmount();
+  //   emit(AllItemsUnSelected());
+  // }
+
+  // void unSelectItem(CartItemModel cartItem) {
+  //   selectedItems.removeWhere((element) => element.id == cartItem.id);
+  //   totalAmount();
+  //   emit(CartLoadingSuccess());
+  // }
 }

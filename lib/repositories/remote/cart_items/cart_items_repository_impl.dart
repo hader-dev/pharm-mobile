@@ -19,14 +19,14 @@ class CartItemRepository extends ICartItemsRepository {
   }
 
   @override
-  Future<void> deleteItem(int id) {
+  Future<void> deleteItem(String id) {
     return client.sendRequest(() => client.delete(
           "${Urls.cartItems}/$id",
         ));
   }
 
   @override
-  Future<void> updateItem(int id, Map<String, dynamic> cartItem) {
+  Future<void> updateItem(String id, Map<String, dynamic> cartItem) {
     return client.sendRequest(() => client.patch(
           "${Urls.cartItems}/$id",
           payload: cartItem,
@@ -34,7 +34,7 @@ class CartItemRepository extends ICartItemsRepository {
   }
 
   @override
-  Future<void> addItem(CreateCartItemModel cartItem) async {
+  Future<void> addCartItem(CreateCartItemModel cartItem) async {
     await client.sendRequest(() => client.post(
           Urls.cartItems,
           payload: cartItem.toMap(),

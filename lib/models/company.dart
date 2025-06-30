@@ -1,4 +1,6 @@
-class BaseCompany {
+import 'package:equatable/equatable.dart';
+
+class BaseCompany with EquatableMixin {
   final String id;
   final dynamic thumbnailImage;
   final dynamic image;
@@ -18,6 +20,11 @@ class BaseCompany {
       name: json["name"] ?? "",
     );
   }
+
+  @override
+  List<Object?> get props => [
+        id,
+      ];
 }
 
 class Company extends BaseCompany {
