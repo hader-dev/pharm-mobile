@@ -4,7 +4,6 @@ import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/features/common_features/cart/cubit/cart_cubit.dart';
 import 'package:hader_pharm_mobile/repositories/remote/medicine_catalog/medicine_catalog_repository_impl.dart';
-import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 
 import '../../../config/di/di.dart';
 import '../../../config/theme/colors_manager.dart';
@@ -43,52 +42,45 @@ class _MedicineCatalogDetailsScreenState extends State<MedicineCatalogDetailsScr
           ),
           BlocProvider.value(value: AppLayout.appLayoutScaffoldKey.currentContext!.read<CartCubit>()),
         ],
-        child: BlocListener<CartCubit, CartState>(
-          listener: (context, state) {
-            if (state is CartItemAdded) {
-              getItInstance.get<ToastManager>().showToast(type: ToastType.success, message: 'Item added to cart');
+        child: Scaffold(body: BlocBuilder<MedicineDetailsCubit, MedicineDetailsState>(
+          builder: (context, state) {
+            if (state is MedicineDetailsLoading) {
+              return Center(child: CircularProgressIndicator());
             }
+            if (state is MedicineDetailsLoadError) {
+              return Center(child: Text('Failed to load medicine details'));
+            }
+
+            return Column(
+              children: [
+                Flexible(
+                  child: ListView(
+                    shrinkWrap: true,
+                    children: [
+                      MedicineProductPhotoSection(),
+                      HeaderSection(),
+                      Divider(color: AppColors.bgDisabled, thickness: 3.5, height: 1),
+                      ProductDetailsTabBarSection(),
+                      Gap(AppSizesManager.s24),
+
+                      if (BlocProvider.of<MedicineDetailsCubit>(context).tabController.index == 0)
+                        MedicineOverViewPage(),
+                      if (BlocProvider.of<MedicineDetailsCubit>(context).tabController.index == 1)
+                        DistributorDetailsPage(),
+
+                      Divider(color: AppColors.bgDisabled, thickness: 3.5, height: 1),
+                      // OtherProductsSection(),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(AppSizesManager.p12),
+                  child: ButtonsSection(),
+                ),
+              ],
+            );
           },
-          child: Scaffold(body: BlocBuilder<MedicineDetailsCubit, MedicineDetailsState>(
-            builder: (context, state) {
-              if (state is MedicineDetailsLoading) {
-                return Center(child: CircularProgressIndicator());
-              }
-              if (state is MedicineDetailsLoadError) {
-                return Center(child: Text('Failed to load medicine details'));
-              }
-
-              return Column(
-                children: [
-                  Flexible(
-                    child: ListView(
-                      shrinkWrap: true,
-                      children: [
-                        MedicineProductPhotoSection(),
-                        HeaderSection(),
-                        Divider(color: AppColors.bgDisabled, thickness: 3.5, height: 1),
-                        ProductDetailsTabBarSection(),
-                        Gap(AppSizesManager.s24),
-
-                        if (BlocProvider.of<MedicineDetailsCubit>(context).tabController.index == 0)
-                          MedicineOverViewPage(),
-                        if (BlocProvider.of<MedicineDetailsCubit>(context).tabController.index == 1)
-                          DistributorDetailsPage(),
-
-                        Divider(color: AppColors.bgDisabled, thickness: 3.5, height: 1),
-                        // OtherProductsSection(),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(AppSizesManager.p12),
-                    child: ButtonsSection(),
-                  ),
-                ],
-              );
-            },
-          )),
-        ),
+        )),
       ),
     );
   }

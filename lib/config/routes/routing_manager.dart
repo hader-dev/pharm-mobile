@@ -10,13 +10,17 @@ import '../../features/common_features/check_email/check_email.dart';
 import '../../features/common_features/check_phone/check_phone.dart';
 import '../../features/common_features/congratulation/congratulation.dart';
 import '../../features/common_features/create_company_profile/create_company_profile.dart';
+import '../../features/common_features/favorites/favorites.dart';
 import '../../features/common_features/login/login.dart';
 import '../../features/common_features/medicine_catalog_details/medicine_catalog_details.dart';
 import '../../features/common_features/onboarding/onboarding.dart';
 import '../../features/common_features/orders/orders.dart';
 
+import '../../features/common_features/orders_details/orders_details.dart';
 import '../../features/common_features/register/register.dart';
 import '../../features/common_features/splash/splash.dart';
+import '../../features/common_features/vendor_details/vendor_details.dart';
+import '../../models/company.dart';
 
 // import '../../view/screens/login/login.dart';
 // import '../../view/screens/splash/splash.dart';
@@ -41,12 +45,19 @@ class RoutingManager {
   static const String onboardingScreen = '/OnboardingScreen';
   static const String profileScreen = '/ProfileScreen';
   static const String changePasswordScreen = 'ChangePasswordScreen';
+  static const String favoritesScreen = 'FavoritesScreen';
+  static const String vendorDetails = '/VendorDetails';
+  static const String ordersDetailsScreen = '/OrdersDetailsScreen';
 
   static final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
 
   static final GoRouter router = GoRouter(
       navigatorKey: rootNavigatorKey,
       initialLocation: splashScreen,
+      redirect: (context, state) {
+        print("redirect ---------> ${state.fullPath}${state.pathParameters}");
+        return null;
+      },
       debugLogDiagnostics: true,
       routes: <RouteBase>[
         GoRoute(
@@ -71,6 +82,24 @@ class RoutingManager {
           },
         ),
         GoRoute(
+          name: ordersDetailsScreen,
+          path: ordersDetailsScreen,
+          builder: (BuildContext context, GoRouterState state) {
+            return OrdersDetailsScreen(
+              orderId: state.extra as String,
+            );
+          },
+        ),
+        GoRoute(
+          name: vendorDetails,
+          path: vendorDetails,
+          builder: (BuildContext context, GoRouterState state) {
+            return VendorDetails(
+              companyData: state.extra as Company,
+            );
+          },
+        ),
+        GoRoute(
           name: profileScreen,
           path: profileScreen,
           routes: [
@@ -79,6 +108,13 @@ class RoutingManager {
               path: changePasswordScreen,
               builder: (BuildContext context, GoRouterState state) {
                 return const ChangePasswordScreen();
+              },
+            ),
+            GoRoute(
+              name: favoritesScreen,
+              path: favoritesScreen,
+              builder: (BuildContext context, GoRouterState state) {
+                return const FavoritesScreen();
               },
             ),
           ],

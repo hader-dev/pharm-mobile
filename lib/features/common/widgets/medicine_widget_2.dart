@@ -14,8 +14,15 @@ import '../../../models/medicine_catalog.dart';
 import '../chips/custom_chip.dart' show CustomChip;
 
 class MedicineWidget2 extends StatelessWidget {
-  final BaseMedicineCatalog medicineData;
-  const MedicineWidget2({super.key, required this.medicineData});
+  final BaseMedicineCatalogModel medicineData;
+  final VoidCallback? onLikeTapped;
+  final bool isLiked;
+  const MedicineWidget2({
+    super.key,
+    required this.medicineData,
+    this.onLikeTapped,
+    required this.isLiked,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -105,7 +112,14 @@ class MedicineWidget2 extends StatelessWidget {
                   Row(children: [
                     CustomChip(label: "Antibiotic", color: AppColors.bgDarken2, onTap: () {}),
                     Spacer(),
-                    Icon(Iconsax.heart, color: Colors.black54),
+                    InkWell(
+                      onTap: () {
+                        onLikeTapped?.call();
+                      },
+                      child: !isLiked
+                          ? Icon(Icons.favorite_border_rounded, color: Colors.black54)
+                          : Icon(Icons.favorite, color: Colors.red),
+                    )
                   ]),
                   Gap(AppSizesManager.s8),
                   if (medicineData.dci != null)
@@ -123,16 +137,16 @@ class MedicineWidget2 extends StatelessWidget {
                         shape: BoxShape.circle,
                         border: Border.all(color: AppColors.bgDisabled, width: 1.5),
                         image: DecorationImage(
-                          image: medicineData.company.image == null
+                          image: medicineData.company?.image == null
                               ? AssetImage(DrawableAssetStrings.companyPlaceHolderImg)
-                              : NetworkImage(medicineData.company.thumbnailImage),
+                              : NetworkImage(medicineData.company?.thumbnailImage),
                         ),
                       ),
                     ),
                     Gap(AppSizesManager.s4),
-                    Text(medicineData.company.name,
-                        style: AppTypography.bodyXSmallStyle
-                            .copyWith(fontWeight: AppTypography.appFontSemiBold, color: TextColors.primary.color)),
+                    // Text(medicineData.company.name,
+                    //     style: AppTypography.bodyXSmallStyle
+                    //         .copyWith(fontWeight: AppTypography.appFontSemiBold, color: TextColors.primary.color)),
                   ]),
                   Row(
                     children: [

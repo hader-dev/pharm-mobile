@@ -5,6 +5,7 @@ import '../../../config/services/network/network_interface.dart';
 import '../../../models/medicine_catalog.dart';
 import '../../../models/medicine_catalog_response.dart';
 import '../../../utils/constants.dart';
+import '../../../utils/enums.dart';
 import 'medicine_catalog_repository.dart';
 
 class MedicineCatalogRepository extends IMedicineCatalogRepository {
@@ -13,15 +14,24 @@ class MedicineCatalogRepository extends IMedicineCatalogRepository {
 
   @override
   Future<MedicineResponse> getMedicinesCatalog(
-      {int limit = PaginationConstants.resultsPerPage, int offset = 0, String sortDirection = 'ASC'}) async {
+      {int limit = PaginationConstants.resultsPerPage,
+      int offset = 0,
+      String sortDirection = 'ASC',
+      SearchMedicineFilters? searchFilter,
+      String? companyId,
+      String search = ''}) async {
     final queryParams = {
-      'limit': limit,
-      'offset': offset,
+      'limit': limit.toString(),
+      'offset': offset.toString(),
       'sort[id]': sortDirection,
+      if (companyId != null) 'filters[companyId]': companyId.toString(),
+      if (searchFilter != null) ...{'search[${searchFilter.name}]': search},
+      'computed[isFavorite]': 'true',
+      'include[company][fields][]': ['id', 'name', 'thumbnailImage'],
     };
     var decodedResponse = await client.sendRequest(() => client.get(
           Urls.medicinesCatalog,
-          queryParams: queryParams.map((key, value) => MapEntry(key, value.toString())),
+          queryParams: queryParams,
         ));
     return MedicineResponse.fromJson(decodedResponse);
   }

@@ -11,17 +11,18 @@ class BaseParaPharmaCatalogModel {
   final int stockQuantity;
   final bool isActive;
   final BaseCompany? company;
+  bool isLiked;
 
-  BaseParaPharmaCatalogModel({
-    required this.id,
-    required this.unitPriceHt,
-    required this.thumbnailImage,
-    required this.image,
-    required this.name,
-    required this.stockQuantity,
-    required this.isActive,
-    this.company,
-  });
+  BaseParaPharmaCatalogModel(
+      {required this.id,
+      required this.unitPriceHt,
+      required this.thumbnailImage,
+      required this.image,
+      required this.name,
+      required this.stockQuantity,
+      required this.isActive,
+      this.company,
+      this.isLiked = false});
 
   factory BaseParaPharmaCatalogModel.fromJson(Map<String, dynamic> json) {
     return BaseParaPharmaCatalogModel(
@@ -32,7 +33,8 @@ class BaseParaPharmaCatalogModel {
       name: json['name'],
       stockQuantity: json['stockQuantity'],
       isActive: json['isActive'],
-      company: BaseCompany.fromJson(json['company']),
+      isLiked: json["isFavorite"] ?? false,
+      company: json['company'] != null ? BaseCompany.fromJson(json['company']) : null,
     );
   }
 }

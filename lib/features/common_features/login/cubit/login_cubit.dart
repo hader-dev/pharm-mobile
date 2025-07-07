@@ -16,8 +16,8 @@ part 'login_state.dart';
 class LoginCubit extends Cubit<LoginState> {
   bool isObscured = true;
 
-  TextEditingController emailController = TextEditingController(text: "mail4@mail.com");
-  TextEditingController passwordController = TextEditingController(text: "Strong@1222");
+  TextEditingController emailController = TextEditingController(text: "yassin-nabi@mail.com");
+  TextEditingController passwordController = TextEditingController(text: "Strong@12");
 
   LoginCubit() : super(LoginInitial());
 

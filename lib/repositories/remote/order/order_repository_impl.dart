@@ -2,8 +2,8 @@ import 'package:hader_pharm_mobile/utils/urls.dart';
 
 import '../../../config/services/network/network_interface.dart';
 
-import '../../../models/medicine_catalog.dart';
 
+import '../../../models/order_details.dart';
 import '../../../models/order_response.dart';
 import '../../../utils/constants.dart';
 import 'order_repository.dart';
@@ -28,9 +28,9 @@ class OrderRepository extends IOrderRepository {
   }
 
   @override
-  Future<MedicineCatalogModel> getMOrderById(String id) async {
+  Future<OrderDetailsModel> getMOrderById(String id) async {
     var decodedResponse = await client.sendRequest(() => client.get("${Urls.orders}/$id"));
-    return MedicineCatalogModel.fromJson(decodedResponse);
+    return OrderDetailsModel.fromJson(decodedResponse);
   }
 
   @override

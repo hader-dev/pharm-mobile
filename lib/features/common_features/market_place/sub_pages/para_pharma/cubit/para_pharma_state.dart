@@ -16,3 +16,17 @@ final class ParaPharmaProductsLoadingFailed extends ParaPharmaInitial {}
 
 //Search Limit Reached State :
 final class ParaPharmasLoadLimitReached extends ParaPharmaInitial {}
+
+final class ParaPharmaSearchFilterChanged extends ParaPharmaInitial {}
+
+final class ParaPharmaLiked extends ParaPharmaInitial {
+  String paraPharmaId;
+
+  ParaPharmaLiked({required this.paraPharmaId});
+}
+
+final class ParaPharmaLikeFailed extends ParaPharmaInitial {
+  String paraPharmaId;
+
+  ParaPharmaLikeFailed({required this.paraPharmaId});
+}

@@ -9,7 +9,7 @@ class CreateCartItemModel {
   CreateCartItemModel({required this.productId, required this.quantity, required this.productType, this.note = ''});
   Map<String, dynamic> toMap() => {
         if (productType == ProductTypes.medicine) ...{
-          'medicinesCatalogId': productId
+          'medicineCatalogId': productId
         } else ...{
           'parapharmCatalogId': productId
         },

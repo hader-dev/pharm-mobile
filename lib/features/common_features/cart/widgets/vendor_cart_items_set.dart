@@ -5,7 +5,6 @@ import 'package:hader_pharm_mobile/models/company.dart';
 
 import '../../../../config/theme/colors_manager.dart';
 import '../../../../config/theme/typoghrapy_manager.dart';
-import '../../../../models/cart_item.dart';
 import '../../../../utils/assets_strings.dart';
 import '../../../../utils/constants.dart';
 import '../cubit/cart_cubit.dart';

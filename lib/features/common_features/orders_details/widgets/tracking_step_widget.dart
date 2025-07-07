@@ -1,0 +1,84 @@
+import 'package:flutter/material.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_date_helper.dart';
+
+import '../../../../config/theme/typoghrapy_manager.dart';
+import '../../../../models/order_details.dart';
+
+import '../../../../utils/constants.dart';
+import '../../../../utils/enums.dart';
+
+class TrackingStepWidget extends StatelessWidget {
+  final OrderStatusHistory historyStep;
+  final bool isFirst;
+  final bool isLast;
+
+  const TrackingStepWidget({
+    super.key,
+    required this.historyStep,
+    required this.isFirst,
+    required this.isLast,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    OrderStatus orderStatus =
+        OrderStatus.values.firstWhere((OrderStatus element) => element.id == historyStep.orderStatusId);
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Column(
+          children: <Widget>[
+            Container(
+              width: 20,
+              alignment: Alignment.center,
+              child: Column(
+                children: <Widget>[
+                  if (!isFirst)
+                    Container(
+                      height: 20,
+                      width: 2,
+                      color: Colors.grey.shade300,
+                    ),
+                  CircleAvatar(
+                    child: Icon(orderStatus.icon, color: orderStatus.color, size: AppSizesManager.iconSize20),
+                  ),
+                  if (!isLast)
+                    Container(
+                      height: 40,
+                      width: 2,
+                      color: Colors.grey.shade300,
+                    ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(width: 10),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                orderStatus.name,
+                style: AppTypography.body3MediumStyle,
+              ),
+              Text(
+                historyStep.createdAt.toLocal().format,
+                style: AppTypography.body3RegularStyle,
+              ),
+              const SizedBox(height: 4),
+              // Text(
+              //   OrderStatus.translateDescription(context, orderStatus),
+              //   style: const TextStyle(
+              //     fontSize: AppTypography.appFontSize4,
+              //     color: Colors.black54,
+              //   ),
+              // ),
+              const SizedBox(height: 20),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}

@@ -11,7 +11,7 @@ part 'orders_state.dart';
 class OrdersCubit extends Cubit<OrdersState> {
   int totalItemsCount = 0;
   int offSet = 0;
-  List<OrderModel> orders = [];
+  List<BaseOrderModel> orders = [];
   final OrderRepository orderRepository;
   final ScrollController scrollController;
   OrdersCubit({required this.orderRepository, required this.scrollController}) : super(OrdersInitial()) {

@@ -10,7 +10,6 @@ import 'package:iconsax/iconsax.dart';
 import '../../../../models/create_cart_item.dart';
 import '../../../../utils/constants.dart';
 import '../../../../utils/enums.dart';
-import '../../../app_layout/app_layout.dart';
 import '../../../common/buttons/solid/primary_text_button.dart';
 import 'make_order_bottom_sheet.dart';
 import 'quantity_section.dart';

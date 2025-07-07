@@ -63,11 +63,25 @@ class ProfileScreen extends StatelessWidget {
                           onTap: () {
                             GoRouter.of(context).pushNamed(RoutingManager.changePasswordScreen);
                           }),
-                      SettingsTile(icon: LucideIcons.globe, title: "language", onTap: () {}),
                       Padding(
                         padding:
                             const EdgeInsets.symmetric(horizontal: AppSizesManager.p6, vertical: AppSizesManager.p8),
                         child: SectionTitle(title: "preferences"),
+                      ),
+                      SettingsTile(
+                          icon: LucideIcons.heart,
+                          title: "Favorites",
+                          onTap: () {
+                            GoRouter.of(context).pushNamed(RoutingManager.favoritesScreen);
+                          }),
+                      SettingsTile(
+                        icon: LucideIcons.globe,
+                        title: "language",
+                      ),
+                      Padding(
+                        padding:
+                            const EdgeInsets.symmetric(horizontal: AppSizesManager.p6, vertical: AppSizesManager.p8),
+                        child: SectionTitle(title: "App Privarcy"),
                       ),
                       SettingsTile(
                         icon: LucideIcons.fileText,

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 
-
 class BottomSheetHelper {
   static Future<void> showCommonBottomSheet({
     required BuildContext context,
@@ -19,8 +18,8 @@ class BottomSheetHelper {
       builder: (context) {
         return DraggableScrollableSheet(
           expand: false,
-          initialChildSize: 0.5,
-          maxChildSize: maxHeight ?? 0.9,
+          initialChildSize: .85,
+          maxChildSize: maxHeight ?? 1,
           minChildSize: 0.3,
           builder: (_, controller) => Container(
             padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p12),

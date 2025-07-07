@@ -1,66 +1,164 @@
-// import 'order.dart';
-// import 'order_Item.dart';
-// import 'tracking_history.dart' show OrderHistory;
+import 'company.dart';
+import 'order.dart';
 
-// class OrderDetailsModel extends Order {
-//   final List<OrderItem> orderItems;
-//   final List<OrderHistory> orderHistory;
+class OrderDetailsModel extends BaseOrderModel {
+  final double latitude;
+  final double longitude;
 
-//   OrderDetailsModel({
-//     required super.orderId,
-//     super.note,
-//     required super.discount,
-//     required super.discountPercentage,
-//     required super.clientFirstName,
-//     required super.clientLastName,
-//     required super.deliveryAddress,
-//     required super.clientMobile,
-//     required super.clientFax,
-//     required super.clientPhone,
-//     required super.stampDuty,
-//     required super.amountHt,
-//     required super.netAmountTtc,
-//     required super.netToPay,
-//     required super.totalTva,
-//     required super.ref,
-//     required super.createdAt,
-//     required super.updatedAt,
-//     required super.clientId,
-//     required super.paymentMethodId,
-//     required super.status,
-//     required super.latitude,
-//     required super.longitude,
-//     this.orderItems = const <OrderItem>[],
-//     this.orderHistory = const <OrderHistory>[],
-//   });
+  final String clientCompanyId;
+  final String sellerCompanyId;
+  final dynamic delegateUserId;
+  final dynamic operatorUserId;
+  final dynamic stockUserId;
 
-//   factory OrderDetailsModel.fromJson(Map<String, dynamic> json) {
-//     return OrderDetailsModel(
-//       orderId: json['id'],
-//       note: json['note'],
-//       discount: double.parse(json['discount']),
-//       discountPercentage: json['discountPercentage'],
-//       clientFirstName: json['clientFirstName'],
-//       clientLastName: json['clientLastName'],
-//       deliveryAddress: json['deliveryAddress'],
-//       clientMobile: json['clientMobile'],
-//       clientFax: json['clientFax'],
-//       clientPhone: json['clientPhone'],
-//       stampDuty: double.parse(json['stampDuty']),
-//       amountHt: double.parse(json['amountHt']),
-//       netAmountTtc: double.parse(json['netAmountTtc']),
-//       netToPay: double.parse(json['netToPay']),
-//       totalTva: double.parse(json['totalTva']),
-//       ref: json['ref'],
-//       createdAt: DateTime.parse(json['createdAt']),
-//       updatedAt: DateTime.parse(json['updatedAt']),
-//       clientId: json['clientId'],
-//       paymentMethodId: json['paymentMethodId'],
-//       status: json['statusId'],
-//       latitude: double.parse(json['latitude'] ?? "0.0"),
-//       longitude: double.parse(json['longitude'] ?? "0.0"),
-//       orderItems: (json['orderItems'] as List).map((item) => OrderItem.fromJson(item)).toList(),
-//       orderHistory: (json['history'] as List).map((item) => OrderHistory.fromJson(item)).toList(),
-//     );
-//   }
-// }
+  final int deliveryTownId;
+  final String clientNote;
+  final dynamic privateNote;
+
+  final List<OrderItem> orderItems;
+  final List<OrderStatusHistory> orderStatusHistories;
+  final Company clientCompany;
+  final Company sellerCompany;
+
+  OrderDetailsModel({
+    required super.id,
+    super.invoiceType,
+    super.paymentMethod,
+    required super.createdAt,
+    required super.updatedAt,
+    required super.deliveryAddress,
+    required super.status,
+    required super.totalAmountExclTax,
+    required super.totalAmountInclTax,
+    required this.latitude,
+    required this.longitude,
+    required this.clientCompanyId,
+    required this.sellerCompanyId,
+    required this.delegateUserId,
+    required this.operatorUserId,
+    required this.stockUserId,
+    required this.deliveryTownId,
+    required this.clientNote,
+    required this.privateNote,
+    required this.orderItems,
+    required this.orderStatusHistories,
+    required this.clientCompany,
+    required this.sellerCompany,
+  });
+
+  factory OrderDetailsModel.fromJson(Map<String, dynamic> json) => OrderDetailsModel(
+        id: json['id'],
+        invoiceType: json['invoiceType'],
+        paymentMethod: json['paymentMethod'],
+        createdAt: DateTime.parse(json['createdAt']),
+        updatedAt: DateTime.parse(json['updatedAt']),
+        deliveryAddress: json['deliveryAddress'],
+        status: json['status'],
+        totalAmountExclTax: json['totalAmountHt'] != null ? double.parse(json['totalAmountHt']) : 0.0,
+        totalAmountInclTax: json['totalAmountTtc '] != null ? double.parse(json['totalAmountTtc']) : 0.0,
+        latitude: json['latitude'] != null ? double.parse(json['latitude']) : 0.0,
+        longitude: json['longitude'] != null ? double.parse(json['longitude']) : 0.0,
+        clientCompanyId: json['clientCompanyId'],
+        sellerCompanyId: json['sellerCompanyId'],
+        delegateUserId: json['delegateUserId'],
+        operatorUserId: json['operatorUserId'],
+        stockUserId: json['stockUserId'],
+        deliveryTownId: json['deliveryTownId'],
+        clientNote: json['clientNote'],
+        privateNote: json['privateNote'],
+        orderItems: List<OrderItem>.from(json['orderItems'].map((x) => OrderItem.fromJson(x))),
+        orderStatusHistories: List<OrderStatusHistory>.from(
+            (json['orderStatusHistories'] as List).map((x) => OrderStatusHistory.fromJson(x))),
+        clientCompany: Company.fromJson(json['clientCompany']),
+        sellerCompany: Company.fromJson(json['sellerCompany']),
+      );
+}
+
+class OrderItem {
+  final String id;
+  final double totalAmountTtc;
+  final double totalAmountHt;
+  final double tvaPercentage;
+  final double unitPriceHt;
+  final double unitPriceTtc;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+  final dynamic medicineCatalogId;
+  final String parapharmCatalogId;
+  final int quantity;
+  final dynamic designation;
+  final dynamic lotNumber;
+  final dynamic expirationDate;
+  final double margin;
+  final double discountAmount;
+  final String orderId;
+
+  OrderItem({
+    required this.id,
+    required this.totalAmountTtc,
+    required this.totalAmountHt,
+    required this.tvaPercentage,
+    required this.unitPriceHt,
+    required this.unitPriceTtc,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.medicineCatalogId,
+    required this.parapharmCatalogId,
+    required this.quantity,
+    required this.designation,
+    required this.lotNumber,
+    required this.expirationDate,
+    required this.margin,
+    required this.discountAmount,
+    required this.orderId,
+  });
+
+  factory OrderItem.fromJson(Map<String, dynamic> json) => OrderItem(
+        id: json['id'],
+        totalAmountTtc: json['totalAmountTtc'] != null ? double.parse(json['totalAmountTtc']) : 0.0,
+        totalAmountHt: json['totalAmountHt'] != null ? double.parse(json['totalAmountHt']) : 0.0,
+        tvaPercentage: json['tvaPercentage'] != null ? double.parse(json['tvaPercentage']) : 0.0,
+        unitPriceHt: json['unitPriceHt'] != null ? double.parse(json['unitPriceHt']) : 0.0,
+        unitPriceTtc: json['unitPriceTtc'] != null ? double.parse(json['unitPriceTtc']) : 0.0,
+        createdAt: DateTime.parse(json['createdAt']),
+        updatedAt: DateTime.parse(json['updatedAt']),
+        medicineCatalogId: json['medicineCatalogId'],
+        parapharmCatalogId: json['parapharmCatalogId'],
+        quantity: json['quantity'],
+        designation: json['designation'],
+        lotNumber: json['lotNumber'],
+        expirationDate: json['expirationDate'],
+        margin: json['margin'] != null ? double.parse(json['margin']) : 0.0,
+        discountAmount: json['discountAmount'] != null ? double.parse(json['discountAmount']) : 0.0,
+        orderId: json['orderId'],
+      );
+}
+
+class OrderStatusHistory {
+  final String id;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+  final String orderId;
+  final int orderStatusId;
+  final dynamic changedByUserId;
+  final dynamic note;
+
+  OrderStatusHistory({
+    required this.id,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.orderId,
+    required this.orderStatusId,
+    required this.changedByUserId,
+    required this.note,
+  });
+  factory OrderStatusHistory.fromJson(Map<String, dynamic> json) => OrderStatusHistory(
+        id: json['id'],
+        createdAt: DateTime.parse(json['createdAt']),
+        updatedAt: DateTime.parse(json['updatedAt']),
+        orderId: json['orderId'],
+        orderStatusId: json['orderStatusId'],
+        changedByUserId: json['changedByUserId'],
+        note: json['note'],
+      );
+}

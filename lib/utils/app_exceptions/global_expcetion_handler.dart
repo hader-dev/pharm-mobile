@@ -46,10 +46,17 @@ class GlobalExceptionHandler {
             "${exception.message}\n${exception.errors != null ? exception.errors!.map((e) => e.message).join("\n") : ""}",
       );
     } else {
-      toastManager.showToast(
-        type: ToastType.error,
-        message: (exception as TemplateException).message ?? "An unexpected error occurred. Please try again later.",
-      );
+      if (exception is String) {
+        toastManager.showToast(
+          type: ToastType.error,
+          message: exception,
+        );
+      } else {
+        toastManager.showToast(
+          type: ToastType.error,
+          message: (exception as TemplateException).message ?? "An unexpected error occurred. Please try again later.",
+        );
+      }
     }
   }
 }

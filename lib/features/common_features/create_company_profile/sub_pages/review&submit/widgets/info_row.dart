@@ -9,33 +9,53 @@ class InfoRow extends StatelessWidget {
   final IconData? icon;
   final String label;
   final String dataValue;
+  final Axis contentDirection;
 
-  const InfoRow({super.key, this.icon, required this.label, this.dataValue = ""});
+  const InfoRow(
+      {super.key, this.icon, required this.label, this.dataValue = "", this.contentDirection = Axis.horizontal});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: AppSizesManager.p12),
-      child: Row(
-        children: [
-          if (icon != null) Icon(icon, color: Colors.grey[700], size: 20),
-          const Gap(AppSizesManager.s8),
-          Text(label, style: AppTypography.body3MediumStyle.copyWith(color: TextColors.ternary.color)),
-          Spacer(),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 2 / 6,
-            child: Tooltip(
-              message: dataValue.isEmpty ? "Not Provided" : dataValue,
-              triggerMode: TooltipTriggerMode.tap,
-              child: Text(dataValue.isEmpty ? "Not Provided" : dataValue,
-                  textAlign: TextAlign.end,
-                  softWrap: true,
-                  overflow: TextOverflow.ellipsis,
-                  style: AppTypography.body3MediumStyle),
+    return contentDirection == Axis.horizontal
+        ? Padding(
+            padding: const EdgeInsets.only(bottom: AppSizesManager.p12),
+            child: Row(
+              children: [
+                if (icon != null) Icon(icon, color: Colors.grey[700], size: 20),
+                const Gap(AppSizesManager.s8),
+                Text(label, style: AppTypography.body3MediumStyle.copyWith(color: TextColors.ternary.color)),
+                Spacer(),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * 2 / 6,
+                  child: Tooltip(
+                    message: dataValue.isEmpty ? "Not Provided" : dataValue,
+                    triggerMode: TooltipTriggerMode.tap,
+                    child: Text(dataValue.isEmpty ? "Not Provided" : dataValue,
+                        textAlign: TextAlign.end,
+                        softWrap: true,
+                        overflow: TextOverflow.ellipsis,
+                        style: AppTypography.body3MediumStyle),
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
-      ),
-    );
+          )
+        : Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(label, style: AppTypography.body3MediumStyle.copyWith(color: TextColors.ternary.color)),
+              Gap(AppSizesManager.s6),
+              Tooltip(
+                message: dataValue.isEmpty ? "Not Provided" : dataValue,
+                triggerMode: TooltipTriggerMode.tap,
+                child: Text(dataValue.isEmpty ? "Not Provided" : dataValue,
+                    textAlign: TextAlign.end,
+                    softWrap: true,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                    style: AppTypography.body3MediumStyle),
+              ),
+            ],
+          );
   }
 }

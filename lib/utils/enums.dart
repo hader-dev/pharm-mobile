@@ -1,41 +1,43 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:flutter/material.dart';
 
 import '../config/theme/colors_manager.dart';
 import 'assets_strings.dart';
 
-// enum OrderStatus {
-//   newStat(
-//     id: 1,
-//     color: Color.fromARGB(255, 73, 73, 73),
-//     icon: Icons.new_releases,
-//   ),
-//   confirmed(
-//     id: 2,
-//     color: Colors.orange,
-//     icon: Icons.play_arrow,
-//   ),
-//   completed(
-//     id: 3,
-//     color: Colors.green,
-//     icon: Icons.check_circle,
-//   ),
-//   canceled(
-//     id: 4,
-//     color: Colors.red,
-//     icon: Icons.cancel,
-//   );
+enum OrderStatus {
+  pending(
+    id: 1,
+    color: Color.fromARGB(255, 106, 106, 106),
+    icon: Icons.new_releases,
+  ),
+  confirmed(
+    id: 2,
+    color: Colors.orange,
+    icon: Icons.play_arrow,
+  ),
+  completed(
+    id: 3,
+    color: Colors.green,
+    icon: Icons.check_circle,
+  ),
+  canceled(
+    id: 4,
+    color: Colors.red,
+    icon: Icons.cancel,
+  );
 
-//   final int id;
+  final int id;
 
-//   final Color color;
-//   final IconData icon;
+  final Color color;
+  final IconData icon;
 
-//   const OrderStatus({
-//     required this.id,
-//     required this.color,
-//     required this.icon,
-//   });
-
+  const OrderStatus({
+    required this.id,
+    required this.color,
+    required this.icon,
+  });
+}
 //   static String translateLabel(BuildContext context, OrderStatus expression) {
 //     return '';
 //     // switch (expression) {
@@ -77,6 +79,12 @@ import 'assets_strings.dart';
 //   }
 // }
 
+enum SearchMedicineFilters { dci, distributorSku, code }
+
+enum SearchParaPharmaFilters { name, packaging, sku, description }
+
+enum SearchVendorFilters { name, address, phone, email, description }
+
 enum ProductTypes { medicine, para_pharmacy }
 
 enum PaymentMethods { cash, cheque, bank_transfer }
@@ -97,20 +105,16 @@ enum CompanyType {
 }
 
 enum DistributorCategory {
-  pharmacy(
-    id: 1,
-  ),
-  paraPharmacy(
-    id: 2,
-  ),
-  both(
-    id: 3,
-  );
+  pharmacy(id: 1, color: Colors.green),
+  paraPharmacy(id: 2, color: Colors.blue),
+  both(id: 3, color: Color.fromARGB(255, 96, 79, 183));
 
   final int id;
+  final Color color;
 
   const DistributorCategory({
     required this.id,
+    required this.color,
   });
 }
 

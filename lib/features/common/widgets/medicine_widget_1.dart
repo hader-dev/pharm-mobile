@@ -12,7 +12,7 @@ import '../../../config/theme/typoghrapy_manager.dart';
 import '../chips/custom_chip.dart' show CustomChip;
 
 class MedicineWidget1 extends StatelessWidget {
-  final BaseMedicineCatalog medicineData;
+  final BaseMedicineCatalogModel medicineData;
   const MedicineWidget1({super.key, required this.medicineData});
 
   @override
@@ -76,13 +76,11 @@ class MedicineWidget1 extends StatelessWidget {
                           border: Border.all(color: AppColors.bgDisabled, width: 1.5),
                           image: DecorationImage(
                             fit: BoxFit.fill,
-                            image: medicineData.company.image == null
+                            image: medicineData.company?.image == null
                                 ? AssetImage(DrawableAssetStrings.companyPlaceHolderImg)
-                                : NetworkImage(medicineData.company.thumbnailImage),
+                                : NetworkImage(medicineData.company?.thumbnailImage),
                           ))),
                   Gap(AppSizesManager.s4),
-                  Text(medicineData.company.name,
-                      style: AppTypography.body3RegularStyle.copyWith(color: AppColors.bgWhite)),
                   Spacer(),
                   Icon(
                     Iconsax.wallet_money,

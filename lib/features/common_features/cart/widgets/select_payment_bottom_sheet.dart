@@ -14,6 +14,7 @@ import '../../../../utils/enums.dart';
 import '../../../app_layout/app_layout.dart';
 import '../../../common/buttons/solid/primary_text_button.dart';
 import '../../../common/widgets/bottom_sheet_header.dart';
+import '../../../common/widgets/info_widget.dart' show InfoWidget;
 
 class SelectPaymentMethodBottomSheet extends StatelessWidget {
   const SelectPaymentMethodBottomSheet({super.key});
@@ -35,8 +36,8 @@ class SelectPaymentMethodBottomSheet extends StatelessWidget {
               InfoWidget(
                   label: "Payment Methods",
                   bgColor: AppColors.bgWhite,
-                  value: ListView(
-                    shrinkWrap: true,
+                  value: Column(
+                    // shrinkWrap: true,
                     children: PaymentMethods.values
                         .map((paymentMethod) => FilterOptionValueWidget(
                             title: paymentMethod.name,
@@ -47,8 +48,8 @@ class SelectPaymentMethodBottomSheet extends StatelessWidget {
               InfoWidget(
                   label: "Invoice Types",
                   bgColor: AppColors.bgWhite,
-                  value: ListView(
-                    shrinkWrap: true,
+                  value: Column(
+                    //shrinkWrap: true,
                     children: InvoiceTypes.values
                         .map((invoiceType) => FilterOptionValueWidget(
                             title: invoiceType.name,
@@ -107,45 +108,6 @@ class SelectPaymentMethodBottomSheet extends StatelessWidget {
             ],
           );
         },
-      ),
-    );
-  }
-}
-
-class InfoWidget extends StatelessWidget {
-  final String label;
-  final Widget value;
-  final Color bgColor;
-
-  const InfoWidget({
-    super.key,
-    required this.label,
-    required this.value,
-    this.bgColor = AppColors.bgDarken,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(AppSizesManager.p12),
-      width: double.maxFinite,
-      margin: const EdgeInsets.symmetric(vertical: AppSizesManager.p6),
-      decoration: BoxDecoration(
-        color: bgColor,
-        borderRadius: BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            label,
-            style: AppTypography.body3MediumStyle.copyWith(
-              color: TextColors.ternary.color,
-            ),
-          ),
-          const Gap(AppSizesManager.s4),
-          value
-        ],
       ),
     );
   }

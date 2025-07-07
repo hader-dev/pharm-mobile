@@ -111,7 +111,7 @@ class CartCubit extends Cubit<CartState> {
   void increaseCartItemQuantity(String cartItemId) {
     try {
       int cartItemIndex = cartItems.lastIndexWhere((element) => element.id == cartItemId);
-      if (cartItems[cartItemIndex].quantity == cartItems[cartItemIndex].medicinesCatalog.stockQuantity) {
+      if (cartItems[cartItemIndex].quantity == cartItems[cartItemIndex].medicineCatalog!.stockQuantity) {
         throw TemplateException(message: "you reached the limit of the stock.");
       }
 
@@ -189,7 +189,6 @@ class CartCubit extends Cubit<CartState> {
   }
 
   passOrder() async {
-    ordersRepository.
-
+    //ordersRepository.
   }
 }

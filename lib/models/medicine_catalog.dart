@@ -2,7 +2,7 @@ import 'package:hader_pharm_mobile/models/company.dart';
 import 'package:hader_pharm_mobile/models/image.dart';
 import 'package:hader_pharm_mobile/models/medicine.dart';
 
-class BaseMedicineCatalog {
+class BaseMedicineCatalogModel {
   final String id;
   final String unitPriceTtc;
   final String unitPriceHt;
@@ -26,9 +26,10 @@ class BaseMedicineCatalog {
   final bool isQuota;
   final bool isFeatured;
   final int displayOrder;
-  final BaseCompany company;
+  final BaseCompany? company;
+  bool isLiked;
 
-  BaseMedicineCatalog({
+  BaseMedicineCatalogModel({
     required this.id,
     required this.unitPriceTtc,
     required this.unitPriceHt,
@@ -53,10 +54,11 @@ class BaseMedicineCatalog {
     required this.isFeatured,
     required this.displayOrder,
     required this.company,
+    this.isLiked = false,
   });
 
-  factory BaseMedicineCatalog.fromJson(Map<String, dynamic> json) {
-    return BaseMedicineCatalog(
+  factory BaseMedicineCatalogModel.fromJson(Map<String, dynamic> json) {
+    return BaseMedicineCatalogModel(
       id: json["id"] ?? "",
       unitPriceTtc: json["unitPriceTtc"] ?? "",
       unitPriceHt: json["unitPriceHt"] ?? "",
@@ -80,12 +82,13 @@ class BaseMedicineCatalog {
       isQuota: json["isQuota"] ?? false,
       isFeatured: json["isFeatured"] ?? false,
       displayOrder: json["displayOrder"] ?? 0,
-      company: BaseCompany.fromJson(json["company"]),
+      isLiked: json["isFavorite"] ?? false,
+      company: json["company"] != null ? BaseCompany.fromJson(json["company"]) : null,
     );
   }
 }
 
-class MedicineCatalogModel extends BaseMedicineCatalog {
+class MedicineCatalogModel extends BaseMedicineCatalogModel {
   @override
   // ignore: overridden_fields
   final Company company;

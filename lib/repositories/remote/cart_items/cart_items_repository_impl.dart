@@ -13,6 +13,9 @@ class CartItemRepository extends ICartItemsRepository {
   Future<CartItemsResponse> getCartItem({offset = 0, limit = 10}) async {
     var decodedResponse = await client.sendRequest(() => client.get(
           Urls.cartItems,
+          queryParams: {
+            "include[sellerCompany][fields][]": ["id", "name", "thumbnailImage", "image"],
+          },
         ));
 
     return CartItemsResponse.fromJson(decodedResponse);

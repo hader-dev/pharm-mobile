@@ -1,0 +1,45 @@
+import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+
+import '../../../config/theme/colors_manager.dart';
+import '../../../config/theme/typoghrapy_manager.dart';
+import '../../../utils/constants.dart';
+
+class InfoWidget extends StatelessWidget {
+  final String label;
+  final Widget value;
+  final Color bgColor;
+
+  const InfoWidget({
+    super.key,
+    required this.label,
+    required this.value,
+    this.bgColor = AppColors.bgDarken,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(AppSizesManager.p12),
+      width: double.maxFinite,
+      margin: const EdgeInsets.symmetric(vertical: AppSizesManager.p6),
+      decoration: BoxDecoration(
+        color: bgColor,
+        borderRadius: BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            label,
+            style: AppTypography.body3MediumStyle.copyWith(
+              color: TextColors.ternary.color,
+            ),
+          ),
+          const Gap(AppSizesManager.s4),
+          value
+        ],
+      ),
+    );
+  }
+}

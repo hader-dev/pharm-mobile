@@ -13,6 +13,7 @@ import '../../../utils/constants.dart';
 import '../../common/app_bars/custom_app_bar.dart';
 import '../../common/widgets/end_of_load_result_widget.dart';
 import 'cubit/orders_cubit.dart';
+import 'widget/order_card.dart';
 
 class OrdersScreen extends StatelessWidget {
   const OrdersScreen({super.key});
@@ -20,6 +21,11 @@ class OrdersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+        child: BlocProvider(
+      create: (context) => OrdersCubit(
+          scrollController: ScrollController(),
+          orderRepository: OrderRepository(client: getItInstance.get<INetworkService>()))
+        ..getOrders(),
       child: Scaffold(
         appBar: CustomAppBar(
           bgColor: AppColors.bgWhite,
@@ -32,9 +38,20 @@ class OrdersScreen extends StatelessWidget {
             ),
             onPressed: () {},
           ),
-          title: const Text(
-            "Orders",
-            style: AppTypography.headLine3SemiBoldStyle,
+          title: BlocBuilder<OrdersCubit, OrdersState>(
+            builder: (context, state) {
+              return RichText(
+                text: TextSpan(
+                  text: "Orders",
+                  style: AppTypography.headLine3SemiBoldStyle.copyWith(color: TextColors.primary.color),
+                  children: [
+                    TextSpan(
+                        text: " (${BlocProvider.of<OrdersCubit>(context).orders.length})",
+                        style: AppTypography.bodySmallStyle.copyWith(color: TextColors.ternary.color)),
+                  ],
+                ),
+              );
+            },
           ),
           // trailing: [
           //   // IconButton(
@@ -47,55 +64,39 @@ class OrdersScreen extends StatelessWidget {
           //   // ),
           // ],
         ),
-        body: SizedBox(
-          width: double.maxFinite,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              BlocProvider(
-                create: (context) => OrdersCubit(
-                    scrollController: ScrollController(),
-                    orderRepository: OrderRepository(client: getItInstance.get<INetworkService>()))
-                  ..getOrders(),
-                child: Material(child: BlocBuilder<OrdersCubit, OrdersState>(
-                  builder: (context, state) {
-                    if (state is OrdersLoading) {
-                      return const Center(child: CircularProgressIndicator());
-                    }
-                    if (state is OrdersLoaded && BlocProvider.of<OrdersCubit>(context).orders.isEmpty) {
-                      return EmptyListWidget();
-                    }
-                    return Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Expanded(
-                          child: RefreshIndicator(
-                            onRefresh: () {
-                              return BlocProvider.of<OrdersCubit>(context).getOrders();
-                            },
-                            child: ListView.builder(
-                                controller: BlocProvider.of<OrdersCubit>(context).scrollController,
-                                shrinkWrap: true,
-                                physics: const AlwaysScrollableScrollPhysics(),
-                                itemCount: BlocProvider.of<OrdersCubit>(context).orders.length,
-                                itemBuilder: (context, index) => Container()
-                                //  MedicineWidget2(
-                                //   medicineData: BlocProvider.of<MedicineProductsCubit>(context).medicines[index],
-                                // ),
-                                ),
-                          ),
-                        ),
-                        if (state is LoadingMoreOrders) const Center(child: CircularProgressIndicator()),
-                        if (state is OrdersLoadLimitReached) EndOfLoadResultWidget(),
-                      ],
-                    );
-                  },
-                )),
-              ),
-            ],
-          ),
+        body: BlocBuilder<OrdersCubit, OrdersState>(
+          builder: (context, state) {
+            if (state is OrdersLoading) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            if (state is OrdersLoaded && BlocProvider.of<OrdersCubit>(context).orders.isEmpty) {
+              return EmptyListWidget();
+            }
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Expanded(
+                  child: RefreshIndicator(
+                    onRefresh: () {
+                      return BlocProvider.of<OrdersCubit>(context).getOrders();
+                    },
+                    child: ListView.builder(
+                        controller: BlocProvider.of<OrdersCubit>(context).scrollController,
+                        shrinkWrap: true,
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        itemCount: BlocProvider.of<OrdersCubit>(context).orders.length,
+                        itemBuilder: (context, index) => OrderCard(
+                              orderData: BlocProvider.of<OrdersCubit>(context).orders[index],
+                            )),
+                  ),
+                ),
+                if (state is LoadingMoreOrders) const Center(child: CircularProgressIndicator()),
+                if (state is OrdersLoadLimitReached) EndOfLoadResultWidget(),
+              ],
+            );
+          },
         ),
       ),
-    );
+    ));
   }
 }

@@ -22,6 +22,10 @@ class Urls {
   //Company
   static String get company => "/companies";
 
+  //clients-companies
+  static String get clientsCompanies => "/clients-companies";
+  static String get clientsCompaniesJoin => "$clientsCompanies/requests/join";
+
   //Medicines
   static String get medicinesCatalog => "/medicines-catalog";
 
@@ -33,7 +37,13 @@ class Urls {
 
   //Cart Items
   static String get cartItems => "/cart-items";
-
   static String get cartItemsBulkRemove => "$cartItems/bulk-remove";
+
+  //favorites
+  static String get favorites => "/favorite-";
+  static String get favoritesMedicineCatalog => "${favorites}medications-catalog";
+  static String get favoritesParaPharmaCatalog => "${favorites}parapharm-catalog";
+  static String get favoritesCompany => "${favorites}companies";
+
   static String get publicFiles => "/files";
 }

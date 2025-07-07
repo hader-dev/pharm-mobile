@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/medicine_products/medicine_products.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/para_pharma.dart';
-import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/services/services.dart';
+import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/vendors/vendors.dart';
 
 import '../../../../config/theme/colors_manager.dart';
 
@@ -12,7 +12,7 @@ import '../../../../config/theme/colors_manager.dart';
 // }
 
 class MarketPlaceTabBarSection extends StatefulWidget {
-  final List<String> tabs = ["Medicines products", "Para-Pharma", "Services"];
+  final List<String> tabs = ["Medicines", "Para-Pharma", "Vendors"];
   MarketPlaceTabBarSection({super.key});
   // void generateSectionsKeys() {
   //   sectionsKeys = {for (var categoryItem in tabs.categories) categoryItem.category.name: GlobalKey()};
@@ -59,7 +59,7 @@ class _MarketPlaceTabBarSectionState extends State<MarketPlaceTabBarSection> wit
           child: TabBarView(
             physics: const NeverScrollableScrollPhysics(),
             controller: tabsController,
-            children: [MedicineProductsPage(), ParaPharmaPage(), ServicesPage()],
+            children: [MedicineProductsPage(), ParaPharmaPage(), VendorsPage()],
           ),
         ),
       ],

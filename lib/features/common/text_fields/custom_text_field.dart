@@ -169,6 +169,8 @@ class CustomTextField extends StatelessWidget {
           maxLines: maxLines,
           obscuringCharacter: '*',
           decoration: InputDecoration(
+            hintText: hintText,
+            hintStyle: AppTypography.body3RegularStyle.copyWith(color: TextColors.ternary.color),
             isDense: true,
             filled: isFilled,
             suffixIcon: suffixIcon,

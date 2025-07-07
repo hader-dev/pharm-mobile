@@ -69,7 +69,7 @@ class DioNetworkManager extends INetworkService {
 
   @override
   Future<Response> patch(String url,
-      {Map<String, String>? headers, Map<String, String>? queryParams, dynamic payload}) async {
+      {Map<String, String>? headers, Map<String, Object>? queryParams, dynamic payload}) async {
     Response apiResponse = await _client.patchUri(prepareUrl(url, queryParams: queryParams),
         data: payload != null
             ? payload is FormData
@@ -81,7 +81,7 @@ class DioNetworkManager extends INetworkService {
   }
 
   @override
-  Future<Response> delete(String url, {Map<String, String>? headers, Map<String, String>? queryParams, payload}) async {
+  Future<Response> delete(String url, {Map<String, String>? headers, Map<String, Object>? queryParams, payload}) async {
     Response apiResponse = await _client.deleteUri(
         data: payload,
         prepareUrl(url, queryParams: queryParams),
@@ -90,7 +90,7 @@ class DioNetworkManager extends INetworkService {
   }
 
   @override
-  Future<Response> get(String url, {Map<String, String>? headers, Map<String, String>? queryParams}) async {
+  Future<Response> get(String url, {Map<String, String>? headers, Map<String, Object>? queryParams}) async {
     // await _ensureTokenIsValid(TokenManager.instance);
 
     Response apiResponse = await _client.getUri(prepareUrl(url, queryParams: queryParams),
@@ -102,7 +102,7 @@ class DioNetworkManager extends INetworkService {
   Future<Response> post(
     String url, {
     Map<String, String>? headers,
-    Map<String, String>? queryParams,
+    Map<String, Object>? queryParams,
     payload,
   }) async {
     Response apiResponse = await _client.postUri(prepareUrl(url, queryParams: queryParams),
@@ -116,7 +116,7 @@ class DioNetworkManager extends INetworkService {
   }
 
   @override
-  Future<Response> put(String url, {Map<String, String>? headers, Map<String, String>? queryParams, payload}) async {
+  Future<Response> put(String url, {Map<String, String>? headers, Map<String, Object>? queryParams, payload}) async {
     Response apiResponse = await _client.putUri(prepareUrl(url, queryParams: queryParams),
         data: payload != null ? jsonEncode(payload) : null,
         options: Options(headers: _mergeCustomHeaders(headers ?? <String, String>{})));
@@ -140,7 +140,7 @@ class DioNetworkManager extends INetworkService {
     };
   }
 
-  Uri prepareUrl(String url, {Map<String, String>? queryParams}) {
+  Uri prepareUrl(String url, {Map<String, dynamic>? queryParams}) {
     Uri uri = Uri.parse(baseUrl + url);
     uri = queryParams == null ? uri : uri.replace(queryParameters: queryParams);
     return uri;

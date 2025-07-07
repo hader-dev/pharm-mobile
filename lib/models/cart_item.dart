@@ -9,8 +9,8 @@ class CartItemModel {
   final String unitPriceTtc;
   final DateTime createdAt;
   final DateTime updatedAt;
-  final String medicinesCatalogId;
-  final dynamic parapharmCatalogId;
+  final String? medicinesCatalogId;
+  final String? parapharmCatalogId;
   final int quantity;
   final String designation;
   final dynamic lotNumber;
@@ -19,7 +19,7 @@ class CartItemModel {
   final String discountAmount;
   final String buyerCompanyId;
   final String sellerCompanyId;
-  final MedicinesCatalog medicinesCatalog;
+  final MedicinesCatalog? medicineCatalog;
   final dynamic parapharmCatalog;
   final BaseCompany sellerCompany;
 
@@ -42,7 +42,7 @@ class CartItemModel {
     required this.discountAmount,
     required this.buyerCompanyId,
     required this.sellerCompanyId,
-    required this.medicinesCatalog,
+    required this.medicineCatalog,
     required this.parapharmCatalog,
     required this.sellerCompany,
   });
@@ -57,7 +57,7 @@ class CartItemModel {
       unitPriceTtc: json['unitPriceTtc'],
       createdAt: DateTime.parse(json['createdAt']),
       updatedAt: DateTime.parse(json['updatedAt']),
-      medicinesCatalogId: json['medicinesCatalogId'],
+      medicinesCatalogId: json['medicineCatalogId'],
       parapharmCatalogId: json['parapharmCatalogId'],
       quantity: json['quantity'],
       designation: json['designation'],
@@ -67,7 +67,7 @@ class CartItemModel {
       discountAmount: json['discountAmount'],
       buyerCompanyId: json['buyerCompanyId'],
       sellerCompanyId: json['sellerCompanyId'],
-      medicinesCatalog: MedicinesCatalog.fromJson(json['medicinesCatalog']),
+      medicineCatalog: json['medicineCatalog'] != null ? MedicinesCatalog.fromJson(json['medicineCatalog']) : null,
       parapharmCatalog: json['parapharmCatalog'],
       sellerCompany: BaseCompany.fromJson(json['sellerCompany']),
     );
@@ -114,7 +114,7 @@ class CartItemModel {
       discountAmount: discountAmount ?? this.discountAmount,
       buyerCompanyId: buyerCompanyId ?? this.buyerCompanyId,
       sellerCompanyId: sellerCompanyId ?? this.sellerCompanyId,
-      medicinesCatalog: medicinesCatalog ?? this.medicinesCatalog,
+      medicineCatalog: medicinesCatalog ?? medicineCatalog,
       parapharmCatalog: parapharmCatalog ?? this.parapharmCatalog,
       sellerCompany: sellerCompany ?? this.sellerCompany,
     );

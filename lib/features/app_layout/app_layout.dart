@@ -11,6 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../config/routes/routing_manager.dart';
 import '../../config/services/network/network_interface.dart';
 import '../../repositories/remote/cart_items/cart_items_repository_impl.dart';
+import '../../utils/toast_helper.dart';
 import '../common/widgets/welcoming_widget.dart';
 import '../common_features/cart/cart.dart';
 import '../common_features/market_place/market_place.dart';
@@ -58,21 +59,28 @@ class AppLayout extends StatelessWidget {
               ..getCartItem(),
           ),
         ],
-        child: BlocBuilder<CartCubit, CartState>(
-          builder: (context, state) {
-            return BlocBuilder<AppLayoutCubit, AppLayoutState>(
-              builder: (context, state) {
-                return Scaffold(
-                  key: appLayoutScaffoldKey,
-                  bottomNavigationBar: AppNavBar(),
-                  body: IndexedStack(
-                    index: BlocProvider.of<AppLayoutCubit>(context).pageIndex,
-                    children: screens,
-                  ),
-                );
-              },
-            );
+        child: BlocListener<CartCubit, CartState>(
+          listener: (context, state) {
+            if (state is CartItemAdded) {
+              getItInstance.get<ToastManager>().showToast(type: ToastType.success, message: 'Item added to cart');
+            }
           },
+          child: BlocBuilder<CartCubit, CartState>(
+            builder: (context, state) {
+              return BlocBuilder<AppLayoutCubit, AppLayoutState>(
+                builder: (context, state) {
+                  return Scaffold(
+                    key: appLayoutScaffoldKey,
+                    bottomNavigationBar: AppNavBar(),
+                    body: IndexedStack(
+                      index: BlocProvider.of<AppLayoutCubit>(context).pageIndex,
+                      children: screens,
+                    ),
+                  );
+                },
+              );
+            },
+          ),
         ),
       ),
     );
