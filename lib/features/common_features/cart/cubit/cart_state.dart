@@ -36,6 +36,12 @@ final class InvoiceTypeChanged extends CartInitial {}
 
 final class PaymentMethodChanged extends CartInitial {}
 
+final class PassOrderLoading extends CartInitial {}
+
+final class PassOrderLoaded extends CartInitial {}
+
+final class PassOrderLoadingFailed extends CartInitial {}
+
 final class CartError extends CartInitial {
   final String error;
   CartError({required this.error});

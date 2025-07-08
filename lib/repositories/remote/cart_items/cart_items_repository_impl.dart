@@ -15,6 +15,8 @@ class CartItemRepository extends ICartItemsRepository {
           Urls.cartItems,
           queryParams: {
             "include[sellerCompany][fields][]": ["id", "name", "thumbnailImage", "image"],
+            "include[parapharmCatalog][fields][]": ["stockQuantity"],
+            "include[medicineCatalog][fields][]": ["stockQuantity"]
           },
         ));
 
@@ -45,10 +47,9 @@ class CartItemRepository extends ICartItemsRepository {
   }
 
   @override
-  Future<void> removeAll(payload) async {
-    return client.sendRequest(() => client.delete(
-          Urls.cartItemsBulkRemove,
-          payload: payload,
+  Future<void> removeAll() async {
+    await client.sendRequest(() => client.delete(
+          Urls.removeAllCartItems,
         ));
   }
 }

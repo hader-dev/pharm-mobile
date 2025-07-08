@@ -24,6 +24,7 @@ class OrdersCubit extends Cubit<OrdersState> {
       emit(OrdersLoading());
       var ordersResponse = await orderRepository.getOrders(
         offset: offset,
+        sortDirection: 'DESC',
       );
       totalItemsCount = ordersResponse.totalItems;
       orders = ordersResponse.data;

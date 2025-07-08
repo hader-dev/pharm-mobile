@@ -34,10 +34,12 @@ class Urls {
 
   //Orders
   static String get orders => "/orders";
+  static String get buyNow => "$orders/buy-now";
 
   //Cart Items
   static String get cartItems => "/cart-items";
   static String get cartItemsBulkRemove => "$cartItems/bulk-remove";
+  static String get removeAllCartItems => "$cartItems/remove-all";
 
   //favorites
   static String get favorites => "/favorite-";

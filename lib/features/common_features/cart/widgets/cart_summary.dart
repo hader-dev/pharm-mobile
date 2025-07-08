@@ -135,10 +135,12 @@ class CartSummarySection extends StatelessWidget {
                       Gap(AppSizesManager.s12),
                       PrimaryTextButton(
                         label: "checkout",
-                        onTap: () {
-                          BottomSheetHelper.showCommonBottomSheet(
-                              context: context, child: SelectPaymentMethodBottomSheet());
-                        },
+                        onTap: context.read<CartCubit>().cartItems.isEmpty
+                            ? null
+                            : () {
+                                BottomSheetHelper.showCommonBottomSheet(
+                                    context: context, child: SelectPaymentMethodBottomSheet());
+                              },
                         color: AppColors.accent1Shade1,
                       ),
                     ]),

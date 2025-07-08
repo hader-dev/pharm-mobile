@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hader_pharm_mobile/config/di/di.dart';
-import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
-import 'package:hader_pharm_mobile/repositories/remote/order/order_repository_impl.dart';
-import 'package:iconsax/iconsax.dart';
+import 'package:hader_pharm_mobile/features/app_layout/app_layout.dart';
 
-import '../../../../config/services/network/network_interface.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
+
+import 'package:iconsax/iconsax.dart';
 
 import '../../../config/theme/colors_manager.dart';
 import '../../../config/theme/typoghrapy_manager.dart';
@@ -21,11 +20,8 @@ class OrdersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: BlocProvider(
-      create: (context) => OrdersCubit(
-          scrollController: ScrollController(),
-          orderRepository: OrderRepository(client: getItInstance.get<INetworkService>()))
-        ..getOrders(),
+        child: BlocProvider.value(
+      value: AppLayout.appLayoutScaffoldKey.currentContext!.read<OrdersCubit>(),
       child: Scaffold(
         appBar: CustomAppBar(
           bgColor: AppColors.bgWhite,

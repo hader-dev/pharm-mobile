@@ -19,8 +19,8 @@ class CartItemModel {
   final String discountAmount;
   final String buyerCompanyId;
   final String sellerCompanyId;
-  final MedicinesCatalog? medicineCatalog;
-  final dynamic parapharmCatalog;
+  final int medicineCatalogStockQty;
+  final int parapharmCatalogStockQty;
   final BaseCompany sellerCompany;
 
   CartItemModel({
@@ -42,8 +42,8 @@ class CartItemModel {
     required this.discountAmount,
     required this.buyerCompanyId,
     required this.sellerCompanyId,
-    required this.medicineCatalog,
-    required this.parapharmCatalog,
+    this.medicineCatalogStockQty = 0,
+    this.parapharmCatalogStockQty = 0,
     required this.sellerCompany,
   });
 
@@ -67,8 +67,8 @@ class CartItemModel {
       discountAmount: json['discountAmount'],
       buyerCompanyId: json['buyerCompanyId'],
       sellerCompanyId: json['sellerCompanyId'],
-      medicineCatalog: json['medicineCatalog'] != null ? MedicinesCatalog.fromJson(json['medicineCatalog']) : null,
-      parapharmCatalog: json['parapharmCatalog'],
+      medicineCatalogStockQty: json['medicineCatalog']?['stockQuantity'] ?? 0,
+      parapharmCatalogStockQty: json['parapharmCatalog']?['stockQuantity'] ?? 0,
       sellerCompany: BaseCompany.fromJson(json['sellerCompany']),
     );
   }
@@ -114,8 +114,6 @@ class CartItemModel {
       discountAmount: discountAmount ?? this.discountAmount,
       buyerCompanyId: buyerCompanyId ?? this.buyerCompanyId,
       sellerCompanyId: sellerCompanyId ?? this.sellerCompanyId,
-      medicineCatalog: medicinesCatalog ?? medicineCatalog,
-      parapharmCatalog: parapharmCatalog ?? this.parapharmCatalog,
       sellerCompany: sellerCompany ?? this.sellerCompany,
     );
   }

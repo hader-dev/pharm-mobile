@@ -14,6 +14,7 @@ class BottomSheetHelper {
       isScrollControlled: true,
       isDismissible: isDismissible,
       enableDrag: enableDrag,
+      useSafeArea: true,
       backgroundColor: Colors.transparent,
       builder: (context) {
         return DraggableScrollableSheet(

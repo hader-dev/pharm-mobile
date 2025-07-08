@@ -10,6 +10,7 @@ import '../../../../models/cart_item.dart';
 import '../../../../models/cart_items_response.dart';
 import '../../../../models/create_cart_item.dart';
 
+import '../../../../models/create_order_model.dart';
 import '../../../../repositories/remote/cart_items/cart_items_repository_impl.dart';
 import '../../../../repositories/remote/order/order_repository_impl.dart';
 
@@ -21,6 +22,7 @@ class CartCubit extends Cubit<CartState> {
   Timer? _debounce;
   PaymentMethods? selectedPaymentMethod;
   InvoiceTypes? selectedInvoiceType;
+  String orderNote = '';
   // int totalItemsCount = 0;
   // int offSet = 0;
   List<CartItemModel> cartItems = <CartItemModel>[];
@@ -111,7 +113,10 @@ class CartCubit extends Cubit<CartState> {
   void increaseCartItemQuantity(String cartItemId) {
     try {
       int cartItemIndex = cartItems.lastIndexWhere((element) => element.id == cartItemId);
-      if (cartItems[cartItemIndex].quantity == cartItems[cartItemIndex].medicineCatalog!.stockQuantity) {
+      if ((cartItems[cartItemIndex].medicinesCatalogId != null &&
+              cartItems[cartItemIndex].quantity == cartItems[cartItemIndex].medicineCatalogStockQty) ||
+          (cartItems[cartItemIndex].parapharmCatalogId != null &&
+              cartItems[cartItemIndex].quantity == cartItems[cartItemIndex].parapharmCatalogStockQty)) {
         throw TemplateException(message: "you reached the limit of the stock.");
       }
 
@@ -189,6 +194,39 @@ class CartCubit extends Cubit<CartState> {
   }
 
   passOrder() async {
-    //ordersRepository.
+    try {
+      emit(PassOrderLoading());
+      await Future.wait(cartItemsByVendor.keys.map((sellerId) async {
+        return ordersRepository.createOrder(
+            orderDetails: CreateOrderModel(
+          deliveryAddress: 'sidi,aissa',
+          deliveryTownId: 10,
+          sellerCompanyId: sellerId,
+          cartItemsIds: cartItemsByVendor[sellerId] ?? [],
+          clientNote: orderNote,
+        ));
+      }));
+
+      emit(PassOrderLoaded());
+    } catch (e) {
+      emit(PassOrderLoadingFailed());
+    }
+  }
+
+  changeOrderNote(String text) {
+    orderNote = text;
+  }
+
+  void clearCart() async {
+    try {
+      cartItems.clear();
+      cartItemsByVendor.clear();
+      updateTotals();
+      await cartItemRepository.removeAll();
+      emit(CartLoadingSuccess());
+    } catch (e) {
+      GlobalExceptionHandler.handle(exception: e);
+      emit(CartError(error: 'An error occurred while clearing the cart please refresh the page .'));
+    }
   }
 }

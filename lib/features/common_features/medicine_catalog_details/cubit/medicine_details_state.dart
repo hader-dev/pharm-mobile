@@ -13,3 +13,9 @@ final class MedicineDetailsLoadError extends MedicineDetailsState {}
 final class MedicineDetailsTapIndexChanged extends MedicineDetailsState {}
 
 final class MedicineQuantityChanged extends MedicineDetailsState {}
+
+final class PassingQuickOrder extends MedicineDetailsState {}
+
+final class QuickOrderPassed extends MedicineDetailsState {}
+
+final class PassQuickOrderFailed extends MedicineDetailsState {}

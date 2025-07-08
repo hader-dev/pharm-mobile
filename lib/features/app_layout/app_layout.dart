@@ -15,6 +15,7 @@ import '../../utils/toast_helper.dart';
 import '../common/widgets/welcoming_widget.dart';
 import '../common_features/cart/cart.dart';
 import '../common_features/market_place/market_place.dart';
+import '../common_features/orders/cubit/orders_cubit.dart';
 import '../common_features/profile/profile.dart';
 import 'widgets/app_nav_bar/app_nav_bar.dart';
 
@@ -57,6 +58,12 @@ class AppLayout extends StatelessWidget {
             create: (context) => CartCubit(CartItemRepository(client: getItInstance.get<INetworkService>()),
                 ScrollController(), OrderRepository(client: getItInstance.get<INetworkService>()))
               ..getCartItem(),
+          ),
+          BlocProvider(
+            create: (context) => OrdersCubit(
+                scrollController: ScrollController(),
+                orderRepository: OrderRepository(client: getItInstance.get<INetworkService>()))
+              ..getOrders(),
           ),
         ],
         child: BlocListener<CartCubit, CartState>(

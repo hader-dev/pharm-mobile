@@ -1,7 +1,8 @@
+import 'package:hader_pharm_mobile/models/create_order_model.dart';
+import 'package:hader_pharm_mobile/models/create_quick_order_model.dart';
 import 'package:hader_pharm_mobile/utils/urls.dart';
 
 import '../../../config/services/network/network_interface.dart';
-
 
 import '../../../models/order_details.dart';
 import '../../../models/order_response.dart';
@@ -34,10 +35,18 @@ class OrderRepository extends IOrderRepository {
   }
 
   @override
-  Future<void> createOrder(List<String> cartItemsIds) async {
+  Future<void> createOrder({required CreateOrderModel orderDetails}) async {
     await client.sendRequest(() => client.post(
           Urls.orders,
-          payload: <String, dynamic>{"cartItemsIds": cartItemsIds},
+          payload: orderDetails.toJson(),
+        ));
+  }
+
+  @override
+  Future<void> createQuickOrder({required CreateQuickOrderModel orderDetails}) async {
+    await client.sendRequest(() => client.post(
+          Urls.buyNow,
+          payload: orderDetails.toJson(),
         ));
   }
 }

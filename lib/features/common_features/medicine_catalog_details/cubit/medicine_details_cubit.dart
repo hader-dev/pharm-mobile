@@ -1,8 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:hader_pharm_mobile/models/create_quick_order_model.dart';
+import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler.dart';
 
 import '../../../../models/medicine_catalog.dart';
 import '../../../../repositories/remote/medicine_catalog/medicine_catalog_repository_impl.dart';
+import '../../../../repositories/remote/order/order_repository_impl.dart';
 
 part 'medicine_details_state.dart';
 
@@ -12,10 +15,14 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
   final TextEditingController quantityController;
 
   final MedicineCatalogRepository medicineCatalogRepository;
+  final OrderRepository ordersRepository;
   final TabController tabController;
 
   MedicineDetailsCubit(
-      {required this.medicineCatalogRepository, required this.quantityController, required this.tabController})
+      {required this.medicineCatalogRepository,
+      required this.quantityController,
+      required this.tabController,
+      required this.ordersRepository})
       : super(MedicineDetailsInitial()) {
     quantityController.addListener(() {
       if (int.parse(quantityController.text) <= 0) {
@@ -48,6 +55,23 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
       quantityController.text = (int.parse(quantityController.text) - 1).toString();
     }
     emit(MedicineQuantityChanged());
+  }
+
+  void passQuickOrder() async {
+    try {
+      emit(PassingQuickOrder());
+      await ordersRepository.createQuickOrder(
+          orderDetails: CreateQuickOrderModel(
+        deliveryAddress: 'alger,alger',
+        deliveryTownId: 10,
+        medicineCatalogId: medicineCatalogData!.id,
+        qty: int.parse(quantityController.text),
+      ));
+      emit(QuickOrderPassed());
+    } catch (e) {
+      GlobalExceptionHandler.handle(exception: e);
+      emit(PassQuickOrderFailed());
+    }
   }
   // Timer? _debounce;
 
