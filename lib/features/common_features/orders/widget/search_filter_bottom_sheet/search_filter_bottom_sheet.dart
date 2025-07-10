@@ -64,7 +64,6 @@ class OrdersFilterBottomSheet extends StatelessWidget {
                   )),
               Gap(AppSizesManager.s12),
               PriceFilterSection(),
-              Gap(AppSizesManager.s12),
               DateFilterSection(),
               Gap(AppSizesManager.s12),
               Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),

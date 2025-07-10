@@ -51,16 +51,51 @@ class OrdersScreen extends StatelessWidget {
               );
             },
           ),
-          // trailing: [
-          //   // IconButton(
-          //   //   icon: const Icon(Iconsax.search_normal),
-          //   //   onPressed: () {},
-          //   // ),
-          //   // IconButton(
-          //   //   icon: const Icon(Iconsax.notification),
-          //   //   onPressed: () {},
-          //   // ),
-          // ],
+          trailing: [
+            InkWell(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: AppSizesManager.p12),
+                child: BlocBuilder<OrdersCubit, OrdersState>(
+                  builder: (context, state) {
+                    return Stack(
+                      clipBehavior: Clip.none,
+                      children: [
+                        Icon(
+                          Iconsax.filter,
+                          color: AppColors.accent1Shade1,
+                        ),
+                        // if (BlocProvider.of<OrdersCubit>(context).selectedMedicineSearchFilter != null)
+                        if (context.read<OrdersCubit>().selectedStatusFilters.isNotEmpty ||
+                            context.read<OrdersCubit>().minPriceFilter != null ||
+                            context.read<OrdersCubit>().maxPriceFilter != null ||
+                            context.read<OrdersCubit>().initialDateFilter != null ||
+                            context.read<OrdersCubit>().finalDateFilter != null)
+                          Positioned(
+                            top: -4,
+                            right: -4,
+                            child: CircleAvatar(
+                              radius: AppSizesManager.commonWidgetsRadius,
+                              backgroundColor: Colors.red,
+                            ),
+                          )
+                      ],
+                    );
+                  },
+                ),
+              ),
+              onTap: () {
+                BottomSheetHelper.showCommonBottomSheet(context: context, child: OrdersFilterBottomSheet());
+              },
+            ),
+            // IconButton(
+            //   icon: const Icon(Iconsax.search_normal),
+            //   onPressed: () {},
+            // ),
+            // IconButton(
+            //   icon: const Icon(Iconsax.notification),
+            //   onPressed: () {},
+            // ),
+          ],
         ),
         body: BlocBuilder<OrdersCubit, OrdersState>(
           builder: (context, state) {
@@ -68,46 +103,17 @@ class OrdersScreen extends StatelessWidget {
               return const Center(child: CircularProgressIndicator());
             }
             if (state is OrdersLoaded && BlocProvider.of<OrdersCubit>(context).orders.isEmpty) {
-              return EmptyListWidget();
+              return ConstrainedBox(
+                  constraints: const BoxConstraints(minWidth: double.maxFinite),
+                  child: EmptyListWidget(
+                    onRefresh: () {
+                      BlocProvider.of<OrdersCubit>(context).getOrders();
+                    },
+                  ));
             }
             return Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Row(
-                  children: [
-                    Spacer(),
-                    InkWell(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: AppSizesManager.p12),
-                        child: BlocBuilder<OrdersCubit, OrdersState>(
-                          builder: (context, state) {
-                            return Stack(
-                              clipBehavior: Clip.none,
-                              children: [
-                                Icon(
-                                  Iconsax.filter,
-                                  color: AppColors.accent1Shade1,
-                                ),
-                                // if (BlocProvider.of<OrdersCubit>(context).selectedMedicineSearchFilter != null)
-                                Positioned(
-                                  top: -4,
-                                  right: -4,
-                                  child: CircleAvatar(
-                                    radius: AppSizesManager.commonWidgetsRadius,
-                                    backgroundColor: Colors.red,
-                                  ),
-                                )
-                              ],
-                            );
-                          },
-                        ),
-                      ),
-                      onTap: () {
-                        BottomSheetHelper.showCommonBottomSheet(context: context, child: OrdersFilterBottomSheet());
-                      },
-                    ),
-                  ],
-                ),
                 Expanded(
                   child: RefreshIndicator(
                     onRefresh: () {

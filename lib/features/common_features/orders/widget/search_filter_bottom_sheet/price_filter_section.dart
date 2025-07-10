@@ -28,14 +28,14 @@ class PriceFilterSection extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  PriceTag(label: 'min', value: context.read<OrdersCubit>().minPriceFilter),
-                  PriceTag(label: 'max', value: context.read<OrdersCubit>().maxPriceFilter),
+                  PriceTag(label: 'min', value: context.read<OrdersCubit>().minPriceFilter ?? 0),
+                  PriceTag(label: 'max', value: context.read<OrdersCubit>().maxPriceFilter ?? 100000),
                 ],
               ),
               const Gap(AppSizesManager.s12),
               RangeSlider(
-                values:
-                    RangeValues(context.read<OrdersCubit>().minPriceFilter, context.read<OrdersCubit>().maxPriceFilter),
+                values: RangeValues(context.read<OrdersCubit>().minPriceFilter ?? 0,
+                    context.read<OrdersCubit>().maxPriceFilter ?? 100000),
                 min: 0,
                 max: 100000,
                 onChanged: (RangeValues values) {

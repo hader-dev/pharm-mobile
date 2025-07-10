@@ -14,8 +14,8 @@ class OrdersCubit extends Cubit<OrdersState> {
   int offSet = 0;
   List<BaseOrderModel> orders = [];
   List<int> selectedStatusFilters = [];
-  double minPriceFilter = 0.0;
-  double maxPriceFilter = 100000;
+  double? minPriceFilter = 0.0;
+  double? maxPriceFilter = 0;
   String? initialDateFilter;
   String? finalDateFilter;
   final OrderRepository orderRepository;
@@ -125,8 +125,8 @@ class OrdersCubit extends Cubit<OrdersState> {
 
   void resetFilters() {
     selectedStatusFilters = [];
-    minPriceFilter = 0.0;
-    maxPriceFilter = 100000;
+    minPriceFilter = null;
+    maxPriceFilter = null;
     initialDateFilter = null;
     finalDateFilter = null;
     emit(ResetFilters());

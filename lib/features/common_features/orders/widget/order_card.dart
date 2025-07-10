@@ -8,6 +8,7 @@ import 'package:hader_pharm_mobile/features/common_features/create_company_profi
 import 'package:hader_pharm_mobile/models/order.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_date_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/price_formatter.dart';
 
 import '../../../../config/theme/colors_manager.dart';
@@ -82,8 +83,8 @@ class OrderCard extends StatelessWidget {
             ),
             const Gap(AppSizesManager.s4),
             InfoRow(
-              label: "Deliver to",
-              dataValue: orderData.deliveryAddress,
+              label: "Created At",
+              dataValue: orderData.createdAt.toLocal().formatYMD,
               contentDirection: Axis.vertical,
             ),
             const Gap(AppSizesManager.s4),

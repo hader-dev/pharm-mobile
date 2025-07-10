@@ -26,18 +26,18 @@ class OrderRepository extends IOrderRepository {
     String? finalDateFilter,
   }) async {
     final queryParams = {
-      'limit': limit,
-      'offset': offset,
+      'limit': limit.toString(),
+      'offset': offset.toString(),
       'sort[id]': sortDirection,
-      if (statusesFilter.isNotEmpty) 'in[status][]': statusesFilter.map((status) => status).toList(),
-      if (minPriceFilter != null) 'gte[totalAmountTtc]': minPriceFilter.toString(),
-      if (maxPriceFilter != null) 'lte[totalAmountTtc]': maxPriceFilter.toString(),
+      if (statusesFilter.isNotEmpty) 'in[status][]': statusesFilter.map((status) => status.toString()).toList(),
+      if (minPriceFilter != null) 'gte[totalAmountTtc]': minPriceFilter.toStringAsFixed(2),
+      if (maxPriceFilter != null) 'lte[totalAmountTtc]': maxPriceFilter.toStringAsFixed(2),
       if (initialDateFilter != null) 'date[createdAt][from]': initialDateFilter,
       if (finalDateFilter != null) 'date[createdAt][to]': finalDateFilter,
     };
     var decodedResponse = await client.sendRequest(() => client.get(
           Urls.orders,
-          queryParams: queryParams.map((key, value) => MapEntry(key, value.toString())),
+          queryParams: queryParams,
         ));
     return OrderResponse.fromJson(decodedResponse);
   }
