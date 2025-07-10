@@ -66,11 +66,12 @@ class OrdersDetailsScreen extends StatelessWidget {
               BlocBuilder<OrderDetailsCubit, OrdersDetailsState>(
                 builder: (context, state) {
                   if (state is OrderDetailsLoading) {
-                    return SizedBox(
+                    return Container(
+                        padding: EdgeInsets.all(AppSizesManager.p6),
                         height: 30,
                         width: 30,
                         child: CircularProgressIndicator(
-                          strokeWidth: 1,
+                          strokeWidth: 1.1,
                         ));
                   }
                   OrderStatus orderStatus = OrderStatus.values

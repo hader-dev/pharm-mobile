@@ -22,7 +22,7 @@ class SettingsTile extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: AppSizesManager.p10, left: AppSizesManager.p8, right: AppSizesManager.p8),
       child: Container(
         decoration: BoxDecoration(
-          border: Border.all(color: AppColors.accentGreenShade1.withAlpha(80), width: 1),
+          border: Border.all(color: AppColors.accentGreenShade1.withAlpha(40), width: 1),
           borderRadius: BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
         ),
         child: ListTile(

@@ -9,17 +9,20 @@ class BaseOrderModel {
   final String deliveryAddress;
   final DateTime createdAt;
   final DateTime updatedAt;
+  final String? sellerCompanyName;
 
-  BaseOrderModel(
-      {required this.id,
-      required this.status,
-      required this.totalAmountExclTax,
-      required this.totalAmountInclTax,
-      required this.paymentMethod,
-      required this.invoiceType,
-      required this.createdAt,
-      required this.updatedAt,
-      required this.deliveryAddress});
+  BaseOrderModel({
+    required this.id,
+    required this.status,
+    required this.totalAmountExclTax,
+    required this.totalAmountInclTax,
+    required this.paymentMethod,
+    required this.invoiceType,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.deliveryAddress,
+    this.sellerCompanyName,
+  });
 
   factory BaseOrderModel.fromJson(Map<String, dynamic> json) {
     return BaseOrderModel(
@@ -32,6 +35,7 @@ class BaseOrderModel {
       invoiceType: json['invoiceType'],
       createdAt: DateTime.parse(json['createdAt']),
       updatedAt: DateTime.parse(json['updatedAt']),
+      sellerCompanyName: json['companyInfo']['name'],
     );
   }
 }

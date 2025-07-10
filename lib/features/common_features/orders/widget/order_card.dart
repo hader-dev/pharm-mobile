@@ -58,6 +58,12 @@ class OrderCard extends StatelessWidget {
                         TextSpan(
                             text: " Order-${orderData.id.split("-").first}",
                             style: AppTypography.headLine4SemiBoldStyle.copyWith(color: Colors.black)),
+                        TextSpan(
+                          text: "\n (${orderData.createdAt.toLocal().formatYMD})",
+                          style: AppTypography.bodyXSmallStyle.copyWith(
+                            color: TextColors.ternary.color,
+                          ),
+                        )
                       ],
                     ),
                   ),
@@ -78,26 +84,39 @@ class OrderCard extends StatelessWidget {
                               .copyWith(color: orderStatus.color, fontWeight: AppTypography.appFontSemiBold)),
                     ],
                   ),
-                )
+                ),
               ],
             ),
-            const Gap(AppSizesManager.s4),
+            const Gap(AppSizesManager.s8),
             InfoRow(
-              label: "Created At",
-              dataValue: orderData.createdAt.toLocal().formatYMD,
+              label: "vendor",
+              dataValue: orderData.sellerCompanyName ?? "N/A",
               contentDirection: Axis.vertical,
             ),
-            const Gap(AppSizesManager.s4),
+            const Gap(AppSizesManager.s12),
             InfoRow(
-              label: "Total Amount HT",
-              dataValue: orderData.totalAmountExclTax.formatAsPriceForPrint(),
+              label: "deliver to",
+              dataValue: orderData.deliveryAddress,
               contentDirection: Axis.vertical,
             ),
-            const Gap(AppSizesManager.s4),
-            InfoRow(
-              label: "Total Amount TTC",
-              dataValue: orderData.totalAmountInclTax.formatAsPriceForPrint(),
-              contentDirection: Axis.vertical,
+            const Gap(AppSizesManager.s12),
+            Padding(
+              padding: const EdgeInsets.only(right: AppSizesManager.p8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  InfoRow(
+                    label: "Total Amount HT",
+                    dataValue: orderData.totalAmountExclTax.formatAsPriceForPrint(),
+                    contentDirection: Axis.vertical,
+                  ),
+                  InfoRow(
+                    label: "Total Amount TTC",
+                    dataValue: orderData.totalAmountInclTax.formatAsPriceForPrint(),
+                    contentDirection: Axis.vertical,
+                  ),
+                ],
+              ),
             ),
           ],
         ),

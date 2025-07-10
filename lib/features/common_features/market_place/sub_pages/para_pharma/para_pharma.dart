@@ -5,6 +5,7 @@ import 'package:iconsax/iconsax.dart';
 
 import '../../../../../config/theme/colors_manager.dart';
 
+import '../../../../../config/theme/typoghrapy_manager.dart';
 import '../../../../../utils/bottom_sheet_helper.dart';
 import '../../../../../utils/constants.dart';
 import '../../../../../utils/enums.dart';
@@ -14,6 +15,8 @@ import '../../../../common/widgets/end_of_load_result_widget.dart';
 import '../../../../common/widgets/para_pharma_widget_1.dart';
 import '../medicine_products/cubit/medicine_products_cubit.dart';
 import 'cubit/para_pharma_cubit.dart';
+import 'widget/brand_section.dart';
+import 'widget/categories_section.dart';
 import 'widget/search_filter_bottom_sheet.dart';
 
 class ParaPharmaPage extends StatefulWidget {
@@ -29,6 +32,7 @@ class _ParaPharmaPageState extends State<ParaPharmaPage> with AutomaticKeepAlive
     super.build(context);
     return Material(
         child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           children: [
@@ -106,6 +110,8 @@ class _ParaPharmaPageState extends State<ParaPharmaPage> with AutomaticKeepAlive
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  BrandsSection(),
+                  CategoriesSection(),
                   Expanded(
                     child: RefreshIndicator(
                         onRefresh: () {

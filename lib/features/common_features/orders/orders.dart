@@ -64,7 +64,6 @@ class OrdersScreen extends StatelessWidget {
                           Iconsax.filter,
                           color: AppColors.accent1Shade1,
                         ),
-                        // if (BlocProvider.of<OrdersCubit>(context).selectedMedicineSearchFilter != null)
                         if (context.read<OrdersCubit>().selectedStatusFilters.isNotEmpty ||
                             context.read<OrdersCubit>().minPriceFilter != null ||
                             context.read<OrdersCubit>().maxPriceFilter != null ||

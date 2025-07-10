@@ -3,6 +3,7 @@ import 'package:hader_pharm_mobile/utils/constants.dart';
 
 import '../../../../config/di/di.dart';
 import '../../../../config/services/auth/user_manager.dart';
+import '../../../../config/theme/colors_manager.dart';
 import 'image_user.dart';
 
 class ProfileHeader extends StatelessWidget {
@@ -10,32 +11,41 @@ class ProfileHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        const UserImage(),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AppSizesManager.p6),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                getItInstance.get<UserManager>().currentUser.fullName,
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+    return Container(
+      margin: const EdgeInsets.symmetric(
+        horizontal: AppSizesManager.p8,
+      ),
+      decoration: BoxDecoration(
+        color: AppColors.accent1Shade3,
+        borderRadius: BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+      ),
+      child: Row(
+        children: <Widget>[
+          const UserImage(),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: AppSizesManager.p6),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  getItInstance.get<UserManager>().currentUser.fullName,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              Text(
-                getItInstance.get<UserManager>().currentUser.email,
-                style: const TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.normal,
+                Text(
+                  getItInstance.get<UserManager>().currentUser.email,
+                  style: const TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.normal,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
