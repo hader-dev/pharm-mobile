@@ -25,6 +25,7 @@ class AppTypography {
   static const double body3 = 14.0;
   static const double bodySmall = 13.0;
   static const double bodyXSmall = 12.0;
+  static const double bodyXXSmall = 9.0;
   //-------------------------------------
   // Headings Text Styles
   static const TextStyle headLine1Style = TextStyle(

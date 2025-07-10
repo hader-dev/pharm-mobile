@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart' show BlocProvider, BlocBuilder, MultiBlocProvider;
+import 'package:flutter_bloc/flutter_bloc.dart'
+    show BlocBuilder, BlocProvider, MultiBlocProvider, read, ReadContext, BlocListener;
 import 'package:gap/gap.dart' show Gap;
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
@@ -15,6 +16,7 @@ import '../../../repositories/remote/medicine_catalog/medicine_catalog_repositor
 import '../../../repositories/remote/parapharm_catalog/para_pharma_catalog_repository_impl.dart';
 import '../../../utils/assets_strings.dart';
 import '../../../utils/constants.dart';
+import '../../../utils/toast_helper.dart';
 import '../../common/app_bars/custom_app_bar.dart';
 import '../../common/buttons/solid/primary_text_button.dart';
 import '../market_place/sub_pages/medicine_products/cubit/medicine_products_cubit.dart';
@@ -55,68 +57,89 @@ class VendorDetails extends StatelessWidget {
               ..getMedicines(companyIdFilter: companyData.id),
           ),
         ],
-        child: Scaffold(
-          key: vendorDetailsScaffoldKey,
-          appBar: CustomAppBar(
-            bgColor: AppColors.bgWhite,
-            topPadding: MediaQuery.of(context).padding.top,
-            bottomPadding: MediaQuery.of(context).padding.bottom,
-            leading: IconButton(
-              icon: const Icon(
-                Iconsax.arrow_left_2,
-                size: AppSizesManager.iconSize25,
-              ),
-              onPressed: () {
-                context.pop();
-              },
-            ),
-            trailing: [
-              BlocBuilder<VendorDetailsCubit, VendorDetailsState>(
-                builder: (context, state) {
-                  return PrimaryTextButton(
-                      label: "Join",
-                      leadingIcon: Iconsax.user_add,
-                      labelColor: AppColors.accent1Shade1,
-                      onTap: () {},
-                      isLoading: state is sendingJoinRequest,
-                      borderColor: AppColors.accent1Shade1);
+        child: BlocListener<VendorDetailsCubit, VendorDetailsState>(
+          listener: (context, state) {
+            if (state is VendorLiked) {
+              getItInstance
+                  .get<ToastManager>()
+                  .showToast(type: ToastType.success, message: 'Vendor added to your favorites list');
+            }
+          },
+          child: Scaffold(
+            key: vendorDetailsScaffoldKey,
+            appBar: CustomAppBar(
+              bgColor: AppColors.bgWhite,
+              topPadding: MediaQuery.of(context).padding.top,
+              bottomPadding: MediaQuery.of(context).padding.bottom,
+              leading: IconButton(
+                icon: const Icon(
+                  Iconsax.arrow_left_2,
+                  size: AppSizesManager.iconSize25,
+                ),
+                onPressed: () {
+                  context.pop();
                 },
               ),
-              Padding(
-                padding: const EdgeInsets.only(right: AppSizesManager.p4),
-                child: InkWell(
-                  child: const Icon(
-                    Iconsax.heart,
-                    size: AppSizesManager.iconSize25,
-                  ),
-                  onTap: () {},
+              trailing: [
+                BlocBuilder<VendorDetailsCubit, VendorDetailsState>(
+                  builder: (context, state) {
+                    return PrimaryTextButton(
+                        label: "Join",
+                        leadingIcon: Iconsax.user_add,
+                        labelColor: AppColors.accent1Shade1,
+                        onTap: () {
+                          context
+                              .read<VendorDetailsCubit>()
+                              .requestJoinVendorAsClient(context.read<VendorDetailsCubit>().vendorData.id);
+                        },
+                        isLoading: state is SendingJoinRequest,
+                        borderColor: AppColors.accent1Shade1);
+                  },
                 ),
-              ),
-            ],
-            title: Row(children: [
-              Container(
-                height: 45,
-                width: 45,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(color: AppColors.bgDisabled, width: 1.5),
-                  image: DecorationImage(
-                    image: companyData.image == null
-                        ? AssetImage(DrawableAssetStrings.companyPlaceHolderImg)
-                        : NetworkImage(companyData.thumbnailImage),
+                Padding(
+                  padding: const EdgeInsets.only(right: AppSizesManager.p8),
+                  child: BlocBuilder<VendorDetailsCubit, VendorDetailsState>(
+                    builder: (context, state) {
+                      return InkWell(
+                        child: const Icon(
+                          Iconsax.heart,
+                          size: AppSizesManager.iconSize20,
+                        ),
+                        onTap: () {
+                          context
+                              .read<VendorDetailsCubit>()
+                              .likeVendor(context.read<VendorDetailsCubit>().vendorData.id);
+                        },
+                      );
+                    },
                   ),
                 ),
+              ],
+              title: Row(children: [
+                Container(
+                  height: 45,
+                  width: 45,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: AppColors.bgDisabled, width: 1.5),
+                    image: DecorationImage(
+                      image: companyData.image == null
+                          ? AssetImage(DrawableAssetStrings.companyPlaceHolderImg)
+                          : NetworkImage(companyData.thumbnailImage),
+                    ),
+                  ),
+                ),
+                Gap(AppSizesManager.s8),
+                Text(companyData.name, style: AppTypography.headLine4SemiBoldStyle)
+              ]),
+            ),
+            body: Padding(
+              padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p8),
+              child: BlocBuilder<VendorDetailsCubit, VendorDetailsState>(
+                builder: (context, state) {
+                  return VandorDetailsTabBarSection();
+                },
               ),
-              Gap(AppSizesManager.s8),
-              Text(companyData.name, style: AppTypography.headLine4SemiBoldStyle)
-            ]),
-          ),
-          body: Padding(
-            padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p8),
-            child: BlocBuilder<VendorDetailsCubit, VendorDetailsState>(
-              builder: (context, state) {
-                return VandorDetailsTabBarSection();
-              },
             ),
           ),
         ),

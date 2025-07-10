@@ -28,8 +28,9 @@ class MedicineWidget3 extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: AppSizesManager.p6, vertical: AppSizesManager.p12),
       child: InkWell(
+        splashColor: Colors.transparent,
         onTap: () {
-          GoRouter.of(context).pushNamed(RoutingManager.paraPharmaDetailsScreen, extra: medicineData.id);
+          GoRouter.of(context).pushNamed(RoutingManager.medicineDetailsScreen, extra: medicineData.id);
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -124,6 +125,8 @@ class MedicineWidget3 extends StatelessWidget {
                       style: AppTypography.headLine4SemiBoldStyle.copyWith(color: TextColors.primary.color)),
                 Gap(AppSizesManager.s4),
                 Row(
+                  crossAxisAlignment: CrossAxisAlignment.baseline,
+                  textBaseline: TextBaseline.ideographic,
                   children: [
                     Icon(
                       Iconsax.wallet_money,
@@ -147,10 +150,11 @@ class MedicineWidget3 extends StatelessWidget {
                     ),
                     Spacer(),
                     Transform.scale(
-                      scale: .6,
+                      scale: .55,
                       child: PrimaryIconButton(
                         isBordered: true,
                         borderColor: AppColors.accent1Shade1,
+                        bgColor: Colors.transparent,
                         onPressed: () {
                           AppLayout.appLayoutScaffoldKey.currentContext!.read<CartCubit>().addToCart(
                               CreateCartItemModel(

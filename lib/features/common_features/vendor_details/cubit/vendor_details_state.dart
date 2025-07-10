@@ -11,6 +11,10 @@ final class VendorDetailsLoaded extends VendorDetailsState {}
 final class VendorDetailsLoadingError extends VendorDetailsState {}
 
 //request to join vendor as client
-final class sendingJoinRequest extends VendorDetailsState {}
+final class SendingJoinRequest extends VendorDetailsState {}
 
-final class joinRequestSent extends VendorDetailsState {}
+final class JoinRequestSent extends VendorDetailsState {}
+
+final class VendorLiked extends VendorDetailsState {}
+
+final class VendorLikeFailed extends VendorDetailsState {}

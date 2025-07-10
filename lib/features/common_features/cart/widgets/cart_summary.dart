@@ -133,16 +133,18 @@ class CartSummarySection extends StatelessWidget {
                         ],
                       ),
                       Gap(AppSizesManager.s12),
-                      PrimaryTextButton(
-                        label: "checkout",
-                        onTap: context.read<CartCubit>().cartItems.isEmpty
-                            ? null
-                            : () {
-                                BottomSheetHelper.showCommonBottomSheet(
-                                    context: context, child: SelectPaymentMethodBottomSheet());
-                              },
-                        color: AppColors.accent1Shade1,
-                      ),
+                      BlocBuilder<CartCubit, CartState>(builder: (context, state) {
+                        return PrimaryTextButton(
+                          label: "checkout",
+                          onTap: context.read<CartCubit>().cartItems.isEmpty
+                              ? null
+                              : () {
+                                  BottomSheetHelper.showCommonBottomSheet(
+                                      context: context, child: SelectPaymentMethodBottomSheet());
+                                },
+                          color: AppColors.accent1Shade1,
+                        );
+                      }),
                     ]),
             ),
           );

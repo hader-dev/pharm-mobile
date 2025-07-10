@@ -15,4 +15,5 @@ abstract class ICompanyRepository {
       required CompanyType companyType,
       int? distributorCategoryId});
   Future<void> joinCompanyAsCLient({required String companyId});
+  Future<void> addCompanyToFavorites({required String companyId});
 }

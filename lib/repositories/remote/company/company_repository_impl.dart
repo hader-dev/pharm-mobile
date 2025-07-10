@@ -52,4 +52,9 @@ class CompanyRepository extends ICompanyRepository {
   Future<void> joinCompanyAsCLient({required String companyId}) {
     return client.sendRequest(() => client.post(Urls.clientsCompaniesJoin, payload: {'sellerCompanyId': companyId}));
   }
+
+  @override
+  Future<void> addCompanyToFavorites({required String companyId}) {
+    return client.sendRequest(() => client.post(Urls.favoritesCompany, payload: {'favoriteCompanyId': companyId}));
+  }
 }

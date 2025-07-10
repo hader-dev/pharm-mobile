@@ -16,3 +16,11 @@ final class OrdersLoadingFailed extends OrdersState {}
 
 //Search Limit Reached State :
 final class OrdersLoadLimitReached extends OrdersState {}
+
+final class StatusFilterChanged extends OrdersState {}
+
+final class PriceFilterChanged extends OrdersState {}
+
+final class ResetFilters extends OrdersState {}
+
+final class DateFilterChanged extends OrdersState {}

@@ -13,7 +13,7 @@ class OrderDetailsModel extends BaseOrderModel {
 
   final int deliveryTownId;
   final String clientNote;
-  final dynamic privateNote;
+  final String privateNote;
 
   final List<OrderItem> orderItems;
   final List<OrderStatusHistory> orderStatusHistories;
@@ -64,8 +64,8 @@ class OrderDetailsModel extends BaseOrderModel {
         operatorUserId: json['operatorUserId'],
         stockUserId: json['stockUserId'],
         deliveryTownId: json['deliveryTownId'],
-        clientNote: json['clientNote'],
-        privateNote: json['privateNote'],
+        clientNote: json['clientNote'] ?? "",
+        privateNote: json['privateNote'] ?? "",
         orderItems: List<OrderItem>.from(json['orderItems'].map((x) => OrderItem.fromJson(x))),
         orderStatusHistories: List<OrderStatusHistory>.from(
             (json['orderStatusHistories'] as List).map((x) => OrderStatusHistory.fromJson(x))),
@@ -83,8 +83,8 @@ class OrderItem {
   final double unitPriceTtc;
   final DateTime createdAt;
   final DateTime updatedAt;
-  final dynamic medicineCatalogId;
-  final String parapharmCatalogId;
+  final String? medicineCatalogId;
+  final String? parapharmCatalogId;
   final int quantity;
   final dynamic designation;
   final dynamic lotNumber;

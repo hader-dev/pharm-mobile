@@ -7,6 +7,7 @@ import '../../../config/services/network/network_interface.dart';
 import '../../../models/order_details.dart';
 import '../../../models/order_response.dart';
 import '../../../utils/constants.dart';
+
 import 'order_repository.dart';
 
 class OrderRepository extends IOrderRepository {
@@ -14,12 +15,25 @@ class OrderRepository extends IOrderRepository {
   OrderRepository({required this.client});
 
   @override
-  Future<OrderResponse> getOrders(
-      {int limit = PaginationConstants.resultsPerPage, int offset = 0, String sortDirection = 'ASC'}) async {
+  Future<OrderResponse> getOrders({
+    int limit = PaginationConstants.resultsPerPage,
+    int offset = 0,
+    String sortDirection = 'ASC',
+    List<int> statusesFilter = const [],
+    double? minPriceFilter,
+    double? maxPriceFilter,
+    String? initialDateFilter,
+    String? finalDateFilter,
+  }) async {
     final queryParams = {
       'limit': limit,
       'offset': offset,
       'sort[id]': sortDirection,
+      if (statusesFilter.isNotEmpty) 'in[status][]': statusesFilter.map((status) => status).toList(),
+      if (minPriceFilter != null) 'gte[totalAmountTtc]': minPriceFilter.toString(),
+      if (maxPriceFilter != null) 'lte[totalAmountTtc]': maxPriceFilter.toString(),
+      if (initialDateFilter != null) 'date[createdAt][from]': initialDateFilter,
+      if (finalDateFilter != null) 'date[createdAt][to]': finalDateFilter,
     };
     var decodedResponse = await client.sendRequest(() => client.get(
           Urls.orders,

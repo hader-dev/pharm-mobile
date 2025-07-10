@@ -8,11 +8,13 @@ import 'package:iconsax/iconsax.dart';
 
 import '../../../config/theme/colors_manager.dart';
 import '../../../config/theme/typoghrapy_manager.dart';
+import '../../../utils/bottom_sheet_helper.dart' show BottomSheetHelper;
 import '../../../utils/constants.dart';
 import '../../common/app_bars/custom_app_bar.dart';
 import '../../common/widgets/end_of_load_result_widget.dart';
 import 'cubit/orders_cubit.dart';
 import 'widget/order_card.dart';
+import 'widget/search_filter_bottom_sheet/search_filter_bottom_sheet.dart' show OrdersFilterBottomSheet;
 
 class OrdersScreen extends StatelessWidget {
   const OrdersScreen({super.key});
@@ -71,6 +73,41 @@ class OrdersScreen extends StatelessWidget {
             return Column(
               mainAxisSize: MainAxisSize.min,
               children: [
+                Row(
+                  children: [
+                    Spacer(),
+                    InkWell(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: AppSizesManager.p12),
+                        child: BlocBuilder<OrdersCubit, OrdersState>(
+                          builder: (context, state) {
+                            return Stack(
+                              clipBehavior: Clip.none,
+                              children: [
+                                Icon(
+                                  Iconsax.filter,
+                                  color: AppColors.accent1Shade1,
+                                ),
+                                // if (BlocProvider.of<OrdersCubit>(context).selectedMedicineSearchFilter != null)
+                                Positioned(
+                                  top: -4,
+                                  right: -4,
+                                  child: CircleAvatar(
+                                    radius: AppSizesManager.commonWidgetsRadius,
+                                    backgroundColor: Colors.red,
+                                  ),
+                                )
+                              ],
+                            );
+                          },
+                        ),
+                      ),
+                      onTap: () {
+                        BottomSheetHelper.showCommonBottomSheet(context: context, child: OrdersFilterBottomSheet());
+                      },
+                    ),
+                  ],
+                ),
                 Expanded(
                   child: RefreshIndicator(
                     onRefresh: () {

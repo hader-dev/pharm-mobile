@@ -22,14 +22,24 @@ class VendorDetailsCubit extends Cubit<VendorDetailsState> {
     }
   }
 
-  Future<void> requestJoinVendorAsClient() async {
+  Future<void> requestJoinVendorAsClient(String vendorId) async {
     try {
-      emit(sendingJoinRequest());
-      await companyRepo.joinCompanyAsCLient(companyId: vendorData.id);
-      emit(joinRequestSent());
+      emit(SendingJoinRequest());
+      await companyRepo.joinCompanyAsCLient(companyId: vendorId);
+      emit(JoinRequestSent());
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
       emit(VendorDetailsLoadingError());
+    }
+  }
+
+  Future<void> likeVendor(String vendorId) async {
+    try {
+      await companyRepo.addCompanyToFavorites(companyId: vendorId);
+      emit(VendorLiked());
+    } catch (e) {
+      GlobalExceptionHandler.handle(exception: e);
+      emit(VendorLikeFailed());
     }
   }
 }
