@@ -18,14 +18,14 @@ class BrandCircularWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(AppSizesManager.p6),
+      padding: const EdgeInsets.symmetric(vertical: AppSizesManager.p6, horizontal: AppSizesManager.p10),
       child: Column(
         children: [
           GestureDetector(
             onTap: onTap,
             child: Container(
-              width: 48,
-              height: 48,
+              width: 42,
+              height: 42,
               clipBehavior: Clip.antiAlias,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,

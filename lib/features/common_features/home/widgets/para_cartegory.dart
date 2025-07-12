@@ -24,8 +24,8 @@ class CategoryCircularWidget extends StatelessWidget {
           GestureDetector(
             onTap: onTap,
             child: Container(
-              width: 48,
-              height: 48,
+              width: 42,
+              height: 42,
               clipBehavior: Clip.antiAlias,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,

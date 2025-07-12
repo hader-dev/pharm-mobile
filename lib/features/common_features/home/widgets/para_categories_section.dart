@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 
-import '../../../../../../config/theme/typoghrapy_manager.dart';
-import 'cartegory.dart';
+import '../../../../config/theme/typoghrapy_manager.dart';
+import 'para_cartegory.dart';
 
 class CategoriesSection extends StatelessWidget {
   const CategoriesSection({super.key});
@@ -16,7 +16,7 @@ class CategoriesSection extends StatelessWidget {
           padding: const EdgeInsets.only(
             left: AppSizesManager.p8,
           ),
-          child: Text('Categories', style: AppTypography.headLine4SemiBoldStyle),
+          child: Text('Categories', style: AppTypography.headLine5SemiBoldStyle),
         ),
         ConstrainedBox(
           constraints: BoxConstraints(maxHeight: 100),

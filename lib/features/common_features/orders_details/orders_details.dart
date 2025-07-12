@@ -129,7 +129,7 @@ class OrdersDetailsScreen extends StatelessWidget {
                         child: Column(
                           children: <Widget>[
                             OrderInvoiceSection(),
-                            ClientNoteSection(),
+                            if (context.read<OrderDetailsCubit>().orderData!.clientNote.isNotEmpty) ClientNoteSection(),
                             const OrderSummarySection(),
                             Padding(
                               padding: const EdgeInsets.only(

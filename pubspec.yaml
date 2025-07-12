@@ -121,7 +121,6 @@ flutter:
   assets:
     - assets/fonts/Satoshi_Complete/
     - assets/images/
-    - assets/animations/
     - assets/icons/
     - assets/json/
     - .env

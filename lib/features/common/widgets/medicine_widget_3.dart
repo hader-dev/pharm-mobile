@@ -51,7 +51,7 @@ class MedicineWidget3 extends StatelessWidget {
                 child: Stack(children: [
                   medicineData.image != null
                       ? CacheNetworkImagePlus(
-                          boxFit: BoxFit.cover,
+                          boxFit: BoxFit.fill,
                           imageUrl: "https://pharmacie-denni.dz/wp-content/uploads/2025/05/12-2-1.png",
                         )
                       : Center(
