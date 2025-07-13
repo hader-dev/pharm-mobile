@@ -43,8 +43,17 @@ class Urls {
 
   //favorites
   static String get favorites => "/favorite-";
-  static String get favoritesMedicineCatalog => "${favorites}medications-catalog";
-  static String get favoritesParaPharmaCatalog => "${favorites}parapharm-catalog";
+
+  //Medicines
+  static String get medicinesCatalog1 => "medications-catalog";
+
+  //Medicine parapharm-catalog
+  static String get paraPharamaCatalog1 => "parapharm-catalog";
+
+  static String get favoritesLikeMedicineCatalog => "$favorites$medicinesCatalog1";
+  static String get favoritesUnlikeMedicineCatalog => "$favorites$medicinesCatalog1/by-medicine-catalog-id";
+  static String get favoritesLikeParaPharmaCatalog => "$favorites$paraPharamaCatalog1";
+  static String get favoritesUnLikeParaPharmaCatalog => "$favorites$paraPharamaCatalog1/by-parapharm-catalog-id";
   static String get favoritesCompany => "${favorites}companies";
 
   static String get publicFiles => "/files";

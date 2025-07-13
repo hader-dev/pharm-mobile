@@ -32,7 +32,10 @@ class OrderSummarySection extends StatelessWidget {
 
           SummaryRow(
             label: 'payment method',
-            value: "wiiiiiiiiw",
+            value: PaymentMethods.values
+                .firstWhere((element) => element.id == context.read<OrderDetailsCubit>().orderData!.paymentMethod,
+                    orElse: () => PaymentMethods.cod)
+                .name,
           ),
           SummaryRow(label: 'discount', value: '10%'),
           //   const SummaryRow(label: 'Shipping (Standard)', value: '10.00 context.translation!.currencyAbbreviation'),

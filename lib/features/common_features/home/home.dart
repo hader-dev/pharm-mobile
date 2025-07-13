@@ -68,10 +68,6 @@ class HomeScreen extends StatelessWidget {
             ),
             trailing: [
               IconButton(
-                icon: const Icon(Iconsax.search_normal),
-                onPressed: () {},
-              ),
-              IconButton(
                 icon: const Icon(Iconsax.notification),
                 onPressed: () {},
               ),

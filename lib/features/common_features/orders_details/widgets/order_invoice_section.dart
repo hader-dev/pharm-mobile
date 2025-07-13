@@ -7,7 +7,8 @@ import '../../../../utils/enums.dart';
 import 'order_summary_section.dart';
 
 class OrderInvoiceSection extends StatelessWidget {
-  const OrderInvoiceSection({super.key});
+  final InvoiceTypes invoiceType;
+  const OrderInvoiceSection({super.key, required this.invoiceType});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,7 @@ class OrderInvoiceSection extends StatelessWidget {
           Gap(AppSizesManager.s4),
           SummaryRow(
             label: 'Invoice type',
-            value: InvoiceTypes.facture.name,
+            value: invoiceType.name,
           ),
         ],
       ),

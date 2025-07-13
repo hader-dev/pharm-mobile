@@ -128,7 +128,11 @@ class OrdersDetailsScreen extends StatelessWidget {
                         ),
                         child: Column(
                           children: <Widget>[
-                            OrderInvoiceSection(),
+                            if (context.read<OrderDetailsCubit>().orderData!.invoiceType != null)
+                              OrderInvoiceSection(
+                                invoiceType: InvoiceTypes.values.firstWhere((element) =>
+                                    context.read<OrderDetailsCubit>().orderData!.invoiceType == element.id),
+                              ),
                             if (context.read<OrderDetailsCubit>().orderData!.clientNote.isNotEmpty) ClientNoteSection(),
                             const OrderSummarySection(),
                             Padding(

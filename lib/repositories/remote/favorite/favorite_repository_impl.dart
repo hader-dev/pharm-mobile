@@ -12,7 +12,7 @@ class FavoriteRepository extends IFavoriteRepository {
 
   @override
   Future<List<BaseMedicineCatalogModel>> getFavoritesMedicinesCatalogs() async {
-    final decodedResponse = await client.sendRequest(() => client.get(Urls.favoritesMedicineCatalog));
+    final decodedResponse = await client.sendRequest(() => client.get(Urls.medicinesCatalog1));
     return (decodedResponse as List)
         .map((element) => BaseMedicineCatalogModel.fromJson(element["medicineCatalogId"]))
         .toList();
@@ -20,7 +20,7 @@ class FavoriteRepository extends IFavoriteRepository {
 
   @override
   Future<List<BaseParaPharmaCatalogModel>> getFavoritesParaPharmasCatalogs() async {
-    final decodedResponse = await client.sendRequest(() => client.get(Urls.favoritesParaPharmaCatalog));
+    final decodedResponse = await client.sendRequest(() => client.get(Urls.paraPharamaCatalog1));
     return (decodedResponse as List)
         .map((element) => BaseParaPharmaCatalogModel.fromJson(element["parapharmCatalog"]))
         .toList();
@@ -28,46 +28,46 @@ class FavoriteRepository extends IFavoriteRepository {
 
   @override
   Future<List<Company>> getFavoritesVendors() async {
-    final decodedResponse = await client.sendRequest(() => client.get(Urls.favoritesMedicineCatalog));
+    final decodedResponse = await client.sendRequest(() => client.get(Urls.favoritesUnlikeMedicineCatalog));
     return (decodedResponse as List).map((element) => Company.fromJson(element["favoriteCompany"])).toList();
   }
 
   @override
   Future<void> likeMedicineCatalog({required String medicineCatalogId}) async {
     await client.sendRequest(
-        () => client.post(Urls.favoritesMedicineCatalog, payload: {"medicineCatalogId": medicineCatalogId}));
+        () => client.post(Urls.favoritesLikeMedicineCatalog, payload: {"medicineCatalogId": medicineCatalogId}));
   }
 
   @override
   Future<void> likeParaPharmaCatalog({required String paraPharmaCatalogId}) async {
     await client.sendRequest(
-        () => client.post(Urls.favoritesMedicineCatalog, payload: {"parapharmCatalogId": paraPharmaCatalogId}));
+        () => client.post(Urls.favoritesLikeMedicineCatalog, payload: {"parapharmCatalogId": paraPharmaCatalogId}));
   }
 
   @override
   Future<void> likeVendors({required String vendorId}) async {
     await client
-        .sendRequest(() => client.post(Urls.favoritesMedicineCatalog, payload: {"favoriteCompanyId": vendorId}));
+        .sendRequest(() => client.post(Urls.favoritesUnlikeMedicineCatalog, payload: {"favoriteCompanyId": vendorId}));
   }
 
   @override
   Future<void> unLikeMedicineCatalog({required String medicineCatalogId}) async {
     await client.sendRequest(() => client.delete(
-          "${Urls.favoritesMedicineCatalog}/$medicineCatalogId",
+          "${Urls.favoritesUnlikeMedicineCatalog}/$medicineCatalogId",
         ));
   }
 
   @override
   Future<void> unLikeParaPharmaCatalog({required String paraPharmaCatalogId}) async {
     await client.sendRequest(() => client.delete(
-          "${Urls.favoritesMedicineCatalog}/$paraPharmaCatalogId",
+          "${Urls.favoritesUnLikeParaPharmaCatalog}/$paraPharmaCatalogId",
         ));
   }
 
   @override
   Future<void> unLikeVendors({required String vendorId}) async {
     await client.sendRequest(() => client.delete(
-          "${Urls.favoritesMedicineCatalog}/$vendorId",
+          "${Urls.favoritesUnlikeMedicineCatalog}/$vendorId",
         ));
   }
 }

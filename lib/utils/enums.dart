@@ -87,9 +87,23 @@ enum SearchVendorFilters { name, address, phone, email, description }
 
 enum ProductTypes { medicine, para_pharmacy }
 
-enum PaymentMethods { cash, cheque, bank_transfer }
+enum PaymentMethods {
+  cod(id: 1),
+  bank_transfer(id: 2),
+  card(id: 3),
+  mobile_money(id: 4);
 
-enum InvoiceTypes { facture, proforma }
+  final int id;
+  const PaymentMethods({required this.id});
+}
+
+enum InvoiceTypes {
+  facture(id: 1),
+  proforma(id: 2);
+
+  final int id;
+  const InvoiceTypes({required this.id});
+}
 
 enum CompanyType {
   distributor(id: 1, imgPath: DrawableAssetStrings.companyIllustration2),

@@ -4,8 +4,8 @@ class BaseOrderModel {
   final int status;
   final double totalAmountExclTax;
   final double totalAmountInclTax;
-  final String? paymentMethod;
-  final String? invoiceType;
+  final int? paymentMethod;
+  final int? invoiceType;
   final String deliveryAddress;
   final DateTime createdAt;
   final DateTime updatedAt;
