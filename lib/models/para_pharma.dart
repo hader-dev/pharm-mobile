@@ -39,17 +39,17 @@ class BaseParaPharmaCatalogModel {
   }
 }
 
-class Brand {
+class BaseBrand {
   final String id;
   final String name;
 
-  Brand({
+  BaseBrand({
     required this.id,
     required this.name,
   });
 
-  factory Brand.fromJson(Map<String, dynamic> json) {
-    return Brand(
+  factory BaseBrand.fromJson(Map<String, dynamic> json) {
+    return BaseBrand(
       id: json['id'],
       name: json['name'],
     );
@@ -143,4 +143,35 @@ class ParaPharmaCatalogModel extends BaseParaPharmaCatalogModel {
       company: json['company'] == null ? null : BaseCompany.fromJson(json['company']),
     );
   }
+}
+
+class Brand extends BaseBrand {
+  final DateTime createdAt;
+  final DateTime updatedAt;
+  final dynamic thumbnailImage;
+  final dynamic image;
+  final String companyId;
+  final dynamic parentId;
+
+  Brand({
+    required super.id,
+    required super.name,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.thumbnailImage,
+    required this.image,
+    required this.companyId,
+    required this.parentId,
+  });
+
+  factory Brand.fromJson(Map<String, dynamic> json) => Brand(
+        id: json["id"],
+        createdAt: DateTime.parse(json["createdAt"]),
+        updatedAt: DateTime.parse(json["updatedAt"]),
+        thumbnailImage: json["thumbnailImage"],
+        image: json["image"],
+        companyId: json["companyId"],
+        name: json["name"],
+        parentId: json["parentId"],
+      );
 }

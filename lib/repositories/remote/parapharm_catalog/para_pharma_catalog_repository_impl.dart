@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/utils/urls.dart';
 
@@ -26,7 +28,7 @@ class ParaPharmaRepository extends IParaPharmaRepository {
       'offset': offset.toString(),
       'sort[id]': sortDirection,
       if (companyIdFilter != null) 'filters[companyId]': companyIdFilter..toString(),
-      if (fields.isNotEmpty) ...{'fields[]': fields},
+      if (fields.isNotEmpty) ...{'fields[]': jsonEncode(fields)},
       if (searchFilter != null) ...{'search[${searchFilter.name}]': search},
       'computed[isFavorite]': 'true',
       'include[company][fields][]': ['id', 'name', 'thumbnailImage'],

@@ -35,6 +35,8 @@ class Urls {
   //Orders
   static String get orders => "/orders";
   static String get buyNow => "$orders/buy-now";
+  //parapharm-brands
+  static String get parapharmBrands => "/parapharm-brands";
 
   //Cart Items
   static String get cartItems => "/cart-items";

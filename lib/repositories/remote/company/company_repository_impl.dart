@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 
 import 'package:hader_pharm_mobile/features/common_features/create_company_profile/hooks_data_model/create_company_profile_form.dart';
+import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 
 import '../../../config/services/network/network_interface.dart';
@@ -34,17 +37,19 @@ class CompanyRepository extends ICompanyRepository {
       String search = '',
       SearchVendorFilters? searchFilter,
       int? distributorCategoryId,
+      List<String>? fields,
       required CompanyType companyType}) async {
     final queryParams = {
-      'limit': limit,
-      'offset': offset,
+      'limit': limit.toString(),
+      'offset': offset.toString(),
       'sort[id]': sortDirection,
-      if (distributorCategoryId != null) 'filters[distributorCategory]': distributorCategoryId,
+      if (distributorCategoryId != null) 'filters[distributorCategory]': distributorCategoryId.toString(),
       if (searchFilter != null) 'search[${searchFilter.name}]': search,
-      'filters[type]': companyType.id,
+      if (fields != null) ...{'fields[]': fields},
+      'filters[type]': companyType.id.toString(),
     };
-    var decodedResponse = await client.sendRequest(
-        () => client.get(Urls.company, queryParams: queryParams.map((key, value) => MapEntry(key, value.toString()))));
+
+    var decodedResponse = await client.sendRequest(() => client.get(Urls.company, queryParams: queryParams));
     return (decodedResponse["data"] as List).map((json) => Company.fromJson(json)).toList();
   }
 
@@ -56,5 +61,20 @@ class CompanyRepository extends ICompanyRepository {
   @override
   Future<void> addCompanyToFavorites({required String companyId}) {
     return client.sendRequest(() => client.post(Urls.favoritesCompany, payload: {'favoriteCompanyId': companyId}));
+  }
+
+  @override
+  Future<List<Brand>> getCompanyBrands({required String companyId}) async {
+    var decodedResponse = await client.sendRequest(() => client.get(
+          Urls.parapharmBrands,
+        ));
+
+    return (decodedResponse["data"] as List).map((brandItem) => Brand.fromJson(brandItem)).toList();
+  }
+
+  @override
+  Future<List<Brand>> getCompanyCategories({required String companyId}) {
+    // TODO: implement getCompanyCategories
+    throw UnimplementedError();
   }
 }

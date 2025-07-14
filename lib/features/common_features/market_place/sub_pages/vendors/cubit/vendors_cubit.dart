@@ -52,6 +52,7 @@ class VendorsCubit extends Cubit<VendorsState> {
           limit: PaginationConstants.resultsPerPage,
           offset: offSet,
           searchFilter: selectedVendorSearchFilter,
+          fields: BaseCompany.baseCompanyFields,
           distributorCategoryId:
               selectedDistributorTypeFilter == DistributorCategory.both ? null : selectedDistributorTypeFilter?.id,
           companyType: CompanyType.distributor,

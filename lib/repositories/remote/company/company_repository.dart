@@ -2,6 +2,7 @@ import 'package:hader_pharm_mobile/features/common_features/create_company_profi
 import 'package:hader_pharm_mobile/models/company.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 
+import '../../../models/para_pharma.dart';
 import '../../../utils/constants.dart';
 
 abstract class ICompanyRepository {
@@ -13,7 +14,10 @@ abstract class ICompanyRepository {
       String search = '',
       SearchVendorFilters? searchFilter,
       required CompanyType companyType,
+      List<String>? fields,
       int? distributorCategoryId});
   Future<void> joinCompanyAsCLient({required String companyId});
   Future<void> addCompanyToFavorites({required String companyId});
+  Future<List<Brand>> getCompanyBrands({required String companyId});
+  Future<List<Brand>> getCompanyCategories({required String companyId});
 }

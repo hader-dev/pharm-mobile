@@ -1,16 +1,22 @@
 import 'package:equatable/equatable.dart';
 
 class BaseCompany with EquatableMixin {
+  static final baseCompanyFields = ["id", "thumbnailImage", "image", "name", "address", "phone", "email"];
   final String id;
   final dynamic thumbnailImage;
   final dynamic image;
   final String name;
-
+  final String? address;
+  final String? phone;
+  final String? email;
   BaseCompany({
     required this.id,
     required this.thumbnailImage,
     required this.image,
     required this.name,
+    this.address,
+    this.phone,
+    this.email,
   });
   factory BaseCompany.fromJson(Map<String, dynamic> json) {
     return BaseCompany(
@@ -18,6 +24,9 @@ class BaseCompany with EquatableMixin {
       thumbnailImage: json["thumbnailImage"],
       image: json["image"],
       name: json["name"] ?? "",
+      address: json["address"],
+      phone: json["phone"],
+      email: json["email"],
     );
   }
 
@@ -35,11 +44,10 @@ class Company extends BaseCompany {
   final String? managerUserId;
   final int? type;
   final dynamic distributorCategory;
-  final String? address;
-  final String? phone;
+
   final String? phone2;
   final String? fax;
-  final String? email;
+
   final String? description;
   final String? bankAccount;
   final String? fiscalId;
@@ -54,6 +62,8 @@ class Company extends BaseCompany {
     required super.thumbnailImage,
     required super.image,
     required super.name,
+    super.address,
+    super.phone,
     this.latitude,
     this.longitude,
     this.createdAt,
@@ -61,11 +71,9 @@ class Company extends BaseCompany {
     this.managerUserId,
     this.type,
     this.distributorCategory,
-    this.address,
-    this.phone,
     this.phone2,
     this.fax,
-    this.email,
+    super.email,
     this.description,
     this.bankAccount,
     this.fiscalId,
