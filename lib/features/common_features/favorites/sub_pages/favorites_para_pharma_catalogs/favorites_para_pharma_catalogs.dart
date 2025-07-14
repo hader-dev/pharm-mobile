@@ -11,6 +11,14 @@ class FavoritesParaPharmaCatalogs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<FavoritesCubit, FavoritesState>(
+      buildWhen: (previous, current) {
+        if (current is FavoritesParaPharmaLoaded ||
+            current is FavoritesParaPharmaLoadingFailed ||
+            current is FavoritesParaPharmaLoading) {
+          return true;
+        }
+        return false;
+      },
       builder: (context, state) {
         if (state is FavoritesParaPharmaLoading) {
           return const Center(child: CircularProgressIndicator());
@@ -25,7 +33,7 @@ class FavoritesParaPharmaCatalogs extends StatelessWidget {
             Expanded(
               child: RefreshIndicator(
                 onRefresh: () {
-                  return BlocProvider.of<FavoritesCubit>(context).fetchLikedMedicines();
+                  return BlocProvider.of<FavoritesCubit>(context).fetchLikedParaPharma();
                 },
                 child: ListView.builder(
                   shrinkWrap: true,

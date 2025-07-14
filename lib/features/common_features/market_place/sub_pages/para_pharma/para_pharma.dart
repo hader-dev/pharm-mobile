@@ -121,13 +121,14 @@ class _ParaPharmaPageState extends State<ParaPharmaPage> with AutomaticKeepAlive
                           physics: const AlwaysScrollableScrollPhysics(),
                           itemCount: BlocProvider.of<ParaPharmaCubit>(context).paraPharmaProducts.length,
                           itemBuilder: (context, index) => ParaPharmaWidget1(
+                            hideLikeButton: false,
                             paraPharmData: BlocProvider.of<ParaPharmaCubit>(context).paraPharmaProducts[index],
-                            isLiked: BlocProvider.of<MedicineProductsCubit>(context).medicines[index].isLiked,
-                            onLike: !BlocProvider.of<MedicineProductsCubit>(context).medicines[index].isLiked
-                                ? () => BlocProvider.of<MedicineProductsCubit>(context).likeMedicinesCatalog(
-                                    BlocProvider.of<MedicineProductsCubit>(context).medicines[index].id)
-                                : () => BlocProvider.of<MedicineProductsCubit>(context).unlikeMedicinesCatalog(
-                                    BlocProvider.of<MedicineProductsCubit>(context).medicines[index].id),
+                            isLiked: BlocProvider.of<ParaPharmaCubit>(context).paraPharmaProducts[index].isLiked,
+                            onLike: !BlocProvider.of<ParaPharmaCubit>(context).paraPharmaProducts[index].isLiked
+                                ? () => BlocProvider.of<ParaPharmaCubit>(context).likeParaPharmaCatalog(
+                                    BlocProvider.of<ParaPharmaCubit>(context).paraPharmaProducts[index].id)
+                                : () => BlocProvider.of<ParaPharmaCubit>(context).unlikeParaPharmaCatalog(
+                                    BlocProvider.of<ParaPharmaCubit>(context).paraPharmaProducts[index].id),
                           ),
                         )),
                   ),

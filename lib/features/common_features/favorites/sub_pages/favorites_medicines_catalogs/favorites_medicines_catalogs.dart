@@ -11,6 +11,14 @@ class FavoritesMedicinesCatalog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<FavoritesCubit, FavoritesState>(
+      buildWhen: (previous, current) {
+        if (current is FavoritesMedicinesLoaded ||
+            current is FavoritesMedicinesLoadingFailed ||
+            current is FavoritesMedicinesLoading) {
+          return true;
+        }
+        return false;
+      },
       builder: (context, state) {
         if (state is FavoritesMedicinesLoading) {
           return const Center(child: CircularProgressIndicator());

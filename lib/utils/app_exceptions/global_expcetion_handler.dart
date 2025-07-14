@@ -42,8 +42,8 @@ class GlobalExceptionHandler {
     } else if (exception is DataValidationException) {
       toastManager.showToast(
         type: ToastType.error,
-        message:
-            "${exception.message}\n${exception.errors != null ? exception.errors!.map((e) => e.message).join("\n") : ""}",
+        //${exception.message}\n
+        message: exception.errors != null ? exception.errors!.map((e) => e.message).join("\n") : "",
       );
     } else {
       if (exception is TemplateException) {

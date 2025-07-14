@@ -16,9 +16,11 @@ import '../chips/custom_chip.dart' show CustomChip;
 
 class ParaPharmaWidget1 extends StatelessWidget {
   final BaseParaPharmaCatalogModel paraPharmData;
+  final bool hideLikeButton;
   final bool isLiked;
   final VoidCallback? onLike;
-  const ParaPharmaWidget1({super.key, required this.paraPharmData, required this.isLiked, this.onLike});
+  const ParaPharmaWidget1(
+      {super.key, required this.paraPharmData, required this.isLiked, this.onLike, this.hideLikeButton = true});
 
   @override
   Widget build(BuildContext context) {
@@ -104,18 +106,19 @@ class ParaPharmaWidget1 extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Row(children: [
-                    CustomChip(label: "Antibiotic", color: AppColors.bgDarken2, onTap: () {}),
-                    Spacer(),
-                    InkWell(
-                      onTap: () {
-                        onLike?.call();
-                      },
-                      child: !isLiked
-                          ? Icon(Icons.favorite_border_rounded, color: Colors.black54)
-                          : Icon(Icons.favorite, color: Colors.red),
-                    )
-                  ]),
+                  if (!hideLikeButton)
+                    Row(children: [
+                      // CustomChip(label: "Antibiotic", color: AppColors.bgDarken2, onTap: () {}),
+                      Spacer(),
+                      InkWell(
+                        onTap: () {
+                          onLike?.call();
+                        },
+                        child: !isLiked
+                            ? Icon(Icons.favorite_border_rounded, color: Colors.black54)
+                            : Icon(Icons.favorite, color: Colors.red),
+                      )
+                    ]),
                   Gap(AppSizesManager.s8),
                   Text(paraPharmData.name,
                       maxLines: 1,
@@ -138,7 +141,7 @@ class ParaPharmaWidget1 extends StatelessWidget {
                       ),
                     ),
                     Gap(AppSizesManager.s4),
-                    Text(paraPharmData.company!.name,
+                    Text(paraPharmData.company?.name ?? "",
                         style: AppTypography.bodyXSmallStyle
                             .copyWith(fontWeight: AppTypography.appFontSemiBold, color: TextColors.primary.color)),
                   ]),

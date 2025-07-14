@@ -15,6 +15,7 @@ import '../chips/custom_chip.dart' show CustomChip;
 
 class MedicineWidget2 extends StatelessWidget {
   final BaseMedicineCatalogModel medicineData;
+  final bool hideLikeButton;
   final VoidCallback? onLikeTapped;
   final bool isLiked;
   const MedicineWidget2({
@@ -22,6 +23,7 @@ class MedicineWidget2 extends StatelessWidget {
     required this.medicineData,
     this.onLikeTapped,
     required this.isLiked,
+    this.hideLikeButton = true,
   });
 
   @override
@@ -109,18 +111,19 @@ class MedicineWidget2 extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Row(children: [
-                    CustomChip(label: "Antibiotic", color: AppColors.bgDarken2, onTap: () {}),
-                    Spacer(),
-                    InkWell(
-                      onTap: () {
-                        onLikeTapped?.call();
-                      },
-                      child: !isLiked
-                          ? Icon(Icons.favorite_border_rounded, color: Colors.black54)
-                          : Icon(Icons.favorite, color: Colors.red),
-                    )
-                  ]),
+                  if (!hideLikeButton)
+                    Row(children: [
+                      //    CustomChip(label: "Antibiotic", color: AppColors.bgDarken2, onTap: () {}),
+                      Spacer(),
+                      InkWell(
+                        onTap: () {
+                          onLikeTapped?.call();
+                        },
+                        child: !isLiked
+                            ? Icon(Icons.favorite_border_rounded, color: Colors.black54)
+                            : Icon(Icons.favorite, color: Colors.red),
+                      )
+                    ]),
                   Gap(AppSizesManager.s8),
                   if (medicineData.dci != null)
                     Text(medicineData.dci,

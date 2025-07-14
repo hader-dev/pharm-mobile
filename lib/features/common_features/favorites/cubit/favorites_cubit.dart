@@ -33,23 +33,23 @@ class FavoritesCubit extends Cubit<FavoritesState> {
 
   Future<void> fetchLikedParaPharma() async {
     try {
-      emit(FavoritesMedicinesLoading());
+      emit(FavoritesParaPharmaLoading());
       likedParaPharmaCatalogs = await favoriteRepository.getFavoritesParaPharmasCatalogs();
-      emit(FavoritesMedicinesLoaded());
+      emit(FavoritesParaPharmaLoaded());
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
-      emit(FavoritesMedicinesLoadingFailed());
+      emit(FavoritesParaPharmaLoadingFailed());
     }
   }
 
   Future<void> fetchLikedVendors() async {
     try {
-      emit(FavoritesMedicinesLoading());
+      emit(FavoritesVendorsLoading());
       likedVendors = await favoriteRepository.getFavoritesVendors();
-      emit(FavoritesMedicinesLoaded());
+      emit(FavoritesVendorsLoaded());
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
-      emit(FavoritesMedicinesLoadingFailed());
+      emit(FavoritesVendorsLoadingFailed());
     }
   }
 }

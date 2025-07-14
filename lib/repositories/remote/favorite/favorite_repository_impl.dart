@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import '../../../config/services/network/network_interface.dart';
 
 import '../../../models/company.dart';
@@ -12,15 +14,17 @@ class FavoriteRepository extends IFavoriteRepository {
 
   @override
   Future<List<BaseMedicineCatalogModel>> getFavoritesMedicinesCatalogs() async {
-    final decodedResponse = await client.sendRequest(() => client.get(Urls.medicinesCatalog1));
+    final decodedResponse = await client.sendRequest(() => client
+        .get(Urls.favoritesLikeMedicineCatalog, queryParams: {"include[medicineCatalog][_load]": jsonEncode(true)}));
     return (decodedResponse as List)
-        .map((element) => BaseMedicineCatalogModel.fromJson(element["medicineCatalogId"]))
+        .map((element) => BaseMedicineCatalogModel.fromJson(element["medicineCatalog"]))
         .toList();
   }
 
   @override
   Future<List<BaseParaPharmaCatalogModel>> getFavoritesParaPharmasCatalogs() async {
-    final decodedResponse = await client.sendRequest(() => client.get(Urls.paraPharamaCatalog1));
+    final decodedResponse = await client.sendRequest(() => client
+        .get(Urls.favoritesLikeParaPharmaCatalog, queryParams: {"include[parapharmCatalog][_load]": jsonEncode(true)}));
     return (decodedResponse as List)
         .map((element) => BaseParaPharmaCatalogModel.fromJson(element["parapharmCatalog"]))
         .toList();
@@ -28,8 +32,11 @@ class FavoriteRepository extends IFavoriteRepository {
 
   @override
   Future<List<Company>> getFavoritesVendors() async {
-    final decodedResponse = await client.sendRequest(() => client.get(Urls.favoritesUnlikeMedicineCatalog));
-    return (decodedResponse as List).map((element) => Company.fromJson(element["favoriteCompany"])).toList();
+    final decodedResponse = await client.sendRequest(
+        () => client.get(Urls.favoritesCompany, queryParams: {"include[favoriteCompany][_load]": jsonEncode(true)}));
+    return (decodedResponse as List)
+        .map((favoriteCOmpanyObject) => Company.fromJson(favoriteCOmpanyObject["favoriteCompany"]))
+        .toList();
   }
 
   @override
@@ -41,13 +48,12 @@ class FavoriteRepository extends IFavoriteRepository {
   @override
   Future<void> likeParaPharmaCatalog({required String paraPharmaCatalogId}) async {
     await client.sendRequest(
-        () => client.post(Urls.favoritesLikeMedicineCatalog, payload: {"parapharmCatalogId": paraPharmaCatalogId}));
+        () => client.post(Urls.favoritesLikeParaPharmaCatalog, payload: {"parapharmCatalogId": paraPharmaCatalogId}));
   }
 
   @override
   Future<void> likeVendors({required String vendorId}) async {
-    await client
-        .sendRequest(() => client.post(Urls.favoritesUnlikeMedicineCatalog, payload: {"favoriteCompanyId": vendorId}));
+    await client.sendRequest(() => client.post(Urls.favoritesCompany, payload: {"favoriteCompanyId": vendorId}));
   }
 
   @override

@@ -119,6 +119,7 @@ class _MedicineProductsPageState extends State<MedicineProductsPage> with Automa
                         physics: const AlwaysScrollableScrollPhysics(),
                         itemCount: BlocProvider.of<MedicineProductsCubit>(context).medicines.length,
                         itemBuilder: (context, index) => MedicineWidget2(
+                          hideLikeButton: false,
                           medicineData: BlocProvider.of<MedicineProductsCubit>(context).medicines[index],
                           isLiked: BlocProvider.of<MedicineProductsCubit>(context).medicines[index].isLiked,
                           onLikeTapped: !BlocProvider.of<MedicineProductsCubit>(context).medicines[index].isLiked
