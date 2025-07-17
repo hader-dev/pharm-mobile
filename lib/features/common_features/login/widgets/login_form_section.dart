@@ -30,7 +30,7 @@ class _LoginFormSectionState extends State<LoginFormSection> {
             children: [
               CustomTextField(
                 fieldKey: emailFieldKey,
-                label: 'Email*',
+                label: '${context.translation!.email}*',
                 controller: BlocProvider.of<LoginCubit>(context).emailController,
                 state: FieldState.normal,
                 validationFunc: (value) {

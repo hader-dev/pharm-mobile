@@ -11,6 +11,7 @@ import '../../features/common_features/check_phone/check_phone.dart';
 import '../../features/common_features/congratulation/congratulation.dart';
 import '../../features/common_features/create_company_profile/create_company_profile.dart';
 import '../../features/common_features/favorites/favorites.dart';
+import '../../features/common_features/language/lang_screen.dart';
 import '../../features/common_features/login/login.dart';
 import '../../features/common_features/medicine_catalog_details/medicine_catalog_details.dart';
 import '../../features/common_features/onboarding/onboarding.dart';
@@ -48,6 +49,7 @@ class RoutingManager {
   static const String favoritesScreen = 'FavoritesScreen';
   static const String vendorDetails = '/VendorDetails';
   static const String ordersDetailsScreen = '/OrdersDetailsScreen';
+  static const String languagesScreen = '/LanguagesScreen';
 
   static final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -65,6 +67,13 @@ class RoutingManager {
           path: onboardingScreen,
           builder: (BuildContext context, GoRouterState state) {
             return const OnboardingScreen();
+          },
+        ),
+        GoRoute(
+          name: languagesScreen,
+          path: languagesScreen,
+          builder: (BuildContext context, GoRouterState state) {
+            return const LanguagesScreen();
           },
         ),
         GoRoute(

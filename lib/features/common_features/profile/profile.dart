@@ -77,6 +77,9 @@ class ProfileScreen extends StatelessWidget {
                       SettingsTile(
                         icon: LucideIcons.globe,
                         title: "language",
+                        onTap: () {
+                          GoRouter.of(context).pushNamed(RoutingManager.languagesScreen);
+                        },
                       ),
                       Padding(
                         padding:
