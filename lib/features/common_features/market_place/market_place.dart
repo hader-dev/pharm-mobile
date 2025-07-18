@@ -9,6 +9,7 @@ import 'package:hader_pharm_mobile/repositories/remote/company/company_repositor
 import 'package:hader_pharm_mobile/repositories/remote/favorite/favorite_repository_impl.dart';
 import 'package:hader_pharm_mobile/repositories/remote/parapharm_catalog/para_pharma_catalog_repository_impl.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../config/services/network/network_interface.dart';
@@ -66,8 +67,8 @@ class MarketPlaceScreen extends StatelessWidget {
               ),
               onPressed: () {},
             ),
-            title: const Text(
-              "Market Place",
+            title: Text(
+              context.translation!.market_place,
               style: AppTypography.headLine3SemiBoldStyle,
             ),
             trailing: [

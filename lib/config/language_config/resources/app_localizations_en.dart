@@ -243,4 +243,13 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get emailNotVerified =>
       'Your email is not verified. Please check your email for verification';
+
+  @override
+  String get searchByNamePackagingSku => 'Search by name, packaging or SKU';
+
+  @override
+  String get searchFilters => 'Search Filters';
+
+  @override
+  String get types => 'Types';
 }

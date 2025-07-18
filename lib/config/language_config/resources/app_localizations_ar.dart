@@ -128,7 +128,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get showMore => 'عرض المزيد';
 
   @override
-  String get filters => 'فلاتر';
+  String get filters => 'الفلاتر';
 
   @override
   String get reset => 'إعادة تعيين';
@@ -245,4 +245,14 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get emailNotVerified =>
       'بريدك الإلكتروني غير مفعل. يرجى التحقق من بريدك لتأكيده';
+
+  @override
+  String get searchByNamePackagingSku =>
+      'ابحث بالاسم أو التغليف أو رمز المنتج (SKU)';
+
+  @override
+  String get searchFilters => 'فلاتر البحث';
+
+  @override
+  String get types => 'الأنواع';
 }

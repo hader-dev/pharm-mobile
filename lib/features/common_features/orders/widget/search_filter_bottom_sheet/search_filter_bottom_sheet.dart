@@ -8,6 +8,7 @@ import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/app_layout/app_layout.dart' show AppLayout;
 
 import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart' show Iconsax;
 
 import '../../../../../../../utils/enums.dart';
@@ -76,7 +77,7 @@ class OrdersFilterBottomSheet extends StatelessWidget {
                       flex: 1,
                       child: PrimaryTextButton(
                         isOutLined: true,
-                        label: "Reset",
+                        label: context.translation!.reset,
                         labelColor: AppColors.accent1Shade1,
                         onTap: () {
                           BlocProvider.of<OrdersCubit>(context).resetFilters();
@@ -88,7 +89,7 @@ class OrdersFilterBottomSheet extends StatelessWidget {
                     Expanded(
                       flex: 2,
                       child: PrimaryTextButton(
-                        label: "Apply Filters",
+                        label: context.translation!.apply,
                         leadingIcon: Iconsax.money4,
                         onTap: () {
                           BlocProvider.of<OrdersCubit>(context).applyFilters();

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import 'package:iconsax/iconsax.dart';
 
@@ -36,7 +37,7 @@ class _ParaPharmaPageState extends State<ParaPharmaPage> with AutomaticKeepAlive
               child: Padding(
                 padding: const EdgeInsets.only(left: AppSizesManager.p8),
                 child: CustomTextField(
-                  hintText: 'Search by name ,packaging or sku',
+                  hintText: context.translation!.searchByNamePackagingSku,
                   controller: BlocProvider.of<ParaPharmaCubit>(context).searchController,
                   state: FieldState.normal,
                   isEnabled: true,

@@ -9,6 +9,7 @@ import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/filter_option_value.dart';
 
 import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart' show Iconsax;
 
 import '../../../../../../utils/enums.dart';
@@ -33,12 +34,12 @@ class SearchFilterBottomSheet extends StatelessWidget {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              BottomSheetHeader(title: 'Search Filters'),
+              BottomSheetHeader(title: context.translation!.searchFilters),
               Gap(AppSizesManager.s12),
               Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
               Gap(AppSizesManager.s12),
               InfoWidget(
-                  label: "Filters",
+                  label: context.translation!.filters,
                   bgColor: AppColors.bgWhite,
                   value: Column(
                     // shrinkWrap: true,
@@ -62,7 +63,7 @@ class SearchFilterBottomSheet extends StatelessWidget {
                       flex: 1,
                       child: PrimaryTextButton(
                         isOutLined: true,
-                        label: "Reset",
+                        label: context.translation!.reset,
                         labelColor: AppColors.accent1Shade1,
                         onTap: () {
                           BlocProvider.of<MedicineProductsCubit>(context).resetMedicinesSearchFilter();
@@ -74,7 +75,7 @@ class SearchFilterBottomSheet extends StatelessWidget {
                     Expanded(
                       flex: 2,
                       child: PrimaryTextButton(
-                        label: "Apply Filters",
+                        label: context.translation!.apply,
                         leadingIcon: Iconsax.money4,
                         onTap: () {
                           BlocProvider.of<MedicineProductsCubit>(context).getMedicines();

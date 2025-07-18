@@ -561,6 +561,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your email is not verified. Please check your email for verification'**
   String get emailNotVerified;
+
+  /// No description provided for @searchByNamePackagingSku.
+  ///
+  /// In en, this message translates to:
+  /// **'Search by name, packaging or SKU'**
+  String get searchByNamePackagingSku;
+
+  /// No description provided for @searchFilters.
+  ///
+  /// In en, this message translates to:
+  /// **'Search Filters'**
+  String get searchFilters;
+
+  /// No description provided for @types.
+  ///
+  /// In en, this message translates to:
+  /// **'Types'**
+  String get types;
 }
 
 class _AppLocalizationsDelegate

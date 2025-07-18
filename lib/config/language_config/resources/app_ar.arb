@@ -76,6 +76,10 @@
   "createAccount": "إنشاء حساب",
     "registrationSuccess": "تم التسجيل بنجاح",
   "checkEmailForVerification": "تحقق من بريدك الإلكتروني للتأكيد",
-  "emailNotVerified": "بريدك الإلكتروني غير مفعل. يرجى التحقق من بريدك لتأكيده"
+  "emailNotVerified": "بريدك الإلكتروني غير مفعل. يرجى التحقق من بريدك لتأكيده",
+   "searchByNamePackagingSku": "ابحث بالاسم أو التغليف أو رمز المنتج (SKU)",
+   "searchFilters": "فلاتر البحث",
+  "filters": "الفلاتر",
+  "types": "الأنواع"
 }
 

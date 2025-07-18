@@ -9,6 +9,7 @@ import 'package:hader_pharm_mobile/features/common/widgets/filter_option_value.d
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/vendors/cubit/vendors_cubit.dart';
 
 import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart' show Iconsax;
 
 import '../../../../../../utils/enums.dart';
@@ -31,12 +32,12 @@ class VandorsSearchFilterBottomSheet extends StatelessWidget {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              BottomSheetHeader(title: 'Search Filters'),
+              BottomSheetHeader(title: context.translation!.searchFilters),
               Gap(AppSizesManager.s12),
               Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
               Gap(AppSizesManager.s12),
               InfoWidget(
-                  label: "Filters",
+                  label: context.translation!.filters,
                   bgColor: AppColors.bgWhite,
                   value: Column(
                     // shrinkWrap: true,
@@ -53,7 +54,7 @@ class VandorsSearchFilterBottomSheet extends StatelessWidget {
               Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
               Gap(AppSizesManager.s12),
               InfoWidget(
-                  label: "Types",
+                  label: context.translation!.types,
                   bgColor: AppColors.bgWhite,
                   value: Column(
                     // shrinkWrap: true,
@@ -74,7 +75,7 @@ class VandorsSearchFilterBottomSheet extends StatelessWidget {
                       flex: 1,
                       child: PrimaryTextButton(
                         isOutLined: true,
-                        label: "Reset",
+                        label: context.translation!.reset,
                         labelColor: AppColors.accent1Shade1,
                         onTap: () {
                           BlocProvider.of<VendorsCubit>(context).resetSearchFilters();
@@ -87,7 +88,7 @@ class VandorsSearchFilterBottomSheet extends StatelessWidget {
                     Expanded(
                       flex: 2,
                       child: PrimaryTextButton(
-                        label: "Apply Filters",
+                        label: context.translation!.apply,
                         leadingIcon: Iconsax.money4,
                         onTap: () {
                           BlocProvider.of<VendorsCubit>(context).fetchVendors();

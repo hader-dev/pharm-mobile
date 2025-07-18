@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../../../config/theme/colors_manager.dart';
@@ -37,7 +38,7 @@ class _MedicineProductsPageState extends State<MedicineProductsPage> with Automa
               child: Padding(
                 padding: const EdgeInsets.only(left: AppSizesManager.p8),
                 child: CustomTextField(
-                  hintText: 'Search by dci ,brand or sku',
+                  hintText: context.translation!.medicinesSearchFieldHint,
                   controller: BlocProvider.of<MedicineProductsCubit>(context).searchController,
                   state: FieldState.normal,
                   isEnabled: true,

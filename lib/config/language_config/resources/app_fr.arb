@@ -75,5 +75,9 @@
    "createAccount": "Créer un compte",
      "registrationSuccess": "Inscription réussie",
   "checkEmailForVerification": "Vérifiez votre e-mail pour la vérification",
-  "emailNotVerified": "Votre e-mail n'est pas vérifié. Veuillez vérifier votre e-mail pour la vérification"
+  "emailNotVerified": "Votre e-mail n'est pas vérifié. Veuillez vérifier votre e-mail pour la vérification",
+  "searchByNamePackagingSku": "Rechercher par nom, conditionnement ou SKU",
+   "searchFilters": "Filtres de recherche",
+  "filters": "Filtres",
+  "types": "Types"
 }

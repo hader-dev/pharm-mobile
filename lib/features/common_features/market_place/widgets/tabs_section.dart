@@ -3,6 +3,7 @@ import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/medicine_products/medicine_products.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/para_pharma.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/vendors/vendors.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../../config/theme/colors_manager.dart';
 
@@ -14,9 +15,6 @@ import '../../../../config/theme/colors_manager.dart';
 class MarketPlaceTabBarSection extends StatefulWidget {
   final List<String> tabs = ["Medicines", "Para-Pharma", "Vendors"];
   MarketPlaceTabBarSection({super.key});
-  // void generateSectionsKeys() {
-  //   sectionsKeys = {for (var categoryItem in tabs.categories) categoryItem.category.name: GlobalKey()};
-  // }
 
   @override
   State<MarketPlaceTabBarSection> createState() => _MarketPlaceTabBarSectionState();
@@ -27,7 +25,7 @@ class _MarketPlaceTabBarSectionState extends State<MarketPlaceTabBarSection> wit
   @override
   void initState() {
     super.initState();
-    tabsController = TabController(length: 3, vsync: this);
+    tabsController = TabController(length: widget.tabs.length, vsync: this);
   }
 
   @override
@@ -50,7 +48,7 @@ class _MarketPlaceTabBarSectionState extends State<MarketPlaceTabBarSection> wit
                 .map(
                   (tabLabel) => Tab(
                     child: Text(
-                      tabLabel,
+                      getTabTranslation(tabLabel),
                     ),
                   ),
                 )
@@ -64,5 +62,19 @@ class _MarketPlaceTabBarSectionState extends State<MarketPlaceTabBarSection> wit
         ),
       ],
     );
+  }
+
+  getTabTranslation(String label) {
+    switch (label) {
+      case "Medicines":
+        return context.translation!.medicines;
+      case "Para-Pharma":
+        return context.translation!.para_pharma;
+      case "Vendors":
+        return context.translation!.vendors;
+
+      default:
+        return "Tab";
+    }
   }
 }
