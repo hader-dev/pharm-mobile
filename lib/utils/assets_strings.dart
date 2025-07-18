@@ -24,21 +24,7 @@ class DrawableAssetStrings {
   static const String medicinesBg = 'assets/images/medicines_bg.webp';
   static const String paraPharmsBg = 'assets/images/paras_bg.webp';
 
-//   static const String logoImg = 'assets/images/logo.png';
-//   static const String emptyListImg = 'assets/images/empty_result.png';
-//   static const String loginBg = 'assets/images/login_bg.png';
-//   static const String loginIllustrationSvg = 'assets/images/login_illustration.svg';
-//   static const String errorImg = 'assets/images/error.png';
-//   static const String homeBubbleBgSvg = 'assets/images/home_bubble_bg.svg';
-//   static const String homeEdgedBgImg = 'assets/images/home_edge_bg.png';
-//   static const String noPositionImg = 'assets/images/no_position.png';
-//   static const String noGalleryImg = 'assets/images/no_gallery.png';
-//   static const String noCompanyImg = 'assets/images/company.png';
-//   static const String maleProfileImg = 'assets/images/male_profile.jpg';
-//   static const String femaleProfileImg = 'assets/images/female_profile.jpg';
-
   //app icons
-
   static const String appleIcon = 'assets/icons/apple.svg';
   static const String algeriaFlagIcon = 'assets/icons/algeria_flag.svg';
   static const String googleIcon = 'assets/icons/google.svg';
@@ -48,16 +34,10 @@ class DrawableAssetStrings {
   static const String emptyListIcon = 'assets/icons/empty_list.svg';
   static const String emailIcon = 'assets/icons/email.svg';
   static const String emptyCartIcon = 'assets/icons/empty_cart.svg';
-
-  // //app animations
-  // static const String anim1 = 'assets/animations/anim_1.json';
-  // static const String anim2 = 'assets/animations/anim_2.json';
-  // static const String anim3 = 'assets/animations/anim_3.json';
+  static const String saudiFlagIcon = 'assets/icons/saudi_flag.svg';
+  static const String franceFlagIcon = 'assets/icons/france_flag.svg';
+  static const String usaFlagIcon = 'assets/icons/usa_flag.svg';
 }
-
-// class SoundsAssetsStrings {
-//   static const String notificationSound = 'sounds/notification_track.wav';
-// }
 
 class JsonAssetStrings {
   static const String notificationsJson = 'assets/json/notifications.json';
