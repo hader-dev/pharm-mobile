@@ -51,7 +51,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get full_name => 'Full Name';
 
   @override
-  String get phone_mobile => 'Phone / Mobile';
+  String get phone_mobile => 'Phone number';
 
   @override
   String get fax => 'Fax';
@@ -221,4 +221,26 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get register => 'Register (Don’t have an account?)';
+
+  @override
+  String get loginExisting => 'Login (Already have an account!)';
+
+  @override
+  String get passwordsDoNotMatch => 'Passwords do not match';
+
+  @override
+  String get signUp => 'Sign up';
+
+  @override
+  String get createAccount => 'Create Account';
+
+  @override
+  String get registrationSuccess => 'Registration successful';
+
+  @override
+  String get checkEmailForVerification => 'Check your email for verification';
+
+  @override
+  String get emailNotVerified =>
+      'Your email is not verified. Please check your email for verification';
 }

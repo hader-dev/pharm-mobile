@@ -13,7 +13,7 @@
   "client": "Client",
   "edit": "Modifier",
   "full_name": "Nom complet",
-  "phone_mobile": "Téléphone / Mobile",
+  "phone_mobile": " Numéro Téléphone",
   "fax": "Fax",
   "shippingAddress": "Adresse de livraison",
   "items": "Articles ({count})",
@@ -68,6 +68,12 @@
   "checkEmail": "Vérifiez votre e-mail",
   "passwordResetSent": "Nous avons envoyé un lien de réinitialisation de mot de passe à votre e-mail. Veuillez vérifier votre boîte de réception.",
   "backToLogin": "Retour à la connexion",
-  "register": "S’inscrire (Vous n’avez pas de compte ?)"
-
+  "register": "S’inscrire (Vous n’avez pas de compte ?)",
+   "loginExisting": "Connexion (Vous avez déjà un compte !)",
+  "passwordsDoNotMatch": "Les mots de passe ne correspondent pas",
+  "signUp": "S’inscrire",
+   "createAccount": "Créer un compte",
+     "registrationSuccess": "Inscription réussie",
+  "checkEmailForVerification": "Vérifiez votre e-mail pour la vérification",
+  "emailNotVerified": "Votre e-mail n'est pas vérifié. Veuillez vérifier votre e-mail pour la vérification"
 }

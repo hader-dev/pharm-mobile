@@ -187,7 +187,7 @@ abstract class AppLocalizations {
   /// No description provided for @phone_mobile.
   ///
   /// In en, this message translates to:
-  /// **'Phone / Mobile'**
+  /// **'Phone number'**
   String get phone_mobile;
 
   /// No description provided for @fax.
@@ -519,6 +519,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Register (Don’t have an account?)'**
   String get register;
+
+  /// No description provided for @loginExisting.
+  ///
+  /// In en, this message translates to:
+  /// **'Login (Already have an account!)'**
+  String get loginExisting;
+
+  /// No description provided for @passwordsDoNotMatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Passwords do not match'**
+  String get passwordsDoNotMatch;
+
+  /// No description provided for @signUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign up'**
+  String get signUp;
+
+  /// No description provided for @createAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Account'**
+  String get createAccount;
+
+  /// No description provided for @registrationSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Registration successful'**
+  String get registrationSuccess;
+
+  /// No description provided for @checkEmailForVerification.
+  ///
+  /// In en, this message translates to:
+  /// **'Check your email for verification'**
+  String get checkEmailForVerification;
+
+  /// No description provided for @emailNotVerified.
+  ///
+  /// In en, this message translates to:
+  /// **'Your email is not verified. Please check your email for verification'**
+  String get emailNotVerified;
 }
 
 class _AppLocalizationsDelegate

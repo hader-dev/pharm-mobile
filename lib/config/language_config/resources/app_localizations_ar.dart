@@ -51,7 +51,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get full_name => 'الاسم الكامل';
 
   @override
-  String get phone_mobile => 'الهاتف / الجوال';
+  String get phone_mobile => 'رقم الهاتف ';
 
   @override
   String get fax => 'فاكس';
@@ -223,4 +223,26 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get register => 'إنشاء حساب (لا تملك حسابًا؟)';
+
+  @override
+  String get loginExisting => 'تسجيل الدخول (لديك حساب بالفعل!)';
+
+  @override
+  String get passwordsDoNotMatch => 'كلمتا المرور غير متطابقتين';
+
+  @override
+  String get signUp => 'إنشاء حساب';
+
+  @override
+  String get createAccount => 'إنشاء حساب';
+
+  @override
+  String get registrationSuccess => 'تم التسجيل بنجاح';
+
+  @override
+  String get checkEmailForVerification => 'تحقق من بريدك الإلكتروني للتأكيد';
+
+  @override
+  String get emailNotVerified =>
+      'بريدك الإلكتروني غير مفعل. يرجى التحقق من بريدك لتأكيده';
 }

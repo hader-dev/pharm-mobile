@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../../config/theme/colors_manager.dart';
@@ -24,7 +25,7 @@ class EmailRegisterFormSection extends HookWidget {
       child: Column(
         children: [
           CustomTextField(
-            label: 'Full Name*',
+            label: '${context.translation!.full_name}*',
             value: formData.value.fullName,
             state: FieldState.normal,
             onChanged: (newValue) {
@@ -32,21 +33,21 @@ class EmailRegisterFormSection extends HookWidget {
             },
             validationFunc: (value) {
               if (value == null || value.isEmpty) {
-                return 'Full Name is required';
+                return context.translation!.fieldRequired;
               }
             },
           ),
           Gap(AppSizesManager.s4),
           CustomTextField(
-            label: 'Email*',
+            label: '${context.translation!.email} *',
             value: formData.value.email,
             state: FieldState.normal,
             validationFunc: (value) {
               if (value == null || value.isEmpty) {
-                return 'Email is required';
+                return context.translation!.fieldRequired;
               }
               if (!emailRegex.hasMatch(value)) {
-                return 'Email is not valid';
+                return context.translation!.invalidEmailFormat;
               }
             },
             onChanged: (newValue) {
@@ -55,7 +56,7 @@ class EmailRegisterFormSection extends HookWidget {
           ),
           Gap(AppSizesManager.s4),
           CustomTextField(
-            label: 'Password*',
+            label: '${context.translation!.password}*',
             value: formData.value.password,
             isObscure: BlocProvider.of<RegisterCubit>(context).isObscured,
             suffixIcon: InkWell(
@@ -66,7 +67,7 @@ class EmailRegisterFormSection extends HookWidget {
             state: FieldState.normal,
             validationFunc: (value) {
               if (value == null || value.isEmpty) {
-                return 'Password is required';
+                return context.translation!.fieldRequired;
               }
             },
             onChanged: (newValue) {
@@ -77,7 +78,7 @@ class EmailRegisterFormSection extends HookWidget {
           BlocBuilder<RegisterCubit, RegisterState>(
             builder: (context, state) {
               return CustomTextField(
-                label: 'Confirme Password*',
+                label: '${context.translation!.confirmPassword}*',
                 value: formData.value.confirmPassword,
                 onChanged: (newValue) {
                   formData.value = formData.value.copyWith(confirmPassword: newValue);
@@ -91,10 +92,10 @@ class EmailRegisterFormSection extends HookWidget {
                 state: FieldState.normal,
                 validationFunc: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Confirme Password is required';
+                    return context.translation!.fieldRequired;
                   }
                   if (formData.value.password != formData.value.confirmPassword) {
-                    return 'Passwords do not match';
+                    return context.translation!.passwordsDoNotMatch;
                   }
                   return null;
                 },
@@ -103,7 +104,7 @@ class EmailRegisterFormSection extends HookWidget {
           ),
           Gap(AppSizesManager.s24),
           PrimaryTextButton(
-            label: "Sign up",
+            label: context.translation!.signUp,
             isLoading: context.watch<RegisterCubit>().state is RegisterLoading,
             onTap: () {
               if (formKey.currentState!.validate()) {

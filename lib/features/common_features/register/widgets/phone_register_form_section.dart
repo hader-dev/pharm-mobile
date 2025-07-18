@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import '../../../../config/theme/colors_manager.dart';
 import '../../../../utils/assets_strings.dart';
 
@@ -18,14 +19,14 @@ class PhoneRegisterFormSection extends StatelessWidget {
     return Column(
       children: [
         CustomTextField(
-          label: 'Full Name',
+          label: context.translation!.full_name,
           value: '',
           state: FieldState.normal,
           validationFunc: () {},
         ),
         Gap(AppSizesManager.s4),
         CustomTextField(
-          label: 'Phone Number',
+          label: context.translation!.phone_mobile,
           value: '',
           prefixIcon: SvgPicture.asset(
             DrawableAssetStrings.algeriaFlagIcon,
@@ -35,7 +36,7 @@ class PhoneRegisterFormSection extends StatelessWidget {
         ),
         Gap(AppSizesManager.s4),
         CustomTextField(
-          label: 'Password',
+          label: context.translation!.password,
           value: '',
           onChanged: (value) {},
           isObscure: true,
@@ -45,7 +46,7 @@ class PhoneRegisterFormSection extends StatelessWidget {
         ),
         Gap(AppSizesManager.s4),
         CustomTextField(
-          label: 'Confirme Password',
+          label: context.translation!.confirmPassword,
           value: '',
           onChanged: (value) {},
           isObscure: true,

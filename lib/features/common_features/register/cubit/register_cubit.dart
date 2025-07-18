@@ -2,9 +2,11 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../../config/routes/routing_manager.dart' show RoutingManager;
 import '../../../../config/services/auth/user_manager.dart';
 import '../../../../utils/device_gallery_helper.dart';
 import '../hooks_data_model/register_email_form.dart';
@@ -26,11 +28,13 @@ class RegisterCubit extends Cubit<RegisterState> {
           fullName: formData.fullName,
           password: formData.password,
           userImagePath: pickedImage?.path);
-      getItInstance.get<ToastManager>().showToast(message: "Registration successful", type: ToastType.success);
+      getItInstance.get<ToastManager>().showToast(
+          message: RoutingManager.rootNavigatorKey.currentContext!.translation!.registrationSuccess,
+          type: ToastType.success);
       await Future.delayed(const Duration(seconds: 1), () {
-        getItInstance
-            .get<ToastManager>()
-            .showToast(message: " Check your email for verification", type: ToastType.success);
+        getItInstance.get<ToastManager>().showToast(
+            message: RoutingManager.rootNavigatorKey.currentContext!.translation!.checkEmailForVerification,
+            type: ToastType.success);
       });
       emit(RegisterSuccuss(email: formData.email));
     } catch (e) {

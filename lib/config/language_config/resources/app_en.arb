@@ -13,7 +13,7 @@
   "client": "Client",
   "edit": "Edit",
   "full_name": "Full Name",
-  "phone_mobile": "Phone / Mobile",
+  "phone_mobile": "Phone number",
   "fax": "Fax",
   "shippingAddress": "Shipping Address",
   "items": "Items ({count})",
@@ -68,5 +68,12 @@
   "checkEmail": "Check your email",
   "passwordResetSent": "We have sent a password reset link to your email, Please check your inbox.",
   "backToLogin": "Back to login",
-  "register": "Register (Don’t have an account?)"
+  "register": "Register (Don’t have an account?)",
+   "loginExisting": "Login (Already have an account!)",
+  "passwordsDoNotMatch": "Passwords do not match",
+  "signUp": "Sign up",
+  "createAccount": "Create Account",
+   "registrationSuccess": "Registration successful",
+  "checkEmailForVerification": "Check your email for verification",
+  "emailNotVerified": "Your email is not verified. Please check your email for verification"
 }

@@ -3,6 +3,7 @@ import 'dart:io' show File;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 import '../../../../config/theme/colors_manager.dart';
 import '../../../../config/theme/typoghrapy_manager.dart';
@@ -22,12 +23,12 @@ class RegisterHeaderSection extends StatelessWidget {
         children: [
           Gap(AppSizesManager.s24),
           Text(
-            'Create Account',
+            context.translation!.createAccount,
             style: AppTypography.headLine1Style.copyWith(fontSize: AppSizesManager.p24, color: AppColors.accent1Shade1),
           ),
           Gap(AppSizesManager.s8),
           Text(
-            'Hi! Welcome back, you’ve been missed',
+            context.translation!.welcomeBack,
             style: AppTypography.body3RegularStyle.copyWith(color: TextColors.ternary.color),
           ),
           Gap(AppSizesManager.s24),
@@ -52,30 +53,6 @@ class RegisterHeaderSection extends StatelessWidget {
                             File(BlocProvider.of<RegisterCubit>(context).pickedImage!.path),
                             fit: BoxFit.fill,
                           )
-                        // : Column(
-                        //     mainAxisAlignment: MainAxisAlignment.center,
-                        //     children: [
-                        //       const Icon(Iconsax.gallery_add,
-                        //           color: AppColors.accent1Shade1, size: AppSizesManager.iconSize25),
-                        //       Gap(AppSizesManager.s4),
-                        //       Transform.scale(
-                        //         scale: 0.8,
-                        //         child: PrimaryTextButton(
-                        //           label: BlocProvider.of<RegisterCubit>(context).pickedImage != null
-                        //               ? 'Change Image'
-                        //               : 'Upload Image',
-                        //           labelColor: AppColors.accent1Shade1,
-                        //           color: AppColors.bgWhite,
-                        //           onTap: () {
-                        //             if (BlocProvider.of<RegisterCubit>(context).pickedImage != null) {
-                        //               BlocProvider.of<RegisterCubit>(context).removeImage();
-                        //             }
-                        //             BlocProvider.of<RegisterCubit>(context).pickUserImage();
-                        //           },
-                        //         ),
-                        //       )
-                        //     ],
-                        //   ),
                         : Icon(
                             Iconsax.gallery,
                             color: AppColors.accent1Shade1,

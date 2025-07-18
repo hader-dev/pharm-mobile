@@ -6,6 +6,7 @@ import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/features/common_features/register/cubit/register_cubit.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../config/theme/colors_manager.dart';
 import '../../../utils/constants.dart';
@@ -40,17 +41,11 @@ class RegisterScreen extends StatelessWidget {
                     children: [
                       RegisterHeaderSection(),
                       Gap(AppSizesManager.s4),
-                      // TabsSection(
-                      //   selectedTab: BlocProvider.of<RegisterCubit>(context).selectedTapIndex,
-                      // ),
                       Gap(AppSizesManager.s24),
                       if (BlocProvider.of<RegisterCubit>(context).selectedTapIndex == 0) EmailRegisterFormSection(),
-
                       Gap(AppSizesManager.s16),
-                      // OtherRegisterOptionsSection(),
-                      // Gap(AppSizesManager.s32),
                       OutLinedTextButton(
-                        label: "Login (Already have an account!)",
+                        label: context.translation!.loginExisting,
                         labelColor: AppColors.accent1Shade1,
                         isOutLined: true,
                         onTap: () {
