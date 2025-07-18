@@ -62,36 +62,6 @@ class OrderNoteDialog extends StatelessWidget {
             ),
 
             const SizedBox(height: AppSizesManager.p8),
-
-            // // Button (optional)
-            // Align(
-            //   alignment: Alignment.centerRight,
-            //   child: Row(
-            //     children: [
-            //       // TextButton.icon(
-            //       //   icon: const Icon(Icons.note_add_rounded, color: Colors.amber),
-            //       //   label: Text(note == "" ? "Add Note" : "Update Note"),
-            //       //   onPressed: () {
-            //       //     Navigator.of(context).pop();
-            //       //     showDialog(
-            //       //       context: context,
-            //       //       builder: (BuildContext context) => AddNoteDialog(
-            //       //         title: "context.translation!.orderItemNote",
-            //       //         id: id ?? 0,
-            //       //         note: note ?? "",
-            //       //       ),
-            //       //     );
-            //       //   },
-            //       // ),
-            //       const Spacer(),
-            //       TextButton.icon(
-            //         icon: const Icon(Icons.check_circle, color: Colors.green),
-            //         label: Text(context.translation!.gotIt),
-            //         onPressed: () => Navigator.of(context).pop(),
-            //       ),
-            //     ],
-            //   ),
-            // ),
           ],
         ),
       ),

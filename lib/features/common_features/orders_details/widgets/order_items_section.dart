@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../../config/theme/typoghrapy_manager.dart';
 import '../../../../models/order_details.dart';
@@ -24,14 +25,17 @@ class OrderItemsSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text.rich(TextSpan(text: 'order items', style: AppTypography.headLine4SemiBoldStyle, children: <InlineSpan>[
-            TextSpan(
-              text: ' (${orderItems.length})',
-              style: AppTypography.headLine5MediumStyle.copyWith(
-                color: Colors.grey.shade600,
-              ),
-            )
-          ])),
+          Text.rich(TextSpan(
+              text: context.translation!.order_items,
+              style: AppTypography.headLine4SemiBoldStyle,
+              children: <InlineSpan>[
+                TextSpan(
+                  text: ' (${orderItems.length})',
+                  style: AppTypography.headLine5MediumStyle.copyWith(
+                    color: Colors.grey.shade600,
+                  ),
+                )
+              ])),
           const SizedBox(height: 12),
           Container(
             constraints: const BoxConstraints(

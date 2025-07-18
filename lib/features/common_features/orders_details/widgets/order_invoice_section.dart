@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../../config/theme/typoghrapy_manager.dart';
 import '../../../../utils/enums.dart';
@@ -18,12 +19,12 @@ class OrderInvoiceSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'order Invoice',
+            context.translation!.order_invoice,
             style: AppTypography.headLine4SemiBoldStyle,
           ),
           Gap(AppSizesManager.s4),
           SummaryRow(
-            label: 'Invoice type',
+            label: context.translation!.invoice_type,
             value: invoiceType.name,
           ),
         ],

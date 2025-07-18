@@ -306,4 +306,55 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get all => 'All';
+
+  @override
+  String get confirmed => 'confirmed';
+
+  @override
+  String get canceled => 'canceled';
+
+  @override
+  String get completed => 'completed';
+
+  @override
+  String get pending => 'pending';
+
+  @override
+  String get order_details => 'Order Details';
+
+  @override
+  String get track_order => 'Track Order';
+
+  @override
+  String get order_invoice => 'Order Invoice';
+
+  @override
+  String get invoice_type => 'Invoice Type';
+
+  @override
+  String get client_notes => 'Client Notes';
+
+  @override
+  String get qty => 'Qty';
+
+  @override
+  String get order_items => 'Order Items';
+
+  @override
+  String get order_summary => 'Order Summary';
+
+  @override
+  String get payment_method => 'Payment Method';
+
+  @override
+  String get total_ht => 'Total HT';
+
+  @override
+  String get total_ttc => 'Total TTC';
+
+  @override
+  String get shipping_address => 'Shipping Address';
+
+  @override
+  String get order_tracking => 'Order Tracking';
 }

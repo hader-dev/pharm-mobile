@@ -1,6 +1,8 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:flutter/material.dart';
+import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../config/theme/colors_manager.dart';
 import 'assets_strings.dart';
@@ -37,26 +39,22 @@ enum OrderStatus {
     required this.color,
     required this.icon,
   });
-}
-//   static String translateLabel(BuildContext context, OrderStatus expression) {
-//     return '';
-//     // switch (expression) {
-//     //   case OrderStatus.newStat:
-//     //     return context.translation!.wait_for_approval;
 
-//     //   case OrderStatus.confirmed:
-//     //     return context.translation!.confirmed;
+  static String getTranslatedStatus(OrderStatus expression) {
+    switch (expression) {
+      case OrderStatus.pending:
+        return RoutingManager.rootNavigatorKey.currentContext!.translation!.pending;
 
-//     //   case OrderStatus.completed:
-//     //     return context.translation!.completed;
+      case OrderStatus.confirmed:
+        return RoutingManager.rootNavigatorKey.currentContext!.translation!.confirmed;
 
-//     //   case OrderStatus.canceled:
-//     //     return context.translation!.canceled;
+      case OrderStatus.completed:
+        return RoutingManager.rootNavigatorKey.currentContext!.translation!.completed;
 
-//     //   default:
-//     //     return context.translation!.unknown;
-//     // }
-//   }
+      case OrderStatus.canceled:
+        return RoutingManager.rootNavigatorKey.currentContext!.translation!.canceled;
+    }
+  }
 
 //   static String translateDescription(BuildContext context, OrderStatus expression) {
 //     return '';
@@ -77,7 +75,7 @@ enum OrderStatus {
 //     //     return context.translation!.unknown;
 //     // }
 //   }
-// }
+}
 
 enum SearchMedicineFilters { dci, distributorSku, code }
 

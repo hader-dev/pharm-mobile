@@ -18,7 +18,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get login => 'تسجيل الدخول';
 
   @override
-  String get discount => 'خصم';
+  String get discount => 'الخصم';
 
   @override
   String get my_cart => 'سلة التسوق';
@@ -309,4 +309,55 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get all => 'الكل';
+
+  @override
+  String get confirmed => 'مؤكد';
+
+  @override
+  String get canceled => 'ملغى';
+
+  @override
+  String get completed => 'مكتمل';
+
+  @override
+  String get pending => 'قيد الانتظار';
+
+  @override
+  String get order_details => 'تفاصيل الطلب';
+
+  @override
+  String get track_order => 'تتبع الطلب';
+
+  @override
+  String get order_invoice => 'فاتورة الطلب';
+
+  @override
+  String get invoice_type => 'نوع الفاتورة';
+
+  @override
+  String get client_notes => 'ملاحظات العميل';
+
+  @override
+  String get qty => 'الكمية';
+
+  @override
+  String get order_items => 'عناصر الطلب';
+
+  @override
+  String get order_summary => 'ملخص الطلب';
+
+  @override
+  String get payment_method => 'طريقة الدفع';
+
+  @override
+  String get total_ht => 'الإجمالي بدون ضرائب';
+
+  @override
+  String get total_ttc => 'الإجمالي شامل الضريبة';
+
+  @override
+  String get shipping_address => 'عنوان الشحن';
+
+  @override
+  String get order_tracking => 'تتبع الطلب';
 }

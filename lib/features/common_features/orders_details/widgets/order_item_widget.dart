@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/price_formatter.dart';
 
 import '../../../../config/di/di.dart';
@@ -98,7 +99,7 @@ class OrderItemWidget extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         style: AppTypography.body3MediumStyle.copyWith(color: Colors.grey[500]),
                         TextSpan(
-                          text: 'Qty ',
+                          text: "${context.translation!.quantity} ",
                           children: <InlineSpan>[
                             TextSpan(
                               text: quantity.toString(),

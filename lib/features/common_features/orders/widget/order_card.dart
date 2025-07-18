@@ -80,7 +80,7 @@ class OrderCard extends StatelessWidget {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(orderStatus.name,
+                      Text(OrderStatus.getTranslatedStatus(orderStatus),
                           style: AppTypography.bodySmallStyle
                               .copyWith(color: orderStatus.color, fontWeight: AppTypography.appFontSemiBold)),
                     ],

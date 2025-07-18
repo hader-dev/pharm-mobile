@@ -687,6 +687,108 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'All'**
   String get all;
+
+  /// No description provided for @confirmed.
+  ///
+  /// In en, this message translates to:
+  /// **'confirmed'**
+  String get confirmed;
+
+  /// No description provided for @canceled.
+  ///
+  /// In en, this message translates to:
+  /// **'canceled'**
+  String get canceled;
+
+  /// No description provided for @completed.
+  ///
+  /// In en, this message translates to:
+  /// **'completed'**
+  String get completed;
+
+  /// No description provided for @pending.
+  ///
+  /// In en, this message translates to:
+  /// **'pending'**
+  String get pending;
+
+  /// No description provided for @order_details.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Details'**
+  String get order_details;
+
+  /// No description provided for @track_order.
+  ///
+  /// In en, this message translates to:
+  /// **'Track Order'**
+  String get track_order;
+
+  /// No description provided for @order_invoice.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Invoice'**
+  String get order_invoice;
+
+  /// No description provided for @invoice_type.
+  ///
+  /// In en, this message translates to:
+  /// **'Invoice Type'**
+  String get invoice_type;
+
+  /// No description provided for @client_notes.
+  ///
+  /// In en, this message translates to:
+  /// **'Client Notes'**
+  String get client_notes;
+
+  /// No description provided for @qty.
+  ///
+  /// In en, this message translates to:
+  /// **'Qty'**
+  String get qty;
+
+  /// No description provided for @order_items.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Items'**
+  String get order_items;
+
+  /// No description provided for @order_summary.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Summary'**
+  String get order_summary;
+
+  /// No description provided for @payment_method.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment Method'**
+  String get payment_method;
+
+  /// No description provided for @total_ht.
+  ///
+  /// In en, this message translates to:
+  /// **'Total HT'**
+  String get total_ht;
+
+  /// No description provided for @total_ttc.
+  ///
+  /// In en, this message translates to:
+  /// **'Total TTC'**
+  String get total_ttc;
+
+  /// No description provided for @shipping_address.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipping Address'**
+  String get shipping_address;
+
+  /// No description provided for @order_tracking.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Tracking'**
+  String get order_tracking;
 }
 
 class _AppLocalizationsDelegate

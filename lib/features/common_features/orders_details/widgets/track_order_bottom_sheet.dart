@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 
 import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../../models/order_details.dart';
 import '../../../common/buttons/solid/primary_text_button.dart';
@@ -31,7 +32,7 @@ class OrderTrackingBottomSheet extends StatelessWidget {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              BottomSheetHeader(title: 'Order Tracking'),
+              BottomSheetHeader(title: context.translation!.order_tracking),
               Gap(AppSizesManager.s12),
               ListView.builder(
                 shrinkWrap: true,
@@ -57,7 +58,7 @@ class OrderTrackingBottomSheet extends StatelessWidget {
                   children: [
                     Expanded(
                       child: PrimaryTextButton(
-                        label: "Close",
+                        label: context.translation!.close,
                         onTap: () {
                           context.pop();
                         },

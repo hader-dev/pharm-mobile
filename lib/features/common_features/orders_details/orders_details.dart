@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../config/services/network/network_interface.dart';
@@ -56,8 +57,8 @@ class OrdersDetailsScreen extends StatelessWidget {
                   size: AppSizesManager.iconSize25,
                 ),
                 Gap(AppSizesManager.s12),
-                const Text(
-                  "Order Details",
+                Text(
+                  context.translation!.order_details,
                   style: AppTypography.headLine3SemiBoldStyle,
                 ),
               ],
@@ -88,7 +89,7 @@ class OrdersDetailsScreen extends StatelessWidget {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text(orderStatus.name,
+                        Text(OrderStatus.getTranslatedStatus(orderStatus),
                             style: AppTypography.bodySmallStyle
                                 .copyWith(color: orderStatus.color, fontWeight: AppTypography.appFontSemiBold)),
                       ],
@@ -139,7 +140,7 @@ class OrdersDetailsScreen extends StatelessWidget {
                               padding: const EdgeInsets.only(
                                   left: AppSizesManager.p6, right: AppSizesManager.p6, bottom: AppSizesManager.p6),
                               child: PrimaryTextButton(
-                                label: "Track Order",
+                                label: context.translation!.order_tracking,
                                 onTap: () {
                                   BottomSheetHelper.showCommonBottomSheet(
                                       context: context, child: OrderTrackingBottomSheet());

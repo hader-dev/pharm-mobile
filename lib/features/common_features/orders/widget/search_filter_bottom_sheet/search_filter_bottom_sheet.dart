@@ -54,7 +54,7 @@ class OrdersFilterBottomSheet extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(horizontal: AppSizesManager.p4),
                             child: ChoiceChip(
                                 selectedColor: AppColors.accent1Shade1.withAlpha(150),
-                                label: Text(status.name),
+                                label: Text(OrderStatus.getTranslatedStatus(status)),
                                 selected:
                                     BlocProvider.of<OrdersCubit>(context).selectedStatusFilters.contains(status.id),
                                 onSelected: (value) {

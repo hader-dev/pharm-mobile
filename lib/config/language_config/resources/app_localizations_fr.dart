@@ -312,4 +312,55 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get all => 'Tous';
+
+  @override
+  String get confirmed => 'Confirmé';
+
+  @override
+  String get canceled => 'Annulé';
+
+  @override
+  String get completed => 'Terminé';
+
+  @override
+  String get pending => 'En attente';
+
+  @override
+  String get order_details => 'Détails de la commande';
+
+  @override
+  String get track_order => 'Suivre la commande';
+
+  @override
+  String get order_invoice => 'Facture de commande';
+
+  @override
+  String get invoice_type => 'Type de facture';
+
+  @override
+  String get client_notes => 'Notes du client';
+
+  @override
+  String get qty => 'Qté';
+
+  @override
+  String get order_items => 'Articles commandés';
+
+  @override
+  String get order_summary => 'Résumé de la commande';
+
+  @override
+  String get payment_method => 'Méthode de paiement';
+
+  @override
+  String get total_ht => 'Total HT';
+
+  @override
+  String get total_ttc => 'Total TTC';
+
+  @override
+  String get shipping_address => 'Adresse de livraison';
+
+  @override
+  String get order_tracking => 'Suivi de commande';
 }

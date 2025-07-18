@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../../utils/constants.dart';
 
@@ -23,7 +24,7 @@ class ShippingAddressSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text('shipping address', style: AppTypography.headLine4SemiBoldStyle),
+          Text(context.translation!.shippingAddress, style: AppTypography.headLine4SemiBoldStyle),
           const Gap(AppSizesManager.s12),
           Text(address, style: AppTypography.body3MediumStyle),
           const Gap(AppSizesManager.s12),

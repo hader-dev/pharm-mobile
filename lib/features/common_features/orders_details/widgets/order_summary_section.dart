@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/price_formatter.dart';
 
 import '../../../../config/theme/typoghrapy_manager.dart';
@@ -25,22 +26,25 @@ class OrderSummarySection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            'order summary',
+            context.translation!.order_summary,
             style: AppTypography.headLine4SemiBoldStyle,
           ),
           const Gap(AppSizesManager.s12),
 
           SummaryRow(
-            label: 'payment method',
+            label: context.translation!.payment_method,
             value: PaymentMethods.values
                 .firstWhere((element) => element.id == context.read<OrderDetailsCubit>().orderData!.paymentMethod,
                     orElse: () => PaymentMethods.cod)
                 .name,
           ),
-          SummaryRow(label: 'discount', value: '10%'),
+          SummaryRow(label: context.translation!.discount, value: '10%'),
           //   const SummaryRow(label: 'Shipping (Standard)', value: '10.00 context.translation!.currencyAbbreviation'),
-          SummaryRow(label: "Total Ht", value: cubit.orderData!.totalAmountExclTax.formatAsPriceForPrint()),
-          SummaryRow(label: "Total Ttc", value: cubit.orderData!.totalAmountInclTax.formatAsPriceForPrint()),
+          SummaryRow(
+              label: context.translation!.total_ht, value: cubit.orderData!.totalAmountExclTax.formatAsPriceForPrint()),
+          SummaryRow(
+              label: context.translation!.total_ttc,
+              value: cubit.orderData!.totalAmountInclTax.formatAsPriceForPrint()),
           // const Divider(height: 24, thickness: 1),
           // SummaryRow(
           //   label: context.translation!.total_ht_amount,

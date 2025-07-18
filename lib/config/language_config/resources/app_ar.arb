@@ -98,6 +98,25 @@
   "deliverTo": "التوصيل إلى",
    "min": "الأدنى",
   "max": "الأقصى",
-  "all": "الكل"
+  "all": "الكل",
+   "confirmed": "مؤكد",
+    "canceled": "ملغى",
+    "completed": "مكتمل",
+    "pending": "قيد الانتظار",
+     "order_details": "تفاصيل الطلب",
+  "track_order": "تتبع الطلب",
+  "order_invoice": "فاتورة الطلب",
+  "invoice_type": "نوع الفاتورة",
+  "client_notes": "ملاحظات العميل",
+  "qty": "الكمية",
+  "order_items": "عناصر الطلب",
+  "order_summary": "ملخص الطلب",
+  "payment_method": "طريقة الدفع",
+  "discount": "الخصم",
+  "total_ht": "الإجمالي بدون ضرائب",
+  "total_ttc": "الإجمالي شامل الضريبة",
+  "shipping_address": "عنوان الشحن",
+  "order_tracking": "تتبع الطلب",
+  "order_details": "تفاصيل الطلب"
 }
 
