@@ -5,7 +5,6 @@ import 'package:iconsax/iconsax.dart';
 
 import '../../../../../config/theme/colors_manager.dart';
 
-import '../../../../../config/theme/typoghrapy_manager.dart';
 import '../../../../../utils/bottom_sheet_helper.dart';
 import '../../../../../utils/constants.dart';
 import '../../../../../utils/enums.dart';
@@ -13,10 +12,7 @@ import '../../../../common/text_fields/custom_text_field.dart';
 import '../../../../common/widgets/empty_list.dart';
 import '../../../../common/widgets/end_of_load_result_widget.dart';
 import '../../../../common/widgets/para_pharma_widget_1.dart';
-import '../medicine_products/cubit/medicine_products_cubit.dart';
 import 'cubit/para_pharma_cubit.dart';
-import '../../../home/widgets/para_brand_section.dart';
-import '../../../home/widgets/para_categories_section.dart';
 import 'widget/search_filter_bottom_sheet.dart';
 
 class ParaPharmaPage extends StatefulWidget {

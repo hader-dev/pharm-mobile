@@ -7,7 +7,6 @@ import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 
 import 'package:hader_pharm_mobile/utils/constants.dart';
-import 'package:iconsax/iconsax.dart' show Iconsax;
 
 import '../../../../models/order_details.dart';
 import '../../../common/buttons/solid/primary_text_button.dart';

@@ -3,7 +3,6 @@ import 'package:hader_pharm_mobile/models/order_response.dart';
 import '../../../models/create_order_model.dart';
 import '../../../models/create_quick_order_model.dart';
 import '../../../models/order_details.dart';
-import '../../../utils/enums.dart' show OrderStatus;
 
 abstract class IOrderRepository {
   Future<OrderResponse> getOrders({

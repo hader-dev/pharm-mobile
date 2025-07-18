@@ -40,7 +40,9 @@ class FavoritesMedicinesCatalog extends StatelessWidget {
                   physics: const AlwaysScrollableScrollPhysics(),
                   itemCount: BlocProvider.of<FavoritesCubit>(context).likedMedicinesCatalogs.length,
                   itemBuilder: (context, index) => MedicineWidget2(
-                    //TODO:fix this
+                    hideRemoveButton: false,
+                    onRemoveFromFavorites: () => BlocProvider.of<FavoritesCubit>(context).removeFromFavoritesMedicines(
+                        BlocProvider.of<FavoritesCubit>(context).likedMedicinesCatalogs[index].id),
                     medicineData: BlocProvider.of<FavoritesCubit>(context).likedMedicinesCatalogs[index],
                     isLiked: true,
                   ),

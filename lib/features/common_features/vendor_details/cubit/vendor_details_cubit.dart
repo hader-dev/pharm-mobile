@@ -11,10 +11,10 @@ class VendorDetailsCubit extends Cubit<VendorDetailsState> {
   final CompanyRepository companyRepo;
   VendorDetailsCubit({required this.companyRepo}) : super(VendorDetailsInitial());
 
-  void intVendorDetails(Company companyData) {
+  void getVendorDetails(String companyId) async {
     try {
       emit(VendorDetailsLoading());
-      vendorData = companyData;
+      vendorData = await companyRepo.getCompanyById(companyId: companyId);
       emit(VendorDetailsLoaded());
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);

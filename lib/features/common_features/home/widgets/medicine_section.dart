@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hader_pharm_mobile/features/common/widgets/medicine_widget_3.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 
 import '../../../common/widgets/medicine_widget_4.dart';

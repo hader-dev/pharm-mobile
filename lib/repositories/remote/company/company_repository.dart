@@ -16,6 +16,7 @@ abstract class ICompanyRepository {
       required CompanyType companyType,
       List<String>? fields,
       int? distributorCategoryId});
+  Future<Company> getCompanyById({required String companyId});
   Future<void> joinCompanyAsCLient({required String companyId});
   Future<void> addCompanyToFavorites({required String companyId});
   Future<List<Brand>> getCompanyBrands({required String companyId});

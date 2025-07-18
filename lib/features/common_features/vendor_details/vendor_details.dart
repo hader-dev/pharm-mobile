@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart'
-    show BlocBuilder, BlocProvider, MultiBlocProvider, read, ReadContext, BlocListener;
+    show BlocBuilder, BlocProvider, MultiBlocProvider, ReadContext, BlocListener;
 import 'package:gap/gap.dart' show Gap;
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
-import 'package:hader_pharm_mobile/models/company.dart';
+
 import 'package:iconsax/iconsax.dart';
 
 import '../../../config/services/network/network_interface.dart';
@@ -26,9 +26,9 @@ import 'cubit/vendor_details_cubit.dart';
 import 'widget/tabs_section.dart';
 
 class VendorDetails extends StatelessWidget {
-  final Company companyData;
+  final String companyId;
   static final vendorDetailsScaffoldKey = GlobalKey<ScaffoldState>();
-  const VendorDetails({super.key, required this.companyData});
+  const VendorDetails({super.key, required this.companyId});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,7 @@ class VendorDetails extends StatelessWidget {
           BlocProvider(
             create: (context) =>
                 VendorDetailsCubit(companyRepo: CompanyRepository(client: getItInstance.get<INetworkService>()))
-                  ..intVendorDetails(companyData),
+                  ..getVendorDetails(companyId),
           ),
           BlocProvider(
             create: (context) => ParaPharmaCubit(
@@ -46,7 +46,7 @@ class VendorDetails extends StatelessWidget {
                 scrollController: ScrollController(),
                 searchController: TextEditingController(text: ""),
                 paraPharmaRepository: ParaPharmaRepository(client: getItInstance.get<INetworkService>()))
-              ..getParaPharmas(companyIdFilter: companyData.id),
+              ..getParaPharmas(companyIdFilter: companyId),
           ),
           BlocProvider(
             create: (context) => MedicineProductsCubit(
@@ -54,7 +54,7 @@ class VendorDetails extends StatelessWidget {
                 favoriteRepository: FavoriteRepository(client: getItInstance.get<INetworkService>()),
                 searchController: TextEditingController(text: ""),
                 medicineRepository: MedicineCatalogRepository(client: getItInstance.get<INetworkService>()))
-              ..getMedicines(companyIdFilter: companyData.id),
+              ..getMedicines(companyIdFilter: companyId),
           ),
         ],
         child: BlocListener<VendorDetailsCubit, VendorDetailsState>(
@@ -115,28 +115,39 @@ class VendorDetails extends StatelessWidget {
                   ),
                 ),
               ],
-              title: Row(children: [
-                Container(
-                  height: 45,
-                  width: 45,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(color: AppColors.bgDisabled, width: 1.5),
-                    image: DecorationImage(
-                      image: companyData.image == null
-                          ? AssetImage(DrawableAssetStrings.companyPlaceHolderImg)
-                          : NetworkImage(companyData.thumbnailImage),
+              title: BlocBuilder<VendorDetailsCubit, VendorDetailsState>(
+                builder: (context, state) {
+                  if (state is VendorDetailsLoading) {
+                    return Text("Loading...", style: AppTypography.headLine4SemiBoldStyle);
+                  }
+                  return Row(children: [
+                    Container(
+                      height: 45,
+                      width: 45,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(color: AppColors.bgDisabled, width: 1.5),
+                        image: DecorationImage(
+                          image: context.read<VendorDetailsCubit>().vendorData.image == null
+                              ? AssetImage(DrawableAssetStrings.companyPlaceHolderImg)
+                              : NetworkImage(context.read<VendorDetailsCubit>().vendorData.thumbnailImage),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                Gap(AppSizesManager.s8),
-                Text(companyData.name, style: AppTypography.headLine4SemiBoldStyle)
-              ]),
+                    Gap(AppSizesManager.s8),
+                    Text(context.read<VendorDetailsCubit>().vendorData.name,
+                        style: AppTypography.headLine4SemiBoldStyle)
+                  ]);
+                },
+              ),
             ),
             body: Padding(
               padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p8),
               child: BlocBuilder<VendorDetailsCubit, VendorDetailsState>(
                 builder: (context, state) {
+                  if (state is VendorDetailsLoading) {
+                    return Center(child: CircularProgressIndicator());
+                  }
                   return VandorDetailsTabBarSection();
                 },
               ),

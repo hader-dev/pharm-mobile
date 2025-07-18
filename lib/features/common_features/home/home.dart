@@ -18,8 +18,6 @@ import '../../../utils/constants.dart';
 import '../../common/app_bars/custom_app_bar.dart';
 import '../market_place/sub_pages/para_pharma/cubit/para_pharma_cubit.dart';
 import 'widgets/medicine_section.dart';
-import 'widgets/para_brand_section.dart';
-import 'widgets/para_categories_section.dart';
 import 'widgets/para_pharma_section.dart';
 import 'widgets/promotion_section.dart';
 
@@ -135,7 +133,7 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                         Gap(AppSizesManager.s12),
-                        BrandsSection(),
+                        //  BrandsSection(),
                         Gap(AppSizesManager.s8),
                         ParaPharmaSection(),
                       ],

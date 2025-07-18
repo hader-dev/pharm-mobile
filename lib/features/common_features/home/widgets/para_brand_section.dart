@@ -3,7 +3,6 @@ import 'package:hader_pharm_mobile/features/common_features/home/widgets/para_br
 import 'package:hader_pharm_mobile/utils/constants.dart';
 
 import '../../../../config/theme/typoghrapy_manager.dart';
-import 'para_cartegory.dart';
 
 class BrandsSection extends StatelessWidget {
   const BrandsSection({super.key});

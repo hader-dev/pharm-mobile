@@ -31,9 +31,10 @@ class DateFilterSection extends StatelessWidget {
               onTap: () async {
                 await datePicker.showDatePicker(
                   () {
-                    if (datePicker.result)
+                    if (datePicker.result) {
                       BlocProvider.of<OrdersCubit>(context)
                           .updateDateFilter(initialDate: datePicker.dates.first.formatYMD);
+                    }
                   },
                 );
               },
@@ -78,9 +79,10 @@ class DateFilterSection extends StatelessWidget {
               onTap: () async {
                 await datePicker.showDatePicker(
                   () {
-                    if (datePicker.result)
+                    if (datePicker.result) {
                       BlocProvider.of<OrdersCubit>(context)
                           .updateDateFilter(finalDate: datePicker.dates.first.formatYMD);
+                    }
                   },
                 );
               },

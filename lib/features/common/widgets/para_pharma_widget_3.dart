@@ -14,11 +14,9 @@ import 'package:iconsax/iconsax.dart';
 import '../../../config/theme/colors_manager.dart';
 import '../../../config/theme/typoghrapy_manager.dart';
 import '../../../models/create_cart_item.dart';
-import '../../../models/medicine_catalog.dart';
 import '../../../models/para_pharma.dart';
 import '../../../utils/enums.dart';
 import '../buttons/solid/primary_icon_button.dart' show PrimaryIconButton;
-import '../chips/custom_chip.dart' show CustomChip;
 
 class ParaPharmaWidget4 extends StatelessWidget {
   final BaseParaPharmaCatalogModel paraPharmData;

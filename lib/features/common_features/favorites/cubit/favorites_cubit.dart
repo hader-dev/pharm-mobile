@@ -52,4 +52,22 @@ class FavoritesCubit extends Cubit<FavoritesState> {
       emit(FavoritesVendorsLoadingFailed());
     }
   }
+
+  void removeFromFavoritesMedicines(String medicineId) {
+    likedMedicinesCatalogs.removeWhere((medicine) => medicine.id == medicineId);
+    favoriteRepository.unLikeMedicineCatalog(medicineCatalogId: medicineId);
+    emit(FavoritesMedicinesLoaded());
+  }
+
+  void removeParaPharmaFromFavorites(String paraPharmaId) {
+    likedParaPharmaCatalogs.removeWhere((paraPharma) => paraPharma.id == paraPharmaId);
+    favoriteRepository.unLikeParaPharmaCatalog(paraPharmaCatalogId: paraPharmaId);
+    emit(FavoritesParaPharmaLoaded());
+  }
+
+  void removeFromFavoritesVendors(String vendorId) {
+    likedVendors.removeWhere((vendor) => vendor.id == vendorId);
+    favoriteRepository.unLikeVendors(vendorId: vendorId);
+    emit(FavoritesVendorsLoaded());
+  }
 }

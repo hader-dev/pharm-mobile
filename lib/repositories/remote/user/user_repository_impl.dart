@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 
+import '../../../features/common_features/edit_profile/hooks_data_model/edit_profile_form.dart'
+    show EditProfileFormDataModel;
 import '../../../models/user.dart';
 import '../../../utils/urls.dart';
 import 'user_repository.dart';
@@ -75,6 +77,24 @@ class UserRepository implements IUserRepository {
         }));
 
     return decodedResponse["accessToken"];
+  }
+
+  @override
+  Future<void> updateProfile({required EditProfileFormDataModel updatedProfileData}) async {
+    Map<String, dynamic> dataAsMap = updatedProfileData.toJson();
+    dataAsMap.removeWhere((key, value) => value == null || (value is String && value.isEmpty));
+    FormData formData = FormData.fromMap(
+      {
+        ...dataAsMap,
+        "removeImage": true,
+        if (updatedProfileData.imagePath != null)
+          'image': await MultipartFile.fromFile(updatedProfileData.imagePath!,
+              filename: updatedProfileData.imagePath!.split('/').last),
+      },
+      ListFormat.multiCompatible,
+    );
+
+    await client.sendRequest(() => client.patch(Urls.me, payload: formData));
   }
 
   @override

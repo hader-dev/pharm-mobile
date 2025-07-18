@@ -10,6 +10,7 @@ import '../../features/common_features/check_email/check_email.dart';
 import '../../features/common_features/check_phone/check_phone.dart';
 import '../../features/common_features/congratulation/congratulation.dart';
 import '../../features/common_features/create_company_profile/create_company_profile.dart';
+import '../../features/common_features/edit_profile/edit_profile.dart' show EditProfileScreen;
 import '../../features/common_features/favorites/favorites.dart';
 import '../../features/common_features/login/login.dart';
 import '../../features/common_features/medicine_catalog_details/medicine_catalog_details.dart';
@@ -20,7 +21,6 @@ import '../../features/common_features/orders_details/orders_details.dart';
 import '../../features/common_features/register/register.dart';
 import '../../features/common_features/splash/splash.dart';
 import '../../features/common_features/vendor_details/vendor_details.dart';
-import '../../models/company.dart';
 
 // import '../../view/screens/login/login.dart';
 // import '../../view/screens/splash/splash.dart';
@@ -48,6 +48,7 @@ class RoutingManager {
   static const String favoritesScreen = 'FavoritesScreen';
   static const String vendorDetails = '/VendorDetails';
   static const String ordersDetailsScreen = '/OrdersDetailsScreen';
+  static const String editProfileScreen = '/EditProfileScreen';
 
   static final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -82,6 +83,13 @@ class RoutingManager {
           },
         ),
         GoRoute(
+          name: editProfileScreen,
+          path: editProfileScreen,
+          builder: (BuildContext context, GoRouterState state) {
+            return const EditProfileScreen();
+          },
+        ),
+        GoRoute(
           name: ordersDetailsScreen,
           path: ordersDetailsScreen,
           builder: (BuildContext context, GoRouterState state) {
@@ -95,7 +103,7 @@ class RoutingManager {
           path: vendorDetails,
           builder: (BuildContext context, GoRouterState state) {
             return VendorDetails(
-              companyData: state.extra as Company,
+              companyId: state.extra as String,
             );
           },
         ),

@@ -15,10 +15,11 @@ class PromotionSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (BuildContext context, HomeState state) {
-        if (state is PromotionLoading)
+        if (state is PromotionLoading) {
           return const Center(
             child: CircularProgressIndicator(),
           );
+        }
         if (state is PromotionLoadingFailed) {
           return const Text(
             'Failed to load promotions',

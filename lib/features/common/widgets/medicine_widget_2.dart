@@ -11,19 +11,22 @@ import 'package:iconsax/iconsax.dart';
 import '../../../config/theme/colors_manager.dart';
 import '../../../config/theme/typoghrapy_manager.dart';
 import '../../../models/medicine_catalog.dart';
-import '../chips/custom_chip.dart' show CustomChip;
 
 class MedicineWidget2 extends StatelessWidget {
   final BaseMedicineCatalogModel medicineData;
   final bool hideLikeButton;
   final VoidCallback? onLikeTapped;
   final bool isLiked;
+  final bool hideRemoveButton;
+  final VoidCallback? onRemoveFromFavorites;
   const MedicineWidget2({
     super.key,
     required this.medicineData,
     this.onLikeTapped,
     required this.isLiked,
     this.hideLikeButton = true,
+    this.hideRemoveButton = true,
+    this.onRemoveFromFavorites,
   });
 
   @override
@@ -116,12 +119,29 @@ class MedicineWidget2 extends StatelessWidget {
                       //    CustomChip(label: "Antibiotic", color: AppColors.bgDarken2, onTap: () {}),
                       Spacer(),
                       InkWell(
+                        splashColor: Colors.transparent,
                         onTap: () {
                           onLikeTapped?.call();
                         },
                         child: !isLiked
                             ? Icon(Icons.favorite_border_rounded, color: Colors.black54)
                             : Icon(Icons.favorite, color: Colors.red),
+                      )
+                    ]),
+                  if (!hideRemoveButton)
+                    Row(children: [
+                      // CustomChip(label: "Antibiotic", color: AppColors.bgDarken2, onTap: () {}),
+                      Spacer(),
+                      InkWell(
+                        splashColor: Colors.transparent,
+                        onTap: () {
+                          onRemoveFromFavorites?.call();
+                        },
+                        child: Icon(
+                          Icons.close,
+                          color: Colors.red,
+                          size: AppSizesManager.iconSize16,
+                        ),
                       )
                     ]),
                   Gap(AppSizesManager.s8),

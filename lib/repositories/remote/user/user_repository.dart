@@ -1,3 +1,5 @@
+import '../../../features/common_features/edit_profile/hooks_data_model/edit_profile_form.dart'
+    show EditProfileFormDataModel;
 import '../../../models/user.dart';
 
 abstract class IUserRepository {
@@ -11,4 +13,5 @@ abstract class IUserRepository {
   Future<String> sendUserEmailCheckOtpCode({required String email, required String otp});
   Future<void> resendOtp({required String email});
   Future<void> sendResetPasswordMail({required String email});
+  Future<void> updateProfile({required EditProfileFormDataModel updatedProfileData});
 }

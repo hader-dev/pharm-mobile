@@ -70,9 +70,10 @@ class DioNetworkManager extends INetworkService {
   @override
   Future<Response> patch(String url,
       {Map<String, String>? headers, Map<String, Object>? queryParams, dynamic payload}) async {
+    bool isFormData = payload is FormData;
     Response apiResponse = await _client.patchUri(prepareUrl(url, queryParams: queryParams),
         data: payload != null
-            ? payload is FormData
+            ? isFormData
                 ? payload
                 : jsonEncode(payload)
             : null,

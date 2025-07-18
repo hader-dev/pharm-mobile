@@ -17,7 +17,6 @@ import '../../../models/create_cart_item.dart';
 import '../../../models/medicine_catalog.dart';
 import '../../../utils/enums.dart';
 import '../buttons/solid/primary_icon_button.dart' show PrimaryIconButton;
-import '../chips/custom_chip.dart' show CustomChip;
 
 class MedicineWidget4 extends StatelessWidget {
   final BaseMedicineCatalogModel medicineData;

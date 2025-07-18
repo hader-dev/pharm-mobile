@@ -41,6 +41,9 @@ class FavoritesParaPharmaCatalogs extends StatelessWidget {
                   itemCount: BlocProvider.of<FavoritesCubit>(context).likedParaPharmaCatalogs.length,
                   itemBuilder: (context, index) => ParaPharmaWidget1(
                     isLiked: true,
+                    hideRemoveButton: false,
+                    onRemoveFromFavorites: () => BlocProvider.of<FavoritesCubit>(context).removeParaPharmaFromFavorites(
+                        BlocProvider.of<FavoritesCubit>(context).likedParaPharmaCatalogs[index].id),
                     paraPharmData: BlocProvider.of<FavoritesCubit>(context).likedParaPharmaCatalogs[index],
                   ),
                 ),

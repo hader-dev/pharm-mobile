@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:dio/dio.dart';
 
@@ -76,5 +75,12 @@ class CompanyRepository extends ICompanyRepository {
   Future<List<Brand>> getCompanyCategories({required String companyId}) {
     // TODO: implement getCompanyCategories
     throw UnimplementedError();
+  }
+
+  @override
+  Future<Company> getCompanyById({required String companyId}) async {
+    var decodedResponse = await client.sendRequest(() => client.get('${Urls.company}/$companyId'));
+
+    return Company.fromJson(decodedResponse);
   }
 }

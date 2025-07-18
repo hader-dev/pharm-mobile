@@ -10,7 +10,6 @@ import '../../../config/theme/colors_manager.dart';
 import '../../../repositories/remote/order/order_repository_impl.dart';
 import '../../../utils/constants.dart';
 import '../../app_layout/app_layout.dart';
-import '../orders/cubit/orders_cubit.dart';
 import 'cubit/medicine_details_cubit.dart';
 import 'sub_pages/medcine_catalog_overview/medcine_catalog_overview.dart';
 import 'sub_pages/distribitor_details/distribitor_details.dart';

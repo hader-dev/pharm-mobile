@@ -2,7 +2,7 @@ import 'package:hader_pharm_mobile/models/image.dart';
 
 class UserModel {
   final String id;
-  final dynamic image;
+  final ImageModel? image;
   final DateTime createdAt;
   final DateTime updatedAt;
   final String email;

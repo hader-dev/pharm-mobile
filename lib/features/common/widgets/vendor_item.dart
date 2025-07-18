@@ -12,11 +12,16 @@ import '../../../utils/assets_strings.dart';
 import '../../../utils/enums.dart';
 
 class VendorItem extends StatelessWidget {
+  final bool hideRemoveButton;
+  final VoidCallback? onRemoveFromFavorites;
+
   final Company companyData;
   late final DistributorCategory distributorCategory;
   VendorItem({
     super.key,
     required this.companyData,
+    this.hideRemoveButton = true,
+    this.onRemoveFromFavorites,
   }) {
     distributorCategory = DistributorCategory.values
         .firstWhere((element) => element.id == companyData.distributorCategory, orElse: () => DistributorCategory.both);
@@ -27,7 +32,7 @@ class VendorItem extends StatelessWidget {
     return InkWell(
       splashColor: Colors.transparent,
       onTap: () {
-        GoRouter.of(context).pushNamed(RoutingManager.vendorDetails, extra: companyData);
+        GoRouter.of(context).pushNamed(RoutingManager.vendorDetails, extra: companyData.id);
       },
       child: Stack(
         children: [
@@ -52,9 +57,25 @@ class VendorItem extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                if (!hideRemoveButton)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: AppSizesManager.p4),
+                    child: Align(
+                      alignment: Alignment.topRight,
+                      child: InkWell(
+                        splashColor: Colors.transparent,
+                        onTap: onRemoveFromFavorites,
+                        child: const Icon(
+                          Icons.close,
+                          color: Colors.red,
+                          size: AppSizesManager.iconSize16,
+                        ),
+                      ),
+                    ),
+                  ),
                 Row(
                   children: [
-                    Flexible(
+                    Expanded(
                       child: Text(
                         companyData.name ?? "",
                         overflow: TextOverflow.ellipsis,

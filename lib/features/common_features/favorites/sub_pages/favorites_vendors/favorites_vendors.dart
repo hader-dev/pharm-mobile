@@ -39,7 +39,12 @@ class FavoritesVendors extends StatelessWidget {
                   physics: const AlwaysScrollableScrollPhysics(),
                   itemCount: BlocProvider.of<FavoritesCubit>(context).likedVendors.length,
                   itemBuilder: (_, index) {
-                    return VendorItem(companyData: BlocProvider.of<FavoritesCubit>(context).likedVendors[index]);
+                    return VendorItem(
+                      companyData: BlocProvider.of<FavoritesCubit>(context).likedVendors[index],
+                      hideRemoveButton: false,
+                      onRemoveFromFavorites: () => BlocProvider.of<FavoritesCubit>(context)
+                          .removeFromFavoritesVendors(BlocProvider.of<FavoritesCubit>(context).likedVendors[index].id),
+                    );
                   },
                 ),
               ),

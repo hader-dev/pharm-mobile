@@ -145,6 +145,7 @@ class CustomTextField extends StatelessWidget {
         const Gap(AppSizesManager.s6),
         TextFormField(
           key: fieldKey,
+          initialValue: initValue,
           validator: (value) => validationFunc(value),
           cursorColor: context.theme.primaryColor,
           onChanged: onChanged,

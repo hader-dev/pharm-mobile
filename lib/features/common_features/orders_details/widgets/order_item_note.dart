@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 
 import '../../../../config/theme/typoghrapy_manager.dart';
-import '../../cart/widgets/add_item_note.dart';
 
 class OrderNoteDialog extends StatelessWidget {
   final String title;

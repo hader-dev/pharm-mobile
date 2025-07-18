@@ -12,15 +12,22 @@ import '../../../config/routes/routing_manager.dart';
 import '../../../config/theme/colors_manager.dart';
 import '../../../config/theme/typoghrapy_manager.dart';
 
-import '../chips/custom_chip.dart' show CustomChip;
 
 class ParaPharmaWidget1 extends StatelessWidget {
   final BaseParaPharmaCatalogModel paraPharmData;
   final bool hideLikeButton;
+  final bool hideRemoveButton;
+  final VoidCallback? onRemoveFromFavorites;
   final bool isLiked;
   final VoidCallback? onLike;
   const ParaPharmaWidget1(
-      {super.key, required this.paraPharmData, required this.isLiked, this.onLike, this.hideLikeButton = true});
+      {super.key,
+      required this.paraPharmData,
+      required this.isLiked,
+      this.onLike,
+      this.hideLikeButton = true,
+      this.hideRemoveButton = true,
+      this.onRemoveFromFavorites});
 
   @override
   Widget build(BuildContext context) {
@@ -111,6 +118,7 @@ class ParaPharmaWidget1 extends StatelessWidget {
                       // CustomChip(label: "Antibiotic", color: AppColors.bgDarken2, onTap: () {}),
                       Spacer(),
                       InkWell(
+                        splashColor: Colors.transparent,
                         onTap: () {
                           onLike?.call();
                         },
@@ -119,7 +127,23 @@ class ParaPharmaWidget1 extends StatelessWidget {
                             : Icon(Icons.favorite, color: Colors.red),
                       )
                     ]),
-                  Gap(AppSizesManager.s8),
+                  if (!hideRemoveButton)
+                    Row(children: [
+                      // CustomChip(label: "Antibiotic", color: AppColors.bgDarken2, onTap: () {}),
+                      Spacer(),
+                      InkWell(
+                        splashColor: Colors.transparent,
+                        onTap: () {
+                          onRemoveFromFavorites?.call();
+                        },
+                        child: Icon(
+                          Icons.close,
+                          color: Colors.red,
+                          size: AppSizesManager.iconSize16,
+                        ),
+                      )
+                    ]),
+                  Gap(AppSizesManager.s4),
                   Text(paraPharmData.name,
                       maxLines: 1,
                       softWrap: true,

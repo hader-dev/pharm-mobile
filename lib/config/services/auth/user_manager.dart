@@ -1,3 +1,5 @@
+import 'package:hader_pharm_mobile/features/common_features/edit_profile/hooks_data_model/edit_profile_form.dart';
+
 import '../../../models/user.dart';
 import '../../../repositories/remote/user/user_repository_impl.dart';
 import '../../di/di.dart';
@@ -105,6 +107,13 @@ class UserManager {
       currentPassword: currentPassword,
       newPassword: newPassword,
     );
+  }
+
+  ///Updates the current user profile data.
+  Future<void> updateProfile({
+    required EditProfileFormDataModel updatedProfileData,
+  }) async {
+    await userRepo.updateProfile(updatedProfileData: updatedProfileData);
   }
 
   /// Logs out the current user by removing the stored authentication token.

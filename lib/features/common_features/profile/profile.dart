@@ -58,6 +58,12 @@ class ProfileScreen extends StatelessWidget {
                         child: SectionTitle(title: "Account Settings"),
                       ),
                       SettingsTile(
+                          icon: LucideIcons.userCog,
+                          title: "Edit Profile",
+                          onTap: () {
+                            GoRouter.of(context).pushNamed(RoutingManager.editProfileScreen);
+                          }),
+                      SettingsTile(
                           icon: LucideIcons.lock,
                           title: "Change Password",
                           onTap: () {
