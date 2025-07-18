@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart' show Gap;
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../../../../utils/constants.dart';
 import '../../../../../../utils/enums.dart';
@@ -48,7 +49,7 @@ class _DistributorGeneralInformationPageState extends State<DistributorGeneralIn
                                 style: AppTypography.bodySmallStyle.copyWith(color: TextColors.ternary.color)),
                             validator: (value) {
                               if (value == null) {
-                                return 'field is required';
+                                return context.translation!.fieldRequired;
                               }
                               return null;
                             },
@@ -83,7 +84,7 @@ class _DistributorGeneralInformationPageState extends State<DistributorGeneralIn
                           state: FieldState.normal,
                           validationFunc: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'field is required';
+                              return context.translation!.fieldRequired;
                             }
                           },
                           onChanged: (newValue) {
@@ -106,7 +107,7 @@ class _DistributorGeneralInformationPageState extends State<DistributorGeneralIn
                           },
                           validationFunc: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'field is required';
+                              return context.translation!.fieldRequired;
                             }
                             if (!emailRegex.hasMatch(value)) {
                               return 'Email is not valid';

@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/features/common_features/login/cubit/login_cubit.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../config/theme/colors_manager.dart';
 import '../../../utils/bottom_sheet_helper.dart';
@@ -47,7 +48,7 @@ class LoginScreen extends StatelessWidget {
                   LoginFormSection(),
                   Gap(AppSizesManager.s16),
                   OutLinedTextButton(
-                    label: "Register (Don’t have an account?) ",
+                    label: context.translation!.register,
                     labelColor: AppColors.accent1Shade1,
                     isOutLined: true,
                     onTap: () {

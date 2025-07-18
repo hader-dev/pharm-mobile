@@ -1,6 +1,7 @@
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 
 import '../../../../../../utils/constants.dart';
@@ -99,7 +100,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                 state: FieldState.normal,
                                 validationFunc: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return 'field is required';
+                                    return context.translation!.fieldRequired;
                                   }
                                 },
                               ),
@@ -115,7 +116,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                 state: FieldState.normal,
                                 validationFunc: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return 'field is required';
+                                    return context.translation!.fieldRequired;
                                   }
                                   if (value.length < 6) {
                                     return 'Password must be at least 6 characters';
@@ -137,7 +138,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                 state: FieldState.normal,
                                 validationFunc: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return 'field is required';
+                                    return context.translation!.fieldRequired;
                                   }
                                   if (value.length < 6) {
                                     return 'Confirm Password must be at least 6 characters';

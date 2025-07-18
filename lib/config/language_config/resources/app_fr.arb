@@ -57,5 +57,17 @@
   "para_pharma": "Para-Pharma",
   "select_language_description": "Choisissez la langue que vous souhaitez utiliser dans l'application.",
   "vendors": "Fournisseurs",
-  "medicinesSearchFieldHint": "Rechercher par DCI, marque ou code produit"
+  "medicinesSearchFieldHint": "Rechercher par DCI, marque ou code produit",
+   "email": "E-mail",
+  "fieldRequired": "Le champ est requis",
+  "invalidEmailFormat": "Format d'e-mail invalide",
+  "passwordMinLength": "Le mot de passe doit contenir au moins 6 caractères",
+   "forgotPassword": "Mot de passe oublié ?",
+   "signIn": "Se connecter",
+  "welcomeBack": "Salut ! Bon retour, vous nous avez manqué",
+  "checkEmail": "Vérifiez votre e-mail",
+  "passwordResetSent": "Nous avons envoyé un lien de réinitialisation de mot de passe à votre e-mail. Veuillez vérifier votre boîte de réception.",
+  "backToLogin": "Retour à la connexion",
+  "register": "S’inscrire (Vous n’avez pas de compte ?)"
+
 }

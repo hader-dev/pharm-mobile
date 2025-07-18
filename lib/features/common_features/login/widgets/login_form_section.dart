@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/login/cubit/login_cubit.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../../config/theme/colors_manager.dart';
@@ -35,16 +36,16 @@ class _LoginFormSectionState extends State<LoginFormSection> {
                 state: FieldState.normal,
                 validationFunc: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'field is required';
+                    return context.translation!.fieldRequired;
                   }
                   if (!emailRegex.hasMatch(value)) {
-                    return 'Invalid email format';
+                    return context.translation!.invalidEmailFormat;
                   }
                 },
               ),
               Gap(AppSizesManager.s4),
               CustomTextField(
-                label: 'Password*',
+                label: '${context.translation!.password}*',
                 controller: BlocProvider.of<LoginCubit>(context).passwordController,
                 onChanged: (value) {},
                 isObscure: BlocProvider.of<LoginCubit>(context).isObscured,
@@ -57,10 +58,10 @@ class _LoginFormSectionState extends State<LoginFormSection> {
                 validationFunc: (value) {
                   if ((value == null || value.isEmpty) &&
                       BlocProvider.of<LoginCubit>(context).emailController.text.isNotEmpty) {
-                    return 'field is required';
+                    return context.translation!.fieldRequired;
                   }
                   if (value.length < 6) {
-                    return 'Password must be at least 6 characters';
+                    return context.translation!.passwordMinLength;
                   }
                 },
               ),
@@ -70,7 +71,7 @@ class _LoginFormSectionState extends State<LoginFormSection> {
                 children: [
                   Spacer(),
                   PrimaryTextButton(
-                    label: "Forgot Password?",
+                    label: context.translation!.forgotPassword,
                     onTap: () {
                       if (!emailFieldKey.currentState!.validate()) {}
                       BlocProvider.of<LoginCubit>(context).forgetPassword();
@@ -81,7 +82,7 @@ class _LoginFormSectionState extends State<LoginFormSection> {
               ),
               Gap(AppSizesManager.s24),
               PrimaryTextButton(
-                label: "Login",
+                label: context.translation!.login,
                 isLoading: state is LoginLoading,
                 onTap: () {
                   FocusScope.of(context).unfocus();

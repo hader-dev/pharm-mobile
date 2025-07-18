@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../../../utils/constants.dart';
 import '../../../../common/text_fields/custom_text_field.dart';
@@ -39,7 +40,7 @@ class _PharmacyLegalInformationPageState extends State<PharmacyLegalInformationP
                           state: FieldState.normal,
                           validationFunc: (value) {
                             if (value == null || value.isEmpty) {
-                              return "field is required ";
+                              return "${context.translation!.fieldRequired} ";
                             }
                           },
                           onChanged: (newValue) {
@@ -55,7 +56,7 @@ class _PharmacyLegalInformationPageState extends State<PharmacyLegalInformationP
                           state: FieldState.normal,
                           validationFunc: (value) {
                             if (value == null || value.isEmpty) {
-                              return "field is required ";
+                              return "${context.translation!.fieldRequired} ";
                             }
                           },
                           onChanged: (newValue) {
@@ -70,7 +71,7 @@ class _PharmacyLegalInformationPageState extends State<PharmacyLegalInformationP
                           state: FieldState.normal,
                           validationFunc: (value) {
                             if (value == null || value.isEmpty) {
-                              return "field is required ";
+                              return "${context.translation!.fieldRequired} ";
                             }
                           },
                           value: BlocProvider.of<CreateCompanyProfileCubit>(context).companyData.ai,

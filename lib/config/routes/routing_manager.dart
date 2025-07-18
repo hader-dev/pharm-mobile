@@ -49,11 +49,10 @@ class RoutingManager {
   static const String favoritesScreen = 'FavoritesScreen';
   static const String vendorDetails = '/VendorDetails';
   static const String ordersDetailsScreen = '/OrdersDetailsScreen';
-<<<<<<< HEAD
+
   static const String editProfileScreen = '/EditProfileScreen';
-=======
+
   static const String languagesScreen = '/LanguagesScreen';
->>>>>>> 3cf24c278bc081f6c2539eb7f546375f59f839a0
 
   static final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
 

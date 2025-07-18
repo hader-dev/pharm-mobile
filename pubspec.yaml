@@ -97,12 +97,6 @@ dependencies:
   image_picker: ^1.1.2
 
   calendar_date_picker2: ^2.0.1
-<<<<<<< HEAD
-
-  
-  
-=======
->>>>>>> 3cf24c278bc081f6c2539eb7f546375f59f839a0
 
 dev_dependencies:
   flutter_test:

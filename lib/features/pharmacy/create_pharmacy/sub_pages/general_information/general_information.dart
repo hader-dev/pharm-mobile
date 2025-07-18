@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../../../utils/constants.dart';
 import '../../../../../utils/enums.dart';
@@ -36,7 +37,7 @@ class _PharmacyGeneralInformationPageState extends State<PharmacyGeneralInformat
                           state: FieldState.normal,
                           validationFunc: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'field is required';
+                              return context.translation!.fieldRequired;
                             }
                           },
                           onChanged: (newValue) {
@@ -58,7 +59,7 @@ class _PharmacyGeneralInformationPageState extends State<PharmacyGeneralInformat
                           },
                           validationFunc: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'field is required';
+                              return context.translation!.fieldRequired;
                             }
                             if (!emailRegex.hasMatch(value)) {
                               return 'Email is not valid';

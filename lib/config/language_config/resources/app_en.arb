@@ -57,5 +57,16 @@
   "para_pharma": "Para-Pharma",
   "select_language_description": "Select the language you prefer to use in the app.",
   "vendors": "Vendors",
-  "medicinesSearchFieldHint": "Search by DCI, brand or SKU"
+  "medicinesSearchFieldHint": "Search by DCI, brand or SKU",
+   "email": "Email",
+   "fieldRequired": "Field is required",
+   "invalidEmailFormat": "Invalid email format",
+   "passwordMinLength": "Password must be at least 6 characters",
+   "forgotPassword": "Forgot Password?",
+    "signIn": "Sign In",
+  "welcomeBack": "Hi! Welcome back, you’ve been missed",
+  "checkEmail": "Check your email",
+  "passwordResetSent": "We have sent a password reset link to your email, Please check your inbox.",
+  "backToLogin": "Back to login",
+  "register": "Register (Don’t have an account?)"
 }

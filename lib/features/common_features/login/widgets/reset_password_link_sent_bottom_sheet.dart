@@ -6,6 +6,7 @@ import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../../config/theme/colors_manager.dart';
 
@@ -27,17 +28,17 @@ class CheckYourMailScreen extends StatelessWidget {
           ),
 
           // Title
-          const Text('Check your email', style: AppTypography.headLine1Style),
+          Text(context.translation!.checkEmail, style: AppTypography.headLine1Style),
 
           const Gap(AppSizesManager.s24),
 
           // Subtitle
-          const Text('We have sent a password reset link to your email, Please check your inbox.',
+          Text(context.translation!.passwordResetSent,
               textAlign: TextAlign.center, style: AppTypography.body1RegularStyle),
 
           const Gap(AppSizesManager.s24),
           PrimaryTextButton(
-              label: "Back to login",
+              label: context.translation!.backToLogin,
               onTap: () {
                 context.pop();
               },

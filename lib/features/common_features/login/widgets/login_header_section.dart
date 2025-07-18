@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../../config/theme/colors_manager.dart';
 import '../../../../config/theme/typoghrapy_manager.dart';
@@ -39,12 +40,12 @@ class LoginHeaderSection extends StatelessWidget {
             ),
           ),
           Text(
-            'Sign In',
+            context.translation!.signIn,
             style: AppTypography.headLine1Style.copyWith(fontSize: AppSizesManager.p24, color: AppColors.accent1Shade1),
           ),
           Gap(AppSizesManager.s8),
           Text(
-            'Hi! Welcome back, you’ve been missed',
+            context.translation!.welcomeBack,
             style: AppTypography.body3RegularStyle.copyWith(color: TextColors.ternary.color),
           ),
         ],
