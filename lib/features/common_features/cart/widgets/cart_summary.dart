@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../../config/theme/colors_manager.dart';
 import '../../../../utils/bottom_sheet_helper.dart';
@@ -39,7 +40,7 @@ class CartSummarySection extends StatelessWidget {
               child: !isExpanded.value
                   ? Row(children: <Widget>[
                       Text(
-                        "Summary",
+                        context.translation!.summary,
                       ),
                       const Spacer(),
                       Icon(Icons.keyboard_arrow_up_sharp,
@@ -64,7 +65,7 @@ class CartSummarySection extends StatelessWidget {
                       Row(
                         children: <Widget>[
                           Text(
-                            'Total HT Amount',
+                            context.translation!.total_ht_amount,
                           ),
                           const Spacer(),
                           BlocBuilder<CartCubit, CartState>(
@@ -89,7 +90,7 @@ class CartSummarySection extends StatelessWidget {
                       Row(
                         children: <Widget>[
                           Text(
-                            'Total Ttc Amount',
+                            context.translation!.total_ttc_amount,
                           ),
                           const Spacer(),
                           BlocBuilder<CartCubit, CartState>(
@@ -117,7 +118,7 @@ class CartSummarySection extends StatelessWidget {
                       Row(
                         children: <Widget>[
                           Text(
-                            'Tva (%)',
+                            '${context.translation!.tva} (%)',
                           ),
                           const Spacer(),
                           BlocBuilder<CartCubit, CartState>(
@@ -135,7 +136,7 @@ class CartSummarySection extends StatelessWidget {
                       Gap(AppSizesManager.s12),
                       BlocBuilder<CartCubit, CartState>(builder: (context, state) {
                         return PrimaryTextButton(
-                          label: "checkout",
+                          label: context.translation!.checkout,
                           onTap: context.read<CartCubit>().cartItems.isEmpty
                               ? null
                               : () {

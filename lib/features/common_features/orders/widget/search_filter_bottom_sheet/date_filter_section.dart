@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart' show Gap;
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_date_helper.dart';
 
 import '../../../../../config/theme/colors_manager.dart' show AppColors, SystemColors;
@@ -20,7 +21,7 @@ class DateFilterSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InfoWidget(
-      label: "Date : ",
+      label: "${context.translation!.date} : ",
       bgColor: AppColors.bgWhite,
       value: Padding(
         padding: const EdgeInsets.only(top: AppSizesManager.p16),
@@ -44,7 +45,7 @@ class DateFilterSection extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        "Initial date",
+                        context.translation!.initialDate,
                         style: AppTypography.body2MediumStyle,
                       ),
                       if (BlocProvider.of<OrdersCubit>(context).initialDateFilter != null)
@@ -64,7 +65,7 @@ class DateFilterSection extends StatelessWidget {
                   ),
                   const Gap(AppSizesManager.s8),
                   Text(
-                    BlocProvider.of<OrdersCubit>(context).initialDateFilter ?? "Tap to select",
+                    BlocProvider.of<OrdersCubit>(context).initialDateFilter ?? context.translation!.tapToSelect,
                     style: AppTypography.body2MediumStyle.copyWith(color: AppColors.accent1Shade1),
                   ),
                 ],
@@ -94,7 +95,7 @@ class DateFilterSection extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            "Final date",
+                            context.translation!.finalDate,
                             style: AppTypography.body2MediumStyle,
                           ),
                           if (BlocProvider.of<OrdersCubit>(context).finalDateFilter != null)
@@ -116,7 +117,7 @@ class DateFilterSection extends StatelessWidget {
                   ),
                   const Gap(AppSizesManager.s8),
                   Text(
-                    BlocProvider.of<OrdersCubit>(context).finalDateFilter ?? "Tap to select",
+                    BlocProvider.of<OrdersCubit>(context).finalDateFilter ?? context.translation!.tapToSelect,
                     style: AppTypography.body2MediumStyle.copyWith(color: AppColors.accent1Shade1),
                   ),
                 ],

@@ -258,4 +258,58 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get types => 'Types';
+
+  @override
+  String get checkoutProcess => 'Processus de commande';
+
+  @override
+  String get paymentMethods => 'Méthodes de paiement';
+
+  @override
+  String get invoiceTypes => 'Types de facture';
+
+  @override
+  String get orderNote => 'Note de commande';
+
+  @override
+  String get typeNoteHint => 'écrivez votre note ici...';
+
+  @override
+  String get totalPrice => 'Prix total';
+
+  @override
+  String get cancel => 'Annuler';
+
+  @override
+  String get confirmOrder => 'Confirmer la commande';
+
+  @override
+  String get orders => 'Commandes';
+
+  @override
+  String get initialDate => 'Date de début';
+
+  @override
+  String get finalDate => 'Date de fin';
+
+  @override
+  String get tapToSelect => 'Appuyez pour sélectionner';
+
+  @override
+  String get date => 'Date';
+
+  @override
+  String get order => 'Commande';
+
+  @override
+  String get vendor => 'Fournisseur';
+
+  @override
+  String get min => 'Min';
+
+  @override
+  String get max => 'Max';
+
+  @override
+  String get all => 'Tous';
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart' show Gap;
 import 'package:hader_pharm_mobile/features/common_features/orders/cubit/orders_cubit.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../../../config/theme/colors_manager.dart' show AppColors;
 import '../../../../../utils/constants.dart';
@@ -20,7 +21,7 @@ class PriceFilterSection extends StatelessWidget {
     return BlocBuilder<OrdersCubit, OrdersState>(
       builder: (context, state) {
         return InfoWidget(
-          label: "Price: ",
+          label: "${context.translation!.price}: ",
           bgColor: AppColors.bgWhite,
           value: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -28,8 +29,9 @@ class PriceFilterSection extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  PriceTag(label: 'min', value: context.read<OrdersCubit>().minPriceFilter ?? 0),
-                  PriceTag(label: 'max', value: context.read<OrdersCubit>().maxPriceFilter ?? 100000),
+                  PriceTag(label: context.translation!.min, value: context.read<OrdersCubit>().minPriceFilter ?? 0),
+                  PriceTag(
+                      label: context.translation!.max, value: context.read<OrdersCubit>().maxPriceFilter ?? 100000),
                 ],
               ),
               const Gap(AppSizesManager.s12),

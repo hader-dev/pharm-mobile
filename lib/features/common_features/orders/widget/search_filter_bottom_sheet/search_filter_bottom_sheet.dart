@@ -32,18 +32,18 @@ class OrdersFilterBottomSheet extends StatelessWidget {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              BottomSheetHeader(title: 'Search Filters'),
+              BottomSheetHeader(title: context.translation!.searchFilters),
               Gap(AppSizesManager.s12),
               Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
               Gap(AppSizesManager.s12),
               InfoWidget(
-                  label: "Status : ",
+                  label: "${context.translation!.status} : ",
                   bgColor: AppColors.bgWhite,
                   value: Wrap(
                     // shrinkWrap: true,
                     children: [
                       ChoiceChip(
-                          label: Text("All"),
+                          label: Text(context.translation!.all),
                           selectedColor: AppColors.accent1Shade1.withAlpha(150),
                           selected: BlocProvider.of<OrdersCubit>(context).selectedStatusFilters.length ==
                               OrderStatus.values.length,

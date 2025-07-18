@@ -8,6 +8,7 @@ import 'package:hader_pharm_mobile/features/common_features/create_company_profi
 import 'package:hader_pharm_mobile/models/order.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_date_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/price_formatter.dart';
 
@@ -56,7 +57,7 @@ class OrderCard extends StatelessWidget {
                       style: AppTypography.headLine4SemiBoldStyle.copyWith(color: AppColors.accent1Shade1),
                       children: [
                         TextSpan(
-                            text: " Order-${orderData.id.split("-").first}",
+                            text: " ${context.translation!.order}-${orderData.id.split("-").first}",
                             style: AppTypography.headLine4SemiBoldStyle.copyWith(color: Colors.black)),
                         TextSpan(
                           text: "\n (${orderData.createdAt.toLocal().formatYMD})",
@@ -89,13 +90,13 @@ class OrderCard extends StatelessWidget {
             ),
             const Gap(AppSizesManager.s8),
             InfoRow(
-              label: "vendor",
+              label: context.translation!.vendor,
               dataValue: orderData.sellerCompanyName ?? "N/A",
               contentDirection: Axis.vertical,
             ),
             const Gap(AppSizesManager.s12),
             InfoRow(
-              label: "deliver to",
+              label: context.translation!.deliverTo,
               dataValue: orderData.deliveryAddress,
               contentDirection: Axis.vertical,
             ),
@@ -106,12 +107,12 @@ class OrderCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   InfoRow(
-                    label: "Total Amount HT",
+                    label: context.translation!.total_ht_amount,
                     dataValue: orderData.totalAmountExclTax.formatAsPriceForPrint(),
                     contentDirection: Axis.vertical,
                   ),
                   InfoRow(
-                    label: "Total Amount TTC",
+                    label: context.translation!.total_ttc_amount,
                     dataValue: orderData.totalAmountInclTax.formatAsPriceForPrint(),
                     contentDirection: Axis.vertical,
                   ),

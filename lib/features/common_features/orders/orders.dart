@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/features/app_layout/app_layout.dart';
 
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import 'package:iconsax/iconsax.dart';
 
@@ -40,7 +41,7 @@ class OrdersScreen extends StatelessWidget {
             builder: (context, state) {
               return RichText(
                 text: TextSpan(
-                  text: "Orders",
+                  text: context.translation!.orders,
                   style: AppTypography.headLine3SemiBoldStyle.copyWith(color: TextColors.primary.color),
                   children: [
                     TextSpan(
@@ -86,14 +87,6 @@ class OrdersScreen extends StatelessWidget {
                 BottomSheetHelper.showCommonBottomSheet(context: context, child: OrdersFilterBottomSheet());
               },
             ),
-            // IconButton(
-            //   icon: const Icon(Iconsax.search_normal),
-            //   onPressed: () {},
-            // ),
-            // IconButton(
-            //   icon: const Icon(Iconsax.notification),
-            //   onPressed: () {},
-            // ),
           ],
         ),
         body: BlocBuilder<OrdersCubit, OrdersState>(

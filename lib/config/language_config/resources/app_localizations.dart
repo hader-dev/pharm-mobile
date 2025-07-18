@@ -579,6 +579,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Types'**
   String get types;
+
+  /// No description provided for @checkoutProcess.
+  ///
+  /// In en, this message translates to:
+  /// **'Checkout Process'**
+  String get checkoutProcess;
+
+  /// No description provided for @paymentMethods.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment Methods'**
+  String get paymentMethods;
+
+  /// No description provided for @invoiceTypes.
+  ///
+  /// In en, this message translates to:
+  /// **'Invoice Types'**
+  String get invoiceTypes;
+
+  /// No description provided for @orderNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Note'**
+  String get orderNote;
+
+  /// No description provided for @typeNoteHint.
+  ///
+  /// In en, this message translates to:
+  /// **'type your note here...'**
+  String get typeNoteHint;
+
+  /// No description provided for @totalPrice.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Price'**
+  String get totalPrice;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @confirmOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Order'**
+  String get confirmOrder;
+
+  /// No description provided for @orders.
+  ///
+  /// In en, this message translates to:
+  /// **'Orders'**
+  String get orders;
+
+  /// No description provided for @initialDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Initial date'**
+  String get initialDate;
+
+  /// No description provided for @finalDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Final date'**
+  String get finalDate;
+
+  /// No description provided for @tapToSelect.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to select'**
+  String get tapToSelect;
+
+  /// No description provided for @date.
+  ///
+  /// In en, this message translates to:
+  /// **'Date'**
+  String get date;
+
+  /// No description provided for @order.
+  ///
+  /// In en, this message translates to:
+  /// **'Order'**
+  String get order;
+
+  /// No description provided for @vendor.
+  ///
+  /// In en, this message translates to:
+  /// **'Vendor'**
+  String get vendor;
+
+  /// No description provided for @min.
+  ///
+  /// In en, this message translates to:
+  /// **'Min'**
+  String get min;
+
+  /// No description provided for @max.
+  ///
+  /// In en, this message translates to:
+  /// **'Max'**
+  String get max;
+
+  /// No description provided for @all.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get all;
 }
 
 class _AppLocalizationsDelegate

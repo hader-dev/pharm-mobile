@@ -77,7 +77,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get status => 'الحالة';
 
   @override
-  String get deliverTo => 'تسليم إلى';
+  String get deliverTo => 'التوصيل إلى';
 
   @override
   String get note => 'ملاحظة';
@@ -176,7 +176,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get noAdditionalNotes => 'لا توجد ملاحظات إضافية لهذا العنصر.';
 
   @override
-  String get para_pharma => 'البارا صيدلة';
+  String get para_pharma => 'الشبه صيدلة';
 
   @override
   String get select_language_description =>
@@ -255,4 +255,58 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get types => 'الأنواع';
+
+  @override
+  String get checkoutProcess => 'عملية الدفع';
+
+  @override
+  String get paymentMethods => 'طرق الدفع';
+
+  @override
+  String get invoiceTypes => 'أنواع الفواتير';
+
+  @override
+  String get orderNote => 'ملاحظة على الطلب';
+
+  @override
+  String get typeNoteHint => 'اكتب ملاحظتك هنا...';
+
+  @override
+  String get totalPrice => 'السعر الإجمالي';
+
+  @override
+  String get cancel => 'إلغاء';
+
+  @override
+  String get confirmOrder => 'تأكيد الطلب';
+
+  @override
+  String get orders => 'الطلبات';
+
+  @override
+  String get initialDate => 'تاريخ البدء';
+
+  @override
+  String get finalDate => 'تاريخ الانتهاء';
+
+  @override
+  String get tapToSelect => 'اضغط للاختيار';
+
+  @override
+  String get date => 'التاريخ';
+
+  @override
+  String get order => 'طلب';
+
+  @override
+  String get vendor => 'المورد';
+
+  @override
+  String get min => 'الأدنى';
+
+  @override
+  String get max => 'الأقصى';
+
+  @override
+  String get all => 'الكل';
 }

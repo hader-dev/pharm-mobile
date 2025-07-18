@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/features/app_layout/app_layout.dart';
 import 'package:hader_pharm_mobile/features/common_features/cart/widgets/cart_summary.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 import '../../../config/theme/colors_manager.dart';
 import '../../../config/theme/typoghrapy_manager.dart';
@@ -38,7 +39,7 @@ class CartScreen extends StatelessWidget {
               builder: (context, state) {
                 return Text.rich(
                   TextSpan(
-                    text: "Cart",
+                    text: context.translation!.cart,
                     style: AppTypography.headLine3SemiBoldStyle,
                     children: [
                       TextSpan(

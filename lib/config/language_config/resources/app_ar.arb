@@ -54,9 +54,8 @@
   "add_cart":"أضف إلى السلة",
   "similar_products": "منتجات مشابهة",
   "noAdditionalNotes": "لا توجد ملاحظات إضافية لهذا العنصر.",
-  "para_pharma": "البارا صيدلة",
+  "para_pharma": "الشبه صيدلة",
     "select_language_description": "اختر اللغة التي تفضل استخدامها في التطبيق.",
-
   "vendors": "الموردون",
   "medicinesSearchFieldHint": "ابحث بواسطة الاسم العلمي، العلامة التجارية أو رمز المنتج",
     "email": "البريد الإلكتروني",
@@ -80,6 +79,25 @@
    "searchByNamePackagingSku": "ابحث بالاسم أو التغليف أو رمز المنتج (SKU)",
    "searchFilters": "فلاتر البحث",
   "filters": "الفلاتر",
-  "types": "الأنواع"
+  "types": "الأنواع",
+   "checkoutProcess": "عملية الدفع",
+  "paymentMethods": "طرق الدفع",
+  "invoiceTypes": "أنواع الفواتير",
+  "orderNote": "ملاحظة على الطلب",
+  "typeNoteHint": "اكتب ملاحظتك هنا...",
+  "totalPrice": "السعر الإجمالي",
+  "cancel": "إلغاء",
+  "confirmOrder": "تأكيد الطلب",
+   "orders": "الطلبات",
+  "initialDate": "تاريخ البدء",
+  "finalDate": "تاريخ الانتهاء",
+  "tapToSelect": "اضغط للاختيار",
+  "date": "التاريخ",
+  "order": "طلب",
+  "vendor": "المورد",
+  "deliverTo": "التوصيل إلى",
+   "min": "الأدنى",
+  "max": "الأقصى",
+  "all": "الكل"
 }
 
