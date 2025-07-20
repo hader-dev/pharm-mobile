@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/features/common/dialog/log_out_dialog.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
 import 'package:lucide_icons/lucide_icons.dart';
@@ -34,8 +35,8 @@ class ProfileScreen extends StatelessWidget {
             ),
             onPressed: () {},
           ),
-          title: const Text(
-            "Account",
+          title: Text(
+            context.translation!.account,
             style: AppTypography.headLine3SemiBoldStyle,
           ),
         ),
@@ -55,34 +56,34 @@ class ProfileScreen extends StatelessWidget {
                       Padding(
                         padding:
                             const EdgeInsets.symmetric(horizontal: AppSizesManager.p8, vertical: AppSizesManager.p10),
-                        child: SectionTitle(title: "Account Settings"),
+                        child: SectionTitle(title: context.translation!.account_settings),
                       ),
                       SettingsTile(
                           icon: LucideIcons.userCog,
-                          title: "Edit Profile",
+                          title: context.translation!.edit_profile,
                           onTap: () {
                             GoRouter.of(context).pushNamed(RoutingManager.editProfileScreen);
                           }),
                       SettingsTile(
                           icon: LucideIcons.lock,
-                          title: "Change Password",
+                          title: context.translation!.change_password,
                           onTap: () {
                             GoRouter.of(context).pushNamed(RoutingManager.changePasswordScreen);
                           }),
                       Padding(
                         padding:
                             const EdgeInsets.symmetric(horizontal: AppSizesManager.p6, vertical: AppSizesManager.p8),
-                        child: SectionTitle(title: "preferences"),
+                        child: SectionTitle(title: context.translation!.preferences),
                       ),
                       SettingsTile(
                           icon: LucideIcons.heart,
-                          title: "Favorites",
+                          title: context.translation!.favorites,
                           onTap: () {
                             GoRouter.of(context).pushNamed(RoutingManager.favoritesScreen);
                           }),
                       SettingsTile(
                         icon: LucideIcons.globe,
-                        title: "language",
+                        title: context.translation!.language,
                         onTap: () {
                           GoRouter.of(context).pushNamed(RoutingManager.languagesScreen);
                         },
@@ -90,15 +91,15 @@ class ProfileScreen extends StatelessWidget {
                       Padding(
                         padding:
                             const EdgeInsets.symmetric(horizontal: AppSizesManager.p6, vertical: AppSizesManager.p8),
-                        child: SectionTitle(title: "App Privarcy"),
+                        child: SectionTitle(title: context.translation!.app_privacy),
                       ),
                       SettingsTile(
                         icon: LucideIcons.fileText,
-                        title: "legal And Policies",
+                        title: context.translation!.legal_policies,
                       ),
                       SettingsTile(
                         icon: LucideIcons.helpCircle,
-                        title: "help And Support",
+                        title: context.translation!.help_support,
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(
@@ -106,7 +107,7 @@ class ProfileScreen extends StatelessWidget {
                         ),
                         child: ListTile(
                           leading: const Icon(LucideIcons.logOut, color: Colors.red),
-                          title: Text("logout", style: const TextStyle(color: Colors.red)),
+                          title: Text(context.translation!.logout, style: const TextStyle(color: Colors.red)),
                           onTap: () async {
                             await AppDialogs.showLogoutDialogLogout();
 

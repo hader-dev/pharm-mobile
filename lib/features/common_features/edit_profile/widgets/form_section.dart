@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../../config/theme/colors_manager.dart';
 import '../../../../utils/constants.dart';
@@ -27,7 +28,7 @@ class _FormSectionState extends State<FormSection> {
             return Column(
               children: [
                 CustomTextField(
-                  label: 'Full Name*',
+                  label: '${context.translation!.full_name}*',
                   initValue: BlocProvider.of<EditProfileCubit>(context).profileData.fullName,
                   state: FieldState.normal,
                   onChanged: (newValue) {
@@ -38,21 +39,21 @@ class _FormSectionState extends State<FormSection> {
                   },
                   validationFunc: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Full Name is required';
+                      return context.translation!.fieldRequired;
                     }
                   },
                 ),
                 Gap(AppSizesManager.s4),
                 CustomTextField(
-                  label: 'Email*',
+                  label: '${context.translation!.email}*',
                   initValue: BlocProvider.of<EditProfileCubit>(context).profileData.email,
                   state: FieldState.normal,
                   validationFunc: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Email is required';
+                      return context.translation!.fieldRequired;
                     }
                     if (!emailRegex.hasMatch(value)) {
-                      return 'Email is not valid';
+                      return context.translation!.invalidEmailFormat;
                     }
                   },
                   onChanged: (newValue) {
@@ -64,7 +65,7 @@ class _FormSectionState extends State<FormSection> {
                 ),
                 Gap(AppSizesManager.s4),
                 CustomTextField(
-                  label: 'Phone Number',
+                  label: context.translation!.phone_mobile,
                   state: FieldState.normal,
                   initValue: BlocProvider.of<EditProfileCubit>(context).profileData.phone,
                   keyBoadType: TextInputType.phone,
@@ -80,7 +81,7 @@ class _FormSectionState extends State<FormSection> {
                 ),
                 Gap(AppSizesManager.s24),
                 PrimaryTextButton(
-                  label: "Update Profile",
+                  label: context.translation!.update_profile,
                   isLoading: context.watch<EditProfileCubit>().state is EditProfileLoading,
                   onTap: () {
                     if (!Form.of(context).validate()) {

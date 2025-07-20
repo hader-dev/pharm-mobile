@@ -5,7 +5,8 @@ import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/features/common_features/edit_profile/cubit/edit_profile_cubit.dart';
-import 'package:hader_pharm_mobile/features/common_features/register/cubit/register_cubit.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
+
 import 'package:iconsax/iconsax.dart' show Iconsax;
 
 import '../../../config/theme/colors_manager.dart';
@@ -38,8 +39,8 @@ class EditProfileScreen extends StatelessWidget {
                 context.pop();
               },
             ),
-            title: const Text(
-              "Update Profile",
+            title: Text(
+              context.translation!.update_profile,
               style: AppTypography.headLine3SemiBoldStyle,
             ),
           ),
@@ -55,7 +56,7 @@ class EditProfileScreen extends StatelessWidget {
                   shrinkWrap: true,
                   physics: const BouncingScrollPhysics(),
                   children: [
-                    Text("Update your profile details and upload your profile picture.",
+                    Text(context.translation!.update_profile_description,
                         style: AppTypography.body1MediumStyle.copyWith(
                           color: TextColors.ternary.color,
                         )),

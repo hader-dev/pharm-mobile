@@ -179,8 +179,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get para_pharma => 'Para-Pharma';
 
   @override
-  String get select_language_description =>
-      'Select the language you prefer to use in the app.';
+  String get select_language_description => 'Select the language you prefer to use in the app.';
 
   @override
   String get vendors => 'Vendors';
@@ -213,8 +212,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get checkEmail => 'Check your email';
 
   @override
-  String get passwordResetSent =>
-      'We have sent a password reset link to your email, Please check your inbox.';
+  String get passwordResetSent => 'We have sent a password reset link to your email, Please check your inbox.';
 
   @override
   String get backToLogin => 'Back to login';
@@ -241,8 +239,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get checkEmailForVerification => 'Check your email for verification';
 
   @override
-  String get emailNotVerified =>
-      'Your email is not verified. Please check your email for verification';
+  String get emailNotVerified => 'Your email is not verified. Please check your email for verification';
 
   @override
   String get searchByNamePackagingSku => 'Search by name, packaging or SKU';
@@ -357,4 +354,36 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get order_tracking => 'Order Tracking';
+
+  @override
+  String get account => 'Account';
+
+  @override
+  String get account_settings => 'Account Settings';
+
+  @override
+  String get edit_profile => 'Edit Profile';
+
+  @override
+  String get change_password => 'Change Password';
+
+  @override
+  String get preferences => 'Preferences';
+
+  @override
+  String get favorites => 'Favorites';
+
+  @override
+  String get app_privacy => 'App Privacy';
+
+  @override
+  String get legal_policies => 'Legal and Policies';
+
+  @override
+  String get help_support => 'Help and Support';
+  @override
+  String get update_profile => 'Update Profile';
+
+  @override
+  String get update_profile_description => 'Update your profile details and upload your profile picture.';
 }

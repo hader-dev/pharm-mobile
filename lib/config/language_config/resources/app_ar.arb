@@ -117,6 +117,19 @@
   "total_ttc": "الإجمالي شامل الضريبة",
   "shipping_address": "عنوان الشحن",
   "order_tracking": "تتبع الطلب",
-  "order_details": "تفاصيل الطلب"
+  "order_details": "تفاصيل الطلب",
+  "account": "الحساب",
+  "account_settings": "إعدادات الحساب",
+  "edit_profile": "تعديل الملف الشخصي",
+  "change_password": "تغيير كلمة المرور",
+  "preferences": "التفضيلات",
+  "favorites": "المفضلة",
+  "language": "اللغة",
+  "app_privacy": "خصوصية التطبيق",
+  "legal_policies": "الشروط والسياسات",
+  "help_support": "المساعدة والدعم",
+  "logout": "تسجيل الخروج",
+  "update_profile": "تحديث الملف الشخصي",
+  "update_profile_description": "قم بتحديث تفاصيل ملفك الشخصي وحمّل صورتك الشخصية ."
 }
 

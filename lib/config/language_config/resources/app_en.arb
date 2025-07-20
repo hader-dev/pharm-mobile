@@ -117,5 +117,18 @@
   "total_ttc": "Total TTC",
   "shipping_address": "Shipping Address",
   "order_tracking": "Order Tracking",
-  "order_details": "Order Details"
+  "order_details": "Order Details",
+  "account": "Account",
+  "account_settings": "Account Settings",
+  "edit_profile": "Edit Profile",
+  "change_password": "Change Password",
+  "preferences": "Preferences",
+  "favorites": "Favorites",
+  "language": "Language",
+  "app_privacy": "App Privacy",
+  "legal_policies": "Legal and Policies",
+  "help_support": "Help and Support",
+  "logout": "Logout",
+  "update_profile": "Update Profile",
+  "update_profile_description": "Update your profile details and upload your profile picture."
 }
