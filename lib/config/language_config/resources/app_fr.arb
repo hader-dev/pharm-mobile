@@ -130,5 +130,8 @@
   "help_support": "Aide et support",
   "logout": "Déconnexion",
    "update_profile": "Mettre à jour le profil",
-  "update_profile_description": "Mettez à jour les informations de votre profil et téléchargez votre photo de profil."
+  "update_profile_description": "Mettez à jour les informations de votre profil et téléchargez votre photo de profil.",
+ "set_new_password": "Définir un nouveau mot de passe",
+  "set_new_password_description": "Créez un nouveau mot de passe. Assurez-vous qu’il soit différent des précédents pour plus de sécurité.",
+  "password_requirements": "Le mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre et un caractère spécial."
 }

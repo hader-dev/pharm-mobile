@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart' show getItInstance;
 import 'package:hader_pharm_mobile/features/common_features/favorites/cubit/favorites_cubit.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../config/services/network/network_interface.dart';
@@ -39,8 +40,8 @@ class FavoritesScreen extends StatelessWidget {
                   context.pop();
                 },
               ),
-              title: const Text(
-                "Favorites",
+              title: Text(
+                context.translation!.favorites,
                 style: AppTypography.headLine3SemiBoldStyle,
               ),
             ),

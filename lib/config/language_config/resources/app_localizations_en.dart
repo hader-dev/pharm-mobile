@@ -386,4 +386,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get update_profile_description => 'Update your profile details and upload your profile picture.';
+  @override
+  String get set_new_password => 'Set a new password';
+
+  @override
+  String get set_new_password_description =>
+      'Create a new password. Ensure it differs from previous ones for security.';
+
+  @override
+  String get password_requirements =>
+      'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.';
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../../config/theme/colors_manager.dart';
 import '../sub_pages/favorites_medicines_catalogs/favorites_medicines_catalogs.dart' show FavoritesMedicinesCatalog;
@@ -13,7 +14,7 @@ import '../sub_pages/favorites_vendors/favorites_vendors.dart' show FavoritesVen
 // }
 
 class FavoritesTabBarSection extends StatefulWidget {
-  final List<String> tabs = ["Medicine", "Para-Pharma", "Vendors"];
+  final List<String> tabs = ["Medicines", "Para-Pharma", "Vendors"];
   FavoritesTabBarSection({super.key});
   // void generateSectionsKeys() {
   //   sectionsKeys = {for (var categoryItem in tabs.categories) categoryItem.category.name: GlobalKey()};
@@ -51,7 +52,7 @@ class _FavoritesTabBarSectionState extends State<FavoritesTabBarSection> with Ti
                 .map(
                   (tabLabel) => Tab(
                     child: Text(
-                      tabLabel,
+                      getTabTranslation(tabLabel),
                     ),
                   ),
                 )
@@ -65,5 +66,19 @@ class _FavoritesTabBarSectionState extends State<FavoritesTabBarSection> with Ti
         ),
       ],
     );
+  }
+
+  getTabTranslation(String label) {
+    switch (label) {
+      case "Medicines":
+        return context.translation!.medicines;
+      case "Para-Pharma":
+        return context.translation!.para_pharma;
+      case "Vendors":
+        return context.translation!.vendors;
+
+      default:
+        return "Tab";
+    }
   }
 }

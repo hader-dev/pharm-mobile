@@ -40,10 +40,10 @@ class LanguagesScreen extends StatelessWidget {
                 context.pop();
               },
             ),
-            title: const Text(
-              "Languages",
-              style: AppTypography.headLine3SemiBoldStyle,
-            ),
+            title: Text(context.translation!.language,
+                style: AppTypography.body1MediumStyle.copyWith(
+                  color: TextColors.ternary.color,
+                )),
           ),
           body: SafeArea(
             child: BlocListener<LangCubit, LangState>(
@@ -63,9 +63,10 @@ class LanguagesScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text("context.translation!.select_language_description",
-                            style: context.theme.textTheme.bodyLarge!
-                                .copyWith(fontSize: AppTypography.headLine2, color: TextColors.ternary.color)),
+                        Text(context.translation!.select_language_description,
+                            style: AppTypography.body1MediumStyle.copyWith(
+                              color: TextColors.ternary.color,
+                            )),
                         const SizedBox(
                           height: AppSizesManager.p10,
                         ),
@@ -89,7 +90,7 @@ class LanguagesScreen extends StatelessWidget {
                         ),
                         const Spacer(),
                         PrimaryTextButton(
-                          label: "save",
+                          label: context.translation!.save,
                           isLoading: state is LangSettingsSaved,
                           onTap: () {
                             BlocProvider.of<LangCubit>(context).saveLangSettings();

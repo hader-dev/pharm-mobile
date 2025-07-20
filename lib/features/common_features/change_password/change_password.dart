@@ -45,8 +45,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               context.pop();
             },
           ),
-          title: const Text(
-            "Update Password",
+          title: Text(
+            context.translation!.change_password,
             style: AppTypography.headLine3SemiBoldStyle,
           ),
         ),
@@ -72,11 +72,11 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text("Set a new password", style: AppTypography.headLine2Style),
+                          Text(context.translation!.change_password, style: AppTypography.headLine2Style),
                           Gap(
                             AppSizesManager.s12,
                           ),
-                          Text("Create a new password. Ensure it differs from previous ones for security",
+                          Text(context.translation!.set_new_password_description,
                               style: AppTypography.body1MediumStyle.copyWith(
                                 color: TextColors.ternary.color,
                               )),
@@ -89,7 +89,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               CustomTextField(
-                                label: 'Current Password*',
+                                label: '${context.translation!.currentPassword}*',
                                 controller: BlocProvider.of<ChangePasswordCubit>(ctx).currentPasswordController,
                                 isObscure: BlocProvider.of<ChangePasswordCubit>(ctx).isObscured,
                                 suffixIcon: InkWell(
@@ -105,7 +105,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                 },
                               ),
                               CustomTextField(
-                                label: 'New password*',
+                                label: '${context.translation!.newPassword}*',
                                 controller: BlocProvider.of<ChangePasswordCubit>(ctx).newPasswordController,
                                 isObscure: BlocProvider.of<ChangePasswordCubit>(ctx).isObscured,
                                 suffixIcon: InkWell(
@@ -119,15 +119,15 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                     return context.translation!.fieldRequired;
                                   }
                                   if (value.length < 6) {
-                                    return 'Password must be at least 6 characters';
+                                    return context.translation!.passwordMinLength;
                                   }
                                   if (!passwordRegex.hasMatch(value)) {
-                                    return 'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.';
+                                    return context.translation!.password_requirements;
                                   }
                                 },
                               ),
                               CustomTextField(
-                                label: 'Confirm password*',
+                                label: '${context.translation!.confirmPassword}*',
                                 controller: BlocProvider.of<ChangePasswordCubit>(ctx).confirmPasswordController,
                                 isObscure: BlocProvider.of<ChangePasswordCubit>(ctx).isObscured,
                                 suffixIcon: InkWell(
@@ -144,7 +144,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                     return 'Confirm Password must be at least 6 characters';
                                   }
                                   if (value != BlocProvider.of<ChangePasswordCubit>(ctx).newPasswordController.text) {
-                                    return 'Passwords do not match';
+                                    return context.translation!.passwordsDoNotMatch;
                                   }
                                 },
                               ),
@@ -152,7 +152,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                           ),
                           Gap(AppSizesManager.s16),
                           PrimaryTextButton(
-                            label: "Update password",
+                            label: context.translation!.change_password,
                             isLoading: state is ChangePasswordLoading,
                             onTap: () {
                               if (!Form.of(ctx).validate()) {

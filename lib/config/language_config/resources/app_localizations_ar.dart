@@ -388,4 +388,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get update_profile_description => 'قم بتحديث تفاصيل ملفك الشخصي وحمّل صورة ملفك الشخصي.';
+  @override
+  String get set_new_password => 'أنشئ كلمة مرور جديدة';
+
+  @override
+  String get set_new_password_description => 'أنشئ كلمة مرور جديدة. تأكد من أنها تختلف عن الكلمات السابقة لأمان أفضل.';
+
+  @override
+  String get password_requirements =>
+      'يجب أن تحتوي كلمة المرور على حرف كبير واحد على الأقل، وحرف صغير واحد، ورقم، وحرف خاص.';
 }

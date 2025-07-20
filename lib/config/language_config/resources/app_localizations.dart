@@ -848,6 +848,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Update your profile details and upload your profile picture.'**
   String get update_profile_description;
+
+  /// No description provided for @set_new_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Set a new password'**
+  String get set_new_password;
+
+  /// No description provided for @set_new_password_description.
+  ///
+  /// In en, this message translates to:
+  /// **'Create a new password. Ensure it differs from previous ones for security.'**
+  String get set_new_password_description;
+
+  /// No description provided for @password_requirements.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.'**
+  String get password_requirements;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -387,4 +387,14 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get update_profile_description =>
       'Mettez à jour les informations de votre profil et téléchargez votre photo de profil.';
+  @override
+  String get set_new_password => 'Définir un nouveau mot de passe';
+
+  @override
+  String get set_new_password_description =>
+      'Créez un nouveau mot de passe. Assurez-vous qu’il soit différent des précédents pour plus de sécurité.';
+
+  @override
+  String get password_requirements =>
+      'Le mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre et un caractère spécial.';
 }
