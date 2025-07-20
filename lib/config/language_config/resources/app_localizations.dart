@@ -866,6 +866,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.'**
   String get password_requirements;
+
+  /// No description provided for @logout_confirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'Logout Confirmation'**
+  String get logout_confirmation;
+
+  /// No description provided for @logout_confirmation_message.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to logout?'**
+  String get logout_confirmation_message;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

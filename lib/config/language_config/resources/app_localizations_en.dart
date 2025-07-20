@@ -396,4 +396,9 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get password_requirements =>
       'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.';
+  @override
+  String get logout_confirmation => 'Logout Confirmation';
+
+  @override
+  String get logout_confirmation_message => 'Are you sure you want to logout?';
 }

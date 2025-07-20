@@ -397,4 +397,9 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get password_requirements =>
       'يجب أن تحتوي كلمة المرور على حرف كبير واحد على الأقل، وحرف صغير واحد، ورقم، وحرف خاص.';
+  @override
+  String get logout_confirmation => 'تأكيد تسجيل الخروج';
+
+  @override
+  String get logout_confirmation_message => 'هل أنت متأكد أنك تريد تسجيل الخروج؟';
 }

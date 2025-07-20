@@ -133,5 +133,7 @@
   "update_profile_description": "Update your profile details and upload your profile picture.",
   "set_new_password": "Set a new password",
   "set_new_password_description": "Create a new password. Ensure it differs from previous ones for security.",
-  "password_requirements": "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character."
+  "password_requirements": "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.",
+   "logout_confirmation": "Logout Confirmation",
+   "logout_confirmation_message": "Are you sure you want to logout?"
 }

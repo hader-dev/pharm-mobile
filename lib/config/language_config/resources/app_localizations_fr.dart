@@ -397,4 +397,9 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get password_requirements =>
       'Le mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre et un caractère spécial.';
+  @override
+  String get logout_confirmation => 'Confirmation de déconnexion';
+
+  @override
+  String get logout_confirmation_message => 'Êtes-vous sûr de vouloir vous déconnecter ?';
 }
