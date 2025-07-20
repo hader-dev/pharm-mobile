@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../../../config/routes/routing_manager.dart';
 import '../../../config/theme/colors_manager.dart';
 import '../../../config/theme/typoghrapy_manager.dart';
 import '../../../utils/enums.dart';
@@ -37,8 +38,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           topPadding: MediaQuery.of(context).padding.top,
           bottomPadding: MediaQuery.of(context).padding.bottom,
           leading: IconButton(
-            icon: const Icon(
-              Iconsax.arrow_left_2,
+            icon: Icon(
+              Directionality.of(context) == TextDirection.rtl ? Iconsax.arrow_right_3 : Iconsax.arrow_left_2,
               size: AppSizesManager.iconSize25,
             ),
             onPressed: () {

@@ -46,7 +46,10 @@ class ParaPharmaProductPhotoSection extends StatelessWidget {
             topPadding: MediaQuery.of(context).padding.top,
             bottomPadding: MediaQuery.of(context).padding.bottom,
             leading: IconButton(
-              icon: const Icon(Iconsax.arrow_left_2),
+              icon: Icon(
+                Directionality.of(context) == TextDirection.rtl ? Iconsax.arrow_right_3 : Iconsax.arrow_left_2,
+                size: AppSizesManager.iconSize25,
+              ),
               onPressed: () {
                 context.pop();
               },

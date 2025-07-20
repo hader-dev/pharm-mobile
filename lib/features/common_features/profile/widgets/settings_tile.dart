@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 import '../../../../config/theme/colors_manager.dart';
 import '../../../../config/theme/typoghrapy_manager.dart';
 import '../../../../utils/constants.dart';
@@ -36,8 +37,8 @@ class SettingsTile extends StatelessWidget {
             style: AppTypography.body3MediumStyle,
           ),
           trailing: trailing ??
-              const Icon(
-                Icons.arrow_forward_ios,
+              Icon(
+                Directionality.of(context) == TextDirection.rtl ? Iconsax.arrow_left_2 : Iconsax.arrow_right_3,
                 size: AppSizesManager.iconSize20,
               ),
           onTap: () {

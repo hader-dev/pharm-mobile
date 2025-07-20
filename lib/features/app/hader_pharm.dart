@@ -24,7 +24,7 @@ class HaderPharmApp extends StatelessWidget {
             routerConfig: RoutingManager.router,
             localizationsDelegates: const [
               AppLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
+              // GlobalCupertinoLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate
             ],

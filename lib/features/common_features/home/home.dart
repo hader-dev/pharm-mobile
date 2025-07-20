@@ -6,6 +6,7 @@ import 'package:hader_pharm_mobile/features/common_features/home/cubit/home_cubi
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/medicine_products/cubit/medicine_products_cubit.dart';
 import 'package:hader_pharm_mobile/repositories/remote/announcement/announcement_repository_impl.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../config/di/di.dart';
@@ -60,8 +61,8 @@ class HomeScreen extends StatelessWidget {
               ),
               onPressed: () {},
             ),
-            title: const Text(
-              "Home",
+            title: Text(
+              context.translation!.home,
               style: AppTypography.headLine3SemiBoldStyle,
             ),
             trailing: [
@@ -101,7 +102,7 @@ class HomeScreen extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(left: AppSizesManager.p6),
                           child: Text(
-                            "Medicines",
+                            context.translation!.medicines,
                             style: AppTypography.headLine5SemiBoldStyle,
                           ),
                         ),
@@ -128,7 +129,7 @@ class HomeScreen extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(left: AppSizesManager.p6),
                           child: Text(
-                            "Para Pharmas",
+                            context.translation!.para_pharma,
                             style: AppTypography.headLine5SemiBoldStyle,
                           ),
                         ),
