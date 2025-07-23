@@ -179,13 +179,15 @@ class AppLocalizationsAr extends AppLocalizations {
   String get para_pharma => 'الشبه صيدلة';
 
   @override
-  String get select_language_description => 'اختر اللغة التي تفضل استخدامها في التطبيق.';
+  String get select_language_description =>
+      'اختر اللغة التي تفضل استخدامها في التطبيق.';
 
   @override
   String get vendors => 'الموردون';
 
   @override
-  String get medicinesSearchFieldHint => 'ابحث بواسطة الاسم العلمي، العلامة التجارية أو رمز المنتج';
+  String get medicinesSearchFieldHint =>
+      'ابحث بواسطة الاسم العلمي، العلامة التجارية أو رمز المنتج';
 
   @override
   String get email => 'البريد الإلكتروني';
@@ -197,7 +199,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get invalidEmailFormat => 'تنسيق البريد الإلكتروني غير صالح';
 
   @override
-  String get passwordMinLength => 'يجب أن تتكون كلمة المرور من 6 أحرف على الأقل';
+  String get passwordMinLength =>
+      'يجب أن تتكون كلمة المرور من 6 أحرف على الأقل';
 
   @override
   String get forgotPassword => 'هل نسيت كلمة المرور؟';
@@ -240,10 +243,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get checkEmailForVerification => 'تحقق من بريدك الإلكتروني للتأكيد';
 
   @override
-  String get emailNotVerified => 'بريدك الإلكتروني غير مفعل. يرجى التحقق من بريدك لتأكيده';
+  String get emailNotVerified =>
+      'بريدك الإلكتروني غير مفعل. يرجى التحقق من بريدك لتأكيده';
 
   @override
-  String get searchByNamePackagingSku => 'ابحث بالاسم أو التغليف أو رمز المنتج (SKU)';
+  String get searchByNamePackagingSku =>
+      'ابحث بالاسم أو التغليف أو رمز المنتج (SKU)';
 
   @override
   String get searchFilters => 'فلاتر البحث';
@@ -387,19 +392,36 @@ class AppLocalizationsAr extends AppLocalizations {
   String get update_profile => 'تحديث الملف الشخصي';
 
   @override
-  String get update_profile_description => 'قم بتحديث تفاصيل ملفك الشخصي وحمّل صورة ملفك الشخصي.';
+  String get update_profile_description =>
+      'قم بتحديث تفاصيل ملفك الشخصي وحمّل صورتك الشخصية .';
+
   @override
   String get set_new_password => 'أنشئ كلمة مرور جديدة';
 
   @override
-  String get set_new_password_description => 'أنشئ كلمة مرور جديدة. تأكد من أنها تختلف عن الكلمات السابقة لأمان أفضل.';
+  String get set_new_password_description =>
+      'أنشئ كلمة مرور جديدة. تأكد من أنها تختلف عن الكلمات السابقة لأمان أفضل.';
 
   @override
   String get password_requirements =>
       'يجب أن تحتوي كلمة المرور على حرف كبير واحد على الأقل، وحرف صغير واحد، ورقم، وحرف خاص.';
+
   @override
   String get logout_confirmation => 'تأكيد تسجيل الخروج';
 
   @override
-  String get logout_confirmation_message => 'هل أنت متأكد أنك تريد تسجيل الخروج؟';
+  String get logout_confirmation_message =>
+      'هل أنت متأكد أنك تريد تسجيل الخروج؟';
+
+  @override
+  String get accountNotActive => 'حسابك غير مفعل.';
+
+  @override
+  String get unitHtPrice => 'السعر  بدون ضريبة';
+
+  @override
+  String get unitTtcPrice => 'السعر مع الضريبة';
+
+  @override
+  String get currency => 'دج';
 }

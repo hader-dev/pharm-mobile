@@ -8,12 +8,12 @@ import 'package:hader_pharm_mobile/features/app_layout/app_layout.dart';
 import 'package:hader_pharm_mobile/features/common_features/cart/cubit/cart_cubit.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/price_formatter.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../config/theme/colors_manager.dart';
 import '../../../config/theme/typoghrapy_manager.dart';
-import '../../../main.dart' show translationContext;
 import '../../../models/create_cart_item.dart';
 import '../../../models/medicine_catalog.dart';
 import '../../../utils/enums.dart';
@@ -143,7 +143,7 @@ class MedicineWidget3 extends StatelessWidget {
                             style: AppTypography.headLine3SemiBoldStyle.copyWith(color: AppColors.accent1Shade1),
                           ),
                           TextSpan(
-                            text: " ${translationContext.currency}",
+                            text: " ${context.translation!.currency}",
                             style: AppTypography.bodyXSmallStyle.copyWith(color: AppColors.accent1Shade1),
                           ),
                         ],

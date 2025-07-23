@@ -136,7 +136,7 @@
   "set_new_password_description": "Créez un nouveau mot de passe. Assurez-vous qu’il soit différent des précédents pour plus de sécurité.",
   "password_requirements": "Le mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre et un caractère spécial.",
   "logout_confirmation": "Confirmation de déconnexion",
-  "logout_confirmation_message": "Êtes-vous sûr de vouloir vous déconnecter ?"
+  "logout_confirmation_message": "Êtes-vous sûr de vouloir vous déconnecter ?",
 
   "accountNotActive": "Votre compte n'est pas actif.",
   "unitHtPrice": "Prix unitaire HT",

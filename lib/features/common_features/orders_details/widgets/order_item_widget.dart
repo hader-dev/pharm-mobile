@@ -9,8 +9,8 @@ import 'package:hader_pharm_mobile/utils/extensions/price_formatter.dart';
 
 import '../../../../config/di/di.dart';
 
+import '../../../../config/routes/routing_manager.dart' show RoutingManager;
 import '../../../../config/theme/typoghrapy_manager.dart';
-import '../../../../main.dart' show translationContext;
 import '../../../../utils/constants.dart';
 import '../../../../utils/urls.dart';
 
@@ -118,7 +118,7 @@ class OrderItemWidget extends StatelessWidget {
                           style: AppTypography.body3MediumStyle,
                           children: <InlineSpan>[
                             TextSpan(
-                              text: ' ${translationContext.currency}',
+                              text: ' ${RoutingManager.rootNavigatorKey.currentContext!.translation!.currency}',
                               style: AppTypography.bodySmallStyle.copyWith(color: Colors.grey[500]),
                             ),
                           ],

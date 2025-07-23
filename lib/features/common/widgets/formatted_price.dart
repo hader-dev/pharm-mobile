@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:intl/intl.dart';
 
-import '../../../main.dart' show translationContext;
 
 class FormattedPrice extends StatelessWidget {
   final num price;
@@ -27,7 +27,7 @@ class FormattedPrice extends StatelessWidget {
         style: valueStyle,
         children: [
           TextSpan(
-            text: ' ${translationContext.currency}',
+            text: ' ${context.translation!.currency}',
             style: unitStyle,
           ),
         ],

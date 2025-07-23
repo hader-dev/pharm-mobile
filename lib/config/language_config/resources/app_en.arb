@@ -118,7 +118,7 @@
   "shipping_address": "Shipping Address",
   "order_tracking": "Order Tracking",
   "order_details": "Order Details",
-
+"account": "Account",
   "account_settings": "Account Settings",
   "edit_profile": "Edit Profile",
   "change_password": "Change Password",
@@ -136,7 +136,7 @@
   "set_new_password_description": "Create a new password. Ensure it differs from previous ones for security.",
   "password_requirements": "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.",
    "logout_confirmation": "Logout Confirmation",
-   "logout_confirmation_message": "Are you sure you want to logout?"
+   "logout_confirmation_message": "Are you sure you want to logout?",
 
    "accountNotActive": "Your account is not active.",
     "unitHtPrice": "Unit HT price",

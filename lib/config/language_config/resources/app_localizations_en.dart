@@ -179,7 +179,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get para_pharma => 'Para-Pharma';
 
   @override
-  String get select_language_description => 'Select the language you prefer to use in the app.';
+  String get select_language_description =>
+      'Select the language you prefer to use in the app.';
 
   @override
   String get vendors => 'Vendors';
@@ -212,7 +213,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get checkEmail => 'Check your email';
 
   @override
-  String get passwordResetSent => 'We have sent a password reset link to your email, Please check your inbox.';
+  String get passwordResetSent =>
+      'We have sent a password reset link to your email, Please check your inbox.';
 
   @override
   String get backToLogin => 'Back to login';
@@ -239,7 +241,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get checkEmailForVerification => 'Check your email for verification';
 
   @override
-  String get emailNotVerified => 'Your email is not verified. Please check your email for verification';
+  String get emailNotVerified =>
+      'Your email is not verified. Please check your email for verification';
 
   @override
   String get searchByNamePackagingSku => 'Search by name, packaging or SKU';
@@ -381,11 +384,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get help_support => 'Help and Support';
+
   @override
   String get update_profile => 'Update Profile';
 
   @override
-  String get update_profile_description => 'Update your profile details and upload your profile picture.';
+  String get update_profile_description =>
+      'Update your profile details and upload your profile picture.';
+
   @override
   String get set_new_password => 'Set a new password';
 
@@ -396,9 +402,22 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get password_requirements =>
       'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.';
+
   @override
   String get logout_confirmation => 'Logout Confirmation';
 
   @override
   String get logout_confirmation_message => 'Are you sure you want to logout?';
+
+  @override
+  String get accountNotActive => 'Your account is not active.';
+
+  @override
+  String get unitHtPrice => 'Unit HT price';
+
+  @override
+  String get unitTtcPrice => 'Unit TTC price';
+
+  @override
+  String get currency => 'DZD';
 }
