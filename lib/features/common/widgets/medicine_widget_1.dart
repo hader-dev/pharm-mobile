@@ -9,6 +9,7 @@ import 'package:iconsax/iconsax.dart';
 
 import '../../../config/theme/colors_manager.dart';
 import '../../../config/theme/typoghrapy_manager.dart';
+import '../../../main.dart' show translationContext;
 import '../chips/custom_chip.dart' show CustomChip;
 
 class MedicineWidget1 extends StatelessWidget {
@@ -96,7 +97,7 @@ class MedicineWidget1 extends StatelessWidget {
                           style: AppTypography.headLine3SemiBoldStyle.copyWith(color: AppColors.bgWhite),
                         ),
                         TextSpan(
-                          text: " DZD",
+                          text: " ${translationContext.currency}",
                           style: AppTypography.bodyXSmallStyle.copyWith(color: AppColors.bgWhite),
                         ),
                       ],

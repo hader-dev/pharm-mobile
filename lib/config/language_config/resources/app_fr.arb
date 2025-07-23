@@ -96,14 +96,14 @@
   "order": "Commande",
   "vendor": "Fournisseur",
   "deliverTo": "Livrer à",
-   "min": "Min",
+  "min": "Min",
   "max": "Max",
   "all": "Tous",
   "confirmed": "Confirmé",
-    "canceled": "Annulé",
-    "completed": "Terminé",
-    "pending": "En attente",
-     "order_details": "Détails de la commande",
+  "canceled": "Annulé",
+  "completed": "Terminé",
+  "pending": "En attente",
+  "order_details": "Détails de la commande",
   "track_order": "Suivre la commande",
   "order_invoice": "Facture de commande",
   "invoice_type": "Type de facture",
@@ -126,6 +126,7 @@
   "favorites": "Favoris",
   "language": "Langue",
   "app_privacy": "Confidentialité de l'application",
+
   "legal_policies": "Mentions légales et politiques",
   "help_support": "Aide et support",
   "logout": "Déconnexion",
@@ -136,4 +137,10 @@
   "password_requirements": "Le mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre et un caractère spécial.",
   "logout_confirmation": "Confirmation de déconnexion",
   "logout_confirmation_message": "Êtes-vous sûr de vouloir vous déconnecter ?"
+
+  "accountNotActive": "Votre compte n'est pas actif.",
+  "unitHtPrice": "Prix unitaire HT",
+  "unitTtcPrice": "Prix unitaire TTC",
+  "currency":"DZD"
+
 }

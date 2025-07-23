@@ -11,6 +11,7 @@ import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart' show Iconsax;
 
+import '../../../../main.dart' show translationContext;
 import '../../../../utils/enums.dart';
 
 import '../../../app_layout/app_layout.dart';
@@ -91,7 +92,7 @@ class SelectPaymentMethodBottomSheet extends StatelessWidget {
                     value: Row(
                       children: [
                         Text(
-                          "${context.read<CartCubit>().totalTTCAmount.toStringAsFixed(2)} DZD",
+                          "${context.read<CartCubit>().totalTTCAmount.toStringAsFixed(2)} ${translationContext.currency}",
                           style: AppTypography.body2MediumStyle.copyWith(color: AppColors.accent1Shade1),
                         ),
                         Spacer(),

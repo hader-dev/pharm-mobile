@@ -50,7 +50,7 @@ class MakeOrderBottomSheet extends StatelessWidget {
                 LabeledInfoWidget(
                   label: "Unit Total Price",
                   value:
-                      "//${(num.parse(context.read<MedicineDetailsCubit>().medicineCatalogData!.unitPriceHt).toStringAsFixed(2))} DZD",
+                      "//${(num.parse(context.read<MedicineDetailsCubit>().medicineCatalogData!.unitPriceHt).toStringAsFixed(2))} translationContext.currency",
                 ),
                 Gap(AppSizesManager.s12),
                 Text(
@@ -127,7 +127,7 @@ class MakeOrderBottomSheet extends StatelessWidget {
                   value: Row(
                     children: [
                       Text(
-                        "${(num.parse(context.read<MedicineDetailsCubit>().quantityController.text) * num.parse(context.read<MedicineDetailsCubit>().medicineCatalogData!.unitPriceHt)).toStringAsFixed(2)} DZD",
+                        "${(num.parse(context.read<MedicineDetailsCubit>().quantityController.text) * num.parse(context.read<MedicineDetailsCubit>().medicineCatalogData!.unitPriceHt)).toStringAsFixed(2)} translationContext.currency",
                         style: AppTypography.body2MediumStyle.copyWith(color: AppColors.accent1Shade1),
                       ),
                       Spacer(),

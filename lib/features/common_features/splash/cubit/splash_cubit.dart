@@ -1,58 +1,37 @@
 import 'package:bloc/bloc.dart';
-
 import 'package:flutter/material.dart';
+import 'package:hader_pharm_mobile/config/services/auth/token_manager.dart';
+import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
+import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler.dart';
+import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 
-import '../../../../repositories/remote/user/user_repository_impl.dart';
+import '../../../../config/di/di.dart' show getItInstance;
+import '../../../../main.dart' show translationContext;
 
 part 'splash_state.dart';
 
 class SplashCubit extends Cubit<SplashState> {
-  final UserRepository userRepo;
-  //late Person currentUser;
-  SplashCubit(this.userRepo) : super(SplashInitial());
+  SplashCubit() : super(SplashInitial());
   init() async {
-    Future.delayed(const Duration(seconds: 2)).then((value) => emit(SplashCompleted()));
-    // await userRepo.getCurrentUserData();
+    try {
+      UserManager userManager = getItInstance.get<UserManager>();
+      String? userAccessToken = await getItInstance.get<TokenManager>().getAccessToken();
+      if (userAccessToken == null) {
+        emit(UserNotLoggedInYet());
+        return;
+      }
+      await userManager.getMe();
+      if (!userManager.currentUser.isActive) {
+        getItInstance
+            .get<ToastManager>()
+            .showToast(type: ToastType.error, message: translationContext.accountNotActive);
+        emit(UserNotLoggedInYet());
+        return;
+      }
+      emit(SplashCompleted());
+    } catch (e) {
+      GlobalExceptionHandler.handle(exception: e);
+      emit(SplashFailed());
+    }
   }
-  //SplashCubit() : super(SplashInitial());
-
-  // Future<void> refreshUserData(BuildContext context) async {
-  //   // try {
-  //   //   await checkForApPUpdate();
-  //   //   bool isFirstTime = Prefs.getBool(SPKeys.isFirstTime) ?? true;
-  //   //   bool isLoggedIn = Prefs.getBool(SPKeys.isLoggedIn) ?? false;
-
-  //   //   if (isFirstTime) {
-  //   //     Prefs.setBool(SPKeys.isFirstTime, false);
-  //   //     GoRouter.of(context).goNamed(RoutingManager.onboardingScreen);
-  //   //     return;
-  //   //   }
-  //   //   if (!isLoggedIn) {
-  //   //     GoRouter.of(context).goNamed(RoutingManager.loginScreen);
-  //   //     return;
-  //   //   }
-  //   //   currentUser = await userRepo.getCurrentUserData();
-  //   //   await Person.updatePersonData(currentUser);
-  //   //   redirect(context, currentUser);
-  //   // } on UnAuthenticatedException catch (e) {
-  //   //   GlobalExceptionHandler.handle(exception: e);
-  //   //   await GoRouter.of(context).pushReplacement(RoutingManager.loginScreen);
-  //   // } catch (e) {
-  //   //   GlobalExceptionHandler.handle(exception: e);
-  //   //   await GoRouter.of(context).pushReplacement(RoutingManager.loginScreen);
-  //   // }
-  // }
-
-  // void redirect()
-  //   //BuildContext context, Person person)
-  //    async {
-  //   // if (!person.user!.isActive) {
-  //   //   throw AccountNotActiveException(message: localization.accountDisabled);
-  //   // }
-  //   GoRouter.of(context).goNamed(RoutingManager.appLayoutScreen);
-  // }
-
-//   Future<void> checkForApPUpdate() async {
-//  //   await AppUpdater.checkForUpdates();
-//   }
 }

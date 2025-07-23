@@ -10,3 +10,5 @@ final class SplashCompleted extends SplashState {}
 final class SplashRedirectedToLogin extends SplashState {}
 
 final class SplashFailed extends SplashState {}
+
+final class UserNotLoggedInYet extends SplashState {}

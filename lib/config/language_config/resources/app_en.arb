@@ -118,7 +118,7 @@
   "shipping_address": "Shipping Address",
   "order_tracking": "Order Tracking",
   "order_details": "Order Details",
-  "account": "Account",
+
   "account_settings": "Account Settings",
   "edit_profile": "Edit Profile",
   "change_password": "Change Password",
@@ -126,6 +126,7 @@
   "favorites": "Favorites",
   "language": "Language",
   "app_privacy": "App Privacy",
+
   "legal_policies": "Legal and Policies",
   "help_support": "Help and Support",
   "logout": "Logout",
@@ -136,4 +137,10 @@
   "password_requirements": "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.",
    "logout_confirmation": "Logout Confirmation",
    "logout_confirmation_message": "Are you sure you want to logout?"
+
+   "accountNotActive": "Your account is not active.",
+    "unitHtPrice": "Unit HT price",
+  "unitTtcPrice": "Unit TTC price",
+  "currency":"DZD"
+
 }

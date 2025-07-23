@@ -13,6 +13,7 @@ import 'package:iconsax/iconsax.dart';
 
 import '../../../config/theme/colors_manager.dart';
 import '../../../config/theme/typoghrapy_manager.dart';
+import '../../../main.dart' show translationContext;
 import '../../../models/create_cart_item.dart';
 import '../../../models/medicine_catalog.dart';
 import '../../../utils/enums.dart';
@@ -142,7 +143,7 @@ class MedicineWidget3 extends StatelessWidget {
                             style: AppTypography.headLine3SemiBoldStyle.copyWith(color: AppColors.accent1Shade1),
                           ),
                           TextSpan(
-                            text: " DZD",
+                            text: " ${translationContext.currency}",
                             style: AppTypography.bodyXSmallStyle.copyWith(color: AppColors.accent1Shade1),
                           ),
                         ],

@@ -118,7 +118,7 @@
   "shipping_address": "عنوان الشحن",
   "order_tracking": "تتبع الطلب",
   "order_details": "تفاصيل الطلب",
-  "account": "الحساب",
+
   "account_settings": "إعدادات الحساب",
   "edit_profile": "تعديل الملف الشخصي",
   "change_password": "تغيير كلمة المرور",
@@ -126,6 +126,7 @@
   "favorites": "المفضلة",
   "language": "اللغة",
   "app_privacy": "خصوصية التطبيق",
+
   "legal_policies": "الشروط والسياسات",
   "help_support": "المساعدة والدعم",
   "logout": "تسجيل الخروج",
@@ -136,6 +137,12 @@
   "password_requirements": "يجب أن تحتوي كلمة المرور على حرف كبير واحد على الأقل، وحرف صغير واحد، ورقم، وحرف خاص.",
   "logout_confirmation": "تأكيد تسجيل الخروج",
   "logout_confirmation_message": "هل أنت متأكد أنك تريد تسجيل الخروج؟"
+
+
+  "accountNotActive": "حسابك غير مفعل.",
+   "unitHtPrice": "السعر  بدون ضريبة",
+  "unitTtcPrice": "السعر مع الضريبة",
+  "currency":"دج"
 
 }
 

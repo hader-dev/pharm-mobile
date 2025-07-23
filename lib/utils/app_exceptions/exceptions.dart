@@ -178,27 +178,27 @@ class TooManyRequestsException extends TemplateException {
       );
 }
 
-// class AccountNotActiveException extends TemplateException {
-//   AccountNotActiveException(
-//       {super.message,
-//       super.statusCode,
-//       super.error,
-//       super.errorType,
-//       super.path,
-//       super.timestamp,
-//       super.errors,
-//       super.errorCode});
-//   factory AccountNotActiveException.fromJson(Map<String, dynamic> json) => AccountNotActiveException(
-//         message: json['message'],
-//         statusCode: json['statusCode'],
-//         error: json['error'],
-//         errorType: json['type'],
-//         path: json['path'],
-//         timestamp: json['timestamp'],
-//          errors:  json['errors'] == null ? null : (json['errors'] as List ).map((e) => FieldError.fromJson(e)).toList(),,
-//         errorCode: json['code'],
-//       );
-// }
+class AccountNotActiveException extends TemplateException {
+  AccountNotActiveException(
+      {super.message,
+      super.statusCode,
+      super.error,
+      super.errorType,
+      super.path,
+      super.timestamp,
+      super.errors,
+      super.errorCode});
+  factory AccountNotActiveException.fromJson(Map<String, dynamic> json) => AccountNotActiveException(
+        message: json['message'],
+        statusCode: json['statusCode'],
+        error: json['error'],
+        errorType: json['type'],
+        path: json['path'],
+        timestamp: json['timestamp'],
+        errors: json['errors'] == null ? null : (json['errors'] as List).map((e) => FieldError.fromJson(e)).toList(),
+        errorCode: json['code'],
+      );
+}
 
 class FetchDataException extends TemplateException {
   FetchDataException(

@@ -7,6 +7,7 @@ import 'package:hader_pharm_mobile/models/cart_item.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../../../../main.dart' show translationContext;
 import '../cubit/cart_cubit.dart';
 import 'cart_item_quantity_section.dart';
 
@@ -80,15 +81,15 @@ class CartItemWidget extends StatelessWidget {
                 Column(
                   children: [
                     InfoRow(
-                      label: 'Unit HT price',
+                      label: translationContext.unitHtPrice,
                       dataValue: num.parse(cartItemData.unitPriceHt).toStringAsFixed(2),
                     ),
                     InfoRow(
-                      label: 'Unit TTC price',
+                      label: translationContext.unitTtcPrice,
                       dataValue: num.parse(cartItemData.unitPriceTtc).toStringAsFixed(2),
                     ),
                     InfoRow(
-                      label: 'Tva %',
+                      label: "${translationContext.tva}%",
                       dataValue: num.parse(cartItemData.tvaPercentage).toStringAsFixed(2),
                     ),
                     Row(
