@@ -14,16 +14,16 @@ if (keystorePropertiesFile.exists()) {
 android {
     namespace = "com.example.hader_pharm_mobile"
     compileSdk = 35
-    ndkVersion = flutter.ndkVersion
-    
+    ndkVersion "29.0.13599879"//"27.0.12077973"
+
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8
+        jvmTarget = "17"
     }
 
     defaultConfig {
@@ -36,7 +36,7 @@ android {
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }
-     signingConfigs {
+    signingConfigs {
         release {
             keyAlias = keystoreProperties['keyAlias']
             keyPassword = keystoreProperties['keyPassword']
@@ -47,7 +47,7 @@ android {
 
     buildTypes {
         release {
-         
+
             signingConfig = signingConfigs.release
         }
     }
