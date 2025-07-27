@@ -14,7 +14,7 @@ import '../cubit/cart_cubit.dart';
 import 'select_payment_bottom_sheet.dart';
 
 class CartSummarySection extends StatelessWidget {
-  ValueNotifier<bool> isExpanded = ValueNotifier(true);
+  final ValueNotifier<bool> isExpanded = ValueNotifier(true);
   CartSummarySection({super.key});
 
   @override

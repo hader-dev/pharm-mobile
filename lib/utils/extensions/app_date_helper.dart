@@ -6,6 +6,7 @@ extension DateTimeHelper on DateTime {
 
   String getTimingAgo() {
     final DateTime now = DateTime.now();
+    // ignore: unused_local_variable
     final Duration diff = now.difference(this);
     return '';
     //   if (diff.inMinutes < 1) {

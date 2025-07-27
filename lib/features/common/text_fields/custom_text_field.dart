@@ -33,7 +33,7 @@ class CustomTextField extends StatelessWidget {
   final TextInputType? keyBoadType;
   final FocusNode? fieldFocusNode;
   final bool isFilled;
-  Color? fillColor;
+  final Color? fillColor;
   final double? width;
   final TextAlign textAlign;
   final Function(String?)? onChanged;
@@ -41,8 +41,9 @@ class CustomTextField extends StatelessWidget {
   final int? minLines;
   final int maxLines;
 
-  CustomTextField({
+  const CustomTextField({
     super.key,
+    this.fillColor,
     this.fieldKey,
     this.label = '',
     this.value = '',
@@ -88,9 +89,7 @@ class CustomTextField extends StatelessWidget {
         return state.color.secondary;
       case FieldState.normal:
         return state.color.secondary;
-      default:
-        return context.theme.primaryColor;
-    }
+      }
   }
 
   Color _getFocusedBorderColor(BuildContext context) {

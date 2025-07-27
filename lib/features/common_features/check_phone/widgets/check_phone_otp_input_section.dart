@@ -8,13 +8,15 @@ import '../../../../utils/constants.dart';
 import '../../../common/buttons/solid/primary_text_button.dart';
 
 class CheckPhoneOtpInputSection extends StatelessWidget {
-  late List<TextEditingController?> controls;
-  int numberOfFields = 5;
-  bool clearText = false;
-  CheckPhoneOtpInputSection({super.key});
+  final int numberOfFields = 5;
+  final bool clearText = false;
+  const CheckPhoneOtpInputSection({super.key});
 
   @override
   Widget build(BuildContext context) {
+  // ignore: unused_local_variable
+  late List<TextEditingController?> controls;
+  
     return Column(
       children: [
         OtpTextField(

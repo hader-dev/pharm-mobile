@@ -18,6 +18,7 @@ class _PharmacyGeneralInformationPageState extends State<PharmacyGeneralInformat
     with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p8),
       child: Scrollbar(

@@ -27,6 +27,7 @@ class LoginCubit extends Cubit<LoginState> {
   Future<void> login(String userName, String password) async {
     try {
       emit(LoginLoading());
+      // ignore: unused_local_variable
       var token = await getItInstance.get<UserManager>().login(userName: userName, password: password);
       emit(LoginSuccessful());
     } on UnAuthorizedException catch (e) {

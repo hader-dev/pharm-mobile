@@ -9,7 +9,7 @@ class BaseButton extends StatelessWidget {
   final Function? onTap;
   final bool isLoading;
   final double padding;
-  double height;
+  final double height;
   final double minWidth;
   final double radiusValue;
   final String label;
@@ -20,9 +20,9 @@ class BaseButton extends StatelessWidget {
   final bool isOutLined;
   final IconData? leadingIcon;
   final IconData? trailingIcon;
-  Color? borderColor;
+  final Color? borderColor;
 
-  BaseButton({
+  const BaseButton({
     super.key,
     this.onTap,
     this.isLoading = false,

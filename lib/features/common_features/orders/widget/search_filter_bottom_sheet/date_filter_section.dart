@@ -13,7 +13,7 @@ import '../../../para_pharma_catalog_details/widgets/make_order_bottom_sheet.dar
 import '../../cubit/orders_cubit.dart';
 
 class DateFilterSection extends StatelessWidget {
-  CustomDatePickerWidget datePicker = CustomDatePickerWidget();
+  final CustomDatePickerWidget datePicker = CustomDatePickerWidget();
   DateFilterSection({
     super.key,
   });

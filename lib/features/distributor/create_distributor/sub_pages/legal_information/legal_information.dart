@@ -21,6 +21,7 @@ class _DistributorLegalInformationPageState extends State<DistributorLegalInform
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Padding(
         padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p8),
         child: Scrollbar(

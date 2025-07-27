@@ -77,7 +77,7 @@ class VendorItem extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        companyData.name ?? "",
+                        companyData.name,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
                         softWrap: true,

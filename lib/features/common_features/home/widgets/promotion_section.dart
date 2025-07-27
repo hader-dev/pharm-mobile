@@ -8,7 +8,7 @@ import 'promotion_item_widget.dart';
 
 class PromotionSection extends StatelessWidget {
   final List<String> promotionsUrls;
-  PageController pageController = PageController(initialPage: 0);
+  final PageController pageController = PageController(initialPage: 0);
   PromotionSection({super.key, this.promotionsUrls = const <String>[]});
 
   @override

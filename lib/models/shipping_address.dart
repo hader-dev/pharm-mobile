@@ -5,15 +5,15 @@ class ShippingAddress extends Equatable {
   final DateTime createdAt;
   final DateTime updatedAt;
   final dynamic syncId;
-  double? latitude;
-  double? longitude;
-  String address;
+  final double? latitude;
+  final double? longitude;
+  final String address;
   final int clientId;
-  int townId;
+  final int townId;
   @override
   List<Object?> get props => [id];
 
-  ShippingAddress({
+  const ShippingAddress({
     required this.id,
     required this.createdAt,
     required this.updatedAt,
