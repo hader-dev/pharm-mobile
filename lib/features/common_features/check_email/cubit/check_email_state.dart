@@ -12,7 +12,7 @@ final class CheckEmailFailed extends CheckEmailState {}
 
 final class InitEmail extends CheckEmailState {}
 
-final class resendOtpLoading extends CheckEmailState {}
+final class ResendOtpLoading extends CheckEmailState {}
 
 final class TimerCountChanged extends CheckEmailState {
   final int count;

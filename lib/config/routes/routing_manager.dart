@@ -60,7 +60,7 @@ class RoutingManager {
       navigatorKey: rootNavigatorKey,
       initialLocation: splashScreen,
       redirect: (context, state) {
-        print("redirect ---------> ${state.fullPath}${state.pathParameters}");
+        debugPrint("redirect ---------> ${state.fullPath}${state.pathParameters}");
         return null;
       },
       debugLogDiagnostics: true,

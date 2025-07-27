@@ -13,30 +13,28 @@ class FilterOptionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Row(
-        children: [
-          Column(
-            children: [
-              Text(
-                title,
-                style: AppTypography.body3MediumStyle,
-              ),
-              Text(
-                subTitle,
-                style: AppTypography.bodySmallStyle.copyWith(color: TextColors.ternary.color),
-              ),
-            ],
-          ),
-          Spacer(),
-          PrimaryIconButton(
-            icon: Icon(
-              Iconsax.arrow_right_3,
-              color: Colors.black,
+    return Row(
+      children: [
+        Column(
+          children: [
+            Text(
+              title,
+              style: AppTypography.body3MediumStyle,
             ),
-          )
-        ],
-      ),
+            Text(
+              subTitle,
+              style: AppTypography.bodySmallStyle.copyWith(color: TextColors.ternary.color),
+            ),
+          ],
+        ),
+        Spacer(),
+        PrimaryIconButton(
+          icon: Icon(
+            Iconsax.arrow_right_3,
+            color: Colors.black,
+          ),
+        )
+      ],
     );
   }
 }

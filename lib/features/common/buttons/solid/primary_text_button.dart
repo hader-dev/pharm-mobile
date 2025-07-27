@@ -4,7 +4,7 @@ import '../../../../utils/constants.dart';
 import '../base_button.dart';
 
 class PrimaryTextButton extends BaseButton {
-  PrimaryTextButton({
+  const PrimaryTextButton({
     super.key,
     super.onTap,
     super.isLoading = false,

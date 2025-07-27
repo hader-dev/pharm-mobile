@@ -4,7 +4,7 @@ import '../../../../utils/constants.dart';
 import '../base_button.dart';
 
 class OutLinedTextButton extends BaseButton {
-  OutLinedTextButton({
+ const OutLinedTextButton({
     super.key,
     super.onTap,
     super.isLoading = false,

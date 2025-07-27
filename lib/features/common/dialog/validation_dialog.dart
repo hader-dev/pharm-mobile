@@ -42,7 +42,7 @@ class ValidateActionDialog {
                     Padding(
                       padding: const EdgeInsets.all(AppSizesManager.p16),
                       child: CircleAvatar(
-                        backgroundColor: dialogType.color.withOpacity(.2),
+                        backgroundColor: dialogType.color.withAlpha(51),
                         minRadius: AppSizesManager.r30,
                         child: Icon(
                           dialogType.icon,

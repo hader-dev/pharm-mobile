@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
-import 'package:hader_pharm_mobile/features/common_features/create_company_profile/sub_pages/review&submit/review&submit.dart';
+import 'package:hader_pharm_mobile/features/common_features/create_company_profile/sub_pages/review_and_sumbit/review_and_sumbit.dart';
 import 'package:hader_pharm_mobile/features/pharmacy/create_pharmacy/sub_pages/compay_profile/compay_profile.dart';
 import 'package:hader_pharm_mobile/features/pharmacy/create_pharmacy/sub_pages/general_information/general_information.dart';
 import 'package:hader_pharm_mobile/features/pharmacy/create_pharmacy/sub_pages/legal_information/legal_information.dart';

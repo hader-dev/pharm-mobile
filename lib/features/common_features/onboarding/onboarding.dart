@@ -85,7 +85,7 @@ class OnboardingScreen extends StatelessWidget {
                             dotHeight: 5,
                             dotWidth: 15,
                             activeDotColor: context.theme.primaryColor,
-                            dotColor: context.theme.primaryColor.withOpacity(.2)),
+                            dotColor: context.theme.primaryColor.withAlpha(51)),
                         count: pages.length,
                       ),
                     ),

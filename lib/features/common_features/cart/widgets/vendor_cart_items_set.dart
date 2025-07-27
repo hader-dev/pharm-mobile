@@ -19,10 +19,10 @@ class VendorCartSection extends StatefulWidget {
   const VendorCartSection({super.key, required this.vendorData, required this.cartItems});
 
   @override
-  _VendorCartSectionState createState() => _VendorCartSectionState();
+  State createState() => VendorCartSectionState();
 }
 
-class _VendorCartSectionState extends State<VendorCartSection> {
+class VendorCartSectionState extends State<VendorCartSection> {
   final ValueNotifier _isExpanded = ValueNotifier(true);
 
   @override

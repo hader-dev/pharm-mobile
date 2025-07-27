@@ -10,7 +10,7 @@ class QuestionWidget extends StatefulWidget {
   const QuestionWidget({super.key, required this.question, required this.answer});
 
   @override
-  _QuestionWidgetState createState() => _QuestionWidgetState();
+  State<QuestionWidget> createState() => _QuestionWidgetState();
 }
 
 class _QuestionWidgetState extends State<QuestionWidget> {

@@ -35,7 +35,7 @@ class CheckEmailCubit extends Cubit<CheckEmailState> {
 
   resendOtp(String email) async {
     try {
-      emit(resendOtpLoading());
+      emit(ResendOtpLoading());
       await userManager.resendOtpCode(email: userEmail);
       int counter = 10;
       Timer.periodic(const Duration(seconds: 1), (timer) {

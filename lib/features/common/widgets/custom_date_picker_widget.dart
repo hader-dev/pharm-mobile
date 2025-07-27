@@ -25,7 +25,7 @@ class CustomDatePickerWidget {
       context: RoutingManager.rootNavigatorKey.currentContext!,
       builder: (context) {
         return Material(
-          color: Colors.grey.withOpacity(.5),
+          color: Colors.grey.withAlpha(128),
           child: Builder(builder: (context) {
             return Container(
               padding: const EdgeInsets.symmetric(horizontal: AppSizesManager.p10),

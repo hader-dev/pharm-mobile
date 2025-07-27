@@ -111,7 +111,10 @@ class ProfileScreen extends StatelessWidget {
                           onTap: () async {
                             await AppDialogs.showLogoutDialogLogout();
 
-                            GoRouter.of(context).pushReplacementNamed(RoutingManager.loginScreen);
+                            if(context.mounted){
+                              GoRouter.of(context).pushReplacementNamed(RoutingManager.loginScreen);
+                            }
+
                           },
                         ),
                       ),
