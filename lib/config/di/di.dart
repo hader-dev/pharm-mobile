@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
+import 'package:hader_pharm_mobile/config/services/notification/notification_service.dart';
+import 'package:hader_pharm_mobile/config/services/notification/notification_service_port.dart';
+import 'package:hader_pharm_mobile/repositories/remote/notification/notification_repository_impl.dart';
 import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -11,6 +13,7 @@ import '../../utils/env_helper.dart';
 import '../../utils/shared_prefs.dart';
 import '../services/auth/token_manager.dart';
 import '../services/auth/user_manager.dart';
+import '../services/firebase/firebase_service.dart';
 import '../services/network/dio/dio_network_manager.dart';
 import '../services/network/network_interface.dart';
 
@@ -18,7 +21,6 @@ GetIt getItInstance = GetIt.instance;
 
 initAppDependencies() async {
   final SharedPreferences storage = await Prefs.init();
-  await Firebase.initializeApp();
 
   const FlutterSecureStorage securedStorage = FlutterSecureStorage();
 
@@ -46,4 +48,14 @@ initAppDependencies() async {
   getItInstance.registerLazySingleton<UserManager>(() => UserManager.init(
       userRepository: UserRepository(client: getItInstance()),
       tokenManager: getItInstance()));
+
+  final firebaseService = FirebaseService();
+  await firebaseService.init();
+  final notificationService = NotificationService(
+      firebaseService: firebaseService,
+      notificationRepository: NotificationRepository());
+  await notificationService.init();
+
+  getItInstance.registerLazySingleton<NotificationServicePort>(
+      () => notificationService);
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:hader_pharm_mobile/config/services/notification/notification_service_port.dart';
+import 'package:hader_pharm_mobile/config/services/notification/utility/mock_remote_message.dart';
 import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/cubit/home_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/medicine_products/cubit/medicine_products_cubit.dart';
@@ -30,23 +32,28 @@ class HomeScreen extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) =>
-              HomeCubit(announcementsRepo: PromotionRepository(client: getItInstance.get<INetworkService>()))
-                ..getPromotions(),
+          create: (context) => HomeCubit(
+              announcementsRepo: PromotionRepository(
+                  client: getItInstance.get<INetworkService>()))
+            ..getPromotions(),
         ),
         BlocProvider(
             create: (context) => MedicineProductsCubit(
                 scrollController: ScrollController(),
-                favoriteRepository: FavoriteRepository(client: getItInstance.get<INetworkService>()),
+                favoriteRepository: FavoriteRepository(
+                    client: getItInstance.get<INetworkService>()),
                 searchController: TextEditingController(text: ""),
-                medicineRepository: MedicineCatalogRepository(client: getItInstance.get<INetworkService>()))
+                medicineRepository: MedicineCatalogRepository(
+                    client: getItInstance.get<INetworkService>()))
               ..getMedicines()),
         BlocProvider(
             create: (context) => ParaPharmaCubit(
                 scrollController: ScrollController(),
-                favoriteRepository: FavoriteRepository(client: getItInstance.get<INetworkService>()),
+                favoriteRepository: FavoriteRepository(
+                    client: getItInstance.get<INetworkService>()),
                 searchController: TextEditingController(text: ""),
-                paraPharmaRepository: ParaPharmaRepository(client: getItInstance.get<INetworkService>()))
+                paraPharmaRepository: ParaPharmaRepository(
+                    client: getItInstance.get<INetworkService>()))
               ..getParaPharmas()),
       ],
       child: Scaffold(
@@ -84,7 +91,11 @@ class HomeScreen extends StatelessWidget {
                 shrinkWrap: true,
                 children: [
                   PromotionSection(
-                    promotionsUrls: context.read<HomeCubit>().announcements.map((e) => e.imgPath).toList(),
+                    promotionsUrls: context
+                        .read<HomeCubit>()
+                        .announcements
+                        .map((e) => e.imgPath)
+                        .toList(),
                   ),
                   Gap(AppSizesManager.s12),
                   DecoratedBox(
@@ -100,7 +111,8 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         Gap(AppSizesManager.s4),
                         Padding(
-                          padding: const EdgeInsets.only(left: AppSizesManager.p6),
+                          padding:
+                              const EdgeInsets.only(left: AppSizesManager.p6),
                           child: Text(
                             context.translation!.medicines,
                             style: AppTypography.headLine5SemiBoldStyle,
@@ -127,7 +139,8 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         Gap(AppSizesManager.s4),
                         Padding(
-                          padding: const EdgeInsets.only(left: AppSizesManager.p6),
+                          padding:
+                              const EdgeInsets.only(left: AppSizesManager.p6),
                           child: Text(
                             context.translation!.para_pharma,
                             style: AppTypography.headLine5SemiBoldStyle,

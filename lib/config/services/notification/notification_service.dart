@@ -1,0 +1,92 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:hader_pharm_mobile/config/services/firebase/firebase_service.dart';
+import 'package:hader_pharm_mobile/config/services/firebase/firebase_service_port.dart';
+import 'package:hader_pharm_mobile/config/services/notification/notification_service_port.dart';
+import 'package:hader_pharm_mobile/repositories/remote/notification/notification_repository.dart';
+
+import 'actions/background_notification_tap.dart';
+import 'actions/handle_remote_message.dart' as actions;
+import 'notification_channels.dart';
+import 'notification_plugin.dart';
+
+class NotificationService implements NotificationServicePort {
+  final FirebaseServicePort firebaseService;
+  final INotificationRepository notificationRepository;
+
+  const NotificationService(
+      {required this.firebaseService, required this.notificationRepository});
+
+  @override
+  Future<void> init() async {
+    final FirebaseMessaging messaging = firebaseService.messagingService();
+
+    await messaging.requestPermission();
+    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
+    FirebaseMessaging.onMessage.listen(handleRemoteMessage);
+
+    await _initNotifications();
+
+    String? token = await messaging.getToken();
+
+    debugPrint("DeviceToken $token");
+  }
+
+  @override
+  Future<void> registerUserDevice() async {
+    final FirebaseMessaging messaging = firebaseService.messagingService();
+    String? token = await messaging.getToken();
+
+    debugPrint("DeviceToken $token");
+
+    if (token != null) {
+      await notificationRepository.registerUserDevice(token);
+    }
+  }
+
+  Future<void> _initNotifications() async {
+    // Request notification permissions on Android 13+ (if needed)
+    await flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()
+        ?.requestNotificationsPermission();
+
+    // Define Android initialization settings with app icon
+    const initializationSettingsAndroid =
+        AndroidInitializationSettings('@mipmap/ic_launcher');
+
+    final initializationSettings =
+        InitializationSettings(android: initializationSettingsAndroid);
+
+    await flutterLocalNotificationsPlugin.initialize(
+      initializationSettings,
+      onDidReceiveNotificationResponse: onNotificationTap,
+    );
+
+    // Create Android notification channel (required for Android 8+)
+    const AndroidNotificationChannel channel = AndroidNotificationChannel(
+      NotificationChannel.id,
+      NotificationChannel.name,
+      description: NotificationChannel.description,
+      importance: Importance.high,
+    );
+
+    await flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()
+        ?.createNotificationChannel(channel);
+  }
+
+  @override
+  Future<void> handleRemoteMessage(RemoteMessage message) async {
+    actions.handleRemoteMessage(message);
+  }
+}
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await FirebaseService().init();
+
+  actions.handleRemoteMessage(message);
+}
