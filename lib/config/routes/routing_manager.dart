@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hader_pharm_mobile/config/routes/deeplinks_routes.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/para_pharma_catalog_details.dart';
 import 'package:hader_pharm_mobile/features/common_features/profile/profile.dart';
 
@@ -10,7 +11,8 @@ import '../../features/common_features/check_email/check_email.dart';
 import '../../features/common_features/check_phone/check_phone.dart';
 import '../../features/common_features/congratulation/congratulation.dart';
 import '../../features/common_features/create_company_profile/create_company_profile.dart';
-import '../../features/common_features/edit_profile/edit_profile.dart' show EditProfileScreen;
+import '../../features/common_features/edit_profile/edit_profile.dart'
+    show EditProfileScreen;
 import '../../features/common_features/favorites/favorites.dart';
 import '../../features/common_features/language/lang_screen.dart';
 import '../../features/common_features/login/login.dart';
@@ -54,13 +56,16 @@ class RoutingManager {
 
   static const String languagesScreen = '/LanguagesScreen';
 
-  static final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
+
+  static final GlobalKey<NavigatorState> rootNavigatorKey =
+      GlobalKey<NavigatorState>();
 
   static final GoRouter router = GoRouter(
       navigatorKey: rootNavigatorKey,
       initialLocation: splashScreen,
       redirect: (context, state) {
-        debugPrint("redirect ---------> ${state.fullPath}${state.pathParameters}");
+        debugPrint(
+            "redirect ---------> ${state.fullPath}${state.pathParameters}");
         return null;
       },
       debugLogDiagnostics: true,
@@ -109,6 +114,7 @@ class RoutingManager {
             );
           },
         ),
+       
         GoRoute(
           name: vendorDetails,
           path: vendorDetails,
@@ -191,8 +197,9 @@ class RoutingManager {
           path: createCompanyProfile,
           pageBuilder: (context, state) => CustomTransitionPage(
             child: const CreateCompanyProfile(),
-            transitionsBuilder: (context, animation, secondaryAnimation, child) =>
-                FadeTransition(opacity: animation, child: child),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) =>
+                    FadeTransition(opacity: animation, child: child),
           ),
         ),
         GoRoute(
@@ -216,12 +223,26 @@ class RoutingManager {
             path: ordersScreen,
             builder: (BuildContext context, GoRouterState state) {
               return OrdersScreen();
-            })
+            }),
+
+            ...DeeplinksRoutes.deppLinkRoutes
       ]);
 
-  static Future<void> popUntilPath(BuildContext context, String routePath) async {
-    while (GoRouter.of(context).routerDelegate.currentConfiguration.matches.last.matchedLocation != routePath) {
-      debugPrint(GoRouter.of(context).routerDelegate.currentConfiguration.matches.last.matchedLocation);
+  static Future<void> popUntilPath(
+      BuildContext context, String routePath) async {
+    while (GoRouter.of(context)
+            .routerDelegate
+            .currentConfiguration
+            .matches
+            .last
+            .matchedLocation !=
+        routePath) {
+      debugPrint(GoRouter.of(context)
+          .routerDelegate
+          .currentConfiguration
+          .matches
+          .last
+          .matchedLocation);
       if (!context.canPop()) {
         break;
       }

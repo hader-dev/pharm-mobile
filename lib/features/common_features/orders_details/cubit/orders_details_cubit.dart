@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 
 import '../../../../models/order_details.dart';
 import '../../../../repositories/remote/order/order_repository_impl.dart';
@@ -16,10 +17,13 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
   Future<void> getOrdersDetails({required String orderId}) async {
     try {
       emit(OrderDetailsLoading());
-      orderData = await orderRepository.getMOrderById(orderId);
 
+      orderData = await orderRepository.getMOrderById(orderId);
       emit(OrderDetailsLoaded());
-    } catch (e) {
+    } catch (e, stacktrace) {
+      debugPrint("$e");
+      debugPrintStack(stackTrace: stacktrace);
+
       emit(OrderDetailsLoadingFailed());
     }
   }
