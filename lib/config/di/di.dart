@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hader_pharm_mobile/utils/toast_helper.dart';
@@ -17,15 +18,19 @@ GetIt getItInstance = GetIt.instance;
 
 initAppDependencies() async {
   final SharedPreferences storage = await Prefs.init();
+  await Firebase.initializeApp();
+
   const FlutterSecureStorage securedStorage = FlutterSecureStorage();
 
   getItInstance.registerLazySingleton<ToastManager>(() => ToastManager());
   final ValidateActionDialog dialogManager = ValidateActionDialog();
   //final HiveDbManager hiveStorage = HiveDbManager.getInstance;
   getItInstance.registerLazySingleton<SharedPreferences>(() => storage);
-  getItInstance.registerLazySingleton<FlutterSecureStorage>(() => securedStorage);
+  getItInstance
+      .registerLazySingleton<FlutterSecureStorage>(() => securedStorage);
   //getItInstance.registerLazySingleton<HiveDbManager>(() => hiveStorage);
-  getItInstance.registerLazySingleton<ValidateActionDialog>(() => dialogManager);
+  getItInstance
+      .registerLazySingleton<ValidateActionDialog>(() => dialogManager);
   final TokenManager tokenManager = TokenManager.instance;
   tokenManager.init(getItInstance());
   getItInstance.registerLazySingleton<TokenManager>(() => tokenManager);
@@ -33,9 +38,12 @@ initAppDependencies() async {
   final DioNetworkManager dioNetworkManager = DioNetworkManager.instance;
   await dioNetworkManager.init(
       '''${EnvHelper.getStoredEnvValue(EnvHelper.schemaEnvKey)}://${EnvHelper.getStoredEnvValue(EnvHelper.baseUrlEnvKey)}
-      /${EnvHelper.getStoredEnvValue(EnvHelper.apiVersionEnvKey)}''', Dio(), tokenManager);
+      /${EnvHelper.getStoredEnvValue(EnvHelper.apiVersionEnvKey)}''',
+      Dio(),
+      tokenManager);
 
   getItInstance.registerLazySingleton<INetworkService>(() => dioNetworkManager);
-  getItInstance.registerLazySingleton<UserManager>(
-      () => UserManager.init(userRepository: UserRepository(client: getItInstance()), tokenManager: getItInstance()));
+  getItInstance.registerLazySingleton<UserManager>(() => UserManager.init(
+      userRepository: UserRepository(client: getItInstance()),
+      tokenManager: getItInstance()));
 }
