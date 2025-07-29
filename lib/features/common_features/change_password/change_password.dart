@@ -89,7 +89,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               CustomTextField(
-                                label: '${context.translation!.currentPassword}*',
+                                label: '${context.translation!.current_password}*',
                                 controller: BlocProvider.of<ChangePasswordCubit>(ctx).currentPasswordController,
                                 isObscure: BlocProvider.of<ChangePasswordCubit>(ctx).isObscured,
                                 suffixIcon: InkWell(
@@ -100,12 +100,12 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                 state: FieldState.normal,
                                 validationFunc: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return context.translation!.fieldRequired;
+                                    return context.translation!.errors_field_required;
                                   }
                                 },
                               ),
                               CustomTextField(
-                                label: '${context.translation!.newPassword}*',
+                                label: '${context.translation!.new_password}*',
                                 controller: BlocProvider.of<ChangePasswordCubit>(ctx).newPasswordController,
                                 isObscure: BlocProvider.of<ChangePasswordCubit>(ctx).isObscured,
                                 suffixIcon: InkWell(
@@ -116,10 +116,10 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                 state: FieldState.normal,
                                 validationFunc: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return context.translation!.fieldRequired;
+                                    return context.translation!.errors_field_required;
                                   }
                                   if (value.length < 6) {
-                                    return context.translation!.passwordMinLength;
+                                    return context.translation!.passwor_min_length;
                                   }
                                   if (!passwordRegex.hasMatch(value)) {
                                     return context.translation!.password_requirements;
@@ -127,7 +127,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                 },
                               ),
                               CustomTextField(
-                                label: '${context.translation!.confirmPassword}*',
+                                label: '${context.translation!.confirm_password}*',
                                 controller: BlocProvider.of<ChangePasswordCubit>(ctx).confirmPasswordController,
                                 isObscure: BlocProvider.of<ChangePasswordCubit>(ctx).isObscured,
                                 suffixIcon: InkWell(
@@ -138,13 +138,13 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                 state: FieldState.normal,
                                 validationFunc: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return context.translation!.fieldRequired;
+                                    return context.translation!.errors_field_required;
                                   }
                                   if (value.length < 6) {
                                     return 'Confirm Password must be at least 6 characters';
                                   }
                                   if (value != BlocProvider.of<ChangePasswordCubit>(ctx).newPasswordController.text) {
-                                    return context.translation!.passwordsDoNotMatch;
+                                    return context.translation!.errors_passwords_do_not_match;
                                   }
                                 },
                               ),

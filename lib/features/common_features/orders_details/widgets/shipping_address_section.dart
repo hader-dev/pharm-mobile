@@ -24,7 +24,7 @@ class ShippingAddressSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(context.translation!.shippingAddress, style: AppTypography.headLine4SemiBoldStyle),
+          Text(context.translation!.shipping_address, style: AppTypography.headLine4SemiBoldStyle),
           const Gap(AppSizesManager.s12),
           Text(address, style: AppTypography.body3MediumStyle),
           const Gap(AppSizesManager.s12),

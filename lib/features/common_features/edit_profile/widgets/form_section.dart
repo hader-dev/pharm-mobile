@@ -38,7 +38,7 @@ class _FormSectionState extends State<FormSection> {
                   },
                   validationFunc: (value) {
                     if (value == null || value.isEmpty) {
-                      return context.translation!.fieldRequired;
+                      return context.translation!.errors_field_required;
                     }
                   },
                 ),
@@ -49,10 +49,10 @@ class _FormSectionState extends State<FormSection> {
                   state: FieldState.normal,
                   validationFunc: (value) {
                     if (value == null || value.isEmpty) {
-                      return context.translation!.fieldRequired;
+                      return context.translation!.errors_field_required;
                     }
                     if (!emailRegex.hasMatch(value)) {
-                      return context.translation!.invalidEmailFormat;
+                      return context.translation!.errors_invalid_email_format;
                     }
                   },
                   onChanged: (newValue) {

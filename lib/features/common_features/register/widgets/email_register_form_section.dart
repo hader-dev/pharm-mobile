@@ -33,7 +33,7 @@ class EmailRegisterFormSection extends HookWidget {
             },
             validationFunc: (value) {
               if (value == null || value.isEmpty) {
-                return context.translation!.fieldRequired;
+                return context.translation!.errors_field_required;
               }
             },
           ),
@@ -44,10 +44,10 @@ class EmailRegisterFormSection extends HookWidget {
             state: FieldState.normal,
             validationFunc: (value) {
               if (value == null || value.isEmpty) {
-                return context.translation!.fieldRequired;
+                return context.translation!.errors_field_required;
               }
               if (!emailRegex.hasMatch(value)) {
-                return context.translation!.invalidEmailFormat;
+                return context.translation!.errors_invalid_email_format;
               }
             },
             onChanged: (newValue) {
@@ -67,7 +67,7 @@ class EmailRegisterFormSection extends HookWidget {
             state: FieldState.normal,
             validationFunc: (value) {
               if (value == null || value.isEmpty) {
-                return context.translation!.fieldRequired;
+                return context.translation!.errors_field_required;
               }
             },
             onChanged: (newValue) {
@@ -78,7 +78,7 @@ class EmailRegisterFormSection extends HookWidget {
           BlocBuilder<RegisterCubit, RegisterState>(
             builder: (context, state) {
               return CustomTextField(
-                label: '${context.translation!.confirmPassword}*',
+                label: '${context.translation!.confirm_password}*',
                 value: formData.value.confirmPassword,
                 onChanged: (newValue) {
                   formData.value = formData.value.copyWith(confirmPassword: newValue);
@@ -92,10 +92,10 @@ class EmailRegisterFormSection extends HookWidget {
                 state: FieldState.normal,
                 validationFunc: (value) {
                   if (value == null || value.isEmpty) {
-                    return context.translation!.fieldRequired;
+                    return context.translation!.errors_field_required;
                   }
                   if (formData.value.password != formData.value.confirmPassword) {
-                    return context.translation!.passwordsDoNotMatch;
+                    return context.translation!.errors_passwords_do_not_match;
                   }
                   return null;
                 },
@@ -104,7 +104,7 @@ class EmailRegisterFormSection extends HookWidget {
           ),
           Gap(AppSizesManager.s24),
           PrimaryTextButton(
-            label: context.translation!.signUp,
+            label: context.translation!.sign_up,
             isLoading: context.watch<RegisterCubit>().state is RegisterLoading,
             onTap: () {
               if (formKey.currentState!.validate()) {

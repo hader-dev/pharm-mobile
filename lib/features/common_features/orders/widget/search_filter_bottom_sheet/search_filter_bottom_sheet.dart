@@ -32,7 +32,7 @@ class OrdersFilterBottomSheet extends StatelessWidget {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              BottomSheetHeader(title: context.translation!.searchFilters),
+              BottomSheetHeader(title: context.translation!.search_filters),
               Gap(AppSizesManager.s12),
               Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
               Gap(AppSizesManager.s12),

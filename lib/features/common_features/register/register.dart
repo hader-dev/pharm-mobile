@@ -45,7 +45,7 @@ class RegisterScreen extends StatelessWidget {
                       if (BlocProvider.of<RegisterCubit>(context).selectedTapIndex == 0) EmailRegisterFormSection(),
                       Gap(AppSizesManager.s16),
                       OutLinedTextButton(
-                        label: context.translation!.loginExisting,
+                        label: context.translation!.login_existing,
                         labelColor: AppColors.accent1Shade1,
                         isOutLined: true,
                         onTap: () {

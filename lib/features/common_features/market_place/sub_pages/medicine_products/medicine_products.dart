@@ -38,7 +38,7 @@ class _MedicineProductsPageState extends State<MedicineProductsPage> with Automa
               child: Padding(
                 padding: const EdgeInsets.only(left: AppSizesManager.p8),
                 child: CustomTextField(
-                  hintText: context.translation!.medicinesSearchFieldHint,
+                  hintText: context.translation!.medicines_search_field_hint,
                   controller: BlocProvider.of<MedicineProductsCubit>(context).searchController,
                   state: FieldState.normal,
                   isEnabled: true,

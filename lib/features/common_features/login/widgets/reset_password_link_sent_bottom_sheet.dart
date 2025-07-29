@@ -28,17 +28,17 @@ class CheckYourMailScreen extends StatelessWidget {
           ),
 
           // Title
-          Text(context.translation!.checkEmail, style: AppTypography.headLine1Style),
+          Text(context.translation!.check_email, style: AppTypography.headLine1Style),
 
           const Gap(AppSizesManager.s24),
 
           // Subtitle
-          Text(context.translation!.passwordResetSent,
+          Text(context.translation!.password_reset_sent,
               textAlign: TextAlign.center, style: AppTypography.body1RegularStyle),
 
           const Gap(AppSizesManager.s24),
           PrimaryTextButton(
-              label: context.translation!.backToLogin,
+              label: context.translation!.back_to_login,
               onTap: () {
                 context.pop();
               },

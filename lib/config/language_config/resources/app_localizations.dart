@@ -100,11 +100,11 @@ abstract class AppLocalizations {
     Locale('fr')
   ];
 
-  /// No description provided for @userName.
+  /// No description provided for @user_name.
   ///
   /// In en, this message translates to:
-  /// **'Username'**
-  String get userName;
+  /// **'user_name'**
+  String get user_name;
 
   /// No description provided for @password.
   ///
@@ -190,12 +190,6 @@ abstract class AppLocalizations {
   /// **'Fax'**
   String get fax;
 
-  /// No description provided for @shippingAddress.
-  ///
-  /// In en, this message translates to:
-  /// **'Shipping Address'**
-  String get shippingAddress;
-
   /// No description provided for @items.
   ///
   /// In en, this message translates to:
@@ -214,11 +208,11 @@ abstract class AppLocalizations {
   /// **'Checkout'**
   String get checkout;
 
-  /// No description provided for @myOrders.
+  /// No description provided for @my_orders.
   ///
   /// In en, this message translates to:
   /// **'My Orders'**
-  String get myOrders;
+  String get my_orders;
 
   /// No description provided for @status.
   ///
@@ -232,17 +226,17 @@ abstract class AppLocalizations {
   /// **'Note'**
   String get note;
 
-  /// No description provided for @totalAmount.
+  /// No description provided for @total_amount.
   ///
   /// In en, this message translates to:
   /// **'Total Amount'**
-  String get totalAmount;
+  String get total_amount;
 
-  /// No description provided for @viewDetails.
+  /// No description provided for @view_details.
   ///
   /// In en, this message translates to:
   /// **'View Details'**
-  String get viewDetails;
+  String get view_details;
 
   /// No description provided for @market_place.
   ///
@@ -262,53 +256,53 @@ abstract class AppLocalizations {
   /// **'Profile'**
   String get profile;
 
-  /// No description provided for @legalAndPolicies.
+  /// No description provided for @legal_and_policies.
   ///
   /// In en, this message translates to:
   /// **'Legal and Policies'**
-  String get legalAndPolicies;
+  String get legal_and_policies;
 
-  /// No description provided for @helpAndSupport.
+  /// No description provided for @help_and_support.
   ///
   /// In en, this message translates to:
   /// **'Help and Support'**
-  String get helpAndSupport;
+  String get help_and_support;
 
-  /// No description provided for @currentPassword.
+  /// No description provided for @current_password.
   ///
   /// In en, this message translates to:
   /// **'Current Password'**
-  String get currentPassword;
+  String get current_password;
 
-  /// No description provided for @newPassword.
+  /// No description provided for @new_password.
   ///
   /// In en, this message translates to:
   /// **'New Password'**
-  String get newPassword;
+  String get new_password;
 
-  /// No description provided for @confirmPassword.
+  /// No description provided for @confirm_password.
   ///
   /// In en, this message translates to:
   /// **'Confirm Password'**
-  String get confirmPassword;
+  String get confirm_password;
 
-  /// No description provided for @resetPassword.
+  /// No description provided for @reset_password.
   ///
   /// In en, this message translates to:
   /// **'Reset Password'**
-  String get resetPassword;
+  String get reset_password;
 
-  /// No description provided for @showLess.
+  /// No description provided for @show_less.
   ///
   /// In en, this message translates to:
   /// **'Show Less'**
-  String get showLess;
+  String get show_less;
 
-  /// No description provided for @showMore.
+  /// No description provided for @show_more.
   ///
   /// In en, this message translates to:
   /// **'Show More'**
-  String get showMore;
+  String get show_more;
 
   /// No description provided for @reset.
   ///
@@ -346,23 +340,17 @@ abstract class AppLocalizations {
   /// **'Price'**
   String get price;
 
-  /// No description provided for @logoutConfirmation.
-  ///
-  /// In en, this message translates to:
-  /// **'Are you sure you want to logout?'**
-  String get logoutConfirmation;
-
-  /// No description provided for @logoutAction.
+  /// No description provided for @logout_action.
   ///
   /// In en, this message translates to:
   /// **'Logout'**
-  String get logoutAction;
+  String get logout_action;
 
-  /// No description provided for @cancelAction.
+  /// No description provided for @cancel_action.
   ///
   /// In en, this message translates to:
   /// **'No'**
-  String get cancelAction;
+  String get cancel_action;
 
   /// No description provided for @home.
   ///
@@ -376,11 +364,11 @@ abstract class AppLocalizations {
   /// **'Cart'**
   String get cart;
 
-  /// No description provided for @changePasswordTitle.
+  /// No description provided for @change_password_title.
   ///
   /// In en, this message translates to:
   /// **'Change Password'**
-  String get changePasswordTitle;
+  String get change_password_title;
 
   /// No description provided for @add_cart.
   ///
@@ -394,11 +382,11 @@ abstract class AppLocalizations {
   /// **'Similar Products'**
   String get similar_products;
 
-  /// No description provided for @noAdditionalNotes.
+  /// No description provided for @no_additional_notes.
   ///
   /// In en, this message translates to:
   /// **'No additional notes for this item.'**
-  String get noAdditionalNotes;
+  String get no_additional_notes;
 
   /// No description provided for @para_pharma.
   ///
@@ -418,11 +406,11 @@ abstract class AppLocalizations {
   /// **'Vendors'**
   String get vendors;
 
-  /// No description provided for @medicinesSearchFieldHint.
+  /// No description provided for @medicines_search_field_hint.
   ///
   /// In en, this message translates to:
   /// **'Search by DCI, brand or SKU'**
-  String get medicinesSearchFieldHint;
+  String get medicines_search_field_hint;
 
   /// No description provided for @email.
   ///
@@ -430,59 +418,59 @@ abstract class AppLocalizations {
   /// **'Email'**
   String get email;
 
-  /// No description provided for @fieldRequired.
+  /// No description provided for @errors_field_required.
   ///
   /// In en, this message translates to:
   /// **'Field is required'**
-  String get fieldRequired;
+  String get errors_field_required;
 
-  /// No description provided for @invalidEmailFormat.
+  /// No description provided for @errors_invalid_email_format.
   ///
   /// In en, this message translates to:
   /// **'Invalid email format'**
-  String get invalidEmailFormat;
+  String get errors_invalid_email_format;
 
-  /// No description provided for @passwordMinLength.
+  /// No description provided for @passwor_min_length.
   ///
   /// In en, this message translates to:
   /// **'Password must be at least 6 characters'**
-  String get passwordMinLength;
+  String get passwor_min_length;
 
-  /// No description provided for @forgotPassword.
+  /// No description provided for @forgot_password.
   ///
   /// In en, this message translates to:
   /// **'Forgot Password?'**
-  String get forgotPassword;
+  String get forgot_password;
 
-  /// No description provided for @signIn.
+  /// No description provided for @sign_in.
   ///
   /// In en, this message translates to:
   /// **'Sign In'**
-  String get signIn;
+  String get sign_in;
 
-  /// No description provided for @welcomeBack.
+  /// No description provided for @welcome_back.
   ///
   /// In en, this message translates to:
   /// **'Hi! Welcome back, you’ve been missed'**
-  String get welcomeBack;
+  String get welcome_back;
 
-  /// No description provided for @checkEmail.
+  /// No description provided for @check_email.
   ///
   /// In en, this message translates to:
   /// **'Check your email'**
-  String get checkEmail;
+  String get check_email;
 
-  /// No description provided for @passwordResetSent.
+  /// No description provided for @password_reset_sent.
   ///
   /// In en, this message translates to:
   /// **'We have sent a password reset link to your email, Please check your inbox.'**
-  String get passwordResetSent;
+  String get password_reset_sent;
 
-  /// No description provided for @backToLogin.
+  /// No description provided for @back_to_login.
   ///
   /// In en, this message translates to:
   /// **'Back to login'**
-  String get backToLogin;
+  String get back_to_login;
 
   /// No description provided for @register.
   ///
@@ -490,59 +478,59 @@ abstract class AppLocalizations {
   /// **'Register (Don’t have an account?)'**
   String get register;
 
-  /// No description provided for @loginExisting.
+  /// No description provided for @login_existing.
   ///
   /// In en, this message translates to:
   /// **'Login (Already have an account!)'**
-  String get loginExisting;
+  String get login_existing;
 
-  /// No description provided for @passwordsDoNotMatch.
+  /// No description provided for @errors_passwords_do_not_match.
   ///
   /// In en, this message translates to:
   /// **'Passwords do not match'**
-  String get passwordsDoNotMatch;
+  String get errors_passwords_do_not_match;
 
-  /// No description provided for @signUp.
+  /// No description provided for @sign_up.
   ///
   /// In en, this message translates to:
   /// **'Sign up'**
-  String get signUp;
+  String get sign_up;
 
-  /// No description provided for @createAccount.
+  /// No description provided for @create_account.
   ///
   /// In en, this message translates to:
   /// **'Create Account'**
-  String get createAccount;
+  String get create_account;
 
-  /// No description provided for @registrationSuccess.
+  /// No description provided for @registration_success.
   ///
   /// In en, this message translates to:
   /// **'Registration successful'**
-  String get registrationSuccess;
+  String get registration_success;
 
-  /// No description provided for @checkEmailForVerification.
+  /// No description provided for @check_email_for_verification.
   ///
   /// In en, this message translates to:
   /// **'Check your email for verification'**
-  String get checkEmailForVerification;
+  String get check_email_for_verification;
 
-  /// No description provided for @emailNotVerified.
+  /// No description provided for @email_not_verified.
   ///
   /// In en, this message translates to:
   /// **'Your email is not verified. Please check your email for verification'**
-  String get emailNotVerified;
+  String get email_not_verified;
 
-  /// No description provided for @searchByNamePackagingSku.
+  /// No description provided for @search_by_name_packaging_sku.
   ///
   /// In en, this message translates to:
   /// **'Search by name, packaging or SKU'**
-  String get searchByNamePackagingSku;
+  String get search_by_name_packaging_sku;
 
-  /// No description provided for @searchFilters.
+  /// No description provided for @search_filters.
   ///
   /// In en, this message translates to:
   /// **'Search Filters'**
-  String get searchFilters;
+  String get search_filters;
 
   /// No description provided for @filters.
   ///
@@ -556,41 +544,41 @@ abstract class AppLocalizations {
   /// **'Types'**
   String get types;
 
-  /// No description provided for @checkoutProcess.
+  /// No description provided for @checkout_process.
   ///
   /// In en, this message translates to:
   /// **'Checkout Process'**
-  String get checkoutProcess;
+  String get checkout_process;
 
-  /// No description provided for @paymentMethods.
+  /// No description provided for @payment_methods.
   ///
   /// In en, this message translates to:
   /// **'Payment Methods'**
-  String get paymentMethods;
+  String get payment_methods;
 
-  /// No description provided for @invoiceTypes.
+  /// No description provided for @invoice_types.
   ///
   /// In en, this message translates to:
   /// **'Invoice Types'**
-  String get invoiceTypes;
+  String get invoice_types;
 
-  /// No description provided for @orderNote.
+  /// No description provided for @order_note.
   ///
   /// In en, this message translates to:
   /// **'Order Note'**
-  String get orderNote;
+  String get order_note;
 
-  /// No description provided for @typeNoteHint.
+  /// No description provided for @type_note_hint.
   ///
   /// In en, this message translates to:
   /// **'type your note here...'**
-  String get typeNoteHint;
+  String get type_note_hint;
 
-  /// No description provided for @totalPrice.
+  /// No description provided for @total_price.
   ///
   /// In en, this message translates to:
   /// **'Total Price'**
-  String get totalPrice;
+  String get total_price;
 
   /// No description provided for @cancel.
   ///
@@ -598,11 +586,11 @@ abstract class AppLocalizations {
   /// **'Cancel'**
   String get cancel;
 
-  /// No description provided for @confirmOrder.
+  /// No description provided for @confirm_order.
   ///
   /// In en, this message translates to:
   /// **'Confirm Order'**
-  String get confirmOrder;
+  String get confirm_order;
 
   /// No description provided for @orders.
   ///
@@ -610,23 +598,23 @@ abstract class AppLocalizations {
   /// **'Orders'**
   String get orders;
 
-  /// No description provided for @initialDate.
+  /// No description provided for @initial_date.
   ///
   /// In en, this message translates to:
   /// **'Initial date'**
-  String get initialDate;
+  String get initial_date;
 
-  /// No description provided for @finalDate.
+  /// No description provided for @final_date.
   ///
   /// In en, this message translates to:
   /// **'Final date'**
-  String get finalDate;
+  String get final_date;
 
-  /// No description provided for @tapToSelect.
+  /// No description provided for @tap_to_select.
   ///
   /// In en, this message translates to:
   /// **'Tap to select'**
-  String get tapToSelect;
+  String get tap_to_select;
 
   /// No description provided for @date.
   ///
@@ -646,11 +634,11 @@ abstract class AppLocalizations {
   /// **'Vendor'**
   String get vendor;
 
-  /// No description provided for @deliverTo.
+  /// No description provided for @deliver_to.
   ///
   /// In en, this message translates to:
   /// **'Deliver to'**
-  String get deliverTo;
+  String get deliver_to;
 
   /// No description provided for @min.
   ///
@@ -886,23 +874,23 @@ abstract class AppLocalizations {
   /// **'Are you sure you want to logout?'**
   String get logout_confirmation_message;
 
-  /// No description provided for @accountNotActive.
+  /// No description provided for @account_not_active.
   ///
   /// In en, this message translates to:
   /// **'Your account is not active.'**
-  String get accountNotActive;
+  String get account_not_active;
 
-  /// No description provided for @unitHtPrice.
+  /// No description provided for @unit_ht_price.
   ///
   /// In en, this message translates to:
   /// **'Unit HT price'**
-  String get unitHtPrice;
+  String get unit_ht_price;
 
-  /// No description provided for @unitTtcPrice.
+  /// No description provided for @unit_ttc_price.
   ///
   /// In en, this message translates to:
   /// **'Unit TTC price'**
-  String get unitTtcPrice;
+  String get unit_ttc_price;
 
   /// No description provided for @currency.
   ///

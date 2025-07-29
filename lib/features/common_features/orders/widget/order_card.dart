@@ -96,7 +96,7 @@ class OrderCard extends StatelessWidget {
             ),
             const Gap(AppSizesManager.s12),
             InfoRow(
-              label: context.translation!.deliverTo,
+              label: context.translation!.deliver_to,
               dataValue: orderData.deliveryAddress,
               contentDirection: Axis.vertical,
             ),

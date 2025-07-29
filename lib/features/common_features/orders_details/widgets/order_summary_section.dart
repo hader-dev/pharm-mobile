@@ -55,7 +55,7 @@ class OrderSummarySection extends StatelessWidget {
           //   value: '${cubit.orderDetails!.netAmountTtc.formatAsPrice()} ${context.translation!.currencyAbbreviation}',
           // ),
           // SummaryRow(
-          //     label: context.translation!.totalAmount,
+          //     label: context.translation!.total_amount,
           //     value: '${cubit.orderDetails!.netToPay.formatAsPrice()} ${context.translation!.currencyAbbreviation}',
           //     isBold: true),
         ],

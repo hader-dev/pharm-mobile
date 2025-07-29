@@ -45,7 +45,7 @@ class DateFilterSection extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        context.translation!.initialDate,
+                        context.translation!.initial_date,
                         style: AppTypography.body2MediumStyle,
                       ),
                       if (BlocProvider.of<OrdersCubit>(context).initialDateFilter != null)
@@ -65,7 +65,7 @@ class DateFilterSection extends StatelessWidget {
                   ),
                   const Gap(AppSizesManager.s8),
                   Text(
-                    BlocProvider.of<OrdersCubit>(context).initialDateFilter ?? context.translation!.tapToSelect,
+                    BlocProvider.of<OrdersCubit>(context).initialDateFilter ?? context.translation!.tap_to_select,
                     style: AppTypography.body2MediumStyle.copyWith(color: AppColors.accent1Shade1),
                   ),
                 ],
@@ -95,7 +95,7 @@ class DateFilterSection extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            context.translation!.finalDate,
+                            context.translation!.final_date,
                             style: AppTypography.body2MediumStyle,
                           ),
                           if (BlocProvider.of<OrdersCubit>(context).finalDateFilter != null)
@@ -117,7 +117,7 @@ class DateFilterSection extends StatelessWidget {
                   ),
                   const Gap(AppSizesManager.s8),
                   Text(
-                    BlocProvider.of<OrdersCubit>(context).finalDateFilter ?? context.translation!.tapToSelect,
+                    BlocProvider.of<OrdersCubit>(context).finalDateFilter ?? context.translation!.tap_to_select,
                     style: AppTypography.body2MediumStyle.copyWith(color: AppColors.accent1Shade1),
                   ),
                 ],

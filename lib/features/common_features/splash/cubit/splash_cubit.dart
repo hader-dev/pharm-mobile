@@ -25,7 +25,7 @@ class SplashCubit extends Cubit<SplashState> {
       if (!userManager.currentUser.isActive) {
         getItInstance.get<ToastManager>().showToast(
             type: ToastType.error,
-            message: RoutingManager.rootNavigatorKey.currentContext!.translation!.accountNotActive);
+            message: RoutingManager.rootNavigatorKey.currentContext!.translation!.account_not_active);
         emit(UserNotLoggedInYet());
         return;
       }

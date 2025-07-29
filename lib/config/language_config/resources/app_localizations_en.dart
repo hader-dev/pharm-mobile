@@ -9,7 +9,7 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get userName => 'Username';
+  String get user_name => 'user_name';
 
   @override
   String get password => 'Password';
@@ -54,9 +54,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get fax => 'Fax';
 
   @override
-  String get shippingAddress => 'Shipping Address';
-
-  @override
   String items(Object count) {
     return 'Items ($count)';
   }
@@ -68,7 +65,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get checkout => 'Checkout';
 
   @override
-  String get myOrders => 'My Orders';
+  String get my_orders => 'My Orders';
 
   @override
   String get status => 'Status';
@@ -77,10 +74,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get note => 'Note';
 
   @override
-  String get totalAmount => 'Total Amount';
+  String get total_amount => 'Total Amount';
 
   @override
-  String get viewDetails => 'View Details';
+  String get view_details => 'View Details';
 
   @override
   String get market_place => 'Market Place';
@@ -92,28 +89,28 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profile => 'Profile';
 
   @override
-  String get legalAndPolicies => 'Legal and Policies';
+  String get legal_and_policies => 'Legal and Policies';
 
   @override
-  String get helpAndSupport => 'Help and Support';
+  String get help_and_support => 'Help and Support';
 
   @override
-  String get currentPassword => 'Current Password';
+  String get current_password => 'Current Password';
 
   @override
-  String get newPassword => 'New Password';
+  String get new_password => 'New Password';
 
   @override
-  String get confirmPassword => 'Confirm Password';
+  String get confirm_password => 'Confirm Password';
 
   @override
-  String get resetPassword => 'Reset Password';
+  String get reset_password => 'Reset Password';
 
   @override
-  String get showLess => 'Show Less';
+  String get show_less => 'Show Less';
 
   @override
-  String get showMore => 'Show More';
+  String get show_more => 'Show More';
 
   @override
   String get reset => 'Reset';
@@ -134,13 +131,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get price => 'Price';
 
   @override
-  String get logoutConfirmation => 'Are you sure you want to logout?';
+  String get logout_action => 'Logout';
 
   @override
-  String get logoutAction => 'Logout';
-
-  @override
-  String get cancelAction => 'No';
+  String get cancel_action => 'No';
 
   @override
   String get home => 'Home';
@@ -149,7 +143,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cart => 'Cart';
 
   @override
-  String get changePasswordTitle => 'Change Password';
+  String get change_password_title => 'Change Password';
 
   @override
   String get add_cart => 'Add to Cart';
@@ -158,7 +152,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get similar_products => 'Similar Products';
 
   @override
-  String get noAdditionalNotes => 'No additional notes for this item.';
+  String get no_additional_notes => 'No additional notes for this item.';
 
   @override
   String get para_pharma => 'Para-Pharma';
@@ -171,69 +165,70 @@ class AppLocalizationsEn extends AppLocalizations {
   String get vendors => 'Vendors';
 
   @override
-  String get medicinesSearchFieldHint => 'Search by DCI, brand or SKU';
+  String get medicines_search_field_hint => 'Search by DCI, brand or SKU';
 
   @override
   String get email => 'Email';
 
   @override
-  String get fieldRequired => 'Field is required';
+  String get errors_field_required => 'Field is required';
 
   @override
-  String get invalidEmailFormat => 'Invalid email format';
+  String get errors_invalid_email_format => 'Invalid email format';
 
   @override
-  String get passwordMinLength => 'Password must be at least 6 characters';
+  String get passwor_min_length => 'Password must be at least 6 characters';
 
   @override
-  String get forgotPassword => 'Forgot Password?';
+  String get forgot_password => 'Forgot Password?';
 
   @override
-  String get signIn => 'Sign In';
+  String get sign_in => 'Sign In';
 
   @override
-  String get welcomeBack => 'Hi! Welcome back, you’ve been missed';
+  String get welcome_back => 'Hi! Welcome back, you’ve been missed';
 
   @override
-  String get checkEmail => 'Check your email';
+  String get check_email => 'Check your email';
 
   @override
-  String get passwordResetSent =>
+  String get password_reset_sent =>
       'We have sent a password reset link to your email, Please check your inbox.';
 
   @override
-  String get backToLogin => 'Back to login';
+  String get back_to_login => 'Back to login';
 
   @override
   String get register => 'Register (Don’t have an account?)';
 
   @override
-  String get loginExisting => 'Login (Already have an account!)';
+  String get login_existing => 'Login (Already have an account!)';
 
   @override
-  String get passwordsDoNotMatch => 'Passwords do not match';
+  String get errors_passwords_do_not_match => 'Passwords do not match';
 
   @override
-  String get signUp => 'Sign up';
+  String get sign_up => 'Sign up';
 
   @override
-  String get createAccount => 'Create Account';
+  String get create_account => 'Create Account';
 
   @override
-  String get registrationSuccess => 'Registration successful';
+  String get registration_success => 'Registration successful';
 
   @override
-  String get checkEmailForVerification => 'Check your email for verification';
+  String get check_email_for_verification =>
+      'Check your email for verification';
 
   @override
-  String get emailNotVerified =>
+  String get email_not_verified =>
       'Your email is not verified. Please check your email for verification';
 
   @override
-  String get searchByNamePackagingSku => 'Search by name, packaging or SKU';
+  String get search_by_name_packaging_sku => 'Search by name, packaging or SKU';
 
   @override
-  String get searchFilters => 'Search Filters';
+  String get search_filters => 'Search Filters';
 
   @override
   String get filters => 'Filters';
@@ -242,40 +237,40 @@ class AppLocalizationsEn extends AppLocalizations {
   String get types => 'Types';
 
   @override
-  String get checkoutProcess => 'Checkout Process';
+  String get checkout_process => 'Checkout Process';
 
   @override
-  String get paymentMethods => 'Payment Methods';
+  String get payment_methods => 'Payment Methods';
 
   @override
-  String get invoiceTypes => 'Invoice Types';
+  String get invoice_types => 'Invoice Types';
 
   @override
-  String get orderNote => 'Order Note';
+  String get order_note => 'Order Note';
 
   @override
-  String get typeNoteHint => 'type your note here...';
+  String get type_note_hint => 'type your note here...';
 
   @override
-  String get totalPrice => 'Total Price';
+  String get total_price => 'Total Price';
 
   @override
   String get cancel => 'Cancel';
 
   @override
-  String get confirmOrder => 'Confirm Order';
+  String get confirm_order => 'Confirm Order';
 
   @override
   String get orders => 'Orders';
 
   @override
-  String get initialDate => 'Initial date';
+  String get initial_date => 'Initial date';
 
   @override
-  String get finalDate => 'Final date';
+  String get final_date => 'Final date';
 
   @override
-  String get tapToSelect => 'Tap to select';
+  String get tap_to_select => 'Tap to select';
 
   @override
   String get date => 'Date';
@@ -287,7 +282,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get vendor => 'Vendor';
 
   @override
-  String get deliverTo => 'Deliver to';
+  String get deliver_to => 'Deliver to';
 
   @override
   String get min => 'Min';
@@ -410,13 +405,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get logout_confirmation_message => 'Are you sure you want to logout?';
 
   @override
-  String get accountNotActive => 'Your account is not active.';
+  String get account_not_active => 'Your account is not active.';
 
   @override
-  String get unitHtPrice => 'Unit HT price';
+  String get unit_ht_price => 'Unit HT price';
 
   @override
-  String get unitTtcPrice => 'Unit TTC price';
+  String get unit_ttc_price => 'Unit TTC price';
 
   @override
   String get currency => 'DZD';

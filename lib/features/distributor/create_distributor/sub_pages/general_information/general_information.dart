@@ -50,7 +50,7 @@ class _DistributorGeneralInformationPageState extends State<DistributorGeneralIn
                                 style: AppTypography.bodySmallStyle.copyWith(color: TextColors.ternary.color)),
                             validator: (value) {
                               if (value == null) {
-                                return context.translation!.fieldRequired;
+                                return context.translation!.errors_field_required;
                               }
                               return null;
                             },
@@ -85,7 +85,7 @@ class _DistributorGeneralInformationPageState extends State<DistributorGeneralIn
                           state: FieldState.normal,
                           validationFunc: (value) {
                             if (value == null || value.isEmpty) {
-                              return context.translation!.fieldRequired;
+                              return context.translation!.errors_field_required;
                             }
                           },
                           onChanged: (newValue) {
@@ -108,7 +108,7 @@ class _DistributorGeneralInformationPageState extends State<DistributorGeneralIn
                           },
                           validationFunc: (value) {
                             if (value == null || value.isEmpty) {
-                              return context.translation!.fieldRequired;
+                              return context.translation!.errors_field_required;
                             }
                             if (!emailRegex.hasMatch(value)) {
                               return 'Email is not valid';

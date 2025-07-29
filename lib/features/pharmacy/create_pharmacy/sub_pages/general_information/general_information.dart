@@ -38,7 +38,7 @@ class _PharmacyGeneralInformationPageState extends State<PharmacyGeneralInformat
                           state: FieldState.normal,
                           validationFunc: (value) {
                             if (value == null || value.isEmpty) {
-                              return context.translation!.fieldRequired;
+                              return context.translation!.errors_field_required;
                             }
                           },
                           onChanged: (newValue) {
@@ -60,7 +60,7 @@ class _PharmacyGeneralInformationPageState extends State<PharmacyGeneralInformat
                           },
                           validationFunc: (value) {
                             if (value == null || value.isEmpty) {
-                              return context.translation!.fieldRequired;
+                              return context.translation!.errors_field_required;
                             }
                             if (!emailRegex.hasMatch(value)) {
                               return 'Email is not valid';

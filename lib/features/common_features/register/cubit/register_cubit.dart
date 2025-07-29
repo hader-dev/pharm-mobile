@@ -29,11 +29,11 @@ class RegisterCubit extends Cubit<RegisterState> {
           password: formData.password,
           userImagePath: pickedImage?.path);
       getItInstance.get<ToastManager>().showToast(
-          message: RoutingManager.rootNavigatorKey.currentContext!.translation!.registrationSuccess,
+          message: RoutingManager.rootNavigatorKey.currentContext!.translation!.registration_success,
           type: ToastType.success);
       await Future.delayed(const Duration(seconds: 1), () {
         getItInstance.get<ToastManager>().showToast(
-            message: RoutingManager.rootNavigatorKey.currentContext!.translation!.checkEmailForVerification,
+            message: RoutingManager.rootNavigatorKey.currentContext!.translation!.check_email_for_verification,
             type: ToastType.success);
       });
       emit(RegisterSuccuss(email: formData.email));

@@ -46,7 +46,7 @@ class PhoneRegisterFormSection extends StatelessWidget {
         ),
         Gap(AppSizesManager.s4),
         CustomTextField(
-          label: context.translation!.confirmPassword,
+          label: context.translation!.confirm_password,
           value: '',
           onChanged: (value) {},
           isObscure: true,

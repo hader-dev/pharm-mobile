@@ -36,7 +36,7 @@ class _VendorsPageState extends State<VendorsPage> with AutomaticKeepAliveClient
               child: Padding(
                 padding: const EdgeInsets.only(left: AppSizesManager.p8),
                 child: CustomTextField(
-                  hintText: context.translation!.searchByNamePackagingSku,
+                  hintText: context.translation!.search_by_name_packaging_sku,
                   controller: BlocProvider.of<VendorsCubit>(context).searchController,
                   state: FieldState.normal,
                   isEnabled: true,

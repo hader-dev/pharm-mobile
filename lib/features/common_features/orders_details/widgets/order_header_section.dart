@@ -48,7 +48,7 @@
 //               children: <Widget>[
 //                 const SizedBox(height: AppSizes.mediumSpacing),
 //                 Text(
-//                   context.translation!.orderNote,
+//                   context.translation!.order_note,
 //                   style: context.theme.textTheme.bodySmall!.copyWith(
 //                     color: AppColorsPallette.primaryColors.first.withAlpha(170),
 //                     fontSize: AppTypography.appFontSize4,
@@ -82,7 +82,7 @@
 //                                                     color: AppColorsPallette.darkAccentsColors.last),
 //                                                 children: [
 //                                                     TextSpan(
-//                                                       text: context.translation!.showLess,
+//                                                       text: context.translation!.show_less,
 //                                                       style: context.theme.textTheme.bodySmall!.copyWith(
 //                                                           height: 1.5,
 //                                                           fontWeight: AppTypography.appFontRegular,
@@ -124,7 +124,7 @@
 //                           );
 //                         },
 //                       )
-//                     : Text(" ${context.translation!.noAdditionalNotes}",
+//                     : Text(" ${context.translation!.no_additional_notes}",
 //                         style: context.theme.textTheme.bodySmall!.copyWith(
 //                             fontWeight: AppTypography.appFontRegular, color: AppColorsPallette.darkAccentsColors.last)),
 //               ],

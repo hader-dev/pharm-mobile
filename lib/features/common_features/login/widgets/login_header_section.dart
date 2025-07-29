@@ -40,12 +40,12 @@ class LoginHeaderSection extends StatelessWidget {
             ),
           ),
           Text(
-            context.translation!.signIn,
+            context.translation!.sign_in,
             style: AppTypography.headLine1Style.copyWith(fontSize: AppSizesManager.p24, color: AppColors.accent1Shade1),
           ),
           Gap(AppSizesManager.s8),
           Text(
-            context.translation!.welcomeBack,
+            context.translation!.welcome_back,
             style: AppTypography.body3RegularStyle.copyWith(color: TextColors.ternary.color),
           ),
         ],

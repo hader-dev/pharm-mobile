@@ -36,10 +36,10 @@ class _LoginFormSectionState extends State<LoginFormSection> {
                 state: FieldState.normal,
                 validationFunc: (value) {
                   if (value == null || value.isEmpty) {
-                    return context.translation!.fieldRequired;
+                    return context.translation!.errors_field_required;
                   }
                   if (!emailRegex.hasMatch(value)) {
-                    return context.translation!.invalidEmailFormat;
+                    return context.translation!.errors_invalid_email_format;
                   }
                 },
               ),
@@ -58,10 +58,10 @@ class _LoginFormSectionState extends State<LoginFormSection> {
                 validationFunc: (value) {
                   if ((value == null || value.isEmpty) &&
                       BlocProvider.of<LoginCubit>(context).emailController.text.isNotEmpty) {
-                    return context.translation!.fieldRequired;
+                    return context.translation!.errors_field_required;
                   }
                   if (value.length < 6) {
-                    return context.translation!.passwordMinLength;
+                    return context.translation!.passwor_min_length;
                   }
                 },
               ),
@@ -71,7 +71,7 @@ class _LoginFormSectionState extends State<LoginFormSection> {
                 children: [
                   Spacer(),
                   PrimaryTextButton(
-                    label: context.translation!.forgotPassword,
+                    label: context.translation!.forgot_password,
                     onTap: () {
                       if (!emailFieldKey.currentState!.validate()) {}
                       BlocProvider.of<LoginCubit>(context).forgetPassword();

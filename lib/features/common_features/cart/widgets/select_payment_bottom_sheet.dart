@@ -40,12 +40,12 @@ class SelectPaymentMethodBottomSheet extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  BottomSheetHeader(title: context.translation!.checkoutProcess),
+                  BottomSheetHeader(title: context.translation!.checkout_process),
                   Gap(AppSizesManager.s12),
                   Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
                   Gap(AppSizesManager.s12),
                   InfoWidget(
-                      label: context.translation!.paymentMethods,
+                      label: context.translation!.payment_methods,
                       bgColor: AppColors.bgWhite,
                       value: Column(
                         // shrinkWrap: true,
@@ -58,7 +58,7 @@ class SelectPaymentMethodBottomSheet extends StatelessWidget {
                             .toList(),
                       )),
                   InfoWidget(
-                      label: context.translation!.invoiceTypes,
+                      label: context.translation!.invoice_types,
                       bgColor: AppColors.bgWhite,
                       value: Column(
                         //shrinkWrap: true,
@@ -70,7 +70,7 @@ class SelectPaymentMethodBottomSheet extends StatelessWidget {
                             .toList(),
                       )),
                   InfoWidget(
-                      label: context.translation!.orderNote,
+                      label: context.translation!.order_note,
                       bgColor: AppColors.bgWhite,
                       value: CustomTextField(
                         verticalPadding: 0,
@@ -81,12 +81,12 @@ class SelectPaymentMethodBottomSheet extends StatelessWidget {
                         validationFunc: (String? value) {},
                         isFilled: false,
                         isBorderEnabled: true,
-                        hintText: context.translation!.typeNoteHint,
+                        hintText: context.translation!.type_note_hint,
                         hintTextStyle: AppTypography.bodySmallStyle.copyWith(color: Colors.grey),
                       )),
                   Gap(AppSizesManager.s12),
                   InfoWidget(
-                    label: context.translation!.totalAmount,
+                    label: context.translation!.total_amount,
                     bgColor: AppColors.accentGreenShade3,
                     value: Row(
                       children: [
@@ -125,7 +125,7 @@ class SelectPaymentMethodBottomSheet extends StatelessWidget {
                         Expanded(
                           flex: 2,
                           child: PrimaryTextButton(
-                            label: context.translation!.confirmOrder,
+                            label: context.translation!.confirm_order,
                             leadingIcon: Iconsax.money4,
                             onTap: () {
                               context.read<CartCubit>().passOrder();

@@ -37,7 +37,7 @@ class _ParaPharmaPageState extends State<ParaPharmaPage> with AutomaticKeepAlive
               child: Padding(
                 padding: const EdgeInsets.only(left: AppSizesManager.p8),
                 child: CustomTextField(
-                  hintText: context.translation!.searchByNamePackagingSku,
+                  hintText: context.translation!.search_by_name_packaging_sku,
                   controller: BlocProvider.of<ParaPharmaCubit>(context).searchController,
                   state: FieldState.normal,
                   isEnabled: true,

@@ -23,12 +23,12 @@ class RegisterHeaderSection extends StatelessWidget {
         children: [
           Gap(AppSizesManager.s24),
           Text(
-            context.translation!.createAccount,
+            context.translation!.create_account,
             style: AppTypography.headLine1Style.copyWith(fontSize: AppSizesManager.p24, color: AppColors.accent1Shade1),
           ),
           Gap(AppSizesManager.s8),
           Text(
-            context.translation!.welcomeBack,
+            context.translation!.welcome_back,
             style: AppTypography.body3RegularStyle.copyWith(color: TextColors.ternary.color),
           ),
           Gap(AppSizesManager.s24),

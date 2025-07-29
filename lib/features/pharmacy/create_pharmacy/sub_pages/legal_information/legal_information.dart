@@ -41,7 +41,7 @@ class _PharmacyLegalInformationPageState extends State<PharmacyLegalInformationP
                           state: FieldState.normal,
                           validationFunc: (value) {
                             if (value == null || value.isEmpty) {
-                              return "${context.translation!.fieldRequired} ";
+                              return "${context.translation!.errors_field_required} ";
                             }
                           },
                           onChanged: (newValue) {
@@ -57,7 +57,7 @@ class _PharmacyLegalInformationPageState extends State<PharmacyLegalInformationP
                           state: FieldState.normal,
                           validationFunc: (value) {
                             if (value == null || value.isEmpty) {
-                              return "${context.translation!.fieldRequired} ";
+                              return "${context.translation!.errors_field_required} ";
                             }
                           },
                           onChanged: (newValue) {
@@ -72,7 +72,7 @@ class _PharmacyLegalInformationPageState extends State<PharmacyLegalInformationP
                           state: FieldState.normal,
                           validationFunc: (value) {
                             if (value == null || value.isEmpty) {
-                              return "${context.translation!.fieldRequired} ";
+                              return "${context.translation!.errors_field_required} ";
                             }
                           },
                           value: BlocProvider.of<CreateCompanyProfileCubit>(context).companyData.ai,

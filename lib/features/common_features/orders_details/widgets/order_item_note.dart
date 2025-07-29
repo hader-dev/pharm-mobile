@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../../config/theme/typoghrapy_manager.dart';
 
@@ -54,7 +55,7 @@ class OrderNoteDialog extends StatelessWidget {
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                note.isNotEmpty ? note : " context.translation!.noAdditionalNotes",
+                note.isNotEmpty ? note : context.translation!.no_additional_notes,
                 style: AppTypography.headLine4MediumStyle.copyWith(
                   color: note.isNotEmpty ? Colors.grey[800] : Colors.grey[400],
                 ),

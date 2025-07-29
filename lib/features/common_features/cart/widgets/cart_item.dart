@@ -81,11 +81,11 @@ class CartItemWidget extends StatelessWidget {
                 Column(
                   children: [
                     InfoRow(
-                      label: context.translation!.unitHtPrice,
+                      label: context.translation!.unit_ht_price,
                       dataValue: num.parse(cartItemData.unitPriceHt).toStringAsFixed(2),
                     ),
                     InfoRow(
-                      label: context.translation!.unitTtcPrice,
+                      label: context.translation!.unit_ttc_price,
                       dataValue: num.parse(cartItemData.unitPriceTtc).toStringAsFixed(2),
                     ),
                     InfoRow(

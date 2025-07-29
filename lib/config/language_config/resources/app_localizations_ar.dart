@@ -9,7 +9,7 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
-  String get userName => 'اسم المستخدم';
+  String get user_name => 'اسم المستخدم';
 
   @override
   String get password => 'كلمة المرور';
@@ -54,9 +54,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get fax => 'فاكس';
 
   @override
-  String get shippingAddress => 'عنوان الشحن';
-
-  @override
   String items(Object count) {
     return 'العناصر ($count)';
   }
@@ -68,7 +65,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get checkout => 'الدفع';
 
   @override
-  String get myOrders => 'طلباتي';
+  String get my_orders => 'طلباتي';
 
   @override
   String get status => 'الحالة';
@@ -77,10 +74,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get note => 'ملاحظة';
 
   @override
-  String get totalAmount => 'المبلغ الإجمالي';
+  String get total_amount => 'المبلغ الإجمالي';
 
   @override
-  String get viewDetails => 'عرض التفاصيل';
+  String get view_details => 'عرض التفاصيل';
 
   @override
   String get market_place => 'السوق';
@@ -92,28 +89,28 @@ class AppLocalizationsAr extends AppLocalizations {
   String get profile => 'الملف الشخصي';
 
   @override
-  String get legalAndPolicies => 'القوانين والسياسات';
+  String get legal_and_policies => 'القوانين والسياسات';
 
   @override
-  String get helpAndSupport => 'المساعدة والدعم';
+  String get help_and_support => 'المساعدة والدعم';
 
   @override
-  String get currentPassword => 'كلمة المرور الحالية';
+  String get current_password => 'كلمة المرور الحالية';
 
   @override
-  String get newPassword => 'كلمة المرور الجديدة';
+  String get new_password => 'كلمة المرور الجديدة';
 
   @override
-  String get confirmPassword => 'تأكيد كلمة المرور';
+  String get confirm_password => 'تأكيد كلمة المرور';
 
   @override
-  String get resetPassword => 'إعادة تعيين كلمة المرور';
+  String get reset_password => 'إعادة تعيين كلمة المرور';
 
   @override
-  String get showLess => 'عرض أقل';
+  String get show_less => 'عرض أقل';
 
   @override
-  String get showMore => 'عرض المزيد';
+  String get show_more => 'عرض المزيد';
 
   @override
   String get reset => 'إعادة تعيين';
@@ -134,13 +131,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get price => 'السعر';
 
   @override
-  String get logoutConfirmation => 'هل أنت متأكد أنك تريد تسجيل الخروج؟';
+  String get logout_action => 'تسجيل الخروج';
 
   @override
-  String get logoutAction => 'تسجيل الخروج';
-
-  @override
-  String get cancelAction => 'لا';
+  String get cancel_action => 'لا';
 
   @override
   String get home => 'الرئيسية';
@@ -149,7 +143,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get cart => 'السلة';
 
   @override
-  String get changePasswordTitle => 'تغيير كلمة المرور';
+  String get change_password_title => 'تغيير كلمة المرور';
 
   @override
   String get add_cart => 'أضف إلى السلة';
@@ -158,7 +152,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get similar_products => 'منتجات مشابهة';
 
   @override
-  String get noAdditionalNotes => 'لا توجد ملاحظات إضافية لهذا العنصر.';
+  String get no_additional_notes => 'لا توجد ملاحظات إضافية لهذا العنصر.';
 
   @override
   String get para_pharma => 'الشبه صيدلة';
@@ -171,72 +165,72 @@ class AppLocalizationsAr extends AppLocalizations {
   String get vendors => 'الموردون';
 
   @override
-  String get medicinesSearchFieldHint =>
+  String get medicines_search_field_hint =>
       'ابحث بواسطة الاسم العلمي، العلامة التجارية أو رمز المنتج';
 
   @override
   String get email => 'البريد الإلكتروني';
 
   @override
-  String get fieldRequired => 'الحقل مطلوب';
+  String get errors_field_required => 'الحقل مطلوب';
 
   @override
-  String get invalidEmailFormat => 'تنسيق البريد الإلكتروني غير صالح';
+  String get errors_invalid_email_format => 'تنسيق البريد الإلكتروني غير صالح';
 
   @override
-  String get passwordMinLength =>
+  String get passwor_min_length =>
       'يجب أن تتكون كلمة المرور من 6 أحرف على الأقل';
 
   @override
-  String get forgotPassword => 'هل نسيت كلمة المرور؟';
+  String get forgot_password => 'هل نسيت كلمة المرور؟';
 
   @override
-  String get signIn => 'تسجيل الدخول';
+  String get sign_in => 'تسجيل الدخول';
 
   @override
-  String get welcomeBack => 'مرحبًا! سعداء بعودتك، لقد افتقدناك';
+  String get welcome_back => 'مرحبًا! سعداء بعودتك، لقد افتقدناك';
 
   @override
-  String get checkEmail => 'تحقق من بريدك الإلكتروني';
+  String get check_email => 'تحقق من بريدك الإلكتروني';
 
   @override
-  String get passwordResetSent =>
+  String get password_reset_sent =>
       'لقد أرسلنا رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني، يرجى التحقق من صندوق الوارد.';
 
   @override
-  String get backToLogin => 'العودة لتسجيل الدخول';
+  String get back_to_login => 'العودة لتسجيل الدخول';
 
   @override
   String get register => 'إنشاء حساب (لا تملك حسابًا؟)';
 
   @override
-  String get loginExisting => 'تسجيل الدخول (لديك حساب بالفعل!)';
+  String get login_existing => 'تسجيل الدخول (لديك حساب بالفعل!)';
 
   @override
-  String get passwordsDoNotMatch => 'كلمتا المرور غير متطابقتين';
+  String get errors_passwords_do_not_match => 'كلمتا المرور غير متطابقتين';
 
   @override
-  String get signUp => 'إنشاء حساب';
+  String get sign_up => 'إنشاء حساب';
 
   @override
-  String get createAccount => 'إنشاء حساب';
+  String get create_account => 'إنشاء حساب';
 
   @override
-  String get registrationSuccess => 'تم التسجيل بنجاح';
+  String get registration_success => 'تم التسجيل بنجاح';
 
   @override
-  String get checkEmailForVerification => 'تحقق من بريدك الإلكتروني للتأكيد';
+  String get check_email_for_verification => 'تحقق من بريدك الإلكتروني للتأكيد';
 
   @override
-  String get emailNotVerified =>
+  String get email_not_verified =>
       'بريدك الإلكتروني غير مفعل. يرجى التحقق من بريدك لتأكيده';
 
   @override
-  String get searchByNamePackagingSku =>
+  String get search_by_name_packaging_sku =>
       'ابحث بالاسم أو التغليف أو رمز المنتج (SKU)';
 
   @override
-  String get searchFilters => 'فلاتر البحث';
+  String get search_filters => 'فلاتر البحث';
 
   @override
   String get filters => 'الفلاتر';
@@ -245,40 +239,40 @@ class AppLocalizationsAr extends AppLocalizations {
   String get types => 'الأنواع';
 
   @override
-  String get checkoutProcess => 'عملية الدفع';
+  String get checkout_process => 'عملية الدفع';
 
   @override
-  String get paymentMethods => 'طرق الدفع';
+  String get payment_methods => 'طرق الدفع';
 
   @override
-  String get invoiceTypes => 'أنواع الفواتير';
+  String get invoice_types => 'أنواع الفواتير';
 
   @override
-  String get orderNote => 'ملاحظة على الطلب';
+  String get order_note => 'ملاحظة على الطلب';
 
   @override
-  String get typeNoteHint => 'اكتب ملاحظتك هنا...';
+  String get type_note_hint => 'اكتب ملاحظتك هنا...';
 
   @override
-  String get totalPrice => 'السعر الإجمالي';
+  String get total_price => 'السعر الإجمالي';
 
   @override
   String get cancel => 'إلغاء';
 
   @override
-  String get confirmOrder => 'تأكيد الطلب';
+  String get confirm_order => 'تأكيد الطلب';
 
   @override
   String get orders => 'الطلبات';
 
   @override
-  String get initialDate => 'تاريخ البدء';
+  String get initial_date => 'تاريخ البدء';
 
   @override
-  String get finalDate => 'تاريخ الانتهاء';
+  String get final_date => 'تاريخ الانتهاء';
 
   @override
-  String get tapToSelect => 'اضغط للاختيار';
+  String get tap_to_select => 'اضغط للاختيار';
 
   @override
   String get date => 'التاريخ';
@@ -290,7 +284,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get vendor => 'المورد';
 
   @override
-  String get deliverTo => 'التوصيل إلى';
+  String get deliver_to => 'التوصيل إلى';
 
   @override
   String get min => 'الأدنى';
@@ -414,13 +408,13 @@ class AppLocalizationsAr extends AppLocalizations {
       'هل أنت متأكد أنك تريد تسجيل الخروج؟';
 
   @override
-  String get accountNotActive => 'حسابك غير مفعل.';
+  String get account_not_active => 'حسابك غير مفعل.';
 
   @override
-  String get unitHtPrice => 'السعر  بدون ضريبة';
+  String get unit_ht_price => 'السعر  بدون ضريبة';
 
   @override
-  String get unitTtcPrice => 'السعر مع الضريبة';
+  String get unit_ttc_price => 'السعر مع الضريبة';
 
   @override
   String get currency => 'دج';

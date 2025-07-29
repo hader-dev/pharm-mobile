@@ -9,7 +9,7 @@ class AppLocalizationsFr extends AppLocalizations {
   AppLocalizationsFr([String locale = 'fr']) : super(locale);
 
   @override
-  String get userName => 'Nom d\'utilisateur';
+  String get user_name => 'Nom d\'utilisateur';
 
   @override
   String get password => 'Mot de passe';
@@ -54,9 +54,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get fax => 'Fax';
 
   @override
-  String get shippingAddress => 'Adresse de livraison';
-
-  @override
   String items(Object count) {
     return 'Articles ($count)';
   }
@@ -68,7 +65,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get checkout => 'Commander';
 
   @override
-  String get myOrders => 'Mes commandes';
+  String get my_orders => 'Mes commandes';
 
   @override
   String get status => 'Statut';
@@ -77,10 +74,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get note => 'Remarque';
 
   @override
-  String get totalAmount => 'Montant total';
+  String get total_amount => 'Montant total';
 
   @override
-  String get viewDetails => 'Voir les détails';
+  String get view_details => 'Voir les détails';
 
   @override
   String get market_place => 'Marché';
@@ -92,28 +89,28 @@ class AppLocalizationsFr extends AppLocalizations {
   String get profile => 'Profil';
 
   @override
-  String get legalAndPolicies => 'Législation et politiques';
+  String get legal_and_policies => 'Législation et politiques';
 
   @override
-  String get helpAndSupport => 'Aide et support';
+  String get help_and_support => 'Aide et support';
 
   @override
-  String get currentPassword => 'Mot de passe actuel';
+  String get current_password => 'Mot de passe actuel';
 
   @override
-  String get newPassword => 'Nouveau mot de passe';
+  String get new_password => 'Nouveau mot de passe';
 
   @override
-  String get confirmPassword => 'Confirmer le mot de passe';
+  String get confirm_password => 'Confirmer le mot de passe';
 
   @override
-  String get resetPassword => 'Réinitialiser le mot de passe';
+  String get reset_password => 'Réinitialiser le mot de passe';
 
   @override
-  String get showLess => 'Afficher moins';
+  String get show_less => 'Afficher moins';
 
   @override
-  String get showMore => 'Afficher plus';
+  String get show_more => 'Afficher plus';
 
   @override
   String get reset => 'Réinitialiser';
@@ -134,14 +131,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get price => 'Prix';
 
   @override
-  String get logoutConfirmation =>
-      'Êtes-vous sûr de vouloir vous déconnecter ?';
+  String get logout_action => 'Déconnexion';
 
   @override
-  String get logoutAction => 'Déconnexion';
-
-  @override
-  String get cancelAction => 'Non';
+  String get cancel_action => 'Non';
 
   @override
   String get home => 'Accueil';
@@ -150,7 +143,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get cart => 'Panier';
 
   @override
-  String get changePasswordTitle => 'Changer le mot de passe';
+  String get change_password_title => 'Changer le mot de passe';
 
   @override
   String get add_cart => 'Ajouter au panier';
@@ -159,7 +152,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get similar_products => 'Produits similaires';
 
   @override
-  String get noAdditionalNotes =>
+  String get no_additional_notes =>
       'Aucune note supplémentaire pour cet article.';
 
   @override
@@ -173,73 +166,74 @@ class AppLocalizationsFr extends AppLocalizations {
   String get vendors => 'Fournisseurs';
 
   @override
-  String get medicinesSearchFieldHint =>
+  String get medicines_search_field_hint =>
       'Rechercher par DCI, marque ou code produit';
 
   @override
   String get email => 'E-mail';
 
   @override
-  String get fieldRequired => 'Le champ est requis';
+  String get errors_field_required => 'Le champ est requis';
 
   @override
-  String get invalidEmailFormat => 'Format d\'e-mail invalide';
+  String get errors_invalid_email_format => 'Format d\'e-mail invalide';
 
   @override
-  String get passwordMinLength =>
+  String get passwor_min_length =>
       'Le mot de passe doit contenir au moins 6 caractères';
 
   @override
-  String get forgotPassword => 'Mot de passe oublié ?';
+  String get forgot_password => 'Mot de passe oublié ?';
 
   @override
-  String get signIn => 'Se connecter';
+  String get sign_in => 'Se connecter';
 
   @override
-  String get welcomeBack => 'Salut ! Bon retour, vous nous avez manqué';
+  String get welcome_back => 'Salut ! Bon retour, vous nous avez manqué';
 
   @override
-  String get checkEmail => 'Vérifiez votre e-mail';
+  String get check_email => 'Vérifiez votre e-mail';
 
   @override
-  String get passwordResetSent =>
+  String get password_reset_sent =>
       'Nous avons envoyé un lien de réinitialisation de mot de passe à votre e-mail. Veuillez vérifier votre boîte de réception.';
 
   @override
-  String get backToLogin => 'Retour à la connexion';
+  String get back_to_login => 'Retour à la connexion';
 
   @override
   String get register => 'S’inscrire (Vous n’avez pas de compte ?)';
 
   @override
-  String get loginExisting => 'Connexion (Vous avez déjà un compte !)';
+  String get login_existing => 'Connexion (Vous avez déjà un compte !)';
 
   @override
-  String get passwordsDoNotMatch => 'Les mots de passe ne correspondent pas';
+  String get errors_passwords_do_not_match =>
+      'Les mots de passe ne correspondent pas';
 
   @override
-  String get signUp => 'S’inscrire';
+  String get sign_up => 'S’inscrire';
 
   @override
-  String get createAccount => 'Créer un compte';
+  String get create_account => 'Créer un compte';
 
   @override
-  String get registrationSuccess => 'Inscription réussie';
+  String get registration_success => 'Inscription réussie';
 
   @override
-  String get checkEmailForVerification =>
+  String get check_email_for_verification =>
       'Vérifiez votre e-mail pour la vérification';
 
   @override
-  String get emailNotVerified =>
+  String get email_not_verified =>
       'Votre e-mail n\'est pas vérifié. Veuillez vérifier votre e-mail pour la vérification';
 
   @override
-  String get searchByNamePackagingSku =>
+  String get search_by_name_packaging_sku =>
       'Rechercher par nom, conditionnement ou SKU';
 
   @override
-  String get searchFilters => 'Filtres de recherche';
+  String get search_filters => 'Filtres de recherche';
 
   @override
   String get filters => 'Filtres';
@@ -248,40 +242,40 @@ class AppLocalizationsFr extends AppLocalizations {
   String get types => 'Types';
 
   @override
-  String get checkoutProcess => 'Processus de commande';
+  String get checkout_process => 'Processus de commande';
 
   @override
-  String get paymentMethods => 'Méthodes de paiement';
+  String get payment_methods => 'Méthodes de paiement';
 
   @override
-  String get invoiceTypes => 'Types de facture';
+  String get invoice_types => 'Types de facture';
 
   @override
-  String get orderNote => 'Note de commande';
+  String get order_note => 'Note de commande';
 
   @override
-  String get typeNoteHint => 'écrivez votre note ici...';
+  String get type_note_hint => 'écrivez votre note ici...';
 
   @override
-  String get totalPrice => 'Prix total';
+  String get total_price => 'Prix total';
 
   @override
   String get cancel => 'Annuler';
 
   @override
-  String get confirmOrder => 'Confirmer la commande';
+  String get confirm_order => 'Confirmer la commande';
 
   @override
   String get orders => 'Commandes';
 
   @override
-  String get initialDate => 'Date de début';
+  String get initial_date => 'Date de début';
 
   @override
-  String get finalDate => 'Date de fin';
+  String get final_date => 'Date de fin';
 
   @override
-  String get tapToSelect => 'Appuyez pour sélectionner';
+  String get tap_to_select => 'Appuyez pour sélectionner';
 
   @override
   String get date => 'Date';
@@ -293,7 +287,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get vendor => 'Fournisseur';
 
   @override
-  String get deliverTo => 'Livrer à';
+  String get deliver_to => 'Livrer à';
 
   @override
   String get min => 'Min';
@@ -410,20 +404,21 @@ class AppLocalizationsFr extends AppLocalizations {
       'Le mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre et un caractère spécial.';
 
   @override
-  String get logout_confirmation => 'Confirmation de déconnexion';
+  String get logout_confirmation =>
+      'Êtes-vous sûr de vouloir vous déconnecter ?';
 
   @override
   String get logout_confirmation_message =>
       'Êtes-vous sûr de vouloir vous déconnecter ?';
 
   @override
-  String get accountNotActive => 'Votre compte n\'est pas actif.';
+  String get account_not_active => 'Votre compte n\'est pas actif.';
 
   @override
-  String get unitHtPrice => 'Prix unitaire HT';
+  String get unit_ht_price => 'Prix unitaire HT';
 
   @override
-  String get unitTtcPrice => 'Prix unitaire TTC';
+  String get unit_ttc_price => 'Prix unitaire TTC';
 
   @override
   String get currency => 'DZD';
