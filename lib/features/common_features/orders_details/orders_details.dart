@@ -1,28 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' show BlocProvider, BlocBuilder, ReadContext;
-import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
+import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
+import 'package:hader_pharm_mobile/repositories/remote/order/order_repository_impl.dart';
+import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
+import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
-import 'package:iconsax/iconsax.dart';
-import '../../../config/services/network/network_interface.dart';
-import '../../../config/theme/colors_manager.dart';
-import '../../../config/theme/typoghrapy_manager.dart';
-import '../../../repositories/remote/order/order_repository_impl.dart';
-import '../../../utils/bottom_sheet_helper.dart';
-import '../../../utils/constants.dart';
-import '../../common/app_bars/custom_app_bar.dart';
-import '../../common/buttons/solid/primary_text_button.dart';
 import 'cubit/orders_details_cubit.dart';
 import 'widgets/order_client_note.dart';
+import 'widgets/order_details_appbar.dart';
 import 'widgets/order_invoice_section.dart';
 import 'widgets/order_items_section.dart';
 import 'widgets/order_summary_section.dart';
 import 'widgets/shipping_address_section.dart';
 import 'widgets/track_order_bottom_sheet.dart';
 
-//TODO: Fix Deep Links Navigate Back , 
 
 class OrdersDetailsScreen extends StatelessWidget {
   final String orderId;
@@ -38,68 +33,7 @@ class OrdersDetailsScreen extends StatelessWidget {
             ..getOrdersDetails(orderId: orderId),
       child: Scaffold(
           key: ordersDetailsScaffoldKey,
-          appBar: CustomAppBar(
-            bgColor: AppColors.bgWhite,
-            topPadding: MediaQuery.of(context).padding.top,
-            bottomPadding: MediaQuery.of(context).padding.bottom,
-            leading: IconButton(
-              icon: Icon(
-                Directionality.of(context) == TextDirection.rtl ? Iconsax.arrow_right_3 : Iconsax.arrow_left_2,
-                size: AppSizesManager.iconSize25,
-              ),
-              onPressed: () {
-                context.pop();
-              },
-            ),
-            title: Row(
-              children: [
-                const Icon(
-                  Iconsax.box_2,
-                  size: AppSizesManager.iconSize25,
-                ),
-                Gap(AppSizesManager.s12),
-                Text(
-                  context.translation!.order_details,
-                  style: AppTypography.headLine3SemiBoldStyle,
-                ),
-              ],
-            ),
-            trailing: [
-              BlocBuilder<OrderDetailsCubit, OrdersDetailsState>(
-                builder: (context, state) {
-                  if (state is OrderDetailsLoading) {
-                    return Container(
-                        padding: EdgeInsets.all(AppSizesManager.p6),
-                        height: 30,
-                        width: 30,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 1.1,
-                        ));
-                  }
-                  OrderStatus orderStatus = OrderStatus.values
-                      .firstWhere((statusItem) => statusItem.id == context.read<OrderDetailsCubit>().orderData!.status);
-                  return Container(
-                    margin: EdgeInsets.only(right: AppSizesManager.p12),
-                    padding: EdgeInsets.all(AppSizesManager.p6),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                          bottomRight: Radius.circular(AppSizesManager.r6),
-                          topLeft: Radius.circular(AppSizesManager.r6)),
-                      color: orderStatus.color.withAlpha(50),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(OrderStatus.getTranslatedStatus(orderStatus),
-                            style: AppTypography.bodySmallStyle
-                                .copyWith(color: orderStatus.color, fontWeight: AppTypography.appFontSemiBold)),
-                      ],
-                    ),
-                  );
-                },
-              )
-            ],
-          ),
+          appBar: OrderDetailsAppbar(),
           body: BlocBuilder<OrderDetailsCubit, OrdersDetailsState>(
             builder: (context, state) {
               if (state is OrderDetailsLoading) {
@@ -108,13 +42,12 @@ class OrdersDetailsScreen extends StatelessWidget {
                 );
               }
               if (state is OrderDetailsLoadingFailed) {
-                return Text("Error happend when feetch  ");
+                return Text(context.translation!.errors_network_fetch_error);
               }
               return SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    // const OrderHeaderSection(),
                     OrderItemsSection(orderItems: context.read<OrderDetailsCubit>().orderData!.orderItems),
                     ShippingAddressSection(
                       address: context.read<OrderDetailsCubit>().orderData!.deliveryAddress,
@@ -159,3 +92,4 @@ class OrdersDetailsScreen extends StatelessWidget {
     ));
   }
 }
+

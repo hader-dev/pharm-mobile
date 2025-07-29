@@ -118,12 +118,6 @@ abstract class AppLocalizations {
   /// **'Login'**
   String get login;
 
-  /// No description provided for @discount.
-  ///
-  /// In en, this message translates to:
-  /// **'Discount'**
-  String get discount;
-
   /// No description provided for @my_cart.
   ///
   /// In en, this message translates to:
@@ -232,12 +226,6 @@ abstract class AppLocalizations {
   /// **'Status'**
   String get status;
 
-  /// No description provided for @deliverTo.
-  ///
-  /// In en, this message translates to:
-  /// **'Deliver to'**
-  String get deliverTo;
-
   /// No description provided for @note.
   ///
   /// In en, this message translates to:
@@ -274,12 +262,6 @@ abstract class AppLocalizations {
   /// **'Profile'**
   String get profile;
 
-  /// No description provided for @language.
-  ///
-  /// In en, this message translates to:
-  /// **'Language'**
-  String get language;
-
   /// No description provided for @legalAndPolicies.
   ///
   /// In en, this message translates to:
@@ -291,12 +273,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Help and Support'**
   String get helpAndSupport;
-
-  /// No description provided for @logout.
-  ///
-  /// In en, this message translates to:
-  /// **'Logout'**
-  String get logout;
 
   /// No description provided for @currentPassword.
   ///
@@ -333,12 +309,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Show More'**
   String get showMore;
-
-  /// No description provided for @filters.
-  ///
-  /// In en, this message translates to:
-  /// **'Filters'**
-  String get filters;
 
   /// No description provided for @reset.
   ///
@@ -574,6 +544,12 @@ abstract class AppLocalizations {
   /// **'Search Filters'**
   String get searchFilters;
 
+  /// No description provided for @filters.
+  ///
+  /// In en, this message translates to:
+  /// **'Filters'**
+  String get filters;
+
   /// No description provided for @types.
   ///
   /// In en, this message translates to:
@@ -670,6 +646,12 @@ abstract class AppLocalizations {
   /// **'Vendor'**
   String get vendor;
 
+  /// No description provided for @deliverTo.
+  ///
+  /// In en, this message translates to:
+  /// **'Deliver to'**
+  String get deliverTo;
+
   /// No description provided for @min.
   ///
   /// In en, this message translates to:
@@ -711,12 +693,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'pending'**
   String get pending;
-
-  /// No description provided for @order_details.
-  ///
-  /// In en, this message translates to:
-  /// **'Order Details'**
-  String get order_details;
 
   /// No description provided for @track_order.
   ///
@@ -766,6 +742,12 @@ abstract class AppLocalizations {
   /// **'Payment Method'**
   String get payment_method;
 
+  /// No description provided for @discount.
+  ///
+  /// In en, this message translates to:
+  /// **'Discount'**
+  String get discount;
+
   /// No description provided for @total_ht.
   ///
   /// In en, this message translates to:
@@ -789,6 +771,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Order Tracking'**
   String get order_tracking;
+
+  /// No description provided for @order_details.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Details'**
+  String get order_details;
 
   /// No description provided for @account.
   ///
@@ -826,6 +814,12 @@ abstract class AppLocalizations {
   /// **'Favorites'**
   String get favorites;
 
+  /// No description provided for @language.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get language;
+
   /// No description provided for @app_privacy.
   ///
   /// In en, this message translates to:
@@ -843,6 +837,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Help and Support'**
   String get help_support;
+
+  /// No description provided for @logout.
+  ///
+  /// In en, this message translates to:
+  /// **'Logout'**
+  String get logout;
 
   /// No description provided for @update_profile.
   ///
@@ -909,6 +909,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'DZD'**
   String get currency;
+
+  /// No description provided for @errors_network_fetch_error.
+  ///
+  /// In en, this message translates to:
+  /// **'Fetch error'**
+  String get errors_network_fetch_error;
 }
 
 class _AppLocalizationsDelegate

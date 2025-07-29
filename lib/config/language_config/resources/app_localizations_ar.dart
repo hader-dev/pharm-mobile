@@ -18,9 +18,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get login => 'تسجيل الدخول';
 
   @override
-  String get discount => 'الخصم';
-
-  @override
   String get my_cart => 'سلة التسوق';
 
   @override
@@ -77,9 +74,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get status => 'الحالة';
 
   @override
-  String get deliverTo => 'التوصيل إلى';
-
-  @override
   String get note => 'ملاحظة';
 
   @override
@@ -98,16 +92,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get profile => 'الملف الشخصي';
 
   @override
-  String get language => 'اللغة';
-
-  @override
   String get legalAndPolicies => 'القوانين والسياسات';
 
   @override
   String get helpAndSupport => 'المساعدة والدعم';
-
-  @override
-  String get logout => 'تسجيل الخروج';
 
   @override
   String get currentPassword => 'كلمة المرور الحالية';
@@ -126,9 +114,6 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get showMore => 'عرض المزيد';
-
-  @override
-  String get filters => 'الفلاتر';
 
   @override
   String get reset => 'إعادة تعيين';
@@ -254,6 +239,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get searchFilters => 'فلاتر البحث';
 
   @override
+  String get filters => 'الفلاتر';
+
+  @override
   String get types => 'الأنواع';
 
   @override
@@ -302,6 +290,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get vendor => 'المورد';
 
   @override
+  String get deliverTo => 'التوصيل إلى';
+
+  @override
   String get min => 'الأدنى';
 
   @override
@@ -321,9 +312,6 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get pending => 'قيد الانتظار';
-
-  @override
-  String get order_details => 'تفاصيل الطلب';
 
   @override
   String get track_order => 'تتبع الطلب';
@@ -350,6 +338,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get payment_method => 'طريقة الدفع';
 
   @override
+  String get discount => 'الخصم';
+
+  @override
   String get total_ht => 'الإجمالي بدون ضرائب';
 
   @override
@@ -360,6 +351,9 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get order_tracking => 'تتبع الطلب';
+
+  @override
+  String get order_details => 'تفاصيل الطلب';
 
   @override
   String get account => 'الحساب';
@@ -380,6 +374,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get favorites => 'المفضلة';
 
   @override
+  String get language => 'اللغة';
+
+  @override
   String get app_privacy => 'خصوصية التطبيق';
 
   @override
@@ -387,6 +384,9 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get help_support => 'المساعدة والدعم';
+
+  @override
+  String get logout => 'تسجيل الخروج';
 
   @override
   String get update_profile => 'تحديث الملف الشخصي';
@@ -424,4 +424,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get currency => 'دج';
+
+  @override
+  String get errors_network_fetch_error => 'حدث خطأ أثناء جلب البيانات';
 }

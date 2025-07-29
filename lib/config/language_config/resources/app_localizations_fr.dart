@@ -18,9 +18,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get login => 'Se connecter';
 
   @override
-  String get discount => 'Remise';
-
-  @override
   String get my_cart => 'Mon panier';
 
   @override
@@ -77,9 +74,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get status => 'Statut';
 
   @override
-  String get deliverTo => 'Livrer à';
-
-  @override
   String get note => 'Remarque';
 
   @override
@@ -98,16 +92,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get profile => 'Profil';
 
   @override
-  String get language => 'Langue';
-
-  @override
   String get legalAndPolicies => 'Législation et politiques';
 
   @override
   String get helpAndSupport => 'Aide et support';
-
-  @override
-  String get logout => 'Déconnexion';
 
   @override
   String get currentPassword => 'Mot de passe actuel';
@@ -126,9 +114,6 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get showMore => 'Afficher plus';
-
-  @override
-  String get filters => 'Filtres';
 
   @override
   String get reset => 'Réinitialiser';
@@ -257,6 +242,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get searchFilters => 'Filtres de recherche';
 
   @override
+  String get filters => 'Filtres';
+
+  @override
   String get types => 'Types';
 
   @override
@@ -305,6 +293,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get vendor => 'Fournisseur';
 
   @override
+  String get deliverTo => 'Livrer à';
+
+  @override
   String get min => 'Min';
 
   @override
@@ -324,9 +315,6 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get pending => 'En attente';
-
-  @override
-  String get order_details => 'Détails de la commande';
 
   @override
   String get track_order => 'Suivre la commande';
@@ -353,6 +341,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get payment_method => 'Méthode de paiement';
 
   @override
+  String get discount => 'Remise';
+
+  @override
   String get total_ht => 'Total HT';
 
   @override
@@ -363,6 +354,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get order_tracking => 'Suivi de commande';
+
+  @override
+  String get order_details => 'Détails de la commande';
 
   @override
   String get account => 'Compte';
@@ -383,6 +377,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get favorites => 'Favoris';
 
   @override
+  String get language => 'Langue';
+
+  @override
   String get app_privacy => 'Confidentialité de l\'application';
 
   @override
@@ -390,6 +387,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get help_support => 'Aide et support';
+
+  @override
+  String get logout => 'Déconnexion';
 
   @override
   String get update_profile => 'Mettre à jour le profil';
@@ -427,4 +427,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get currency => 'DZD';
+
+  @override
+  String get errors_network_fetch_error => 'Erreur de récupération des données';
 }

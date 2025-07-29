@@ -18,9 +18,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get login => 'Login';
 
   @override
-  String get discount => 'Discount';
-
-  @override
   String get my_cart => 'My Cart';
 
   @override
@@ -77,9 +74,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get status => 'Status';
 
   @override
-  String get deliverTo => 'Deliver to';
-
-  @override
   String get note => 'Note';
 
   @override
@@ -98,16 +92,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profile => 'Profile';
 
   @override
-  String get language => 'Language';
-
-  @override
   String get legalAndPolicies => 'Legal and Policies';
 
   @override
   String get helpAndSupport => 'Help and Support';
-
-  @override
-  String get logout => 'Logout';
 
   @override
   String get currentPassword => 'Current Password';
@@ -126,9 +114,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get showMore => 'Show More';
-
-  @override
-  String get filters => 'Filters';
 
   @override
   String get reset => 'Reset';
@@ -251,6 +236,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get searchFilters => 'Search Filters';
 
   @override
+  String get filters => 'Filters';
+
+  @override
   String get types => 'Types';
 
   @override
@@ -299,6 +287,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get vendor => 'Vendor';
 
   @override
+  String get deliverTo => 'Deliver to';
+
+  @override
   String get min => 'Min';
 
   @override
@@ -318,9 +309,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pending => 'pending';
-
-  @override
-  String get order_details => 'Order Details';
 
   @override
   String get track_order => 'Track Order';
@@ -347,6 +335,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get payment_method => 'Payment Method';
 
   @override
+  String get discount => 'Discount';
+
+  @override
   String get total_ht => 'Total HT';
 
   @override
@@ -357,6 +348,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get order_tracking => 'Order Tracking';
+
+  @override
+  String get order_details => 'Order Details';
 
   @override
   String get account => 'Account';
@@ -377,6 +371,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get favorites => 'Favorites';
 
   @override
+  String get language => 'Language';
+
+  @override
   String get app_privacy => 'App Privacy';
 
   @override
@@ -384,6 +381,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get help_support => 'Help and Support';
+
+  @override
+  String get logout => 'Logout';
 
   @override
   String get update_profile => 'Update Profile';
@@ -420,4 +420,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get currency => 'DZD';
+
+  @override
+  String get errors_network_fetch_error => 'Fetch error';
 }
