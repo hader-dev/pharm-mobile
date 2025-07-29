@@ -47,7 +47,9 @@ class _CustomToastWidgetState extends State<CustomToastWidget> with SingleTicker
     _controller.addListener(() async {
       if (_controller.isForwardOrCompleted) {
         await Future.delayed(Duration(seconds: 2, milliseconds: 600));
-        _controller.reverse();
+        if(context.mounted){
+          _controller.reverse();
+        }
       }
       if (_controller.isDismissed) {
         _controller.removeListener(

@@ -33,6 +33,10 @@ class TokenManager {
     token = newToken;
   }
 
+  void optimisticUpdate(String token){
+    this.token = token;
+  }
+
   Future<String?> getAccessToken() async => await secureStorage.read(key: accessTokenStoreKey);
 
   Future<void> removeToken() async => await secureStorage.deleteAll();

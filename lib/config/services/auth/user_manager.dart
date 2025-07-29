@@ -55,6 +55,7 @@ class UserManager {
     required String password,
   }) async {
     final String token = await userRepo.login(userName, password);
+    tokenManagerInstance.optimisticUpdate(token);
     await tokenManagerInstance.storeAccessToken(token);
     (getItInstance.get<INetworkService>() as DioNetworkManager).initDefaultHeaders(token);
     await getMe();

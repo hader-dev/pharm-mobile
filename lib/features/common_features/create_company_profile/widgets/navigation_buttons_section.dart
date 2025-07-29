@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart' show GoRouter;
-import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/common_features/create_company_profile/actions/previous_step_or_logout.dart';
 
 import '../../../../utils/constants.dart';
 import '../../../common/buttons/solid/primary_text_button.dart';
@@ -20,23 +19,29 @@ class NavigationButtonsSection extends StatelessWidget {
         children: [
           Expanded(
             child: PrimaryTextButton(
-              label: BlocProvider.of<CreateCompanyProfileCubit>(context).currentStepIndex != 0 ? "Previous" : "Cancel",
+              label: BlocProvider.of<CreateCompanyProfileCubit>(context)
+                          .currentStepIndex !=
+                      0
+                  ? "Previous"
+                  : "Cancel",
               labelColor: AppColors.accent1Shade1,
-              onTap: () {
-                BlocProvider.of<CreateCompanyProfileCubit>(context).currentStepIndex != 0
-                    ? BlocProvider.of<CreateCompanyProfileCubit>(context).previousStep()
-                    : GoRouter.of(context).pushReplacementNamed(RoutingManager.loginScreen);
-              },
+              onTap: () => previousStepOrLogout(context),
               borderColor: AppColors.accent1Shade1,
             ),
           ),
           Gap(AppSizesManager.s8),
           Expanded(
             child: PrimaryTextButton(
-              label: BlocProvider.of<CreateCompanyProfileCubit>(context).currentStepIndex < 4 ? "Next" : "Validate",
-              isLoading: BlocProvider.of<CreateCompanyProfileCubit>(context).state is CreatingCompany,
+              label: BlocProvider.of<CreateCompanyProfileCubit>(context)
+                          .currentStepIndex <
+                      4
+                  ? "Next"
+                  : "Validate",
+              isLoading: BlocProvider.of<CreateCompanyProfileCubit>(context)
+                  .state is CreatingCompany,
               onTap: () {
-                BlocProvider.of<CreateCompanyProfileCubit>(context).validateCompanyData();
+                BlocProvider.of<CreateCompanyProfileCubit>(context)
+                    .validateCompanyData();
               },
               color: AppColors.accent1Shade1,
             ),

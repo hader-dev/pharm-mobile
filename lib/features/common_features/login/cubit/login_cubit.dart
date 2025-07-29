@@ -15,12 +15,13 @@ import '../../../../utils/toast_helper.dart';
 
 part 'login_state.dart';
 
+bool testWithAccountOne = true;
 class LoginCubit extends Cubit<LoginState> {
   bool isObscured = true;
 
-  TextEditingController emailController = TextEditingController(text: "ayoub1@gmail.com");
+  TextEditingController emailController = TextEditingController(text: testWithAccountOne ? "ayoub1@gmail.com" : "nocompany@gmail.com");
 
-  TextEditingController passwordController = TextEditingController(text: "Strong@12");
+  TextEditingController passwordController = TextEditingController(text: testWithAccountOne ? "Strong@12" : "Idir*34bba");
 
   LoginCubit() : super(LoginInitial());
 

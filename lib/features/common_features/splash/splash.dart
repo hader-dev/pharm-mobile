@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
-
-import '../../../config/routes/routing_manager.dart';
-import '../../../config/theme/typoghrapy_manager.dart';
+import 'actions/setup_company_or_go_home.dart';
 import 'cubit/splash_cubit.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -20,14 +18,7 @@ class SplashScreen extends StatelessWidget {
       child: BlocProvider(
           create: (context) => SplashCubit()..init(),
           child: BlocListener<SplashCubit, SplashState>(
-            listener: (context, state) {
-              if (state is UserNotLoggedInYet || state is SplashFailed) {
-                GoRouter.of(context).pushReplacementNamed(RoutingManager.loginScreen);
-              }
-              if (state is SplashCompleted) {
-                GoRouter.of(context).pushReplacementNamed(RoutingManager.appLayout);
-              }
-            },
+            listener: setupCompanyOrGoHome,
             child: BlocBuilder<SplashCubit, SplashState>(
               builder: (context, state) {
                 return Scaffold(

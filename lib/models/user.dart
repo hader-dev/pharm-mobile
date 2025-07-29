@@ -1,4 +1,5 @@
 import 'package:hader_pharm_mobile/models/image.dart';
+import 'package:hader_pharm_mobile/models/role.dart';
 
 class UserModel {
   final String id;
@@ -12,8 +13,10 @@ class UserModel {
   final bool emailVerified;
   final bool phoneVerified;
   final dynamic lastLogin;
+  final Role role;
 
   UserModel({
+    required this.role,
     required this.id,
     required this.image,
     required this.createdAt,
@@ -28,6 +31,7 @@ class UserModel {
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
+        role: Role.fromId(json["roleId"]),
         id: json["id"],
         image: json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
         createdAt: DateTime.parse(json["createdAt"]),
