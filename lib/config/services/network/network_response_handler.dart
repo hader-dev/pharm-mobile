@@ -17,6 +17,8 @@ class ResponseHandler {
         throw UnAuthorizedException.fromJson(decodedResponse);
       case 404: //Resource Not Found
         throw NotFoundException.fromJson(decodedResponse);
+      case 409:
+        throw ConstraintFailedException.fromJson(decodedResponse);
       case 429: //Too Many Requests
         throw TooManyRequestsException.fromJson(decodedResponse);
 

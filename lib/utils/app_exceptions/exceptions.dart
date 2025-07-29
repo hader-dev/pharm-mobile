@@ -314,6 +314,35 @@ class NotFoundException extends TemplateException {
   }
 }
 
+
+class ConstraintFailedException extends TemplateException {
+  ConstraintFailedException({
+    super.message,
+    super.statusCode,
+    super.error,
+    super.errorType,
+    super.path,
+    super.timestamp,
+    super.errors,
+    super.errorCode,
+  });
+
+  factory ConstraintFailedException.fromJson(Map<String, dynamic> json) {
+    return ConstraintFailedException(
+      message: json['message'],
+      statusCode: json['statusCode'],
+      error: json['error'],
+      errorType: json['type'],
+      path: json['path'],
+      timestamp: json['timestamp'],
+      errors: json['errors'] == null ? null : (json['errors'] as List).map((e) => FieldError.fromJson(e)).toList(),
+      errorCode: json['code'],
+    );
+  }
+}
+
+
+
 class FieldError {
   final String? field;
   final String? message;
