@@ -15,7 +15,7 @@ import '../../../../config/routes/routing_manager.dart' show RoutingManager;
 
 part 'login_state.dart';
 
-bool testWithAccountOne = true;
+bool testWithAccountOne = false;
 
 class LoginCubit extends Cubit<LoginState> {
   bool isObscured = true;

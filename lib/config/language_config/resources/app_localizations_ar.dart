@@ -172,10 +172,11 @@ class AppLocalizationsAr extends AppLocalizations {
   String get email => 'البريد الإلكتروني';
 
   @override
-  String get errors_field_required => 'الحقل مطلوب';
+  String get feedback_field_required => 'الحقل مطلوب';
 
   @override
-  String get errors_invalid_email_format => 'تنسيق البريد الإلكتروني غير صالح';
+  String get feedback_invalid_email_format =>
+      'تنسيق البريد الإلكتروني غير صالح';
 
   @override
   String get passwor_min_length =>
@@ -207,7 +208,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get login_existing => 'تسجيل الدخول (لديك حساب بالفعل!)';
 
   @override
-  String get errors_passwords_do_not_match => 'كلمتا المرور غير متطابقتين';
+  String get feedback_passwords_do_not_match => 'كلمتا المرور غير متطابقتين';
 
   @override
   String get sign_up => 'إنشاء حساب';
@@ -420,7 +421,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get currency => 'دج';
 
   @override
-  String get errors_network_fetch_error => 'حدث خطأ أثناء جلب البيانات';
+  String get feedback_network_fetch_error => 'حدث خطأ أثناء جلب البيانات';
 
   @override
   String get enter_email_for_password_reset =>
@@ -428,4 +429,115 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get confirm => 'تاكيد';
+
+  @override
+  String get feedback_company_created => 'تم انشاء الشركة بنجاح';
+
+  @override
+  String get company_name => 'اسم الشركة';
+
+  @override
+  String get feedback_email_not_valid => 'البريد الالكتروني غير صالح';
+
+  @override
+  String get phone_number => 'رقم الهاتف';
+
+  @override
+  String get full_address => 'العنوان الكامل';
+
+  @override
+  String get website => 'الموقع الالكتروني';
+
+  @override
+  String get city_commune_no => 'رقم المدينة/القرية';
+
+  @override
+  String get logo => 'اللوجو';
+
+  @override
+  String get nis => 'NIS';
+
+  @override
+  String get rc => 'RC';
+
+  @override
+  String get ai => 'AI';
+
+  @override
+  String get nis_expanded => 'رقم التعريف الثابت';
+
+  @override
+  String get rc_expanded => 'السجل التجاري';
+
+  @override
+  String get ai_expanded => 'عقد التأسيس';
+
+  @override
+  String get what_you_distribute => 'ماذا توزع؟';
+
+  @override
+  String get select_category => 'حدد القسم';
+
+  @override
+  String get bank_account => 'حساب البنك';
+
+  @override
+  String get fiscal_id => 'رقم السجل الضريبي';
+
+  @override
+  String get feedback_not_provided => 'غير مقدمة';
+
+  @override
+  String get feedback_fill_missing_fields => 'يرجى ملء الحقول الناقصة';
+
+  @override
+  String get feedback_select_company_type => 'يرجى اختيار نوع الشركة';
+
+  @override
+  String get company_type_title => 'نوع الشركة';
+
+  @override
+  String get company_type_subtitle => 'اختر نوع شركتك.';
+
+  @override
+  String get general_info_title => 'معلومات عامة';
+
+  @override
+  String get general_info_subtitle => 'قدّم التفاصيل الأساسية لشركتك.';
+
+  @override
+  String get legal_info_title => 'معلومات قانونية';
+
+  @override
+  String get legal_info_subtitle => 'أدخل تفاصيل التسجيل والترخيص.';
+
+  @override
+  String get company_profile_title => 'ملف الشركة';
+
+  @override
+  String get company_profile_subtitle => 'أضف الهوية التجارية ونبذة عن نشاطك.';
+
+  @override
+  String get review_submit_title => 'مراجعة وإرسال';
+
+  @override
+  String get review_submit_subtitle => 'راجع جميع المعلومات قبل الإرسال.';
+
+  @override
+  String get previous => 'السابق';
+
+  @override
+  String get next => 'التالي';
+
+  @override
+  String get validate => 'تحقق';
+
+  @override
+  String get feedback_invalid_number => 'رقم غير صالح';
+
+  @override
+  String get feedback_invalid_mobile_number => 'رقم الجوال غير صالح';
+
+  @override
+  String get feedback_invalid_fax_number => 'رقم الفاكس غير صالح';
 }

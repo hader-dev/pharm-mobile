@@ -124,9 +124,13 @@ class DioNetworkManager extends INetworkService {
     return apiResponse;
   }
 
-  // static refreshAuthHeader(String newToken) {
-  //   defaultHeaders['x-auth-token'] = newToken;
-  // }
+  @override
+
+  void refreshAuthHeader(String? token) {
+    if (token != null) {
+      defaultHeaders[TokenManager.tokenHeaderKey] = "Bearer $token";
+    }
+  }
 
   void initDefaultHeaders(String? token) async {
     if (token != null) {

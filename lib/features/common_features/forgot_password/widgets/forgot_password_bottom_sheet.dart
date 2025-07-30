@@ -44,10 +44,10 @@ class RequestForgotPasswordScreen extends StatelessWidget {
               state: FieldState.normal,
               validationFunc: (value) {
                 if (value == null || value.isEmpty) {
-                  return context.translation!.errors_field_required;
+                  return context.translation!.feedback_field_required;
                 }
                 if (!emailRegex.hasMatch(value)) {
-                  return context.translation!.errors_invalid_email_format;
+                  return context.translation!.feedback_invalid_email_format;
                 }
               },
             ),

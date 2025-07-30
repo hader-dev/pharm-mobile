@@ -2,35 +2,40 @@ import 'package:bloc/bloc.dart';
 
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/config/services/auth/token_manager.dart';
+import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
+import 'package:hader_pharm_mobile/features/common_features/create_company_profile/hooks_data_model/create_company_profile_form.dart';
 
 import 'package:hader_pharm_mobile/repositories/remote/company/company_repository_impl.dart';
 import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler.dart';
+import 'package:hader_pharm_mobile/utils/device_gallery_helper.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 import 'package:image_picker/image_picker.dart';
-
-import '../../../../utils/device_gallery_helper.dart';
-import '../hooks_data_model/create_company_profile_form.dart';
 
 part 'create_company_profile_state.dart';
 
 class CreateCompanyProfileCubit extends Cubit<CreateCompanyProfileState> {
   int currentStepIndex = 0;
   XFile? pickedImage;
-  List<GlobalKey<FormState>> formKeys = List.generate(2, (_) => GlobalKey<FormState>());
-  CreateCompanyProfileFormDataModel companyData = CreateCompanyProfileFormDataModel(
+  List<GlobalKey<FormState>> formKeys =
+      List.generate(2, (_) => GlobalKey<FormState>());
+  CreateCompanyProfileFormDataModel companyData =
+      CreateCompanyProfileFormDataModel(
     companyType: 0,
   );
   final pageController = PageController(initialPage: 0);
   final CompanyRepository companyRepository;
-  CreateCompanyProfileCubit({required this.companyRepository}) : super(CreateCompanyProfileInitial());
+  CreateCompanyProfileCubit({required this.companyRepository})
+      : super(CreateCompanyProfileInitial());
 
-  void validateCompanyData() async {
+  void validateCompanyData(BuildContext context) async {
     try {
       switch (currentStepIndex) {
         case 0:
           {
             if (companyData.companyType == 0) {
-              throw 'Please select a company type.';
+              throw context.translation!.feedback_select_company_type;
             } else {
               nextStep();
             }
@@ -38,14 +43,14 @@ class CreateCompanyProfileCubit extends Cubit<CreateCompanyProfileState> {
         case 1:
           {
             if (!formKeys[0].currentState!.validate()) {
-              throw 'fill missing fields';
+              throw context.translation!.feedback_fill_missing_fields;
             } else {
               nextStep();
             }
           }
         case 2:
           if (!formKeys[1].currentState!.validate()) {
-            throw 'fill missing fields';
+            throw context.translation!.feedback_fill_missing_fields;
           } else {
             nextStep();
           }
@@ -57,7 +62,9 @@ class CreateCompanyProfileCubit extends Cubit<CreateCompanyProfileState> {
           }
       }
     } catch (e) {
-      getItInstance.get<ToastManager>().showToast(type: ToastType.warning, message: e.toString());
+      getItInstance
+          .get<ToastManager>()
+          .showToast(type: ToastType.warning, message: e.toString());
     }
   }
 
@@ -94,11 +101,16 @@ class CreateCompanyProfileCubit extends Cubit<CreateCompanyProfileState> {
     }
   }
 
-  Future<void> createCompany(CreateCompanyProfileFormDataModel companyData) async {
+  Future<void> createCompany(
+      CreateCompanyProfileFormDataModel companyData) async {
     try {
       emit(CreatingCompany());
 
       await companyRepository.createCompany(companyData);
+      var client = getItInstance.get<INetworkService>();
+      var tokenManger = getItInstance.get<TokenManager>();
+      await tokenManger.refreshToken(client);
+
 
       emit(CompanyCreated());
     } catch (e) {

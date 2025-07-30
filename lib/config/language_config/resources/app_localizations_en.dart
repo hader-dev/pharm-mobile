@@ -171,10 +171,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get email => 'Email';
 
   @override
-  String get errors_field_required => 'Field is required';
+  String get feedback_field_required => 'Field is required';
 
   @override
-  String get errors_invalid_email_format => 'Invalid email format';
+  String get feedback_invalid_email_format => 'Invalid email format';
 
   @override
   String get passwor_min_length => 'Password must be at least 6 characters';
@@ -205,7 +205,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get login_existing => 'Login (Already have an account!)';
 
   @override
-  String get errors_passwords_do_not_match => 'Passwords do not match';
+  String get feedback_passwords_do_not_match => 'Passwords do not match';
 
   @override
   String get sign_up => 'Sign up';
@@ -417,7 +417,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get currency => 'DZD';
 
   @override
-  String get errors_network_fetch_error => 'Fetch error';
+  String get feedback_network_fetch_error => 'Fetch error';
 
   @override
   String get enter_email_for_password_reset =>
@@ -425,4 +425,118 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get confirm => 'Confirm';
+
+  @override
+  String get feedback_company_created => 'Company created successfully';
+
+  @override
+  String get company_name => 'Company Name';
+
+  @override
+  String get feedback_email_not_valid => 'Email is not valid';
+
+  @override
+  String get phone_number => 'Phone Number';
+
+  @override
+  String get full_address => 'Full Address';
+
+  @override
+  String get website => 'Website';
+
+  @override
+  String get city_commune_no => 'City/Commune No.';
+
+  @override
+  String get logo => 'Logo';
+
+  @override
+  String get nis => 'NIS';
+
+  @override
+  String get rc => 'RC';
+
+  @override
+  String get ai => 'AI';
+
+  @override
+  String get nis_expanded => 'Static Identification Number';
+
+  @override
+  String get rc_expanded => 'Commercial Registration Number';
+
+  @override
+  String get ai_expanded => 'Article of Incorporation';
+
+  @override
+  String get what_you_distribute => 'What do you distribute?';
+
+  @override
+  String get select_category => 'Select Category';
+
+  @override
+  String get bank_account => 'Bank Account';
+
+  @override
+  String get fiscal_id => 'Fiscal ID';
+
+  @override
+  String get feedback_not_provided => 'Not provided';
+
+  @override
+  String get feedback_fill_missing_fields =>
+      'Please fill in the missing fields';
+
+  @override
+  String get feedback_select_company_type => 'Please select a company type';
+
+  @override
+  String get company_type_title => 'Company Type';
+
+  @override
+  String get company_type_subtitle => 'Select the type of your company.';
+
+  @override
+  String get general_info_title => 'General Information';
+
+  @override
+  String get general_info_subtitle => 'Provide your company’s basic details.';
+
+  @override
+  String get legal_info_title => 'Legal Information';
+
+  @override
+  String get legal_info_subtitle =>
+      'Enter your registration and license details.';
+
+  @override
+  String get company_profile_title => 'Company Profile';
+
+  @override
+  String get company_profile_subtitle => 'Add branding and business overview.';
+
+  @override
+  String get review_submit_title => 'Review & Submit';
+
+  @override
+  String get review_submit_subtitle =>
+      'Review all information before submitting.';
+
+  @override
+  String get previous => 'Previous';
+
+  @override
+  String get next => 'Next';
+
+  @override
+  String get validate => 'Validate';
+
+  @override
+  String get feedback_invalid_number => 'Invalid number';
+
+  @override
+  String get feedback_invalid_mobile_number => 'Invalid mobile number';
+
+  @override
+  String get feedback_invalid_fax_number => 'Invalid fax number';
 }

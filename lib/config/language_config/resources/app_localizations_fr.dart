@@ -173,10 +173,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get email => 'E-mail';
 
   @override
-  String get errors_field_required => 'Le champ est requis';
+  String get feedback_field_required => 'Le champ est requis';
 
   @override
-  String get errors_invalid_email_format => 'Format d\'e-mail invalide';
+  String get feedback_invalid_email_format => 'Format d\'e-mail invalide';
 
   @override
   String get passwor_min_length =>
@@ -208,7 +208,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get login_existing => 'Connexion (Vous avez déjà un compte !)';
 
   @override
-  String get errors_passwords_do_not_match =>
+  String get feedback_passwords_do_not_match =>
       'Les mots de passe ne correspondent pas';
 
   @override
@@ -424,7 +424,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String get currency => 'DZD';
 
   @override
-  String get errors_network_fetch_error => 'Erreur de récupération des données';
+  String get feedback_network_fetch_error =>
+      'Erreur de récupération des données';
 
   @override
   String get enter_email_for_password_reset =>
@@ -432,4 +433,121 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get confirm => 'Confirmer';
+
+  @override
+  String get feedback_company_created => 'Société crée avec successe';
+
+  @override
+  String get company_name => 'Nom de la société';
+
+  @override
+  String get feedback_email_not_valid => 'Adresse e-mail non valide';
+
+  @override
+  String get phone_number => 'Numéro de tèlèphone';
+
+  @override
+  String get full_address => 'Adresse complète';
+
+  @override
+  String get website => 'Site web';
+
+  @override
+  String get city_commune_no => 'Ville/Commune No.';
+
+  @override
+  String get logo => 'Logo';
+
+  @override
+  String get nis => 'NIS';
+
+  @override
+  String get rc => 'RC';
+
+  @override
+  String get ai => 'AI';
+
+  @override
+  String get nis_expanded => 'Numéro d\'identification statique';
+
+  @override
+  String get rc_expanded => 'Registre de commerce';
+
+  @override
+  String get ai_expanded => 'Acte constitutif';
+
+  @override
+  String get what_you_distribute => 'Qu\'est-ce que vous distribuez ?';
+
+  @override
+  String get select_category => 'Choisissez la categorie';
+
+  @override
+  String get bank_account => 'Compte bancaire';
+
+  @override
+  String get fiscal_id => 'Numéro fiscal';
+
+  @override
+  String get feedback_not_provided => 'Pas fourni';
+
+  @override
+  String get feedback_fill_missing_fields =>
+      'Please fill in the missing fields';
+
+  @override
+  String get feedback_select_company_type => 'Please select a company type';
+
+  @override
+  String get company_type_title => 'Type d\'entreprise';
+
+  @override
+  String get company_type_subtitle =>
+      'Sélectionnez le type de votre entreprise.';
+
+  @override
+  String get general_info_title => 'Informations générales';
+
+  @override
+  String get general_info_subtitle =>
+      'Fournissez les informations de base sur votre entreprise.';
+
+  @override
+  String get legal_info_title => 'Informations légales';
+
+  @override
+  String get legal_info_subtitle =>
+      'Entrez vos informations d\'enregistrement et de licence.';
+
+  @override
+  String get company_profile_title => 'Profil de l\'entreprise';
+
+  @override
+  String get company_profile_subtitle =>
+      'Ajoutez l\'identité visuelle et un aperçu de votre activité.';
+
+  @override
+  String get review_submit_title => 'Vérification et soumission';
+
+  @override
+  String get review_submit_subtitle =>
+      'Vérifiez toutes les informations avant de soumettre.';
+
+  @override
+  String get previous => 'Précédent';
+
+  @override
+  String get next => 'Suivant';
+
+  @override
+  String get validate => 'Valider';
+
+  @override
+  String get feedback_invalid_number => 'Nombre invalide';
+
+  @override
+  String get feedback_invalid_mobile_number => 'Numéro de mobile invalide';
+
+  @override
+  String get feedback_invalid_fax_number => 'Numéro de fax invalide';
 }

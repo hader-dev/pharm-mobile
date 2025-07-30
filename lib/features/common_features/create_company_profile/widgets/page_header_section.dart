@@ -1,24 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
+import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
-import '../../../../config/theme/colors_manager.dart';
-import '../../../../config/theme/typoghrapy_manager.dart';
-import '../../../../utils/constants.dart';
 import 'custom_stepper.dart';
 
 class PageHeaderSection extends StatelessWidget {
   final int currentStep;
-  final List<Map<String, String>> pagesTitles = [
-    {"title": "Company Type", "subtitle": "Select the type of your company."},
-    {"title": "General Information", "subtitle": "Provide your company’s basic details."},
-    {"title": "Legal Information", "subtitle": "Enter your registration and license details."},
-    {"title": "Company Profile", "subtitle": "Add branding and business overview."},
-    {"title": "Review & Submit", "subtitle": "Review all information before submitting."},
-  ];
-  PageHeaderSection({super.key, required this.currentStep});
+
+  const PageHeaderSection({super.key, required this.currentStep});
 
   @override
   Widget build(BuildContext context) {
+    final List<Map<String, String>> pagesTitles = [
+      {
+        "title": context.translation!.company_type_title,
+        "subtitle": context.translation!.company_type_subtitle,
+      },
+      {
+        "title": context.translation!.general_info_title,
+        "subtitle": context.translation!.general_info_subtitle,
+      },
+      {
+        "title": context.translation!.legal_info_title,
+        "subtitle": context.translation!.legal_info_subtitle,
+      },
+      {
+        "title": context.translation!.company_profile_title,
+        "subtitle": context.translation!.company_profile_subtitle,
+      },
+      {
+        "title": context.translation!.review_submit_title,
+        "subtitle": context.translation!.review_submit_subtitle,
+      },
+    ];
+
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p16),
       child: Column(mainAxisSize: MainAxisSize.min, children: [
@@ -39,7 +57,8 @@ class PageHeaderSection extends StatelessWidget {
               ),
               child: Text(
                 '${currentStep + 1}',
-                style: AppTypography.headLine3SemiBoldStyle.copyWith(color: AppColors.accent1Shade1),
+                style: AppTypography.headLine3SemiBoldStyle
+                    .copyWith(color: AppColors.accent1Shade1),
               ),
             ),
             Column(
@@ -47,10 +66,12 @@ class PageHeaderSection extends StatelessWidget {
               children: [
                 Text(
                   pagesTitles[currentStep]["title"] ?? '',
-                  style: AppTypography.headLine3SemiBoldStyle.copyWith(color: AppColors.accent1Shade1),
+                  style: AppTypography.headLine3SemiBoldStyle
+                      .copyWith(color: AppColors.accent1Shade1),
                 ),
                 Gap(AppSizesManager.s4),
-                Text(pagesTitles[currentStep]["subtitle"] ?? '', style: AppTypography.bodySmallStyle),
+                Text(pagesTitles[currentStep]["subtitle"] ?? '',
+                    style: AppTypography.bodySmallStyle),
               ],
             ),
           ],

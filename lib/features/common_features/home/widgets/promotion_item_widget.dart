@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-
-import '../../../common/widgets/image_load_error_widget.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/image_load_error_widget.dart';
 
 class PromotionItemWidget extends StatelessWidget {
   final String promotionUrl;

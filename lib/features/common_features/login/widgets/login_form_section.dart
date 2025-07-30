@@ -36,10 +36,10 @@ class _LoginFormSectionState extends State<LoginFormSection> {
                 state: FieldState.normal,
                 validationFunc: (value) {
                   if (value == null || value.isEmpty) {
-                    return context.translation!.errors_field_required;
+                    return context.translation!.feedback_field_required;
                   }
                   if (!emailRegex.hasMatch(value)) {
-                    return context.translation!.errors_invalid_email_format;
+                    return context.translation!.feedback_invalid_email_format;
                   }
                 },
               ),
@@ -58,7 +58,7 @@ class _LoginFormSectionState extends State<LoginFormSection> {
                 validationFunc: (value) {
                   if ((value == null || value.isEmpty) &&
                       BlocProvider.of<LoginCubit>(context).emailController.text.isNotEmpty) {
-                    return context.translation!.errors_field_required;
+                    return context.translation!.feedback_field_required;
                   }
                   if (value.length < 6) {
                     return context.translation!.passwor_min_length;

@@ -1,9 +1,9 @@
 import 'package:hader_pharm_mobile/features/common_features/create_company_profile/hooks_data_model/create_company_profile_form.dart';
 import 'package:hader_pharm_mobile/models/company.dart';
+import 'package:hader_pharm_mobile/models/para_pharma.dart';
+import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 
-import '../../../models/para_pharma.dart';
-import '../../../utils/constants.dart';
 
 abstract class ICompanyRepository {
   Future<void> createCompany(CreateCompanyProfileFormDataModel companyData);

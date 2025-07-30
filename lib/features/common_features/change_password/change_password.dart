@@ -100,7 +100,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                 state: FieldState.normal,
                                 validationFunc: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return context.translation!.errors_field_required;
+                                    return context.translation!.feedback_field_required;
                                   }
                                 },
                               ),
@@ -116,7 +116,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                 state: FieldState.normal,
                                 validationFunc: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return context.translation!.errors_field_required;
+                                    return context.translation!.feedback_field_required;
                                   }
                                   if (value.length < 6) {
                                     return context.translation!.passwor_min_length;
@@ -138,13 +138,13 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                 state: FieldState.normal,
                                 validationFunc: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return context.translation!.errors_field_required;
+                                    return context.translation!.feedback_field_required;
                                   }
                                   if (value.length < 6) {
                                     return 'Confirm Password must be at least 6 characters';
                                   }
                                   if (value != BlocProvider.of<ChangePasswordCubit>(ctx).newPasswordController.text) {
-                                    return context.translation!.errors_passwords_do_not_match;
+                                    return context.translation!.feedback_passwords_do_not_match;
                                   }
                                 },
                               ),

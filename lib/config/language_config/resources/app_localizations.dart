@@ -418,17 +418,17 @@ abstract class AppLocalizations {
   /// **'Email'**
   String get email;
 
-  /// No description provided for @errors_field_required.
+  /// No description provided for @feedback_field_required.
   ///
   /// In en, this message translates to:
   /// **'Field is required'**
-  String get errors_field_required;
+  String get feedback_field_required;
 
-  /// No description provided for @errors_invalid_email_format.
+  /// No description provided for @feedback_invalid_email_format.
   ///
   /// In en, this message translates to:
   /// **'Invalid email format'**
-  String get errors_invalid_email_format;
+  String get feedback_invalid_email_format;
 
   /// No description provided for @passwor_min_length.
   ///
@@ -484,11 +484,11 @@ abstract class AppLocalizations {
   /// **'Login (Already have an account!)'**
   String get login_existing;
 
-  /// No description provided for @errors_passwords_do_not_match.
+  /// No description provided for @feedback_passwords_do_not_match.
   ///
   /// In en, this message translates to:
   /// **'Passwords do not match'**
-  String get errors_passwords_do_not_match;
+  String get feedback_passwords_do_not_match;
 
   /// No description provided for @sign_up.
   ///
@@ -898,11 +898,11 @@ abstract class AppLocalizations {
   /// **'DZD'**
   String get currency;
 
-  /// No description provided for @errors_network_fetch_error.
+  /// No description provided for @feedback_network_fetch_error.
   ///
   /// In en, this message translates to:
   /// **'Fetch error'**
-  String get errors_network_fetch_error;
+  String get feedback_network_fetch_error;
 
   /// No description provided for @enter_email_for_password_reset.
   ///
@@ -915,6 +915,228 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Confirm'**
   String get confirm;
+
+  /// No description provided for @feedback_company_created.
+  ///
+  /// In en, this message translates to:
+  /// **'Company created successfully'**
+  String get feedback_company_created;
+
+  /// No description provided for @company_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Company Name'**
+  String get company_name;
+
+  /// No description provided for @feedback_email_not_valid.
+  ///
+  /// In en, this message translates to:
+  /// **'Email is not valid'**
+  String get feedback_email_not_valid;
+
+  /// No description provided for @phone_number.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone Number'**
+  String get phone_number;
+
+  /// No description provided for @full_address.
+  ///
+  /// In en, this message translates to:
+  /// **'Full Address'**
+  String get full_address;
+
+  /// No description provided for @website.
+  ///
+  /// In en, this message translates to:
+  /// **'Website'**
+  String get website;
+
+  /// No description provided for @city_commune_no.
+  ///
+  /// In en, this message translates to:
+  /// **'City/Commune No.'**
+  String get city_commune_no;
+
+  /// No description provided for @logo.
+  ///
+  /// In en, this message translates to:
+  /// **'Logo'**
+  String get logo;
+
+  /// No description provided for @nis.
+  ///
+  /// In en, this message translates to:
+  /// **'NIS'**
+  String get nis;
+
+  /// No description provided for @rc.
+  ///
+  /// In en, this message translates to:
+  /// **'RC'**
+  String get rc;
+
+  /// No description provided for @ai.
+  ///
+  /// In en, this message translates to:
+  /// **'AI'**
+  String get ai;
+
+  /// No description provided for @nis_expanded.
+  ///
+  /// In en, this message translates to:
+  /// **'Static Identification Number'**
+  String get nis_expanded;
+
+  /// No description provided for @rc_expanded.
+  ///
+  /// In en, this message translates to:
+  /// **'Commercial Registration Number'**
+  String get rc_expanded;
+
+  /// No description provided for @ai_expanded.
+  ///
+  /// In en, this message translates to:
+  /// **'Article of Incorporation'**
+  String get ai_expanded;
+
+  /// No description provided for @what_you_distribute.
+  ///
+  /// In en, this message translates to:
+  /// **'What do you distribute?'**
+  String get what_you_distribute;
+
+  /// No description provided for @select_category.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Category'**
+  String get select_category;
+
+  /// No description provided for @bank_account.
+  ///
+  /// In en, this message translates to:
+  /// **'Bank Account'**
+  String get bank_account;
+
+  /// No description provided for @fiscal_id.
+  ///
+  /// In en, this message translates to:
+  /// **'Fiscal ID'**
+  String get fiscal_id;
+
+  /// No description provided for @feedback_not_provided.
+  ///
+  /// In en, this message translates to:
+  /// **'Not provided'**
+  String get feedback_not_provided;
+
+  /// No description provided for @feedback_fill_missing_fields.
+  ///
+  /// In en, this message translates to:
+  /// **'Please fill in the missing fields'**
+  String get feedback_fill_missing_fields;
+
+  /// No description provided for @feedback_select_company_type.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select a company type'**
+  String get feedback_select_company_type;
+
+  /// No description provided for @company_type_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Company Type'**
+  String get company_type_title;
+
+  /// No description provided for @company_type_subtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Select the type of your company.'**
+  String get company_type_subtitle;
+
+  /// No description provided for @general_info_title.
+  ///
+  /// In en, this message translates to:
+  /// **'General Information'**
+  String get general_info_title;
+
+  /// No description provided for @general_info_subtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Provide your company’s basic details.'**
+  String get general_info_subtitle;
+
+  /// No description provided for @legal_info_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Legal Information'**
+  String get legal_info_title;
+
+  /// No description provided for @legal_info_subtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your registration and license details.'**
+  String get legal_info_subtitle;
+
+  /// No description provided for @company_profile_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Company Profile'**
+  String get company_profile_title;
+
+  /// No description provided for @company_profile_subtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add branding and business overview.'**
+  String get company_profile_subtitle;
+
+  /// No description provided for @review_submit_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Review & Submit'**
+  String get review_submit_title;
+
+  /// No description provided for @review_submit_subtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Review all information before submitting.'**
+  String get review_submit_subtitle;
+
+  /// No description provided for @previous.
+  ///
+  /// In en, this message translates to:
+  /// **'Previous'**
+  String get previous;
+
+  /// No description provided for @next.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get next;
+
+  /// No description provided for @validate.
+  ///
+  /// In en, this message translates to:
+  /// **'Validate'**
+  String get validate;
+
+  /// No description provided for @feedback_invalid_number.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid number'**
+  String get feedback_invalid_number;
+
+  /// No description provided for @feedback_invalid_mobile_number.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid mobile number'**
+  String get feedback_invalid_mobile_number;
+
+  /// No description provided for @feedback_invalid_fax_number.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid fax number'**
+  String get feedback_invalid_fax_number;
 }
 
 class _AppLocalizationsDelegate

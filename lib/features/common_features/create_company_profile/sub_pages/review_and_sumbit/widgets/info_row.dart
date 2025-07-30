@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
-import '../../../../../../config/theme/colors_manager.dart';
-import '../../../../../../config/theme/typoghrapy_manager.dart';
 
 class InfoRow extends StatelessWidget {
   final IconData? icon;
@@ -28,9 +29,9 @@ class InfoRow extends StatelessWidget {
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 2 / 6,
                   child: Tooltip(
-                    message: dataValue.isEmpty ? "Not Provided" : dataValue,
+                    message: dataValue.isEmpty ? context.translation!.feedback_not_provided : dataValue,
                     triggerMode: TooltipTriggerMode.tap,
-                    child: Text(dataValue.isEmpty ? "Not Provided" : dataValue,
+                    child: Text(dataValue.isEmpty ? context.translation!.feedback_not_provided : dataValue,
                         textAlign: TextAlign.end,
                         softWrap: true,
                         overflow: TextOverflow.ellipsis,
@@ -46,9 +47,9 @@ class InfoRow extends StatelessWidget {
               Text(label, style: AppTypography.body3MediumStyle.copyWith(color: TextColors.ternary.color)),
               Gap(AppSizesManager.s6),
               Tooltip(
-                message: dataValue.isEmpty ? "Not Provided" : dataValue,
+                message: dataValue.isEmpty ? context.translation!.feedback_not_provided : dataValue,
                 triggerMode: TooltipTriggerMode.tap,
-                child: Text(dataValue.isEmpty ? "Not Provided" : dataValue,
+                child: Text(dataValue.isEmpty ? context.translation!.feedback_not_provided : dataValue,
                     textAlign: TextAlign.end,
                     softWrap: true,
                     overflow: TextOverflow.ellipsis,

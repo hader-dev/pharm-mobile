@@ -5,10 +5,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
+import 'package:hader_pharm_mobile/features/common_features/create_company_profile/cubit/create_company_profile_cubit.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
-import '../../cubit/create_company_profile_cubit.dart';
 import 'widgets/info_row.dart';
 
 class ReviewSubmitPage extends StatelessWidget {
@@ -18,93 +19,133 @@ class ReviewSubmitPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p8),
-        child: Scrollbar(
+      padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p8),
+      child: Scrollbar(
+        controller: scrollController,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p8),
+          child: SingleChildScrollView(
             controller: scrollController,
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p8),
-              child: SingleChildScrollView(
-                controller: scrollController,
-                physics: const BouncingScrollPhysics(),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Container(
-                      clipBehavior: Clip.antiAlias,
-                      height: MediaQuery.sizeOf(context).height * 0.2,
-                      width: MediaQuery.sizeOf(context).height * 0.2,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: AppColors.bgDarken,
-                          border: Border.all(color: AppColors.bgDarken2)),
-                      child: BlocProvider.of<CreateCompanyProfileCubit>(context).companyData.logoPath != null
-                          ? Image.file(
-                              File(BlocProvider.of<CreateCompanyProfileCubit>(context).companyData.logoPath!),
-                              fit: BoxFit.fill,
-                            )
-                          : const Icon(Iconsax.camera, color: Colors.white, size: 40),
-                    ),
-                    // Container(
-                    //   height: 112,
-                    //   width: 112,
-                    //   decoration: BoxDecoration(
-                    //     shape: BoxShape.circle,
-                    //     color: Colors.blue,
-                    //   ),
-                    //   child: const Icon(Icons.local_pharmacy, color: Colors.white, size: 40),
-                    // ),
-                    const Gap(AppSizesManager.s24),
-
-                    // Company Info
-                    Text(BlocProvider.of<CreateCompanyProfileCubit>(context).companyData.companyName,
-                        style: AppTypography.headLine2Style),
-
-                    const Gap(AppSizesManager.s4),
-                    Text(
-                        CompanyType.values
-                            .where((e) =>
-                                e.id == BlocProvider.of<CreateCompanyProfileCubit>(context).companyData.companyType)
-                            .first
-                            .name,
-                        style: AppTypography.body1MediumStyle.copyWith(color: TextColors.ternary.color)),
-                    const Gap(AppSizesManager.s12),
-
-                    Text(
-                      "${BlocProvider.of<CreateCompanyProfileCubit>(context).companyData.description}.",
-                      textAlign: TextAlign.center,
-                      style: AppTypography.body2RegularStyle.copyWith(color: TextColors.ternary.color),
-                    ),
-                    const Gap(AppSizesManager.s24),
-
-                    // General information
-                    InfoRow(
-                        icon: Icons.email,
-                        label: "Email",
-                        dataValue: BlocProvider.of<CreateCompanyProfileCubit>(context).companyData.email),
-                    InfoRow(
-                        icon: Icons.phone,
-                        label: "Phone",
-                        dataValue: BlocProvider.of<CreateCompanyProfileCubit>(context).companyData.phone),
-                    InfoRow(
-                        icon: Icons.language,
-                        label: "Website",
-                        dataValue: BlocProvider.of<CreateCompanyProfileCubit>(context).companyData.website),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: AppSizesManager.p16),
-                      child: Divider(
-                        color: StrokeColors.normal.color,
-                      ),
-                    ),
-
-                    // Legal information
-
-                    InfoRow(
-                        label: "NIS", dataValue: BlocProvider.of<CreateCompanyProfileCubit>(context).companyData.nis),
-                    InfoRow(label: "RC", dataValue: BlocProvider.of<CreateCompanyProfileCubit>(context).companyData.rc),
-                    InfoRow(label: "AI", dataValue: BlocProvider.of<CreateCompanyProfileCubit>(context).companyData.ai),
-                  ],
+            physics: const BouncingScrollPhysics(),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  clipBehavior: Clip.antiAlias,
+                  height: MediaQuery.sizeOf(context).height * 0.2,
+                  width: MediaQuery.sizeOf(context).height * 0.2,
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: AppColors.bgDarken,
+                      border: Border.all(color: AppColors.bgDarken2)),
+                  child: BlocProvider.of<CreateCompanyProfileCubit>(context)
+                              .companyData
+                              .logoPath !=
+                          null
+                      ? Image.file(
+                          File(BlocProvider.of<CreateCompanyProfileCubit>(
+                                  context)
+                              .companyData
+                              .logoPath!),
+                          fit: BoxFit.fill,
+                        )
+                      : const Icon(Iconsax.camera,
+                          color: Colors.white, size: 40),
                 ),
-              ),
-            )));
+                // Container(
+                //   height: 112,
+                //   width: 112,
+                //   decoration: BoxDecoration(
+                //     shape: BoxShape.circle,
+                //     color: Colors.blue,
+                //   ),
+                //   child: const Icon(Icons.local_pharmacy, color: Colors.white, size: 40),
+                // ),
+                const Gap(AppSizesManager.s24),
+
+                // Company Info
+                Text(
+                    BlocProvider.of<CreateCompanyProfileCubit>(context)
+                        .companyData
+                        .companyName,
+                    style: AppTypography.headLine2Style),
+
+                const Gap(AppSizesManager.s4),
+                Text(
+                    CompanyType.values
+                        .where((e) =>
+                            e.id ==
+                            BlocProvider.of<CreateCompanyProfileCubit>(context)
+                                .companyData
+                                .companyType)
+                        .first
+                        .name,
+                    style: AppTypography.body1MediumStyle
+                        .copyWith(color: TextColors.ternary.color)),
+                const Gap(AppSizesManager.s12),
+
+                Text(
+                  "${BlocProvider.of<CreateCompanyProfileCubit>(context).companyData.description}.",
+                  textAlign: TextAlign.center,
+                  style: AppTypography.body2RegularStyle
+                      .copyWith(color: TextColors.ternary.color),
+                ),
+                const Gap(AppSizesManager.s24),
+
+                // General information
+                InfoRow(
+                    icon: Icons.email,
+                    label: context.translation!.email,
+                    dataValue:
+                        BlocProvider.of<CreateCompanyProfileCubit>(context)
+                            .companyData
+                            .email),
+                InfoRow(
+                    icon: Icons.phone,
+                    label: context.translation!.phone_number,
+                    dataValue:
+                        BlocProvider.of<CreateCompanyProfileCubit>(context)
+                            .companyData
+                            .phone),
+                InfoRow(
+                    icon: Icons.language,
+                    label: context.translation!.website,
+                    dataValue:
+                        BlocProvider.of<CreateCompanyProfileCubit>(context)
+                            .companyData
+                            .website),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: AppSizesManager.p16),
+                  child: Divider(
+                    color: StrokeColors.normal.color,
+                  ),
+                ),
+
+                // Legal information
+
+                InfoRow(
+                    label: context.translation!.nis,
+                    dataValue:
+                        BlocProvider.of<CreateCompanyProfileCubit>(context)
+                            .companyData
+                            .nis),
+                InfoRow(
+                    label: context.translation!.rc,
+                    dataValue:
+                        BlocProvider.of<CreateCompanyProfileCubit>(context)
+                            .companyData
+                            .rc),
+                InfoRow(
+                    label: context.translation!.ai,
+                    dataValue:
+                        BlocProvider.of<CreateCompanyProfileCubit>(context)
+                            .companyData
+                            .ai),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

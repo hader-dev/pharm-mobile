@@ -1,11 +1,10 @@
+import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
+import 'package:hader_pharm_mobile/models/medicine_catalog.dart';
+import 'package:hader_pharm_mobile/models/medicine_catalog_response.dart';
+import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/urls.dart';
 
-import '../../../config/services/network/network_interface.dart';
-
-import '../../../models/medicine_catalog.dart';
-import '../../../models/medicine_catalog_response.dart';
-import '../../../utils/constants.dart';
-import '../../../utils/enums.dart';
 import 'medicine_catalog_repository.dart';
 
 class MedicineCatalogRepository extends IMedicineCatalogRepository {
@@ -37,8 +36,10 @@ class MedicineCatalogRepository extends IMedicineCatalogRepository {
   }
 
   @override
+
   Future<MedicineCatalogModel> getMedicineCatalogById(String id) async {
-    var decodedResponse = await client.sendRequest(() => client.get("${Urls.medicinesCatalog}/$id"));
+    var decodedResponse = await client
+        .sendRequest(() => client.get("${Urls.medicinesCatalog}/$id"));
     return MedicineCatalogModel.fromJson(decodedResponse);
   }
 }

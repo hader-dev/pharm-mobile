@@ -11,6 +11,7 @@ class CreateCompanyProfileFormDataModel {
   final String fax;
   final String fullAddress;
   final String website;
+  final int townId;
 
   //only for distributor
   final int? distributorCategoryId;
@@ -32,7 +33,8 @@ class CreateCompanyProfileFormDataModel {
   final String description;
   final bool isActive = true;
 
-  CreateCompanyProfileFormDataModel({
+  CreateCompanyProfileFormDataModel( {
+    this.townId = 34000,
     this.companyType = 0,
     this.companyName = '',
     this.fullAddress = '',
@@ -82,7 +84,9 @@ class CreateCompanyProfileFormDataModel {
         rc: rc ?? this.rc,
         bankAccount: bankAccount ?? this.bankAccount,
         distributorCategoryId: distributorCategoryId ?? this.distributorCategoryId,
+        townId:  townId ?? this.townId,
         fiscalId: fiscalId ?? this.fiscalId);
+
   }
 
   Map<String, dynamic> toJson() {
@@ -101,11 +105,12 @@ class CreateCompanyProfileFormDataModel {
       'fiscalId': fiscalId,
       'description': description,
       'bankAccount': bankAccount,
+      'townId': townId
     };
   }
 
   @override
   String toString() {
-    return 'CreateCompanyProfileFormDataModel{companyType: $companyType, distributorCategoryId: $distributorCategoryId, companyName: $companyName, email: $email, phone: $phone, fullAddress: $fullAddress, website: $website, nis: $nis, ai: $ai, logoPath: $logoPath, description: $description}';
+    return 'CreateCompanyProfileFormDataModel{companyType: $companyType, townId: $townId, distributorCategoryId: $distributorCategoryId, companyName: $companyName, email: $email, phone: $phone, fullAddress: $fullAddress, website: $website, nis: $nis, ai: $ai, logoPath: $logoPath, description: $description}';
   }
 }

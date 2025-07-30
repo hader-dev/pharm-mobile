@@ -42,7 +42,7 @@ class OrdersDetailsScreen extends StatelessWidget {
                 );
               }
               if (state is OrderDetailsLoadingFailed) {
-                return Text(context.translation!.errors_network_fetch_error);
+                return Text(context.translation!.feedback_network_fetch_error);
               }
               return SingleChildScrollView(
                 child: Column(

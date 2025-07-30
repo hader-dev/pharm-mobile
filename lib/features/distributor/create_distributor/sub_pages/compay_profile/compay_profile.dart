@@ -3,15 +3,15 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
+import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_icon_button.dart' show PrimaryIconButton;
+import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field.dart';
+import 'package:hader_pharm_mobile/features/common_features/create_company_profile/cubit/create_company_profile_cubit.dart';
+import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/enums.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
-
-import '../../../../../../config/theme/colors_manager.dart';
-import '../../../../../../config/theme/typoghrapy_manager.dart';
-import '../../../../../../utils/constants.dart';
-import '../../../../../../utils/enums.dart';
-import '../../../../common/buttons/solid/primary_icon_button.dart' show PrimaryIconButton;
-import '../../../../common/text_fields/custom_text_field.dart';
-import '../../../../common_features/create_company_profile/cubit/create_company_profile_cubit.dart';
 
 class DistributorProfilePage extends StatefulWidget {
   const DistributorProfilePage({super.key});
@@ -40,7 +40,7 @@ class _DistributorProfilePageState extends State<DistributorProfilePage> with Au
                   children: [
                     Align(
                         alignment: Alignment.centerLeft,
-                        child: Text("Logo",
+                        child: Text(context.translation!.logo,
                             style: AppTypography.body3MediumStyle.copyWith(color: TextColors.ternary.color))),
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: AppSizesManager.p24),
@@ -79,7 +79,7 @@ class _DistributorProfilePageState extends State<DistributorProfilePage> with Au
                     ),
                     Gap(AppSizesManager.s16),
                     CustomTextField(
-                      label: 'Description',
+                      label: context.translation!.description,
                       state: FieldState.normal,
                       maxLines: 8,
                       validationFunc: () {},
