@@ -548,4 +548,17 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get resend => 'Resend';
+
+  @override
+  String get by_signing_up_you_agree_to_our =>
+      'By signing up, you agree to our';
+
+  @override
+  String get terms_of_services => 'Terms of Services';
+
+  @override
+  String get privacy_policy => 'Privacy Policy';
+
+  @override
+  String get and => 'and';
 }

@@ -28,8 +28,8 @@ class RegisterScreen extends StatelessWidget {
         child: BlocListener<RegisterCubit, RegisterState>(
           listener: (context, state) {
             if (state is RegisterSuccuss) {
-              GoRouter.of(context).goNamed(RoutingManager.checkEmailScreen,
-                  extra: {"email": state.email});
+              GoRouter.of(context).pushReplacement(RoutingManager.checkEmailScreen,
+                  extra: {"email": state.email,"redirectTo": RoutingManager.createCompanyProfile});
             }
           },
           child: Scaffold(

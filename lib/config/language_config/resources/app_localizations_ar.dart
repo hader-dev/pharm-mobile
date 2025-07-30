@@ -549,4 +549,17 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get resend => 'إعادة الإرسال';
+
+  @override
+  String get by_signing_up_you_agree_to_our =>
+      'من خلال التسجيل، فإنك توافق على';
+
+  @override
+  String get terms_of_services => 'شروط الخدمة';
+
+  @override
+  String get privacy_policy => 'سياسة الخصوصية';
+
+  @override
+  String get and => 'و';
 }

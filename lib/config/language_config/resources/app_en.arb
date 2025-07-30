@@ -174,5 +174,9 @@
   "feedback_invalid_fax_number": "Invalid fax number",
   "verification_successful_for": "Verification successful for",
   "verify": "Verify",
-  "resend": "Resend"
+  "resend": "Resend",
+  "by_signing_up_you_agree_to_our": "By signing up, you agree to our",
+  "terms_of_services": "Terms of Services",
+  "privacy_policy": "Privacy Policy",
+  "and": "and"
 }

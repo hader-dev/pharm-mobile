@@ -559,4 +559,17 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get resend => 'Renvoyer';
+
+  @override
+  String get by_signing_up_you_agree_to_our =>
+      'En vous inscrivant, vous acceptez nos';
+
+  @override
+  String get terms_of_services => 'Conditions de service';
+
+  @override
+  String get privacy_policy => 'Politique de confidentialité';
+
+  @override
+  String get and => 'et';
 }

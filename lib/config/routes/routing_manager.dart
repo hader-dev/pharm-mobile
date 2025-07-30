@@ -177,7 +177,8 @@ class RoutingManager {
               Map<String, dynamic> prams = state.extra as Map<String, dynamic>;
               return CheckEmailScreen(
                 email: prams["email"],
-                redirectTo: prams["redirectTo"],
+                redirectTo: prams["redirectTo"]?? RoutingManager.congratulationScreen,
+                popInsteadOfPushReplacement: prams["popInsteadOfPushReplacement"] ?? false,
               );
             }),
         GoRoute(

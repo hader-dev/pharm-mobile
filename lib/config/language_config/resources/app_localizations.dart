@@ -1155,6 +1155,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Resend'**
   String get resend;
+
+  /// No description provided for @by_signing_up_you_agree_to_our.
+  ///
+  /// In en, this message translates to:
+  /// **'By signing up, you agree to our'**
+  String get by_signing_up_you_agree_to_our;
+
+  /// No description provided for @terms_of_services.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms of Services'**
+  String get terms_of_services;
+
+  /// No description provided for @privacy_policy.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy'**
+  String get privacy_policy;
+
+  /// No description provided for @and.
+  ///
+  /// In en, this message translates to:
+  /// **'and'**
+  String get and;
 }
 
 class _AppLocalizationsDelegate

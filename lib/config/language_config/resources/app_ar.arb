@@ -171,5 +171,9 @@
   "feedback_invalid_fax_number": "رقم الفاكس غير صالح",
   "verification_successful_for": "تم التحقق بنجاح لـ",
   "verify": "تحقق",
-  "resend": "إعادة الإرسال"
+  "resend": "إعادة الإرسال",
+  "by_signing_up_you_agree_to_our": "من خلال التسجيل، فإنك توافق على",
+  "terms_of_services": "شروط الخدمة",
+  "privacy_policy": "سياسة الخصوصية",
+  "and": "و"
 }
