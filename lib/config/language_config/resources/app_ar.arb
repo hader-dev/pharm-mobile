@@ -168,5 +168,8 @@
   "validate": "تحقق",
   "feedback_invalid_number": "رقم غير صالح",
   "feedback_invalid_mobile_number": "رقم الجوال غير صالح",
-  "feedback_invalid_fax_number": "رقم الفاكس غير صالح"
+  "feedback_invalid_fax_number": "رقم الفاكس غير صالح",
+  "verification_successful_for": "تم التحقق بنجاح لـ",
+  "verify": "تحقق",
+  "resend": "إعادة الإرسال"
 }

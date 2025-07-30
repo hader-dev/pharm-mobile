@@ -33,7 +33,7 @@ class LoginScreen extends StatelessWidget {
             }
             if (state is EmailOtpResentSuccessfully) {
               GoRouter.of(context).goNamed(RoutingManager.checkEmailScreen,
-                  extra: {"email": state.email, "redirectTo": RoutingManager.loginScreen});
+                  extra: {"email": state.email, "redirectTo": RoutingManager.createCompanyProfile});
             }
           },
           child: Scaffold(

@@ -1,11 +1,11 @@
 import 'dart:async' show Timer;
 
 import 'package:bloc/bloc.dart';
+import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/config/language_config/resources/app_localizations.dart';
+import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler.dart';
-
-import '../../../../config/di/di.dart';
-import '../../../../config/services/auth/user_manager.dart';
-import '../../../../utils/toast_helper.dart';
+import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 
 part 'check_email_state.dart';
 
@@ -20,13 +20,13 @@ class CheckEmailCubit extends Cubit<CheckEmailState> {
     emit(InitEmail());
   }
 
-  void checkEmail(String otp) async {
+  void checkEmail(String otp,AppLocalizations translation) async {
     try {
       emit(CheckEmailLoading());
       await userManager.sendUserEmailCheckOtpCode(email: userEmail, otp: otp);
       getItInstance
           .get<ToastManager>()
-          .showToast(message: "Verification successful for $userEmail ", type: ToastType.success);
+          .showToast(message: "${translation.verification_successful_for} $userEmail ", type: ToastType.success);
       emit(CheckEmailSuccuss());
     } catch (e) {
       emit(CheckEmailFailed());

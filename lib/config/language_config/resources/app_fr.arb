@@ -171,5 +171,8 @@
   "validate": "Valider",
   "feedback_invalid_number": "Nombre invalide",
   "feedback_invalid_mobile_number": "Numéro de mobile invalide",
-  "feedback_invalid_fax_number": "Numéro de fax invalide"
+  "feedback_invalid_fax_number": "Numéro de fax invalide",
+  "verification_successful_for": "Vérification réussie pour",
+  "verify": "Vérifier",
+  "resend": "Renvoyer"
 }

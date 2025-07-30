@@ -540,4 +540,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get feedback_invalid_fax_number => 'رقم الفاكس غير صالح';
+
+  @override
+  String get verification_successful_for => 'تم التحقق بنجاح لـ';
+
+  @override
+  String get verify => 'تحقق';
+
+  @override
+  String get resend => 'إعادة الإرسال';
 }

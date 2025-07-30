@@ -550,4 +550,13 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get feedback_invalid_fax_number => 'Numéro de fax invalide';
+
+  @override
+  String get verification_successful_for => 'Vérification réussie pour';
+
+  @override
+  String get verify => 'Vérifier';
+
+  @override
+  String get resend => 'Renvoyer';
 }

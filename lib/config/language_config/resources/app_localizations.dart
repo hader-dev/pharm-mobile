@@ -1137,6 +1137,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Invalid fax number'**
   String get feedback_invalid_fax_number;
+
+  /// No description provided for @verification_successful_for.
+  ///
+  /// In en, this message translates to:
+  /// **'Verification successful for'**
+  String get verification_successful_for;
+
+  /// No description provided for @verify.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify'**
+  String get verify;
+
+  /// No description provided for @resend.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend'**
+  String get resend;
 }
 
 class _AppLocalizationsDelegate

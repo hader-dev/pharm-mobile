@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:gap/gap.dart';
+import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
+import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
 import 'package:hader_pharm_mobile/features/common_features/check_email/cubit/check_email_cubit.dart';
+import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
-import '../../../../config/theme/colors_manager.dart';
-import '../../../../config/theme/typoghrapy_manager.dart';
-import '../../../../utils/constants.dart';
-import '../../../common/buttons/solid/primary_text_button.dart';
 
 class CheckEmailOtpInputSection extends StatefulWidget {
   const CheckEmailOtpInputSection({super.key});
@@ -25,6 +26,8 @@ class _CheckEmailOtpInputSectionState extends State<CheckEmailOtpInputSection> {
 
   @override
   Widget build(BuildContext context) {
+    final translation = context.translation!;
+    
     return Column(
       children: [
         OtpTextField(
@@ -54,7 +57,7 @@ class _CheckEmailOtpInputSectionState extends State<CheckEmailOtpInputSection> {
                 child: Text.rich(TextSpan(
                   children: [
                     TextSpan(
-                      text: 'Resend!',
+                      text: translation.resend,
                       style: AppTypography.body3RegularStyle.copyWith(
                           color: context.read<CheckEmailCubit>().isResendActive
                               ? AppColors.accent1Shade1
@@ -78,17 +81,12 @@ class _CheckEmailOtpInputSectionState extends State<CheckEmailOtpInputSection> {
         ),
         Gap(AppSizesManager.s24),
         PrimaryTextButton(
-          label: "Verify",
+          label: translation.verify,
           isLoading: context.read<CheckEmailCubit>().state is CheckEmailLoading,
-          onTap: () => context.read<CheckEmailCubit>().checkEmail(controls.map((e) => e!.text).join("")),
+          onTap: () => context.read<CheckEmailCubit>().checkEmail(controls.map((e) => e!.text).join(""), translation),
           color: AppColors.accent1Shade1,
         ),
-        // Gap(AppSizesManager.s12),
-        // PrimaryTextButton(
-        //   label: "Change Email",
-        //   onTap: () {},
-        //   labelColor: AppColors.accent1Shade1,
-        // ),
+   
       ],
     );
   }
