@@ -53,7 +53,7 @@ class LoginScreen extends StatelessWidget {
                     labelColor: AppColors.accent1Shade1,
                     isOutLined: true,
                     onTap: () {
-                      GoRouter.of(context).pushReplacementNamed(RoutingManager.registerScreen);
+                      GoRouter.of(context).push(RoutingManager.registerScreen);
                     },
                     borderColor: AppColors.accent1Shade1,
                   ),
