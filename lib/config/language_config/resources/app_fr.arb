@@ -132,7 +132,7 @@
   "unit_ht_price": "Prix unitaire HT",
   "unit_ttc_price": "Prix unitaire TTC",
   "currency": "DZD",
-  "errors_network_fetch_error": "Erreur de récupération des données"
-
-
+  "errors_network_fetch_error": "Erreur de récupération des données",
+  "enter_email_for_password_reset": "Entrez votre adresse e-mail pour recevoir un lien de réinitialisation de mot de passe.",
+  "confirm": "Confirmer"
 }

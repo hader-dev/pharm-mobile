@@ -903,6 +903,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Fetch error'**
   String get errors_network_fetch_error;
+
+  /// No description provided for @enter_email_for_password_reset.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your email and we\'ll send you a link to reset your password.'**
+  String get enter_email_for_password_reset;
+
+  /// No description provided for @confirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get confirm;
 }
 
 class _AppLocalizationsDelegate

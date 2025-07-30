@@ -132,6 +132,7 @@
   "unit_ht_price": "السعر  بدون ضريبة",
   "unit_ttc_price": "السعر مع الضريبة",
   "currency": "دج",
-  "errors_network_fetch_error": "حدث خطأ أثناء جلب البيانات"
-
+  "errors_network_fetch_error": "حدث خطأ أثناء جلب البيانات",
+  "enter_email_for_password_reset": "أدخل بريدك الإلكتروني وسنرسل لك رابطًا لإعادة تعيين كلمة المرور.",
+  "confirm": "تاكيد"
 }

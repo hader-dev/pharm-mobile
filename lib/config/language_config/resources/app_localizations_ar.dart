@@ -421,4 +421,11 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get errors_network_fetch_error => 'حدث خطأ أثناء جلب البيانات';
+
+  @override
+  String get enter_email_for_password_reset =>
+      'أدخل بريدك الإلكتروني وسنرسل لك رابطًا لإعادة تعيين كلمة المرور.';
+
+  @override
+  String get confirm => 'تاكيد';
 }

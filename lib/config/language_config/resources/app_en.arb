@@ -132,5 +132,7 @@
   "unit_ht_price": "Unit HT price",
   "unit_ttc_price": "Unit TTC price",
   "currency": "DZD",
-  "errors_network_fetch_error":"Fetch error"
+  "errors_network_fetch_error":"Fetch error",
+  "enter_email_for_password_reset": "Enter your email and we'll send you a link to reset your password.",
+  "confirm": "Confirm"
 }

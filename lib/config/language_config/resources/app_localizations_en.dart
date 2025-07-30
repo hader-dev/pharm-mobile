@@ -418,4 +418,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get errors_network_fetch_error => 'Fetch error';
+
+  @override
+  String get enter_email_for_password_reset =>
+      'Enter your email and we\'ll send you a link to reset your password.';
+
+  @override
+  String get confirm => 'Confirm';
 }

@@ -425,4 +425,11 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get errors_network_fetch_error => 'Erreur de récupération des données';
+
+  @override
+  String get enter_email_for_password_reset =>
+      'Entrez votre adresse e-mail pour recevoir un lien de réinitialisation de mot de passe.';
+
+  @override
+  String get confirm => 'Confirmer';
 }

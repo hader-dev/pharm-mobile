@@ -3,17 +3,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
+import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/common/buttons/outlined/outlined_text_button.dart';
+import 'package:hader_pharm_mobile/features/common_features/forgot_password/forgot_password.dart';
 import 'package:hader_pharm_mobile/features/common_features/login/cubit/login_cubit.dart';
+import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
+import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
-import '../../../config/theme/colors_manager.dart';
-import '../../../utils/bottom_sheet_helper.dart';
-import '../../../utils/constants.dart';
-import '../../common/buttons/outlined/outlined_text_button.dart';
 import 'actions/setup_company_or_go_home.dart';
 import 'widgets/login_form_section.dart';
 import 'widgets/login_header_section.dart';
-import 'widgets/reset_password_link_sent_bottom_sheet.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -28,8 +28,8 @@ class LoginScreen extends StatelessWidget {
             if (state is LoginSuccessful) {
               setupCompanyOrSkipToHome(context);
             }
-            if (state is ResetLinkSent) {
-              BottomSheetHelper.showCommonBottomSheet(context: context, child: CheckYourMailScreen());
+            if (state is ForgotPassword) {
+              BottomSheetHelper.showCommonBottomSheet(context: context, child: ForgotPasswordScreen());
             }
             if (state is EmailOtpResentSuccessfully) {
               GoRouter.of(context).goNamed(RoutingManager.checkEmailScreen,
