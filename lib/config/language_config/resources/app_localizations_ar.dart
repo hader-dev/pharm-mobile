@@ -562,4 +562,16 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get and => 'و';
+
+  @override
+  String get wilaya => 'الولاية';
+
+  @override
+  String get town => 'المدينة';
+
+  @override
+  String get select_wilaya => 'حدد الولاية';
+
+  @override
+  String get select_town => 'حدد المدينة';
 }

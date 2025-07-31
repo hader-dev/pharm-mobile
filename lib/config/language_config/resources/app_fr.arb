@@ -178,5 +178,9 @@
   "by_signing_up_you_agree_to_our": "En vous inscrivant, vous acceptez nos",
   "terms_of_services": "Conditions de service",
   "privacy_policy": "Politique de confidentialité",
-  "and": "et"
+  "and": "et",
+  "wilaya": "Wilaya",
+  "town": "Ville",
+  "select_wilaya": "Choisissez la wilaya",
+  "select_town": "Choisissez la ville"
 }

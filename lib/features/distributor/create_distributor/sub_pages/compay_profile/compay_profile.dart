@@ -5,7 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
-import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_icon_button.dart' show PrimaryIconButton;
+import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_icon_button.dart'
+    show PrimaryIconButton;
 import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field.dart';
 import 'package:hader_pharm_mobile/features/common_features/create_company_profile/cubit/create_company_profile_cubit.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
@@ -20,7 +21,8 @@ class DistributorProfilePage extends StatefulWidget {
   State<DistributorProfilePage> createState() => _DistributorProfilePageState();
 }
 
-class _DistributorProfilePageState extends State<DistributorProfilePage> with AutomaticKeepAliveClientMixin {
+class _DistributorProfilePageState extends State<DistributorProfilePage>
+    with AutomaticKeepAliveClientMixin {
   final scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
@@ -34,16 +36,19 @@ class _DistributorProfilePageState extends State<DistributorProfilePage> with Au
           child: SingleChildScrollView(
             controller: scrollController,
             physics: const BouncingScrollPhysics(),
-            child: BlocBuilder<CreateCompanyProfileCubit, CreateCompanyProfileState>(
+            child: BlocBuilder<CreateCompanyProfileCubit,
+                CreateCompanyProfileState>(
               builder: (context, state) {
                 return Column(
                   children: [
                     Align(
                         alignment: Alignment.centerLeft,
                         child: Text(context.translation!.logo,
-                            style: AppTypography.body3MediumStyle.copyWith(color: TextColors.ternary.color))),
+                            style: AppTypography.body3MediumStyle
+                                .copyWith(color: TextColors.ternary.color))),
                     Padding(
-                      padding: EdgeInsets.symmetric(vertical: AppSizesManager.p24),
+                      padding:
+                          EdgeInsets.symmetric(vertical: AppSizesManager.p24),
                       child: Stack(
                         children: [
                           Container(
@@ -54,12 +59,19 @@ class _DistributorProfilePageState extends State<DistributorProfilePage> with Au
                                 shape: BoxShape.circle,
                                 color: AppColors.bgDarken,
                                 border: Border.all(color: AppColors.bgDarken2)),
-                            child: BlocProvider.of<CreateCompanyProfileCubit>(context).pickedImage != null
+                            child: BlocProvider.of<CreateCompanyProfileCubit>(
+                                            context)
+                                        .pickedImage !=
+                                    null
                                 ? Image.file(
-                                    File(BlocProvider.of<CreateCompanyProfileCubit>(context).pickedImage!.path),
+                                    File(BlocProvider.of<
+                                            CreateCompanyProfileCubit>(context)
+                                        .pickedImage!
+                                        .path),
                                     fit: BoxFit.fill,
                                   )
-                                : const Icon(Iconsax.camera, color: Colors.white, size: 40),
+                                : const Icon(Iconsax.camera,
+                                    color: Colors.white, size: 40),
                           ),
                           Positioned(
                             bottom: AppSizesManager.s16,
@@ -70,7 +82,9 @@ class _DistributorProfilePageState extends State<DistributorProfilePage> with Au
                                 color: AppColors.bgWhite,
                               ),
                               onPressed: () {
-                                BlocProvider.of<CreateCompanyProfileCubit>(context).pickGalleryImage();
+                                BlocProvider.of<CreateCompanyProfileCubit>(
+                                        context)
+                                    .pickGalleryImage();
                               },
                             ),
                           )
@@ -83,12 +97,17 @@ class _DistributorProfilePageState extends State<DistributorProfilePage> with Au
                       state: FieldState.normal,
                       maxLines: 8,
                       validationFunc: () {},
-                      value: BlocProvider.of<CreateCompanyProfileCubit>(context).companyData.description,
+                      value: BlocProvider.of<CreateCompanyProfileCubit>(context)
+                          .companyData
+                          .description,
                       onChanged: (newValue) {
-                        BlocProvider.of<CreateCompanyProfileCubit>(context).changeCompanyData(
-                            modifiedData: BlocProvider.of<CreateCompanyProfileCubit>(context)
-                                .companyData
-                                .copyWith(description: newValue));
+                        BlocProvider.of<CreateCompanyProfileCubit>(context)
+                            .changeCompanyData(
+                                modifiedData:
+                                    BlocProvider.of<CreateCompanyProfileCubit>(
+                                            context)
+                                        .companyData
+                                        .copyWith(description: newValue));
                       },
                     ),
                   ],

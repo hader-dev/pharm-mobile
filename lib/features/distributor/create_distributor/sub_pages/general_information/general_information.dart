@@ -5,6 +5,8 @@ import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field.dart';
 import 'package:hader_pharm_mobile/features/common_features/create_company_profile/cubit/create_company_profile_cubit.dart';
+import 'package:hader_pharm_mobile/features/common_features/wilaya/town.dart';
+import 'package:hader_pharm_mobile/features/common_features/wilaya/wilaya.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
@@ -175,29 +177,6 @@ class _DistributorGeneralInformationPageState
                               validateIsFaxNumber(value, translation),
                         ),
                         CustomTextField(
-                          label: "${translation.city_commune_no}*",
-                          value: BlocProvider.of<CreateCompanyProfileCubit>(
-                                  context)
-                              .companyData
-                              .townId
-                              .toString(),
-                          state: FieldState.normal,
-                          validationFunc: (value) =>
-                              validateIsWilayaNumber(value, translation, true),
-                          onChanged: (newValue) {
-                            BlocProvider.of<CreateCompanyProfileCubit>(context)
-                                .changeCompanyData(
-                              modifiedData:
-                                  BlocProvider.of<CreateCompanyProfileCubit>(
-                                          context)
-                                      .companyData
-                                      .copyWith(
-                                        townId: int.parse(newValue ?? "0"),
-                                      ),
-                            );
-                          },
-                        ),
-                        CustomTextField(
                           label: translation.full_address,
                           value: BlocProvider.of<CreateCompanyProfileCubit>(
                                   context)
@@ -233,6 +212,24 @@ class _DistributorGeneralInformationPageState
                                         .copyWith(website: newValue));
                           },
                         ),
+                        WilayaDropdown(),
+                        TownDropdown(
+                            isRequired: true,
+                            validator: (v) => requiredValidator(v?.label, translation),
+                            onChanged: (newValue) {
+                              if (newValue == null) return;
+                              BlocProvider.of<CreateCompanyProfileCubit>(
+                                      context)
+                                  .changeCompanyData(
+                                modifiedData:
+                                    BlocProvider.of<CreateCompanyProfileCubit>(
+                                            context)
+                                        .companyData
+                                        .copyWith(
+                                          townId: newValue.id,
+                                        ),
+                              );
+                            }),
                       ],
                     ));
               },

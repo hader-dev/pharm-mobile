@@ -561,4 +561,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get and => 'and';
+
+  @override
+  String get wilaya => 'Wilaya';
+
+  @override
+  String get town => 'Town';
+
+  @override
+  String get select_wilaya => 'Select Wilaya';
+
+  @override
+  String get select_town => 'Select Town';
 }

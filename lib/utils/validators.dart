@@ -8,7 +8,7 @@ String? emptyValidator(String? value, AppLocalizations translation) {
 }
 
 
-String? isRequired(String? value, AppLocalizations translation) {
+String? requiredValidator(String? value, AppLocalizations translation) {
   final trimmed = value?.trim() ?? '';
   if (trimmed.isEmpty) {
     return translation.feedback_field_required;

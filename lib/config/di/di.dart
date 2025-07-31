@@ -59,4 +59,5 @@ initAppDependencies() async {
   getItInstance.registerLazySingleton<NotificationServicePort>(
       () => notificationService);
 
+
 }

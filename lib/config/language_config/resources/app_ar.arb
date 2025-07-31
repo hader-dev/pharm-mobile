@@ -175,5 +175,9 @@
   "by_signing_up_you_agree_to_our": "من خلال التسجيل، فإنك توافق على",
   "terms_of_services": "شروط الخدمة",
   "privacy_policy": "سياسة الخصوصية",
-  "and": "و"
+  "and": "و",
+  "wilaya": "الولاية",
+  "town": "المدينة",
+  "select_wilaya": "حدد الولاية",
+  "select_town": "حدد المدينة"
 }

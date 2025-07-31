@@ -6,12 +6,14 @@ import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/features/common_features/create_company_profile/sub_pages/review_and_sumbit/review_and_sumbit.dart';
+import 'package:hader_pharm_mobile/features/common_features/wilaya/cubit/wilaya_cubit.dart';
 import 'package:hader_pharm_mobile/features/distributor/create_distributor/sub_pages/compay_profile/compay_profile.dart';
 import 'package:hader_pharm_mobile/features/distributor/create_distributor/sub_pages/general_information/general_information.dart';
 import 'package:hader_pharm_mobile/features/distributor/create_distributor/sub_pages/legal_information/legal_information.dart';
 import 'package:hader_pharm_mobile/features/pharmacy/create_pharmacy/sub_pages/compay_profile/compay_profile.dart';
 import 'package:hader_pharm_mobile/features/pharmacy/create_pharmacy/sub_pages/general_information/general_information.dart';
 import 'package:hader_pharm_mobile/features/pharmacy/create_pharmacy/sub_pages/legal_information/legal_information.dart';
+import 'package:hader_pharm_mobile/repositories/locale/wilaya/wilaya_repository_impl.dart';
 import 'package:hader_pharm_mobile/repositories/remote/company/company_repository_impl.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
@@ -30,10 +32,21 @@ class CreateCompanyProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: BlocProvider(
-        create: (context) => CreateCompanyProfileCubit(
-            companyRepository: CompanyRepository(
-                client: getItInstance.get<INetworkService>())),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => CreateCompanyProfileCubit(
+                companyRepository: CompanyRepository(
+                    client: getItInstance.get<INetworkService>())),
+          ),
+            BlocProvider(
+            create: (context) => WilayaCubit(
+                wilayaRepository: WilayaRepositoryImpl(
+                    )),
+          ),
+          
+        ],
+        
         child: Scaffold(
           body: BlocListener<CreateCompanyProfileCubit,
               CreateCompanyProfileState>(

@@ -572,4 +572,16 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get and => 'et';
+
+  @override
+  String get wilaya => 'Wilaya';
+
+  @override
+  String get town => 'Ville';
+
+  @override
+  String get select_wilaya => 'Choisissez la wilaya';
+
+  @override
+  String get select_town => 'Choisissez la ville';
 }

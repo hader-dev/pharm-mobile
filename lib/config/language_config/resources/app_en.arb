@@ -178,5 +178,9 @@
   "by_signing_up_you_agree_to_our": "By signing up, you agree to our",
   "terms_of_services": "Terms of Services",
   "privacy_policy": "Privacy Policy",
-  "and": "and"
+  "and": "and",
+  "wilaya":"Wilaya",
+  "town":"Town",
+  "select_wilaya":"Select Wilaya",
+  "select_town":"Select Town"
 }

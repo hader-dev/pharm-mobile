@@ -1179,6 +1179,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'and'**
   String get and;
+
+  /// No description provided for @wilaya.
+  ///
+  /// In en, this message translates to:
+  /// **'Wilaya'**
+  String get wilaya;
+
+  /// No description provided for @town.
+  ///
+  /// In en, this message translates to:
+  /// **'Town'**
+  String get town;
+
+  /// No description provided for @select_wilaya.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Wilaya'**
+  String get select_wilaya;
+
+  /// No description provided for @select_town.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Town'**
+  String get select_town;
 }
 
 class _AppLocalizationsDelegate

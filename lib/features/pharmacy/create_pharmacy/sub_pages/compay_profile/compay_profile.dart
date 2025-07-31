@@ -152,6 +152,7 @@ class _PharmacyProfilePageState extends State<PharmacyProfilePage> with Automati
                                 .copyWith(description: newValue));
                       },
                     ),
+                    
                   ],
                 );
               },
