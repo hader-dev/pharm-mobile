@@ -1,0 +1,144 @@
+{
+  "data": [
+    {
+      "id": 1382,
+      "label": "Tipaza",
+      "wilayaId": 42
+    },
+    {
+      "id": 1369,
+      "label": "Hadjout",
+      "wilayaId": 42
+    },
+    {
+      "id": 1375,
+      "label": "Merad",
+      "wilayaId": 42
+    },
+    {
+      "id": 1374,
+      "label": "Menaceur",
+      "wilayaId": 42
+    },
+    {
+      "id": 1377,
+      "label": "Nador",
+      "wilayaId": 42
+    },
+    {
+      "id": 1381,
+      "label": "Sidi-Amar",
+      "wilayaId": 42
+    },
+    {
+      "id": 1355,
+      "label": "Aghbal",
+      "wilayaId": 42
+    },
+    {
+      "id": 1368,
+      "label": "Gouraya",
+      "wilayaId": 42
+    },
+    {
+      "id": 1376,
+      "label": "Messelmoun",
+      "wilayaId": 42
+    },
+    {
+      "id": 1364,
+      "label": "Cherchell",
+      "wilayaId": 42
+    },
+    {
+      "id": 1370,
+      "label": "Hadjret Ennous",
+      "wilayaId": 42
+    },
+    {
+      "id": 1378,
+      "label": "Sidi Ghiles",
+      "wilayaId": 42
+    },
+    {
+      "id": 1380,
+      "label": "Sidi Semiane",
+      "wilayaId": 42
+    },
+    {
+      "id": 1359,
+      "label": "Beni Mileuk",
+      "wilayaId": 42
+    },
+    {
+      "id": 1365,
+      "label": "Damous",
+      "wilayaId": 42
+    },
+    {
+      "id": 1373,
+      "label": "Larhat",
+      "wilayaId": 42
+    },
+    {
+      "id": 1366,
+      "label": "Douaouda",
+      "wilayaId": 42
+    },
+    {
+      "id": 1367,
+      "label": "Fouka",
+      "wilayaId": 42
+    },
+    {
+      "id": 1357,
+      "label": "Ain Tagourait",
+      "wilayaId": 42
+    },
+    {
+      "id": 1360,
+      "label": "Bou Haroun",
+      "wilayaId": 42
+    },
+    {
+      "id": 1361,
+      "label": "Bou Ismail",
+      "wilayaId": 42
+    },
+    {
+      "id": 1371,
+      "label": "Khemisti",
+      "wilayaId": 42
+    },
+    {
+      "id": 1356,
+      "label": "Ahmer El Ain",
+      "wilayaId": 42
+    },
+    {
+      "id": 1362,
+      "label": "Bourkika",
+      "wilayaId": 42
+    },
+    {
+      "id": 1379,
+      "label": "Sidi Rached",
+      "wilayaId": 42
+    },
+    {
+      "id": 1358,
+      "label": "Attatba",
+      "wilayaId": 42
+    },
+    {
+      "id": 1363,
+      "label": "Chaiba",
+      "wilayaId": 42
+    },
+    {
+      "id": 1372,
+      "label": "Kolea",
+      "wilayaId": 42
+    }
+  ]
+}

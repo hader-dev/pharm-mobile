@@ -1,0 +1,229 @@
+{
+  "data": [
+    {
+      "id": 313,
+      "label": "Ain Turk",
+      "wilayaId": 10
+    },
+    {
+      "id": 315,
+      "label": "Ait Laaziz",
+      "wilayaId": 10
+    },
+    {
+      "id": 321,
+      "label": "Bouira",
+      "wilayaId": 10
+    },
+    {
+      "id": 332,
+      "label": "El-Mokrani",
+      "wilayaId": 10
+    },
+    {
+      "id": 348,
+      "label": "Souk El Khemis",
+      "wilayaId": 10
+    },
+    {
+      "id": 316,
+      "label": "Aomar",
+      "wilayaId": 10
+    },
+    {
+      "id": 326,
+      "label": "Djebahia",
+      "wilayaId": 10
+    },
+    {
+      "id": 337,
+      "label": "Kadiria",
+      "wilayaId": 10
+    },
+    {
+      "id": 335,
+      "label": "Haizer",
+      "wilayaId": 10
+    },
+    {
+      "id": 350,
+      "label": "Taghzout",
+      "wilayaId": 10
+    },
+    {
+      "id": 320,
+      "label": "Bouderbala",
+      "wilayaId": 10
+    },
+    {
+      "id": 322,
+      "label": "Boukram",
+      "wilayaId": 10
+    },
+    {
+      "id": 333,
+      "label": "Guerrouma",
+      "wilayaId": 10
+    },
+    {
+      "id": 338,
+      "label": "Lakhdaria",
+      "wilayaId": 10
+    },
+    {
+      "id": 340,
+      "label": "Maala",
+      "wilayaId": 10
+    },
+    {
+      "id": 353,
+      "label": "Z'barbar (El Isseri )",
+      "wilayaId": 10
+    },
+    {
+      "id": 329,
+      "label": "El Hachimia",
+      "wilayaId": 10
+    },
+    {
+      "id": 343,
+      "label": "Oued El Berdi",
+      "wilayaId": 10
+    },
+    {
+      "id": 319,
+      "label": "Bordj Okhriss",
+      "wilayaId": 10
+    },
+    {
+      "id": 334,
+      "label": "Hadjera Zerga",
+      "wilayaId": 10
+    },
+    {
+      "id": 342,
+      "label": "Mezdour",
+      "wilayaId": 10
+    },
+    {
+      "id": 351,
+      "label": "Taguedite",
+      "wilayaId": 10
+    },
+    {
+      "id": 310,
+      "label": "Ahl El Ksar",
+      "wilayaId": 10
+    },
+    {
+      "id": 317,
+      "label": "Bechloul",
+      "wilayaId": 10
+    },
+    {
+      "id": 327,
+      "label": "El Adjiba",
+      "wilayaId": 10
+    },
+    {
+      "id": 328,
+      "label": "El Asnam",
+      "wilayaId": 10
+    },
+    {
+      "id": 344,
+      "label": "Ouled Rached",
+      "wilayaId": 10
+    },
+    {
+      "id": 311,
+      "label": "Ain El Hadjar",
+      "wilayaId": 10
+    },
+    {
+      "id": 312,
+      "label": "Ain Laloui",
+      "wilayaId": 10
+    },
+    {
+      "id": 314,
+      "label": "Ain-Bessem",
+      "wilayaId": 10
+    },
+    {
+      "id": 318,
+      "label": "Bir Ghbalou",
+      "wilayaId": 10
+    },
+    {
+      "id": 330,
+      "label": "El Khabouzia",
+      "wilayaId": 10
+    },
+    {
+      "id": 345,
+      "label": "Raouraoua",
+      "wilayaId": 10
+    },
+    {
+      "id": 309,
+      "label": "Aghbalou",
+      "wilayaId": 10
+    },
+    {
+      "id": 323,
+      "label": "Chorfa",
+      "wilayaId": 10
+    },
+    {
+      "id": 336,
+      "label": "Hanif",
+      "wilayaId": 10
+    },
+    {
+      "id": 339,
+      "label": "M Chedallah",
+      "wilayaId": 10
+    },
+    {
+      "id": 347,
+      "label": "Saharidj",
+      "wilayaId": 10
+    },
+    {
+      "id": 352,
+      "label": "Ath Mansour",
+      "wilayaId": 10
+    },
+    {
+      "id": 324,
+      "label": "Dechmia",
+      "wilayaId": 10
+    },
+    {
+      "id": 325,
+      "label": "Dirah",
+      "wilayaId": 10
+    },
+    {
+      "id": 331,
+      "label": "El-Hakimia",
+      "wilayaId": 10
+    },
+    {
+      "id": 341,
+      "label": "Maamora",
+      "wilayaId": 10
+    },
+    {
+      "id": 346,
+      "label": "Ridane",
+      "wilayaId": 10
+    },
+    {
+      "id": 349,
+      "label": "Sour El Ghozlane",
+      "wilayaId": 10
+    }
+  ]
+}

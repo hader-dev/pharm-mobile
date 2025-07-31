@@ -1,0 +1,29 @@
+{
+  "data": [
+    {
+      "id": 355,
+      "label": "Ain Amguel",
+      "wilayaId": 11
+    },
+    {
+      "id": 361,
+      "label": "Tamanrasset",
+      "wilayaId": 11
+    },
+    {
+      "id": 354,
+      "label": "Abelsa",
+      "wilayaId": 11
+    },
+    {
+      "id": 359,
+      "label": "Idles",
+      "wilayaId": 11
+    },
+    {
+      "id": 362,
+      "label": "Tazrouk",
+      "wilayaId": 11
+    }
+  ]
+}

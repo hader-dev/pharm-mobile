@@ -1,0 +1,114 @@
+{
+  "data": [
+    {
+      "id": 1269,
+      "label": "Ouled Bessam",
+      "wilayaId": 38
+    },
+    {
+      "id": 1276,
+      "label": "Tissemsilt",
+      "wilayaId": 38
+    },
+    {
+      "id": 1257,
+      "label": "Beni Chaib",
+      "wilayaId": 38
+    },
+    {
+      "id": 1258,
+      "label": "Beni Lahcene",
+      "wilayaId": 38
+    },
+    {
+      "id": 1259,
+      "label": "Bordj Bounaama",
+      "wilayaId": 38
+    },
+    {
+      "id": 1273,
+      "label": "Sidi Slimane",
+      "wilayaId": 38
+    },
+    {
+      "id": 1271,
+      "label": "Sidi Boutouchent",
+      "wilayaId": 38
+    },
+    {
+      "id": 1275,
+      "label": "Theniet El Had",
+      "wilayaId": 38
+    },
+    {
+      "id": 1261,
+      "label": "Boucaid",
+      "wilayaId": 38
+    },
+    {
+      "id": 1263,
+      "label": "Larbaa",
+      "wilayaId": 38
+    },
+    {
+      "id": 1266,
+      "label": "Lazharia",
+      "wilayaId": 38
+    },
+    {
+      "id": 1264,
+      "label": "Lardjem",
+      "wilayaId": 38
+    },
+    {
+      "id": 1268,
+      "label": "Melaab",
+      "wilayaId": 38
+    },
+    {
+      "id": 1272,
+      "label": "Sidi Lantri",
+      "wilayaId": 38
+    },
+    {
+      "id": 1274,
+      "label": "Tamellahet",
+      "wilayaId": 38
+    },
+    {
+      "id": 1260,
+      "label": "Bordj El Emir Abdelkader",
+      "wilayaId": 38
+    },
+    {
+      "id": 1277,
+      "label": "Youssoufia",
+      "wilayaId": 38
+    },
+    {
+      "id": 1262,
+      "label": "Khemisti",
+      "wilayaId": 38
+    },
+    {
+      "id": 1265,
+      "label": "Layoune",
+      "wilayaId": 38
+    },
+    {
+      "id": 1256,
+      "label": "Ammari",
+      "wilayaId": 38
+    },
+    {
+      "id": 1267,
+      "label": "Maacem",
+      "wilayaId": 38
+    },
+    {
+      "id": 1270,
+      "label": "Sidi Abed",
+      "wilayaId": 38
+    }
+  ]
+}

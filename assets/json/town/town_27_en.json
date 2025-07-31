@@ -1,0 +1,164 @@
+{
+  "data": [
+    {
+      "id": 979,
+      "label": "Mostaganem",
+      "wilayaId": 27
+    },
+    {
+      "id": 965,
+      "label": "Ain-Nouissy",
+      "wilayaId": 27
+    },
+    {
+      "id": 970,
+      "label": "Fornaka",
+      "wilayaId": 27
+    },
+    {
+      "id": 973,
+      "label": "Hassiane",
+      "wilayaId": 27
+    },
+    {
+      "id": 972,
+      "label": "Hassi Mameche",
+      "wilayaId": 27
+    },
+    {
+      "id": 977,
+      "label": "Mazagran",
+      "wilayaId": 27
+    },
+    {
+      "id": 992,
+      "label": "Stidia",
+      "wilayaId": 27
+    },
+    {
+      "id": 967,
+      "label": "Ain-Tedles",
+      "wilayaId": 27
+    },
+    {
+      "id": 981,
+      "label": "Oued El Kheir",
+      "wilayaId": 27
+    },
+    {
+      "id": 987,
+      "label": "Sidi Belaattar",
+      "wilayaId": 27
+    },
+    {
+      "id": 991,
+      "label": "Sour",
+      "wilayaId": 27
+    },
+    {
+      "id": 964,
+      "label": "Ain-Boudinar",
+      "wilayaId": 27
+    },
+    {
+      "id": 975,
+      "label": "Kheir-Eddine",
+      "wilayaId": 27
+    },
+    {
+      "id": 985,
+      "label": "Sayada",
+      "wilayaId": 27
+    },
+    {
+      "id": 983,
+      "label": "Ouled-Maalah",
+      "wilayaId": 27
+    },
+    {
+      "id": 986,
+      "label": "Sidi Ali",
+      "wilayaId": 27
+    },
+    {
+      "id": 993,
+      "label": "Tazgait",
+      "wilayaId": 27
+    },
+    {
+      "id": 968,
+      "label": "Benabdelmalek Ramdane",
+      "wilayaId": 27
+    },
+    {
+      "id": 971,
+      "label": "Hadjadj",
+      "wilayaId": 27
+    },
+    {
+      "id": 988,
+      "label": "Sidi-Lakhdar",
+      "wilayaId": 27
+    },
+    {
+      "id": 963,
+      "label": "Achaacha",
+      "wilayaId": 27
+    },
+    {
+      "id": 974,
+      "label": "Khadra",
+      "wilayaId": 27
+    },
+    {
+      "id": 980,
+      "label": "Nekmaria",
+      "wilayaId": 27
+    },
+    {
+      "id": 982,
+      "label": "Ouled Boughalem",
+      "wilayaId": 27
+    },
+    {
+      "id": 969,
+      "label": "Bouguirat",
+      "wilayaId": 27
+    },
+    {
+      "id": 984,
+      "label": "Safsaf",
+      "wilayaId": 27
+    },
+    {
+      "id": 989,
+      "label": "Sirat",
+      "wilayaId": 27
+    },
+    {
+      "id": 990,
+      "label": "Souaflia",
+      "wilayaId": 27
+    },
+    {
+      "id": 966,
+      "label": "Ain-Sidi Cherif",
+      "wilayaId": 27
+    },
+    {
+      "id": 976,
+      "label": "Mansourah",
+      "wilayaId": 27
+    },
+    {
+      "id": 978,
+      "label": "Mesra",
+      "wilayaId": 27
+    },
+    {
+      "id": 994,
+      "label": "Touahria",
+      "wilayaId": 27
+    }
+  ]
+}

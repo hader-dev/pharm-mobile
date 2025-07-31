@@ -1,0 +1,164 @@
+{
+  "data": [
+    {
+      "id": 1206,
+      "label": "Boumerdes",
+      "wilayaId": 35
+    },
+    {
+      "id": 1209,
+      "label": "Corso",
+      "wilayaId": 35
+    },
+    {
+      "id": 1227,
+      "label": "Tidjelabine",
+      "wilayaId": 35
+    },
+    {
+      "id": 1204,
+      "label": "Boudouaou",
+      "wilayaId": 35
+    },
+    {
+      "id": 1205,
+      "label": "Boudouaou El Bahri",
+      "wilayaId": 35
+    },
+    {
+      "id": 1207,
+      "label": "Bouzegza Keddara",
+      "wilayaId": 35
+    },
+    {
+      "id": 1212,
+      "label": "El Kharrouba",
+      "wilayaId": 35
+    },
+    {
+      "id": 1220,
+      "label": "Ouled Hedadj",
+      "wilayaId": 35
+    },
+    {
+      "id": 1203,
+      "label": "Bordj Menaiel",
+      "wilayaId": 35
+    },
+    {
+      "id": 1211,
+      "label": "Djinet",
+      "wilayaId": 35
+    },
+    {
+      "id": 1217,
+      "label": "Leghata",
+      "wilayaId": 35
+    },
+    {
+      "id": 1229,
+      "label": "Zemmouri",
+      "wilayaId": 35
+    },
+    {
+      "id": 1200,
+      "label": "Baghlia",
+      "wilayaId": 35
+    },
+    {
+      "id": 1223,
+      "label": "Sidi Daoud",
+      "wilayaId": 35
+    },
+    {
+      "id": 1225,
+      "label": "Taourga",
+      "wilayaId": 35
+    },
+    {
+      "id": 1218,
+      "label": "Naciria",
+      "wilayaId": 35
+    },
+    {
+      "id": 1219,
+      "label": "Ouled Aissa",
+      "wilayaId": 35
+    },
+    {
+      "id": 1208,
+      "label": "Chabet El Ameur",
+      "wilayaId": 35
+    },
+    {
+      "id": 1214,
+      "label": "Isser",
+      "wilayaId": 35
+    },
+    {
+      "id": 1222,
+      "label": "Si Mustapha",
+      "wilayaId": 35
+    },
+    {
+      "id": 1228,
+      "label": "Timezrit",
+      "wilayaId": 35
+    },
+    {
+      "id": 1199,
+      "label": "Ammal",
+      "wilayaId": 35
+    },
+    {
+      "id": 1202,
+      "label": "Beni Amrane",
+      "wilayaId": 35
+    },
+    {
+      "id": 1224,
+      "label": "Souk El Had",
+      "wilayaId": 35
+    },
+    {
+      "id": 1226,
+      "label": "Thenia",
+      "wilayaId": 35
+    },
+    {
+      "id": 1198,
+      "label": "Afir",
+      "wilayaId": 35
+    },
+    {
+      "id": 1201,
+      "label": "Ben Choud",
+      "wilayaId": 35
+    },
+    {
+      "id": 1210,
+      "label": "Dellys",
+      "wilayaId": 35
+    },
+    {
+      "id": 1213,
+      "label": "Hammedi",
+      "wilayaId": 35
+    },
+    {
+      "id": 1215,
+      "label": "Khemis El Khechna",
+      "wilayaId": 35
+    },
+    {
+      "id": 1216,
+      "label": "Larbatache",
+      "wilayaId": 35
+    },
+    {
+      "id": 1221,
+      "label": "Ouled Moussa",
+      "wilayaId": 35
+    }
+  ]
+}

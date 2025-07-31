@@ -1,0 +1,174 @@
+{
+  "data": [
+    {
+      "id": 859,
+      "label": "Bendjarah",
+      "wilayaId": 24
+    },
+    {
+      "id": 871,
+      "label": "Guelma",
+      "wilayaId": 24
+    },
+    {
+      "id": 856,
+      "label": "Ain Regada",
+      "wilayaId": 24
+    },
+    {
+      "id": 861,
+      "label": "Bordj Sabath",
+      "wilayaId": 24
+    },
+    {
+      "id": 882,
+      "label": "Oued Zenati",
+      "wilayaId": 24
+    },
+    {
+      "id": 854,
+      "label": "Ain Larbi",
+      "wilayaId": 24
+    },
+    {
+      "id": 855,
+      "label": "Ain Makhlouf",
+      "wilayaId": 24
+    },
+    {
+      "id": 886,
+      "label": "Tamlouka",
+      "wilayaId": 24
+    },
+    {
+      "id": 857,
+      "label": "Ain Sandel",
+      "wilayaId": 24
+    },
+    {
+      "id": 862,
+      "label": "Bou Hachana",
+      "wilayaId": 24
+    },
+    {
+      "id": 876,
+      "label": "Khezaras",
+      "wilayaId": 24
+    },
+    {
+      "id": 858,
+      "label": "Belkheir",
+      "wilayaId": 24
+    },
+    {
+      "id": 860,
+      "label": "Beni Mezline",
+      "wilayaId": 24
+    },
+    {
+      "id": 866,
+      "label": "Boumahra Ahmed",
+      "wilayaId": 24
+    },
+    {
+      "id": 868,
+      "label": "Djeballah Khemissi",
+      "wilayaId": 24
+    },
+    {
+      "id": 870,
+      "label": "Guelaat Bou Sbaa",
+      "wilayaId": 24
+    },
+    {
+      "id": 875,
+      "label": "Nechmaya",
+      "wilayaId": 24
+    },
+    {
+      "id": 863,
+      "label": "Bou Hamdane",
+      "wilayaId": 24
+    },
+    {
+      "id": 872,
+      "label": "Hammam Debagh",
+      "wilayaId": 24
+    },
+    {
+      "id": 884,
+      "label": "Roknia",
+      "wilayaId": 24
+    },
+    {
+      "id": 867,
+      "label": "Dahouara",
+      "wilayaId": 24
+    },
+    {
+      "id": 873,
+      "label": "Hammam N'bail",
+      "wilayaId": 24
+    },
+    {
+      "id": 880,
+      "label": "Oued Cheham",
+      "wilayaId": 24
+    },
+    {
+      "id": 853,
+      "label": "Ain Ben Beida",
+      "wilayaId": 24
+    },
+    {
+      "id": 865,
+      "label": "Bouchegouf",
+      "wilayaId": 24
+    },
+    {
+      "id": 878,
+      "label": "Medjez Sfa",
+      "wilayaId": 24
+    },
+    {
+      "id": 881,
+      "label": "Oued Ferragha",
+      "wilayaId": 24
+    },
+    {
+      "id": 864,
+      "label": "Bouati Mahmoud",
+      "wilayaId": 24
+    },
+    {
+      "id": 869,
+      "label": "El Fedjoudj",
+      "wilayaId": 24
+    },
+    {
+      "id": 874,
+      "label": "Heliopolis",
+      "wilayaId": 24
+    },
+    {
+      "id": 877,
+      "label": "Medjez Amar",
+      "wilayaId": 24
+    },
+    {
+      "id": 879,
+      "label": "Houari Boumedienne",
+      "wilayaId": 24
+    },
+    {
+      "id": 883,
+      "label": "Ras El Agba",
+      "wilayaId": 24
+    },
+    {
+      "id": 885,
+      "label": "Sellaoua Announa",
+      "wilayaId": 24
+    }
+  ]
+}

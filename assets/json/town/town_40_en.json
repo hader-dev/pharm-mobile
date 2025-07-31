@@ -1,0 +1,109 @@
+{
+  "data": [
+    {
+      "id": 1320,
+      "label": "Khenchela",
+      "wilayaId": 40
+    },
+    {
+      "id": 1319,
+      "label": "Kais",
+      "wilayaId": 40
+    },
+    {
+      "id": 1325,
+      "label": "Remila",
+      "wilayaId": 40
+    },
+    {
+      "id": 1327,
+      "label": "Taouzianat",
+      "wilayaId": 40
+    },
+    {
+      "id": 1310,
+      "label": "Baghai",
+      "wilayaId": 40
+    },
+    {
+      "id": 1315,
+      "label": "El Hamma",
+      "wilayaId": 40
+    },
+    {
+      "id": 1318,
+      "label": "Ensigha",
+      "wilayaId": 40
+    },
+    {
+      "id": 1326,
+      "label": "Tamza",
+      "wilayaId": 40
+    },
+    {
+      "id": 1308,
+      "label": "Ain Touila",
+      "wilayaId": 40
+    },
+    {
+      "id": 1323,
+      "label": "M'toussa",
+      "wilayaId": 40
+    },
+    {
+      "id": 1311,
+      "label": "Bouhmama",
+      "wilayaId": 40
+    },
+    {
+      "id": 1313,
+      "label": "Chelia",
+      "wilayaId": 40
+    },
+    {
+      "id": 1322,
+      "label": "M'sara",
+      "wilayaId": 40
+    },
+    {
+      "id": 1328,
+      "label": "Yabous",
+      "wilayaId": 40
+    },
+    {
+      "id": 1312,
+      "label": "Chechar",
+      "wilayaId": 40
+    },
+    {
+      "id": 1314,
+      "label": "Djellal",
+      "wilayaId": 40
+    },
+    {
+      "id": 1317,
+      "label": "El Oueldja",
+      "wilayaId": 40
+    },
+    {
+      "id": 1321,
+      "label": "Khirane",
+      "wilayaId": 40
+    },
+    {
+      "id": 1309,
+      "label": "Babar",
+      "wilayaId": 40
+    },
+    {
+      "id": 1316,
+      "label": "El Mahmal",
+      "wilayaId": 40
+    },
+    {
+      "id": 1324,
+      "label": "Ouled Rechache",
+      "wilayaId": 40
+    }
+  ]
+}

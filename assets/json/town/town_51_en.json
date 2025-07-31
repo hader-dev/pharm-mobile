@@ -1,0 +1,34 @@
+{
+  "data": [
+    {
+      "id": 237,
+      "label": "Chaiba",
+      "wilayaId": 51
+    },
+    {
+      "id": 240,
+      "label": "Doucen",
+      "wilayaId": 51
+    },
+    {
+      "id": 255,
+      "label": "Ouled Djellal",
+      "wilayaId": 51
+    },
+    {
+      "id": 232,
+      "label": "Besbes",
+      "wilayaId": 51
+    },
+    {
+      "id": 258,
+      "label": "Ras El Miad",
+      "wilayaId": 51
+    },
+    {
+      "id": 259,
+      "label": "Sidi Khaled",
+      "wilayaId": 51
+    }
+  ]
+}

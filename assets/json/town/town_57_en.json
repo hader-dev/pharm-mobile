@@ -1,0 +1,44 @@
+{
+  "data": [
+    {
+      "id": 1284,
+      "label": "El-M'ghaier",
+      "wilayaId": 57
+    },
+    {
+      "id": 1296,
+      "label": "Oum Touyour",
+      "wilayaId": 57
+    },
+    {
+      "id": 1302,
+      "label": "Sidi Khelil",
+      "wilayaId": 57
+    },
+    {
+      "id": 1303,
+      "label": "Still",
+      "wilayaId": 57
+    },
+    {
+      "id": 1281,
+      "label": "Djamaa",
+      "wilayaId": 57
+    },
+    {
+      "id": 1293,
+      "label": "M'rara",
+      "wilayaId": 57
+    },
+    {
+      "id": 1300,
+      "label": "Sidi Amrane",
+      "wilayaId": 57
+    },
+    {
+      "id": 1306,
+      "label": "Tenedla",
+      "wilayaId": 57
+    }
+  ]
+}

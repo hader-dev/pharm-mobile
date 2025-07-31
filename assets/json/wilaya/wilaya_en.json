@@ -1,4 +1,5 @@
-[
+{
+  "data": [
     { "id": 1, "label": "Adrar" },
     { "id": 2, "label": "Chlef" },
     { "id": 3, "label": "Laghouat" },
@@ -57,5 +58,5 @@
     { "id": 56, "label": "Djanet" },
     { "id": 57, "label": "El M'ghair" },
     { "id": 58, "label": "El Menia" }
-    ]
-    
+  ]
+}

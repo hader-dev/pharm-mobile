@@ -1,0 +1,64 @@
+{
+  "data": [
+    {
+      "id": 1460,
+      "label": "Naama",
+      "wilayaId": 45
+    },
+    {
+      "id": 1451,
+      "label": "Ain Ben Khelil",
+      "wilayaId": 45
+    },
+    {
+      "id": 1455,
+      "label": "El Biodh",
+      "wilayaId": 45
+    },
+    {
+      "id": 1458,
+      "label": "Mecheria",
+      "wilayaId": 45
+    },
+    {
+      "id": 1452,
+      "label": "Ain Sefra",
+      "wilayaId": 45
+    },
+    {
+      "id": 1462,
+      "label": "Tiout",
+      "wilayaId": 45
+    },
+    {
+      "id": 1461,
+      "label": "Sfissifa",
+      "wilayaId": 45
+    },
+    {
+      "id": 1454,
+      "label": "Djenienne Bourezg",
+      "wilayaId": 45
+    },
+    {
+      "id": 1459,
+      "label": "Moghrar",
+      "wilayaId": 45
+    },
+    {
+      "id": 1453,
+      "label": "Asla",
+      "wilayaId": 45
+    },
+    {
+      "id": 1456,
+      "label": "Kasdir",
+      "wilayaId": 45
+    },
+    {
+      "id": 1457,
+      "label": "Makmen Ben Amar",
+      "wilayaId": 45
+    }
+  ]
+}

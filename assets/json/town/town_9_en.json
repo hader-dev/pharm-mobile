@@ -1,0 +1,129 @@
+{
+  "data": [
+    {
+      "id": 288,
+      "label": "Blida",
+      "wilayaId": 9
+    },
+    {
+      "id": 289,
+      "label": "Bouarfa",
+      "wilayaId": 9
+    },
+    {
+      "id": 292,
+      "label": "Bouinan",
+      "wilayaId": 9
+    },
+    {
+      "id": 293,
+      "label": "Chebli",
+      "wilayaId": 9
+    },
+    {
+      "id": 286,
+      "label": "Beni-Tamou",
+      "wilayaId": 9
+    },
+    {
+      "id": 287,
+      "label": "Benkhelil",
+      "wilayaId": 9
+    },
+    {
+      "id": 304,
+      "label": "Oued El Alleug",
+      "wilayaId": 9
+    },
+    {
+      "id": 285,
+      "label": "Beni Mered",
+      "wilayaId": 9
+    },
+    {
+      "id": 295,
+      "label": "Chrea",
+      "wilayaId": 9
+    },
+    {
+      "id": 306,
+      "label": "Ouled Yaich",
+      "wilayaId": 9
+    },
+    {
+      "id": 297,
+      "label": "El-Affroun",
+      "wilayaId": 9
+    },
+    {
+      "id": 303,
+      "label": "Oued  Djer",
+      "wilayaId": 9
+    },
+    {
+      "id": 284,
+      "label": "Ain Romana",
+      "wilayaId": 9
+    },
+    {
+      "id": 294,
+      "label": "Chiffa",
+      "wilayaId": 9
+    },
+    {
+      "id": 302,
+      "label": "Mouzaia",
+      "wilayaId": 9
+    },
+    {
+      "id": 296,
+      "label": "Djebabra",
+      "wilayaId": 9
+    },
+    {
+      "id": 301,
+      "label": "Meftah",
+      "wilayaId": 9
+    },
+    {
+      "id": 290,
+      "label": "Boufarik",
+      "wilayaId": 9
+    },
+    {
+      "id": 298,
+      "label": "Guerrouaou",
+      "wilayaId": 9
+    },
+    {
+      "id": 308,
+      "label": "Soumaa",
+      "wilayaId": 9
+    },
+    {
+      "id": 300,
+      "label": "Larbaa",
+      "wilayaId": 9
+    },
+    {
+      "id": 307,
+      "label": "Souhane",
+      "wilayaId": 9
+    },
+    {
+      "id": 291,
+      "label": "Bougara",
+      "wilayaId": 9
+    },
+    {
+      "id": 299,
+      "label": "Hammam Elouane",
+      "wilayaId": 9
+    },
+    {
+      "id": 305,
+      "label": "Ouled Slama",
+      "wilayaId": 9
+    }
+  ]
+}

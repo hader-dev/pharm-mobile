@@ -1,0 +1,69 @@
+{
+  "data": [
+    {
+      "id": 1099,
+      "label": "Nezla",
+      "wilayaId": 55
+    },
+    {
+      "id": 1106,
+      "label": "Tebesbest",
+      "wilayaId": 55
+    },
+    {
+      "id": 1108,
+      "label": "Touggourt",
+      "wilayaId": 55
+    },
+    {
+      "id": 1109,
+      "label": "Zaouia El Abidia",
+      "wilayaId": 55
+    },
+    {
+      "id": 1091,
+      "label": "Blidet Amor",
+      "wilayaId": 55
+    },
+    {
+      "id": 1107,
+      "label": "Temacine",
+      "wilayaId": 55
+    },
+    {
+      "id": 1097,
+      "label": "Megarine",
+      "wilayaId": 55
+    },
+    {
+      "id": 1104,
+      "label": "Sidi Slimane",
+      "wilayaId": 55
+    },
+    {
+      "id": 1090,
+      "label": "Benaceur",
+      "wilayaId": 55
+    },
+    {
+      "id": 1098,
+      "label": "M'naguer",
+      "wilayaId": 55
+    },
+    {
+      "id": 1105,
+      "label": "Taibet",
+      "wilayaId": 55
+    },
+    {
+      "id": 1092,
+      "label": "El Alia",
+      "wilayaId": 55
+    },
+    {
+      "id": 1094,
+      "label": "El-Hadjira",
+      "wilayaId": 55
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "data": [
+    {
+      "id": 1285,
+      "label": "El-Oued",
+      "wilayaId": 39
+    },
+    {
+      "id": 1290,
+      "label": "Kouinine",
+      "wilayaId": 39
+    },
+    {
+      "id": 1283,
+      "label": "El Ogla",
+      "wilayaId": 39
+    },
+    {
+      "id": 1294,
+      "label": "Nakhla",
+      "wilayaId": 39
+    },
+    {
+      "id": 1299,
+      "label": "Robbah",
+      "wilayaId": 39
+    },
+    {
+      "id": 1278,
+      "label": "Bayadha",
+      "wilayaId": 39
+    },
+    {
+      "id": 1286,
+      "label": "Guemar",
+      "wilayaId": 39
+    },
+    {
+      "id": 1297,
+      "label": "Ourmes",
+      "wilayaId": 39
+    },
+    {
+      "id": 1304,
+      "label": "Taghzout",
+      "wilayaId": 39
+    },
+    {
+      "id": 1287,
+      "label": "Hamraia",
+      "wilayaId": 39
+    },
+    {
+      "id": 1298,
+      "label": "Reguiba",
+      "wilayaId": 39
+    },
+    {
+      "id": 1280,
+      "label": "Debila",
+      "wilayaId": 39
+    },
+    {
+      "id": 1288,
+      "label": "Hassani Abdelkrim",
+      "wilayaId": 39
+    },
+    {
+      "id": 1289,
+      "label": "Hassi Khalifa",
+      "wilayaId": 39
+    },
+    {
+      "id": 1307,
+      "label": "Trifaoui",
+      "wilayaId": 39
+    },
+    {
+      "id": 1279,
+      "label": "Ben Guecha",
+      "wilayaId": 39
+    },
+    {
+      "id": 1282,
+      "label": "Douar El Maa",
+      "wilayaId": 39
+    },
+    {
+      "id": 1305,
+      "label": "Taleb Larbi",
+      "wilayaId": 39
+    },
+    {
+      "id": 1291,
+      "label": "Magrane",
+      "wilayaId": 39
+    },
+    {
+      "id": 1301,
+      "label": "Sidi Aoun",
+      "wilayaId": 39
+    },
+    {
+      "id": 1292,
+      "label": "Mih Ouansa",
+      "wilayaId": 39
+    },
+    {
+      "id": 1295,
+      "label": "Oued El Alenda",
+      "wilayaId": 39
+    }
+  ]
+}

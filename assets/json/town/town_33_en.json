@@ -1,0 +1,24 @@
+{
+  "data": [
+    {
+      "id": 1162,
+      "label": "Illizi",
+      "wilayaId": 33
+    },
+    {
+      "id": 1159,
+      "label": "Bordj Omar Driss",
+      "wilayaId": 33
+    },
+    {
+      "id": 1160,
+      "label": "Debdeb",
+      "wilayaId": 33
+    },
+    {
+      "id": 1163,
+      "label": "In Amenas",
+      "wilayaId": 33
+    }
+  ]
+}

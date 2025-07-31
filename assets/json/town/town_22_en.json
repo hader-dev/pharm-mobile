@@ -1,0 +1,264 @@
+{
+  "data": [
+    {
+      "id": 824,
+      "label": "Sidi Bel-Abbes",
+      "wilayaId": 22
+    },
+    {
+      "id": 791,
+      "label": "Ain Thrid",
+      "wilayaId": 22
+    },
+    {
+      "id": 820,
+      "label": "Sehala Thaoura",
+      "wilayaId": 22
+    },
+    {
+      "id": 838,
+      "label": "Tessala",
+      "wilayaId": 22
+    },
+    {
+      "id": 796,
+      "label": "Belarbi",
+      "wilayaId": 22
+    },
+    {
+      "id": 813,
+      "label": "Mostefa  Ben Brahim",
+      "wilayaId": 22
+    },
+    {
+      "id": 839,
+      "label": "Tilmouni",
+      "wilayaId": 22
+    },
+    {
+      "id": 840,
+      "label": "Zerouala",
+      "wilayaId": 22
+    },
+    {
+      "id": 803,
+      "label": "Dhaya",
+      "wilayaId": 22
+    },
+    {
+      "id": 812,
+      "label": "Mezaourou",
+      "wilayaId": 22
+    },
+    {
+      "id": 835,
+      "label": "Teghalimet",
+      "wilayaId": 22
+    },
+    {
+      "id": 836,
+      "label": "Telagh",
+      "wilayaId": 22
+    },
+    {
+      "id": 790,
+      "label": "Ain Kada",
+      "wilayaId": 22
+    },
+    {
+      "id": 807,
+      "label": "Lamtar",
+      "wilayaId": 22
+    },
+    {
+      "id": 823,
+      "label": "Sidi Ali Boussidi",
+      "wilayaId": 22
+    },
+    {
+      "id": 827,
+      "label": "Sidi Dahou Zairs",
+      "wilayaId": 22
+    },
+    {
+      "id": 799,
+      "label": "Bir El Hammam",
+      "wilayaId": 22
+    },
+    {
+      "id": 809,
+      "label": "Marhoum",
+      "wilayaId": 22
+    },
+    {
+      "id": 826,
+      "label": "Sidi Chaib",
+      "wilayaId": 22
+    },
+    {
+      "id": 794,
+      "label": "Amarnas",
+      "wilayaId": 22
+    },
+    {
+      "id": 829,
+      "label": "Sidi Khaled",
+      "wilayaId": 22
+    },
+    {
+      "id": 830,
+      "label": "Sidi Lahcene",
+      "wilayaId": 22
+    },
+    {
+      "id": 831,
+      "label": "Sidi Yacoub",
+      "wilayaId": 22
+    },
+    {
+      "id": 798,
+      "label": "Benachiba Chelia",
+      "wilayaId": 22
+    },
+    {
+      "id": 805,
+      "label": "Hassi Dahou",
+      "wilayaId": 22
+    },
+    {
+      "id": 816,
+      "label": "Oued Sefioun",
+      "wilayaId": 22
+    },
+    {
+      "id": 837,
+      "label": "Tenira",
+      "wilayaId": 22
+    },
+    {
+      "id": 792,
+      "label": "Ain Tindamine",
+      "wilayaId": 22
+    },
+    {
+      "id": 804,
+      "label": "El Hacaiba",
+      "wilayaId": 22
+    },
+    {
+      "id": 814,
+      "label": "Moulay Slissen",
+      "wilayaId": 22
+    },
+    {
+      "id": 811,
+      "label": "Merine",
+      "wilayaId": 22
+    },
+    {
+      "id": 817,
+      "label": "Oued Taourira",
+      "wilayaId": 22
+    },
+    {
+      "id": 833,
+      "label": "Taoudmout",
+      "wilayaId": 22
+    },
+    {
+      "id": 834,
+      "label": "Tefessour",
+      "wilayaId": 22
+    },
+    {
+      "id": 815,
+      "label": "Oued Sebaa",
+      "wilayaId": 22
+    },
+    {
+      "id": 818,
+      "label": "Ras El Ma",
+      "wilayaId": 22
+    },
+    {
+      "id": 819,
+      "label": "Redjem Demouche",
+      "wilayaId": 22
+    },
+    {
+      "id": 789,
+      "label": "Ain El Berd",
+      "wilayaId": 22
+    },
+    {
+      "id": 808,
+      "label": "Makedra",
+      "wilayaId": 22
+    },
+    {
+      "id": 825,
+      "label": "Sidi Brahim",
+      "wilayaId": 22
+    },
+    {
+      "id": 828,
+      "label": "Sidi Hamadouche",
+      "wilayaId": 22
+    },
+    {
+      "id": 793,
+      "label": "Ain- Adden",
+      "wilayaId": 22
+    },
+    {
+      "id": 800,
+      "label": "Boudjebaa El Bordj",
+      "wilayaId": 22
+    },
+    {
+      "id": 810,
+      "label": "M'cid",
+      "wilayaId": 22
+    },
+    {
+      "id": 821,
+      "label": "Sfisef",
+      "wilayaId": 22
+    },
+    {
+      "id": 795,
+      "label": "Bedrabine El Mokrani",
+      "wilayaId": 22
+    },
+    {
+      "id": 797,
+      "label": "Ben Badis",
+      "wilayaId": 22
+    },
+    {
+      "id": 802,
+      "label": "Chetouane Belaila",
+      "wilayaId": 22
+    },
+    {
+      "id": 806,
+      "label": "Hassi Zahana",
+      "wilayaId": 22
+    },
+    {
+      "id": 801,
+      "label": "Boukhanefis",
+      "wilayaId": 22
+    },
+    {
+      "id": 822,
+      "label": "Sidi Ali Benyoub",
+      "wilayaId": 22
+    },
+    {
+      "id": 832,
+      "label": "Tabia",
+      "wilayaId": 22
+    }
+  ]
+}

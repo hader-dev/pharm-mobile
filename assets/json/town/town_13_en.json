@@ -1,0 +1,269 @@
+{
+  "data": [
+    {
+      "id": 443,
+      "label": "Tlemcen",
+      "wilayaId": 13
+    },
+    {
+      "id": 396,
+      "label": "Ain Nehala",
+      "wilayaId": 13
+    },
+    {
+      "id": 397,
+      "label": "Ain Tellout",
+      "wilayaId": 13
+    },
+    {
+      "id": 398,
+      "label": "Ain Youcef",
+      "wilayaId": 13
+    },
+    {
+      "id": 405,
+      "label": "Beni Ouarsous",
+      "wilayaId": 13
+    },
+    {
+      "id": 416,
+      "label": "El Fehoul",
+      "wilayaId": 13
+    },
+    {
+      "id": 431,
+      "label": "Remchi",
+      "wilayaId": 13
+    },
+    {
+      "id": 433,
+      "label": "Sebbaa Chioukh",
+      "wilayaId": 13
+    },
+    {
+      "id": 409,
+      "label": "Bouhlou",
+      "wilayaId": 13
+    },
+    {
+      "id": 432,
+      "label": "Sabra",
+      "wilayaId": 13
+    },
+    {
+      "id": 412,
+      "label": "Dar Yaghmoracen",
+      "wilayaId": 13
+    },
+    {
+      "id": 419,
+      "label": "Ghazaouet",
+      "wilayaId": 13
+    },
+    {
+      "id": 438,
+      "label": "Souahlia",
+      "wilayaId": 13
+    },
+    {
+      "id": 442,
+      "label": "Tianet",
+      "wilayaId": 13
+    },
+    {
+      "id": 406,
+      "label": "Beni Smiel",
+      "wilayaId": 13
+    },
+    {
+      "id": 428,
+      "label": "Oued Lakhdar",
+      "wilayaId": 13
+    },
+    {
+      "id": 429,
+      "label": "Ouled Mimoun",
+      "wilayaId": 13
+    },
+    {
+      "id": 401,
+      "label": "Beni Bahdel",
+      "wilayaId": 13
+    },
+    {
+      "id": 407,
+      "label": "Beni Snous",
+      "wilayaId": 13
+    },
+    {
+      "id": 415,
+      "label": "Azail",
+      "wilayaId": 13
+    },
+    {
+      "id": 400,
+      "label": "Bab El Assa",
+      "wilayaId": 13
+    },
+    {
+      "id": 439,
+      "label": "Souani",
+      "wilayaId": 13
+    },
+    {
+      "id": 440,
+      "label": "Souk Tleta",
+      "wilayaId": 13
+    },
+    {
+      "id": 392,
+      "label": "Ain Fetah",
+      "wilayaId": 13
+    },
+    {
+      "id": 395,
+      "label": "Ain Kebira",
+      "wilayaId": 13
+    },
+    {
+      "id": 418,
+      "label": "Fellaoucene",
+      "wilayaId": 13
+    },
+    {
+      "id": 408,
+      "label": "Bensekrane",
+      "wilayaId": 13
+    },
+    {
+      "id": 435,
+      "label": "Sidi Abdelli",
+      "wilayaId": 13
+    },
+    {
+      "id": 421,
+      "label": "Hennaya",
+      "wilayaId": 13
+    },
+    {
+      "id": 430,
+      "label": "Ouled Riyah",
+      "wilayaId": 13
+    },
+    {
+      "id": 444,
+      "label": "Zenata",
+      "wilayaId": 13
+    },
+    {
+      "id": 420,
+      "label": "Hammam Boughrara",
+      "wilayaId": 13
+    },
+    {
+      "id": 423,
+      "label": "Maghnia",
+      "wilayaId": 13
+    },
+    {
+      "id": 414,
+      "label": "El Aricha",
+      "wilayaId": 13
+    },
+    {
+      "id": 417,
+      "label": "El Gor",
+      "wilayaId": 13
+    },
+    {
+      "id": 434,
+      "label": "Sebdou",
+      "wilayaId": 13
+    },
+    {
+      "id": 402,
+      "label": "Beni Boussaid",
+      "wilayaId": 13
+    },
+    {
+      "id": 437,
+      "label": "Sidi Medjahed",
+      "wilayaId": 13
+    },
+    {
+      "id": 425,
+      "label": "Marsa Ben M'hidi",
+      "wilayaId": 13
+    },
+    {
+      "id": 426,
+      "label": "M'sirda Fouaga",
+      "wilayaId": 13
+    },
+    {
+      "id": 413,
+      "label": "Djebala",
+      "wilayaId": 13
+    },
+    {
+      "id": 427,
+      "label": "Nedroma",
+      "wilayaId": 13
+    },
+    {
+      "id": 410,
+      "label": "Bouihi",
+      "wilayaId": 13
+    },
+    {
+      "id": 436,
+      "label": "Sidi Djillali",
+      "wilayaId": 13
+    },
+    {
+      "id": 403,
+      "label": "Beni Khellad",
+      "wilayaId": 13
+    },
+    {
+      "id": 422,
+      "label": "Honnaine",
+      "wilayaId": 13
+    },
+    {
+      "id": 393,
+      "label": "Ain Fezza",
+      "wilayaId": 13
+    },
+    {
+      "id": 399,
+      "label": "Amieur",
+      "wilayaId": 13
+    },
+    {
+      "id": 411,
+      "label": "Chetouane",
+      "wilayaId": 13
+    },
+    {
+      "id": 394,
+      "label": "Ain Ghoraba",
+      "wilayaId": 13
+    },
+    {
+      "id": 404,
+      "label": "Beni Mester",
+      "wilayaId": 13
+    },
+    {
+      "id": 424,
+      "label": "Mansourah",
+      "wilayaId": 13
+    },
+    {
+      "id": 441,
+      "label": "Terny Beni Hediel",
+      "wilayaId": 13
+    }
+  ]
+}

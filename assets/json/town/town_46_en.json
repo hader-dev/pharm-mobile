@@ -1,0 +1,144 @@
+{
+  "data": [
+    {
+      "id": 1466,
+      "label": "Ain Temouchent",
+      "wilayaId": 46
+    },
+    {
+      "id": 1485,
+      "label": "Sidi Ben Adda",
+      "wilayaId": 46
+    },
+    {
+      "id": 1472,
+      "label": "Chentouf",
+      "wilayaId": 46
+    },
+    {
+      "id": 1477,
+      "label": "Hammam Bou Hadjar",
+      "wilayaId": 46
+    },
+    {
+      "id": 1478,
+      "label": "Hassasna",
+      "wilayaId": 46
+    },
+    {
+      "id": 1480,
+      "label": "Oued Berkeche",
+      "wilayaId": 46
+    },
+    {
+      "id": 1464,
+      "label": "Ain El Arbaa",
+      "wilayaId": 46
+    },
+    {
+      "id": 1481,
+      "label": "Oued Sebbah",
+      "wilayaId": 46
+    },
+    {
+      "id": 1486,
+      "label": "Sidi Boumediene",
+      "wilayaId": 46
+    },
+    {
+      "id": 1489,
+      "label": "Tamzoura",
+      "wilayaId": 46
+    },
+    {
+      "id": 1471,
+      "label": "Chaabat El Ham",
+      "wilayaId": 46
+    },
+    {
+      "id": 1474,
+      "label": "El Maleh",
+      "wilayaId": 46
+    },
+    {
+      "id": 1483,
+      "label": "Ouled Kihal",
+      "wilayaId": 46
+    },
+    {
+      "id": 1490,
+      "label": "Terga",
+      "wilayaId": 46
+    },
+    {
+      "id": 1470,
+      "label": "Bouzedjar",
+      "wilayaId": 46
+    },
+    {
+      "id": 1473,
+      "label": "El Amria",
+      "wilayaId": 46
+    },
+    {
+      "id": 1475,
+      "label": "El Messaid",
+      "wilayaId": 46
+    },
+    {
+      "id": 1479,
+      "label": "Hassi El Ghella",
+      "wilayaId": 46
+    },
+    {
+      "id": 1482,
+      "label": "Ouled Boudjemaa",
+      "wilayaId": 46
+    },
+    {
+      "id": 1463,
+      "label": "Aghlal",
+      "wilayaId": 46
+    },
+    {
+      "id": 1465,
+      "label": "Ain Kihal",
+      "wilayaId": 46
+    },
+    {
+      "id": 1467,
+      "label": "Ain Tolba",
+      "wilayaId": 46
+    },
+    {
+      "id": 1468,
+      "label": "Aoubellil",
+      "wilayaId": 46
+    },
+    {
+      "id": 1469,
+      "label": "Beni Saf",
+      "wilayaId": 46
+    },
+    {
+      "id": 1476,
+      "label": "Emir Abdelkader",
+      "wilayaId": 46
+    },
+    {
+      "id": 1488,
+      "label": "Sidi Safi",
+      "wilayaId": 46
+    },
+    {
+      "id": 1484,
+      "label": "Oulhaca El Gheraba",
+      "wilayaId": 46
+    },
+    {
+      "id": 1487,
+      "label": "Sidi Ouriache",
+      "wilayaId": 46
+    }
+  ]
+}

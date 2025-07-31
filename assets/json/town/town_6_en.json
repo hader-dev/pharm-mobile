@@ -1,0 +1,264 @@
+{
+  "data": [
+    {
+      "id": 187,
+      "label": "Bejaia",
+      "wilayaId": 6
+    },
+    {
+      "id": 210,
+      "label": "Oued Ghir",
+      "wilayaId": 6
+    },
+    {
+      "id": 184,
+      "label": "Amizour",
+      "wilayaId": 6
+    },
+    {
+      "id": 188,
+      "label": "Beni Djellil",
+      "wilayaId": 6
+    },
+    {
+      "id": 202,
+      "label": "Feraoun",
+      "wilayaId": 6
+    },
+    {
+      "id": 214,
+      "label": "Smaoun",
+      "wilayaId": 6
+    },
+    {
+      "id": 226,
+      "label": "Timezrit",
+      "wilayaId": 6
+    },
+    {
+      "id": 209,
+      "label": "Melbou",
+      "wilayaId": 6
+    },
+    {
+      "id": 215,
+      "label": "Souk El Tenine",
+      "wilayaId": 6
+    },
+    {
+      "id": 219,
+      "label": "Tamridjet",
+      "wilayaId": 6
+    },
+    {
+      "id": 194,
+      "label": "Boukhelifa",
+      "wilayaId": 6
+    },
+    {
+      "id": 217,
+      "label": "Tala Hamza",
+      "wilayaId": 6
+    },
+    {
+      "id": 224,
+      "label": "Tichy",
+      "wilayaId": 6
+    },
+    {
+      "id": 179,
+      "label": "Ait R'zine",
+      "wilayaId": 6
+    },
+    {
+      "id": 204,
+      "label": "Ighil-Ali",
+      "wilayaId": 6
+    },
+    {
+      "id": 180,
+      "label": "Ait-Smail",
+      "wilayaId": 6
+    },
+    {
+      "id": 197,
+      "label": "Darguina",
+      "wilayaId": 6
+    },
+    {
+      "id": 221,
+      "label": "Taskriout",
+      "wilayaId": 6
+    },
+    {
+      "id": 185,
+      "label": "Aokas",
+      "wilayaId": 6
+    },
+    {
+      "id": 228,
+      "label": "Tizi-N'berber",
+      "wilayaId": 6
+    },
+    {
+      "id": 178,
+      "label": "Adekar",
+      "wilayaId": 6
+    },
+    {
+      "id": 189,
+      "label": "Beni K'sila",
+      "wilayaId": 6
+    },
+    {
+      "id": 220,
+      "label": "Taourit Ighil",
+      "wilayaId": 6
+    },
+    {
+      "id": 181,
+      "label": "Akbou",
+      "wilayaId": 6
+    },
+    {
+      "id": 195,
+      "label": "Chellata",
+      "wilayaId": 6
+    },
+    {
+      "id": 205,
+      "label": "Ighram",
+      "wilayaId": 6
+    },
+    {
+      "id": 218,
+      "label": "Tamokra",
+      "wilayaId": 6
+    },
+    {
+      "id": 183,
+      "label": "Amalou",
+      "wilayaId": 6
+    },
+    {
+      "id": 193,
+      "label": "Bouhamza",
+      "wilayaId": 6
+    },
+    {
+      "id": 208,
+      "label": "M'cisna",
+      "wilayaId": 6
+    },
+    {
+      "id": 211,
+      "label": "Seddouk",
+      "wilayaId": 6
+    },
+    {
+      "id": 190,
+      "label": "Beni-Mallikeche",
+      "wilayaId": 6
+    },
+    {
+      "id": 192,
+      "label": "Boudjellil",
+      "wilayaId": 6
+    },
+    {
+      "id": 222,
+      "label": "Tazmalt",
+      "wilayaId": 6
+    },
+    {
+      "id": 182,
+      "label": "Akfadou",
+      "wilayaId": 6
+    },
+    {
+      "id": 196,
+      "label": "Chemini",
+      "wilayaId": 6
+    },
+    {
+      "id": 216,
+      "label": "Souk Oufella",
+      "wilayaId": 6
+    },
+    {
+      "id": 223,
+      "label": "Tibane",
+      "wilayaId": 6
+    },
+    {
+      "id": 186,
+      "label": "Barbacha",
+      "wilayaId": 6
+    },
+    {
+      "id": 206,
+      "label": "Kendira",
+      "wilayaId": 6
+    },
+    {
+      "id": 203,
+      "label": "Ouzellaguen",
+      "wilayaId": 6
+    },
+    {
+      "id": 199,
+      "label": "Leflaye",
+      "wilayaId": 6
+    },
+    {
+      "id": 212,
+      "label": "Sidi Ayad",
+      "wilayaId": 6
+    },
+    {
+      "id": 213,
+      "label": "Sidi-Aich",
+      "wilayaId": 6
+    },
+    {
+      "id": 225,
+      "label": "Tifra",
+      "wilayaId": 6
+    },
+    {
+      "id": 227,
+      "label": "Tinebdar",
+      "wilayaId": 6
+    },
+    {
+      "id": 200,
+      "label": "El Kseur",
+      "wilayaId": 6
+    },
+    {
+      "id": 201,
+      "label": "Fenaia Il Maten",
+      "wilayaId": 6
+    },
+    {
+      "id": 229,
+      "label": "Toudja",
+      "wilayaId": 6
+    },
+    {
+      "id": 198,
+      "label": "Dra El Caid",
+      "wilayaId": 6
+    },
+    {
+      "id": 207,
+      "label": "Kherrata",
+      "wilayaId": 6
+    },
+    {
+      "id": 191,
+      "label": "Benimaouche",
+      "wilayaId": 6
+    }
+  ]
+}

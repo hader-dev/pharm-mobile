@@ -1,0 +1,64 @@
+{
+  "data": [
+    {
+      "id": 842,
+      "label": "Annaba",
+      "wilayaId": 23
+    },
+    {
+      "id": 850,
+      "label": "Seraidi",
+      "wilayaId": 23
+    },
+    {
+      "id": 843,
+      "label": "Berrahal",
+      "wilayaId": 23
+    },
+    {
+      "id": 849,
+      "label": "Oued El Aneb",
+      "wilayaId": 23
+    },
+    {
+      "id": 852,
+      "label": "Treat",
+      "wilayaId": 23
+    },
+    {
+      "id": 848,
+      "label": "El Hadjar",
+      "wilayaId": 23
+    },
+    {
+      "id": 851,
+      "label": "Sidi Amar",
+      "wilayaId": 23
+    },
+    {
+      "id": 846,
+      "label": "El Bouni",
+      "wilayaId": 23
+    },
+    {
+      "id": 841,
+      "label": "Ain El Berda",
+      "wilayaId": 23
+    },
+    {
+      "id": 845,
+      "label": "Cheurfa",
+      "wilayaId": 23
+    },
+    {
+      "id": 847,
+      "label": "El Eulma",
+      "wilayaId": 23
+    },
+    {
+      "id": 844,
+      "label": "Chetaibi",
+      "wilayaId": 23
+    }
+  ]
+}

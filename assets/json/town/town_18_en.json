@@ -1,0 +1,144 @@
+{
+  "data": [
+    {
+      "id": 662,
+      "label": "Jijel",
+      "wilayaId": 18
+    },
+    {
+      "id": 656,
+      "label": "El Aouana",
+      "wilayaId": 18
+    },
+    {
+      "id": 668,
+      "label": "Selma Benziada",
+      "wilayaId": 18
+    },
+    {
+      "id": 660,
+      "label": "Erraguene Souissi",
+      "wilayaId": 18
+    },
+    {
+      "id": 674,
+      "label": "Ziama Mansouriah",
+      "wilayaId": 18
+    },
+    {
+      "id": 650,
+      "label": "Boussif Ouled Askeur",
+      "wilayaId": 18
+    },
+    {
+      "id": 651,
+      "label": "Chahna",
+      "wilayaId": 18
+    },
+    {
+      "id": 659,
+      "label": "Emir Abdelkader",
+      "wilayaId": 18
+    },
+    {
+      "id": 665,
+      "label": "Oudjana",
+      "wilayaId": 18
+    },
+    {
+      "id": 672,
+      "label": "Taher",
+      "wilayaId": 18
+    },
+    {
+      "id": 647,
+      "label": "Bordj T'har",
+      "wilayaId": 18
+    },
+    {
+      "id": 652,
+      "label": "Chekfa",
+      "wilayaId": 18
+    },
+    {
+      "id": 657,
+      "label": "El Kennar Nouchfi",
+      "wilayaId": 18
+    },
+    {
+      "id": 670,
+      "label": "Sidi Abdelaziz",
+      "wilayaId": 18
+    },
+    {
+      "id": 658,
+      "label": "El Milia",
+      "wilayaId": 18
+    },
+    {
+      "id": 667,
+      "label": "Ouled Yahia Khadrouch",
+      "wilayaId": 18
+    },
+    {
+      "id": 666,
+      "label": "Ouled Rabah",
+      "wilayaId": 18
+    },
+    {
+      "id": 671,
+      "label": "Sidi Marouf",
+      "wilayaId": 18
+    },
+    {
+      "id": 661,
+      "label": "Ghebala",
+      "wilayaId": 18
+    },
+    {
+      "id": 669,
+      "label": "Settara",
+      "wilayaId": 18
+    },
+    {
+      "id": 649,
+      "label": "Bouraoui Belhadef",
+      "wilayaId": 18
+    },
+    {
+      "id": 653,
+      "label": "Djemaa Beni Habibi",
+      "wilayaId": 18
+    },
+    {
+      "id": 655,
+      "label": "El Ancer",
+      "wilayaId": 18
+    },
+    {
+      "id": 664,
+      "label": "Khiri Oued Adjoul",
+      "wilayaId": 18
+    },
+    {
+      "id": 648,
+      "label": "Boudria Beniyadjis",
+      "wilayaId": 18
+    },
+    {
+      "id": 654,
+      "label": "Djimla",
+      "wilayaId": 18
+    },
+    {
+      "id": 663,
+      "label": "Kaous",
+      "wilayaId": 18
+    },
+    {
+      "id": 673,
+      "label": "Texenna",
+      "wilayaId": 18
+    }
+  ]
+}

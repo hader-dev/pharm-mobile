@@ -1,0 +1,19 @@
+{
+  "data": [
+    {
+      "id": 357,
+      "label": "Ain Salah",
+      "wilayaId": 53
+    },
+    {
+      "id": 358,
+      "label": "Foggaret Ezzoua",
+      "wilayaId": 53
+    },
+    {
+      "id": 360,
+      "label": "Inghar",
+      "wilayaId": 53
+    }
+  ]
+}

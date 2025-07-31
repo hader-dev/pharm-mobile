@@ -1,0 +1,24 @@
+{
+  "data": [
+    {
+      "id": 1495,
+      "label": "El Meniaa",
+      "wilayaId": 58
+    },
+    {
+      "id": 1499,
+      "label": "Hassi Gara",
+      "wilayaId": 58
+    },
+    {
+      "id": 1498,
+      "label": "Hassi Fehal",
+      "wilayaId": 58
+    },
+    {
+      "id": 1500,
+      "label": "Mansoura",
+      "wilayaId": 58
+    }
+  ]
+}

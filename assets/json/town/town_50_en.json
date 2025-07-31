@@ -1,0 +1,14 @@
+{
+  "data": [
+    {
+      "id": 5,
+      "label": "Bordj Badji Mokhtar",
+      "wilayaId": 50
+    },
+    {
+      "id": 23,
+      "label": "Timiaouine",
+      "wilayaId": 50
+    }
+  ]
+}

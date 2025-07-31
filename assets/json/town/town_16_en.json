@@ -1,0 +1,289 @@
+{
+  "data": [
+    {
+      "id": 556,
+      "label": "Alger Centre",
+      "wilayaId": 16
+    },
+    {
+      "id": 582,
+      "label": "El Madania",
+      "wilayaId": 16
+    },
+    {
+      "id": 585,
+      "label": "El Mouradia",
+      "wilayaId": 16
+    },
+    {
+      "id": 605,
+      "label": "Sidi M'hamed",
+      "wilayaId": 16
+    },
+    {
+      "id": 557,
+      "label": "Bab El Oued",
+      "wilayaId": 16
+    },
+    {
+      "id": 567,
+      "label": "Bologhine Ibnou Ziri",
+      "wilayaId": 16
+    },
+    {
+      "id": 572,
+      "label": "Casbah",
+      "wilayaId": 16
+    },
+    {
+      "id": 596,
+      "label": "Oued Koriche",
+      "wilayaId": 16
+    },
+    {
+      "id": 601,
+      "label": "Rais Hamidou",
+      "wilayaId": 16
+    },
+    {
+      "id": 564,
+      "label": "Bir Mourad Rais",
+      "wilayaId": 16
+    },
+    {
+      "id": 565,
+      "label": "Birkhadem",
+      "wilayaId": 16
+    },
+    {
+      "id": 576,
+      "label": "Djasr Kasentina",
+      "wilayaId": 16
+    },
+    {
+      "id": 589,
+      "label": "Hydra",
+      "wilayaId": 16
+    },
+    {
+      "id": 604,
+      "label": "Sehaoula",
+      "wilayaId": 16
+    },
+    {
+      "id": 562,
+      "label": "Ben Aknoun",
+      "wilayaId": 16
+    },
+    {
+      "id": 563,
+      "label": "Beni Messous",
+      "wilayaId": 16
+    },
+    {
+      "id": 571,
+      "label": "Bouzareah",
+      "wilayaId": 16
+    },
+    {
+      "id": 580,
+      "label": "El Biar",
+      "wilayaId": 16
+    },
+    {
+      "id": 560,
+      "label": "Bachedjerah",
+      "wilayaId": 16
+    },
+    {
+      "id": 570,
+      "label": "Bourouba",
+      "wilayaId": 16
+    },
+    {
+      "id": 581,
+      "label": "El Harrach",
+      "wilayaId": 16
+    },
+    {
+      "id": 597,
+      "label": "Oued Smar",
+      "wilayaId": 16
+    },
+    {
+      "id": 561,
+      "label": "Baraki",
+      "wilayaId": 16
+    },
+    {
+      "id": 592,
+      "label": "Les Eucalyptus",
+      "wilayaId": 16
+    },
+    {
+      "id": 606,
+      "label": "Sidi Moussa",
+      "wilayaId": 16
+    },
+    {
+      "id": 583,
+      "label": "El Magharia",
+      "wilayaId": 16
+    },
+    {
+      "id": 588,
+      "label": "Hussein Dey",
+      "wilayaId": 16
+    },
+    {
+      "id": 591,
+      "label": "Kouba",
+      "wilayaId": 16
+    },
+    {
+      "id": 594,
+      "label": "Mohamed Belouzdad",
+      "wilayaId": 16
+    },
+    {
+      "id": 555,
+      "label": "Ain Taya",
+      "wilayaId": 16
+    },
+    {
+      "id": 558,
+      "label": "Bab Ezzouar",
+      "wilayaId": 16
+    },
+    {
+      "id": 568,
+      "label": "Bordj El Bahri",
+      "wilayaId": 16
+    },
+    {
+      "id": 569,
+      "label": "Bordj El Kiffan",
+      "wilayaId": 16
+    },
+    {
+      "id": 574,
+      "label": "Dar El Beida",
+      "wilayaId": 16
+    },
+    {
+      "id": 584,
+      "label": "El Marsa",
+      "wilayaId": 16
+    },
+    {
+      "id": 595,
+      "label": "Mohammadia",
+      "wilayaId": 16
+    },
+    {
+      "id": 566,
+      "label": "Bir Touta",
+      "wilayaId": 16
+    },
+    {
+      "id": 598,
+      "label": "Ouled Chebel",
+      "wilayaId": 16
+    },
+    {
+      "id": 609,
+      "label": "Tessala El Merdja",
+      "wilayaId": 16
+    },
+    {
+      "id": 587,
+      "label": "Herraoua",
+      "wilayaId": 16
+    },
+    {
+      "id": 602,
+      "label": "Reghaia",
+      "wilayaId": 16
+    },
+    {
+      "id": 603,
+      "label": "Rouiba",
+      "wilayaId": 16
+    },
+    {
+      "id": 593,
+      "label": "Maalma",
+      "wilayaId": 16
+    },
+    {
+      "id": 600,
+      "label": "Rahmania",
+      "wilayaId": 16
+    },
+    {
+      "id": 607,
+      "label": "Souidania",
+      "wilayaId": 16
+    },
+    {
+      "id": 608,
+      "label": "Staoueli",
+      "wilayaId": 16
+    },
+    {
+      "id": 610,
+      "label": "Zeralda",
+      "wilayaId": 16
+    },
+    {
+      "id": 559,
+      "label": "Baba Hassen",
+      "wilayaId": 16
+    },
+    {
+      "id": 577,
+      "label": "Douira",
+      "wilayaId": 16
+    },
+    {
+      "id": 578,
+      "label": "Draria",
+      "wilayaId": 16
+    },
+    {
+      "id": 579,
+      "label": "El Achour",
+      "wilayaId": 16
+    },
+    {
+      "id": 590,
+      "label": "Khraissia",
+      "wilayaId": 16
+    },
+    {
+      "id": 554,
+      "label": "Ain Benian",
+      "wilayaId": 16
+    },
+    {
+      "id": 573,
+      "label": "Cheraga",
+      "wilayaId": 16
+    },
+    {
+      "id": 575,
+      "label": "Dely Ibrahim",
+      "wilayaId": 16
+    },
+    {
+      "id": 586,
+      "label": "Hammamet",
+      "wilayaId": 16
+    },
+    {
+      "id": 599,
+      "label": "Ouled Fayet",
+      "wilayaId": 16
+    }
+  ]
+}

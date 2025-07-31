@@ -1,0 +1,64 @@
+{
+  "data": [
+    {
+      "id": 264,
+      "label": "Bechar",
+      "wilayaId": 8
+    },
+    {
+      "id": 268,
+      "label": "Boukais",
+      "wilayaId": 8
+    },
+    {
+      "id": 275,
+      "label": "Lahmar",
+      "wilayaId": 8
+    },
+    {
+      "id": 278,
+      "label": "Mogheul",
+      "wilayaId": 8
+    },
+    {
+      "id": 272,
+      "label": "Kenadsa",
+      "wilayaId": 8
+    },
+    {
+      "id": 277,
+      "label": "Meridja",
+      "wilayaId": 8
+    },
+    {
+      "id": 280,
+      "label": "Tabelbala",
+      "wilayaId": 8
+    },
+    {
+      "id": 281,
+      "label": "Taghit",
+      "wilayaId": 8
+    },
+    {
+      "id": 263,
+      "label": "Abadla",
+      "wilayaId": 8
+    },
+    {
+      "id": 270,
+      "label": "Erg-Ferradj",
+      "wilayaId": 8
+    },
+    {
+      "id": 276,
+      "label": "Machraa-Houari-Boumediene",
+      "wilayaId": 8
+    },
+    {
+      "id": 267,
+      "label": "Beni-Ounif",
+      "wilayaId": 8
+    }
+  ]
+}

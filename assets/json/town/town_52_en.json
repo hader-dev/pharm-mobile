@@ -1,0 +1,49 @@
+{
+  "data": [
+    {
+      "id": 265,
+      "label": "Beni-Abbes",
+      "wilayaId": 52
+    },
+    {
+      "id": 282,
+      "label": "Tamtert",
+      "wilayaId": 52
+    },
+    {
+      "id": 271,
+      "label": "Igli",
+      "wilayaId": 52
+    },
+    {
+      "id": 269,
+      "label": "El Ouata",
+      "wilayaId": 52
+    },
+    {
+      "id": 274,
+      "label": "Ksabi",
+      "wilayaId": 52
+    },
+    {
+      "id": 279,
+      "label": "Ouled-Khodeir",
+      "wilayaId": 52
+    },
+    {
+      "id": 266,
+      "label": "Beni-Ikhlef",
+      "wilayaId": 52
+    },
+    {
+      "id": 273,
+      "label": "Kerzaz",
+      "wilayaId": 52
+    },
+    {
+      "id": 283,
+      "label": "Timoudi",
+      "wilayaId": 52
+    }
+  ]
+}

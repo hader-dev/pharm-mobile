@@ -1,0 +1,144 @@
+{
+  "data": [
+    {
+      "id": 390,
+      "label": "Tebessa",
+      "wilayaId": 12
+    },
+    {
+      "id": 369,
+      "label": "Bir-El-Ater",
+      "wilayaId": 12
+    },
+    {
+      "id": 378,
+      "label": "El Ogla El Malha",
+      "wilayaId": 12
+    },
+    {
+      "id": 372,
+      "label": "Cheria",
+      "wilayaId": 12
+    },
+    {
+      "id": 391,
+      "label": "Telidjen",
+      "wilayaId": 12
+    },
+    {
+      "id": 370,
+      "label": "Boukhadra",
+      "wilayaId": 12
+    },
+    {
+      "id": 379,
+      "label": "El-Aouinet",
+      "wilayaId": 12
+    },
+    {
+      "id": 381,
+      "label": "Ferkane",
+      "wilayaId": 12
+    },
+    {
+      "id": 385,
+      "label": "Negrine",
+      "wilayaId": 12
+    },
+    {
+      "id": 368,
+      "label": "Bir Mokkadem",
+      "wilayaId": 12
+    },
+    {
+      "id": 382,
+      "label": "Guorriguer",
+      "wilayaId": 12
+    },
+    {
+      "id": 383,
+      "label": "Hammamet",
+      "wilayaId": 12
+    },
+    {
+      "id": 366,
+      "label": "Bekkaria",
+      "wilayaId": 12
+    },
+    {
+      "id": 371,
+      "label": "Boulhaf Dyr",
+      "wilayaId": 12
+    },
+    {
+      "id": 373,
+      "label": "El Kouif",
+      "wilayaId": 12
+    },
+    {
+      "id": 367,
+      "label": "Bir Dheheb",
+      "wilayaId": 12
+    },
+    {
+      "id": 384,
+      "label": "Morsott",
+      "wilayaId": 12
+    },
+    {
+      "id": 365,
+      "label": "Bedjene",
+      "wilayaId": 12
+    },
+    {
+      "id": 376,
+      "label": "El Mezeraa",
+      "wilayaId": 12
+    },
+    {
+      "id": 377,
+      "label": "El Ogla",
+      "wilayaId": 12
+    },
+    {
+      "id": 389,
+      "label": "Stah Guentis",
+      "wilayaId": 12
+    },
+    {
+      "id": 364,
+      "label": "Ain Zerga",
+      "wilayaId": 12
+    },
+    {
+      "id": 375,
+      "label": "El Meridj",
+      "wilayaId": 12
+    },
+    {
+      "id": 386,
+      "label": "Ouenza",
+      "wilayaId": 12
+    },
+    {
+      "id": 374,
+      "label": "El Malabiod",
+      "wilayaId": 12
+    },
+    {
+      "id": 380,
+      "label": "El-Houidjbet",
+      "wilayaId": 12
+    },
+    {
+      "id": 387,
+      "label": "Oum Ali",
+      "wilayaId": 12
+    },
+    {
+      "id": 388,
+      "label": "Saf Saf El Ouesra",
+      "wilayaId": 12
+    }
+  ]
+}

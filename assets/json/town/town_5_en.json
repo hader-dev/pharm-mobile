@@ -1,0 +1,309 @@
+{
+  "data": [
+    {
+      "id": 123,
+      "label": "Batna",
+      "wilayaId": 5
+    },
+    {
+      "id": 136,
+      "label": "Fesdis",
+      "wilayaId": 5
+    },
+    {
+      "id": 154,
+      "label": "Oued Chaaba",
+      "wilayaId": 5
+    },
+    {
+      "id": 141,
+      "label": "Hidoussa",
+      "wilayaId": 5
+    },
+    {
+      "id": 145,
+      "label": "Ksar Bellezma",
+      "wilayaId": 5
+    },
+    {
+      "id": 152,
+      "label": "Merouana",
+      "wilayaId": 5
+    },
+    {
+      "id": 155,
+      "label": "Oued El Ma",
+      "wilayaId": 5
+    },
+    {
+      "id": 147,
+      "label": "Lazrou",
+      "wilayaId": 5
+    },
+    {
+      "id": 167,
+      "label": "Seriana",
+      "wilayaId": 5
+    },
+    {
+      "id": 177,
+      "label": "Zanet El Beida",
+      "wilayaId": 5
+    },
+    {
+      "id": 151,
+      "label": "Menaa",
+      "wilayaId": 5
+    },
+    {
+      "id": 174,
+      "label": "Tigharghar",
+      "wilayaId": 5
+    },
+    {
+      "id": 119,
+      "label": "Ain Yagout",
+      "wilayaId": 5
+    },
+    {
+      "id": 128,
+      "label": "Boumia",
+      "wilayaId": 5
+    },
+    {
+      "id": 132,
+      "label": "Djerma",
+      "wilayaId": 5
+    },
+    {
+      "id": 135,
+      "label": "El Madher",
+      "wilayaId": 5
+    },
+    {
+      "id": 162,
+      "label": "Ouyoun El Assafir",
+      "wilayaId": 5
+    },
+    {
+      "id": 171,
+      "label": "Tazoult",
+      "wilayaId": 5
+    },
+    {
+      "id": 127,
+      "label": "Boumagueur",
+      "wilayaId": 5
+    },
+    {
+      "id": 153,
+      "label": "N Gaous",
+      "wilayaId": 5
+    },
+    {
+      "id": 165,
+      "label": "Sefiane",
+      "wilayaId": 5
+    },
+    {
+      "id": 120,
+      "label": "Arris",
+      "wilayaId": 5
+    },
+    {
+      "id": 173,
+      "label": "Tighanimine",
+      "wilayaId": 5
+    },
+    {
+      "id": 117,
+      "label": "Ain Djasser",
+      "wilayaId": 5
+    },
+    {
+      "id": 134,
+      "label": "El Hassi",
+      "wilayaId": 5
+    },
+    {
+      "id": 166,
+      "label": "Seggana",
+      "wilayaId": 5
+    },
+    {
+      "id": 175,
+      "label": "Tilatou",
+      "wilayaId": 5
+    },
+    {
+      "id": 137,
+      "label": "Foum Toub",
+      "wilayaId": 5
+    },
+    {
+      "id": 142,
+      "label": "Ichemoul",
+      "wilayaId": 5
+    },
+    {
+      "id": 143,
+      "label": "Inoughissen",
+      "wilayaId": 5
+    },
+    {
+      "id": 129,
+      "label": "Bouzina",
+      "wilayaId": 5
+    },
+    {
+      "id": 146,
+      "label": "Larbaa",
+      "wilayaId": 5
+    },
+    {
+      "id": 126,
+      "label": "Boulhilat",
+      "wilayaId": 5
+    },
+    {
+      "id": 130,
+      "label": "Chemora",
+      "wilayaId": 5
+    },
+    {
+      "id": 122,
+      "label": "Barika",
+      "wilayaId": 5
+    },
+    {
+      "id": 125,
+      "label": "Bitam",
+      "wilayaId": 5
+    },
+    {
+      "id": 149,
+      "label": "M Doukal",
+      "wilayaId": 5
+    },
+    {
+      "id": 121,
+      "label": "Azil Abedelkader",
+      "wilayaId": 5
+    },
+    {
+      "id": 133,
+      "label": "Djezzar",
+      "wilayaId": 5
+    },
+    {
+      "id": 157,
+      "label": "Ouled Ammar",
+      "wilayaId": 5
+    },
+    {
+      "id": 138,
+      "label": "Ghassira",
+      "wilayaId": 5
+    },
+    {
+      "id": 144,
+      "label": "Kimmel",
+      "wilayaId": 5
+    },
+    {
+      "id": 168,
+      "label": "T Kout",
+      "wilayaId": 5
+    },
+    {
+      "id": 118,
+      "label": "Ain Touta",
+      "wilayaId": 5
+    },
+    {
+      "id": 124,
+      "label": "Beni Foudhala El Hakania",
+      "wilayaId": 5
+    },
+    {
+      "id": 150,
+      "label": "Maafa",
+      "wilayaId": 5
+    },
+    {
+      "id": 158,
+      "label": "Ouled Aouf",
+      "wilayaId": 5
+    },
+    {
+      "id": 131,
+      "label": "Chir",
+      "wilayaId": 5
+    },
+    {
+      "id": 156,
+      "label": "Oued Taga",
+      "wilayaId": 5
+    },
+    {
+      "id": 172,
+      "label": "Teniet El Abed",
+      "wilayaId": 5
+    },
+    {
+      "id": 159,
+      "label": "Ouled Fadel",
+      "wilayaId": 5
+    },
+    {
+      "id": 176,
+      "label": "Timgad",
+      "wilayaId": 5
+    },
+    {
+      "id": 139,
+      "label": "Gosbat",
+      "wilayaId": 5
+    },
+    {
+      "id": 140,
+      "label": "Guigba",
+      "wilayaId": 5
+    },
+    {
+      "id": 160,
+      "label": "Ouled Sellem",
+      "wilayaId": 5
+    },
+    {
+      "id": 163,
+      "label": "Rahbat",
+      "wilayaId": 5
+    },
+    {
+      "id": 164,
+      "label": "Ras El Aioun",
+      "wilayaId": 5
+    },
+    {
+      "id": 169,
+      "label": "Talkhamt",
+      "wilayaId": 5
+    },
+    {
+      "id": 148,
+      "label": "Lemcene",
+      "wilayaId": 5
+    },
+    {
+      "id": 161,
+      "label": "Ouled Si Slimane",
+      "wilayaId": 5
+    },
+    {
+      "id": 170,
+      "label": "Taxlent",
+      "wilayaId": 5
+    }
+  ]
+}

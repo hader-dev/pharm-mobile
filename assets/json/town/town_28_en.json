@@ -1,0 +1,239 @@
+{
+  "data": [
+    {
+      "id": 1023,
+      "label": "M'sila",
+      "wilayaId": 28
+    },
+    {
+      "id": 1013,
+      "label": "Hammam Dalaa",
+      "wilayaId": 28
+    },
+    {
+      "id": 1025,
+      "label": "Ouanougha",
+      "wilayaId": 28
+    },
+    {
+      "id": 1029,
+      "label": "Ouled Mansour",
+      "wilayaId": 28
+    },
+    {
+      "id": 1040,
+      "label": "Tarmount",
+      "wilayaId": 28
+    },
+    {
+      "id": 1016,
+      "label": "Maadid",
+      "wilayaId": 28
+    },
+    {
+      "id": 1024,
+      "label": "M'tarfa",
+      "wilayaId": 28
+    },
+    {
+      "id": 1026,
+      "label": "Ouled Addi Guebala",
+      "wilayaId": 28
+    },
+    {
+      "id": 1027,
+      "label": "Ouled Derradj",
+      "wilayaId": 28
+    },
+    {
+      "id": 1038,
+      "label": "Souamaa",
+      "wilayaId": 28
+    },
+    {
+      "id": 1012,
+      "label": "El Houamed",
+      "wilayaId": 28
+    },
+    {
+      "id": 1015,
+      "label": "Khoubana",
+      "wilayaId": 28
+    },
+    {
+      "id": 1019,
+      "label": "M'cif",
+      "wilayaId": 28
+    },
+    {
+      "id": 1008,
+      "label": "Chellal",
+      "wilayaId": 28
+    },
+    {
+      "id": 1014,
+      "label": "Khettouti Sed-El-Jir",
+      "wilayaId": 28
+    },
+    {
+      "id": 1017,
+      "label": "Maarif",
+      "wilayaId": 28
+    },
+    {
+      "id": 1028,
+      "label": "Ouled Madhi",
+      "wilayaId": 28
+    },
+    {
+      "id": 998,
+      "label": "Ain Khadra",
+      "wilayaId": 28
+    },
+    {
+      "id": 1000,
+      "label": "Belaiba",
+      "wilayaId": 28
+    },
+    {
+      "id": 1004,
+      "label": "Berhoum",
+      "wilayaId": 28
+    },
+    {
+      "id": 1009,
+      "label": "Dehahna",
+      "wilayaId": 28
+    },
+    {
+      "id": 1018,
+      "label": "Magra",
+      "wilayaId": 28
+    },
+    {
+      "id": 1002,
+      "label": "Beni Ilmane",
+      "wilayaId": 28
+    },
+    {
+      "id": 1007,
+      "label": "Bouti Sayeh",
+      "wilayaId": 28
+    },
+    {
+      "id": 1033,
+      "label": "Sidi Aissa",
+      "wilayaId": 28
+    },
+    {
+      "id": 995,
+      "label": "Ain El Hadjel",
+      "wilayaId": 28
+    },
+    {
+      "id": 1035,
+      "label": "Sidi Hadjeres",
+      "wilayaId": 28
+    },
+    {
+      "id": 1006,
+      "label": "Bou Saada",
+      "wilayaId": 28
+    },
+    {
+      "id": 1011,
+      "label": "El Hamel",
+      "wilayaId": 28
+    },
+    {
+      "id": 1032,
+      "label": "Oulteme",
+      "wilayaId": 28
+    },
+    {
+      "id": 1003,
+      "label": "Benzouh",
+      "wilayaId": 28
+    },
+    {
+      "id": 1030,
+      "label": "Ouled Sidi Brahim",
+      "wilayaId": 28
+    },
+    {
+      "id": 1034,
+      "label": "Sidi Ameur",
+      "wilayaId": 28
+    },
+    {
+      "id": 1039,
+      "label": "Tamsa",
+      "wilayaId": 28
+    },
+    {
+      "id": 1001,
+      "label": "Ben Srour",
+      "wilayaId": 28
+    },
+    {
+      "id": 1022,
+      "label": "Mohamed Boudiaf",
+      "wilayaId": 28
+    },
+    {
+      "id": 1031,
+      "label": "Ouled Slimane",
+      "wilayaId": 28
+    },
+    {
+      "id": 1041,
+      "label": "Zarzour",
+      "wilayaId": 28
+    },
+    {
+      "id": 996,
+      "label": "Ain El Melh",
+      "wilayaId": 28
+    },
+    {
+      "id": 997,
+      "label": "Ain Fares",
+      "wilayaId": 28
+    },
+    {
+      "id": 999,
+      "label": "Ain Rich",
+      "wilayaId": 28
+    },
+    {
+      "id": 1005,
+      "label": "Bir Foda",
+      "wilayaId": 28
+    },
+    {
+      "id": 1036,
+      "label": "Sidi M'hamed",
+      "wilayaId": 28
+    },
+    {
+      "id": 1020,
+      "label": "Medjedel",
+      "wilayaId": 28
+    },
+    {
+      "id": 1021,
+      "label": "Menaa",
+      "wilayaId": 28
+    },
+    {
+      "id": 1010,
+      "label": "Djebel Messaad",
+      "wilayaId": 28
+    },
+    {
+      "id": 1037,
+      "label": "Slim",
+      "wilayaId": 28
+    }
+  ]
+}

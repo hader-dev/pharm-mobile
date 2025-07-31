@@ -1,0 +1,134 @@
+{
+  "data": [
+    {
+      "id": 1349,
+      "label": "Souk Ahras",
+      "wilayaId": 41
+    },
+    {
+      "id": 1329,
+      "label": "Ain Soltane",
+      "wilayaId": 41
+    },
+    {
+      "id": 1336,
+      "label": "Khemissa",
+      "wilayaId": 41
+    },
+    {
+      "id": 1347,
+      "label": "Sedrata",
+      "wilayaId": 41
+    },
+    {
+      "id": 1334,
+      "label": "Hanencha",
+      "wilayaId": 41
+    },
+    {
+      "id": 1337,
+      "label": "Machroha",
+      "wilayaId": 41
+    },
+    {
+      "id": 1330,
+      "label": "Ain Zana",
+      "wilayaId": 41
+    },
+    {
+      "id": 1341,
+      "label": "Ouled Driss",
+      "wilayaId": 41
+    },
+    {
+      "id": 1332,
+      "label": "Drea",
+      "wilayaId": 41
+    },
+    {
+      "id": 1350,
+      "label": "Taoura",
+      "wilayaId": 41
+    },
+    {
+      "id": 1353,
+      "label": "Zaarouria",
+      "wilayaId": 41
+    },
+    {
+      "id": 1333,
+      "label": "Haddada",
+      "wilayaId": 41
+    },
+    {
+      "id": 1335,
+      "label": "Khedara",
+      "wilayaId": 41
+    },
+    {
+      "id": 1342,
+      "label": "Ouled Moumen",
+      "wilayaId": 41
+    },
+    {
+      "id": 1339,
+      "label": "Merahna",
+      "wilayaId": 41
+    },
+    {
+      "id": 1344,
+      "label": "Ouillen",
+      "wilayaId": 41
+    },
+    {
+      "id": 1348,
+      "label": "Sidi Fredj",
+      "wilayaId": 41
+    },
+    {
+      "id": 1331,
+      "label": "Bir Bouhouche",
+      "wilayaId": 41
+    },
+    {
+      "id": 1346,
+      "label": "Safel El Ouiden",
+      "wilayaId": 41
+    },
+    {
+      "id": 1354,
+      "label": "Zouabi",
+      "wilayaId": 41
+    },
+    {
+      "id": 1338,
+      "label": "M'daourouche",
+      "wilayaId": 41
+    },
+    {
+      "id": 1345,
+      "label": "Ragouba",
+      "wilayaId": 41
+    },
+    {
+      "id": 1352,
+      "label": "Tiffech",
+      "wilayaId": 41
+    },
+    {
+      "id": 1340,
+      "label": "Oued Kebrit",
+      "wilayaId": 41
+    },
+    {
+      "id": 1343,
+      "label": "Oum El Adhaim",
+      "wilayaId": 41
+    },
+    {
+      "id": 1351,
+      "label": "Terraguelt",
+      "wilayaId": 41
+    }
+  ]
+}

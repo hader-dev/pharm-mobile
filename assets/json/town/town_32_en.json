@@ -1,0 +1,94 @@
+{
+  "data": [
+    {
+      "id": 1144,
+      "label": "El Bayadh",
+      "wilayaId": 32
+    },
+    {
+      "id": 1139,
+      "label": "Bougtoub",
+      "wilayaId": 32
+    },
+    {
+      "id": 1152,
+      "label": "Rogassa",
+      "wilayaId": 32
+    },
+    {
+      "id": 1155,
+      "label": "Sidi Tiffour",
+      "wilayaId": 32
+    },
+    {
+      "id": 1141,
+      "label": "Brezina",
+      "wilayaId": 32
+    },
+    {
+      "id": 1149,
+      "label": "Ghassoul",
+      "wilayaId": 32
+    },
+    {
+      "id": 1151,
+      "label": "Krakda",
+      "wilayaId": 32
+    },
+    {
+      "id": 1142,
+      "label": "Cheguig",
+      "wilayaId": 32
+    },
+    {
+      "id": 1542,
+      "label": "Labiodh Sidi Cheikh",
+      "wilayaId": 32
+    },
+    {
+      "id": 1146,
+      "label": "El Bnoud",
+      "wilayaId": 32
+    },
+    {
+      "id": 1137,
+      "label": "Arbaouat",
+      "wilayaId": 32
+    },
+    {
+      "id": 1543,
+      "label": "Ain El Orak",
+      "wilayaId": 32
+    },
+    {
+      "id": 1147,
+      "label": "El Kheither",
+      "wilayaId": 32
+    },
+    {
+      "id": 1150,
+      "label": "Kef El Ahmar",
+      "wilayaId": 32
+    },
+    {
+      "id": 1138,
+      "label": "Boualem",
+      "wilayaId": 32
+    },
+    {
+      "id": 1156,
+      "label": "Stitten",
+      "wilayaId": 32
+    },
+    {
+      "id": 1143,
+      "label": "Chellala",
+      "wilayaId": 32
+    },
+    {
+      "id": 1148,
+      "label": "El Mehara",
+      "wilayaId": 32
+    }
+  ]
+}

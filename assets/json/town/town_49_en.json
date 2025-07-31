@@ -1,0 +1,54 @@
+{
+  "data": [
+    {
+      "id": 15,
+      "label": "Ouled Said",
+      "wilayaId": 49
+    },
+    {
+      "id": 24,
+      "label": "Timimoun",
+      "wilayaId": 49
+    },
+    {
+      "id": 3,
+      "label": "Aougrout",
+      "wilayaId": 49
+    },
+    {
+      "id": 8,
+      "label": "Deldoul",
+      "wilayaId": 49
+    },
+    {
+      "id": 12,
+      "label": "Metarfa",
+      "wilayaId": 49
+    },
+    {
+      "id": 7,
+      "label": "Charouine",
+      "wilayaId": 49
+    },
+    {
+      "id": 14,
+      "label": "Ouled Aissa",
+      "wilayaId": 49
+    },
+    {
+      "id": 19,
+      "label": "Talmine",
+      "wilayaId": 49
+    },
+    {
+      "id": 11,
+      "label": "Ksar Kaddour",
+      "wilayaId": 49
+    },
+    {
+      "id": 25,
+      "label": "Tinerkouk",
+      "wilayaId": 49
+    }
+  ]
+}

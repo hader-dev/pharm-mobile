@@ -1,0 +1,124 @@
+{
+  "data": [
+    {
+      "id": 79,
+      "label": "Laghouat",
+      "wilayaId": 3
+    },
+    {
+      "id": 68,
+      "label": "Benacer Benchohra",
+      "wilayaId": 3
+    },
+    {
+      "id": 78,
+      "label": "Ksar El Hirane",
+      "wilayaId": 3
+    },
+    {
+      "id": 70,
+      "label": "El Assafia",
+      "wilayaId": 3
+    },
+    {
+      "id": 84,
+      "label": "Sidi Makhlouf",
+      "wilayaId": 3
+    },
+    {
+      "id": 75,
+      "label": "Hassi Delaa",
+      "wilayaId": 3
+    },
+    {
+      "id": 76,
+      "label": "Hassi R'mel",
+      "wilayaId": 3
+    },
+    {
+      "id": 65,
+      "label": "Ain Madhi",
+      "wilayaId": 3
+    },
+    {
+      "id": 72,
+      "label": "El Haouaita",
+      "wilayaId": 3
+    },
+    {
+      "id": 77,
+      "label": "Kheneg",
+      "wilayaId": 3
+    },
+    {
+      "id": 85,
+      "label": "Tadjemout",
+      "wilayaId": 3
+    },
+    {
+      "id": 86,
+      "label": "Tadjrouna",
+      "wilayaId": 3
+    },
+    {
+      "id": 66,
+      "label": "Ain Sidi Ali",
+      "wilayaId": 3
+    },
+    {
+      "id": 67,
+      "label": "El Beidha",
+      "wilayaId": 3
+    },
+    {
+      "id": 73,
+      "label": "Gueltat Sidi Saad",
+      "wilayaId": 3
+    },
+    {
+      "id": 69,
+      "label": "Brida",
+      "wilayaId": 3
+    },
+    {
+      "id": 74,
+      "label": "Hadj Mechri",
+      "wilayaId": 3
+    },
+    {
+      "id": 87,
+      "label": "Taouiala",
+      "wilayaId": 3
+    },
+    {
+      "id": 71,
+      "label": "El Ghicha",
+      "wilayaId": 3
+    },
+    {
+      "id": 64,
+      "label": "Aflou",
+      "wilayaId": 3
+    },
+    {
+      "id": 82,
+      "label": "Sebgag",
+      "wilayaId": 3
+    },
+    {
+      "id": 83,
+      "label": "Sidi Bouzid",
+      "wilayaId": 3
+    },
+    {
+      "id": 80,
+      "label": "Oued Morra",
+      "wilayaId": 3
+    },
+    {
+      "id": 81,
+      "label": "Oued M'zi",
+      "wilayaId": 3
+    }
+  ]
+}

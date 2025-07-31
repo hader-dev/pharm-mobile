@@ -1,0 +1,124 @@
+{
+  "data": [
+    {
+      "id": 1230,
+      "label": "Ain El Assel",
+      "wilayaId": 36
+    },
+    {
+      "id": 1236,
+      "label": "Bougous",
+      "wilayaId": 36
+    },
+    {
+      "id": 1246,
+      "label": "El Tarf",
+      "wilayaId": 36
+    },
+    {
+      "id": 1253,
+      "label": "Zitouna",
+      "wilayaId": 36
+    },
+    {
+      "id": 1231,
+      "label": "Ain Kerma",
+      "wilayaId": 36
+    },
+    {
+      "id": 1237,
+      "label": "Bouhadjar",
+      "wilayaId": 36
+    },
+    {
+      "id": 1247,
+      "label": "Hammam Beni Salah",
+      "wilayaId": 36
+    },
+    {
+      "id": 1249,
+      "label": "Oued Zitoun",
+      "wilayaId": 36
+    },
+    {
+      "id": 1233,
+      "label": "Ben M Hidi",
+      "wilayaId": 36
+    },
+    {
+      "id": 1234,
+      "label": "Berrihane",
+      "wilayaId": 36
+    },
+    {
+      "id": 1243,
+      "label": "Echatt",
+      "wilayaId": 36
+    },
+    {
+      "id": 1244,
+      "label": "El Aioun",
+      "wilayaId": 36
+    },
+    {
+      "id": 1245,
+      "label": "El Kala",
+      "wilayaId": 36
+    },
+    {
+      "id": 1250,
+      "label": "Raml Souk",
+      "wilayaId": 36
+    },
+    {
+      "id": 1251,
+      "label": "Souarekh",
+      "wilayaId": 36
+    },
+    {
+      "id": 1238,
+      "label": "Bouteldja",
+      "wilayaId": 36
+    },
+    {
+      "id": 1240,
+      "label": "Chefia",
+      "wilayaId": 36
+    },
+    {
+      "id": 1248,
+      "label": "Lac Des Oiseaux",
+      "wilayaId": 36
+    },
+    {
+      "id": 1239,
+      "label": "Chebaita Mokhtar",
+      "wilayaId": 36
+    },
+    {
+      "id": 1241,
+      "label": "Chihani",
+      "wilayaId": 36
+    },
+    {
+      "id": 1242,
+      "label": "Drean",
+      "wilayaId": 36
+    },
+    {
+      "id": 1232,
+      "label": "Asfour",
+      "wilayaId": 36
+    },
+    {
+      "id": 1235,
+      "label": "Besbes",
+      "wilayaId": 36
+    },
+    {
+      "id": 1252,
+      "label": "Zerizer",
+      "wilayaId": 36
+    }
+  ]
+}

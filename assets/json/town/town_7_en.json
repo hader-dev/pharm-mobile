@@ -1,0 +1,139 @@
+{
+  "data": [
+    {
+      "id": 233,
+      "label": "Biskra",
+      "wilayaId": 7
+    },
+    {
+      "id": 243,
+      "label": "El Hadjab",
+      "wilayaId": 7
+    },
+    {
+      "id": 230,
+      "label": "Ain Naga",
+      "wilayaId": 7
+    },
+    {
+      "id": 238,
+      "label": "Chetma",
+      "wilayaId": 7
+    },
+    {
+      "id": 244,
+      "label": "El Haouch",
+      "wilayaId": 7
+    },
+    {
+      "id": 260,
+      "label": "Sidi Okba",
+      "wilayaId": 7
+    },
+    {
+      "id": 251,
+      "label": "M'chouneche",
+      "wilayaId": 7
+    },
+    {
+      "id": 241,
+      "label": "El Feidh",
+      "wilayaId": 7
+    },
+    {
+      "id": 248,
+      "label": "Khenguet Sidi Nadji",
+      "wilayaId": 7
+    },
+    {
+      "id": 253,
+      "label": "Meziraa",
+      "wilayaId": 7
+    },
+    {
+      "id": 262,
+      "label": "Zeribet El Oued",
+      "wilayaId": 7
+    },
+    {
+      "id": 231,
+      "label": "Ain Zaatout",
+      "wilayaId": 7
+    },
+    {
+      "id": 245,
+      "label": "El Kantara",
+      "wilayaId": 7
+    },
+    {
+      "id": 246,
+      "label": "El Outaya",
+      "wilayaId": 7
+    },
+    {
+      "id": 236,
+      "label": "Branis",
+      "wilayaId": 7
+    },
+    {
+      "id": 239,
+      "label": "Djemorah",
+      "wilayaId": 7
+    },
+    {
+      "id": 234,
+      "label": "Bordj Ben Azzouz",
+      "wilayaId": 7
+    },
+    {
+      "id": 235,
+      "label": "Bouchakroun",
+      "wilayaId": 7
+    },
+    {
+      "id": 249,
+      "label": "Lichana",
+      "wilayaId": 7
+    },
+    {
+      "id": 261,
+      "label": "Tolga",
+      "wilayaId": 7
+    },
+    {
+      "id": 250,
+      "label": "Lioua",
+      "wilayaId": 7
+    },
+    {
+      "id": 252,
+      "label": "Mekhadma",
+      "wilayaId": 7
+    },
+    {
+      "id": 254,
+      "label": "M'lili",
+      "wilayaId": 7
+    },
+    {
+      "id": 256,
+      "label": "Oumache",
+      "wilayaId": 7
+    },
+    {
+      "id": 257,
+      "label": "Ourlal",
+      "wilayaId": 7
+    },
+    {
+      "id": 242,
+      "label": "El Ghrous",
+      "wilayaId": 7
+    },
+    {
+      "id": 247,
+      "label": "Foughala",
+      "wilayaId": 7
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "data": [
+    {
+      "id": 891,
+      "label": "Constantine",
+      "wilayaId": 25
+    },
+    {
+      "id": 892,
+      "label": "Didouche Mourad",
+      "wilayaId": 25
+    },
+    {
+      "id": 894,
+      "label": "Hamma Bouziane",
+      "wilayaId": 25
+    },
+    {
+      "id": 890,
+      "label": "Beni Hamidane",
+      "wilayaId": 25
+    },
+    {
+      "id": 898,
+      "label": "Zighoud Youcef",
+      "wilayaId": 25
+    },
+    {
+      "id": 888,
+      "label": "Ain Smara",
+      "wilayaId": 25
+    },
+    {
+      "id": 893,
+      "label": "El Khroub",
+      "wilayaId": 25
+    },
+    {
+      "id": 897,
+      "label": "Ouled Rahmoun",
+      "wilayaId": 25
+    },
+    {
+      "id": 887,
+      "label": "Ain Abid",
+      "wilayaId": 25
+    },
+    {
+      "id": 889,
+      "label": "Ben Badis",
+      "wilayaId": 25
+    },
+    {
+      "id": 895,
+      "label": "Ibn Ziad",
+      "wilayaId": 25
+    },
+    {
+      "id": 896,
+      "label": "Messaoud Boudjeriou",
+      "wilayaId": 25
+    }
+  ]
+}

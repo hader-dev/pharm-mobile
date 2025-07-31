@@ -1,0 +1,84 @@
+{
+  "data": [
+    {
+      "id": 745,
+      "label": "Saida",
+      "wilayaId": 20
+    },
+    {
+      "id": 735,
+      "label": "Ain El Hadjar",
+      "wilayaId": 20
+    },
+    {
+      "id": 742,
+      "label": "Moulay Larbi",
+      "wilayaId": 20
+    },
+    {
+      "id": 746,
+      "label": "Sidi Ahmed",
+      "wilayaId": 20
+    },
+    {
+      "id": 738,
+      "label": "Doui Thabet",
+      "wilayaId": 20
+    },
+    {
+      "id": 750,
+      "label": "Youb",
+      "wilayaId": 20
+    },
+    {
+      "id": 740,
+      "label": "Hounet",
+      "wilayaId": 20
+    },
+    {
+      "id": 744,
+      "label": "Ouled Khaled",
+      "wilayaId": 20
+    },
+    {
+      "id": 747,
+      "label": "Sidi Amar",
+      "wilayaId": 20
+    },
+    {
+      "id": 748,
+      "label": "Sidi Boubekeur",
+      "wilayaId": 20
+    },
+    {
+      "id": 736,
+      "label": "Ain Sekhouna",
+      "wilayaId": 20
+    },
+    {
+      "id": 739,
+      "label": "El Hassasna",
+      "wilayaId": 20
+    },
+    {
+      "id": 741,
+      "label": "Maamora",
+      "wilayaId": 20
+    },
+    {
+      "id": 737,
+      "label": "Ain Soltane",
+      "wilayaId": 20
+    },
+    {
+      "id": 743,
+      "label": "Ouled Brahim",
+      "wilayaId": 20
+    },
+    {
+      "id": 749,
+      "label": "Tircine",
+      "wilayaId": 20
+    }
+  ]
+}

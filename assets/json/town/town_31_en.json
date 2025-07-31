@@ -1,0 +1,134 @@
+{
+  "data": [
+    {
+      "id": 1131,
+      "label": "Oran",
+      "wilayaId": 31
+    },
+    {
+      "id": 1114,
+      "label": "Ben Freha",
+      "wilayaId": 31
+    },
+    {
+      "id": 1124,
+      "label": "Gdyel",
+      "wilayaId": 31
+    },
+    {
+      "id": 1127,
+      "label": "Hassi Mefsoukh",
+      "wilayaId": 31
+    },
+    {
+      "id": 1116,
+      "label": "Bir El Djir",
+      "wilayaId": 31
+    },
+    {
+      "id": 1125,
+      "label": "Hassi Ben Okba",
+      "wilayaId": 31
+    },
+    {
+      "id": 1126,
+      "label": "Hassi Bounif",
+      "wilayaId": 31
+    },
+    {
+      "id": 1122,
+      "label": "El Kerma",
+      "wilayaId": 31
+    },
+    {
+      "id": 1123,
+      "label": "Es Senia",
+      "wilayaId": 31
+    },
+    {
+      "id": 1134,
+      "label": "Sidi Chami",
+      "wilayaId": 31
+    },
+    {
+      "id": 1113,
+      "label": "Arzew",
+      "wilayaId": 31
+    },
+    {
+      "id": 1133,
+      "label": "Sidi Ben Yebka",
+      "wilayaId": 31
+    },
+    {
+      "id": 1110,
+      "label": "Ain Biya",
+      "wilayaId": 31
+    },
+    {
+      "id": 1115,
+      "label": "Bethioua",
+      "wilayaId": 31
+    },
+    {
+      "id": 1128,
+      "label": "Marsat El Hadjadj",
+      "wilayaId": 31
+    },
+    {
+      "id": 1112,
+      "label": "Ain Turk",
+      "wilayaId": 31
+    },
+    {
+      "id": 1118,
+      "label": "Bousfer",
+      "wilayaId": 31
+    },
+    {
+      "id": 1120,
+      "label": "El Ancor",
+      "wilayaId": 31
+    },
+    {
+      "id": 1129,
+      "label": "Mers El Kebir",
+      "wilayaId": 31
+    },
+    {
+      "id": 1117,
+      "label": "Boufatis",
+      "wilayaId": 31
+    },
+    {
+      "id": 1121,
+      "label": "El Braya",
+      "wilayaId": 31
+    },
+    {
+      "id": 1132,
+      "label": "Oued Tlelat",
+      "wilayaId": 31
+    },
+    {
+      "id": 1135,
+      "label": "Tafraoui",
+      "wilayaId": 31
+    },
+    {
+      "id": 1111,
+      "label": "Ain Kerma",
+      "wilayaId": 31
+    },
+    {
+      "id": 1119,
+      "label": "Boutlelis",
+      "wilayaId": 31
+    },
+    {
+      "id": 1130,
+      "label": "Messerghin",
+      "wilayaId": 31
+    }
+  ]
+}

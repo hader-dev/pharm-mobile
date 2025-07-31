@@ -1,0 +1,84 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "label": "Adrar",
+      "wilayaId": 1
+    },
+    {
+      "id": 6,
+      "label": "Bouda",
+      "wilayaId": 1
+    },
+    {
+      "id": 13,
+      "label": "Ouled Ahmed Timmi",
+      "wilayaId": 1
+    },
+    {
+      "id": 16,
+      "label": "Reggane",
+      "wilayaId": 1
+    },
+    {
+      "id": 17,
+      "label": "Sali",
+      "wilayaId": 1
+    },
+    {
+      "id": 18,
+      "label": "Sebaa",
+      "wilayaId": 1
+    },
+    {
+      "id": 27,
+      "label": "Tsabit",
+      "wilayaId": 1
+    },
+    {
+      "id": 10,
+      "label": "In Zghmir",
+      "wilayaId": 1
+    },
+    {
+      "id": 28,
+      "label": "Zaouiet Kounta",
+      "wilayaId": 1
+    },
+    {
+      "id": 2,
+      "label": "Akabli",
+      "wilayaId": 1
+    },
+    {
+      "id": 4,
+      "label": "Aoulef",
+      "wilayaId": 1
+    },
+    {
+      "id": 22,
+      "label": "Timekten",
+      "wilayaId": 1
+    },
+    {
+      "id": 26,
+      "label": "Tit",
+      "wilayaId": 1
+    },
+    {
+      "id": 9,
+      "label": "Fenoughil",
+      "wilayaId": 1
+    },
+    {
+      "id": 20,
+      "label": "Tamantit",
+      "wilayaId": 1
+    },
+    {
+      "id": 21,
+      "label": "Tamest",
+      "wilayaId": 1
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "data": [
+    {
+      "id": 1101,
+      "label": "Ouargla",
+      "wilayaId": 30
+    },
+    {
+      "id": 1102,
+      "label": "Rouissat",
+      "wilayaId": 30
+    },
+    {
+      "id": 1100,
+      "label": "N'goussa",
+      "wilayaId": 30
+    },
+    {
+      "id": 1096,
+      "label": "Hassi Messaoud",
+      "wilayaId": 30
+    },
+    {
+      "id": 1089,
+      "label": "Ain Beida",
+      "wilayaId": 30
+    },
+    {
+      "id": 1095,
+      "label": "Hassi Ben Abdellah",
+      "wilayaId": 30
+    },
+    {
+      "id": 1103,
+      "label": "Sidi Khouiled",
+      "wilayaId": 30
+    },
+    {
+      "id": 1093,
+      "label": "El Borma",
+      "wilayaId": 30
+    }
+  ]
+}

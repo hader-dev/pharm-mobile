@@ -1,0 +1,179 @@
+{
+  "data": [
+    {
+      "id": 39,
+      "label": "Chlef",
+      "wilayaId": 2
+    },
+    {
+      "id": 54,
+      "label": "Oum Drou",
+      "wilayaId": 2
+    },
+    {
+      "id": 55,
+      "label": "Sendjas",
+      "wilayaId": 2
+    },
+    {
+      "id": 56,
+      "label": "Sidi Abderrahmane",
+      "wilayaId": 2
+    },
+    {
+      "id": 57,
+      "label": "Sidi Akkacha",
+      "wilayaId": 2
+    },
+    {
+      "id": 62,
+      "label": "Tenes",
+      "wilayaId": 2
+    },
+    {
+      "id": 32,
+      "label": "Beni  Bouattab",
+      "wilayaId": 2
+    },
+    {
+      "id": 42,
+      "label": "El Karimia",
+      "wilayaId": 2
+    },
+    {
+      "id": 44,
+      "label": "Harchoun",
+      "wilayaId": 2
+    },
+    {
+      "id": 40,
+      "label": "Dahra",
+      "wilayaId": 2
+    },
+    {
+      "id": 61,
+      "label": "Taougrit",
+      "wilayaId": 2
+    },
+    {
+      "id": 33,
+      "label": "Beni Haoua",
+      "wilayaId": 2
+    },
+    {
+      "id": 37,
+      "label": "Breira",
+      "wilayaId": 2
+    },
+    {
+      "id": 49,
+      "label": "Oued Goussine",
+      "wilayaId": 2
+    },
+    {
+      "id": 38,
+      "label": "Chettia",
+      "wilayaId": 2
+    },
+    {
+      "id": 46,
+      "label": "Labiod Medjadja",
+      "wilayaId": 2
+    },
+    {
+      "id": 53,
+      "label": "Ouled Fares",
+      "wilayaId": 2
+    },
+    {
+      "id": 35,
+      "label": "Boukadir",
+      "wilayaId": 2
+    },
+    {
+      "id": 50,
+      "label": "Oued Sly",
+      "wilayaId": 2
+    },
+    {
+      "id": 58,
+      "label": "Sobha",
+      "wilayaId": 2
+    },
+    {
+      "id": 31,
+      "label": "Benairia",
+      "wilayaId": 2
+    },
+    {
+      "id": 36,
+      "label": "Bouzeghaia",
+      "wilayaId": 2
+    },
+    {
+      "id": 63,
+      "label": "Zeboudja",
+      "wilayaId": 2
+    },
+    {
+      "id": 29,
+      "label": "Abou El Hassane",
+      "wilayaId": 2
+    },
+    {
+      "id": 59,
+      "label": "Tadjena",
+      "wilayaId": 2
+    },
+    {
+      "id": 60,
+      "label": "Talassa",
+      "wilayaId": 2
+    },
+    {
+      "id": 43,
+      "label": "El Marsa",
+      "wilayaId": 2
+    },
+    {
+      "id": 47,
+      "label": "Moussadek",
+      "wilayaId": 2
+    },
+    {
+      "id": 34,
+      "label": "Beni Rached",
+      "wilayaId": 2
+    },
+    {
+      "id": 48,
+      "label": "Oued Fodda",
+      "wilayaId": 2
+    },
+    {
+      "id": 51,
+      "label": "Ouled Abbes",
+      "wilayaId": 2
+    },
+    {
+      "id": 41,
+      "label": "El Hadjadj",
+      "wilayaId": 2
+    },
+    {
+      "id": 52,
+      "label": "Ouled Ben Abdelkader",
+      "wilayaId": 2
+    },
+    {
+      "id": 30,
+      "label": "Ain Merane",
+      "wilayaId": 2
+    },
+    {
+      "id": 45,
+      "label": "Herenfa",
+      "wilayaId": 2
+    }
+  ]
+}

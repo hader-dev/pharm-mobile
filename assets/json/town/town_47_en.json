@@ -1,0 +1,49 @@
+{
+  "data": [
+    {
+      "id": 1496,
+      "label": "Ghardaia",
+      "wilayaId": 47
+    },
+    {
+      "id": 1493,
+      "label": "Dhayet Bendhahoua",
+      "wilayaId": 47
+    },
+    {
+      "id": 1491,
+      "label": "Berriane",
+      "wilayaId": 47
+    },
+    {
+      "id": 1501,
+      "label": "Metlili",
+      "wilayaId": 47
+    },
+    {
+      "id": 1502,
+      "label": "Sebseb",
+      "wilayaId": 47
+    },
+    {
+      "id": 1497,
+      "label": "El Guerrara",
+      "wilayaId": 47
+    },
+    {
+      "id": 1503,
+      "label": "Zelfana",
+      "wilayaId": 47
+    },
+    {
+      "id": 1492,
+      "label": "Bounoura",
+      "wilayaId": 47
+    },
+    {
+      "id": 1494,
+      "label": "El Atteuf",
+      "wilayaId": 47
+    }
+  ]
+}

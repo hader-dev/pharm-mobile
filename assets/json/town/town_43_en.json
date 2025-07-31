@@ -1,0 +1,164 @@
+{
+  "data": [
+    {
+      "id": 1386,
+      "label": "Ain Tine",
+      "wilayaId": 43
+    },
+    {
+      "id": 1398,
+      "label": "Mila",
+      "wilayaId": 43
+    },
+    {
+      "id": 1405,
+      "label": "Sidi Khelifa",
+      "wilayaId": 43
+    },
+    {
+      "id": 1395,
+      "label": "Ferdjioua",
+      "wilayaId": 43
+    },
+    {
+      "id": 1413,
+      "label": "Yahia Beniguecha",
+      "wilayaId": 43
+    },
+    {
+      "id": 1385,
+      "label": "Ain Mellouk",
+      "wilayaId": 43
+    },
+    {
+      "id": 1390,
+      "label": "Chelghoum Laid",
+      "wilayaId": 43
+    },
+    {
+      "id": 1400,
+      "label": "Oued Athmenia",
+      "wilayaId": 43
+    },
+    {
+      "id": 1394,
+      "label": "El Mechira",
+      "wilayaId": 43
+    },
+    {
+      "id": 1402,
+      "label": "Oued Seguen",
+      "wilayaId": 43
+    },
+    {
+      "id": 1409,
+      "label": "Teleghma",
+      "wilayaId": 43
+    },
+    {
+      "id": 1388,
+      "label": "Benyahia Abderrahmane",
+      "wilayaId": 43
+    },
+    {
+      "id": 1403,
+      "label": "Ouled Khalouf",
+      "wilayaId": 43
+    },
+    {
+      "id": 1407,
+      "label": "Tadjenanet",
+      "wilayaId": 43
+    },
+    {
+      "id": 1383,
+      "label": "Ahmed Rachedi",
+      "wilayaId": 43
+    },
+    {
+      "id": 1401,
+      "label": "Oued Endja",
+      "wilayaId": 43
+    },
+    {
+      "id": 1414,
+      "label": "Zeghaia",
+      "wilayaId": 43
+    },
+    {
+      "id": 1389,
+      "label": "Bouhatem",
+      "wilayaId": 43
+    },
+    {
+      "id": 1392,
+      "label": "Derrahi Bousselah",
+      "wilayaId": 43
+    },
+    {
+      "id": 1404,
+      "label": "Rouached",
+      "wilayaId": 43
+    },
+    {
+      "id": 1412,
+      "label": "Tiberguent",
+      "wilayaId": 43
+    },
+    {
+      "id": 1396,
+      "label": "Grarem Gouga",
+      "wilayaId": 43
+    },
+    {
+      "id": 1397,
+      "label": "Hamala",
+      "wilayaId": 43
+    },
+    {
+      "id": 1391,
+      "label": "Chigara",
+      "wilayaId": 43
+    },
+    {
+      "id": 1406,
+      "label": "Sidi Merouane",
+      "wilayaId": 43
+    },
+    {
+      "id": 1399,
+      "label": "Minar Zarza",
+      "wilayaId": 43
+    },
+    {
+      "id": 1408,
+      "label": "Tassadane Haddada",
+      "wilayaId": 43
+    },
+    {
+      "id": 1387,
+      "label": "Amira Arres",
+      "wilayaId": 43
+    },
+    {
+      "id": 1410,
+      "label": "Terrai Bainen",
+      "wilayaId": 43
+    },
+    {
+      "id": 1411,
+      "label": "Tassala Lematai",
+      "wilayaId": 43
+    },
+    {
+      "id": 1384,
+      "label": "Ain Beida Harriche",
+      "wilayaId": 43
+    },
+    {
+      "id": 1393,
+      "label": "El Ayadi Barbes",
+      "wilayaId": 43
+    }
+  ]
+}
