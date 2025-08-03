@@ -573,4 +573,67 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get select_town => 'Select Town';
+
+  @override
+  String get filters_clinincal => 'Clinical';
+
+  @override
+  String get filter_items_dci => 'DCI';
+
+  @override
+  String get filter_items_dosage => 'Dosage';
+
+  @override
+  String get filter_items_form => 'Form';
+
+  @override
+  String get filter_items_status => 'Status';
+
+  @override
+  String get filter_items_register_date => 'Registration Date';
+
+  @override
+  String get filter_items_country => 'Country';
+
+  @override
+  String get filter_items_patent => 'Patent';
+
+  @override
+  String get filters_commercial => 'Commercial';
+
+  @override
+  String get filter_items_brand => 'Brand';
+
+  @override
+  String get filter_items_condition => 'Condition';
+
+  @override
+  String get filter_items_type => 'Type';
+
+  @override
+  String get filters_regulatory => 'Regulatory';
+
+  @override
+  String get filters_logisctics => 'Logistics';
+
+  @override
+  String get filter_items_stability_duration => 'Stability Duration';
+
+  @override
+  String get filter_items_origin_country => 'Country of Origin';
+
+  @override
+  String get filter_items_packaging_format => 'Packaging Format';
+
+  @override
+  String get filters_others => 'Others';
+
+  @override
+  String get filter_items_code => 'Code';
+
+  @override
+  String get filter_items_reimbursement => 'Reimbursement';
+
+  @override
+  String get any => 'Any';
 }

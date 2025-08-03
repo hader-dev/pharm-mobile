@@ -182,5 +182,30 @@
   "wilaya":"Wilaya",
   "town":"Town",
   "select_wilaya":"Select Wilaya",
-  "select_town":"Select Town"
+  "select_town":"Select Town",
+  "filters_clinincal":"Clinical",
+  "filter_items_dci":"DCI",
+  "filter_items_dosage":"Dosage",
+  "filter_items_form":"Form",
+"filter_items_status": "Status",
+"filter_items_register_date": "Registration Date",
+"filter_items_country": "Country",
+"filter_items_patent": "Patent",
+"filters_commercial": "Commercial",
+"filter_items_brand": "Brand",
+"filter_items_condition": "Condition",
+"filter_items_type": "Type",
+"filters_regulatory": "Regulatory",
+"filters_logisctics": "Logistics",
+"filter_items_stability_duration": "Stability Duration",
+"filter_items_origin_country": "Country of Origin",
+"filter_items_packaging_format": "Packaging Format",
+
+"filters_others": "Others",
+"filter_items_code": "Code",
+"filter_items_reimbursement": "Reimbursement",
+"any": "Any"
+
+
+  
 }

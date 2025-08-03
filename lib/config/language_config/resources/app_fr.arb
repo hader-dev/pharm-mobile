@@ -182,5 +182,22 @@
   "wilaya": "Wilaya",
   "town": "Ville",
   "select_wilaya": "Choisissez la wilaya",
-  "select_town": "Choisissez la ville"
+  "select_town": "Choisissez la ville",
+  "filters_clinincal": "Clinical",
+  "filter_items_dci": "DCI",
+  "filter_items_dosage": "Dosage",
+  "filter_items_form": "Form",
+  "filter_items_status": "Statut",
+  "filter_items_register_date": "Date d'enregistrement",
+  "filter_items_country": "Pays",
+  "filter_items_patent": "Brevet",
+  "filters_regulatory": "Réglementaire",
+  "filters_logisctics": "Logistique",
+  "filter_items_stability_duration": "Durée de stabilité",
+  "filter_items_origin_country": "Pays d'origine",
+  "filter_items_packaging_format": "Format d'emballage",
+  "filters_others": "Autres",
+  "filter_items_code": "Code",
+  "filter_items_reimbursement": "Remboursement",
+  "any": "Any"
 }

@@ -574,4 +574,67 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get select_town => 'حدد المدينة';
+
+  @override
+  String get filters_clinincal => 'سريرية';
+
+  @override
+  String get filter_items_dci => 'الاسم العلمي';
+
+  @override
+  String get filter_items_dosage => 'الجرعة';
+
+  @override
+  String get filter_items_form => 'الشكل الصيدلاني';
+
+  @override
+  String get filter_items_status => 'الحالة';
+
+  @override
+  String get filter_items_register_date => 'تاريخ التسجيل';
+
+  @override
+  String get filter_items_country => 'البلد';
+
+  @override
+  String get filter_items_patent => 'براءة الاختراع';
+
+  @override
+  String get filters_commercial => 'العلامات التجارية';
+
+  @override
+  String get filter_items_brand => 'العلامة التجارية';
+
+  @override
+  String get filter_items_condition => 'الحالة التجارية';
+
+  @override
+  String get filter_items_type => 'النوع';
+
+  @override
+  String get filters_regulatory => 'تنظيمي';
+
+  @override
+  String get filters_logisctics => 'لوجستي';
+
+  @override
+  String get filter_items_stability_duration => 'مدة الثبات';
+
+  @override
+  String get filter_items_origin_country => 'بلد المنشأ';
+
+  @override
+  String get filter_items_packaging_format => 'شكل التعبئة';
+
+  @override
+  String get filters_others => 'أخرى';
+
+  @override
+  String get filter_items_code => 'الرمز';
+
+  @override
+  String get filter_items_reimbursement => 'التعويض';
+
+  @override
+  String get any => 'الكل';
 }

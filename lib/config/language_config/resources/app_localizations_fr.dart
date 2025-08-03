@@ -584,4 +584,67 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get select_town => 'Choisissez la ville';
+
+  @override
+  String get filters_clinincal => 'Clinical';
+
+  @override
+  String get filter_items_dci => 'DCI';
+
+  @override
+  String get filter_items_dosage => 'Dosage';
+
+  @override
+  String get filter_items_form => 'Form';
+
+  @override
+  String get filter_items_status => 'Statut';
+
+  @override
+  String get filter_items_register_date => 'Date d\'enregistrement';
+
+  @override
+  String get filter_items_country => 'Pays';
+
+  @override
+  String get filter_items_patent => 'Brevet';
+
+  @override
+  String get filters_commercial => 'Commercial';
+
+  @override
+  String get filter_items_brand => 'Brand';
+
+  @override
+  String get filter_items_condition => 'Condition';
+
+  @override
+  String get filter_items_type => 'Type';
+
+  @override
+  String get filters_regulatory => 'Réglementaire';
+
+  @override
+  String get filters_logisctics => 'Logistique';
+
+  @override
+  String get filter_items_stability_duration => 'Durée de stabilité';
+
+  @override
+  String get filter_items_origin_country => 'Pays d\'origine';
+
+  @override
+  String get filter_items_packaging_format => 'Format d\'emballage';
+
+  @override
+  String get filters_others => 'Autres';
+
+  @override
+  String get filter_items_code => 'Code';
+
+  @override
+  String get filter_items_reimbursement => 'Remboursement';
+
+  @override
+  String get any => 'Any';
 }

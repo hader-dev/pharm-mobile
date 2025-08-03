@@ -5,21 +5,17 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/bottom_sheet_header.dart';
 
-import 'package:hader_pharm_mobile/features/common/widgets/filter_option_value.dart';
+import 'package:hader_pharm_mobile/features/common_features/filters/filters_medical.dart';
+import 'package:hader_pharm_mobile/features/common_features/market_place/market_place.dart';
+import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/medicine_products/cubit/medicine_products_cubit.dart';
 
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart' show Iconsax;
 
-import '../../../../../../utils/enums.dart';
-
-import '../../../../../common/buttons/solid/primary_text_button.dart';
-import '../../../../../common/widgets/bottom_sheet_header.dart';
-import '../../../../../common/widgets/info_widget.dart' show InfoWidget;
-
-import '../../../market_place.dart';
-import '../cubit/medicine_products_cubit.dart';
 
 class SearchFilterBottomSheet extends StatelessWidget {
   const SearchFilterBottomSheet({super.key});
@@ -27,7 +23,8 @@ class SearchFilterBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
-      value: MarketPlaceScreen.marketPlaceScaffoldKey.currentContext!.read<MedicineProductsCubit>(),
+      value: MarketPlaceScreen.marketPlaceScaffoldKey.currentContext!
+          .read<MedicineProductsCubit>(),
       child: BlocBuilder<MedicineProductsCubit, MedicineProductsState>(
         builder: (context, state) {
           if (state is! MedicineSearchFilterChanged) {}
@@ -38,20 +35,7 @@ class SearchFilterBottomSheet extends StatelessWidget {
               Gap(AppSizesManager.s12),
               Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
               Gap(AppSizesManager.s12),
-              InfoWidget(
-                  label: context.translation!.filters,
-                  bgColor: AppColors.bgWhite,
-                  value: Column(
-                    // shrinkWrap: true,
-                    children: SearchMedicineFilters.values
-                        .map((seachFilter) => FilterOptionValueWidget(
-                            title: seachFilter.name,
-                            onSelected: () =>
-                                BlocProvider.of<MedicineProductsCubit>(context).changeMedicineSearchFilter(seachFilter),
-                            isSelected: BlocProvider.of<MedicineProductsCubit>(context).selectedMedicineSearchFilter ==
-                                seachFilter))
-                        .toList(),
-                  )),
+              FiltersMedical(),
               Gap(AppSizesManager.s12),
               Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
               Gap(AppSizesManager.s12),
@@ -66,7 +50,8 @@ class SearchFilterBottomSheet extends StatelessWidget {
                         label: context.translation!.reset,
                         labelColor: AppColors.accent1Shade1,
                         onTap: () {
-                          BlocProvider.of<MedicineProductsCubit>(context).resetMedicinesSearchFilter();
+                          BlocProvider.of<MedicineProductsCubit>(context)
+                              .resetMedicinesSearchFilter();
                         },
                         borderColor: AppColors.accent1Shade1,
                       ),
@@ -78,7 +63,8 @@ class SearchFilterBottomSheet extends StatelessWidget {
                         label: context.translation!.apply,
                         leadingIcon: Iconsax.money4,
                         onTap: () {
-                          BlocProvider.of<MedicineProductsCubit>(context).getMedicines();
+                          BlocProvider.of<MedicineProductsCubit>(context)
+                              .getMedicines();
                           context.pop();
                         },
                         color: AppColors.accent1Shade1,

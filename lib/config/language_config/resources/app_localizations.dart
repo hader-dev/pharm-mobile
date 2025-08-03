@@ -1203,6 +1203,132 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Select Town'**
   String get select_town;
+
+  /// No description provided for @filters_clinincal.
+  ///
+  /// In en, this message translates to:
+  /// **'Clinical'**
+  String get filters_clinincal;
+
+  /// No description provided for @filter_items_dci.
+  ///
+  /// In en, this message translates to:
+  /// **'DCI'**
+  String get filter_items_dci;
+
+  /// No description provided for @filter_items_dosage.
+  ///
+  /// In en, this message translates to:
+  /// **'Dosage'**
+  String get filter_items_dosage;
+
+  /// No description provided for @filter_items_form.
+  ///
+  /// In en, this message translates to:
+  /// **'Form'**
+  String get filter_items_form;
+
+  /// No description provided for @filter_items_status.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get filter_items_status;
+
+  /// No description provided for @filter_items_register_date.
+  ///
+  /// In en, this message translates to:
+  /// **'Registration Date'**
+  String get filter_items_register_date;
+
+  /// No description provided for @filter_items_country.
+  ///
+  /// In en, this message translates to:
+  /// **'Country'**
+  String get filter_items_country;
+
+  /// No description provided for @filter_items_patent.
+  ///
+  /// In en, this message translates to:
+  /// **'Patent'**
+  String get filter_items_patent;
+
+  /// No description provided for @filters_commercial.
+  ///
+  /// In en, this message translates to:
+  /// **'Commercial'**
+  String get filters_commercial;
+
+  /// No description provided for @filter_items_brand.
+  ///
+  /// In en, this message translates to:
+  /// **'Brand'**
+  String get filter_items_brand;
+
+  /// No description provided for @filter_items_condition.
+  ///
+  /// In en, this message translates to:
+  /// **'Condition'**
+  String get filter_items_condition;
+
+  /// No description provided for @filter_items_type.
+  ///
+  /// In en, this message translates to:
+  /// **'Type'**
+  String get filter_items_type;
+
+  /// No description provided for @filters_regulatory.
+  ///
+  /// In en, this message translates to:
+  /// **'Regulatory'**
+  String get filters_regulatory;
+
+  /// No description provided for @filters_logisctics.
+  ///
+  /// In en, this message translates to:
+  /// **'Logistics'**
+  String get filters_logisctics;
+
+  /// No description provided for @filter_items_stability_duration.
+  ///
+  /// In en, this message translates to:
+  /// **'Stability Duration'**
+  String get filter_items_stability_duration;
+
+  /// No description provided for @filter_items_origin_country.
+  ///
+  /// In en, this message translates to:
+  /// **'Country of Origin'**
+  String get filter_items_origin_country;
+
+  /// No description provided for @filter_items_packaging_format.
+  ///
+  /// In en, this message translates to:
+  /// **'Packaging Format'**
+  String get filter_items_packaging_format;
+
+  /// No description provided for @filters_others.
+  ///
+  /// In en, this message translates to:
+  /// **'Others'**
+  String get filters_others;
+
+  /// No description provided for @filter_items_code.
+  ///
+  /// In en, this message translates to:
+  /// **'Code'**
+  String get filter_items_code;
+
+  /// No description provided for @filter_items_reimbursement.
+  ///
+  /// In en, this message translates to:
+  /// **'Reimbursement'**
+  String get filter_items_reimbursement;
+
+  /// No description provided for @any.
+  ///
+  /// In en, this message translates to:
+  /// **'Any'**
+  String get any;
 }
 
 class _AppLocalizationsDelegate
