@@ -30,7 +30,7 @@ class ParaPharmaWidget4 extends StatelessWidget {
       child: InkWell(
         splashColor: Colors.transparent,
         onTap: () {
-          GoRouter.of(context).pushNamed(RoutingManager.medicineDetailsScreen, extra: paraPharmData.id);
+          GoRouter.of(context).pushNamed(RoutingManager.paraPharmaDetailsScreen, extra: paraPharmData.id);
         },
         child: Column(
           children: [
