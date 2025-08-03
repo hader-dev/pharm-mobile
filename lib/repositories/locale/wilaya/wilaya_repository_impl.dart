@@ -15,7 +15,7 @@ class WilayaRepositoryImpl implements IWilayaRepository {
 
   @override
   Future<ResponseLoadWilayas> getWilayas(ParamsLoadWilayas params) {
-   return loadWilayas(params);
+   return loadFilters(params);
   }
 
 }

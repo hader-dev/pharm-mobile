@@ -3,7 +3,6 @@ import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/routes/deeplinks_routes.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/para_pharma_catalog_details.dart';
 import 'package:hader_pharm_mobile/features/common_features/profile/profile.dart';
-
 import '../../features/app_componants/app_componants.dart';
 import '../../features/app_layout/app_layout.dart';
 import '../../features/common_features/change_password/change_password.dart';
@@ -52,10 +51,11 @@ class RoutingManager {
   static const String vendorDetails = '/VendorDetails';
   static const String ordersDetailsScreen = '/OrdersDetailsScreen';
 
+
+
   static const String editProfileScreen = '/EditProfileScreen';
 
   static const String languagesScreen = '/LanguagesScreen';
-
 
   static final GlobalKey<NavigatorState> rootNavigatorKey =
       GlobalKey<NavigatorState>();
@@ -114,7 +114,6 @@ class RoutingManager {
             );
           },
         ),
-       
         GoRoute(
           name: vendorDetails,
           path: vendorDetails,
@@ -177,8 +176,10 @@ class RoutingManager {
               Map<String, dynamic> prams = state.extra as Map<String, dynamic>;
               return CheckEmailScreen(
                 email: prams["email"],
-                redirectTo: prams["redirectTo"]?? RoutingManager.congratulationScreen,
-                popInsteadOfPushReplacement: prams["popInsteadOfPushReplacement"] ?? false,
+                redirectTo:
+                    prams["redirectTo"] ?? RoutingManager.congratulationScreen,
+                popInsteadOfPushReplacement:
+                    prams["popInsteadOfPushReplacement"] ?? false,
               );
             }),
         GoRoute(
@@ -225,8 +226,7 @@ class RoutingManager {
             builder: (BuildContext context, GoRouterState state) {
               return OrdersScreen();
             }),
-
-            ...DeeplinksRoutes.deppLinkRoutes
+        ...DeeplinksRoutes.deppLinkRoutes
       ]);
 
   static Future<void> popUntilPath(

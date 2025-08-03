@@ -1,4 +1,4 @@
-part of 'medical_cubit.dart';
+part of 'medical_filters_cubit.dart';
 
 sealed class MedicalFiltersState {}
 
@@ -10,3 +10,6 @@ final class MedicalFiltersLoaded extends MedicalFiltersState {}
 
 final class MedicalFiltersLoadingError extends MedicalFiltersState {}
 
+final class MedicalFiltersPageChanged extends MedicalFiltersState {}
+
+final class MedicalFiltersUpdated extends MedicalFiltersState {}

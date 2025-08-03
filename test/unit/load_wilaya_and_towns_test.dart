@@ -21,7 +21,7 @@ void main() {
 
   group('WilayaRepositoryImpl', () {
     test('getWilayas returns a valid ResponseLoadWilayas', () async {
-      final result = await loadWilayas(ParamsLoadWilayas(
+      final result = await loadFilters(ParamsLoadWilayas(
           locale: locale, jsonStringLoader: loadJsonFileString));
 
       expect(result.wilayas.length, greaterThan(0));

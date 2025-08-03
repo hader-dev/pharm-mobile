@@ -6,7 +6,7 @@ import 'package:hader_pharm_mobile/repositories/locale/wilaya/mappers/json_to_lo
 import 'package:hader_pharm_mobile/repositories/locale/wilaya/params/load_wilayas_params.dart';
 import 'package:hader_pharm_mobile/repositories/locale/wilaya/responses/load_wilayas_response.dart';
 
-Future<ResponseLoadWilayas> loadWilayas(ParamsLoadWilayas params) async {
+Future<ResponseLoadWilayas> loadFilters(ParamsLoadWilayas params) async {
   try {
     final jsonLoader = params.jsonStringLoader ?? rootBundle.loadString;
 

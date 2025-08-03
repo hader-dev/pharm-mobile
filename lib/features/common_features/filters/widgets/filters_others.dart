@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/features/common/accordions/ink_accordion.dart';
 import 'package:hader_pharm_mobile/features/common/accordions/ink_accordion_item.dart';
+import 'package:hader_pharm_mobile/features/common_features/filters/actions/navigate_to_filters_apply_view.dart';
+import 'package:hader_pharm_mobile/models/medical_filters.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class FiltersAccordionOthers extends StatelessWidget {
@@ -16,9 +18,13 @@ class FiltersAccordionOthers extends StatelessWidget {
           isExpanded: false,
           children: [
             InkAccordionItem(
-                rawTitle: translation.filter_items_code, onTap: () {}),
+                rawTitle: translation.filter_items_code,
+                onTap: () => navigateToFiltersApplyView(
+                    context, MedicalFiltersKeys.code)),
             InkAccordionItem(
-                rawTitle: translation.filter_items_reimbursement, onTap: () {}),
+                rawTitle: translation.filter_items_reimbursement,
+                onTap: () => navigateToFiltersApplyView(
+                    context, MedicalFiltersKeys.reimbursement)),
           ],
         ),
       ],

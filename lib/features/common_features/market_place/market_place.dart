@@ -30,6 +30,7 @@ class MarketPlaceScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        
         BlocProvider(
           create: (context) => MedicineProductsCubit(
               scrollController: ScrollController(),
