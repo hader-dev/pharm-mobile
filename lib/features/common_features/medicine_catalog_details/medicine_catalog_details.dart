@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
+import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/app_layout/app_layout.dart';
 import 'package:hader_pharm_mobile/features/common_features/cart/cubit/cart_cubit.dart';
+import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/helpers/medicine_catalog_details_tab_data.dart';
 import 'package:hader_pharm_mobile/repositories/remote/medicine_catalog/medicine_catalog_repository_impl.dart';
+import 'package:hader_pharm_mobile/repositories/remote/order/order_repository_impl.dart';
+import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
-import '../../../config/di/di.dart';
-import '../../../config/theme/colors_manager.dart';
-import '../../../repositories/remote/order/order_repository_impl.dart';
-import '../../../utils/constants.dart';
-import '../../app_layout/app_layout.dart';
 import 'cubit/medicine_details_cubit.dart';
 import 'sub_pages/medcine_catalog_overview/medcine_catalog_overview.dart';
 import 'sub_pages/distribitor_details/distribitor_details.dart';
@@ -21,7 +23,6 @@ import 'widgets/tap_bar_section.dart';
 
 class MedicineCatalogDetailsScreen extends StatefulWidget {
   final String medicineCatalogId;
-  static const List<String> tabs = ['Medicine overview', 'About distributor'];
   static final GlobalKey<ScaffoldState> medicineDetailsScaffoldKey = GlobalKey<ScaffoldState>();
   const MedicineCatalogDetailsScreen({super.key, required this.medicineCatalogId});
 
@@ -32,13 +33,20 @@ class MedicineCatalogDetailsScreen extends StatefulWidget {
 class _MedicineCatalogDetailsScreenState extends State<MedicineCatalogDetailsScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
+    
+    final cartCubit = AppLayout.appLayoutScaffoldKey.currentContext!
+                .read<CartCubit>();
+    final existingCartItem = cartCubit.getItemIfExists(widget.medicineCatalogId);
+
+    final tabs = medicineCatalogDetailsTabData(context);
+
     return SafeArea(
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
             create: (context) => MedicineDetailsCubit(
-                quantityController: TextEditingController(text: '1'),
-                tabController: TabController(length: MedicineCatalogDetailsScreen.tabs.length, vsync: this),
+              quantityController: TextEditingController(text: existingCartItem?.quantity.toString() ?? '1'),
+                tabController: TabController(length: tabs.length, vsync: this),
                 ordersRepository: OrderRepository(client: getItInstance.get<INetworkService>()),
                 medicineCatalogRepository: MedicineCatalogRepository(client: getItInstance.get<INetworkService>()))
               ..getMedicineCatalogData(widget.medicineCatalogId),
@@ -53,7 +61,7 @@ class _MedicineCatalogDetailsScreenState extends State<MedicineCatalogDetailsScr
                   return Center(child: CircularProgressIndicator());
                 }
                 if (state is MedicineDetailsLoadError) {
-                  return Center(child: Text('Failed to load medicine details'));
+                  return Center(child: Text(context.translation!.feedback_failed_to_load_medicine_details));
                 }
 
                 return Column(

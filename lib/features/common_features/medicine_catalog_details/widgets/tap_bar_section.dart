@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
+import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/cubit/medicine_details_cubit.dart';
+import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/helpers/medicine_catalog_details_tab_data.dart';
 
-import '../../../../config/theme/colors_manager.dart';
-import '../cubit/medicine_details_cubit.dart';
-import '../medicine_catalog_details.dart';
 
-// onCategoryTapped(String categoryName) {
-//   Scrollable.ensureVisible(TabBArSection.sectionsKeys[categoryName]!.currentContext!,
-//       duration: const Duration(seconds: 1), curve: Curves.easeInOut);
-// }
 
 class ProductDetailsTabBarSection extends StatefulWidget {
   const ProductDetailsTabBarSection({super.key});
@@ -27,6 +23,7 @@ class _ProductDetailsTabBarSectionState extends State<ProductDetailsTabBarSectio
   @override
   Widget build(BuildContext context) {
     TextStyle tabTextStyle = AppTypography.body3MediumStyle;
+    final tabs = medicineCatalogDetailsTabData(context);
 
     return TabBar(
         indicatorColor: AppColors.accent1Shade2,
@@ -40,7 +37,7 @@ class _ProductDetailsTabBarSectionState extends State<ProductDetailsTabBarSectio
         onTap: (index) {
           BlocProvider.of<MedicineDetailsCubit>(context, listen: false).changeTapIndex(index);
         },
-        tabs: MedicineCatalogDetailsScreen.tabs
+        tabs: tabs
             .map(
               (tabLabel) => Tab(
                 child: Text(

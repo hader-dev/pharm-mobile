@@ -199,5 +199,8 @@
   "filters_others": "Autres",
   "filter_items_code": "Code",
   "filter_items_reimbursement": "Remboursement",
-  "any": "Any"
+  "any": "Any",
+  "medicine_overview": "Aperçu du médicament",
+  "about_distributor": "À propos du distributeur",
+  "feedback_failed_to_load_medicine_details": "Échec du chargement des détails du médicament"
 }

@@ -200,5 +200,9 @@
   "filters_others": "أخرى",
   "filter_items_code": "الرمز",
   "filter_items_reimbursement": "التعويض",
-  "any": "الكل"
+  "any": "الكل",
+  "medicine_overview": "نظرة عامة على الدواء",
+  "about_distributor": "حول الموزع",
+  "feedback_failed_to_load_medicine_details": "فشل في تحميل تفاصيل الدواء"
+
 }

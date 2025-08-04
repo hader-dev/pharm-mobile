@@ -637,4 +637,14 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get any => 'الكل';
+
+  @override
+  String get medicine_overview => 'نظرة عامة على الدواء';
+
+  @override
+  String get about_distributor => 'حول الموزع';
+
+  @override
+  String get feedback_failed_to_load_medicine_details =>
+      'فشل في تحميل تفاصيل الدواء';
 }

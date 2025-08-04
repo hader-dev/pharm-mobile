@@ -204,7 +204,11 @@
 "filters_others": "Others",
 "filter_items_code": "Code",
 "filter_items_reimbursement": "Reimbursement",
-"any": "Any"
+"any": "Any",
+"medicine_overview": "Medicine overview",
+"about_distributor": "About distributor",
+"feedback_failed_to_load_medicine_details":"Failed to load medicine details"
+
 
 
   

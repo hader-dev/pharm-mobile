@@ -1329,6 +1329,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Any'**
   String get any;
+
+  /// No description provided for @medicine_overview.
+  ///
+  /// In en, this message translates to:
+  /// **'Medicine overview'**
+  String get medicine_overview;
+
+  /// No description provided for @about_distributor.
+  ///
+  /// In en, this message translates to:
+  /// **'About distributor'**
+  String get about_distributor;
+
+  /// No description provided for @feedback_failed_to_load_medicine_details.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load medicine details'**
+  String get feedback_failed_to_load_medicine_details;
 }
 
 class _AppLocalizationsDelegate

@@ -1,19 +1,15 @@
 import 'dart:async' show Timer;
-
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:hader_pharm_mobile/models/cart_item.dart';
+import 'package:hader_pharm_mobile/models/cart_items_response.dart';
+import 'package:hader_pharm_mobile/models/create_cart_item.dart';
+import 'package:hader_pharm_mobile/models/create_order_model.dart';
+import 'package:hader_pharm_mobile/repositories/remote/cart_items/cart_items_repository_impl.dart';
+import 'package:hader_pharm_mobile/repositories/remote/order/order_repository_impl.dart';
 import 'package:hader_pharm_mobile/utils/app_exceptions/exceptions.dart';
 import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
-
-import '../../../../models/cart_item.dart';
-import '../../../../models/cart_items_response.dart';
-import '../../../../models/create_cart_item.dart';
-
-import '../../../../models/create_order_model.dart';
-import '../../../../repositories/remote/cart_items/cart_items_repository_impl.dart';
-import '../../../../repositories/remote/order/order_repository_impl.dart';
-
 part 'cart_state.dart';
 
 class CartCubit extends Cubit<CartState> {
@@ -31,7 +27,9 @@ class CartCubit extends Cubit<CartState> {
   final CartItemRepository cartItemRepository;
   final OrderRepository ordersRepository;
   final ScrollController scrollController;
-  CartCubit(this.cartItemRepository, this.scrollController, this.ordersRepository) : super(CartInitial()) {
+  CartCubit(
+      this.cartItemRepository, this.scrollController, this.ordersRepository)
+      : super(CartInitial()) {
     _onScroll();
   }
   _onScroll() {
@@ -49,7 +47,17 @@ class CartCubit extends Cubit<CartState> {
   Future<void> addToCart(CreateCartItemModel cartItem) async {
     try {
       emit(AddCartItemLoading());
-      await cartItemRepository.addCartItem(cartItem);
+
+      final existingItem = getItemIfExists(cartItem.productId);
+
+      if (existingItem != null) {
+        final updatedItem = {"quantity":cartItem.quantity};
+
+        await cartItemRepository.updateItem(existingItem.id, updatedItem);
+      } else {
+        await cartItemRepository.addCartItem(cartItem);
+      }
+
       getCartItem();
       emit(CartItemAdded());
     } catch (e) {
@@ -57,7 +65,8 @@ class CartCubit extends Cubit<CartState> {
     }
   }
 
-  Future<Map<String, List<String>>> prepareOrderCartitemsByVendor(List<CartItemModel> cartItems) async {
+  Future<Map<String, List<String>>> prepareOrderCartitemsByVendor(
+      List<CartItemModel> cartItems) async {
     var reslutMap = <String, List<String>>{};
     await Future.forEach(
       cartItems,
@@ -94,12 +103,15 @@ class CartCubit extends Cubit<CartState> {
 
   void decreaseCartItemQuantity(String cartItemId) {
     try {
-      int cartItemIndex = cartItems.lastIndexWhere((element) => element.id == cartItemId);
+      int cartItemIndex =
+          cartItems.lastIndexWhere((element) => element.id == cartItemId);
       if (cartItems[cartItemIndex].quantity <= 1) {
-        throw TemplateException(message: "quantity should be greater than or equal 1.");
+        throw TemplateException(
+            message: "quantity should be greater than or equal 1.");
       }
 
-      cartItems[cartItemIndex] = cartItems[cartItemIndex].copyWith(quantity: cartItems[cartItemIndex].quantity - 1);
+      cartItems[cartItemIndex] = cartItems[cartItemIndex]
+          .copyWith(quantity: cartItems[cartItemIndex].quantity - 1);
       updateTotals();
       _debounceFunction(() async {
         updateItemQuantity(cartItemId, cartItems[cartItemIndex].quantity);
@@ -112,15 +124,19 @@ class CartCubit extends Cubit<CartState> {
 
   void increaseCartItemQuantity(String cartItemId) {
     try {
-      int cartItemIndex = cartItems.lastIndexWhere((element) => element.id == cartItemId);
+      int cartItemIndex =
+          cartItems.lastIndexWhere((element) => element.id == cartItemId);
       if ((cartItems[cartItemIndex].medicinesCatalogId != null &&
-              cartItems[cartItemIndex].quantity == cartItems[cartItemIndex].medicineCatalogStockQty) ||
+              cartItems[cartItemIndex].quantity ==
+                  cartItems[cartItemIndex].medicineCatalogStockQty) ||
           (cartItems[cartItemIndex].parapharmCatalogId != null &&
-              cartItems[cartItemIndex].quantity == cartItems[cartItemIndex].parapharmCatalogStockQty)) {
+              cartItems[cartItemIndex].quantity ==
+                  cartItems[cartItemIndex].parapharmCatalogStockQty)) {
         throw TemplateException(message: "you reached the limit of the stock.");
       }
 
-      cartItems[cartItemIndex] = cartItems[cartItemIndex].copyWith(quantity: cartItems[cartItemIndex].quantity + 1);
+      cartItems[cartItemIndex] = cartItems[cartItemIndex]
+          .copyWith(quantity: cartItems[cartItemIndex].quantity + 1);
       updateTotals();
       _debounceFunction(() async {
         updateItemQuantity(cartItemId, cartItems[cartItemIndex].quantity);
@@ -175,7 +191,8 @@ class CartCubit extends Cubit<CartState> {
     return totalAmount;
   }
 
-  Future<void> _debounceFunction(Future<void> Function() func, [int milliseconds = 500]) async {
+  Future<void> _debounceFunction(Future<void> Function() func,
+      [int milliseconds = 500]) async {
     if (_debounce?.isActive ?? false) _debounce?.cancel();
     _debounce = Timer(Duration(milliseconds: milliseconds), () async {
       await func();
@@ -226,7 +243,17 @@ class CartCubit extends Cubit<CartState> {
       emit(CartLoadingSuccess());
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
-      emit(CartError(error: 'An error occurred while clearing the cart please refresh the page .'));
+      emit(CartError(
+          error:
+              'An error occurred while clearing the cart please refresh the page .'));
     }
+  }
+
+  CartItemModel? getItemIfExists(String medicineCatalogId) {
+    final existingItem = cartItems
+        .where((element) => element.medicinesCatalogId == medicineCatalogId)
+        .firstOrNull;
+
+    return existingItem;
   }
 }

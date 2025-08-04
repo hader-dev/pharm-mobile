@@ -636,4 +636,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get any => 'Any';
+
+  @override
+  String get medicine_overview => 'Medicine overview';
+
+  @override
+  String get about_distributor => 'About distributor';
+
+  @override
+  String get feedback_failed_to_load_medicine_details =>
+      'Failed to load medicine details';
 }

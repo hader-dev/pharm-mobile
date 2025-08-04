@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hader_pharm_mobile/models/announcement.dart';
+import 'package:hader_pharm_mobile/repositories/remote/announcement/announcement_repository_impl.dart';
 
-import '../../../../repositories/remote/announcement/announcement_repository_impl.dart';
 
 part 'home_state.dart';
 

@@ -8,6 +8,7 @@ class BottomSheetHelper {
     bool isDismissible = true,
     bool enableDrag = true,
     double? maxHeight,
+    double initialChildSize = .85,
   }) {
     return showModalBottomSheet(
       context: context,
@@ -19,7 +20,7 @@ class BottomSheetHelper {
       builder: (context) {
         return DraggableScrollableSheet(
           expand: false,
-          initialChildSize: .85,
+          initialChildSize: initialChildSize,
           maxChildSize: maxHeight ?? 1,
           minChildSize: 0.3,
           builder: (_, controller) => Container(

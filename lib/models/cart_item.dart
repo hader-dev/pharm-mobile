@@ -123,6 +123,8 @@ class CartItemModel {
     num totalTTCPrice = num.parse(totalAmountTtc) * quantity;
     return <String, num>{"totalHtPrice": totalHtPrice, "totalTTCPrice": totalTTCPrice};
   }
+
+ 
 }
 
 class MedicinesCatalog {
