@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import '../../../config/theme/typoghrapy_manager.dart';
-
-import '../../../config/theme/colors_manager.dart';
-import '../../../utils/constants.dart';
+import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
+import 'package:hader_pharm_mobile/utils/constants.dart';
 
 class BaseButton extends StatelessWidget {
   final Function? onTap;
@@ -21,6 +20,7 @@ class BaseButton extends StatelessWidget {
   final IconData? leadingIcon;
   final IconData? trailingIcon;
   final Color? borderColor;
+  final Color? spalshColor;
 
   const BaseButton({
     super.key,
@@ -38,6 +38,7 @@ class BaseButton extends StatelessWidget {
     this.isOutLined = false,
     this.borderColor,
     this.leadingIcon,
+    this.spalshColor,
     this.trailingIcon,
   });
 
@@ -46,7 +47,7 @@ class BaseButton extends StatelessWidget {
     return MaterialButton(
       color: color,
       padding: EdgeInsets.all(padding),
-      splashColor: Colors.transparent,
+      splashColor:spalshColor ?? Colors.transparent,
       elevation: 0,
       disabledColor: AppColors.bgDisabled,
       shape: getButtonShape(isRectangular, isOutLined, borderColor: borderColor),

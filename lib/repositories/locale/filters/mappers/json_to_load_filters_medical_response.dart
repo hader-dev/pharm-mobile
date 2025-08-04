@@ -25,7 +25,7 @@ ResponseLoadFiltersMedical jsonToLoadFiltersMedicalResponse(
     condition: listFrom(data['condition']),
     type: listFrom(data['type']),
     stabilityDuration: listFrom(data['stabilityDuration']),
-    originCountry: listFrom(data['originCountry']),
+    distributorSku: listFrom(data['distributorSku']),
     packagingFormat: listFrom(data['packagingFormat']),
     code: listFrom(data['code']),
     reimbursement: listFrom(data['reimbursement']),

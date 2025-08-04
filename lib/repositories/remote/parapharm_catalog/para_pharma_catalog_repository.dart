@@ -1,6 +1,7 @@
-import '../../../models/para_pharma.dart';
-import '../../../models/para_pharma_response.dart';
-import '../../../utils/enums.dart';
+import 'package:hader_pharm_mobile/models/para_medical_filters.dart';
+import 'package:hader_pharm_mobile/models/para_pharma.dart';
+import 'package:hader_pharm_mobile/models/para_pharma_response.dart';
+
 
 abstract class IParaPharmaRepository {
   Future<ParaPharmaResponse> getParaPharmaCatalog(
@@ -8,8 +9,6 @@ abstract class IParaPharmaRepository {
       int offset = 0,
       String sortDirection = 'ASC',
       List<String> fields = const [],
-      SearchParaPharmaFilters? searchFilter,
-      String? companyIdFilter,
-      String search = ''});
+      ParaMedicalFilters filters = const ParaMedicalFilters()});
   Future<ParaPharmaCatalogModel> getParaPharmaCatalogById(String id);
 }

@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
+import 'package:hader_pharm_mobile/models/medical_filters.dart';
 
-class MedicalFilters extends Equatable {
+class ParaMedicalFilters extends Equatable {
   final List<String> dci;
   final List<String> dosage;
   final List<String> form;
@@ -21,7 +22,7 @@ class MedicalFilters extends Equatable {
   final List<String> code;
   final List<String> reimbursement;
 
-  const MedicalFilters({
+  const ParaMedicalFilters({
     this.dci = const [],
     this.dosage = const [],
     this.form = const [],
@@ -39,7 +40,7 @@ class MedicalFilters extends Equatable {
     this.reimbursement = const [],
   });
 
-  MedicalFilters copyWith({
+  ParaMedicalFilters copyWith({
     List<String>? dci,
     List<String>? dosage,
     List<String>? form,
@@ -56,7 +57,7 @@ class MedicalFilters extends Equatable {
     List<String>? code,
     List<String>? reimbursement,
   }) {
-    return MedicalFilters(
+    return ParaMedicalFilters(
       dci: dci ?? this.dci,
       dosage: dosage ?? this.dosage,
       form: form ?? this.form,
@@ -94,7 +95,7 @@ class MedicalFilters extends Equatable {
         reimbursement,
       ];
 
-  MedicalFilters updateSearchFilter(MedicalFiltersKeys key, String text) {
+  ParaMedicalFilters updateSearchFilter(MedicalFiltersKeys key, String text) {
     matchList(List<String> list) =>
         list.where((el) => el.contains(text)).toList();
 
@@ -159,7 +160,7 @@ class MedicalFilters extends Equatable {
     }
   }
 
-  MedicalFilters updateFilterList(
+  ParaMedicalFilters updateFilterList(
       MedicalFiltersKeys key, List<String> updatedFilters) {
     switch (key) {
       case MedicalFiltersKeys.distributorSku:
@@ -190,20 +191,4 @@ class MedicalFilters extends Equatable {
         return copyWith(reimbursement: updatedFilters);
     }
   }
-}
-
-enum MedicalFiltersKeys {
-  dci,
-  dosage,
-  form,
-  status,
-  country,
-  patent,
-  brand,
-  condition,
-  type,
-  stabilityDuration,
-  code,
-  reimbursement,
-  distributorSku;
 }

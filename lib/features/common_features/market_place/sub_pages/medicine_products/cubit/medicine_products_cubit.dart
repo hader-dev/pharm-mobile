@@ -1,16 +1,13 @@
 import 'dart:async' show Timer;
-
 import 'package:bloc/bloc.dart';
 import 'package:flutter/widgets.dart';
-
+import 'package:hader_pharm_mobile/models/medical_filters.dart';
 import 'package:hader_pharm_mobile/models/medicine_catalog.dart';
 import 'package:hader_pharm_mobile/repositories/remote/favorite/favorite_repository_impl.dart';
 import 'package:hader_pharm_mobile/repositories/remote/medicine_catalog/medicine_catalog_repository_impl.dart';
 import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler.dart';
+import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
-
-import '../../../../../../utils/constants.dart';
-
 part 'medicine_products_state.dart';
 
 class MedicineProductsCubit extends Cubit<MedicineProductsState> {
@@ -19,6 +16,7 @@ class MedicineProductsCubit extends Cubit<MedicineProductsState> {
   Timer? _debounce;
   SearchMedicineFilters? selectedMedicineSearchFilter;
   List<BaseMedicineCatalogModel> medicines = [];
+  MedicalFilters params = const MedicalFilters();
 
   final MedicineCatalogRepository medicineRepository;
   final FavoriteRepository favoriteRepository;
@@ -34,13 +32,11 @@ class MedicineProductsCubit extends Cubit<MedicineProductsState> {
   }
   Future<void> getMedicines({
     int offset = 0,
-    String searchValue = '',
-    String? companyIdFilter,
   }) async {
     try {
       emit(MedicineProductsLoading());
       var medicinesResponse = await medicineRepository.getMedicinesCatalog(
-          offset: offset, searchFilter: selectedMedicineSearchFilter, search: searchValue, companyId: companyIdFilter);
+          offset: offset, filters: params);
       totalItemsCount = medicinesResponse.totalItems;
       medicines = medicinesResponse.data;
       emit(MedicineProductsLoaded());
@@ -60,8 +56,7 @@ class MedicineProductsCubit extends Cubit<MedicineProductsState> {
       emit(MedicineProductsLoading());
       var medicinesResponse = await medicineRepository.getMedicinesCatalog(
         offset: offSet,
-        searchFilter: selectedMedicineSearchFilter,
-        search: searchController.text,
+        filters: params,
       );
       totalItemsCount = medicinesResponse.totalItems;
       medicines.addAll(medicinesResponse.data);
@@ -74,6 +69,7 @@ class MedicineProductsCubit extends Cubit<MedicineProductsState> {
 
   resetMedicinesSearchFilter() {
     selectedMedicineSearchFilter = null;
+    params = const MedicalFilters();
     getMedicines();
     emit(MedicineSearchFilterChanged());
   }
@@ -83,9 +79,11 @@ class MedicineProductsCubit extends Cubit<MedicineProductsState> {
     emit(MedicineSearchFilterChanged());
   }
 
-  void searchMedicineCatalog(String? text) => _debounceFunction(() => getMedicines(searchValue: text ?? ''));
+  void searchMedicineCatalog(String? text) =>
+      _debounceFunction(() => getMedicines());
 
-  Future<void> _debounceFunction(Future<void> Function() func, [int milliseconds = 500]) async {
+  Future<void> _debounceFunction(Future<void> Function() func,
+      [int milliseconds = 500]) async {
     if (_debounce?.isActive ?? false) _debounce?.cancel();
     _debounce = Timer(Duration(milliseconds: milliseconds), () async {
       await func();
@@ -94,10 +92,12 @@ class MedicineProductsCubit extends Cubit<MedicineProductsState> {
   }
 
   Future<void> likeMedicinesCatalog(String medicineCatalogId) async {
-    var index = medicines.lastIndexWhere((medicine) => medicine.id == medicineCatalogId);
+    var index = medicines
+        .lastIndexWhere((medicine) => medicine.id == medicineCatalogId);
     try {
       medicines[index].isLiked = true;
-      await favoriteRepository.likeMedicineCatalog(medicineCatalogId: medicineCatalogId);
+      await favoriteRepository.likeMedicineCatalog(
+          medicineCatalogId: medicineCatalogId);
 
       emit(MedicineLiked(medicineId: medicineCatalogId));
     } catch (e) {
@@ -108,10 +108,12 @@ class MedicineProductsCubit extends Cubit<MedicineProductsState> {
   }
 
   Future<void> unlikeMedicinesCatalog(String medicineCatalogId) async {
-    var index = medicines.lastIndexWhere((medicine) => medicine.id == medicineCatalogId);
+    var index = medicines
+        .lastIndexWhere((medicine) => medicine.id == medicineCatalogId);
     try {
       medicines[index].isLiked = false;
-      await favoriteRepository.unLikeMedicineCatalog(medicineCatalogId: medicineCatalogId);
+      await favoriteRepository.unLikeMedicineCatalog(
+          medicineCatalogId: medicineCatalogId);
       emit(MedicineLiked(medicineId: medicineCatalogId));
     } catch (e) {
       medicines[index].isLiked = true;
@@ -122,7 +124,8 @@ class MedicineProductsCubit extends Cubit<MedicineProductsState> {
 
   _onScroll() {
     scrollController.addListener(() async {
-      if (scrollController.position.pixels >= scrollController.position.maxScrollExtent) {
+      if (scrollController.position.pixels >=
+          scrollController.position.maxScrollExtent) {
         if (offSet < totalItemsCount) {
           await loadMoreMedicines();
         } else {
@@ -130,5 +133,9 @@ class MedicineProductsCubit extends Cubit<MedicineProductsState> {
         }
       }
     });
+  }
+
+  void updatedFilters(MedicalFilters appliedFilters) {
+    params = appliedFilters;
   }
 }

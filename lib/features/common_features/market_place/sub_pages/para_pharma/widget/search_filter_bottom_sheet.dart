@@ -77,7 +77,12 @@ class ParaPharmaSearchFilterBottomSheet extends StatelessWidget {
                         label: context.translation!.apply,
                         leadingIcon: Iconsax.money4,
                         onTap: () {
-                          BlocProvider.of<ParaPharmaCubit>(context).getParaPharmas();
+
+                          final parapharmCubit = context.read<ParaPharmaCubit>();
+                          final appliedFilters = parapharmCubit.filters;
+                          parapharmCubit.updatedFilters(appliedFilters);
+
+                          parapharmCubit.getParaPharmas();
                           context.pop();
                         },
                         color: AppColors.accent1Shade1,

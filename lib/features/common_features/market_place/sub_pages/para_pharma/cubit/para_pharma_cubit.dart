@@ -1,16 +1,13 @@
 import 'dart:async';
-
 import 'package:bloc/bloc.dart';
-
 import 'package:flutter/material.dart';
+import 'package:hader_pharm_mobile/models/para_medical_filters.dart';
+import 'package:hader_pharm_mobile/models/para_pharma.dart';
+import 'package:hader_pharm_mobile/repositories/remote/favorite/favorite_repository_impl.dart';
+import 'package:hader_pharm_mobile/repositories/remote/parapharm_catalog/para_pharma_catalog_repository_impl.dart';
 import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler.dart';
-
-import '../../../../../../models/para_pharma.dart';
-import '../../../../../../repositories/remote/favorite/favorite_repository_impl.dart';
-import '../../../../../../repositories/remote/parapharm_catalog/para_pharma_catalog_repository_impl.dart';
-import '../../../../../../utils/constants.dart';
-import '../../../../../../utils/enums.dart';
-
+import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/enums.dart';
 part 'para_pharma_state.dart';
 
 class ParaPharmaCubit extends Cubit<ParaPharmaState> {
@@ -18,6 +15,7 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
   int offSet = 0;
   SearchParaPharmaFilters? selectedParaPharmaSearchFilter;
   List<BaseParaPharmaCatalogModel> paraPharmaProducts = [];
+  ParaMedicalFilters filters = const ParaMedicalFilters();
   final ParaPharmaRepository paraPharmaRepository;
   final TextEditingController searchController;
   final ScrollController scrollController;
@@ -40,9 +38,8 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
       emit(ParaPharmaProductsLoading());
       var paraPharmaCatalogResponse = await paraPharmaRepository.getParaPharmaCatalog(
           offset: offset,
-          searchFilter: selectedParaPharmaSearchFilter,
-          search: searchValue,
-          companyIdFilter: companyIdFilter);
+          filters: filters,
+          );
       totalItemsCount = paraPharmaCatalogResponse.totalItems;
       paraPharmaProducts = paraPharmaCatalogResponse.data;
       emit(ParaPharmaProductsLoaded());
@@ -63,8 +60,7 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
       emit(ParaPharmaProductsLoading());
       var medicinesResponse = await paraPharmaRepository.getParaPharmaCatalog(
         offset: offSet,
-        searchFilter: selectedParaPharmaSearchFilter,
-        search: searchController.text,
+        filters: filters
       );
       totalItemsCount = medicinesResponse.totalItems;
       paraPharmaProducts.addAll(medicinesResponse.data);
@@ -92,8 +88,14 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
 
   resetParaPharmaSearchFilter() {
     selectedParaPharmaSearchFilter = null;
+    filters = const ParaMedicalFilters();
     getParaPharmas();
     emit(ParaPharmaSearchFilterChanged());
+  }
+
+
+  void updatedFilters(ParaMedicalFilters appliedFilters) {
+    filters = appliedFilters;
   }
 
   Future<void> likeParaPharmaCatalog(String paraPharmaCatalogId) async {

@@ -4,25 +4,22 @@ import 'package:flutter_bloc/flutter_bloc.dart'
 import 'package:gap/gap.dart' show Gap;
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
-
+import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
+import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
+import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar.dart';
+import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
+import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/medicine_products/cubit/medicine_products_cubit.dart';
+import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/cubit/para_pharma_cubit.dart';
+import 'package:hader_pharm_mobile/repositories/remote/company/company_repository_impl.dart';
+import 'package:hader_pharm_mobile/repositories/remote/favorite/favorite_repository_impl.dart';
+import 'package:hader_pharm_mobile/repositories/remote/medicine_catalog/medicine_catalog_repository_impl.dart';
+import 'package:hader_pharm_mobile/repositories/remote/parapharm_catalog/para_pharma_catalog_repository_impl.dart';
+import 'package:hader_pharm_mobile/utils/assets_strings.dart';
+import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 import 'package:iconsax/iconsax.dart';
-
-import '../../../config/services/network/network_interface.dart';
-import '../../../config/theme/colors_manager.dart';
-import '../../../config/theme/typoghrapy_manager.dart';
-import '../../../repositories/remote/company/company_repository_impl.dart';
-import '../../../repositories/remote/favorite/favorite_repository_impl.dart';
-import '../../../repositories/remote/medicine_catalog/medicine_catalog_repository_impl.dart';
-import '../../../repositories/remote/parapharm_catalog/para_pharma_catalog_repository_impl.dart';
-import '../../../utils/assets_strings.dart';
-import '../../../utils/constants.dart';
-import '../../../utils/toast_helper.dart';
-import '../../common/app_bars/custom_app_bar.dart';
-import '../../common/buttons/solid/primary_text_button.dart';
-import '../market_place/sub_pages/medicine_products/cubit/medicine_products_cubit.dart';
-import '../market_place/sub_pages/para_pharma/cubit/para_pharma_cubit.dart';
 import 'cubit/vendor_details_cubit.dart';
-
 import 'widget/tabs_section.dart';
 
 class VendorDetails extends StatelessWidget {
@@ -54,7 +51,7 @@ class VendorDetails extends StatelessWidget {
                 favoriteRepository: FavoriteRepository(client: getItInstance.get<INetworkService>()),
                 searchController: TextEditingController(text: ""),
                 medicineRepository: MedicineCatalogRepository(client: getItInstance.get<INetworkService>()))
-              ..getMedicines(companyIdFilter: companyId),
+              ..getMedicines(),
           ),
         ],
         child: BlocListener<VendorDetailsCubit, VendorDetailsState>(

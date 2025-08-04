@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hader_pharm_mobile/features/common/buttons/base_button.dart';
+import 'package:hader_pharm_mobile/utils/constants.dart';
 
-import '../../../../utils/constants.dart';
-import '../base_button.dart';
 
 class PrimaryTextButton extends BaseButton {
   const PrimaryTextButton({
@@ -21,5 +21,6 @@ class PrimaryTextButton extends BaseButton {
     super.borderColor,
     super.leadingIcon,
     super.trailingIcon,
+    super.spalshColor
   });
 }

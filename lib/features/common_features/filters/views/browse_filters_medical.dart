@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/bottom_sheet_header.dart';
+import 'package:hader_pharm_mobile/features/common_features/filters/cubit/medical_filters_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/filters/widgets/filters_clinical.dart';
 import 'package:hader_pharm_mobile/features/common_features/filters/widgets/filters_commercial.dart';
 import 'package:hader_pharm_mobile/features/common_features/filters/widgets/filters_logistics.dart';
@@ -48,10 +49,12 @@ class FiltersMedicalBrowse extends StatelessWidget {
                 child: PrimaryTextButton(
                   isOutLined: true,
                   label: context.translation!.reset,
+                  spalshColor: AppColors.accent1Shade1.withAlpha(50),
                   labelColor: AppColors.accent1Shade1,
                   onTap: () {
                     BlocProvider.of<MedicineProductsCubit>(context)
                         .resetMedicinesSearchFilter();
+                    context.pop();
                   },
                   borderColor: AppColors.accent1Shade1,
                 ),
@@ -63,8 +66,13 @@ class FiltersMedicalBrowse extends StatelessWidget {
                   label: context.translation!.apply,
                   leadingIcon: Iconsax.money4,
                   onTap: () {
-                    BlocProvider.of<MedicineProductsCubit>(context)
-                        .getMedicines();
+                    final appliedFilters =
+                        context.read<MedicalFiltersCubit>().appliedFilters;
+                    final medicineCatalogCubit =
+                        context.read<MedicineProductsCubit>();
+                    medicineCatalogCubit.updatedFilters(appliedFilters);
+                    medicineCatalogCubit.getMedicines();
+
                     context.pop();
                   },
                   color: AppColors.accent1Shade1,
