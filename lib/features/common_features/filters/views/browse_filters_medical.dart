@@ -21,67 +21,71 @@ class FiltersMedicalBrowse extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.max,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        BottomSheetHeader(title: context.translation!.search_filters),
-        Gap(AppSizesManager.s12),
-        Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
-        Gap(AppSizesManager.s12),
-        Column(
+    return BlocBuilder<MedicalFiltersCubit, MedicalFiltersState>(
+      builder: (context,state) {
+        return Column(
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            FiltersAccordionClinical(),
-            FiltersAccordionRegulatory(),
-            FiltersAccordionCommercial(),
-            FiltersAccordionLogistics(),
-            FiltersAccordionOthers()
+            BottomSheetHeader(title: context.translation!.search_filters),
+            Gap(AppSizesManager.s12),
+            Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
+            Gap(AppSizesManager.s12),
+            Column(
+              children: [
+                FiltersAccordionClinical(),
+                FiltersAccordionRegulatory(),
+                FiltersAccordionCommercial(),
+                FiltersAccordionLogistics(),
+                FiltersAccordionOthers()
+              ],
+            ),
+            Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
+            Gap(AppSizesManager.s12),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p4),
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: PrimaryTextButton(
+                      isOutLined: true,
+                      label: context.translation!.reset,
+                      spalshColor: AppColors.accent1Shade1.withAlpha(50),
+                      labelColor: AppColors.accent1Shade1,
+                      onTap: () {
+                        BlocProvider.of<MedicineProductsCubit>(context)
+                            .resetMedicinesSearchFilter();
+                        context.pop();
+                      },
+                      borderColor: AppColors.accent1Shade1,
+                    ),
+                  ),
+                  Gap(AppSizesManager.s8),
+                  Expanded(
+                    flex: 2,
+                    child: PrimaryTextButton(
+                      label: context.translation!.apply,
+                      leadingIcon: Iconsax.money4,
+                      onTap: () {
+                        final appliedFilters =
+                            context.read<MedicalFiltersCubit>().appliedFilters;
+                        final medicineCatalogCubit =
+                            context.read<MedicineProductsCubit>();
+                        medicineCatalogCubit.updatedFilters(appliedFilters);
+                        medicineCatalogCubit.getMedicines();
+        
+                        context.pop();
+                      },
+                      color: AppColors.accent1Shade1,
+                    ),
+                  ),
+                ],
+              ),
+            )
           ],
-        ),
-        Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
-        Gap(AppSizesManager.s12),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p4),
-          child: Row(
-            children: [
-              Expanded(
-                flex: 1,
-                child: PrimaryTextButton(
-                  isOutLined: true,
-                  label: context.translation!.reset,
-                  spalshColor: AppColors.accent1Shade1.withAlpha(50),
-                  labelColor: AppColors.accent1Shade1,
-                  onTap: () {
-                    BlocProvider.of<MedicineProductsCubit>(context)
-                        .resetMedicinesSearchFilter();
-                    context.pop();
-                  },
-                  borderColor: AppColors.accent1Shade1,
-                ),
-              ),
-              Gap(AppSizesManager.s8),
-              Expanded(
-                flex: 2,
-                child: PrimaryTextButton(
-                  label: context.translation!.apply,
-                  leadingIcon: Iconsax.money4,
-                  onTap: () {
-                    final appliedFilters =
-                        context.read<MedicalFiltersCubit>().appliedFilters;
-                    final medicineCatalogCubit =
-                        context.read<MedicineProductsCubit>();
-                    medicineCatalogCubit.updatedFilters(appliedFilters);
-                    medicineCatalogCubit.getMedicines();
-
-                    context.pop();
-                  },
-                  color: AppColors.accent1Shade1,
-                ),
-              ),
-            ],
-          ),
-        )
-      ],
+        );
+      }
     );
   }
 }
