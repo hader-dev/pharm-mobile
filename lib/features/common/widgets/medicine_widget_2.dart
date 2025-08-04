@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
+import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
+import 'package:hader_pharm_mobile/models/medicine_catalog.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/price_formatter.dart';
 import 'package:iconsax/iconsax.dart';
 
-import '../../../config/theme/colors_manager.dart';
-import '../../../config/theme/typoghrapy_manager.dart';
-import '../../../models/medicine_catalog.dart';
 
 class MedicineWidget2 extends StatelessWidget {
   final BaseMedicineCatalogModel medicineData;
@@ -102,7 +102,7 @@ class MedicineWidget2 extends StatelessWidget {
                               ? Icon(Iconsax.box_2, color: SystemColors.green.primary, size: AppSizesManager.iconSize16)
                               : Icon(Iconsax.box_2, color: SystemColors.red.primary, size: AppSizesManager.iconSize16),
                           const Gap(AppSizesManager.s4),
-                          Text(medicineData.stockQuantity > 0 ? "In Stock" : "Out of Stock",
+                          Text(medicineData.stockQuantity > 0 ? context.translation!.in_stock :  context.translation!.out_stock,
                               style: AppTypography.bodySmallStyle.copyWith(
                                   color: SystemColors.green.primary, fontWeight: AppTypography.appFontSemiBold)),
                         ],
@@ -148,9 +148,9 @@ class MedicineWidget2 extends StatelessWidget {
                   Gap(AppSizesManager.s8),
                   if (medicineData.dci != null)
                     Text(medicineData.dci,
-                        maxLines: 1,
+                        maxLines: 2,
                         softWrap: true,
-                        overflow: TextOverflow.ellipsis,
+                        overflow: TextOverflow.visible,
                         style: AppTypography.headLine4SemiBoldStyle.copyWith(color: TextColors.primary.color)),
                   Gap(AppSizesManager.s8),
                   Row(children: [

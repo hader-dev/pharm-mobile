@@ -24,7 +24,8 @@ class ParaPharmaPage extends StatefulWidget {
   State<ParaPharmaPage> createState() => _ParaPharmaPageState();
 }
 
-class _ParaPharmaPageState extends State<ParaPharmaPage> with AutomaticKeepAliveClientMixin {
+class _ParaPharmaPageState extends State<ParaPharmaPage>
+    with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -38,7 +39,8 @@ class _ParaPharmaPageState extends State<ParaPharmaPage> with AutomaticKeepAlive
                 padding: const EdgeInsets.only(left: AppSizesManager.p8),
                 child: CustomTextField(
                   hintText: 'Search by name ,packaging or sku',
-                  controller: BlocProvider.of<ParaPharmaCubit>(context).searchController,
+                  controller: BlocProvider.of<ParaPharmaCubit>(context)
+                      .searchController,
                   state: FieldState.normal,
                   isEnabled: true,
                   prefixIcon: Icon(
@@ -47,8 +49,11 @@ class _ParaPharmaPageState extends State<ParaPharmaPage> with AutomaticKeepAlive
                   ),
                   suffixIcon: InkWell(
                     onTap: () {
-                      BlocProvider.of<ParaPharmaCubit>(context).searchController.clear();
-                      BlocProvider.of<ParaPharmaCubit>(context).searchParaPharmaCatalog(null);
+                      BlocProvider.of<ParaPharmaCubit>(context)
+                          .searchController
+                          .clear();
+                      BlocProvider.of<ParaPharmaCubit>(context)
+                          .searchParaPharmaCatalog(null);
                     },
                     child: Icon(
                       Icons.clear,
@@ -56,7 +61,8 @@ class _ParaPharmaPageState extends State<ParaPharmaPage> with AutomaticKeepAlive
                     ),
                   ),
                   onChanged: (searchValue) {
-                    BlocProvider.of<ParaPharmaCubit>(context).searchParaPharmaCatalog(searchValue);
+                    BlocProvider.of<ParaPharmaCubit>(context)
+                        .searchParaPharmaCatalog(searchValue);
                   },
                   validationFunc: (value) {},
                 ),
@@ -64,7 +70,8 @@ class _ParaPharmaPageState extends State<ParaPharmaPage> with AutomaticKeepAlive
             ),
             InkWell(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: AppSizesManager.p12),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: AppSizesManager.p12),
                 child: BlocBuilder<ParaPharmaCubit, ParaPharmaState>(
                   builder: (context, state) {
                     return Stack(
@@ -74,7 +81,9 @@ class _ParaPharmaPageState extends State<ParaPharmaPage> with AutomaticKeepAlive
                           Iconsax.filter,
                           color: AppColors.accent1Shade1,
                         ),
-                        if (BlocProvider.of<ParaPharmaCubit>(context).selectedParaPharmaSearchFilter != null)
+                        if (BlocProvider.of<ParaPharmaCubit>(context)
+                                .selectedParaPharmaSearchFilter !=
+                            null)
                           Positioned(
                             top: -4,
                             right: -4,
@@ -89,7 +98,9 @@ class _ParaPharmaPageState extends State<ParaPharmaPage> with AutomaticKeepAlive
                 ),
               ),
               onTap: () {
-                BottomSheetHelper.showCommonBottomSheet(context: context, child: ParaPharmaSearchFilterBottomSheet());
+                BottomSheetHelper.showCommonBottomSheet(
+                    context: context,
+                    child: ParaPharmaSearchFilterBottomSheet());
               },
             ),
           ],
@@ -97,38 +108,54 @@ class _ParaPharmaPageState extends State<ParaPharmaPage> with AutomaticKeepAlive
         Expanded(
           child: BlocBuilder<ParaPharmaCubit, ParaPharmaState>(
             builder: (context, state) {
-              if (state is ParaPharmaProductsLoading) {
+              final cubit = BlocProvider.of<ParaPharmaCubit>(context);
+              final products = cubit.paraPharmaProducts;
+
+              if (state is ParaPharmaProductsLoading && products.isEmpty) {
                 return const Center(child: CircularProgressIndicator());
               }
-              if (state is ParaPharmaProductsLoaded &&
-                  BlocProvider.of<ParaPharmaCubit>(context).paraPharmaProducts.isEmpty) {
+
+              if (state is ParaPharmaProductsLoaded && products.isEmpty) {
                 return EmptyListWidget();
               }
-              return Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Expanded(
-                    child: RefreshIndicator(
-                        onRefresh: () {
-                          return BlocProvider.of<ParaPharmaCubit>(context).getParaPharmas(
-                            companyIdFilter: BlocProvider.of<VendorDetailsCubit>(context).vendorData.id,
-                          );
-                        },
-                        child: GridView.builder(
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 0.7),
-                          controller: BlocProvider.of<ParaPharmaCubit>(context).scrollController,
-                          shrinkWrap: true,
-                          physics: const AlwaysScrollableScrollPhysics(),
-                          itemCount: BlocProvider.of<ParaPharmaCubit>(context).paraPharmaProducts.length,
-                          itemBuilder: (context, index) => ParaPharmaWidget2(
-                            paraPharmData: BlocProvider.of<ParaPharmaCubit>(context).paraPharmaProducts[index],
-                          ),
-                        )),
+
+              final bool isLoadingMore = state is LoadingMoreParaPharma;
+              final bool hasReachedEnd = state is ParaPharmasLoadLimitReached;
+
+              return RefreshIndicator(
+                onRefresh: () {
+                  return cubit.getParaPharmas(
+                    companyIdFilter:
+                        BlocProvider.of<VendorDetailsCubit>(context)
+                            .vendorData
+                            .id,
+                  );
+                },
+                child: GridView.builder(
+                  controller: cubit.scrollController,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio: 0.7,
                   ),
-                  if (state is LoadingMoreParaPharma) const Center(child: CircularProgressIndicator()),
-                  if (state is ParaPharmasLoadLimitReached) EndOfLoadResultWidget(),
-                ],
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  itemCount: products.length +
+                      (isLoadingMore || hasReachedEnd ? 1 : 0),
+                  itemBuilder: (context, index) {
+                    if (index < products.length) {
+                      return ParaPharmaWidget2(paraPharmData: products[index]);
+                    } else {
+                      if (isLoadingMore) {
+                        return const Padding(
+                          padding: EdgeInsets.all(16.0),
+                          child: Center(child: CircularProgressIndicator()),
+                        );
+                      } else if (hasReachedEnd) {
+                        return const EndOfLoadResultWidget();
+                      }
+                      return const SizedBox.shrink();
+                    }
+                  },
+                ),
               );
             },
           ),

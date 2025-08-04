@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field.dart';
 
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/end_of_load_result_widget.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/medicine_widget_2.dart';
+import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
-import '../../../../../config/theme/colors_manager.dart';
-
-import '../../../../../utils/bottom_sheet_helper.dart';
-import '../../../../../utils/enums.dart';
-
-import '../../../../common/text_fields/custom_text_field.dart';
-import '../../../../common/widgets/end_of_load_result_widget.dart';
-
-import '../../../../common/widgets/medicine_widget_2.dart';
 import 'cubit/medicine_products_cubit.dart';
 import 'widget/search_filter_bottom_sheet.dart' show SearchFilterBottomSheet;
 
@@ -25,7 +22,8 @@ class MedicineProductsPage extends StatefulWidget {
   State<MedicineProductsPage> createState() => _MedicineProductsPageState();
 }
 
-class _MedicineProductsPageState extends State<MedicineProductsPage> with AutomaticKeepAliveClientMixin {
+class _MedicineProductsPageState extends State<MedicineProductsPage>
+    with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -39,7 +37,8 @@ class _MedicineProductsPageState extends State<MedicineProductsPage> with Automa
                 padding: const EdgeInsets.only(left: AppSizesManager.p8),
                 child: CustomTextField(
                   hintText: context.translation!.medicines_search_field_hint,
-                  controller: BlocProvider.of<MedicineProductsCubit>(context).searchController,
+                  controller: BlocProvider.of<MedicineProductsCubit>(context)
+                      .searchController,
                   state: FieldState.normal,
                   isEnabled: true,
                   prefixIcon: Icon(
@@ -48,8 +47,11 @@ class _MedicineProductsPageState extends State<MedicineProductsPage> with Automa
                   ),
                   suffixIcon: InkWell(
                     onTap: () {
-                      BlocProvider.of<MedicineProductsCubit>(context).searchController.clear();
-                      BlocProvider.of<MedicineProductsCubit>(context).searchMedicineCatalog(null);
+                      BlocProvider.of<MedicineProductsCubit>(context)
+                          .searchController
+                          .clear();
+                      BlocProvider.of<MedicineProductsCubit>(context)
+                          .searchMedicineCatalog(null);
                     },
                     child: Icon(
                       Icons.clear,
@@ -57,7 +59,8 @@ class _MedicineProductsPageState extends State<MedicineProductsPage> with Automa
                     ),
                   ),
                   onChanged: (searchValue) {
-                    BlocProvider.of<MedicineProductsCubit>(context).searchMedicineCatalog(searchValue);
+                    BlocProvider.of<MedicineProductsCubit>(context)
+                        .searchMedicineCatalog(searchValue);
                   },
                   validationFunc: (value) {},
                 ),
@@ -65,8 +68,10 @@ class _MedicineProductsPageState extends State<MedicineProductsPage> with Automa
             ),
             InkWell(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: AppSizesManager.p12),
-                child: BlocBuilder<MedicineProductsCubit, MedicineProductsState>(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: AppSizesManager.p12),
+                child:
+                    BlocBuilder<MedicineProductsCubit, MedicineProductsState>(
                   builder: (context, state) {
                     return Stack(
                       clipBehavior: Clip.none,
@@ -75,7 +80,9 @@ class _MedicineProductsPageState extends State<MedicineProductsPage> with Automa
                           Iconsax.filter,
                           color: AppColors.accent1Shade1,
                         ),
-                        if (BlocProvider.of<MedicineProductsCubit>(context).selectedMedicineSearchFilter != null)
+                        if (BlocProvider.of<MedicineProductsCubit>(context)
+                                .selectedMedicineSearchFilter !=
+                            null)
                           Positioned(
                             top: -4,
                             right: -4,
@@ -90,7 +97,8 @@ class _MedicineProductsPageState extends State<MedicineProductsPage> with Automa
                 ),
               ),
               onTap: () {
-                BottomSheetHelper.showCommonBottomSheet(context: context, child: SearchFilterBottomSheet());
+                BottomSheetHelper.showCommonBottomSheet(
+                    context: context, child: SearchFilterBottomSheet());
               },
             ),
           ],
@@ -98,47 +106,58 @@ class _MedicineProductsPageState extends State<MedicineProductsPage> with Automa
         Expanded(
           child: BlocBuilder<MedicineProductsCubit, MedicineProductsState>(
             builder: (context, state) {
-              if (state is MedicineLiked || state is MedicineLikeFailed) {}
-              if (state is MedicineProductsLoading) {
+              final cubit = BlocProvider.of<MedicineProductsCubit>(context);
+              final medicines = cubit.medicines;
+
+              if (state is MedicineProductsLoading && medicines.isEmpty) {
                 return const Center(child: CircularProgressIndicator());
               }
-              if (state is MedicineProductsLoaded &&
-                  BlocProvider.of<MedicineProductsCubit>(context).medicines.isEmpty) {
+
+              if (state is MedicineProductsLoaded && medicines.isEmpty) {
                 return EmptyListWidget();
               }
-              return Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Expanded(
-                    child: RefreshIndicator(
-                      onRefresh: () {
-                        return BlocProvider.of<MedicineProductsCubit>(context).getMedicines();
-                      },
-                      child: ListView.builder(
-                        controller: BlocProvider.of<MedicineProductsCubit>(context).scrollController,
-                        shrinkWrap: true,
-                        physics: const AlwaysScrollableScrollPhysics(),
-                        itemCount: BlocProvider.of<MedicineProductsCubit>(context).medicines.length,
-                        itemBuilder: (context, index) => MedicineWidget2(
-                          hideLikeButton: false,
-                          medicineData: BlocProvider.of<MedicineProductsCubit>(context).medicines[index],
-                          isLiked: BlocProvider.of<MedicineProductsCubit>(context).medicines[index].isLiked,
-                          onLikeTapped: !BlocProvider.of<MedicineProductsCubit>(context).medicines[index].isLiked
-                              ? () => BlocProvider.of<MedicineProductsCubit>(context).likeMedicinesCatalog(
-                                  BlocProvider.of<MedicineProductsCubit>(context).medicines[index].id)
-                              : () => BlocProvider.of<MedicineProductsCubit>(context).unlikeMedicinesCatalog(
-                                  BlocProvider.of<MedicineProductsCubit>(context).medicines[index].id),
-                        ),
-                      ),
-                    ),
-                  ),
-                  if (state is LoadingMoreMedicine) const Center(child: CircularProgressIndicator()),
-                  if (state is MedicinesLoadLimitReached) EndOfLoadResultWidget(),
-                ],
+
+              final bool isLoadingMore = state is MedicineProductsLoading;
+              final bool hasReachedEnd = state is MedicinesLoadLimitReached;
+
+              return RefreshIndicator(
+                onRefresh: () => cubit.getMedicines(),
+                child: ListView.builder(
+                  controller: cubit.scrollController,
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  itemCount: medicines.length +
+                      (isLoadingMore || hasReachedEnd ? 1 : 0),
+                  itemBuilder: (context, index) {
+                    if (index < medicines.length) {
+                      final medicine = medicines[index];
+                      return MedicineWidget2(
+                        hideLikeButton: false,
+                        medicineData: medicine,
+                        isLiked: medicine.isLiked,
+                        onLikeTapped: () {
+                          final id = medicine.id;
+                          medicine.isLiked
+                              ? cubit.unlikeMedicinesCatalog(id)
+                              : cubit.likeMedicinesCatalog(id);
+                        },
+                      );
+                    } else {
+                      if (isLoadingMore) {
+                        return const Padding(
+                          padding: EdgeInsets.all(16.0),
+                          child: Center(child: CircularProgressIndicator()),
+                        );
+                      } else if (hasReachedEnd) {
+                        return const EndOfLoadResultWidget();
+                      }
+                    }
+                    return const SizedBox.shrink();
+                  },
+                ),
               );
             },
           ),
-        ),
+        )
       ],
     ));
   }

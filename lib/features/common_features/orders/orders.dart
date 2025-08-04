@@ -15,7 +15,8 @@ import '../../common/app_bars/custom_app_bar.dart';
 import '../../common/widgets/end_of_load_result_widget.dart';
 import 'cubit/orders_cubit.dart';
 import 'widget/order_card.dart';
-import 'widget/search_filter_bottom_sheet/search_filter_bottom_sheet.dart' show OrdersFilterBottomSheet;
+import 'widget/search_filter_bottom_sheet/search_filter_bottom_sheet.dart'
+    show OrdersFilterBottomSheet;
 
 class OrdersScreen extends StatelessWidget {
   const OrdersScreen({super.key});
@@ -42,11 +43,14 @@ class OrdersScreen extends StatelessWidget {
               return RichText(
                 text: TextSpan(
                   text: context.translation!.orders,
-                  style: AppTypography.headLine3SemiBoldStyle.copyWith(color: TextColors.primary.color),
+                  style: AppTypography.headLine3SemiBoldStyle
+                      .copyWith(color: TextColors.primary.color),
                   children: [
                     TextSpan(
-                        text: " (${BlocProvider.of<OrdersCubit>(context).orders.length})",
-                        style: AppTypography.bodySmallStyle.copyWith(color: TextColors.ternary.color)),
+                        text:
+                            " (${BlocProvider.of<OrdersCubit>(context).orders.length})",
+                        style: AppTypography.bodySmallStyle
+                            .copyWith(color: TextColors.ternary.color)),
                   ],
                 ),
               );
@@ -55,7 +59,8 @@ class OrdersScreen extends StatelessWidget {
           trailing: [
             InkWell(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: AppSizesManager.p12),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: AppSizesManager.p12),
                 child: BlocBuilder<OrdersCubit, OrdersState>(
                   builder: (context, state) {
                     return Stack(
@@ -65,10 +70,16 @@ class OrdersScreen extends StatelessWidget {
                           Iconsax.filter,
                           color: AppColors.accent1Shade1,
                         ),
-                        if (context.read<OrdersCubit>().selectedStatusFilters.isNotEmpty ||
-                            context.read<OrdersCubit>().minPriceFilter != null ||
-                            context.read<OrdersCubit>().maxPriceFilter != null ||
-                            context.read<OrdersCubit>().initialDateFilter != null ||
+                        if (context
+                                .read<OrdersCubit>()
+                                .selectedStatusFilters
+                                .isNotEmpty ||
+                            context.read<OrdersCubit>().minPriceFilter !=
+                                null ||
+                            context.read<OrdersCubit>().maxPriceFilter !=
+                                null ||
+                            context.read<OrdersCubit>().initialDateFilter !=
+                                null ||
                             context.read<OrdersCubit>().finalDateFilter != null)
                           Positioned(
                             top: -4,
@@ -84,7 +95,8 @@ class OrdersScreen extends StatelessWidget {
                 ),
               ),
               onTap: () {
-                BottomSheetHelper.showCommonBottomSheet(context: context, child: OrdersFilterBottomSheet());
+                BottomSheetHelper.showCommonBottomSheet(
+                    context: context, child: OrdersFilterBottomSheet());
               },
             ),
           ],
@@ -94,7 +106,8 @@ class OrdersScreen extends StatelessWidget {
             if (state is OrdersLoading) {
               return const Center(child: CircularProgressIndicator());
             }
-            if (state is OrdersLoaded && BlocProvider.of<OrdersCubit>(context).orders.isEmpty) {
+            if (state is OrdersLoaded &&
+                BlocProvider.of<OrdersCubit>(context).orders.isEmpty) {
               return ConstrainedBox(
                   constraints: const BoxConstraints(minWidth: double.maxFinite),
                   child: EmptyListWidget(
@@ -112,16 +125,20 @@ class OrdersScreen extends StatelessWidget {
                       return BlocProvider.of<OrdersCubit>(context).getOrders();
                     },
                     child: ListView.builder(
-                        controller: BlocProvider.of<OrdersCubit>(context).scrollController,
+                        controller: BlocProvider.of<OrdersCubit>(context)
+                            .scrollController,
                         shrinkWrap: true,
                         physics: const AlwaysScrollableScrollPhysics(),
-                        itemCount: BlocProvider.of<OrdersCubit>(context).orders.length,
+                        itemCount:
+                            BlocProvider.of<OrdersCubit>(context).orders.length,
                         itemBuilder: (context, index) => OrderCard(
-                              orderData: BlocProvider.of<OrdersCubit>(context).orders[index],
+                              orderData: BlocProvider.of<OrdersCubit>(context)
+                                  .orders[index],
                             )),
                   ),
                 ),
-                if (state is LoadingMoreOrders) const Center(child: CircularProgressIndicator()),
+                if (state is LoadingMoreOrders)
+                  const Center(child: CircularProgressIndicator()),
                 if (state is OrdersLoadLimitReached) EndOfLoadResultWidget(),
               ],
             );

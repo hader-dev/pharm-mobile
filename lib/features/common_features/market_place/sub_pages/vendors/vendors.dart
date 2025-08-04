@@ -23,7 +23,8 @@ class VendorsPage extends StatefulWidget {
   State<VendorsPage> createState() => _VendorsPageState();
 }
 
-class _VendorsPageState extends State<VendorsPage> with AutomaticKeepAliveClientMixin {
+class _VendorsPageState extends State<VendorsPage>
+    with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -37,7 +38,8 @@ class _VendorsPageState extends State<VendorsPage> with AutomaticKeepAliveClient
                 padding: const EdgeInsets.only(left: AppSizesManager.p8),
                 child: CustomTextField(
                   hintText: context.translation!.search_by_name_packaging_sku,
-                  controller: BlocProvider.of<VendorsCubit>(context).searchController,
+                  controller:
+                      BlocProvider.of<VendorsCubit>(context).searchController,
                   state: FieldState.normal,
                   isEnabled: true,
                   prefixIcon: Icon(
@@ -46,7 +48,9 @@ class _VendorsPageState extends State<VendorsPage> with AutomaticKeepAliveClient
                   ),
                   suffixIcon: InkWell(
                     onTap: () {
-                      BlocProvider.of<VendorsCubit>(context).searchController.clear();
+                      BlocProvider.of<VendorsCubit>(context)
+                          .searchController
+                          .clear();
                       BlocProvider.of<VendorsCubit>(context).searchVendor(null);
                     },
                     child: Icon(
@@ -55,7 +59,8 @@ class _VendorsPageState extends State<VendorsPage> with AutomaticKeepAliveClient
                     ),
                   ),
                   onChanged: (searchValue) {
-                    BlocProvider.of<VendorsCubit>(context).searchVendor(searchValue);
+                    BlocProvider.of<VendorsCubit>(context)
+                        .searchVendor(searchValue);
                   },
                   validationFunc: (value) {},
                 ),
@@ -63,7 +68,8 @@ class _VendorsPageState extends State<VendorsPage> with AutomaticKeepAliveClient
             ),
             InkWell(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: AppSizesManager.p12),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: AppSizesManager.p12),
                 child: BlocBuilder<VendorsCubit, VendorsState>(
                   builder: (context, state) {
                     return Stack(
@@ -73,7 +79,9 @@ class _VendorsPageState extends State<VendorsPage> with AutomaticKeepAliveClient
                           Iconsax.filter,
                           color: AppColors.accent1Shade1,
                         ),
-                        if (BlocProvider.of<VendorsCubit>(context).selectedVendorSearchFilter != null)
+                        if (BlocProvider.of<VendorsCubit>(context)
+                                .selectedVendorSearchFilter !=
+                            null)
                           Positioned(
                             top: -4,
                             right: -4,
@@ -88,7 +96,8 @@ class _VendorsPageState extends State<VendorsPage> with AutomaticKeepAliveClient
                 ),
               ),
               onTap: () {
-                BottomSheetHelper.showCommonBottomSheet(context: context, child: VandorsSearchFilterBottomSheet());
+                BottomSheetHelper.showCommonBottomSheet(
+                    context: context, child: VandorsSearchFilterBottomSheet());
               },
             ),
           ],
@@ -96,35 +105,43 @@ class _VendorsPageState extends State<VendorsPage> with AutomaticKeepAliveClient
         Expanded(
           child: BlocBuilder<VendorsCubit, VendorsState>(
             builder: (context, state) {
-              if (state is VendorsLoading) {
+              final cubit = BlocProvider.of<VendorsCubit>(context);
+              final vendors = cubit.vendorsList;
+
+              if (state is VendorsLoading && vendors.isEmpty) {
                 return const Center(child: CircularProgressIndicator());
               }
-              if (state is VendorsLoaded && BlocProvider.of<VendorsCubit>(context).vendorsList.isEmpty) {
+
+              if (state is VendorsLoaded && vendors.isEmpty) {
                 return EmptyListWidget();
               }
-              return Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Expanded(
-                    child: RefreshIndicator(
-                        onRefresh: () {
-                          return BlocProvider.of<VendorsCubit>(context).fetchVendors();
-                        },
-                        child: ListView.builder(
-                          controller: BlocProvider.of<VendorsCubit>(context).scrollController,
-                          shrinkWrap: true,
-                          physics: const AlwaysScrollableScrollPhysics(),
-                          itemCount: BlocProvider.of<VendorsCubit>(context).vendorsList.length,
-                          itemBuilder: (context, index) {
-                            return VendorItem(
-                              companyData: BlocProvider.of<VendorsCubit>(context).vendorsList[index],
-                            );
-                          },
-                        )),
-                  ),
-                  if (state is VendorsLoadingMore) const Center(child: CircularProgressIndicator()),
-                  if (state is VendorsLoadLimitReached) EndOfLoadResultWidget(),
-                ],
+
+              final bool isLoadingMore = state is VendorsLoadingMore;
+              final bool hasReachedEnd = state is VendorsLoadLimitReached;
+
+              return RefreshIndicator(
+                onRefresh: () => cubit.fetchVendors(),
+                child: ListView.builder(
+                  controller: cubit.scrollController,
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  itemCount:
+                      vendors.length + (isLoadingMore || hasReachedEnd ? 1 : 0),
+                  itemBuilder: (context, index) {
+                    if (index < vendors.length) {
+                      return VendorItem(companyData: vendors[index]);
+                    } else {
+                      if (isLoadingMore) {
+                        return const Padding(
+                          padding: EdgeInsets.all(16.0),
+                          child: Center(child: CircularProgressIndicator()),
+                        );
+                      } else if (hasReachedEnd) {
+                        return const EndOfLoadResultWidget();
+                      }
+                    }
+                    return const SizedBox.shrink();
+                  },
+                ),
               );
             },
           ),
