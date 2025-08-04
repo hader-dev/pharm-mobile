@@ -157,7 +157,7 @@ class ParaPharmaWidget2 extends StatelessWidget {
                         onPressed: () {
                           AppLayout.appLayoutScaffoldKey.currentContext!.read<CartCubit>().addToCart(
                               CreateCartItemModel(
-                                  productId: paraPharmData.id, productType: ProductTypes.para_pharmacy, quantity: 1));
+                                  productId: paraPharmData.id, productType: ProductTypes.para_pharmacy, quantity: 1),true);
                         },
                         icon: Icon(
                           Iconsax.add,

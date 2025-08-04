@@ -202,5 +202,14 @@
   "any": "Any",
   "medicine_overview": "Aperçu du médicament",
   "about_distributor": "À propos du distributeur",
-  "feedback_failed_to_load_medicine_details": "Échec du chargement des détails du médicament"
+  "feedback_failed_to_load_medicine_details": "Échec du chargement des détails du médicament",
+  "product_overview": "Aperçu du produit",
+  "feedback_failed_to_load_para_pharma_details": "Échec du chargement des détails parapharmaceutiques",
+  "buy_now": "Acheter maintenant",
+  "loading": "Chargement",
+  "feedback_loading_failed": "Échec du chargement",
+  "in_stock": "En stock",
+  "out_stock": "Rupture de stock",
+  "feedback_error_loading_cart": "Échec du chargement du panier, veuillez actualiser"
+
 }

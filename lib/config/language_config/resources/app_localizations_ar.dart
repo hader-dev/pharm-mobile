@@ -647,4 +647,29 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get feedback_failed_to_load_medicine_details =>
       'فشل في تحميل تفاصيل الدواء';
+
+  @override
+  String get product_overview => 'نظرة عامة على المنتج';
+
+  @override
+  String get feedback_failed_to_load_para_pharma_details =>
+      'فشل في تحميل تفاصيل البارافارما';
+
+  @override
+  String get buy_now => 'اشترِ الآن';
+
+  @override
+  String get loading => 'جارٍ التحميل';
+
+  @override
+  String get feedback_loading_failed => 'فشل في التحميل';
+
+  @override
+  String get in_stock => 'متوفر';
+
+  @override
+  String get out_stock => 'غير متوفر';
+
+  @override
+  String get feedback_error_loading_cart => 'فشل في تحميل السلة، يرجى التحديث';
 }

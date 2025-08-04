@@ -657,4 +657,30 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get feedback_failed_to_load_medicine_details =>
       'Échec du chargement des détails du médicament';
+
+  @override
+  String get product_overview => 'Aperçu du produit';
+
+  @override
+  String get feedback_failed_to_load_para_pharma_details =>
+      'Échec du chargement des détails parapharmaceutiques';
+
+  @override
+  String get buy_now => 'Acheter maintenant';
+
+  @override
+  String get loading => 'Chargement';
+
+  @override
+  String get feedback_loading_failed => 'Échec du chargement';
+
+  @override
+  String get in_stock => 'En stock';
+
+  @override
+  String get out_stock => 'Rupture de stock';
+
+  @override
+  String get feedback_error_loading_cart =>
+      'Échec du chargement du panier, veuillez actualiser';
 }

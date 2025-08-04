@@ -1,24 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
-
-import '../../../../config/theme/colors_manager.dart';
-import '../cubit/para_pharma_details_cubit.dart';
-import '../para_pharma_catalog_details.dart';
-
-// onCategoryTapped(String categoryName) {
-//   Scrollable.ensureVisible(TabBArSection.sectionsKeys[categoryName]!.currentContext!,
-//       duration: const Duration(seconds: 1), curve: Curves.easeInOut);
-// }
+import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/cubit/para_pharma_details_cubit.dart';
+import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/helpers/para_pharma_catalog_details_tab_data.dart';
 
 class ProductDetailsTabBarSection extends StatefulWidget {
   const ProductDetailsTabBarSection({super.key});
 
   @override
-  State<ProductDetailsTabBarSection> createState() => _ProductDetailsTabBarSectionState();
+  State<ProductDetailsTabBarSection> createState() =>
+      _ProductDetailsTabBarSectionState();
 }
 
-class _ProductDetailsTabBarSectionState extends State<ProductDetailsTabBarSection> with TickerProviderStateMixin {
+class _ProductDetailsTabBarSectionState
+    extends State<ProductDetailsTabBarSection> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
@@ -26,6 +22,8 @@ class _ProductDetailsTabBarSectionState extends State<ProductDetailsTabBarSectio
 
   @override
   Widget build(BuildContext context) {
+    final tabs = paraPharmaCatalogDetailsTabData(context);
+
     TextStyle tabTextStyle = AppTypography.body3MediumStyle;
 
     return TabBar(
@@ -36,11 +34,13 @@ class _ProductDetailsTabBarSectionState extends State<ProductDetailsTabBarSectio
         overlayColor: WidgetStatePropertyAll(Colors.transparent),
         tabAlignment: TabAlignment.start,
         labelColor: AppColors.accent1Shade1,
-        controller: BlocProvider.of<ParaPharmaDetailsCubit>(context).tabController,
+        controller:
+            BlocProvider.of<ParaPharmaDetailsCubit>(context).tabController,
         onTap: (index) {
-          BlocProvider.of<ParaPharmaDetailsCubit>(context, listen: false).changeTapIndex(index);
+          BlocProvider.of<ParaPharmaDetailsCubit>(context, listen: false)
+              .changeTapIndex(index);
         },
-        tabs: ParaPharmaCatalogDetailsScreen.tabs
+        tabs: tabs
             .map(
               (tabLabel) => Tab(
                 child: Text(

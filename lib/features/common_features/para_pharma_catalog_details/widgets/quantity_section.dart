@@ -3,27 +3,29 @@ import 'package:flutter/services.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
+import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_icon_button.dart';
 
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/cubit/para_pharma_details_cubit.dart';
+import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:iconsax/iconsax.dart' show Iconsax;
-
-import '../../../../config/theme/typoghrapy_manager.dart';
-import '../../../../utils/constants.dart';
-
-import '../../../common/buttons/solid/primary_icon_button.dart';
 
 class QuantitySectionModified extends StatelessWidget {
   const QuantitySectionModified({
     super.key,
+    this.mainAxisAlignment = MainAxisAlignment.end,
   });
+  final MainAxisAlignment mainAxisAlignment;
 
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<ParaPharmaDetailsCubit>();
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: AppSizesManager.p8),
-      child: Row(children: [
-        Spacer(),
+      child: Row(
+        mainAxisAlignment: mainAxisAlignment,
+        children: [
         PrimaryIconButton(
           borderColor: StrokeColors.normal.color,
           isBordered: true,
@@ -50,11 +52,13 @@ class QuantitySectionModified extends StatelessWidget {
               decoration: InputDecoration(
                 enabledBorder: InputBorder.none,
                 disabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+                  borderRadius: BorderRadius.circular(
+                      AppSizesManager.commonWidgetsRadius),
                   borderSide: BorderSide(color: AppColors.bgDisabled),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+                  borderRadius: BorderRadius.circular(
+                      AppSizesManager.commonWidgetsRadius),
                   borderSide: BorderSide(color: StrokeColors.focused.color),
                 ),
               )),

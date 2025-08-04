@@ -1,23 +1,19 @@
 import 'package:cached_network_image_plus/flutter_cached_network_image_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
-import 'package:hader_pharm_mobile/features/app_layout/app_layout.dart';
-import 'package:hader_pharm_mobile/features/common_features/cart/cubit/cart_cubit.dart';
+import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
+import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_icon_button.dart';
+import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/widgets/quick_add_modal.dart';
+import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
+import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/price_formatter.dart';
 import 'package:iconsax/iconsax.dart';
-
-import '../../../config/theme/colors_manager.dart';
-import '../../../config/theme/typoghrapy_manager.dart';
-import '../../../models/create_cart_item.dart';
-import '../../../models/para_pharma.dart';
-import '../../../utils/enums.dart';
-import '../buttons/solid/primary_icon_button.dart' show PrimaryIconButton;
 
 class ParaPharmaWidget4 extends StatelessWidget {
   final BaseParaPharmaCatalogModel paraPharmData;
@@ -25,12 +21,16 @@ class ParaPharmaWidget4 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final translation = context.translation!;
+
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: AppSizesManager.p6, vertical: AppSizesManager.p12),
+      padding: const EdgeInsets.symmetric(
+          horizontal: AppSizesManager.p6, vertical: AppSizesManager.p12),
       child: InkWell(
         splashColor: Colors.transparent,
         onTap: () {
-          GoRouter.of(context).pushNamed(RoutingManager.paraPharmaDetailsScreen, extra: paraPharmData.id);
+          GoRouter.of(context).pushNamed(RoutingManager.paraPharmaDetailsScreen,
+              extra: paraPharmData.id);
         },
         child: Column(
           children: [
@@ -40,7 +40,8 @@ class ParaPharmaWidget4 extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(AppSizesManager.r6), topRight: Radius.circular(AppSizesManager.r6)),
+                      topLeft: Radius.circular(AppSizesManager.r6),
+                      topRight: Radius.circular(AppSizesManager.r6)),
                   border: paraPharmData.image != null
                       ? null
                       : Border.all(
@@ -53,11 +54,13 @@ class ParaPharmaWidget4 extends StatelessWidget {
                       ? CacheNetworkImagePlus(
                           boxFit: BoxFit.cover,
                           width: double.maxFinite,
-                          imageUrl: "https://pharmacie-denni.dz/wp-content/uploads/2025/05/12-2-1.png",
+                          imageUrl:
+                              "https://pharmacie-denni.dz/wp-content/uploads/2025/05/12-2-1.png",
                         )
                       : Center(
                           child: Image(
-                            image: AssetImage(DrawableAssetStrings.medicinePlaceHolderImg),
+                            image: AssetImage(
+                                DrawableAssetStrings.medicinePlaceHolderImg),
                             fit: BoxFit.cover,
                             height: 80,
                             width: 80,
@@ -89,20 +92,27 @@ class ParaPharmaWidget4 extends StatelessWidget {
                           borderRadius: BorderRadius.only(
                               bottomRight: Radius.circular(AppSizesManager.r6),
                               topLeft: Radius.circular(AppSizesManager.r6)),
-                          color: const Color.fromARGB(255, 195, 252, 222).withValues(alpha: 0.8),
+                          color: const Color.fromARGB(255, 195, 252, 222)
+                              .withValues(alpha: 0.8),
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             paraPharmData.stockQuantity > 0
                                 ? Icon(Iconsax.box_2,
-                                    color: SystemColors.green.primary, size: AppSizesManager.iconSize16)
+                                    color: SystemColors.green.primary,
+                                    size: AppSizesManager.iconSize16)
                                 : Icon(Iconsax.box_2,
-                                    color: SystemColors.red.primary, size: AppSizesManager.iconSize16),
+                                    color: SystemColors.red.primary,
+                                    size: AppSizesManager.iconSize16),
                             const Gap(AppSizesManager.s4),
-                            Text(paraPharmData.stockQuantity > 0 ? "In Stock" : "Out of Stock",
+                            Text(
+                                paraPharmData.stockQuantity > 0
+                                    ? translation.in_stock
+                                    : translation.out_stock,
                                 style: AppTypography.bodySmallStyle.copyWith(
-                                    color: SystemColors.green.primary, fontWeight: AppTypography.appFontSemiBold)),
+                                    color: SystemColors.green.primary,
+                                    fontWeight: AppTypography.appFontSemiBold)),
                           ],
                         ),
                       ),
@@ -111,7 +121,8 @@ class ParaPharmaWidget4 extends StatelessWidget {
                   ]),
                 ])),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: AppSizesManager.p6, vertical: AppSizesManager.p4),
+              padding: const EdgeInsets.symmetric(
+                  horizontal: AppSizesManager.p6, vertical: AppSizesManager.p4),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
@@ -128,7 +139,8 @@ class ParaPharmaWidget4 extends StatelessWidget {
                       maxLines: 1,
                       softWrap: true,
                       overflow: TextOverflow.ellipsis,
-                      style: AppTypography.body2MediumStyle.copyWith(color: TextColors.primary.color)),
+                      style: AppTypography.body2MediumStyle
+                          .copyWith(color: TextColors.primary.color)),
                   Gap(AppSizesManager.s4),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.baseline,
@@ -144,12 +156,15 @@ class ParaPharmaWidget4 extends StatelessWidget {
                         TextSpan(
                           children: [
                             TextSpan(
-                              text: double.parse(paraPharmData.unitPriceHt).formatAsPrice(),
-                              style: AppTypography.headLine3SemiBoldStyle.copyWith(color: AppColors.accent1Shade1),
+                              text: double.parse(paraPharmData.unitPriceHt)
+                                  .formatAsPrice(),
+                              style: AppTypography.headLine3SemiBoldStyle
+                                  .copyWith(color: AppColors.accent1Shade1),
                             ),
                             TextSpan(
                               text: " ${context.translation!.currency}",
-                              style: AppTypography.bodyXSmallStyle.copyWith(color: AppColors.accent1Shade1),
+                              style: AppTypography.bodyXSmallStyle
+                                  .copyWith(color: AppColors.accent1Shade1),
                             ),
                           ],
                         ),
@@ -162,9 +177,12 @@ class ParaPharmaWidget4 extends StatelessWidget {
                           borderColor: AppColors.accent1Shade1,
                           bgColor: Colors.transparent,
                           onPressed: () {
-                            AppLayout.appLayoutScaffoldKey.currentContext!.read<CartCubit>().addToCart(
-                                CreateCartItemModel(
-                                    productId: paraPharmData.id, productType: ProductTypes.medicine, quantity: 1));
+                            BottomSheetHelper.showCommonBottomSheet(
+                                initialChildSize: .3,
+                                context: context,
+                                child: QuickCartAddModal(
+                                  paraPharmaCatalogId: paraPharmData.id,
+                                ));
                           },
                           icon: Icon(
                             Iconsax.add,

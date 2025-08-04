@@ -1347,6 +1347,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Failed to load medicine details'**
   String get feedback_failed_to_load_medicine_details;
+
+  /// No description provided for @product_overview.
+  ///
+  /// In en, this message translates to:
+  /// **'Product overview'**
+  String get product_overview;
+
+  /// No description provided for @feedback_failed_to_load_para_pharma_details.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load para-pharmaceutical details'**
+  String get feedback_failed_to_load_para_pharma_details;
+
+  /// No description provided for @buy_now.
+  ///
+  /// In en, this message translates to:
+  /// **'Buy Now'**
+  String get buy_now;
+
+  /// No description provided for @loading.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading'**
+  String get loading;
+
+  /// No description provided for @feedback_loading_failed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load'**
+  String get feedback_loading_failed;
+
+  /// No description provided for @in_stock.
+  ///
+  /// In en, this message translates to:
+  /// **'In stock'**
+  String get in_stock;
+
+  /// No description provided for @out_stock.
+  ///
+  /// In en, this message translates to:
+  /// **'Out of stock'**
+  String get out_stock;
+
+  /// No description provided for @feedback_error_loading_cart.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load cart ,please refresh'**
+  String get feedback_error_loading_cart;
 }
 
 class _AppLocalizationsDelegate

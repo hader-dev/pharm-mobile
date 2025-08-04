@@ -9,6 +9,7 @@ import 'package:hader_pharm_mobile/models/create_cart_item.dart';
 import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 import 'make_order_bottom_sheet.dart';
 import 'quantity_section.dart';
@@ -21,6 +22,8 @@ class ButtonsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final translation = context.translation!;
+    
     return BlocBuilder<CartCubit, CartState>(
       builder: (context, state) {
         return Column(
@@ -33,7 +36,7 @@ class ButtonsSection extends StatelessWidget {
                   Expanded(
                     child: PrimaryTextButton(
                       isOutLined: true,
-                      label: "Add to cart",
+                      label:translation.add_cart ,
                       leadingIcon: Iconsax.add,
                       labelColor: AppColors.accent1Shade1,
                       onTap: () {
@@ -57,7 +60,7 @@ class ButtonsSection extends StatelessWidget {
                   Gap(AppSizesManager.s8),
                   Expanded(
                     child: PrimaryTextButton(
-                      label: "Buy now",
+                      label: translation.buy_now,
                       leadingIcon: Iconsax.money4,
                       onTap: () {
                         BottomSheetHelper.showCommonBottomSheet(

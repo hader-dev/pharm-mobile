@@ -29,7 +29,7 @@ class SelectPaymentMethodBottomSheet extends StatelessWidget {
       child: BlocListener<CartCubit, CartState>(
         listener: (context, state) {
           if (state is PassOrderLoaded) {
-            context.read<CartCubit>().clearCart();
+            context.read<CartCubit>().clearCart(context.translation!);
             context.pop();
           }
         },

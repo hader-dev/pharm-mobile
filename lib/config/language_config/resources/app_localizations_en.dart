@@ -646,4 +646,30 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get feedback_failed_to_load_medicine_details =>
       'Failed to load medicine details';
+
+  @override
+  String get product_overview => 'Product overview';
+
+  @override
+  String get feedback_failed_to_load_para_pharma_details =>
+      'Failed to load para-pharmaceutical details';
+
+  @override
+  String get buy_now => 'Buy Now';
+
+  @override
+  String get loading => 'Loading';
+
+  @override
+  String get feedback_loading_failed => 'Failed to load';
+
+  @override
+  String get in_stock => 'In stock';
+
+  @override
+  String get out_stock => 'Out of stock';
+
+  @override
+  String get feedback_error_loading_cart =>
+      'Failed to load cart ,please refresh';
 }

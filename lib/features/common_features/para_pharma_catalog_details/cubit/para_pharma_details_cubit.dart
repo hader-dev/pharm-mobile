@@ -1,11 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:hader_pharm_mobile/models/create_quick_order_model.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/order_repository_impl.dart';
-
-import '../../../../models/create_quick_order_model.dart';
-import '../../../../repositories/remote/parapharm_catalog/para_pharma_catalog_repository_impl.dart';
-import '../../../../utils/app_exceptions/global_expcetion_handler.dart';
+import 'package:hader_pharm_mobile/repositories/remote/parapharm_catalog/para_pharma_catalog_repository_impl.dart';
+import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler.dart';
 
 part 'para_pharma_details_state.dart';
 
@@ -16,15 +15,19 @@ class ParaPharmaDetailsCubit extends Cubit<ParaPharmaDetailsState> {
   final TabController tabController;
   final OrderRepository ordersRepository;
 
-  TextEditingController quantityController = TextEditingController(text: '1');
+  final TextEditingController quantityController;
 
   ParaPharmaDetailsCubit(
-      {required this.paraPharmaCatalogRepository, required this.tabController, required this.ordersRepository})
+      {required this.quantityController,
+      required this.paraPharmaCatalogRepository,
+      required this.tabController,
+      required this.ordersRepository})
       : super(ParaPharmaDetailsInitial());
   getParaPharmaCatalogData(String id) async {
     try {
       emit(ParaPharmaDetailsLoading());
-      paraPharmaCatalogData = await paraPharmaCatalogRepository.getParaPharmaCatalogById(id);
+      paraPharmaCatalogData =
+          await paraPharmaCatalogRepository.getParaPharmaCatalogById(id);
       emit(ParaPharmaDetailsLoaded());
     } catch (e) {
       emit(ParaPharmaDetailsLoadError());
@@ -37,13 +40,15 @@ class ParaPharmaDetailsCubit extends Cubit<ParaPharmaDetailsState> {
   }
 
   void incrementQuantity() {
-    quantityController.text = (int.parse(quantityController.text) + 1).toString();
+    quantityController.text =
+        (int.parse(quantityController.text) + 1).toString();
     emit(ParaPharmaQuantityChanged());
   }
 
   void decrementQuantity() {
     if (int.parse(quantityController.text) > 1) {
-      quantityController.text = (int.parse(quantityController.text) - 1).toString();
+      quantityController.text =
+          (int.parse(quantityController.text) - 1).toString();
     }
     emit(ParaPharmaQuantityChanged());
   }

@@ -1,6 +1,7 @@
 import 'dart:async' show Timer;
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:hader_pharm_mobile/config/language_config/resources/app_localizations.dart';
 import 'package:hader_pharm_mobile/models/cart_item.dart';
 import 'package:hader_pharm_mobile/models/cart_items_response.dart';
 import 'package:hader_pharm_mobile/models/create_cart_item.dart';
@@ -44,14 +45,14 @@ class CartCubit extends Cubit<CartState> {
     // });
   }
 
-  Future<void> addToCart(CreateCartItemModel cartItem) async {
+  Future<void> addToCart(CreateCartItemModel cartItem,[bool isParapharma = false]) async {
     try {
       emit(AddCartItemLoading());
 
-      final existingItem = getItemIfExists(cartItem.productId);
+      final existingItem = getItemIfExists(cartItem.productId,isParapharma);
 
       if (existingItem != null) {
-        final updatedItem = {"quantity":cartItem.quantity};
+        final updatedItem = {"quantity": cartItem.quantity};
 
         await cartItemRepository.updateItem(existingItem.id, updatedItem);
       } else {
@@ -234,7 +235,7 @@ class CartCubit extends Cubit<CartState> {
     orderNote = text;
   }
 
-  void clearCart() async {
+  void clearCart(AppLocalizations translation) async {
     try {
       cartItems.clear();
       cartItemsByVendor.clear();
@@ -243,15 +244,15 @@ class CartCubit extends Cubit<CartState> {
       emit(CartLoadingSuccess());
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
-      emit(CartError(
-          error:
-              'An error occurred while clearing the cart please refresh the page .'));
+      emit(CartError(error: translation.feedback_error_loading_cart));
     }
   }
 
-  CartItemModel? getItemIfExists(String medicineCatalogId) {
+  CartItemModel? getItemIfExists(String id, [bool isParapharma = false]) {
     final existingItem = cartItems
-        .where((element) => element.medicinesCatalogId == medicineCatalogId)
+        .where((element) => isParapharma
+            ? element.parapharmCatalogId == id
+            : element.medicinesCatalogId == id)
         .firstOrNull;
 
     return existingItem;
