@@ -5,9 +5,7 @@ import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/end_of_load_result_widget.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/para_pharma_widget_1.dart';
-import 'package:hader_pharm_mobile/features/common_features/filters/cubit/para_medical_filters_cubit.dart';
-import 'package:hader_pharm_mobile/features/common_features/filters/para_medical_filters.dart';
-import 'package:hader_pharm_mobile/repositories/locale/filters/filters_repository_impl.dart';
+import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/widget/search_filter_bottom_sheet.dart';
 import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
@@ -101,12 +99,7 @@ class _ParaPharmaSearchFilterBottomSheetState extends State<ParaPharmaSearchFilt
               onTap: () {
                 BottomSheetHelper.showCommonBottomSheet(
                   context: context,
-                  child: BlocProvider(
-                    create: (_) => ParaMedicalFiltersCubit(
-                      filtersRepository: FiltersRepositoryImpl(),
-                    )..loadParaMedicalFilters(),
-                    child: ParaMedicalFiltersView(),
-                  ),
+                  child: SearchParaPharmFilterBottomSheet(),
                 );
               },
             ),
@@ -148,8 +141,7 @@ class _ParaPharmaSearchFilterBottomSheetState extends State<ParaPharmaSearchFilt
                             : () => cubit.likeParaPharmaCatalog(paraPharma.id),
                       );
                     } else {
-                      // Extra slot for loader or end message
-                      if (isLoadingMore) {
+                     if (isLoadingMore) {
                         return const Padding(
                           padding: EdgeInsets.all(16.0),
                           child: Center(child: CircularProgressIndicator()),
