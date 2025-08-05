@@ -20,10 +20,11 @@ class ButtonsSection extends StatelessWidget {
   const ButtonsSection(
       {super.key,
       this.onAction,
-      this.quantitySectionAlignment = MainAxisAlignment.end});
+      this.quantitySectionAlignment = MainAxisAlignment.end, this.parapharmDetailsCubit});
 
   final VoidCallback? onAction;
   final MainAxisAlignment quantitySectionAlignment;
+  final ParaPharmaDetailsCubit? parapharmDetailsCubit;
 
   @override
   Widget build(BuildContext context) {
@@ -72,10 +73,11 @@ class ButtonsSection extends StatelessWidget {
                     child: PrimaryTextButton(
                       label: translation.buy_now,
                       leadingIcon: Iconsax.money4,
+                      spalshColor:AppColors.accent1Shade1.withAlpha(50),
                       onTap: () {
                         BottomSheetHelper.showCommonBottomSheet(
-                            context: context, child: MakeOrderBottomSheet());
-                        onAction?.call();
+                            context: context, child: MakeOrderBottomSheet(cubit:parapharmDetailsCubit)).then((res)=>onAction?.call());
+                        
                       },
                       color: AppColors.accent1Shade1,
                     ),

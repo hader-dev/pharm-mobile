@@ -5,30 +5,37 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
+import 'package:hader_pharm_mobile/features/app_layout/app_layout.dart';
+import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_icon_button.dart';
+import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/bottom_sheet_header.dart';
+import 'package:hader_pharm_mobile/features/common_features/orders/cubit/orders_cubit.dart';
+import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/cubit/para_pharma_details_cubit.dart';
+import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/para_pharma_catalog_details.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/enums.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart' show Iconsax;
 
-import '../../../../utils/enums.dart';
-import '../../../app_layout/app_layout.dart';
-import '../../../common/buttons/solid/primary_icon_button.dart';
-import '../../../common/buttons/solid/primary_text_button.dart';
-import '../../../common/widgets/bottom_sheet_header.dart';
-import '../../orders/cubit/orders_cubit.dart';
-import '../cubit/para_pharma_details_cubit.dart';
-import '../para_pharma_catalog_details.dart' show ParaPharmaCatalogDetailsScreen;
-
 class MakeOrderBottomSheet extends StatelessWidget {
-  const MakeOrderBottomSheet({super.key});
+  const MakeOrderBottomSheet({super.key, this.cubit});
+  final ParaPharmaDetailsCubit? cubit;
 
   @override
   Widget build(BuildContext context) {
+    final translation = context.translation!;
+
     return MultiBlocProvider(
       providers: [
         BlocProvider.value(
-          value: ParaPharmaCatalogDetailsScreen.paraPharmaDetailsScaffoldKey.currentContext!
-              .read<ParaPharmaDetailsCubit>(),
+          value: cubit ??
+              ParaPharmaCatalogDetailsScreen
+                  .paraPharmaDetailsScaffoldKey.currentContext!
+                  .read<ParaPharmaDetailsCubit>(),
         ),
-        BlocProvider.value(value: AppLayout.appLayoutScaffoldKey.currentContext!.read<OrdersCubit>()),
+        BlocProvider.value(
+            value: AppLayout.appLayoutScaffoldKey.currentContext!
+                .read<OrdersCubit>()),
       ],
       child: BlocListener<ParaPharmaDetailsCubit, ParaPharmaDetailsState>(
         listener: (context, state) {
@@ -42,33 +49,39 @@ class MakeOrderBottomSheet extends StatelessWidget {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                BottomSheetHeader(title: 'Make an order'),
+                BottomSheetHeader(title: translation.make_order),
                 Gap(AppSizesManager.s12),
                 LabeledInfoWidget(
-                  label: "Product",
-                  value: context.read<ParaPharmaDetailsCubit>().paraPharmaCatalogData!.name,
+                  label: translation.product,
+                  value: context
+                      .read<ParaPharmaDetailsCubit>()
+                      .paraPharmaCatalogData!
+                      .name,
                 ),
                 LabeledInfoWidget(
-                  label: "Unit Total Price",
+                  label: translation.unit_total_price,
                   value:
                       "${(num.parse(context.read<ParaPharmaDetailsCubit>().paraPharmaCatalogData!.unitPriceHt).toStringAsFixed(2))} translationContext.currency",
                 ),
                 Gap(AppSizesManager.s12),
                 Text(
-                  'Quantity',
+                  translation.quantity,
                   style: AppTypography.body3MediumStyle.copyWith(
                     color: TextColors.ternary.color,
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: AppSizesManager.p8),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: AppSizesManager.p8),
                   child: Row(children: [
                     PrimaryIconButton(
                       borderColor: StrokeColors.normal.color,
                       isBordered: true,
                       bgColor: Colors.transparent,
                       onPressed: () {
-                        context.read<ParaPharmaDetailsCubit>().decrementQuantity();
+                        context
+                            .read<ParaPharmaDetailsCubit>()
+                            .decrementQuantity();
                       },
                       icon: Icon(
                         Iconsax.minus,
@@ -82,25 +95,37 @@ class MakeOrderBottomSheet extends StatelessWidget {
                       child: Form(
                           child: TextFormField(
                               cursorColor: AppColors.accentGreenShade1,
-                              controller: context.read<ParaPharmaDetailsCubit>().quantityController,
+                              controller: context
+                                  .read<ParaPharmaDetailsCubit>()
+                                  .quantityController,
                               textAlign: TextAlign.center,
                               keyboardType: TextInputType.number,
-                              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                              validator: (value) => value == null || value.isEmpty ? '' : null,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly
+                              ],
+                              validator: (value) =>
+                                  value == null || value.isEmpty ? '' : null,
                               style: AppTypography.body3MediumStyle,
                               decoration: InputDecoration(
-                                contentPadding: EdgeInsets.all(AppSizesManager.p12),
+                                contentPadding:
+                                    EdgeInsets.all(AppSizesManager.p12),
                                 enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
-                                  borderSide: BorderSide(color: FieldState.normal.color.secondary),
+                                  borderRadius: BorderRadius.circular(
+                                      AppSizesManager.commonWidgetsRadius),
+                                  borderSide: BorderSide(
+                                      color: FieldState.normal.color.secondary),
                                 ),
                                 disabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
-                                  borderSide: BorderSide(color: AppColors.bgDisabled),
+                                  borderRadius: BorderRadius.circular(
+                                      AppSizesManager.commonWidgetsRadius),
+                                  borderSide:
+                                      BorderSide(color: AppColors.bgDisabled),
                                 ),
                                 focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
-                                  borderSide: BorderSide(color: StrokeColors.focused.color),
+                                  borderRadius: BorderRadius.circular(
+                                      AppSizesManager.commonWidgetsRadius),
+                                  borderSide: BorderSide(
+                                      color: StrokeColors.focused.color),
                                 ),
                               ))),
                     ),
@@ -110,7 +135,9 @@ class MakeOrderBottomSheet extends StatelessWidget {
                       isBordered: true,
                       bgColor: Colors.transparent,
                       onPressed: () {
-                        context.read<ParaPharmaDetailsCubit>().incrementQuantity();
+                        context
+                            .read<ParaPharmaDetailsCubit>()
+                            .incrementQuantity();
                       },
                       icon: Icon(
                         Iconsax.add,
@@ -123,13 +150,14 @@ class MakeOrderBottomSheet extends StatelessWidget {
                 Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
                 Gap(AppSizesManager.s12),
                 InfoWidget(
-                  label: "Total Price",
+                  label: translation.total_price,
                   bgColor: AppColors.accentGreenShade3,
                   value: Row(
                     children: [
                       Text(
                         "${(num.parse(context.read<ParaPharmaDetailsCubit>().quantityController.text) * num.parse(context.read<ParaPharmaDetailsCubit>().paraPharmaCatalogData!.unitPriceHt)).toStringAsFixed(2)} translationContext.currency",
-                        style: AppTypography.body2MediumStyle.copyWith(color: AppColors.accent1Shade1),
+                        style: AppTypography.body2MediumStyle
+                            .copyWith(color: AppColors.accent1Shade1),
                       ),
                       Spacer(),
                       Icon(
@@ -150,7 +178,8 @@ class MakeOrderBottomSheet extends StatelessWidget {
                         flex: 1,
                         child: PrimaryTextButton(
                           isOutLined: true,
-                          label: "Cancel",
+                          label: translation.cancel,
+                          spalshColor: AppColors.accent1Shade1.withAlpha(50),
                           labelColor: AppColors.accent1Shade1,
                           onTap: () {
                             context.pop();
@@ -162,11 +191,13 @@ class MakeOrderBottomSheet extends StatelessWidget {
                       Expanded(
                         flex: 2,
                         child: PrimaryTextButton(
-                          label: "Buy now",
+                          label: translation.buy_now,
                           leadingIcon: Iconsax.money4,
                           isLoading: state is PassingQuickOrder,
                           onTap: () {
-                            context.read<ParaPharmaDetailsCubit>().passQuickOrder();
+                            context
+                                .read<ParaPharmaDetailsCubit>()
+                                .passQuickOrder();
                           },
                           color: AppColors.accent1Shade1,
                         ),
@@ -225,7 +256,8 @@ class InfoWidget extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: AppSizesManager.p6),
       decoration: BoxDecoration(
         color: bgColor,
-        borderRadius: BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+        borderRadius:
+            BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

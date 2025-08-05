@@ -212,5 +212,8 @@
   "in_stock": "متوفر",
   "out_stock": "غير متوفر",
   "feedback_error_loading_cart": "فشل في تحميل السلة، يرجى التحديث",
-  "distributor_sku": "رمز المنتج للتوزيع"
+  "make_order": "إجراء الطلب",
+  "unit_total_price": "السعر الإجمالي للوحدة",
+  "product": "المنتج",
+  "distributor_sku": "رمز الموزع"
 }

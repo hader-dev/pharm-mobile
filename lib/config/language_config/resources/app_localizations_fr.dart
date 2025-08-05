@@ -685,5 +685,14 @@ class AppLocalizationsFr extends AppLocalizations {
       'Échec du chargement du panier, veuillez actualiser';
 
   @override
+  String get make_order => 'Passer la commande';
+
+  @override
+  String get unit_total_price => 'Prix total unitaire';
+
+  @override
+  String get product => 'Produit';
+
+  @override
   String get distributor_sku => 'SKU du distributeur';
 }

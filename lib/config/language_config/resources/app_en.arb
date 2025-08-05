@@ -215,5 +215,9 @@
   "in_stock": "In stock",
   "out_stock": "Out of stock",
   "feedback_error_loading_cart": "Failed to load cart ,please refresh",
+  "make_order": "Make Order",
+  "unit_total_price": "Unit Total Price",
+  "product": "Product",
   "distributor_sku": "Distributor SKU"
+
 }
