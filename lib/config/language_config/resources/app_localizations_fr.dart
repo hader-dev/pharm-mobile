@@ -683,4 +683,13 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get feedback_error_loading_cart =>
       'Échec du chargement du panier, veuillez actualiser';
+
+  @override
+  String get make_order => 'Passer la commande';
+
+  @override
+  String get unit_total_price => 'Prix total unitaire';
+
+  @override
+  String get product => 'Produit';
 }

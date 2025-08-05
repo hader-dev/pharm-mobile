@@ -23,33 +23,35 @@ class _QuickCartAddModalState extends State<QuickCartAddModal>
     with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-
-    final cartCubit = AppLayout.appLayoutScaffoldKey.currentContext!
-                .read<CartCubit>();
-    final existingCartItem = cartCubit.getItemIfExists(widget.medicineCatalogId);
+    final cartCubit =
+        AppLayout.appLayoutScaffoldKey.currentContext!.read<CartCubit>();
+    final existingCartItem =
+        cartCubit.getItemIfExists(widget.medicineCatalogId);
 
     final tabs = medicineCatalogDetailsTabData(context);
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => MedicineDetailsCubit(
-              quantityController: TextEditingController(text: existingCartItem?.quantity.toString() ?? '1'),
-              tabController: TabController(
-                  length: tabs.length,
-                  vsync: this),
+
+    final medicineDetailsCubit = MedicineDetailsCubit(
+              quantityController: TextEditingController(
+                  text: existingCartItem?.quantity.toString() ?? '1'),
+              tabController: TabController(length: tabs.length, vsync: this),
               ordersRepository:
                   OrderRepository(client: getItInstance.get<INetworkService>()),
               medicineCatalogRepository: MedicineCatalogRepository(
-                  client: getItInstance.get<INetworkService>()))
+                  client: getItInstance.get<INetworkService>()));
+
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => medicineDetailsCubit
             ..getMedicineCatalogData(widget.medicineCatalogId),
         ),
-        BlocProvider.value(
-            value: cartCubit),
+        BlocProvider.value(value: cartCubit),
       ],
       child: ButtonsSection(
         onAction: () => context.pop(),
         quantitySectionAlignment: MainAxisAlignment.center,
-        ),
+        medicineDetailsCubit: medicineDetailsCubit,
+      ),
     );
   }
 }

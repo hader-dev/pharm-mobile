@@ -15,20 +15,27 @@ import 'make_order_bottom_sheet.dart';
 import 'quantity_section.dart';
 
 class ButtonsSection extends StatelessWidget {
-  const ButtonsSection({super.key, this.onAction,  this.quantitySectionAlignment = MainAxisAlignment.center});
+  const ButtonsSection(
+      {super.key,
+      this.medicineDetailsCubit,
+      this.onAction,
+      this.quantitySectionAlignment = MainAxisAlignment.center});
 
   final VoidCallback? onAction;
-  final MainAxisAlignment quantitySectionAlignment ;
+  final MainAxisAlignment quantitySectionAlignment;
+  final MedicineDetailsCubit? medicineDetailsCubit;
 
   @override
   Widget build(BuildContext context) {
     final translation = context.translation!;
-    
+
     return BlocBuilder<CartCubit, CartState>(
       builder: (context, state) {
         return Column(
           children: [
-            QuantitySectionModified(mainAxisAlignment: quantitySectionAlignment,),
+            QuantitySectionModified(
+              mainAxisAlignment: quantitySectionAlignment,
+            ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p4),
               child: Row(
@@ -36,8 +43,9 @@ class ButtonsSection extends StatelessWidget {
                   Expanded(
                     child: PrimaryTextButton(
                       isOutLined: true,
-                      label:translation.add_cart ,
+                      label: translation.add_cart,
                       leadingIcon: Iconsax.add,
+                      spalshColor: AppColors.accent1Shade1.withAlpha(50),
                       labelColor: AppColors.accent1Shade1,
                       onTap: () {
                         BlocProvider.of<CartCubit>(context).addToCart(
@@ -64,8 +72,10 @@ class ButtonsSection extends StatelessWidget {
                       leadingIcon: Iconsax.money4,
                       onTap: () {
                         BottomSheetHelper.showCommonBottomSheet(
-                            context: context, child: MakeOrderBottomSheet());
-                        onAction?.call();
+                            context: context,
+                            child: MakeOrderBottomSheet(
+                              cubit: medicineDetailsCubit,
+                            )).then((res) => onAction?.call());
                       },
                       color: AppColors.accent1Shade1,
                     ),

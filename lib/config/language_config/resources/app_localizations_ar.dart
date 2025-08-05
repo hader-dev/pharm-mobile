@@ -672,4 +672,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get feedback_error_loading_cart => 'فشل في تحميل السلة، يرجى التحديث';
+
+  @override
+  String get make_order => 'إجراء الطلب';
+
+  @override
+  String get unit_total_price => 'السعر الإجمالي للوحدة';
+
+  @override
+  String get product => 'المنتج';
 }

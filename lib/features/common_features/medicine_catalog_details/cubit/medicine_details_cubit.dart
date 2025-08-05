@@ -1,11 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/models/create_quick_order_model.dart';
+import 'package:hader_pharm_mobile/models/medicine_catalog.dart';
+import 'package:hader_pharm_mobile/repositories/remote/medicine_catalog/medicine_catalog_repository_impl.dart';
+import 'package:hader_pharm_mobile/repositories/remote/order/order_repository_impl.dart';
 import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler.dart';
 
-import '../../../../models/medicine_catalog.dart';
-import '../../../../repositories/remote/medicine_catalog/medicine_catalog_repository_impl.dart';
-import '../../../../repositories/remote/order/order_repository_impl.dart';
 
 part 'medicine_details_state.dart';
 
@@ -30,6 +30,7 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
       }
     });
   }
+  
   getMedicineCatalogData(String id) async {
     try {
       emit(MedicineDetailsLoading());

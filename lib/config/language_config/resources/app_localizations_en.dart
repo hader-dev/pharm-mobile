@@ -672,4 +672,13 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get feedback_error_loading_cart =>
       'Failed to load cart ,please refresh';
+
+  @override
+  String get make_order => 'Make Order';
+
+  @override
+  String get unit_total_price => 'Unit Total Price';
+
+  @override
+  String get product => 'Product';
 }

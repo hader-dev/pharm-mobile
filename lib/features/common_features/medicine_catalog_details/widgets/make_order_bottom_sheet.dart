@@ -5,27 +5,32 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
+import 'package:hader_pharm_mobile/features/app_layout/app_layout.dart';
+import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_icon_button.dart';
+import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/bottom_sheet_header.dart';
+import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/cubit/medicine_details_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/medicine_catalog_details.dart';
+import 'package:hader_pharm_mobile/features/common_features/orders/cubit/orders_cubit.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/enums.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart' show Iconsax;
 
-import '../../../../utils/enums.dart';
-import '../../../app_layout/app_layout.dart';
-import '../../../common/buttons/solid/primary_icon_button.dart';
-import '../../../common/buttons/solid/primary_text_button.dart';
-import '../../../common/widgets/bottom_sheet_header.dart';
-import '../../orders/cubit/orders_cubit.dart';
-import '../cubit/medicine_details_cubit.dart';
 
 class MakeOrderBottomSheet extends StatelessWidget {
-  const MakeOrderBottomSheet({super.key});
+  const MakeOrderBottomSheet({super.key, this.cubit});
+
+  final MedicineDetailsCubit? cubit;
 
   @override
   Widget build(BuildContext context) {
+    final translation = context.translation!;
+    
     return MultiBlocProvider(
       providers: [
         BlocProvider.value(
-          value: MedicineCatalogDetailsScreen.medicineDetailsScaffoldKey.currentContext!.read<MedicineDetailsCubit>(),
+          value: cubit ?? MedicineCatalogDetailsScreen.medicineDetailsScaffoldKey.currentContext!.read<MedicineDetailsCubit>(),
         ),
         BlocProvider.value(value: AppLayout.appLayoutScaffoldKey.currentContext!.read<OrdersCubit>()),
       ],
@@ -41,20 +46,20 @@ class MakeOrderBottomSheet extends StatelessWidget {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                BottomSheetHeader(title: 'Make an order'),
+                BottomSheetHeader(title: translation.make_order),
                 Gap(AppSizesManager.s12),
                 LabeledInfoWidget(
-                  label: "Product",
+                  label: translation.product,
                   value: context.read<MedicineDetailsCubit>().medicineCatalogData!.medicine.dci,
                 ),
                 LabeledInfoWidget(
-                  label: "Unit Total Price",
+                  label: translation.unit_total_price,
                   value:
-                      "//${(num.parse(context.read<MedicineDetailsCubit>().medicineCatalogData!.unitPriceHt).toStringAsFixed(2))} translationContext.currency",
+                      "${(num.parse(context.read<MedicineDetailsCubit>().medicineCatalogData!.unitPriceHt).toStringAsFixed(2))} ${translation.currency}",
                 ),
                 Gap(AppSizesManager.s12),
                 Text(
-                  'Quantity',
+                  translation.quantity,
                   style: AppTypography.body3MediumStyle.copyWith(
                     color: TextColors.ternary.color,
                   ),
@@ -122,7 +127,7 @@ class MakeOrderBottomSheet extends StatelessWidget {
                 Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
                 Gap(AppSizesManager.s12),
                 InfoWidget(
-                  label: "Total Price",
+                  label: translation.total_price,
                   bgColor: AppColors.accentGreenShade3,
                   value: Row(
                     children: [
@@ -149,9 +154,12 @@ class MakeOrderBottomSheet extends StatelessWidget {
                         flex: 1,
                         child: PrimaryTextButton(
                           isOutLined: true,
-                          label: "Cancel",
+                          label: translation.cancel,
+                          spalshColor:AppColors.accent1Shade1.withAlpha(50) ,
                           labelColor: AppColors.accent1Shade1,
-                          onTap: () {},
+                          onTap: () {
+                            context.pop();
+                          },
                           borderColor: AppColors.accent1Shade1,
                         ),
                       ),
@@ -159,7 +167,7 @@ class MakeOrderBottomSheet extends StatelessWidget {
                       Expanded(
                         flex: 2,
                         child: PrimaryTextButton(
-                          label: "Buy now",
+                          label: translation.buy_now,
                           leadingIcon: Iconsax.money4,
                           isLoading: state is PassingQuickOrder,
                           onTap: () {

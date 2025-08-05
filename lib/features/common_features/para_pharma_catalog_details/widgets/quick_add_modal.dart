@@ -26,19 +26,24 @@ class _QuickCartAddModalState extends State<QuickCartAddModal>
     final cartCubit =
         AppLayout.appLayoutScaffoldKey.currentContext!.read<CartCubit>();
 
-    final existingCartItem = cartCubit.getItemIfExists(widget.paraPharmaCatalogId,true);
+    final existingCartItem =
+        cartCubit.getItemIfExists(widget.paraPharmaCatalogId, true);
 
     final tabs = paraPharmaCatalogDetailsTabData(context);
+
+    final detailsCubit = ParaPharmaDetailsCubit(
+        quantityController: TextEditingController(
+            text: existingCartItem?.quantity.toString() ?? '1'),
+        tabController: TabController(length: tabs.length, vsync: this),
+        ordersRepository:
+            OrderRepository(client: getItInstance.get<INetworkService>()),
+        paraPharmaCatalogRepository:
+            ParaPharmaRepository(client: getItInstance.get<INetworkService>()));
+
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => ParaPharmaDetailsCubit(
-            quantityController: TextEditingController(text: existingCartItem?.quantity.toString() ?? '1'),
-              tabController: TabController(length: tabs.length, vsync: this),
-              ordersRepository:
-                  OrderRepository(client: getItInstance.get<INetworkService>()),
-              paraPharmaCatalogRepository: ParaPharmaRepository(
-                  client: getItInstance.get<INetworkService>()))
+          create: (context) => detailsCubit
             ..getParaPharmaCatalogData(widget.paraPharmaCatalogId),
         ),
         BlocProvider.value(value: cartCubit),
@@ -46,6 +51,8 @@ class _QuickCartAddModalState extends State<QuickCartAddModal>
       child: ButtonsSection(
         onAction: () => context.pop(),
         quantitySectionAlignment: MainAxisAlignment.center,
+                parapharmDetailsCubit: detailsCubit,
+
       ),
     );
   }
