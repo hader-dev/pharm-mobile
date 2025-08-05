@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/para_pharma.dart';
 
 import 'package:iconsax/iconsax.dart';
 
@@ -14,7 +15,6 @@ import '../../../../common/widgets/end_of_load_result_widget.dart';
 
 import '../../../../common/widgets/para_pharma_widget_2.dart';
 import '../../../market_place/sub_pages/para_pharma/cubit/para_pharma_cubit.dart';
-import '../../../market_place/sub_pages/para_pharma/widget/search_filter_bottom_sheet.dart';
 import '../../cubit/vendor_details_cubit.dart';
 
 class ParaPharmaPage extends StatefulWidget {
