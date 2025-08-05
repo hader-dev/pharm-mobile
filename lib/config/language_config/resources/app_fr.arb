@@ -210,6 +210,7 @@
   "feedback_loading_failed": "Échec du chargement",
   "in_stock": "En stock",
   "out_stock": "Rupture de stock",
-  "feedback_error_loading_cart": "Échec du chargement du panier, veuillez actualiser"
+  "feedback_error_loading_cart": "Échec du chargement du panier, veuillez actualiser",
+  "distributor_sku": "SKU du distributeur"
 
 }

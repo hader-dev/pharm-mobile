@@ -41,19 +41,15 @@ class NotificationService implements NotificationServicePort {
 
     debugPrint("DeviceToken $token");
 
-    if (token != null) {
-      await notificationRepository.registerUserDevice(token);
+    await notificationRepository.registerUserDevice(token!);
     }
-  }
 
   Future<void> _initNotifications() async {
-    // Request notification permissions on Android 13+ (if needed)
     await flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>()
         ?.requestNotificationsPermission();
 
-    // Define Android initialization settings with app icon
     const initializationSettingsAndroid =
         AndroidInitializationSettings('@mipmap/ic_launcher');
 
@@ -65,7 +61,6 @@ class NotificationService implements NotificationServicePort {
       onDidReceiveNotificationResponse: onNotificationTap,
     );
 
-    // Create Android notification channel (required for Android 8+)
     const AndroidNotificationChannel channel = AndroidNotificationChannel(
       NotificationChannel.id,
       NotificationChannel.name,

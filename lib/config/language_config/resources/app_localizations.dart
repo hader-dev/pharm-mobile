@@ -1395,6 +1395,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Failed to load cart ,please refresh'**
   String get feedback_error_loading_cart;
+
+  /// No description provided for @distributor_sku.
+  ///
+  /// In en, this message translates to:
+  /// **'Distributor SKU'**
+  String get distributor_sku;
 }
 
 class _AppLocalizationsDelegate

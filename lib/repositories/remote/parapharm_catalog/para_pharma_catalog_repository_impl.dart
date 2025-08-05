@@ -27,19 +27,15 @@ class ParaPharmaRepository extends IParaPharmaRepository {
       'include[company][fields][]': ['id', 'name', 'thumbnailImage'],
     };
     
-    if (filters.dci.isNotEmpty) queryParams['search[dci]'] = filters.dci.first;
     if (filters.code.isNotEmpty) queryParams['search[code]'] = filters.code.first;
     if (filters.dosage.isNotEmpty) queryParams['search[dosage]'] = filters.dosage.first;
-    if (filters.form.isNotEmpty) queryParams['search[form]'] = filters.form.first;
     if (filters.status.isNotEmpty) queryParams['search[status]'] = filters.status.first;
-    if (filters.registrationDate.isNotEmpty) queryParams['search[registrationDate]'] = filters.registrationDate.first;
     if (filters.country.isNotEmpty) queryParams['search[country]'] = filters.country.first;
     if (filters.patent.isNotEmpty) queryParams['search[patent]'] = filters.patent.first;
     if (filters.brand.isNotEmpty) queryParams['search[brand]'] = filters.brand.first;
     if (filters.condition.isNotEmpty) queryParams['search[condition]'] = filters.condition.first;
     if (filters.type.isNotEmpty) queryParams['search[type]'] = filters.type.first;
     if (filters.stabilityDuration.isNotEmpty) queryParams['search[stabilityDuration]'] = filters.stabilityDuration.first;
-    if (filters.packagingFormat.isNotEmpty) queryParams['search[packagingFormat]'] = filters.packagingFormat.first;
     if (filters.reimbursement.isNotEmpty) queryParams['search[reimbursement]'] = filters.reimbursement.first;
     if (filters.distributorSku.isNotEmpty) queryParams['search[distributorSku]'] = filters.distributorSku.first;
 

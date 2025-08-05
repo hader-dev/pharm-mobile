@@ -214,5 +214,6 @@
   "feedback_loading_failed": "Failed to load",
   "in_stock": "In stock",
   "out_stock": "Out of stock",
-  "feedback_error_loading_cart": "Failed to load cart ,please refresh"
+  "feedback_error_loading_cart": "Failed to load cart ,please refresh",
+  "distributor_sku": "Distributor SKU"
 }
