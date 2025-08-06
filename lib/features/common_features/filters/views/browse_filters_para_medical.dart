@@ -6,8 +6,6 @@ import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/bottom_sheet_header.dart';
 import 'package:hader_pharm_mobile/features/common_features/filters/cubit/para_medical_filters_cubit.dart';
-// TODO: Uncomment when backend is ready
-// import 'package:hader_pharm_mobile/features/common_features/filters/widgets/filters_para_pharma_specific.dart';
 import 'package:hader_pharm_mobile/features/common_features/filters/widgets/filters_para_clinical.dart';
 import 'package:hader_pharm_mobile/features/common_features/filters/widgets/filters_para_regulatory.dart';
 import 'package:hader_pharm_mobile/features/common_features/filters/widgets/filters_para_commercial.dart';
@@ -68,6 +66,7 @@ class FiltersParaMedicalBrowse extends StatelessWidget {
                       onTap: () {
                         final cubit = context.read<ParaMedicalFiltersCubit>();
                         cubit.resetFilters();
+                        context.pop();
                       },
                       borderColor: AppColors.accent1Shade1,
                     ),
