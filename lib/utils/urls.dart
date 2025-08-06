@@ -1,4 +1,5 @@
 class Urls {
+
   //users endpoint
   static String get users => "/users";
 
@@ -13,6 +14,7 @@ class Urls {
   static String get resendOtp => "$auth/resend-email-otp";
   static String get forgotPassword => "$auth/forgot-password";
   static String get changePassword => "$auth/change-password";
+
 
   static String get me => "$users/me";
 
@@ -59,4 +61,7 @@ class Urls {
   static String get favoritesCompany => "${favorites}companies";
 
   static String get publicFiles => "/files";
+
+  static String get announcements => "/announcements";
+
 }

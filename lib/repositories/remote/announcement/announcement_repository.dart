@@ -1,7 +1,5 @@
-//import '../../../model/person.dart';
-
-import '../../../models/announcement.dart';
+import 'package:hader_pharm_mobile/repositories/remote/announcement/response/response_load_announcements.dart';
 
 abstract class IPromotionRepository {
-  Future<List<AnnouncementModel>> getPromotions();
+  Future<ResponseLoadAnnouncements> getPromotions();
 }

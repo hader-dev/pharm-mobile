@@ -1,0 +1,24 @@
+[
+	{
+		"id": "e91400b1-a3b0-4de3-b2da-ec7ae5b4f47f",
+		"createdAt": "2025-08-06T12:21:44.895Z",
+		"updatedAt": "2025-08-06T12:21:44.895Z",
+		"thumbnailImage": "https://t4.ftcdn.net/jpg/02/81/42/77/360_F_281427785_gfahY8bX4VYCGo6jlfO8St38wS9cJQop.jpg",
+		"image": "https://t4.ftcdn.net/jpg/02/81/42/77/360_F_281427785_gfahY8bX4VYCGo6jlfO8St38wS9cJQop.jpg",
+		"title": "Test Ann",
+		"content": "Good offers mate",
+		"isActive": true,
+		"companyId": "0197993b-fc2d-70fd-931d-23f4911731fe"
+	},
+	{
+		"id": "db063439-24f1-4943-986f-c26e5198d706",
+		"createdAt": "2025-08-06T12:21:44.895Z",
+		"updatedAt": "2025-08-06T12:21:44.895Z",
+		"thumbnailImage": "https://t4.ftcdn.net/jpg/02/81/42/77/360_F_281427785_gfahY8bX4VYCGo6jlfO8St38wS9cJQop.jpg",
+		"image": "https://t4.ftcdn.net/jpg/02/76/80/31/360_F_276803150_yUZGcTLjJErZdmLw0GhDzARQY91S6yrv.jpg",
+		"title": "Test Ann Para",
+		"content": "Good offers mate",
+		"isActive": true,
+		"companyId": "0197993b-fc2d-70fd-931d-23f4911731fe"
+	}
+]

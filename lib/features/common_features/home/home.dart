@@ -108,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     promotionsUrls: context
                         .read<HomeCubit>()
                         .announcements
-                        .map((e) => e.imgPath)
+                        .map((e) => e.image)
                         .toList(),
                   ),
                   Gap(AppSizesManager.s12),

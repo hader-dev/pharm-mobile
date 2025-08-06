@@ -1,9 +1,9 @@
 class AnnouncementModel {
-  final String imgPath;
-  AnnouncementModel({required this.imgPath});
-  factory AnnouncementModel.fromJson(Map<String, dynamic> json) {
-    return AnnouncementModel(
-      imgPath: json['img_path'],
-    );
-  }
+  final String image;
+  final String title;
+  final String content;
+  final String thumbnailImage;
+  AnnouncementModel(
+      {required this.title, required this.content, required this.image,required this.thumbnailImage, });
+ 
 }

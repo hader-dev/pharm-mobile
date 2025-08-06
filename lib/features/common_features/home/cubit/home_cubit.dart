@@ -14,7 +14,7 @@ class HomeCubit extends Cubit<HomeState> {
   Future<void> getPromotions() async {
     try {
       emit(PromotionLoading());
-      announcements = await announcementsRepo.getPromotions();
+      announcements = (await announcementsRepo.getPromotions()).announcements;
       emit(PromotionLoadingSuccess());
     } catch (e) {
       emit(PromotionLoadingFailed());
