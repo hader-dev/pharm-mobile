@@ -6,11 +6,6 @@ import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pag
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/vendors/vendors.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
-// onCategoryTapped(String categoryName) {
-//   Scrollable.ensureVisible(TabBArSection.sectionsKeys[categoryName]!.currentContext!,
-//       duration: const Duration(seconds: 1), curve: Curves.easeInOut);
-// }
-
 class MarketPlaceTabBarSection extends StatefulWidget {
   const MarketPlaceTabBarSection({super.key});
 
