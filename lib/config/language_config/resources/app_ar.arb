@@ -216,5 +216,10 @@
   "unit_total_price": "السعر الإجمالي للوحدة",
   "product": "المنتج",
   "distributor_sku": "رمز الموزع",
-  "image_not_available": "الصورة غير متوفرة"
+  "image_not_available": "الصورة غير متوفرة",
+  "feedback_failed_to_load_announcements": "فشل في تحميل الاعلانات",
+  "vendors_search_field_hint": "ابحث عن الموردين بالاسم",
+  "learn_more": "تعرف على المزيد",
+  "brands": "العلامات التجارية",
+  "top_vendors": "الموردين الرائعين"
 }

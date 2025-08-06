@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/features/app_layout/app_layout.dart';
+import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
 
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/end_of_load_result_widget.dart';
+import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
+import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import 'package:iconsax/iconsax.dart';
-
-import '../../../config/theme/colors_manager.dart';
-import '../../../config/theme/typoghrapy_manager.dart';
-import '../../../utils/bottom_sheet_helper.dart' show BottomSheetHelper;
-import '../../../utils/constants.dart';
-import '../../common/app_bars/custom_app_bar.dart';
-import '../../common/widgets/end_of_load_result_widget.dart';
 import 'cubit/orders_cubit.dart';
 import 'widget/order_card.dart';
 import 'widget/search_filter_bottom_sheet/search_filter_bottom_sheet.dart'
@@ -27,13 +26,13 @@ class OrdersScreen extends StatelessWidget {
         child: BlocProvider.value(
       value: AppLayout.appLayoutScaffoldKey.currentContext!.read<OrdersCubit>(),
       child: Scaffold(
-        appBar: CustomAppBar(
-          bgColor: AppColors.bgWhite,
+        appBar: CustomAppBarV2.alternate(
           topPadding: MediaQuery.of(context).padding.top,
           bottomPadding: MediaQuery.of(context).padding.bottom,
           leading: IconButton(
             icon: const Icon(
               Iconsax.box,
+              color: AppColors.bgWhite,
               size: AppSizesManager.iconSize25,
             ),
             onPressed: () {},
@@ -44,13 +43,13 @@ class OrdersScreen extends StatelessWidget {
                 text: TextSpan(
                   text: context.translation!.orders,
                   style: AppTypography.headLine3SemiBoldStyle
-                      .copyWith(color: TextColors.primary.color),
+                      .copyWith(color: AppColors.bgWhite),
                   children: [
                     TextSpan(
                         text:
                             " (${BlocProvider.of<OrdersCubit>(context).orders.length})",
                         style: AppTypography.bodySmallStyle
-                            .copyWith(color: TextColors.ternary.color)),
+                            .copyWith(color: AppColors.accent1Shade2Deemphasized)),
                   ],
                 ),
               );
@@ -68,7 +67,7 @@ class OrdersScreen extends StatelessWidget {
                       children: [
                         Icon(
                           Iconsax.filter,
-                          color: AppColors.accent1Shade1,
+                          color: AppColors.bgWhite,
                         ),
                         if (context
                                 .read<OrdersCubit>()

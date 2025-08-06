@@ -687,4 +687,20 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get image_not_available => 'Image not available';
+
+  @override
+  String get feedback_failed_to_load_announcements =>
+      'Failed to load announcements';
+
+  @override
+  String get vendors_search_field_hint => 'Search vendors by name';
+
+  @override
+  String get learn_more => 'Learn More';
+
+  @override
+  String get brands => 'Brands';
+
+  @override
+  String get top_vendors => 'Top Vendors';
 }

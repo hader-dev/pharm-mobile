@@ -1425,6 +1425,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Image not available'**
   String get image_not_available;
+
+  /// No description provided for @feedback_failed_to_load_announcements.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load announcements'**
+  String get feedback_failed_to_load_announcements;
+
+  /// No description provided for @vendors_search_field_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search vendors by name'**
+  String get vendors_search_field_hint;
+
+  /// No description provided for @learn_more.
+  ///
+  /// In en, this message translates to:
+  /// **'Learn More'**
+  String get learn_more;
+
+  /// No description provided for @brands.
+  ///
+  /// In en, this message translates to:
+  /// **'Brands'**
+  String get brands;
+
+  /// No description provided for @top_vendors.
+  ///
+  /// In en, this message translates to:
+  /// **'Top Vendors'**
+  String get top_vendors;
 }
 
 class _AppLocalizationsDelegate

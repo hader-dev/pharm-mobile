@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 
-import '../../../../config/theme/typoghrapy_manager.dart';
+import '../../../../../../config/theme/typoghrapy_manager.dart';
 import 'para_cartegory.dart';
 
 class CategoriesSection extends StatelessWidget {

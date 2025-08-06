@@ -1,18 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/common_features/home/cubit/home_cubit.dart';
+import 'package:hader_pharm_mobile/models/announcement.dart';
+import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../../../../utils/constants.dart';
-import '../cubit/home_cubit.dart';
 import 'promotion_item_widget.dart';
 
 class PromotionSection extends StatelessWidget {
-  final List<String> promotionsUrls;
+  final List<AnnouncementModel> announcements;
   final PageController pageController = PageController(initialPage: 0);
-  PromotionSection({super.key, this.promotionsUrls = const <String>[]});
+  PromotionSection(
+      {super.key, this.announcements = const <AnnouncementModel>[]});
 
   @override
   Widget build(BuildContext context) {
+    final translations = context.translation!;
+
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (BuildContext context, HomeState state) {
         if (state is PromotionLoading) {
@@ -21,8 +27,8 @@ class PromotionSection extends StatelessWidget {
           );
         }
         if (state is PromotionLoadingFailed) {
-          return const Text(
-            'Failed to load promotions',
+          return Text(
+            translations.feedback_failed_to_load_announcements,
           );
         }
         return Padding(
@@ -35,15 +41,21 @@ class PromotionSection extends StatelessWidget {
             children: <Widget>[
               Container(
                 clipBehavior: Clip.antiAlias,
-                decoration: BoxDecoration(borderRadius: BorderRadius.circular(AppSizesManager.commonWidgetsRadius)),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(
+                        AppSizesManager.commonWidgetsRadius)),
                 height: 130,
                 width: MediaQuery.of(context).size.width,
                 child: PageView(
                   controller: pageController,
                   scrollDirection: Axis.horizontal,
-                  children: promotionsUrls
+                  children: announcements
                       .map(
-                        (String promotionUrl) => PromotionItemWidget(promotionUrl: promotionUrl),
+                        (AnnouncementModel announcement) =>
+                            PromotionItemWidget(announcement: announcement,
+                            filterColor: AppColors.accent1Shade2,
+                            onForegroundColor: Colors.white,
+                            ),
                       )
                       .toList(),
                 ),
@@ -51,7 +63,8 @@ class PromotionSection extends StatelessWidget {
               Container(
                 decoration: BoxDecoration(
                   color: Colors.black45,
-                  borderRadius: BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+                  borderRadius: BorderRadius.circular(
+                      AppSizesManager.commonWidgetsRadius),
                 ),
                 padding: const EdgeInsets.all(AppSizesManager.p4),
                 margin: const EdgeInsets.all(AppSizesManager.p4),
@@ -64,7 +77,7 @@ class PromotionSection extends StatelessWidget {
                     dotColor: Colors.grey,
                     activeDotColor: Colors.white,
                   ),
-                  count: promotionsUrls.length,
+                  count: announcements.length,
                 ),
               ),
             ],

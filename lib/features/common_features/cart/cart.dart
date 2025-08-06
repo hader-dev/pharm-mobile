@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/features/app_layout/app_layout.dart';
+import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common_features/cart/widgets/cart_summary.dart';
+import 'package:hader_pharm_mobile/utils/assets_strings.dart';
+import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
-import '../../../config/theme/colors_manager.dart';
-import '../../../config/theme/typoghrapy_manager.dart';
-import '../../../utils/assets_strings.dart';
-import '../../../utils/constants.dart';
-import '../../common/app_bars/custom_app_bar.dart';
-import '../../common/widgets/empty_list.dart';
 import 'cubit/cart_cubit.dart';
 
 import 'widgets/vendor_cart_items_set.dart';
@@ -24,14 +24,14 @@ class CartScreen extends StatelessWidget {
       child: BlocProvider.value(
         value: AppLayout.appLayoutScaffoldKey.currentContext!.read<CartCubit>(),
         child: Scaffold(
-          appBar: CustomAppBar(
-            bgColor: AppColors.bgWhite,
+          appBar: CustomAppBarV2.alternate(
             topPadding: MediaQuery.of(context).padding.top,
             bottomPadding: MediaQuery.of(context).padding.bottom,
             leading: IconButton(
               icon: const Icon(
                 Iconsax.bag_2,
                 size: AppSizesManager.iconSize25,
+                color: AppColors.bgWhite,
               ),
               onPressed: () {},
             ),
@@ -40,11 +40,11 @@ class CartScreen extends StatelessWidget {
                 return Text.rich(
                   TextSpan(
                     text: context.translation!.cart,
-                    style: AppTypography.headLine3SemiBoldStyle,
+                    style: AppTypography.headLine3SemiBoldStyle.copyWith(color: AppColors.bgWhite),
                     children: [
                       TextSpan(
                           text: " (${BlocProvider.of<CartCubit>(context).cartItems.length})",
-                          style: AppTypography.bodySmallStyle.copyWith(color: TextColors.ternary.color)),
+                          style: AppTypography.bodySmallStyle.copyWith(color: AppColors.accent1Shade2Deemphasized)),
                     ],
                   ),
                 );

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/features/common/decorations/field.dart';
@@ -8,7 +7,8 @@ import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
-class CustomTextField extends StatelessWidget {
+
+class CompactCustomTextField extends StatelessWidget {
   final GlobalKey<FormFieldState>? fieldKey;
   final String label;
   final String value;
@@ -41,7 +41,7 @@ class CustomTextField extends StatelessWidget {
   final int? minLines;
   final int maxLines;
 
-  const CustomTextField({
+  const CompactCustomTextField({
     super.key,
     this.fillColor,
     this.fieldKey,
@@ -76,22 +76,12 @@ class CustomTextField extends StatelessWidget {
   });
 
 
+
   @override
   Widget build(BuildContext context) {
     final isDisabled = state == FieldState.disabled;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (label.isNotEmpty)
-          Padding(
-            padding: const EdgeInsets.only(left: AppSizesManager.p4),
-            child: Text(label,
-                style: AppTypography.body3MediumStyle
-                    .copyWith(color: TextColors.ternary.color)),
-          ),
-        if (label.isNotEmpty) const Gap(AppSizesManager.s6),
-        TextFormField(
+    return TextFormField(
           key: fieldKey,
           initialValue: initValue,
           validator: (value) => validationFunc?.call(value),
@@ -103,15 +93,6 @@ class CustomTextField extends StatelessWidget {
           readOnly: isReadOnly,
           onTap: onTap,
           enabled: isEnabled,
-          errorBuilder: (context, errorText) {
-            return Flexible(
-              child: Text(
-                errorText,
-                style:
-                    AppTypography.bodyXSmallStyle.copyWith(color: Colors.red),
-              ),
-            );
-          },
           inputFormatters: formatters,
           controller: controller,
           obscureText: isObscure,
@@ -127,17 +108,6 @@ class CustomTextField extends StatelessWidget {
             suffixIcon: suffixIcon,
             prefixIcon: prefixIcon,
             contentPadding: EdgeInsets.all(AppSizesManager.p12),
-            helper: Row(
-              children: [
-                getSuffixIcon(state) ?? const SizedBox.shrink(),
-                const Gap(AppSizesManager.s6),
-                Text(
-                  state.wordKey,
-                  style: AppTypography.bodyXSmallStyle
-                      .copyWith(color: getEnabledBorderColor(context,state)),
-                ),
-              ],
-            ),
             fillColor: isDisabled
                 ? AppColors.bgDisabled
                 : state == FieldState.error
@@ -159,8 +129,6 @@ class CustomTextField extends StatelessWidget {
               borderSide: BorderSide(color: getFocusedBorderColor(context,state)),
             ),
           ),
-        ),
-      ],
-    );
+        );
   }
 }

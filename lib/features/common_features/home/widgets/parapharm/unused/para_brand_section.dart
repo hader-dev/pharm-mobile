@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:hader_pharm_mobile/features/common_features/home/widgets/para_brand.dart';
+import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
+import 'package:hader_pharm_mobile/features/common_features/home/widgets/parapharm/unused/para_brand.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
-import '../../../../config/theme/typoghrapy_manager.dart';
 
 class BrandsSection extends StatelessWidget {
   const BrandsSection({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final translation = context.translation!;
+
     return Container(
       color: Colors.white.withAlpha(100),
       padding: const EdgeInsets.symmetric(vertical: AppSizesManager.p8),
@@ -17,7 +20,7 @@ class BrandsSection extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.only(left: AppSizesManager.p8, bottom: AppSizesManager.p8),
-            child: Text('Brands', style: AppTypography.body2MediumStyle),
+            child: Text(translation.brands, style: AppTypography.body2MediumStyle),
           ),
           ConstrainedBox(
             constraints: BoxConstraints(maxHeight: 100),

@@ -687,4 +687,19 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get image_not_available => 'الصورة غير متوفرة';
+
+  @override
+  String get feedback_failed_to_load_announcements => 'فشل في تحميل الاعلانات';
+
+  @override
+  String get vendors_search_field_hint => 'ابحث عن الموردين بالاسم';
+
+  @override
+  String get learn_more => 'تعرف على المزيد';
+
+  @override
+  String get brands => 'العلامات التجارية';
+
+  @override
+  String get top_vendors => 'الموردين الرائعين';
 }

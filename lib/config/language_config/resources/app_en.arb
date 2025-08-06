@@ -219,6 +219,11 @@
   "unit_total_price": "Unit Total Price",
   "product": "Product",
   "distributor_sku": "Distributor SKU",
-  "image_not_available": "Image not available"
+  "image_not_available": "Image not available",
+  "feedback_failed_to_load_announcements": "Failed to load announcements",
+  "vendors_search_field_hint": "Search vendors by name",
+  "learn_more": "Learn More",
+  "brands": "Brands",
+  "top_vendors": "Top Vendors"
 
 }

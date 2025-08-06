@@ -215,5 +215,10 @@
   "unit_total_price": "Prix total unitaire",
   "product": "Produit",
   "distributor_sku": "SKU du distributeur",
-  "image_not_available": "Image non disponible"
+  "image_not_available": "Image non disponible",
+  "feedback_failed_to_load_announcements": "Échec du chargement des annonces",
+  "vendors_search_field_hint": "Rechercher des fournisseurs par nom",
+  "learn_more": "En savoir plus",
+  "brands": "Marques",
+  "top_vendors": "Fournisseurs populaires"
 }

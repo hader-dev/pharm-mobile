@@ -35,25 +35,31 @@ class _MarketPlaceTabBarSectionState extends State<MarketPlaceTabBarSection>
 
     return Column(
       children: [
-        TabBar(
-            indicatorColor: AppColors.accent1Shade2,
-            indicatorSize: TabBarIndicatorSize.tab,
-            isScrollable: true,
-            labelStyle: tabTextStyle,
-            overlayColor: WidgetStatePropertyAll(Colors.transparent),
-            tabAlignment: TabAlignment.start,
-            labelColor: AppColors.accent1Shade1,
-            controller: tabsController,
-            onTap: (index) {},
-            tabs: tabs
-                .map(
-                  (tabLabel) => Tab(
-                    child: Text(
-                      getTabTranslation(tabLabel),
+        ColoredBox(
+          color: AppColors.accent1Shade2,
+          child: TabBar(
+              indicatorColor: AppColors.bgWhite,
+              indicatorSize: TabBarIndicatorSize.tab,
+              isScrollable: true,
+              labelStyle: tabTextStyle,
+              overlayColor: WidgetStatePropertyAll(Colors.transparent),
+              tabAlignment: TabAlignment.start,
+              labelColor: AppColors.bgWhite,
+              unselectedLabelColor: AppColors.accent1Shade2Deemphasized,
+              controller: tabsController,
+              onTap: (index) {},
+              tabs: tabs
+                  .map(
+                    (tabLabel) => Tab(
+                      
+                      child: Text(
+                        getTabTranslation(tabLabel,),
+                        
+                      ),
                     ),
-                  ),
-                )
-                .toList()),
+                  )
+                  .toList()),
+        ),
         Expanded(
           child: TabBarView(
             physics: const NeverScrollableScrollPhysics(),

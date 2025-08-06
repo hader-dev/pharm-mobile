@@ -698,4 +698,20 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get image_not_available => 'Image non disponible';
+
+  @override
+  String get feedback_failed_to_load_announcements =>
+      'Échec du chargement des annonces';
+
+  @override
+  String get vendors_search_field_hint => 'Rechercher des fournisseurs par nom';
+
+  @override
+  String get learn_more => 'En savoir plus';
+
+  @override
+  String get brands => 'Marques';
+
+  @override
+  String get top_vendors => 'Fournisseurs populaires';
 }

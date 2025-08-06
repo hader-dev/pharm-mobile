@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
+import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
+import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
 import 'package:hader_pharm_mobile/features/common/dialog/log_out_dialog.dart';
+import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
 import 'package:lucide_icons/lucide_icons.dart';
 
-import '../../../config/routes/routing_manager.dart';
-import '../../../config/theme/colors_manager.dart';
-import '../../../config/theme/typoghrapy_manager.dart';
-import '../../../utils/constants.dart';
-
-import '../../common/app_bars/custom_app_bar.dart';
 import 'widgets/profile_header.dart';
 import 'widgets/section_title.dart';
 import 'widgets/settings_tile.dart';
@@ -24,20 +23,20 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: CustomAppBar(
-          bgColor: AppColors.bgWhite,
+        appBar: CustomAppBarV2.alternate(
           topPadding: MediaQuery.of(context).padding.top,
           bottomPadding: MediaQuery.of(context).padding.bottom,
           leading: IconButton(
             icon: const Icon(
               Iconsax.profile_circle,
               size: AppSizesManager.iconSize25,
+              color: AppColors.bgWhite,
             ),
             onPressed: () {},
           ),
           title: Text(
             context.translation!.account,
-            style: AppTypography.headLine3SemiBoldStyle,
+            style: AppTypography.headLine3SemiBoldStyle.copyWith(color: AppColors.bgWhite),
           ),
         ),
         body: Column(
