@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -11,7 +12,7 @@ import 'package:hader_pharm_mobile/repositories/remote/medicine_catalog/medicine
 import 'package:hader_pharm_mobile/repositories/remote/order/order_repository_impl.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
-
+import 'package:hader_pharm_mobile/repositories/remote/favorite/favorite_repository_impl.dart';
 import 'cubit/medicine_details_cubit.dart';
 import 'sub_pages/medcine_catalog_overview/medcine_catalog_overview.dart';
 import 'sub_pages/distribitor_details/distribitor_details.dart';
@@ -46,10 +47,11 @@ class _MedicineCatalogDetailsScreenState extends State<MedicineCatalogDetailsScr
           BlocProvider(
             create: (context) => MedicineDetailsCubit(
               quantityController: TextEditingController(text: existingCartItem?.quantity.toString() ?? '1'),
-                tabController: TabController(length: tabs.length, vsync: this),
-                ordersRepository: OrderRepository(client: getItInstance.get<INetworkService>()),
-                medicineCatalogRepository: MedicineCatalogRepository(client: getItInstance.get<INetworkService>()))
-              ..getMedicineCatalogData(widget.medicineCatalogId),
+              tabController: TabController(length: tabs.length, vsync: this),
+              ordersRepository: OrderRepository(client: getItInstance.get<INetworkService>()),
+              medicineCatalogRepository: MedicineCatalogRepository(client: getItInstance.get<INetworkService>()),
+              favoriteRepository: FavoriteRepository(client: getItInstance.get<INetworkService>()),
+            )..getMedicineCatalogData(widget.medicineCatalogId),
           ),
           BlocProvider.value(value: AppLayout.appLayoutScaffoldKey.currentContext!.read<CartCubit>()),
         ],

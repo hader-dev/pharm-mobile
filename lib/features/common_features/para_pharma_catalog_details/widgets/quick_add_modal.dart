@@ -8,6 +8,7 @@ import 'package:hader_pharm_mobile/features/common_features/cart/cubit/cart_cubi
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/cubit/para_pharma_details_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/helpers/para_pharma_catalog_details_tab_data.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/widgets/buttons_section.dart';
+import 'package:hader_pharm_mobile/repositories/remote/favorite/favorite_repository_impl.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/order_repository_impl.dart';
 import 'package:hader_pharm_mobile/repositories/remote/parapharm_catalog/para_pharma_catalog_repository_impl.dart';
 
@@ -38,7 +39,9 @@ class _QuickCartAddModalState extends State<QuickCartAddModal>
         ordersRepository:
             OrderRepository(client: getItInstance.get<INetworkService>()),
         paraPharmaCatalogRepository:
-            ParaPharmaRepository(client: getItInstance.get<INetworkService>()));
+            ParaPharmaRepository(client: getItInstance.get<INetworkService>()),
+        favoriteRepository:
+            FavoriteRepository(client: getItInstance.get<INetworkService>()));
 
     return MultiBlocProvider(
       providers: [

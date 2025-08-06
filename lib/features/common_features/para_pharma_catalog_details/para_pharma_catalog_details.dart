@@ -7,6 +7,7 @@ import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common_features/cart/cubit/cart_cubit.dart'
     show CartCubit;
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/helpers/para_pharma_catalog_details_tab_data.dart';
+import 'package:hader_pharm_mobile/repositories/remote/favorite/favorite_repository_impl.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/order_repository_impl.dart';
 import 'package:hader_pharm_mobile/repositories/remote/parapharm_catalog/para_pharma_catalog_repository_impl.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
@@ -57,6 +58,8 @@ class _ParaPharmaCatalogDetailsScreenState
                 ordersRepository: OrderRepository(
                     client: getItInstance.get<INetworkService>()),
                 paraPharmaCatalogRepository: ParaPharmaRepository(
+                    client: getItInstance.get<INetworkService>()),
+                favoriteRepository: FavoriteRepository(
                     client: getItInstance.get<INetworkService>()))
               ..getParaPharmaCatalogData(widget.paraPharmaCatalogId),
           ),

@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -8,6 +9,7 @@ import 'package:hader_pharm_mobile/features/common_features/cart/cubit/cart_cubi
 import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/cubit/medicine_details_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/helpers/medicine_catalog_details_tab_data.dart';
 import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/widgets/buttons_section.dart';
+import 'package:hader_pharm_mobile/repositories/remote/favorite/favorite_repository_impl.dart';
 import 'package:hader_pharm_mobile/repositories/remote/medicine_catalog/medicine_catalog_repository_impl.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/order_repository_impl.dart';
 
@@ -37,6 +39,8 @@ class _QuickCartAddModalState extends State<QuickCartAddModal>
               ordersRepository:
                   OrderRepository(client: getItInstance.get<INetworkService>()),
               medicineCatalogRepository: MedicineCatalogRepository(
+                  client: getItInstance.get<INetworkService>()),
+              favoriteRepository: FavoriteRepository(
                   client: getItInstance.get<INetworkService>()));
 
     return MultiBlocProvider(

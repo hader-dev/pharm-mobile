@@ -214,5 +214,6 @@
   "make_order": "Passer la commande",
   "unit_total_price": "Prix total unitaire",
   "product": "Produit",
-  "distributor_sku": "SKU du distributeur"
+  "distributor_sku": "SKU du distributeur",
+  "image_not_available": "Image non disponible"
 }

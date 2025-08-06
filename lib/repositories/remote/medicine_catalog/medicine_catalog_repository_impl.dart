@@ -53,7 +53,9 @@ class MedicineCatalogRepository extends IMedicineCatalogRepository {
 
   Future<MedicineCatalogModel> getMedicineCatalogById(String id) async {
     var decodedResponse = await client
-        .sendRequest(() => client.get("${Urls.medicinesCatalog}/$id"));
+        .sendRequest(() => client.get("${Urls.medicinesCatalog}/$id", queryParams: {
+          'computed[isFavorite]': 'true',
+        }));
     return MedicineCatalogModel.fromJson(decodedResponse);
   }
 }

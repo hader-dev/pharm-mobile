@@ -684,4 +684,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get distributor_sku => 'رمز الموزع';
+
+  @override
+  String get image_not_available => 'الصورة غير متوفرة';
 }

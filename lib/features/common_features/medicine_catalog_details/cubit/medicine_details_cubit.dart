@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/models/create_quick_order_model.dart';
 import 'package:hader_pharm_mobile/models/medicine_catalog.dart';
+import 'package:hader_pharm_mobile/repositories/remote/favorite/favorite_repository_impl.dart';
 import 'package:hader_pharm_mobile/repositories/remote/medicine_catalog/medicine_catalog_repository_impl.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/order_repository_impl.dart';
 import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler.dart';
@@ -16,13 +17,15 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
 
   final MedicineCatalogRepository medicineCatalogRepository;
   final OrderRepository ordersRepository;
+   final FavoriteRepository favoriteRepository;
   final TabController tabController;
 
   MedicineDetailsCubit(
       {required this.medicineCatalogRepository,
       required this.quantityController,
       required this.tabController,
-      required this.ordersRepository})
+      required this.ordersRepository,
+      required this.favoriteRepository})
       : super(MedicineDetailsInitial()) {
     quantityController.addListener(() {
       if (int.parse(quantityController.text) <= 0) {
@@ -30,6 +33,33 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
       }
     });
   }
+  Future<void> likeMedicine() async {
+    if(medicineCatalogData== null) return;
+    try {
+      medicineCatalogData!.isLiked = true;
+      emit(MedicineDetailsLoaded());
+      await favoriteRepository.likeMedicineCatalog(medicineCatalogId: medicineCatalogData!.id);
+    } catch (e) {
+      medicineCatalogData!.isLiked = false;
+      emit(MedicineDetailsLoaded());
+      GlobalExceptionHandler.handle(exception: e);
+
+    }
+  }
+     Future<void> unlikeMedicine() async {
+  if (medicineCatalogData != null) {
+    try {
+      medicineCatalogData!.isLiked = false;
+      emit(MedicineDetailsLoaded());
+      await favoriteRepository.unLikeMedicineCatalog(medicineCatalogId: medicineCatalogData!.id);
+    } catch (e) {
+      medicineCatalogData!.isLiked = true;
+      emit(MedicineDetailsLoaded());
+      GlobalExceptionHandler.handle(exception: e);
+    }
+  }
+}
+   
   
   getMedicineCatalogData(String id) async {
     try {

@@ -215,5 +215,6 @@
   "make_order": "إجراء الطلب",
   "unit_total_price": "السعر الإجمالي للوحدة",
   "product": "المنتج",
-  "distributor_sku": "رمز الموزع"
+  "distributor_sku": "رمز الموزع",
+  "image_not_available": "الصورة غير متوفرة"
 }

@@ -55,9 +55,25 @@ class MedicineProductPhotoSection extends StatelessWidget {
               },
             ),
             trailing: [
-              IconButton(
-                icon: const Icon(Iconsax.heart),
-                onPressed: () {},
+              BlocBuilder<MedicineDetailsCubit, MedicineDetailsState>(
+                builder: (context, state) {
+                  final cubit = BlocProvider.of<MedicineDetailsCubit>(context);
+                  final isLiked = cubit.medicineCatalogData?.isLiked ?? false;
+
+                  return IconButton(
+                    icon: Icon(
+                      isLiked ? Iconsax.heart5 : Iconsax.heart,
+                      color: isLiked ? Colors.red : Colors.white,
+                    ),
+                    onPressed: () {
+                      if (isLiked) {
+                        cubit.unlikeMedicine();
+                      } else {
+                        cubit.likeMedicine();
+                      }
+                    },
+                  );
+                },
               ),
               IconButton(
                 icon: const Icon(Iconsax.share),

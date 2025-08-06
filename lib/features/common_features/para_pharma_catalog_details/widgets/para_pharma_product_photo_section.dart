@@ -1,9 +1,11 @@
+
 import 'package:flutter/material.dart';
 import 'package:cached_network_image_plus/flutter_cached_network_image_plus.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../../config/di/di.dart';
@@ -34,7 +36,7 @@ class ParaPharmaProductPhotoSection extends StatelessWidget {
               Icon(Iconsax.image, color: Color.fromARGB(255, 197, 197, 197), size: AppSizesManager.iconSize30),
               Gap(AppSizesManager.s8),
               Text(
-                "Image not available",
+                context.translation!.image_not_available,
                 style: AppTypography.body3MediumStyle.copyWith(color: const Color.fromARGB(255, 197, 197, 197)),
               ),
               Spacer(),
@@ -55,9 +57,25 @@ class ParaPharmaProductPhotoSection extends StatelessWidget {
               },
             ),
             trailing: [
-              IconButton(
-                icon: const Icon(Iconsax.heart),
-                onPressed: () {},
+              BlocBuilder<ParaPharmaDetailsCubit, ParaPharmaDetailsState>(
+                builder: (context, state) {
+                  final cubit = BlocProvider.of<ParaPharmaDetailsCubit>(context);
+                  final isLiked = cubit.paraPharmaCatalogData?.isLiked ?? false;
+                  
+                  return IconButton(
+                    icon: Icon(
+                      isLiked ? Iconsax.heart5 : Iconsax.heart,
+                      color: isLiked ? Colors.red : Colors.white,
+                    ),
+                    onPressed: () {
+                      if (isLiked) {
+                        cubit.unlikeParaPharma();
+                      } else {
+                        cubit.likeParaPharma();
+                      }
+                    },
+                  );
+                },
               ),
               IconButton(
                 icon: const Icon(Iconsax.share),

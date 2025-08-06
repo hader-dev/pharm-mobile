@@ -1419,6 +1419,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Distributor SKU'**
   String get distributor_sku;
+
+  /// No description provided for @image_not_available.
+  ///
+  /// In en, this message translates to:
+  /// **'Image not available'**
+  String get image_not_available;
 }
 
 class _AppLocalizationsDelegate

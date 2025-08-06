@@ -49,6 +49,9 @@ class ParaPharmaRepository extends IParaPharmaRepository {
     return await client
         .sendRequest(() => client.get(
               '${Urls.paraPharamaCatalog}/$id',
+              queryParams: {
+                'computed[isFavorite]': 'true',
+              },
             ))
         .then((response) {
       return ParaPharmaCatalogModel.fromJson(response);

@@ -684,4 +684,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get distributor_sku => 'Distributor SKU';
+
+  @override
+  String get image_not_available => 'Image not available';
 }
