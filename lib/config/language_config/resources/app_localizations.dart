@@ -1467,6 +1467,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Overview'**
   String get overview;
+
+  /// No description provided for @are_you_sure_cancel_order.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to cancel the order?'**
+  String get are_you_sure_cancel_order;
+
+  /// No description provided for @order_cancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Order cancelled'**
+  String get order_cancelled;
+
+  /// No description provided for @feedback_server_error.
+  ///
+  /// In en, this message translates to:
+  /// **'Server error'**
+  String get feedback_server_error;
 }
 
 class _AppLocalizationsDelegate

@@ -709,4 +709,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get overview => 'Overview';
+
+  @override
+  String get are_you_sure_cancel_order =>
+      'Are you sure you want to cancel the order?';
+
+  @override
+  String get order_cancelled => 'Order cancelled';
+
+  @override
+  String get feedback_server_error => 'Server error';
 }

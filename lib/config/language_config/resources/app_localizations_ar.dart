@@ -708,4 +708,14 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get overview => 'نظرة عامة';
+
+  @override
+  String get are_you_sure_cancel_order =>
+      'هل انت متأكد من أنك تريد إلغاء الطلب؟';
+
+  @override
+  String get order_cancelled => 'تم إلغاء الطلب';
+
+  @override
+  String get feedback_server_error => 'خطأ في الخادم';
 }

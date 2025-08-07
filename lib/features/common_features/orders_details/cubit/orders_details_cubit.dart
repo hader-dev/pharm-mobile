@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:hader_pharm_mobile/repositories/remote/order/params/cancel_order.dart';
+import 'package:hader_pharm_mobile/repositories/remote/order/response/response_order_cancel.dart';
 
 import '../../../../models/order_details.dart';
 import '../../../../repositories/remote/order/order_repository_impl.dart';
@@ -26,5 +28,10 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
 
       emit(OrderDetailsLoadingFailed());
     }
+  }
+
+  Future<ResponseOrderCancel> cancelOrder() async {
+    if(orderData == null) return ResponseOrderCancel.error();
+    return orderRepository.cancelOrder(ParamsCancelOrder(id: orderData!.id));
   }
 }

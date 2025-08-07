@@ -4,7 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar.dart';
-import 'package:hader_pharm_mobile/features/common_features/orders_details/actions/app_bar.dart';
+import 'package:hader_pharm_mobile/features/common_features/orders_details/actions/navigate_back.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders_details/cubit/orders_details_cubit.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';

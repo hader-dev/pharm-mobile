@@ -2,9 +2,9 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:hader_pharm_mobile/models/order.dart';
+import 'package:hader_pharm_mobile/repositories/remote/order/order_repository.dart';
 
 import '../../../../../utils/constants.dart';
-import '../../../../repositories/remote/order/order_repository_impl.dart';
 import '../../../../utils/enums.dart' show OrderStatus;
 
 part 'orders_state.dart';
@@ -18,7 +18,7 @@ class OrdersCubit extends Cubit<OrdersState> {
   double? maxPriceFilter = 0;
   String? initialDateFilter;
   String? finalDateFilter;
-  final OrderRepository orderRepository;
+  final IOrderRepository orderRepository;
   final ScrollController scrollController;
   OrdersCubit({required this.orderRepository, required this.scrollController}) : super(OrdersInitial()) {
     _onScroll();

@@ -226,6 +226,9 @@
   "brands": "Brands",
   "top_vendors": "Top Vendors",
   "announcement_details": "Announcement Details",
-  "overview": "Overview"
+  "overview": "Overview",
+  "are_you_sure_cancel_order": "Are you sure you want to cancel the order?",
+  "order_cancelled": "Order cancelled",
+  "feedback_server_error": "Server error"
 
 }

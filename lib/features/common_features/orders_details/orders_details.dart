@@ -4,6 +4,7 @@ import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
+import 'package:hader_pharm_mobile/features/common_features/orders_details/widgets/cancel_order_bottom_sheet.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/order_repository_impl.dart';
 import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
@@ -26,6 +27,8 @@ class OrdersDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return SafeArea(
         child: BlocProvider(
       create: (context) =>
@@ -80,6 +83,19 @@ class OrdersDetailsScreen extends StatelessWidget {
                                       context: context, child: OrderTrackingBottomSheet());
                                 },
                                 color: AppColors.accent1Shade1,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: AppSizesManager.p6, right: AppSizesManager.p6, bottom: AppSizesManager.p6),
+                              child: PrimaryTextButton(
+                                label: context.translation!.cancel,
+                                onTap: () {
+                                  BottomSheetHelper.showCommonBottomSheet(
+                                    initialChildSize: 0.3,
+                                      context: context, child: CancelOrderBottomSheet());
+                                },
+                                color: theme.colorScheme.error,
                               ),
                             ),
                           ],

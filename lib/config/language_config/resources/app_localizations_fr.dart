@@ -720,4 +720,14 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get overview => 'Aperçu';
+
+  @override
+  String get are_you_sure_cancel_order =>
+      'Êtes-vous sûr de vouloir annuler la commande?';
+
+  @override
+  String get order_cancelled => 'Commande annulée';
+
+  @override
+  String get feedback_server_error => 'Erreur du serveur';
 }

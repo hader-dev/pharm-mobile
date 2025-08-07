@@ -222,5 +222,8 @@
   "brands": "Marques",
   "top_vendors": "Fournisseurs populaires",
   "announcement_details": "Détails de l'annonce",
-  "overview": "Aperçu"
+  "overview": "Aperçu",
+  "are_you_sure_cancel_order": "Êtes-vous sûr de vouloir annuler la commande?",
+  "order_cancelled": "Commande annulée",
+  "feedback_server_error": "Erreur du serveur"
 }
