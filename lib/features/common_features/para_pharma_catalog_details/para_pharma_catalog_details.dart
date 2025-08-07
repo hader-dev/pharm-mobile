@@ -45,7 +45,8 @@ class _ParaPharmaCatalogDetailsScreenState
     final cartCubit =
         AppLayout.appLayoutScaffoldKey.currentContext!.read<CartCubit>();
     final existingCartItem =
-        cartCubit.getItemIfExists(widget.paraPharmaCatalogId,true);
+        cartCubit.getItemIfExists(widget.paraPharmaCatalogId, true);
+
 
     return SafeArea(
       child: MultiBlocProvider(

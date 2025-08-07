@@ -1,3 +1,4 @@
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/models/create_quick_order_model.dart';
@@ -6,6 +7,7 @@ import 'package:hader_pharm_mobile/repositories/remote/favorite/favorite_reposit
 import 'package:hader_pharm_mobile/repositories/remote/medicine_catalog/medicine_catalog_repository_impl.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/order_repository_impl.dart';
 import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler.dart';
+import 'package:share_plus/share_plus.dart';
 
 
 part 'medicine_details_state.dart';
@@ -71,6 +73,21 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
       emit(MedicineDetailsLoadError());
     }
   }
+  void shareProduct() async {
+  if (medicineCatalogData != null) {
+    try {
+      final product = medicineCatalogData!;
+      
+   
+      final deepLinkUrl = 'https://pharma.com/product/medicine/${product.id}';
+      
+     
+            await SharePlus.instance.share(ShareParams(uri: Uri.parse(deepLinkUrl)));
+    } catch (e) {
+      GlobalExceptionHandler.handle(exception: e);
+    }
+  }
+}
 
   void changeTapIndex(int index) {
     currentTapIndex = index;

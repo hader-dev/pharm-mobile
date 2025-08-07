@@ -11,6 +11,12 @@ class DeeplinksService implements DeeplinksServicePort {
   @override
   Future<void> init() async {
     _linksStream = AppLinks().uriLinkStream.listen(handleDeepLinkUri);
+
+    // Handle initial link when app is launched from deep link
+    final initialUri = await AppLinks().getInitialLink();
+    if (initialUri != null) {
+      handleDeepLinkUri(initialUri);
+    }
   }
   
   @override
@@ -23,7 +29,6 @@ class DeeplinksService implements DeeplinksServicePort {
       switch(rootSegment){
         case "order":
           handleOrderDeepLink(uri!);
-
       default:
         debugPrint("No handler registered");
       }
