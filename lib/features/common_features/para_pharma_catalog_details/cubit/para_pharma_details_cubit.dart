@@ -6,6 +6,7 @@ import 'package:hader_pharm_mobile/repositories/remote/order/order_repository_im
 import 'package:hader_pharm_mobile/repositories/remote/parapharm_catalog/para_pharma_catalog_repository_impl.dart';
 import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler.dart';
 import 'package:hader_pharm_mobile/repositories/remote/favorite/favorite_repository_impl.dart';
+import 'package:share_plus/share_plus.dart';
 part 'para_pharma_details_state.dart';
 
 class ParaPharmaDetailsCubit extends Cubit<ParaPharmaDetailsState> {
@@ -62,6 +63,21 @@ class ParaPharmaDetailsCubit extends Cubit<ParaPharmaDetailsState> {
       } catch (e) {
         paraPharmaCatalogData!.isLiked = true;
         emit(ParaPharmaDetailsLoaded());
+        GlobalExceptionHandler.handle(exception: e);
+      }
+    }
+  }
+
+  void shareProduct() async {
+    if (paraPharmaCatalogData != null) {
+      try {
+        final product = paraPharmaCatalogData!;
+
+        final deepLinkUrl =
+            'https://pharma.com/product/parapharma/${product.id}';
+
+        await SharePlus.instance.share(ShareParams(uri: Uri.parse(deepLinkUrl)));
+      } catch (e) {
         GlobalExceptionHandler.handle(exception: e);
       }
     }
