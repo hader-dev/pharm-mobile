@@ -1,7 +1,15 @@
 import 'package:equatable/equatable.dart';
 
 class BaseCompany with EquatableMixin {
-  static final baseCompanyFields = ["id", "thumbnailImage", "image", "name", "address", "phone", "email"];
+  static final baseCompanyFields = [
+    "id",
+    "thumbnailImage",
+    "image",
+    "name",
+    "address",
+    "phone",
+    "email"
+  ];
   final String id;
   final dynamic thumbnailImage;
   final dynamic image;
@@ -92,8 +100,12 @@ class Company extends BaseCompany {
       name: json["name"] ?? "",
       latitude: json["latitude"],
       longitude: json["longitude"],
-      createdAt: json["createdAt"] != null ? DateTime.tryParse(json["createdAt"]) : null,
-      updatedAt: json["updatedAt"] != null ? DateTime.tryParse(json["updatedAt"]) : null,
+      createdAt: json["createdAt"] != null
+          ? DateTime.tryParse(json["createdAt"])
+          : null,
+      updatedAt: json["updatedAt"] != null
+          ? DateTime.tryParse(json["updatedAt"])
+          : null,
       managerUserId: json["managerUserId"],
       type: json["type"],
       distributorCategory: json["distributorCategory"],
@@ -110,6 +122,35 @@ class Company extends BaseCompany {
       nisNumber: json["nisNumber"],
       contactInfo: json["contactInfo"],
       isActive: json["isActive"],
+    );
+  }
+
+  factory Company.empty() {
+    return Company(
+      id: '',
+      thumbnailImage: '',
+      image: '',
+      name: '',
+      address: null,
+      phone: null,
+      latitude: null,
+      longitude: null,
+      createdAt: null,
+      updatedAt: null,
+      managerUserId: null,
+      type: null,
+      distributorCategory: null,
+      phone2: null,
+      fax: null,
+      email: null,
+      description: null,
+      bankAccount: null,
+      fiscalId: null,
+      rcNumber: null,
+      aiNumber: null,
+      nisNumber: null,
+      contactInfo: null,
+      isActive: null,
     );
   }
 }

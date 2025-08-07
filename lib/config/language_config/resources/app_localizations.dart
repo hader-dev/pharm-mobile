@@ -1455,6 +1455,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Top Vendors'**
   String get top_vendors;
+
+  /// No description provided for @announcement_details.
+  ///
+  /// In en, this message translates to:
+  /// **'Announcement Details'**
+  String get announcement_details;
+
+  /// No description provided for @overview.
+  ///
+  /// In en, this message translates to:
+  /// **'Overview'**
+  String get overview;
 }
 
 class _AppLocalizationsDelegate

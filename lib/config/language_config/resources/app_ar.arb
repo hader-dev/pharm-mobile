@@ -221,5 +221,7 @@
   "vendors_search_field_hint": "ابحث عن الموردين بالاسم",
   "learn_more": "تعرف على المزيد",
   "brands": "العلامات التجارية",
-  "top_vendors": "الموردين الرائعين"
+  "top_vendors": "الموردين الرائعين",
+  "announcement_details": "تفاصيل الاعلان",
+  "overview": "نظرة عامة"
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/routes/deeplinks_routes.dart';
+import 'package:hader_pharm_mobile/features/common_features/anouncement_details/announcement_details.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/para_pharma_catalog_details.dart';
 import 'package:hader_pharm_mobile/features/common_features/profile/profile.dart';
 import '../../features/app_componants/app_componants.dart';
@@ -50,8 +51,7 @@ class RoutingManager {
   static const String favoritesScreen = 'FavoritesScreen';
   static const String vendorDetails = '/VendorDetails';
   static const String ordersDetailsScreen = '/OrdersDetailsScreen';
-
-
+  static const String announcementDetailsScreen = '/AnnouncementDetailsScreen';
 
   static const String editProfileScreen = '/EditProfileScreen';
 
@@ -96,6 +96,15 @@ class RoutingManager {
           path: appLayout,
           builder: (BuildContext context, GoRouterState state) {
             return const AppLayout();
+          },
+        ),
+        GoRoute(
+          name: announcementDetailsScreen,
+          path: announcementDetailsScreen,
+          builder: (BuildContext context, GoRouterState state) {
+            return  AnnouncementDetailsScreen(
+               announcementId: state.extra as String,
+            );
           },
         ),
         GoRoute(

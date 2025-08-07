@@ -220,5 +220,7 @@
   "vendors_search_field_hint": "Rechercher des fournisseurs par nom",
   "learn_more": "En savoir plus",
   "brands": "Marques",
-  "top_vendors": "Fournisseurs populaires"
+  "top_vendors": "Fournisseurs populaires",
+  "announcement_details": "Détails de l'annonce",
+  "overview": "Aperçu"
 }

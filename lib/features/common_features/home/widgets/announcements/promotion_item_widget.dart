@@ -24,77 +24,80 @@ class PromotionItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final translation = context.translation!;
 
-    return Stack(
-      children: [
-        CachedNetworkImage(
-          imageUrl: announcement.image,
-          fit: BoxFit.cover,
-          width: double.infinity,
-          height: double.infinity,
-          errorWidget: (context, url, error) => const ImageLoadErrorWidget(),
-        ),
-        if(filterColor != null)
-        Container(
-          width: double.infinity,
-          height: double.infinity,
-          color: filterColor!.withAlpha(150),
-        ),
-        Positioned(
-          left: 16,
-          right: 16,
-          bottom: 24,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        announcement.title,
-                        style:  TextStyle(
-                          color: onForegroundColor,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          height: 1.3,
-                          shadows: [Shadow(blurRadius: 4, color: Colors.black)],
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        announcement.content,
-                        style:  TextStyle(
-                          color: onForegroundColor,
-                          fontSize: 18,
-                          height: 1.4,
-                          shadows: [Shadow(blurRadius: 4, color: Colors.black)],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () => onTap?.call(announcement),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  foregroundColor: Colors.black,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  elevation: 4,
-                ),
-                child: Text(translation.learn_more),
-              ),
-            ],
+    return InkWell(
+      onTap: () => onTap?.call(announcement),
+      child: Stack(
+        children: [
+          CachedNetworkImage(
+            imageUrl: announcement.image,
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: double.infinity,
+            errorWidget: (context, url, error) => const ImageLoadErrorWidget(),
           ),
-        ),
-      ],
+          if(filterColor != null)
+          Container(
+            width: double.infinity,
+            height: double.infinity,
+            color: filterColor!.withAlpha(150),
+          ),
+          Positioned(
+            left: 16,
+            right: 16,
+            bottom: 24,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          announcement.title,
+                          style:  TextStyle(
+                            color: onForegroundColor,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            height: 1.3,
+                            shadows: [Shadow(blurRadius: 4, color: Colors.black)],
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          announcement.content,
+                          style:  TextStyle(
+                            color: onForegroundColor,
+                            fontSize: 18,
+                            height: 1.4,
+                            shadows: [Shadow(blurRadius: 4, color: Colors.black)],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () => onTap?.call(announcement),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.white,
+                    foregroundColor: Colors.black,
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    elevation: 4,
+                  ),
+                  child: Text(translation.learn_more),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

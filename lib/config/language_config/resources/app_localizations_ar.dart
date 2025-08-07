@@ -702,4 +702,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get top_vendors => 'الموردين الرائعين';
+
+  @override
+  String get announcement_details => 'تفاصيل الاعلان';
+
+  @override
+  String get overview => 'نظرة عامة';
 }

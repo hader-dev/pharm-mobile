@@ -22,6 +22,7 @@ class MedicineProductsCubit extends Cubit<MedicineProductsState> {
   final FavoriteRepository favoriteRepository;
   final ScrollController scrollController;
   final TextEditingController searchController;
+  
   MedicineProductsCubit(
       {required this.medicineRepository,
       required this.favoriteRepository,

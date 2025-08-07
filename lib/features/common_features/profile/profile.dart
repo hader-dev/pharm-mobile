@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
@@ -36,61 +37,75 @@ class ProfileScreen extends StatelessWidget {
           ),
           title: Text(
             context.translation!.account,
-            style: AppTypography.headLine3SemiBoldStyle.copyWith(color: AppColors.bgWhite),
+            style: AppTypography.headLine3SemiBoldStyle
+                .copyWith(color: AppColors.bgWhite),
           ),
         ),
         body: Column(
           children: <Widget>[
+            Gap(AppSizesManager.s16),
             const Padding(
               padding: EdgeInsets.only(left: AppSizesManager.p4),
               child: ProfileHeader(),
             ),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: AppSizesManager.p8, vertical: AppSizesManager.p4),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppSizesManager.p8,
+                    vertical: AppSizesManager.p4),
                 child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Padding(
-                        padding:
-                            const EdgeInsets.symmetric(horizontal: AppSizesManager.p8, vertical: AppSizesManager.p10),
-                        child: SectionTitle(title: context.translation!.account_settings),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: AppSizesManager.p8,
+                            vertical: AppSizesManager.p10),
+                        child: SectionTitle(
+                            title: context.translation!.account_settings),
                       ),
                       SettingsTile(
                           icon: LucideIcons.userCog,
                           title: context.translation!.edit_profile,
                           onTap: () {
-                            GoRouter.of(context).pushNamed(RoutingManager.editProfileScreen);
+                            GoRouter.of(context)
+                                .pushNamed(RoutingManager.editProfileScreen);
                           }),
                       SettingsTile(
                           icon: LucideIcons.lock,
                           title: context.translation!.change_password,
                           onTap: () {
-                            GoRouter.of(context).pushNamed(RoutingManager.changePasswordScreen);
+                            GoRouter.of(context)
+                                .pushNamed(RoutingManager.changePasswordScreen);
                           }),
                       Padding(
-                        padding:
-                            const EdgeInsets.symmetric(horizontal: AppSizesManager.p6, vertical: AppSizesManager.p8),
-                        child: SectionTitle(title: context.translation!.preferences),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: AppSizesManager.p6,
+                            vertical: AppSizesManager.p8),
+                        child: SectionTitle(
+                            title: context.translation!.preferences),
                       ),
                       SettingsTile(
                           icon: LucideIcons.heart,
                           title: context.translation!.favorites,
                           onTap: () {
-                            GoRouter.of(context).pushNamed(RoutingManager.favoritesScreen);
+                            GoRouter.of(context)
+                                .pushNamed(RoutingManager.favoritesScreen);
                           }),
                       SettingsTile(
                         icon: LucideIcons.globe,
                         title: context.translation!.language,
                         onTap: () {
-                          GoRouter.of(context).pushNamed(RoutingManager.languagesScreen);
+                          GoRouter.of(context)
+                              .pushNamed(RoutingManager.languagesScreen);
                         },
                       ),
                       Padding(
-                        padding:
-                            const EdgeInsets.symmetric(horizontal: AppSizesManager.p6, vertical: AppSizesManager.p8),
-                        child: SectionTitle(title: context.translation!.app_privacy),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: AppSizesManager.p6,
+                            vertical: AppSizesManager.p8),
+                        child: SectionTitle(
+                            title: context.translation!.app_privacy),
                       ),
                       SettingsTile(
                         icon: LucideIcons.fileText,
@@ -105,15 +120,17 @@ class ProfileScreen extends StatelessWidget {
                           horizontal: AppSizesManager.p6,
                         ),
                         child: ListTile(
-                          leading: const Icon(LucideIcons.logOut, color: Colors.red),
-                          title: Text(context.translation!.logout, style: const TextStyle(color: Colors.red)),
+                          leading:
+                              const Icon(LucideIcons.logOut, color: Colors.red),
+                          title: Text(context.translation!.logout,
+                              style: const TextStyle(color: Colors.red)),
                           onTap: () async {
                             await AppDialogs.showLogoutDialogLogout();
 
-                            if(context.mounted){
-                              GoRouter.of(context).pushReplacementNamed(RoutingManager.loginScreen);
+                            if (context.mounted) {
+                              GoRouter.of(context).pushReplacementNamed(
+                                  RoutingManager.loginScreen);
                             }
-
                           },
                         ),
                       ),

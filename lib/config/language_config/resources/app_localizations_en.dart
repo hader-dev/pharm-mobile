@@ -703,4 +703,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get top_vendors => 'Top Vendors';
+
+  @override
+  String get announcement_details => 'Announcement Details';
+
+  @override
+  String get overview => 'Overview';
 }

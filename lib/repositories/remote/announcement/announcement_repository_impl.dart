@@ -1,6 +1,9 @@
 
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
+import 'package:hader_pharm_mobile/repositories/remote/announcement/actions/details.dart';
 import 'package:hader_pharm_mobile/repositories/remote/announcement/actions/load.dart';
+import 'package:hader_pharm_mobile/repositories/remote/announcement/params/load_announcement_details.dart';
+import 'package:hader_pharm_mobile/repositories/remote/announcement/response/response_load_announcement_details.dart';
 import 'package:hader_pharm_mobile/repositories/remote/announcement/response/response_load_announcements.dart';
 
 import 'announcement_repository.dart';
@@ -12,5 +15,10 @@ class PromotionRepository extends IPromotionRepository {
   Future<ResponseLoadAnnouncements> getPromotions() async {
     
     return loadAnnouncements(client);
+  }
+
+  @override
+  Future<ResponseLoadAnnouncementDetails> getPromotion(ParamsLoadAnnouncementDetails params) async {
+    return loadAnnouncementDetails(client,params);
   }
 }

@@ -224,6 +224,8 @@
   "vendors_search_field_hint": "Search vendors by name",
   "learn_more": "Learn More",
   "brands": "Brands",
-  "top_vendors": "Top Vendors"
+  "top_vendors": "Top Vendors",
+  "announcement_details": "Announcement Details",
+  "overview": "Overview"
 
 }

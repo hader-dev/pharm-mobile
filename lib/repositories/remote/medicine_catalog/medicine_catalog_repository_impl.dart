@@ -2,6 +2,7 @@ import 'package:hader_pharm_mobile/config/services/network/network_interface.dar
 import 'package:hader_pharm_mobile/models/medical_filters.dart';
 import 'package:hader_pharm_mobile/models/medicine_catalog.dart';
 import 'package:hader_pharm_mobile/models/medicine_catalog_response.dart';
+import 'package:hader_pharm_mobile/repositories/remote/medicine_catalog/mappers/json_to_medicine_catalogue_item.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/urls.dart';
 
@@ -56,6 +57,6 @@ class MedicineCatalogRepository extends IMedicineCatalogRepository {
         .sendRequest(() => client.get("${Urls.medicinesCatalog}/$id", queryParams: {
           'computed[isFavorite]': 'true',
         }));
-    return MedicineCatalogModel.fromJson(decodedResponse);
+    return jsonToMedicineCatalogItem(decodedResponse);
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/cubit/home_cubit.dart';
 import 'package:hader_pharm_mobile/models/announcement.dart';
@@ -51,11 +52,15 @@ class PromotionSection extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   children: announcements
                       .map(
-                        (AnnouncementModel announcement) =>
-                            PromotionItemWidget(announcement: announcement,
-                            filterColor: AppColors.accent1Shade2,
-                            onForegroundColor: Colors.white,
-                            ),
+                        (AnnouncementModel announcement) => PromotionItemWidget(
+                          announcement: announcement,
+                          filterColor: AppColors.accent1Shade2,
+                          onForegroundColor: Colors.white,
+                          onTap: (announcement) => RoutingManager.router
+                              .pushNamed(
+                                  RoutingManager.announcementDetailsScreen,
+                                  extra: announcement.id),
+                        ),
                       )
                       .toList(),
                 ),

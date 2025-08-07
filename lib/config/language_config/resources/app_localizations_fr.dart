@@ -714,4 +714,10 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get top_vendors => 'Fournisseurs populaires';
+
+  @override
+  String get announcement_details => 'Détails de l\'annonce';
+
+  @override
+  String get overview => 'Aperçu';
 }

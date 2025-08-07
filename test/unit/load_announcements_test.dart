@@ -5,28 +5,25 @@ import 'package:hader_pharm_mobile/repositories/remote/announcement/mappers/json
 import 'package:path/path.dart' as p;
 
 void main() {
-
-// C:\Projects\hader-pharm-mobile\test
   Future<String> loadJsonFileString(String relativePathFromProjectRoot) async {
-  final baseDir = Directory.current.path;
+    final baseDir = Directory.current.path;
 
-  final filePath = p.join(baseDir, relativePathFromProjectRoot);
-  final file = File(filePath);
+    final filePath = p.join(baseDir, relativePathFromProjectRoot);
+    final file = File(filePath);
 
-  if (!file.existsSync()) {
-    throw Exception('File not found: $filePath');
+    if (!file.existsSync()) {
+      throw Exception('File not found: $filePath');
+    }
+
+    return file.readAsString();
   }
 
-  return file.readAsString();
-}
-
-
   group('AnnouncementRepositoryImpl', () {
-    test('getAnnouncements returns a valid ResponseLoadAnnouncements', () async {
-
-      final data = await loadJsonFileString("test/resources/get_announcements.json");
+    test('getAnnouncements returns a valid ResponseLoadAnnouncements',
+        () async {
+      final data =
+          await loadJsonFileString("test/resources/get_announcements.json");
       final parsed = jsonDecode(data);
-      
 
       final result = jsonToAnnouncementsList(parsed);
 
@@ -34,5 +31,18 @@ void main() {
       expect(result.first.title, equals('Test Ann'));
     });
 
+    test(
+        'getAnnouncementDetails returns a valid ResponseLoadAnnouncementDetails',
+        () async {
+      final data =
+          await loadJsonFileString("test/resources/announcement_details.json");
+
+      final parsed = jsonDecode(data);
+
+      final result = jsonToAnnouncementDetailsResponse(parsed);
+
+      expect(result.announcement?.title, equals('Test Ann Para'));
+      expect(result.parapharmas.first.name, equals('Licensed Soft Hat'));
+    });
   });
 }

@@ -34,7 +34,9 @@ class BaseParaPharmaCatalogModel {
       stockQuantity: json['stockQuantity'],
       isActive: json['isActive'],
       isLiked: json["isFavorite"] ?? false,
-      company: json['company'] != null ? BaseCompany.fromJson(json['company']) : null,
+      company: json['company'] != null
+          ? BaseCompany.fromJson(json['company'])
+          : null,
     );
   }
 }
@@ -69,6 +71,13 @@ class Category {
     return Category(
       id: json['id'],
       name: json['name'],
+    );
+  }
+
+  factory Category.empty() {
+    return Category(
+      id: '',
+      name: '',
     );
   }
 }
@@ -115,34 +124,6 @@ class ParaPharmaCatalogModel extends BaseParaPharmaCatalogModel {
     required this.brand,
     required this.category,
   });
-
-  factory ParaPharmaCatalogModel.fromJson(Map<String, dynamic> json) {
-    return ParaPharmaCatalogModel(
-      id: json['id'],
-      unitPriceHt: json['unitPriceHt'],
-      unitPriceTtc: json['unitPriceTtc'],
-      tvaPercentage: json['tvaPercentage'],
-      thumbnailImage: json['thumbnailImage'],
-      image: json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
-      name: json['name'],
-      stockQuantity: json['stockQuantity'],
-      isActive: json['isActive'],
-      createdAt: DateTime.parse(json['createdAt']),
-      updatedAt: DateTime.parse(json['updatedAt']),
-      companyId: json['companyId'],
-      categoryId: json['categoryId'],
-      brandId: json['brandId'],
-      packaging: json['packaging'],
-      sku: json['sku'],
-      description: json['description'],
-      metaData: json['metaData'],
-      minOrderQuantity: json['minOrderQuantity'],
-      maxOrderQuantity: json['maxOrderQuantity'],
-      brand: Brand.fromJson(json['brand']),
-      category: Category.fromJson(json['category']),
-      company: json['company'] == null ? null : BaseCompany.fromJson(json['company']),
-    );
-  }
 }
 
 class Brand extends BaseBrand {
@@ -174,4 +155,17 @@ class Brand extends BaseBrand {
         name: json["name"],
         parentId: json["parentId"],
       );
+
+  factory Brand.empty() {
+    return Brand(
+      id: '',
+      name: '',
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+      thumbnailImage: '',
+      image: '',
+      companyId: '',
+      parentId: '',
+    );
+  }
 }
