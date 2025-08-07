@@ -18,6 +18,7 @@ Future<void> cancelOrder(
     }
 
     if(v.success && context.mounted) {
+      orderDetailsCubit.reloadOrderData();
       final ordersCubit = AppLayout.appLayoutScaffoldKey.currentContext!.read<OrdersCubit>();
       ordersCubit.getOrders();
     }

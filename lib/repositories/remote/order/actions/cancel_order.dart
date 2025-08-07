@@ -7,7 +7,7 @@ Future<ResponseOrderCancel> cancelOrder(
     ParamsCancelOrder params, INetworkService client) async {
   try {
     await client
-        .sendRequest(() => client.delete("${Urls.orders}/${params.id}"));
+        .sendRequest(() => client.patch("${Urls.orders}/${params.id}/status/canceled"));
   } catch (e) {
     
     return ResponseOrderCancel(statusCode: 400,success: false);

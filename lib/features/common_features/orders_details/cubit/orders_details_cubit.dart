@@ -30,6 +30,20 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
     }
   }
 
+  Future<void> reloadOrderData() async{
+    try {
+      emit(OrderDetailsLoading());
+
+      orderData = await orderRepository.getMOrderById(orderData!.id);
+      emit(OrderDetailsLoaded());
+    } catch (e, stacktrace) {
+      debugPrint("$e");
+      debugPrintStack(stackTrace: stacktrace);
+
+      emit(OrderDetailsLoadingFailed());
+    }
+  }
+
   Future<ResponseOrderCancel> cancelOrder() async {
     if(orderData == null) return ResponseOrderCancel.error();
     return orderRepository.cancelOrder(ParamsCancelOrder(id: orderData!.id));
