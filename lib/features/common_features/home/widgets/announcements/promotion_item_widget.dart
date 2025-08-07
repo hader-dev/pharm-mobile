@@ -67,7 +67,7 @@ class PromotionItemWidget extends StatelessWidget {
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          announcement.content,
+                          announcement.title,
                           style:  TextStyle(
                             color: onForegroundColor,
                             fontSize: 18,
