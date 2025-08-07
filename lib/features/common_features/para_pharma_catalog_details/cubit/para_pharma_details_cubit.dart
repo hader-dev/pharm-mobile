@@ -17,6 +17,7 @@ class ParaPharmaDetailsCubit extends Cubit<ParaPharmaDetailsState> {
   final FavoriteRepository favoriteRepository;
 
   final TextEditingController quantityController;
+  String shippingAddress = '';
 
   ParaPharmaDetailsCubit(
       {required this.quantityController,
@@ -35,33 +36,36 @@ class ParaPharmaDetailsCubit extends Cubit<ParaPharmaDetailsState> {
       emit(ParaPharmaDetailsLoadError());
     }
   }
-  Future<void> likeParaPharma() async {
-  if (paraPharmaCatalogData != null) {
-    try {
-      paraPharmaCatalogData!.isLiked = true;
-      emit(ParaPharmaDetailsLoaded());
-      await favoriteRepository.likeParaPharmaCatalog(paraPharmaCatalogId: paraPharmaCatalogData!.id);
-    } catch (e) {
-      paraPharmaCatalogData!.isLiked = false;
-      emit(ParaPharmaDetailsLoaded());
-      GlobalExceptionHandler.handle(exception: e);
-    }
-  }
-}
 
-Future<void> unlikeParaPharma() async {
-  if (paraPharmaCatalogData != null) {
-    try {
-      paraPharmaCatalogData!.isLiked = false;
-      emit(ParaPharmaDetailsLoaded());
-      await favoriteRepository.unLikeParaPharmaCatalog(paraPharmaCatalogId: paraPharmaCatalogData!.id);
-    } catch (e) {
-      paraPharmaCatalogData!.isLiked = true;
-      emit(ParaPharmaDetailsLoaded());
-      GlobalExceptionHandler.handle(exception: e);
+  Future<void> likeParaPharma() async {
+    if (paraPharmaCatalogData != null) {
+      try {
+        paraPharmaCatalogData!.isLiked = true;
+        emit(ParaPharmaDetailsLoaded());
+        await favoriteRepository.likeParaPharmaCatalog(
+            paraPharmaCatalogId: paraPharmaCatalogData!.id);
+      } catch (e) {
+        paraPharmaCatalogData!.isLiked = false;
+        emit(ParaPharmaDetailsLoaded());
+        GlobalExceptionHandler.handle(exception: e);
+      }
     }
   }
-}
+
+  Future<void> unlikeParaPharma() async {
+    if (paraPharmaCatalogData != null) {
+      try {
+        paraPharmaCatalogData!.isLiked = false;
+        emit(ParaPharmaDetailsLoaded());
+        await favoriteRepository.unLikeParaPharmaCatalog(
+            paraPharmaCatalogId: paraPharmaCatalogData!.id);
+      } catch (e) {
+        paraPharmaCatalogData!.isLiked = true;
+        emit(ParaPharmaDetailsLoaded());
+        GlobalExceptionHandler.handle(exception: e);
+      }
+    }
+  }
 
   void changeTapIndex(int index) {
     currentTapIndex = index;
@@ -87,7 +91,7 @@ Future<void> unlikeParaPharma() async {
       emit(PassingQuickOrder());
       await ordersRepository.createQuickOrder(
           orderDetails: CreateQuickOrderModel(
-        deliveryAddress: 'alger,alger',
+        deliveryAddress: shippingAddress,
         deliveryTownId: 10,
         paraPharmaCatalogId: paraPharmaCatalogData!.id,
         qty: int.parse(quantityController.text),
@@ -97,5 +101,9 @@ Future<void> unlikeParaPharma() async {
       GlobalExceptionHandler.handle(exception: e);
       emit(PassQuickOrderFailed());
     }
+  }
+
+  void updateShippingAddress(String value) {
+    shippingAddress = value;
   }
 }

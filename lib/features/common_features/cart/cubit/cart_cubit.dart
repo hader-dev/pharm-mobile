@@ -20,6 +20,7 @@ class CartCubit extends Cubit<CartState> {
   PaymentMethods? selectedPaymentMethod;
   InvoiceTypes? selectedInvoiceType;
   String orderNote = '';
+  String shippingAddress = '';
   // int totalItemsCount = 0;
   // int offSet = 0;
   List<CartItemModel> cartItems = <CartItemModel>[];
@@ -45,11 +46,12 @@ class CartCubit extends Cubit<CartState> {
     // });
   }
 
-  Future<void> addToCart(CreateCartItemModel cartItem,[bool isParapharma = false]) async {
+  Future<void> addToCart(CreateCartItemModel cartItem,
+      [bool isParapharma = false]) async {
     try {
       emit(AddCartItemLoading());
 
-      final existingItem = getItemIfExists(cartItem.productId,isParapharma);
+      final existingItem = getItemIfExists(cartItem.productId, isParapharma);
 
       if (existingItem != null) {
         final updatedItem = {"quantity": cartItem.quantity};
@@ -217,7 +219,7 @@ class CartCubit extends Cubit<CartState> {
       await Future.wait(cartItemsByVendor.keys.map((sellerId) async {
         return ordersRepository.createOrder(
             orderDetails: CreateOrderModel(
-          deliveryAddress: 'sidi,aissa',
+          deliveryAddress: shippingAddress,
           deliveryTownId: 10,
           sellerCompanyId: sellerId,
           cartItemsIds: cartItemsByVendor[sellerId] ?? [],
@@ -256,5 +258,9 @@ class CartCubit extends Cubit<CartState> {
         .firstOrNull;
 
     return existingItem;
+  }
+
+  void updateShippingAddress(String value) {
+    shippingAddress = value;
   }
 }

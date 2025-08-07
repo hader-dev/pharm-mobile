@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/filter_option_value.dart';
@@ -35,12 +36,14 @@ class SelectPaymentMethodBottomSheet extends StatelessWidget {
         },
         child: BlocBuilder<CartCubit, CartState>(
           builder: (context, state) {
-            if (state is! InvoiceTypeChanged && state is! PaymentMethodChanged) {}
+            if (state is! InvoiceTypeChanged &&
+                state is! PaymentMethodChanged) {}
             return SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  BottomSheetHeader(title: context.translation!.checkout_process),
+                  BottomSheetHeader(
+                      title: context.translation!.checkout_process),
                   Gap(AppSizesManager.s12),
                   Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
                   Gap(AppSizesManager.s12),
@@ -53,8 +56,11 @@ class SelectPaymentMethodBottomSheet extends StatelessWidget {
                             .map((paymentMethod) => FilterOptionValueWidget(
                                 title: paymentMethod.name,
                                 onSelected: () =>
-                                    BlocProvider.of<CartCubit>(context).changePaymentMethod(paymentMethod),
-                                isSelected: BlocProvider.of<CartCubit>(context).selectedPaymentMethod == paymentMethod))
+                                    BlocProvider.of<CartCubit>(context)
+                                        .changePaymentMethod(paymentMethod),
+                                isSelected: BlocProvider.of<CartCubit>(context)
+                                        .selectedPaymentMethod ==
+                                    paymentMethod))
                             .toList(),
                       )),
                   InfoWidget(
@@ -65,9 +71,31 @@ class SelectPaymentMethodBottomSheet extends StatelessWidget {
                         children: InvoiceTypes.values
                             .map((invoiceType) => FilterOptionValueWidget(
                                 title: invoiceType.name,
-                                onSelected: () => BlocProvider.of<CartCubit>(context).changeInvoiceType(invoiceType),
-                                isSelected: BlocProvider.of<CartCubit>(context).selectedInvoiceType == invoiceType))
+                                onSelected: () =>
+                                    BlocProvider.of<CartCubit>(context)
+                                        .changeInvoiceType(invoiceType),
+                                isSelected: BlocProvider.of<CartCubit>(context)
+                                        .selectedInvoiceType ==
+                                    invoiceType))
                             .toList(),
+                      )),
+                  InfoWidget(
+                      label: context.translation!.shipping_address,
+                      bgColor: AppColors.bgWhite,
+                      value: CustomTextField(
+                        verticalPadding: 0,
+                        horizontalPadding: AppSizesManager.p6,
+                        initValue: UserManager.instance.currentUser.address,
+                        onChanged: (text) => context
+                            .read<CartCubit>()
+                            .updateShippingAddress(text ?? ''),
+                        maxLines: 3,
+                        validationFunc: (String? value) {},
+                        isFilled: false,
+                        isBorderEnabled: true,
+                        hintText: context.translation!.shipping_address,
+                        hintTextStyle: AppTypography.bodySmallStyle
+                            .copyWith(color: Colors.grey),
                       )),
                   InfoWidget(
                       label: context.translation!.order_note,
@@ -76,13 +104,16 @@ class SelectPaymentMethodBottomSheet extends StatelessWidget {
                         verticalPadding: 0,
                         horizontalPadding: AppSizesManager.p6,
                         initValue: context.read<CartCubit>().orderNote,
-                        onChanged: (text) => context.read<CartCubit>().changeOrderNote(text ?? ''),
+                        onChanged: (text) => context
+                            .read<CartCubit>()
+                            .changeOrderNote(text ?? ''),
                         maxLines: 3,
                         validationFunc: (String? value) {},
                         isFilled: false,
                         isBorderEnabled: true,
                         hintText: context.translation!.type_note_hint,
-                        hintTextStyle: AppTypography.bodySmallStyle.copyWith(color: Colors.grey),
+                        hintTextStyle: AppTypography.bodySmallStyle
+                            .copyWith(color: Colors.grey),
                       )),
                   Gap(AppSizesManager.s12),
                   InfoWidget(
@@ -92,7 +123,8 @@ class SelectPaymentMethodBottomSheet extends StatelessWidget {
                       children: [
                         Text(
                           "${context.read<CartCubit>().totalTTCAmount.toStringAsFixed(2)} ${context.translation!.currency}",
-                          style: AppTypography.body2MediumStyle.copyWith(color: AppColors.accent1Shade1),
+                          style: AppTypography.body2MediumStyle
+                              .copyWith(color: AppColors.accent1Shade1),
                         ),
                         Spacer(),
                         Icon(
@@ -106,7 +138,9 @@ class SelectPaymentMethodBottomSheet extends StatelessWidget {
                   Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
                   Gap(AppSizesManager.s12),
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: AppSizesManager.p4, horizontal: AppSizesManager.p4),
+                    padding: EdgeInsets.symmetric(
+                        vertical: AppSizesManager.p4,
+                        horizontal: AppSizesManager.p4),
                     child: Row(
                       children: [
                         Expanded(

@@ -14,8 +14,10 @@ class UserModel {
   final bool phoneVerified;
   final dynamic lastLogin;
   final Role role;
+  final String address;
 
   UserModel({
+    required this.address,
     required this.role,
     required this.id,
     required this.image,
@@ -30,18 +32,4 @@ class UserModel {
     required this.lastLogin,
   });
 
-  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
-        role: Role.fromId(json["roleId"]),
-        id: json["id"],
-        image: json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
-        createdAt: DateTime.parse(json["createdAt"]),
-        updatedAt: DateTime.parse(json["updatedAt"]),
-        email: json["email"],
-        fullName: json["fullName"],
-        phone: json["phone"],
-        isActive: json["isActive"],
-        emailVerified: json["emailVerified"],
-        phoneVerified: json["phoneVerified"],
-        lastLogin: json["lastLogin"],
-      );
 }

@@ -13,11 +13,12 @@ part 'medicine_details_state.dart';
 class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
   MedicineCatalogModel? medicineCatalogData;
   int currentTapIndex = 0;
+  String shippingAddress = "";
   final TextEditingController quantityController;
 
   final MedicineCatalogRepository medicineCatalogRepository;
   final OrderRepository ordersRepository;
-   final FavoriteRepository favoriteRepository;
+  final FavoriteRepository favoriteRepository;
   final TabController tabController;
 
   MedicineDetailsCubit(
@@ -93,7 +94,7 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
       emit(PassingQuickOrder());
       await ordersRepository.createQuickOrder(
           orderDetails: CreateQuickOrderModel(
-        deliveryAddress: 'alger,alger',
+        deliveryAddress: shippingAddress,
         deliveryTownId: 10,
         medicineCatalogId: medicineCatalogData!.id,
         qty: int.parse(quantityController.text),
@@ -103,6 +104,10 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
       GlobalExceptionHandler.handle(exception: e);
       emit(PassQuickOrderFailed());
     }
+  }
+
+  void updateShippingAddress(String value) {
+    shippingAddress = value;
   }
   // Timer? _debounce;
 

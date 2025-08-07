@@ -3,11 +3,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/features/app_layout/app_layout.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_icon_button.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
+import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/bottom_sheet_header.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders/cubit/orders_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/cubit/para_pharma_details_cubit.dart';
@@ -146,6 +148,25 @@ class MakeOrderBottomSheet extends StatelessWidget {
                     ),
                   ]),
                 ),
+                Gap(AppSizesManager.s12),
+                InfoWidget(
+                    label: context.translation!.shipping_address,
+                    bgColor: AppColors.bgWhite,
+                    value: CustomTextField(
+                      verticalPadding: 0,
+                      horizontalPadding: AppSizesManager.p6,
+                      initValue: UserManager.instance.currentUser.address,
+                      onChanged: (text) => context
+                          .read<ParaPharmaDetailsCubit>()
+                          .updateShippingAddress(text ?? ''),
+                      maxLines: 3,
+                      validationFunc: (String? value) {},
+                      isFilled: false,
+                      isBorderEnabled: true,
+                      hintText: context.translation!.shipping_address,
+                      hintTextStyle: AppTypography.bodySmallStyle
+                          .copyWith(color: Colors.grey),
+                    )),
                 Gap(AppSizesManager.s12),
                 Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
                 Gap(AppSizesManager.s12),

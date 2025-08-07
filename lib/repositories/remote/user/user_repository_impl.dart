@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
+import 'package:hader_pharm_mobile/repositories/remote/user/mappers/json_to_user.dart';
 
 import '../../../features/common_features/edit_profile/hooks_data_model/edit_profile_form.dart'
     show EditProfileFormDataModel;
@@ -16,8 +17,8 @@ class UserRepository implements IUserRepository {
     String username,
     String password,
   ) async {
-    var decodedResponse = await client
-        .sendRequest(() => client.post(Urls.logIn, payload: <String, String>{"email": username, "password": password}));
+    var decodedResponse = await client.sendRequest(() => client.post(Urls.logIn,
+        payload: <String, String>{"email": username, "password": password}));
 
     return decodedResponse["accessToken"];
   }
@@ -26,17 +27,21 @@ class UserRepository implements IUserRepository {
   Future<UserModel> getCurrentUserData() async {
     var decodedResponse = await client.sendRequest(() => client.get(Urls.me));
 
-    return UserModel.fromJson(decodedResponse);
+    return jsonToUser(decodedResponse);
   }
 
   @override
-  Future<void> changePassword({required String currentPassword, required String newPassword}) async {
-    await client.sendRequest(() =>
-        client.post(Urls.changePassword, payload: {"currentPassword": currentPassword, "newPassword": newPassword}));
+  Future<void> changePassword(
+      {required String currentPassword, required String newPassword}) async {
+    await client.sendRequest(() => client.post(Urls.changePassword, payload: {
+          "currentPassword": currentPassword,
+          "newPassword": newPassword
+        }));
   }
 
   @override
-  Future<String> emailSignUp(String email, String fullName, String password, {String? userImagePath}) async {
+  Future<String> emailSignUp(String email, String fullName, String password,
+      {String? userImagePath}) async {
     late MultipartFile file;
     if (userImagePath != null) {
       String fileName = userImagePath.split('/').last;
@@ -63,26 +68,31 @@ class UserRepository implements IUserRepository {
   }
 
   @override
-  Future<String> sendUserEmailCheckOtpCode({required String email, required String otp}) async {
-    var decodedResponse = await client
-        .sendRequest(() => client.post(Urls.verifyEmail, payload: <String, String>{"email": email, "otp": otp}));
+  Future<String> sendUserEmailCheckOtpCode(
+      {required String email, required String otp}) async {
+    var decodedResponse = await client.sendRequest(() => client.post(
+        Urls.verifyEmail,
+        payload: <String, String>{"email": email, "otp": otp}));
 
     return decodedResponse["accessToken"];
   }
 
   @override
   Future<void> resendOtp({required String email}) async {
-    var decodedResponse = await client.sendRequest(() => client.post(Urls.resendOtp, payload: <String, String>{
-          "email": email,
-        }));
+    var decodedResponse = await client.sendRequest(
+        () => client.post(Urls.resendOtp, payload: <String, String>{
+              "email": email,
+            }));
 
     return decodedResponse["accessToken"];
   }
 
   @override
-  Future<void> updateProfile({required EditProfileFormDataModel updatedProfileData}) async {
+  Future<void> updateProfile(
+      {required EditProfileFormDataModel updatedProfileData}) async {
     Map<String, dynamic> dataAsMap = updatedProfileData.toJson();
-    dataAsMap.removeWhere((key, value) => value == null || (value is String && value.isEmpty));
+    dataAsMap.removeWhere(
+        (key, value) => value == null || (value is String && value.isEmpty));
     FormData formData = FormData.fromMap(
       {
         ...dataAsMap,
@@ -99,8 +109,9 @@ class UserRepository implements IUserRepository {
 
   @override
   Future<void> sendResetPasswordMail({required String email}) {
-    return client.sendRequest(() => client.post(Urls.forgotPassword, payload: <String, String>{
-          "email": email,
-        }));
+    return client.sendRequest(
+        () => client.post(Urls.forgotPassword, payload: <String, String>{
+              "email": email,
+            }));
   }
 }

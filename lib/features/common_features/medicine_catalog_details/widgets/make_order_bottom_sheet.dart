@@ -3,11 +3,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/features/app_layout/app_layout.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_icon_button.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
+import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/bottom_sheet_header.dart';
 import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/cubit/medicine_details_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/medicine_catalog_details.dart';
@@ -17,7 +19,6 @@ import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart' show Iconsax;
 
-
 class MakeOrderBottomSheet extends StatelessWidget {
   const MakeOrderBottomSheet({super.key, this.cubit});
 
@@ -26,13 +27,18 @@ class MakeOrderBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final translation = context.translation!;
-    
+
     return MultiBlocProvider(
       providers: [
         BlocProvider.value(
-          value: cubit ?? MedicineCatalogDetailsScreen.medicineDetailsScaffoldKey.currentContext!.read<MedicineDetailsCubit>(),
+          value: cubit ??
+              MedicineCatalogDetailsScreen
+                  .medicineDetailsScaffoldKey.currentContext!
+                  .read<MedicineDetailsCubit>(),
         ),
-        BlocProvider.value(value: AppLayout.appLayoutScaffoldKey.currentContext!.read<OrdersCubit>()),
+        BlocProvider.value(
+            value: AppLayout.appLayoutScaffoldKey.currentContext!
+                .read<OrdersCubit>()),
       ],
       child: BlocListener<MedicineDetailsCubit, MedicineDetailsState>(
         listener: (context, state) {
@@ -50,7 +56,11 @@ class MakeOrderBottomSheet extends StatelessWidget {
                 Gap(AppSizesManager.s12),
                 LabeledInfoWidget(
                   label: translation.product,
-                  value: context.read<MedicineDetailsCubit>().medicineCatalogData!.medicine.dci,
+                  value: context
+                      .read<MedicineDetailsCubit>()
+                      .medicineCatalogData!
+                      .medicine
+                      .dci,
                 ),
                 LabeledInfoWidget(
                   label: translation.unit_total_price,
@@ -65,14 +75,17 @@ class MakeOrderBottomSheet extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: AppSizesManager.p8),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: AppSizesManager.p8),
                   child: Row(children: [
                     PrimaryIconButton(
                       borderColor: StrokeColors.normal.color,
                       isBordered: true,
                       bgColor: Colors.transparent,
                       onPressed: () {
-                        context.read<MedicineDetailsCubit>().decrementQuantity();
+                        context
+                            .read<MedicineDetailsCubit>()
+                            .decrementQuantity();
                       },
                       icon: Icon(
                         Iconsax.minus,
@@ -86,25 +99,37 @@ class MakeOrderBottomSheet extends StatelessWidget {
                       child: Form(
                           child: TextFormField(
                               cursorColor: AppColors.accentGreenShade1,
-                              controller: context.read<MedicineDetailsCubit>().quantityController,
+                              controller: context
+                                  .read<MedicineDetailsCubit>()
+                                  .quantityController,
                               textAlign: TextAlign.center,
                               keyboardType: TextInputType.number,
-                              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                              validator: (value) => value == null || value.isEmpty ? '' : null,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly
+                              ],
+                              validator: (value) =>
+                                  value == null || value.isEmpty ? '' : null,
                               style: AppTypography.body3MediumStyle,
                               decoration: InputDecoration(
-                                contentPadding: EdgeInsets.all(AppSizesManager.p12),
+                                contentPadding:
+                                    EdgeInsets.all(AppSizesManager.p12),
                                 enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
-                                  borderSide: BorderSide(color: FieldState.normal.color.secondary),
+                                  borderRadius: BorderRadius.circular(
+                                      AppSizesManager.commonWidgetsRadius),
+                                  borderSide: BorderSide(
+                                      color: FieldState.normal.color.secondary),
                                 ),
                                 disabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
-                                  borderSide: BorderSide(color: AppColors.bgDisabled),
+                                  borderRadius: BorderRadius.circular(
+                                      AppSizesManager.commonWidgetsRadius),
+                                  borderSide:
+                                      BorderSide(color: AppColors.bgDisabled),
                                 ),
                                 focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
-                                  borderSide: BorderSide(color: StrokeColors.focused.color),
+                                  borderRadius: BorderRadius.circular(
+                                      AppSizesManager.commonWidgetsRadius),
+                                  borderSide: BorderSide(
+                                      color: StrokeColors.focused.color),
                                 ),
                               ))),
                     ),
@@ -114,7 +139,9 @@ class MakeOrderBottomSheet extends StatelessWidget {
                       isBordered: true,
                       bgColor: Colors.transparent,
                       onPressed: () {
-                        context.read<MedicineDetailsCubit>().incrementQuantity();
+                        context
+                            .read<MedicineDetailsCubit>()
+                            .incrementQuantity();
                       },
                       icon: Icon(
                         Iconsax.add,
@@ -123,6 +150,25 @@ class MakeOrderBottomSheet extends StatelessWidget {
                     ),
                   ]),
                 ),
+                Gap(AppSizesManager.s12),
+                InfoWidget(
+                    label: context.translation!.shipping_address,
+                    bgColor: AppColors.bgWhite,
+                    value: CustomTextField(
+                      verticalPadding: 0,
+                      horizontalPadding: AppSizesManager.p6,
+                      initValue: UserManager.instance.currentUser.address,
+                      onChanged: (text) => context
+                          .read<MedicineDetailsCubit>()
+                          .updateShippingAddress(text ?? ''),
+                      maxLines: 3,
+                      validationFunc: (String? value) {},
+                      isFilled: false,
+                      isBorderEnabled: true,
+                      hintText: context.translation!.shipping_address,
+                      hintTextStyle: AppTypography.bodySmallStyle
+                          .copyWith(color: Colors.grey),
+                    )),
                 Gap(AppSizesManager.s12),
                 Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
                 Gap(AppSizesManager.s12),
@@ -133,7 +179,8 @@ class MakeOrderBottomSheet extends StatelessWidget {
                     children: [
                       Text(
                         "${(num.parse(context.read<MedicineDetailsCubit>().quantityController.text) * num.parse(context.read<MedicineDetailsCubit>().medicineCatalogData!.unitPriceHt)).toStringAsFixed(2)} translationContext.currency",
-                        style: AppTypography.body2MediumStyle.copyWith(color: AppColors.accent1Shade1),
+                        style: AppTypography.body2MediumStyle
+                            .copyWith(color: AppColors.accent1Shade1),
                       ),
                       Spacer(),
                       Icon(
@@ -155,7 +202,7 @@ class MakeOrderBottomSheet extends StatelessWidget {
                         child: PrimaryTextButton(
                           isOutLined: true,
                           label: translation.cancel,
-                          spalshColor:AppColors.accent1Shade1.withAlpha(50) ,
+                          spalshColor: AppColors.accent1Shade1.withAlpha(50),
                           labelColor: AppColors.accent1Shade1,
                           onTap: () {
                             context.pop();
@@ -171,7 +218,9 @@ class MakeOrderBottomSheet extends StatelessWidget {
                           leadingIcon: Iconsax.money4,
                           isLoading: state is PassingQuickOrder,
                           onTap: () {
-                            context.read<MedicineDetailsCubit>().passQuickOrder();
+                            context
+                                .read<MedicineDetailsCubit>()
+                                .passQuickOrder();
                           },
                           color: AppColors.accent1Shade1,
                         ),
@@ -230,7 +279,8 @@ class InfoWidget extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: AppSizesManager.p6),
       decoration: BoxDecoration(
         color: bgColor,
-        borderRadius: BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+        borderRadius:
+            BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
