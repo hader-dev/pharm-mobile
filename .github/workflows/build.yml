@@ -32,8 +32,17 @@ jobs:
       - name: Run tests
         run: flutter test
 
-      - name: Accept Android Licenses
-        run: yes | sdkmanager --licenses
+      - name: Install Android SDK command line tools
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y wget unzip
+          wget https://dl.google.com/android/repository/commandlinetools-linux-10406996_latest.zip
+          sudo mkdir -p /usr/local/lib/android/sdk/cmdline-tools
+          sudo unzip commandlinetools-linux-*.zip -d /usr/local/lib/android/sdk/cmdline-tools
+          sudo mv /usr/local/lib/android/sdk/cmdline-tools/cmdline-tools /usr/local/lib/android/sdk/cmdline-tools/latest
+          export ANDROID_HOME=/usr/local/lib/android/sdk
+          export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH
+          yes | sdkmanager --licenses
 
       - name: Build APK
         run: flutter build apk --release
