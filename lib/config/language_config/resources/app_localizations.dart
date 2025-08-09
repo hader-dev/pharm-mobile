@@ -1485,6 +1485,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Server error'**
   String get feedback_server_error;
+
+  /// No description provided for @order_complaint.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Complaint'**
+  String get order_complaint;
+
+  /// No description provided for @item_complaint.
+  ///
+  /// In en, this message translates to:
+  /// **'Item Complaint'**
+  String get item_complaint;
+
+  /// No description provided for @subject.
+  ///
+  /// In en, this message translates to:
+  /// **'Subject'**
+  String get subject;
+
+  /// No description provided for @unknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get unknown;
+
+  /// No description provided for @rejected.
+  ///
+  /// In en, this message translates to:
+  /// **'Rejected'**
+  String get rejected;
+
+  /// No description provided for @resolved.
+  ///
+  /// In en, this message translates to:
+  /// **'Resolved'**
+  String get resolved;
+
+  /// No description provided for @processing.
+  ///
+  /// In en, this message translates to:
+  /// **'Processing'**
+  String get processing;
+
+  /// No description provided for @claim_status_history.
+  ///
+  /// In en, this message translates to:
+  /// **'Claim Status History'**
+  String get claim_status_history;
 }
 
 class _AppLocalizationsDelegate

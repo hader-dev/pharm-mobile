@@ -5,7 +5,7 @@ import 'package:hader_pharm_mobile/models/order.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/order_repository.dart';
 
 import '../../../../../utils/constants.dart';
-import '../../../../utils/enums.dart' show OrderStatus;
+import '../../../../utils/enums.dart' show OrderClaimStatus;
 
 part 'orders_state.dart';
 
@@ -73,10 +73,10 @@ class OrdersCubit extends Cubit<OrdersState> {
 
   void updateStatusFilter(int statusId) {
     if (statusId == -1) {
-      if (selectedStatusFilters.length == OrderStatus.values.length) {
+      if (selectedStatusFilters.length == OrderClaimStatus.values.length) {
         selectedStatusFilters = [];
       } else {
-        selectedStatusFilters = OrderStatus.values.map((e) => e.id).toList();
+        selectedStatusFilters = OrderClaimStatus.values.map((e) => e.id).toList();
       }
       emit(StatusFilterChanged());
       return;

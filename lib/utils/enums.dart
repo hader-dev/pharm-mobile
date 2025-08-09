@@ -7,6 +7,61 @@ import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import '../config/theme/colors_manager.dart';
 import 'assets_strings.dart';
 
+enum OrderClaimStatus {
+  pending(
+    id: 1,
+    color: Color.fromARGB(255, 106, 106, 106),
+    icon: Icons.new_releases,
+  ),
+  processing(
+    id: 2,
+    color: Colors.orange,
+    icon: Icons.play_arrow,
+  ),
+  rejected(
+    id: 3,
+    color: Colors.green,
+    icon: Icons.check_circle,
+  ),
+  resolved(
+    id: 4,
+    color: Colors.red,
+    icon: Icons.cancel,
+  );
+
+  final int id;
+
+  final Color color;
+  final IconData icon;
+
+  const OrderClaimStatus({
+    required this.id,
+    required this.color,
+    required this.icon,
+  });
+
+    static String getTranslatedStatus(OrderClaimStatus expression) {
+    switch (expression) {
+      case OrderClaimStatus.pending:
+        return RoutingManager
+            .rootNavigatorKey.currentContext!.translation!.pending;
+
+      case OrderClaimStatus.processing:
+        return RoutingManager
+            .rootNavigatorKey.currentContext!.translation!.processing;
+
+      case OrderClaimStatus.rejected:
+        return RoutingManager
+            .rootNavigatorKey.currentContext!.translation!.rejected;
+
+      case OrderClaimStatus.resolved:
+        return RoutingManager
+            .rootNavigatorKey.currentContext!.translation!.resolved;
+    }
+
+}
+}
+
 enum OrderStatus {
   pending(
     id: 1,
@@ -43,16 +98,20 @@ enum OrderStatus {
   static String getTranslatedStatus(OrderStatus expression) {
     switch (expression) {
       case OrderStatus.pending:
-        return RoutingManager.rootNavigatorKey.currentContext!.translation!.pending;
+        return RoutingManager
+            .rootNavigatorKey.currentContext!.translation!.pending;
 
       case OrderStatus.confirmed:
-        return RoutingManager.rootNavigatorKey.currentContext!.translation!.confirmed;
+        return RoutingManager
+            .rootNavigatorKey.currentContext!.translation!.confirmed;
 
       case OrderStatus.completed:
-        return RoutingManager.rootNavigatorKey.currentContext!.translation!.completed;
+        return RoutingManager
+            .rootNavigatorKey.currentContext!.translation!.completed;
 
       case OrderStatus.canceled:
-        return RoutingManager.rootNavigatorKey.currentContext!.translation!.canceled;
+        return RoutingManager
+            .rootNavigatorKey.currentContext!.translation!.canceled;
     }
   }
 
@@ -172,8 +231,12 @@ enum FieldState {
   normal(color: SystemColors.defaultState),
   loading(wordKey: "Loading", color: SystemColors.defaultState),
   disabled(color: SystemColors.defaultState),
-  success(wordKey: "Success", color: SystemColors.green, icon: Icons.check_circle),
-  warning(wordKey: "Warning", color: SystemColors.orange, icon: Icons.warning_amber_rounded),
+  success(
+      wordKey: "Success", color: SystemColors.green, icon: Icons.check_circle),
+  warning(
+      wordKey: "Warning",
+      color: SystemColors.orange,
+      icon: Icons.warning_amber_rounded),
   error(wordKey: "Error", color: SystemColors.red, icon: Icons.error);
 
   final SystemColors color;
@@ -196,7 +259,8 @@ enum ApiErrorCodes {
   INVALID_CREDENTIALS('INVALID_CREDENTIALS', 'Email or password is incorrect'),
   INVALID_PASSWORD('INVALID_PASSWORD', 'Invalid password'),
   INVALID_OTP('INVALID_OTP', 'Invalid OTP'),
-  INVALID_PASSWORD_RESET_TOKEN('INVALID_PASSWORD_RESET_TOKEN', 'Invalid password reset token'),
+  INVALID_PASSWORD_RESET_TOKEN(
+      'INVALID_PASSWORD_RESET_TOKEN', 'Invalid password reset token'),
   EMAIL_NOT_VERIFIED('EMAIL_NOT_VERIFIED', 'Email not verified'),
   INCORRECT_PASSWORD('INCORRECT_PASSWORD', 'Incorrect password');
 
