@@ -5,13 +5,15 @@ import 'package:hader_pharm_mobile/config/services/firebase/firebase_service.dar
 import 'package:hader_pharm_mobile/config/services/firebase/firebase_service_port.dart';
 import 'package:hader_pharm_mobile/config/services/notification/notification_service_port.dart';
 import 'package:hader_pharm_mobile/repositories/remote/notification/notification_repository.dart';
+import 'package:hader_pharm_mobile/repositories/remote/notification/params/params_load_notifications.dart';
+import 'package:hader_pharm_mobile/repositories/remote/notification/responses/response_load_notifications.dart';
 
 import 'actions/background_notification_tap.dart';
 import 'actions/handle_remote_message.dart' as actions;
 import 'notification_channels.dart';
 import 'notification_plugin.dart';
 
-class NotificationService implements NotificationServicePort {
+class NotificationService implements INotificationService {
   final FirebaseServicePort firebaseService;
   final INotificationRepository notificationRepository;
 
@@ -77,6 +79,11 @@ class NotificationService implements NotificationServicePort {
   @override
   Future<void> handleRemoteMessage(RemoteMessage message) async {
     actions.handleRemoteMessage(message);
+  }
+
+  @override
+  Future<ResponseLoadNotifications> getNotifications(ParamsLoadNotifications paramsLoadNotifications) async{
+   return notificationRepository.getNotifications(paramsLoadNotifications);
   }
 }
 

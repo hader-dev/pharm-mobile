@@ -233,5 +233,6 @@
   "rejected": "Rejeté",
   "resolved": "Résolue",
   "processing": "Traitement",
-  "claim_status_history": "Historique de statut de la reclamation"
+  "claim_status_history": "Historique de statut de la reclamation",
+  "notifications": "Notifications"
 }

@@ -31,4 +31,26 @@ class NotificationModel {
       redirectUrl: json['redirectUrl'] as String,
     );
   }
+
+  NotificationModel copyWith({
+    int? id,
+    String? title,
+    String? body,
+    bool? isRead,
+    String? type,
+    DateTime? createdAt,
+    int? clientId,
+    String? redirectUrl,
+  }) {
+    return NotificationModel(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      body: body ?? this.body,
+      isRead: isRead ?? this.isRead,
+      type: type ?? this.type,
+      createdAt: createdAt ?? this.createdAt,
+      clientId: clientId ?? this.clientId,
+      redirectUrl: redirectUrl ?? this.redirectUrl,
+    );
+  }
 }

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/config/services/notification/notification_service_port.dart';
 import 'package:hader_pharm_mobile/features/common_features/cart/cubit/cart_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/home.dart';
+import 'package:hader_pharm_mobile/features/common_features/notification/cubit/notifications_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders/orders.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/order_repository_impl.dart';
 import 'package:hader_pharm_mobile/utils/shared_prefs.dart';
@@ -51,6 +53,11 @@ class AppLayout extends StatelessWidget {
     return SafeArea(
       child: MultiBlocProvider(
         providers: [
+           BlocProvider(
+            create: (context) => NotificationsCubit(
+          notificationService: getItInstance.get<INotificationService>(),
+          scrollController: ScrollController())..getNotifications(),
+          ),
           BlocProvider(
             create: (context) => AppLayoutCubit(),
           ),

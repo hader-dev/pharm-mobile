@@ -742,4 +742,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get claim_status_history => 'تاريخ حالة الشكوى';
+
+  @override
+  String get notifications => 'الاشعارات';
 }

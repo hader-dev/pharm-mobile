@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
 import 'package:hader_pharm_mobile/features/common/text_fields/compact_custom_text_field.dart';
+import 'package:hader_pharm_mobile/features/common_features/notification/cubit/notifications_cubit.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
@@ -15,7 +18,6 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight * 2.5);
-
 
   @override
   Widget build(BuildContext context) {
@@ -37,12 +39,31 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
                       .copyWith(color: Colors.white),
                 ),
                 const Spacer(),
-                 IconButton(
-                  icon: const Icon(
-                    Iconsax.notification,
-                    color: Colors.white,
-                  ),
-                  onPressed: () {},
+                BlocBuilder<NotificationsCubit, NotificationState>(
+                  builder: (context, state) {
+                    return InkWell(
+                      onTap: () => RoutingManager.router
+                          .pushNamed(RoutingManager.notificationsScreen),
+                      child: Stack(
+                        clipBehavior: Clip.none,
+                        children: [
+                          const Icon(
+                            Iconsax.notification,
+                            color: Colors.white,
+                          ),
+                          if (context.read<NotificationsCubit>().unreadCount > 0)
+                            Positioned(
+                              top: -4,
+                              right: -4,
+                              child: CircleAvatar(
+                                radius: AppSizesManager.commonWidgetsRadius,
+                                backgroundColor: Colors.red,
+                              ),
+                            )
+                        ],
+                      ),
+                    );
+                  },
                 ),
               ],
             ),
@@ -69,7 +90,6 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
                 },
                 validationFunc: (value) {},
               ),
-             
             ),
           ],
         ),

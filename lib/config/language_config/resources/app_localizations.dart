@@ -1533,6 +1533,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Claim Status History'**
   String get claim_status_history;
+
+  /// No description provided for @notifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notifications;
 }
 
 class _AppLocalizationsDelegate
