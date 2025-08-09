@@ -93,8 +93,13 @@ class OrderItem {
   final double discountAmount;
   final String orderId;
 
+  final String? imageUrl;
+
+  final String? note;
+
   OrderItem({
     required this.id,
+    this.note,
     required this.totalAmountTtc,
     required this.totalAmountHt,
     required this.tvaPercentage,
@@ -111,6 +116,7 @@ class OrderItem {
     required this.margin,
     required this.discountAmount,
     required this.orderId,
+    this.imageUrl,
   });
 
   factory OrderItem.fromJson(Map<String, dynamic> json) => OrderItem(

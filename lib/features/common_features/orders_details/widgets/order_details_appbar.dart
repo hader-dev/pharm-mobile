@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
-import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar.dart';
+import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders_details/actions/navigate_back.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders_details/cubit/orders_details_cubit.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
@@ -22,14 +22,14 @@ class OrderDetailsAppbar extends StatelessWidget  implements PreferredSizeWidget
 
   @override
   Widget build(BuildContext context) {
-    return CustomAppBar(
-      bgColor: AppColors.bgWhite,
+    return CustomAppBarV2.alternate(
       topPadding: MediaQuery.of(context).padding.top,
       bottomPadding: MediaQuery.of(context).padding.bottom,
       leading: IconButton(
         icon: Icon(
           Directionality.of(context) == TextDirection.rtl ? Iconsax.arrow_right_3 : Iconsax.arrow_left_2,
           size: AppSizesManager.iconSize25,
+          color: AppColors.bgWhite
         ),
         onPressed: () => handleNavigateBack(context),
       ),
@@ -38,11 +38,13 @@ class OrderDetailsAppbar extends StatelessWidget  implements PreferredSizeWidget
           const Icon(
             Iconsax.box_2,
             size: AppSizesManager.iconSize25,
+            color: AppColors.bgWhite
           ),
           Gap(AppSizesManager.s12),
           Text(
             context.translation!.order_details,
-            style: AppTypography.headLine3SemiBoldStyle,
+            style: AppTypography.headLine3SemiBoldStyle.copyWith(color: AppColors.bgWhite),
+            
           ),
         ],
       ),

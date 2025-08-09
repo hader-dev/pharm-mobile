@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
+import 'package:hader_pharm_mobile/models/order_details.dart';
+import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
-import '../../../../config/theme/typoghrapy_manager.dart';
-import '../../../../models/order_details.dart';
-import '../../../../utils/constants.dart';
 import 'order_item_widget.dart';
 
 class OrderItemsSection extends StatelessWidget {
-  final List<OrderItem> orderItems; // List of OrderItem objects>
+  final List<OrderItem> orderItems;
   const OrderItemsSection({super.key, required this.orderItems});
 
   @override
@@ -20,7 +20,8 @@ class OrderItemsSection extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+        borderRadius:
+            BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,9 +52,7 @@ class OrderItemsSection extends StatelessWidget {
                   children: orderItems
                       .map(
                         (OrderItem item) => OrderItemWidget(
-                          productName: item.designation ?? "N/A",
-                          quantity: item.quantity,
-                          price: item.unitPriceHt.toString(),
+                          item: item,
                         ),
                       )
                       .toList(),

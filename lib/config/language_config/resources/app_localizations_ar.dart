@@ -718,4 +718,28 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get feedback_server_error => 'خطأ في الخادم';
+
+  @override
+  String get order_complaint => 'شكوى عن الطلب';
+
+  @override
+  String get item_complaint => 'شكوى عن المنتج';
+
+  @override
+  String get subject => 'الموضوع';
+
+  @override
+  String get unknown => 'غير معروف';
+
+  @override
+  String get rejected => 'مرفوض';
+
+  @override
+  String get resolved => 'محلول';
+
+  @override
+  String get processing => 'معالجة';
+
+  @override
+  String get claim_status_history => 'تاريخ حالة الشكوى';
 }

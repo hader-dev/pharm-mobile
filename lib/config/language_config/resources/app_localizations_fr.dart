@@ -730,4 +730,28 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get feedback_server_error => 'Erreur du serveur';
+
+  @override
+  String get order_complaint => 'Reclamation de commande';
+
+  @override
+  String get item_complaint => 'Reclamation de produit';
+
+  @override
+  String get subject => 'Sujet';
+
+  @override
+  String get unknown => 'Inconnu';
+
+  @override
+  String get rejected => 'Rejeté';
+
+  @override
+  String get resolved => 'Résolue';
+
+  @override
+  String get processing => 'Traitement';
+
+  @override
+  String get claim_status_history => 'Historique de statut de la reclamation';
 }

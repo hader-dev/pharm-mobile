@@ -1,5 +1,4 @@
 class Urls {
-
   //users endpoint
   static String get users => "/users";
 
@@ -14,7 +13,6 @@ class Urls {
   static String get resendOtp => "$auth/resend-email-otp";
   static String get forgotPassword => "$auth/forgot-password";
   static String get changePassword => "$auth/change-password";
-
 
   static String get me => "$users/me";
 
@@ -54,14 +52,22 @@ class Urls {
   //Medicine parapharm-catalog
   static String get paraPharamaCatalog1 => "parapharm-catalog";
 
-  static String get favoritesLikeMedicineCatalog => "$favorites$medicinesCatalog1";
-  static String get favoritesUnlikeMedicineCatalog => "$favorites$medicinesCatalog1/by-medicine-catalog-id";
-  static String get favoritesLikeParaPharmaCatalog => "$favorites$paraPharamaCatalog1";
-  static String get favoritesUnLikeParaPharmaCatalog => "$favorites$paraPharamaCatalog1/by-parapharm-catalog-id";
+  static String get favoritesLikeMedicineCatalog =>
+      "$favorites$medicinesCatalog1";
+  static String get favoritesUnlikeMedicineCatalog =>
+      "$favorites$medicinesCatalog1/by-medicine-catalog-id";
+  static String get favoritesLikeParaPharmaCatalog =>
+      "$favorites$paraPharamaCatalog1";
+  static String get favoritesUnLikeParaPharmaCatalog =>
+      "$favorites$paraPharamaCatalog1/by-parapharm-catalog-id";
   static String get favoritesCompany => "${favorites}companies";
 
   static String get publicFiles => "/files";
 
+  //Announcements
   static String get announcements => "/announcements";
 
+  //Complaints
+  static String get itemComplaint => "/claims";
+  
 }

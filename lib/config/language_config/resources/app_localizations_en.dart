@@ -719,4 +719,28 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get feedback_server_error => 'Server error';
+
+  @override
+  String get order_complaint => 'Order Complaint';
+
+  @override
+  String get item_complaint => 'Item Complaint';
+
+  @override
+  String get subject => 'Subject';
+
+  @override
+  String get unknown => 'Unknown';
+
+  @override
+  String get rejected => 'Rejected';
+
+  @override
+  String get resolved => 'Resolved';
+
+  @override
+  String get processing => 'Processing';
+
+  @override
+  String get claim_status_history => 'Claim Status History';
 }

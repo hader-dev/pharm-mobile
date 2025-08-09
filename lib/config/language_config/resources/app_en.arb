@@ -229,6 +229,14 @@
   "overview": "Overview",
   "are_you_sure_cancel_order": "Are you sure you want to cancel the order?",
   "order_cancelled": "Order cancelled",
-  "feedback_server_error": "Server error"
+  "feedback_server_error": "Server error",
+  "order_complaint": "Order Complaint",
+  "item_complaint": "Item Complaint",
+  "subject": "Subject",
+  "unknown": "Unknown",
+  "rejected": "Rejected",
+  "resolved": "Resolved",
+  "processing": "Processing",
+  "claim_status_history": "Claim Status History"
 
 }

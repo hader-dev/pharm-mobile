@@ -225,5 +225,13 @@
   "overview": "Aperçu",
   "are_you_sure_cancel_order": "Êtes-vous sûr de vouloir annuler la commande?",
   "order_cancelled": "Commande annulée",
-  "feedback_server_error": "Erreur du serveur"
+  "feedback_server_error": "Erreur du serveur",
+  "order_complaint": "Reclamation de commande",
+  "item_complaint": "Reclamation de produit",
+  "subject": "Sujet",
+  "unknown": "Inconnu",
+  "rejected": "Rejeté",
+  "resolved": "Résolue",
+  "processing": "Traitement",
+  "claim_status_history": "Historique de statut de la reclamation"
 }
