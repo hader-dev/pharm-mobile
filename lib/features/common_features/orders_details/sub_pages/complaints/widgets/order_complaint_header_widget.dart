@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/features/common/accordions/ink_accordion_item.dart';
@@ -39,7 +40,7 @@ class OrderComplaintHeaderWidget extends StatelessWidget {
         ],
       ),
       rawSubtitle: claim.createdAt.format,
-      onTap: () => {},
+      onTap: () => RoutingManager.router.pushNamed(RoutingManager.orderComplaint, extra: {"orderId": claim.orderId, "itemId": claim.orderItemId}),
     );
   }
 }
