@@ -45,5 +45,5 @@ jobs:
           yes | sdkmanager --licenses
 
       - name: Build APK
-        run: flutter build apk --release --no-shrink # remove shrink and add a proper signing key
+        run: flutter build apk --debug #  add a proper signing key
 
