@@ -754,4 +754,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get claim_status_history => 'Historique de statut de la reclamation';
+
+  @override
+  String get notifications => 'Notifications';
 }

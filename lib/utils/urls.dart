@@ -1,4 +1,7 @@
 class Urls {
+  // Notifications
+  static String get notifications => "/notifications";
+
   //users endpoint
   static String get users => "/users";
 

@@ -237,6 +237,7 @@
   "rejected": "Rejected",
   "resolved": "Resolved",
   "processing": "Processing",
-  "claim_status_history": "Claim Status History"
+  "claim_status_history": "Claim Status History",
+  "notifications": "Notifications"
 
 }

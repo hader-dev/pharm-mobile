@@ -55,10 +55,12 @@ initAppDependencies() async {
   await firebaseService.init();
   final notificationService = NotificationService(
       firebaseService: firebaseService,
-      notificationRepository: NotificationRepository());
+      notificationRepository: NotificationRepository(
+        client: getItInstance(),
+      ));
   await notificationService.init();
 
-  getItInstance.registerLazySingleton<NotificationServicePort>(
+  getItInstance.registerLazySingleton<INotificationService>(
       () => notificationService);
 
   // Initialize DeeplinksService

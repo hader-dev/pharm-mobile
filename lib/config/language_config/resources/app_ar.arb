@@ -234,5 +234,6 @@
   "rejected": "مرفوض",
   "resolved": "محلول",
   "processing": "معالجة",
-  "claim_status_history": "تاريخ حالة الشكوى"
+  "claim_status_history": "تاريخ حالة الشكوى",
+  "notifications": "الاشعارات"
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/routes/deeplinks_routes.dart';
 import 'package:hader_pharm_mobile/features/common_features/anouncement_details/announcement_details.dart';
+import 'package:hader_pharm_mobile/features/common_features/notification/notification.dart';
 import 'package:hader_pharm_mobile/features/common_features/order_complaint_details/complaint.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/para_pharma_catalog_details.dart';
 import 'package:hader_pharm_mobile/features/common_features/profile/profile.dart';
@@ -56,6 +57,7 @@ class RoutingManager {
   static const String orderComplaint = '/OrderComplaint';
 
   static const String editProfileScreen = '/EditProfileScreen';
+  static const String notificationsScreen = '/Notifications';
 
   static const String languagesScreen = '/LanguagesScreen';
 
@@ -84,6 +86,13 @@ class RoutingManager {
           path: languagesScreen,
           builder: (BuildContext context, GoRouterState state) {
             return const LanguagesScreen();
+          },
+        ),
+         GoRoute(
+          name: notificationsScreen,
+          path: notificationsScreen,
+          builder: (BuildContext context, GoRouterState state) {
+            return const NotificaitonScreen();
           },
         ),
         GoRoute(
@@ -252,6 +261,7 @@ class RoutingManager {
             }),
         ...DeeplinksRoutes.deppLinkRoutes
       ]);
+
 
   static Future<void> popUntilPath(
       BuildContext context, String routePath) async {

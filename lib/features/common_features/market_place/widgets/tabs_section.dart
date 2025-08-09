@@ -26,7 +26,7 @@ class _MarketPlaceTabBarSectionState extends State<MarketPlaceTabBarSection>
   @override
   Widget build(BuildContext context) {
     final translation = context.translation!;
-    final List<String> tabs  = [
+    final List<String> tabs = [
       translation.medicines,
       translation.para_pharma,
       translation.vendors
@@ -51,10 +51,10 @@ class _MarketPlaceTabBarSectionState extends State<MarketPlaceTabBarSection>
               tabs: tabs
                   .map(
                     (tabLabel) => Tab(
-                      
                       child: Text(
-                        getTabTranslation(tabLabel,),
-                        
+                        getTabTranslation(
+                          tabLabel,
+                        ),
                       ),
                     ),
                   )
@@ -64,7 +64,11 @@ class _MarketPlaceTabBarSectionState extends State<MarketPlaceTabBarSection>
           child: TabBarView(
             physics: const NeverScrollableScrollPhysics(),
             controller: tabsController,
-            children: [MedicineProductsPage(), ParaPharmaSearchFilterBottomSheet(), VendorsPage()],
+            children: [
+              MedicineProductsPage(),
+              ParaPharmaSearchFilterBottomSheet(),
+              VendorsPage()
+            ],
           ),
         ),
       ],
