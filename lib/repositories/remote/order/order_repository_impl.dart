@@ -31,27 +31,11 @@ class OrderRepository extends IOrderRepository {
     int limit = PaginationConstants.resultsPerPage,
     int offset = 0,
     String sortDirection = 'ASC',
-    List<int> statusesFilter = const [],
-    double? minPriceFilter,
-    double? maxPriceFilter,
-    String? initialDateFilter,
-    String? finalDateFilter,
   }) async {
     final Map<String, String> queryParams = {
       'limit': limit.toString(),
       'offset': offset.toString(),
       'sort[id]': sortDirection,
-      if (statusesFilter.isNotEmpty)
-        'in[status][]': statusesFilter
-            .map((status) => status.toString())
-            .toList()
-            .join(','),
-      if (minPriceFilter != null)
-        'gte[totalAmountTtc]': minPriceFilter.toStringAsFixed(2),
-      if (maxPriceFilter != null)
-        'lte[totalAmountTtc]': maxPriceFilter.toStringAsFixed(2),
-      if (initialDateFilter != null) 'date[createdAt][from]': initialDateFilter,
-      if (finalDateFilter != null) 'date[createdAt][to]': finalDateFilter,
     };
 
     return actions.getOrders(queryParams, client);

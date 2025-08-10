@@ -239,10 +239,7 @@
   "lteUnitPriceHt": "Min Price",
   "gteUnitPriceHt": "Max Price",
   "price_range_ht": "Price Range (HT)",
-  "currency_symbol": "DA"
-  
-
-
+  "currency_symbol": "DA",
   "feedback_server_error": "Server error",
   "order_complaint": "Order Complaint",
   "item_complaint": "Item Complaint",
