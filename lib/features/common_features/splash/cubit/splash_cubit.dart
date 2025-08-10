@@ -17,10 +17,6 @@ class SplashCubit extends Cubit<SplashState> {
     try {
       UserManager userManager = getItInstance.get<UserManager>();
       String? userAccessToken = await getItInstance.get<TokenManager>().getAccessToken();
-      if (userAccessToken == null) {
-        emit(UserNotLoggedInYet());
-        return;
-      }
       await userManager.getMe();
       if (!userManager.currentUser.isActive) {
         getItInstance.get<ToastManager>().showToast(

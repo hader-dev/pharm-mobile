@@ -1486,6 +1486,66 @@ abstract class AppLocalizations {
   /// **'Server error'**
   String get feedback_server_error;
 
+  /// No description provided for @filter_items_distributor_sku.
+  ///
+  /// In en, this message translates to:
+  /// **'Distributor SKU'**
+  String get filter_items_distributor_sku;
+
+  /// No description provided for @filter_items_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get filter_items_name;
+
+  /// No description provided for @filter_items_description.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get filter_items_description;
+
+  /// No description provided for @filter_items_sku.
+  ///
+  /// In en, this message translates to:
+  /// **'SKU'**
+  String get filter_items_sku;
+
+  /// No description provided for @price_range.
+  ///
+  /// In en, this message translates to:
+  /// **'Price Range'**
+  String get price_range;
+
+  /// No description provided for @to.
+  ///
+  /// In en, this message translates to:
+  /// **'to'**
+  String get to;
+
+  /// No description provided for @lteUnitPriceHt.
+  ///
+  /// In en, this message translates to:
+  /// **'Min Price'**
+  String get lteUnitPriceHt;
+
+  /// No description provided for @gteUnitPriceHt.
+  ///
+  /// In en, this message translates to:
+  /// **'Max Price'**
+  String get gteUnitPriceHt;
+
+  /// No description provided for @price_range_ht.
+  ///
+  /// In en, this message translates to:
+  /// **'Price Range (HT)'**
+  String get price_range_ht;
+
+  /// No description provided for @currency_symbol.
+  ///
+  /// In en, this message translates to:
+  /// **'DA'**
+  String get currency_symbol;
+
   /// No description provided for @order_complaint.
   ///
   /// In en, this message translates to:

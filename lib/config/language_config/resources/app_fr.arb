@@ -235,4 +235,16 @@
   "processing": "Traitement",
   "claim_status_history": "Historique de statut de la reclamation",
   "notifications": "Notifications"
+  "feedback_server_error": "Erreur du serveur",
+  "filter_items_distributor_sku": "SKU du distributeur",
+  "filter_items_name": "Nom",
+  "filter_items_description": "Description",
+  "filter_items_sku": "SKU",
+  "price_range": "Plage de prix",
+  "to": "à",
+  "lteUnitPriceHt": "Prix min",
+  "gteUnitPriceHt": "Prix max",
+  "price_range_ht": "Plage de prix (HT)",
+  "currency_symbol": "DA"
+  
 }

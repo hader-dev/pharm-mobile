@@ -20,8 +20,14 @@ class MedicalFilters extends Equatable {
 
   final List<String> code;
   final List<String> reimbursement;
+  final String? gteUnitPriceHt;  
+  final String? lteUnitPriceHt;
+
+
 
   const MedicalFilters({
+    this.gteUnitPriceHt,
+    this.lteUnitPriceHt,
     this.dci = const [],
     this.dosage = const [],
     this.form = const [],
@@ -37,9 +43,11 @@ class MedicalFilters extends Equatable {
     this.packagingFormat = const [],
     this.code = const [],
     this.reimbursement = const [],
+
   });
 
   MedicalFilters copyWith({
+    
     List<String>? dci,
     List<String>? dosage,
     List<String>? form,
@@ -55,8 +63,15 @@ class MedicalFilters extends Equatable {
     List<String>? packagingFormat,
     List<String>? code,
     List<String>? reimbursement,
+    String? gteUnitPriceHt,
+    String? lteUnitPriceHt,
+  
+
   }) {
     return MedicalFilters(
+
+      gteUnitPriceHt: gteUnitPriceHt ?? this.gteUnitPriceHt,
+      lteUnitPriceHt: lteUnitPriceHt ?? this.lteUnitPriceHt,
       dci: dci ?? this.dci,
       dosage: dosage ?? this.dosage,
       form: form ?? this.form,
@@ -72,11 +87,14 @@ class MedicalFilters extends Equatable {
       packagingFormat: packagingFormat ?? this.packagingFormat,
       code: code ?? this.code,
       reimbursement: reimbursement ?? this.reimbursement,
+
     );
   }
 
   @override
   List<Object?> get props => [
+        gteUnitPriceHt,
+        lteUnitPriceHt, 
         dci,
         dosage,
         form,
@@ -92,6 +110,7 @@ class MedicalFilters extends Equatable {
         packagingFormat,
         code,
         reimbursement,
+       
       ];
 
   MedicalFilters updateSearchFilter(MedicalFiltersKeys key, String text) {
@@ -99,8 +118,15 @@ class MedicalFilters extends Equatable {
         list.where((el) => el.contains(text)).toList();
 
     switch (key) {
+  
+    
+
+      
+      
+
+
       case MedicalFiltersKeys.distributorSku:
-        return copyWith(dci: matchList(distributorSku));
+        return copyWith(distributorSku: matchList(distributorSku));
       case MedicalFiltersKeys.dci:
         return copyWith(dci: matchList(dci));
       case MedicalFiltersKeys.dosage:
@@ -125,11 +151,14 @@ class MedicalFilters extends Equatable {
         return copyWith(code: matchList(code));
       case MedicalFiltersKeys.reimbursement:
         return copyWith(reimbursement: matchList(reimbursement));
+      case MedicalFiltersKeys.unitPriceHt:
+        return this; 
     }
   }
 
   List<String> getFilterBykey(MedicalFiltersKeys currentkey) {
     switch (currentkey) {
+
       case MedicalFiltersKeys.distributorSku:
         return distributorSku;
       case MedicalFiltersKeys.dci:
@@ -156,14 +185,17 @@ class MedicalFilters extends Equatable {
         return code;
       case MedicalFiltersKeys.reimbursement:
         return reimbursement;
+      case MedicalFiltersKeys.unitPriceHt:
+        return []; 
     }
   }
 
   MedicalFilters updateFilterList(
       MedicalFiltersKeys key, List<String> updatedFilters) {
     switch (key) {
+
       case MedicalFiltersKeys.distributorSku:
-        return copyWith(dci: updatedFilters);
+        return copyWith(distributorSku: updatedFilters);
       case MedicalFiltersKeys.dci:
         return copyWith(dci: updatedFilters);
       case MedicalFiltersKeys.dosage:
@@ -186,6 +218,9 @@ class MedicalFilters extends Equatable {
         return copyWith(stabilityDuration: updatedFilters);
       case MedicalFiltersKeys.code:
         return copyWith(code: updatedFilters);
+      
+      case MedicalFiltersKeys.unitPriceHt:
+        return this; 
       case MedicalFiltersKeys.reimbursement:
         return copyWith(reimbursement: updatedFilters);
     }
@@ -205,5 +240,6 @@ enum MedicalFiltersKeys {
   stabilityDuration,
   code,
   reimbursement,
-  distributorSku;
+  distributorSku,
+  unitPriceHt,
 }

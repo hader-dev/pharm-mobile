@@ -7,6 +7,8 @@ import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field
 import 'package:hader_pharm_mobile/features/common/widgets/bottom_sheet_header.dart';
 import 'package:hader_pharm_mobile/features/common_features/filters/cubit/medical_filters_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/filters/widgets/filter_label.dart';
+
+
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
@@ -73,7 +75,7 @@ class MedicalFiltersApply extends StatelessWidget {
 
                       var appliedWorkingFilters = cubit.getCurrentWorkAppliedFilters();
                       var isSelected = appliedWorkingFilters.contains(filter);
-              
+
                       return FilterLabel(label: filter,isSelected:isSelected ,onSelected: (v,s)=>onFilterSelected(v,s,cubit) ,);
                     });
               }),
@@ -85,21 +87,36 @@ class MedicalFiltersApply extends StatelessWidget {
         Padding(
           padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p4),
           child: Row(
-            children: [
-              Expanded(
-                flex: 2,
-                child: PrimaryTextButton(
-                  label: context.translation!.confirm,
-                  leadingIcon: Iconsax.money4,
-                  onTap: () {
-                    BlocProvider.of<MedicalFiltersCubit>(context)
-                        .goToAllFilters();
-                  },
-                  color: AppColors.accent1Shade1,
-                ),
-              ),
-            ],
-          ),
+  children: [
+    
+    Expanded(
+      flex: 1,
+      child: PrimaryTextButton(
+        isOutLined: true,
+        label: context.translation!.reset,
+        labelColor: AppColors.accent1Shade1,
+        onTap: () {
+          BlocProvider.of<MedicalFiltersCubit>(context)
+              .resetCurrentFilters();
+        },
+        borderColor: AppColors.accent1Shade1,
+      ),
+    ),
+    Gap(AppSizesManager.s8),
+    Expanded(
+      flex: 2,
+      child: PrimaryTextButton(
+        label: context.translation!.confirm,
+        leadingIcon: Iconsax.money4,
+        onTap: () {
+          BlocProvider.of<MedicalFiltersCubit>(context)
+              .goToAllFilters();
+        },
+        color: AppColors.accent1Shade1,
+      ),
+    ),
+  ],
+)
         )
       ],
     );

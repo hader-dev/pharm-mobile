@@ -27,6 +27,7 @@ class MedicineCatalogRepository extends IMedicineCatalogRepository {
       'include[company][fields][]': ['id', 'name', 'thumbnailImage'],
     };
 
+
     if (filters.dci.isNotEmpty) queryParams['search[dci]'] = filters.dci.first;
     if (filters.code.isNotEmpty) queryParams['search[code]'] = filters.code.first;
     if (filters.dosage.isNotEmpty) queryParams['search[dosage]'] = filters.dosage.first;
@@ -42,11 +43,18 @@ class MedicineCatalogRepository extends IMedicineCatalogRepository {
     if (filters.packagingFormat.isNotEmpty) queryParams['search[packagingFormat]'] = filters.packagingFormat.first;
     if (filters.reimbursement.isNotEmpty) queryParams['search[reimbursement]'] = filters.reimbursement.first;
     if (filters.distributorSku.isNotEmpty) queryParams['search[distributorSku]'] = filters.distributorSku.first;
+    if(filters.gteUnitPriceHt != null && filters.gteUnitPriceHt!.isNotEmpty) queryParams['gte[unitPriceHt]'] = filters.gteUnitPriceHt!;
+    if(filters.lteUnitPriceHt != null && filters.lteUnitPriceHt!.isNotEmpty) queryParams['lte[unitPriceHt]'] = filters.lteUnitPriceHt!;
+
+
 
     var decodedResponse = await client.sendRequest(() => client.get(
           Urls.medicinesCatalog,
           queryParams: queryParams,
         ));
+
+
+
     return MedicineResponse.fromJson(decodedResponse);
   }
 

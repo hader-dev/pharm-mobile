@@ -1,7 +1,9 @@
 import 'package:equatable/equatable.dart';
 
 enum ParaMedicalFiltersKeys {
-
+  sku,
+  name,
+  description,
   dosage,
   status,
   country,
@@ -12,11 +14,15 @@ enum ParaMedicalFiltersKeys {
   stabilityDuration,
   code,
   reimbursement,
-  distributorSku;
+  distributorSku,
+  unitPriceHt;
 }
 
 class ParaMedicalFilters extends Equatable {
   final List<String> dosage;
+  final List<String> name;
+  final List<String> description;
+  final List<String> sku;
 
   final List<String> status;
   final List<String> registrationDate;
@@ -33,7 +39,15 @@ class ParaMedicalFilters extends Equatable {
   final List<String> code;
   final List<String> reimbursement;
 
+  final String? gteUnitPriceHt;
+  final String? lteUnitPriceHt;
+
+
+
   const ParaMedicalFilters({
+    this.name = const [],
+    this.description = const [],
+    this.sku = const [],
     this.dosage = const [],
     this.status = const [],
     this.registrationDate = const [],
@@ -46,9 +60,15 @@ class ParaMedicalFilters extends Equatable {
     this.distributorSku = const [],
     this.code = const [],
     this.reimbursement = const [],
+    this.gteUnitPriceHt,
+    this.lteUnitPriceHt,
+
   });
 
   ParaMedicalFilters copyWith({
+    List<String>? name,
+    List<String>? description,
+    List<String>? sku,
     List<String>? dosage,
     List<String>? status,
     List<String>? country,
@@ -60,8 +80,14 @@ class ParaMedicalFilters extends Equatable {
     List<String>? distributorSku,
     List<String>? code,
     List<String>? reimbursement,
+    String? gteUnitPriceHt,
+    String? lteUnitPriceHt,
+
   }) {
     return ParaMedicalFilters(
+      name: name ?? this.name,
+      description: description ?? this.description,
+      sku: sku ?? this.sku,
       dosage: dosage ?? this.dosage,
       status: status ?? this.status,
       country: country ?? this.country,
@@ -73,11 +99,18 @@ class ParaMedicalFilters extends Equatable {
       distributorSku: distributorSku ?? this.distributorSku,
       code: code ?? this.code,
       reimbursement: reimbursement ?? this.reimbursement,
+      gteUnitPriceHt: gteUnitPriceHt ?? this.gteUnitPriceHt,
+      lteUnitPriceHt: lteUnitPriceHt ?? this.lteUnitPriceHt,
+
     );
   }
 
   @override
   List<Object?> get props => [
+
+        name,
+        description,
+        sku,
         dosage,
         status,
         country,
@@ -89,6 +122,8 @@ class ParaMedicalFilters extends Equatable {
         distributorSku,
         code,
         reimbursement,
+        gteUnitPriceHt,
+        lteUnitPriceHt,
       ];
 
   ParaMedicalFilters updateSearchFilter(ParaMedicalFiltersKeys key, String text) {
@@ -96,6 +131,16 @@ class ParaMedicalFilters extends Equatable {
         list.where((el) => el.toLowerCase().contains(text.toLowerCase())).toList();
 
     switch (key) {
+
+      case ParaMedicalFiltersKeys.name:
+        return copyWith(name: matchList(name));
+
+      case ParaMedicalFiltersKeys.description:
+        return copyWith(description: matchList(description));
+
+      case ParaMedicalFiltersKeys.sku:
+        return copyWith(sku: matchList(sku));
+
       case ParaMedicalFiltersKeys.distributorSku:
         return copyWith(distributorSku: matchList(distributorSku));
       
@@ -119,11 +164,21 @@ class ParaMedicalFilters extends Equatable {
         return copyWith(code: matchList(code));
       case ParaMedicalFiltersKeys.reimbursement:
         return copyWith(reimbursement: matchList(reimbursement));
+      case ParaMedicalFiltersKeys.unitPriceHt:
+        return this; 
     }
   }
 
   List<String> getFilterBykey(ParaMedicalFiltersKeys currentkey) {
     switch (currentkey) {
+
+      case ParaMedicalFiltersKeys.name:
+        return name;
+        case ParaMedicalFiltersKeys.description:
+        return description;
+        case ParaMedicalFiltersKeys.sku:
+        return  sku;
+
       case ParaMedicalFiltersKeys.distributorSku:
         return distributorSku;
       
@@ -147,12 +202,23 @@ class ParaMedicalFilters extends Equatable {
         return code;
       case ParaMedicalFiltersKeys.reimbursement:
         return reimbursement;
+      case ParaMedicalFiltersKeys.unitPriceHt:
+        return []; 
     }
   }
 
   ParaMedicalFilters updateFilterList(
       ParaMedicalFiltersKeys key, List<String> updatedFilters) {
     switch (key) {
+
+
+      case ParaMedicalFiltersKeys.name:
+        return copyWith(name: updatedFilters);
+      case ParaMedicalFiltersKeys.description:
+        return copyWith(description: updatedFilters);
+      case ParaMedicalFiltersKeys.sku:
+        return copyWith(sku: updatedFilters);
+
       case ParaMedicalFiltersKeys.distributorSku:
         return copyWith(distributorSku: updatedFilters);
      
@@ -176,6 +242,8 @@ class ParaMedicalFilters extends Equatable {
         return copyWith(code: updatedFilters);
       case ParaMedicalFiltersKeys.reimbursement:
         return copyWith(reimbursement: updatedFilters);
+      case ParaMedicalFiltersKeys.unitPriceHt:
+        return this; 
     }
   }
 }

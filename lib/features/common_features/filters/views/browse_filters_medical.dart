@@ -3,15 +3,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/common/accordions/ink_accordion_item.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/bottom_sheet_header.dart';
+import 'package:hader_pharm_mobile/features/common_features/filters/actions/get_applied_filters_as_raw_string.dart';
+import 'package:hader_pharm_mobile/features/common_features/filters/actions/navigate_to_medical_filters_apply_view.dart';
 import 'package:hader_pharm_mobile/features/common_features/filters/cubit/medical_filters_cubit.dart';
-import 'package:hader_pharm_mobile/features/common_features/filters/widgets/filters_clinical.dart';
-import 'package:hader_pharm_mobile/features/common_features/filters/widgets/filters_commercial.dart';
-import 'package:hader_pharm_mobile/features/common_features/filters/widgets/filters_logistics.dart';
-import 'package:hader_pharm_mobile/features/common_features/filters/widgets/filters_others.dart';
-import 'package:hader_pharm_mobile/features/common_features/filters/widgets/filters_regulatory.dart';
+import 'package:hader_pharm_mobile/features/common_features/filters/widgets/filter_price_section.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/medicine_products/cubit/medicine_products_cubit.dart';
+import 'package:hader_pharm_mobile/models/medical_filters.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
@@ -33,12 +33,38 @@ class FiltersMedicalBrowse extends StatelessWidget {
             Gap(AppSizesManager.s12),
             Column(
               children: [
-                FiltersAccordionClinical(),
-                FiltersAccordionRegulatory(),
-                FiltersAccordionCommercial(),
-                FiltersAccordionLogistics(),
-                FiltersAccordionOthers()
+                InkAccordionItem(
+                  rawTitle: context.translation!.filter_items_dci,
+                  onTap: () => navigateToMedicalFiltersApplyView(context, MedicalFiltersKeys.dci),
+                  rawSubtitle: getDisplayedFiltersAsRawString(context, MedicalFiltersKeys.dci),
+                ),
+                InkAccordionItem(
+                  rawTitle: context.translation!.filter_items_distributor_sku,
+                  onTap: () => navigateToMedicalFiltersApplyView(context, MedicalFiltersKeys.distributorSku),
+                  rawSubtitle: getDisplayedFiltersAsRawString(context, MedicalFiltersKeys.distributorSku),
+                ),
+                InkAccordionItem(
+                  rawTitle: context.translation!.filter_items_code,
+                  onTap: () => navigateToMedicalFiltersApplyView(context, MedicalFiltersKeys.code),
+                  rawSubtitle: getDisplayedFiltersAsRawString(context, MedicalFiltersKeys.code),
+                ),
+
               ],
+            ),
+            Gap(AppSizesManager.s12),
+            BlocBuilder<MedicalFiltersCubit, MedicalFiltersState>(
+              builder: (context, state) {
+                final cubit = context.read<MedicalFiltersCubit>();
+                return FilterPriceSection(
+                  minPrice: cubit.appliedFilters.gteUnitPriceHt != null
+                      ? double.tryParse(cubit.appliedFilters.gteUnitPriceHt!)
+                      : null,
+                  maxPrice: cubit.appliedFilters.lteUnitPriceHt != null
+                      ? double.tryParse(cubit.appliedFilters.lteUnitPriceHt!)
+                      : null,
+                  onChanged: (min, max) => cubit.updatePriceRange(min, max),
+                );
+              },
             ),
             Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
             Gap(AppSizesManager.s12),
@@ -54,9 +80,10 @@ class FiltersMedicalBrowse extends StatelessWidget {
                       spalshColor: AppColors.accent1Shade1.withAlpha(50),
                       labelColor: AppColors.accent1Shade1,
                       onTap: () {
+                        context.read<MedicalFiltersCubit>().resetAllFilters();
+
                         BlocProvider.of<MedicineProductsCubit>(context)
                             .resetMedicinesSearchFilter();
-                        context.pop();
                       },
                       borderColor: AppColors.accent1Shade1,
                     ),
@@ -88,4 +115,6 @@ class FiltersMedicalBrowse extends StatelessWidget {
       }
     );
   }
+
+
 }
