@@ -15,11 +15,6 @@ abstract class IOrderRepository {
     int limit = 8,
     int offset = 0,
     String sortDirection = 'ASC',
-    List<int> statusesFilter = const [],
-    double? minPriceFilter,
-    double? maxPriceFilter,
-    String? initialDateFilter,
-    String? finalDateFilter,
   });
   Future<OrderDetailsModel> getMOrderById(String id);
   Future<void> createOrder({required CreateOrderModel orderDetails});

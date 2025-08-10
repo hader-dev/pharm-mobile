@@ -236,8 +236,7 @@
   "lteUnitPriceHt": "الحد الأدنى",
   "gteUnitPriceHt": "الحد الأقصى",
   "price_range_ht": "نطاق السعر (HT)",
-  "currency_symbol": "دج"
-  
+  "currency_symbol": "دج",
   "feedback_server_error": "خطأ في الخادم",
   "order_complaint": "شكوى عن الطلب",
   "item_complaint": "شكوى عن المنتج",

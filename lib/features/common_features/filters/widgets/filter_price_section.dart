@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/features/common_features/orders/widget/search_filter_bottom_sheet/price_tag.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/widgets/make_order_bottom_sheet.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
@@ -82,6 +81,36 @@ class _FilterPriceSectionState extends State<FilterPriceSection> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class PriceTag extends StatelessWidget {
+  final String label;
+  final double value;
+
+  const PriceTag({
+    super.key,
+    required this.label,
+    required this.value,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: Theme.of(context).textTheme.bodySmall,
+        ),
+        Text(
+          '${value.toStringAsFixed(0)} ${context.translation!.currency}',
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
     );
   }
 }

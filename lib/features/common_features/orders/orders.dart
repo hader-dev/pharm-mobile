@@ -7,15 +7,12 @@ import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.da
 
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/end_of_load_result_widget.dart';
-import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import 'package:iconsax/iconsax.dart';
 import 'cubit/orders_cubit.dart';
 import 'widget/order_card.dart';
-import 'widget/search_filter_bottom_sheet/search_filter_bottom_sheet.dart'
-    show OrdersFilterBottomSheet;
 
 class OrdersScreen extends StatelessWidget {
   const OrdersScreen({super.key});
@@ -55,50 +52,6 @@ class OrdersScreen extends StatelessWidget {
               );
             },
           ),
-          trailing: [
-            InkWell(
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: AppSizesManager.p12),
-                child: BlocBuilder<OrdersCubit, OrdersState>(
-                  builder: (context, state) {
-                    return Stack(
-                      clipBehavior: Clip.none,
-                      children: [
-                        Icon(
-                          Iconsax.filter,
-                          color: AppColors.bgWhite,
-                        ),
-                        if (context
-                                .read<OrdersCubit>()
-                                .selectedStatusFilters
-                                .isNotEmpty ||
-                            context.read<OrdersCubit>().minPriceFilter !=
-                                null ||
-                            context.read<OrdersCubit>().maxPriceFilter !=
-                                null ||
-                            context.read<OrdersCubit>().initialDateFilter !=
-                                null ||
-                            context.read<OrdersCubit>().finalDateFilter != null)
-                          Positioned(
-                            top: -4,
-                            right: -4,
-                            child: CircleAvatar(
-                              radius: AppSizesManager.commonWidgetsRadius,
-                              backgroundColor: Colors.red,
-                            ),
-                          )
-                      ],
-                    );
-                  },
-                ),
-              ),
-              onTap: () {
-                BottomSheetHelper.showCommonBottomSheet(
-                    context: context, child: OrdersFilterBottomSheet());
-              },
-            ),
-          ],
         ),
         body: BlocBuilder<OrdersCubit, OrdersState>(
           builder: (context, state) {

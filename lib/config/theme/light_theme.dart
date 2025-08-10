@@ -20,6 +20,7 @@ class LightTheme {
     ),
     iconTheme: IconThemeData(size: AppSizesManager.iconSize20),
 
+
     // tabBarTheme: TabBarThemeData(
     //     dividerHeight: 0.1,
     //     overlayColor: const WidgetStatePropertyAll(Colors.transparent),
