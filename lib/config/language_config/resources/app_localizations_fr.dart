@@ -730,4 +730,34 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get feedback_server_error => 'Erreur du serveur';
+
+  @override
+  String get filter_items_distributor_sku => 'SKU du distributeur';
+
+  @override
+  String get filter_items_name => 'Nom';
+
+  @override
+  String get filter_items_description => 'Description';
+
+  @override
+  String get filter_items_sku => 'SKU';
+
+  @override
+  String get price_range => 'Plage de prix';
+
+  @override
+  String get to => 'à';
+
+  @override
+  String get lteUnitPriceHt => 'Prix min';
+
+  @override
+  String get gteUnitPriceHt => 'Prix max';
+
+  @override
+  String get price_range_ht => 'Plage de prix (HT)';
+
+  @override
+  String get currency_symbol => 'DA';
 }

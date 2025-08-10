@@ -27,6 +27,7 @@ class ParaPharmaRepository extends IParaPharmaRepository {
       'computed[isFavorite]': 'true',
       'include[company][fields][]': ['id', 'name', 'thumbnailImage'],
     };
+
     
     if (filters.code.isNotEmpty) queryParams['search[code]'] = filters.code.first;
     if (filters.dosage.isNotEmpty) queryParams['search[dosage]'] = filters.dosage.first;
@@ -39,7 +40,11 @@ class ParaPharmaRepository extends IParaPharmaRepository {
     if (filters.stabilityDuration.isNotEmpty) queryParams['search[stabilityDuration]'] = filters.stabilityDuration.first;
     if (filters.reimbursement.isNotEmpty) queryParams['search[reimbursement]'] = filters.reimbursement.first;
     if (filters.distributorSku.isNotEmpty) queryParams['search[distributorSku]'] = filters.distributorSku.first;
+    if (filters.name.isNotEmpty) queryParams['search[name]'] = filters.name.first;
+if(filters.gteUnitPriceHt != null && filters.gteUnitPriceHt!.isNotEmpty) queryParams['gte[unitPriceHt]'] = filters.gteUnitPriceHt!;
+if(filters.lteUnitPriceHt != null && filters.lteUnitPriceHt!.isNotEmpty) queryParams['lte[unitPriceHt]'] = filters.lteUnitPriceHt!;
 
+   
 
     var decodedResponse = await client.sendRequest(() => client.get(Urls.paraPharamaCatalog, queryParams: queryParams));
     return ParaPharmaResponse.fromJson(decodedResponse);

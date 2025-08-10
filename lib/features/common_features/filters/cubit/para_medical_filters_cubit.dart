@@ -14,6 +14,8 @@ class ParaMedicalFiltersCubit extends Cubit<ParaMedicalFiltersState> {
 
   final searchController = TextEditingController();
 
+
+
   ParaMedicalFilters filtersSource = const ParaMedicalFilters();
   ParaMedicalFilters appliedFilters = const ParaMedicalFilters();
   ParaMedicalFilters visibleFilters = const ParaMedicalFilters();
@@ -76,9 +78,35 @@ class ParaMedicalFiltersCubit extends Cubit<ParaMedicalFiltersState> {
     currentkey = key;
     emit(ParaMedicalFiltersPageChanged());
   }
+  void updatePriceRange(double minPrice, double maxPrice) {
+  appliedFilters = appliedFilters.copyWith(
+    gteUnitPriceHt: minPrice.toString(),
+    lteUnitPriceHt: maxPrice.toString(),
+  );
+  emit(ParaMedicalFiltersUpdated()); 
+}
 
-  void resetFilters() {
+
+
+  void resetCurrentFilters() {
+    if (currentkey == ParaMedicalFiltersKeys.unitPriceHt) {
+      // Reset price filters
+      appliedFilters = appliedFilters.copyWith(
+        gteUnitPriceHt: null,
+        lteUnitPriceHt: null,
+      );
+    } else {
+      // Reset normal filters
+      appliedFilters = appliedFilters.updateFilterList(currentkey, []);
+      searchController.clear();
+      updateVisibleItems();
+    }
+    emit(ParaMedicalFiltersUpdated());
+  }
+
+  void resetAllFilters() {
     appliedFilters = const ParaMedicalFilters();
+    searchController.clear();
     emit(ParaMedicalFiltersUpdated());
   }
 }

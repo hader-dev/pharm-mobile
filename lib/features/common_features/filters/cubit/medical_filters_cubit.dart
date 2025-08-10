@@ -14,11 +14,15 @@ class MedicalFiltersCubit extends Cubit<MedicalFiltersState> {
 
   final searchController = TextEditingController();
 
+
+
   MedicalFilters filtersSource = MedicalFilters();
   MedicalFilters appliedFilters = MedicalFilters();
   MedicalFilters visibleFilters = MedicalFilters();
 
   MedicalFiltersKeys currentkey = MedicalFiltersKeys.dci;
+
+
 
   MedicalFiltersCubit({required IFiltersRepository filtersRepository})
       : super(MedicalFiltersStateInitial()) {
@@ -38,6 +42,10 @@ class MedicalFiltersCubit extends Cubit<MedicalFiltersState> {
       emit(MedicalFiltersLoadingError());
     }
   }
+
+  
+  
+  
 
   void updateVisibleItems() {
     visibleFilters =
@@ -65,6 +73,15 @@ class MedicalFiltersCubit extends Cubit<MedicalFiltersState> {
 
     emit(MedicalFiltersUpdated());
   }
+  void updatePriceRange(double minPrice, double maxPrice) {
+    debugPrint('DEBUG: updatePriceRange called with min=$minPrice, max=$maxPrice');
+    appliedFilters = appliedFilters.copyWith(
+      gteUnitPriceHt: minPrice.toString(),
+      lteUnitPriceHt: maxPrice.toString(),
+    );
+    debugPrint('DEBUG: appliedFilters updated - gte=${appliedFilters.gteUnitPriceHt}, lte=${appliedFilters.lteUnitPriceHt}');
+    emit(MedicalFiltersUpdated());
+  }
 
   void goToAllFilters() {
     _pageIndex = 0;
@@ -75,5 +92,24 @@ class MedicalFiltersCubit extends Cubit<MedicalFiltersState> {
     _pageIndex = 1;
     currentkey = key;
     emit(MedicalFiltersPageChanged());
+  }
+  void resetCurrentFilters() {
+    if (currentkey == MedicalFiltersKeys.unitPriceHt) {
+      appliedFilters = appliedFilters.copyWith(
+        gteUnitPriceHt: null,
+        lteUnitPriceHt: null,
+      );
+    } else {
+      appliedFilters = appliedFilters.updateFilterList(currentkey, []);
+      searchController.clear();
+      updateVisibleItems();
+    }
+    emit(MedicalFiltersUpdated());
+  }
+
+  void resetAllFilters() {
+    appliedFilters = const MedicalFilters();
+    searchController.clear();
+    emit(MedicalFiltersUpdated());
   }
 }

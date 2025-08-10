@@ -719,4 +719,34 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get feedback_server_error => 'Server error';
+
+  @override
+  String get filter_items_distributor_sku => 'Distributor SKU';
+
+  @override
+  String get filter_items_name => 'Name';
+
+  @override
+  String get filter_items_description => 'Description';
+
+  @override
+  String get filter_items_sku => 'SKU';
+
+  @override
+  String get price_range => 'Price Range';
+
+  @override
+  String get to => 'to';
+
+  @override
+  String get lteUnitPriceHt => 'Min Price';
+
+  @override
+  String get gteUnitPriceHt => 'Max Price';
+
+  @override
+  String get price_range_ht => 'Price Range (HT)';
+
+  @override
+  String get currency_symbol => 'DA';
 }

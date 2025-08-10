@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/features/common/accordions/ink_accordion.dart';
 import 'package:hader_pharm_mobile/features/common/accordions/ink_accordion_item.dart';
 import 'package:hader_pharm_mobile/features/common_features/filters/actions/get_applied_filters_as_raw_string.dart';
-import 'package:hader_pharm_mobile/features/common_features/filters/actions/navigate_to_filters_apply_view.dart';
+import 'package:hader_pharm_mobile/features/common_features/filters/actions/navigate_to_medical_filters_apply_view.dart';
 import 'package:hader_pharm_mobile/models/medical_filters.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
@@ -22,13 +22,13 @@ class FiltersAccordionClinical extends StatelessWidget {
             InkAccordionItem(
               rawTitle: translation.filter_items_dci,
               onTap: () =>
-                  navigateToFiltersApplyView(context, MedicalFiltersKeys.dci),
+                  navigateToMedicalFiltersApplyView(context, MedicalFiltersKeys.dci),
               rawSubtitle: getDisplayedFiltersAsRawString(
                   context, MedicalFiltersKeys.dci),
             ),
             InkAccordionItem(
               rawTitle: translation.filter_items_dosage,
-              onTap: () => navigateToFiltersApplyView(
+              onTap: () => navigateToMedicalFiltersApplyView(
                   context, MedicalFiltersKeys.dosage),
               rawSubtitle: getDisplayedFiltersAsRawString(
                   context, MedicalFiltersKeys.dosage),
@@ -36,7 +36,7 @@ class FiltersAccordionClinical extends StatelessWidget {
             InkAccordionItem(
               rawTitle: translation.filter_items_form,
               onTap: () =>
-                  navigateToFiltersApplyView(context, MedicalFiltersKeys.form),
+                  navigateToMedicalFiltersApplyView(context, MedicalFiltersKeys.form),
               rawSubtitle: getDisplayedFiltersAsRawString(
                   context, MedicalFiltersKeys.form),
             ),

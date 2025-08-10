@@ -12,7 +12,22 @@ class ParamsLoadFiltersMedical {
       {this.locale = "en",
       this.rootPath = "assets/json/filters",
       this.jsonStringLoader,
-      this.filterItems = MedicalFiltersKeys.values,
+      this.filterItems = const [
+        MedicalFiltersKeys.dci,
+        MedicalFiltersKeys.dosage,
+        MedicalFiltersKeys.form,
+        MedicalFiltersKeys.status,
+        MedicalFiltersKeys.country,
+        MedicalFiltersKeys.patent,
+        MedicalFiltersKeys.brand,
+        MedicalFiltersKeys.condition,
+        MedicalFiltersKeys.type,
+        MedicalFiltersKeys.stabilityDuration,
+        MedicalFiltersKeys.code,
+        MedicalFiltersKeys.reimbursement,
+        MedicalFiltersKeys.distributorSku,
+        // unitPriceHt excluded - it's a price filter, not a list-based filter
+      ],
       });
 }
 
@@ -24,8 +39,24 @@ class ParamsLoadFiltersParaMedical {
 
   ParamsLoadFiltersParaMedical(
       {this.locale = "en",
-      this.rootPath = "assets/json/filters", 
+      this.rootPath = "assets/json/filters",
       this.jsonStringLoader,
-      this.filterItems = ParaMedicalFiltersKeys.values,
+      this.filterItems = const [
+        ParaMedicalFiltersKeys.sku,
+        ParaMedicalFiltersKeys.name,
+        ParaMedicalFiltersKeys.description,
+        ParaMedicalFiltersKeys.dosage,
+        ParaMedicalFiltersKeys.status,
+        ParaMedicalFiltersKeys.country,
+        ParaMedicalFiltersKeys.patent,
+        ParaMedicalFiltersKeys.brand,
+        ParaMedicalFiltersKeys.condition,
+        ParaMedicalFiltersKeys.type,
+        ParaMedicalFiltersKeys.stabilityDuration,
+        ParaMedicalFiltersKeys.code,
+        ParaMedicalFiltersKeys.reimbursement,
+        ParaMedicalFiltersKeys.distributorSku,
+        // unitPriceHt excluded - it's a price filter, not a list-based filter
+      ],
       });
 }

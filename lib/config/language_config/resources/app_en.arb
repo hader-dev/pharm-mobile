@@ -229,6 +229,19 @@
   "overview": "Overview",
   "are_you_sure_cancel_order": "Are you sure you want to cancel the order?",
   "order_cancelled": "Order cancelled",
-  "feedback_server_error": "Server error"
+  "feedback_server_error": "Server error",
+  "filter_items_distributor_sku": "Distributor SKU",
+  "filter_items_name": "Name",
+  "filter_items_description": "Description",
+  "filter_items_sku": "SKU",
+  "price_range": "Price Range",
+  "to": "to",
+  "lteUnitPriceHt": "Min Price",
+  "gteUnitPriceHt": "Max Price",
+  "price_range_ht": "Price Range (HT)",
+  "currency_symbol": "DA"
+  
+
+
 
 }

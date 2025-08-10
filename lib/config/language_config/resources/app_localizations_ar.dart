@@ -718,4 +718,34 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get feedback_server_error => 'خطأ في الخادم';
+
+  @override
+  String get filter_items_distributor_sku => 'رمز الموزع';
+
+  @override
+  String get filter_items_name => 'الاسم';
+
+  @override
+  String get filter_items_description => 'الوصف';
+
+  @override
+  String get filter_items_sku => 'رمز المنتج';
+
+  @override
+  String get price_range => 'نطاق السعر';
+
+  @override
+  String get to => 'إلى';
+
+  @override
+  String get lteUnitPriceHt => 'الحد الأدنى';
+
+  @override
+  String get gteUnitPriceHt => 'الحد الأقصى';
+
+  @override
+  String get price_range_ht => 'نطاق السعر (HT)';
+
+  @override
+  String get currency_symbol => 'دج';
 }
