@@ -12,21 +12,31 @@ class FilterLabel extends StatelessWidget {
   final OnSelectedCallback? onSelected;
 
   @override
-  Widget build(BuildContext context) {
-    return Card(
-      child: Row(
-        children: [
-          Checkbox(value: isSelected, onChanged: (v) => onSelected?.call(label, v!)),
-          Expanded(
-            child: Text(
-              label,
-              style: AppTypography.bodySmallStyle.copyWith(
-                  fontWeight: AppTypography.appFontBold,
-                  color: TextColors.primary.color),
+Widget build(BuildContext context) {
+  return InkWell(
+    onTap: () => onSelected?.call(label, !isSelected), 
+    child: Card(
+      child: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Row(
+          children: [
+            Checkbox(
+              value: isSelected, 
+              onChanged: (v) => onSelected?.call(label, v!), 
             ),
-          ),
-        ],
+            const SizedBox(width: 8),
+            Expanded(
+              child: Text(
+                label,
+                style: AppTypography.bodySmallStyle.copyWith(
+                    fontWeight: AppTypography.appFontBold,
+                    color: TextColors.primary.color),
+              ),
+            ),
+          ],
+        ),
       ),
-    );
-  }
+    ),
+  );
+}
 }
