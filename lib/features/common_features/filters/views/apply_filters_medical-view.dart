@@ -7,8 +7,7 @@ import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field
 import 'package:hader_pharm_mobile/features/common/widgets/bottom_sheet_header.dart';
 import 'package:hader_pharm_mobile/features/common_features/filters/cubit/medical_filters_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/filters/widgets/filter_label.dart';
-
-
+import 'package:hader_pharm_mobile/features/common_features/filters/widgets/selected_filters_display.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
@@ -60,6 +59,15 @@ class MedicalFiltersApply extends StatelessWidget {
               },
               validationFunc: (value) {},
             ),
+            BlocBuilder<MedicalFiltersCubit, MedicalFiltersState>(
+  builder: (context, state) {
+    return SelectedFiltersDisplay(
+      selectedFilters: cubit.getCurrentWorkAppliedFilters(),
+      onRemoveFilter: (filter) => onFilterSelected(filter, false, cubit),
+    );
+  },
+),
+
             Gap(AppSizesManager.s8),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.5,
