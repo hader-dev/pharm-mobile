@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hader_pharm_mobile/config/language_config/cubit/lang_cubit.dart';
+import 'package:hader_pharm_mobile/config/language_config/cubit/lang_state.dart';
+import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
+import 'package:hader_pharm_mobile/config/theme/light_theme.dart';
 import '../../config/language_config/resources/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-import '../../config/language_config/cubit/lang_cubit.dart';
-import '../../config/language_config/cubit/lang_state.dart';
-import '../../config/routes/routing_manager.dart';
-import '../../config/theme/light_theme.dart';
+
 
 class HaderPharmApp extends StatelessWidget {
   const HaderPharmApp({super.key});
