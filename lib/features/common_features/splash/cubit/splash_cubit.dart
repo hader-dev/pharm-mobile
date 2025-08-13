@@ -16,6 +16,7 @@ class SplashCubit extends Cubit<SplashState> {
   init() async {
     try {
       UserManager userManager = getItInstance.get<UserManager>();
+      // ignore: unused_local_variable
       String? userAccessToken = await getItInstance.get<TokenManager>().getAccessToken();
       await userManager.getMe();
       if (!userManager.currentUser.isActive) {
