@@ -28,11 +28,11 @@ class _VendorsPageState extends State<VendorsPage>
               final cubit = BlocProvider.of<VendorsCubit>(context);
               final vendors = cubit.vendorsList;
 
-              if (state is VendorsLoading && vendors.isEmpty) {
+              if (state is VendorsLoading ) {
                 return const Center(child: CircularProgressIndicator());
               }
 
-              if (state is VendorsLoaded && vendors.isEmpty) {
+              if (vendors.isEmpty) {
                 return EmptyListWidget();
               }
 

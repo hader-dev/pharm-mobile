@@ -60,6 +60,7 @@ class VendorsCubit extends Cubit<VendorsState> {
       totalVendorsCount = vendorsList.length;
       emit(VendorsLoaded());
     } catch (e) {
+      vendorsList = [];
       emit(VendorsLoadingFailed());
     }
   }

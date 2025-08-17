@@ -27,12 +27,14 @@ class _MedicineProductsPageState extends State<MedicineProductsPage>
               final cubit = BlocProvider.of<MedicineProductsCubit>(context);
               final medicines = cubit.medicines;
 
+              if (state is MedicineProductsLoadingFailed) {
+                return const Center(child: EmptyListWidget());
+              }
               if (state is MedicineProductsLoading && medicines.isEmpty) {
                 return const Center(child: CircularProgressIndicator());
               }
-
               if (state is MedicineProductsLoaded && medicines.isEmpty) {
-                return EmptyListWidget();
+                return const Center(child: EmptyListWidget());
               }
 
               final bool isLoadingMore = state is MedicineProductsLoading;

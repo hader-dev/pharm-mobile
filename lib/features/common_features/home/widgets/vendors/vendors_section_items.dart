@@ -5,10 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/featured.dart';
-import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/medicine_products/cubit/medicine_products_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/vendors/cubit/vendors_cubit.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
-import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class VendorsSectionItems extends StatelessWidget {
   final int maxItemsPerRow;
@@ -26,7 +24,6 @@ class VendorsSectionItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final translation = context.translation!;
     final spacing = _horizontalSpacing();
     final itemWidth = _gridItemWidth(context, spacing);
 
@@ -38,13 +35,11 @@ class VendorsSectionItems extends StatelessWidget {
         builder: (context, state) {
           final items = context.read<VendorsCubit>().vendorsList;
 
-          if (state is MedicineProductsLoading ||
-              state is MedicineProductsLoadingFailed) {
-            return Text(translation.feedback_loading_failed);
+          if (state is VendorsLoadingFailed) {
+            return const Center(child: EmptyListWidget());
           }
-
           if (items.isEmpty) {
-            return EmptyListWidget();
+            return const Center(child: EmptyListWidget());
           }
 
           final visibleItems = items.take(maxVisibleItems).toList();

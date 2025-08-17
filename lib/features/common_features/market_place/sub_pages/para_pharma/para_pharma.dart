@@ -30,12 +30,14 @@ class _ParaPharmaSearchFilterBottomSheetState
                 final cubit = BlocProvider.of<ParaPharmaCubit>(context);
                 final products = cubit.paraPharmaProducts;
 
+                if (state is ParaPharmaProductsLoadingFailed) {
+                  return const Center(child: EmptyListWidget());
+                }
                 if (state is ParaPharmaProductsLoading && products.isEmpty) {
                   return const Center(child: CircularProgressIndicator());
                 }
-
                 if (state is ParaPharmaProductsLoaded && products.isEmpty) {
-                  return EmptyListWidget();
+                  return const Center(child: EmptyListWidget());
                 }
 
                 final bool isLoadingMore = state is LoadingMoreParaPharma;
