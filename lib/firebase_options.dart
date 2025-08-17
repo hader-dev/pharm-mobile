@@ -52,7 +52,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCzd1-cqEVupvX_nuGT9FYRd3sK3k1SjWg',
-    appId: '1:406202220091:android:6a28dee38ee94161bda61e',
+    appId: '1:406202220091:android:934ade724555c834bda61e',
     messagingSenderId: '406202220091',
     projectId: 'hader-9f8a3',
     storageBucket: 'hader-9f8a3.firebasestorage.app',
@@ -60,11 +60,11 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyC0jy4rxGvmIZhrrBYGl7Ja7NUKr6G4QWA',
-    appId: '1:406202220091:ios:823955de04c752fdbda61e',
+    appId: '1:406202220091:ios:46dae02d681aaba8bda61e',
     messagingSenderId: '406202220091',
     projectId: 'hader-9f8a3',
     storageBucket: 'hader-9f8a3.firebasestorage.app',
-    iosBundleId: 'com.example.haderPharmMobile',
+    iosBundleId: 'com.hader.pharma',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(

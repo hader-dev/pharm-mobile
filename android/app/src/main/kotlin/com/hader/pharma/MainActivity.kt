@@ -1,4 +1,4 @@
-package com.example.hader_pharm_mobile
+package com.hader.pharma
 
 import io.flutter.embedding.android.FlutterActivity
 
