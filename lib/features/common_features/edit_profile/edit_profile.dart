@@ -4,15 +4,14 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
+import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
 import 'package:hader_pharm_mobile/features/common_features/edit_profile/cubit/edit_profile_cubit.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
-
 import 'package:iconsax/iconsax.dart' show Iconsax;
 
 import '../../../config/theme/colors_manager.dart';
 import '../../../config/theme/typoghrapy_manager.dart' show AppTypography;
 import '../../../utils/constants.dart';
-import '../../common/app_bars/custom_app_bar.dart' show CustomAppBar;
 import 'widgets/form_section.dart';
 import 'widgets/profile_image_section.dart' show ProfileImageSection;
 
@@ -22,17 +21,19 @@ class EditProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => EditProfileCubit(userManager: getItInstance.get<UserManager>())..initProfileData(),
+      create: (context) =>
+          EditProfileCubit(userManager: getItInstance.get<UserManager>())
+            ..initProfileData(),
       child: SafeArea(
         child: Scaffold(
           backgroundColor: AppColors.bgWhite,
-          appBar: CustomAppBar(
-            bgColor: AppColors.bgWhite,
-            topPadding: MediaQuery.of(context).padding.top,
-            bottomPadding: MediaQuery.of(context).padding.bottom,
+          appBar: CustomAppBarV2.alternate(
             leading: IconButton(
               icon: Icon(
-                Directionality.of(context) == TextDirection.rtl ? Iconsax.arrow_right_3 : Iconsax.arrow_left_2,
+                Directionality.of(context) == TextDirection.rtl
+                    ? Iconsax.arrow_right_3
+                    : Iconsax.arrow_left_2,
+                color: AppColors.bgWhite,
                 size: AppSizesManager.iconSize25,
               ),
               onPressed: () {
@@ -41,11 +42,13 @@ class EditProfileScreen extends StatelessWidget {
             ),
             title: Text(
               context.translation!.update_profile,
-              style: AppTypography.headLine3SemiBoldStyle,
+              style: AppTypography.headLine3SemiBoldStyle
+                  .copyWith(color: AppColors.bgWhite),
             ),
           ),
           body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: AppSizesManager.p16),
+            padding:
+                const EdgeInsets.symmetric(horizontal: AppSizesManager.p16),
             child: BlocBuilder<EditProfileCubit, EditProfileState>(
               builder: (context, state) {
                 if (state is EditProfileLoading) {

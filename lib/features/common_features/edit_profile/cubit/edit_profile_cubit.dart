@@ -17,6 +17,7 @@ class EditProfileCubit extends Cubit<EditProfileState> {
   UserModel? userData;
   EditProfileFormDataModel profileData = EditProfileFormDataModel();
   XFile? pickedImage;
+
   EditProfileCubit({required this.userManager}) : super(EditProfileInitial());
 
   initProfileData() async {
@@ -27,6 +28,7 @@ class EditProfileCubit extends Cubit<EditProfileState> {
         email: getItInstance.get<UserManager>().currentUser.email,
         fullName: getItInstance.get<UserManager>().currentUser.fullName,
         phone: getItInstance.get<UserManager>().currentUser.phone,
+        address: getItInstance.get<UserManager>().currentUser.address,
         iamgePath: getItInstance.get<UserManager>().currentUser.image?.filename,
       );
       emit(EditProfileSuccuss());
@@ -47,7 +49,9 @@ class EditProfileCubit extends Cubit<EditProfileState> {
         updatedProfileData: formData,
       );
       await getItInstance.get<UserManager>().getMe();
-      getItInstance.get<ToastManager>().showToast(message: "Update successful", type: ToastType.success);
+      getItInstance
+          .get<ToastManager>()
+          .showToast(message: "Update successful", type: ToastType.success);
 
       emit(EditProfileSuccuss());
     } catch (e) {

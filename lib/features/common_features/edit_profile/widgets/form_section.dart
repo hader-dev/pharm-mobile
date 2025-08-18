@@ -28,13 +28,19 @@ class _FormSectionState extends State<FormSection> {
               children: [
                 CustomTextField(
                   label: '${context.translation!.full_name}*',
-                  initValue: BlocProvider.of<EditProfileCubit>(context).profileData.fullName,
+                  initValue: BlocProvider.of<EditProfileCubit>(context)
+                      .profileData
+                      .fullName,
                   state: FieldState.normal,
                   onChanged: (newValue) {
-                    BlocProvider.of<EditProfileCubit>(context).changeProfileData(
-                        modifiedData: BlocProvider.of<EditProfileCubit>(context).profileData.copyWith(
-                              fullName: newValue,
-                            ));
+                    BlocProvider.of<EditProfileCubit>(context)
+                        .changeProfileData(
+                            modifiedData:
+                                BlocProvider.of<EditProfileCubit>(context)
+                                    .profileData
+                                    .copyWith(
+                                      fullName: newValue,
+                                    ));
                   },
                   validationFunc: (value) {
                     if (value == null || value.isEmpty) {
@@ -45,7 +51,9 @@ class _FormSectionState extends State<FormSection> {
                 Gap(AppSizesManager.s4),
                 CustomTextField(
                   label: '${context.translation!.email}*',
-                  initValue: BlocProvider.of<EditProfileCubit>(context).profileData.email,
+                  initValue: BlocProvider.of<EditProfileCubit>(context)
+                      .profileData
+                      .email,
                   state: FieldState.normal,
                   validationFunc: (value) {
                     if (value == null || value.isEmpty) {
@@ -56,23 +64,56 @@ class _FormSectionState extends State<FormSection> {
                     }
                   },
                   onChanged: (newValue) {
-                    BlocProvider.of<EditProfileCubit>(context).changeProfileData(
-                        modifiedData: BlocProvider.of<EditProfileCubit>(context).profileData.copyWith(
-                              email: newValue,
-                            ));
+                    BlocProvider.of<EditProfileCubit>(context)
+                        .changeProfileData(
+                            modifiedData:
+                                BlocProvider.of<EditProfileCubit>(context)
+                                    .profileData
+                                    .copyWith(
+                                      email: newValue,
+                                    ));
+                  },
+                ),
+                Gap(AppSizesManager.s4),
+                CustomTextField(
+                  label: '${context.translation!.shipping_address}*',
+                  initValue: BlocProvider.of<EditProfileCubit>(context)
+                      .profileData
+                      .address,
+                  state: FieldState.normal,
+                  validationFunc: (value) {
+                    if (value == null || value.isEmpty) {
+                      return context.translation!.feedback_field_required;
+                    }
+                  },
+                  onChanged: (newValue) {
+                    BlocProvider.of<EditProfileCubit>(context)
+                        .changeProfileData(
+                            modifiedData:
+                                BlocProvider.of<EditProfileCubit>(context)
+                                    .profileData
+                                    .copyWith(
+                                      address: newValue,
+                                    ));
                   },
                 ),
                 Gap(AppSizesManager.s4),
                 CustomTextField(
                   label: context.translation!.phone_mobile,
                   state: FieldState.normal,
-                  initValue: BlocProvider.of<EditProfileCubit>(context).profileData.phone,
+                  initValue: BlocProvider.of<EditProfileCubit>(context)
+                      .profileData
+                      .phone,
                   keyBoadType: TextInputType.phone,
                   onChanged: (newValue) {
-                    BlocProvider.of<EditProfileCubit>(context).changeProfileData(
-                        modifiedData: BlocProvider.of<EditProfileCubit>(context).profileData.copyWith(
-                              phone: newValue,
-                            ));
+                    BlocProvider.of<EditProfileCubit>(context)
+                        .changeProfileData(
+                            modifiedData:
+                                BlocProvider.of<EditProfileCubit>(context)
+                                    .profileData
+                                    .copyWith(
+                                      phone: newValue,
+                                    ));
                   },
                   validationFunc: (value) {
                     return;
@@ -81,14 +122,15 @@ class _FormSectionState extends State<FormSection> {
                 Gap(AppSizesManager.s24),
                 PrimaryTextButton(
                   label: context.translation!.update_profile,
-                  isLoading: context.watch<EditProfileCubit>().state is EditProfileLoading,
+                  isLoading: context.watch<EditProfileCubit>().state
+                      is EditProfileLoading,
                   onTap: () {
                     if (!Form.of(context).validate()) {
                       return;
                     }
 
-                    BlocProvider.of<EditProfileCubit>(context)
-                        .editProfile(BlocProvider.of<EditProfileCubit>(context).profileData);
+                    BlocProvider.of<EditProfileCubit>(context).editProfile(
+                        BlocProvider.of<EditProfileCubit>(context).profileData);
                   },
                   color: AppColors.accent1Shade1,
                 ),

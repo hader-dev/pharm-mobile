@@ -3,18 +3,26 @@ class EditProfileFormDataModel {
   String fullName;
   String phone;
   final String? imagePath;
+  String address;
 
-  EditProfileFormDataModel({this.fullName = "", this.email = "", this.phone = "", this.imagePath});
+  EditProfileFormDataModel(
+      {this.address = "",
+      this.fullName = "",
+      this.email = "",
+      this.phone = "",
+      this.imagePath});
 
   EditProfileFormDataModel copyWith({
     String? email,
     String? phone,
     String? iamgePath,
     String? fullName,
+    String? address,
   }) {
     return EditProfileFormDataModel(
         email: email ?? this.email,
         phone: phone ?? this.phone,
+        address: address ?? this.address,
         imagePath: iamgePath ?? imagePath,
         fullName: fullName ?? this.fullName);
   }
@@ -24,6 +32,7 @@ class EditProfileFormDataModel {
       'fullName': fullName,
       'email': email,
       'phone': phone,
+      'address': address,
     };
   }
 
