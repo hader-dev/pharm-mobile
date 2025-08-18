@@ -4,7 +4,7 @@ import 'package:hader_pharm_mobile/models/medicine_catalog.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/repositories/remote/announcement/response/response_load_announcement_details.dart';
 import 'package:hader_pharm_mobile/repositories/remote/announcement/response/response_load_announcements.dart';
-import 'package:hader_pharm_mobile/repositories/remote/company/mappers/json_to_company.dart';
+import 'package:hader_pharm_mobile/repositories/remote/company/mappers/json_to_base_company.dart';
 import 'package:hader_pharm_mobile/repositories/remote/medicine_catalog/mappers/json_to_medicine_catalogue_item.dart';
 import 'package:hader_pharm_mobile/repositories/remote/parapharm_catalog/mappers/json_to_parapharma_catalogue_item.dart';
 
@@ -37,7 +37,7 @@ ResponseLoadAnnouncementDetails jsonToAnnouncementDetailsResponse(
     Map<String, dynamic> json) {
   final announcement = jsonToAnnouncement(json);
 
-  final company = jsonToCompany(json["company"] as Map<String, dynamic>);
+  final company = jsonToBaseCompany(json["company"] as Map<String, dynamic>);
 
   final List<MedicineCatalogModel> medicines = [];
   final List<ParaPharmaCatalogModel> parapharmas = [];

@@ -1,4 +1,5 @@
 import 'package:hader_pharm_mobile/models/company.dart';
+import 'package:hader_pharm_mobile/repositories/remote/company/mappers/json_to_company.dart';
 
 import 'image.dart';
 
@@ -34,9 +35,7 @@ class BaseParaPharmaCatalogModel {
       stockQuantity: json['stockQuantity'],
       isActive: json['isActive'],
       isLiked: json["isFavorite"] ?? false,
-      company: json['company'] != null
-          ? BaseCompany.fromJson(json['company'])
-          : null,
+      company: json['company'] != null ? jsonToCompany(json['company']) : null,
     );
   }
 }
@@ -101,6 +100,7 @@ class ParaPharmaCatalogModel extends BaseParaPharmaCatalogModel {
 
   ParaPharmaCatalogModel({
     required super.id,
+    required super.isLiked,
     required super.unitPriceHt,
     required super.thumbnailImage,
     required super.image,

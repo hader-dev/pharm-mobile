@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:cached_network_image_plus/flutter_cached_network_image_plus.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
@@ -17,7 +17,7 @@ import '../cubit/medicine_details_cubit.dart';
 class MedicineProductPhotoSection extends StatelessWidget {
   const MedicineProductPhotoSection({super.key});
 
-   @override
+  @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
@@ -26,7 +26,7 @@ class MedicineProductPhotoSection extends StatelessWidget {
           width: double.maxFinite,
           boxFit: BoxFit.fill,
           imageUrl: BlocProvider.of<MedicineDetailsCubit>(context)
-                      . medicineCatalogData
+                      .medicineCatalogData
                       ?.image !=
                   null
               ? getItInstance.get<INetworkService>().getFilesPath(
@@ -67,14 +67,13 @@ class MedicineProductPhotoSection extends StatelessWidget {
             trailing: [
               BlocBuilder<MedicineDetailsCubit, MedicineDetailsState>(
                 builder: (context, state) {
-                  final cubit =
-                      BlocProvider.of<MedicineDetailsCubit>(context);
-                  final isLiked = cubit.  medicineCatalogData?.isLiked ?? false;
+                  final cubit = BlocProvider.of<MedicineDetailsCubit>(context);
+                  final isLiked = cubit.medicineCatalogData?.isLiked ?? false;
 
                   return IconButton(
                     icon: Icon(
                       isLiked ? Iconsax.heart5 : Iconsax.heart,
-                      color: isLiked ? Colors.red : Colors.white,
+                      color: isLiked ? Colors.red : Colors.black,
                     ),
                     onPressed: () {
                       if (isLiked) {
@@ -89,8 +88,7 @@ class MedicineProductPhotoSection extends StatelessWidget {
               IconButton(
                 icon: const Icon(Iconsax.share),
                 onPressed: () {
-                  final cubit =
-                      BlocProvider.of<MedicineDetailsCubit>(context);
+                  final cubit = BlocProvider.of<MedicineDetailsCubit>(context);
                   cubit.shareProduct();
                 },
               ),

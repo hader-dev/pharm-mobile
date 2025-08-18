@@ -1,6 +1,6 @@
-import 'package:hader_pharm_mobile/models/company.dart';
 import 'package:hader_pharm_mobile/models/image.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
+import 'package:hader_pharm_mobile/repositories/remote/company/mappers/json_to_company.dart';
 
 ParaPharmaCatalogModel jsonToParapharmaCatalogueItem(
     Map<String, dynamic> json) {
@@ -30,7 +30,7 @@ ParaPharmaCatalogModel jsonToParapharmaCatalogueItem(
     category: json['category'] == null
         ? Category.empty()
         : Category.fromJson(json['category']),
-    company:
-        json['company'] == null ? null : BaseCompany.fromJson(json['company']),
+    isLiked: json["isFavorite"] ?? false,
+    company: json['company'] == null ? null : jsonToCompany(json['company']),
   );
 }

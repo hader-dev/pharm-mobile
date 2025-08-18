@@ -775,4 +775,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get notifications => 'الاشعارات';
+
+  @override
+  String get follow => 'متابعة';
+
+  @override
+  String get unfollow => 'إلغاء المتابعة';
 }

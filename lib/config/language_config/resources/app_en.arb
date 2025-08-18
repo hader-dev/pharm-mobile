@@ -240,7 +240,6 @@
   "gteUnitPriceHt": "Max Price",
   "price_range_ht": "Price Range (HT)",
   "currency_symbol": "DA",
-  "feedback_server_error": "Server error",
   "order_complaint": "Order Complaint",
   "item_complaint": "Item Complaint",
   "subject": "Subject",
@@ -249,6 +248,7 @@
   "resolved": "Resolved",
   "processing": "Processing",
   "claim_status_history": "Claim Status History",
-  "notifications": "Notifications"
-
+  "notifications": "Notifications",
+  "follow": "Follow",
+  "unfollow": "Unfollow"
 }

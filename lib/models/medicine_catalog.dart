@@ -83,7 +83,9 @@ class BaseMedicineCatalogModel {
       isFeatured: json["isFeatured"] ?? false,
       displayOrder: json["displayOrder"] ?? 0,
       isLiked: json["isFavorite"] ?? false,
-      company: json["company"] != null ? BaseCompany.fromJson(json["company"]) : null,
+      company: json["company"] != null
+          ? BaseCompany.fromJson(json["company"])
+          : null,
     );
   }
 }
@@ -121,8 +123,8 @@ class MedicineCatalogModel extends BaseMedicineCatalogModel {
     required super.displayOrder,
     required this.company,
     required this.medicine,
+    required super.isLiked,
   }) : super(
           company: company,
         );
-
 }

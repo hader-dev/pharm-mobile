@@ -787,4 +787,10 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get notifications => 'Notifications';
+
+  @override
+  String get follow => 'Suivre';
+
+  @override
+  String get unfollow => 'Ne plus suivre';
 }

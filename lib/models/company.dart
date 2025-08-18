@@ -64,6 +64,8 @@ class Company extends BaseCompany {
   final String? nisNumber;
   final dynamic contactInfo;
   final bool? isActive;
+  final bool? isLiked;
+  final bool? isFollowing;
 
   Company({
     required super.id,
@@ -72,6 +74,8 @@ class Company extends BaseCompany {
     required super.name,
     super.address,
     super.phone,
+    this.isFollowing,
+    this.isLiked,
     this.latitude,
     this.longitude,
     this.createdAt,
@@ -91,39 +95,6 @@ class Company extends BaseCompany {
     this.contactInfo,
     this.isActive,
   });
-
-  factory Company.fromJson(Map<String, dynamic> json) {
-    return Company(
-      id: json["id"] ?? "",
-      thumbnailImage: json["thumbnailImage"],
-      image: json["image"],
-      name: json["name"] ?? "",
-      latitude: json["latitude"],
-      longitude: json["longitude"],
-      createdAt: json["createdAt"] != null
-          ? DateTime.tryParse(json["createdAt"])
-          : null,
-      updatedAt: json["updatedAt"] != null
-          ? DateTime.tryParse(json["updatedAt"])
-          : null,
-      managerUserId: json["managerUserId"],
-      type: json["type"],
-      distributorCategory: json["distributorCategory"],
-      address: json["address"],
-      phone: json["phone"],
-      phone2: json["phone2"],
-      fax: json["fax"],
-      email: json["email"],
-      description: json["description"],
-      bankAccount: json["bankAccount"],
-      fiscalId: json["fiscalId"],
-      rcNumber: json["rcNumber"],
-      aiNumber: json["aiNumber"],
-      nisNumber: json["nisNumber"],
-      contactInfo: json["contactInfo"],
-      isActive: json["isActive"],
-    );
-  }
 
   factory Company.empty() {
     return Company(

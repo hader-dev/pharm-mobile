@@ -4,7 +4,6 @@ import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 
-
 abstract class ICompanyRepository {
   Future<void> createCompany(CreateCompanyProfileFormDataModel companyData);
   Future<List<Company>> getCompanies(
@@ -21,4 +20,8 @@ abstract class ICompanyRepository {
   Future<void> addCompanyToFavorites({required String companyId});
   Future<List<Brand>> getCompanyBrands({required String companyId});
   Future<List<Brand>> getCompanyCategories({required String companyId});
+
+  Future<void> removeCompanyFromFavorites({required String companyId});
+
+  Future<void> unJoinCompanyAsCLient({required String companyId});
 }

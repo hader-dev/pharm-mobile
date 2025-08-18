@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart'
-    show BlocBuilder, BlocProvider, MultiBlocProvider, ReadContext, BlocListener;
+    show
+        BlocBuilder,
+        BlocProvider,
+        MultiBlocProvider,
+        ReadContext,
+        BlocListener;
 import 'package:gap/gap.dart' show Gap;
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
@@ -17,8 +22,10 @@ import 'package:hader_pharm_mobile/repositories/remote/medicine_catalog/medicine
 import 'package:hader_pharm_mobile/repositories/remote/parapharm_catalog/para_pharma_catalog_repository_impl.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 import 'package:iconsax/iconsax.dart';
+
 import 'cubit/vendor_details_cubit.dart';
 import 'widget/tabs_section.dart';
 
@@ -33,33 +40,38 @@ class VendorDetails extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (context) =>
-                VendorDetailsCubit(companyRepo: CompanyRepository(client: getItInstance.get<INetworkService>()))
-                  ..getVendorDetails(companyId),
+            create: (context) => VendorDetailsCubit(
+                companyRepo: CompanyRepository(
+                    client: getItInstance.get<INetworkService>()))
+              ..getVendorDetails(companyId),
           ),
           BlocProvider(
             create: (context) => ParaPharmaCubit(
-                favoriteRepository: FavoriteRepository(client: getItInstance.get<INetworkService>()),
+                favoriteRepository: FavoriteRepository(
+                    client: getItInstance.get<INetworkService>()),
                 scrollController: ScrollController(),
                 searchController: TextEditingController(text: ""),
-                paraPharmaRepository: ParaPharmaRepository(client: getItInstance.get<INetworkService>()))
+                paraPharmaRepository: ParaPharmaRepository(
+                    client: getItInstance.get<INetworkService>()))
               ..getParaPharmas(companyIdFilter: companyId),
           ),
           BlocProvider(
             create: (context) => MedicineProductsCubit(
                 scrollController: ScrollController(),
-                favoriteRepository: FavoriteRepository(client: getItInstance.get<INetworkService>()),
+                favoriteRepository: FavoriteRepository(
+                    client: getItInstance.get<INetworkService>()),
                 searchController: TextEditingController(text: ""),
-                medicineRepository: MedicineCatalogRepository(client: getItInstance.get<INetworkService>()))
+                medicineRepository: MedicineCatalogRepository(
+                    client: getItInstance.get<INetworkService>()))
               ..getMedicines(),
           ),
         ],
         child: BlocListener<VendorDetailsCubit, VendorDetailsState>(
           listener: (context, state) {
             if (state is VendorLiked) {
-              getItInstance
-                  .get<ToastManager>()
-                  .showToast(type: ToastType.success, message: 'Vendor added to your favorites list');
+              getItInstance.get<ToastManager>().showToast(
+                  type: ToastType.success,
+                  message: 'Vendor added to your favorites list');
             }
           },
           child: Scaffold(
@@ -70,7 +82,9 @@ class VendorDetails extends StatelessWidget {
               bottomPadding: MediaQuery.of(context).padding.bottom,
               leading: IconButton(
                 icon: Icon(
-                  Directionality.of(context) == TextDirection.rtl ? Iconsax.arrow_right_3 : Iconsax.arrow_left_2,
+                  Directionality.of(context) == TextDirection.rtl
+                      ? Iconsax.arrow_right_3
+                      : Iconsax.arrow_left_2,
                   size: AppSizesManager.iconSize25,
                 ),
                 onPressed: () {
@@ -80,14 +94,33 @@ class VendorDetails extends StatelessWidget {
               trailing: [
                 BlocBuilder<VendorDetailsCubit, VendorDetailsState>(
                   builder: (context, state) {
+                    final isFollowing = context
+                            .read<VendorDetailsCubit>()
+                            .vendorData
+                            .isFollowing ??
+                        false;
+
                     return PrimaryTextButton(
-                        label: "Join",
+                        label: isFollowing
+                            ? context.translation!.unfollow
+                            : context.translation!.follow,
                         leadingIcon: Iconsax.user_add,
                         labelColor: AppColors.accent1Shade1,
                         onTap: () {
-                          context
-                              .read<VendorDetailsCubit>()
-                              .requestJoinVendorAsClient(context.read<VendorDetailsCubit>().vendorData.id);
+                          if (isFollowing) {
+                            context.read<VendorDetailsCubit>().unfollowVendor(
+                                context
+                                    .read<VendorDetailsCubit>()
+                                    .vendorData
+                                    .id);
+                          } else {
+                            context
+                                .read<VendorDetailsCubit>()
+                                .requestJoinVendorAsClient(context
+                                    .read<VendorDetailsCubit>()
+                                    .vendorData
+                                    .id);
+                          }
                         },
                         isLoading: state is SendingJoinRequest,
                         borderColor: AppColors.accent1Shade1);
@@ -97,15 +130,32 @@ class VendorDetails extends StatelessWidget {
                   padding: const EdgeInsets.only(right: AppSizesManager.p8),
                   child: BlocBuilder<VendorDetailsCubit, VendorDetailsState>(
                     builder: (context, state) {
+                      final isLiked = context
+                              .read<VendorDetailsCubit>()
+                              .vendorData
+                              .isLiked ??
+                          false;
+
                       return InkWell(
-                        child: const Icon(
+                        child: Icon(
                           Iconsax.heart,
+                          color: isLiked ? Colors.red : Colors.black,
                           size: AppSizesManager.iconSize20,
                         ),
                         onTap: () {
-                          context
-                              .read<VendorDetailsCubit>()
-                              .likeVendor(context.read<VendorDetailsCubit>().vendorData.id);
+                          if (isLiked) {
+                            context.read<VendorDetailsCubit>().unlikeVendor(
+                                context
+                                    .read<VendorDetailsCubit>()
+                                    .vendorData
+                                    .id);
+                          } else {
+                            context.read<VendorDetailsCubit>().likeVendor(
+                                context
+                                    .read<VendorDetailsCubit>()
+                                    .vendorData
+                                    .id);
+                          }
                         },
                       );
                     },
@@ -115,7 +165,8 @@ class VendorDetails extends StatelessWidget {
               title: BlocBuilder<VendorDetailsCubit, VendorDetailsState>(
                 builder: (context, state) {
                   if (state is VendorDetailsLoading) {
-                    return Text("Loading...", style: AppTypography.headLine4SemiBoldStyle);
+                    return Text("Loading...",
+                        style: AppTypography.headLine4SemiBoldStyle);
                   }
                   return Row(children: [
                     Container(
@@ -123,11 +174,20 @@ class VendorDetails extends StatelessWidget {
                       width: 45,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        border: Border.all(color: AppColors.bgDisabled, width: 1.5),
+                        border:
+                            Border.all(color: AppColors.bgDisabled, width: 1.5),
                         image: DecorationImage(
-                          image: context.read<VendorDetailsCubit>().vendorData.image == null
-                              ? AssetImage(DrawableAssetStrings.companyPlaceHolderImg)
-                              : NetworkImage(context.read<VendorDetailsCubit>().vendorData.thumbnailImage),
+                          image: context
+                                      .read<VendorDetailsCubit>()
+                                      .vendorData
+                                      .image ==
+                                  null
+                              ? AssetImage(
+                                  DrawableAssetStrings.companyPlaceHolderImg)
+                              : NetworkImage(context
+                                  .read<VendorDetailsCubit>()
+                                  .vendorData
+                                  .thumbnailImage),
                         ),
                       ),
                     ),
