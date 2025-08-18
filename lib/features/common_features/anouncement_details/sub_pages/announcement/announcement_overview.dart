@@ -17,12 +17,12 @@ class AnnouncementOverviewPage extends StatelessWidget {
         return const Center(child: CircularProgressIndicator());
       }
 
-      if (cubit.announcement == null) {
-        return EmptyListWidget();
+      if (cubit.announcement == null || cubit.announcement?.content == "") {
+        return const Center(child: EmptyListWidget());
       }
       return Center(
           child: Markdown(
-        data:cubit.announcement?.content ?? "",
+        data: cubit.announcement?.content ?? "",
       ));
     });
   }
