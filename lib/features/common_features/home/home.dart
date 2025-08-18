@@ -1,3 +1,4 @@
+import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -86,8 +87,32 @@ class _HomeScreenState extends State<HomeScreen> {
               return const Center(child: CircularProgressIndicator());
             }
             if (state is PromotionLoadingFailed) {
-              return Text(translation.feedback_loading_failed);
+              return Center(
+                child: EmptyListWidget(
+                  onRefresh: () {
+                    context.read<HomeCubit>().getPromotions();
+                  },
+                ),
+              );
             }
+            final hasPromotions = context.read<HomeCubit>().announcements.isNotEmpty;
+            final hasVendors = context.read<VendorsCubit>().vendorsList.isNotEmpty;
+            final hasMedicines = context.read<MedicineProductsCubit>().medicines.isNotEmpty;
+            final hasParapharma = context.read<ParaPharmaCubit>().paraPharmaProducts.isNotEmpty;
+
+            if (!hasPromotions && !hasVendors && !hasMedicines && !hasParapharma) {
+              return Center(
+                child: EmptyListWidget(
+                  onRefresh: () {
+                    context.read<HomeCubit>().getPromotions();
+                    context.read<VendorsCubit>().fetchVendors();
+                    context.read<MedicineProductsCubit>().getMedicines();
+                    context.read<ParaPharmaCubit>().getParaPharmas();
+                  },
+                ),
+              );
+            }
+
             return SingleChildScrollView(
                 child: Column(
               children: [
