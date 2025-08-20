@@ -32,7 +32,7 @@ class EditProfileFormDataModel {
       'fullName': fullName,
       'email': email,
       'phone': phone,
-      'address': address,
+      //'address': address,
     };
   }
 

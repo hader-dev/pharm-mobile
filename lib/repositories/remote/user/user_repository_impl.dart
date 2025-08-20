@@ -93,18 +93,31 @@ class UserRepository implements IUserRepository {
     Map<String, dynamic> dataAsMap = updatedProfileData.toJson();
     dataAsMap.removeWhere(
         (key, value) => value == null || (value is String && value.isEmpty));
+
+    final allowedExtensions = [
+      'png', 'jpg', 'jpeg', 'gif', 'tif', 'tiff', 'svg', 'bmp', 'webp'
+    ];
+
     FormData formData = FormData.fromMap(
       {
         ...dataAsMap,
-        "removeImage": true,
-        if (updatedProfileData.imagePath != null)
-          'image': await MultipartFile.fromFile(updatedProfileData.imagePath!,
-              filename: updatedProfileData.imagePath!.split('/').last),
+        if (updatedProfileData.imagePath != null &&
+            updatedProfileData.imagePath!.isNotEmpty)
+          if (allowedExtensions.contains(
+              updatedProfileData.imagePath!.split('.').last.toLowerCase()))
+            'image': await MultipartFile.fromFile(
+              updatedProfileData.imagePath!,
+              filename: updatedProfileData.imagePath!.split('/').last,
+            ),
       },
       ListFormat.multiCompatible,
     );
 
-    await client.sendRequest(() => client.patch(Urls.me, payload: formData));
+    await client.sendRequest(() => client.patch(
+          Urls.me,
+          payload: formData,
+          headers: {'Content-Type': 'multipart/form-data'},
+        ));
   }
 
   @override
