@@ -1,4 +1,9 @@
+import 'dart:convert';
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/repositories/remote/user/mappers/json_to_user.dart';
 
@@ -89,35 +94,42 @@ class UserRepository implements IUserRepository {
 
   @override
   Future<void> updateProfile(
-      {required EditProfileFormDataModel updatedProfileData}) async {
-    Map<String, dynamic> dataAsMap = updatedProfileData.toJson();
-    dataAsMap.removeWhere(
-        (key, value) => value == null || (value is String && value.isEmpty));
+      {required EditProfileFormDataModel updatedProfileData,
+      bool shouldRemoveImage = false}) async {
+    try {
+      final imagePath = updatedProfileData.imagePath;
+      Uint8List? imageBytes;
 
-    final allowedExtensions = [
-      'png', 'jpg', 'jpeg', 'gif', 'tif', 'tiff', 'svg', 'bmp', 'webp'
-    ];
+// Read image file as bytes if imagePath is provided
+      if (imagePath != null && imagePath.isNotEmpty) {
+        final file = File(imagePath);
+        if (await file.exists()) {
+          imageBytes = await file.readAsBytes();
+        }
+      }
 
-    FormData formData = FormData.fromMap(
-      {
-        ...dataAsMap,
-        if (updatedProfileData.imagePath != null &&
-            updatedProfileData.imagePath!.isNotEmpty)
-          if (allowedExtensions.contains(
-              updatedProfileData.imagePath!.split('.').last.toLowerCase()))
-            'image': await MultipartFile.fromFile(
-              updatedProfileData.imagePath!,
-              filename: updatedProfileData.imagePath!.split('/').last,
-            ),
-      },
-      ListFormat.multiCompatible,
-    );
+// Create payload with profile data and image bytes
+      Map<String, dynamic> payload = {
+        'email': updatedProfileData.email,
+        'fullName': updatedProfileData.fullName,
+        'phone': updatedProfileData.phone,
+        if (imageBytes != null) 'image': base64Encode(imageBytes),
+      };
 
-    await client.sendRequest(() => client.patch(
-          Urls.me,
-          payload: formData,
-          headers: {'Content-Type': 'multipart/form-data'},
-        ));
+// Use PATCH with JSON content type
+      var response = await client.sendRequest(() => client.patch(
+            Urls.me,
+            payload: payload,
+            headers: {'Content-Type': 'application/json'},
+          ));
+
+      debugPrint("Profile update - Success response: $response");
+    } catch (e, stackTrace) {
+      debugPrint("Profile update - Error occurred: $e");
+      debugPrint("Profile update - Error type: ${e.runtimeType}");
+      debugPrint("Profile update - Stack trace: $stackTrace");
+      rethrow;
+    }
   }
 
   @override

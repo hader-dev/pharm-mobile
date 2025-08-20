@@ -17,6 +17,7 @@ class EditProfileCubit extends Cubit<EditProfileState> {
   UserModel? userData;
   EditProfileFormDataModel profileData = EditProfileFormDataModel();
   XFile? pickedImage;
+  bool shouldRemoveImage = false; // Track if user wants to remove existing image
 
   EditProfileCubit({required this.userManager}) : super(EditProfileInitial());
 
@@ -29,7 +30,7 @@ class EditProfileCubit extends Cubit<EditProfileState> {
         fullName: getItInstance.get<UserManager>().currentUser.fullName,
         phone: getItInstance.get<UserManager>().currentUser.phone,
         address: getItInstance.get<UserManager>().currentUser.address,
-        iamgePath: getItInstance.get<UserManager>().currentUser.image?.filename,
+        imagePath: getItInstance.get<UserManager>().currentUser.image?.filename,
       );
       emit(EditProfileSuccuss());
     } catch (e) {
@@ -43,18 +44,34 @@ class EditProfileCubit extends Cubit<EditProfileState> {
       emit(EditProfileLoading());
 
       if (pickedImage != null) {
-        formData = formData.copyWith(iamgePath: pickedImage?.path);
+        debugPrint("Profile update: Image selected - ${pickedImage?.path}");
+        formData = formData.copyWith(imagePath: pickedImage?.path);
+      } else {
+        debugPrint("Profile update: No image selected");
       }
+
+      debugPrint("Profile update: Form data - ${formData.toString()}");
+
       await userManager.updateProfile(
         updatedProfileData: formData,
+        shouldRemoveImage: shouldRemoveImage,
       );
       await getItInstance.get<UserManager>().getMe();
+
+      // Reset flags after successful update
+      shouldRemoveImage = false;
+      pickedImage = null;
+
       getItInstance
           .get<ToastManager>()
           .showToast(message: "Update successful", type: ToastType.success);
 
       emit(EditProfileSuccuss());
     } catch (e) {
+      debugPrint("Profile update error: $e");
+      if (e.toString().contains('runtimeType')) {
+        debugPrint("Error type: ${e.runtimeType}");
+      }
       GlobalExceptionHandler.handle(exception: e);
       emit(EditProfileFailed());
     }
@@ -64,6 +81,7 @@ class EditProfileCubit extends Cubit<EditProfileState> {
     try {
       pickedImage = await DeviceGalleryHelper.pickImageFromGallery();
       if (pickedImage != null) {
+        shouldRemoveImage = false; // User selected new image, don't remove existing one
         emit(UserImagePicked());
       }
     } catch (e) {
@@ -79,6 +97,7 @@ class EditProfileCubit extends Cubit<EditProfileState> {
 
   void removeImage() {
     pickedImage = null;
+    shouldRemoveImage = true; // User wants to remove existing image
     emit(UserImagePicked());
   }
 }

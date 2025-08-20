@@ -118,8 +118,13 @@ class DioNetworkManager extends INetworkService {
 
   @override
   Future<Response> put(String url, {Map<String, String>? headers, Map<String, Object>? queryParams, payload}) async {
+    bool isFormData = payload is FormData;
     Response apiResponse = await _client.putUri(prepareUrl(url, queryParams: queryParams),
-        data: payload != null ? jsonEncode(payload) : null,
+        data: payload != null
+            ? isFormData
+                ? payload
+                : jsonEncode(payload)
+            : null,
         options: Options(headers: _mergeCustomHeaders(headers ?? <String, String>{})));
     return apiResponse;
   }
