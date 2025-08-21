@@ -113,8 +113,12 @@ class UserManager {
   ///Updates the current user profile data.
   Future<void> updateProfile({
     required EditProfileFormDataModel updatedProfileData,
+    bool shouldRemoveImage = false,
   }) async {
-    await userRepo.updateProfile(updatedProfileData: updatedProfileData);
+    await userRepo.updateProfile(
+      updatedProfileData: updatedProfileData,
+      shouldRemoveImage: shouldRemoveImage,
+    );
   }
 
   /// Logs out the current user by removing the stored authentication token.

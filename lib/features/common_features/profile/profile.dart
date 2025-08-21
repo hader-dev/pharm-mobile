@@ -14,9 +14,15 @@ import 'widgets/profile_header.dart';
 import 'widgets/section_title.dart';
 import 'widgets/settings_tile.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   final String openedFrom;
   const ProfileScreen({super.key, required this.openedFrom});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
@@ -65,9 +71,11 @@ class ProfileScreen extends StatelessWidget {
                       SettingsTile(
                           icon: LucideIcons.userCog,
                           title: context.translation!.edit_profile,
-                          onTap: () {
-                            GoRouter.of(context)
+                          onTap: () async {
+                            await GoRouter.of(context)
                                 .pushNamed(RoutingManager.editProfileScreen);
+                            // Rebuild the profile screen when returning from edit profile
+                            setState(() {});
                           }),
                       SettingsTile(
                           icon: LucideIcons.lock,

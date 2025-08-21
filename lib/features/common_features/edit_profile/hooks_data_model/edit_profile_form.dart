@@ -15,7 +15,7 @@ class EditProfileFormDataModel {
   EditProfileFormDataModel copyWith({
     String? email,
     String? phone,
-    String? iamgePath,
+    String? imagePath,
     String? fullName,
     String? address,
   }) {
@@ -23,7 +23,7 @@ class EditProfileFormDataModel {
         email: email ?? this.email,
         phone: phone ?? this.phone,
         address: address ?? this.address,
-        imagePath: iamgePath ?? imagePath,
+        imagePath: imagePath ?? this.imagePath,
         fullName: fullName ?? this.fullName);
   }
 

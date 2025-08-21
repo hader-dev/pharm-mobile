@@ -109,6 +109,7 @@ dependencies:
   dropdown_search: ^6.0.2
   expansion_tile_group: ^2.3.0
   flutter_markdown: ^0.7.7+1
+  http_parser: ^4.1.2
 
 dev_dependencies:
   flutter_test:

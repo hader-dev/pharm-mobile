@@ -21,7 +21,7 @@ class ProfileHeader extends StatelessWidget {
       ),
       child: Row(
         children: <Widget>[
-          const UserImage(),
+          UserImage(key: ValueKey(getItInstance.get<UserManager>().currentUser.image?.path ?? 'no-image')),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: AppSizesManager.p6),
             child: Column(

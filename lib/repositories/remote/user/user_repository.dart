@@ -13,5 +13,5 @@ abstract class IUserRepository {
   Future<String> sendUserEmailCheckOtpCode({required String email, required String otp});
   Future<void> resendOtp({required String email});
   Future<void> sendResetPasswordMail({required String email});
-  Future<void> updateProfile({required EditProfileFormDataModel updatedProfileData});
+  Future<void> updateProfile({required EditProfileFormDataModel updatedProfileData, bool shouldRemoveImage = false});
 }
