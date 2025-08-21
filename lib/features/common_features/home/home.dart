@@ -1,9 +1,9 @@
-import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/cubit/home_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/widgets/appbar.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/widgets/medicine/medicine_section.dart';
@@ -18,7 +18,7 @@ import 'package:hader_pharm_mobile/repositories/remote/favorite/favorite_reposit
 import 'package:hader_pharm_mobile/repositories/remote/medicine_catalog/medicine_catalog_repository_impl.dart';
 import 'package:hader_pharm_mobile/repositories/remote/parapharm_catalog/para_pharma_catalog_repository_impl.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
-import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
+
 import 'widgets/announcements/promotion_section.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -41,7 +41,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final translation = context.translation!;
     final minSectionHeight = MediaQuery.of(context).size.height * 0.15;
 
     return MultiBlocProvider(
@@ -95,12 +94,19 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               );
             }
-            final hasPromotions = context.read<HomeCubit>().announcements.isNotEmpty;
-            final hasVendors = context.read<VendorsCubit>().vendorsList.isNotEmpty;
-            final hasMedicines = context.read<MedicineProductsCubit>().medicines.isNotEmpty;
-            final hasParapharma = context.read<ParaPharmaCubit>().paraPharmaProducts.isNotEmpty;
+            final hasPromotions =
+                context.read<HomeCubit>().announcements.isNotEmpty;
+            final hasVendors =
+                context.read<VendorsCubit>().vendorsList.isNotEmpty;
+            final hasMedicines =
+                context.read<MedicineProductsCubit>().medicines.isNotEmpty;
+            final hasParapharma =
+                context.read<ParaPharmaCubit>().paraPharmaProducts.isNotEmpty;
 
-            if (!hasPromotions && !hasVendors && !hasMedicines && !hasParapharma) {
+            if (!hasPromotions &&
+                !hasVendors &&
+                !hasMedicines &&
+                !hasParapharma) {
               return Center(
                 child: EmptyListWidget(
                   onRefresh: () {
