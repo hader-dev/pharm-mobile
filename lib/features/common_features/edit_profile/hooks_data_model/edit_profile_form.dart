@@ -32,8 +32,7 @@ class EditProfileFormDataModel {
       'fullName': fullName,
       'email': email,
       'phone': phone,
-      // Temporarily removing address to test if it's causing the server error
-      // 'address': address,
+      'address': address,
     };
   }
 

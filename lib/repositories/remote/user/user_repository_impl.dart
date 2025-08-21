@@ -1,11 +1,11 @@
-import 'dart:convert';
-import 'dart:io';
-import 'dart:typed_data';
 
+
+import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/repositories/remote/user/mappers/json_to_user.dart';
+import 'package:http_parser/http_parser.dart';
 
 import '../../../features/common_features/edit_profile/hooks_data_model/edit_profile_form.dart'
     show EditProfileFormDataModel;
@@ -97,36 +97,79 @@ class UserRepository implements IUserRepository {
       {required EditProfileFormDataModel updatedProfileData,
       bool shouldRemoveImage = false}) async {
     try {
-      final imagePath = updatedProfileData.imagePath;
-      Uint8List? imageBytes;
+      debugPrint("Profile update - Starting update process");
 
-// Read image file as bytes if imagePath is provided
-      if (imagePath != null && imagePath.isNotEmpty) {
-        final file = File(imagePath);
-        if (await file.exists()) {
-          imageBytes = await file.readAsBytes();
+      
+      if (updatedProfileData.imagePath != null && updatedProfileData.imagePath!.isNotEmpty) {
+        debugPrint("Profile update - Attempting multipart upload with image");
+        
+        try {
+          late MultipartFile file;
+          String fileName = updatedProfileData.imagePath!.split('/').last;
+          
+          // Get file extension and determine correct mimetype
+          String fileExtension = fileName.split('.').last.toLowerCase();
+          String mimeType = _getMimeTypeFromExtension(fileExtension);
+          
+          debugPrint("Profile update - Image file: $fileName");
+          debugPrint("Profile update - Detected mimetype: $mimeType");
+          
+          // Read file bytes and create MultipartFile with correct content type
+          File imageFile = File(updatedProfileData.imagePath!);
+          List<int> fileBytes = await imageFile.readAsBytes();
+          
+          file = MultipartFile.fromBytes(
+            fileBytes,
+            filename: fileName,
+            contentType: MediaType.parse(mimeType),
+          );
+
+          FormData formData = FormData.fromMap({
+            "email": updatedProfileData.email,
+            "fullName": updatedProfileData.fullName,
+            "phone": updatedProfileData.phone,
+            "address": updatedProfileData.address,
+            'image': file,
+            if (shouldRemoveImage) 'removeImage': true,
+          });
+
+          var response = await client.sendRequest(() => client.patch(
+                Urls.me,
+                payload: formData,
+                headers: {'Content-Type': 'multipart/form-data'},
+              ));
+
+          debugPrint("Profile update with image - SUCCESS: $response");
+          return; 
+        } catch (imageError) {
+          debugPrint("Profile update with image - FAILED: $imageError");
+          debugPrint("Falling back to text-only update...");
+         
         }
       }
 
-// Create payload with profile data and image bytes
+      
       Map<String, dynamic> payload = {
-        'email': updatedProfileData.email,
-        'fullName': updatedProfileData.fullName,
-        'phone': updatedProfileData.phone,
-        if (imageBytes != null) 'image': base64Encode(imageBytes),
+        "fullName": updatedProfileData.fullName,
+        "email": updatedProfileData.email,
+        "phone": updatedProfileData.phone,
+        "address": updatedProfileData.address,
       };
 
-// Use PATCH with JSON content type
+      if (shouldRemoveImage) {
+        payload['removeImage'] = true;
+      }
+
+      debugPrint("Profile update - Sending JSON payload");
       var response = await client.sendRequest(() => client.patch(
             Urls.me,
             payload: payload,
             headers: {'Content-Type': 'application/json'},
           ));
 
-      debugPrint("Profile update - Success response: $response");
+      debugPrint("Profile update - SUCCESS: $response");
     } catch (e, stackTrace) {
       debugPrint("Profile update - Error occurred: $e");
-      debugPrint("Profile update - Error type: ${e.runtimeType}");
       debugPrint("Profile update - Stack trace: $stackTrace");
       rethrow;
     }
@@ -138,5 +181,31 @@ class UserRepository implements IUserRepository {
         () => client.post(Urls.forgotPassword, payload: <String, String>{
               "email": email,
             }));
+  }
+
+  // Helper method to get correct MIME type based on file extension
+  String _getMimeTypeFromExtension(String fileExtension) {
+    switch (fileExtension) {
+      case 'png':
+        return 'image/png';
+      case 'jpg':
+      case 'jpeg':
+        return 'image/jpeg';
+      case 'gif':
+        return 'image/gif';
+      case 'tif':
+      case 'tiff':
+        return 'image/tiff';
+      case 'svg':
+        return 'image/svg+xml';
+      case 'bmp':
+        return 'image/bmp';
+      case 'webp':
+        return 'image/webp';
+      default:
+        // Default to jpeg for unknown extensions
+        debugPrint("Unknown file extension: $fileExtension, defaulting to image/jpeg");
+        return 'image/jpeg';
+    }
   }
 }

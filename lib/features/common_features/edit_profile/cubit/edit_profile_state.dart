@@ -12,9 +12,5 @@ final class ProfileDataLoaded extends EditProfileState {}
 
 final class EditProfileFailed extends EditProfileState {}
 
-//Profile Data changed
-
-final class ProfileDataChanged extends EditProfileState {}
-
 //User Image Picked
 final class UserImagePicked extends EditProfileState {}

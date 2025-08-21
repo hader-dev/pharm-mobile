@@ -5,6 +5,7 @@ import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 
 import '../../../../config/services/auth/user_manager.dart';
+import '../../../../config/services/network/network_interface.dart';
 
 class UserImage extends StatelessWidget {
   const UserImage({
@@ -13,6 +14,12 @@ class UserImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userImage = getItInstance.get<UserManager>().currentUser.image;
+    final imageUrl = userImage != null
+        ? getItInstance.get<INetworkService>().getFilesPath(userImage.path)
+        : null;
+
+   
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Hero(
@@ -26,12 +33,15 @@ class UserImage extends StatelessWidget {
             ),
             height: 70,
             width: 70,
-            child: getItInstance.get<UserManager>().currentUser.image == null
+            child: userImage == null
                 ? SvgPicture.asset(DrawableAssetStrings.defaultProfileImgIcon)
                 : CachedNetworkImage(
-                    imageUrl:
-                        "https://img.freepik.com/premium-photo/male-artist-3d-cartoon-avatar-portrait_839035-198908.jpg",
+                    imageUrl: imageUrl!,
                     fit: BoxFit.cover,
+                    placeholder: (context, url) => const CircularProgressIndicator(),
+                    errorWidget: (context, url, error) {
+                      return SvgPicture.asset(DrawableAssetStrings.defaultProfileImgIcon);
+                    },
                   ),
           ),
         ),

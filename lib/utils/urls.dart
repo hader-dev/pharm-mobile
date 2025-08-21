@@ -4,20 +4,19 @@ class Urls {
 
   //users endpoint
   static String get users => "/users";
+  static String get me => "$users/me";
+  static String get uploadUserImage => "$users/upload-image";
 
   //Auth endpoint
 
   static String get auth => "/auth";
   static String get refreshToken => "$auth/refresh-token";
-
   static String get logIn => "$auth/log-in";
   static String get signUp => "$auth/sign-up";
   static String get verifyEmail => "$auth/verify-email";
   static String get resendOtp => "$auth/resend-email-otp";
   static String get forgotPassword => "$auth/forgot-password";
   static String get changePassword => "$auth/change-password";
-
-  static String get me => "$users/me";
 
   //Client
   static String get client => "/clients";

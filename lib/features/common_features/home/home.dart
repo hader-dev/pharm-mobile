@@ -18,7 +18,6 @@ import 'package:hader_pharm_mobile/repositories/remote/favorite/favorite_reposit
 import 'package:hader_pharm_mobile/repositories/remote/medicine_catalog/medicine_catalog_repository_impl.dart';
 import 'package:hader_pharm_mobile/repositories/remote/parapharm_catalog/para_pharma_catalog_repository_impl.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
-import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'widgets/announcements/promotion_section.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -41,7 +40,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final translation = context.translation!;
     final minSectionHeight = MediaQuery.of(context).size.height * 0.15;
 
     return MultiBlocProvider(

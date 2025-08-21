@@ -92,7 +92,7 @@ class EditProfileCubit extends Cubit<EditProfileState> {
   changeProfileData({required EditProfileFormDataModel modifiedData}) {
     debugPrint(profileData.toString());
     profileData = modifiedData;
-    emit(ProfileDataChanged());
+    emit(ProfileDataLoaded());
   }
 
   void removeImage() {
