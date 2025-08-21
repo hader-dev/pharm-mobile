@@ -5,7 +5,6 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/features/app_layout/app_layout.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_icon_button.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
@@ -70,7 +69,8 @@ class MakeOrderBottomSheet extends StatelessWidget {
                 Gap(AppSizesManager.s12),
                 Text(
                   translation.quantity,
-                  style: AppTypography.body3MediumStyle.copyWith(
+                  style:
+                      context.responsiveTextTheme.current.body3Medium.copyWith(
                     color: TextColors.ternary.color,
                   ),
                 ),
@@ -109,7 +109,8 @@ class MakeOrderBottomSheet extends StatelessWidget {
                               ],
                               validator: (value) =>
                                   value == null || value.isEmpty ? '' : null,
-                              style: AppTypography.body3MediumStyle,
+                              style: context
+                                  .responsiveTextTheme.current.body3Medium,
                               decoration: InputDecoration(
                                 contentPadding:
                                     EdgeInsets.all(AppSizesManager.p12),
@@ -166,7 +167,8 @@ class MakeOrderBottomSheet extends StatelessWidget {
                       isFilled: false,
                       isBorderEnabled: true,
                       hintText: context.translation!.shipping_address,
-                      hintTextStyle: AppTypography.bodySmallStyle
+                      hintTextStyle: context
+                          .responsiveTextTheme.current.bodySmall
                           .copyWith(color: Colors.grey),
                     )),
                 Gap(AppSizesManager.s12),
@@ -179,7 +181,7 @@ class MakeOrderBottomSheet extends StatelessWidget {
                     children: [
                       Text(
                         "${(num.parse(context.read<MedicineDetailsCubit>().quantityController.text) * num.parse(context.read<MedicineDetailsCubit>().medicineCatalogData!.unitPriceHt)).toStringAsFixed(2)} translationContext.currency",
-                        style: AppTypography.body2MediumStyle
+                        style: context.responsiveTextTheme.current.body2Medium
                             .copyWith(color: AppColors.accent1Shade1),
                       ),
                       Spacer(),
@@ -253,7 +255,7 @@ class LabeledInfoWidget extends StatelessWidget {
       label: label,
       value: Text(
         value,
-        style: AppTypography.body2MediumStyle,
+        style: context.responsiveTextTheme.current.body2Medium,
       ),
     );
   }
@@ -287,7 +289,7 @@ class InfoWidget extends StatelessWidget {
         children: [
           Text(
             label,
-            style: AppTypography.body3MediumStyle.copyWith(
+            style: context.responsiveTextTheme.current.body3Medium.copyWith(
               color: TextColors.ternary.color,
             ),
           ),

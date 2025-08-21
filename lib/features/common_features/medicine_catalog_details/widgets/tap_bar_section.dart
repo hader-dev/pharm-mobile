@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/cubit/medicine_details_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/helpers/medicine_catalog_details_tab_data.dart';
-
-
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class ProductDetailsTabBarSection extends StatefulWidget {
   const ProductDetailsTabBarSection({super.key});
 
   @override
-  State<ProductDetailsTabBarSection> createState() => _ProductDetailsTabBarSectionState();
+  State<ProductDetailsTabBarSection> createState() =>
+      _ProductDetailsTabBarSectionState();
 }
 
-class _ProductDetailsTabBarSectionState extends State<ProductDetailsTabBarSection> with TickerProviderStateMixin {
+class _ProductDetailsTabBarSectionState
+    extends State<ProductDetailsTabBarSection> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
@@ -22,7 +22,7 @@ class _ProductDetailsTabBarSectionState extends State<ProductDetailsTabBarSectio
 
   @override
   Widget build(BuildContext context) {
-    TextStyle tabTextStyle = AppTypography.body3MediumStyle;
+    TextStyle tabTextStyle = context.responsiveTextTheme.current.body3Medium;
     final tabs = medicineCatalogDetailsTabData(context);
 
     return TabBar(
@@ -33,9 +33,11 @@ class _ProductDetailsTabBarSectionState extends State<ProductDetailsTabBarSectio
         overlayColor: WidgetStatePropertyAll(Colors.transparent),
         tabAlignment: TabAlignment.start,
         labelColor: AppColors.accent1Shade1,
-        controller: BlocProvider.of<MedicineDetailsCubit>(context).tabController,
+        controller:
+            BlocProvider.of<MedicineDetailsCubit>(context).tabController,
         onTap: (index) {
-          BlocProvider.of<MedicineDetailsCubit>(context, listen: false).changeTapIndex(index);
+          BlocProvider.of<MedicineDetailsCubit>(context, listen: false)
+              .changeTapIndex(index);
         },
         tabs: tabs
             .map(

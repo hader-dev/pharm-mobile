@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../../utils/constants.dart';
@@ -35,32 +34,41 @@ class AppNavBar extends StatelessWidget {
           selectedItemColor: context.theme.primaryColor,
           unselectedItemColor: TextColors.secondary.color,
           currentIndex: BlocProvider.of<AppLayoutCubit>(context).pageIndex,
-          selectedLabelStyle: AppTypography.bodyXSmallStyle,
-          unselectedLabelStyle: AppTypography.bodyXSmallStyle,
+          selectedLabelStyle: context.responsiveTextTheme.current.bodyXSmall,
+          unselectedLabelStyle: context.responsiveTextTheme.current.bodyXSmall,
           showSelectedLabels: true,
           onTap: (index) {
             BlocProvider.of<AppLayoutCubit>(context).changePage(index);
           },
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Padding(padding: EdgeInsets.symmetric(vertical: AppSizesManager.p6), child: Icon(Iconsax.home)),
+              icon: Padding(
+                  padding: EdgeInsets.symmetric(vertical: AppSizesManager.p6),
+                  child: Icon(Iconsax.home)),
               label: context.translation!.home,
             ),
             BottomNavigationBarItem(
-              icon: Padding(padding: EdgeInsets.symmetric(vertical: AppSizesManager.p6), child: Icon(Iconsax.shop)),
+              icon: Padding(
+                  padding: EdgeInsets.symmetric(vertical: AppSizesManager.p6),
+                  child: Icon(Iconsax.shop)),
               label: context.translation!.market_place,
             ),
             BottomNavigationBarItem(
-              icon: Padding(padding: EdgeInsets.symmetric(vertical: AppSizesManager.p6), child: Icon(Iconsax.bag_2)),
+              icon: Padding(
+                  padding: EdgeInsets.symmetric(vertical: AppSizesManager.p6),
+                  child: Icon(Iconsax.bag_2)),
               label: context.translation!.cart,
             ),
             BottomNavigationBarItem(
-              icon: Padding(padding: EdgeInsets.symmetric(vertical: AppSizesManager.p6), child: Icon(Iconsax.box)),
+              icon: Padding(
+                  padding: EdgeInsets.symmetric(vertical: AppSizesManager.p6),
+                  child: Icon(Iconsax.box)),
               label: context.translation!.orders,
             ),
             BottomNavigationBarItem(
               icon: Padding(
-                  padding: EdgeInsets.symmetric(vertical: AppSizesManager.p6), child: Icon(Iconsax.profile_circle)),
+                  padding: EdgeInsets.symmetric(vertical: AppSizesManager.p6),
+                  child: Icon(Iconsax.profile_circle)),
               label: context.translation!.account,
             ),
           ],
@@ -73,14 +81,17 @@ class AppNavBar extends StatelessWidget {
 class NavBarIndicator extends StatelessWidget {
   final int tapsCount;
   final int selectedIndex;
-  const NavBarIndicator({super.key, this.tapsCount = 0, this.selectedIndex = 0});
+  const NavBarIndicator(
+      {super.key, this.tapsCount = 0, this.selectedIndex = 0});
 
   @override
   Widget build(BuildContext context) {
     return Row(children: [
       ...List.generate(tapsCount, (index) {
         return Container(
-          color: selectedIndex == index ? context.theme.primaryColor : Colors.transparent,
+          color: selectedIndex == index
+              ? context.theme.primaryColor
+              : Colors.transparent,
           width: MediaQuery.sizeOf(context).width / tapsCount,
           height: 3,
         );

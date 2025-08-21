@@ -6,7 +6,6 @@ import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/routes/go_router_extension.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/cubit/para_pharma_details_cubit.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
@@ -43,7 +42,7 @@ class ParaPharmaProductPhotoSection extends StatelessWidget {
               Gap(AppSizesManager.s8),
               Text(
                 context.translation!.image_not_available,
-                style: AppTypography.body3MediumStyle
+                style: context.responsiveTextTheme.current.body3Medium
                     .copyWith(color: const Color.fromARGB(255, 197, 197, 197)),
               ),
               Spacer(),

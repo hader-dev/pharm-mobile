@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:gap/gap.dart';
@@ -7,7 +6,6 @@ import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/features/common/accordions/ink_accordion.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders_details/sub_pages/order_items/widgets/order_item_content.dart';
@@ -81,7 +79,8 @@ class OrderItemWidget extends StatelessWidget {
                         item.designation ?? context.translation!.unknown,
                         softWrap: true,
                         overflow: TextOverflow.ellipsis,
-                        style: AppTypography.headLine4MediumStyle,
+                        style:
+                            context.responsiveTextTheme.current.headLine4Medium,
                       ),
                     ],
                   ),

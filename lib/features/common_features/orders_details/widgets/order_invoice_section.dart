@@ -3,7 +3,6 @@ import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
-import '../../../../config/theme/typoghrapy_manager.dart';
 import '../../../../utils/enums.dart';
 import 'order_summary_section.dart';
 
@@ -14,13 +13,14 @@ class OrderInvoiceSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: AppSizesManager.p12, horizontal: AppSizesManager.p8),
+      padding: const EdgeInsets.symmetric(
+          vertical: AppSizesManager.p12, horizontal: AppSizesManager.p8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             context.translation!.order_invoice,
-            style: AppTypography.headLine4SemiBoldStyle,
+            style: context.responsiveTextTheme.current.headLine4SemiBold,
           ),
           Gap(AppSizesManager.s4),
           SummaryRow(

@@ -4,15 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_icon_button.dart';
 import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field.dart';
-import 'package:hader_pharm_mobile/features/common_features/create_company_profile/cubit/create_company_profile_cubit.dart' show CreateCompanyProfileState, CreateCompanyProfileCubit;
+import 'package:hader_pharm_mobile/features/common_features/create_company_profile/cubit/create_company_profile_cubit.dart'
+    show CreateCompanyProfileState, CreateCompanyProfileCubit;
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
-
 
 class PharmacyProfilePage extends StatefulWidget {
   const PharmacyProfilePage({super.key});
@@ -21,7 +20,8 @@ class PharmacyProfilePage extends StatefulWidget {
   State<PharmacyProfilePage> createState() => _PharmacyProfilePageState();
 }
 
-class _PharmacyProfilePageState extends State<PharmacyProfilePage> with AutomaticKeepAliveClientMixin {
+class _PharmacyProfilePageState extends State<PharmacyProfilePage>
+    with AutomaticKeepAliveClientMixin {
   final scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
@@ -35,35 +35,50 @@ class _PharmacyProfilePageState extends State<PharmacyProfilePage> with Automati
           child: SingleChildScrollView(
             controller: scrollController,
             physics: const BouncingScrollPhysics(),
-            child: BlocBuilder<CreateCompanyProfileCubit, CreateCompanyProfileState>(
+            child: BlocBuilder<CreateCompanyProfileCubit,
+                CreateCompanyProfileState>(
               builder: (context, state) {
                 return Column(
                   children: [
                     Align(
                         alignment: Alignment.centerLeft,
                         child: Text(context.translation!.logo,
-                            style: AppTypography.body3MediumStyle.copyWith(color: TextColors.ternary.color))),
+                            style: context
+                                .responsiveTextTheme.current.body3Medium
+                                .copyWith(color: TextColors.ternary.color))),
                     Padding(
-                      padding: EdgeInsets.symmetric(vertical: AppSizesManager.p24),
+                      padding:
+                          EdgeInsets.symmetric(vertical: AppSizesManager.p24),
                       child: InkWell(
                         onTap: () {
-                          BlocProvider.of<CreateCompanyProfileCubit>(context).pickGalleryImage();
+                          BlocProvider.of<CreateCompanyProfileCubit>(context)
+                              .pickGalleryImage();
                         },
                         splashColor: Colors.transparent,
                         child: Stack(
                           children: [
                             Container(
-                                margin: EdgeInsets.symmetric(vertical: AppSizesManager.p4),
+                                margin: EdgeInsets.symmetric(
+                                    vertical: AppSizesManager.p4),
                                 clipBehavior: Clip.antiAlias,
                                 height: MediaQuery.sizeOf(context).height * 0.2,
                                 width: MediaQuery.sizeOf(context).height * 0.2,
                                 decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     color: AppColors.bgDarken,
-                                    border: Border.all(color: AppColors.bgDarken2)),
-                                child: BlocProvider.of<CreateCompanyProfileCubit>(context).pickedImage != null
+                                    border:
+                                        Border.all(color: AppColors.bgDarken2)),
+                                child: BlocProvider.of<
+                                                    CreateCompanyProfileCubit>(
+                                                context)
+                                            .pickedImage !=
+                                        null
                                     ? Image.file(
-                                        File(BlocProvider.of<CreateCompanyProfileCubit>(context).pickedImage!.path),
+                                        File(BlocProvider.of<
+                                                    CreateCompanyProfileCubit>(
+                                                context)
+                                            .pickedImage!
+                                            .path),
                                         fit: BoxFit.fill,
                                       )
                                     // : Column(
@@ -102,7 +117,10 @@ class _PharmacyProfilePageState extends State<PharmacyProfilePage> with Automati
                                   scale: 0.7,
                                   child: PrimaryIconButton(
                                     icon: Icon(
-                                      BlocProvider.of<CreateCompanyProfileCubit>(context).pickedImage != null
+                                      BlocProvider.of<CreateCompanyProfileCubit>(
+                                                      context)
+                                                  .pickedImage !=
+                                              null
                                           ? Iconsax.edit_2
                                           : Iconsax.add,
                                       color: Colors.white,
@@ -110,11 +128,17 @@ class _PharmacyProfilePageState extends State<PharmacyProfilePage> with Automati
                                     isBordered: true,
                                     borderColor: Colors.white,
                                     onPressed: () {
-                                      BlocProvider.of<CreateCompanyProfileCubit>(context).pickGalleryImage();
+                                      BlocProvider.of<
+                                                  CreateCompanyProfileCubit>(
+                                              context)
+                                          .pickGalleryImage();
                                     },
                                   ),
                                 )),
-                            if (BlocProvider.of<CreateCompanyProfileCubit>(context).pickedImage != null)
+                            if (BlocProvider.of<CreateCompanyProfileCubit>(
+                                        context)
+                                    .pickedImage !=
+                                null)
                               Positioned(
                                 top: AppSizesManager.s4,
                                 right: AppSizesManager.s4 / 2,
@@ -129,7 +153,10 @@ class _PharmacyProfilePageState extends State<PharmacyProfilePage> with Automati
                                     ),
                                     bgColor: SystemColors.red.primary,
                                     onPressed: () {
-                                      BlocProvider.of<CreateCompanyProfileCubit>(context).removeImage();
+                                      BlocProvider.of<
+                                                  CreateCompanyProfileCubit>(
+                                              context)
+                                          .removeImage();
                                     },
                                   ),
                                 ),
@@ -144,15 +171,19 @@ class _PharmacyProfilePageState extends State<PharmacyProfilePage> with Automati
                       state: FieldState.normal,
                       maxLines: 8,
                       validationFunc: () {},
-                      value: BlocProvider.of<CreateCompanyProfileCubit>(context).companyData.description,
+                      value: BlocProvider.of<CreateCompanyProfileCubit>(context)
+                          .companyData
+                          .description,
                       onChanged: (newValue) {
-                        BlocProvider.of<CreateCompanyProfileCubit>(context).changeCompanyData(
-                            modifiedData: BlocProvider.of<CreateCompanyProfileCubit>(context)
-                                .companyData
-                                .copyWith(description: newValue));
+                        BlocProvider.of<CreateCompanyProfileCubit>(context)
+                            .changeCompanyData(
+                                modifiedData:
+                                    BlocProvider.of<CreateCompanyProfileCubit>(
+                                            context)
+                                        .companyData
+                                        .copyWith(description: newValue));
                       },
                     ),
-                    
                   ],
                 );
               },

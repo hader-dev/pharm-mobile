@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
-import '../../../../../../config/theme/typoghrapy_manager.dart';
 import 'para_cartegory.dart';
 
 class CategoriesSection extends StatelessWidget {
@@ -16,7 +16,8 @@ class CategoriesSection extends StatelessWidget {
           padding: const EdgeInsets.only(
             left: AppSizesManager.p8,
           ),
-          child: Text('Categories', style: AppTypography.headLine5SemiBoldStyle),
+          child: Text('Categories',
+              style: context.responsiveTextTheme.current.headLine5SemiBold),
         ),
         ConstrainedBox(
           constraints: BoxConstraints(maxHeight: 100),
@@ -26,7 +27,8 @@ class CategoriesSection extends StatelessWidget {
                 10,
                 (index) => CategoryCircularWidget(
                       categoryName: index.toString(),
-                      imageUrl: "https://logos-world.net/wp-content/uploads/2020/09/Dove-Logo-1969-2004.png",
+                      imageUrl:
+                          "https://logos-world.net/wp-content/uploads/2020/09/Dove-Logo-1969-2004.png",
                     )),
           ),
         ),

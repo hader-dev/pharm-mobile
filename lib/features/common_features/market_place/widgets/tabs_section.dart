@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/medicine_products/medicine_products.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/para_pharma.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/vendors/vendors.dart';
@@ -31,7 +30,7 @@ class _MarketPlaceTabBarSectionState extends State<MarketPlaceTabBarSection>
       translation.para_pharma,
       translation.vendors
     ];
-    TextStyle tabTextStyle = AppTypography.body3MediumStyle;
+    TextStyle tabTextStyle = context.responsiveTextTheme.current.body3Medium;
 
     return Column(
       children: [

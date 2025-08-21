@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
 import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field.dart';
 import 'package:hader_pharm_mobile/features/common_features/forgot_password/cubit/forgot_password_cubit.dart';
@@ -32,7 +31,7 @@ class RequestForgotPasswordScreen extends StatelessWidget {
           ),
           Text(context.translation!.enter_email_for_password_reset,
               textAlign: TextAlign.center,
-              style: AppTypography.body1RegularStyle),
+              style: context.responsiveTextTheme.current.body1Regular),
           const Gap(AppSizesManager.s24),
           Form(
             key: formKey,

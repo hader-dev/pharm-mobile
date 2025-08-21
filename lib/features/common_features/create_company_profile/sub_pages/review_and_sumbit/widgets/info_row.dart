@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
-
 
 class InfoRow extends StatelessWidget {
   final IconData? icon;
@@ -13,7 +11,11 @@ class InfoRow extends StatelessWidget {
   final Axis contentDirection;
 
   const InfoRow(
-      {super.key, this.icon, required this.label, this.dataValue = "", this.contentDirection = Axis.horizontal});
+      {super.key,
+      this.icon,
+      required this.label,
+      this.dataValue = "",
+      this.contentDirection = Axis.horizontal});
 
   @override
   Widget build(BuildContext context) {
@@ -24,18 +26,25 @@ class InfoRow extends StatelessWidget {
               children: [
                 if (icon != null) Icon(icon, color: Colors.grey[700], size: 20),
                 const Gap(AppSizesManager.s8),
-                Text(label, style: AppTypography.body3MediumStyle.copyWith(color: TextColors.ternary.color)),
+                Text(label,
+                    style: context.responsiveTextTheme.current.body3Medium
+                        .copyWith(color: TextColors.ternary.color)),
                 Spacer(),
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 2 / 6,
                   child: Tooltip(
-                    message: dataValue.isEmpty ? context.translation!.feedback_not_provided : dataValue,
+                    message: dataValue.isEmpty
+                        ? context.translation!.feedback_not_provided
+                        : dataValue,
                     triggerMode: TooltipTriggerMode.tap,
-                    child: Text(dataValue.isEmpty ? context.translation!.feedback_not_provided : dataValue,
+                    child: Text(
+                        dataValue.isEmpty
+                            ? context.translation!.feedback_not_provided
+                            : dataValue,
                         textAlign: TextAlign.end,
                         softWrap: true,
                         overflow: TextOverflow.ellipsis,
-                        style: AppTypography.body3MediumStyle),
+                        style: context.responsiveTextTheme.current.body3Medium),
                   ),
                 ),
               ],
@@ -44,17 +53,24 @@ class InfoRow extends StatelessWidget {
         : Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(label, style: AppTypography.body3MediumStyle.copyWith(color: TextColors.ternary.color)),
+              Text(label,
+                  style: context.responsiveTextTheme.current.body3Medium
+                      .copyWith(color: TextColors.ternary.color)),
               Gap(AppSizesManager.s6),
               Tooltip(
-                message: dataValue.isEmpty ? context.translation!.feedback_not_provided : dataValue,
+                message: dataValue.isEmpty
+                    ? context.translation!.feedback_not_provided
+                    : dataValue,
                 triggerMode: TooltipTriggerMode.tap,
-                child: Text(dataValue.isEmpty ? context.translation!.feedback_not_provided : dataValue,
+                child: Text(
+                    dataValue.isEmpty
+                        ? context.translation!.feedback_not_provided
+                        : dataValue,
                     textAlign: TextAlign.end,
                     softWrap: true,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
-                    style: AppTypography.body3MediumStyle),
+                    style: context.responsiveTextTheme.current.body3Medium),
               ),
             ],
           );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class InkAccordion extends StatefulWidget {
   final List<Widget> children;
@@ -61,9 +61,11 @@ class InkAccordionState extends State<InkAccordion> {
                 Text.rich(
                   TextSpan(
                     text: widget.rawTitle,
-                    style: AppTypography.bodySmallStyle.copyWith(
-                        fontWeight: AppTypography.appFontBold,
-                        color: TextColors.primary.color),
+                    style: context.responsiveTextTheme.current.bodySmall
+                        .copyWith(
+                            fontWeight: context.responsiveTextTheme.current
+                                .appFont.appFontBold,
+                            color: TextColors.primary.color),
                   ),
                 )
           ]),

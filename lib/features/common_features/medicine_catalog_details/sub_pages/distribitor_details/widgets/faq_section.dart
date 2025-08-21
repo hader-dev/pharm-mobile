@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../../../../config/theme/colors_manager.dart';
-import '../../../../../../config/theme/typoghrapy_manager.dart';
 import '../../../../../../utils/constants.dart';
 import 'question_widget.dart';
 
@@ -17,41 +17,47 @@ class FAQSection extends StatelessWidget {
           children: [
             Text(
               'Questions & Réponses',
-              style: AppTypography.headLine3SemiBoldStyle.copyWith(color: AppColors.accent1Shade1),
+              style: context.responsiveTextTheme.current.headLine3SemiBold
+                  .copyWith(color: AppColors.accent1Shade1),
             ),
             QuestionWidget(
               question: "How to add restaurant food to cart ?",
               answer: Text(
                 "I'm ayoub larbaoui a flutter apps devoloper",
-                style: AppTypography.bodySmallStyle.copyWith(color: TextColors.secondary.color),
+                style: context.responsiveTextTheme.current.bodySmall
+                    .copyWith(color: TextColors.secondary.color),
               ),
             ),
             QuestionWidget(
               question: "How to pass order ?",
               answer: Text(
                 "I'm ayoub larbaoui a flutter apps devoloper",
-                style: AppTypography.bodySmallStyle.copyWith(color: TextColors.secondary.color),
+                style: context.responsiveTextTheme.current.bodySmall
+                    .copyWith(color: TextColors.secondary.color),
               ),
             ),
             QuestionWidget(
               question: "How to cancel order  ?",
               answer: Text(
                 "I'm ayoub larbaoui a flutter apps devoloper",
-                style: AppTypography.bodySmallStyle.copyWith(color: TextColors.secondary.color),
+                style: context.responsiveTextTheme.current.bodySmall
+                    .copyWith(color: TextColors.secondary.color),
               ),
             ),
             QuestionWidget(
               question: "How to add new delivery address ?",
               answer: Text(
                 "I'm ayoub larbaoui a flutter apps devoloper",
-                style: AppTypography.bodySmallStyle.copyWith(color: TextColors.secondary.color),
+                style: context.responsiveTextTheme.current.bodySmall
+                    .copyWith(color: TextColors.secondary.color),
               ),
             ),
             QuestionWidget(
               question: "How to add new delivery address ?",
               answer: Text(
                 "I'm ayoub larbaoui a flutter apps devoloper",
-                style: AppTypography.bodySmallStyle.copyWith(color: TextColors.secondary.color),
+                style: context.responsiveTextTheme.current.bodySmall
+                    .copyWith(color: TextColors.secondary.color),
               ),
             ),
           ],

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/models/order_claim.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_date_helper.dart';
 
 class TrackingClaimStepWidget extends StatelessWidget {
@@ -19,8 +19,8 @@ class TrackingClaimStepWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    OrderClaimStatus orderStatus =
-        OrderClaimStatus.values.firstWhere((OrderClaimStatus element) => element.id == historyStep.claimStatusId);
+    OrderClaimStatus orderStatus = OrderClaimStatus.values.firstWhere(
+        (OrderClaimStatus element) => element.id == historyStep.claimStatusId);
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -38,7 +38,9 @@ class TrackingClaimStepWidget extends StatelessWidget {
                       color: Colors.grey.shade300,
                     ),
                   CircleAvatar(
-                    child: Icon(orderStatus.icon, color: orderStatus.color, size: AppSizesManager.iconSize20),
+                    child: Icon(orderStatus.icon,
+                        color: orderStatus.color,
+                        size: AppSizesManager.iconSize20),
                   ),
                   if (!isLast)
                     Container(
@@ -58,11 +60,11 @@ class TrackingClaimStepWidget extends StatelessWidget {
             children: <Widget>[
               Text(
                 orderStatus.name,
-                style: AppTypography.body3MediumStyle,
+                style: context.responsiveTextTheme.current.body3Medium,
               ),
               Text(
                 historyStep.createdAt.toLocal().format,
-                style: AppTypography.body3RegularStyle,
+                style: context.responsiveTextTheme.current.body3Regular,
               ),
               const SizedBox(height: 4),
               // Text(

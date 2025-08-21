@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../config/theme/colors_manager.dart';
-import '../../../config/theme/typoghrapy_manager.dart';
 import '../../../utils/constants.dart';
 import 'widgets/check_phone_header_section.dart';
 import 'widgets/check_phone_otp_input_section.dart';
@@ -30,21 +30,29 @@ class CheckPhoneScreen extends StatelessWidget {
                   TextSpan(children: [
                     TextSpan(
                       text: 'By Signing Up, you agree to our',
-                      style: AppTypography.body3RegularStyle.copyWith(color: TextColors.ternary.color),
+                      style: context.responsiveTextTheme.current.body3Regular
+                          .copyWith(color: TextColors.ternary.color),
                     ),
                     TextSpan(
                       text: ' Terms of Services ',
-                      style: AppTypography.body3RegularStyle
-                          .copyWith(fontWeight: AppTypography.appFontSemiBold, color: AppColors.accent1Shade1),
+                      style: context.responsiveTextTheme.current.body3Regular
+                          .copyWith(
+                              fontWeight: context.responsiveTextTheme.current
+                                  .appFont.appFontSemiBold,
+                              color: AppColors.accent1Shade1),
                     ),
                     TextSpan(
                       text: ' and',
-                      style: AppTypography.body3RegularStyle.copyWith(color: TextColors.ternary.color),
+                      style: context.responsiveTextTheme.current.body3Regular
+                          .copyWith(color: TextColors.ternary.color),
                     ),
                     TextSpan(
                       text: ' Privacy Policy',
-                      style: AppTypography.body3RegularStyle
-                          .copyWith(fontWeight: AppTypography.appFontSemiBold, color: AppColors.accent1Shade1),
+                      style: context.responsiveTextTheme.current.body3Regular
+                          .copyWith(
+                              fontWeight: context.responsiveTextTheme.current
+                                  .appFont.appFontSemiBold,
+                              color: AppColors.accent1Shade1),
                     ),
                   ])),
               Gap(AppSizesManager.s12),

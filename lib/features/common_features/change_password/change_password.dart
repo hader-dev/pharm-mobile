@@ -1,17 +1,15 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/toast_helper.dart';
-
-import '../../../../../../utils/constants.dart';
-
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../../../../../../utils/constants.dart';
 import '../../../config/theme/colors_manager.dart';
-import '../../../config/theme/typoghrapy_manager.dart';
+import '../../../config/theme/typography/typoghrapy_source.dart';
 import '../../../utils/enums.dart';
 import '../../common/app_bars/custom_app_bar.dart';
 import '../../common/buttons/solid/primary_text_button.dart';
@@ -28,7 +26,8 @@ class ChangePasswordScreen extends StatefulWidget {
 class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   @override
   Widget build(BuildContext context) {
-    final passwordRegex = RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$');
+    final passwordRegex =
+        RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$');
 
     return SafeArea(
       child: Scaffold(
@@ -38,7 +37,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           bottomPadding: MediaQuery.of(context).padding.bottom,
           leading: IconButton(
             icon: Icon(
-              Directionality.of(context) == TextDirection.rtl ? Iconsax.arrow_right_3 : Iconsax.arrow_left_2,
+              Directionality.of(context) == TextDirection.rtl
+                  ? Iconsax.arrow_right_3
+                  : Iconsax.arrow_left_2,
               size: AppSizesManager.iconSize25,
             ),
             onPressed: () {
@@ -47,7 +48,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           ),
           title: Text(
             context.translation!.change_password,
-            style: AppTypography.headLine3SemiBoldStyle,
+            style: context.responsiveTextTheme.current.headLine3SemiBold,
           ),
         ),
         body: BlocProvider(
@@ -72,12 +73,16 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(context.translation!.change_password, style: AppTypography.headLine2Style),
+                          Text(context.translation!.change_password,
+                              style: context
+                                  .responsiveTextTheme.current.headLine2),
                           Gap(
                             AppSizesManager.s12,
                           ),
-                          Text(context.translation!.set_new_password_description,
-                              style: AppTypography.body1MediumStyle.copyWith(
+                          Text(
+                              context.translation!.set_new_password_description,
+                              style:
+                                  AppTypographySource.body1MediumStyle.copyWith(
                                 color: TextColors.ternary.color,
                               )),
                           const Gap(
@@ -89,62 +94,106 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               CustomTextField(
-                                label: '${context.translation!.current_password}*',
-                                controller: BlocProvider.of<ChangePasswordCubit>(ctx).currentPasswordController,
-                                isObscure: BlocProvider.of<ChangePasswordCubit>(ctx).isObscured,
+                                label:
+                                    '${context.translation!.current_password}*',
+                                controller:
+                                    BlocProvider.of<ChangePasswordCubit>(ctx)
+                                        .currentPasswordController,
+                                isObscure:
+                                    BlocProvider.of<ChangePasswordCubit>(ctx)
+                                        .isObscured,
                                 suffixIcon: InkWell(
-                                    onTap: () => BlocProvider.of<ChangePasswordCubit>(ctx).showPassword(),
-                                    child: BlocProvider.of<ChangePasswordCubit>(ctx).isObscured
-                                        ? const Icon(Iconsax.eye, color: AppColors.accent1Shade1)
-                                        : const Icon(Iconsax.eye_slash, color: AppColors.accent1Shade1)),
+                                    onTap: () =>
+                                        BlocProvider.of<ChangePasswordCubit>(
+                                                ctx)
+                                            .showPassword(),
+                                    child: BlocProvider.of<ChangePasswordCubit>(
+                                                ctx)
+                                            .isObscured
+                                        ? const Icon(Iconsax.eye,
+                                            color: AppColors.accent1Shade1)
+                                        : const Icon(Iconsax.eye_slash,
+                                            color: AppColors.accent1Shade1)),
                                 state: FieldState.normal,
                                 validationFunc: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return context.translation!.feedback_field_required;
+                                    return context
+                                        .translation!.feedback_field_required;
                                   }
                                 },
                               ),
                               CustomTextField(
                                 label: '${context.translation!.new_password}*',
-                                controller: BlocProvider.of<ChangePasswordCubit>(ctx).newPasswordController,
-                                isObscure: BlocProvider.of<ChangePasswordCubit>(ctx).isObscured,
+                                controller:
+                                    BlocProvider.of<ChangePasswordCubit>(ctx)
+                                        .newPasswordController,
+                                isObscure:
+                                    BlocProvider.of<ChangePasswordCubit>(ctx)
+                                        .isObscured,
                                 suffixIcon: InkWell(
-                                    onTap: () => BlocProvider.of<ChangePasswordCubit>(ctx).showPassword(),
-                                    child: BlocProvider.of<ChangePasswordCubit>(ctx).isObscured
-                                        ? const Icon(Iconsax.eye, color: AppColors.accent1Shade1)
-                                        : const Icon(Iconsax.eye_slash, color: AppColors.accent1Shade1)),
+                                    onTap: () =>
+                                        BlocProvider.of<ChangePasswordCubit>(
+                                                ctx)
+                                            .showPassword(),
+                                    child: BlocProvider.of<ChangePasswordCubit>(
+                                                ctx)
+                                            .isObscured
+                                        ? const Icon(Iconsax.eye,
+                                            color: AppColors.accent1Shade1)
+                                        : const Icon(Iconsax.eye_slash,
+                                            color: AppColors.accent1Shade1)),
                                 state: FieldState.normal,
                                 validationFunc: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return context.translation!.feedback_field_required;
+                                    return context
+                                        .translation!.feedback_field_required;
                                   }
                                   if (value.length < 6) {
-                                    return context.translation!.passwor_min_length;
+                                    return context
+                                        .translation!.passwor_min_length;
                                   }
                                   if (!passwordRegex.hasMatch(value)) {
-                                    return context.translation!.password_requirements;
+                                    return context
+                                        .translation!.password_requirements;
                                   }
                                 },
                               ),
                               CustomTextField(
-                                label: '${context.translation!.confirm_password}*',
-                                controller: BlocProvider.of<ChangePasswordCubit>(ctx).confirmPasswordController,
-                                isObscure: BlocProvider.of<ChangePasswordCubit>(ctx).isObscured,
+                                label:
+                                    '${context.translation!.confirm_password}*',
+                                controller:
+                                    BlocProvider.of<ChangePasswordCubit>(ctx)
+                                        .confirmPasswordController,
+                                isObscure:
+                                    BlocProvider.of<ChangePasswordCubit>(ctx)
+                                        .isObscured,
                                 suffixIcon: InkWell(
-                                    onTap: () => BlocProvider.of<ChangePasswordCubit>(ctx).showPassword(),
-                                    child: BlocProvider.of<ChangePasswordCubit>(ctx).isObscured
-                                        ? const Icon(Iconsax.eye, color: AppColors.accent1Shade1)
-                                        : const Icon(Iconsax.eye_slash, color: AppColors.accent1Shade1)),
+                                    onTap: () =>
+                                        BlocProvider.of<ChangePasswordCubit>(
+                                                ctx)
+                                            .showPassword(),
+                                    child: BlocProvider.of<ChangePasswordCubit>(
+                                                ctx)
+                                            .isObscured
+                                        ? const Icon(Iconsax.eye,
+                                            color: AppColors.accent1Shade1)
+                                        : const Icon(Iconsax.eye_slash,
+                                            color: AppColors.accent1Shade1)),
                                 state: FieldState.normal,
                                 validationFunc: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return context.translation!.feedback_field_required;
+                                    return context
+                                        .translation!.feedback_field_required;
                                   }
                                   if (value.length < 6) {
                                     return 'Confirm Password must be at least 6 characters';
                                   }
-                                  if (value != BlocProvider.of<ChangePasswordCubit>(ctx).newPasswordController.text) {
-                                    return context.translation!.feedback_passwords_do_not_match;
+                                  if (value !=
+                                      BlocProvider.of<ChangePasswordCubit>(ctx)
+                                          .newPasswordController
+                                          .text) {
+                                    return context.translation!
+                                        .feedback_passwords_do_not_match;
                                   }
                                 },
                               ),
@@ -158,7 +207,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                               if (!Form.of(ctx).validate()) {
                                 return;
                               }
-                              BlocProvider.of<ChangePasswordCubit>(ctx).changePassword();
+                              BlocProvider.of<ChangePasswordCubit>(ctx)
+                                  .changePassword();
                             },
                             color: AppColors.accent1Shade1,
                           ),

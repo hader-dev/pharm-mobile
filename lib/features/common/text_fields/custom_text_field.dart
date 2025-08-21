@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/features/common/decorations/field.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
@@ -75,7 +74,6 @@ class CustomTextField extends StatelessWidget {
     this.maxLines = 1,
   });
 
-
   @override
   Widget build(BuildContext context) {
     final isDisabled = state == FieldState.disabled;
@@ -87,7 +85,7 @@ class CustomTextField extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: AppSizesManager.p4),
             child: Text(label,
-                style: AppTypography.body3MediumStyle
+                style: context.responsiveTextTheme.current.body3Medium
                     .copyWith(color: TextColors.ternary.color)),
           ),
         if (label.isNotEmpty) const Gap(AppSizesManager.s6),
@@ -107,8 +105,8 @@ class CustomTextField extends StatelessWidget {
             return Flexible(
               child: Text(
                 errorText,
-                style:
-                    AppTypography.bodyXSmallStyle.copyWith(color: Colors.red),
+                style: context.responsiveTextTheme.current.bodyXSmall
+                    .copyWith(color: Colors.red),
               ),
             );
           },
@@ -120,7 +118,7 @@ class CustomTextField extends StatelessWidget {
           obscuringCharacter: '*',
           decoration: InputDecoration(
             hintText: hintText,
-            hintStyle: AppTypography.body3RegularStyle
+            hintStyle: context.responsiveTextTheme.current.body3Regular
                 .copyWith(color: TextColors.ternary.color),
             isDense: true,
             filled: isFilled,
@@ -133,8 +131,8 @@ class CustomTextField extends StatelessWidget {
                 const Gap(AppSizesManager.s6),
                 Text(
                   state.wordKey,
-                  style: AppTypography.bodyXSmallStyle
-                      .copyWith(color: getEnabledBorderColor(context,state)),
+                  style: context.responsiveTextTheme.current.bodyXSmall
+                      .copyWith(color: getEnabledBorderColor(context, state)),
                 ),
               ],
             ),
@@ -146,7 +144,8 @@ class CustomTextField extends StatelessWidget {
             enabledBorder: OutlineInputBorder(
               borderRadius:
                   BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
-              borderSide: BorderSide(color: getEnabledBorderColor(context,state)),
+              borderSide:
+                  BorderSide(color: getEnabledBorderColor(context, state)),
             ),
             disabledBorder: OutlineInputBorder(
               borderRadius:
@@ -156,7 +155,8 @@ class CustomTextField extends StatelessWidget {
             focusedBorder: OutlineInputBorder(
               borderRadius:
                   BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
-              borderSide: BorderSide(color: getFocusedBorderColor(context,state)),
+              borderSide:
+                  BorderSide(color: getFocusedBorderColor(context, state)),
             ),
           ),
         ),

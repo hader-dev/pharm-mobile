@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/features/common_features/anouncement_details/sub_pages/announcement/announcement_overview.dart';
 import 'package:hader_pharm_mobile/features/common_features/anouncement_details/sub_pages/medicine_products/medicine_products.dart';
 import 'package:hader_pharm_mobile/features/common_features/anouncement_details/sub_pages/para_pharma/para_pharma.dart';
@@ -33,7 +32,7 @@ class _AnnouncementDetailsTabBarSectionState
       translation.para_pharma,
     ];
 
-    TextStyle tabTextStyle = AppTypography.body3MediumStyle;
+    TextStyle tabTextStyle = context.responsiveTextTheme.current.body3Medium;
 
     return Column(
       children: [

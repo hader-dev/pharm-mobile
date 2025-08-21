@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/models/order_details.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
@@ -28,11 +27,12 @@ class OrderItemsSection extends StatelessWidget {
         children: <Widget>[
           Text.rich(TextSpan(
               text: context.translation!.order_items,
-              style: AppTypography.headLine4SemiBoldStyle,
+              style: context.responsiveTextTheme.current.headLine4SemiBold,
               children: <InlineSpan>[
                 TextSpan(
                   text: ' (${orderItems.length})',
-                  style: AppTypography.headLine5MediumStyle.copyWith(
+                  style: context.responsiveTextTheme.current.headLine5Medium
+                      .copyWith(
                     color: Colors.grey.shade600,
                   ),
                 )

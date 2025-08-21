@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 // ignore: must_be_immutable
 class CustomChip extends StatelessWidget {
@@ -26,10 +26,12 @@ class CustomChip extends StatelessWidget {
       onTap: onTap,
       child: Container(
         alignment: Alignment.center,
-        padding: const EdgeInsets.symmetric(horizontal: AppSizesManager.p6, vertical: AppSizesManager.p4),
+        padding: const EdgeInsets.symmetric(
+            horizontal: AppSizesManager.p6, vertical: AppSizesManager.p4),
         decoration: BoxDecoration(
           color: color,
-          borderRadius: BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+          borderRadius:
+              BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
         ),
         child: Row(
           children: <Widget>[
@@ -42,12 +44,14 @@ class CustomChip extends StatelessWidget {
               const Gap(AppSizesManager.s4),
             ],
             Container(
-              constraints: BoxConstraints(maxWidth: MediaQuery.sizeOf(context).width / 2),
+              constraints: BoxConstraints(
+                  maxWidth: MediaQuery.sizeOf(context).width / 2),
               child: Text(label,
                   softWrap: true,
                   textWidthBasis: TextWidthBasis.parent,
                   overflow: TextOverflow.ellipsis,
-                  style: AppTypography.body3MediumStyle.copyWith(color: labelColor)),
+                  style: context.responsiveTextTheme.current.body3Medium
+                      .copyWith(color: labelColor)),
             ),
           ],
         ),

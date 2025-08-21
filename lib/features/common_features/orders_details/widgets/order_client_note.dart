@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
-import '../../../../config/theme/typoghrapy_manager.dart';
-
+import '../../../../config/theme/typography/typoghrapy_source.dart';
 import '../../../../utils/helper_func.dart';
 import '../cubit/orders_details_cubit.dart';
 
@@ -15,13 +15,14 @@ class ClientNoteSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: AppSizesManager.p12, horizontal: AppSizesManager.p8),
+      padding: const EdgeInsets.symmetric(
+          vertical: AppSizesManager.p12, horizontal: AppSizesManager.p8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             'Client notes',
-            style: AppTypography.headLine4SemiBoldStyle,
+            style: context.responsiveTextTheme.current.headLine4SemiBold,
           ),
           Gap(AppSizesManager.s4),
           ValueListenableBuilder(
@@ -29,8 +30,13 @@ class ClientNoteSection extends StatelessWidget {
             builder: (BuildContext ctx, value, Widget? child) {
               return InkWell(
                 onTap: () => showMore.value = !showMore.value,
-                child: calculateNumberOfLines(context.read<OrderDetailsCubit>().orderData!.clientNote,
-                            AppTypography.bodySmallStyle, MediaQuery.sizeOf(context).width) >
+                child: calculateNumberOfLines(
+                            context
+                                .read<OrderDetailsCubit>()
+                                .orderData!
+                                .clientNote,
+                            AppTypographySource.bodySmallStyle,
+                            MediaQuery.sizeOf(context).width) >
                         3
                     ? Stack(
                         alignment: AlignmentDirectional.bottomEnd,
@@ -38,32 +44,50 @@ class ClientNoteSection extends StatelessWidget {
                           Text.rich(
                             showMore.value
                                 ? TextSpan(
-                                    text: context.read<OrderDetailsCubit>().orderData!.clientNote,
-                                    style: AppTypography.bodySmallStyle.copyWith(
+                                    text: context
+                                        .read<OrderDetailsCubit>()
+                                        .orderData!
+                                        .clientNote,
+                                    style: context
+                                        .responsiveTextTheme.current.bodySmall
+                                        .copyWith(
                                       height: 1.5,
-                                      fontWeight: AppTypography.appFontRegular,
+                                      fontWeight:
+                                          AppTypographySource.appFontRegular,
                                     ),
                                     children: [
                                         TextSpan(
                                           text: '(show_less)',
-                                          style: AppTypography.bodySmallStyle.copyWith(
+                                          style: AppTypographySource
+                                              .bodySmallStyle
+                                              .copyWith(
                                             height: 1.5,
-                                            fontWeight: AppTypography.appFontRegular,
+                                            fontWeight: AppTypographySource
+                                                .appFontRegular,
                                           ),
                                         )
                                       ])
                                 : TextSpan(
-                                    text: context.read<OrderDetailsCubit>().orderData!.clientNote,
-                                    style: AppTypography.bodySmallStyle.copyWith(
+                                    text: context
+                                        .read<OrderDetailsCubit>()
+                                        .orderData!
+                                        .clientNote,
+                                    style: context
+                                        .responsiveTextTheme.current.bodySmall
+                                        .copyWith(
                                       height: 1.5,
-                                      fontWeight: AppTypography.appFontRegular,
+                                      fontWeight:
+                                          AppTypographySource.appFontRegular,
                                     ),
                                     children: [
                                         TextSpan(
                                           text: ' (show_more)',
-                                          style: AppTypography.bodySmallStyle.copyWith(
+                                          style: AppTypographySource
+                                              .bodySmallStyle
+                                              .copyWith(
                                             height: 1.5,
-                                            fontWeight: AppTypography.appFontRegular,
+                                            fontWeight: AppTypographySource
+                                                .appFontRegular,
                                           ),
                                         )
                                       ]),
@@ -77,8 +101,10 @@ class ClientNoteSection extends StatelessWidget {
                                 )
                         ],
                       )
-                    : Text(context.read<OrderDetailsCubit>().orderData!.clientNote,
-                        style: AppTypography.bodySmallStyle.copyWith(
+                    : Text(
+                        context.read<OrderDetailsCubit>().orderData!.clientNote,
+                        style: context.responsiveTextTheme.current.bodySmall
+                            .copyWith(
                           height: 1.5,
                         )),
               );

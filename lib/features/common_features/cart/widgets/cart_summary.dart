@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:gap/gap.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../../config/theme/colors_manager.dart';
@@ -44,7 +42,8 @@ class CartSummarySection extends StatelessWidget {
                       ),
                       const Spacer(),
                       Icon(Icons.keyboard_arrow_up_sharp,
-                          color: AppColors.accent1Shade1, size: AppSizesManager.iconSize20),
+                          color: AppColors.accent1Shade1,
+                          size: AppSizesManager.iconSize20),
                     ])
                   : Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
                       Container(
@@ -52,13 +51,18 @@ class CartSummarySection extends StatelessWidget {
                           width: 50,
                           decoration: BoxDecoration(
                               color: Colors.grey[300],
-                              borderRadius: BorderRadius.circular(AppSizesManager.commonWidgetsRadius))),
+                              borderRadius: BorderRadius.circular(
+                                  AppSizesManager.commonWidgetsRadius))),
                       Padding(
-                        padding: const EdgeInsets.only(top: AppSizesManager.p10, bottom: AppSizesManager.p10),
+                        padding: const EdgeInsets.only(
+                            top: AppSizesManager.p10,
+                            bottom: AppSizesManager.p10),
                         child: Row(
                           children: <Widget>[
                             const Spacer(),
-                            Icon(Icons.close, color: AppColors.accent1Shade1, size: AppSizesManager.iconSize20),
+                            Icon(Icons.close,
+                                color: AppColors.accent1Shade1,
+                                size: AppSizesManager.iconSize20),
                           ],
                         ),
                       ),
@@ -71,12 +75,20 @@ class CartSummarySection extends StatelessWidget {
                           BlocBuilder<CartCubit, CartState>(
                             builder: (context, state) {
                               return FormattedPrice(
-                                price: num.parse(context.read<CartCubit>().totalHtAmount.toStringAsFixed(2)),
-                                valueStyle: AppTypography.body3MediumStyle.copyWith(
-                                  fontWeight: AppTypography.appFontBold,
+                                price: num.parse(context
+                                    .read<CartCubit>()
+                                    .totalHtAmount
+                                    .toStringAsFixed(2)),
+                                valueStyle: context
+                                    .responsiveTextTheme.current.body3Medium
+                                    .copyWith(
+                                  fontWeight: context.responsiveTextTheme
+                                      .current.appFont.appFontBold,
                                   color: Colors.grey[600],
                                 ),
-                                unitStyle: AppTypography.bodyXSmallStyle.copyWith(
+                                unitStyle: context
+                                    .responsiveTextTheme.current.bodyXSmall
+                                    .copyWith(
                                   color: Colors.grey,
                                 ),
                               );
@@ -96,12 +108,20 @@ class CartSummarySection extends StatelessWidget {
                           BlocBuilder<CartCubit, CartState>(
                             builder: (context, state) {
                               return FormattedPrice(
-                                price: num.parse(context.read<CartCubit>().totalTTCAmount.toStringAsFixed(2)),
-                                valueStyle: AppTypography.body3MediumStyle.copyWith(
-                                  fontWeight: AppTypography.appFontBold,
+                                price: num.parse(context
+                                    .read<CartCubit>()
+                                    .totalTTCAmount
+                                    .toStringAsFixed(2)),
+                                valueStyle: context
+                                    .responsiveTextTheme.current.body3Medium
+                                    .copyWith(
+                                  fontWeight: context.responsiveTextTheme
+                                      .current.appFont.appFontBold,
                                   color: Colors.grey[600],
                                 ),
-                                unitStyle: AppTypography.bodyXSmallStyle.copyWith(
+                                unitStyle: context
+                                    .responsiveTextTheme.current.bodyXSmall
+                                    .copyWith(
                                   color: Colors.grey,
                                 ),
                               );
@@ -125,8 +145,11 @@ class CartSummarySection extends StatelessWidget {
                             builder: (context, state) {
                               return Text(
                                   "${((num.parse(context.read<CartCubit>().totalTTCAmount.toStringAsFixed(2)) - num.parse(context.read<CartCubit>().totalHtAmount.toStringAsFixed(2))) / 100).toStringAsFixed(2)} %",
-                                  style: AppTypography.body3MediumStyle.copyWith(
-                                    fontWeight: AppTypography.appFontBold,
+                                  style: context
+                                      .responsiveTextTheme.current.body3Medium
+                                      .copyWith(
+                                    fontWeight: context.responsiveTextTheme
+                                        .current.appFont.appFontBold,
                                     color: Colors.grey[600],
                                   ));
                             },
@@ -134,14 +157,16 @@ class CartSummarySection extends StatelessWidget {
                         ],
                       ),
                       Gap(AppSizesManager.s12),
-                      BlocBuilder<CartCubit, CartState>(builder: (context, state) {
+                      BlocBuilder<CartCubit, CartState>(
+                          builder: (context, state) {
                         return PrimaryTextButton(
                           label: context.translation!.checkout,
                           onTap: context.read<CartCubit>().cartItems.isEmpty
                               ? null
                               : () {
                                   BottomSheetHelper.showCommonBottomSheet(
-                                      context: context, child: SelectPaymentMethodBottomSheet());
+                                      context: context,
+                                      child: SelectPaymentMethodBottomSheet());
                                 },
                           color: AppColors.accent1Shade1,
                         );

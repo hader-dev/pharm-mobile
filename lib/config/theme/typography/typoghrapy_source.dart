@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class AppTypography {
+class AppTypographySource {
   //Fonts
   static const String appFont = "Satoshi";
   //-------------------------------

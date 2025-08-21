@@ -9,7 +9,6 @@ import 'package:hader_pharm_mobile/utils/extensions/price_formatter.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../config/theme/colors_manager.dart';
-import '../../../config/theme/typoghrapy_manager.dart';
 import '../chips/custom_chip.dart' show CustomChip;
 
 class MedicineWidget1 extends StatelessWidget {
@@ -54,7 +53,9 @@ class MedicineWidget1 extends StatelessWidget {
                   //   CustomChip(label: medicineData.brandName, color: AppColors.bgDarken2, onTap: () {}),
                   Spacer(),
                   CustomChip(
-                      label: medicineData.stockQuantity > 0 ? "In Stock" : "Out of Stock",
+                      label: medicineData.stockQuantity > 0
+                          ? "In Stock"
+                          : "Out of Stock",
                       icon: Iconsax.bag,
                       labelColor: AppColors.bgWhite,
                       color: SystemColors.green.primary,
@@ -66,7 +67,9 @@ class MedicineWidget1 extends StatelessWidget {
                       maxLines: 1,
                       softWrap: true,
                       overflow: TextOverflow.ellipsis,
-                      style: AppTypography.headLine4SemiBoldStyle.copyWith(color: AppColors.bgWhite)),
+                      style: context
+                          .responsiveTextTheme.current.headLine4SemiBold
+                          .copyWith(color: AppColors.bgWhite)),
                 Gap(AppSizesManager.s12),
                 Row(children: [
                   Container(
@@ -74,12 +77,15 @@ class MedicineWidget1 extends StatelessWidget {
                       width: 35,
                       decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          border: Border.all(color: AppColors.bgDisabled, width: 1.5),
+                          border: Border.all(
+                              color: AppColors.bgDisabled, width: 1.5),
                           image: DecorationImage(
                             fit: BoxFit.fill,
                             image: medicineData.company?.image == null
-                                ? AssetImage(DrawableAssetStrings.companyPlaceHolderImg)
-                                : NetworkImage(medicineData.company?.thumbnailImage),
+                                ? AssetImage(
+                                    DrawableAssetStrings.companyPlaceHolderImg)
+                                : NetworkImage(
+                                    medicineData.company?.thumbnailImage),
                           ))),
                   Gap(AppSizesManager.s4),
                   Spacer(),
@@ -93,12 +99,16 @@ class MedicineWidget1 extends StatelessWidget {
                     TextSpan(
                       children: [
                         TextSpan(
-                          text: double.parse(medicineData.unitPriceHt).formatAsPrice(),
-                          style: AppTypography.headLine3SemiBoldStyle.copyWith(color: AppColors.bgWhite),
+                          text: double.parse(medicineData.unitPriceHt)
+                              .formatAsPrice(),
+                          style: context
+                              .responsiveTextTheme.current.headLine3SemiBold
+                              .copyWith(color: AppColors.bgWhite),
                         ),
                         TextSpan(
                           text: " ${context.translation!.currency}",
-                          style: AppTypography.bodyXSmallStyle.copyWith(color: AppColors.bgWhite),
+                          style: context.responsiveTextTheme.current.bodyXSmall
+                              .copyWith(color: AppColors.bgWhite),
                         ),
                       ],
                     ),

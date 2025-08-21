@@ -10,7 +10,6 @@ import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart' show Iconsax;
 
 import '../../../config/theme/colors_manager.dart';
-import '../../../config/theme/typoghrapy_manager.dart' show AppTypography;
 import '../../../utils/constants.dart';
 import 'widgets/form_section.dart';
 import 'widgets/profile_image_section.dart' show ProfileImageSection;
@@ -42,7 +41,7 @@ class EditProfileScreen extends StatelessWidget {
             ),
             title: Text(
               context.translation!.update_profile,
-              style: AppTypography.headLine3SemiBoldStyle
+              style: context.responsiveTextTheme.current.headLine3SemiBold
                   .copyWith(color: AppColors.bgWhite),
             ),
           ),
@@ -60,7 +59,8 @@ class EditProfileScreen extends StatelessWidget {
                   physics: const BouncingScrollPhysics(),
                   children: [
                     Text(context.translation!.update_profile_description,
-                        style: AppTypography.body1MediumStyle.copyWith(
+                        style: context.responsiveTextTheme.current.body1Medium
+                            .copyWith(
                           color: TextColors.ternary.color,
                         )),
                     Gap(AppSizesManager.s24),

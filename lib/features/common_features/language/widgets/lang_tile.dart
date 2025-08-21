@@ -1,21 +1,24 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../../config/language_config/cubit/lang_cubit.dart';
 import '../../../../config/language_config/cubit/lang_state.dart';
 import '../../../../config/theme/colors_manager.dart';
-import '../../../../config/theme/typoghrapy_manager.dart';
 import '../../../../utils/constants.dart';
-
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class LangTile extends StatelessWidget {
   final String langValue;
 
   final String langName;
   final String langImgPath;
-  const LangTile({super.key, required this.langValue, required this.langName, required this.langImgPath});
+  const LangTile(
+      {super.key,
+      required this.langValue,
+      required this.langName,
+      required this.langImgPath});
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +47,8 @@ class LangTile extends StatelessWidget {
               Gap(AppSizesManager.s12),
               Text(
                 langName,
-                style: AppTypography.body1MediumStyle.copyWith(color: TextColors.primary.color),
+                style: context.responsiveTextTheme.current.body1Medium
+                    .copyWith(color: TextColors.primary.color),
               ),
               const Spacer(),
               if (context.read<LangCubit>().appLang == langValue)

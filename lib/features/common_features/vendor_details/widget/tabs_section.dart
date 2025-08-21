@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../../config/theme/colors_manager.dart';
-
 import '../cubit/vendor_details_cubit.dart';
 import '../subPages/about_vendor/about_vendor.dart';
 import '../subPages/medicines/medicines.dart';
@@ -24,10 +23,12 @@ class VandorDetailsTabBarSection extends StatefulWidget {
   VandorDetailsTabBarSection({super.key});
 
   @override
-  State<VandorDetailsTabBarSection> createState() => _VandorDetailsTabBarSectionState();
+  State<VandorDetailsTabBarSection> createState() =>
+      _VandorDetailsTabBarSectionState();
 }
 
-class _VandorDetailsTabBarSectionState extends State<VandorDetailsTabBarSection> with TickerProviderStateMixin {
+class _VandorDetailsTabBarSectionState extends State<VandorDetailsTabBarSection>
+    with TickerProviderStateMixin {
   late final TabController tabsController;
   @override
   void initState() {
@@ -37,7 +38,7 @@ class _VandorDetailsTabBarSectionState extends State<VandorDetailsTabBarSection>
 
   @override
   Widget build(BuildContext context) {
-    TextStyle tabTextStyle = AppTypography.body3MediumStyle;
+    TextStyle tabTextStyle = context.responsiveTextTheme.current.body3Medium;
 
     return Padding(
       padding: const EdgeInsets.only(top: AppSizesManager.p16),
@@ -67,7 +68,9 @@ class _VandorDetailsTabBarSectionState extends State<VandorDetailsTabBarSection>
               physics: const NeverScrollableScrollPhysics(),
               controller: tabsController,
               children: [
-                VendorDetailsPage(vendorData: BlocProvider.of<VendorDetailsCubit>(context).vendorData),
+                VendorDetailsPage(
+                    vendorData: BlocProvider.of<VendorDetailsCubit>(context)
+                        .vendorData),
                 MedicinesPage(),
                 ParaPharmaPage()
               ],

@@ -11,7 +11,6 @@ import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/medicine_products/cubit/medicine_products_cubit.dart';
@@ -166,7 +165,8 @@ class VendorDetails extends StatelessWidget {
                 builder: (context, state) {
                   if (state is VendorDetailsLoading) {
                     return Text("Loading...",
-                        style: AppTypography.headLine4SemiBoldStyle);
+                        style: context
+                            .responsiveTextTheme.current.headLine4SemiBold);
                   }
                   return Row(children: [
                     Container(
@@ -193,7 +193,8 @@ class VendorDetails extends StatelessWidget {
                     ),
                     Gap(AppSizesManager.s8),
                     Text(context.read<VendorDetailsCubit>().vendorData.name,
-                        style: AppTypography.headLine4SemiBoldStyle)
+                        style: context
+                            .responsiveTextTheme.current.headLine4SemiBold)
                   ]);
                 },
               ),

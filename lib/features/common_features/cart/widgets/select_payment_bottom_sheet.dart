@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/filter_option_value.dart';
 import 'package:hader_pharm_mobile/features/common_features/cart/cubit/cart_cubit.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
@@ -13,7 +11,6 @@ import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart' show Iconsax;
 
 import '../../../../utils/enums.dart';
-
 import '../../../app_layout/app_layout.dart';
 import '../../../common/buttons/solid/primary_text_button.dart';
 import '../../../common/text_fields/custom_text_field.dart';
@@ -94,7 +91,8 @@ class SelectPaymentMethodBottomSheet extends StatelessWidget {
                         isFilled: false,
                         isBorderEnabled: true,
                         hintText: context.translation!.shipping_address,
-                        hintTextStyle: AppTypography.bodySmallStyle
+                        hintTextStyle: context
+                            .responsiveTextTheme.current.bodySmall
                             .copyWith(color: Colors.grey),
                       )),
                   InfoWidget(
@@ -112,7 +110,8 @@ class SelectPaymentMethodBottomSheet extends StatelessWidget {
                         isFilled: false,
                         isBorderEnabled: true,
                         hintText: context.translation!.type_note_hint,
-                        hintTextStyle: AppTypography.bodySmallStyle
+                        hintTextStyle: context
+                            .responsiveTextTheme.current.bodySmall
                             .copyWith(color: Colors.grey),
                       )),
                   Gap(AppSizesManager.s12),
@@ -123,7 +122,7 @@ class SelectPaymentMethodBottomSheet extends StatelessWidget {
                       children: [
                         Text(
                           "${context.read<CartCubit>().totalTTCAmount.toStringAsFixed(2)} ${context.translation!.currency}",
-                          style: AppTypography.body2MediumStyle
+                          style: context.responsiveTextTheme.current.body2Medium
                               .copyWith(color: AppColors.accent1Shade1),
                         ),
                         Spacer(),

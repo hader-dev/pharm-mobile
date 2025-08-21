@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/features/common/accordions/ink_accordion_item.dart';
 import 'package:hader_pharm_mobile/models/order_claim.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_date_helper.dart';
 
 class OrderComplaintHeaderWidget extends StatelessWidget {
@@ -24,23 +24,27 @@ class OrderComplaintHeaderWidget extends StatelessWidget {
           Text.rich(
             TextSpan(
               text: claim.subject,
-              style: AppTypography.body1MediumStyle.copyWith(
-                  fontWeight: AppTypography.appFontBold,
+              style: context.responsiveTextTheme.current.body1Medium.copyWith(
+                  fontWeight:
+                      context.responsiveTextTheme.current.appFont.appFontBold,
                   color: TextColors.primary.color),
             ),
           ),
           Text.rich(
             TextSpan(
               text: OrderClaimStatus.getTranslatedStatus(status),
-              style: AppTypography.bodySmallStyle.copyWith(
-                  fontWeight: AppTypography.appFontBold,
+              style: context.responsiveTextTheme.current.bodySmall.copyWith(
+                  fontWeight:
+                      context.responsiveTextTheme.current.appFont.appFontBold,
                   color: status.color),
             ),
           ),
         ],
       ),
       rawSubtitle: claim.createdAt.format,
-      onTap: () => RoutingManager.router.pushNamed(RoutingManager.orderComplaint, extra: {"orderId": claim.orderId, "itemId": claim.orderItemId}),
+      onTap: () => RoutingManager.router.pushNamed(
+          RoutingManager.orderComplaint,
+          extra: {"orderId": claim.orderId, "itemId": claim.orderItemId}),
     );
   }
 }

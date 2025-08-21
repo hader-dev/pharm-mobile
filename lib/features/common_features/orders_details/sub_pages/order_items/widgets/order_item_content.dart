@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/price_formatter.dart';
 
@@ -27,14 +26,14 @@ class ItemContent extends StatelessWidget {
         Text.rich(
           softWrap: true,
           overflow: TextOverflow.ellipsis,
-          style: AppTypography.body3MediumStyle
+          style: context.responsiveTextTheme.current.body3Medium
               .copyWith(color: Colors.grey[500]),
           TextSpan(
             text: "${context.translation!.quantity} ",
             children: <InlineSpan>[
               TextSpan(
                 text: quantity.toString(),
-                style: AppTypography.body3MediumStyle
+                style: context.responsiveTextTheme.current.body3Medium
                     .copyWith(color: TextColors.primary.color),
               ),
             ],
@@ -46,12 +45,12 @@ class ItemContent extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
           TextSpan(
             text: double.parse(price).formatAsPrice(),
-            style: AppTypography.body3MediumStyle,
+            style: context.responsiveTextTheme.current.body3Medium,
             children: <InlineSpan>[
               TextSpan(
                 text:
                     ' ${RoutingManager.rootNavigatorKey.currentContext!.translation!.currency}',
-                style: AppTypography.bodySmallStyle
+                style: context.responsiveTextTheme.current.bodySmall
                     .copyWith(color: Colors.grey[500]),
               ),
             ],

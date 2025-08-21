@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class BrandCircularWidget extends StatelessWidget {
   final String imageUrl;
@@ -18,7 +18,8 @@ class BrandCircularWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: AppSizesManager.p6, horizontal: AppSizesManager.p10),
+      padding: const EdgeInsets.symmetric(
+          vertical: AppSizesManager.p6, horizontal: AppSizesManager.p10),
       child: Column(
         children: [
           GestureDetector(
@@ -46,7 +47,7 @@ class BrandCircularWidget extends StatelessWidget {
           const Gap(AppSizesManager.s6),
           Text(
             categoryName,
-            style: AppTypography.body3MediumStyle,
+            style: context.responsiveTextTheme.current.body3Medium,
             softWrap: true,
             overflow: TextOverflow.ellipsis,
           ),

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../config/theme/colors_manager.dart';
-import '../../../config/theme/typoghrapy_manager.dart';
 import '../../../utils/assets_strings.dart' show DrawableAssetStrings;
 import '../../../utils/constants.dart';
 
@@ -45,14 +45,14 @@ class WelcomingWidget extends StatelessWidget {
             ),
             Text(
               'Welcome to Hader Pharm',
-              style: AppTypography.headLine3SemiBoldStyle,
+              style: context.responsiveTextTheme.current.headLine3SemiBold,
             ),
             Gap(AppSizesManager.s16),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p8),
               child: Text(
                 'We wish you a good experience , your health is our priority.',
-                style: AppTypography.body3RegularStyle,
+                style: context.responsiveTextTheme.current.body3Regular,
                 textAlign: TextAlign.center,
               ),
             ),

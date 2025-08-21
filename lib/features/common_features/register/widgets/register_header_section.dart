@@ -5,9 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
-import '../../../../config/theme/colors_manager.dart';
-import '../../../../config/theme/typoghrapy_manager.dart';
 
+import '../../../../config/theme/colors_manager.dart';
 import '../../../../utils/constants.dart';
 import '../../../common/buttons/solid/primary_icon_button.dart';
 import '../cubit/register_cubit.dart';
@@ -24,12 +23,14 @@ class RegisterHeaderSection extends StatelessWidget {
           Gap(AppSizesManager.s24),
           Text(
             context.translation!.create_account,
-            style: AppTypography.headLine1Style.copyWith(fontSize: AppSizesManager.p24, color: AppColors.accent1Shade1),
+            style: context.responsiveTextTheme.current.headLine1.copyWith(
+                fontSize: AppSizesManager.p24, color: AppColors.accent1Shade1),
           ),
           Gap(AppSizesManager.s8),
           Text(
             context.translation!.welcome_back,
-            style: AppTypography.body3RegularStyle.copyWith(color: TextColors.ternary.color),
+            style: context.responsiveTextTheme.current.body3Regular
+                .copyWith(color: TextColors.ternary.color),
           ),
           Gap(AppSizesManager.s24),
           InkWell(
@@ -48,16 +49,20 @@ class RegisterHeaderSection extends StatelessWidget {
                         shape: BoxShape.circle,
                         color: AppColors.bgDarken,
                         border: Border.all(color: AppColors.bgDarken2)),
-                    child: BlocProvider.of<RegisterCubit>(context).pickedImage != null
-                        ? Image.file(
-                            File(BlocProvider.of<RegisterCubit>(context).pickedImage!.path),
-                            fit: BoxFit.fill,
-                          )
-                        : Icon(
-                            Iconsax.gallery,
-                            color: AppColors.accent1Shade1,
-                            size: AppSizesManager.iconSize25,
-                          )),
+                    child:
+                        BlocProvider.of<RegisterCubit>(context).pickedImage !=
+                                null
+                            ? Image.file(
+                                File(BlocProvider.of<RegisterCubit>(context)
+                                    .pickedImage!
+                                    .path),
+                                fit: BoxFit.fill,
+                              )
+                            : Icon(
+                                Iconsax.gallery,
+                                color: AppColors.accent1Shade1,
+                                size: AppSizesManager.iconSize25,
+                              )),
                 Positioned(
                     bottom: AppSizesManager.s4,
                     right: AppSizesManager.s4 / 2,
@@ -65,13 +70,17 @@ class RegisterHeaderSection extends StatelessWidget {
                       scale: 0.7,
                       child: PrimaryIconButton(
                         icon: Icon(
-                          BlocProvider.of<RegisterCubit>(context).pickedImage != null ? Iconsax.edit_2 : Iconsax.add,
+                          BlocProvider.of<RegisterCubit>(context).pickedImage !=
+                                  null
+                              ? Iconsax.edit_2
+                              : Iconsax.add,
                           color: Colors.white,
                         ),
                         isBordered: true,
                         borderColor: Colors.white,
                         onPressed: () {
-                          BlocProvider.of<RegisterCubit>(context).pickUserImage();
+                          BlocProvider.of<RegisterCubit>(context)
+                              .pickUserImage();
                         },
                       ),
                     )),

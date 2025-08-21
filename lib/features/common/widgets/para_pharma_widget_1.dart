@@ -11,7 +11,6 @@ import 'package:iconsax/iconsax.dart';
 
 import '../../../config/routes/routing_manager.dart';
 import '../../../config/theme/colors_manager.dart';
-import '../../../config/theme/typoghrapy_manager.dart';
 
 class ParaPharmaWidget1 extends StatelessWidget {
   final BaseParaPharmaCatalogModel paraPharmData;
@@ -32,10 +31,12 @@ class ParaPharmaWidget1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: AppSizesManager.p8, vertical: AppSizesManager.p12),
+      padding: const EdgeInsets.symmetric(
+          horizontal: AppSizesManager.p8, vertical: AppSizesManager.p12),
       child: InkWell(
         onTap: () {
-          GoRouter.of(context).pushNamed(RoutingManager.paraPharmaDetailsScreen, extra: paraPharmData.id);
+          GoRouter.of(context).pushNamed(RoutingManager.paraPharmaDetailsScreen,
+              extra: paraPharmData.id);
         },
         child: Row(
           children: [
@@ -56,11 +57,13 @@ class ParaPharmaWidget1 extends StatelessWidget {
                   paraPharmData.image != null
                       ? CacheNetworkImagePlus(
                           boxFit: BoxFit.cover,
-                          imageUrl: "https://pharmacie-denni.dz/wp-content/uploads/2025/05/12-2-1.png",
+                          imageUrl:
+                              "https://pharmacie-denni.dz/wp-content/uploads/2025/05/12-2-1.png",
                         )
                       : Center(
                           child: Image(
-                            image: AssetImage(DrawableAssetStrings.paraPharmaPlaceHolderImg),
+                            image: AssetImage(
+                                DrawableAssetStrings.paraPharmaPlaceHolderImg),
                             fit: BoxFit.cover,
                             height: 80,
                             width: 80,
@@ -91,18 +94,30 @@ class ParaPharmaWidget1 extends StatelessWidget {
                         borderRadius: BorderRadius.only(
                             bottomRight: Radius.circular(AppSizesManager.r6),
                             topLeft: Radius.circular(AppSizesManager.r6)),
-                        color: const Color.fromARGB(255, 195, 252, 222).withValues(alpha: 0.8),
+                        color: const Color.fromARGB(255, 195, 252, 222)
+                            .withValues(alpha: 0.8),
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           paraPharmData.stockQuantity > 0
-                              ? Icon(Iconsax.box_2, color: SystemColors.green.primary, size: AppSizesManager.iconSize16)
-                              : Icon(Iconsax.box_2, color: SystemColors.red.primary, size: AppSizesManager.iconSize16),
+                              ? Icon(Iconsax.box_2,
+                                  color: SystemColors.green.primary,
+                                  size: AppSizesManager.iconSize16)
+                              : Icon(Iconsax.box_2,
+                                  color: SystemColors.red.primary,
+                                  size: AppSizesManager.iconSize16),
                           const Gap(AppSizesManager.s4),
-                          Text(paraPharmData.stockQuantity > 0 ? "In Stock" : "Out of Stock",
-                              style: AppTypography.bodySmallStyle.copyWith(
-                                  color: SystemColors.green.primary, fontWeight: AppTypography.appFontSemiBold)),
+                          Text(
+                              paraPharmData.stockQuantity > 0
+                                  ? "In Stock"
+                                  : "Out of Stock",
+                              style: context
+                                  .responsiveTextTheme.current.bodySmall
+                                  .copyWith(
+                                      color: SystemColors.green.primary,
+                                      fontWeight: context.responsiveTextTheme
+                                          .current.appFont.appFontSemiBold)),
                         ],
                       ),
                     ),
@@ -123,7 +138,8 @@ class ParaPharmaWidget1 extends StatelessWidget {
                           onLike?.call();
                         },
                         child: !isLiked
-                            ? Icon(Icons.favorite_border_rounded, color: Colors.black54)
+                            ? Icon(Icons.favorite_border_rounded,
+                                color: Colors.black54)
                             : Icon(Icons.favorite, color: Colors.red),
                       )
                     ]),
@@ -148,7 +164,9 @@ class ParaPharmaWidget1 extends StatelessWidget {
                       maxLines: 1,
                       softWrap: true,
                       overflow: TextOverflow.ellipsis,
-                      style: AppTypography.headLine4SemiBoldStyle.copyWith(color: TextColors.primary.color)),
+                      style: context
+                          .responsiveTextTheme.current.headLine4SemiBold
+                          .copyWith(color: TextColors.primary.color)),
                   Gap(AppSizesManager.s8),
                   Row(children: [
                     Container(
@@ -156,18 +174,24 @@ class ParaPharmaWidget1 extends StatelessWidget {
                       width: 30,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        border: Border.all(color: AppColors.bgDisabled, width: 1.5),
+                        border:
+                            Border.all(color: AppColors.bgDisabled, width: 1.5),
                         image: DecorationImage(
                           image: paraPharmData.thumbnailImage?.image == null
-                              ? AssetImage(DrawableAssetStrings.companyPlaceHolderImg)
-                              : NetworkImage(paraPharmData.company!.thumbnailImage),
+                              ? AssetImage(
+                                  DrawableAssetStrings.companyPlaceHolderImg)
+                              : NetworkImage(
+                                  paraPharmData.company!.thumbnailImage),
                         ),
                       ),
                     ),
                     Gap(AppSizesManager.s4),
                     Text(paraPharmData.company?.name ?? "",
-                        style: AppTypography.bodyXSmallStyle
-                            .copyWith(fontWeight: AppTypography.appFontSemiBold, color: TextColors.primary.color)),
+                        style: context.responsiveTextTheme.current.bodyXSmall
+                            .copyWith(
+                                fontWeight: context.responsiveTextTheme.current
+                                    .appFont.appFontSemiBold,
+                                color: TextColors.primary.color)),
                   ]),
                   Row(
                     children: [
@@ -181,12 +205,17 @@ class ParaPharmaWidget1 extends StatelessWidget {
                         TextSpan(
                           children: [
                             TextSpan(
-                              text: double.parse(paraPharmData.unitPriceHt).formatAsPrice(),
-                              style: AppTypography.headLine3SemiBoldStyle.copyWith(color: AppColors.accent1Shade1),
+                              text: double.parse(paraPharmData.unitPriceHt)
+                                  .formatAsPrice(),
+                              style: context
+                                  .responsiveTextTheme.current.headLine3SemiBold
+                                  .copyWith(color: AppColors.accent1Shade1),
                             ),
                             TextSpan(
                               text: " ${context.translation!.currency}",
-                              style: AppTypography.bodyXSmallStyle.copyWith(color: AppColors.accent1Shade1),
+                              style: context
+                                  .responsiveTextTheme.current.bodyXSmall
+                                  .copyWith(color: AppColors.accent1Shade1),
                             ),
                           ],
                         ),

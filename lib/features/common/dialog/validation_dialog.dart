@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../utils/constants.dart';
 import '../../../utils/enums.dart';
@@ -30,11 +30,13 @@ class ValidateActionDialog {
               elevation: 0,
               insetAnimationCurve: Curves.ease,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+                borderRadius:
+                    BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
               ),
               alignment: Alignment.center,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: AppSizesManager.p8),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: AppSizesManager.p8),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
@@ -51,9 +53,11 @@ class ValidateActionDialog {
                         ),
                       ),
                     ),
-                    if (title != null) Align(alignment: Alignment.center, child: title),
+                    if (title != null)
+                      Align(alignment: Alignment.center, child: title),
                     const SizedBox(height: AppSizesManager.s12),
-                    if (content != null) Align(alignment: Alignment.center, child: content),
+                    if (content != null)
+                      Align(alignment: Alignment.center, child: content),
                     Padding(
                       padding: const EdgeInsets.all(AppSizesManager.p16),
                       child: Row(
@@ -66,8 +70,11 @@ class ValidateActionDialog {
                               },
                               child: Text(
                                 cancelText,
-                                style: AppTypography.body3MediumStyle
-                                    .copyWith(color: AppColors.accentGreenShade2.withAlpha(200)),
+                                style: context
+                                    .responsiveTextTheme.current.body3Medium
+                                    .copyWith(
+                                        color: AppColors.accentGreenShade2
+                                            .withAlpha(200)),
                               ),
                             ),
                           if (okEnabled)
@@ -78,7 +85,10 @@ class ValidateActionDialog {
                               },
                               child: Text(
                                 agreeText,
-                                style: AppTypography.body3MediumStyle.copyWith(color: AppColors.accentGreenShade2),
+                                style: context
+                                    .responsiveTextTheme.current.body3Medium
+                                    .copyWith(
+                                        color: AppColors.accentGreenShade2),
                               ),
                             ),
                         ],

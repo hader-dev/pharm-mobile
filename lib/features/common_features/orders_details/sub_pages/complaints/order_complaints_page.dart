@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders_details/cubit/orders_details_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders_details/sub_pages/complaints/widgets/order_complaint_header_widget.dart';
@@ -62,7 +61,7 @@ class OrderItemsComplaintPage extends StatelessWidget {
           children: <Widget>[
             Text(
               context.translation!.order_complaint,
-              style: AppTypography.headLine4SemiBoldStyle,
+              style: context.responsiveTextTheme.current.headLine4SemiBold,
             ),
             const SizedBox(height: 12),
             Container(

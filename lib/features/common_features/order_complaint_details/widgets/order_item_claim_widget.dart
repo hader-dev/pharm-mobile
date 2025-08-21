@@ -4,7 +4,6 @@ import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/models/order_details.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
@@ -52,14 +51,15 @@ class OrderItemClaimWidget extends StatelessWidget {
                     Text.rich(
                       softWrap: true,
                       overflow: TextOverflow.ellipsis,
-                      style: AppTypography.body3MediumStyle
+                      style: context.responsiveTextTheme.current.body3Medium
                           .copyWith(color: Colors.grey[500]),
                       TextSpan(
                         text: "${context.translation!.quantity} ",
                         children: <InlineSpan>[
                           TextSpan(
                             text: item.quantity.toString(),
-                            style: AppTypography.body3MediumStyle
+                            style: context
+                                .responsiveTextTheme.current.body3Medium
                                 .copyWith(color: TextColors.primary.color),
                           ),
                         ],
@@ -72,12 +72,12 @@ class OrderItemClaimWidget extends StatelessWidget {
                       TextSpan(
                         text: double.parse(item.totalAmountHt.toString())
                             .formatAsPrice(),
-                        style: AppTypography.body3MediumStyle,
+                        style: context.responsiveTextTheme.current.body3Medium,
                         children: <InlineSpan>[
                           TextSpan(
                             text:
                                 ' ${RoutingManager.rootNavigatorKey.currentContext!.translation!.currency}',
-                            style: AppTypography.bodySmallStyle
+                            style: context.responsiveTextTheme.current.bodySmall
                                 .copyWith(color: Colors.grey[500]),
                           ),
                         ],

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_date_helper.dart';
 
-import '../../../../config/theme/typoghrapy_manager.dart';
 import '../../../../models/order_details.dart';
-
 import '../../../../utils/constants.dart';
 import '../../../../utils/enums.dart';
 
@@ -21,8 +20,8 @@ class TrackingStepWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    OrderStatus orderStatus =
-        OrderStatus.values.firstWhere((OrderStatus element) => element.id == historyStep.orderStatusId);
+    OrderStatus orderStatus = OrderStatus.values.firstWhere(
+        (OrderStatus element) => element.id == historyStep.orderStatusId);
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -40,7 +39,9 @@ class TrackingStepWidget extends StatelessWidget {
                       color: Colors.grey.shade300,
                     ),
                   CircleAvatar(
-                    child: Icon(orderStatus.icon, color: orderStatus.color, size: AppSizesManager.iconSize20),
+                    child: Icon(orderStatus.icon,
+                        color: orderStatus.color,
+                        size: AppSizesManager.iconSize20),
                   ),
                   if (!isLast)
                     Container(
@@ -60,11 +61,11 @@ class TrackingStepWidget extends StatelessWidget {
             children: <Widget>[
               Text(
                 orderStatus.name,
-                style: AppTypography.body3MediumStyle,
+                style: context.responsiveTextTheme.current.body3Medium,
               ),
               Text(
                 historyStep.createdAt.toLocal().format,
-                style: AppTypography.body3RegularStyle,
+                style: context.responsiveTextTheme.current.body3Regular,
               ),
               const SizedBox(height: 4),
               // Text(

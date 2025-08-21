@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
-import '../../../config/theme/typoghrapy_manager.dart';
 import '../../../utils/constants.dart';
 
 class LegalPoliciesScreen extends StatelessWidget {
@@ -15,8 +13,9 @@ class LegalPoliciesScreen extends StatelessWidget {
       body: SafeArea(
         child: Theme(
           data: ThemeData(
-              scrollbarTheme:
-                  ScrollbarThemeData(thumbColor: WidgetStatePropertyAll(context.theme.primaryColor.withAlpha(170)))),
+              scrollbarTheme: ScrollbarThemeData(
+                  thumbColor: WidgetStatePropertyAll(
+                      context.theme.primaryColor.withAlpha(170)))),
           child: Padding(
             padding: EdgeInsets.only(
               left: AppSizesManager.p8,
@@ -27,12 +26,15 @@ class LegalPoliciesScreen extends StatelessWidget {
               children: <Widget>[
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: AppSizesManager.p4),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: AppSizesManager.p4),
                     child: Scrollbar(
-                      radius: const Radius.circular(AppSizesManager.commonWidgetsRadius),
+                      radius: const Radius.circular(
+                          AppSizesManager.commonWidgetsRadius),
                       child: SingleChildScrollView(
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: AppSizesManager.p4),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: AppSizesManager.p4),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
@@ -143,8 +145,11 @@ Partenaires
 Nous travaillons avec des transporteurs locaux fiables pour assurer un service rapide et sécurisé.
                                   ''',
                                   softWrap: true,
-                                  style: AppTypography.bodySmallStyle
-                                      .copyWith(color: TextColors.primary.color, height: 1.5)),
+                                  style: context
+                                      .responsiveTextTheme.current.bodySmall
+                                      .copyWith(
+                                          color: TextColors.primary.color,
+                                          height: 1.5)),
                             ],
                           ),
                         ),

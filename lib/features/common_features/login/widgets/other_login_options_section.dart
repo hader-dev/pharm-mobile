@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../../config/theme/colors_manager.dart';
-import '../../../../config/theme/typoghrapy_manager.dart';
 import '../../../../utils/assets_strings.dart';
 import '../../../../utils/constants.dart';
 import '../../../common/widgets/social_media_button.dart';
@@ -23,7 +23,7 @@ class OtherLoginOptionsSection extends StatelessWidget {
         ),
         Gap(AppSizesManager.s16),
         Text('Or Sign in with',
-            style: AppTypography.body3MediumStyle.copyWith(
+            style: context.responsiveTextTheme.current.body3Medium.copyWith(
               color: TextColors.ternary.color,
             )),
         Gap(AppSizesManager.s16),

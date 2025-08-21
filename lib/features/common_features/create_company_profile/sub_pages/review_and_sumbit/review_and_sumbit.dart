@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/features/common_features/create_company_profile/cubit/create_company_profile_cubit.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
+
 import 'widgets/info_row.dart';
 
 class ReviewSubmitPage extends StatelessWidget {
@@ -68,7 +68,7 @@ class ReviewSubmitPage extends StatelessWidget {
                     BlocProvider.of<CreateCompanyProfileCubit>(context)
                         .companyData
                         .companyName,
-                    style: AppTypography.headLine2Style),
+                    style: context.responsiveTextTheme.current.headLine2),
 
                 const Gap(AppSizesManager.s4),
                 Text(
@@ -80,14 +80,14 @@ class ReviewSubmitPage extends StatelessWidget {
                                 .companyType)
                         .first
                         .name,
-                    style: AppTypography.body1MediumStyle
+                    style: context.responsiveTextTheme.current.body1Medium
                         .copyWith(color: TextColors.ternary.color)),
                 const Gap(AppSizesManager.s12),
 
                 Text(
                   "${BlocProvider.of<CreateCompanyProfileCubit>(context).companyData.description}.",
                   textAlign: TextAlign.center,
-                  style: AppTypography.body2RegularStyle
+                  style: context.responsiveTextTheme.current.body2Regular
                       .copyWith(color: TextColors.ternary.color),
                 ),
                 const Gap(AppSizesManager.s24),

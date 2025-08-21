@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_icon_button.dart'
     show PrimaryIconButton;
 import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field.dart';
@@ -44,7 +43,8 @@ class _DistributorProfilePageState extends State<DistributorProfilePage>
                     Align(
                         alignment: Alignment.centerLeft,
                         child: Text(context.translation!.logo,
-                            style: AppTypography.body3MediumStyle
+                            style: context
+                                .responsiveTextTheme.current.body3Medium
                                 .copyWith(color: TextColors.ternary.color))),
                     Padding(
                       padding:

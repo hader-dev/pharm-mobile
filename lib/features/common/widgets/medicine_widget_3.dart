@@ -13,7 +13,6 @@ import 'package:hader_pharm_mobile/utils/extensions/price_formatter.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../config/theme/colors_manager.dart';
-import '../../../config/theme/typoghrapy_manager.dart';
 import '../../../models/create_cart_item.dart';
 import '../../../models/medicine_catalog.dart';
 import '../../../utils/enums.dart';
@@ -27,11 +26,13 @@ class MedicineWidget3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: AppSizesManager.p6, vertical: AppSizesManager.p12),
+      padding: const EdgeInsets.symmetric(
+          horizontal: AppSizesManager.p6, vertical: AppSizesManager.p12),
       child: InkWell(
         splashColor: Colors.transparent,
         onTap: () {
-          GoRouter.of(context).pushNamed(RoutingManager.medicineDetailsScreen, extra: medicineData.id);
+          GoRouter.of(context).pushNamed(RoutingManager.medicineDetailsScreen,
+              extra: medicineData.id);
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,11 +54,13 @@ class MedicineWidget3 extends StatelessWidget {
                   medicineData.image != null
                       ? CacheNetworkImagePlus(
                           boxFit: BoxFit.fill,
-                          imageUrl: "https://pharmacie-denni.dz/wp-content/uploads/2025/05/12-2-1.png",
+                          imageUrl:
+                              "https://pharmacie-denni.dz/wp-content/uploads/2025/05/12-2-1.png",
                         )
                       : Center(
                           child: Image(
-                            image: AssetImage(DrawableAssetStrings.medicinePlaceHolderImg),
+                            image: AssetImage(
+                                DrawableAssetStrings.medicinePlaceHolderImg),
                             fit: BoxFit.cover,
                             height: 80,
                             width: 80,
@@ -88,18 +91,30 @@ class MedicineWidget3 extends StatelessWidget {
                         borderRadius: BorderRadius.only(
                             bottomRight: Radius.circular(AppSizesManager.r6),
                             topLeft: Radius.circular(AppSizesManager.r6)),
-                        color: const Color.fromARGB(255, 195, 252, 222).withValues(alpha: 0.8),
+                        color: const Color.fromARGB(255, 195, 252, 222)
+                            .withValues(alpha: 0.8),
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           medicineData.stockQuantity > 0
-                              ? Icon(Iconsax.box_2, color: SystemColors.green.primary, size: AppSizesManager.iconSize16)
-                              : Icon(Iconsax.box_2, color: SystemColors.red.primary, size: AppSizesManager.iconSize16),
+                              ? Icon(Iconsax.box_2,
+                                  color: SystemColors.green.primary,
+                                  size: AppSizesManager.iconSize16)
+                              : Icon(Iconsax.box_2,
+                                  color: SystemColors.red.primary,
+                                  size: AppSizesManager.iconSize16),
                           const Gap(AppSizesManager.s4),
-                          Text(medicineData.stockQuantity > 0 ? "In Stock" : "Out of Stock",
-                              style: AppTypography.bodySmallStyle.copyWith(
-                                  color: SystemColors.green.primary, fontWeight: AppTypography.appFontSemiBold)),
+                          Text(
+                              medicineData.stockQuantity > 0
+                                  ? "In Stock"
+                                  : "Out of Stock",
+                              style: context
+                                  .responsiveTextTheme.current.bodySmall
+                                  .copyWith(
+                                      color: SystemColors.green.primary,
+                                      fontWeight: context.responsiveTextTheme
+                                          .current.appFont.appFontSemiBold)),
                         ],
                       ),
                     ),
@@ -114,7 +129,10 @@ class MedicineWidget3 extends StatelessWidget {
                   Transform.scale(
                       alignment: Alignment.centerLeft,
                       scale: .9,
-                      child: CustomChip(label: "Antibiotic", color: AppColors.bgDarken2, onTap: () {})),
+                      child: CustomChip(
+                          label: "Antibiotic",
+                          color: AppColors.bgDarken2,
+                          onTap: () {})),
                   Spacer()
                 ]),
                 Gap(AppSizesManager.s8),
@@ -123,7 +141,9 @@ class MedicineWidget3 extends StatelessWidget {
                       maxLines: 1,
                       softWrap: true,
                       overflow: TextOverflow.ellipsis,
-                      style: AppTypography.headLine4SemiBoldStyle.copyWith(color: TextColors.primary.color)),
+                      style: context
+                          .responsiveTextTheme.current.headLine4SemiBold
+                          .copyWith(color: TextColors.primary.color)),
                 Gap(AppSizesManager.s4),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.baseline,
@@ -139,12 +159,17 @@ class MedicineWidget3 extends StatelessWidget {
                       TextSpan(
                         children: [
                           TextSpan(
-                            text: double.parse(medicineData.unitPriceHt).formatAsPrice(),
-                            style: AppTypography.headLine3SemiBoldStyle.copyWith(color: AppColors.accent1Shade1),
+                            text: double.parse(medicineData.unitPriceHt)
+                                .formatAsPrice(),
+                            style: context
+                                .responsiveTextTheme.current.headLine3SemiBold
+                                .copyWith(color: AppColors.accent1Shade1),
                           ),
                           TextSpan(
                             text: " ${context.translation!.currency}",
-                            style: AppTypography.bodyXSmallStyle.copyWith(color: AppColors.accent1Shade1),
+                            style: context
+                                .responsiveTextTheme.current.bodyXSmall
+                                .copyWith(color: AppColors.accent1Shade1),
                           ),
                         ],
                       ),
@@ -157,9 +182,12 @@ class MedicineWidget3 extends StatelessWidget {
                         borderColor: AppColors.accent1Shade1,
                         bgColor: Colors.transparent,
                         onPressed: () {
-                          AppLayout.appLayoutScaffoldKey.currentContext!.read<CartCubit>().addToCart(
-                              CreateCartItemModel(
-                                  productId: medicineData.id, productType: ProductTypes.medicine, quantity: 1));
+                          AppLayout.appLayoutScaffoldKey.currentContext!
+                              .read<CartCubit>()
+                              .addToCart(CreateCartItemModel(
+                                  productId: medicineData.id,
+                                  productType: ProductTypes.medicine,
+                                  quantity: 1));
                         },
                         icon: Icon(
                           Iconsax.add,

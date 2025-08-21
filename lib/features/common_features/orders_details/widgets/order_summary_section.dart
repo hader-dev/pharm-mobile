@@ -5,7 +5,7 @@ import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/price_formatter.dart';
 
-import '../../../../config/theme/typoghrapy_manager.dart';
+import '../../../../config/theme/typography/typoghrapy_source.dart';
 import '../../../../utils/constants.dart';
 import '../cubit/orders_details_cubit.dart';
 
@@ -17,34 +17,45 @@ class OrderSummarySection extends StatelessWidget {
     OrderDetailsCubit cubit = context.read<OrderDetailsCubit>();
     return Container(
       margin: const EdgeInsets.all(AppSizesManager.p4),
-      padding: const EdgeInsets.symmetric(vertical: AppSizesManager.p8, horizontal: AppSizesManager.p8),
+      padding: const EdgeInsets.symmetric(
+          vertical: AppSizesManager.p8, horizontal: AppSizesManager.p8),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+        borderRadius:
+            BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
             context.translation!.order_summary,
-            style: AppTypography.headLine4SemiBoldStyle,
+            style: context.responsiveTextTheme.current.headLine4SemiBold,
           ),
           const Gap(AppSizesManager.s12),
 
           SummaryRow(
             label: context.translation!.payment_method,
             value: PaymentMethods.values
-                .firstWhere((element) => element.id == context.read<OrderDetailsCubit>().orderData!.paymentMethod,
+                .firstWhere(
+                    (element) =>
+                        element.id ==
+                        context
+                            .read<OrderDetailsCubit>()
+                            .orderData!
+                            .paymentMethod,
                     orElse: () => PaymentMethods.cod)
                 .name,
           ),
           SummaryRow(label: context.translation!.discount, value: '10%'),
           //   const SummaryRow(label: 'Shipping (Standard)', value: '10.00 context.translation!.currencyAbbreviation'),
           SummaryRow(
-              label: context.translation!.total_ht, value: cubit.orderData!.totalAmountExclTax.formatAsPriceForPrint()),
+              label: context.translation!.total_ht,
+              value:
+                  cubit.orderData!.totalAmountExclTax.formatAsPriceForPrint()),
           SummaryRow(
               label: context.translation!.total_ttc,
-              value: cubit.orderData!.totalAmountInclTax.formatAsPriceForPrint()),
+              value:
+                  cubit.orderData!.totalAmountInclTax.formatAsPriceForPrint()),
           // const Divider(height: 24, thickness: 1),
           // SummaryRow(
           //   label: context.translation!.total_ht_amount,
@@ -86,7 +97,9 @@ class SummaryRow extends StatelessWidget {
           Text(
             label,
             style: TextStyle(
-              fontSize: isBold ? AppTypography.headLine4 : AppTypography.headLine5,
+              fontSize: isBold
+                  ? context.responsiveTextTheme.current.appFont.headLine4
+                  : AppTypographySource.headLine5,
               fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
               color: isBold ? Colors.black : Colors.grey[700],
             ),
@@ -94,7 +107,9 @@ class SummaryRow extends StatelessWidget {
           Text(
             value,
             style: TextStyle(
-              fontSize: isBold ? AppTypography.headLine4 : AppTypography.headLine5,
+              fontSize: isBold
+                  ? context.responsiveTextTheme.current.appFont.headLine4
+                  : AppTypographySource.headLine5,
               fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
               color: isBold ? Colors.black : Colors.grey[700],
             ),

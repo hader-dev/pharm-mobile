@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/features/common_features/wilaya/cubit/wilaya_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/wilaya/widgets/wilaya_dropdown.dart';
 import 'package:hader_pharm_mobile/models/wilaya.dart';
@@ -31,7 +30,7 @@ class WilayaDropdown extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: AppSizesManager.p4),
             child: Text(context.translation!.wilaya,
-                style: AppTypography.body3MediumStyle
+                style: context.responsiveTextTheme.current.body3Medium
                     .copyWith(color: TextColors.ternary.color)),
           ),
           const Gap(AppSizesManager.s6),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class CategoryCircularWidget extends StatelessWidget {
   final String imageUrl;
@@ -46,7 +46,7 @@ class CategoryCircularWidget extends StatelessWidget {
           const Gap(AppSizesManager.s6),
           Text(
             categoryName,
-            style: AppTypography.body3MediumStyle,
+            style: context.responsiveTextTheme.current.body3Medium,
             softWrap: true,
             overflow: TextOverflow.ellipsis,
           ),

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
+
 import '../../../../config/theme/colors_manager.dart';
-import '../../../../config/theme/typoghrapy_manager.dart';
 import '../../../../utils/constants.dart';
 
 class SettingsTile extends StatelessWidget {
@@ -20,11 +21,16 @@ class SettingsTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: AppSizesManager.p10, left: AppSizesManager.p8, right: AppSizesManager.p8),
+      padding: const EdgeInsets.only(
+          bottom: AppSizesManager.p10,
+          left: AppSizesManager.p8,
+          right: AppSizesManager.p8),
       child: Container(
         decoration: BoxDecoration(
-          border: Border.all(color: AppColors.accentGreenShade1.withAlpha(40), width: 1),
-          borderRadius: BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+          border: Border.all(
+              color: AppColors.accentGreenShade1.withAlpha(40), width: 1),
+          borderRadius:
+              BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
         ),
         child: ListTile(
           leading: Icon(
@@ -34,11 +40,13 @@ class SettingsTile extends StatelessWidget {
           ),
           title: Text(
             title,
-            style: AppTypography.body3MediumStyle,
+            style: context.responsiveTextTheme.current.body3Medium,
           ),
           trailing: trailing ??
               Icon(
-                Directionality.of(context) == TextDirection.rtl ? Iconsax.arrow_left_2 : Iconsax.arrow_right_3,
+                Directionality.of(context) == TextDirection.rtl
+                    ? Iconsax.arrow_left_2
+                    : Iconsax.arrow_right_3,
                 size: AppSizesManager.iconSize20,
               ),
           onTap: () {

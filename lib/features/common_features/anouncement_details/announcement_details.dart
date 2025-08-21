@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
 import 'package:hader_pharm_mobile/features/common_features/anouncement_details/cubit/announcement_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/anouncement_details/widgets/tabs_section.dart';
@@ -72,7 +71,8 @@ class AnnouncementDetailsScreen extends StatelessWidget {
             ),
             title: Text(
               context.translation!.announcement_details,
-              style: AppTypography.headLine3SemiBoldStyle.copyWith(
+              style: context.responsiveTextTheme.current.headLine3SemiBold
+                  .copyWith(
                 color: Colors.white,
               ),
             ),

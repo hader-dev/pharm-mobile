@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders_details/sub_pages/complaints/order_complaints_page.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders_details/sub_pages/order_details.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders_details/sub_pages/order_items/order_items.dart';
@@ -33,7 +32,7 @@ class _OrderDetailsTabBarSectionState extends State<OrderDetailsTabBarSection>
       translation.order_complaint
     ];
 
-    TextStyle tabTextStyle = AppTypography.body3MediumStyle;
+    TextStyle tabTextStyle = context.responsiveTextTheme.current.body3Medium;
 
     return Column(
       children: [

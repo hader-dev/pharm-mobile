@@ -8,7 +8,6 @@ import 'package:iconsax/iconsax.dart';
 
 import '../../../config/services/network/network_interface.dart';
 import '../../../config/theme/colors_manager.dart';
-import '../../../config/theme/typoghrapy_manager.dart';
 import '../../../repositories/remote/favorite/favorite_repository_impl.dart';
 import '../../../utils/constants.dart';
 import '../../common/app_bars/custom_app_bar.dart';
@@ -22,9 +21,10 @@ class FavoritesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: BlocProvider(
-        create: (context) =>
-            FavoritesCubit(favoriteRepository: FavoriteRepository(client: getItInstance.get<INetworkService>()))
-              ..fetchFavorites(),
+        create: (context) => FavoritesCubit(
+            favoriteRepository: FavoriteRepository(
+                client: getItInstance.get<INetworkService>()))
+          ..fetchFavorites(),
         child: Scaffold(
             key: favoritesScaffoldKey,
             appBar: CustomAppBar(
@@ -33,7 +33,9 @@ class FavoritesScreen extends StatelessWidget {
               bottomPadding: MediaQuery.of(context).padding.bottom,
               leading: IconButton(
                 icon: Icon(
-                  Directionality.of(context) == TextDirection.rtl ? Iconsax.arrow_right_3 : Iconsax.arrow_left_2,
+                  Directionality.of(context) == TextDirection.rtl
+                      ? Iconsax.arrow_right_3
+                      : Iconsax.arrow_left_2,
                   size: AppSizesManager.iconSize25,
                 ),
                 onPressed: () {
@@ -42,7 +44,7 @@ class FavoritesScreen extends StatelessWidget {
               ),
               title: Text(
                 context.translation!.favorites,
-                style: AppTypography.headLine3SemiBoldStyle,
+                style: context.responsiveTextTheme.current.headLine3SemiBold,
               ),
             ),
             body: FavoritesTabBarSection()),

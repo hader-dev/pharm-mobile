@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
 import 'package:hader_pharm_mobile/features/common/text_fields/compact_custom_text_field.dart';
@@ -35,7 +34,7 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
               children: [
                 Text(
                   "Sologene",
-                  style: AppTypography.headLine3SemiBoldStyle
+                  style: context.responsiveTextTheme.current.headLine3SemiBold
                       .copyWith(color: Colors.white),
                 ),
                 const Spacer(),
@@ -51,7 +50,8 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
                             Iconsax.notification,
                             color: Colors.white,
                           ),
-                          if (context.read<NotificationsCubit>().unreadCount > 0)
+                          if (context.read<NotificationsCubit>().unreadCount >
+                              0)
                             Positioned(
                               top: -4,
                               right: -4,
@@ -118,7 +118,7 @@ class HomeAppbarOld extends StatelessWidget {
       ),
       title: Text(
         translation.home,
-        style: AppTypography.headLine3SemiBoldStyle,
+        style: context.responsiveTextTheme.current.headLine3SemiBold,
       ),
       trailing: [
         IconButton(

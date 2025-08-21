@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class BottomSheetHeader extends StatelessWidget {
   final String title;
@@ -18,7 +18,7 @@ class BottomSheetHeader extends StatelessWidget {
         children: [
           Text(
             title,
-            style: AppTypography.headLine3SemiBoldStyle,
+            style: context.responsiveTextTheme.current.headLine3SemiBold,
           ),
           Spacer(),
           InkWell(

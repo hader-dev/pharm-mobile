@@ -5,9 +5,9 @@ import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/features/common_features/create_company_profile/sub_pages/review_and_sumbit/widgets/info_row.dart';
 import 'package:hader_pharm_mobile/models/company.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../config/theme/colors_manager.dart';
-import '../../../config/theme/typoghrapy_manager.dart';
 import '../../../utils/assets_strings.dart';
 import '../../../utils/enums.dart';
 
@@ -23,8 +23,9 @@ class VendorItem extends StatelessWidget {
     this.hideRemoveButton = true,
     this.onRemoveFromFavorites,
   }) {
-    distributorCategory = DistributorCategory.values
-        .firstWhere((element) => element.id == companyData.distributorCategory, orElse: () => DistributorCategory.both);
+    distributorCategory = DistributorCategory.values.firstWhere(
+        (element) => element.id == companyData.distributorCategory,
+        orElse: () => DistributorCategory.both);
   }
 
   @override
@@ -32,7 +33,8 @@ class VendorItem extends StatelessWidget {
     return InkWell(
       splashColor: Colors.transparent,
       onTap: () {
-        GoRouter.of(context).pushNamed(RoutingManager.vendorDetails, extra: companyData.id);
+        GoRouter.of(context)
+            .pushNamed(RoutingManager.vendorDetails, extra: companyData.id);
       },
       child: Stack(
         children: [
@@ -51,7 +53,8 @@ class VendorItem extends StatelessWidget {
             margin: const EdgeInsets.all(AppSizesManager.p12),
             padding: EdgeInsets.all(AppSizesManager.p8),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+              borderRadius:
+                  BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
               border: Border.all(color: StrokeColors.normal.color, width: 1),
             ),
             child: Column(
@@ -81,7 +84,8 @@ class VendorItem extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
                         softWrap: true,
-                        style: AppTypography.headLine4SemiBoldStyle,
+                        style: context
+                            .responsiveTextTheme.current.headLine4SemiBold,
                       ),
                     ),
                     Spacer(),
@@ -100,8 +104,12 @@ class VendorItem extends StatelessWidget {
                               distributorCategory == DistributorCategory.both
                                   ? "pharmacy,para-pharmacy"
                                   : distributorCategory.name,
-                              style: AppTypography.bodySmallStyle.copyWith(
-                                  color: distributorCategory.color, fontWeight: AppTypography.appFontSemiBold)),
+                              style: context
+                                  .responsiveTextTheme.current.bodySmall
+                                  .copyWith(
+                                      color: distributorCategory.color,
+                                      fontWeight: context.responsiveTextTheme
+                                          .current.appFont.appFontSemiBold)),
                         ],
                       ),
                     )

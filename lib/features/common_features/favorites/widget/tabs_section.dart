@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../../config/theme/colors_manager.dart';
-import '../sub_pages/favorites_medicines_catalogs/favorites_medicines_catalogs.dart' show FavoritesMedicinesCatalog;
+import '../sub_pages/favorites_medicines_catalogs/favorites_medicines_catalogs.dart'
+    show FavoritesMedicinesCatalog;
 import '../sub_pages/favorites_para_pharma_catalogs/favorites_para_pharma_catalogs.dart'
     show FavoritesParaPharmaCatalogs;
-import '../sub_pages/favorites_vendors/favorites_vendors.dart' show FavoritesVendors;
+import '../sub_pages/favorites_vendors/favorites_vendors.dart'
+    show FavoritesVendors;
 
 // onCategoryTapped(String categoryName) {
 //   Scrollable.ensureVisible(TabBArSection.sectionsKeys[categoryName]!.currentContext!,
@@ -24,7 +25,8 @@ class FavoritesTabBarSection extends StatefulWidget {
   State<FavoritesTabBarSection> createState() => _FavoritesTabBarSectionState();
 }
 
-class _FavoritesTabBarSectionState extends State<FavoritesTabBarSection> with TickerProviderStateMixin {
+class _FavoritesTabBarSectionState extends State<FavoritesTabBarSection>
+    with TickerProviderStateMixin {
   late final TabController tabsController;
   @override
   void initState() {
@@ -34,7 +36,7 @@ class _FavoritesTabBarSectionState extends State<FavoritesTabBarSection> with Ti
 
   @override
   Widget build(BuildContext context) {
-    TextStyle tabTextStyle = AppTypography.body3MediumStyle;
+    TextStyle tabTextStyle = context.responsiveTextTheme.current.body3Medium;
 
     return Column(
       children: [
@@ -61,7 +63,11 @@ class _FavoritesTabBarSectionState extends State<FavoritesTabBarSection> with Ti
           child: TabBarView(
             physics: const NeverScrollableScrollPhysics(),
             controller: tabsController,
-            children: [FavoritesMedicinesCatalog(), FavoritesParaPharmaCatalogs(), FavoritesVendors()],
+            children: [
+              FavoritesMedicinesCatalog(),
+              FavoritesParaPharmaCatalogs(),
+              FavoritesVendors()
+            ],
           ),
         ),
       ],

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/models/company.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../../config/theme/colors_manager.dart';
-import '../../../../config/theme/typoghrapy_manager.dart';
 import '../../../../utils/assets_strings.dart';
 import '../../../../utils/constants.dart';
 import '../cubit/cart_cubit.dart';
@@ -16,7 +16,8 @@ class VendorCartSection extends StatefulWidget {
   final BaseCompany vendorData;
   final List<String> cartItems;
 
-  const VendorCartSection({super.key, required this.vendorData, required this.cartItems});
+  const VendorCartSection(
+      {super.key, required this.vendorData, required this.cartItems});
 
   @override
   State createState() => VendorCartSectionState();
@@ -28,18 +29,23 @@ class VendorCartSectionState extends State<VendorCartSection> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: AppSizesManager.p8, vertical: AppSizesManager.s8),
+      padding: const EdgeInsets.symmetric(
+          horizontal: AppSizesManager.p8, vertical: AppSizesManager.s8),
       child: ValueListenableBuilder(
         valueListenable: _isExpanded,
         builder: (context, value, child) => ExpansionTile(
           dense: true,
           initiallyExpanded: _isExpanded.value,
-          trailing: Icon(_isExpanded.value ? Icons.minimize : Icons.keyboard_arrow_down_outlined),
+          trailing: Icon(_isExpanded.value
+              ? Icons.minimize
+              : Icons.keyboard_arrow_down_outlined),
           iconColor: AppColors.accent1Shade1,
           maintainState: true,
-          childrenPadding: const EdgeInsets.symmetric(vertical: AppSizesManager.p8, horizontal: AppSizesManager.p8),
+          childrenPadding: const EdgeInsets.symmetric(
+              vertical: AppSizesManager.p8, horizontal: AppSizesManager.p8),
           expandedAlignment: Alignment.centerLeft,
-          tilePadding: const EdgeInsets.symmetric(horizontal: AppSizesManager.p8),
+          tilePadding:
+              const EdgeInsets.symmetric(horizontal: AppSizesManager.p8),
           collapsedShape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(AppSizesManager.r8),
               side: BorderSide(color: StrokeColors.normal.color)),
@@ -64,12 +70,15 @@ class VendorCartSectionState extends State<VendorCartSection> {
             Text.rich(
               TextSpan(
                 text: widget.vendorData.name,
-                style: AppTypography.bodySmallStyle
-                    .copyWith(fontWeight: AppTypography.appFontSemiBold, color: TextColors.primary.color),
+                style: context.responsiveTextTheme.current.bodySmall.copyWith(
+                    fontWeight: context
+                        .responsiveTextTheme.current.appFont.appFontSemiBold,
+                    color: TextColors.primary.color),
                 children: [
                   TextSpan(
                       text: " (${widget.cartItems.length})",
-                      style: AppTypography.bodyXSmallStyle.copyWith(color: TextColors.ternary.color)),
+                      style: context.responsiveTextTheme.current.bodyXSmall
+                          .copyWith(color: TextColors.ternary.color)),
                 ],
               ),
             )
@@ -79,7 +88,9 @@ class VendorCartSectionState extends State<VendorCartSection> {
           },
           children: widget.cartItems
               .map((e) => CartItemWidget(
-                  cartItemData: BlocProvider.of<CartCubit>(context).cartItems.firstWhere((item) => item.id == e)))
+                  cartItemData: BlocProvider.of<CartCubit>(context)
+                      .cartItems
+                      .firstWhere((item) => item.id == e)))
               .toList(),
         ),
       ),

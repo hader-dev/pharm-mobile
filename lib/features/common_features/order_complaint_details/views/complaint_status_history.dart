@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common_features/order_complaint_details/cubit/orders_complaint_details_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/order_complaint_details/widgets/tracking_status_step_widget.dart';
@@ -27,7 +26,8 @@ class ComplaintStatusHistory extends StatelessWidget {
       children: [
         Text(
           translation.claim_status_history,
-          style: AppTypography.headLine3SemiBoldStyle.copyWith(color: AppColors.accent1Shade1),
+          style: context.responsiveTextTheme.current.headLine3SemiBold
+              .copyWith(color: AppColors.accent1Shade1),
         ),
         ...cubit.complaintStatusHitsory.asMap().entries.map((entry) {
           final index = entry.key;

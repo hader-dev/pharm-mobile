@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
@@ -57,7 +56,7 @@ class PageHeaderSection extends StatelessWidget {
               ),
               child: Text(
                 '${currentStep + 1}',
-                style: AppTypography.headLine3SemiBoldStyle
+                style: context.responsiveTextTheme.current.headLine3SemiBold
                     .copyWith(color: AppColors.accent1Shade1),
               ),
             ),
@@ -66,12 +65,12 @@ class PageHeaderSection extends StatelessWidget {
               children: [
                 Text(
                   pagesTitles[currentStep]["title"] ?? '',
-                  style: AppTypography.headLine3SemiBoldStyle
+                  style: context.responsiveTextTheme.current.headLine3SemiBold
                       .copyWith(color: AppColors.accent1Shade1),
                 ),
                 Gap(AppSizesManager.s4),
                 Text(pagesTitles[currentStep]["subtitle"] ?? '',
-                    style: AppTypography.bodySmallStyle),
+                    style: context.responsiveTextTheme.current.bodySmall),
               ],
             ),
           ],

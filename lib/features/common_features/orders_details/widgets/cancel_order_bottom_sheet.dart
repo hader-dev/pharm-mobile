@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders_details/actions/cancel_order.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders_details/cubit/orders_details_cubit.dart';
@@ -25,7 +24,7 @@ class CancelOrderBottomSheet extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(translation.are_you_sure_cancel_order,
-            style: AppTypography.body1MediumStyle),
+            style: context.responsiveTextTheme.current.body1Medium),
         Gap(AppSizesManager.s16),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p4),

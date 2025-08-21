@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/features/app_layout/app_layout.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
@@ -10,8 +9,8 @@ import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
-import 'cubit/cart_cubit.dart';
 
+import 'cubit/cart_cubit.dart';
 import 'widgets/vendor_cart_items_set.dart';
 
 class CartScreen extends StatelessWidget {
@@ -40,11 +39,15 @@ class CartScreen extends StatelessWidget {
                 return Text.rich(
                   TextSpan(
                     text: context.translation!.cart,
-                    style: AppTypography.headLine3SemiBoldStyle.copyWith(color: AppColors.bgWhite),
+                    style: context.responsiveTextTheme.current.headLine3SemiBold
+                        .copyWith(color: AppColors.bgWhite),
                     children: [
                       TextSpan(
-                          text: " (${BlocProvider.of<CartCubit>(context).cartItems.length})",
-                          style: AppTypography.bodySmallStyle.copyWith(color: AppColors.accent1Shade2Deemphasized)),
+                          text:
+                              " (${BlocProvider.of<CartCubit>(context).cartItems.length})",
+                          style: context.responsiveTextTheme.current.bodySmall
+                              .copyWith(
+                                  color: AppColors.accent1Shade2Deemphasized)),
                     ],
                   ),
                 );
@@ -58,10 +61,13 @@ class CartScreen extends StatelessWidget {
                 if (state is CartQuantityUpdated) {}
                 if (state is CartLoading) {
                   return Expanded(
-                    child: Container(alignment: Alignment.center, child: const CircularProgressIndicator()),
+                    child: Container(
+                        alignment: Alignment.center,
+                        child: const CircularProgressIndicator()),
                   );
                 }
-                if (state is CartLoadingSuccess && BlocProvider.of<CartCubit>(context).cartItems.isEmpty) {
+                if (state is CartLoadingSuccess &&
+                    BlocProvider.of<CartCubit>(context).cartItems.isEmpty) {
                   return Expanded(
                     child: EmptyListWidget(
                       emptyIllustrationPath: DrawableAssetStrings.emptyCartIcon,
@@ -77,18 +83,23 @@ class CartScreen extends StatelessWidget {
                       return BlocProvider.of<CartCubit>(context).getCartItem();
                     },
                     child: ListView(
-                        controller: BlocProvider.of<CartCubit>(context).scrollController,
+                        controller: BlocProvider.of<CartCubit>(context)
+                            .scrollController,
                         shrinkWrap: true,
                         physics: const AlwaysScrollableScrollPhysics(),
                         children: BlocProvider.of<CartCubit>(context)
                             .cartItemsByVendor
                             .keys
                             .map((vendor) => VendorCartSection(
-                                  vendorData: BlocProvider.of<CartCubit>(context)
-                                      .cartItems
-                                      .firstWhere((element) => element.sellerCompanyId == vendor)
-                                      .sellerCompany,
-                                  cartItems: BlocProvider.of<CartCubit>(context).cartItemsByVendor[vendor] ?? [],
+                                  vendorData:
+                                      BlocProvider.of<CartCubit>(context)
+                                          .cartItems
+                                          .firstWhere((element) =>
+                                              element.sellerCompanyId == vendor)
+                                          .sellerCompany,
+                                  cartItems: BlocProvider.of<CartCubit>(context)
+                                          .cartItemsByVendor[vendor] ??
+                                      [],
                                 ))
                             .toList()),
                   ),

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:intl/intl.dart';
 
-
 class FormattedPrice extends StatelessWidget {
   final num price;
   final TextStyle valueStyle;

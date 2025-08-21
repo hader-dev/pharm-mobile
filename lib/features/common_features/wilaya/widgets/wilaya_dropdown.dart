@@ -1,7 +1,7 @@
 import 'dart:async';
+
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/features/common/decorations/field.dart';
 import 'package:hader_pharm_mobile/features/common/decorations/input.dart';
 import 'package:hader_pharm_mobile/models/wilaya.dart';
@@ -38,7 +38,7 @@ class BaseWilayaDropdown extends StatelessWidget {
   Widget buildDisplayWidget(BuildContext context, Wilaya? selectedItem) {
     return Text(
       selectedItem?.label ?? context.translation!.select_wilaya,
-      style: AppTypography.body3RegularStyle,
+      style: context.responsiveTextTheme.current.body3Regular,
     );
   }
 

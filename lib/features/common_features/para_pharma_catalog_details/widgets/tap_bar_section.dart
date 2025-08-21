@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/cubit/para_pharma_details_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/helpers/para_pharma_catalog_details_tab_data.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class ProductDetailsTabBarSection extends StatefulWidget {
   const ProductDetailsTabBarSection({super.key});
@@ -24,7 +24,7 @@ class _ProductDetailsTabBarSectionState
   Widget build(BuildContext context) {
     final tabs = paraPharmaCatalogDetailsTabData(context);
 
-    TextStyle tabTextStyle = AppTypography.body3MediumStyle;
+    TextStyle tabTextStyle = context.responsiveTextTheme.current.body3Medium;
 
     return TabBar(
         indicatorColor: AppColors.accent1Shade2,

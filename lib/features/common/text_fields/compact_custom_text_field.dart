@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/features/common/decorations/field.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
-
 
 class CompactCustomTextField extends StatelessWidget {
   final GlobalKey<FormFieldState>? fieldKey;
@@ -75,60 +73,58 @@ class CompactCustomTextField extends StatelessWidget {
     this.maxLines = 1,
   });
 
-
-
   @override
   Widget build(BuildContext context) {
     final isDisabled = state == FieldState.disabled;
 
     return TextFormField(
-          key: fieldKey,
-          initialValue: initValue,
-          validator: (value) => validationFunc?.call(value),
-          cursorColor: context.theme.primaryColor,
-          onChanged: onChanged,
-          focusNode: fieldFocusNode,
-          keyboardType: keyBoadType,
-          textAlign: textAlign,
-          readOnly: isReadOnly,
-          onTap: onTap,
-          enabled: isEnabled,
-          inputFormatters: formatters,
-          controller: controller,
-          obscureText: isObscure,
-          minLines: minLines,
-          maxLines: maxLines,
-          obscuringCharacter: '*',
-          decoration: InputDecoration(
-            hintText: hintText,
-            hintStyle: AppTypography.body3RegularStyle
-                .copyWith(color: TextColors.ternary.color),
-            isDense: true,
-            filled: isFilled,
-            suffixIcon: suffixIcon,
-            prefixIcon: prefixIcon,
-            contentPadding: EdgeInsets.all(AppSizesManager.p12),
-            fillColor: isDisabled
-                ? AppColors.bgDisabled
-                : state == FieldState.error
-                    ? FieldState.error.color.ternary
-                    : AppColors.bgWhite,
-            enabledBorder: OutlineInputBorder(
-              borderRadius:
-                  BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
-              borderSide: BorderSide(color: getEnabledBorderColor(context,state)),
-            ),
-            disabledBorder: OutlineInputBorder(
-              borderRadius:
-                  BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
-              borderSide: BorderSide(color: AppColors.bgDisabled),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius:
-                  BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
-              borderSide: BorderSide(color: getFocusedBorderColor(context,state)),
-            ),
-          ),
-        );
+      key: fieldKey,
+      initialValue: initValue,
+      validator: (value) => validationFunc?.call(value),
+      cursorColor: context.theme.primaryColor,
+      onChanged: onChanged,
+      focusNode: fieldFocusNode,
+      keyboardType: keyBoadType,
+      textAlign: textAlign,
+      readOnly: isReadOnly,
+      onTap: onTap,
+      enabled: isEnabled,
+      inputFormatters: formatters,
+      controller: controller,
+      obscureText: isObscure,
+      minLines: minLines,
+      maxLines: maxLines,
+      obscuringCharacter: '*',
+      decoration: InputDecoration(
+        hintText: hintText,
+        hintStyle: context.responsiveTextTheme.current.body3Regular
+            .copyWith(color: TextColors.ternary.color),
+        isDense: true,
+        filled: isFilled,
+        suffixIcon: suffixIcon,
+        prefixIcon: prefixIcon,
+        contentPadding: EdgeInsets.all(AppSizesManager.p12),
+        fillColor: isDisabled
+            ? AppColors.bgDisabled
+            : state == FieldState.error
+                ? FieldState.error.color.ternary
+                : AppColors.bgWhite,
+        enabledBorder: OutlineInputBorder(
+          borderRadius:
+              BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+          borderSide: BorderSide(color: getEnabledBorderColor(context, state)),
+        ),
+        disabledBorder: OutlineInputBorder(
+          borderRadius:
+              BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+          borderSide: BorderSide(color: AppColors.bgDisabled),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius:
+              BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+          borderSide: BorderSide(color: getFocusedBorderColor(context, state)),
+        ),
+      ),
+    );
   }
 }

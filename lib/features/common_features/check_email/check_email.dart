@@ -7,7 +7,6 @@ import 'package:hader_pharm_mobile/config/routes/go_router_extension.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/features/common_features/check_email/cubit/check_email_cubit.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
@@ -28,7 +27,7 @@ class CheckEmailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final translation = context.translation!;
-    
+
     return BlocProvider(
       create: (context) =>
           CheckEmailCubit(userManager: getItInstance.get<UserManager>())
@@ -64,25 +63,33 @@ class CheckEmailScreen extends StatelessWidget {
                           TextSpan(children: [
                             TextSpan(
                               text: translation.by_signing_up_you_agree_to_our,
-                              style: AppTypography.body3RegularStyle
+                              style: context
+                                  .responsiveTextTheme.current.body3Regular
                                   .copyWith(color: TextColors.ternary.color),
                             ),
                             TextSpan(
                               text: ' ${translation.terms_of_services} ',
-                              style: AppTypography.body3RegularStyle.copyWith(
-                                  fontWeight: AppTypography.appFontSemiBold,
-                                  color: AppColors.accent1Shade1),
+                              style: context
+                                  .responsiveTextTheme.current.body3Regular
+                                  .copyWith(
+                                      fontWeight: context.responsiveTextTheme
+                                          .current.appFont.appFontSemiBold,
+                                      color: AppColors.accent1Shade1),
                             ),
                             TextSpan(
                               text: ' ${translation.and} ',
-                              style: AppTypography.body3RegularStyle
+                              style: context
+                                  .responsiveTextTheme.current.body3Regular
                                   .copyWith(color: TextColors.ternary.color),
                             ),
                             TextSpan(
                               text: ' ${translation.privacy_policy}',
-                              style: AppTypography.body3RegularStyle.copyWith(
-                                  fontWeight: AppTypography.appFontSemiBold,
-                                  color: AppColors.accent1Shade1),
+                              style: context
+                                  .responsiveTextTheme.current.body3Regular
+                                  .copyWith(
+                                      fontWeight: context.responsiveTextTheme
+                                          .current.appFont.appFontSemiBold,
+                                      color: AppColors.accent1Shade1),
                             ),
                           ])),
                       Gap(AppSizesManager.s12),

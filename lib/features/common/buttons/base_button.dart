@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class BaseButton extends StatelessWidget {
   final Function? onTap;
@@ -47,10 +47,11 @@ class BaseButton extends StatelessWidget {
     return MaterialButton(
       color: color,
       padding: EdgeInsets.all(padding),
-      splashColor:spalshColor ?? Colors.transparent,
+      splashColor: spalshColor ?? Colors.transparent,
       elevation: 0,
       disabledColor: AppColors.bgDisabled,
-      shape: getButtonShape(isRectangular, isOutLined, borderColor: borderColor),
+      shape:
+          getButtonShape(isRectangular, isOutLined, borderColor: borderColor),
       disabledElevation: 0,
       height: height,
       minWidth: minWidth,
@@ -91,7 +92,8 @@ class BaseButton extends StatelessWidget {
                   ),
                 Text(
                   label,
-                  style: AppTypography.headLine4MediumStyle.copyWith(
+                  style: context.responsiveTextTheme.current.headLine4Medium
+                      .copyWith(
                     color: onTap == null ? Colors.grey : labelColor,
                   ),
                 ),
@@ -111,11 +113,14 @@ class BaseButton extends StatelessWidget {
     );
   }
 
-  dynamic getButtonShape(bool isRectangular, bool isOutLined, {Color? borderColor}) {
+  dynamic getButtonShape(bool isRectangular, bool isOutLined,
+      {Color? borderColor}) {
     if (isRectangular) {
       return RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(radiusValue),
-        side: isOutLined ? BorderSide(color: borderColor ?? Colors.black, width: .6) : BorderSide.none,
+        side: isOutLined
+            ? BorderSide(color: borderColor ?? Colors.black, width: .6)
+            : BorderSide.none,
       );
     } else {
       return const CircleBorder();

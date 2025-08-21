@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:gap/gap.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../../config/theme/colors_manager.dart';
-import '../../../../config/theme/typoghrapy_manager.dart';
 import '../../../../utils/constants.dart';
 import '../../../common/buttons/solid/primary_text_button.dart';
 
@@ -14,9 +14,9 @@ class CheckPhoneOtpInputSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  // ignore: unused_local_variable
-  late List<TextEditingController?> controls;
-  
+    // ignore: unused_local_variable
+    late List<TextEditingController?> controls;
+
     return Column(
       children: [
         OtpTextField(
@@ -29,8 +29,8 @@ class CheckPhoneOtpInputSection extends StatelessWidget {
           fieldWidth: 52.8,
           cursorColor: AppColors.accent1Shade1,
           alignment: Alignment.center,
-
-          textStyle: AppTypography.body1MediumStyle.copyWith(fontSize: AppTypography.headLine4),
+          textStyle: context.responsiveTextTheme.current.body1Medium.copyWith(
+              fontSize: context.responsiveTextTheme.current.appFont.headLine4),
           onCodeChanged: (String value) {
             //Handle each value
           },
@@ -45,7 +45,7 @@ class CheckPhoneOtpInputSection extends StatelessWidget {
           padding: const EdgeInsets.all(AppSizesManager.p12),
           child: Text(
             "Resend! (5s)",
-            style: AppTypography.body3RegularStyle.copyWith(
+            style: context.responsiveTextTheme.current.body3Regular.copyWith(
                 color: TextColors.secondary.color,
                 decoration: TextDecoration.underline,
                 decorationColor: TextColors.secondary.color),

@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/info_widget.dart';
 import 'package:hader_pharm_mobile/features/common_features/order_complaint_details/cubit/orders_complaint_details_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/order_complaint_details/views/complaint_status_history.dart';
@@ -45,35 +44,35 @@ class ComplaintReviewView extends StatelessWidget {
             label: translation.item_complaint,
             value: Text(
               "#${cubit.claimData!.id}",
-              style: AppTypography.body2MediumStyle,
+              style: context.responsiveTextTheme.current.body2Medium,
             ),
           ),
           InfoWidget(
             label: translation.subject,
             value: Text(
               cubit.claimData!.subject,
-              style: AppTypography.body2MediumStyle,
+              style: context.responsiveTextTheme.current.body2Medium,
             ),
           ),
           InfoWidget(
             label: translation.product,
             value: Text(
               item.designation ?? translation.unknown,
-              style: AppTypography.body2MediumStyle,
+              style: context.responsiveTextTheme.current.body2Medium,
             ),
           ),
           InfoWidget(
             label: translation.quantity,
             value: Text(
               item.quantity.toString(),
-              style: AppTypography.body2MediumStyle,
+              style: context.responsiveTextTheme.current.body2Medium,
             ),
           ),
           InfoWidget(
             label: translation.description,
             value: Text(
               cubit.claimData!.description,
-              style: AppTypography.body2MediumStyle,
+              style: context.responsiveTextTheme.current.body2Medium,
             ),
           ),
           Divider(color: AppColors.accent1Shade1, thickness: 1, height: 1),

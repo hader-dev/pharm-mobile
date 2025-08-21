@@ -4,7 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
+import 'package:hader_pharm_mobile/config/theme/typography/typoghrapy_source.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_icon_button.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/widgets/quick_add_modal.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
@@ -110,9 +110,12 @@ class ParaPharmaWidget4 extends StatelessWidget {
                                 paraPharmData.stockQuantity > 0
                                     ? translation.in_stock
                                     : translation.out_stock,
-                                style: AppTypography.bodySmallStyle.copyWith(
-                                    color: SystemColors.green.primary,
-                                    fontWeight: AppTypography.appFontSemiBold)),
+                                style: context
+                                    .responsiveTextTheme.current.bodySmall
+                                    .copyWith(
+                                        color: SystemColors.green.primary,
+                                        fontWeight: AppTypographySource
+                                            .appFontSemiBold)),
                           ],
                         ),
                       ),
@@ -139,7 +142,7 @@ class ParaPharmaWidget4 extends StatelessWidget {
                       maxLines: 1,
                       softWrap: true,
                       overflow: TextOverflow.ellipsis,
-                      style: AppTypography.body2MediumStyle
+                      style: context.responsiveTextTheme.current.body2Medium
                           .copyWith(color: TextColors.primary.color)),
                   Gap(AppSizesManager.s4),
                   Row(
@@ -158,12 +161,14 @@ class ParaPharmaWidget4 extends StatelessWidget {
                             TextSpan(
                               text: double.parse(paraPharmData.unitPriceHt)
                                   .formatAsPrice(),
-                              style: AppTypography.headLine3SemiBoldStyle
+                              style: context
+                                  .responsiveTextTheme.current.headLine3SemiBold
                                   .copyWith(color: AppColors.accent1Shade1),
                             ),
                             TextSpan(
                               text: " ${context.translation!.currency}",
-                              style: AppTypography.bodyXSmallStyle
+                              style: context
+                                  .responsiveTextTheme.current.bodyXSmall
                                   .copyWith(color: AppColors.accent1Shade1),
                             ),
                           ],

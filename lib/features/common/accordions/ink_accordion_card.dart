@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
@@ -29,7 +28,6 @@ class InkAccordionItem extends StatelessWidget {
         dense: true,
         trailing: Icon(Icons.keyboard_arrow_right_outlined),
         iconColor: AppColors.accent1Shade1,
-       
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppSizesManager.r8),
             side: BorderSide(color: StrokeColors.focused.color)),
@@ -37,8 +35,9 @@ class InkAccordionItem extends StatelessWidget {
             Text.rich(
               TextSpan(
                 text: rawTitle,
-                style: AppTypography.bodySmallStyle.copyWith(
-                    fontWeight: AppTypography.appFontBold,
+                style: context.responsiveTextTheme.current.bodySmall.copyWith(
+                    fontWeight:
+                        context.responsiveTextTheme.current.appFont.appFontBold,
                     color: TextColors.primary.color),
               ),
             ),
@@ -46,8 +45,9 @@ class InkAccordionItem extends StatelessWidget {
             Text.rich(
               TextSpan(
                 text: rawSubtitle ?? context.translation!.any,
-                style: AppTypography.bodySmallStyle.copyWith(
-                    fontWeight: AppTypography.appFontBold,
+                style: context.responsiveTextTheme.current.bodySmall.copyWith(
+                    fontWeight:
+                        context.responsiveTextTheme.current.appFont.appFontBold,
                     color: TextColors.ternary.color),
               ),
             ),

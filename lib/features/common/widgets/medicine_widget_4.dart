@@ -4,7 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
+import 'package:hader_pharm_mobile/config/theme/typography/typoghrapy_source.dart';
 import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/widgets/quick_add_modal.dart';
 import 'package:hader_pharm_mobile/models/medicine_catalog.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
@@ -109,9 +109,12 @@ class MedicineWidget4 extends StatelessWidget {
                                 medicineData.stockQuantity > 0
                                     ? "In Stock"
                                     : "Out of Stock",
-                                style: AppTypography.bodySmallStyle.copyWith(
-                                    color: SystemColors.green.primary,
-                                    fontWeight: AppTypography.appFontSemiBold)),
+                                style: context
+                                    .responsiveTextTheme.current.bodySmall
+                                    .copyWith(
+                                        color: SystemColors.green.primary,
+                                        fontWeight: AppTypographySource
+                                            .appFontSemiBold)),
                           ],
                         ),
                       ),
@@ -139,7 +142,7 @@ class MedicineWidget4 extends StatelessWidget {
                         maxLines: 1,
                         softWrap: true,
                         overflow: TextOverflow.ellipsis,
-                        style: AppTypography.body2MediumStyle
+                        style: context.responsiveTextTheme.current.body2Medium
                             .copyWith(color: TextColors.primary.color)),
                   Gap(AppSizesManager.s4),
                   Row(
@@ -158,12 +161,14 @@ class MedicineWidget4 extends StatelessWidget {
                             TextSpan(
                               text: double.parse(medicineData.unitPriceHt)
                                   .formatAsPrice(),
-                              style: AppTypography.headLine3SemiBoldStyle
+                              style: context
+                                  .responsiveTextTheme.current.headLine3SemiBold
                                   .copyWith(color: AppColors.accent1Shade1),
                             ),
                             TextSpan(
                               text: " ${context.translation!.currency}",
-                              style: AppTypography.bodyXSmallStyle
+                              style: context
+                                  .responsiveTextTheme.current.bodyXSmall
                                   .copyWith(color: AppColors.accent1Shade1),
                             ),
                           ],
@@ -178,7 +183,7 @@ class MedicineWidget4 extends StatelessWidget {
                           bgColor: Colors.transparent,
                           onPressed: () {
                             BottomSheetHelper.showCommonBottomSheet(
-                              initialChildSize: .3,
+                                initialChildSize: .3,
                                 context: context,
                                 child: QuickCartAddModal(
                                   medicineCatalogId: medicineData.id,

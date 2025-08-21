@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_icon_button.dart';
-
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/cubit/para_pharma_details_cubit.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart' show Iconsax;
 
 class QuantitySectionModified extends StatelessWidget {
@@ -23,9 +21,7 @@ class QuantitySectionModified extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: AppSizesManager.p8),
-      child: Row(
-        mainAxisAlignment: mainAxisAlignment,
-        children: [
+      child: Row(mainAxisAlignment: mainAxisAlignment, children: [
         PrimaryIconButton(
           borderColor: StrokeColors.normal.color,
           isBordered: true,
@@ -48,7 +44,7 @@ class QuantitySectionModified extends StatelessWidget {
               keyboardType: TextInputType.number,
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
               validator: (value) => value == null || value.isEmpty ? '' : null,
-              style: AppTypography.body1MediumStyle,
+              style: context.responsiveTextTheme.current.body1Medium,
               decoration: InputDecoration(
                 enabledBorder: InputBorder.none,
                 disabledBorder: OutlineInputBorder(

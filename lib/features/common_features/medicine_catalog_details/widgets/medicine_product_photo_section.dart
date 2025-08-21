@@ -10,7 +10,6 @@ import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
-import '../../../../config/theme/typoghrapy_manager.dart';
 import '../../../common/app_bars/custom_app_bar.dart';
 import '../cubit/medicine_details_cubit.dart';
 
@@ -44,7 +43,7 @@ class MedicineProductPhotoSection extends StatelessWidget {
               Gap(AppSizesManager.s8),
               Text(
                 context.translation!.image_not_available,
-                style: AppTypography.body3MediumStyle
+                style: context.responsiveTextTheme.current.body3Medium
                     .copyWith(color: const Color.fromARGB(255, 197, 197, 197)),
               ),
               Spacer(),

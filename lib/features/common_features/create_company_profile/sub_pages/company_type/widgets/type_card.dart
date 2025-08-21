@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
-
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class TypeCard extends StatelessWidget {
   final int selectedTypeIndex;
@@ -30,10 +29,15 @@ class TypeCard extends StatelessWidget {
         padding: const EdgeInsets.all(AppSizesManager.p16),
         margin: const EdgeInsets.only(bottom: AppSizesManager.p16),
         decoration: BoxDecoration(
-          color: selectedTypeIndex == index ? AppColors.accent1Shade3 : AppColors.bgWhite,
-          borderRadius: BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+          color: selectedTypeIndex == index
+              ? AppColors.accent1Shade3
+              : AppColors.bgWhite,
+          borderRadius:
+              BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
           border: Border.all(
-              color: selectedTypeIndex == index ? StrokeColors.focused.color : StrokeColors.normal.color,
+              color: selectedTypeIndex == index
+                  ? StrokeColors.focused.color
+                  : StrokeColors.normal.color,
               width: selectedTypeIndex == index ? 1 : 1.5),
         ),
         child: Column(
@@ -41,8 +45,11 @@ class TypeCard extends StatelessWidget {
           children: [
             Text(
               title,
-              style: AppTypography.headLine3SemiBoldStyle
-                  .copyWith(color: selectedTypeIndex == index ? AppColors.accent1Shade1 : TextColors.primary.color),
+              style: context.responsiveTextTheme.current.headLine3SemiBold
+                  .copyWith(
+                      color: selectedTypeIndex == index
+                          ? AppColors.accent1Shade1
+                          : TextColors.primary.color),
             ),
             const SizedBox(height: 12),
             SvgPicture.asset(

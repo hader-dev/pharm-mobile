@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/check_email/cubit/check_email_cubit.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../../config/theme/colors_manager.dart';
-import '../../../../config/theme/typoghrapy_manager.dart';
 import '../../../../utils/constants.dart';
 
 class CheckEmailHeaderSection extends StatelessWidget {
@@ -21,17 +21,20 @@ class CheckEmailHeaderSection extends StatelessWidget {
           Gap(AppSizesManager.s24),
           Text(
             'Verify your email',
-            style: AppTypography.headLine1Style.copyWith(fontSize: AppSizesManager.p24, color: AppColors.accent1Shade1),
+            style: context.responsiveTextTheme.current.headLine1.copyWith(
+                fontSize: AppSizesManager.p24, color: AppColors.accent1Shade1),
           ),
           Gap(AppSizesManager.s8),
           Text(
             'Please enter  the code we just sent to',
-            style: AppTypography.body3RegularStyle.copyWith(color: TextColors.ternary.color),
+            style: context.responsiveTextTheme.current.body3Regular
+                .copyWith(color: TextColors.ternary.color),
           ),
           Gap(AppSizesManager.s4),
           Text(
             BlocProvider.of<CheckEmailCubit>(context).userEmail,
-            style: AppTypography.body3MediumStyle.copyWith(color: TextColors.primary.color),
+            style: context.responsiveTextTheme.current.body3Medium
+                .copyWith(color: TextColors.primary.color),
           ),
         ],
       ),

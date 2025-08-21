@@ -3,13 +3,11 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
 import 'package:hader_pharm_mobile/features/common/dialog/log_out_dialog.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
-
 import 'package:lucide_icons/lucide_icons.dart';
 
 import 'widgets/profile_header.dart';
@@ -37,7 +35,7 @@ class ProfileScreen extends StatelessWidget {
           ),
           title: Text(
             context.translation!.account,
-            style: AppTypography.headLine3SemiBoldStyle
+            style: context.responsiveTextTheme.current.headLine3SemiBold
                 .copyWith(color: AppColors.bgWhite),
           ),
         ),
@@ -125,7 +123,7 @@ class ProfileScreen extends StatelessWidget {
                           title: Text(context.translation!.logout,
                               style: const TextStyle(color: Colors.red)),
                           onTap: () async {
-                            await AppDialogs.showLogoutDialogLogout();
+                            await AppDialogs.showLogoutDialogLogout(context);
 
                             if (context.mounted) {
                               GoRouter.of(context).pushReplacementNamed(

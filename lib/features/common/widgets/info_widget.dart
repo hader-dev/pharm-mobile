@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../config/theme/colors_manager.dart';
-import '../../../config/theme/typoghrapy_manager.dart';
 import '../../../utils/constants.dart';
 
 class InfoWidget extends StatelessWidget {
@@ -25,14 +25,15 @@ class InfoWidget extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: AppSizesManager.p6),
       decoration: BoxDecoration(
         color: bgColor,
-        borderRadius: BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+        borderRadius:
+            BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             label,
-            style: AppTypography.body3MediumStyle.copyWith(
+            style: context.responsiveTextTheme.current.body3Medium.copyWith(
               color: TextColors.ternary.color,
             ),
           ),

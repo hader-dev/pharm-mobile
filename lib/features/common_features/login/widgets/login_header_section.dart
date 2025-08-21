@@ -4,7 +4,6 @@ import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../../config/theme/colors_manager.dart';
-import '../../../../config/theme/typoghrapy_manager.dart';
 import '../../../../utils/assets_strings.dart';
 import '../../../../utils/constants.dart';
 
@@ -18,12 +17,14 @@ class LoginHeaderSection extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            margin: EdgeInsets.only(top: AppSizesManager.p32, bottom: AppSizesManager.p32),
+            margin: EdgeInsets.only(
+                top: AppSizesManager.p32, bottom: AppSizesManager.p32),
             padding: EdgeInsets.all(AppSizesManager.p16),
             alignment: Alignment.center,
             width: MediaQuery.sizeOf(context).width * .5,
             decoration: BoxDecoration(
-              borderRadius: const BorderRadius.all(Radius.circular(AppSizesManager.r4)),
+              borderRadius:
+                  const BorderRadius.all(Radius.circular(AppSizesManager.r4)),
               // gradient: LinearGradient(
               //   begin: Alignment.topCenter,
               //   end: Alignment.bottomCenter,
@@ -41,12 +42,14 @@ class LoginHeaderSection extends StatelessWidget {
           ),
           Text(
             context.translation!.sign_in,
-            style: AppTypography.headLine1Style.copyWith(fontSize: AppSizesManager.p24, color: AppColors.accent1Shade1),
+            style: context.responsiveTextTheme.current.headLine1.copyWith(
+                fontSize: AppSizesManager.p24, color: AppColors.accent1Shade1),
           ),
           Gap(AppSizesManager.s8),
           Text(
             context.translation!.welcome_back,
-            style: AppTypography.body3RegularStyle.copyWith(color: TextColors.ternary.color),
+            style: context.responsiveTextTheme.current.body3Regular
+                .copyWith(color: TextColors.ternary.color),
           ),
         ],
       ),

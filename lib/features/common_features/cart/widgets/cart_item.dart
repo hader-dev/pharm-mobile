@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:hader_pharm_mobile/config/theme/typoghrapy_manager.dart';
 import 'package:hader_pharm_mobile/features/common_features/create_company_profile/sub_pages/review_and_sumbit/widgets/info_row.dart';
 import 'package:hader_pharm_mobile/models/cart_item.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
@@ -19,11 +18,14 @@ class CartItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: AppSizesManager.p8, horizontal: AppSizesManager.p4),
-      padding: const EdgeInsets.symmetric(vertical: AppSizesManager.p10, horizontal: AppSizesManager.p10),
+      margin: const EdgeInsets.symmetric(
+          vertical: AppSizesManager.p8, horizontal: AppSizesManager.p4),
+      padding: const EdgeInsets.symmetric(
+          vertical: AppSizesManager.p10, horizontal: AppSizesManager.p10),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey.shade200),
-        borderRadius: BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+        borderRadius:
+            BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
       ),
       child: Row(
         children: [
@@ -62,12 +64,14 @@ class CartItemWidget extends StatelessWidget {
                       cartItemData.designation,
                       softWrap: true,
                       overflow: TextOverflow.ellipsis,
-                      style: AppTypography.headLine5SemiBoldStyle,
+                      style:
+                          context.responsiveTextTheme.current.headLine5SemiBold,
                     ),
                     Spacer(),
                     InkWell(
                       onTap: () {
-                        BlocProvider.of<CartCubit>(context).deleteCartItem(cartItemData.id);
+                        BlocProvider.of<CartCubit>(context)
+                            .deleteCartItem(cartItemData.id);
                       },
                       child: const Icon(
                         Iconsax.trash,
@@ -82,15 +86,18 @@ class CartItemWidget extends StatelessWidget {
                   children: [
                     InfoRow(
                       label: context.translation!.unit_ht_price,
-                      dataValue: num.parse(cartItemData.unitPriceHt).toStringAsFixed(2),
+                      dataValue: num.parse(cartItemData.unitPriceHt)
+                          .toStringAsFixed(2),
                     ),
                     InfoRow(
                       label: context.translation!.unit_ttc_price,
-                      dataValue: num.parse(cartItemData.unitPriceTtc).toStringAsFixed(2),
+                      dataValue: num.parse(cartItemData.unitPriceTtc)
+                          .toStringAsFixed(2),
                     ),
                     InfoRow(
                       label: "${context.translation!.tva}%",
-                      dataValue: num.parse(cartItemData.tvaPercentage).toStringAsFixed(2),
+                      dataValue: num.parse(cartItemData.tvaPercentage)
+                          .toStringAsFixed(2),
                     ),
                     Row(
                       children: [

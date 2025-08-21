@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hader_pharm_mobile/config/language_config/cubit/lang_cubit.dart';
 import 'package:hader_pharm_mobile/config/language_config/cubit/lang_state.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
-import 'package:hader_pharm_mobile/config/theme/light_theme.dart';
+import 'package:hader_pharm_mobile/config/theme/typography/widgets/responsive_theme_provider.dart';
+
 import '../../config/language_config/resources/app_localizations.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-
-
 
 class HaderPharmApp extends StatelessWidget {
   const HaderPharmApp({super.key});
@@ -18,21 +17,29 @@ class HaderPharmApp extends StatelessWidget {
       create: (context) => LangCubit()..initLanguage(),
       child: BlocBuilder<LangCubit, LangState>(
         builder: (context, state) {
-          return MaterialApp.router(
-            debugShowCheckedModeBanner: false,
-            title: 'Hader Pharm',
-            theme: LightTheme.theme,
-            routerConfig: RoutingManager.router,
-            localizationsDelegates: const [
-              AppLocalizations.delegate,
-              // GlobalCupertinoLocalizations.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate
-            ],
-            supportedLocales: AppLocalizations.supportedLocales,
-            locale: Locale(BlocProvider.of<LangCubit>(context).appLang),
-            builder: (context, child) => Overlay(
-              initialEntries: [OverlayEntry(builder: (_) => child!)],
+          return ResponsiveThemeProvider(
+            child: Builder(
+              builder: (themeContext) {
+                // The provider above supplies ThemeData with ResponsiveTextTheme
+                return MaterialApp.router(
+                  debugShowCheckedModeBanner: false,
+                  title: 'Hader Pharm',
+                  theme: Theme.of(themeContext), // ✅ dynamic theme
+                  routerConfig: RoutingManager.router,
+                  localizationsDelegates: const [
+                    AppLocalizations.delegate,
+                    GlobalMaterialLocalizations.delegate,
+                    GlobalWidgetsLocalizations.delegate,
+                  ],
+                  supportedLocales: AppLocalizations.supportedLocales,
+                  locale: Locale(
+                    BlocProvider.of<LangCubit>(context).appLang,
+                  ),
+                  builder: (context, child) => Overlay(
+                    initialEntries: [OverlayEntry(builder: (_) => child!)],
+                  ),
+                );
+              },
             ),
           );
         },

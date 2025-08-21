@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common_features/create_company_profile/sub_pages/review_and_sumbit/widgets/info_row.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
-
-import '../../../../../../config/theme/typoghrapy_manager.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class SpecificationsWidget extends StatelessWidget {
   final Map<String, String> specifications;
@@ -20,14 +18,15 @@ class SpecificationsWidget extends StatelessWidget {
           tilePadding: const EdgeInsets.all(0),
           title: Text(
             'Details',
-            style: AppTypography.headLine3SemiBoldStyle.copyWith(color: AppColors.accent1Shade1),
+            style: context.responsiveTextTheme.current.headLine3SemiBold
+                .copyWith(color: AppColors.accent1Shade1),
           ),
           dense: true,
           initiallyExpanded: true,
           maintainState: true,
           trailing: Text(
             'Show',
-            style: AppTypography.body3MediumStyle,
+            style: context.responsiveTextTheme.current.body3Medium,
           ),
           children: [
             ...specifications.entries.map((entry) {
@@ -35,7 +34,11 @@ class SpecificationsWidget extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(
                   vertical: AppSizesManager.s8,
                 ),
-                child: InfoRow(label: entry.key, dataValue: entry.value.isNotEmpty ? entry.value : "No data available"),
+                child: InfoRow(
+                    label: entry.key,
+                    dataValue: entry.value.isNotEmpty
+                        ? entry.value
+                        : "No data available"),
               );
             }),
           ],

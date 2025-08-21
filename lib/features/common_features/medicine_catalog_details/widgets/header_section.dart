@@ -8,8 +8,6 @@ import 'package:hader_pharm_mobile/utils/extensions/price_formatter.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../../config/theme/colors_manager.dart';
-import '../../../../config/theme/typoghrapy_manager.dart';
-
 import '../../../../models/medicine_catalog.dart';
 import '../../../../utils/assets_strings.dart';
 import '../../../common/chips/custom_chip.dart';
@@ -20,15 +18,20 @@ class HeaderSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    MedicineCatalogModel medicineCatalogData = BlocProvider.of<MedicineDetailsCubit>(context).medicineCatalogData!;
+    MedicineCatalogModel medicineCatalogData =
+        BlocProvider.of<MedicineDetailsCubit>(context).medicineCatalogData!;
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: AppSizesManager.p16, horizontal: AppSizesManager.p12),
+      padding: const EdgeInsets.symmetric(
+          vertical: AppSizesManager.p16, horizontal: AppSizesManager.p12),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(children: [
-            CustomChip(label: medicineCatalogData.medicine.brandName, color: AppColors.bgDarken2, onTap: () {}),
+            CustomChip(
+                label: medicineCatalogData.medicine.brandName,
+                color: AppColors.bgDarken2,
+                onTap: () {}),
             Spacer(),
             Icon(
               Iconsax.calendar_1,
@@ -36,10 +39,12 @@ class HeaderSection extends StatelessWidget {
             ),
             Gap(AppSizesManager.s4),
             Text(medicineCatalogData.createdAt.formatYMD,
-                style: AppTypography.body3MediumStyle.copyWith(color: TextColors.ternary.color)),
+                style: context.responsiveTextTheme.current.body3Medium
+                    .copyWith(color: TextColors.ternary.color)),
           ]),
           Gap(AppSizesManager.s12),
-          Text(medicineCatalogData.dci ?? "No dci Available", style: AppTypography.headLine2Style),
+          Text(medicineCatalogData.dci ?? "No dci Available",
+              style: context.responsiveTextTheme.current.headLine2),
           Gap(AppSizesManager.s12),
           Row(
             children: [
@@ -52,12 +57,14 @@ class HeaderSection extends StatelessWidget {
                   image: DecorationImage(
                     image: medicineCatalogData.company.image == null
                         ? AssetImage(DrawableAssetStrings.companyPlaceHolderImg)
-                        : NetworkImage(medicineCatalogData.company.thumbnailImage),
+                        : NetworkImage(
+                            medicineCatalogData.company.thumbnailImage),
                   ),
                 ),
               ),
               Gap(AppSizesManager.s4),
-              Text(medicineCatalogData.company.name, style: AppTypography.body3RegularStyle),
+              Text(medicineCatalogData.company.name,
+                  style: context.responsiveTextTheme.current.body3Regular),
               Spacer(),
               Icon(
                 Iconsax.money_4,
@@ -68,12 +75,16 @@ class HeaderSection extends StatelessWidget {
                 TextSpan(
                   children: [
                     TextSpan(
-                      text: double.parse(medicineCatalogData.unitPriceHt).formatAsPrice(),
-                      style: AppTypography.headLine3SemiBoldStyle.copyWith(color: AppColors.accent1Shade1),
+                      text: double.parse(medicineCatalogData.unitPriceHt)
+                          .formatAsPrice(),
+                      style: context
+                          .responsiveTextTheme.current.headLine3SemiBold
+                          .copyWith(color: AppColors.accent1Shade1),
                     ),
                     TextSpan(
                       text: " ${context.translation!.currency}",
-                      style: AppTypography.bodyXSmallStyle.copyWith(color: AppColors.accent1Shade1),
+                      style: context.responsiveTextTheme.current.bodyXSmall
+                          .copyWith(color: AppColors.accent1Shade1),
                     ),
                   ],
                 ),
