@@ -57,7 +57,7 @@ class VendorsSectionItems extends StatelessWidget {
                 size: itemWidth,
                 title: entity.name,
                 onPress: () => RoutingManager.router.pushNamed(RoutingManager.vendorDetails, extra: entity.id, ),
-                imageUrl: entity.thumbnailImage,
+                imageUrl: entity.thumbnailImageUrl,
               );
             }),
           );

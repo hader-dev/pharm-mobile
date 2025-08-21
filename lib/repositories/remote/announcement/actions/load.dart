@@ -5,13 +5,9 @@ import 'package:hader_pharm_mobile/utils/urls.dart';
 
 Future<ResponseLoadAnnouncements> loadAnnouncements(
     INetworkService client) async {
-  
   var decodedResponse = await client.sendRequest(() => client.get(
         Urls.announcements,
       ));
 
-  var parsedList =
-      jsonToAnnouncementsList(decodedResponse);
-
-  return ResponseLoadAnnouncements(announcements: parsedList);
+  return jsonToAnnouncementsResponse(decodedResponse);
 }

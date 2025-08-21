@@ -2,5 +2,7 @@ import 'package:hader_pharm_mobile/models/announcement.dart';
 
 class ResponseLoadAnnouncements {
   List<AnnouncementModel> announcements;
-  ResponseLoadAnnouncements({ this.announcements = const []});
+  final int totalItems;
+  ResponseLoadAnnouncements(
+      {this.announcements = const [], this.totalItems = 0});
 }

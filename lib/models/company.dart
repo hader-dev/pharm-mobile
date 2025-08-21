@@ -1,4 +1,6 @@
 import 'package:equatable/equatable.dart';
+import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 
 class BaseCompany with EquatableMixin {
   static final baseCompanyFields = [
@@ -124,4 +126,8 @@ class Company extends BaseCompany {
       isActive: null,
     );
   }
+
+  String? get thumbnailImageUrl => thumbnailImage is String
+      ? thumbnailImage as String
+      : "${getItInstance<INetworkService>().baseUrl}/files/$thumbnailImage";
 }

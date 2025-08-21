@@ -42,4 +42,42 @@ class AppFonts {
     required this.bodyXSmall,
     required this.bodyXXSmall,
   });
+
+  AppFonts copyWith({
+    String? appFont,
+    FontWeight? appFontBold,
+    FontWeight? appFontSemiBold,
+    FontWeight? appFontMedium,
+    FontWeight? appFontRegular,
+    double? headLine1,
+    double? headLine2,
+    double? headLine3,
+    double? headLine4,
+    double? headLine5,
+    double? body1,
+    double? body2,
+    double? body3,
+    double? bodySmall,
+    double? bodyXSmall,
+    double? bodyXXSmall,
+  }) {
+    return AppFonts(
+      appFont: appFont ?? this.appFont,
+      appFontBold: appFontBold ?? this.appFontBold,
+      appFontSemiBold: appFontSemiBold ?? this.appFontSemiBold,
+      appFontMedium: appFontMedium ?? this.appFontMedium,
+      appFontRegular: appFontRegular ?? this.appFontRegular,
+      headLine1: headLine1 ?? this.headLine1,
+      headLine2: headLine2 ?? this.headLine2,
+      headLine3: headLine3 ?? this.headLine3,
+      headLine4: headLine4 ?? this.headLine4,
+      headLine5: headLine5 ?? this.headLine5,
+      body1: body1 ?? this.body1,
+      body2: body2 ?? this.body2,
+      body3: body3 ?? this.body3,
+      bodySmall: bodySmall ?? this.bodySmall,
+      bodyXSmall: bodyXSmall ?? this.bodyXSmall,
+      bodyXXSmall: bodyXXSmall ?? this.bodyXXSmall,
+    );
+  }
 }

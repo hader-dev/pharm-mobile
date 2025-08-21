@@ -35,7 +35,7 @@ class FeaturedEntity extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(6),
               child: CacheNetworkImagePlus(
-                width: double.infinity,
+                width: 400,
                 boxFit: BoxFit.cover,
                 imageUrl: imageUrl ??
                     "https://images.aeonmedia.co/images/afef287f-dd6f-4a6a-b8a6-4f0a09330657/sized-kendal-l4ikccachoc-unsplash.jpg?width=3840&quality=75&format=auto",
