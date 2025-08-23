@@ -12,7 +12,6 @@ import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar.dart';
-import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/medicine_products/cubit/medicine_products_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/cubit/para_pharma_cubit.dart';
 import 'package:hader_pharm_mobile/repositories/remote/company/company_repository_impl.dart';
@@ -91,75 +90,76 @@ class VendorDetails extends StatelessWidget {
                 },
               ),
               trailing: [
-                BlocBuilder<VendorDetailsCubit, VendorDetailsState>(
-                  builder: (context, state) {
-                    final isFollowing = context
-                            .read<VendorDetailsCubit>()
-                            .vendorData
-                            .isFollowing ??
-                        false;
+                // Disabled until we have the follow/unfollow backend ready
+                // BlocBuilder<VendorDetailsCubit, VendorDetailsState>(
+                //   builder: (context, state) {
+                //     final isFollowing = context
+                //             .read<VendorDetailsCubit>()
+                //             .vendorData
+                //             .isFollowing ??
+                //         false;
 
-                    return PrimaryTextButton(
-                        label: isFollowing
-                            ? context.translation!.unfollow
-                            : context.translation!.follow,
-                        leadingIcon: Iconsax.user_add,
-                        labelColor: AppColors.accent1Shade1,
-                        onTap: () {
-                          if (isFollowing) {
-                            context.read<VendorDetailsCubit>().unfollowVendor(
-                                context
-                                    .read<VendorDetailsCubit>()
-                                    .vendorData
-                                    .id);
-                          } else {
-                            context
-                                .read<VendorDetailsCubit>()
-                                .requestJoinVendorAsClient(context
-                                    .read<VendorDetailsCubit>()
-                                    .vendorData
-                                    .id);
-                          }
-                        },
-                        isLoading: state is SendingJoinRequest,
-                        borderColor: AppColors.accent1Shade1);
-                  },
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: AppSizesManager.p8),
-                  child: BlocBuilder<VendorDetailsCubit, VendorDetailsState>(
-                    builder: (context, state) {
-                      final isLiked = context
-                              .read<VendorDetailsCubit>()
-                              .vendorData
-                              .isLiked ??
-                          false;
+                //     return PrimaryTextButton(
+                //         label: isFollowing
+                //             ? context.translation!.unfollow
+                //             : context.translation!.follow,
+                //         leadingIcon: Iconsax.user_add,
+                //         labelColor: AppColors.accent1Shade1,
+                //         onTap: () {
+                //           if (isFollowing) {
+                //             context.read<VendorDetailsCubit>().unfollowVendor(
+                //                 context
+                //                     .read<VendorDetailsCubit>()
+                //                     .vendorData
+                //                     .id);
+                //           } else {
+                //             context
+                //                 .read<VendorDetailsCubit>()
+                //                 .requestJoinVendorAsClient(context
+                //                     .read<VendorDetailsCubit>()
+                //                     .vendorData
+                //                     .id);
+                //           }
+                //         },
+                //         isLoading: state is SendingJoinRequest,
+                //         borderColor: AppColors.accent1Shade1);
+                //   },
+                // ),
+                // Padding(
+                //   padding: const EdgeInsets.only(right: AppSizesManager.p8),
+                //   child: BlocBuilder<VendorDetailsCubit, VendorDetailsState>(
+                //     builder: (context, state) {
+                //       final isLiked = context
+                //               .read<VendorDetailsCubit>()
+                //               .vendorData
+                //               .isLiked ??
+                //           false;
 
-                      return InkWell(
-                        child: Icon(
-                          Iconsax.heart,
-                          color: isLiked ? Colors.red : Colors.black,
-                          size: AppSizesManager.iconSize20,
-                        ),
-                        onTap: () {
-                          if (isLiked) {
-                            context.read<VendorDetailsCubit>().unlikeVendor(
-                                context
-                                    .read<VendorDetailsCubit>()
-                                    .vendorData
-                                    .id);
-                          } else {
-                            context.read<VendorDetailsCubit>().likeVendor(
-                                context
-                                    .read<VendorDetailsCubit>()
-                                    .vendorData
-                                    .id);
-                          }
-                        },
-                      );
-                    },
-                  ),
-                ),
+                //       return InkWell(
+                //         child: Icon(
+                //           Iconsax.heart,
+                //           color: isLiked ? Colors.red : Colors.black,
+                //           size: AppSizesManager.iconSize20,
+                //         ),
+                //         onTap: () {
+                //           if (isLiked) {
+                //             context.read<VendorDetailsCubit>().unlikeVendor(
+                //                 context
+                //                     .read<VendorDetailsCubit>()
+                //                     .vendorData
+                //                     .id);
+                //           } else {
+                //             context.read<VendorDetailsCubit>().likeVendor(
+                //                 context
+                //                     .read<VendorDetailsCubit>()
+                //                     .vendorData
+                //                     .id);
+                //           }
+                //         },
+                //       );
+                //     },
+                //   ),
+                // ),
               ],
               title: BlocBuilder<VendorDetailsCubit, VendorDetailsState>(
                 builder: (context, state) {
@@ -180,16 +180,19 @@ class VendorDetails extends StatelessWidget {
                           image: context
                                       .read<VendorDetailsCubit>()
                                       .vendorData
-                                      .image ==
+                                      .image
+                                      ?.path ==
                                   null
                               ? AssetImage(
                                   DrawableAssetStrings.companyPlaceHolderImg)
-                              : NetworkImage(context
-                                      .read<VendorDetailsCubit>()
-                                      .vendorData
-                                      .thumbnailImage
-                                      ?.path ??
-                                  ""),
+                              : NetworkImage(getItInstance
+                                  .get<INetworkService>()
+                                  .getFilesPath(context
+                                          .read<VendorDetailsCubit>()
+                                          .vendorData
+                                          .image
+                                          ?.path ??
+                                      '')) as ImageProvider,
                         ),
                       ),
                     ),

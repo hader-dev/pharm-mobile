@@ -59,6 +59,7 @@ class ParaPharmaWidget1 extends StatelessWidget {
                   paraPharmData.image != null
                       ? CacheNetworkImagePlus(
                           boxFit: BoxFit.cover,
+                          width: double.maxFinite,
                           imageUrl: getItInstance
                               .get<INetworkService>()
                               .getFilesPath(paraPharmData.image?.path ?? ''),
