@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/models/announcement.dart';
+import 'package:hader_pharm_mobile/models/image.dart';
 import 'package:hader_pharm_mobile/models/medicine_catalog.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/repositories/remote/announcement/response/response_load_announcement_details.dart';
@@ -9,20 +10,15 @@ import 'package:hader_pharm_mobile/repositories/remote/medicine_catalog/mappers/
 import 'package:hader_pharm_mobile/repositories/remote/parapharm_catalog/mappers/json_to_parapharma_catalogue_item.dart';
 
 AnnouncementModel jsonToAnnouncement(Map<String, dynamic> json) {
-  final image = json['image'] is String?
-      ? (json['image'] ?? "unkown") as String
-      : json['image']?['path'] as String;
-
-  final thumbnailImage = json['thumbnailImage'] is String?
-      ? (json['thumbnailImage'] ?? "unkown") as String
-      : json['thumbnailImage']?['path'] as String;
-
   return AnnouncementModel(
-      id: json["id"] ?? "unknown",
-      image: image,
-      title: json['title'] ?? "unknown",
-      content: json['content'] ?? "unknown",
-      thumbnailImage: thumbnailImage);
+    id: json["id"] ?? "unknown",
+    image: json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
+    title: json['title'] ?? "unknown",
+    content: json['content'] ?? "unknown",
+    thumbnailImage: json["thumbnailImage"] != null
+        ? ImageModel.fromJson(json["thumbnailImage"])
+        : null,
+  );
 }
 
 List<AnnouncementModel> jsonToAnnouncementsList(List<dynamic> json) {

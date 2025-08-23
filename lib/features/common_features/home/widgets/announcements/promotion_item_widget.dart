@@ -1,5 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/image_load_error_widget.dart';
 import 'package:hader_pharm_mobile/models/announcement.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
@@ -16,7 +18,7 @@ class PromotionItemWidget extends StatelessWidget {
     super.key,
     required this.announcement,
     this.onTap,
-    this.filterColor ,
+    this.filterColor,
     this.onForegroundColor,
   });
 
@@ -29,18 +31,20 @@ class PromotionItemWidget extends StatelessWidget {
       child: Stack(
         children: [
           CachedNetworkImage(
-            imageUrl: announcement.image,
+            imageUrl: getItInstance
+                .get<INetworkService>()
+                .getFilesPath(announcement.thumbnailImage?.path ?? ''),
             fit: BoxFit.cover,
             width: double.infinity,
             height: double.infinity,
             errorWidget: (context, url, error) => const ImageLoadErrorWidget(),
           ),
-          if(filterColor != null)
-          Container(
-            width: double.infinity,
-            height: double.infinity,
-            color: filterColor!.withAlpha(150),
-          ),
+          if (filterColor != null)
+            Container(
+              width: double.infinity,
+              height: double.infinity,
+              color: filterColor!.withAlpha(150),
+            ),
           Positioned(
             left: 16,
             right: 16,
@@ -57,22 +61,26 @@ class PromotionItemWidget extends StatelessWidget {
                       children: [
                         Text(
                           announcement.title,
-                          style:  TextStyle(
+                          style: TextStyle(
                             color: onForegroundColor,
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                             height: 1.3,
-                            shadows: [Shadow(blurRadius: 4, color: Colors.black)],
+                            shadows: [
+                              Shadow(blurRadius: 4, color: Colors.black)
+                            ],
                           ),
                         ),
                         const SizedBox(height: 8),
                         Text(
                           announcement.title,
-                          style:  TextStyle(
+                          style: TextStyle(
                             color: onForegroundColor,
                             fontSize: 18,
                             height: 1.4,
-                            shadows: [Shadow(blurRadius: 4, color: Colors.black)],
+                            shadows: [
+                              Shadow(blurRadius: 4, color: Colors.black)
+                            ],
                           ),
                         ),
                       ],
@@ -84,8 +92,8 @@ class PromotionItemWidget extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
                     foregroundColor: Colors.black,
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 12),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
