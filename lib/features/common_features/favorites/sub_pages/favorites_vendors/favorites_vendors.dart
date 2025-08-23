@@ -23,7 +23,7 @@ class FavoritesVendors extends StatelessWidget {
         if (state is FavoritesVendorsLoading) {
           return const Center(child: CircularProgressIndicator());
         }
-        if (state is FavoritesVendorsLoaded && BlocProvider.of<FavoritesCubit>(context).likedVendors.isEmpty) {
+        if (BlocProvider.of<FavoritesCubit>(context).likedVendors.isEmpty) {
           return EmptyListWidget();
         }
         return Column(
@@ -32,18 +32,26 @@ class FavoritesVendors extends StatelessWidget {
             Expanded(
               child: RefreshIndicator(
                 onRefresh: () {
-                  return BlocProvider.of<FavoritesCubit>(context).fetchLikedVendors();
+                  return BlocProvider.of<FavoritesCubit>(context)
+                      .fetchLikedVendors();
                 },
                 child: ListView.builder(
                   shrinkWrap: true,
                   physics: const AlwaysScrollableScrollPhysics(),
-                  itemCount: BlocProvider.of<FavoritesCubit>(context).likedVendors.length,
+                  itemCount: BlocProvider.of<FavoritesCubit>(context)
+                      .likedVendors
+                      .length,
                   itemBuilder: (_, index) {
                     return VendorItem(
-                      companyData: BlocProvider.of<FavoritesCubit>(context).likedVendors[index],
+                      companyData: BlocProvider.of<FavoritesCubit>(context)
+                          .likedVendors[index],
                       hideRemoveButton: false,
-                      onRemoveFromFavorites: () => BlocProvider.of<FavoritesCubit>(context)
-                          .removeFromFavoritesVendors(BlocProvider.of<FavoritesCubit>(context).likedVendors[index].id),
+                      onRemoveFromFavorites: () =>
+                          BlocProvider.of<FavoritesCubit>(context)
+                              .removeFromFavoritesVendors(
+                                  BlocProvider.of<FavoritesCubit>(context)
+                                      .likedVendors[index]
+                                      .id),
                     );
                   },
                 ),

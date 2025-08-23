@@ -17,12 +17,14 @@ class SplashCubit extends Cubit<SplashState> {
     try {
       UserManager userManager = getItInstance.get<UserManager>();
       // ignore: unused_local_variable
-      String? userAccessToken = await getItInstance.get<TokenManager>().getAccessToken();
+      String? userAccessToken =
+          await getItInstance.get<TokenManager>().getAccessToken();
       await userManager.getMe();
       if (!userManager.currentUser.isActive) {
         getItInstance.get<ToastManager>().showToast(
             type: ToastType.error,
-            message: RoutingManager.rootNavigatorKey.currentContext!.translation!.account_not_active);
+            message: RoutingManager.rootNavigatorKey.currentContext!
+                .translation!.account_not_active);
         emit(UserNotLoggedInYet());
         return;
       }

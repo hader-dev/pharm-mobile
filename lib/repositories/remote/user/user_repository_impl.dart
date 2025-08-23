@@ -1,6 +1,5 @@
-
-
 import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
@@ -99,25 +98,25 @@ class UserRepository implements IUserRepository {
     try {
       debugPrint("Profile update - Starting update process");
 
-      
-      if (updatedProfileData.imagePath != null && updatedProfileData.imagePath!.isNotEmpty) {
+      if (updatedProfileData.imagePath != null &&
+          updatedProfileData.imagePath!.isNotEmpty) {
         debugPrint("Profile update - Attempting multipart upload with image");
-        
+
         try {
           late MultipartFile file;
           String fileName = updatedProfileData.imagePath!.split('/').last;
-          
+
           // Get file extension and determine correct mimetype
           String fileExtension = fileName.split('.').last.toLowerCase();
           String mimeType = _getMimeTypeFromExtension(fileExtension);
-          
+
           debugPrint("Profile update - Image file: $fileName");
           debugPrint("Profile update - Detected mimetype: $mimeType");
-          
+
           // Read file bytes and create MultipartFile with correct content type
           File imageFile = File(updatedProfileData.imagePath!);
           List<int> fileBytes = await imageFile.readAsBytes();
-          
+
           file = MultipartFile.fromBytes(
             fileBytes,
             filename: fileName,
@@ -140,15 +139,13 @@ class UserRepository implements IUserRepository {
               ));
 
           debugPrint("Profile update with image - SUCCESS: $response");
-          return; 
+          return;
         } catch (imageError) {
           debugPrint("Profile update with image - FAILED: $imageError");
           debugPrint("Falling back to text-only update...");
-         
         }
       }
 
-      
       Map<String, dynamic> payload = {
         "fullName": updatedProfileData.fullName,
         "email": updatedProfileData.email,
@@ -204,7 +201,8 @@ class UserRepository implements IUserRepository {
         return 'image/webp';
       default:
         // Default to jpeg for unknown extensions
-        debugPrint("Unknown file extension: $fileExtension, defaulting to image/jpeg");
+        debugPrint(
+            "Unknown file extension: $fileExtension, defaulting to image/jpeg");
         return 'image/jpeg';
     }
   }

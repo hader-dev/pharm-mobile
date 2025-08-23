@@ -23,8 +23,9 @@ class FavoritesParaPharmaCatalogs extends StatelessWidget {
         if (state is FavoritesParaPharmaLoading) {
           return const Center(child: CircularProgressIndicator());
         }
-        if (state is FavoritesParaPharmaLoaded &&
-            BlocProvider.of<FavoritesCubit>(context).likedParaPharmaCatalogs.isEmpty) {
+        if (BlocProvider.of<FavoritesCubit>(context)
+            .likedParaPharmaCatalogs
+            .isEmpty) {
           return EmptyListWidget();
         }
         return Column(
@@ -33,18 +34,26 @@ class FavoritesParaPharmaCatalogs extends StatelessWidget {
             Expanded(
               child: RefreshIndicator(
                 onRefresh: () {
-                  return BlocProvider.of<FavoritesCubit>(context).fetchLikedParaPharma();
+                  return BlocProvider.of<FavoritesCubit>(context)
+                      .fetchLikedParaPharma();
                 },
                 child: ListView.builder(
                   shrinkWrap: true,
                   physics: const AlwaysScrollableScrollPhysics(),
-                  itemCount: BlocProvider.of<FavoritesCubit>(context).likedParaPharmaCatalogs.length,
+                  itemCount: BlocProvider.of<FavoritesCubit>(context)
+                      .likedParaPharmaCatalogs
+                      .length,
                   itemBuilder: (context, index) => ParaPharmaWidget1(
                     isLiked: true,
                     hideRemoveButton: false,
-                    onRemoveFromFavorites: () => BlocProvider.of<FavoritesCubit>(context).removeParaPharmaFromFavorites(
-                        BlocProvider.of<FavoritesCubit>(context).likedParaPharmaCatalogs[index].id),
-                    paraPharmData: BlocProvider.of<FavoritesCubit>(context).likedParaPharmaCatalogs[index],
+                    onRemoveFromFavorites: () =>
+                        BlocProvider.of<FavoritesCubit>(context)
+                            .removeParaPharmaFromFavorites(
+                                BlocProvider.of<FavoritesCubit>(context)
+                                    .likedParaPharmaCatalogs[index]
+                                    .id),
+                    paraPharmData: BlocProvider.of<FavoritesCubit>(context)
+                        .likedParaPharmaCatalogs[index],
                   ),
                 ),
               ),

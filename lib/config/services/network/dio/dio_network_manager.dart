@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/services/network/dio/interceptor/request_token_interceptor.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -26,7 +27,8 @@ class DioNetworkManager extends INetworkService {
   DioNetworkManager._internal();
 
   init(String apiUrl, Dio client, TokenManager tokenManager) async {
-    baseUrl = apiUrl;
+    baseUrl = apiUrl.replaceAll(RegExp(r'\s+'), '');
+    ;
     client.options.baseUrl = baseUrl;
     _client = client;
     await preparePersistantCookiesJar();
@@ -61,7 +63,8 @@ class DioNetworkManager extends INetworkService {
       Response response = await sendFunc();
       var decodedResponse = ResponseHandler.processResponse(response);
       return decodedResponse;
-    } on DioException catch (e) {
+    } on DioException catch (e, stack) {
+      debugPrintStack(stackTrace: stack);
       var decodedResponse = ResponseHandler.processResponse(e.response);
       return decodedResponse;
     }
@@ -168,9 +171,17 @@ class DioNetworkManager extends INetworkService {
   }
 
   Uri prepareUrl(String url, {Map<String, dynamic>? queryParams}) {
-    Uri uri = Uri.parse(baseUrl + url);
-    uri = queryParams == null ? uri : uri.replace(queryParameters: queryParams);
-    return uri;
+    final cleanUrl = url.replaceAll(RegExp(r'\s+'), '');
+
+    Uri uri = Uri.parse("$baseUrl$cleanUrl");
+
+    debugPrint("Concat URL: $baseUrl$cleanUrl");
+    debugPrint("Base URL: $baseUrl");
+    debugPrint("Endpoint URL: $cleanUrl");
+
+    return queryParams == null
+        ? uri
+        : uri.replace(queryParameters: queryParams);
   }
 
   @override

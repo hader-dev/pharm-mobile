@@ -39,14 +39,16 @@ class CustomCookieInjector extends Interceptor {
   }
 
   @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
+  void onRequest(
+      RequestOptions options, RequestInterceptorHandler handler) async {
     try {
       var cookies = await cookieJar.loadForRequest(Uri.parse(appBaseUrl));
       debugPrint('cookies: $cookies');
       final newCookies = getCookies([
         ...cookies,
       ]);
-      options.headers[HttpHeaders.cookieHeader] = newCookies.isNotEmpty ? newCookies : null;
+      options.headers[HttpHeaders.cookieHeader] =
+          newCookies.isNotEmpty ? newCookies : null;
       handler.next(options);
     } catch (e, s) {
       final error = DioException(

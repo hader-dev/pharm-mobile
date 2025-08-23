@@ -41,13 +41,14 @@ class _FavoritesTabBarSectionState extends State<FavoritesTabBarSection>
     return Column(
       children: [
         TabBar(
-            indicatorColor: AppColors.accent1Shade2,
+            indicatorColor: AppColors.bgWhite,
             indicatorSize: TabBarIndicatorSize.tab,
             isScrollable: true,
             labelStyle: tabTextStyle,
             overlayColor: WidgetStatePropertyAll(Colors.transparent),
             tabAlignment: TabAlignment.start,
-            labelColor: AppColors.accent1Shade1,
+            unselectedLabelColor: AppColors.accent1Shade2Deemphasized,
+            labelColor: AppColors.bgWhite,
             controller: tabsController,
             onTap: (index) {},
             tabs: widget.tabs

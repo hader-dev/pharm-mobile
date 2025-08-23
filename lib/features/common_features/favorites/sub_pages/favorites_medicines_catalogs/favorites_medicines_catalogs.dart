@@ -23,8 +23,9 @@ class FavoritesMedicinesCatalog extends StatelessWidget {
         if (state is FavoritesMedicinesLoading) {
           return const Center(child: CircularProgressIndicator());
         }
-        if (state is FavoritesMedicinesLoaded &&
-            BlocProvider.of<FavoritesCubit>(context).likedMedicinesCatalogs.isEmpty) {
+        if (BlocProvider.of<FavoritesCubit>(context)
+            .likedMedicinesCatalogs
+            .isEmpty) {
           return EmptyListWidget();
         }
         return Column(
@@ -33,17 +34,25 @@ class FavoritesMedicinesCatalog extends StatelessWidget {
             Expanded(
               child: RefreshIndicator(
                 onRefresh: () {
-                  return BlocProvider.of<FavoritesCubit>(context).fetchLikedMedicines();
+                  return BlocProvider.of<FavoritesCubit>(context)
+                      .fetchLikedMedicines();
                 },
                 child: ListView.builder(
                   shrinkWrap: true,
                   physics: const AlwaysScrollableScrollPhysics(),
-                  itemCount: BlocProvider.of<FavoritesCubit>(context).likedMedicinesCatalogs.length,
+                  itemCount: BlocProvider.of<FavoritesCubit>(context)
+                      .likedMedicinesCatalogs
+                      .length,
                   itemBuilder: (context, index) => MedicineWidget2(
                     hideRemoveButton: false,
-                    onRemoveFromFavorites: () => BlocProvider.of<FavoritesCubit>(context).removeFromFavoritesMedicines(
-                        BlocProvider.of<FavoritesCubit>(context).likedMedicinesCatalogs[index].id),
-                    medicineData: BlocProvider.of<FavoritesCubit>(context).likedMedicinesCatalogs[index],
+                    onRemoveFromFavorites: () =>
+                        BlocProvider.of<FavoritesCubit>(context)
+                            .removeFromFavoritesMedicines(
+                                BlocProvider.of<FavoritesCubit>(context)
+                                    .likedMedicinesCatalogs[index]
+                                    .id),
+                    medicineData: BlocProvider.of<FavoritesCubit>(context)
+                        .likedMedicinesCatalogs[index],
                     isLiked: true,
                   ),
                 ),
