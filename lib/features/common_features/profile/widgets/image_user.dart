@@ -19,6 +19,11 @@ class UserImage extends StatelessWidget {
         ? getItInstance.get<INetworkService>().getFilesPath(userImage.path)
         : null;
 
+    // Responsive image size based on screen width
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isTablet = screenWidth >= 768;
+    final imageSize = isTablet ? 90.0 : 70.0;
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Hero(
@@ -30,8 +35,8 @@ class UserImage extends StatelessWidget {
             decoration: const BoxDecoration(
               shape: BoxShape.circle,
             ),
-            height: 70,
-            width: 70,
+            height: imageSize,
+            width: imageSize,
             child: userImage == null
                 ? SvgPicture.asset(DrawableAssetStrings.defaultProfileImgIcon)
                 : CachedNetworkImage(

@@ -60,14 +60,12 @@ class MedicineWidget4 extends StatelessWidget {
                               .get<INetworkService>()
                               .getFilesPath(medicineData.image?.path ?? ''),
                         )
-                      : Center(
-                          child: Image(
-                            image: AssetImage(
-                                DrawableAssetStrings.medicinePlaceHolderImg),
-                            fit: BoxFit.cover,
-                            height: 80,
-                            width: 80,
-                          ),
+                      : Image(
+                          image: AssetImage(
+                              DrawableAssetStrings.medicinePlaceHolderImg),
+                          fit: BoxFit.cover,
+                          height: double.maxFinite,
+                          width: double.maxFinite,
                         ),
                   if (medicineData.image != null)
                     Container(

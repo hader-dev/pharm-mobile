@@ -65,14 +65,12 @@ class ParaPharmaWidget1 extends StatelessWidget {
                               .get<INetworkService>()
                               .getFilesPath(paraPharmData.image?.path ?? ''),
                         )
-                      : Center(
-                          child: Image(
-                            image: AssetImage(
-                                DrawableAssetStrings.paraPharmaPlaceHolderImg),
-                            fit: BoxFit.cover,
-                            height: 80,
-                            width: 80,
-                          ),
+                      : Image(
+                          image: AssetImage(
+                              DrawableAssetStrings.paraPharmaPlaceHolderImg),
+                          fit: BoxFit.cover,
+                          height: double.maxFinite,
+                          width: double.maxFinite,
                         ),
                   if (paraPharmData.image != null)
                     Container(

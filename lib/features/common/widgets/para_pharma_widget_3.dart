@@ -27,7 +27,7 @@ class ParaPharmaWidget4 extends StatelessWidget {
 
     return Container(
       padding: const EdgeInsets.symmetric(
-          horizontal: AppSizesManager.p6, vertical: AppSizesManager.p12),
+          horizontal: AppSizesManager.p4, vertical: AppSizesManager.p12),
       child: InkWell(
         splashColor: Colors.transparent,
         onTap: () {
@@ -61,14 +61,12 @@ class ParaPharmaWidget4 extends StatelessWidget {
                               .get<INetworkService>()
                               .getFilesPath(paraPharmData.image?.path ?? ''),
                         )
-                      : Center(
-                          child: Image(
-                            image: AssetImage(
-                                DrawableAssetStrings.medicinePlaceHolderImg),
-                            fit: BoxFit.cover,
-                            height: 80,
-                            width: 80,
-                          ),
+                      : Image(
+                          image: AssetImage(
+                              DrawableAssetStrings.medicinePlaceHolderImg),
+                          fit: BoxFit.cover,
+                          height: double.maxFinite,
+                          width: double.maxFinite,
                         ),
                   if (paraPharmData.image != null)
                     Container(

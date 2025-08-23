@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/para_pharma_widget_3.dart';
-
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/cubit/para_pharma_cubit.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class ParaPharmaSectionItems extends StatelessWidget {
@@ -38,16 +36,12 @@ class ParaPharmaSectionItems extends StatelessWidget {
           return ListView.builder(
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
+            padding: const EdgeInsets.only(left: 0),
             itemCount: items.length,
             itemBuilder: (context, index) {
-              return Padding(
-                padding: index == 0
-                    ? const EdgeInsets.only(left: AppSizesManager.p4)
-                    : EdgeInsets.zero,
-                child: AspectRatio(
-                  aspectRatio: 1.05,
-                  child: ParaPharmaWidget4(paraPharmData: items[index]),
-                ),
+              return AspectRatio(
+                aspectRatio: 1,
+                child: ParaPharmaWidget4(paraPharmData: items[index]),
               );
             },
           );

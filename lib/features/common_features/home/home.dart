@@ -121,6 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
             return SingleChildScrollView(
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Gap(AppSizesManager.s12),
                 PromotionSection(

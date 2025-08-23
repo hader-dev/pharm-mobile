@@ -27,6 +27,13 @@ class ProfileImageSection extends StatelessWidget {
         ? getItInstance.get<INetworkService>().getFilesPath(userImage.path)
         : null;
 
+    // Responsive image size for tablets
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isTablet = screenWidth >= 768;
+    final imageSize = isTablet 
+        ? 120.0 // Smaller fixed size for tablets
+        : MediaQuery.sizeOf(context).height * 0.2; // Responsive for phones
+
     return SizedBox(
           width: double.maxFinite,
           child: Column(
@@ -41,8 +48,8 @@ class ProfileImageSection extends StatelessWidget {
                     Container(
                         margin: EdgeInsets.symmetric(vertical: AppSizesManager.p4),
                         clipBehavior: Clip.antiAlias,
-                        height: MediaQuery.sizeOf(context).height * 0.2,
-                        width: MediaQuery.sizeOf(context).height * 0.2,
+                        height: imageSize,
+                        width: imageSize,
                         decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: AppColors.bgDarken,
