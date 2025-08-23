@@ -30,8 +30,9 @@ class MedicineWidget1 extends StatelessWidget {
           CacheNetworkImagePlus(
             width: double.maxFinite,
             boxFit: BoxFit.cover,
-            imageUrl:
-                "https://images.aeonmedia.co/images/afef287f-dd6f-4a6a-b8a6-4f0a09330657/sized-kendal-l4ikccachoc-unsplash.jpg?width=3840&quality=75&format=auto",
+            imageUrl: getItInstance
+                .get<INetworkService>()
+                .getFilesPath(medicineData.image?.path ?? ''),
           ),
           Container(
             padding: const EdgeInsets.all(AppSizesManager.p8),
@@ -87,13 +88,14 @@ class MedicineWidget1 extends StatelessWidget {
                                     null
                                 ? AssetImage(
                                     DrawableAssetStrings.companyPlaceHolderImg)
-                                :  NetworkImage(
-                                  getItInstance
-                                      .get<INetworkService>()
-                                      .getFilesPath(
-                                        medicineData.company!.thumbnailImage!
-                                            .path,
-                                      ),),
+                                : NetworkImage(
+                                    getItInstance
+                                        .get<INetworkService>()
+                                        .getFilesPath(
+                                          medicineData
+                                              .company!.thumbnailImage!.path,
+                                        ),
+                                  ),
                           ))),
                   Gap(AppSizesManager.s4),
                   Spacer(),

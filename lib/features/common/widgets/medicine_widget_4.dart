@@ -2,7 +2,9 @@ import 'package:cached_network_image_plus/flutter_cached_network_image_plus.dart
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
+import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/typography/typoghrapy_source.dart';
 import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/widgets/quick_add_modal.dart';
@@ -53,8 +55,9 @@ class MedicineWidget4 extends StatelessWidget {
                       ? CacheNetworkImagePlus(
                           boxFit: BoxFit.cover,
                           width: double.maxFinite,
-                          imageUrl:
-                              "https://pharmacie-denni.dz/wp-content/uploads/2025/05/12-2-1.png",
+                          imageUrl: getItInstance
+                              .get<INetworkService>()
+                              .getFilesPath(medicineData.image?.path ?? ''),
                         )
                       : Center(
                           child: Image(

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
@@ -53,8 +55,9 @@ class ParaPharmaWidget2 extends StatelessWidget {
                   paraPharmData.image != null
                       ? CacheNetworkImagePlus(
                           boxFit: BoxFit.cover,
-                          imageUrl:
-                              "https://pharmacie-denni.dz/wp-content/uploads/2025/05/12-2-1.png",
+                          imageUrl: getItInstance
+                              .get<INetworkService>()
+                              .getFilesPath(paraPharmData.image?.path ?? ''),
                         )
                       : Center(
                           child: Image(

@@ -60,8 +60,9 @@ class MedicineWidget2 extends StatelessWidget {
                   medicineData.image != null
                       ? CacheNetworkImagePlus(
                           boxFit: BoxFit.cover,
-                          imageUrl:
-                              "https://pharmacie-denni.dz/wp-content/uploads/2025/05/12-2-1.png",
+                          imageUrl: getItInstance
+                              .get<INetworkService>()
+                              .getFilesPath(medicineData.image?.path ?? ''),
                         )
                       : Center(
                           child: Image(
@@ -189,9 +190,10 @@ class MedicineWidget2 extends StatelessWidget {
                                   getItInstance
                                       .get<INetworkService>()
                                       .getFilesPath(
-                                        medicineData.company!.thumbnailImage!
-                                            .path,
-                                      ),),
+                                        medicineData
+                                            .company!.thumbnailImage!.path,
+                                      ),
+                                ),
                         ),
                       ),
                     ),

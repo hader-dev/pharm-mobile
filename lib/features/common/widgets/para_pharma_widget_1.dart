@@ -59,8 +59,9 @@ class ParaPharmaWidget1 extends StatelessWidget {
                   paraPharmData.image != null
                       ? CacheNetworkImagePlus(
                           boxFit: BoxFit.cover,
-                          imageUrl:
-                              "https://pharmacie-denni.dz/wp-content/uploads/2025/05/12-2-1.png",
+                          imageUrl: getItInstance
+                              .get<INetworkService>()
+                              .getFilesPath(paraPharmData.image?.path ?? ''),
                         )
                       : Center(
                           child: Image(
@@ -183,13 +184,14 @@ class ParaPharmaWidget1 extends StatelessWidget {
                                   null
                               ? AssetImage(
                                   DrawableAssetStrings.companyPlaceHolderImg)
-                             : NetworkImage(
+                              : NetworkImage(
                                   getItInstance
                                       .get<INetworkService>()
                                       .getFilesPath(
-                                        paraPharmData.company!.thumbnailImage!
-                                            .path,
-                                      ),),
+                                        paraPharmData
+                                            .company!.thumbnailImage!.path,
+                                      ),
+                                ),
                         ),
                       ),
                     ),
