@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/features/common_features/create_company_profile/hooks_data_model/create_company_profile_form.dart';
 import 'package:hader_pharm_mobile/models/company.dart';
@@ -6,7 +7,9 @@ import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/repositories/remote/company/mappers/json_to_company.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
+import 'package:hader_pharm_mobile/utils/mime_type.dart';
 import 'package:hader_pharm_mobile/utils/urls.dart';
+import 'package:http_parser/http_parser.dart';
 
 import 'company_repository.dart';
 
@@ -19,11 +22,27 @@ class CompanyRepository extends ICompanyRepository {
     Map<String, dynamic> dataAsMap = companyData.toJson();
     dataAsMap.removeWhere(
         (key, value) => value == null || (value is String && value.isEmpty));
+
+    late MultipartFile file;
+    final String? userImagePath = companyData.logoPath;
+
+    if (userImagePath != null) {
+      String fileName = userImagePath.split('/').last;
+
+      String fileExtension = fileName.split('.').last.toLowerCase();
+      String mimeType = getMimeTypeFromExtension(fileExtension);
+
+      debugPrint("SignUp - Image file: $mimeType");
+      file = await MultipartFile.fromFile(
+        userImagePath,
+        filename: fileName,
+        contentType: MediaType.parse(mimeType),
+      );
+    }
+
     FormData formData = FormData.fromMap({
       ...dataAsMap,
-      if (companyData.logoPath != null)
-        'image': await MultipartFile.fromFile(companyData.logoPath!,
-            filename: companyData.logoPath!.split('/').last),
+      if (companyData.logoPath != null) 'image': file,
     });
 
     await client

@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/repositories/remote/user/mappers/json_to_user.dart';
+import 'package:hader_pharm_mobile/utils/mime_type.dart';
 import 'package:http_parser/http_parser.dart';
 
 import '../../../features/common_features/edit_profile/hooks_data_model/edit_profile_form.dart'
@@ -49,9 +50,15 @@ class UserRepository implements IUserRepository {
     late MultipartFile file;
     if (userImagePath != null) {
       String fileName = userImagePath.split('/').last;
+
+      String fileExtension = fileName.split('.').last.toLowerCase();
+      String mimeType = getMimeTypeFromExtension(fileExtension);
+
+      debugPrint("SignUp - Image file: $mimeType");
       file = await MultipartFile.fromFile(
         userImagePath,
         filename: fileName,
+        contentType: MediaType.parse(mimeType),
       );
     }
     FormData formData = FormData.fromMap({
@@ -108,7 +115,7 @@ class UserRepository implements IUserRepository {
 
           // Get file extension and determine correct mimetype
           String fileExtension = fileName.split('.').last.toLowerCase();
-          String mimeType = _getMimeTypeFromExtension(fileExtension);
+          String mimeType = getMimeTypeFromExtension(fileExtension);
 
           debugPrint("Profile update - Image file: $fileName");
           debugPrint("Profile update - Detected mimetype: $mimeType");
@@ -180,30 +187,5 @@ class UserRepository implements IUserRepository {
             }));
   }
 
-  // Helper method to get correct MIME type based on file extension
-  String _getMimeTypeFromExtension(String fileExtension) {
-    switch (fileExtension) {
-      case 'png':
-        return 'image/png';
-      case 'jpg':
-      case 'jpeg':
-        return 'image/jpeg';
-      case 'gif':
-        return 'image/gif';
-      case 'tif':
-      case 'tiff':
-        return 'image/tiff';
-      case 'svg':
-        return 'image/svg+xml';
-      case 'bmp':
-        return 'image/bmp';
-      case 'webp':
-        return 'image/webp';
-      default:
-        // Default to jpeg for unknown extensions
-        debugPrint(
-            "Unknown file extension: $fileExtension, defaulting to image/jpeg");
-        return 'image/jpeg';
-    }
-  }
+  
 }

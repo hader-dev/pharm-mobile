@@ -40,7 +40,7 @@ enum OrderClaimStatus {
     required this.icon,
   });
 
-    static String getTranslatedStatus(OrderClaimStatus expression) {
+  static String getTranslatedStatus(OrderClaimStatus expression) {
     switch (expression) {
       case OrderClaimStatus.pending:
         return RoutingManager
@@ -58,8 +58,7 @@ enum OrderClaimStatus {
         return RoutingManager
             .rootNavigatorKey.currentContext!.translation!.resolved;
     }
-
-}
+  }
 }
 
 enum OrderStatus {
