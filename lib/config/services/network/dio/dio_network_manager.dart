@@ -28,7 +28,7 @@ class DioNetworkManager extends INetworkService {
 
   init(String apiUrl, Dio client, TokenManager tokenManager) async {
     baseUrl = apiUrl.replaceAll(RegExp(r'\s+'), '');
-    ;
+    
     client.options.baseUrl = baseUrl;
     _client = client;
     await preparePersistantCookiesJar();
