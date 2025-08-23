@@ -188,9 +188,12 @@ class MedicineWidget2 extends StatelessWidget {
                       ),
                     ),
                     Gap(AppSizesManager.s4),
-                    // Text(medicineData.company.name,
-                    //     style: AppTypography.bodyXSmallStyle
-                    //         .copyWith(fontWeight: AppTypography.appFontSemiBold, color: TextColors.primary.color)),
+                    Text(medicineData.company?.name ?? "unkown",
+                        style: context.responsiveTextTheme.current.bodyXSmall
+                            .copyWith(
+                                fontWeight: context.responsiveTextTheme.current
+                                    .appFont.appFontSemiBold,
+                                color: TextColors.primary.color)),
                   ]),
                   Row(
                     children: [

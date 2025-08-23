@@ -59,7 +59,7 @@ ResponseLoadAnnouncementDetails jsonToAnnouncementDetailsResponse(
     }
 
     final sourceParapharma = item["parapharmCatalog"];
-    debugPrint(sourceParapharma.toString());
+    debugPrint(sourceMedicine.toString());
 
     if (sourceParapharma != null) {
       parapharmas.add(jsonToParapharmaCatalogueItem(sourceParapharma));
