@@ -40,26 +40,29 @@ class _FavoritesTabBarSectionState extends State<FavoritesTabBarSection>
 
     return Column(
       children: [
-        TabBar(
-            indicatorColor: AppColors.bgWhite,
-            indicatorSize: TabBarIndicatorSize.tab,
-            isScrollable: true,
-            labelStyle: tabTextStyle,
-            overlayColor: WidgetStatePropertyAll(Colors.transparent),
-            tabAlignment: TabAlignment.start,
-            unselectedLabelColor: AppColors.accent1Shade2Deemphasized,
-            labelColor: AppColors.bgWhite,
-            controller: tabsController,
-            onTap: (index) {},
-            tabs: widget.tabs
-                .map(
-                  (tabLabel) => Tab(
-                    child: Text(
-                      getTabTranslation(tabLabel),
+        ColoredBox(
+          color: AppColors.accent1Shade2,
+          child: TabBar(
+              indicatorColor: AppColors.bgWhite,
+              indicatorSize: TabBarIndicatorSize.tab,
+              isScrollable: true,
+              labelStyle: tabTextStyle,
+              overlayColor: WidgetStatePropertyAll(Colors.transparent),
+              tabAlignment: TabAlignment.start,
+              unselectedLabelColor: AppColors.accent1Shade2Deemphasized,
+              labelColor: AppColors.bgWhite,
+              controller: tabsController,
+              onTap: (index) {},
+              tabs: widget.tabs
+                  .map(
+                    (tabLabel) => Tab(
+                      child: Text(
+                        getTabTranslation(tabLabel),
+                      ),
                     ),
-                  ),
-                )
-                .toList()),
+                  )
+                  .toList()),
+        ),
         Expanded(
           child: TabBarView(
             physics: const NeverScrollableScrollPhysics(),
