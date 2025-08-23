@@ -13,7 +13,6 @@ import 'package:hader_pharm_mobile/features/common_features/orders_details/widge
 import 'package:hader_pharm_mobile/models/order_details.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
-import 'package:hader_pharm_mobile/utils/urls.dart';
 
 class OrderItemWidget extends StatelessWidget {
   final OrderItem item;
@@ -57,17 +56,18 @@ class OrderItemWidget extends StatelessWidget {
                     children: [
                       Container(
                         clipBehavior: Clip.antiAlias,
+                        width: constraints.maxWidth * 0.2,
                         decoration: BoxDecoration(
                           borderRadius:
                               BorderRadius.circular(AppSizesManager.p8),
                           color: item.imageUrl == null
-                              ? Colors.grey.shade100
+                              ? const Color.fromARGB(255, 145, 106, 106)
                               : null,
                         ),
                         child: CachedNetworkImage(
                           imageUrl:
                               getItInstance.get<INetworkService>().getFilesPath(
-                                    '${Urls.publicFiles}${item.imageUrl}',
+                                    item.imageUrl ?? "",
                                   ),
                           width: 60,
                           height: 60,
@@ -75,12 +75,15 @@ class OrderItemWidget extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: AppSizesManager.s8),
-                      Text(
-                        item.designation ?? context.translation!.unknown,
-                        softWrap: true,
-                        overflow: TextOverflow.ellipsis,
-                        style:
-                            context.responsiveTextTheme.current.headLine4Medium,
+                      SizedBox(
+                        width: constraints.maxWidth * 0.6,
+                        child: Text(
+                          item.designation ?? context.translation!.unknown,
+                          softWrap: true,
+                          overflow: TextOverflow.visible,
+                          style: context
+                              .responsiveTextTheme.current.headLine4Medium,
+                        ),
                       ),
                     ],
                   ),

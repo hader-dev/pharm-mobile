@@ -69,33 +69,44 @@ class DioNetworkManager extends INetworkService {
 
   @override
   Future<Response> patch(String url,
-      {Map<String, String>? headers, Map<String, Object>? queryParams, dynamic payload}) async {
+      {Map<String, String>? headers,
+      Map<String, Object>? queryParams,
+      dynamic payload}) async {
     bool isFormData = payload is FormData;
-    Response apiResponse = await _client.patchUri(prepareUrl(url, queryParams: queryParams),
+    Response apiResponse = await _client.patchUri(
+        prepareUrl(url, queryParams: queryParams),
         data: payload != null
             ? isFormData
                 ? payload
                 : jsonEncode(payload)
             : null,
-        options: Options(headers: _mergeCustomHeaders(headers ?? <String, String>{})));
+        options: Options(
+            headers: _mergeCustomHeaders(headers ?? <String, String>{})));
     return apiResponse;
   }
 
   @override
-  Future<Response> delete(String url, {Map<String, String>? headers, Map<String, Object>? queryParams, payload}) async {
+  Future<Response> delete(String url,
+      {Map<String, String>? headers,
+      Map<String, Object>? queryParams,
+      payload}) async {
     Response apiResponse = await _client.deleteUri(
         data: payload,
         prepareUrl(url, queryParams: queryParams),
-        options: Options(headers: _mergeCustomHeaders(headers ?? <String, String>{})));
+        options: Options(
+            headers: _mergeCustomHeaders(headers ?? <String, String>{})));
     return apiResponse;
   }
 
   @override
-  Future<Response> get(String url, {Map<String, String>? headers, Map<String, Object>? queryParams}) async {
+  Future<Response> get(String url,
+      {Map<String, String>? headers, Map<String, Object>? queryParams}) async {
     // await _ensureTokenIsValid(TokenManager.instance);
 
-    Response apiResponse = await _client.getUri(prepareUrl(url, queryParams: queryParams),
-        options: Options(headers: _mergeCustomHeaders(headers ?? <String, String>{})));
+    Response apiResponse = await _client.getUri(
+        prepareUrl(url, queryParams: queryParams),
+        options: Options(
+            headers: _mergeCustomHeaders(headers ?? <String, String>{})));
     return apiResponse;
   }
 
@@ -106,31 +117,37 @@ class DioNetworkManager extends INetworkService {
     Map<String, Object>? queryParams,
     payload,
   }) async {
-    Response apiResponse = await _client.postUri(prepareUrl(url, queryParams: queryParams),
+    Response apiResponse = await _client.postUri(
+        prepareUrl(url, queryParams: queryParams),
         data: payload != null
             ? payload is FormData
                 ? payload
                 : jsonEncode(payload)
             : null,
-        options: Options(headers: _mergeCustomHeaders(headers ?? <String, String>{})));
+        options: Options(
+            headers: _mergeCustomHeaders(headers ?? <String, String>{})));
     return apiResponse;
   }
 
   @override
-  Future<Response> put(String url, {Map<String, String>? headers, Map<String, Object>? queryParams, payload}) async {
+  Future<Response> put(String url,
+      {Map<String, String>? headers,
+      Map<String, Object>? queryParams,
+      payload}) async {
     bool isFormData = payload is FormData;
-    Response apiResponse = await _client.putUri(prepareUrl(url, queryParams: queryParams),
+    Response apiResponse = await _client.putUri(
+        prepareUrl(url, queryParams: queryParams),
         data: payload != null
             ? isFormData
                 ? payload
                 : jsonEncode(payload)
             : null,
-        options: Options(headers: _mergeCustomHeaders(headers ?? <String, String>{})));
+        options: Options(
+            headers: _mergeCustomHeaders(headers ?? <String, String>{})));
     return apiResponse;
   }
 
   @override
-
   void refreshAuthHeader(String? token) {
     if (token != null) {
       defaultHeaders[TokenManager.tokenHeaderKey] = "Bearer $token";
@@ -158,8 +175,12 @@ class DioNetworkManager extends INetworkService {
 
   @override
   String getFilesPath(String? imageName) {
-    if (imageName == null) return "";
+    if (imageName == null || imageName.isEmpty) return "";
 
-    return "$baseUrl${Urls.publicFiles}/$imageName";
+    if (imageName.startsWith('/')) {
+      return "$baseUrl${Urls.publicFiles}$imageName";
+    } else {
+      return "$baseUrl${Urls.publicFiles}/$imageName";
+    }
   }
 }

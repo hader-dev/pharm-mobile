@@ -35,9 +35,9 @@ class ShippingAddressSection extends StatelessWidget {
           const Gap(AppSizesManager.s12),
           Text(address, style: context.responsiveTextTheme.current.body3Medium),
           const Gap(AppSizesManager.s12),
-          Text(
-              "(Lat: ${latitude.toStringAsFixed(2)} , Long: ${longitude.toStringAsFixed(2)})",
-              style: context.responsiveTextTheme.current.body3Medium),
+          // Text(
+          //     "(Lat: ${latitude.toStringAsFixed(2)} , Long: ${longitude.toStringAsFixed(2)})",
+          //     style: context.responsiveTextTheme.current.body3Medium),
         ],
       ),
     );

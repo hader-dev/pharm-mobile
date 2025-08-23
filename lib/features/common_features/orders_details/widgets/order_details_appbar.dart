@@ -68,7 +68,7 @@ class OrderDetailsAppbar extends StatelessWidget
                 borderRadius: BorderRadius.only(
                     bottomRight: Radius.circular(AppSizesManager.r6),
                     topLeft: Radius.circular(AppSizesManager.r6)),
-                color: orderStatus.color.withAlpha(50),
+                color: Colors.white,
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,

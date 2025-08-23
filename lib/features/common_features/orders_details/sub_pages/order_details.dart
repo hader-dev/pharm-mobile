@@ -52,6 +52,7 @@ class OrdersDetailsPage extends StatelessWidget {
                           borderRadius: BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
                         ),
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             if (context.read<OrderDetailsCubit>().orderData!.invoiceType != null)
                               OrderInvoiceSection(

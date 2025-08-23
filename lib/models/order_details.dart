@@ -154,6 +154,7 @@ class OrderItem {
         quantity: json['quantity'],
         designation: json['designation'],
         lotNumber: json['lotNumber'],
+        imageUrl: json['thumbnailImage']['path'],
         expirationDate: json['expirationDate'],
         margin: json['margin'] != null ? double.parse(json['margin']) : 0.0,
         discountAmount: json['discountAmount'] != null

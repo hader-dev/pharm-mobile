@@ -19,7 +19,6 @@ class UserImage extends StatelessWidget {
         ? getItInstance.get<INetworkService>().getFilesPath(userImage.path)
         : null;
 
-   
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Hero(
@@ -38,9 +37,11 @@ class UserImage extends StatelessWidget {
                 : CachedNetworkImage(
                     imageUrl: imageUrl!,
                     fit: BoxFit.cover,
-                    placeholder: (context, url) => const CircularProgressIndicator(),
+                    placeholder: (context, url) =>
+                        const CircularProgressIndicator(),
                     errorWidget: (context, url, error) {
-                      return SvgPicture.asset(DrawableAssetStrings.defaultProfileImgIcon);
+                      return SvgPicture.asset(
+                          DrawableAssetStrings.defaultProfileImgIcon);
                     },
                   ),
           ),
