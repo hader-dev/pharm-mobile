@@ -1,3 +1,4 @@
+import 'package:hader_pharm_mobile/config/services/notification/notification_service_port.dart';
 import 'package:hader_pharm_mobile/features/common_features/edit_profile/hooks_data_model/edit_profile_form.dart';
 
 import '../../../models/user.dart';
@@ -15,7 +16,9 @@ class UserManager {
   static UserManager get instance => _instance;
 
   UserManager._internal();
-  static UserManager init({required UserRepository userRepository, required TokenManager tokenManager}) {
+  static UserManager init(
+      {required UserRepository userRepository,
+      required TokenManager tokenManager}) {
     userRepo = userRepository;
     tokenManagerInstance = tokenManager;
     return _instance;
@@ -28,7 +31,8 @@ class UserManager {
     required String password,
     String? userImagePath,
   }) async {
-    await userRepo.emailSignUp(email, fullName, password, userImagePath: userImagePath);
+    await userRepo.emailSignUp(email, fullName, password,
+        userImagePath: userImagePath);
   }
 
   /// Resends the OTP code for the given email.
@@ -54,12 +58,15 @@ class UserManager {
     required String userName,
     required String password,
   }) async {
-    
     final String token = await userRepo.login(userName, password);
     tokenManagerInstance.optimisticUpdate(token);
     await tokenManagerInstance.storeAccessToken(token);
-    (getItInstance.get<INetworkService>() as DioNetworkManager).initDefaultHeaders(token);
-    await getMe();
+    (getItInstance.get<INetworkService>() as DioNetworkManager)
+        .initDefaultHeaders(token);
+    await Future.wait([
+      getMe(),
+      getItInstance.get<INotificationService>().registerUserDevice(),
+    ]);
     return true;
   }
 
@@ -82,9 +89,11 @@ class UserManager {
     required String email,
     required String otp,
   }) async {
-    String token = await userRepo.sendUserEmailCheckOtpCode(email: email, otp: otp);
+    String token =
+        await userRepo.sendUserEmailCheckOtpCode(email: email, otp: otp);
     await tokenManagerInstance.storeAccessToken(token);
-    (getItInstance.get<INetworkService>() as DioNetworkManager).initDefaultHeaders(token);
+    (getItInstance.get<INetworkService>() as DioNetworkManager)
+        .initDefaultHeaders(token);
   }
 
   Future<void> sendResetPasswordMail({

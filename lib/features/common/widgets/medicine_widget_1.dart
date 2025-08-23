@@ -29,6 +29,7 @@ class MedicineWidget1 extends StatelessWidget {
         child: Stack(children: [
           CacheNetworkImagePlus(
             width: double.maxFinite,
+            height: double.maxFinite,
             boxFit: BoxFit.cover,
             imageUrl: getItInstance
                 .get<INetworkService>()

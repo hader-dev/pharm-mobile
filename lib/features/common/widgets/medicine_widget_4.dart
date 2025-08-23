@@ -55,6 +55,7 @@ class MedicineWidget4 extends StatelessWidget {
                       ? CacheNetworkImagePlus(
                           boxFit: BoxFit.cover,
                           width: double.maxFinite,
+                          height: double.maxFinite,
                           imageUrl: getItInstance
                               .get<INetworkService>()
                               .getFilesPath(medicineData.image?.path ?? ''),

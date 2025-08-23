@@ -174,11 +174,6 @@ class DioNetworkManager extends INetworkService {
     final cleanUrl = url.replaceAll(RegExp(r'\s+'), '');
 
     Uri uri = Uri.parse("$baseUrl$cleanUrl");
-
-    debugPrint("Concat URL: $baseUrl$cleanUrl");
-    debugPrint("Base URL: $baseUrl");
-    debugPrint("Endpoint URL: $cleanUrl");
-
     return queryParams == null
         ? uri
         : uri.replace(queryParameters: queryParams);

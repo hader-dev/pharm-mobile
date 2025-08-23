@@ -71,5 +71,6 @@ class Urls {
 
   //Complaints
   static String get itemComplaint => "/claims";
-  
+
+  static String get registerUserDevice => "/firebase/register";
 }
