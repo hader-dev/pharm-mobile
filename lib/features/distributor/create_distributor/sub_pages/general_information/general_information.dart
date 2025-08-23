@@ -53,7 +53,8 @@ class _DistributorGeneralInformationPageState
                                   .copyWith(color: TextColors.ternary.color)),
                         ),
                         DropdownButtonFormField(
-                            initialValue: BlocProvider.of<CreateCompanyProfileCubit>(
+                            // ignore: deprecated_member_use
+                            value: BlocProvider.of<CreateCompanyProfileCubit>(
                                     context)
                                 .companyData
                                 .distributorCategoryId,
