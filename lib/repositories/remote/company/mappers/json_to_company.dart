@@ -1,10 +1,13 @@
 import 'package:hader_pharm_mobile/models/company.dart';
+import 'package:hader_pharm_mobile/models/image.dart';
 
 Company jsonToCompany(Map<String, dynamic> json) {
   return Company(
     id: json["id"] ?? "",
-    thumbnailImage: json["thumbnailImage"],
-    image: json["image"],
+    thumbnailImage: json["thumbnailImage"] != null
+        ? ImageModel.fromJson(json["thumbnailImage"])
+        : null,
+    image: json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
     name: json["name"] ?? "",
     latitude: json["latitude"],
     longitude: json["longitude"],

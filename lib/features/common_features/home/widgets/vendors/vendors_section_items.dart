@@ -2,7 +2,9 @@ import 'dart:math';
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
+import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/featured.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/vendors/cubit/vendors_cubit.dart';
@@ -26,7 +28,6 @@ class VendorsSectionItems extends StatelessWidget {
   Widget build(BuildContext context) {
     final spacing = _horizontalSpacing();
     final itemWidth = _gridItemWidth(context, spacing);
-
 
     return ConstrainedBox(
       constraints: BoxConstraints(
@@ -56,8 +57,13 @@ class VendorsSectionItems extends StatelessWidget {
               return FeaturedEntity(
                 size: itemWidth,
                 title: entity.name,
-                onPress: () => RoutingManager.router.pushNamed(RoutingManager.vendorDetails, extra: entity.id, ),
-                imageUrl: entity.thumbnailImageUrl,
+                onPress: () => RoutingManager.router.pushNamed(
+                  RoutingManager.vendorDetails,
+                  extra: entity.id,
+                ),
+                imageUrl: getItInstance.get<INetworkService>().getFilesPath(
+                      entity.thumbnailImage!.path,
+                    ),
               );
             }),
           );

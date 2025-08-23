@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/features/common_features/create_company_profile/sub_pages/review_and_sumbit/widgets/info_row.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
@@ -38,11 +40,18 @@ class HeaderSection extends StatelessWidget {
                     shape: BoxShape.circle,
                     border: Border.all(color: AppColors.bgDisabled, width: 1.5),
                     image: DecorationImage(
-                      image: paraPharmaCatalogData.company!.image == null
-                          ? AssetImage(
-                              DrawableAssetStrings.companyPlaceHolderImg)
-                          : NetworkImage(
-                              paraPharmaCatalogData.company!.thumbnailImage),
+                      image:
+                          paraPharmaCatalogData.company?.thumbnailImage?.path ==
+                                  null
+                              ? AssetImage(
+                                  DrawableAssetStrings.companyPlaceHolderImg)
+                              : NetworkImage(
+                                  getItInstance
+                                      .get<INetworkService>()
+                                      .getFilesPath(
+                                        paraPharmaCatalogData.company!.thumbnailImage!
+                                            .path,
+                                      ),),
                     ),
                   ),
                 ),

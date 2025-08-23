@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
+import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/features/common_features/create_company_profile/sub_pages/review_and_sumbit/widgets/info_row.dart';
 import 'package:hader_pharm_mobile/models/company.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
@@ -44,9 +46,15 @@ class VendorItem extends StatelessWidget {
             child: Opacity(
               opacity: .15,
               child: Image(
-                  image: companyData.image == null
+                  image: companyData.thumbnailImage?.path == null
                       ? AssetImage(DrawableAssetStrings.companyPlaceHolderImg)
-                      : NetworkImage(companyData.image.thumbnailImage)),
+                      : NetworkImage(
+                                  getItInstance
+                                      .get<INetworkService>()
+                                      .getFilesPath(
+                                        companyData.thumbnailImage!
+                                            .path,
+                                      ),),),
             ),
           ),
           Container(

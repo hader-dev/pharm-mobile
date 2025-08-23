@@ -60,9 +60,9 @@ class VendorCartSectionState extends State<VendorCartSection> {
                 shape: BoxShape.circle,
                 border: Border.all(color: AppColors.bgDisabled, width: 1.5),
                 image: DecorationImage(
-                  image: widget.vendorData.image == null
+                  image: widget.vendorData.thumbnailImage == null
                       ? AssetImage(DrawableAssetStrings.companyPlaceHolderImg)
-                      : NetworkImage(widget.vendorData.thumbnailImage),
+                      : NetworkImage(widget.vendorData.thumbnailImage!.path),
                 ),
               ),
             ),

@@ -185,9 +185,11 @@ class VendorDetails extends StatelessWidget {
                               ? AssetImage(
                                   DrawableAssetStrings.companyPlaceHolderImg)
                               : NetworkImage(context
-                                  .read<VendorDetailsCubit>()
-                                  .vendorData
-                                  .thumbnailImage),
+                                      .read<VendorDetailsCubit>()
+                                      .vendorData
+                                      .thumbnailImage
+                                      ?.path ??
+                                  ""),
                         ),
                       ),
                     ),

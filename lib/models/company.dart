@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
+import 'package:hader_pharm_mobile/models/image.dart';
 
 class BaseCompany with EquatableMixin {
   static final baseCompanyFields = [
@@ -13,8 +14,8 @@ class BaseCompany with EquatableMixin {
     "email"
   ];
   final String id;
-  final dynamic thumbnailImage;
-  final dynamic image;
+  final ImageModel? thumbnailImage;
+  final ImageModel? image;
   final String name;
   final String? address;
   final String? phone;
@@ -31,8 +32,10 @@ class BaseCompany with EquatableMixin {
   factory BaseCompany.fromJson(Map<String, dynamic> json) {
     return BaseCompany(
       id: json["id"] ?? "",
-      thumbnailImage: json["thumbnailImage"],
-      image: json["image"],
+      thumbnailImage: json["thumbnailImage"] != null
+          ? ImageModel.fromJson(json["thumbnailImage"])
+          : null,
+      image: json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
       name: json["name"] ?? "",
       address: json["address"],
       phone: json["phone"],
@@ -101,8 +104,8 @@ class Company extends BaseCompany {
   factory Company.empty() {
     return Company(
       id: '',
-      thumbnailImage: '',
-      image: '',
+      thumbnailImage: null,
+      image: null,
       name: '',
       address: null,
       phone: null,

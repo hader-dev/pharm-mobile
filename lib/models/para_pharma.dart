@@ -6,7 +6,7 @@ import 'image.dart';
 class BaseParaPharmaCatalogModel {
   final String id;
   final String unitPriceHt;
-  final dynamic thumbnailImage;
+  final ImageModel? thumbnailImage;
   final ImageModel? image;
   final String name;
   final int stockQuantity;
@@ -29,7 +29,9 @@ class BaseParaPharmaCatalogModel {
     return BaseParaPharmaCatalogModel(
       id: json['id'],
       unitPriceHt: json['unitPriceHt'],
-      thumbnailImage: json['thumbnailImage'],
+      thumbnailImage: json["thumbnailImage"] != null
+          ? ImageModel.fromJson(json["thumbnailImage"])
+          : null,
       image: json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
       name: json['name'],
       stockQuantity: json['stockQuantity'],

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_date_helper.dart';
@@ -55,10 +57,16 @@ class HeaderSection extends StatelessWidget {
                   shape: BoxShape.circle,
                   border: Border.all(color: AppColors.bgDisabled, width: 1.5),
                   image: DecorationImage(
-                    image: medicineCatalogData.company.image == null
+                    image: medicineCatalogData.company.thumbnailImage?.path ==
+                            null
                         ? AssetImage(DrawableAssetStrings.companyPlaceHolderImg)
                         : NetworkImage(
-                            medicineCatalogData.company.thumbnailImage),
+                                  getItInstance
+                                      .get<INetworkService>()
+                                      .getFilesPath(
+                                        medicineCatalogData.company.thumbnailImage!
+                                            .path,
+                                      ),),
                   ),
                 ),
               ),

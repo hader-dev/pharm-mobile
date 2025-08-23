@@ -2,6 +2,8 @@ import 'package:cached_network_image_plus/flutter_cached_network_image_plus.dart
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
@@ -177,11 +179,17 @@ class ParaPharmaWidget1 extends StatelessWidget {
                         border:
                             Border.all(color: AppColors.bgDisabled, width: 1.5),
                         image: DecorationImage(
-                          image: paraPharmData.thumbnailImage?.image == null
+                          image: paraPharmData.company?.thumbnailImage?.path ==
+                                  null
                               ? AssetImage(
                                   DrawableAssetStrings.companyPlaceHolderImg)
-                              : NetworkImage(
-                                  paraPharmData.company!.thumbnailImage),
+                             : NetworkImage(
+                                  getItInstance
+                                      .get<INetworkService>()
+                                      .getFilesPath(
+                                        paraPharmData.company!.thumbnailImage!
+                                            .path,
+                                      ),),
                         ),
                       ),
                     ),

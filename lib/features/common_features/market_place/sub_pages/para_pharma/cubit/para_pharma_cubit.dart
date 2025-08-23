@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/models/para_medical_filters.dart';
@@ -8,6 +9,7 @@ import 'package:hader_pharm_mobile/repositories/remote/parapharm_catalog/para_ph
 import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
+
 part 'para_pharma_state.dart';
 
 class ParaPharmaCubit extends Cubit<ParaPharmaState> {
@@ -36,14 +38,16 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
   }) async {
     try {
       emit(ParaPharmaProductsLoading());
-      var paraPharmaCatalogResponse = await paraPharmaRepository.getParaPharmaCatalog(
-          offset: offset,
-          filters: filters,
-          );
+      var paraPharmaCatalogResponse =
+          await paraPharmaRepository.getParaPharmaCatalog(
+        offset: offset,
+        filters: filters,
+      );
       totalItemsCount = paraPharmaCatalogResponse.totalItems;
       paraPharmaProducts = paraPharmaCatalogResponse.data;
       emit(ParaPharmaProductsLoaded());
-    } catch (e) {
+    } catch (e, stack) {
+      debugPrintStack(stackTrace: stack);
       GlobalExceptionHandler.handle(exception: e);
       emit(ParaPharmaProductsLoadingFailed());
     }
@@ -59,9 +63,7 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
       offSet = offSet + PaginationConstants.resultsPerPage;
       emit(ParaPharmaProductsLoading());
       var medicinesResponse = await paraPharmaRepository.getParaPharmaCatalog(
-        offset: offSet,
-        filters: filters
-      );
+          offset: offSet, filters: filters);
       totalItemsCount = medicinesResponse.totalItems;
       paraPharmaProducts.addAll(medicinesResponse.data);
       emit(ParaPharmaProductsLoaded());
@@ -76,9 +78,11 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
     emit(ParaPharmaSearchFilterChanged());
   }
 
-  void searchParaPharmaCatalog(String? text) => _debounceFunction(() => getParaPharmas(searchValue: text ?? ''));
+  void searchParaPharmaCatalog(String? text) =>
+      _debounceFunction(() => getParaPharmas(searchValue: text ?? ''));
 
-  Future<void> _debounceFunction(Future<void> Function() func, [int milliseconds = 500]) async {
+  Future<void> _debounceFunction(Future<void> Function() func,
+      [int milliseconds = 500]) async {
     if (_debounce?.isActive ?? false) _debounce?.cancel();
     _debounce = Timer(Duration(milliseconds: milliseconds), () async {
       await func();
@@ -93,16 +97,17 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
     emit(ParaPharmaSearchFilterChanged());
   }
 
-
   void updatedFilters(ParaMedicalFilters appliedFilters) {
     filters = appliedFilters;
   }
 
   Future<void> likeParaPharmaCatalog(String paraPharmaCatalogId) async {
-    var index = paraPharmaProducts.lastIndexWhere((paraProd) => paraProd.id == paraPharmaCatalogId);
+    var index = paraPharmaProducts
+        .lastIndexWhere((paraProd) => paraProd.id == paraPharmaCatalogId);
     try {
       paraPharmaProducts[index].isLiked = true;
-      await favoriteRepository.likeParaPharmaCatalog(paraPharmaCatalogId: paraPharmaCatalogId);
+      await favoriteRepository.likeParaPharmaCatalog(
+          paraPharmaCatalogId: paraPharmaCatalogId);
 
       emit(ParaPharmaLiked(paraPharmaId: paraPharmaCatalogId));
     } catch (e) {
@@ -113,10 +118,12 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
   }
 
   Future<void> unlikeParaPharmaCatalog(String paraPharmaCatalogId) async {
-    var index = paraPharmaProducts.lastIndexWhere((paraProd) => paraProd.id == paraPharmaCatalogId);
+    var index = paraPharmaProducts
+        .lastIndexWhere((paraProd) => paraProd.id == paraPharmaCatalogId);
     try {
       paraPharmaProducts[index].isLiked = false;
-      await favoriteRepository.unLikeParaPharmaCatalog(paraPharmaCatalogId: paraPharmaCatalogId);
+      await favoriteRepository.unLikeParaPharmaCatalog(
+          paraPharmaCatalogId: paraPharmaCatalogId);
       emit(ParaPharmaLiked(paraPharmaId: paraPharmaCatalogId));
     } catch (e) {
       paraPharmaProducts[index].isLiked = true;
@@ -127,7 +134,8 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
 
   _onScroll() {
     scrollController.addListener(() async {
-      if (scrollController.position.pixels >= scrollController.position.maxScrollExtent) {
+      if (scrollController.position.pixels >=
+          scrollController.position.maxScrollExtent) {
         if (offSet < totalItemsCount) {
           await loadMoreParaPharmas();
         } else {

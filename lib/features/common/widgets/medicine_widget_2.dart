@@ -2,7 +2,9 @@ import 'package:cached_network_image_plus/flutter_cached_network_image_plus.dart
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
+import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/models/medicine_catalog.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
@@ -179,11 +181,17 @@ class MedicineWidget2 extends StatelessWidget {
                         border:
                             Border.all(color: AppColors.bgDisabled, width: 1.5),
                         image: DecorationImage(
-                          image: medicineData.company?.image == null
+                          image: medicineData.company?.thumbnailImage?.path ==
+                                  null
                               ? AssetImage(
                                   DrawableAssetStrings.companyPlaceHolderImg)
                               : NetworkImage(
-                                  medicineData.company?.thumbnailImage),
+                                  getItInstance
+                                      .get<INetworkService>()
+                                      .getFilesPath(
+                                        medicineData.company!.thumbnailImage!
+                                            .path,
+                                      ),),
                         ),
                       ),
                     ),
