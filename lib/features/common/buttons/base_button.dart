@@ -92,7 +92,8 @@ class BaseButton extends StatelessWidget {
                       const Gap(AppSizesManager.s8),
                     ],
                   ),
-                Expanded(
+                ConstrainedBox(
+                  constraints: BoxConstraints(maxHeight: 200),
                   child: Text(
                     label,
                     style: context.responsiveTextTheme.current.headLine4Medium
