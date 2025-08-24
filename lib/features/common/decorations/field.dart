@@ -88,5 +88,9 @@ InputDecoration buildInputDecorationCustomFieldStyle(
       borderRadius: BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
       borderSide: BorderSide(color: getFocusedBorderColor(context, state)),
     ),
+    errorBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+      borderSide: BorderSide(color: FieldState.error.color.primary),
+    ),
   );
 }
