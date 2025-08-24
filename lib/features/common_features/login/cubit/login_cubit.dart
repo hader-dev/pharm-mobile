@@ -1,15 +1,12 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
-
-import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/utils/app_exceptions/exceptions.dart';
 import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler.dart';
-
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/toast_helper.dart';
-
 
 import '../../../../config/routes/routing_manager.dart' show RoutingManager;
 
@@ -21,10 +18,10 @@ class LoginCubit extends Cubit<LoginState> {
   bool isObscured = true;
 
   TextEditingController emailController = TextEditingController(
-      text: testWithAccountOne ? "ayoub1@gmail.com" : "nocompany@gmail.com");
+      text: testWithAccountOne ? "ayoub1@gmail.com" : "pharma@mail.com");
 
   TextEditingController passwordController = TextEditingController(
-      text: testWithAccountOne ? "Strong@12" : "Idir*34bba");
+      text: testWithAccountOne ? "Strong@12" : "Strong@12");
 
   LoginCubit() : super(LoginInitial());
 

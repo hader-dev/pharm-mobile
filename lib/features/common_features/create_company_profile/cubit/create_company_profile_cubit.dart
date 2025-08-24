@@ -1,11 +1,10 @@
 import 'package:bloc/bloc.dart';
-
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/auth/token_manager.dart';
+import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/features/common_features/create_company_profile/hooks_data_model/create_company_profile_form.dart';
-
 import 'package:hader_pharm_mobile/repositories/remote/company/company_repository_impl.dart';
 import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler.dart';
 import 'package:hader_pharm_mobile/utils/device_gallery_helper.dart';
@@ -111,6 +110,7 @@ class CreateCompanyProfileCubit extends Cubit<CreateCompanyProfileState> {
       var tokenManger = getItInstance.get<TokenManager>();
       await tokenManger.refreshToken(client);
 
+      await getItInstance.get<UserManager>().getMe();
 
       emit(CompanyCreated());
     } catch (e) {

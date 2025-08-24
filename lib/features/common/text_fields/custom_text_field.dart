@@ -102,12 +102,10 @@ class CustomTextField extends StatelessWidget {
           onTap: onTap,
           enabled: isEnabled,
           errorBuilder: (context, errorText) {
-            return Flexible(
-              child: Text(
-                errorText,
-                style: context.responsiveTextTheme.current.bodyXSmall
-                    .copyWith(color: Colors.red),
-              ),
+            return Text(
+              errorText,
+              style: context.responsiveTextTheme.current.bodyXSmall
+                  .copyWith(color: Colors.red),
             );
           },
           inputFormatters: formatters,
