@@ -3,13 +3,13 @@ import 'package:hader_pharm_mobile/models/notification.dart';
 
 NotificationModel mockNotificationModel() {
   return NotificationModel(
-    id: 0,
+    id: "0",
     title: 'Mock Notification Title',
     body: 'This is a mock notification body for testing purposes.',
     isRead: false,
     type: 'info',
     createdAt: DateTime.now(),
-    clientId: 0,
+    clientId: "0",
     redirectUrl: '/mock/route',
   );
 }

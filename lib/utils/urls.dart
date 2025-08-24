@@ -1,6 +1,10 @@
 class Urls {
   // Notifications
   static String get notifications => "/notifications";
+  static String get notificationsUnreadCount => "/notifications/count";
+  static String get notificationMarkAllRead => "/notifications/mark-all-read";
+  static String notificationMarkRead(String id) =>
+      "/notifications/$id/mark-read";
 
   //users endpoint
   static String get users => "/users";

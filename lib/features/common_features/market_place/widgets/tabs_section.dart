@@ -50,11 +50,7 @@ class _MarketPlaceTabBarSectionState extends State<MarketPlaceTabBarSection>
               tabs: tabs
                   .map(
                     (tabLabel) => Tab(
-                      child: Text(
-                        getTabTranslation(
-                          tabLabel,
-                        ),
-                      ),
+                      child: Text(tabLabel),
                     ),
                   )
                   .toList()),

@@ -29,7 +29,7 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
         orderRepository
             .getOrderClaims(ParamsGetOrderComplaints(orderId: orderId))
       ]);
-      
+
       final orderData = results[0] as OrderDetailsModel;
       final orderClaims = results[1] as ResponseOrderComplaints;
 

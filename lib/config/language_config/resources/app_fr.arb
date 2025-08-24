@@ -246,5 +246,6 @@
   "price_range_ht": "Plage de prix (HT)",
   "currency_symbol": "DA",
   "follow": "Suivre",
-  "unfollow": "Ne plus suivre"
+  "unfollow": "Ne plus suivre",
+  "mark_all_as_read": "Tout marquer comme lu"
 }

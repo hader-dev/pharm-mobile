@@ -781,4 +781,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get unfollow => 'إلغاء المتابعة';
+
+  @override
+  String get mark_all_as_read => 'تحديد الكل كمقروء';
 }

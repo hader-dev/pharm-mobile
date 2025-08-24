@@ -1611,6 +1611,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Unfollow'**
   String get unfollow;
+
+  /// No description provided for @mark_all_as_read.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark all as read'**
+  String get mark_all_as_read;
 }
 
 class _AppLocalizationsDelegate

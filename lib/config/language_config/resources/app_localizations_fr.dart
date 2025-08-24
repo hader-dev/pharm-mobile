@@ -793,4 +793,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get unfollow => 'Ne plus suivre';
+
+  @override
+  String get mark_all_as_read => 'Tout marquer comme lu';
 }

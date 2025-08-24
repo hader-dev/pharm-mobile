@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import '../notification_channels.dart';
 import '../notification_plugin.dart';
@@ -22,7 +22,7 @@ Future<void> handleRemoteMessage(RemoteMessage message) async {
   final String? body = message.notification?.body ?? message.data['body'];
 
   await flutterLocalNotificationsPlugin.show(
-    message.hashCode, // unique notification id
+    message.hashCode,
     title,
     body,
     platformDetails,

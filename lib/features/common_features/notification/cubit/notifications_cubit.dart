@@ -1,9 +1,11 @@
 import 'dart:async' show Timer;
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hader_pharm_mobile/config/services/notification/notification_service_port.dart';
 import 'package:hader_pharm_mobile/models/notification.dart';
 import 'package:hader_pharm_mobile/repositories/remote/notification/params/params_load_notifications.dart';
+import 'package:hader_pharm_mobile/repositories/remote/notification/params/params_mark_read.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 
 part 'notifications_state.dart';
@@ -23,6 +25,20 @@ class NotificationsCubit extends Cubit<NotificationState> {
       : super(NotificationsInitial()) {
     _onScroll();
   }
+
+  Future<void> getUnreadNotificationsCount() async {
+    try {
+      emit(NotificationsLoading());
+      var response = await notificationService.getUnreadNotificationsCount();
+      unreadCount = response.unreadCount;
+      emit(NotificationsLoaded());
+    } catch (e, stack) {
+      debugPrint("Error fetching unread notifications count: $e");
+      debugPrintStack(stackTrace: stack);
+      emit(NotificationsLoadingFailed());
+    }
+  }
+
   Future<void> getNotifications({
     int offset = 0,
   }) async {
@@ -35,10 +51,11 @@ class NotificationsCubit extends Cubit<NotificationState> {
 
       totalItemsCount = response.totalItems;
       notifications = response.data;
-      unreadCount = response.unreadCount;
 
       emit(NotificationsLoaded());
-    } catch (e) {
+    } catch (e, stack) {
+      debugPrint("Error fetching notifications: $e");
+      debugPrintStack(stackTrace: stack);
       emit(NotificationsLoadingFailed());
     }
   }
@@ -58,7 +75,6 @@ class NotificationsCubit extends Cubit<NotificationState> {
       ));
       totalItemsCount = response.totalItems;
       notifications.addAll(response.data);
-      unreadCount = response.unreadCount;
       emit(NotificationsLoaded());
     } catch (e) {
       offSet = offSet - PaginationConstants.resultsPerPage;
@@ -93,13 +109,24 @@ class NotificationsCubit extends Cubit<NotificationState> {
 
   void markReadNotification(NotificationModel notification) {
     final updatedNotifications = notifications.map((item) {
-      if(item.id == notification.id) {
-          return item.copyWith(isRead: true);
+      if (item.id == notification.id) {
+        return item.copyWith(isRead: true);
       }
       return item;
-    }).toList() ;
+    }).toList();
     unreadCount = unreadCount - 1;
     notifications = updatedNotifications;
+    notificationService
+        .markReadNotification(ParamsMarkRead(id: notification.id));
+    emit(NotificationsLoaded());
+  }
+
+  void markAllNotificationRead() {
+    notifications = notifications
+        .map((item) => item.copyWith(isRead: true))
+        .toList(growable: false);
+    unreadCount = 0;
+    notificationService.markReadAllNotifications();
     emit(NotificationsLoaded());
   }
 }

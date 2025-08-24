@@ -247,5 +247,6 @@
   "claim_status_history": "تاريخ حالة الشكوى",
   "notifications": "الاشعارات",
   "follow": "متابعة",
-  "unfollow": "إلغاء المتابعة"
+  "unfollow": "إلغاء المتابعة",
+  "mark_all_as_read": "تحديد الكل كمقروء"
 }

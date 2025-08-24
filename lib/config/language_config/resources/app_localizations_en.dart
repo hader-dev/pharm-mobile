@@ -782,4 +782,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get unfollow => 'Unfollow';
+
+  @override
+  String get mark_all_as_read => 'Mark all as read';
 }

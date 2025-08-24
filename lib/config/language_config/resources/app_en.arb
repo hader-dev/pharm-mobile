@@ -250,5 +250,6 @@
   "claim_status_history": "Claim Status History",
   "notifications": "Notifications",
   "follow": "Follow",
-  "unfollow": "Unfollow"
+  "unfollow": "Unfollow",
+  "mark_all_as_read": "Mark all as read"
 }

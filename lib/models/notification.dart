@@ -1,45 +1,33 @@
 class NotificationModel {
-  final int id;
+  final String id;
   final String title;
   final String body;
   final bool isRead;
   final String type;
   final DateTime createdAt;
-  final int? clientId;
-  final String redirectUrl;
+  final String? clientId;
+  final String? redirectUrl;
+  final dynamic actionPayload;
 
-  NotificationModel({
-    required this.id,
-    required this.title,
-    required this.body,
-    required this.isRead,
-    required this.type,
-    required this.createdAt,
-    this.clientId,
-    required this.redirectUrl,
-  });
-
-  factory NotificationModel.fromJson(Map<String, dynamic> json) {
-    return NotificationModel(
-      id: json['id'] as int,
-      title: json['title'] as String,
-      body: json['body'] as String,
-      isRead: json['isRead'] as bool,
-      type: json['type'] as String,
-      createdAt: DateTime.parse(json['createdAt'] as String),
-      clientId: json['clientId'] != null ? json['clientId'] as int : null,
-      redirectUrl: json['redirectUrl'] as String,
-    );
-  }
+  NotificationModel(
+      {required this.id,
+      required this.title,
+      required this.body,
+      required this.isRead,
+      required this.type,
+      required this.createdAt,
+      this.clientId,
+      this.redirectUrl,
+      this.actionPayload});
 
   NotificationModel copyWith({
-    int? id,
+    String? id,
     String? title,
     String? body,
     bool? isRead,
     String? type,
     DateTime? createdAt,
-    int? clientId,
+    String? clientId,
     String? redirectUrl,
   }) {
     return NotificationModel(
@@ -52,5 +40,25 @@ class NotificationModel {
       clientId: clientId ?? this.clientId,
       redirectUrl: redirectUrl ?? this.redirectUrl,
     );
+  }
+}
+
+enum NotificationType { order, claim }
+
+extension NotificationTypeExtension on NotificationType {
+  static NotificationType fromString(String type) {
+    final parsedType = type.split('.').first;
+    switch (parsedType) {
+      case 'order':
+        return NotificationType.order;
+      case 'claim':
+        return NotificationType.claim;
+      default:
+        throw Exception('Unknown notification type: $type');
+    }
+  }
+
+  String toShortString() {
+    return toString().split('.').last;
   }
 }

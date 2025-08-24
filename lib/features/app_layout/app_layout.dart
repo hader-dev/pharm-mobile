@@ -19,12 +19,12 @@ import '../common_features/cart/cart.dart';
 import '../common_features/market_place/market_place.dart';
 import '../common_features/orders/cubit/orders_cubit.dart';
 import '../common_features/profile/profile.dart';
+import 'cubit/app_layout_cubit.dart';
 import 'widgets/app_nav_bar/app_nav_bar.dart';
 
-import 'cubit/app_layout_cubit.dart';
-
 class AppLayout extends StatelessWidget {
-  static final GlobalKey<ScaffoldState> appLayoutScaffoldKey = GlobalKey<ScaffoldState>();
+  static final GlobalKey<ScaffoldState> appLayoutScaffoldKey =
+      GlobalKey<ScaffoldState>();
   final List<Widget> screens = const [
     HomeScreen(),
     MarketPlaceScreen(),
@@ -37,13 +37,17 @@ class AppLayout extends StatelessWidget {
   const AppLayout({super.key});
 
   void showWelcomingDialog() {
-    if (getItInstance.get<SharedPreferences>().getBool(SPKeys.isFirstLoggin) ?? true) {
+    if (getItInstance.get<SharedPreferences>().getBool(SPKeys.isFirstLoggin) ??
+        true) {
       Future.delayed(Duration(milliseconds: 400), () {
         showDialog(
             context: RoutingManager.rootNavigatorKey.currentContext!,
-            builder: (context) => Dialog(clipBehavior: Clip.antiAlias, child: WelcomingWidget()));
+            builder: (context) =>
+                Dialog(clipBehavior: Clip.antiAlias, child: WelcomingWidget()));
       });
-      getItInstance.get<SharedPreferences>().setBool(SPKeys.isFirstLoggin, false);
+      getItInstance
+          .get<SharedPreferences>()
+          .setBool(SPKeys.isFirstLoggin, false);
     }
   }
 
@@ -53,30 +57,36 @@ class AppLayout extends StatelessWidget {
     return SafeArea(
       child: MultiBlocProvider(
         providers: [
-           BlocProvider(
+          BlocProvider(
             create: (context) => NotificationsCubit(
-          notificationService: getItInstance.get<INotificationService>(),
-          scrollController: ScrollController())..getNotifications(),
+                notificationService: getItInstance.get<INotificationService>(),
+                scrollController: ScrollController())
+              ..getUnreadNotificationsCount(),
           ),
           BlocProvider(
             create: (context) => AppLayoutCubit(),
           ),
           BlocProvider(
-            create: (context) => CartCubit(CartItemRepository(client: getItInstance.get<INetworkService>()),
-                ScrollController(), OrderRepository(client: getItInstance.get<INetworkService>()))
+            create: (context) => CartCubit(
+                CartItemRepository(
+                    client: getItInstance.get<INetworkService>()),
+                ScrollController(),
+                OrderRepository(client: getItInstance.get<INetworkService>()))
               ..getCartItem(),
           ),
           BlocProvider(
             create: (context) => OrdersCubit(
                 scrollController: ScrollController(),
-                orderRepository: OrderRepository(client: getItInstance.get<INetworkService>()))
+                orderRepository: OrderRepository(
+                    client: getItInstance.get<INetworkService>()))
               ..getOrders(),
           ),
         ],
         child: BlocListener<CartCubit, CartState>(
           listener: (context, state) {
             if (state is CartItemAdded) {
-              getItInstance.get<ToastManager>().showToast(type: ToastType.success, message: 'Item added to cart');
+              getItInstance.get<ToastManager>().showToast(
+                  type: ToastType.success, message: 'Item added to cart');
             }
           },
           child: BlocBuilder<CartCubit, CartState>(
