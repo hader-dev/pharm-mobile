@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 import 'package:iconsax/iconsax.dart';
@@ -11,7 +12,6 @@ import '../../../../../../utils/constants.dart';
 import '../../../config/theme/colors_manager.dart';
 import '../../../config/theme/typography/typoghrapy_source.dart';
 import '../../../utils/enums.dart';
-import '../../common/app_bars/custom_app_bar.dart';
 import '../../common/buttons/solid/primary_text_button.dart';
 import '../../common/text_fields/custom_text_field.dart';
 import 'cubit/change_password_cubit.dart';
@@ -31,16 +31,14 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
     return SafeArea(
       child: Scaffold(
-        appBar: CustomAppBar(
-          bgColor: AppColors.bgWhite,
-          topPadding: MediaQuery.of(context).padding.top,
-          bottomPadding: MediaQuery.of(context).padding.bottom,
+        appBar: CustomAppBarV2.alternate(
           leading: IconButton(
             icon: Icon(
               Directionality.of(context) == TextDirection.rtl
                   ? Iconsax.arrow_right_3
                   : Iconsax.arrow_left_2,
               size: AppSizesManager.iconSize25,
+              color: AppColors.bgWhite,
             ),
             onPressed: () {
               context.pop();
@@ -48,7 +46,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           ),
           title: Text(
             context.translation!.change_password,
-            style: context.responsiveTextTheme.current.headLine3SemiBold,
+            style: context.responsiveTextTheme.current.headLine3SemiBold
+                .copyWith(color: AppColors.bgWhite),
           ),
         ),
         body: BlocProvider(
@@ -73,6 +72,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
+                          Gap(
+                            AppSizesManager.s12,
+                          ),
                           Text(context.translation!.change_password,
                               style: context
                                   .responsiveTextTheme.current.headLine2),
@@ -186,7 +188,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                         .translation!.feedback_field_required;
                                   }
                                   if (value.length < 6) {
-                                    return 'Confirm Password must be at least 6 characters';
+                                    return context
+                                        .translation!.passwor_min_length;
                                   }
                                   if (value !=
                                       BlocProvider.of<ChangePasswordCubit>(ctx)

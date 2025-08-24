@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
@@ -8,11 +9,6 @@ import '../cubit/vendor_details_cubit.dart';
 import '../subPages/about_vendor/about_vendor.dart';
 import '../subPages/medicines/medicines.dart';
 import '../subPages/para_pharma/para_pharma.dart';
-
-// onCategoryTapped(String categoryName) {
-//   Scrollable.ensureVisible(TabBArSection.sectionsKeys[categoryName]!.currentContext!,
-//       duration: const Duration(seconds: 1), curve: Curves.easeInOut);
-// }
 
 class VandorDetailsTabBarSection extends StatefulWidget {
   final List<String> tabs = [
@@ -40,20 +36,20 @@ class _VandorDetailsTabBarSectionState extends State<VandorDetailsTabBarSection>
   Widget build(BuildContext context) {
     TextStyle tabTextStyle = context.responsiveTextTheme.current.body3Medium;
 
-    return Padding(
-      padding: const EdgeInsets.only(top: AppSizesManager.p16),
-      child: Column(
-        children: [
-          TabBar(
-              indicatorColor: AppColors.accent1Shade2,
+    return Column(
+      children: [
+        ColoredBox(
+          color: AppColors.accent1Shade2,
+          child: TabBar(
+              indicatorColor: AppColors.bgWhite,
               indicatorSize: TabBarIndicatorSize.tab,
               isScrollable: true,
               labelStyle: tabTextStyle,
               overlayColor: WidgetStatePropertyAll(Colors.transparent),
               tabAlignment: TabAlignment.start,
-              labelColor: AppColors.accent1Shade1,
+              labelColor: AppColors.bgWhite,
+              unselectedLabelColor: AppColors.accent1Shade2Deemphasized,
               controller: tabsController,
-              onTap: (index) {},
               tabs: widget.tabs
                   .map(
                     (tabLabel) => Tab(
@@ -63,21 +59,22 @@ class _VandorDetailsTabBarSectionState extends State<VandorDetailsTabBarSection>
                     ),
                   )
                   .toList()),
-          Expanded(
-            child: TabBarView(
-              physics: const NeverScrollableScrollPhysics(),
-              controller: tabsController,
-              children: [
-                VendorDetailsPage(
-                    vendorData: BlocProvider.of<VendorDetailsCubit>(context)
-                        .vendorData),
-                MedicinesPage(),
-                ParaPharmaPage()
-              ],
-            ),
+        ),
+        Gap(AppSizesManager.s16),
+        Expanded(
+          child: TabBarView(
+            physics: const NeverScrollableScrollPhysics(),
+            controller: tabsController,
+            children: [
+              VendorDetailsPage(
+                  vendorData:
+                      BlocProvider.of<VendorDetailsCubit>(context).vendorData),
+              MedicinesPage(),
+              ParaPharmaPage()
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

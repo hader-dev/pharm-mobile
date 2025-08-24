@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
+import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../config/language_config/cubit/lang_cubit.dart';
@@ -11,7 +12,6 @@ import '../../../config/theme/typography/typoghrapy_source.dart';
 import '../../../utils/assets_strings.dart';
 import '../../../utils/constants.dart';
 import '../../../utils/extensions/app_context_helper.dart';
-import '../../common/app_bars/custom_app_bar.dart';
 import '../../common/buttons/solid/primary_text_button.dart';
 import 'widgets/lang_tile.dart';
 
@@ -25,15 +25,13 @@ class LanguagesScreen extends StatelessWidget {
         value: BlocProvider.of<LangCubit>(
             RoutingManager.rootNavigatorKey.currentContext!),
         child: Scaffold(
-          appBar: CustomAppBar(
-            bgColor: AppColors.bgWhite,
-            topPadding: MediaQuery.of(context).padding.top,
-            bottomPadding: MediaQuery.of(context).padding.bottom,
+          appBar: CustomAppBarV2.alternate(
             leading: IconButton(
               icon: Icon(
                 Directionality.of(context) == TextDirection.rtl
                     ? Iconsax.arrow_right_3
                     : Iconsax.arrow_left_2,
+                color: AppColors.bgWhite,
                 size: AppSizesManager.iconSize25,
               ),
               onPressed: () {
@@ -42,7 +40,7 @@ class LanguagesScreen extends StatelessWidget {
             ),
             title: Text(context.translation!.language,
                 style: context.responsiveTextTheme.current.body1Medium.copyWith(
-                  color: TextColors.ternary.color,
+                  color: AppColors.bgWhite,
                 )),
           ),
           body: SafeArea(
@@ -63,6 +61,9 @@ class LanguagesScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
+                        const SizedBox(
+                          height: AppSizesManager.p10,
+                        ),
                         Text(context.translation!.select_language_description,
                             style:
                                 AppTypographySource.body1MediumStyle.copyWith(
