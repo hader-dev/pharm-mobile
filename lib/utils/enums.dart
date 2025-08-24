@@ -1,6 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:flutter/material.dart';
+import 'package:hader_pharm_mobile/config/language_config/resources/app_localizations.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
@@ -144,13 +145,23 @@ enum SearchVendorFilters { name, address, phone, email, description }
 enum ProductTypes { medicine, para_pharmacy }
 
 enum PaymentMethods {
-  cod(id: 1),
-  bank_transfer(id: 2),
-  card(id: 3),
-  mobile_money(id: 4);
+  cash(id: 1, label: "cash"),
+  bank_transfer(id: 2, label: "bank_transfer");
 
+  final String label;
   final int id;
-  const PaymentMethods({required this.id});
+  const PaymentMethods({required this.id, required this.label});
+}
+
+extension PaymentMethodsExtension on PaymentMethods {
+  String translation(AppLocalizations translation) {
+    switch (this) {
+      case PaymentMethods.cash:
+        return translation.cash;
+      case PaymentMethods.bank_transfer:
+        return translation.bank_transfer;
+    }
+  }
 }
 
 enum InvoiceTypes {

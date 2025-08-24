@@ -53,9 +53,7 @@ class _AnnouncementDetailsTabBarSectionState
                   .map(
                     (tabLabel) => Tab(
                       child: Text(
-                        getTabTranslation(
-                          tabLabel,
-                        ),
+                        tabLabel,
                       ),
                     ),
                   )

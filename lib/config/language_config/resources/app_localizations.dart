@@ -544,6 +544,18 @@ abstract class AppLocalizations {
   /// **'Types'**
   String get types;
 
+  /// No description provided for @cash.
+  ///
+  /// In en, this message translates to:
+  /// **'Cash'**
+  String get cash;
+
+  /// No description provided for @bank_transfer.
+  ///
+  /// In en, this message translates to:
+  /// **'Bank Transfer'**
+  String get bank_transfer;
+
   /// No description provided for @checkout_process.
   ///
   /// In en, this message translates to:
@@ -1617,6 +1629,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Mark all as read'**
   String get mark_all_as_read;
+
+  /// No description provided for @feedback_session_expired_please_login.
+  ///
+  /// In en, this message translates to:
+  /// **'Session expired, please login again'**
+  String get feedback_session_expired_please_login;
 }
 
 class _AppLocalizationsDelegate

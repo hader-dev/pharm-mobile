@@ -43,8 +43,8 @@ class OrderSummarySection extends StatelessWidget {
                             .read<OrderDetailsCubit>()
                             .orderData!
                             .paymentMethod,
-                    orElse: () => PaymentMethods.cod)
-                .name,
+                    orElse: () => PaymentMethods.cash)
+                .translation(context.translation!),
           ),
           SummaryRow(label: context.translation!.discount, value: '10%'),
           //   const SummaryRow(label: 'Shipping (Standard)', value: '10.00 context.translation!.currencyAbbreviation'),

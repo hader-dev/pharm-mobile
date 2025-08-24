@@ -242,6 +242,12 @@ class AppLocalizationsFr extends AppLocalizations {
   String get types => 'Types';
 
   @override
+  String get cash => 'Espece';
+
+  @override
+  String get bank_transfer => 'Virement bancaire';
+
+  @override
   String get checkout_process => 'Processus de commande';
 
   @override
@@ -796,4 +802,8 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get mark_all_as_read => 'Tout marquer comme lu';
+
+  @override
+  String get feedback_session_expired_please_login =>
+      'Session expirée, veuillez vous connecter';
 }

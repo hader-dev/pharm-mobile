@@ -237,6 +237,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get types => 'Types';
 
   @override
+  String get cash => 'Cash';
+
+  @override
+  String get bank_transfer => 'Bank Transfer';
+
+  @override
   String get checkout_process => 'Checkout Process';
 
   @override
@@ -785,4 +791,8 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mark_all_as_read => 'Mark all as read';
+
+  @override
+  String get feedback_session_expired_please_login =>
+      'Session expired, please login again';
 }

@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 
 /// An interceptor for [Dio] that injects and persists cookies using a [CookieJar].
 ///
@@ -43,7 +42,6 @@ class CustomCookieInjector extends Interceptor {
       RequestOptions options, RequestInterceptorHandler handler) async {
     try {
       var cookies = await cookieJar.loadForRequest(Uri.parse(appBaseUrl));
-      debugPrint('cookies: $cookies');
       final newCookies = getCookies([
         ...cookies,
       ]);

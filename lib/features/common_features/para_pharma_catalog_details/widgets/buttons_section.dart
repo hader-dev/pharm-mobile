@@ -4,7 +4,6 @@ import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
 import 'package:hader_pharm_mobile/features/common_features/cart/cubit/cart_cubit.dart';
-
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/cubit/para_pharma_details_cubit.dart';
 import 'package:hader_pharm_mobile/models/create_cart_item.dart';
 import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
@@ -20,7 +19,8 @@ class ButtonsSection extends StatelessWidget {
   const ButtonsSection(
       {super.key,
       this.onAction,
-      this.quantitySectionAlignment = MainAxisAlignment.end, this.parapharmDetailsCubit});
+      this.quantitySectionAlignment = MainAxisAlignment.end,
+      this.parapharmDetailsCubit});
 
   final VoidCallback? onAction;
   final MainAxisAlignment quantitySectionAlignment;
@@ -49,20 +49,19 @@ class ButtonsSection extends StatelessWidget {
                       labelColor: AppColors.accent1Shade1,
                       onTap: () {
                         BlocProvider.of<CartCubit>(context).addToCart(
-                          CreateCartItemModel(
-                              productId:
-                                  BlocProvider.of<ParaPharmaDetailsCubit>(
-                                          context)
-                                      .paraPharmaCatalogData!
-                                      .id,
-                              quantity: int.parse(
-                                  BlocProvider.of<ParaPharmaDetailsCubit>(
-                                          context)
-                                      .quantityController
-                                      .text),
-                              productType: ProductTypes.para_pharmacy),
-                              true
-                        );
+                            CreateCartItemModel(
+                                productId:
+                                    BlocProvider.of<ParaPharmaDetailsCubit>(
+                                            context)
+                                        .paraPharmaCatalogData!
+                                        .id,
+                                quantity: int.parse(
+                                    BlocProvider.of<ParaPharmaDetailsCubit>(
+                                            context)
+                                        .quantityController
+                                        .text),
+                                productType: ProductTypes.para_pharmacy),
+                            true);
                         onAction?.call();
                       },
                       borderColor: AppColors.accent1Shade1,
@@ -72,12 +71,15 @@ class ButtonsSection extends StatelessWidget {
                   Expanded(
                     child: PrimaryTextButton(
                       label: translation.buy_now,
+                      maxWidth: MediaQuery.of(context).size.width * 0.25,
                       leadingIcon: Iconsax.money4,
-                      spalshColor:AppColors.accent1Shade1.withAlpha(50),
+                      spalshColor: AppColors.accent1Shade1.withAlpha(50),
                       onTap: () {
                         BottomSheetHelper.showCommonBottomSheet(
-                            context: context, child: MakeOrderBottomSheet(cubit:parapharmDetailsCubit)).then((res)=>onAction?.call());
-                        
+                                context: context,
+                                child: MakeOrderBottomSheet(
+                                    cubit: parapharmDetailsCubit))
+                            .then((res) => onAction?.call());
                       },
                       color: AppColors.accent1Shade1,
                     ),

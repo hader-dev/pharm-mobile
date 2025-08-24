@@ -73,6 +73,8 @@
   "search_filters": "Search Filters",
   "filters": "Filters",
   "types": "Types",
+  "cash": "Cash",
+  "bank_transfer": "Bank Transfer",
   "checkout_process": "Checkout Process",
   "payment_methods": "Payment Methods",
   "invoice_types": "Invoice Types",
@@ -251,5 +253,6 @@
   "notifications": "Notifications",
   "follow": "Follow",
   "unfollow": "Unfollow",
-  "mark_all_as_read": "Mark all as read"
+  "mark_all_as_read": "Mark all as read",
+  "feedback_session_expired_please_login": "Session expired, please login again"
 }

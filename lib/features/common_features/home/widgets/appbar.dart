@@ -33,17 +33,17 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
             Row(
               children: [
                 Text(
-                  "Sologene",
+                  "Hader Pharma",
                   style: context.responsiveTextTheme.current.headLine3SemiBold
                       .copyWith(color: Colors.white),
                 ),
                 const Spacer(),
                 BlocBuilder<NotificationsCubit, NotificationState>(
                   builder: (context, state) {
-                    return InkWell(
-                      onTap: () => RoutingManager.router
+                    return IconButton(
+                      onPressed: () => RoutingManager.router
                           .pushNamed(RoutingManager.notificationsScreen),
-                      child: Stack(
+                      icon: Stack(
                         clipBehavior: Clip.none,
                         children: [
                           const Icon(

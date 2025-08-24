@@ -109,8 +109,8 @@ class MedicineWidget4 extends StatelessWidget {
                             const Gap(AppSizesManager.s4),
                             Text(
                                 medicineData.stockQuantity > 0
-                                    ? "In Stock"
-                                    : "Out of Stock",
+                                    ? context.translation!.in_stock
+                                    : context.translation!.out_stock,
                                 style: context
                                     .responsiveTextTheme.current.bodySmall
                                     .copyWith(

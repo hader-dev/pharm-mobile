@@ -22,10 +22,12 @@ class BaseButton extends StatelessWidget {
   final Color? borderColor;
   final Color? spalshColor;
   final TextOverflow? textOverflow;
+  final double? maxWidth;
 
   const BaseButton({
     super.key,
-    this.textOverflow,
+    this.maxWidth,
+    this.textOverflow = TextOverflow.ellipsis,
     this.onTap,
     this.isLoading = false,
     this.padding = AppSizesManager.p10,
@@ -93,7 +95,8 @@ class BaseButton extends StatelessWidget {
                     ],
                   ),
                 ConstrainedBox(
-                  constraints: BoxConstraints(maxHeight: 200),
+                  constraints: BoxConstraints(
+                      maxWidth: maxWidth ?? double.maxFinite),
                   child: Text(
                     label,
                     style: context.responsiveTextTheme.current.headLine4Medium

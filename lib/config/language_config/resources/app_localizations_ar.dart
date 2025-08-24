@@ -240,6 +240,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get types => 'الأنواع';
 
   @override
+  String get cash => 'نقدي';
+
+  @override
+  String get bank_transfer => 'نقل بنكي';
+
+  @override
   String get checkout_process => 'عملية الدفع';
 
   @override
@@ -784,4 +790,8 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get mark_all_as_read => 'تحديد الكل كمقروء';
+
+  @override
+  String get feedback_session_expired_please_login =>
+      'انتهت صلاحية الجلسة، يرجى تسجيل الدخول';
 }

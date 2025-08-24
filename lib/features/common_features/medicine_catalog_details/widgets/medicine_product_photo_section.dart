@@ -6,6 +6,7 @@ import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/routes/go_router_extension.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
+import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
@@ -59,6 +60,7 @@ class MedicineProductPhotoSection extends StatelessWidget {
                 Directionality.of(context) == TextDirection.rtl
                     ? Iconsax.arrow_right_3
                     : Iconsax.arrow_left_2,
+                color: AppColors.bgWhite,
                 size: AppSizesManager.iconSize25,
               ),
               onPressed: RoutingManager.router.popOrGoHome,

@@ -10,6 +10,7 @@ class PrimaryTextButton extends BaseButton {
       super.padding = AppSizesManager.p10,
       required super.label,
       super.color,
+      super.maxWidth,
       super.textOverflow,
       super.labelColor = Colors.white,
       super.height = AppSizesManager.buttonHeight,

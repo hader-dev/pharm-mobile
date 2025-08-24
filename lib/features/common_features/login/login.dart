@@ -29,17 +29,22 @@ class LoginScreen extends StatelessWidget {
               setupCompanyOrSkipToHome(context);
             }
             if (state is ForgotPassword) {
-              BottomSheetHelper.showCommonBottomSheet(context: context, child: ForgotPasswordScreen());
+              BottomSheetHelper.showCommonBottomSheet(
+                  context: context, child: ForgotPasswordScreen());
             }
             if (state is EmailOtpResentSuccessfully) {
               GoRouter.of(context).goNamed(RoutingManager.checkEmailScreen,
-                  extra: {"email": state.email, "redirectTo": RoutingManager.createCompanyProfile});
+                  extra: {
+                    "email": state.email,
+                    "redirectTo": RoutingManager.createCompanyProfile
+                  });
             }
           },
           child: Scaffold(
             backgroundColor: AppColors.bgWhite,
             body: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppSizesManager.p16),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: AppSizesManager.p16),
               child: ListView(
                 shrinkWrap: true,
                 physics: const BouncingScrollPhysics(),

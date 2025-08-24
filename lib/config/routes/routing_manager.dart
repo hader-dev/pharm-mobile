@@ -184,9 +184,9 @@ class RoutingManager {
             Map<String, dynamic> params = state.extra as Map<String, dynamic>;
 
             return OrderItemComplaintScreen(
-              orderId: params["orderId"] as String,
-              itemId: params["itemId"] as String,
-              complaintId: params["complaintId"] as String,
+              orderId: params["orderId"] ?? "",
+              itemId: params["itemId"] ?? "",
+              complaintId: params["complaintId"] ?? "",
             );
           },
         ),

@@ -51,7 +51,7 @@ class SelectPaymentMethodBottomSheet extends StatelessWidget {
                         // shrinkWrap: true,
                         children: PaymentMethods.values
                             .map((paymentMethod) => FilterOptionValueWidget(
-                                title: paymentMethod.name,
+                                title: paymentMethod.translation(context.translation!),
                                 onSelected: () =>
                                     BlocProvider.of<CartCubit>(context)
                                         .changePaymentMethod(paymentMethod),
