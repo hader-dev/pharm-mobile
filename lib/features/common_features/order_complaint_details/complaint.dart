@@ -13,11 +13,11 @@ class OrderItemComplaintScreen extends StatelessWidget {
       {super.key,
       required this.orderId,
       required this.itemId,
-      this.complaintId});
+      required this.complaintId});
 
   final String orderId;
   final String itemId;
-  final String? complaintId;
+  final String complaintId;
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +27,7 @@ class OrderItemComplaintScreen extends StatelessWidget {
         create: (context) => OrderComplaintsCubit(
           orderId: orderId,
           itemId: itemId,
+          complaintId: complaintId,
           orderRepository: OrderRepository(
             client: getItInstance.get<INetworkService>(),
           ),

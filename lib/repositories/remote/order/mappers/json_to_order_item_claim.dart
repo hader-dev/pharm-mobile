@@ -1,5 +1,3 @@
-
-
 import 'package:hader_pharm_mobile/models/order_claim.dart';
 
 OrderClaimHeaderModel jsonToOrderClaimHeaderModel(Map<String, dynamic> json) {
@@ -8,13 +6,14 @@ OrderClaimHeaderModel jsonToOrderClaimHeaderModel(Map<String, dynamic> json) {
     id: json['id'] as String,
     fromCompanyId: json['fromCompanyId'] as String,
     toCompanyId: json['toCompanyId'] as String,
-    orderId: json['orderId'] as String,
-    orderItemId: json['orderItemId'] as String,
-    claimStatusId: json['claimStatusId'] as int,
-    subject: json['subject'] as String,
+    orderId: json['orderId'] ?? "",
+    orderItemId: json['orderItemId'] ?? "",
+    claimStatusId: json['statusId'] ?? 1,
+    subject: json['subject'] ?? "",
   );
 }
 
-List<OrderClaimHeaderModel> jsonToOrderClaimHeaderModelList(List<dynamic> json) {
+List<OrderClaimHeaderModel> jsonToOrderClaimHeaderModelList(
+    List<dynamic> json) {
   return json.map((claim) => jsonToOrderClaimHeaderModel(claim)).toList();
 }

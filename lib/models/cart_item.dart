@@ -1,3 +1,5 @@
+import 'package:hader_pharm_mobile/models/image.dart';
+
 import 'company.dart';
 
 class CartItemModel {
@@ -22,8 +24,10 @@ class CartItemModel {
   final int medicineCatalogStockQty;
   final int parapharmCatalogStockQty;
   final BaseCompany sellerCompany;
+  final ImageModel? image;
 
   CartItemModel({
+    this.image,
     required this.id,
     required this.totalAmountTtc,
     required this.totalAmountHt,
@@ -70,6 +74,7 @@ class CartItemModel {
       medicineCatalogStockQty: json['medicineCatalog']?['stockQuantity'] ?? 0,
       parapharmCatalogStockQty: json['parapharmCatalog']?['stockQuantity'] ?? 0,
       sellerCompany: BaseCompany.fromJson(json['sellerCompany']),
+      image: json['image'] != null ? ImageModel.fromJson(json['image']) : null,
     );
   }
   CartItemModel copyWith({
@@ -121,10 +126,11 @@ class CartItemModel {
   Map<String, num> getTotalPrice() {
     num totalHtPrice = num.parse(totalAmountHt) * quantity;
     num totalTTCPrice = num.parse(totalAmountTtc) * quantity;
-    return <String, num>{"totalHtPrice": totalHtPrice, "totalTTCPrice": totalTTCPrice};
+    return <String, num>{
+      "totalHtPrice": totalHtPrice,
+      "totalTTCPrice": totalTTCPrice
+    };
   }
-
- 
 }
 
 class MedicinesCatalog {

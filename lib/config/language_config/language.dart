@@ -1,7 +1,7 @@
 import '../../utils/shared_prefs.dart';
 
 class LanguageHelper {
-  static final List<String> supportedLanguages = <String>['en', 'fr', 'ar'];
+  static final List<String> supportedLanguages = <String>['fr', 'en', 'ar'];
 
   static String getCurrentLanguage() {
     return Prefs.getString(SPKeys.language) ?? supportedLanguages.first;

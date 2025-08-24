@@ -1,17 +1,19 @@
-
-
-
-class ParamsGetComplaint{
+class ParamsGetComplaint {
   final String orderId;
-  final String itemId;
-  ParamsGetComplaint({required this.orderId,required this.itemId});
+  final String? itemId;
+  final String complaintId;
+  ParamsGetComplaint(
+      {required this.orderId, this.itemId, required this.complaintId});
 }
 
-
-class ParamsMakeComplaint{
+class ParamsMakeComplaint {
   final String orderId;
-  final String itemId;
+  final String? itemId;
   final String description;
   final String subject;
-  ParamsMakeComplaint( {required this.subject, required this.orderId,required this.itemId,required this.description});
+  ParamsMakeComplaint(
+      {required this.subject,
+      required this.orderId,
+      this.itemId,
+      required this.description});
 }

@@ -42,9 +42,12 @@ class OrderComplaintHeaderWidget extends StatelessWidget {
         ],
       ),
       rawSubtitle: claim.createdAt.format,
-      onTap: () => RoutingManager.router.pushNamed(
-          RoutingManager.orderComplaint,
-          extra: {"orderId": claim.orderId, "itemId": claim.orderItemId}),
+      onTap: () => RoutingManager.router
+          .pushNamed(RoutingManager.orderComplaint, extra: {
+        "orderId": claim.orderId,
+        "itemId": claim.orderItemId,
+        "complaintId": claim.id
+      }),
     );
   }
 }

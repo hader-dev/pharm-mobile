@@ -1,21 +1,22 @@
+import 'package:flutter/cupertino.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/models/order_claim.dart';
-import 'package:hader_pharm_mobile/repositories/remote/order/mappers/json_to_order_item_claim.dart';
-import 'package:hader_pharm_mobile/repositories/remote/order/params/item_complaint.dart';
+import 'package:hader_pharm_mobile/repositories/remote/order/mappers/json_to_order_complaint_response.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/params/order_complaint.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/response/response_order_complaints.dart';
 import 'package:hader_pharm_mobile/utils/urls.dart';
 
 Future<ResponseOrderComplaints> getOrderComplaints(
-    ParamsGetComplaint params, INetworkService client) async {
-  final queryParams = {"itemId": params.itemId, "orderId": params.orderId};
+    ParamsGetOrderComplaints params, INetworkService client) async {
+  final queryParams = {"orderId": params.orderId};
+
   try {
     var decodedResponse = await client.sendRequest(
-        () => client.get(Urls.itemComplaint, queryParams: queryParams));
-
-    return ResponseOrderComplaints(
-        claims: jsonToOrderClaimHeaderModelList(decodedResponse));
-  } catch (e) {
+        () => client.get(Urls.complaints, queryParams: queryParams));
+    return jsonToOrderComplaintResponse(decodedResponse);
+  } catch (e, stackTrace) {
+    debugPrintStack(stackTrace: stackTrace);
+    debugPrint("$e");
     return ResponseOrderComplaints();
   }
 }

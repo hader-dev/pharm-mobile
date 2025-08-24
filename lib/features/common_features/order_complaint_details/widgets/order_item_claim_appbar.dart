@@ -35,10 +35,13 @@ class OrderItemComplaintAppbar extends StatelessWidget
           const Icon(Iconsax.box_2,
               size: AppSizesManager.iconSize25, color: AppColors.bgWhite),
           Gap(AppSizesManager.s12),
-          Text(
-            context.translation!.item_complaint,
-            style: context.responsiveTextTheme.current.headLine3SemiBold
-                .copyWith(color: AppColors.bgWhite),
+          Expanded(
+            child: Text(
+              context.translation!.item_complaint,
+              style: context.responsiveTextTheme.current.headLine3SemiBold
+                  .copyWith(color: AppColors.bgWhite),
+                  overflow: TextOverflow.ellipsis,
+            ),
           ),
         ],
       ),

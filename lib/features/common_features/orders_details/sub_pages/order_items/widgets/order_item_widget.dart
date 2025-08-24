@@ -3,11 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
-import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
-import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/accordions/ink_accordion.dart';
-import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders_details/sub_pages/order_items/widgets/order_item_content.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders_details/widgets/order_item_note.dart';
 import 'package:hader_pharm_mobile/models/order_details.dart';
@@ -88,24 +85,17 @@ class OrderItemWidget extends StatelessWidget {
                     ],
                   ),
                   const Gap(AppSizesManager.s8),
-                  SizedBox(
-                    width: constraints.maxWidth * 0.8,
-                    child: ItemContent(
-                      itemId: item.id,
-                      quantity: item.quantity,
-                      price: item.unitPriceHt.toString(),
-                      orderId: item.orderId,
-                    ),
-                  )
                 ],
               ),
               children: [
-                PrimaryTextButton(
-                  label: context.translation!.item_complaint,
-                  onTap: () => RoutingManager.router.pushNamed(
-                      RoutingManager.orderComplaint,
-                      extra: {"orderId": item.orderId, "itemId": item.id}),
-                  color: AppColors.accent1Shade1,
+                SizedBox(
+                  width: constraints.maxWidth * 0.8,
+                  child: ItemContent(
+                    itemId: item.id,
+                    quantity: item.quantity,
+                    price: item.unitPriceHt.toString(),
+                    orderId: item.orderId,
+                  ),
                 )
               ]),
         );

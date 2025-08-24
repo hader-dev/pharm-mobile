@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/models/company.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
@@ -62,7 +64,10 @@ class VendorCartSectionState extends State<VendorCartSection> {
                 image: DecorationImage(
                   image: widget.vendorData.thumbnailImage == null
                       ? AssetImage(DrawableAssetStrings.companyPlaceHolderImg)
-                      : NetworkImage(widget.vendorData.thumbnailImage!.path),
+                      : NetworkImage(getItInstance
+                          .get<INetworkService>()
+                          .getFilesPath(
+                              widget.vendorData.thumbnailImage!.path)),
                 ),
               ),
             ),

@@ -53,9 +53,7 @@ class _OrderDetailsTabBarSectionState extends State<OrderDetailsTabBarSection>
                   .map(
                     (tabLabel) => Tab(
                       child: Text(
-                        getTabTranslation(
-                          tabLabel,
-                        ),
+                        tabLabel,
                       ),
                     ),
                   )

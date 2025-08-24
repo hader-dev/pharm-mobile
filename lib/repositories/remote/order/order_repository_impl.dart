@@ -66,19 +66,16 @@ class OrderRepository extends IOrderRepository {
   @override
 
   Future<ResponseItemComplaintFind> findComplaint(ParamsGetComplaint params) {
-// TODO: switch to api when it's implemented ready
-    return find_complaint_action.mockResponse(params, client);
+    return find_complaint_action.findComplaint(params, client);
   }
 
   @override
   Future<ResponseItemComplaintMake> makeComplaint(ParamsMakeComplaint params) {
-// TODO: switch to api when it's implemented ready
-    return make_complaint_action.mockResponse(params, client);
+    return make_complaint_action.makeComplaint(params, client);
   }
 
   @override
   Future<ResponseOrderComplaints> getOrderClaims(ParamsGetOrderComplaints params) {
-// TODO: switch to api when it's implemented ready
-    return order_complaint_action.mockResponse(params, client);
+    return order_complaint_action.getOrderComplaints(params, client);
   }
 }

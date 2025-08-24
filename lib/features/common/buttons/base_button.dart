@@ -21,9 +21,11 @@ class BaseButton extends StatelessWidget {
   final IconData? trailingIcon;
   final Color? borderColor;
   final Color? spalshColor;
+  final TextOverflow? textOverflow;
 
   const BaseButton({
     super.key,
+    this.textOverflow,
     this.onTap,
     this.isLoading = false,
     this.padding = AppSizesManager.p10,
@@ -90,11 +92,14 @@ class BaseButton extends StatelessWidget {
                       const Gap(AppSizesManager.s8),
                     ],
                   ),
-                Text(
-                  label,
-                  style: context.responsiveTextTheme.current.headLine4Medium
-                      .copyWith(
-                    color: onTap == null ? Colors.grey : labelColor,
+                Expanded(
+                  child: Text(
+                    label,
+                    style: context.responsiveTextTheme.current.headLine4Medium
+                        .copyWith(
+                      color: onTap == null ? Colors.grey : labelColor,
+                    ),
+                    overflow: textOverflow,
                   ),
                 ),
                 if (trailingIcon != null)

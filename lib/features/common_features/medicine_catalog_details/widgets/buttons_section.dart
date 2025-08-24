@@ -11,6 +11,7 @@ import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
+
 import 'make_order_bottom_sheet.dart';
 import 'quantity_section.dart';
 
@@ -43,6 +44,7 @@ class ButtonsSection extends StatelessWidget {
                   Expanded(
                     child: PrimaryTextButton(
                       isOutLined: true,
+                      textOverflow: TextOverflow.ellipsis,
                       label: translation.add_cart,
                       leadingIcon: Iconsax.add,
                       spalshColor: AppColors.accent1Shade1.withAlpha(50),
@@ -68,6 +70,7 @@ class ButtonsSection extends StatelessWidget {
                   Gap(AppSizesManager.s8),
                   Expanded(
                     child: PrimaryTextButton(
+                      textOverflow: TextOverflow.ellipsis,
                       label: translation.buy_now,
                       leadingIcon: Iconsax.money4,
                       onTap: () {

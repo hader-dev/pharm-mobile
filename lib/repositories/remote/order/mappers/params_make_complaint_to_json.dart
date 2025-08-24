@@ -3,8 +3,8 @@ import 'package:hader_pharm_mobile/repositories/remote/order/params/item_complai
 Map<String, dynamic> paramsMakeComplaintToJson(ParamsMakeComplaint params) {
   return {
     "orderId": params.orderId,
-    "itemId": params.itemId,
+    // "itemId": params.itemId, //TODO: Fix when backend is ready
     "subject": params.subject,
-    "descirption": params.description
+    "description": params.description
   };
 }

@@ -350,7 +350,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get order_tracking => 'Suivi de commande';
 
   @override
-  String get order_details => 'Détails de la commande';
+  String get order_details => 'Détails de commande';
 
   @override
   String get account => 'Compte';

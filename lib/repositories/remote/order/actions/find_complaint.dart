@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/models/order_claim.dart';
 import 'package:hader_pharm_mobile/models/order_details.dart';
@@ -8,14 +9,16 @@ import 'package:hader_pharm_mobile/utils/urls.dart';
 
 Future<ResponseItemComplaintFind> findComplaint(
     ParamsGetComplaint params, INetworkService client) async {
-  final queryParams = {"itemId": params.itemId, "orderId": params.orderId};
   try {
-    var decodedResponse = await client.sendRequest(
-        () => client.get(Urls.itemComplaint, queryParams: queryParams));
+    var decodedResponse = await client.sendRequest(() => client.get(
+          Urls.itemComplaint(params.complaintId),
+        ));
 
     return ResponseItemComplaintFind(
         orderClaimModel: jsonToOrderClaimModel(decodedResponse));
-  } catch (e) {
+  } catch (e, stackTrace) {
+    debugPrint("$e");
+    debugPrintStack(stackTrace: stackTrace);
     return ResponseItemComplaintFind();
   }
 }

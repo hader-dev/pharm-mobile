@@ -12,7 +12,6 @@ class OrderItemsComplaintPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final translation = context.translation!;
     final cubit = context.read<OrderDetailsCubit>();
     final scrollContoller = ScrollController();
 
@@ -30,9 +29,7 @@ class OrderItemsComplaintPage extends StatelessWidget {
       }
 
       if (state is OrderDetailsLoadingFailed) {
-        return Center(
-          child: Text(translation.feedback_network_fetch_error),
-        );
+        return const EmptyListWidget();
       }
 
       if (cubit.orderClaims.isEmpty) {
@@ -57,6 +54,7 @@ class OrderItemsComplaintPage extends StatelessWidget {
               BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
         ),
         child: Column(
+          mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
@@ -65,8 +63,8 @@ class OrderItemsComplaintPage extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             Container(
-              constraints: const BoxConstraints(
-                maxHeight: 450,
+              constraints:  BoxConstraints(
+                maxHeight: MediaQuery.of(context).size.height * 0.7,
               ),
               child: Scrollbar(
                 controller: scrollContoller,

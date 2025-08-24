@@ -38,10 +38,13 @@ class OrderDetailsAppbar extends StatelessWidget
           const Icon(Iconsax.box_2,
               size: AppSizesManager.iconSize25, color: AppColors.bgWhite),
           Gap(AppSizesManager.s12),
-          Text(
-            context.translation!.order_details,
-            style: context.responsiveTextTheme.current.headLine3SemiBold
-                .copyWith(color: AppColors.bgWhite),
+          Expanded(
+            child: Text(
+              context.translation!.order_details,
+              style: context.responsiveTextTheme.current.headLine3SemiBold
+                  .copyWith(color: AppColors.bgWhite),
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
         ],
       ),
@@ -58,9 +61,10 @@ class OrderDetailsAppbar extends StatelessWidget
                   ));
             }
             OrderStatus orderStatus = OrderStatus.values.firstWhere(
-                (statusItem) =>
-                    statusItem.id ==
-                    context.read<OrderDetailsCubit>().orderData!.status);
+              (statusItem) =>
+                  statusItem.id ==
+                  (context.read<OrderDetailsCubit>().orderData?.status ?? 1),
+            );
             return Container(
               margin: EdgeInsets.only(right: AppSizesManager.p12),
               padding: EdgeInsets.all(AppSizesManager.p6),

@@ -11,7 +11,7 @@ Future<ResponseItemComplaintMake> makeComplaint(
     ParamsMakeComplaint params, INetworkService client) async {
   try {
     var res = await client.sendRequest(() => client.post(
-          Urls.itemComplaint,
+          Urls.complaints,
           payload: paramsMakeComplaintToJson(params),
         ));
 

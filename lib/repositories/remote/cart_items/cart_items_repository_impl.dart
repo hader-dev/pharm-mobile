@@ -1,5 +1,6 @@
-import '../../../config/services/network/network_interface.dart';
+import 'package:flutter/foundation.dart';
 
+import '../../../config/services/network/network_interface.dart';
 import '../../../models/cart_items_response.dart';
 import '../../../models/create_cart_item.dart';
 import '../../../utils/urls.dart';
@@ -11,16 +12,26 @@ class CartItemRepository extends ICartItemsRepository {
 
   @override
   Future<CartItemsResponse> getCartItem({offset = 0, limit = 10}) async {
-    var decodedResponse = await client.sendRequest(() => client.get(
-          Urls.cartItems,
-          queryParams: {
-            "include[sellerCompany][fields][]": ["id", "name", "thumbnailImage", "image"],
-            "include[parapharmCatalog][fields][]": ["stockQuantity"],
-            "include[medicineCatalog][fields][]": ["stockQuantity"]
-          },
-        ));
+    try {
+      var decodedResponse = await client.sendRequest(() => client.get(
+            Urls.cartItems,
+            queryParams: {
+              "include[sellerCompany][fields][]": [
+                "id",
+                "name",
+                "thumbnailImage",
+                "image"
+              ],
+              "include[parapharmCatalog][fields][]": ["stockQuantity"],
+              "include[medicineCatalog][fields][]": ["stockQuantity"]
+            },
+          ));
 
-    return CartItemsResponse.fromJson(decodedResponse);
+      return CartItemsResponse.fromJson(decodedResponse);
+    } catch (e) {
+      debugPrint("$e");
+      return CartItemsResponse(data: []);
+    }
   }
 
   @override

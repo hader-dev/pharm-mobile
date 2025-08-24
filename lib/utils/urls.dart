@@ -74,7 +74,8 @@ class Urls {
   static String get announcements => "/announcements";
 
   //Complaints
-  static String get itemComplaint => "/claims";
+  static String itemComplaint(String id) => "/complaints/$id";
+  static String get complaints => "/complaints";
 
   static String get registerUserDevice => "/firebase/register";
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common_features/order_complaint_details/cubit/orders_complaint_details_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/order_complaint_details/views/complaint_review.dart';
 import 'package:hader_pharm_mobile/features/common_features/order_complaint_details/views/make_complaint_view.dart';
@@ -21,13 +20,11 @@ class OrderComplaintContent extends StatelessWidget {
       }
 
       if (state is OrderComplaintsLoadingFailed) {
-        return Center(
-          child: EmptyListWidget(),
-        );
+        return MakeComplaintView();
       }
 
       if (cubit.claimData != null) {
-        return ComplaintReviewView()  ;
+        return ComplaintReviewView();
       }
 
       return MakeComplaintView();
