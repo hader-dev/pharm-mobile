@@ -12,12 +12,7 @@ import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
-import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/medicine_products/cubit/medicine_products_cubit.dart';
-import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/cubit/para_pharma_cubit.dart';
 import 'package:hader_pharm_mobile/repositories/remote/company/company_repository_impl.dart';
-import 'package:hader_pharm_mobile/repositories/remote/favorite/favorite_repository_impl.dart';
-import 'package:hader_pharm_mobile/repositories/remote/medicine_catalog/medicine_catalog_repository_impl.dart';
-import 'package:hader_pharm_mobile/repositories/remote/parapharm_catalog/para_pharma_catalog_repository_impl.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
@@ -43,26 +38,6 @@ class VendorDetails extends StatelessWidget {
                     client: getItInstance.get<INetworkService>()))
               ..getVendorDetails(companyId),
           ),
-          BlocProvider(
-            create: (context) => ParaPharmaCubit(
-                favoriteRepository: FavoriteRepository(
-                    client: getItInstance.get<INetworkService>()),
-                scrollController: ScrollController(),
-                searchController: TextEditingController(text: ""),
-                paraPharmaRepository: ParaPharmaRepository(
-                    client: getItInstance.get<INetworkService>()))
-              ..getParaPharmas(companyIdFilter: companyId),
-          ),
-          BlocProvider(
-            create: (context) => MedicineProductsCubit(
-                scrollController: ScrollController(),
-                favoriteRepository: FavoriteRepository(
-                    client: getItInstance.get<INetworkService>()),
-                searchController: TextEditingController(text: ""),
-                medicineRepository: MedicineCatalogRepository(
-                    client: getItInstance.get<INetworkService>()))
-              ..getMedicines(),
-          ),
         ],
         child: BlocListener<VendorDetailsCubit, VendorDetailsState>(
           listener: (context, state) {
@@ -87,78 +62,6 @@ class VendorDetails extends StatelessWidget {
                   context.pop();
                 },
               ),
-              // trailing: [
-              // Disabled until we have the follow/unfollow backend ready
-              // BlocBuilder<VendorDetailsCubit, VendorDetailsState>(
-              //   builder: (context, state) {
-              //     final isFollowing = context
-              //             .read<VendorDetailsCubit>()
-              //             .vendorData
-              //             .isFollowing ??
-              //         false;
-
-              //     return PrimaryTextButton(
-              //         label: isFollowing
-              //             ? context.translation!.unfollow
-              //             : context.translation!.follow,
-              //         leadingIcon: Iconsax.user_add,
-              //         labelColor: AppColors.accent1Shade1,
-              //         onTap: () {
-              //           if (isFollowing) {
-              //             context.read<VendorDetailsCubit>().unfollowVendor(
-              //                 context
-              //                     .read<VendorDetailsCubit>()
-              //                     .vendorData
-              //                     .id);
-              //           } else {
-              //             context
-              //                 .read<VendorDetailsCubit>()
-              //                 .requestJoinVendorAsClient(context
-              //                     .read<VendorDetailsCubit>()
-              //                     .vendorData
-              //                     .id);
-              //           }
-              //         },
-              //         isLoading: state is SendingJoinRequest,
-              //         borderColor: AppColors.accent1Shade1);
-              //   },
-              // ),
-              // Padding(
-              //   padding: const EdgeInsets.only(right: AppSizesManager.p8),
-              //   child: BlocBuilder<VendorDetailsCubit, VendorDetailsState>(
-              //     builder: (context, state) {
-              //       final isLiked = context
-              //               .read<VendorDetailsCubit>()
-              //               .vendorData
-              //               .isLiked ??
-              //           false;
-
-              //       return InkWell(
-              //         child: Icon(
-              //           Iconsax.heart,
-              //           color: isLiked ? Colors.red : Colors.black,
-              //           size: AppSizesManager.iconSize20,
-              //         ),
-              //         onTap: () {
-              //           if (isLiked) {
-              //             context.read<VendorDetailsCubit>().unlikeVendor(
-              //                 context
-              //                     .read<VendorDetailsCubit>()
-              //                     .vendorData
-              //                     .id);
-              //           } else {
-              //             context.read<VendorDetailsCubit>().likeVendor(
-              //                 context
-              //                     .read<VendorDetailsCubit>()
-              //                     .vendorData
-              //                     .id);
-              //           }
-              //         },
-              //       );
-              //     },
-              //   ),
-              // ),
-              // ],
               title: BlocBuilder<VendorDetailsCubit, VendorDetailsState>(
                 builder: (context, state) {
                   if (state is VendorDetailsLoading) {
@@ -209,7 +112,9 @@ class VendorDetails extends StatelessWidget {
                 if (state is VendorDetailsLoading) {
                   return Center(child: CircularProgressIndicator());
                 }
-                return VandorDetailsTabBarSection();
+                return VandorDetailsTabBarSection(
+                  companyId: companyId,
+                );
               },
             ),
           ),

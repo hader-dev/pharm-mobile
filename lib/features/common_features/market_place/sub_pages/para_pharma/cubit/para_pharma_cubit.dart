@@ -42,6 +42,7 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
           await paraPharmaRepository.getParaPharmaCatalog(
         offset: offset,
         filters: filters,
+        companyId: companyIdFilter,
       );
       totalItemsCount = paraPharmaCatalogResponse.totalItems;
       paraPharmaProducts = paraPharmaCatalogResponse.data;

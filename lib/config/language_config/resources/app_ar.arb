@@ -36,6 +36,7 @@
   "show_less": "عرض أقل",
   "show_more": "عرض المزيد",
   "feedback_session_expired_please_login": "انتهت صلاحية الجلسة، يرجى تسجيل الدخول",
+  "search_by_dci_brand_sku": "ابحث بالDCI، العلامة التجارية او SKU",
   "reset": "إعادة تعيين",
   "apply": "تطبيق",
   "close": "إغلاق",

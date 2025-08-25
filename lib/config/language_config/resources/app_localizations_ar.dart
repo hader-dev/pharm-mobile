@@ -794,4 +794,7 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get feedback_session_expired_please_login =>
       'انتهت صلاحية الجلسة، يرجى تسجيل الدخول';
+
+  @override
+  String get search_by_dci_brand_sku => 'ابحث بالDCI، العلامة التجارية او SKU';
 }

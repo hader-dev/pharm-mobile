@@ -806,4 +806,7 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get feedback_session_expired_please_login =>
       'Session expirée, veuillez vous connecter';
+
+  @override
+  String get search_by_dci_brand_sku => 'Rechercher par DCI, marque ou SKU';
 }

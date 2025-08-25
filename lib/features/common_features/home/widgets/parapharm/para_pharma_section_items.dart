@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/para_pharma_widget_3.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/cubit/para_pharma_cubit.dart';
-import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class ParaPharmaSectionItems extends StatelessWidget {
   const ParaPharmaSectionItems({super.key, required this.minSectionHeight});
@@ -11,8 +10,6 @@ class ParaPharmaSectionItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final translation = context.translation!;
-
     return ConstrainedBox(
       constraints: BoxConstraints(
           maxHeight: minSectionHeight * 2, minHeight: minSectionHeight),
@@ -23,14 +20,14 @@ class ParaPharmaSectionItems extends StatelessWidget {
           final items = paraPharmaProductsCubit.paraPharmaProducts;
 
           if (state is ParaPharmaProductsLoading) {
-            return Text(translation.loading);
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
           }
-          if (state is ParaPharmaProductsLoadingFailed) {
-            return Text(translation.feedback_loading_failed);
-          }
-
-          if (items.isEmpty) {
-            return EmptyListWidget();
+          if (state is ParaPharmaProductsLoadingFailed || items.isEmpty) {
+            return const Center(
+              child: EmptyListWidget(),
+            );
           }
 
           return ListView.builder(

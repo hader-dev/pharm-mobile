@@ -89,6 +89,7 @@ class MarketPlaceScreen extends StatelessWidget {
                         child: const Icon(
                           Iconsax.bag_2,
                           color: Colors.white,
+                          size: 28,
                         ));
                   },
                 ),

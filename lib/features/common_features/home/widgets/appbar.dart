@@ -49,6 +49,7 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
                           const Icon(
                             Iconsax.notification,
                             color: Colors.white,
+                            size: 28,
                           ),
                           if (context.read<NotificationsCubit>().unreadCount >
                               0)

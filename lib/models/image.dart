@@ -12,9 +12,9 @@ class ImageModel {
   });
 
   factory ImageModel.fromJson(Map<String, dynamic> json) => ImageModel(
-        path: json["path"],
-        filename: json["filename"],
-        mimetype: json["mimetype"],
-        size: json["size"],
+        path: json["path"] ?? "",
+        filename: json["filename"] ?? "",
+        mimetype: json["mimetype"] ?? "",
+        size: json["size"] ?? 0,
       );
 }

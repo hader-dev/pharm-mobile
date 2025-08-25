@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
+import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/common_features/anouncement_details/sub_pages/para_pharma/cubit/para_pharma_cubit.dart';
+import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/medicine_products/cubit/medicine_products_cubit.dart';
+import 'package:hader_pharm_mobile/features/common_features/vendor_details/cubit/vendor_details_cubit.dart';
+import 'package:hader_pharm_mobile/repositories/remote/favorite/favorite_repository_impl.dart';
+import 'package:hader_pharm_mobile/repositories/remote/medicine_catalog/medicine_catalog_repository_impl.dart';
+import 'package:hader_pharm_mobile/repositories/remote/parapharm_catalog/para_pharma_catalog_repository_impl.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
-import '../../../../config/theme/colors_manager.dart';
-import '../cubit/vendor_details_cubit.dart';
 import '../subPages/about_vendor/about_vendor.dart';
 import '../subPages/medicines/medicines.dart';
 import '../subPages/para_pharma/para_pharma.dart';
@@ -16,7 +23,8 @@ class VandorDetailsTabBarSection extends StatefulWidget {
     "Medicine",
     "Para-Pharma",
   ];
-  VandorDetailsTabBarSection({super.key});
+  VandorDetailsTabBarSection({super.key, required this.companyId});
+  final String companyId;
 
   @override
   State<VandorDetailsTabBarSection> createState() =>
@@ -62,16 +70,40 @@ class _VandorDetailsTabBarSectionState extends State<VandorDetailsTabBarSection>
         ),
         Gap(AppSizesManager.s16),
         Expanded(
-          child: TabBarView(
-            physics: const NeverScrollableScrollPhysics(),
-            controller: tabsController,
-            children: [
-              VendorDetailsPage(
-                  vendorData:
-                      BlocProvider.of<VendorDetailsCubit>(context).vendorData),
-              MedicinesPage(),
-              ParaPharmaPage()
+          child: MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => MedicineProductsCubit(
+                    scrollController: ScrollController(),
+                    favoriteRepository: FavoriteRepository(
+                        client: getItInstance.get<INetworkService>()),
+                    searchController: TextEditingController(text: ""),
+                    medicineRepository: MedicineCatalogRepository(
+                        client: getItInstance.get<INetworkService>()))
+                  ..getMedicines(companyIdFilter: widget.companyId),
+              ),
+              BlocProvider(
+                create: (context) => ParaPharmaCubit(
+                    favoriteRepository: FavoriteRepository(
+                        client: getItInstance.get<INetworkService>()),
+                    scrollController: ScrollController(),
+                    searchController: TextEditingController(text: ""),
+                    paraPharmaRepository: ParaPharmaRepository(
+                        client: getItInstance.get<INetworkService>()))
+                  ..getParaPharmas(companyIdFilter: widget.companyId),
+              ),
             ],
+            child: TabBarView(
+              physics: const NeverScrollableScrollPhysics(),
+              controller: tabsController,
+              children: [
+                VendorDetailsPage(
+                    vendorData: BlocProvider.of<VendorDetailsCubit>(context)
+                        .vendorData),
+                MedicinesPage(),
+                ParapharmaPage()
+              ],
+            ),
           ),
         ),
       ],

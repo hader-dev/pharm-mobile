@@ -36,10 +36,7 @@ class VendorsSectionItems extends StatelessWidget {
         builder: (context, state) {
           final items = context.read<VendorsCubit>().vendorsList;
 
-          if (state is VendorsLoadingFailed) {
-            return const Center(child: EmptyListWidget());
-          }
-          if (items.isEmpty) {
+          if (state is VendorsLoadingFailed || state is VendorsLoading) {
             return const Center(child: EmptyListWidget());
           }
 

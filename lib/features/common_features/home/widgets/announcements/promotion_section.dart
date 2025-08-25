@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/cubit/home_cubit.dart';
 import 'package:hader_pharm_mobile/models/announcement.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
-import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import 'promotion_item_widget.dart';
@@ -18,8 +18,6 @@ class PromotionSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final translations = context.translation!;
-
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (BuildContext context, HomeState state) {
         if (state is PromotionLoading) {
@@ -28,10 +26,17 @@ class PromotionSection extends StatelessWidget {
           );
         }
         if (state is PromotionLoadingFailed) {
-          return Text(
-            translations.feedback_failed_to_load_announcements,
+          return Center(
+            child: EmptyListWidget(),
           );
         }
+
+        if (announcements.isEmpty) {
+          return Center(
+            child: EmptyListWidget(),
+          );
+        }
+
         return Padding(
           padding: const EdgeInsets.only(
             right: AppSizesManager.p8,

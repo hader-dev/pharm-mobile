@@ -1,4 +1,5 @@
 import 'dart:async' show Timer;
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hader_pharm_mobile/models/medical_filters.dart';
@@ -8,6 +9,7 @@ import 'package:hader_pharm_mobile/repositories/remote/medicine_catalog/medicine
 import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
+
 part 'medicine_products_state.dart';
 
 class MedicineProductsCubit extends Cubit<MedicineProductsState> {
@@ -22,7 +24,7 @@ class MedicineProductsCubit extends Cubit<MedicineProductsState> {
   final FavoriteRepository favoriteRepository;
   final ScrollController scrollController;
   final TextEditingController searchController;
-  
+
   MedicineProductsCubit(
       {required this.medicineRepository,
       required this.favoriteRepository,
@@ -33,11 +35,15 @@ class MedicineProductsCubit extends Cubit<MedicineProductsState> {
   }
   Future<void> getMedicines({
     int offset = 0,
+    String? companyIdFilter,
   }) async {
     try {
       emit(MedicineProductsLoading());
       var medicinesResponse = await medicineRepository.getMedicinesCatalog(
-          offset: offset, filters: params);
+        offset: offset,
+        filters: params,
+        companyId: companyIdFilter,
+      );
       totalItemsCount = medicinesResponse.totalItems;
       medicines = medicinesResponse.data;
       emit(MedicineProductsLoaded());

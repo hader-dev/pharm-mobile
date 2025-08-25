@@ -795,4 +795,7 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get feedback_session_expired_please_login =>
       'Session expired, please login again';
+
+  @override
+  String get search_by_dci_brand_sku => 'Search by DCI, Brand, SKU';
 }

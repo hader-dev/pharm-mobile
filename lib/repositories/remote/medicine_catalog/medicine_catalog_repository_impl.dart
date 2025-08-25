@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/models/medical_filters.dart';
 import 'package:hader_pharm_mobile/models/medicine_catalog.dart';
@@ -17,8 +18,8 @@ class MedicineCatalogRepository extends IMedicineCatalogRepository {
       {int limit = PaginationConstants.resultsPerPage,
       int offset = 0,
       String sortDirection = 'ASC',
+      String? companyId,
       MedicalFilters filters = const MedicalFilters()}) async {
-
     final queryParams = {
       'limit': limit.toString(),
       'offset': offset.toString(),
@@ -27,44 +28,82 @@ class MedicineCatalogRepository extends IMedicineCatalogRepository {
       'include[company][fields][]': ['id', 'name', 'thumbnailImage'],
     };
 
-
     if (filters.dci.isNotEmpty) queryParams['search[dci]'] = filters.dci.first;
-    if (filters.code.isNotEmpty) queryParams['search[code]'] = filters.code.first;
-    if (filters.dosage.isNotEmpty) queryParams['search[dosage]'] = filters.dosage.first;
-    if (filters.form.isNotEmpty) queryParams['search[form]'] = filters.form.first;
-    if (filters.status.isNotEmpty) queryParams['search[status]'] = filters.status.first;
-    if (filters.registrationDate.isNotEmpty) queryParams['search[registrationDate]'] = filters.registrationDate.first;
-    if (filters.country.isNotEmpty) queryParams['search[country]'] = filters.country.first;
-    if (filters.patent.isNotEmpty) queryParams['search[patent]'] = filters.patent.first;
-    if (filters.brand.isNotEmpty) queryParams['search[brand]'] = filters.brand.first;
-    if (filters.condition.isNotEmpty) queryParams['search[condition]'] = filters.condition.first;
-    if (filters.type.isNotEmpty) queryParams['search[type]'] = filters.type.first;
-    if (filters.stabilityDuration.isNotEmpty) queryParams['search[stabilityDuration]'] = filters.stabilityDuration.first;
-    if (filters.packagingFormat.isNotEmpty) queryParams['search[packagingFormat]'] = filters.packagingFormat.first;
-    if (filters.reimbursement.isNotEmpty) queryParams['search[reimbursement]'] = filters.reimbursement.first;
-    if (filters.distributorSku.isNotEmpty) queryParams['search[distributorSku]'] = filters.distributorSku.first;
-    if(filters.gteUnitPriceHt != null && filters.gteUnitPriceHt!.isNotEmpty) queryParams['gte[unitPriceHt]'] = filters.gteUnitPriceHt!;
-    if(filters.lteUnitPriceHt != null && filters.lteUnitPriceHt!.isNotEmpty) queryParams['lte[unitPriceHt]'] = filters.lteUnitPriceHt!;
+    if (filters.code.isNotEmpty) {
+      queryParams['search[code]'] = filters.code.first;
+    }
+    if (filters.dosage.isNotEmpty) {
+      queryParams['search[dosage]'] = filters.dosage.first;
+    }
+    if (filters.form.isNotEmpty) {
+      queryParams['search[form]'] = filters.form.first;
+    }
+    if (filters.status.isNotEmpty) {
+      queryParams['search[status]'] = filters.status.first;
+    }
+    if (filters.registrationDate.isNotEmpty) {
+      queryParams['search[registrationDate]'] = filters.registrationDate.first;
+    }
+    if (filters.country.isNotEmpty) {
+      queryParams['search[country]'] = filters.country.first;
+    }
+    if (filters.patent.isNotEmpty) {
+      queryParams['search[patent]'] = filters.patent.first;
+    }
+    if (filters.brand.isNotEmpty) {
+      queryParams['search[brand]'] = filters.brand.first;
+    }
+    if (filters.condition.isNotEmpty) {
+      queryParams['search[condition]'] = filters.condition.first;
+    }
+    if (filters.type.isNotEmpty) {
+      queryParams['search[type]'] = filters.type.first;
+    }
+    if (filters.stabilityDuration.isNotEmpty) {
+      queryParams['search[stabilityDuration]'] =
+          filters.stabilityDuration.first;
+    }
+    if (filters.packagingFormat.isNotEmpty) {
+      queryParams['search[packagingFormat]'] = filters.packagingFormat.first;
+    }
+    if (filters.reimbursement.isNotEmpty) {
+      queryParams['search[reimbursement]'] = filters.reimbursement.first;
+    }
+    if (filters.distributorSku.isNotEmpty) {
+      queryParams['search[distributorSku]'] = filters.distributorSku.first;
+    }
+    if (filters.gteUnitPriceHt != null && filters.gteUnitPriceHt!.isNotEmpty) {
+      queryParams['gte[unitPriceHt]'] = filters.gteUnitPriceHt!;
+    }
+    if (filters.lteUnitPriceHt != null && filters.lteUnitPriceHt!.isNotEmpty) {
+      queryParams['lte[unitPriceHt]'] = filters.lteUnitPriceHt!;
+    }
 
+    if (companyId != null && companyId.isNotEmpty) {
+      queryParams['filter[companyId]'] = companyId;
+    }
 
+    try {
+      var decodedResponse = await client.sendRequest(() => client.get(
+            Urls.medicinesCatalog,
+            queryParams: queryParams,
+          ));
 
-    var decodedResponse = await client.sendRequest(() => client.get(
-          Urls.medicinesCatalog,
-          queryParams: queryParams,
-        ));
+      return MedicineResponse.fromJson(decodedResponse);
+    } catch (e, stack) {
+      debugPrintStack(stackTrace: stack);
+      debugPrint("Error fetching medicines: $e");
 
-
-
-    return MedicineResponse.fromJson(decodedResponse);
+      return MedicineResponse(data: [], totalItems: 0);
+    }
   }
 
   @override
-
   Future<MedicineCatalogModel> getMedicineCatalogById(String id) async {
-    var decodedResponse = await client
-        .sendRequest(() => client.get("${Urls.medicinesCatalog}/$id", queryParams: {
-          'computed[isFavorite]': 'true',
-        }));
+    var decodedResponse = await client.sendRequest(
+        () => client.get("${Urls.medicinesCatalog}/$id", queryParams: {
+              'computed[isFavorite]': 'true',
+            }));
     return jsonToMedicineCatalogItem(decodedResponse);
   }
 }

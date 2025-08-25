@@ -94,41 +94,21 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               );
             }
-            final hasPromotions =
-                context.read<HomeCubit>().announcements.isNotEmpty;
-            final hasVendors =
-                context.read<VendorsCubit>().vendorsList.isNotEmpty;
-            final hasMedicines =
-                context.read<MedicineProductsCubit>().medicines.isNotEmpty;
-            final hasParapharma =
-                context.read<ParaPharmaCubit>().paraPharmaProducts.isNotEmpty;
-
-            if (!hasPromotions &&
-                !hasVendors &&
-                !hasMedicines &&
-                !hasParapharma) {
-              return Center(
-                child: EmptyListWidget(
-                  onRefresh: () {
-                    context.read<HomeCubit>().getPromotions();
-                    context.read<VendorsCubit>().fetchVendors();
-                    context.read<MedicineProductsCubit>().getMedicines();
-                    context.read<ParaPharmaCubit>().getParaPharmas();
-                  },
-                ),
-              );
-            }
 
             return SingleChildScrollView(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Gap(AppSizesManager.s12),
                 PromotionSection(
                   announcements: context.read<HomeCubit>().announcements,
                 ),
                 Gap(AppSizesManager.s16),
-                VendorSection(minSectionHeight: minSectionHeight),
+                VendorSection(
+                    minSectionHeight:
+                        context.read<VendorsCubit>().vendorsList.length < 4
+                            ? minSectionHeight * 0.5
+                            : minSectionHeight),
                 Gap(AppSizesManager.s12),
                 MedicineSection(minSectionHeight: minSectionHeight),
                 Gap(AppSizesManager.s12),

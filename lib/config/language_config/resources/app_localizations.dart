@@ -1635,6 +1635,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Session expired, please login again'**
   String get feedback_session_expired_please_login;
+
+  /// No description provided for @search_by_dci_brand_sku.
+  ///
+  /// In en, this message translates to:
+  /// **'Search by DCI, Brand, SKU'**
+  String get search_by_dci_brand_sku;
 }
 
 class _AppLocalizationsDelegate

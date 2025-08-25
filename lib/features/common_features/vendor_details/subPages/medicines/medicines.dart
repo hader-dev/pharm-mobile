@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field.dart';
-
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/end_of_load_result_widget.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/medicine_widget_3.dart';
@@ -11,6 +10,7 @@ import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pag
 import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
 class MedicinesPage extends StatefulWidget {
@@ -34,7 +34,7 @@ class _MedicinesPageState extends State<MedicinesPage>
               child: Padding(
                 padding: const EdgeInsets.only(left: AppSizesManager.p8),
                 child: CustomTextField(
-                  hintText: 'Search by dci ,brand or sku',
+                  hintText: context.translation!.search_by_dci_brand_sku,
                   controller: BlocProvider.of<MedicineProductsCubit>(context)
                       .searchController,
                   state: FieldState.normal,
@@ -103,13 +103,13 @@ class _MedicinesPageState extends State<MedicinesPage>
         ),
         Expanded(
           child: BlocBuilder<MedicineProductsCubit, MedicineProductsState>(
-            builder: (context, state) {
+            builder: (bContext, state) {
               if (state is MedicineLiked || state is MedicineLikeFailed) {}
               if (state is MedicineProductsLoading) {
                 return const Center(child: CircularProgressIndicator());
               }
               if (state is MedicineProductsLoaded &&
-                  BlocProvider.of<MedicineProductsCubit>(context)
+                  BlocProvider.of<MedicineProductsCubit>(bContext)
                       .medicines
                       .isEmpty) {
                 return EmptyListWidget();
@@ -120,7 +120,7 @@ class _MedicinesPageState extends State<MedicinesPage>
                   Expanded(
                     child: RefreshIndicator(
                       onRefresh: () {
-                        return BlocProvider.of<MedicineProductsCubit>(context)
+                        return BlocProvider.of<MedicineProductsCubit>(bContext)
                             .getMedicines();
                       },
                       child: GridView.builder(
@@ -128,12 +128,12 @@ class _MedicinesPageState extends State<MedicinesPage>
                             const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2, childAspectRatio: 0.7),
                         controller:
-                            BlocProvider.of<MedicineProductsCubit>(context)
+                            BlocProvider.of<MedicineProductsCubit>(bContext)
                                 .scrollController,
                         shrinkWrap: true,
                         physics: const AlwaysScrollableScrollPhysics(),
                         itemCount:
-                            BlocProvider.of<MedicineProductsCubit>(context)
+                            BlocProvider.of<MedicineProductsCubit>(bContext)
                                 .medicines
                                 .length,
                         itemBuilder: (context, index) => MedicineWidget3(

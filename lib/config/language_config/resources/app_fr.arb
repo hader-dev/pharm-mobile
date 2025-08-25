@@ -250,5 +250,6 @@
   "currency_symbol": "DA",
   "follow": "Suivre",
   "unfollow": "Ne plus suivre",
-  "mark_all_as_read": "Tout marquer comme lu"
+  "mark_all_as_read": "Tout marquer comme lu",
+  "search_by_dci_brand_sku": "Rechercher par DCI, marque ou SKU"
 }

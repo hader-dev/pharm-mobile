@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/medicine_widget_4.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/medicine_products/cubit/medicine_products_cubit.dart';
-import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class MedicinesSectionItems extends StatelessWidget {
   const MedicinesSectionItems({super.key, required this.minSectionHeight});
@@ -11,8 +10,6 @@ class MedicinesSectionItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final translation = context.translation!;
-
     return ConstrainedBox(
       constraints: BoxConstraints(
           maxHeight: minSectionHeight * 2, minHeight: minSectionHeight),
@@ -23,14 +20,10 @@ class MedicinesSectionItems extends StatelessWidget {
           final items = medicinesCubit.medicines;
 
           if (state is MedicineProductsLoading) {
-            return Text(translation.feedback_loading_failed);
+            return const Center(child: CircularProgressIndicator());
           }
-          if (state is MedicineProductsLoadingFailed) {
-            return Text(translation.feedback_loading_failed);
-          }
-
-          if (items.isEmpty) {
-            return EmptyListWidget();
+          if (state is MedicineProductsLoadingFailed || items.isEmpty) {
+            return const Center(child: EmptyListWidget());
           }
 
           return ListView.builder(
