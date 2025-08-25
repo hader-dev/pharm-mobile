@@ -107,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 VendorSection(
                     minSectionHeight:
                         context.read<VendorsCubit>().vendorsList.length < 4
-                            ? minSectionHeight * 0.5
+                            ? minSectionHeight * 0.8
                             : minSectionHeight),
                 Gap(AppSizesManager.s12),
                 MedicineSection(minSectionHeight: minSectionHeight),

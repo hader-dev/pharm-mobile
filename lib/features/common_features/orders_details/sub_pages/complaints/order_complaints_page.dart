@@ -28,11 +28,7 @@ class OrderItemsComplaintPage extends StatelessWidget {
         );
       }
 
-      if (state is OrderDetailsLoadingFailed) {
-        return const EmptyListWidget();
-      }
-
-      if (cubit.orderClaims.isEmpty) {
+      if (cubit.orderClaims.isEmpty || state is OrderDetailsLoadingFailed) {
         return Column(
           mainAxisSize: MainAxisSize.max,
           children: [
@@ -63,7 +59,7 @@ class OrderItemsComplaintPage extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             Container(
-              constraints:  BoxConstraints(
+              constraints: BoxConstraints(
                 maxHeight: MediaQuery.of(context).size.height * 0.7,
               ),
               child: Scrollbar(

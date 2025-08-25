@@ -2,11 +2,12 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/models/create_quick_order_model.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
+import 'package:hader_pharm_mobile/repositories/remote/favorite/favorite_repository_impl.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/order_repository_impl.dart';
 import 'package:hader_pharm_mobile/repositories/remote/parapharm_catalog/para_pharma_catalog_repository_impl.dart';
 import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler.dart';
-import 'package:hader_pharm_mobile/repositories/remote/favorite/favorite_repository_impl.dart';
 import 'package:share_plus/share_plus.dart';
+
 part 'para_pharma_details_state.dart';
 
 class ParaPharmaDetailsCubit extends Cubit<ParaPharmaDetailsState> {
@@ -76,7 +77,8 @@ class ParaPharmaDetailsCubit extends Cubit<ParaPharmaDetailsState> {
         final deepLinkUrl =
             'https://pharma.com/product/parapharma/${product.id}';
 
-        await SharePlus.instance.share(ShareParams(uri: Uri.parse(deepLinkUrl)));
+        await SharePlus.instance
+            .share(ShareParams(uri: Uri.parse(deepLinkUrl)));
       } catch (e) {
         GlobalExceptionHandler.handle(exception: e);
       }
@@ -102,7 +104,7 @@ class ParaPharmaDetailsCubit extends Cubit<ParaPharmaDetailsState> {
     emit(ParaPharmaQuantityChanged());
   }
 
-  void passQuickOrder() async {
+  Future<bool> passQuickOrder() async {
     try {
       emit(PassingQuickOrder());
       await ordersRepository.createQuickOrder(
@@ -113,9 +115,11 @@ class ParaPharmaDetailsCubit extends Cubit<ParaPharmaDetailsState> {
         qty: int.parse(quantityController.text),
       ));
       emit(QuickOrderPassed());
+      return true;
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
       emit(PassQuickOrderFailed());
+      return false;
     }
   }
 

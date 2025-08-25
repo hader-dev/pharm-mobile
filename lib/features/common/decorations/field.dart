@@ -65,32 +65,40 @@ InputDecoration buildInputDecorationCustomFieldStyle(
     String hintText, FieldState state, BuildContext context,
     [bool isFilled = true, bool isDisabled = false]) {
   return InputDecoration(
-    hintText: hintText,
-    hintStyle: context.responsiveTextTheme.current.body3Regular
-        .copyWith(color: TextColors.ternary.color),
-    isDense: true,
-    filled: isFilled,
-    contentPadding: EdgeInsets.all(AppSizesManager.p12),
-    fillColor: isDisabled
-        ? AppColors.bgDisabled
-        : state == FieldState.error
-            ? FieldState.error.color.ternary
-            : AppColors.bgWhite,
-    enabledBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
-      borderSide: BorderSide(color: getEnabledBorderColor(context, state)),
-    ),
-    disabledBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
-      borderSide: BorderSide(color: AppColors.bgDisabled),
-    ),
-    focusedBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
-      borderSide: BorderSide(color: getFocusedBorderColor(context, state)),
-    ),
-    errorBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
-      borderSide: BorderSide(color: FieldState.error.color.primary),
-    ),
-  );
+      hintText: hintText,
+      hintStyle: context.responsiveTextTheme.current.body3Regular
+          .copyWith(color: TextColors.ternary.color),
+      isDense: true,
+      filled: isFilled,
+      contentPadding: EdgeInsets.all(AppSizesManager.p12),
+      fillColor: isDisabled
+          ? AppColors.bgDisabled
+          : state == FieldState.error
+              ? FieldState.error.color.ternary
+              : AppColors.bgWhite,
+      enabledBorder: OutlineInputBorder(
+        borderRadius:
+            BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+        borderSide: BorderSide(color: getEnabledBorderColor(context, state)),
+      ),
+      disabledBorder: OutlineInputBorder(
+        borderRadius:
+            BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+        borderSide: BorderSide(color: AppColors.bgDisabled),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius:
+            BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+        borderSide: BorderSide(color: getFocusedBorderColor(context, state)),
+      ),
+      errorBorder: OutlineInputBorder(
+        borderRadius:
+            BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+        borderSide: BorderSide(color: FieldState.error.color.primary),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderRadius:
+            BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+        borderSide: BorderSide(color: FieldState.error.color.primary),
+      ));
 }

@@ -16,6 +16,7 @@ import 'package:hader_pharm_mobile/features/common_features/orders/cubit/orders_
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
+import 'package:hader_pharm_mobile/utils/validators.dart';
 import 'package:iconsax/iconsax.dart' show Iconsax;
 
 class MakeOrderBottomSheet extends StatelessWidget {
@@ -42,195 +43,205 @@ class MakeOrderBottomSheet extends StatelessWidget {
       child: BlocListener<MedicineDetailsCubit, MedicineDetailsState>(
         listener: (context, state) {
           if (state is QuickOrderPassed) {
-            context.read<OrdersCubit>().getOrders();
+            AppLayout.appLayoutScaffoldKey.currentContext!
+                .read<OrdersCubit>()
+                .getOrders();
             context.pop();
           }
         },
         child: BlocBuilder<MedicineDetailsCubit, MedicineDetailsState>(
           builder: (context, state) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                BottomSheetHeader(title: translation.make_order),
-                Gap(AppSizesManager.s12),
-                LabeledInfoWidget(
-                  label: translation.product,
-                  value: context
-                      .read<MedicineDetailsCubit>()
-                      .medicineCatalogData!
-                      .medicine
-                      .dci,
-                ),
-                LabeledInfoWidget(
-                  label: translation.unit_total_price,
-                  value:
-                      "${(num.parse(context.read<MedicineDetailsCubit>().medicineCatalogData!.unitPriceHt).toStringAsFixed(2))} ${translation.currency}",
-                ),
-                Gap(AppSizesManager.s12),
-                Text(
-                  translation.quantity,
-                  style:
-                      context.responsiveTextTheme.current.body3Medium.copyWith(
-                    color: TextColors.ternary.color,
+            final cubit = context.read<MedicineDetailsCubit>();
+
+            return Form(
+              key: cubit.formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  BottomSheetHeader(title: translation.make_order),
+                  Gap(AppSizesManager.s12),
+                  LabeledInfoWidget(
+                    label: translation.product,
+                    value: context
+                        .read<MedicineDetailsCubit>()
+                        .medicineCatalogData!
+                        .medicine
+                        .dci,
                   ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: AppSizesManager.p8),
-                  child: Row(children: [
-                    PrimaryIconButton(
-                      borderColor: StrokeColors.normal.color,
-                      isBordered: true,
-                      bgColor: Colors.transparent,
-                      onPressed: () {
-                        context
-                            .read<MedicineDetailsCubit>()
-                            .decrementQuantity();
-                      },
-                      icon: Icon(
-                        Iconsax.minus,
-                        color: Colors.black,
-                      ),
+                  LabeledInfoWidget(
+                    label: translation.unit_total_price,
+                    value:
+                        "${(num.parse(context.read<MedicineDetailsCubit>().medicineCatalogData!.unitPriceHt).toStringAsFixed(2))} ${translation.currency}",
+                  ),
+                  Gap(AppSizesManager.s12),
+                  Text(
+                    translation.quantity,
+                    style: context.responsiveTextTheme.current.body3Medium
+                        .copyWith(
+                      color: TextColors.ternary.color,
                     ),
-                    Spacer(),
-                    SizedBox(
-                      height: AppSizesManager.buttonHeight,
-                      width: MediaQuery.sizeOf(context).width * 4 / 6,
-                      child: Form(
-                          child: TextFormField(
-                              cursorColor: AppColors.accentGreenShade1,
-                              controller: context
-                                  .read<MedicineDetailsCubit>()
-                                  .quantityController,
-                              textAlign: TextAlign.center,
-                              keyboardType: TextInputType.number,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.digitsOnly
-                              ],
-                              validator: (value) =>
-                                  value == null || value.isEmpty ? '' : null,
-                              style: context
-                                  .responsiveTextTheme.current.body3Medium,
-                              decoration: InputDecoration(
-                                contentPadding:
-                                    EdgeInsets.all(AppSizesManager.p12),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(
-                                      AppSizesManager.commonWidgetsRadius),
-                                  borderSide: BorderSide(
-                                      color: FieldState.normal.color.secondary),
-                                ),
-                                disabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(
-                                      AppSizesManager.commonWidgetsRadius),
-                                  borderSide:
-                                      BorderSide(color: AppColors.bgDisabled),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(
-                                      AppSizesManager.commonWidgetsRadius),
-                                  borderSide: BorderSide(
-                                      color: StrokeColors.focused.color),
-                                ),
-                              ))),
-                    ),
-                    Spacer(),
-                    PrimaryIconButton(
-                      borderColor: StrokeColors.normal.color,
-                      isBordered: true,
-                      bgColor: Colors.transparent,
-                      onPressed: () {
-                        context
-                            .read<MedicineDetailsCubit>()
-                            .incrementQuantity();
-                      },
-                      icon: Icon(
-                        Iconsax.add,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ]),
-                ),
-                Gap(AppSizesManager.s12),
-                InfoWidget(
-                    label: context.translation!.shipping_address,
-                    bgColor: AppColors.bgWhite,
-                    value: CustomTextField(
-                      verticalPadding: 0,
-                      horizontalPadding: AppSizesManager.p6,
-                      initValue: UserManager.instance.currentUser.address,
-                      onChanged: (text) => context
-                          .read<MedicineDetailsCubit>()
-                          .updateShippingAddress(text ?? ''),
-                      maxLines: 3,
-                      validationFunc: (String? value) {},
-                      isFilled: false,
-                      isBorderEnabled: true,
-                      hintText: context.translation!.shipping_address,
-                      hintTextStyle: context
-                          .responsiveTextTheme.current.bodySmall
-                          .copyWith(color: Colors.grey),
-                    )),
-                Gap(AppSizesManager.s12),
-                Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
-                Gap(AppSizesManager.s12),
-                InfoWidget(
-                  label: translation.total_price,
-                  bgColor: AppColors.accentGreenShade3,
-                  value: Row(
-                    children: [
-                      Text(
-                        "${(num.parse(context.read<MedicineDetailsCubit>().quantityController.text) * num.parse(context.read<MedicineDetailsCubit>().medicineCatalogData!.unitPriceHt)).toStringAsFixed(2)} translationContext.currency",
-                        style: context.responsiveTextTheme.current.body2Medium
-                            .copyWith(color: AppColors.accent1Shade1),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: AppSizesManager.p8),
+                    child: Row(children: [
+                      PrimaryIconButton(
+                        borderColor: StrokeColors.normal.color,
+                        isBordered: true,
+                        bgColor: Colors.transparent,
+                        onPressed: () {
+                          context
+                              .read<MedicineDetailsCubit>()
+                              .decrementQuantity();
+                        },
+                        icon: Icon(
+                          Iconsax.minus,
+                          color: Colors.black,
+                        ),
                       ),
                       Spacer(),
-                      Icon(
-                        Iconsax.wallet_money,
-                        color: AppColors.accent1Shade1,
+                      SizedBox(
+                        height: AppSizesManager.buttonHeight,
+                        width: MediaQuery.sizeOf(context).width * 4 / 6,
+                        child: Form(
+                            child: TextFormField(
+                                cursorColor: AppColors.accentGreenShade1,
+                                controller: context
+                                    .read<MedicineDetailsCubit>()
+                                    .quantityController,
+                                textAlign: TextAlign.center,
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],
+                                validator: (value) =>
+                                    value == null || value.isEmpty ? '' : null,
+                                style: context
+                                    .responsiveTextTheme.current.body3Medium,
+                                decoration: InputDecoration(
+                                  contentPadding:
+                                      EdgeInsets.all(AppSizesManager.p12),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        AppSizesManager.commonWidgetsRadius),
+                                    borderSide: BorderSide(
+                                        color:
+                                            FieldState.normal.color.secondary),
+                                  ),
+                                  disabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        AppSizesManager.commonWidgetsRadius),
+                                    borderSide:
+                                        BorderSide(color: AppColors.bgDisabled),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        AppSizesManager.commonWidgetsRadius),
+                                    borderSide: BorderSide(
+                                        color: StrokeColors.focused.color),
+                                  ),
+                                ))),
                       ),
-                    ],
-                  ),
-                ),
-                Gap(AppSizesManager.s12),
-                Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
-                Gap(AppSizesManager.s12),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p4),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: PrimaryTextButton(
-                          isOutLined: true,
-                          label: translation.cancel,
-                          spalshColor: AppColors.accent1Shade1.withAlpha(50),
-                          labelColor: AppColors.accent1Shade1,
-                          onTap: () {
-                            context.pop();
-                          },
-                          borderColor: AppColors.accent1Shade1,
+                      Spacer(),
+                      PrimaryIconButton(
+                        borderColor: StrokeColors.normal.color,
+                        isBordered: true,
+                        bgColor: Colors.transparent,
+                        onPressed: () {
+                          context
+                              .read<MedicineDetailsCubit>()
+                              .incrementQuantity();
+                        },
+                        icon: Icon(
+                          Iconsax.add,
+                          color: Colors.black,
                         ),
                       ),
-                      Gap(AppSizesManager.s8),
-                      Expanded(
-                        flex: 2,
-                        child: PrimaryTextButton(
-                          label: translation.buy_now,
-                          leadingIcon: Iconsax.money4,
-                          isLoading: state is PassingQuickOrder,
-                          onTap: () {
-                            context
-                                .read<MedicineDetailsCubit>()
-                                .passQuickOrder();
-                          },
+                    ]),
+                  ),
+                  Gap(AppSizesManager.s12),
+                  InfoWidget(
+                      label: context.translation!.shipping_address,
+                      bgColor: AppColors.bgWhite,
+                      value: CustomTextField(
+                        verticalPadding: 0,
+                        horizontalPadding: AppSizesManager.p6,
+                        initValue: UserManager.instance.currentUser.address,
+                        onChanged: (text) => context
+                            .read<MedicineDetailsCubit>()
+                            .updateShippingAddress(text ?? ''),
+                        maxLines: 3,
+                        validationFunc: (v) =>
+                            requiredValidator(v, translation),
+                        isFilled: false,
+                        isBorderEnabled: true,
+                        hintText: context.translation!.shipping_address,
+                        hintTextStyle: context
+                            .responsiveTextTheme.current.bodySmall
+                            .copyWith(color: Colors.grey),
+                      )),
+                  Gap(AppSizesManager.s12),
+                  Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
+                  Gap(AppSizesManager.s12),
+                  InfoWidget(
+                    label: translation.total_price,
+                    bgColor: AppColors.accentGreenShade3,
+                    value: Row(
+                      children: [
+                        Text(
+                          "${(num.parse(context.read<MedicineDetailsCubit>().quantityController.text) * num.parse(context.read<MedicineDetailsCubit>().medicineCatalogData!.unitPriceHt)).toStringAsFixed(2)} ${translation.currency}",
+                          style: context.responsiveTextTheme.current.body2Medium
+                              .copyWith(color: AppColors.accent1Shade1),
+                        ),
+                        Spacer(),
+                        Icon(
+                          Iconsax.wallet_money,
                           color: AppColors.accent1Shade1,
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                )
-              ],
+                  Gap(AppSizesManager.s12),
+                  Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
+                  Gap(AppSizesManager.s12),
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: AppSizesManager.p4),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: PrimaryTextButton(
+                            isOutLined: true,
+                            label: translation.cancel,
+                            spalshColor: AppColors.accent1Shade1.withAlpha(50),
+                            labelColor: AppColors.accent1Shade1,
+                            onTap: () {
+                              context.pop();
+                            },
+                            borderColor: AppColors.accent1Shade1,
+                          ),
+                        ),
+                        Gap(AppSizesManager.s8),
+                        Expanded(
+                          flex: 2,
+                          child: PrimaryTextButton(
+                            label: translation.buy_now,
+                            leadingIcon: Iconsax.money4,
+                            isLoading: state is PassingQuickOrder,
+                            onTap: () {
+                              context
+                                  .read<MedicineDetailsCubit>()
+                                  .passQuickOrder();
+                            },
+                            color: AppColors.accent1Shade1,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
             );
           },
         ),

@@ -11,18 +11,20 @@ class OrderDetailsItemsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<OrderDetailsCubit, OrdersDetailsState>(
         builder: (context, state) {
+      final cubit = context.read<OrderDetailsCubit>();
+
       if (state is OrderDetailsLoading) {
         return Center(
           child: CircularProgressIndicator(),
         );
       }
-      if (state is OrderDetailsLoadingFailed) {
-        return const EmptyListWidget();
+
+      final isEmpty = cubit.orderData?.orderItems.isEmpty ?? true;
+      if (state is OrderDetailsLoadingFailed || isEmpty) {
+        return Center(child: const EmptyListWidget());
       }
       return SingleChildScrollView(
-          child: OrderItemsSection(
-              orderItems:
-                  context.read<OrderDetailsCubit>().orderData!.orderItems));
+          child: OrderItemsSection(orderItems: cubit.orderData!.orderItems));
     });
   }
 }

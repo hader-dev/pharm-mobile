@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hader_pharm_mobile/config/responsive/device_size.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
@@ -108,12 +109,17 @@ class _MedicinesPageState extends State<MedicinesPage>
               if (state is MedicineProductsLoading) {
                 return const Center(child: CircularProgressIndicator());
               }
-              if (state is MedicineProductsLoaded &&
-                  BlocProvider.of<MedicineProductsCubit>(bContext)
-                      .medicines
-                      .isEmpty) {
+              if (BlocProvider.of<MedicineProductsCubit>(bContext)
+                  .medicines
+                  .isEmpty) {
                 return EmptyListWidget();
               }
+
+              final crossAxisCount =
+                  bContext.deviceSize.width <= DeviceSizes.mediumMobile.width
+                      ? 1
+                      : 2;
+
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -124,9 +130,9 @@ class _MedicinesPageState extends State<MedicinesPage>
                             .getMedicines();
                       },
                       child: GridView.builder(
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2, childAspectRatio: 0.7),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: crossAxisCount,
+                            childAspectRatio: 0.7),
                         controller:
                             BlocProvider.of<MedicineProductsCubit>(bContext)
                                 .scrollController,

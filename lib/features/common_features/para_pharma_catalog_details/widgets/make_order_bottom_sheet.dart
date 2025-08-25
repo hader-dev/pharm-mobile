@@ -41,7 +41,9 @@ class MakeOrderBottomSheet extends StatelessWidget {
       child: BlocListener<ParaPharmaDetailsCubit, ParaPharmaDetailsState>(
         listener: (context, state) {
           if (state is QuickOrderPassed) {
-            context.read<OrdersCubit>().getOrders();
+            AppLayout.appLayoutScaffoldKey.currentContext!
+                .read<OrdersCubit>()
+                .getOrders();
             context.pop();
           }
         },

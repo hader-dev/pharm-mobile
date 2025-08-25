@@ -1,4 +1,5 @@
 import 'dart:async' show Timer;
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/language_config/resources/app_localizations.dart';
@@ -11,6 +12,7 @@ import 'package:hader_pharm_mobile/repositories/remote/order/order_repository_im
 import 'package:hader_pharm_mobile/utils/app_exceptions/exceptions.dart';
 import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
+
 part 'cart_state.dart';
 
 class CartCubit extends Cubit<CartState> {
@@ -29,6 +31,9 @@ class CartCubit extends Cubit<CartState> {
   final CartItemRepository cartItemRepository;
   final OrderRepository ordersRepository;
   final ScrollController scrollController;
+
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
   CartCubit(
       this.cartItemRepository, this.scrollController, this.ordersRepository)
       : super(CartInitial()) {
@@ -213,9 +218,12 @@ class CartCubit extends Cubit<CartState> {
     emit(PaymentMethodChanged());
   }
 
-  passOrder() async {
+  Future<bool> passOrder() async {
+    if (formKey.currentState?.validate() == false) return false;
+
     try {
       emit(PassOrderLoading());
+
       await Future.wait(cartItemsByVendor.keys.map((sellerId) async {
         return ordersRepository.createOrder(
             orderDetails: CreateOrderModel(
@@ -228,8 +236,12 @@ class CartCubit extends Cubit<CartState> {
       }));
 
       emit(PassOrderLoaded());
-    } catch (e) {
+      return true;
+    } catch (e, stack) {
+      debugPrint("$e");
+      debugPrintStack(stackTrace: stack);
       emit(PassOrderLoadingFailed());
+      return false;
     }
   }
 

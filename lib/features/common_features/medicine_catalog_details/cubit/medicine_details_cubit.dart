@@ -1,4 +1,3 @@
-
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/models/create_quick_order_model.dart';
@@ -8,7 +7,6 @@ import 'package:hader_pharm_mobile/repositories/remote/medicine_catalog/medicine
 import 'package:hader_pharm_mobile/repositories/remote/order/order_repository_impl.dart';
 import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler.dart';
 import 'package:share_plus/share_plus.dart';
-
 
 part 'medicine_details_state.dart';
 
@@ -22,6 +20,8 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
   final OrderRepository ordersRepository;
   final FavoriteRepository favoriteRepository;
   final TabController tabController;
+
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   MedicineDetailsCubit(
       {required this.medicineCatalogRepository,
@@ -37,57 +37,59 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
     });
   }
   Future<void> likeMedicine() async {
-    if(medicineCatalogData== null) return;
+    if (medicineCatalogData == null) return;
     try {
       medicineCatalogData!.isLiked = true;
       emit(MedicineDetailsLoaded());
-      await favoriteRepository.likeMedicineCatalog(medicineCatalogId: medicineCatalogData!.id);
+      await favoriteRepository.likeMedicineCatalog(
+          medicineCatalogId: medicineCatalogData!.id);
     } catch (e) {
       medicineCatalogData!.isLiked = false;
       emit(MedicineDetailsLoaded());
       GlobalExceptionHandler.handle(exception: e);
+    }
+  }
 
+  Future<void> unlikeMedicine() async {
+    if (medicineCatalogData != null) {
+      try {
+        medicineCatalogData!.isLiked = false;
+        emit(MedicineDetailsLoaded());
+        await favoriteRepository.unLikeMedicineCatalog(
+            medicineCatalogId: medicineCatalogData!.id);
+      } catch (e) {
+        medicineCatalogData!.isLiked = true;
+        emit(MedicineDetailsLoaded());
+        GlobalExceptionHandler.handle(exception: e);
+      }
     }
   }
-     Future<void> unlikeMedicine() async {
-  if (medicineCatalogData != null) {
-    try {
-      medicineCatalogData!.isLiked = false;
-      emit(MedicineDetailsLoaded());
-      await favoriteRepository.unLikeMedicineCatalog(medicineCatalogId: medicineCatalogData!.id);
-    } catch (e) {
-      medicineCatalogData!.isLiked = true;
-      emit(MedicineDetailsLoaded());
-      GlobalExceptionHandler.handle(exception: e);
-    }
-  }
-}
-   
-  
+
   getMedicineCatalogData(String id) async {
     try {
       emit(MedicineDetailsLoading());
-      medicineCatalogData = await medicineCatalogRepository.getMedicineCatalogById(id);
+      medicineCatalogData =
+          await medicineCatalogRepository.getMedicineCatalogById(id);
       emit(MedicineDetailsLoaded());
     } catch (e) {
       emit(MedicineDetailsLoadError());
     }
   }
+
   void shareProduct() async {
-  if (medicineCatalogData != null) {
-    try {
-      final product = medicineCatalogData!;
-      
-   
-      final deepLinkUrl = 'https://pharma.com/product/medicine/${product.id}';
-      
-     
-            await SharePlus.instance.share(ShareParams(uri: Uri.parse(deepLinkUrl)));
-    } catch (e) {
-      GlobalExceptionHandler.handle(exception: e);
+    if (medicineCatalogData != null) {
+      try {
+        final product = medicineCatalogData!;
+
+        final deepLinkUrl = 'https://pharma.com/product/medicine/${product.id}';
+
+        await SharePlus.instance
+            .share(ShareParams(uri: Uri.parse(deepLinkUrl)));
+      } catch (e) {
+        GlobalExceptionHandler.handle(exception: e);
+      }
     }
   }
-}
 
   void changeTapIndex(int index) {
     currentTapIndex = index;
@@ -95,18 +97,22 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
   }
 
   void incrementQuantity() {
-    quantityController.text = (int.parse(quantityController.text) + 1).toString();
+    quantityController.text =
+        (int.parse(quantityController.text) + 1).toString();
     emit(MedicineQuantityChanged());
   }
 
   void decrementQuantity() {
     if (int.parse(quantityController.text) > 1) {
-      quantityController.text = (int.parse(quantityController.text) - 1).toString();
+      quantityController.text =
+          (int.parse(quantityController.text) - 1).toString();
     }
     emit(MedicineQuantityChanged());
   }
 
-  void passQuickOrder() async {
+  Future<bool> passQuickOrder() async {
+    if (formKey.currentState?.validate() == false) return false;
+
     try {
       emit(PassingQuickOrder());
       await ordersRepository.createQuickOrder(
@@ -117,9 +123,11 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
         qty: int.parse(quantityController.text),
       ));
       emit(QuickOrderPassed());
+      return true;
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
       emit(PassQuickOrderFailed());
+      return false;
     }
   }
 

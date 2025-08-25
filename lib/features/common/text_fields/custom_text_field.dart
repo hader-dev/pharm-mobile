@@ -115,48 +115,57 @@ class CustomTextField extends StatelessWidget {
           maxLines: maxLines,
           obscuringCharacter: '*',
           decoration: InputDecoration(
-            hintText: hintText,
-            hintStyle: context.responsiveTextTheme.current.body3Regular
-                .copyWith(color: TextColors.ternary.color),
-            isDense: true,
-            filled: isFilled,
-            suffixIcon: suffixIcon,
-            prefixIcon: prefixIcon,
-            contentPadding: EdgeInsets.all(AppSizesManager.p12),
-            helper: Row(
-              children: [
-                getSuffixIcon(state) ?? const SizedBox.shrink(),
-                const Gap(AppSizesManager.s6),
-                Text(
-                  state.wordKey,
-                  style: context.responsiveTextTheme.current.bodyXSmall
-                      .copyWith(color: getEnabledBorderColor(context, state)),
-                ),
-              ],
-            ),
-            fillColor: isDisabled
-                ? AppColors.bgDisabled
-                : state == FieldState.error
-                    ? FieldState.error.color.ternary
-                    : AppColors.bgWhite,
-            enabledBorder: OutlineInputBorder(
-              borderRadius:
-                  BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
-              borderSide:
-                  BorderSide(color: getEnabledBorderColor(context, state)),
-            ),
-            disabledBorder: OutlineInputBorder(
-              borderRadius:
-                  BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
-              borderSide: BorderSide(color: AppColors.bgDisabled),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius:
-                  BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
-              borderSide:
-                  BorderSide(color: getFocusedBorderColor(context, state)),
-            ),
-          ),
+              hintText: hintText,
+              hintStyle: context.responsiveTextTheme.current.body3Regular
+                  .copyWith(color: TextColors.ternary.color),
+              isDense: true,
+              filled: isFilled,
+              suffixIcon: suffixIcon,
+              prefixIcon: prefixIcon,
+              contentPadding: EdgeInsets.all(AppSizesManager.p12),
+              helper: Row(
+                children: [
+                  getSuffixIcon(state) ?? const SizedBox.shrink(),
+                  const Gap(AppSizesManager.s6),
+                  Text(
+                    state.wordKey,
+                    style: context.responsiveTextTheme.current.bodyXSmall
+                        .copyWith(color: getEnabledBorderColor(context, state)),
+                  ),
+                ],
+              ),
+              fillColor: isDisabled
+                  ? AppColors.bgDisabled
+                  : state == FieldState.error
+                      ? FieldState.error.color.ternary
+                      : AppColors.bgWhite,
+              enabledBorder: OutlineInputBorder(
+                borderRadius:
+                    BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+                borderSide:
+                    BorderSide(color: getEnabledBorderColor(context, state)),
+              ),
+              disabledBorder: OutlineInputBorder(
+                borderRadius:
+                    BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+                borderSide: BorderSide(color: AppColors.bgDisabled),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius:
+                    BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+                borderSide:
+                    BorderSide(color: getFocusedBorderColor(context, state)),
+              ),
+              errorBorder: OutlineInputBorder(
+                borderRadius:
+                    BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+                borderSide: BorderSide(color: FieldState.error.color.primary),
+              ),
+              focusedErrorBorder: OutlineInputBorder(
+                borderRadius:
+                    BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+                borderSide: BorderSide(color: FieldState.error.color.primary),
+              )),
         ),
       ],
     );
