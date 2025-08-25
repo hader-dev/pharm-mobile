@@ -9,7 +9,7 @@ class MedicalFilters extends Equatable {
   final List<String> registrationDate;
   final List<String> country;
   final List<String> patent;
-  final List<String> distributorSku;
+  final List<String> sku;
 
   final List<String> brand;
   final List<String> condition;
@@ -20,10 +20,8 @@ class MedicalFilters extends Equatable {
 
   final List<String> code;
   final List<String> reimbursement;
-  final String? gteUnitPriceHt;  
+  final String? gteUnitPriceHt;
   final String? lteUnitPriceHt;
-
-
 
   const MedicalFilters({
     this.gteUnitPriceHt,
@@ -39,15 +37,13 @@ class MedicalFilters extends Equatable {
     this.condition = const [],
     this.type = const [],
     this.stabilityDuration = const [],
-    this.distributorSku = const [],
+    this.sku = const [],
     this.packagingFormat = const [],
     this.code = const [],
     this.reimbursement = const [],
-
   });
 
   MedicalFilters copyWith({
-    
     List<String>? dci,
     List<String>? dosage,
     List<String>? form,
@@ -59,17 +55,14 @@ class MedicalFilters extends Equatable {
     List<String>? condition,
     List<String>? type,
     List<String>? stabilityDuration,
-    List<String>? distributorSku,
+    List<String>? sku,
     List<String>? packagingFormat,
     List<String>? code,
     List<String>? reimbursement,
     String? gteUnitPriceHt,
     String? lteUnitPriceHt,
-  
-
   }) {
     return MedicalFilters(
-
       gteUnitPriceHt: gteUnitPriceHt ?? this.gteUnitPriceHt,
       lteUnitPriceHt: lteUnitPriceHt ?? this.lteUnitPriceHt,
       dci: dci ?? this.dci,
@@ -83,18 +76,17 @@ class MedicalFilters extends Equatable {
       condition: condition ?? this.condition,
       type: type ?? this.type,
       stabilityDuration: stabilityDuration ?? this.stabilityDuration,
-      distributorSku: distributorSku ?? this.distributorSku,
+      sku: sku ?? this.sku,
       packagingFormat: packagingFormat ?? this.packagingFormat,
       code: code ?? this.code,
       reimbursement: reimbursement ?? this.reimbursement,
-
     );
   }
 
   @override
   List<Object?> get props => [
         gteUnitPriceHt,
-        lteUnitPriceHt, 
+        lteUnitPriceHt,
         dci,
         dosage,
         form,
@@ -106,11 +98,10 @@ class MedicalFilters extends Equatable {
         condition,
         type,
         stabilityDuration,
-        distributorSku,
+        sku,
         packagingFormat,
         code,
         reimbursement,
-       
       ];
 
   MedicalFilters updateSearchFilter(MedicalFiltersKeys key, String text) {
@@ -118,15 +109,8 @@ class MedicalFilters extends Equatable {
         list.where((el) => el.contains(text)).toList();
 
     switch (key) {
-  
-    
-
-      
-      
-
-
       case MedicalFiltersKeys.distributorSku:
-        return copyWith(distributorSku: matchList(distributorSku));
+        return copyWith(sku: matchList(sku));
       case MedicalFiltersKeys.dci:
         return copyWith(dci: matchList(dci));
       case MedicalFiltersKeys.dosage:
@@ -135,32 +119,31 @@ class MedicalFilters extends Equatable {
         return copyWith(form: matchList(form));
       case MedicalFiltersKeys.status:
         return copyWith(status: matchList(status));
-      case MedicalFiltersKeys.country:
+      case MedicalFiltersKeys.laboratoryCountry:
         return copyWith(country: matchList(country));
-      case MedicalFiltersKeys.patent:
+      case MedicalFiltersKeys.laboratoryHolder:
         return copyWith(patent: matchList(patent));
-      case MedicalFiltersKeys.brand:
+      case MedicalFiltersKeys.brandName:
         return copyWith(brand: matchList(brand));
-      case MedicalFiltersKeys.condition:
-        return copyWith(condition: matchList(condition));
+      // case MedicalFiltersKeys.condition:
+      //   return copyWith(condition: matchList(condition));
       case MedicalFiltersKeys.type:
         return copyWith(type: matchList(type));
-      case MedicalFiltersKeys.stabilityDuration:
-        return copyWith(stabilityDuration: matchList(stabilityDuration));
+      // case MedicalFiltersKeys.stabilityDuration:
+      //   return copyWith(stabilityDuration: matchList(stabilityDuration));
       case MedicalFiltersKeys.code:
         return copyWith(code: matchList(code));
-      case MedicalFiltersKeys.reimbursement:
+      case MedicalFiltersKeys.p1:
         return copyWith(reimbursement: matchList(reimbursement));
       case MedicalFiltersKeys.unitPriceHt:
-        return this; 
+        return this;
     }
   }
 
   List<String> getFilterBykey(MedicalFiltersKeys currentkey) {
     switch (currentkey) {
-
       case MedicalFiltersKeys.distributorSku:
-        return distributorSku;
+        return sku;
       case MedicalFiltersKeys.dci:
         return dci;
       case MedicalFiltersKeys.dosage:
@@ -169,33 +152,32 @@ class MedicalFilters extends Equatable {
         return form;
       case MedicalFiltersKeys.status:
         return status;
-      case MedicalFiltersKeys.country:
+      case MedicalFiltersKeys.laboratoryCountry:
         return country;
-      case MedicalFiltersKeys.patent:
+      case MedicalFiltersKeys.laboratoryHolder:
         return patent;
-      case MedicalFiltersKeys.brand:
+      case MedicalFiltersKeys.brandName:
         return brand;
-      case MedicalFiltersKeys.condition:
-        return condition;
+      // case MedicalFiltersKeys.condition:
+      //   return condition;
       case MedicalFiltersKeys.type:
         return type;
-      case MedicalFiltersKeys.stabilityDuration:
-        return stabilityDuration;
+      // case MedicalFiltersKeys.stabilityDuration:
+      //   return stabilityDuration;
       case MedicalFiltersKeys.code:
         return code;
-      case MedicalFiltersKeys.reimbursement:
+      case MedicalFiltersKeys.p1:
         return reimbursement;
       case MedicalFiltersKeys.unitPriceHt:
-        return []; 
+        return [];
     }
   }
 
   MedicalFilters updateFilterList(
       MedicalFiltersKeys key, List<String> updatedFilters) {
     switch (key) {
-
       case MedicalFiltersKeys.distributorSku:
-        return copyWith(distributorSku: updatedFilters);
+        return copyWith(sku: updatedFilters);
       case MedicalFiltersKeys.dci:
         return copyWith(dci: updatedFilters);
       case MedicalFiltersKeys.dosage:
@@ -204,24 +186,24 @@ class MedicalFilters extends Equatable {
         return copyWith(form: updatedFilters);
       case MedicalFiltersKeys.status:
         return copyWith(status: updatedFilters);
-      case MedicalFiltersKeys.country:
+      case MedicalFiltersKeys.laboratoryCountry:
         return copyWith(country: updatedFilters);
-      case MedicalFiltersKeys.patent:
+      case MedicalFiltersKeys.laboratoryHolder:
         return copyWith(patent: updatedFilters);
-      case MedicalFiltersKeys.brand:
+      case MedicalFiltersKeys.brandName:
         return copyWith(brand: updatedFilters);
-      case MedicalFiltersKeys.condition:
-        return copyWith(condition: updatedFilters);
+      // case MedicalFiltersKeys.condition:
+      //   return copyWith(condition: updatedFilters);
       case MedicalFiltersKeys.type:
         return copyWith(type: updatedFilters);
-      case MedicalFiltersKeys.stabilityDuration:
-        return copyWith(stabilityDuration: updatedFilters);
+      // case MedicalFiltersKeys.stabilityDuration:
+      //   return copyWith(stabilityDuration: updatedFilters);
       case MedicalFiltersKeys.code:
         return copyWith(code: updatedFilters);
-      
+
       case MedicalFiltersKeys.unitPriceHt:
-        return this; 
-      case MedicalFiltersKeys.reimbursement:
+        return this;
+      case MedicalFiltersKeys.p1:
         return copyWith(reimbursement: updatedFilters);
     }
   }
@@ -232,14 +214,14 @@ enum MedicalFiltersKeys {
   dosage,
   form,
   status,
-  country,
-  patent,
-  brand,
-  condition,
+  laboratoryCountry,
+  laboratoryHolder,
+  brandName,
+  // condition, api not supported
   type,
-  stabilityDuration,
+  // stabilityDuration, api not supported
   code,
-  reimbursement,
+  p1,
   distributorSku,
   unitPriceHt,
 }

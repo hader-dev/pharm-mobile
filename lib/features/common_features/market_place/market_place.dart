@@ -9,7 +9,7 @@ import 'package:hader_pharm_mobile/features/common_features/cart/cubit/cart_cubi
 import 'package:hader_pharm_mobile/features/common_features/filters/cubit/medical_filters_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/filters/cubit/para_medical_filters_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/cubit/para_pharma_cubit.dart';
-import 'package:hader_pharm_mobile/repositories/locale/filters/filters_repository.dart';
+import 'package:hader_pharm_mobile/repositories/remote/filters/filters_repository.dart';
 import 'package:hader_pharm_mobile/repositories/remote/company/company_repository_impl.dart';
 import 'package:hader_pharm_mobile/repositories/remote/favorite/favorite_repository_impl.dart';
 import 'package:hader_pharm_mobile/repositories/remote/medicine_catalog/medicine_catalog_repository_impl.dart';

@@ -6,8 +6,8 @@ import 'package:hader_pharm_mobile/features/common_features/filters/actions/navi
 import 'package:hader_pharm_mobile/models/medical_filters.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
-class FiltersAccordionCommercial extends StatelessWidget {
-  const FiltersAccordionCommercial({super.key});
+class FiltersAccordionRegulatory extends StatelessWidget {
+  const FiltersAccordionRegulatory({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,29 +15,22 @@ class FiltersAccordionCommercial extends StatelessWidget {
     return Column(
       children: [
         InkAccordion(
-          rawTitle: translation.filters_commercial,
+          rawTitle: translation.filters_regulatory,
           isExpanded: false,
           children: [
             InkAccordionItem(
-              rawTitle: translation.filter_items_brand,
-              onTap: () =>
-                  navigateToMedicalFiltersApplyView(context, MedicalFiltersKeys.brand),
-              rawSubtitle: getDisplayedFiltersAsRawString(
-                  context, MedicalFiltersKeys.brand),
-            ),
-            InkAccordionItem(
-              rawTitle: translation.filter_items_condition,
+              rawTitle: translation.filter_items_status,
               onTap: () => navigateToMedicalFiltersApplyView(
-                  context, MedicalFiltersKeys.condition),
+                  context, MedicalFiltersKeys.status),
               rawSubtitle: getDisplayedFiltersAsRawString(
-                  context, MedicalFiltersKeys.condition),
+                  context, MedicalFiltersKeys.status),
             ),
             InkAccordionItem(
-              rawTitle: translation.filter_items_type,
-              onTap: () =>
-                  navigateToMedicalFiltersApplyView(context, MedicalFiltersKeys.type),
+              rawTitle: translation.filter_items_patent,
+              onTap: () => navigateToMedicalFiltersApplyView(
+                  context, MedicalFiltersKeys.laboratoryHolder),
               rawSubtitle: getDisplayedFiltersAsRawString(
-                  context, MedicalFiltersKeys.type),
+                  context, MedicalFiltersKeys.laboratoryHolder),
             ),
           ],
         ),

@@ -6,8 +6,8 @@ import 'package:hader_pharm_mobile/features/common_features/filters/actions/navi
 import 'package:hader_pharm_mobile/models/medical_filters.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
-class FiltersAccordionLogistics extends StatelessWidget {
-  const FiltersAccordionLogistics({super.key});
+class FiltersAccordionCommercial extends StatelessWidget {
+  const FiltersAccordionCommercial({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,22 +15,29 @@ class FiltersAccordionLogistics extends StatelessWidget {
     return Column(
       children: [
         InkAccordion(
-          rawTitle: translation.filters_logisctics,
+          rawTitle: translation.filters_commercial,
           isExpanded: false,
           children: [
             InkAccordionItem(
-              rawTitle: translation.filter_items_stability_duration,
+              rawTitle: translation.filter_items_brand,
               onTap: () => navigateToMedicalFiltersApplyView(
-                  context, MedicalFiltersKeys.stabilityDuration),
+                  context, MedicalFiltersKeys.brandName),
               rawSubtitle: getDisplayedFiltersAsRawString(
-                  context, MedicalFiltersKeys.stabilityDuration),
+                  context, MedicalFiltersKeys.brandName),
             ),
+            // InkAccordionItem(
+            //   rawTitle: translation.filter_items_condition,
+            //   onTap: () => navigateToMedicalFiltersApplyView(
+            //       context, MedicalFiltersKeys.condition),
+            //   rawSubtitle: getDisplayedFiltersAsRawString(
+            //       context, MedicalFiltersKeys.condition),
+            // ),
             InkAccordionItem(
-              rawTitle: translation.filter_items_country,
+              rawTitle: translation.filter_items_type,
               onTap: () => navigateToMedicalFiltersApplyView(
-                  context, MedicalFiltersKeys.country),
+                  context, MedicalFiltersKeys.type),
               rawSubtitle: getDisplayedFiltersAsRawString(
-                  context, MedicalFiltersKeys.country),
+                  context, MedicalFiltersKeys.type),
             ),
           ],
         ),

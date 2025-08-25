@@ -6,21 +6,19 @@ import 'package:hader_pharm_mobile/features/common_features/filters/actions/navi
 import 'package:hader_pharm_mobile/models/para_medical_filters.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
-
 class FiltersAccordionParaLogistics extends StatelessWidget {
   const FiltersAccordionParaLogistics({super.key});
 
   @override
   Widget build(BuildContext context) {
     final translation = context.translation!;
-    
+
     return Column(
       children: [
         InkAccordion(
           rawTitle: translation.filters_logisctics,
           isExpanded: false,
           children: [
-            
             InkAccordionItem(
               rawTitle: translation.filter_items_stability_duration,
               onTap: () => navigateToParaFiltersApplyView(
@@ -28,8 +26,6 @@ class FiltersAccordionParaLogistics extends StatelessWidget {
               rawSubtitle: getDisplayedParaFiltersAsRawString(
                   context, ParaMedicalFiltersKeys.stabilityDuration),
             ),
-            
-            
             InkAccordionItem(
               rawTitle: translation.filter_items_country,
               onTap: () => navigateToParaFiltersApplyView(
@@ -37,10 +33,8 @@ class FiltersAccordionParaLogistics extends StatelessWidget {
               rawSubtitle: getDisplayedParaFiltersAsRawString(
                   context, ParaMedicalFiltersKeys.country),
             ),
-            
-            
             InkAccordionItem(
-              rawTitle: translation.distributor_sku, 
+              rawTitle: translation.distributor_sku,
               onTap: () => navigateToParaFiltersApplyView(
                   context, ParaMedicalFiltersKeys.distributorSku),
               rawSubtitle: getDisplayedParaFiltersAsRawString(

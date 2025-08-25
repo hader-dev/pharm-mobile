@@ -69,8 +69,8 @@ class MedicineCatalogRepository extends IMedicineCatalogRepository {
     if (filters.reimbursement.isNotEmpty) {
       queryParams['search[reimbursement]'] = filters.reimbursement.first;
     }
-    if (filters.distributorSku.isNotEmpty) {
-      queryParams['search[distributorSku]'] = filters.distributorSku.first;
+    if (filters.sku.isNotEmpty) {
+      queryParams['search[sku]'] = filters.sku.first;
     }
     if (filters.gteUnitPriceHt != null && filters.gteUnitPriceHt!.isNotEmpty) {
       queryParams['gte[unitPriceHt]'] = filters.gteUnitPriceHt!;

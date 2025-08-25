@@ -1,7 +1,7 @@
-import 'package:hader_pharm_mobile/models/para_medical_filters.dart';
-import 'package:hader_pharm_mobile/repositories/locale/filters/responses/response_load_filters_para_medical.dart';
+import 'package:hader_pharm_mobile/models/medical_filters.dart';
+import 'package:hader_pharm_mobile/repositories/remote/filters/responses/response_load_filters_medical.dart';
 
-ResponseLoadFiltersParaMedical jsonToLoadFiltersParaMedicalResponse(
+ResponseLoadFiltersMedical jsonToLoadFiltersMedicalResponse(
     Map<String, dynamic> json) {
   final data = json as Map<String, dynamic>? ?? {};
 
@@ -12,18 +12,21 @@ ResponseLoadFiltersParaMedical jsonToLoadFiltersParaMedicalResponse(
     return [];
   }
 
-  return ResponseLoadFiltersParaMedical(
-      filters: ParaMedicalFilters(
-    
+  return ResponseLoadFiltersMedical(
+      filters: MedicalFilters(
+    dci: listFrom(data['dci']),
     dosage: listFrom(data['dosage']),
+    form: listFrom(data['form']),
     status: listFrom(data['status']),
+    registrationDate: listFrom(data['registrationDate']),
     country: listFrom(data['country']),
     patent: listFrom(data['patent']),
     brand: listFrom(data['brand']),
     condition: listFrom(data['condition']),
     type: listFrom(data['type']),
     stabilityDuration: listFrom(data['stabilityDuration']),
-    distributorSku: listFrom(data['distributorSku']),
+    sku: listFrom(data['sku']),
+    packagingFormat: listFrom(data['packagingFormat']),
     code: listFrom(data['code']),
     reimbursement: listFrom(data['reimbursement']),
   ));

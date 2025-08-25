@@ -25,7 +25,7 @@ class ParaMedicalFiltersApply extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<ParaMedicalFiltersCubit>();
 
-    cubit.updateVisibleItems();
+    cubit.loadParaMedicalFilters();
 
     return Column(
       mainAxisSize: MainAxisSize.max,
@@ -55,8 +55,8 @@ class ParaMedicalFiltersApply extends StatelessWidget {
         Gap(AppSizesManager.s12),
         CustomTextField(
           hintText: context.translation!.medicines_search_field_hint,
-          controller:
-              BlocProvider.of<ParaMedicalFiltersCubit>(context).searchController,
+          controller: BlocProvider.of<ParaMedicalFiltersCubit>(context)
+              .searchController,
           state: FieldState.normal,
           isEnabled: true,
           prefixIcon: Icon(
@@ -119,15 +119,13 @@ class ParaMedicalFiltersApply extends StatelessWidget {
                                           var filter = workingFilters[index];
                                           var appliedWorkingFilters = cubit
                                               .getCurrentWorkAppliedFilters();
-                                          var isSelected =
-                                              appliedWorkingFilters
-                                                  .contains(filter);
+                                          var isSelected = appliedWorkingFilters
+                                              .contains(filter);
                                           return FilterLabel(
                                             label: filter,
                                             isSelected: isSelected,
                                             onSelected: (v, s) =>
-                                                onFilterSelected(
-                                                    v, s, cubit),
+                                                onFilterSelected(v, s, cubit),
                                           );
                                         },
                                       );

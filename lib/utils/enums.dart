@@ -136,7 +136,7 @@ enum OrderStatus {
 //   }
 }
 
-enum SearchMedicineFilters { dci, distributorSku, code }
+enum SearchMedicineFilters { dci, sku, code }
 
 enum SearchParaPharmaFilters { name, packaging, sku, description }
 

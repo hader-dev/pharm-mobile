@@ -1,9 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/models/medical_filters.dart';
-import 'package:hader_pharm_mobile/repositories/locale/filters/filters_repository.dart';
-import 'package:hader_pharm_mobile/repositories/locale/filters/params/params_load_filters.dart';
+import 'package:hader_pharm_mobile/repositories/remote/filters/filters_repository.dart';
+import 'package:hader_pharm_mobile/repositories/remote/filters/params/params_load_medical_filters.dart';
 import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler.dart';
+
 part 'medical_filters_state.dart';
 
 class MedicalFiltersCubit extends Cubit<MedicalFiltersState> {
@@ -14,28 +15,25 @@ class MedicalFiltersCubit extends Cubit<MedicalFiltersState> {
 
   final searchController = TextEditingController();
 
-
-
   MedicalFilters filtersSource = MedicalFilters();
   MedicalFilters appliedFilters = MedicalFilters();
-  MedicalFilters visibleFilters = MedicalFilters();
 
   MedicalFiltersKeys currentkey = MedicalFiltersKeys.dci;
-
-
 
   MedicalFiltersCubit({required IFiltersRepository filtersRepository})
       : super(MedicalFiltersStateInitial()) {
     _filtersRepository = filtersRepository;
   }
 
-  void loadMedicalFilters([ParamsLoadFiltersMedical? params]) async {
+  void loadMedicalFilters() async {
     try {
       emit(MedicalFiltersIsLoading());
-      final data = await _filtersRepository
-          .getMedicalFilters(params ?? ParamsLoadFiltersMedical());
-      filtersSource = data.filters;
-      visibleFilters = data.filters.copyWith();
+      final data = await _filtersRepository.getMedicalFilter(
+          ParamLoadMedicalFilter(
+              key: currentkey, query: searchController.text));
+
+      filtersSource = filtersSource.updateFilterList(currentkey, data.data);
+
       emit(MedicalFiltersLoaded());
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
@@ -43,18 +41,13 @@ class MedicalFiltersCubit extends Cubit<MedicalFiltersState> {
     }
   }
 
-  
-  
-  
-
   void updateVisibleItems() {
-    visibleFilters =
-        filtersSource.updateSearchFilter(currentkey, searchController.text);
     emit(MedicalFiltersUpdated());
   }
 
   List<String> getCurrentWorkSourceFilters() {
-    return visibleFilters.getFilterBykey(currentkey);
+    final data = filtersSource.getFilterBykey(currentkey);
+    return data;
   }
 
   List<String> getCurrentWorkAppliedFilters() {
@@ -73,13 +66,12 @@ class MedicalFiltersCubit extends Cubit<MedicalFiltersState> {
 
     emit(MedicalFiltersUpdated());
   }
+
   void updatePriceRange(double minPrice, double maxPrice) {
-    debugPrint('DEBUG: updatePriceRange called with min=$minPrice, max=$maxPrice');
     appliedFilters = appliedFilters.copyWith(
       gteUnitPriceHt: minPrice.toString(),
       lteUnitPriceHt: maxPrice.toString(),
     );
-    debugPrint('DEBUG: appliedFilters updated - gte=${appliedFilters.gteUnitPriceHt}, lte=${appliedFilters.lteUnitPriceHt}');
     emit(MedicalFiltersUpdated());
   }
 
@@ -91,8 +83,12 @@ class MedicalFiltersCubit extends Cubit<MedicalFiltersState> {
   void goToApplyFilters(MedicalFiltersKeys key) {
     _pageIndex = 1;
     currentkey = key;
+    searchController.clear();
     emit(MedicalFiltersPageChanged());
+
+    loadMedicalFilters();
   }
+
   void resetCurrentFilters() {
     if (currentkey == MedicalFiltersKeys.unitPriceHt) {
       appliedFilters = appliedFilters.copyWith(
@@ -102,7 +98,6 @@ class MedicalFiltersCubit extends Cubit<MedicalFiltersState> {
     } else {
       appliedFilters = appliedFilters.updateFilterList(currentkey, []);
       searchController.clear();
-      updateVisibleItems();
     }
     emit(MedicalFiltersUpdated());
   }

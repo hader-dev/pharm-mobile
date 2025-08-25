@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/features/common_features/filters/cubit/medical_filters_cubit.dart';
-import 'package:hader_pharm_mobile/features/common_features/filters/views/apply_filters_medical_view.dart';
-import 'package:hader_pharm_mobile/features/common_features/filters/views/browse_filters_medical.dart';
+import 'package:hader_pharm_mobile/features/common_features/filters/views/medical/apply_filters_medical_view.dart';
+import 'package:hader_pharm_mobile/features/common_features/filters/views/medical/browse_filters_medical.dart';
 class MedicalFiltersView extends StatelessWidget {
   const MedicalFiltersView({super.key});
 

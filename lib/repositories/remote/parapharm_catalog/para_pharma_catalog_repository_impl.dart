@@ -59,8 +59,8 @@ class ParaPharmaRepository extends IParaPharmaRepository {
     if (filters.reimbursement.isNotEmpty) {
       queryParams['search[reimbursement]'] = filters.reimbursement.first;
     }
-    if (filters.distributorSku.isNotEmpty) {
-      queryParams['search[distributorSku]'] = filters.distributorSku.first;
+    if (filters.sku.isNotEmpty) {
+      queryParams['search[sku]'] = filters.sku.first;
     }
     if (filters.name.isNotEmpty) {
       queryParams['search[name]'] = filters.name.first;

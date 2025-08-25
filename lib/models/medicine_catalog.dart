@@ -14,7 +14,7 @@ class BaseMedicineCatalogModel {
   final String companyId;
   final dynamic dci;
   final String registrationNumber;
-  final String distributorSku;
+  final String sku;
   final bool isPrivate;
   final String margin;
   final int stockQuantity;
@@ -41,7 +41,7 @@ class BaseMedicineCatalogModel {
     required this.companyId,
     required this.dci,
     required this.registrationNumber,
-    required this.distributorSku,
+    required this.sku,
     required this.isPrivate,
     required this.margin,
     required this.stockQuantity,
@@ -70,7 +70,7 @@ class BaseMedicineCatalogModel {
       companyId: json["companyId"] ?? "",
       dci: json["dci"],
       registrationNumber: json["registrationNumber"] ?? "",
-      distributorSku: json["distributorSku"] ?? "",
+      sku: json["sku"] ?? "",
       isPrivate: json["isPrivate"] ?? false,
       margin: json["margin"] ?? "",
       stockQuantity: json["stockQuantity"] ?? 0,
@@ -109,7 +109,7 @@ class MedicineCatalogModel extends BaseMedicineCatalogModel {
     required super.companyId,
     required super.dci,
     required super.registrationNumber,
-    required super.distributorSku,
+    required super.sku,
     required super.isPrivate,
     required super.margin,
     required super.stockQuantity,

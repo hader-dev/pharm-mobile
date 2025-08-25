@@ -6,8 +6,8 @@ import 'package:hader_pharm_mobile/features/common_features/filters/actions/navi
 import 'package:hader_pharm_mobile/models/medical_filters.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
-class FiltersAccordionRegulatory extends StatelessWidget {
-  const FiltersAccordionRegulatory({super.key});
+class FiltersAccordionLogistics extends StatelessWidget {
+  const FiltersAccordionLogistics({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,25 +15,22 @@ class FiltersAccordionRegulatory extends StatelessWidget {
     return Column(
       children: [
         InkAccordion(
-          rawTitle: translation.filters_regulatory,
+          rawTitle: translation.filters_logisctics,
           isExpanded: false,
           children: [
+            // InkAccordionItem(
+            //   rawTitle: translation.filter_items_stability_duration,
+            //   onTap: () => navigateToMedicalFiltersApplyView(
+            //       context, MedicalFiltersKeys.stabilityDuration),
+            //   rawSubtitle: getDisplayedFiltersAsRawString(
+            //       context, MedicalFiltersKeys.stabilityDuration),
+            // ),
             InkAccordionItem(
-              rawTitle: translation.filter_items_status,
+              rawTitle: translation.filter_items_country,
               onTap: () => navigateToMedicalFiltersApplyView(
-                  context, MedicalFiltersKeys.status),
+                  context, MedicalFiltersKeys.laboratoryCountry),
               rawSubtitle: getDisplayedFiltersAsRawString(
-                  context, MedicalFiltersKeys.status),
-            ),
-            InkAccordionItem(
-                rawTitle: translation.filter_items_register_date,
-                onTap: () => {}),
-            InkAccordionItem(
-              rawTitle: translation.filter_items_patent,
-              onTap: () => navigateToMedicalFiltersApplyView(
-                  context, MedicalFiltersKeys.patent),
-              rawSubtitle: getDisplayedFiltersAsRawString(
-                  context, MedicalFiltersKeys.patent),
+                  context, MedicalFiltersKeys.laboratoryCountry),
             ),
           ],
         ),

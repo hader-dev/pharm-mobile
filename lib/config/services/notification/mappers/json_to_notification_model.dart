@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:hader_pharm_mobile/models/notification.dart';
 
 NotificationModel jsonToNotificationModel(Map<String, dynamic> json) {
-  debugPrint("Mapping JSON to NotificationModel: $json");
   return NotificationModel(
     id: json['id'] as String,
     title: json['title'] ?? "Unkown",

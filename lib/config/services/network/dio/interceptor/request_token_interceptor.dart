@@ -3,8 +3,6 @@ import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/services/auth/token_manager.dart';
-import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
-import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 
 import '../../../../../utils/enums.dart';
 import '../../network_interface.dart';
@@ -34,10 +32,6 @@ class TokenCheckerInterceptor extends Interceptor {
     } catch (e) {
       isLastRefreshTry = false;
       await getItInstance.get<TokenManager>().removeToken();
-      getItInstance.get<ToastManager>().showToast(
-          type: ToastType.error,
-          message: RoutingManager.rootNavigatorKey.currentContext!.translation!
-              .feedback_session_expired_please_login);
       RoutingManager.rootNavigatorKey.currentContext!
           .pushReplacementNamed(RoutingManager.loginScreen);
 

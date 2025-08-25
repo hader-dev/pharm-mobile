@@ -25,7 +25,7 @@ class MedicalFiltersApply extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<MedicalFiltersCubit>();
 
-    cubit.updateVisibleItems();
+    cubit.loadMedicalFilters();
 
     return Column(
       mainAxisSize: MainAxisSize.max,
@@ -67,7 +67,7 @@ class MedicalFiltersApply extends StatelessWidget {
             color: AppColors.accent1Shade1,
           ),
           onChanged: (searchValue) {
-            BlocProvider.of<MedicalFiltersCubit>(context).updateVisibleItems();
+            BlocProvider.of<MedicalFiltersCubit>(context).loadMedicalFilters();
           },
           validationFunc: (value) {},
         ),
@@ -117,15 +117,13 @@ class MedicalFiltersApply extends StatelessWidget {
                                           var filter = workingFilters[index];
                                           var appliedWorkingFilters = cubit
                                               .getCurrentWorkAppliedFilters();
-                                          var isSelected =
-                                              appliedWorkingFilters
-                                                  .contains(filter);
+                                          var isSelected = appliedWorkingFilters
+                                              .contains(filter);
                                           return FilterLabel(
                                             label: filter,
                                             isSelected: isSelected,
                                             onSelected: (v, s) =>
-                                                onFilterSelected(
-                                                    v, s, cubit),
+                                                onFilterSelected(v, s, cubit),
                                           );
                                         },
                                       );

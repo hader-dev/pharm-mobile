@@ -18,7 +18,7 @@ MedicineCatalogModel jsonToMedicineCatalogItem(Map<String, dynamic> json) {
     companyId: json["companyId"] ?? "",
     dci: json["dci"],
     registrationNumber: json["registrationNumber"] ?? "",
-    distributorSku: json["distributorSku"] ?? "",
+    sku: json["sku"] ?? "",
     isPrivate: json["isPrivate"] ?? false,
     margin: json["margin"] ?? "",
     stockQuantity: json["stockQuantity"] ?? 0,

@@ -54,9 +54,11 @@ class Urls {
 
   //Medicines
   static String get medicinesCatalog1 => "medications-catalog";
+  static String get medicines => "/medicines";
 
   //Medicine parapharm-catalog
   static String get paraPharamaCatalog1 => "parapharm-catalog";
+  static String get parapharms => "/parapharm-categories";
 
   static String get favoritesLikeMedicineCatalog =>
       "$favorites$medicinesCatalog1";

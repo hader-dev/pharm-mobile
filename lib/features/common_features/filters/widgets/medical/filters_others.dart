@@ -20,17 +20,17 @@ class FiltersAccordionOthers extends StatelessWidget {
           children: [
             InkAccordionItem(
               rawTitle: translation.filter_items_code,
-              onTap: () =>
-                  navigateToMedicalFiltersApplyView(context, MedicalFiltersKeys.code),
+              onTap: () => navigateToMedicalFiltersApplyView(
+                  context, MedicalFiltersKeys.code),
               rawSubtitle: getDisplayedFiltersAsRawString(
                   context, MedicalFiltersKeys.code),
             ),
             InkAccordionItem(
               rawTitle: translation.filter_items_reimbursement,
               onTap: () => navigateToMedicalFiltersApplyView(
-                  context, MedicalFiltersKeys.reimbursement),
+                  context, MedicalFiltersKeys.p1),
               rawSubtitle: getDisplayedFiltersAsRawString(
-                  context, MedicalFiltersKeys.reimbursement),
+                  context, MedicalFiltersKeys.p1),
             ),
           ],
         ),
