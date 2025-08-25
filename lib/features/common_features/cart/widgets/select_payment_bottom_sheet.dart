@@ -155,19 +155,7 @@ class SelectPaymentMethodBottomSheet extends StatelessWidget {
                               label: context.translation!.confirm_order,
                               leadingIcon: Iconsax.money4,
                               onTap: () {
-                                context
-                                    .read<CartCubit>()
-                                    .passOrder()
-                                    .then((pass) {
-                                  if (pass) {
-                                    if (context.mounted) {
-                                      AppLayout
-                                          .appLayoutScaffoldKey.currentContext!
-                                          .read<OrdersCubit>()
-                                          .getOrders();
-                                    }
-                                  }
-                                });
+                                context.read<CartCubit>().passOrder();
                               },
                               color: AppColors.accent1Shade1,
                             ),
