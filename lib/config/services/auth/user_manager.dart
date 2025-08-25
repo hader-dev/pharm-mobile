@@ -1,5 +1,7 @@
 import 'package:hader_pharm_mobile/config/services/notification/notification_service_port.dart';
 import 'package:hader_pharm_mobile/features/common_features/edit_profile/hooks_data_model/edit_profile_form.dart';
+import 'package:hader_pharm_mobile/models/jwt_decoded.dart';
+import 'package:hader_pharm_mobile/utils/login_jwt_decoder.dart';
 
 import '../../../models/user.dart';
 import '../../../repositories/remote/user/user_repository_impl.dart';
@@ -63,10 +65,18 @@ class UserManager {
     await tokenManagerInstance.storeAccessToken(token);
     (getItInstance.get<INetworkService>() as DioNetworkManager)
         .initDefaultHeaders(token);
-    await Future.wait([
-      getMe(),
-      getItInstance.get<INotificationService>().registerUserDevice(),
-    ]);
+
+    await getMe();
+
+    JwtDecoded decodedJwt = decodeJwt(token);
+
+    bool noCompany =
+        decodedJwt.companyId == null || decodedJwt.companyId == "null";
+
+    if (!noCompany) {
+      getItInstance.get<INotificationService>().registerUserDevice();
+    }
+
     return true;
   }
 
@@ -74,9 +84,10 @@ class UserManager {
   ///
   /// This method is used to update the [currentUser] after a successful login.
 
-  Future<void> getMe() async {
+  Future<UserModel> getMe() async {
     final UserModel userData = await userRepo.getCurrentUserData();
     currentUser = userData;
+    return currentUser;
   }
 
   /// Checks the provided OTP for the given email.

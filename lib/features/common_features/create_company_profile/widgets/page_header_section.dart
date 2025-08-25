@@ -60,18 +60,22 @@ class PageHeaderSection extends StatelessWidget {
                     .copyWith(color: AppColors.accent1Shade1),
               ),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  pagesTitles[currentStep]["title"] ?? '',
-                  style: context.responsiveTextTheme.current.headLine3SemiBold
-                      .copyWith(color: AppColors.accent1Shade1),
-                ),
-                Gap(AppSizesManager.s4),
-                Text(pagesTitles[currentStep]["subtitle"] ?? '',
-                    style: context.responsiveTextTheme.current.bodySmall),
-              ],
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    pagesTitles[currentStep]["title"] ?? '',
+                    style: context.responsiveTextTheme.current.headLine3SemiBold
+                        .copyWith(color: AppColors.accent1Shade1),
+                  ),
+                  Gap(AppSizesManager.s4),
+                  Text(
+                    pagesTitles[currentStep]["subtitle"] ?? '',
+                    style: context.responsiveTextTheme.current.bodySmall,
+                  ),
+                ],
+              ),
             ),
           ],
         )
