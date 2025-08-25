@@ -1,10 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
-import 'package:hader_pharm_mobile/config/services/notification/notification_service.dart';
-import 'package:hader_pharm_mobile/config/services/notification/notification_service_port.dart';
 import 'package:hader_pharm_mobile/config/services/deeplinks/deeplinks_service.dart';
 import 'package:hader_pharm_mobile/config/services/deeplinks/deeplinks_service_port.dart';
+import 'package:hader_pharm_mobile/config/services/notification/notification_service.dart';
+import 'package:hader_pharm_mobile/config/services/notification/notification_service_port.dart';
+import 'package:hader_pharm_mobile/repositories/locale/filters/filters_repository.dart';
+import 'package:hader_pharm_mobile/repositories/locale/filters/filters_repository_impl.dart';
 import 'package:hader_pharm_mobile/repositories/remote/notification/notification_repository_impl.dart';
 import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -60,13 +62,16 @@ initAppDependencies() async {
       ));
   await notificationService.init();
 
-  getItInstance.registerLazySingleton<INotificationService>(
-      () => notificationService);
+  getItInstance
+      .registerLazySingleton<INotificationService>(() => notificationService);
 
   // Initialize DeeplinksService
   final deeplinksService = DeeplinksService();
   await deeplinksService.init();
-  getItInstance.registerLazySingleton<DeeplinksServicePort>(
-      () => deeplinksService);
+  getItInstance
+      .registerLazySingleton<DeeplinksServicePort>(() => deeplinksService);
 
+  final filtersRepository = FiltersRepositoryImpl();
+  getItInstance
+      .registerLazySingleton<IFiltersRepository>(() => filtersRepository);
 }
