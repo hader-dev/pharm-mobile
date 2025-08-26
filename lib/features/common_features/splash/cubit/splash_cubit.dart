@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/services/auth/token_manager.dart';
 import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
-import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 
@@ -30,7 +29,6 @@ class SplashCubit extends Cubit<SplashState> {
       }
       emit(SplashCompleted());
     } catch (e) {
-      GlobalExceptionHandler.handle(exception: e);
       emit(SplashFailed());
     }
   }
