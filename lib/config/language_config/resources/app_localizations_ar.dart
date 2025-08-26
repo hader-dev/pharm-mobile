@@ -797,4 +797,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get search_by_dci_brand_sku => 'ابحث بالDCI، العلامة التجارية او SKU';
+
+  @override
+  String get policy => 'سياسة الخصوصية';
 }

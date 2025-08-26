@@ -798,4 +798,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get search_by_dci_brand_sku => 'Search by DCI, Brand, SKU';
+
+  @override
+  String get policy => 'Policy';
 }

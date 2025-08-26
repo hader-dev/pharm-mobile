@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/routes/deeplinks_routes.dart';
 import 'package:hader_pharm_mobile/features/common_features/anouncement_details/announcement_details.dart';
+import 'package:hader_pharm_mobile/features/common_features/leagal_policies/leagal_policies.dart';
 import 'package:hader_pharm_mobile/features/common_features/notification/notification.dart';
 import 'package:hader_pharm_mobile/features/common_features/order_complaint_details/complaint.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/para_pharma_catalog_details.dart';
@@ -41,6 +42,7 @@ class RoutingManager {
   static const String registerScreen = '/RegisterScreen';
   static const String checkEmailScreen = '/CheckEmailScreen';
   static const String checkPhoneScreen = '/CheckPhoneScreen';
+  static const String legalPoliciesScreen = '/LegalPoliciesScreen';
 
   static const String congratulationScreen = '/CongratulationScreen';
   static const String createCompanyProfile = '/CreateCompanyProfile';
@@ -79,6 +81,13 @@ class RoutingManager {
           path: onboardingScreen,
           builder: (BuildContext context, GoRouterState state) {
             return const OnboardingScreen();
+          },
+        ),
+        GoRoute(
+          name: legalPoliciesScreen,
+          path: legalPoliciesScreen,
+          builder: (BuildContext context, GoRouterState state) {
+            return const LegalPoliciesScreen();
           },
         ),
         GoRoute(

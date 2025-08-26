@@ -255,5 +255,6 @@
   "unfollow": "Unfollow",
   "mark_all_as_read": "Mark all as read",
   "feedback_session_expired_please_login": "Session expired, please login again",
-  "search_by_dci_brand_sku": "Search by DCI, Brand, SKU"
+  "search_by_dci_brand_sku": "Search by DCI, Brand, SKU",
+  "policy":"Policy"
 }

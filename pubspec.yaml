@@ -140,7 +140,7 @@ flutter:
     - assets/json/
     - assets/json/town/
     - assets/json/wilaya/
-    - assets/json/filters/
+    - assets/markup/privacy_policy/
     - .env
 
   fonts:

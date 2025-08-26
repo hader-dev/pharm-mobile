@@ -10,6 +10,7 @@
   "total_ttc_amount": "Total TTC",
   "payment": "Paiement",
   "client": "Client",
+  "policy":"Policy",
   "edit": "Modifier",
   "full_name": "Nom complet",
   "phone_mobile": " Numéro Téléphone",

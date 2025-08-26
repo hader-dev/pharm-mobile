@@ -1641,6 +1641,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Search by DCI, Brand, SKU'**
   String get search_by_dci_brand_sku;
+
+  /// No description provided for @policy.
+  ///
+  /// In en, this message translates to:
+  /// **'Policy'**
+  String get policy;
 }
 
 class _AppLocalizationsDelegate

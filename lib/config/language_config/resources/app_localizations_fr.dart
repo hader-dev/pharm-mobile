@@ -809,4 +809,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get search_by_dci_brand_sku => 'Rechercher par DCI, marque ou SKU';
+
+  @override
+  String get policy => 'Policy';
 }

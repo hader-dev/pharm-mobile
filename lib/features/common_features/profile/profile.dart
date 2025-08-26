@@ -23,7 +23,6 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -111,12 +110,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             horizontal: AppSizesManager.p6,
                             vertical: AppSizesManager.p8),
                         child: SectionTitle(
-                            title: context.translation!.app_privacy),
+                          title: context.translation!.app_privacy,
+                        ),
                       ),
                       SettingsTile(
-                        icon: LucideIcons.fileText,
-                        title: context.translation!.legal_policies,
-                      ),
+                          icon: LucideIcons.fileText,
+                          title: context.translation!.legal_policies,
+                          onTap: () {
+                            GoRouter.of(context)
+                                .pushNamed(RoutingManager.legalPoliciesScreen);
+                          }),
                       SettingsTile(
                         icon: LucideIcons.helpCircle,
                         title: context.translation!.help_support,
