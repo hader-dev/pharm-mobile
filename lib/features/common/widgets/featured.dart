@@ -19,36 +19,41 @@ class FeaturedEntity extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onPress,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            height: size,
-            width: size,
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey.shade300),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            padding: const EdgeInsets.all(AppSizesManager.p8),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(6),
-              child: CacheNetworkImagePlus(
-                width: 400,
-                boxFit: BoxFit.cover,
-                imageUrl: imageUrl ??
-                    "https://images.aeonmedia.co/images/afef287f-dd6f-4a6a-b8a6-4f0a09330657/sized-kendal-l4ikccachoc-unsplash.jpg?width=3840&quality=75&format=auto",
+    return SizedBox(
+      height: size,
+      width: size,
+      child: InkWell(
+        onTap: onPress,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey.shade300),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              padding: const EdgeInsets.all(AppSizesManager.p8),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(6),
+                child: CacheNetworkImagePlus(
+                  width: size,
+                  height: (size * 0.5) - AppSizesManager.p8,
+                  boxFit: BoxFit.cover,
+                  imageUrl: imageUrl ??
+                      "https://images.aeonmedia.co/images/afef287f-dd6f-4a6a-b8a6-4f0a09330657/sized-kendal-l4ikccachoc-unsplash.jpg?width=3840&quality=75&format=auto",
+                ),
               ),
             ),
-          ),
-          const Gap(AppSizesManager.s4),
-          Expanded(
+            const Gap(AppSizesManager.s4),
+            Expanded(
               child: Text(
-            title,
-            style: context.responsiveTextTheme.current.body3Medium,
-          )),
-        ],
+                title,
+                textAlign: TextAlign.center,
+                style: context.responsiveTextTheme.current.body3Medium,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
@@ -27,7 +27,7 @@ class VendorsSectionItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final spacing = _horizontalSpacing();
-    final itemWidth = _gridItemWidth(context, spacing);
+    final itemWidth = _getItemWidth(context, spacing);
 
     return ConstrainedBox(
       constraints: BoxConstraints(
@@ -42,27 +42,29 @@ class VendorsSectionItems extends StatelessWidget {
 
           final visibleItems = items.take(maxVisibleItems).toList();
 
-          return GridView.count(
-            physics: const NeverScrollableScrollPhysics(),
-            crossAxisCount: min(maxItemsPerRow, items.length),
-            mainAxisSpacing: spacing,
-            crossAxisSpacing: spacing,
-            childAspectRatio: 1 / 2,
-            children:
-                List.generate(min(maxVisibleItems, items.length), (index) {
-              final entity = visibleItems[index];
-              return FeaturedEntity(
-                size: itemWidth,
-                title: entity.name,
-                onPress: () => RoutingManager.router.pushNamed(
-                  RoutingManager.vendorDetails,
-                  extra: entity.id,
-                ),
-                imageUrl: getItInstance.get<INetworkService>().getFilesPath(
-                      entity.thumbnailImage!.path,
+          return Material(
+            child: Wrap(
+              spacing: spacing,
+              runSpacing: spacing,
+              children:
+                  List.generate(min(maxVisibleItems, items.length), (index) {
+                final entity = visibleItems[index];
+                return SizedBox(
+                  width: itemWidth,
+                  child: FeaturedEntity(
+                    size: itemWidth,
+                    title: entity.name,
+                    onPress: () => RoutingManager.router.pushNamed(
+                      RoutingManager.vendorDetails,
+                      extra: entity.id,
                     ),
-              );
-            }),
+                    imageUrl: getItInstance.get<INetworkService>().getFilesPath(
+                          entity.thumbnailImage!.path,
+                        ),
+                  ),
+                );
+              }),
+            ),
           );
         },
       ),
@@ -71,10 +73,10 @@ class VendorsSectionItems extends StatelessWidget {
 
   double _horizontalSpacing() => AppSizesManager.p8;
 
-  double _gridItemWidth(BuildContext context, double spacing) {
+  double _getItemWidth(BuildContext context, double spacing) {
     final screenWidth = MediaQuery.of(context).size.width;
     final horizontalPadding = padding.left + padding.right;
     final totalSpacing = spacing * (maxItemsPerRow - 1);
-    return (screenWidth - totalSpacing - horizontalPadding) / maxItemsPerRow;
+    return (screenWidth - horizontalPadding - totalSpacing) / maxItemsPerRow;
   }
 }
