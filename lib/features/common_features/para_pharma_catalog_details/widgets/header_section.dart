@@ -2,18 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
+import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common_features/create_company_profile/sub_pages/review_and_sumbit/widgets/info_row.dart';
+import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/cubit/para_pharma_details_cubit.dart';
+import 'package:hader_pharm_mobile/models/para_pharma.dart';
+import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/price_formatter.dart';
 import 'package:iconsax/iconsax.dart';
-
-import '../../../../config/routes/routing_manager.dart' show RoutingManager;
-import '../../../../config/theme/colors_manager.dart';
-import '../../../../models/para_pharma.dart';
-import '../../../../utils/assets_strings.dart';
-import '../cubit/para_pharma_details_cubit.dart';
 
 class HeaderSection extends StatelessWidget {
   const HeaderSection({super.key});
@@ -22,6 +21,8 @@ class HeaderSection extends StatelessWidget {
   Widget build(BuildContext context) {
     ParaPharmaCatalogModel paraPharmaCatalogData =
         BlocProvider.of<ParaPharmaDetailsCubit>(context).paraPharmaCatalogData!;
+    final translation = context.translation!;
+
     return Padding(
       padding: const EdgeInsets.symmetric(
           vertical: AppSizesManager.p16, horizontal: AppSizesManager.p12),
@@ -40,18 +41,17 @@ class HeaderSection extends StatelessWidget {
                     shape: BoxShape.circle,
                     border: Border.all(color: AppColors.bgDisabled, width: 1.5),
                     image: DecorationImage(
-                      image:
-                          paraPharmaCatalogData.company?.thumbnailImage?.path ==
-                                  null
-                              ? AssetImage(
-                                  DrawableAssetStrings.companyPlaceHolderImg)
-                              : NetworkImage(
-                                  getItInstance
-                                      .get<INetworkService>()
-                                      .getFilesPath(
-                                        paraPharmaCatalogData.company!.thumbnailImage!
-                                            .path,
-                                      ),),
+                      image: paraPharmaCatalogData
+                                  .company?.thumbnailImage?.path ==
+                              null
+                          ? AssetImage(
+                              DrawableAssetStrings.companyPlaceHolderImg)
+                          : NetworkImage(
+                              getItInstance.get<INetworkService>().getFilesPath(
+                                    paraPharmaCatalogData
+                                        .company!.thumbnailImage!.path,
+                                  ),
+                            ),
                     ),
                   ),
                 ),
@@ -89,9 +89,8 @@ class HeaderSection extends StatelessWidget {
           ]),
           Gap(AppSizesManager.s12),
           InfoRow(
-              label: "Available quantity",
-              dataValue:
-                  "${paraPharmaCatalogData.stockQuantity.toString()} unit"),
+              label: translation.quantity,
+              dataValue: paraPharmaCatalogData.stockQuantity.toString()),
         ],
       ),
     );

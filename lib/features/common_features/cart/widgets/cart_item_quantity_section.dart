@@ -29,10 +29,8 @@ class QuantitySection extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: AppSizesManager.p8),
           child: Transform.scale(
             alignment: Alignment.centerRight,
-            scale: 0.25, // Absolute minimum scaling for 94.7px constraint
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
+            scale: 0.82,
+            child: Row(mainAxisSize: MainAxisSize.min, children: [
               PrimaryIconButton(
                 borderColor: StrokeColors.normal.color,
                 isBordered: true,
@@ -47,7 +45,7 @@ class QuantitySection extends StatelessWidget {
               ),
               SizedBox(
                 height: AppSizesManager.buttonHeight,
-                width: 20, // Absolute minimum width for tight constraint
+                width: 60,
                 child: TextFormField(
                     key: ValueKey(cartData.quantity.toString()),
                     cursorColor: AppColors.accentGreenShade1,

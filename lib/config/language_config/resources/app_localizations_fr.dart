@@ -863,10 +863,64 @@ class AppLocalizationsFr extends AppLocalizations {
   String get last_week => 'last week';
 
   @override
+  String get main_features => 'Caractéristiques principales';
+
+  @override
+  String get pharmaceutical_form => 'Forme pharmaceutique';
+
+  @override
+  String get dosage => 'Dosage';
+
+  @override
+  String get packaging => 'Conditionnement';
+
+  @override
+  String get type => 'Type';
+
+  @override
+  String get lifetime => 'Durée de vie';
+
+  @override
+  String get laboratory => 'Laboratoire';
+
+  @override
+  String get country_of_origin => 'Pays d\'origine';
+
+  @override
   String get week_ago => 'il y a 1 semaine';
 
   @override
   String weeks_ago(Object weeks) {
     return 'il y a $weeks semaines';
   }
+
+  @override
+  String get no_description_available => 'Aucune description disponible';
+
+  @override
+  String get specifications => 'Spécifications';
+
+  @override
+  String get specialty => 'Spécialité';
+
+  @override
+  String get address => 'Adresse';
+
+  @override
+  String get no_address_available => 'Aucune adresse disponible';
+
+  @override
+  String get phone => 'Téléphone';
+
+  @override
+  String get no_phone_available => 'Aucun numéro de téléphone disponible';
+
+  @override
+  String get no_email_available => 'Aucun email disponible';
+
+  @override
+  String get category => 'Catégorie';
+
+  @override
+  String get brand => 'Brand';
 }

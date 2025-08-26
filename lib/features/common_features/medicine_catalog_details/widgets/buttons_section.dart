@@ -54,7 +54,7 @@ class ButtonsSection extends StatelessWidget {
                           CreateCartItemModel(
                               productId:
                                   BlocProvider.of<MedicineDetailsCubit>(context)
-                                      .medicineCatalogData!
+                                      .state.medicineCatalogData!
                                       .id,
                               quantity: int.parse(
                                   BlocProvider.of<MedicineDetailsCubit>(context)

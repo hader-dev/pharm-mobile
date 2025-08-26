@@ -1,21 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:hader_pharm_mobile/config/di/di.dart';
-import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/features/app_layout/app_layout.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
-import 'package:hader_pharm_mobile/features/common_features/cart/cubit/cart_cubit.dart';
+import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/cubit/provider.dart';
 import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/helpers/medicine_catalog_details_tab_data.dart';
-import 'package:hader_pharm_mobile/repositories/remote/favorite/favorite_repository_impl.dart';
-import 'package:hader_pharm_mobile/repositories/remote/medicine_catalog/medicine_catalog_repository_impl.dart';
-import 'package:hader_pharm_mobile/repositories/remote/order/order_repository_impl.dart';
+import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/sub_pages/distribitor_details/distributor_details.dart';
+import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/sub_pages/medcine_catalog_overview/medcine_catalog_overview.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 
 import 'cubit/medicine_details_cubit.dart';
-import 'sub_pages/distribitor_details/distribitor_details.dart';
-import 'sub_pages/medcine_catalog_overview/medcine_catalog_overview.dart';
 import 'widgets/buttons_section.dart';
 import 'widgets/header_section.dart';
 import 'widgets/medicine_product_photo_section.dart';
@@ -37,33 +31,13 @@ class _MedicineCatalogDetailsScreenState
     extends State<MedicineCatalogDetailsScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    final cartCubit =
-        AppLayout.appLayoutScaffoldKey.currentContext!.read<CartCubit>();
-    final existingCartItem =
-        cartCubit.getItemIfExists(widget.medicineCatalogId);
-
     final tabs = medicineCatalogDetailsTabData(context);
 
     return SafeArea(
-      child: MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (context) => MedicineDetailsCubit(
-              quantityController: TextEditingController(
-                  text: existingCartItem?.quantity.toString() ?? '1'),
-              tabController: TabController(length: tabs.length, vsync: this),
-              ordersRepository:
-                  OrderRepository(client: getItInstance.get<INetworkService>()),
-              medicineCatalogRepository: MedicineCatalogRepository(
-                  client: getItInstance.get<INetworkService>()),
-              favoriteRepository: FavoriteRepository(
-                  client: getItInstance.get<INetworkService>()),
-            )..getMedicineCatalogData(widget.medicineCatalogId),
-          ),
-          BlocProvider.value(
-              value: AppLayout.appLayoutScaffoldKey.currentContext!
-                  .read<CartCubit>()),
-        ],
+      child: StateProvider(
+        tabs: tabs,
+        vsync: this,
+        medicineCatalogId: widget.medicineCatalogId,
         child: Scaffold(
             key: MedicineCatalogDetailsScreen.medicineDetailsScaffoldKey,
             body: BlocBuilder<MedicineDetailsCubit, MedicineDetailsState>(
@@ -82,45 +56,38 @@ class _MedicineCatalogDetailsScreenState
                     ],
                   );
                 }
-                return Column(
-                  children: [
-                    Flexible(
-                      child: ListView(
-                        shrinkWrap: true,
-                        children: [
-                          MedicineProductPhotoSection(),
-                          HeaderSection(),
-                          Divider(
-                              color: AppColors.bgDisabled,
-                              thickness: 3.5,
-                              height: 1),
-                          ProductDetailsTabBarSection(),
-                          Gap(AppSizesManager.s24),
-
-                          if (BlocProvider.of<MedicineDetailsCubit>(context)
-                                  .tabController
-                                  .index ==
-                              0)
-                            MedicineOverViewPage(),
-                          if (BlocProvider.of<MedicineDetailsCubit>(context)
-                                  .tabController
-                                  .index ==
-                              1)
-                            DistributorDetailsPage(),
-
-                          Divider(
-                              color: AppColors.bgDisabled,
-                              thickness: 3.5,
-                              height: 1),
-                          // OtherProductsSection(),
-                        ],
+                return SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      MedicineProductPhotoSection(),
+                      HeaderSection(),
+                      Divider(
+                          color: AppColors.bgDisabled,
+                          thickness: 3.5,
+                          height: 1),
+                      ProductDetailsTabBarSection(),
+                      Gap(AppSizesManager.s24),
+                      if (BlocProvider.of<MedicineDetailsCubit>(context)
+                              .tabController
+                              .index ==
+                          0)
+                        MedicineOverViewPage(),
+                      if (BlocProvider.of<MedicineDetailsCubit>(context)
+                              .tabController
+                              .index ==
+                          1)
+                        DistributorDetailsPage(),
+                      Gap(AppSizesManager.s24),
+                      Divider(
+                          color: AppColors.bgDisabled,
+                          thickness: 3.5,
+                          height: 1),
+                      Padding(
+                        padding: const EdgeInsets.all(AppSizesManager.p12),
+                        child: ButtonsSection(),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(AppSizesManager.p12),
-                      child: ButtonsSection(),
-                    ),
-                  ],
+                    ],
+                  ),
                 );
               },
             )),

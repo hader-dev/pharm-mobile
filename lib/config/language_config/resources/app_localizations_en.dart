@@ -852,10 +852,64 @@ class AppLocalizationsEn extends AppLocalizations {
   String get last_week => 'last week';
 
   @override
-  String get week_ago => 'منذ أسبوع واحد';
+  String get main_features => 'Main Features';
+
+  @override
+  String get pharmaceutical_form => 'Pharmaceutical Form';
+
+  @override
+  String get dosage => 'Dosage';
+
+  @override
+  String get packaging => 'Packaging';
+
+  @override
+  String get type => 'Type';
+
+  @override
+  String get lifetime => 'Lifetime';
+
+  @override
+  String get laboratory => 'Laboratory';
+
+  @override
+  String get country_of_origin => 'Country of Origin';
+
+  @override
+  String get week_ago => 'One week ago';
 
   @override
   String weeks_ago(Object weeks) {
-    return 'منذ $weeks أسابيع';
+    return '$weeks weeks ago';
   }
+
+  @override
+  String get no_description_available => 'No description available';
+
+  @override
+  String get specifications => 'Specifications';
+
+  @override
+  String get specialty => 'Specialty';
+
+  @override
+  String get address => 'Address';
+
+  @override
+  String get no_address_available => 'No address available';
+
+  @override
+  String get phone => 'Phone';
+
+  @override
+  String get no_phone_available => 'No phone number available';
+
+  @override
+  String get no_email_available => 'No email available';
+
+  @override
+  String get category => 'Category';
+
+  @override
+  String get brand => 'Brand';
 }

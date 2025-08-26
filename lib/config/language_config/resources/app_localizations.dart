@@ -1726,17 +1726,125 @@ abstract class AppLocalizations {
   /// **'last week'**
   String get last_week;
 
+  /// No description provided for @main_features.
+  ///
+  /// In en, this message translates to:
+  /// **'Main Features'**
+  String get main_features;
+
+  /// No description provided for @pharmaceutical_form.
+  ///
+  /// In en, this message translates to:
+  /// **'Pharmaceutical Form'**
+  String get pharmaceutical_form;
+
+  /// No description provided for @dosage.
+  ///
+  /// In en, this message translates to:
+  /// **'Dosage'**
+  String get dosage;
+
+  /// No description provided for @packaging.
+  ///
+  /// In en, this message translates to:
+  /// **'Packaging'**
+  String get packaging;
+
+  /// No description provided for @type.
+  ///
+  /// In en, this message translates to:
+  /// **'Type'**
+  String get type;
+
+  /// No description provided for @lifetime.
+  ///
+  /// In en, this message translates to:
+  /// **'Lifetime'**
+  String get lifetime;
+
+  /// No description provided for @laboratory.
+  ///
+  /// In en, this message translates to:
+  /// **'Laboratory'**
+  String get laboratory;
+
+  /// No description provided for @country_of_origin.
+  ///
+  /// In en, this message translates to:
+  /// **'Country of Origin'**
+  String get country_of_origin;
+
   /// No description provided for @week_ago.
   ///
   /// In en, this message translates to:
-  /// **'منذ أسبوع واحد'**
+  /// **'One week ago'**
   String get week_ago;
 
   /// No description provided for @weeks_ago.
   ///
   /// In en, this message translates to:
-  /// **'منذ {weeks} أسابيع'**
+  /// **'{weeks} weeks ago'**
   String weeks_ago(Object weeks);
+
+  /// No description provided for @no_description_available.
+  ///
+  /// In en, this message translates to:
+  /// **'No description available'**
+  String get no_description_available;
+
+  /// No description provided for @specifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Specifications'**
+  String get specifications;
+
+  /// No description provided for @specialty.
+  ///
+  /// In en, this message translates to:
+  /// **'Specialty'**
+  String get specialty;
+
+  /// No description provided for @address.
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get address;
+
+  /// No description provided for @no_address_available.
+  ///
+  /// In en, this message translates to:
+  /// **'No address available'**
+  String get no_address_available;
+
+  /// No description provided for @phone.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone'**
+  String get phone;
+
+  /// No description provided for @no_phone_available.
+  ///
+  /// In en, this message translates to:
+  /// **'No phone number available'**
+  String get no_phone_available;
+
+  /// No description provided for @no_email_available.
+  ///
+  /// In en, this message translates to:
+  /// **'No email available'**
+  String get no_email_available;
+
+  /// No description provided for @category.
+  ///
+  /// In en, this message translates to:
+  /// **'Category'**
+  String get category;
+
+  /// No description provided for @brand.
+  ///
+  /// In en, this message translates to:
+  /// **'Brand'**
+  String get brand;
 }
 
 class _AppLocalizationsDelegate
