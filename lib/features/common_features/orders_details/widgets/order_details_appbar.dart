@@ -40,7 +40,7 @@ class OrderDetailsAppbar extends StatelessWidget
           Gap(AppSizesManager.s12),
           Expanded(
             child: Text(
-              context.translation!.order_details,
+              context.translation!.order,
               style: context.responsiveTextTheme.current.headLine3SemiBold
                   .copyWith(color: AppColors.bgWhite),
               overflow: TextOverflow.ellipsis,

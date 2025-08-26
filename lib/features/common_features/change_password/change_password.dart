@@ -45,7 +45,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
             },
           ),
           title: Text(
-            context.translation!.change_password,
+            context.translation!.password,
             style: context.responsiveTextTheme.current.headLine3SemiBold
                 .copyWith(color: AppColors.bgWhite),
           ),
