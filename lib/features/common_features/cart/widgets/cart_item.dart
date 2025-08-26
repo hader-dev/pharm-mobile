@@ -34,10 +34,10 @@ class CartItemWidget extends StatelessWidget {
           //   width: 70,
 
           //   boxFit: BoxFit.fill,
-          //   imageUrl: cartItemData. != null
+          //   imageUrl: cartItemData.image?.path!= null
           //       ? getItInstance
           //           .get<INetworkService>()
-          //           .getFilesPath(BlocProvider.of<MedicineDetailsCubit>(context).medicineCatalogData!.image!.path)
+          //           .getFilesPath(cartItemData.image!.path)
           //       : "",
           //   errorWidget: Column(
           //     children: [
@@ -46,7 +46,7 @@ class CartItemWidget extends StatelessWidget {
           //       Gap(AppSizesManager.s8),
           //       Text(
           //         "Image not available",
-          //         style: AppTypography.body3MediumStyle.copyWith(color: const Color.fromARGB(255, 197, 197, 197)),
+          //         style: context.responsiveTextTheme.current.body3Medium.copyWith(color: const Color.fromARGB(255, 197, 197, 197)),
           //       ),
           //       Spacer(),
           //     ],
@@ -99,15 +99,8 @@ class CartItemWidget extends StatelessWidget {
                       dataValue: num.parse(cartItemData.tvaPercentage)
                           .toStringAsFixed(2),
                     ),
-                    Row(
-                      children: [
-                        Expanded(flex: 2, child: SizedBox()), // Give more space to left side
-                        Flexible( // Use Flexible instead of no constraint
-                          child: QuantitySection(
-                            cartData: cartItemData,
-                          ),
-                        ),
-                      ],
+                    QuantitySection(
+                      cartData: cartItemData,
                     ),
                   ],
                 )

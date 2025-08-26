@@ -851,10 +851,64 @@ class AppLocalizationsAr extends AppLocalizations {
   String get last_week => 'last week';
 
   @override
+  String get main_features => 'الميزات الرئيسية';
+
+  @override
+  String get pharmaceutical_form => 'الشكل الصيدلاني';
+
+  @override
+  String get dosage => 'الجرعة';
+
+  @override
+  String get packaging => 'التغليف';
+
+  @override
+  String get type => 'النوع';
+
+  @override
+  String get lifetime => 'مدة الصلاحية';
+
+  @override
+  String get laboratory => 'المختبر';
+
+  @override
+  String get country_of_origin => 'بلد المنشأ';
+
+  @override
   String get week_ago => 'week ago';
 
   @override
   String weeks_ago(Object weeks) {
     return '$weeks week ago';
   }
+
+  @override
+  String get no_description_available => 'لا يوجد وصف متاح';
+
+  @override
+  String get specifications => 'المواصفات';
+
+  @override
+  String get specialty => 'التخصص';
+
+  @override
+  String get address => 'العنوان';
+
+  @override
+  String get no_address_available => 'لا يوجد عنوان متاح';
+
+  @override
+  String get phone => 'الهاتف';
+
+  @override
+  String get no_phone_available => 'لا يوجد رقم هاتف متاح';
+
+  @override
+  String get no_email_available => 'لا يوجد بريد إلكتروني متاح';
+
+  @override
+  String get category => 'القسم';
+
+  @override
+  String get brand => 'الماركة';
 }

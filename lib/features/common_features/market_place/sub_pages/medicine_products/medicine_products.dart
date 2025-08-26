@@ -5,6 +5,7 @@ import 'package:hader_pharm_mobile/features/common/widgets/end_of_load_result_wi
 import 'package:hader_pharm_mobile/features/common/widgets/medicine_widget_3.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/medicine_products/widget/floating_filter.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
+
 import 'cubit/medicine_products_cubit.dart';
 
 class MedicineProductsPage extends StatefulWidget {
@@ -20,67 +21,63 @@ class _MedicineProductsPageState extends State<MedicineProductsPage>
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
-        body: Column(
-      children: [
-        Expanded(
-          child: BlocBuilder<MedicineProductsCubit, MedicineProductsState>(
-            builder: (context, state) {
-              final cubit = BlocProvider.of<MedicineProductsCubit>(context);
-              final medicines = cubit.medicines;
+      body: Column(
+        children: [
+          Expanded(
+            child: BlocBuilder<MedicineProductsCubit, MedicineProductsState>(
+              builder: (context, state) {
+                final cubit = BlocProvider.of<MedicineProductsCubit>(context);
+                final medicines = cubit.medicines;
+                if (state is MedicineProductsLoading) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                if (state is MedicineProductsLoadingFailed ||
+                    medicines.isEmpty) {
+                  return const Center(child: EmptyListWidget());
+                }
 
-              if (state is MedicineProductsLoadingFailed) {
-                return const Center(child: EmptyListWidget());
-              }
-              if (state is MedicineProductsLoading && medicines.isEmpty) {
-                return const Center(child: CircularProgressIndicator());
-              }
-              if (state is MedicineProductsLoaded && medicines.isEmpty) {
-                return const Center(child: EmptyListWidget());
-              }
+                final bool isLoadingMore = state is MedicineProductsLoading;
+                final bool hasReachedEnd = state is MedicinesLoadLimitReached;
 
-              final bool isLoadingMore = state is MedicineProductsLoading;
-              final bool hasReachedEnd = state is MedicinesLoadLimitReached;
-
-              return RefreshIndicator(
-                onRefresh: () => cubit.getMedicines(),
-                child: GridView.builder(
-                  controller: cubit.scrollController,
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: context.marketplaceCrossAxisCount,
-                    crossAxisSpacing: context.marketplaceGridSpacing,
-                    mainAxisSpacing: context.marketplaceMainAxisSpacing,
-                    childAspectRatio: context.marketplaceAspectRatio,
-                  ),
-                  itemCount: medicines.length +
-                      (isLoadingMore || hasReachedEnd ? 1 : 0),
-                  itemBuilder: (context, index) {
-                    if (index < medicines.length) {
-                      final medicine = medicines[index];
-                      return MedicineWidget3(
-                        medicineData: medicine,
-                      );
-                    } else {
-                      if (isLoadingMore) {
-                        return const Padding(
-                          padding: EdgeInsets.all(16.0),
-                          child: Center(child: CircularProgressIndicator()),
+                return RefreshIndicator(
+                  onRefresh: () => cubit.getMedicines(),
+                  child: GridView.builder(
+                    controller: cubit.scrollController,
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: context.marketplaceCrossAxisCount,
+                      crossAxisSpacing: context.marketplaceGridSpacing,
+                      mainAxisSpacing: context.marketplaceMainAxisSpacing,
+                      childAspectRatio: context.marketplaceAspectRatio,
+                    ),
+                    itemCount: medicines.length +
+                        (isLoadingMore || hasReachedEnd ? 1 : 0),
+                    itemBuilder: (context, index) {
+                      if (index < medicines.length) {
+                        final medicine = medicines[index];
+                        return MedicineWidget3(
+                          medicineData: medicine,
                         );
-                      } else if (hasReachedEnd) {
-                        return const EndOfLoadResultWidget();
+                      } else {
+                        if (isLoadingMore) {
+                          return const Padding(
+                            padding: EdgeInsets.all(16.0),
+                            child: Center(child: CircularProgressIndicator()),
+                          );
+                        } else if (hasReachedEnd) {
+                          return const EndOfLoadResultWidget();
+                        }
                       }
-                    }
-                    return const SizedBox.shrink();
-                  },
-                ),
-              );
-            },
-          ),
-        )
-      ],
-    ),
-    floatingActionButton: FloatingFilterMedical(),
-    
+                      return const SizedBox.shrink();
+                    },
+                  ),
+                );
+              },
+            ),
+          )
+        ],
+      ),
+      floatingActionButton: FloatingFilterMedical(),
     );
   }
 

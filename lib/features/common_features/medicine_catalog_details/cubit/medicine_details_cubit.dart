@@ -11,9 +11,6 @@ import 'package:share_plus/share_plus.dart';
 part 'medicine_details_state.dart';
 
 class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
-  MedicineCatalogModel? medicineCatalogData;
-  int currentTapIndex = 0;
-  String shippingAddress = "";
   final TextEditingController quantityController;
 
   final MedicineCatalogRepository medicineCatalogRepository;
@@ -37,29 +34,30 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
     });
   }
   Future<void> likeMedicine() async {
-    if (medicineCatalogData == null) return;
+    if (state.medicineCatalogData == null) return;
     try {
-      medicineCatalogData!.isLiked = true;
-      emit(MedicineDetailsLoaded());
+      emit(state.loaded(
+        state.medicineCatalogData!.copyWith(isLiked: true),
+      ));
       await favoriteRepository.likeMedicineCatalog(
-          medicineCatalogId: medicineCatalogData!.id);
+          medicineCatalogId: state.medicineCatalogData!.id);
     } catch (e) {
-      medicineCatalogData!.isLiked = false;
-      emit(MedicineDetailsLoaded());
+      emit(state.loaded(state.medicineCatalogData!.copyWith(isLiked: false)));
       GlobalExceptionHandler.handle(exception: e);
     }
   }
 
   Future<void> unlikeMedicine() async {
-    if (medicineCatalogData != null) {
+    if (state.medicineCatalogData != null) {
       try {
-        medicineCatalogData!.isLiked = false;
-        emit(MedicineDetailsLoaded());
+        emit(state.loaded(state.medicineCatalogData!.copyWith(isLiked: false)));
         await favoriteRepository.unLikeMedicineCatalog(
-            medicineCatalogId: medicineCatalogData!.id);
+            medicineCatalogId: state.medicineCatalogData!.id);
       } catch (e) {
-        medicineCatalogData!.isLiked = true;
-        emit(MedicineDetailsLoaded());
+        state.medicineCatalogData!.isLiked = true;
+        emit(state.loaded(
+          state.medicineCatalogData!.copyWith(isLiked: true),
+        ));
         GlobalExceptionHandler.handle(exception: e);
       }
     }
@@ -67,19 +65,19 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
 
   getMedicineCatalogData(String id) async {
     try {
-      emit(MedicineDetailsLoading());
-      medicineCatalogData =
+      emit(state.loading());
+      final medicineCatalogData =
           await medicineCatalogRepository.getMedicineCatalogById(id);
-      emit(MedicineDetailsLoaded());
+      emit(state.loaded(medicineCatalogData));
     } catch (e) {
       emit(MedicineDetailsLoadError());
     }
   }
 
   void shareProduct() async {
-    if (medicineCatalogData != null) {
+    if (state.medicineCatalogData != null) {
       try {
-        final product = medicineCatalogData!;
+        final product = state.medicineCatalogData!;
 
         final deepLinkUrl = 'https://pharma.com/product/medicine/${product.id}';
 
@@ -92,14 +90,13 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
   }
 
   void changeTapIndex(int index) {
-    currentTapIndex = index;
-    emit(MedicineDetailsTapIndexChanged());
+    emit(state.tapIndexChanged(index));
   }
 
   void incrementQuantity() {
     quantityController.text =
         (int.parse(quantityController.text) + 1).toString();
-    emit(MedicineQuantityChanged());
+    emit(state.quantityChanged());
   }
 
   void decrementQuantity() {
@@ -107,7 +104,7 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
       quantityController.text =
           (int.parse(quantityController.text) - 1).toString();
     }
-    emit(MedicineQuantityChanged());
+    emit(state.quantityChanged());
   }
 
   Future<bool> passQuickOrder() async {
@@ -117,9 +114,9 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
       emit(PassingQuickOrder());
       await ordersRepository.createQuickOrder(
           orderDetails: CreateQuickOrderModel(
-        deliveryAddress: shippingAddress,
+        deliveryAddress: state.shippingAddress,
         deliveryTownId: 10,
-        medicineCatalogId: medicineCatalogData!.id,
+        medicineCatalogId: state.medicineCatalogData!.id,
         qty: int.parse(quantityController.text),
       ));
       emit(QuickOrderPassed());
@@ -132,25 +129,6 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
   }
 
   void updateShippingAddress(String value) {
-    shippingAddress = value;
+    emit(state.initial(shippingAddress: value));
   }
-  // Timer? _debounce;
-
-  // void onChangeQuantity() {
-  //   if (_debounce?.isActive ?? false) _debounce!.cancel();
-
-  //   _debounce = Timer(const Duration(seconds: 1), () {
-  //     final value = quantityController.text.trim();
-  //     if (value.isNotEmpty) {
-  //       final quantity = int.tryParse(value);
-  //       if (quantity != null && quantity > 0) {
-  //         quantityController.text = quantity.toString();
-  //         emit(QuantityChanged());
-  //       } else {
-  //         // Reset to 1 or any valid value you prefer
-  //         quantityController.text = '1';
-  //       }
-  //     }
-  //   });
-  // }
 }

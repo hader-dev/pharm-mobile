@@ -3,15 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
-import 'package:hader_pharm_mobile/config/routes/go_router_extension.dart';
-import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
-import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/sub_pages/distribitor_details/widgets/trademark_widget.dart';
+import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/widgets/appbar.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
-import '../../../common/app_bars/custom_app_bar.dart';
 import '../cubit/medicine_details_cubit.dart';
 
 class MedicineProductPhotoSection extends StatelessWidget {
@@ -26,11 +24,13 @@ class MedicineProductPhotoSection extends StatelessWidget {
           width: double.maxFinite,
           boxFit: BoxFit.fill,
           imageUrl: BlocProvider.of<MedicineDetailsCubit>(context)
+                      .state
                       .medicineCatalogData
                       ?.image !=
                   null
               ? getItInstance.get<INetworkService>().getFilesPath(
                   BlocProvider.of<MedicineDetailsCubit>(context)
+                      .state
                       .medicineCatalogData!
                       .image!
                       .path)
@@ -51,50 +51,8 @@ class MedicineProductPhotoSection extends StatelessWidget {
             ],
           ),
         ),
-        CustomAppBar(
-            bgColor: Colors.transparent,
-            topPadding: MediaQuery.of(context).padding.top,
-            bottomPadding: MediaQuery.of(context).padding.bottom,
-            leading: IconButton(
-              icon: Icon(
-                Directionality.of(context) == TextDirection.rtl
-                    ? Iconsax.arrow_right_3
-                    : Iconsax.arrow_left_2,
-                color: AppColors.bgWhite,
-                size: AppSizesManager.iconSize25,
-              ),
-              onPressed: RoutingManager.router.popOrGoHome,
-            ),
-            trailing: [
-              BlocBuilder<MedicineDetailsCubit, MedicineDetailsState>(
-                builder: (context, state) {
-                  final cubit = BlocProvider.of<MedicineDetailsCubit>(context);
-                  final isLiked = cubit.medicineCatalogData?.isLiked ?? false;
-
-                  return IconButton(
-                    icon: Icon(
-                      isLiked ? Iconsax.heart5 : Iconsax.heart,
-                      color: isLiked ? Colors.red : Colors.black,
-                    ),
-                    onPressed: () {
-                      if (isLiked) {
-                        cubit.unlikeMedicine();
-                      } else {
-                        cubit.likeMedicine();
-                      }
-                    },
-                  );
-                },
-              ),
-              IconButton(
-                icon: const Icon(Iconsax.share),
-                onPressed: () {
-                  final cubit = BlocProvider.of<MedicineDetailsCubit>(context);
-                  cubit.shareProduct();
-                },
-              ),
-            ],
-            title: SizedBox.shrink()),
+        MedicineCatalogAppBar(),
+        Positioned(bottom: 10, right: 10, child: TrademarkWidget())
       ],
     );
   }

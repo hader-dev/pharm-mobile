@@ -64,14 +64,14 @@ class MakeOrderBottomSheet extends StatelessWidget {
                     label: translation.product,
                     value: context
                         .read<MedicineDetailsCubit>()
-                        .medicineCatalogData!
+                        .state.medicineCatalogData!
                         .medicine
                         .dci,
                   ),
                   LabeledInfoWidget(
                     label: translation.unit_total_price,
                     value:
-                        "${(num.parse(context.read<MedicineDetailsCubit>().medicineCatalogData!.unitPriceHt).toStringAsFixed(2))} ${translation.currency}",
+                        "${(num.parse(context.read<MedicineDetailsCubit>().state.medicineCatalogData!.unitPriceHt).toStringAsFixed(2))} ${translation.currency}",
                   ),
                   Gap(AppSizesManager.s12),
                   Text(
@@ -189,7 +189,7 @@ class MakeOrderBottomSheet extends StatelessWidget {
                     value: Row(
                       children: [
                         Text(
-                          "${(num.parse(context.read<MedicineDetailsCubit>().quantityController.text) * num.parse(context.read<MedicineDetailsCubit>().medicineCatalogData!.unitPriceHt)).toStringAsFixed(2)} ${translation.currency}",
+                          "${(num.parse(context.read<MedicineDetailsCubit>().quantityController.text) * num.parse(context.read<MedicineDetailsCubit>().state.medicineCatalogData!.unitPriceHt)).toStringAsFixed(2)} ${translation.currency}",
                           style: context.responsiveTextTheme.current.body2Medium
                               .copyWith(color: AppColors.accent1Shade1),
                         ),
