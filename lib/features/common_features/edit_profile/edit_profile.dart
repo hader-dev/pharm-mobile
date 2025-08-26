@@ -58,6 +58,7 @@ class EditProfileScreen extends StatelessWidget {
                   shrinkWrap: true,
                   physics: const BouncingScrollPhysics(),
                   children: [
+                    Gap(AppSizesManager.s16),
                     Text(context.translation!.update_profile_description,
                         style: context.responsiveTextTheme.current.body1Medium
                             .copyWith(
