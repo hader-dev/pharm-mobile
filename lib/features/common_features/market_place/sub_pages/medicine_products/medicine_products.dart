@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/end_of_load_result_widget.dart';
-import 'package:hader_pharm_mobile/features/common/widgets/medicine_widget_2.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/medicine_widget_3.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/medicine_products/widget/floating_filter.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'cubit/medicine_products_cubit.dart';
 
 class MedicineProductsPage extends StatefulWidget {
@@ -42,24 +43,22 @@ class _MedicineProductsPageState extends State<MedicineProductsPage>
 
               return RefreshIndicator(
                 onRefresh: () => cubit.getMedicines(),
-                child: ListView.builder(
+                child: GridView.builder(
                   controller: cubit.scrollController,
                   physics: const AlwaysScrollableScrollPhysics(),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: context.marketplaceCrossAxisCount,
+                    crossAxisSpacing: context.marketplaceGridSpacing,
+                    mainAxisSpacing: context.marketplaceMainAxisSpacing,
+                    childAspectRatio: context.marketplaceAspectRatio,
+                  ),
                   itemCount: medicines.length +
                       (isLoadingMore || hasReachedEnd ? 1 : 0),
                   itemBuilder: (context, index) {
                     if (index < medicines.length) {
                       final medicine = medicines[index];
-                      return MedicineWidget2(
-                        hideLikeButton: false,
+                      return MedicineWidget3(
                         medicineData: medicine,
-                        isLiked: medicine.isLiked,
-                        onLikeTapped: () {
-                          final id = medicine.id;
-                          medicine.isLiked
-                              ? cubit.unlikeMedicinesCatalog(id)
-                              : cubit.likeMedicinesCatalog(id);
-                        },
                       );
                     } else {
                       if (isLoadingMore) {

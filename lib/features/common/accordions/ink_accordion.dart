@@ -56,19 +56,19 @@ class InkAccordionState extends State<InkAccordion> {
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(AppSizesManager.r8),
               side: BorderSide(color: StrokeColors.focused.color)),
-          title: Row(children: [
-            widget.title ??
-                Text.rich(
-                  TextSpan(
-                    text: widget.rawTitle,
-                    style: context.responsiveTextTheme.current.bodySmall
-                        .copyWith(
-                            fontWeight: context.responsiveTextTheme.current
-                                .appFont.appFontBold,
-                            color: TextColors.primary.color),
-                  ),
-                )
-          ]),
+          title: widget.title ??
+              Text.rich(
+                TextSpan(
+                  text: widget.rawTitle,
+                  style: context.responsiveTextTheme.current.bodySmall
+                      .copyWith(
+                          fontWeight: context.responsiveTextTheme.current
+                              .appFont.appFontBold,
+                          color: TextColors.primary.color),
+                ),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+              ),
           onExpansionChanged: (value) {
             _isExpanded.value = value;
           },

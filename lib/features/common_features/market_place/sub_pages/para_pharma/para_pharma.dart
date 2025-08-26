@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/end_of_load_result_widget.dart';
-import 'package:hader_pharm_mobile/features/common/widgets/para_pharma_widget_1.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/para_pharma_widget_2.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/widget/floating_filter.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'cubit/para_pharma_cubit.dart';
 
 class ParaPharmaSearchFilterBottomSheet extends StatefulWidget {
@@ -45,23 +46,22 @@ class _ParaPharmaSearchFilterBottomSheetState
 
                 return RefreshIndicator(
                   onRefresh: () => cubit.getParaPharmas(),
-                  child: ListView.builder(
+                  child: GridView.builder(
                     controller: cubit.scrollController,
                     physics: const AlwaysScrollableScrollPhysics(),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: context.marketplaceCrossAxisCount,
+                      crossAxisSpacing: context.marketplaceGridSpacing,
+                      mainAxisSpacing: context.marketplaceMainAxisSpacing,
+                      childAspectRatio: context.marketplaceAspectRatio,
+                    ),
                     itemCount: products.length +
                         (isLoadingMore || hasReachedEnd ? 1 : 0),
                     itemBuilder: (context, index) {
                       if (index < products.length) {
                         final paraPharma = products[index];
-                        return ParaPharmaWidget1(
-                          hideLikeButton: false,
+                        return ParaPharmaWidget2(
                           paraPharmData: paraPharma,
-                          isLiked: paraPharma.isLiked,
-                          onLike: paraPharma.isLiked
-                              ? () =>
-                                  cubit.unlikeParaPharmaCatalog(paraPharma.id)
-                              : () =>
-                                  cubit.likeParaPharmaCatalog(paraPharma.id),
                         );
                       } else {
                         if (isLoadingMore) {

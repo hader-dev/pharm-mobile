@@ -5,7 +5,6 @@ import 'package:hader_pharm_mobile/features/app_layout/app_layout.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common_features/cart/widgets/cart_summary.dart';
-import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
@@ -70,7 +69,6 @@ class CartScreen extends StatelessWidget {
                     BlocProvider.of<CartCubit>(context).cartItems.isEmpty) {
                   return Expanded(
                     child: EmptyListWidget(
-                      emptyIllustrationPath: DrawableAssetStrings.emptyCartIcon,
                       onRefresh: () {
                         BlocProvider.of<CartCubit>(context).getCartItem();
                       },

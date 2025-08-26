@@ -26,21 +26,26 @@ class VendorsSectionItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     final spacing = _horizontalSpacing();
     final itemWidth = _getItemWidth(context, spacing);
 
-    return ConstrainedBox(
-      constraints: BoxConstraints(
-          maxHeight: minSectionHeight * 2.2, minHeight: minSectionHeight),
-      child: BlocBuilder<VendorsCubit, VendorsState>(
-        builder: (context, state) {
-          final items = context.read<VendorsCubit>().vendorsList;
+    return BlocBuilder<VendorsCubit, VendorsState>(
+      builder: (context, state) {
+        final items = context.read<VendorsCubit>().vendorsList;
 
-          if (state is VendorsLoadingFailed || state is VendorsLoading) {
-            return const Center(child: EmptyListWidget());
+          if (state is VendorsLoading) {
+            return Center(child: CircularProgressIndicator(),);
           }
+          
 
-          final visibleItems = items.take(maxVisibleItems).toList();
+        if (state is VendorsLoadingFailed || items.isEmpty) {
+          return Center(
+            child: EmptyListWidget(),
+          );
+        }
+
+        final visibleItems = items.take(maxVisibleItems).toList();
 
           return Material(
             child: Wrap(
@@ -67,7 +72,7 @@ class VendorsSectionItems extends StatelessWidget {
             ),
           );
         },
-      ),
+      
     );
   }
 

@@ -51,33 +51,36 @@ class OrderItemWidget extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Container(
-                        clipBehavior: Clip.antiAlias,
-                        width: constraints.maxWidth * 0.2,
-                        decoration: BoxDecoration(
-                          borderRadius:
-                              BorderRadius.circular(AppSizesManager.p8),
-                          color: item.imageUrl == null
-                              ? const Color.fromARGB(255, 145, 106, 106)
-                              : null,
-                        ),
-                        child: CachedNetworkImage(
-                          imageUrl:
-                              getItInstance.get<INetworkService>().getFilesPath(
-                                    item.imageUrl ?? "",
-                                  ),
-                          width: 60,
-                          height: 60,
-                          fit: BoxFit.fill,
+                      Flexible(
+                        flex: 2,
+                        child: Container(
+                          clipBehavior: Clip.antiAlias,
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.circular(AppSizesManager.p8),
+                            color: item.imageUrl == null
+                                ? const Color.fromARGB(255, 145, 106, 106)
+                                : null,
+                          ),
+                          child: CachedNetworkImage(
+                            imageUrl:
+                                getItInstance.get<INetworkService>().getFilesPath(
+                                      item.imageUrl ?? "",
+                                    ),
+                            width: 60,
+                            height: 60,
+                            fit: BoxFit.fill,
+                          ),
                         ),
                       ),
                       const SizedBox(width: AppSizesManager.s8),
-                      SizedBox(
-                        width: constraints.maxWidth * 0.6,
+                      Expanded(
+                        flex: 6,
                         child: Text(
                           item.designation ?? context.translation!.unknown,
                           softWrap: true,
-                          overflow: TextOverflow.visible,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
                           style: context
                               .responsiveTextTheme.current.headLine4Medium,
                         ),

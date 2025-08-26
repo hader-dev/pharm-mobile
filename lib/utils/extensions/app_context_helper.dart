@@ -34,4 +34,27 @@ extension BuildContextHelper on BuildContext {
       return DeviceSizes.largeTablet;
     }
   }
+
+  /// Cross axis count for marketplace grid - 2 columns only for large tablets
+  int get marketplaceCrossAxisCount {
+    if (deviceSize.width <= DeviceSizes.largeMobile.width) {
+      return 1; // Single column for small and medium phones
+    } else if (deviceSize.width <= DeviceSizes.mediumTablet.width) {
+      return 1; // Single column for small and medium tablets  
+    } else {
+      return 2; // Two columns for large tablets only
+    }
+  }
+
+  /// Aspect ratio for marketplace grid items
+  double get marketplaceAspectRatio => deviceSize.width <= DeviceSizes.mediumTablet.width ? 0.9 : 0.85;
+
+  /// Cross axis spacing between grid items
+  double get marketplaceGridSpacing => deviceSize.width <= DeviceSizes.mediumTablet.width ? 4 : 10;
+
+  /// Main axis spacing between rows
+  double get marketplaceMainAxisSpacing => deviceSize.width <= DeviceSizes.mediumTablet.width ? 4 : 6;
+
+  /// Marketplace padding
+  EdgeInsets get marketplacePadding => const EdgeInsets.symmetric(horizontal: 8, vertical: 4);
 }

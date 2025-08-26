@@ -17,13 +17,14 @@ class VendorSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final translation = context.translation!;
+    final screenWidth = MediaQuery.of(context).size.width;
 
-    return Padding(
+    Widget content = Padding(
       padding: padding,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Gap(AppSizesManager.s4),
+          Gap(screenWidth <= 414 ? 0 : AppSizesManager.s4), // No gap for phones, normal gap for tablets
           SectionTitle(title: translation.vendors),
           VendorsSectionItems(
             minSectionHeight: minSectionHeight,
@@ -31,5 +32,15 @@ class VendorSection extends StatelessWidget {
         ],
       ),
     );
+
+    // Force height constraint for very small screens
+    if (screenWidth < 360) {
+      return SizedBox(
+        height: 90,
+        child: ClipRect(child: content),
+      );
+    }
+
+    return content;
   }
 }

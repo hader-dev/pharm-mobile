@@ -10,40 +10,42 @@ class ParaPharmaSectionItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ConstrainedBox(
-      constraints: BoxConstraints(
-          maxHeight: minSectionHeight * 2, minHeight: minSectionHeight),
-      child: BlocBuilder<ParaPharmaCubit, ParaPharmaState>(
-        builder: (context, state) {
-          ParaPharmaCubit paraPharmaProductsCubit =
-              context.read<ParaPharmaCubit>();
-          final items = paraPharmaProductsCubit.paraPharmaProducts;
+    final screenWidth = MediaQuery.of(context).size.width;
+    
+    return BlocBuilder<ParaPharmaCubit, ParaPharmaState>(
+      builder: (context, state) {
+        ParaPharmaCubit paraPharmaProductsCubit =
+            context.read<ParaPharmaCubit>();
+        final items = paraPharmaProductsCubit.paraPharmaProducts;
 
-          if (state is ParaPharmaProductsLoading) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          if (state is ParaPharmaProductsLoadingFailed || items.isEmpty) {
-            return const Center(
-              child: EmptyListWidget(),
-            );
-          }
 
-          return ListView.builder(
+        if (state is ParaPharmaProductsLoading) {
+            return Center(child: CircularProgressIndicator(),);
+          }
+          
+
+        if (state is ParaPharmaProductsLoadingFailed || items.isEmpty) {
+          return Center(
+            child: EmptyListWidget(),
+          );
+        }
+
+        return SizedBox(
+          height: 240, 
+          child: ListView.builder(
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.only(left: 0),
             itemCount: items.length,
             itemBuilder: (context, index) {
-              return AspectRatio(
-                aspectRatio: 1,
+              return SizedBox(
+                width: screenWidth > 768 ? 300 : 240, 
                 child: ParaPharmaWidget4(paraPharmData: items[index]),
               );
             },
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }

@@ -52,6 +52,7 @@ class InfoRow extends StatelessWidget {
           )
         : Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
             children: [
               Text(label,
                   style: context.responsiveTextTheme.current.body3Medium
@@ -66,7 +67,7 @@ class InfoRow extends StatelessWidget {
                     dataValue.isEmpty
                         ? context.translation!.feedback_not_provided
                         : dataValue,
-                    textAlign: TextAlign.end,
+                    textAlign: TextAlign.start, // Changed from end to start
                     softWrap: true,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,

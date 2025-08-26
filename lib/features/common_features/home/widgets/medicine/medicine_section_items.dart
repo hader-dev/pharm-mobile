@@ -10,36 +10,42 @@ class MedicinesSectionItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ConstrainedBox(
-      constraints: BoxConstraints(
-          maxHeight: minSectionHeight * 2, minHeight: minSectionHeight),
-      child: BlocBuilder<MedicineProductsCubit, MedicineProductsState>(
-        builder: (context, state) {
-          MedicineProductsCubit medicinesCubit =
-              context.read<MedicineProductsCubit>();
-          final items = medicinesCubit.medicines;
+    final screenWidth = MediaQuery.of(context).size.width;
+    
+    return BlocBuilder<MedicineProductsCubit, MedicineProductsState>(
+      builder: (context, state) {
+        MedicineProductsCubit medicinesCubit =
+            context.read<MedicineProductsCubit>();
+        final items = medicinesCubit.medicines;
 
-          if (state is MedicineProductsLoading) {
-            return const Center(child: CircularProgressIndicator());
+       
+        if (state is MedicineProductsLoading) {
+            return Center(child: CircularProgressIndicator(),);
           }
-          if (state is MedicineProductsLoadingFailed || items.isEmpty) {
-            return const Center(child: EmptyListWidget());
-          }
+          
 
-          return ListView.builder(
+        if (state is MedicineProductsLoadingFailed || items.isEmpty) {
+          return Center(
+            child: EmptyListWidget(),
+          );
+        }
+
+        return SizedBox(
+          height: 240, 
+          child: ListView.builder(
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.only(left: 0),
             itemCount: items.length,
             itemBuilder: (context, index) {
-              return AspectRatio(
-                aspectRatio: 1,
+              return Container(
+                width: screenWidth > 768 ? 300 : 240, 
                 child: MedicineWidget4(medicineData: items[index]),
               );
             },
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }

@@ -46,7 +46,8 @@ class OrderCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                Flexible(
+                Expanded(
+                  flex: 3,
                   child: RichText(
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
@@ -75,25 +76,25 @@ class OrderCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                Spacer(),
-                Container(
-                  padding: EdgeInsets.all(AppSizesManager.p6),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        bottomRight: Radius.circular(AppSizesManager.r6),
-                        topLeft: Radius.circular(AppSizesManager.r6)),
-                    color: orderStatus.color.withAlpha(50),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(OrderStatus.getTranslatedStatus(orderStatus),
-                          style: context.responsiveTextTheme.current.bodySmall
-                              .copyWith(
-                                  color: orderStatus.color,
-                                  fontWeight: context.responsiveTextTheme
-                                      .current.appFont.appFontSemiBold)),
-                    ],
+                const SizedBox(width: 8), // Small spacing
+                Expanded(
+                  child: Container(
+                    padding: EdgeInsets.all(AppSizesManager.p6),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                          bottomRight: Radius.circular(AppSizesManager.r6),
+                          topLeft: Radius.circular(AppSizesManager.r6)),
+                      color: orderStatus.color.withAlpha(50),
+                    ),
+                    child: Text(OrderStatus.getTranslatedStatus(orderStatus),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,
+                        style: context.responsiveTextTheme.current.bodySmall
+                            .copyWith(
+                                color: orderStatus.color,
+                                fontWeight: context.responsiveTextTheme
+                                    .current.appFont.appFontSemiBold)),
                   ),
                 ),
               ],
@@ -116,17 +117,22 @@ class OrderCard extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  InfoRow(
-                    label: context.translation!.total_ht_amount,
-                    dataValue:
-                        orderData.totalAmountExclTax.formatAsPriceForPrint(),
-                    contentDirection: Axis.vertical,
+                  Expanded(
+                    child: InfoRow(
+                      label: context.translation!.total_ht_amount,
+                      dataValue:
+                          orderData.totalAmountExclTax.formatAsPriceForPrint(),
+                      contentDirection: Axis.vertical,
+                    ),
                   ),
-                  InfoRow(
-                    label: context.translation!.total_ttc_amount,
-                    dataValue:
-                        orderData.totalAmountInclTax.formatAsPriceForPrint(),
-                    contentDirection: Axis.vertical,
+                  const SizedBox(width: 8), // Small spacing
+                  Expanded(
+                    child: InfoRow(
+                      label: context.translation!.total_ttc_amount,
+                      dataValue:
+                          orderData.totalAmountInclTax.formatAsPriceForPrint(),
+                      contentDirection: Axis.vertical,
+                    ),
                   ),
                 ],
               ),

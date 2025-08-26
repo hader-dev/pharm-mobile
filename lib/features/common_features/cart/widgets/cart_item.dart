@@ -101,9 +101,11 @@ class CartItemWidget extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        Spacer(),
-                        QuantitySection(
-                          cartData: cartItemData,
+                        Expanded(flex: 2, child: SizedBox()), // Give more space to left side
+                        Flexible( // Use Flexible instead of no constraint
+                          child: QuantitySection(
+                            cartData: cartItemData,
+                          ),
                         ),
                       ],
                     ),

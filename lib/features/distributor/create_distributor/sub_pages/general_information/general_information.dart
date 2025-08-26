@@ -48,19 +48,16 @@ class _DistributorGeneralInformationPageState
                               left: AppSizesManager.p4,
                               top: AppSizesManager.p8),
                           child: Text("${translation.what_you_distribute}*",
-                              style: context
-                                  .responsiveTextTheme.current.body3Medium
+                              style: context.responsiveTextTheme.current.body3Medium
                                   .copyWith(color: TextColors.ternary.color)),
                         ),
                         DropdownButtonFormField(
-                            // ignore: deprecated_member_use
-                            value: BlocProvider.of<CreateCompanyProfileCubit>(
+                            initialValue: BlocProvider.of<CreateCompanyProfileCubit>(
                                     context)
                                 .companyData
                                 .distributorCategoryId,
                             hint: Text(translation.select_category,
-                                style: context
-                                    .responsiveTextTheme.current.bodySmall
+                                style: context.responsiveTextTheme.current.body3Regular
                                     .copyWith(color: TextColors.ternary.color)),
                             validator: (value) {
                               if (value == null) {
@@ -217,8 +214,7 @@ class _DistributorGeneralInformationPageState
                         WilayaDropdown(),
                         TownDropdown(
                             isRequired: true,
-                            validator: (v) =>
-                                requiredValidator(v?.label, translation),
+                            validator: (v) => requiredValidator(v?.label, translation),
                             onChanged: (newValue) {
                               if (newValue == null) return;
                               BlocProvider.of<CreateCompanyProfileCubit>(

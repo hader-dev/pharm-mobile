@@ -156,19 +156,24 @@ class CartSummarySection extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Gap(AppSizesManager.s12),
+                      Gap(AppSizesManager.s8), // Reduced gap
                       BlocBuilder<CartCubit, CartState>(
                           builder: (context, state) {
-                        return PrimaryTextButton(
-                          label: context.translation!.checkout,
-                          onTap: context.read<CartCubit>().cartItems.isEmpty
-                              ? null
-                              : () {
-                                  BottomSheetHelper.showCommonBottomSheet(
-                                      context: context,
-                                      child: SelectPaymentMethodBottomSheet());
-                                },
-                          color: AppColors.accent1Shade1,
+                        return ConstrainedBox(
+                          constraints: BoxConstraints(
+                            maxWidth: MediaQuery.of(context).size.width - 32, // Ensure button fits
+                          ),
+                          child: PrimaryTextButton(
+                            label: context.translation!.checkout,
+                            onTap: context.read<CartCubit>().cartItems.isEmpty
+                                ? null
+                                : () {
+                                    BottomSheetHelper.showCommonBottomSheet(
+                                        context: context,
+                                        child: SelectPaymentMethodBottomSheet());
+                                  },
+                            color: AppColors.accent1Shade1,
+                          ),
                         );
                       }),
                     ]),
