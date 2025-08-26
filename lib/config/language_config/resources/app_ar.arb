@@ -253,5 +253,18 @@
   "notifications": "الاشعارات",
   "follow": "متابعة",
   "unfollow": "إلغاء المتابعة",
-  "mark_all_as_read": "تحديد الكل كمقروء"
+  "mark_all_as_read": "تحديد الكل كمقروء",
+  "just_now": "الآن",
+  "minute_ago": "منذ دقيقة واحدة",
+  "minutes_ago": "منذ {minutes} دقائق",
+  "hour_ago": "منذ ساعة واحدة",
+  "hours_ago": "منذ {hours} ساعات",
+  "day_ago": "منذ يوم واحد",
+  "days_ago": "منذ {days} أيام",
+  "month_ago": "منذ شهر واحد",
+  "months_ago": "منذ {months} أشهر",
+  "year_ago": "منذ سنة واحدة",
+  "years_ago": "منذ {years} سنوات",
+  "week_ago": "week ago",
+  "weeks_ago": "{weeks} week ago"
 }

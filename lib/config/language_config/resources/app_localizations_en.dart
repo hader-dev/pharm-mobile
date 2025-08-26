@@ -801,4 +801,61 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get policy => 'Policy';
+
+  @override
+  String get just_now => 'just now';
+
+  @override
+  String get minute_ago => '1 minute ago';
+
+  @override
+  String minutes_ago(Object minutes) {
+    return '$minutes minutes ago';
+  }
+
+  @override
+  String get hour_ago => '1 hour ago';
+
+  @override
+  String hours_ago(Object hours) {
+    return '$hours hours ago';
+  }
+
+  @override
+  String get day_ago => '1 day ago';
+
+  @override
+  String days_ago(Object days) {
+    return '$days days ago';
+  }
+
+  @override
+  String get month_ago => '1 month ago';
+
+  @override
+  String months_ago(Object months) {
+    return '$months months ago';
+  }
+
+  @override
+  String get year_ago => '1 year ago';
+
+  @override
+  String years_ago(Object years) {
+    return '$years years ago';
+  }
+
+  @override
+  String get yesterday => 'yesterday';
+
+  @override
+  String get last_week => 'last week';
+
+  @override
+  String get week_ago => 'منذ أسبوع واحد';
+
+  @override
+  String weeks_ago(Object weeks) {
+    return 'منذ $weeks أسابيع';
+  }
 }

@@ -1647,6 +1647,96 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Policy'**
   String get policy;
+
+  /// No description provided for @just_now.
+  ///
+  /// In en, this message translates to:
+  /// **'just now'**
+  String get just_now;
+
+  /// No description provided for @minute_ago.
+  ///
+  /// In en, this message translates to:
+  /// **'1 minute ago'**
+  String get minute_ago;
+
+  /// No description provided for @minutes_ago.
+  ///
+  /// In en, this message translates to:
+  /// **'{minutes} minutes ago'**
+  String minutes_ago(Object minutes);
+
+  /// No description provided for @hour_ago.
+  ///
+  /// In en, this message translates to:
+  /// **'1 hour ago'**
+  String get hour_ago;
+
+  /// No description provided for @hours_ago.
+  ///
+  /// In en, this message translates to:
+  /// **'{hours} hours ago'**
+  String hours_ago(Object hours);
+
+  /// No description provided for @day_ago.
+  ///
+  /// In en, this message translates to:
+  /// **'1 day ago'**
+  String get day_ago;
+
+  /// No description provided for @days_ago.
+  ///
+  /// In en, this message translates to:
+  /// **'{days} days ago'**
+  String days_ago(Object days);
+
+  /// No description provided for @month_ago.
+  ///
+  /// In en, this message translates to:
+  /// **'1 month ago'**
+  String get month_ago;
+
+  /// No description provided for @months_ago.
+  ///
+  /// In en, this message translates to:
+  /// **'{months} months ago'**
+  String months_ago(Object months);
+
+  /// No description provided for @year_ago.
+  ///
+  /// In en, this message translates to:
+  /// **'1 year ago'**
+  String get year_ago;
+
+  /// No description provided for @years_ago.
+  ///
+  /// In en, this message translates to:
+  /// **'{years} years ago'**
+  String years_ago(Object years);
+
+  /// No description provided for @yesterday.
+  ///
+  /// In en, this message translates to:
+  /// **'yesterday'**
+  String get yesterday;
+
+  /// No description provided for @last_week.
+  ///
+  /// In en, this message translates to:
+  /// **'last week'**
+  String get last_week;
+
+  /// No description provided for @week_ago.
+  ///
+  /// In en, this message translates to:
+  /// **'منذ أسبوع واحد'**
+  String get week_ago;
+
+  /// No description provided for @weeks_ago.
+  ///
+  /// In en, this message translates to:
+  /// **'منذ {weeks} أسابيع'**
+  String weeks_ago(Object weeks);
 }
 
 class _AppLocalizationsDelegate

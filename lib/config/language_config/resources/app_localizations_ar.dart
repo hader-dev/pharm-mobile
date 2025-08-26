@@ -800,4 +800,61 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get policy => 'سياسة الخصوصية';
+
+  @override
+  String get just_now => 'الآن';
+
+  @override
+  String get minute_ago => 'منذ دقيقة واحدة';
+
+  @override
+  String minutes_ago(Object minutes) {
+    return 'منذ $minutes دقائق';
+  }
+
+  @override
+  String get hour_ago => 'منذ ساعة واحدة';
+
+  @override
+  String hours_ago(Object hours) {
+    return 'منذ $hours ساعات';
+  }
+
+  @override
+  String get day_ago => 'منذ يوم واحد';
+
+  @override
+  String days_ago(Object days) {
+    return 'منذ $days أيام';
+  }
+
+  @override
+  String get month_ago => 'منذ شهر واحد';
+
+  @override
+  String months_ago(Object months) {
+    return 'منذ $months أشهر';
+  }
+
+  @override
+  String get year_ago => 'منذ سنة واحدة';
+
+  @override
+  String years_ago(Object years) {
+    return 'منذ $years سنوات';
+  }
+
+  @override
+  String get yesterday => 'yesterday';
+
+  @override
+  String get last_week => 'last week';
+
+  @override
+  String get week_ago => 'week ago';
+
+  @override
+  String weeks_ago(Object weeks) {
+    return '$weeks week ago';
+  }
 }

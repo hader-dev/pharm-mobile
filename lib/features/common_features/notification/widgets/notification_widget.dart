@@ -41,7 +41,12 @@ class NotificationWidget extends StatelessWidget {
                     .copyWith(color: onSurfaceColor),
               ),
               Text(
-                notification.createdAt.format,
+                notification.body,
+                style: context.responsiveTextTheme.current.body3Medium
+                    .copyWith(color: onSurfaceColor),
+              ),
+              Text(
+                notification.createdAt.getTimingAgo(context.translation!),
                 style: context.responsiveTextTheme.current.body3Medium
                     .copyWith(color: onSurfaceHintColor),
               ),

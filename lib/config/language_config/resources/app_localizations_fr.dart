@@ -812,4 +812,61 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get policy => 'Policy';
+
+  @override
+  String get just_now => 'à l\'instant';
+
+  @override
+  String get minute_ago => 'il y a 1 minute';
+
+  @override
+  String minutes_ago(Object minutes) {
+    return 'il y a $minutes minutes';
+  }
+
+  @override
+  String get hour_ago => 'il y a 1 heure';
+
+  @override
+  String hours_ago(Object hours) {
+    return 'il y a $hours heures';
+  }
+
+  @override
+  String get day_ago => 'il y a 1 jour';
+
+  @override
+  String days_ago(Object days) {
+    return 'il y a $days jours';
+  }
+
+  @override
+  String get month_ago => 'il y a 1 mois';
+
+  @override
+  String months_ago(Object months) {
+    return 'il y a $months mois';
+  }
+
+  @override
+  String get year_ago => 'il y a 1 an';
+
+  @override
+  String years_ago(Object years) {
+    return 'il y a $years ans';
+  }
+
+  @override
+  String get yesterday => 'hier';
+
+  @override
+  String get last_week => 'last week';
+
+  @override
+  String get week_ago => 'il y a 1 semaine';
+
+  @override
+  String weeks_ago(Object weeks) {
+    return 'il y a $weeks semaines';
+  }
 }

@@ -256,5 +256,20 @@
   "mark_all_as_read": "Mark all as read",
   "feedback_session_expired_please_login": "Session expired, please login again",
   "search_by_dci_brand_sku": "Search by DCI, Brand, SKU",
-  "policy":"Policy"
+  "policy": "Policy",
+  "just_now": "just now",
+  "minute_ago": "1 minute ago",
+  "minutes_ago": "{minutes} minutes ago",
+  "hour_ago": "1 hour ago",
+  "hours_ago": "{hours} hours ago",
+  "day_ago": "1 day ago",
+  "days_ago": "{days} days ago",
+  "month_ago": "1 month ago",
+  "months_ago": "{months} months ago",
+  "year_ago": "1 year ago",
+  "years_ago": "{years} years ago",
+  "yesterday": "yesterday",
+  "last_week": "last week",
+  "week_ago": "منذ أسبوع واحد",
+  "weeks_ago": "منذ {weeks} أسابيع"
 }
