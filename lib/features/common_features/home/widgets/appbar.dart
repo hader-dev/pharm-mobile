@@ -4,11 +4,8 @@ import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar.dart';
-import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
-import 'package:hader_pharm_mobile/features/common/text_fields/compact_custom_text_field.dart';
 import 'package:hader_pharm_mobile/features/common_features/notification/cubit/notifications_cubit.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
-import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -16,12 +13,10 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
   const HomeAppbar({super.key});
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight * 2.5);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight * 1.5);
 
   @override
   Widget build(BuildContext context) {
-    final translation = context.translation!;
-
     return ColoredBox(
       color: AppColors.accent1Shade2,
       child: Padding(
@@ -69,29 +64,6 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
               ],
             ),
             Gap(AppSizesManager.s12),
-            CustomAppBarV2.expanded(
-              bgColor: AppColors.accent1Shade2,
-              topPadding: MediaQuery.of(context).padding.top,
-              bottomPadding: MediaQuery.of(context).padding.bottom,
-              title: CompactCustomTextField(
-                hintText: translation.vendors_search_field_hint,
-                state: FieldState.normal,
-                isEnabled: true,
-                isFilled: true,
-                prefixIcon: Icon(
-                  Iconsax.search_normal,
-                  color: AppColors.accent1Shade1,
-                ),
-                suffixIcon: Icon(
-                  Icons.clear,
-                  color: AppColors.accent1Shade1,
-                ),
-                onChanged: (searchValue) {
-                  // TODO SEARCH VENDORS HOME
-                },
-                validationFunc: (value) {},
-              ),
-            ),
           ],
         ),
       ),

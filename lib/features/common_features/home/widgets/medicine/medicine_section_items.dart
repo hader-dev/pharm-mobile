@@ -38,7 +38,7 @@ class MedicinesSectionItems extends StatelessWidget {
             padding: const EdgeInsets.only(left: 0),
             itemCount: items.length,
             itemBuilder: (context, index) {
-              return Container(
+              return SizedBox(
                 width: screenWidth > 768 ? 300 : 240, 
                 child: MedicineWidget4(medicineData: items[index]),
               );
