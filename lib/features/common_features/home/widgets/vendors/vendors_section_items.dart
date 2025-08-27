@@ -26,7 +26,6 @@ class VendorsSectionItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     final spacing = _horizontalSpacing();
     final itemWidth = _getItemWidth(context, spacing);
 
@@ -34,10 +33,11 @@ class VendorsSectionItems extends StatelessWidget {
       builder: (context, state) {
         final items = context.read<VendorsCubit>().vendorsList;
 
-          if (state is VendorsLoading) {
-            return Center(child: CircularProgressIndicator(),);
-          }
-          
+        if (state is VendorsLoading) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
 
         if (state is VendorsLoadingFailed || items.isEmpty) {
           return Center(
@@ -47,32 +47,28 @@ class VendorsSectionItems extends StatelessWidget {
 
         final visibleItems = items.take(maxVisibleItems).toList();
 
-          return Material(
-            child: Wrap(
-              spacing: spacing,
-              runSpacing: spacing,
-              children:
-                  List.generate(min(maxVisibleItems, items.length), (index) {
-                final entity = visibleItems[index];
-                return SizedBox(
-                  width: itemWidth,
-                  child: FeaturedEntity(
-                    size: itemWidth,
-                    title: entity.name,
-                    onPress: () => RoutingManager.router.pushNamed(
-                      RoutingManager.vendorDetails,
-                      extra: entity.id,
+        return Material(
+          child: Wrap(
+            spacing: spacing,
+            runSpacing: spacing,
+            children:
+                List.generate(min(maxVisibleItems, items.length), (index) {
+              final entity = visibleItems[index];
+              return FeaturedEntity(
+                size: itemWidth,
+                title: entity.name,
+                onPress: () => RoutingManager.router.pushNamed(
+                  RoutingManager.vendorDetails,
+                  extra: entity.id,
+                ),
+                imageUrl: getItInstance.get<INetworkService>().getFilesPath(
+                      entity.thumbnailImage!.path,
                     ),
-                    imageUrl: getItInstance.get<INetworkService>().getFilesPath(
-                          entity.thumbnailImage!.path,
-                        ),
-                  ),
-                );
-              }),
-            ),
-          );
-        },
-      
+              );
+            }),
+          ),
+        );
+      },
     );
   }
 

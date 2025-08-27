@@ -58,9 +58,10 @@ class _HomeScreenState extends State<HomeScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Gap(AppSizesManager.s12),
-                PromotionSection(
-                  announcements: context.read<HomeCubit>().announcements,
-                ),
+                if (context.read<HomeCubit>().announcements.isNotEmpty)
+                  PromotionSection(
+                    announcements: context.read<HomeCubit>().announcements,
+                  ),
                 Gap(AppSizesManager.s16),
                 VendorSection(
                     minSectionHeight:

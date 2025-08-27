@@ -1726,17 +1726,17 @@ abstract class AppLocalizations {
   /// **'last week'**
   String get last_week;
 
-  /// No description provided for @week_ago.
+  /// No description provided for @no_items_found.
   ///
   /// In en, this message translates to:
-  /// **'One week ago'**
-  String get week_ago;
+  /// **'No items found'**
+  String get no_items_found;
 
-  /// No description provided for @weeks_ago.
+  /// No description provided for @refresh.
   ///
   /// In en, this message translates to:
-  /// **'{weeks} weeks ago'**
-  String weeks_ago(Object weeks);
+  /// **'Refresh'**
+  String get refresh;
 
   /// No description provided for @announcements.
   ///
@@ -1803,6 +1803,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Country of Origin'**
   String get country_of_origin;
+
+  /// No description provided for @week_ago.
+  ///
+  /// In en, this message translates to:
+  /// **'One week ago'**
+  String get week_ago;
+
+  /// No description provided for @weeks_ago.
+  ///
+  /// In en, this message translates to:
+  /// **'{weeks} weeks ago'**
+  String weeks_ago(Object weeks);
 
   /// No description provided for @no_description_available.
   ///

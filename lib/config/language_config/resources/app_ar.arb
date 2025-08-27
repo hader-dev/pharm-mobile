@@ -275,6 +275,8 @@
   "dosage": "الجرعة",
   "packaging": "التغليف",
   "type": "النوع",
+  "refresh": "تحديث",
+  "no_items_found": "لا يوجد منتجات",
   "lifetime": "مدة الصلاحية",
   "laboratory": "المختبر",
   "country_of_origin": "بلد المنشأ",

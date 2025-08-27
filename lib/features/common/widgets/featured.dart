@@ -20,7 +20,7 @@ class FeaturedEntity extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: size,
+      height: size * 1.25,
       width: size,
       child: InkWell(
         onTap: onPress,

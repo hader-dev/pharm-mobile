@@ -851,12 +851,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get last_week => 'last week';
 
   @override
-  String get week_ago => 'week ago';
+  String get no_items_found => 'لا يوجد منتجات';
 
   @override
-  String weeks_ago(Object weeks) {
-    return '$weeks week ago';
-  }
+  String get refresh => 'تحديث';
 
   @override
   String get announcements => 'الإعلانات';
@@ -890,6 +888,14 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get country_of_origin => 'بلد المنشأ';
+
+  @override
+  String get week_ago => 'week ago';
+
+  @override
+  String weeks_ago(Object weeks) {
+    return '$weeks week ago';
+  }
 
   @override
   String get no_description_available => 'لا يوجد وصف متاح';
