@@ -19,11 +19,15 @@ import '../../../utils/enums.dart';
 import '../../app_layout/app_layout.dart';
 import '../../common_features/cart/cubit/cart_cubit.dart';
 import '../buttons/solid/primary_icon_button.dart';
-import '../chips/custom_chip.dart' show CustomChip;
+
+typedef OnFavoriteCallback = void Function(BaseParaPharmaCatalogModel medicine);
 
 class ParaPharmaWidget2 extends StatelessWidget {
   final BaseParaPharmaCatalogModel paraPharmData;
-  const ParaPharmaWidget2({super.key, required this.paraPharmData});
+  final OnFavoriteCallback? onFavoriteCallback;
+
+  const ParaPharmaWidget2(
+      {super.key, required this.paraPharmData, this.onFavoriteCallback});
 
   @override
   Widget build(BuildContext context) {
@@ -111,8 +115,8 @@ class ParaPharmaWidget2 extends StatelessWidget {
                           const Gap(AppSizesManager.s4),
                           Text(
                               paraPharmData.stockQuantity > 0
-                                  ? "In Stock"
-                                  : "Out of Stock",
+                                  ? context.translation!.in_stock
+                                  : context.translation!.out_stock,
                               style: context
                                   .responsiveTextTheme.current.bodySmall
                                   .copyWith(
@@ -122,23 +126,50 @@ class ParaPharmaWidget2 extends StatelessWidget {
                         ],
                       ),
                     ),
-                  )
+                  ),
+                  if (onFavoriteCallback != null)
+                    Positioned(
+                      bottom: 0,
+                      right: 0,
+                      child: IconButton(
+                        icon: Container(
+                          width: 50,
+                          height: 50,
+                          decoration: BoxDecoration(
+                            color: AppColors.accent1Shade1.withAlpha(150),
+                            shape: BoxShape.circle,
+                          ),
+                          child: Icon(
+                            paraPharmData.isLiked
+                                ? Iconsax.heart5
+                                : Iconsax.heart,
+                            color: paraPharmData.isLiked
+                                ? Colors.red
+                                : Colors.black,
+                            size: AppSizesManager.iconSize30,
+                          ),
+                        ),
+                        onPressed: () {
+                          onFavoriteCallback?.call(paraPharmData);
+                        },
+                      ),
+                    )
                 ])),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Gap(AppSizesManager.s8),
-                Row(children: [
-                  Transform.scale(
-                      alignment: Alignment.centerLeft,
-                      scale: .9,
-                      child: CustomChip(
-                          label: "Antibiotic",
-                          color: AppColors.bgDarken2,
-                          onTap: () {})),
-                  Spacer()
-                ]),
+                // Row(children: [
+                //   Transform.scale(
+                //       alignment: Alignment.centerLeft,
+                //       scale: .9,
+                //       child: CustomChip(
+                //           label: "Antibiotic",
+                //           color: AppColors.bgDarken2,
+                //           onTap: () {})),
+                //   Spacer()
+                // ]),
                 Gap(AppSizesManager.s8),
                 Text(paraPharmData.name,
                     maxLines: 1,
@@ -191,10 +222,9 @@ class ParaPharmaWidget2 extends StatelessWidget {
                                       quantity: 1),
                                   true);
                         },
-                        icon: Icon(
-                          Iconsax.add,
-                          color: Colors.black,
-                        ),
+                        icon: Icon(Iconsax.add,
+                            color: Colors.black,
+                            size: AppSizesManager.iconSize30),
                       ),
                     )
                   ],

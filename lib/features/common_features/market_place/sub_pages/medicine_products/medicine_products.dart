@@ -4,6 +4,7 @@ import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/end_of_load_result_widget.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/medicine_widget_3.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/medicine_products/widget/floating_filter.dart';
+import 'package:hader_pharm_mobile/models/medicine_catalog.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import 'cubit/medicine_products_cubit.dart';
@@ -39,6 +40,13 @@ class _MedicineProductsPageState extends State<MedicineProductsPage>
                 final bool isLoadingMore = state is MedicineProductsLoading;
                 final bool hasReachedEnd = state is MedicinesLoadLimitReached;
 
+                void onLikeTapped(BaseMedicineCatalogModel medicine) {
+                  final id = medicine.id;
+                  medicine.isLiked
+                      ? cubit.unlikeMedicinesCatalog(id)
+                      : cubit.likeMedicinesCatalog(id);
+                }
+
                 return RefreshIndicator(
                   onRefresh: () => cubit.getMedicines(),
                   child: GridView.builder(
@@ -57,6 +65,7 @@ class _MedicineProductsPageState extends State<MedicineProductsPage>
                         final medicine = medicines[index];
                         return MedicineWidget3(
                           medicineData: medicine,
+                          onFavoriteCallback: onLikeTapped,
                         );
                       } else {
                         if (isLoadingMore) {

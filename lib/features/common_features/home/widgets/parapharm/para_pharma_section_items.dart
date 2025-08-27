@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
-import 'package:hader_pharm_mobile/features/common/widgets/para_pharma_widget_3.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/para_pharma_widget_2.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/cubit/para_pharma_cubit.dart';
+import 'package:hader_pharm_mobile/models/para_pharma.dart';
 
 class ParaPharmaSectionItems extends StatelessWidget {
   const ParaPharmaSectionItems({super.key, required this.minSectionHeight});
@@ -11,27 +12,34 @@ class ParaPharmaSectionItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    
+
     return BlocBuilder<ParaPharmaCubit, ParaPharmaState>(
       builder: (context, state) {
         ParaPharmaCubit paraPharmaProductsCubit =
             context.read<ParaPharmaCubit>();
         final items = paraPharmaProductsCubit.paraPharmaProducts;
 
-
         if (state is ParaPharmaProductsLoading) {
-            return Center(child: CircularProgressIndicator(),);
-          }
-          
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
 
         if (state is ParaPharmaProductsLoadingFailed || items.isEmpty) {
           return Center(
             child: EmptyListWidget(),
           );
         }
+        void onFavoriteCallback(BaseParaPharmaCatalogModel medicine) {
+          if (medicine.isLiked) {
+            paraPharmaProductsCubit.likeParaPharmaCatalog(medicine.id);
+          } else {
+            paraPharmaProductsCubit.unlikeParaPharmaCatalog(medicine.id);
+          }
+        }
 
         return SizedBox(
-          height: 240, 
+          height: 240,
           child: ListView.builder(
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
@@ -39,8 +47,10 @@ class ParaPharmaSectionItems extends StatelessWidget {
             itemCount: items.length,
             itemBuilder: (context, index) {
               return SizedBox(
-                width: screenWidth > 768 ? 300 : 240, 
-                child: ParaPharmaWidget4(paraPharmData: items[index]),
+                width: screenWidth > 768 ? 300 : 240,
+                child: ParaPharmaWidget2(
+                    paraPharmData: items[index],
+                    onFavoriteCallback: onFavoriteCallback),
               );
             },
           ),
