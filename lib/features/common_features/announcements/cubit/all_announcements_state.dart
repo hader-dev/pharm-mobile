@@ -39,10 +39,10 @@ class AnnouncementsLoadLimitReached extends AllAnnouncementsState {
   });
 }
 
-class AllAnnouncementsError extends AllAnnouncementsState {
+class AllAnnouncementsLoadingFailed extends AllAnnouncementsState {
   final String message;
 
-  const AllAnnouncementsError({
+  const AllAnnouncementsLoadingFailed({
     required super.announcements,
     required super.hasReachedMax,
     required this.message,

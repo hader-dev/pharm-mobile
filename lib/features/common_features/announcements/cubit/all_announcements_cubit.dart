@@ -10,25 +10,30 @@ class AllAnnouncementsCubit extends Cubit<AllAnnouncementsState> {
   int totalItemsCount = 0;
   int offSet = 0;
   List<AnnouncementModel> announcements = [];
-  
+  String? companyId;
+
   final PromotionRepository announcementsRepo;
   final ScrollController scrollController;
+  int limit = 20;
 
-  AllAnnouncementsCubit({
-    required this.announcementsRepo,
-    required this.scrollController,
-  }) : super(const AllAnnouncementsInitial()) {
+  AllAnnouncementsCubit(
+      {required this.announcementsRepo,
+      required this.scrollController,
+      this.companyId})
+      : super(const AllAnnouncementsInitial()) {
     _onScroll();
   }
 
   Future<void> getAnnouncements({int offset = 0}) async {
     try {
-      emit(AllAnnouncementsLoading(announcements: announcements, hasReachedMax: false));
-      
-      final response = await announcementsRepo.getPromotions(limit: 2);
+      emit(AllAnnouncementsLoading(
+          announcements: announcements, hasReachedMax: false));
+
+      final response = await announcementsRepo.getPromotions(
+          limit: limit, companyId: companyId);
       totalItemsCount = response.totalItems;
       announcements = response.announcements;
-      
+
       emit(AllAnnouncementsLoaded(
         announcements: announcements,
         hasReachedMax: announcements.length >= totalItemsCount,
@@ -36,7 +41,7 @@ class AllAnnouncementsCubit extends Cubit<AllAnnouncementsState> {
     } catch (e, stack) {
       debugPrintStack(stackTrace: stack);
       debugPrint("Error loading announcements: $e");
-      emit(AllAnnouncementsError(
+      emit(AllAnnouncementsLoadingFailed(
         announcements: announcements,
         hasReachedMax: false,
         message: "Failed to load announcements",
@@ -47,17 +52,20 @@ class AllAnnouncementsCubit extends Cubit<AllAnnouncementsState> {
   Future<void> loadMoreAnnouncements() async {
     try {
       if (offSet >= totalItemsCount) {
-        emit(AnnouncementsLoadLimitReached(announcements: announcements, hasReachedMax: true));
+        emit(AnnouncementsLoadLimitReached(
+            announcements: announcements, hasReachedMax: true));
         return;
       }
 
-      offSet = offSet + 2; 
-      emit(AllAnnouncementsLoading(announcements: announcements, hasReachedMax: false));
-      
-      final response = await announcementsRepo.getPromotions(limit: 2, offset: offSet);
+      offSet = offSet + limit;
+      emit(AllAnnouncementsLoading(
+          announcements: announcements, hasReachedMax: false));
+
+      final response = await announcementsRepo.getPromotions(
+          limit: limit, offset: offSet, companyId: companyId);
       totalItemsCount = response.totalItems;
       announcements.addAll(response.announcements);
-      
+
       emit(AllAnnouncementsLoaded(
         announcements: announcements,
         hasReachedMax: announcements.length >= totalItemsCount,
@@ -65,7 +73,7 @@ class AllAnnouncementsCubit extends Cubit<AllAnnouncementsState> {
     } catch (e, stack) {
       debugPrintStack(stackTrace: stack);
       debugPrint("Error loading more announcements: $e");
-      emit(AllAnnouncementsError(
+      emit(AllAnnouncementsLoadingFailed(
         announcements: announcements,
         hasReachedMax: false,
         message: "Failed to load more announcements",
@@ -87,9 +95,7 @@ class AllAnnouncementsCubit extends Cubit<AllAnnouncementsState> {
           await loadMoreAnnouncements();
         } else {
           emit(AnnouncementsLoadLimitReached(
-            announcements: announcements, 
-            hasReachedMax: true
-          ));
+              announcements: announcements, hasReachedMax: true));
         }
       }
     });

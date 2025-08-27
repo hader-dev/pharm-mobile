@@ -1726,6 +1726,36 @@ abstract class AppLocalizations {
   /// **'last week'**
   String get last_week;
 
+  /// No description provided for @week_ago.
+  ///
+  /// In en, this message translates to:
+  /// **'One week ago'**
+  String get week_ago;
+
+  /// No description provided for @weeks_ago.
+  ///
+  /// In en, this message translates to:
+  /// **'{weeks} weeks ago'**
+  String weeks_ago(Object weeks);
+
+  /// No description provided for @announcements.
+  ///
+  /// In en, this message translates to:
+  /// **'Announcements'**
+  String get announcements;
+
+  /// No description provided for @see_all.
+  ///
+  /// In en, this message translates to:
+  /// **'See All'**
+  String get see_all;
+
+  /// No description provided for @all_announcements.
+  ///
+  /// In en, this message translates to:
+  /// **'All Announcements'**
+  String get all_announcements;
+
   /// No description provided for @main_features.
   ///
   /// In en, this message translates to:
@@ -1773,36 +1803,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Country of Origin'**
   String get country_of_origin;
-
-  /// No description provided for @week_ago.
-  ///
-  /// In en, this message translates to:
-  /// **'One week ago'**
-  String get week_ago;
-
-  /// No description provided for @weeks_ago.
-  ///
-  /// In en, this message translates to:
-  /// **'{weeks} weeks ago'**
-  String weeks_ago(Object weeks);
-
-  /// No description provided for @announcements.
-  ///
-  /// In en, this message translates to:
-  /// **'Announcements'**
-  String get announcements;
-
-  /// No description provided for @see_all.
-  ///
-  /// In en, this message translates to:
-  /// **'See All'**
-  String get see_all;
-
-  /// No description provided for @all_announcements.
-  ///
-  /// In en, this message translates to:
-  /// **'All Announcements'**
-  String get all_announcements;
 
   /// No description provided for @no_description_available.
   ///
@@ -1869,7 +1869,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Unauthorized distributor login'**
   String get unauthorized_distributor_login;
-
 }
 
 class _AppLocalizationsDelegate

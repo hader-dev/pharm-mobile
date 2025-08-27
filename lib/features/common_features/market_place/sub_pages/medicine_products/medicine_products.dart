@@ -6,6 +6,7 @@ import 'package:hader_pharm_mobile/features/common/widgets/medicine_widget_3.dar
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/medicine_products/widget/floating_filter.dart';
 import 'package:hader_pharm_mobile/models/medicine_catalog.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
+import 'package:hader_pharm_mobile/utils/responsive/silver_grid_params.dart';
 
 import 'cubit/medicine_products_cubit.dart';
 
@@ -53,10 +54,14 @@ class _MedicineProductsPageState extends State<MedicineProductsPage>
                     controller: cubit.scrollController,
                     physics: const AlwaysScrollableScrollPhysics(),
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: context.marketplaceCrossAxisCount,
-                      crossAxisSpacing: context.marketplaceGridSpacing,
-                      mainAxisSpacing: context.marketplaceMainAxisSpacing,
-                      childAspectRatio: context.marketplaceAspectRatio,
+                      crossAxisCount: calculateMarketplaceCrossAxisCount(
+                          context.deviceSize),
+                      crossAxisSpacing:
+                          calculateMarketplaceGridSpacing(context.deviceSize),
+                      mainAxisSpacing: calculateMarketplaceMainAxisSpacing(
+                          context.deviceSize),
+                      childAspectRatio:
+                          calculateMarketplaceAspectRatio(context.deviceSize),
                     ),
                     itemCount: medicines.length +
                         (isLoadingMore || hasReachedEnd ? 1 : 0),

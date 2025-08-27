@@ -851,6 +851,23 @@ class AppLocalizationsAr extends AppLocalizations {
   String get last_week => 'last week';
 
   @override
+  String get week_ago => 'week ago';
+
+  @override
+  String weeks_ago(Object weeks) {
+    return '$weeks week ago';
+  }
+
+  @override
+  String get announcements => 'الإعلانات';
+
+  @override
+  String get see_all => 'عرض الكل';
+
+  @override
+  String get all_announcements => 'جميع الإعلانات';
+
+  @override
   String get main_features => 'الميزات الرئيسية';
 
   @override
@@ -875,23 +892,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get country_of_origin => 'بلد المنشأ';
 
   @override
-  String get week_ago => 'week ago';
-
-  @override
-  String weeks_ago(Object weeks) {
-    return '$weeks week ago';
-  }
-
-  @override
-
-  String get announcements => 'الإعلانات';
-
-  @override
-  String get see_all => 'عرض الكل';
-
-  @override
-  String get all_announcements => 'جميع الإعلانات';
-
   String get no_description_available => 'لا يوجد وصف متاح';
 
   @override
@@ -923,5 +923,4 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get unauthorized_distributor_login => 'تسجيل دخول غير مصرح به';
-
 }

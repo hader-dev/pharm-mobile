@@ -863,6 +863,23 @@ class AppLocalizationsFr extends AppLocalizations {
   String get last_week => 'last week';
 
   @override
+  String get week_ago => 'il y a 1 semaine';
+
+  @override
+  String weeks_ago(Object weeks) {
+    return 'il y a $weeks semaines';
+  }
+
+  @override
+  String get announcements => 'Annonces';
+
+  @override
+  String get see_all => 'Voir Tout';
+
+  @override
+  String get all_announcements => 'Toutes les Annonces';
+
+  @override
   String get main_features => 'Caractéristiques principales';
 
   @override
@@ -887,21 +904,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get country_of_origin => 'Pays d\'origine';
 
   @override
-  String get week_ago => 'il y a 1 semaine';
-
-  @override
-  String weeks_ago(Object weeks) {
-    return 'il y a $weeks semaines';
-  }
-
-  @override
-  String get announcements => 'Annonces';
-
-  @override
-  String get see_all => 'Voir Tout';
-
-  @override
-  String get all_announcements => 'Toutes les Annonces';
   String get no_description_available => 'Aucune description disponible';
 
   @override

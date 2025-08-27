@@ -12,6 +12,8 @@ import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
+import 'package:hader_pharm_mobile/features/common_features/announcements/cubit/all_announcements_cubit.dart';
+import 'package:hader_pharm_mobile/repositories/remote/announcement/announcement_repository_impl.dart';
 import 'package:hader_pharm_mobile/repositories/remote/company/company_repository_impl.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
@@ -38,6 +40,14 @@ class VendorDetails extends StatelessWidget {
                     client: getItInstance.get<INetworkService>()))
               ..getVendorDetails(companyId),
           ),
+          BlocProvider(
+              create: (context) => AllAnnouncementsCubit(
+                    companyId: companyId,
+                    announcementsRepo: PromotionRepository(
+                      client: getItInstance.get<INetworkService>(),
+                    ),
+                    scrollController: ScrollController(),
+                  )..getAnnouncements()),
         ],
         child: BlocListener<VendorDetailsCubit, VendorDetailsState>(
           listener: (context, state) {
@@ -65,10 +75,7 @@ class VendorDetails extends StatelessWidget {
               title: BlocBuilder<VendorDetailsCubit, VendorDetailsState>(
                 builder: (context, state) {
                   if (state is VendorDetailsLoading) {
-                    return Text("Loading...",
-                        style: context
-                            .responsiveTextTheme.current.headLine4SemiBold
-                            .copyWith(color: AppColors.bgWhite));
+                    return const CircularProgressIndicator();
                   }
                   return Row(children: [
                     Container(

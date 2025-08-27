@@ -269,7 +269,7 @@
   "weeks_ago": "{weeks} week ago",
   "announcements": "الإعلانات",
   "see_all": "عرض الكل",
-  "all_announcements": "جميع الإعلانات"
+  "all_announcements": "جميع الإعلانات",
   "main_features": "الميزات الرئيسية",
   "pharmaceutical_form": "الشكل الصيدلاني",
   "dosage": "الجرعة",
@@ -289,5 +289,4 @@
   "category": "القسم",
   "brand": "الماركة",
   "unauthorized_distributor_login": "تسجيل دخول غير مصرح به"
-
 }

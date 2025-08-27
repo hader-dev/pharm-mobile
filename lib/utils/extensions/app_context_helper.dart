@@ -35,20 +35,4 @@ extension BuildContextHelper on BuildContext {
     }
   }
 
-  int get marketplaceCrossAxisCount {
-    if (deviceSize.width <= DeviceSizes.mediumTablet.width) {
-      return 1;
-    } else {
-      return 2;
-    }
-  }
-
-  double get marketplaceAspectRatio =>
-      deviceSize.width <= DeviceSizes.mediumTablet.width ? 1.5 : 0.85;
-
-  double get marketplaceGridSpacing =>
-      deviceSize.width <= DeviceSizes.mediumTablet.width ? 4 : 10;
-
-  double get marketplaceMainAxisSpacing =>
-      deviceSize.width <= DeviceSizes.mediumTablet.width ? 4 : 6;
 }

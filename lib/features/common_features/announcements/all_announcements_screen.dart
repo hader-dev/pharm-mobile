@@ -45,32 +45,34 @@ class _AllAnnouncementsScreenState extends State<AllAnnouncementsScreen> {
         scrollController: _scrollController,
       )..getAnnouncements(),
       child: Scaffold(
-        appBar:  CustomAppBarV2.alternate(
-            topPadding: MediaQuery.of(context).padding.top,
-            bottomPadding: MediaQuery.of(context).padding.bottom,
-            leading: IconButton(
-              icon: const Icon(
-                Iconsax.arrow_left,
-                color: Colors.white,
-                size: AppSizesManager.iconSize25,
-              ),
-              onPressed: () => context.pop(),
+        appBar: CustomAppBarV2.alternate(
+          topPadding: MediaQuery.of(context).padding.top,
+          bottomPadding: MediaQuery.of(context).padding.bottom,
+          leading: IconButton(
+            icon: const Icon(
+              Iconsax.arrow_left,
+              color: Colors.white,
+              size: AppSizesManager.iconSize25,
             ),
-            title: Text(
-              context.translation!.all_announcements,
-              style: context.responsiveTextTheme.current.headLine3SemiBold
-                  .copyWith(
-                color: Colors.white,
-              ),
+            onPressed: () => context.pop(),
+          ),
+          title: Text(
+            context.translation!.all_announcements,
+            style:
+                context.responsiveTextTheme.current.headLine3SemiBold.copyWith(
+              color: Colors.white,
             ),
           ),
+        ),
         body: BlocBuilder<AllAnnouncementsCubit, AllAnnouncementsState>(
           builder: (context, state) {
-            if (state is AllAnnouncementsLoading && state.announcements.isEmpty) {
+            if (state is AllAnnouncementsLoading &&
+                state.announcements.isEmpty) {
               return const Center(child: CircularProgressIndicator());
             }
 
-            if (state is AllAnnouncementsError && state.announcements.isEmpty) {
+            if (state is AllAnnouncementsLoadingFailed &&
+                state.announcements.isEmpty) {
               return Center(
                 child: EmptyListWidget(
                   onRefresh: () {
@@ -93,8 +95,10 @@ class _AllAnnouncementsScreenState extends State<AllAnnouncementsScreen> {
               child: ListView.separated(
                 controller: _scrollController,
                 padding: const EdgeInsets.all(AppSizesManager.p16),
-                itemCount: state.announcements.length + (state.hasReachedMax ? 0 : 1),
-                separatorBuilder: (context, index) => const Gap(AppSizesManager.s12),
+                itemCount:
+                    state.announcements.length + (state.hasReachedMax ? 0 : 1),
+                separatorBuilder: (context, index) =>
+                    const Gap(AppSizesManager.s12),
                 itemBuilder: (context, index) {
                   if (index >= state.announcements.length) {
                     return const Center(

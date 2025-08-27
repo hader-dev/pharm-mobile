@@ -14,6 +14,7 @@ import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../subPages/about_vendor/about_vendor.dart';
+import '../subPages/announcements/announcements.dart';
 import '../subPages/medicines/medicines.dart';
 import '../subPages/para_pharma/para_pharma.dart';
 
@@ -22,6 +23,7 @@ class VandorDetailsTabBarSection extends StatefulWidget {
     "About",
     "Medicine",
     "Para-Pharma",
+    "Announcement"
   ];
   VandorDetailsTabBarSection({super.key, required this.companyId});
   final String companyId;
@@ -37,7 +39,7 @@ class _VandorDetailsTabBarSectionState extends State<VandorDetailsTabBarSection>
   @override
   void initState() {
     super.initState();
-    tabsController = TabController(length: 3, vsync: this);
+    tabsController = TabController(length: widget.tabs.length, vsync: this);
   }
 
   @override
@@ -101,7 +103,8 @@ class _VandorDetailsTabBarSectionState extends State<VandorDetailsTabBarSection>
                     vendorData: BlocProvider.of<VendorDetailsCubit>(context)
                         .vendorData),
                 MedicinesPage(),
-                ParapharmaPage()
+                ParapharmaPage(),
+                AnnouncementsPage()
               ],
             ),
           ),
