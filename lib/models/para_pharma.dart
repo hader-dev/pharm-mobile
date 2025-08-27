@@ -126,6 +126,34 @@ class ParaPharmaCatalogModel extends BaseParaPharmaCatalogModel {
     required this.brand,
     required this.category,
   });
+
+  factory ParaPharmaCatalogModel.empty() {
+    return ParaPharmaCatalogModel(
+        id: '',
+        name: '',
+        unitPriceHt: '',
+        unitPriceTtc: '',
+        tvaPercentage: '',
+        thumbnailImage: null,
+        image: null,
+        stockQuantity: 0,
+        isActive: false,
+        company: null,
+        brand: Brand.empty(),
+        category: Category.empty(),
+        isLiked: false,
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now(),
+        companyId: '',
+        categoryId: '',
+        brandId: '',
+        packaging: '',
+        sku: '',
+        description: '',
+        metaData: {},
+        minOrderQuantity: 0,
+        maxOrderQuantity: 0);
+  }
 }
 
 class Brand extends BaseBrand {

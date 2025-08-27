@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/models/para_medical_filters.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
@@ -76,22 +77,33 @@ class ParaPharmaRepository extends IParaPharmaRepository {
       queryParams['filter[companyId]'] = companyId;
     }
 
-    var decodedResponse = await client.sendRequest(
-        () => client.get(Urls.paraPharamaCatalog, queryParams: queryParams));
-    return ParaPharmaResponse.fromJson(decodedResponse);
+    try {
+      var decodedResponse = await client.sendRequest(
+          () => client.get(Urls.paraPharamaCatalog, queryParams: queryParams));
+      return ParaPharmaResponse.fromJson(decodedResponse);
+    } catch (e) {
+      debugPrint("$e");
+      return ParaPharmaResponse(data: [], totalItems: 0);
+    }
   }
 
   @override
   Future<ParaPharmaCatalogModel> getParaPharmaCatalogById(String id) async {
-    return await client
-        .sendRequest(() => client.get(
-              '${Urls.paraPharamaCatalog}/$id',
-              queryParams: {
-                'computed[isFavorite]': 'true',
-              },
-            ))
-        .then((response) {
-      return jsonToParapharmaCatalogueItem(response);
-    });
+    try {
+      return await client
+          .sendRequest(() => client.get(
+                '${Urls.paraPharamaCatalog}/$id',
+                queryParams: {
+                  'computed[isFavorite]': 'true',
+                },
+              ))
+          .then((response) {
+        return jsonToParapharmaCatalogueItem(response);
+      });
+    } catch (e, stacktrack) {
+      debugPrintStack(stackTrace: stacktrack);
+      debugPrint("$e");
+      return ParaPharmaCatalogModel.empty();
+    }
   }
 }

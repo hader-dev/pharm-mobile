@@ -17,4 +17,5 @@ class ImageModel {
         mimetype: json["mimetype"] ?? "",
         size: json["size"] ?? 0,
       );
+
 }
