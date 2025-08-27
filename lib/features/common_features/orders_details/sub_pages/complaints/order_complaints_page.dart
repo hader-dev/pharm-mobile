@@ -12,11 +12,12 @@ class OrderItemsComplaintPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<OrderDetailsCubit>();
     final scrollContoller = ScrollController();
 
     return BlocBuilder<OrderDetailsCubit, OrdersDetailsState>(
         builder: (context, state) {
+      final cubit = context.read<OrderDetailsCubit>();
+
       if (state is OrderDetailsLoading) {
         return Column(
           mainAxisSize: MainAxisSize.max,
@@ -29,61 +30,68 @@ class OrderItemsComplaintPage extends StatelessWidget {
       }
 
       if (cubit.orderClaims.isEmpty || state is OrderDetailsLoadingFailed) {
-        return Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Center(
-              child: EmptyListWidget(),
-            ),
-          ],
+        return RefreshIndicator(
+          onRefresh: () => cubit.getOrderComplaints(),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Center(
+                child: EmptyListWidget(),
+              ),
+            ],
+          ),
         );
       }
 
-      return Container(
-        padding: const EdgeInsets.symmetric(
-          vertical: AppSizesManager.p12,
-          horizontal: AppSizesManager.p6,
-        ),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius:
-              BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              context.translation!.order_complaint,
-              style: context.responsiveTextTheme.current.headLine4SemiBold,
-            ),
-            const SizedBox(height: 12),
-            Container(
-              constraints: BoxConstraints(
-                maxHeight: MediaQuery.of(context).size.height * 0.7,
+      debugPrint("Building");
+      return RefreshIndicator(
+        onRefresh: () => cubit.getOrderComplaints(),
+        child: Container(
+          padding: const EdgeInsets.symmetric(
+            vertical: AppSizesManager.p12,
+            horizontal: AppSizesManager.p6,
+          ),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius:
+                BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                context.translation!.order_complaint,
+                style: context.responsiveTextTheme.current.headLine4SemiBold,
               ),
-              child: Scrollbar(
-                controller: scrollContoller,
-                child: Padding(
-                  padding: const EdgeInsets.only(right: AppSizesManager.p8),
-                  child: Material(
-                    child: ListView(
-                      controller: scrollContoller,
-                      shrinkWrap: true,
-                      children: cubit.orderClaims
-                          .map(
-                            (OrderClaimHeaderModel item) =>
-                                OrderComplaintHeaderWidget(
-                              claim: item,
-                            ),
-                          )
-                          .toList(),
+              const SizedBox(height: 12),
+              Container(
+                constraints: BoxConstraints(
+                  maxHeight: MediaQuery.of(context).size.height * 0.7,
+                ),
+                child: Scrollbar(
+                  controller: scrollContoller,
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: AppSizesManager.p8),
+                    child: Material(
+                      child: ListView(
+                        controller: scrollContoller,
+                        shrinkWrap: true,
+                        children: cubit.orderClaims
+                            .map(
+                              (OrderClaimHeaderModel item) =>
+                                  OrderComplaintHeaderWidget(
+                                claim: item,
+                              ),
+                            )
+                            .toList(),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       );
     });

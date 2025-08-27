@@ -36,6 +36,8 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
       this.orderData = orderData;
       this.orderClaims = orderClaims.claims;
 
+      debugPrint("Claims length ${orderClaims.claims.length}");
+
       emit(OrderDetailsLoaded());
     } catch (e, stacktrace) {
       debugPrint("$e");

@@ -93,7 +93,7 @@ class OrderComplaintsCubit extends Cubit<OrdersComplaintState> {
 
       emit(OrderComplaintsLoaded());
 
-      RoutingManager.router.safePop();
+      RoutingManager.router.safePop(true);
 
       return res;
     } catch (e) {

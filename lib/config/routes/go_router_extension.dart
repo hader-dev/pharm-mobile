@@ -2,9 +2,9 @@ import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 
 extension GoRouterExtension on GoRouter {
-  void safePop() {
+  void safePop<T extends Object?>([T? result])  {
     if (canPop()) {
-      pop();
+      pop(result);
     }
   }
 

@@ -40,8 +40,9 @@ class OrdersDetailsPage extends StatelessWidget {
         if (state is OrderDetailsLoadingFailed) {
           return const EmptyListWidget();
         }
+        final cubit = context.read<OrderDetailsCubit>();
 
-        final item = context.read<OrderDetailsCubit>().orderData!;
+        final item = cubit.orderData!;
 
         return SingleChildScrollView(
           child: Column(
@@ -50,9 +51,8 @@ class OrdersDetailsPage extends StatelessWidget {
             children: <Widget>[
               ShippingAddressSection(
                 address: item.deliveryAddress,
-                latitude: context.read<OrderDetailsCubit>().orderData!.latitude,
-                longitude:
-                    context.read<OrderDetailsCubit>().orderData!.longitude,
+                latitude: cubit.orderData!.latitude,
+                longitude: cubit.orderData!.longitude,
               ),
               Container(
                 margin:
@@ -103,9 +103,16 @@ class OrdersDetailsPage extends StatelessWidget {
                       padding: buttonsPadding,
                       child: PrimaryTextButton(
                         label: context.translation!.item_complaint,
-                        onTap: () => RoutingManager.router.pushNamed(
-                            RoutingManager.orderComplaint,
-                            extra: {"orderId": item.id, "itemId": item.id}),
+                        onTap: () {
+                          RoutingManager.router.pushNamed(
+                              RoutingManager.orderComplaint,
+                              extra: {
+                                "orderId": item.id,
+                                "itemId": item.id
+                              }).then((value) => {
+                                if (value == true) {cubit.getOrderComplaints()}
+                              });
+                        },
                         color: AppColors.accent1Shade1,
                       ),
                     ),
