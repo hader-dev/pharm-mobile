@@ -1,12 +1,13 @@
 import 'package:cached_network_image_plus/flutter_cached_network_image_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
+import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/widgets/quick_add_modal.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
+import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/price_formatter.dart';
@@ -14,10 +15,6 @@ import 'package:iconsax/iconsax.dart';
 
 import '../../../config/routes/routing_manager.dart';
 import '../../../config/theme/colors_manager.dart';
-import '../../../models/create_cart_item.dart';
-import '../../../utils/enums.dart';
-import '../../app_layout/app_layout.dart';
-import '../../common_features/cart/cubit/cart_cubit.dart';
 import '../buttons/solid/primary_icon_button.dart';
 
 typedef OnFavoriteCallback = void Function(BaseParaPharmaCatalogModel medicine);
@@ -213,14 +210,12 @@ class ParaPharmaWidget2 extends StatelessWidget {
                         borderColor: AppColors.accent1Shade1,
                         bgColor: Colors.transparent,
                         onPressed: () {
-                          AppLayout.appLayoutScaffoldKey.currentContext!
-                              .read<CartCubit>()
-                              .addToCart(
-                                  CreateCartItemModel(
-                                      productId: paraPharmData.id,
-                                      productType: ProductTypes.para_pharmacy,
-                                      quantity: 1),
-                                  true);
+                          BottomSheetHelper.showCommonBottomSheet(
+                              initialChildSize: .3,
+                              context: context,
+                              child: QuickCartAddModal(
+                                paraPharmaCatalogId: paraPharmData.id,
+                              ));
                         },
                         icon: Icon(Iconsax.add,
                             color: Colors.black,

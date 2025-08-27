@@ -1,23 +1,20 @@
 import 'package:cached_network_image_plus/flutter_cached_network_image_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
-import 'package:hader_pharm_mobile/features/app_layout/app_layout.dart';
-import 'package:hader_pharm_mobile/features/common_features/cart/cubit/cart_cubit.dart';
+import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/widgets/quick_add_modal.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
+import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/price_formatter.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../config/theme/colors_manager.dart';
-import '../../../models/create_cart_item.dart';
 import '../../../models/medicine_catalog.dart';
-import '../../../utils/enums.dart';
 import '../buttons/solid/primary_icon_button.dart' show PrimaryIconButton;
 
 typedef OnFavoriteCallback = void Function(BaseMedicineCatalogModel medicine);
@@ -108,12 +105,12 @@ class MedicineWidget3 extends StatelessWidget {
                         borderColor: AppColors.accent1Shade1,
                         bgColor: Colors.transparent,
                         onPressed: () {
-                          AppLayout.appLayoutScaffoldKey.currentContext!
-                              .read<CartCubit>()
-                              .addToCart(CreateCartItemModel(
-                                  productId: medicineData.id,
-                                  productType: ProductTypes.medicine,
-                                  quantity: 1));
+                          BottomSheetHelper.showCommonBottomSheet(
+                              initialChildSize: .3,
+                              context: context,
+                              child: QuickCartAddModal(
+                                medicineCatalogId: medicineData.id,
+                              ));
                         },
                         icon: Icon(
                           Iconsax.add,
