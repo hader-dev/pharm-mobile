@@ -21,7 +21,6 @@ class FloatingFilter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     if (isFloatingStyle) {
       return InkWell(
         onTap: onTap,
@@ -30,7 +29,7 @@ class FloatingFilter extends StatelessWidget {
           width: 56,
           height: 56,
           decoration: BoxDecoration(
-            color: AppColors.accent1Shade1.withAlpha(50),
+            color: AppColors.accent1Shade1,
             shape: BoxShape.circle,
           ),
           child: Stack(
@@ -39,7 +38,7 @@ class FloatingFilter extends StatelessWidget {
             children: [
               Icon(
                 Iconsax.filter,
-                color: AppColors.accent1Shade1,
+                color: AppColors.bgWhite,
                 size: 28,
               ),
               if (hasBadge)

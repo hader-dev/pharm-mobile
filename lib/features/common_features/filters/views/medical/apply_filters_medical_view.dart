@@ -55,16 +55,19 @@ class MedicalFiltersApply extends StatelessWidget {
         CustomTextField(
           hintText: context.translation!.medicines_search_field_hint,
           controller:
-              BlocProvider.of<MedicalFiltersCubit>(context).searchController,
+              cubit.searchController,
           state: FieldState.normal,
           isEnabled: true,
           prefixIcon: Icon(
             Iconsax.search_normal,
             color: AppColors.accent1Shade1,
           ),
-          suffixIcon: Icon(
-            Icons.clear,
-            color: AppColors.accent1Shade1,
+          suffixIcon: IconButton(
+            onPressed: cubit.clearSearch,
+            icon: Icon(
+              Icons.clear,
+              color: AppColors.accent1Shade1,
+            ),
           ),
           onChanged: (searchValue) {
             BlocProvider.of<MedicalFiltersCubit>(context).loadMedicalFilters();

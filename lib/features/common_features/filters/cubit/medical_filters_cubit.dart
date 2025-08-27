@@ -105,6 +105,11 @@ class MedicalFiltersCubit extends Cubit<MedicalFiltersState> {
   void resetAllFilters() {
     appliedFilters = const MedicalFilters();
     searchController.clear();
-    emit(MedicalFiltersUpdated());
+    loadMedicalFilters();
+  }
+
+  void clearSearch() {
+    searchController.clear();
+    loadMedicalFilters();
   }
 }

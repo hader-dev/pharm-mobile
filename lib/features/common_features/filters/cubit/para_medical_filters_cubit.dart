@@ -104,7 +104,11 @@ class ParaMedicalFiltersCubit extends Cubit<ParaMedicalFiltersState> {
 
   void resetAllFilters() {
     appliedFilters = const ParaMedicalFilters();
+    loadParaMedicalFilters();
+  }
+
+  void clearSearch() {
     searchController.clear();
-    emit(ParaMedicalFiltersUpdated());
+    loadParaMedicalFilters();
   }
 }

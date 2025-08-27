@@ -28,10 +28,11 @@ class AnnouncementListItem extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+          borderRadius:
+              BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.1),
+              color: Colors.grey.withAlpha(150),
               spreadRadius: 1,
               blurRadius: 4,
               offset: const Offset(0, 2),
@@ -50,7 +51,8 @@ class AnnouncementListItem extends StatelessWidget {
               child: SizedBox(
                 height: 180,
                 width: double.infinity,
-                child: announcement.thumbnailImage != null && announcement.thumbnailImage!.path.isNotEmpty
+                child: announcement.thumbnailImage != null &&
+                        announcement.thumbnailImage!.path.isNotEmpty
                     ? CachedNetworkImage(
                         imageUrl: getItInstance
                             .get<INetworkService>()
