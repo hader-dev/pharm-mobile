@@ -279,6 +279,7 @@
   "specifications": "Spécifications",
   "specialty": "Spécialité",
   "address": "Adresse",
+  "unauthorized_distributor_login": "Connexion non autorisée",
   "no_address_available": "Aucune adresse disponible",
   "phone": "Téléphone",
   "no_phone_available": "Aucun numéro de téléphone disponible",

@@ -289,5 +289,6 @@
   "no_phone_available": "No phone number available",
   "no_email_available": "No email available",
   "category": "Category",
-  "brand": "Brand"
+  "brand": "Brand",
+  "unauthorized_distributor_login": "Unauthorized distributor login"
 }

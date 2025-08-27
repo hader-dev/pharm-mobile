@@ -50,4 +50,6 @@ class Role {
   bool get isStockHolder => roleId == 6;
   bool get isDelegate => roleId == 7;
   bool get isPharmacyManager => roleId == 8;
+
+  bool get isDistributor => roleId >= 4 && roleId <= 7;
 }

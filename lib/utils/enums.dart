@@ -260,7 +260,8 @@ enum ApiErrorCodes {
   // Auth
   NO_TOKEN('NO_TOKEN', 'No token provided'),
   TOKEN_EXPIRED('TOKEN_EXPIRED', 'Token has expired'),
-
+  UNAUTHORIZED_DISTRIBUTOR_LOGIN(
+      'UNAUTHORIZED_DISTRIBUTOR_LOGIN', 'Unauthorized distributor login'),
   TOKEN_REUSED('TOKEN_REUSED', 'Token has been reused'),
   REFRESH_TOKEN_REUSED('REFRESH_TOKEN_REUSED', 'Refresh token has been reused'),
   REFRESH_TOKEN_EXPIRED('REFRESH_TOKEN_EXPIRED', 'Refresh token has expired'),

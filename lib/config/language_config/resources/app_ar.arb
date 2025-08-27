@@ -284,5 +284,6 @@
   "no_phone_available": "لا يوجد رقم هاتف متاح",
   "no_email_available": "لا يوجد بريد إلكتروني متاح",
   "category": "القسم",
-  "brand": "الماركة"
+  "brand": "الماركة",
+  "unauthorized_distributor_login": "تسجيل دخول غير مصرح به"
 }

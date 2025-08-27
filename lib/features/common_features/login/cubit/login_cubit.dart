@@ -34,6 +34,13 @@ class LoginCubit extends Cubit<LoginState> {
           .login(userName: userName, password: password);
       emit(LoginSuccessful());
     } on UnAuthorizedException catch (e) {
+      if (e.errorCode == ApiErrorCodes.UNAUTHORIZED_DISTRIBUTOR_LOGIN.name) {
+        getItInstance.get<ToastManager>().showToast(
+              type: ToastType.warning,
+              message: RoutingManager.rootNavigatorKey.currentContext!
+                  .translation!.unauthorized_distributor_login,
+            );
+      }
       if (e.errorCode == ApiErrorCodes.EMAIL_NOT_VERIFIED.name) {
         getItInstance.get<ToastManager>().showToast(
               type: ToastType.warning,
@@ -45,6 +52,8 @@ class LoginCubit extends Cubit<LoginState> {
       GlobalExceptionHandler.handle(
         exception: e,
       );
+
+      emit(LoginFailed());
     } catch (e, stackTrace) {
       GlobalExceptionHandler.handle(
           exception: e, exceptionStackTrace: stackTrace);

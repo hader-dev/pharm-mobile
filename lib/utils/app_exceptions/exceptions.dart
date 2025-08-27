@@ -1,3 +1,5 @@
+import 'package:hader_pharm_mobile/utils/enums.dart';
+
 class TemplateException implements Exception {
   final String? error;
   final String? message;
@@ -19,7 +21,8 @@ class TemplateException implements Exception {
       this.timestamp,
       this.errors})
       : super();
-  factory TemplateException.fromJson(Map<String, dynamic> json) => TemplateException(
+  factory TemplateException.fromJson(Map<String, dynamic> json) =>
+      TemplateException(
         message: json['message'],
         statusCode: json['statusCode'],
         error: json['error'],
@@ -27,7 +30,11 @@ class TemplateException implements Exception {
         path: json['path'],
         timestamp: json['timestamp'],
         errorCode: json['code'],
-        errors: json['errors'] == null ? null : (json['errors'] as List).map((e) => FieldError.fromJson(e)).toList(),
+        errors: json['errors'] == null
+            ? null
+            : (json['errors'] as List)
+                .map((e) => FieldError.fromJson(e))
+                .toList(),
       );
 
   @override
@@ -48,7 +55,8 @@ class InternalServerErrorException extends TemplateException {
     super.errorCode,
   });
 
-  factory InternalServerErrorException.fromJson(Map<String, dynamic> json) => InternalServerErrorException(
+  factory InternalServerErrorException.fromJson(Map<String, dynamic> json) =>
+      InternalServerErrorException(
         message: json['message'],
         statusCode: json['statusCode'],
         error: json['error'],
@@ -56,7 +64,11 @@ class InternalServerErrorException extends TemplateException {
         path: json['path'],
         timestamp: json['timestamp'],
         errorCode: json['code'],
-        errors: json['errors'] == null ? null : (json['errors'] as List).map((e) => FieldError.fromJson(e)).toList(),
+        errors: json['errors'] == null
+            ? null
+            : (json['errors'] as List)
+                .map((e) => FieldError.fromJson(e))
+                .toList(),
       );
 }
 
@@ -83,7 +95,11 @@ class InvalidFileTypeException extends TemplateException {
       errorType: json['type'],
       path: json['path'],
       timestamp: json['timestamp'],
-      errors: json['errors'] == null ? null : (json['errors'] as List).map((e) => FieldError.fromJson(e)).toList(),
+      errors: json['errors'] == null
+          ? null
+          : (json['errors'] as List)
+              .map((e) => FieldError.fromJson(e))
+              .toList(),
       meta: json['meta'],
       errorCode: json['code'],
     );
@@ -100,14 +116,19 @@ class ReachSearchLimitException extends TemplateException {
       super.timestamp,
       super.errors,
       super.errorCode});
-  factory ReachSearchLimitException.fromJson(Map<String, dynamic> json) => ReachSearchLimitException(
+  factory ReachSearchLimitException.fromJson(Map<String, dynamic> json) =>
+      ReachSearchLimitException(
         message: json['message'],
         statusCode: json['statusCode'],
         error: json['error'],
         errorType: json['type'],
         path: json['path'],
         timestamp: json['timestamp'],
-        errors: json['errors'] == null ? null : (json['errors'] as List).map((e) => FieldError.fromJson(e)).toList(),
+        errors: json['errors'] == null
+            ? null
+            : (json['errors'] as List)
+                .map((e) => FieldError.fromJson(e))
+                .toList(),
         errorCode: json['code'],
       );
 }
@@ -122,7 +143,8 @@ class BadRequestException extends TemplateException {
       super.errorCode,
       super.timestamp,
       super.errors});
-  factory BadRequestException.fromJson(Map<String, dynamic> json) => BadRequestException(
+  factory BadRequestException.fromJson(Map<String, dynamic> json) =>
+      BadRequestException(
         message: json['message'],
         statusCode: json['statusCode'],
         error: json['error'],
@@ -130,7 +152,11 @@ class BadRequestException extends TemplateException {
         path: json['path'],
         timestamp: json['timestamp'],
         errorCode: json['code'],
-        errors: json['errors'] == null ? null : (json['errors'] as List).map((e) => FieldError.fromJson(e)).toList(),
+        errors: json['errors'] == null
+            ? null
+            : (json['errors'] as List)
+                .map((e) => FieldError.fromJson(e))
+                .toList(),
       );
 }
 
@@ -144,7 +170,8 @@ class DataValidationException extends TemplateException {
       super.errorCode,
       super.timestamp,
       super.errors});
-  factory DataValidationException.fromJson(Map<String, dynamic> json) => DataValidationException(
+  factory DataValidationException.fromJson(Map<String, dynamic> json) =>
+      DataValidationException(
         message: json['message'],
         statusCode: json['statusCode'],
         error: json['error'],
@@ -152,7 +179,11 @@ class DataValidationException extends TemplateException {
         path: json['path'],
         timestamp: json['timestamp'],
         errorCode: json['code'],
-        errors: json['errors'] == null ? null : (json['errors'] as List).map((e) => FieldError.fromJson(e)).toList(),
+        errors: json['errors'] == null
+            ? null
+            : (json['errors'] as List)
+                .map((e) => FieldError.fromJson(e))
+                .toList(),
       );
 }
 
@@ -166,7 +197,8 @@ class TooManyRequestsException extends TemplateException {
       super.errorCode,
       super.timestamp,
       super.errors});
-  factory TooManyRequestsException.fromJson(Map<String, dynamic> json) => TooManyRequestsException(
+  factory TooManyRequestsException.fromJson(Map<String, dynamic> json) =>
+      TooManyRequestsException(
         message: json['message'],
         statusCode: json['statusCode'],
         error: json['error'],
@@ -174,7 +206,11 @@ class TooManyRequestsException extends TemplateException {
         path: json['path'],
         timestamp: json['timestamp'],
         errorCode: json['code'],
-        errors: json['errors'] == null ? null : (json['errors'] as List).map((e) => FieldError.fromJson(e)).toList(),
+        errors: json['errors'] == null
+            ? null
+            : (json['errors'] as List)
+                .map((e) => FieldError.fromJson(e))
+                .toList(),
       );
 }
 
@@ -188,14 +224,19 @@ class AccountNotActiveException extends TemplateException {
       super.timestamp,
       super.errors,
       super.errorCode});
-  factory AccountNotActiveException.fromJson(Map<String, dynamic> json) => AccountNotActiveException(
+  factory AccountNotActiveException.fromJson(Map<String, dynamic> json) =>
+      AccountNotActiveException(
         message: json['message'],
         statusCode: json['statusCode'],
         error: json['error'],
         errorType: json['type'],
         path: json['path'],
         timestamp: json['timestamp'],
-        errors: json['errors'] == null ? null : (json['errors'] as List).map((e) => FieldError.fromJson(e)).toList(),
+        errors: json['errors'] == null
+            ? null
+            : (json['errors'] as List)
+                .map((e) => FieldError.fromJson(e))
+                .toList(),
         errorCode: json['code'],
       );
 }
@@ -210,14 +251,19 @@ class FetchDataException extends TemplateException {
       super.timestamp,
       super.errors,
       super.errorCode});
-  factory FetchDataException.fromJson(Map<String, dynamic> json) => FetchDataException(
+  factory FetchDataException.fromJson(Map<String, dynamic> json) =>
+      FetchDataException(
         message: json['message'],
         statusCode: json['statusCode'],
         error: json['error'],
         errorType: json['type'],
         path: json['path'],
         timestamp: json['timestamp'],
-        errors: json['errors'] == null ? null : (json['errors'] as List).map((e) => FieldError.fromJson(e)).toList(),
+        errors: json['errors'] == null
+            ? null
+            : (json['errors'] as List)
+                .map((e) => FieldError.fromJson(e))
+                .toList(),
         errorCode: json['code'],
       );
 }
@@ -232,14 +278,19 @@ class UnAuthorizedException extends TemplateException {
       super.timestamp,
       super.errors,
       super.errorCode});
-  factory UnAuthorizedException.fromJson(Map<String, dynamic> json) => UnAuthorizedException(
+  factory UnAuthorizedException.fromJson(Map<String, dynamic> json) =>
+      UnAuthorizedException(
         message: json['message'],
         statusCode: json['statusCode'],
         error: json['error'],
         errorType: json['type'],
         path: json['path'],
         timestamp: json['timestamp'],
-        errors: json['errors'] == null ? null : (json['errors'] as List).map((e) => FieldError.fromJson(e)).toList(),
+        errors: json['errors'] == null
+            ? null
+            : (json['errors'] as List)
+                .map((e) => FieldError.fromJson(e))
+                .toList(),
         errorCode: json['code'],
       );
 }
@@ -254,16 +305,61 @@ class EmailNotVerifiedException extends TemplateException {
       super.timestamp,
       super.errors,
       super.errorCode});
-  factory EmailNotVerifiedException.fromJson(Map<String, dynamic> json) => EmailNotVerifiedException(
+  factory EmailNotVerifiedException.fromJson(Map<String, dynamic> json) =>
+      EmailNotVerifiedException(
         message: json['message'],
         statusCode: json['statusCode'],
         error: json['error'],
         errorType: json['type'],
         path: json['path'],
         timestamp: json['timestamp'],
-        errors: json['errors'] == null ? null : (json['errors'] as List).map((e) => FieldError.fromJson(e)).toList(),
+        errors: json['errors'] == null
+            ? null
+            : (json['errors'] as List)
+                .map((e) => FieldError.fromJson(e))
+                .toList(),
         errorCode: json['code'],
       );
+}
+
+class DistributorLoginException extends UnAuthorizedException {
+  DistributorLoginException(
+      {super.message,
+      super.statusCode,
+      super.error,
+      super.errorType,
+      super.path,
+      super.timestamp,
+      super.errors,
+      super.errorCode});
+  factory DistributorLoginException.fromJson(Map<String, dynamic> json) =>
+      DistributorLoginException(
+        message: json['message'],
+        statusCode: json['statusCode'],
+        error: json['error'],
+        errorType: json['type'],
+        path: json['path'],
+        timestamp: json['timestamp'],
+        errors: json['errors'] == null
+            ? null
+            : (json['errors'] as List)
+                .map((e) => FieldError.fromJson(e))
+                .toList(),
+        errorCode: json['code'],
+      );
+
+  factory DistributorLoginException.base() {
+    return DistributorLoginException(
+      message: ApiErrorCodes.UNAUTHORIZED_DISTRIBUTOR_LOGIN.errorMessage,
+      statusCode: 401,
+      errorCode: ApiErrorCodes.UNAUTHORIZED_DISTRIBUTOR_LOGIN.name,
+      errorType: ApiErrorCodes.UNAUTHORIZED_DISTRIBUTOR_LOGIN.name,
+      errors: null,
+      error: null,
+      path: null,
+      timestamp: null,
+    );
+  }
 }
 
 class UnAuthenticatedException extends TemplateException {
@@ -276,14 +372,19 @@ class UnAuthenticatedException extends TemplateException {
       super.timestamp,
       super.errors,
       super.errorCode});
-  factory UnAuthenticatedException.fromJson(Map<String, dynamic> json) => UnAuthenticatedException(
+  factory UnAuthenticatedException.fromJson(Map<String, dynamic> json) =>
+      UnAuthenticatedException(
         message: json['message'],
         statusCode: json['statusCode'],
         error: json['error'],
         errorType: json['type'],
         path: json['path'],
         timestamp: json['timestamp'],
-        errors: json['errors'] == null ? null : (json['errors'] as List).map((e) => FieldError.fromJson(e)).toList(),
+        errors: json['errors'] == null
+            ? null
+            : (json['errors'] as List)
+                .map((e) => FieldError.fromJson(e))
+                .toList(),
         errorCode: json['code'],
       );
 }
@@ -308,12 +409,15 @@ class NotFoundException extends TemplateException {
       errorType: json['type'],
       path: json['path'],
       timestamp: json['timestamp'],
-      errors: json['errors'] == null ? null : (json['errors'] as List).map((e) => FieldError.fromJson(e)).toList(),
+      errors: json['errors'] == null
+          ? null
+          : (json['errors'] as List)
+              .map((e) => FieldError.fromJson(e))
+              .toList(),
       errorCode: json['code'],
     );
   }
 }
-
 
 class ConstraintFailedException extends TemplateException {
   ConstraintFailedException({
@@ -335,13 +439,15 @@ class ConstraintFailedException extends TemplateException {
       errorType: json['type'],
       path: json['path'],
       timestamp: json['timestamp'],
-      errors: json['errors'] == null ? null : (json['errors'] as List).map((e) => FieldError.fromJson(e)).toList(),
+      errors: json['errors'] == null
+          ? null
+          : (json['errors'] as List)
+              .map((e) => FieldError.fromJson(e))
+              .toList(),
       errorCode: json['code'],
     );
   }
 }
-
-
 
 class FieldError {
   final String? field;

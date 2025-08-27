@@ -1845,6 +1845,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Brand'**
   String get brand;
+
+  /// No description provided for @unauthorized_distributor_login.
+  ///
+  /// In en, this message translates to:
+  /// **'Unauthorized distributor login'**
+  String get unauthorized_distributor_login;
 }
 
 class _AppLocalizationsDelegate

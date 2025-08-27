@@ -912,4 +912,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get brand => 'Brand';
+
+  @override
+  String get unauthorized_distributor_login => 'Unauthorized distributor login';
 }

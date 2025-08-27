@@ -911,4 +911,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get brand => 'الماركة';
+
+  @override
+  String get unauthorized_distributor_login => 'تسجيل دخول غير مصرح به';
 }

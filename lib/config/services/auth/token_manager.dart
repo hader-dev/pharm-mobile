@@ -26,7 +26,6 @@ class TokenManager {
   }
 
   Future<void> refreshToken(INetworkService client) async {
-
     var decodedResponse =
         await client.sendRequest(() => client.post(Urls.refreshToken));
     var newToken = decodedResponse[accessTokenStoreKey];
@@ -43,5 +42,8 @@ class TokenManager {
   Future<String?> getAccessToken() async =>
       await secureStorage.read(key: accessTokenStoreKey);
 
-  Future<void> removeToken() async => await secureStorage.deleteAll();
+  Future<void> removeToken() async {
+    token = null;
+    await secureStorage.deleteAll();
+  }
 }

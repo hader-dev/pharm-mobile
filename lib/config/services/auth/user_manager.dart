@@ -1,6 +1,7 @@
 import 'package:hader_pharm_mobile/config/services/notification/notification_service_port.dart';
 import 'package:hader_pharm_mobile/features/common_features/edit_profile/hooks_data_model/edit_profile_form.dart';
 import 'package:hader_pharm_mobile/models/jwt_decoded.dart';
+import 'package:hader_pharm_mobile/utils/app_exceptions/exceptions.dart';
 import 'package:hader_pharm_mobile/utils/login_jwt_decoder.dart';
 
 import '../../../models/user.dart';
@@ -62,11 +63,10 @@ class UserManager {
   }) async {
     final String token = await userRepo.login(userName, password);
     tokenManagerInstance.optimisticUpdate(token);
-    await tokenManagerInstance.storeAccessToken(token);
     (getItInstance.get<INetworkService>() as DioNetworkManager)
         .initDefaultHeaders(token);
 
-    await getMe();
+    final user = await getMe();
 
     JwtDecoded decodedJwt = decodeJwt(token);
 
@@ -76,6 +76,16 @@ class UserManager {
     if (!noCompany) {
       getItInstance.get<INotificationService>().registerUserDevice();
     }
+
+    if (user.role.isDistributor) {
+      await Future.wait([
+        tokenManagerInstance.removeToken(),
+        getItInstance.get<INetworkService>().deletePersistantCookiesJar()
+      ]);
+      throw DistributorLoginException.base();
+    }
+
+    await tokenManagerInstance.storeAccessToken(token);
 
     return true;
   }
@@ -147,6 +157,9 @@ class UserManager {
   /// This method clears the token from [TokenManager], effectively logging out the user.
 
   Future<void> logout() async {
-    await tokenManagerInstance.removeToken();
+    await Future.wait([
+      tokenManagerInstance.removeToken(),
+      getItInstance.get<INetworkService>().deletePersistantCookiesJar()
+    ]);
   }
 }
