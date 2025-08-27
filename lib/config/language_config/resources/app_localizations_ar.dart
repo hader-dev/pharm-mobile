@@ -883,6 +883,15 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
+
+  String get announcements => 'الإعلانات';
+
+  @override
+  String get see_all => 'عرض الكل';
+
+  @override
+  String get all_announcements => 'جميع الإعلانات';
+
   String get no_description_available => 'لا يوجد وصف متاح';
 
   @override
@@ -914,4 +923,5 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get unauthorized_distributor_login => 'تسجيل دخول غير مصرح به';
+
 }

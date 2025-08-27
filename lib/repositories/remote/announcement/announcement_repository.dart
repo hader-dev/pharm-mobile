@@ -3,6 +3,6 @@ import 'package:hader_pharm_mobile/repositories/remote/announcement/response/res
 import 'package:hader_pharm_mobile/repositories/remote/announcement/response/response_load_announcements.dart';
 
 abstract class IPromotionRepository {
-  Future<ResponseLoadAnnouncements> getPromotions();
+  Future<ResponseLoadAnnouncements> getPromotions({int limit = 20, int offset = 0});
   Future<ResponseLoadAnnouncementDetails> getPromotion(ParamsLoadAnnouncementDetails params);
 }

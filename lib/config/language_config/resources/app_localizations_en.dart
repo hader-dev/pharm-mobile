@@ -884,6 +884,15 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+
+  String get announcements => 'Announcements';
+
+  @override
+  String get see_all => 'See All';
+
+  @override
+  String get all_announcements => 'All Announcements';
+
   String get no_description_available => 'No description available';
 
   @override
@@ -915,4 +924,5 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get unauthorized_distributor_login => 'Unauthorized distributor login';
+
 }

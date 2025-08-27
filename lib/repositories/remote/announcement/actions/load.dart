@@ -4,9 +4,15 @@ import 'package:hader_pharm_mobile/repositories/remote/announcement/response/res
 import 'package:hader_pharm_mobile/utils/urls.dart';
 
 Future<ResponseLoadAnnouncements> loadAnnouncements(
-    INetworkService client) async {
+    INetworkService client, {int limit = 20, int offset = 0}) async {
+  final queryParams = {
+    'limit': limit.toString(),
+    'offset': offset.toString(),
+  };
+
   var decodedResponse = await client.sendRequest(() => client.get(
         Urls.announcements,
+        queryParams: queryParams,
       ));
 
   return jsonToAnnouncementsResponse(decodedResponse);

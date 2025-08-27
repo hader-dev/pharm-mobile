@@ -895,6 +895,13 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
+  String get announcements => 'Annonces';
+
+  @override
+  String get see_all => 'Voir Tout';
+
+  @override
+  String get all_announcements => 'Toutes les Annonces';
   String get no_description_available => 'Aucune description disponible';
 
   @override

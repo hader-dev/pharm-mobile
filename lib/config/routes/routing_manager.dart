@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/routes/deeplinks_routes.dart';
 import 'package:hader_pharm_mobile/features/common_features/anouncement_details/announcement_details.dart';
+import 'package:hader_pharm_mobile/features/common_features/announcements/all_announcements_screen.dart';
 import 'package:hader_pharm_mobile/features/common_features/leagal_policies/leagal_policies.dart';
 import 'package:hader_pharm_mobile/features/common_features/notification/notification.dart';
 import 'package:hader_pharm_mobile/features/common_features/order_complaint_details/complaint.dart';
@@ -56,6 +57,7 @@ class RoutingManager {
   static const String vendorDetails = '/VendorDetails';
   static const String ordersDetailsScreen = '/OrdersDetailsScreen';
   static const String announcementDetailsScreen = '/AnnouncementDetailsScreen';
+  static const String allAnnouncementsScreen = '/AllAnnouncementsScreen';
   static const String orderComplaint = '/OrderComplaint';
 
   static const String editProfileScreen = '/EditProfileScreen';
@@ -125,6 +127,13 @@ class RoutingManager {
             return AnnouncementDetailsScreen(
               announcementId: state.extra as String,
             );
+          },
+        ),
+        GoRoute(
+          name: allAnnouncementsScreen,
+          path: allAnnouncementsScreen,
+          builder: (BuildContext context, GoRouterState state) {
+            return const AllAnnouncementsScreen();
           },
         ),
         GoRoute(

@@ -267,6 +267,9 @@
   "week_ago": "il y a 1 semaine",
   "weeks_ago": "il y a {weeks} semaines",
   "yesterday": "hier",
+  "announcements": "Annonces",
+  "see_all": "Voir Tout",
+  "all_announcements": "Toutes les Annonces",
   "main_features": "Caractéristiques principales",
   "pharmaceutical_form": "Forme pharmaceutique",
   "dosage": "Dosage",
@@ -286,4 +289,5 @@
   "no_email_available": "Aucun email disponible",
   "category": "Catégorie",
   "brand": "Brand"
+
 }

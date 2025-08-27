@@ -12,9 +12,8 @@ class PromotionRepository extends IPromotionRepository {
   final INetworkService client;
   PromotionRepository({required this.client});
   @override
-  Future<ResponseLoadAnnouncements> getPromotions() async {
-    
-    return loadAnnouncements(client);
+  Future<ResponseLoadAnnouncements> getPromotions({int limit = 20, int offset = 0}) async {
+    return loadAnnouncements(client, limit: limit, offset: offset);
   }
 
   @override
