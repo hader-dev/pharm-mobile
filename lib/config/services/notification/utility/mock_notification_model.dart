@@ -7,9 +7,10 @@ NotificationModel mockNotificationModel() {
     title: 'Mock Notification Title',
     body: 'This is a mock notification body for testing purposes.',
     isRead: false,
-    type: 'info',
+    type: 'order.created',
     createdAt: DateTime.now(),
     clientId: "0",
+    actionPayload: {"orderId": "test_payload"},
     redirectUrl: '/mock/route',
   );
 }

@@ -26,7 +26,7 @@ Future<void> showTestNotificationManually() async {
     'Test Notification', // title
     'This is the notification body.', // body
     platformChannelSpecifics,
-    payload: 'test_payload', // optional
+    payload: "{'orderId': 'test_payload'}", // optional
   );
 }
 

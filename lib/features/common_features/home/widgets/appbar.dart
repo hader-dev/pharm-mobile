@@ -28,7 +28,7 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
             Row(
               children: [
                 Text(
-                  "Hader Pharma",
+                  context.translation!.app_name,
                   style: context.responsiveTextTheme.current.headLine3SemiBold
                       .copyWith(color: Colors.white),
                 ),

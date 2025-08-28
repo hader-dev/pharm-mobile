@@ -1726,6 +1726,12 @@ abstract class AppLocalizations {
   /// **'last week'**
   String get last_week;
 
+  /// No description provided for @app_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Hader Pharma'**
+  String get app_name;
+
   /// No description provided for @no_items_found.
   ///
   /// In en, this message translates to:

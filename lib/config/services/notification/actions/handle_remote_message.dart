@@ -28,4 +28,5 @@ Future<void> handleRemoteMessage(RemoteMessage message) async {
     platformDetails,
     payload: jsonEncode(message.data),
   );
+  
 }

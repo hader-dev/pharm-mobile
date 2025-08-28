@@ -851,6 +851,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get last_week => 'last week';
 
   @override
+  String get app_name => 'حاضر صيدلية';
+
+  @override
   String get no_items_found => 'لا يوجد منتجات';
 
   @override

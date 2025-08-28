@@ -852,6 +852,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get last_week => 'last week';
 
   @override
+  String get app_name => 'Hader Pharma';
+
+  @override
   String get no_items_found => 'No items found';
 
   @override

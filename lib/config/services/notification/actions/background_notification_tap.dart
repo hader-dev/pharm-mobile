@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/services/notification/mappers/json_to_notification_model.dart';
@@ -7,17 +8,27 @@ import 'package:hader_pharm_mobile/models/notification.dart';
 
 @pragma('vm:entry-point')
 void onNotificationResponseTap(NotificationResponse response) {
+  debugPrint("NotificationResponse: ${response.payload}");
   final payload = response.payload;
   if (payload != null) {
     final data = jsonDecode(payload);
-    final notification = jsonToNotificationModel(data);
 
-    onNotificationTap(notification);
+    try {
+      final notification = jsonToNotificationModel(data);
+
+      debugPrint("Notification: $notification");
+
+      onNotificationTap(notification);
+    } catch (e,stack) {
+      debugPrint("$e");
+      debugPrintStack(stackTrace: stack);
+    }
   }
 }
 
 void onNotificationTap(NotificationModel notification) {
   final parsedType = NotificationTypeExtension.fromString(notification.type);
+  debugPrint("NotificationType: ${notification.actionPayload}");
   switch (parsedType) {
     case NotificationType.order:
       RoutingManager.router.pushNamed(RoutingManager.ordersDetailsScreen,
