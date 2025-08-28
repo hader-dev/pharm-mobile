@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart'
-    show BlocProvider, MultiBlocProvider;
-import 'package:hader_pharm_mobile/config/di/di.dart';
-import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
+import 'package:go_router/go_router.dart';
+import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
+import 'package:hader_pharm_mobile/features/common_features/orders_details/cubit/provider.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders_details/widgets/tabs_section.dart';
-import 'package:hader_pharm_mobile/repositories/remote/order/order_repository_impl.dart';
-import 'cubit/orders_details_cubit.dart';
+
 import 'widgets/order_details_appbar.dart';
 
 class OrdersDetailsScreen extends StatelessWidget {
@@ -17,20 +15,25 @@ class OrdersDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (context) => OrderDetailsCubit(
-              orderRepository: OrderRepository(
-                client: getItInstance.get<INetworkService>(),
-              ),
-            )..getOrdersDetails(orderId: orderId),
+      child: StateProvider(
+        orderId: orderId,
+        child: PopScope(
+          canPop: false,
+          onPopInvokedWithResult: (didPop, result) async {
+            if (!didPop) {
+              if (context.canPop()) {
+                context.pop(result);
+                return;
+              }
+              RoutingManager.router
+                  .pushReplacementNamed(RoutingManager.appLayout);
+            }
+          },
+          child: Scaffold(
+            key: ordersDetailsScaffoldKey,
+            appBar: OrderDetailsAppbar(),
+            body: OrderDetailsTabBarSection(orderId: orderId),
           ),
-        ],
-        child: Scaffold(
-          key: ordersDetailsScaffoldKey,
-          appBar: OrderDetailsAppbar(),
-          body: OrderDetailsTabBarSection(orderId: orderId),
         ),
       ),
     );
