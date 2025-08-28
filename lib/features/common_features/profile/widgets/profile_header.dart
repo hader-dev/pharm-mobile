@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../../config/di/di.dart';
 import '../../../../config/services/auth/user_manager.dart';
@@ -11,6 +12,7 @@ class ProfileHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final currentUser = getItInstance.get<UserManager>().currentUser;
     return Container(
       margin: const EdgeInsets.symmetric(
         horizontal: AppSizesManager.p8,
@@ -21,25 +23,19 @@ class ProfileHeader extends StatelessWidget {
       ),
       child: Row(
         children: <Widget>[
-          UserImage(key: ValueKey(getItInstance.get<UserManager>().currentUser.image?.path ?? 'no-image')),
+          UserImage(),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: AppSizesManager.p6),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  getItInstance.get<UserManager>().currentUser.fullName,
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  currentUser.fullName,
+                  style: context.responsiveTextTheme.current.headLine4SemiBold,
                 ),
                 Text(
-                  getItInstance.get<UserManager>().currentUser.email,
-                  style: const TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.normal,
-                  ),
+                  currentUser.email,
+                  style: context.responsiveTextTheme.current.body2Regular,
                 ),
               ],
             ),

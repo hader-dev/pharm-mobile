@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart'
 import 'package:gap/gap.dart' show Gap;
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
@@ -37,7 +38,9 @@ class VendorDetails extends StatelessWidget {
           BlocProvider(
             create: (context) => VendorDetailsCubit(
                 companyRepo: CompanyRepository(
-                    client: getItInstance.get<INetworkService>()))
+                  client: getItInstance.get<INetworkService>(),
+                  userManager: getItInstance.get<UserManager>(),
+                ))
               ..getVendorDetails(companyId),
           ),
           BlocProvider(
@@ -54,7 +57,7 @@ class VendorDetails extends StatelessWidget {
             if (state is VendorLiked) {
               getItInstance.get<ToastManager>().showToast(
                   type: ToastType.success,
-                  message: 'Vendor added to your favorites list');
+                  message: context.translation!.vendor_added_to_favorites);
             }
           },
           child: Scaffold(
@@ -75,6 +78,10 @@ class VendorDetails extends StatelessWidget {
               title: BlocBuilder<VendorDetailsCubit, VendorDetailsState>(
                 builder: (context, state) {
                   if (state is VendorDetailsLoading) {
+                    return Text(context.translation!.loading_text,
+                        style: context
+                            .responsiveTextTheme.current.headLine4SemiBold
+                            .copyWith(color: AppColors.bgWhite));
                     return const CircularProgressIndicator();
                   }
                   return Row(children: [

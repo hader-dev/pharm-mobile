@@ -29,14 +29,14 @@ class ContentSection extends StatelessWidget {
               left: AppSizesManager.p8,
               bottom: AppSizesManager.s16),
           child: Text(
-            'Create or join a company (pharmacies, distributors, ...) and explore our marketplace and many more Features.',
+            context.translation!.create_company_description,
             textAlign: TextAlign.center,
             style: context.responsiveTextTheme.current.body3Regular
                 .copyWith(color: TextColors.ternary.color),
           ),
         ),
         PrimaryTextButton(
-          label: "Create a company profile",
+          label: context.translation!.create_company_profile_btn,
           onTap: () {
             GoRouter.of(context)
                 .pushReplacementNamed(RoutingManager.createCompanyProfile);
@@ -45,7 +45,7 @@ class ContentSection extends StatelessWidget {
         ),
         Gap(AppSizesManager.s12),
         PrimaryTextButton(
-          label: "Already a member of a company",
+          label: context.translation!.already_member_btn,
           onTap: () {
             GoRouter.of(context)
                 .pushReplacementNamed(RoutingManager.loginScreen);

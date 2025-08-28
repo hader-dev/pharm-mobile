@@ -1,4 +1,5 @@
 import 'package:hader_pharm_mobile/features/common_features/create_company_profile/hooks_data_model/create_company_profile_form.dart';
+import 'package:hader_pharm_mobile/features/common_features/edit_company/hooks_data_model/edit_company_form.dart';
 import 'package:hader_pharm_mobile/models/company.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
@@ -24,4 +25,8 @@ abstract class ICompanyRepository {
   Future<void> removeCompanyFromFavorites({required String companyId});
 
   Future<void> unJoinCompanyAsCLient({required String companyId});
+  
+  // Company management for current user
+  Future<Company> getMyCompany();
+  Future<void> updateMyCompany({required EditCompanyFormDataModel companyData, bool shouldRemoveImage = false});
 }

@@ -363,6 +363,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get edit_profile => 'Edit Profile';
 
   @override
+  String get edit_company => 'Edit Company';
+
+  @override
+  String get view_company => 'View Company';
+
+  @override
   String get change_password => 'Change Password';
 
   @override
@@ -439,6 +445,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get company_name => 'Company Name';
 
   @override
+  String get company_logo => 'Company Logo';
+
+  @override
+  String get company_information => 'Company Information';
+
+  @override
+  String get feedback_company_updated => 'Company updated successfully';
+
+  @override
+  String get update_company => 'Update Company';
+
+  @override
   String get feedback_email_not_valid => 'Email is not valid';
 
   @override
@@ -449,6 +467,21 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get website => 'Website';
+
+  @override
+  String get view_company_description =>
+      'View your company information and details.';
+
+  @override
+  String get create_company_profile_required =>
+      'You need to create a company profile first.';
+
+  @override
+  String get no_company_associated =>
+      'No company is associated with this account.';
+
+  @override
+  String get go_back => 'Go Back';
 
   @override
   String get city_commune_no => 'City/Commune No.';
@@ -852,6 +885,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get last_week => 'last week';
 
   @override
+  String get week_ago => 'منذ أسبوع واحد';
   String get app_name => 'Hader Pharma';
 
   @override
@@ -859,6 +893,23 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get refresh => 'Refresh';
+
+  @override
+  String get announcements => 'Announcements';
+
+  @override
+  String get see_all => 'See All';
+
+  @override
+  String get all_announcements => 'All Announcements';
+
+  @override
+  String get main_features => 'Main Features';
+
+  @override
+  String weeks_ago(Object weeks) {
+    return 'منذ $weeks أسابيع';
+  }
 
   @override
   String get announcements => 'Announcements';
@@ -894,14 +945,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get country_of_origin => 'Country of Origin';
 
   @override
-  String get week_ago => 'One week ago';
-
-  @override
-  String weeks_ago(Object weeks) {
-    return '$weeks weeks ago';
-  }
-
-  @override
   String get no_description_available => 'No description available';
 
   @override
@@ -933,4 +976,78 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get unauthorized_distributor_login => 'Unauthorized distributor login';
+
+  @override
+  String get feedback_no_changes_to_update => 'No changes to update';
+
+  @override
+  String get feedback_failed_to_load_company_details =>
+      'Failed to load company details';
+
+  @override
+  String get feedback_failed_to_load_company_products =>
+      'Failed to load company products';
+
+  @override
+  String get feedback_failed_to_load_company_categories =>
+      'Failed to load company categories';
+
+  @override
+  String get update_your_company_information_and_branding =>
+      'Update your company information and branding';
+
+  @override
+  String get no_company_found => 'No company found';
+
+  @override
+  String get update_company_description =>
+      'Update your company information and branding';
+
+  @override
+  String get create_company_description =>
+      'Create or join a company (pharmacies, distributors, ...) and explore our marketplace and many more Features.';
+
+  @override
+  String get create_company_profile_btn => 'Create a company profile';
+
+  @override
+  String get already_member_btn => 'Already a member of a company';
+
+  @override
+  String get create_company => 'Create Company';
+
+  @override
+  String get no_company_data_available => 'No company data available';
+
+  @override
+  String get phone_2 => 'Phone 2';
+
+  @override
+  String get rc_number => 'RC Number';
+
+  @override
+  String get nis_number => 'NIS Number';
+
+  @override
+  String get ai_number => 'AI Number';
+
+  @override
+  String get companyLogo => 'Company Logo';
+
+  @override
+  String get no_company_is_associated_with_this_account =>
+      'No company is associated with this account.';
+
+  @override
+  String get create_company_action => 'Create Company';
+
+  @override
+  String get loading_text => 'Loading...';
+
+  @override
+  String get feedback_profile_updated => 'Profile updated successfully';
+
+  @override
+  String get vendor_added_to_favorites => 'Vendor added to your favorites list';
+
 }

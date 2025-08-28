@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/cubit/home_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/medicine_products/cubit/medicine_products_cubit.dart';
@@ -27,7 +28,10 @@ class StateProvider extends StatelessWidget {
       BlocProvider(
         create: (context) => VendorsCubit(
           companyRepository:
-              CompanyRepository(client: getItInstance.get<INetworkService>()),
+              CompanyRepository(
+                client: getItInstance.get<INetworkService>(),
+                userManager: getItInstance.get<UserManager>(),
+              ),
           scrollController: ScrollController(),
           searchController: TextEditingController(text: ""),
         )..fetchVendors(),

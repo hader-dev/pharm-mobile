@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
+import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/features/common_features/create_company_profile/sub_pages/review_and_sumbit/review_and_sumbit.dart';
 import 'package:hader_pharm_mobile/features/common_features/wilaya/cubit/wilaya_cubit.dart';
@@ -37,7 +38,9 @@ class CreateCompanyProfile extends StatelessWidget {
           BlocProvider(
             create: (context) => CreateCompanyProfileCubit(
                 companyRepository: CompanyRepository(
-                    client: getItInstance.get<INetworkService>())),
+                  client: getItInstance.get<INetworkService>(),
+                  userManager: getItInstance.get<UserManager>(),
+                )),
           ),
             BlocProvider(
             create: (context) => WilayaCubit(

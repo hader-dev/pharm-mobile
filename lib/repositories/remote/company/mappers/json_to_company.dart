@@ -22,6 +22,7 @@ Company jsonToCompany(Map<String, dynamic> json) {
     phone: json["phone"],
     phone2: json["phone2"],
     fax: json["fax"],
+    website: json["website"],
     email: json["email"],
     description: json["description"],
     bankAccount: json["bankAccount"],

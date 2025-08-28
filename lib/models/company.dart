@@ -60,6 +60,7 @@ class Company extends BaseCompany {
 
   final String? phone2;
   final String? fax;
+  final String? website;
 
   final String? description;
   final String? bankAccount;
@@ -90,6 +91,7 @@ class Company extends BaseCompany {
     this.distributorCategory,
     this.phone2,
     this.fax,
+    this.website,
     super.email,
     this.description,
     this.bankAccount,
@@ -118,6 +120,7 @@ class Company extends BaseCompany {
       distributorCategory: null,
       phone2: null,
       fax: null,
+      website: null,
       email: null,
       description: null,
       bankAccount: null,

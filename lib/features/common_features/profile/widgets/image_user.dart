@@ -7,11 +7,16 @@ import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import '../../../../config/services/auth/user_manager.dart';
 import '../../../../config/services/network/network_interface.dart';
 
-class UserImage extends StatelessWidget {
+class UserImage extends StatefulWidget {
   const UserImage({
     super.key,
   });
 
+  @override
+  State<UserImage> createState() => _UserImageState();
+}
+
+class _UserImageState extends State<UserImage> {
   @override
   Widget build(BuildContext context) {
     final userImage = getItInstance.get<UserManager>().currentUser.image;
@@ -19,7 +24,6 @@ class UserImage extends StatelessWidget {
         ? getItInstance.get<INetworkService>().getFilesPath(userImage.path)
         : null;
 
-    // Responsive image size based on screen width
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 768;
     final imageSize = isTablet ? 90.0 : 70.0;
@@ -40,7 +44,7 @@ class UserImage extends StatelessWidget {
             child: userImage == null
                 ? SvgPicture.asset(DrawableAssetStrings.defaultProfileImgIcon)
                 : CachedNetworkImage(
-                    imageUrl: imageUrl!,
+                    imageUrl: '${imageUrl!}?v=${DateTime.now().millisecondsSinceEpoch}',
                     fit: BoxFit.cover,
                     placeholder: (context, url) =>
                         const CircularProgressIndicator(),

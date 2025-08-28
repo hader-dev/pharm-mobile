@@ -16,6 +16,8 @@ import '../../features/common_features/check_email/check_email.dart';
 import '../../features/common_features/check_phone/check_phone.dart';
 import '../../features/common_features/congratulation/congratulation.dart';
 import '../../features/common_features/create_company_profile/create_company_profile.dart';
+import '../../features/common_features/edit_company/edit_company.dart'
+    show EditCompanyScreen, CompanyScreenMode;
 import '../../features/common_features/edit_profile/edit_profile.dart'
     show EditProfileScreen;
 import '../../features/common_features/favorites/favorites.dart';
@@ -61,6 +63,7 @@ class RoutingManager {
   static const String orderComplaint = '/OrderComplaint';
 
   static const String editProfileScreen = '/EditProfileScreen';
+  static const String editCompanyScreen = '/EditCompanyScreen';
   static const String notificationsScreen = '/Notifications';
 
   static const String languagesScreen = '/LanguagesScreen';
@@ -141,6 +144,15 @@ class RoutingManager {
           path: editProfileScreen,
           builder: (BuildContext context, GoRouterState state) {
             return const EditProfileScreen();
+          },
+        ),
+        GoRoute(
+          name: editCompanyScreen,
+          path: editCompanyScreen,
+          builder: (BuildContext context, GoRouterState state) {
+            // Check if mode is passed as extra parameter
+            final mode = state.extra as CompanyScreenMode?;
+            return EditCompanyScreen(initialMode: mode);
           },
         ),
         GoRoute(

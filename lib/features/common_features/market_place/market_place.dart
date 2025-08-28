@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/features/app_layout/app_layout.dart';
 import 'package:hader_pharm_mobile/features/app_layout/cubit/app_layout_cubit.dart';
@@ -63,7 +64,10 @@ class MarketPlaceScreen extends StatelessWidget {
         BlocProvider(
           create: (context) => VendorsCubit(
             companyRepository:
-                CompanyRepository(client: getItInstance.get<INetworkService>()),
+                CompanyRepository(
+                  client: getItInstance.get<INetworkService>(),
+                  userManager: getItInstance.get<UserManager>(),
+                ),
             scrollController: ScrollController(),
             searchController: TextEditingController(text: ""),
           )..fetchVendors(),

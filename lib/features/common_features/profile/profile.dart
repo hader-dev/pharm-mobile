@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
+import 'package:hader_pharm_mobile/config/services/auth/token_manager.dart';
+import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
 import 'package:hader_pharm_mobile/features/common/dialog/log_out_dialog.dart';
+import 'package:hader_pharm_mobile/features/common_features/edit_company/edit_company.dart';
+import 'package:hader_pharm_mobile/models/jwt_decoded.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
+import 'package:hader_pharm_mobile/utils/login_jwt_decoder.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
@@ -23,6 +29,22 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  String _profileUpdateKey = DateTime.now().millisecondsSinceEpoch.toString();
+
+  bool get _userHasCompany {
+    final token = getItInstance.get<TokenManager>().token;
+    if (token != null) {
+      JwtDecoded decodedJwt = decodeJwt(token);
+      return decodedJwt.companyId != null && decodedJwt.companyId != "null";
+    }
+    return false;
+  }
+
+  bool get _isPharmacyManager {
+    final currentUser = getItInstance.get<UserManager>().currentUser;
+    return currentUser.role.isPharmacyManager;
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -47,9 +69,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
         body: Column(
           children: <Widget>[
             Gap(AppSizesManager.s16),
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(left: AppSizesManager.p4),
-              child: ProfileHeader(),
+              child: ProfileHeader(key: ValueKey(_profileUpdateKey)),
             ),
             Expanded(
               child: Padding(
@@ -73,9 +95,49 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           onTap: () async {
                             await GoRouter.of(context)
                                 .pushNamed(RoutingManager.editProfileScreen);
-                            // Rebuild the profile screen when returning from edit profile
-                            setState(() {});
+                            setState(() {
+                              _profileUpdateKey = DateTime.now().millisecondsSinceEpoch.toString();
+                            });
                           }),
+                      if (_userHasCompany)
+                      
+                        _isPharmacyManager
+                            ? SettingsTile(
+                                icon: LucideIcons.edit,
+                                title: context.translation!.edit_company,
+                                onTap: () async {
+                                  try {
+                                    await GoRouter.of(context)
+                                        .pushNamed(RoutingManager.editCompanyScreen, 
+                                            extra: CompanyScreenMode.edit);
+                                    setState(() {});
+                                  } catch (e) {
+                                    debugPrint("Error navigating to edit company: $e");
+                                  }
+                                })
+                            : SettingsTile(
+                                icon: LucideIcons.building,
+                                title: context.translation!.view_company,
+                                onTap: () async {
+                                  try {
+                                    await GoRouter.of(context)
+                                        .pushNamed(RoutingManager.editCompanyScreen, 
+                                            extra: CompanyScreenMode.view);
+                                    setState(() {});
+                                  } catch (e) {
+                                    // If there's an error, user might need to create company
+                                    debugPrint("Error navigating to view company: $e");
+                                  }
+                                })
+                      else if (_isPharmacyManager)
+                        SettingsTile(
+                            icon: LucideIcons.plus,
+                            title: context.translation!.create_company_action,
+                            onTap: () async {
+                              await GoRouter.of(context)
+                                  .pushNamed(RoutingManager.createCompanyProfile);
+                              setState(() {});
+                            }),
                       SettingsTile(
                           icon: LucideIcons.lock,
                           title: context.translation!.change_password,

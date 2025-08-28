@@ -366,6 +366,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get edit_profile => 'تعديل الملف الشخصي';
 
   @override
+  String get edit_company => 'تعديل الشركة';
+
+  @override
+  String get view_company => 'عرض الشركة';
+
+  @override
   String get change_password => 'تغيير كلمة المرور';
 
   @override
@@ -443,6 +449,18 @@ class AppLocalizationsAr extends AppLocalizations {
   String get company_name => 'اسم الشركة';
 
   @override
+  String get company_logo => 'شعار الشركة';
+
+  @override
+  String get company_information => 'معلومات الشركة';
+
+  @override
+  String get feedback_company_updated => 'تم تحديث الشركة بنجاح';
+
+  @override
+  String get update_company => 'تحديث الشركة';
+
+  @override
   String get feedback_email_not_valid => 'البريد الالكتروني غير صالح';
 
   @override
@@ -453,6 +471,19 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get website => 'الموقع الالكتروني';
+
+  @override
+  String get view_company_description => 'عرض معلومات وتفاصيل شركتك.';
+
+  @override
+  String get create_company_profile_required =>
+      'تحتاج إلى إنشاء ملف شركة أولاً.';
+
+  @override
+  String get no_company_associated => 'لا توجد شركة مرتبطة بهذا الحساب.';
+
+  @override
+  String get go_back => 'العودة';
 
   @override
   String get city_commune_no => 'رقم المدينة/القرية';
@@ -851,6 +882,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get last_week => 'last week';
 
   @override
+  String get week_ago => 'week ago';
   String get app_name => 'حاضر صيدلية';
 
   @override
@@ -858,6 +890,23 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get refresh => 'تحديث';
+
+  @override
+  String get announcements => 'الإعلانات';
+
+  @override
+  String get see_all => 'عرض الكل';
+
+  @override
+  String get all_announcements => 'جميع الإعلانات';
+
+  @override
+  String get main_features => 'الميزات الرئيسية';
+
+  @override
+  String weeks_ago(Object weeks) {
+    return '$weeks week ago';
+  }
 
   @override
   String get announcements => 'الإعلانات';
@@ -893,14 +942,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get country_of_origin => 'بلد المنشأ';
 
   @override
-  String get week_ago => 'week ago';
-
-  @override
-  String weeks_ago(Object weeks) {
-    return '$weeks week ago';
-  }
-
-  @override
   String get no_description_available => 'لا يوجد وصف متاح';
 
   @override
@@ -932,4 +973,76 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get unauthorized_distributor_login => 'تسجيل دخول غير مصرح به';
+
+  @override
+  String get feedback_no_changes_to_update => 'لا توجد تغييرات للتحديث';
+
+  @override
+  String get feedback_failed_to_load_company_details =>
+      'فشل في تحميل تفاصيل الشركة';
+
+  @override
+  String get feedback_failed_to_load_company_products =>
+      'فشل في تحميل منتجات الشركة';
+
+  @override
+  String get feedback_failed_to_load_company_categories =>
+      'فشل في تحميل قسمات الشركة';
+
+  @override
+  String get update_your_company_information_and_branding =>
+      'تحديث معلومات الشركة وشعاراتها';
+
+  @override
+  String get no_company_found => 'لم يتم العثور على شركة';
+
+  @override
+  String get update_company_description => 'تحديث معلومات الشركة وشعاراتها';
+
+  @override
+  String get create_company_description =>
+      'إنشاء أو انضمام إلى شركة (صيدليات، موزعين، ...) واستكشاف السوق والعديد من الميزات الأخرى.';
+
+  @override
+  String get create_company_profile_btn => 'إنشاء ملف تعريف شركة';
+
+  @override
+  String get already_member_btn => 'عضو بالفعل في شركة';
+
+  @override
+  String get create_company => 'انشاء شركة';
+
+  @override
+  String get no_company_data_available => 'لا توجد بيانات للشركة متاحة';
+
+  @override
+  String get phone_2 => 'هاتف 2';
+
+  @override
+  String get rc_number => 'رقم السجل التجاري';
+
+  @override
+  String get nis_number => 'رقم NIS';
+
+  @override
+  String get ai_number => 'رقم AI';
+
+  @override
+  String get companyLogo => 'شعار الشركة';
+
+  @override
+  String get no_company_is_associated_with_this_account =>
+      'لا توجد شركة مرتبطة بهذا الحساب.';
+
+  @override
+  String get create_company_action => 'إنشاء شركة';
+
+  @override
+  String get loading_text => 'جارٍ التحميل...';
+
+  @override
+  String get feedback_profile_updated => 'تم تحديث الملف الشخصي بنجاح';
+
+  @override
+  String get vendor_added_to_favorites => 'تم إضافة المورد إلى قائمة المفضلة';
 }

@@ -152,6 +152,15 @@ class UserManager {
     );
   }
 
+  /// Gets the company ID from the JWT token
+  Future<String?> getCompanyId() async {
+    String? token = await tokenManagerInstance.getAccessToken();
+    if (token == null) return null;
+    
+    JwtDecoded decodedJwt = decodeJwt(token);
+    return decodedJwt.companyId;
+  }
+
   /// Logs out the current user by removing the stored authentication token.
   ///
   /// This method clears the token from [TokenManager], effectively logging out the user.

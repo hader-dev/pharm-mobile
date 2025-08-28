@@ -368,6 +368,12 @@ class AppLocalizationsFr extends AppLocalizations {
   String get edit_profile => 'Modifier le profil';
 
   @override
+  String get edit_company => 'Modifier l\'entreprise';
+
+  @override
+  String get view_company => 'Voir l\'entreprise';
+
+  @override
   String get change_password => 'Changer le mot de passe';
 
   @override
@@ -447,6 +453,18 @@ class AppLocalizationsFr extends AppLocalizations {
   String get company_name => 'Nom de la société';
 
   @override
+  String get company_logo => 'Logo de la société';
+
+  @override
+  String get company_information => 'Informations de la société';
+
+  @override
+  String get feedback_company_updated => 'Société mise à jour avec succès';
+
+  @override
+  String get update_company => 'Mettre à jour la société';
+
+  @override
   String get feedback_email_not_valid => 'Adresse e-mail non valide';
 
   @override
@@ -457,6 +475,21 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get website => 'Site web';
+
+  @override
+  String get view_company_description =>
+      'Consultez les informations et détails de votre société.';
+
+  @override
+  String get create_company_profile_required =>
+      'Vous devez d\'abord créer un profil de société.';
+
+  @override
+  String get no_company_associated =>
+      'Aucune société n\'est associée à ce compte.';
+
+  @override
+  String get go_back => 'Retour';
 
   @override
   String get city_commune_no => 'Ville/Commune No.';
@@ -863,6 +896,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get last_week => 'last week';
 
   @override
+  String get week_ago => 'il y a 1 semaine';
   String get app_name => 'Hader Pharma';
 
   @override
@@ -870,6 +904,23 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get refresh => 'Rafraîchir';
+
+  @override
+  String get announcements => 'Annonces';
+
+  @override
+  String get see_all => 'Voir Tout';
+
+  @override
+  String get all_announcements => 'Toutes les Annonces';
+
+  @override
+  String get main_features => 'Caractéristiques principales';
+
+  @override
+  String weeks_ago(Object weeks) {
+    return 'il y a $weeks semaines';
+  }
 
   @override
   String get announcements => 'Annonces';
@@ -905,14 +956,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get country_of_origin => 'Pays d\'origine';
 
   @override
-  String get week_ago => 'il y a 1 semaine';
-
-  @override
-  String weeks_ago(Object weeks) {
-    return 'il y a $weeks semaines';
-  }
-
-  @override
   String get no_description_available => 'Aucune description disponible';
 
   @override
@@ -944,4 +987,79 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get unauthorized_distributor_login => 'Connexion non autorisée';
+
+  @override
+  String get feedback_no_changes_to_update =>
+      'Aucune modification à mettre à jour';
+
+  @override
+  String get feedback_failed_to_load_company_details =>
+      'Échec du chargement des détails de la société';
+
+  @override
+  String get feedback_failed_to_load_company_products =>
+      'Échec du chargement des produits de la société';
+
+  @override
+  String get feedback_failed_to_load_company_categories =>
+      'Échec du chargement des catégories de la société';
+
+  @override
+  String get update_your_company_information_and_branding =>
+      'Mettre à jour les informations de votre société et sa charte graphique';
+
+  @override
+  String get no_company_found => 'Aucune société trouvée';
+
+  @override
+  String get update_company_description =>
+      'Mettre à jour les informations de votre société et sa charte graphique';
+
+  @override
+  String get create_company_description =>
+      'Créer ou rejoindre une entreprise (pharmacies, distributeurs, ...) et explorer notre marketplace et bien d\'autres fonctionnalités.';
+
+  @override
+  String get create_company_profile_btn => 'Créer un profil d\'entreprise';
+
+  @override
+  String get already_member_btn => 'Déjà membre d\'une entreprise';
+
+  @override
+  String get create_company => 'Créer une société';
+
+  @override
+  String get no_company_data_available => 'Aucune donnée de société disponible';
+
+  @override
+  String get phone_2 => 'Téléphone 2';
+
+  @override
+  String get rc_number => 'Numéro RC';
+
+  @override
+  String get nis_number => 'Numéro NIS';
+
+  @override
+  String get ai_number => 'Numéro AI';
+
+  @override
+  String get companyLogo => 'Logo de la société';
+
+  @override
+  String get no_company_is_associated_with_this_account =>
+      'Aucune société n\'est associée à ce compte.';
+
+  @override
+  String get create_company_action => 'Créer une société';
+
+  @override
+  String get loading_text => 'Chargement...';
+
+  @override
+  String get feedback_profile_updated => 'Profil mis à jour avec succès';
+
+  @override
+  String get vendor_added_to_favorites =>
+      'Fournisseur ajouté à votre liste de favoris';
 }

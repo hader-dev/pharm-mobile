@@ -796,6 +796,18 @@ abstract class AppLocalizations {
   /// **'Edit Profile'**
   String get edit_profile;
 
+  /// No description provided for @edit_company.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Company'**
+  String get edit_company;
+
+  /// No description provided for @view_company.
+  ///
+  /// In en, this message translates to:
+  /// **'View Company'**
+  String get view_company;
+
   /// No description provided for @change_password.
   ///
   /// In en, this message translates to:
@@ -940,6 +952,30 @@ abstract class AppLocalizations {
   /// **'Company Name'**
   String get company_name;
 
+  /// No description provided for @company_logo.
+  ///
+  /// In en, this message translates to:
+  /// **'Company Logo'**
+  String get company_logo;
+
+  /// No description provided for @company_information.
+  ///
+  /// In en, this message translates to:
+  /// **'Company Information'**
+  String get company_information;
+
+  /// No description provided for @feedback_company_updated.
+  ///
+  /// In en, this message translates to:
+  /// **'Company updated successfully'**
+  String get feedback_company_updated;
+
+  /// No description provided for @update_company.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Company'**
+  String get update_company;
+
   /// No description provided for @feedback_email_not_valid.
   ///
   /// In en, this message translates to:
@@ -963,6 +999,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Website'**
   String get website;
+
+  /// No description provided for @view_company_description.
+  ///
+  /// In en, this message translates to:
+  /// **'View your company information and details.'**
+  String get view_company_description;
+
+  /// No description provided for @create_company_profile_required.
+  ///
+  /// In en, this message translates to:
+  /// **'You need to create a company profile first.'**
+  String get create_company_profile_required;
+
+  /// No description provided for @no_company_associated.
+  ///
+  /// In en, this message translates to:
+  /// **'No company is associated with this account.'**
+  String get no_company_associated;
+
+  /// No description provided for @go_back.
+  ///
+  /// In en, this message translates to:
+  /// **'Go Back'**
+  String get go_back;
 
   /// No description provided for @city_commune_no.
   ///
@@ -1726,6 +1786,17 @@ abstract class AppLocalizations {
   /// **'last week'**
   String get last_week;
 
+  /// No description provided for @week_ago.
+  ///
+  /// In en, this message translates to:
+  /// **'منذ أسبوع واحد'**
+  String get week_ago;
+
+  /// No description provided for @weeks_ago.
+  ///
+  /// In en, this message translates to:
+  /// **'منذ {weeks} أسابيع'**
+  String weeks_ago(Object weeks);
   /// No description provided for @app_name.
   ///
   /// In en, this message translates to:
@@ -1810,6 +1881,7 @@ abstract class AppLocalizations {
   /// **'Country of Origin'**
   String get country_of_origin;
 
+
   /// No description provided for @week_ago.
   ///
   /// In en, this message translates to:
@@ -1887,6 +1959,139 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Unauthorized distributor login'**
   String get unauthorized_distributor_login;
+
+  /// No description provided for @feedback_no_changes_to_update.
+  ///
+  /// In en, this message translates to:
+  /// **'No changes to update'**
+  String get feedback_no_changes_to_update;
+
+  /// No description provided for @feedback_failed_to_load_company_details.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load company details'**
+  String get feedback_failed_to_load_company_details;
+
+  /// No description provided for @feedback_failed_to_load_company_products.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load company products'**
+  String get feedback_failed_to_load_company_products;
+
+  /// No description provided for @feedback_failed_to_load_company_categories.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load company categories'**
+  String get feedback_failed_to_load_company_categories;
+
+  /// No description provided for @update_your_company_information_and_branding.
+  ///
+  /// In en, this message translates to:
+  /// **'Update your company information and branding'**
+  String get update_your_company_information_and_branding;
+
+  /// No description provided for @no_company_found.
+  ///
+  /// In en, this message translates to:
+  /// **'No company found'**
+  String get no_company_found;
+
+  /// No description provided for @update_company_description.
+  ///
+  /// In en, this message translates to:
+  /// **'Update your company information and branding'**
+  String get update_company_description;
+
+  /// No description provided for @create_company_description.
+  ///
+  /// In en, this message translates to:
+  /// **'Create or join a company (pharmacies, distributors, ...) and explore our marketplace and many more Features.'**
+  String get create_company_description;
+
+  /// No description provided for @create_company_profile_btn.
+  ///
+  /// In en, this message translates to:
+  /// **'Create a company profile'**
+  String get create_company_profile_btn;
+
+  /// No description provided for @already_member_btn.
+  ///
+  /// In en, this message translates to:
+  /// **'Already a member of a company'**
+  String get already_member_btn;
+
+  /// No description provided for @create_company.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Company'**
+  String get create_company;
+
+  /// No description provided for @no_company_data_available.
+  ///
+  /// In en, this message translates to:
+  /// **'No company data available'**
+  String get no_company_data_available;
+
+  /// No description provided for @phone_2.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone 2'**
+  String get phone_2;
+
+  /// No description provided for @rc_number.
+  ///
+  /// In en, this message translates to:
+  /// **'RC Number'**
+  String get rc_number;
+
+  /// No description provided for @nis_number.
+  ///
+  /// In en, this message translates to:
+  /// **'NIS Number'**
+  String get nis_number;
+
+  /// No description provided for @ai_number.
+  ///
+  /// In en, this message translates to:
+  /// **'AI Number'**
+  String get ai_number;
+
+  /// No description provided for @companyLogo.
+  ///
+  /// In en, this message translates to:
+  /// **'Company Logo'**
+  String get companyLogo;
+
+  /// No description provided for @no_company_is_associated_with_this_account.
+  ///
+  /// In en, this message translates to:
+  /// **'No company is associated with this account.'**
+  String get no_company_is_associated_with_this_account;
+
+  /// No description provided for @create_company_action.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Company'**
+  String get create_company_action;
+
+  /// No description provided for @loading_text.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading...'**
+  String get loading_text;
+
+  /// No description provided for @feedback_profile_updated.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile updated successfully'**
+  String get feedback_profile_updated;
+
+  /// No description provided for @vendor_added_to_favorites.
+  ///
+  /// In en, this message translates to:
+  /// **'Vendor added to your favorites list'**
+  String get vendor_added_to_favorites;
+
 }
 
 class _AppLocalizationsDelegate
