@@ -1786,18 +1786,6 @@ abstract class AppLocalizations {
   /// **'last week'**
   String get last_week;
 
-  /// No description provided for @week_ago.
-  ///
-  /// In en, this message translates to:
-  /// **'منذ أسبوع واحد'**
-  String get week_ago;
-
-  /// No description provided for @weeks_ago.
-  ///
-  /// In en, this message translates to:
-  /// **'منذ {weeks} أسابيع'**
-  String weeks_ago(Object weeks);
-
   /// No description provided for @app_name.
   ///
   /// In en, this message translates to:

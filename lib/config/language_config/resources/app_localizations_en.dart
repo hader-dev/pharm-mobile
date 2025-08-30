@@ -885,7 +885,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get last_week => 'last week';
 
   @override
-  String get week_ago => 'منذ أسبوع واحد';
   String get app_name => 'Hader Pharma';
 
   @override
@@ -905,12 +904,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get main_features => 'Main Features';
-
-  @override
-  String weeks_ago(Object weeks) {
-    return 'منذ $weeks أسابيع';
-  }
-
 
   @override
   String get pharmaceutical_form => 'Pharmaceutical Form';
@@ -1038,5 +1031,4 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get vendor_added_to_favorites => 'Vendor added to your favorites list';
-
 }

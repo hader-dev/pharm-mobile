@@ -1,6 +1,5 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -897,7 +896,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get last_week => 'last week';
 
   @override
-  String get week_ago => 'il y a 1 semaine';
   String get app_name => 'Hader Pharma';
 
   @override
@@ -917,11 +915,6 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get main_features => 'Caractéristiques principales';
-
-  @override
-  String weeks_ago(Object weeks) {
-    return 'il y a $weeks semaines';
-  }
 
   @override
   String get pharmaceutical_form => 'Forme pharmaceutique';
