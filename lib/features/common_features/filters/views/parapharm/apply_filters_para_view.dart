@@ -156,6 +156,7 @@ class ParaMedicalFiltersApply extends StatelessWidget {
                           child: PrimaryTextButton(
                             isOutLined: true,
                             label: context.translation!.reset,
+                            spalshColor: AppColors.accent1Shade1.withAlpha(50),
                             labelColor: AppColors.accent1Shade1,
                             onTap: () {
                               BlocProvider.of<ParaMedicalFiltersCubit>(context)
