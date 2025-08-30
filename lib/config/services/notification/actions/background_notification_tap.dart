@@ -8,18 +8,16 @@ import 'package:hader_pharm_mobile/models/notification.dart';
 
 @pragma('vm:entry-point')
 void onNotificationResponseTap(NotificationResponse response) {
-  debugPrint("NotificationResponse: ${response.payload}");
   final payload = response.payload;
   if (payload != null) {
     final data = jsonDecode(payload);
 
     try {
-      final notification = jsonToNotificationModel(data);
-
-      debugPrint("Notification: $notification");
+      final notification =
+          jsonToNotificationModel(jsonDecode(data["notification"]));
 
       onNotificationTap(notification);
-    } catch (e,stack) {
+    } catch (e, stack) {
       debugPrint("$e");
       debugPrintStack(stackTrace: stack);
     }
