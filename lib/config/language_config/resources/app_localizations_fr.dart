@@ -938,6 +938,14 @@ class AppLocalizationsFr extends AppLocalizations {
   String get country_of_origin => 'Pays d\'origine';
 
   @override
+  String get week_ago => 'il y a 1 semaine';
+
+  @override
+  String weeks_ago(Object weeks) {
+    return 'il y a $weeks semaines';
+  }
+
+  @override
   String get no_description_available => 'Aucune description disponible';
 
   @override
@@ -966,6 +974,33 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get brand => 'Brand';
+
+  @override
+  String get created => 'Créé';
+
+  @override
+  String get approved => 'Approuvé';
+
+  @override
+  String get cancelled => 'Annulé';
+
+  @override
+  String get ready => 'Prêt';
+
+  @override
+  String get delivered => 'Livré';
+
+  @override
+  String get returned => 'Retourné';
+
+  @override
+  String get invoice => 'Facture';
+
+  @override
+  String get proforma => 'Facture proforma';
+
+  @override
+  String get failed => 'Échoué';
 
   @override
   String get unauthorized_distributor_login => 'Connexion non autorisée';

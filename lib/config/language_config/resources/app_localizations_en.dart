@@ -927,6 +927,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get country_of_origin => 'Country of Origin';
 
   @override
+  String get week_ago => '1 week ago';
+
+  @override
+  String weeks_ago(Object weeks) {
+    return '$weeks weeks ago';
+  }
+
+  @override
   String get no_description_available => 'No description available';
 
   @override
@@ -955,6 +963,33 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get brand => 'Brand';
+
+  @override
+  String get created => 'Created';
+
+  @override
+  String get approved => 'Approved';
+
+  @override
+  String get cancelled => 'Cancelled';
+
+  @override
+  String get ready => 'Ready';
+
+  @override
+  String get delivered => 'Delivered';
+
+  @override
+  String get returned => 'Returned';
+
+  @override
+  String get invoice => 'Invoice';
+
+  @override
+  String get proforma => 'Proforma Invoice';
+
+  @override
+  String get failed => 'Failed';
 
   @override
   String get unauthorized_distributor_login => 'Unauthorized distributor login';

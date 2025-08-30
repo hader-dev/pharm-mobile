@@ -11,7 +11,6 @@ sealed class MedicineDetailsState {
     this.shippingAddress = "",
   });
 
-  /// Universal copy method
   MedicineDetailsState copyWith({
     MedicineCatalogModel? medicineCatalogData,
     int? currentTapIndex,

@@ -924,6 +924,14 @@ class AppLocalizationsAr extends AppLocalizations {
   String get country_of_origin => 'بلد المنشأ';
 
   @override
+  String get week_ago => 'week ago';
+
+  @override
+  String weeks_ago(Object weeks) {
+    return '$weeks week ago';
+  }
+
+  @override
   String get no_description_available => 'لا يوجد وصف متاح';
 
   @override
@@ -952,6 +960,33 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get brand => 'الماركة';
+
+  @override
+  String get created => 'تم الإنشاء';
+
+  @override
+  String get approved => 'موافق عليه';
+
+  @override
+  String get cancelled => 'ملغي';
+
+  @override
+  String get ready => 'جاهز';
+
+  @override
+  String get delivered => 'تم التوصيل';
+
+  @override
+  String get returned => 'تم الإرجاع';
+
+  @override
+  String get invoice => 'فاتورة';
+
+  @override
+  String get proforma => 'فاتورة أولية';
+
+  @override
+  String get failed => 'فشل';
 
   @override
   String get unauthorized_distributor_login => 'تسجيل دخول غير مصرح به';

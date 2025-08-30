@@ -14,6 +14,7 @@ Future<ResponseLoadFilter> loadMedicalFilter(
       'offset': param.offset.toString(),
       'sortDirection': param.sort,
       'fields[]': [param.key.name],
+      'distinct': param.key.name,
       if (param.query.isNotEmpty) 'search[${param.key.name}]': param.query
     };
 

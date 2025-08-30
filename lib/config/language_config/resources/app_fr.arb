@@ -319,10 +319,18 @@
   "nis_number": "Numéro NIS",
   "ai_number": "Numéro AI",
   "companyLogo": "Logo de la société",
-   "no_company_is_associated_with_this_account": "Aucune société n'est associée à ce compte.",
-   "create_company_action": "Créer une société",
-   "loading_text": "Chargement...",
-   "feedback_profile_updated": "Profil mis à jour avec succès",
-   "vendor_added_to_favorites": "Fournisseur ajouté à votre liste de favoris"
- 
+  "no_company_is_associated_with_this_account": "Aucune société n'est associée à ce compte.",
+  "create_company_action": "Créer une société",
+  "loading_text": "Chargement...",
+  "feedback_profile_updated": "Profil mis à jour avec succès",
+  "vendor_added_to_favorites": "Fournisseur ajouté à votre liste de favoris",
+  "created": "Créé",
+  "approved": "Approuvé",
+  "cancelled": "Annulé",
+  "ready": "Prêt",
+  "invoice": "Facture",
+  "proforma": "Facture proforma",
+  "delivered": "Livré",
+  "returned": "Retourné",
+  "failed": "Échoué"
 }

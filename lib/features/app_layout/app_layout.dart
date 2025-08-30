@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/config/services/notification/notification_service_port.dart';
 import 'package:hader_pharm_mobile/features/common_features/cart/cubit/cart_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/home.dart';
@@ -68,10 +69,12 @@ class AppLayout extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => CartCubit(
-                CartItemRepository(
+                shippingAddress: UserManager.instance.currentUser.address,
+                cartItemRepository: CartItemRepository(
                     client: getItInstance.get<INetworkService>()),
-                ScrollController(),
-                OrderRepository(client: getItInstance.get<INetworkService>()))
+                scrollController: ScrollController(),
+                ordersRepository: OrderRepository(
+                    client: getItInstance.get<INetworkService>()))
               ..getCartItem(),
           ),
           BlocProvider(

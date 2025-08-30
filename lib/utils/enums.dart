@@ -63,25 +63,50 @@ enum OrderClaimStatus {
 }
 
 enum OrderStatus {
-  pending(
+  created(
     id: 1,
-    color: Color.fromARGB(255, 106, 106, 106),
-    icon: Icons.new_releases,
+    color: Color.fromARGB(255, 106, 106, 106), // gray
+    icon: Icons.new_releases, // "new"
   ),
-  confirmed(
+  approved(
     id: 2,
-    color: Colors.orange,
-    icon: Icons.play_arrow,
-  ),
-  completed(
-    id: 3,
     color: Colors.green,
     icon: Icons.check_circle,
   ),
-  canceled(
-    id: 4,
+  rejected(
+    id: 3,
     color: Colors.red,
     icon: Icons.cancel,
+  ),
+  cancelled(
+    id: 4,
+    color: Colors.grey,
+    icon: Icons.remove_circle,
+  ),
+  processing(
+    id: 5,
+    color: Colors.orange,
+    icon: Icons.autorenew,
+  ),
+  ready(
+    id: 6,
+    color: Colors.blue,
+    icon: Icons.shopping_bag,
+  ),
+  delivered(
+    id: 7,
+    color: Colors.teal,
+    icon: Icons.local_shipping,
+  ),
+  returned(
+    id: 8,
+    color: Colors.purple,
+    icon: Icons.reply,
+  ),
+  failed(
+    id: 9,
+    color: Colors.black,
+    icon: Icons.error,
   );
 
   final int id;
@@ -95,45 +120,39 @@ enum OrderStatus {
     required this.icon,
   });
 
-  static String getTranslatedStatus(OrderStatus expression) {
-    switch (expression) {
-      case OrderStatus.pending:
-        return RoutingManager
-            .rootNavigatorKey.currentContext!.translation!.pending;
+  static String getTranslatedStatus(OrderStatus status) {
+    final context = RoutingManager.rootNavigatorKey.currentContext!;
+    final t = context.translation!;
 
-      case OrderStatus.confirmed:
-        return RoutingManager
-            .rootNavigatorKey.currentContext!.translation!.confirmed;
+    switch (status) {
+      case OrderStatus.created:
+        return t.created;
 
-      case OrderStatus.completed:
-        return RoutingManager
-            .rootNavigatorKey.currentContext!.translation!.completed;
+      case OrderStatus.approved:
+        return t.approved;
 
-      case OrderStatus.canceled:
-        return RoutingManager
-            .rootNavigatorKey.currentContext!.translation!.canceled;
+      case OrderStatus.rejected:
+        return t.rejected;
+
+      case OrderStatus.cancelled:
+        return t.cancelled;
+
+      case OrderStatus.processing:
+        return t.processing;
+
+      case OrderStatus.ready:
+        return t.ready;
+
+      case OrderStatus.delivered:
+        return t.delivered;
+
+      case OrderStatus.returned:
+        return t.returned;
+
+      case OrderStatus.failed:
+        return t.failed;
     }
   }
-
-//   static String translateDescription(BuildContext context, OrderStatus expression) {
-//     return '';
-//     // switch (expression) {
-//     //   case OrderStatus.newStat:
-//     //     return context.translation!.wait_for_approval_desc;
-
-//     //   case OrderStatus.confirmed:
-//     //     return context.translation!.confirmed_desc;
-
-//     //   case OrderStatus.completed:
-//     //     return context.translation!.completed;
-
-//     //   case OrderStatus.canceled:
-//     //     return context.translation!.canceled_desc;
-
-//     //   default:
-//     //     return context.translation!.unknown;
-//     // }
-//   }
 }
 
 enum SearchMedicineFilters { dci, sku, code }
@@ -170,6 +189,15 @@ enum InvoiceTypes {
 
   final int id;
   const InvoiceTypes({required this.id});
+
+  String translation(AppLocalizations translation) {
+    switch (this) {
+      case InvoiceTypes.facture:
+        return translation.invoice;
+      case InvoiceTypes.proforma:
+        return translation.proforma;
+    }
+  }
 }
 
 enum CompanyType {

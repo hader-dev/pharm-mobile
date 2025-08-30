@@ -8,7 +8,7 @@ import 'package:hader_pharm_mobile/utils/urls.dart';
 
 Future<ResponseOrderComplaints> getOrderComplaints(
     ParamsGetOrderComplaints params, INetworkService client) async {
-  final queryParams = {"orderId": params.orderId};
+  final queryParams = {"filters[orderId]": params.orderId};
 
   try {
     var decodedResponse = await client.sendRequest(

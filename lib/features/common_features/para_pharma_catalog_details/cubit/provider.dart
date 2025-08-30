@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/features/app_layout/app_layout.dart';
 import 'package:hader_pharm_mobile/features/common_features/cart/cubit/cart_cubit.dart';
@@ -31,6 +32,7 @@ class StateProvider extends StatelessWidget {
     return MultiBlocProvider(providers: [
       BlocProvider(
         create: (context) => ParaPharmaDetailsCubit(
+            shippingAddress: UserManager.instance.currentUser.address,
             quantityController: TextEditingController(
                 text: existingCartItem?.quantity.toString() ?? '1'),
             tabController: TabController(length: tabs.length, vsync: vsync),

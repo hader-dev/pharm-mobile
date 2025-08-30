@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
+import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common_features/create_company_profile/sub_pages/review_and_sumbit/widgets/info_row.dart';
 import 'package:hader_pharm_mobile/models/order.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
@@ -9,8 +10,6 @@ import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_date_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/price_formatter.dart';
-
-import '../../../../config/theme/colors_manager.dart';
 
 class OrderCard extends StatelessWidget {
   final BaseOrderModel orderData;
@@ -21,7 +20,7 @@ class OrderCard extends StatelessWidget {
   }) {
     orderStatus = OrderStatus.values.firstWhere(
       (element) => element.id == orderData.status,
-      orElse: () => OrderStatus.pending,
+      orElse: () => OrderStatus.created,
     );
   }
 
@@ -93,8 +92,8 @@ class OrderCard extends StatelessWidget {
                         style: context.responsiveTextTheme.current.bodySmall
                             .copyWith(
                                 color: orderStatus.color,
-                                fontWeight: context.responsiveTextTheme
-                                    .current.appFont.appFontSemiBold)),
+                                fontWeight: context.responsiveTextTheme.current
+                                    .appFont.appFontSemiBold)),
                   ),
                 ),
               ],

@@ -1870,6 +1870,18 @@ abstract class AppLocalizations {
   /// **'Country of Origin'**
   String get country_of_origin;
 
+  /// No description provided for @week_ago.
+  ///
+  /// In en, this message translates to:
+  /// **'1 week ago'**
+  String get week_ago;
+
+  /// No description provided for @weeks_ago.
+  ///
+  /// In en, this message translates to:
+  /// **'{weeks} weeks ago'**
+  String weeks_ago(Object weeks);
+
   /// No description provided for @no_description_available.
   ///
   /// In en, this message translates to:
@@ -1929,6 +1941,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Brand'**
   String get brand;
+
+  /// No description provided for @created.
+  ///
+  /// In en, this message translates to:
+  /// **'Created'**
+  String get created;
+
+  /// No description provided for @approved.
+  ///
+  /// In en, this message translates to:
+  /// **'Approved'**
+  String get approved;
+
+  /// No description provided for @cancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled'**
+  String get cancelled;
+
+  /// No description provided for @ready.
+  ///
+  /// In en, this message translates to:
+  /// **'Ready'**
+  String get ready;
+
+  /// No description provided for @delivered.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivered'**
+  String get delivered;
+
+  /// No description provided for @returned.
+  ///
+  /// In en, this message translates to:
+  /// **'Returned'**
+  String get returned;
+
+  /// No description provided for @invoice.
+  ///
+  /// In en, this message translates to:
+  /// **'Invoice'**
+  String get invoice;
+
+  /// No description provided for @proforma.
+  ///
+  /// In en, this message translates to:
+  /// **'Proforma Invoice'**
+  String get proforma;
+
+  /// No description provided for @failed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed'**
+  String get failed;
 
   /// No description provided for @unauthorized_distributor_login.
   ///

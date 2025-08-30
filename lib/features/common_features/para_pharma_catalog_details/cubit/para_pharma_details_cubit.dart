@@ -19,13 +19,14 @@ class ParaPharmaDetailsCubit extends Cubit<ParaPharmaDetailsState> {
   final FavoriteRepository favoriteRepository;
 
   final TextEditingController quantityController;
-  String shippingAddress = '';
+  String shippingAddress;
 
   ParaPharmaDetailsCubit(
       {required this.quantityController,
       required this.paraPharmaCatalogRepository,
       required this.tabController,
       required this.favoriteRepository,
+      this.shippingAddress = '',
       required this.ordersRepository})
       : super(ParaPharmaDetailsInitial());
   getParaPharmaCatalogData(String id) async {

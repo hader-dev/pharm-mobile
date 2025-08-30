@@ -54,8 +54,7 @@ class MedicalFiltersApply extends StatelessWidget {
         Gap(AppSizesManager.s12),
         CustomTextField(
           hintText: context.translation!.medicines_search_field_hint,
-          controller:
-              cubit.searchController,
+          controller: cubit.searchController,
           state: FieldState.normal,
           isEnabled: true,
           prefixIcon: Icon(
@@ -157,6 +156,7 @@ class MedicalFiltersApply extends StatelessWidget {
                           child: PrimaryTextButton(
                             isOutLined: true,
                             label: context.translation!.reset,
+                            spalshColor: AppColors.accent1Shade2.withAlpha(50),
                             labelColor: AppColors.accent1Shade1,
                             onTap: () {
                               BlocProvider.of<MedicalFiltersCubit>(context)

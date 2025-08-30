@@ -32,6 +32,7 @@ class MedicalFiltersCubit extends Cubit<MedicalFiltersState> {
           ParamLoadMedicalFilter(
               key: currentkey, query: searchController.text));
 
+      debugPrint(data.data.length.toString());
       filtersSource = filtersSource.updateFilterList(currentkey, data.data);
 
       emit(MedicalFiltersLoaded());

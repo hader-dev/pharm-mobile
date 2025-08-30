@@ -284,6 +284,15 @@
   "main_features": "الميزات الرئيسية",
   "pharmaceutical_form": "الشكل الصيدلاني",
   "dosage": "الجرعة",
+  "created": "تم الإنشاء",
+  "approved": "موافق عليه",
+  "cancelled": "ملغي",
+  "ready": "جاهز",
+  "delivered": "تم التوصيل",
+  "returned": "تم الإرجاع",
+  "invoice": "فاتورة",
+  "proforma": "فاتورة أولية",
+  "failed": "فشل",
   "packaging": "التغليف",
   "type": "النوع",
   "refresh": "تحديث",
@@ -323,6 +332,5 @@
   "create_company_action": "إنشاء شركة",
   "loading_text": "جارٍ التحميل...",
   "feedback_profile_updated": "تم تحديث الملف الشخصي بنجاح",
-  "vendor_added_to_favorites": "تم إضافة المورد إلى قائمة المفضلة",
-  "unauthorized_distributor_login": "تسجيل دخول غير مصرح به"
+  "vendor_added_to_favorites": "تم إضافة المورد إلى قائمة المفضلة"
 }

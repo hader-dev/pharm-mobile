@@ -25,8 +25,9 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
       required this.quantityController,
       required this.tabController,
       required this.ordersRepository,
+      String shippingAddress = "",
       required this.favoriteRepository})
-      : super(MedicineDetailsInitial()) {
+      : super(MedicineDetailsInitial(shippingAddress: shippingAddress)) {
     quantityController.addListener(() {
       if (int.parse(quantityController.text) <= 0) {
         quantityController.text = '1';

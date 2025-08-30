@@ -19,10 +19,10 @@ class CartCubit extends Cubit<CartState> {
   num totalHtAmount = 0;
   num totalTTCAmount = 0;
   Timer? _debounce;
-  PaymentMethods? selectedPaymentMethod;
-  InvoiceTypes? selectedInvoiceType;
+  PaymentMethods selectedPaymentMethod = PaymentMethods.cash;
+  InvoiceTypes? selectedInvoiceType = InvoiceTypes.facture;
   String orderNote = '';
-  String shippingAddress = '';
+  String shippingAddress;
   // int totalItemsCount = 0;
   // int offSet = 0;
   List<CartItemModel> cartItems = <CartItemModel>[];
@@ -34,9 +34,12 @@ class CartCubit extends Cubit<CartState> {
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  CartCubit(
-      this.cartItemRepository, this.scrollController, this.ordersRepository)
-      : super(CartInitial()) {
+  CartCubit({
+    required this.cartItemRepository,
+    required this.scrollController,
+    required this.ordersRepository,
+    this.shippingAddress = '',
+  }) : super(CartInitial()) {
     _onScroll();
   }
   _onScroll() {
