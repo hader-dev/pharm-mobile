@@ -18,7 +18,7 @@ Future<ResponseLoadFilter> loadFiltersParaMedical(
     };
 
     final res = await client.sendRequest(() => client.get(
-          Urls.parapharms,
+          Urls.paraPharamaCatalog1,
           queryParams: queryParams,
         ));
 
