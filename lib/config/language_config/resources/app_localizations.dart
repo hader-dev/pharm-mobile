@@ -1797,6 +1797,7 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'منذ {weeks} أسابيع'**
   String weeks_ago(Object weeks);
+
   /// No description provided for @app_name.
   ///
   /// In en, this message translates to:
@@ -1880,19 +1881,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Country of Origin'**
   String get country_of_origin;
-
-
-  /// No description provided for @week_ago.
-  ///
-  /// In en, this message translates to:
-  /// **'One week ago'**
-  String get week_ago;
-
-  /// No description provided for @weeks_ago.
-  ///
-  /// In en, this message translates to:
-  /// **'{weeks} weeks ago'**
-  String weeks_ago(Object weeks);
 
   /// No description provided for @no_description_available.
   ///
@@ -2091,7 +2079,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Vendor added to your favorites list'**
   String get vendor_added_to_favorites;
-
 }
 
 class _AppLocalizationsDelegate

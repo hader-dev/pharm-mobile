@@ -911,17 +911,6 @@ class AppLocalizationsEn extends AppLocalizations {
     return 'منذ $weeks أسابيع';
   }
 
-  @override
-  String get announcements => 'Announcements';
-
-  @override
-  String get see_all => 'See All';
-
-  @override
-  String get all_announcements => 'All Announcements';
-
-  @override
-  String get main_features => 'Main Features';
 
   @override
   String get pharmaceutical_form => 'Pharmaceutical Form';

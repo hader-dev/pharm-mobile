@@ -38,9 +38,9 @@ class VendorDetails extends StatelessWidget {
           BlocProvider(
             create: (context) => VendorDetailsCubit(
                 companyRepo: CompanyRepository(
-                  client: getItInstance.get<INetworkService>(),
-                  userManager: getItInstance.get<UserManager>(),
-                ))
+              client: getItInstance.get<INetworkService>(),
+              userManager: getItInstance.get<UserManager>(),
+            ))
               ..getVendorDetails(companyId),
           ),
           BlocProvider(
@@ -78,11 +78,7 @@ class VendorDetails extends StatelessWidget {
               title: BlocBuilder<VendorDetailsCubit, VendorDetailsState>(
                 builder: (context, state) {
                   if (state is VendorDetailsLoading) {
-                    return Text(context.translation!.loading_text,
-                        style: context
-                            .responsiveTextTheme.current.headLine4SemiBold
-                            .copyWith(color: AppColors.bgWhite));
-                    return const CircularProgressIndicator();
+                    return const Center(child: CircularProgressIndicator());
                   }
                   return Row(children: [
                     Container(
