@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/language_config/resources/app_localizations.dart';
 import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
+import 'package:hader_pharm_mobile/features/common_features/login/actions/setup_company_or_go_home.dart';
 import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler.dart';
 
 part 'forgot_pasword_state.dart';
@@ -65,14 +66,30 @@ class ForgotPasswordCubit extends Cubit<ForgotPaswordState> {
             email: emailController.text,
             otp: otp,
             newPassword: newPasswordController.text);
+
+        final success = await getItInstance.get<UserManager>().login(
+            userName: emailController.text,
+            password: newPasswordController.text);
+
+        if (success) {
+          setupCompanyOrSkipToHome();
+        }
+        _reset();
         emit(ResetPasswordSuccess());
       }
     } catch (e) {
+      debugPrint("$e");
       GlobalExceptionHandler.handle(exception: e);
     }
   }
 
+  void _reset() {
+    emailController.clear();
+    newPasswordController.clear();
+  }
+
   void navigateBack() {
+    _reset();
     emit(ForgotPasswordInitial());
   }
 

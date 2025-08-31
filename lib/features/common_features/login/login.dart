@@ -26,7 +26,7 @@ class LoginScreen extends StatelessWidget {
         child: BlocListener<LoginCubit, LoginState>(
           listener: (BuildContext context, LoginState state) {
             if (state is LoginSuccessful) {
-              setupCompanyOrSkipToHome(context);
+              setupCompanyOrSkipToHome();
             }
             if (state is ForgotPassword) {
               BottomSheetHelper.showCommonBottomSheet(
