@@ -93,6 +93,7 @@ class LanguagesScreen extends StatelessWidget {
                         const Spacer(),
                         PrimaryTextButton(
                           label: context.translation!.save,
+                          labelColor: AppColors.bgWhite,
                           isLoading: state is LangSettingsSaved,
                           onTap: () {
                             BlocProvider.of<LangCubit>(context)

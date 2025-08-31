@@ -97,13 +97,15 @@ class BaseButton extends StatelessWidget {
                     ],
                   ),
                 ConstrainedBox(
-                  constraints: BoxConstraints(
-                      maxWidth: maxWidth ?? double.maxFinite),
+                  constraints:
+                      BoxConstraints(maxWidth: maxWidth ?? double.infinity),
                   child: Text(
                     label,
-                    style: labelTextStyle ?? context.responsiveTextTheme.current.headLine4Medium.copyWith(
-                      color: onTap == null ? Colors.grey : labelColor,
-                    ),
+                    style: labelTextStyle ??
+                        context.responsiveTextTheme.current.headLine4Medium
+                            .copyWith(
+                          color: onTap == null ? Colors.grey : labelColor,
+                        ),
                     overflow: textOverflow,
                   ),
                 ),
