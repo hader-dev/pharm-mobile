@@ -62,7 +62,7 @@ class VendorsSectionItems extends StatelessWidget {
                   extra: entity.id,
                 ),
                 imageUrl: getItInstance.get<INetworkService>().getFilesPath(
-                      entity.thumbnailImage!.path,
+                      entity.thumbnailImage?.path ?? "",
                     ),
               );
             }),
