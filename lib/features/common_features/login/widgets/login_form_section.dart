@@ -32,7 +32,8 @@ class _LoginFormSectionState extends State<LoginFormSection> {
               CustomTextField(
                 fieldKey: emailFieldKey,
                 label: '${context.translation!.email}*',
-                controller: BlocProvider.of<LoginCubit>(context).emailController,
+                controller:
+                    BlocProvider.of<LoginCubit>(context).emailController,
                 state: FieldState.normal,
                 validationFunc: (value) {
                   if (value == null || value.isEmpty) {
@@ -46,18 +47,25 @@ class _LoginFormSectionState extends State<LoginFormSection> {
               Gap(AppSizesManager.s4),
               CustomTextField(
                 label: '${context.translation!.password}*',
-                controller: BlocProvider.of<LoginCubit>(context).passwordController,
+                controller:
+                    BlocProvider.of<LoginCubit>(context).passwordController,
                 onChanged: (value) {},
                 isObscure: BlocProvider.of<LoginCubit>(context).isObscured,
                 suffixIcon: InkWell(
-                    onTap: () => BlocProvider.of<LoginCubit>(context).showPassword(),
+                    onTap: () =>
+                        BlocProvider.of<LoginCubit>(context).showPassword(),
                     child: BlocProvider.of<LoginCubit>(context).isObscured
-                        ? const Icon(Iconsax.eye, color: AppColors.accent1Shade1)
-                        : const Icon(Iconsax.eye_slash, color: AppColors.accent1Shade1)),
+                        ? const Icon(Iconsax.eye,
+                            color: AppColors.accent1Shade1)
+                        : const Icon(Iconsax.eye_slash,
+                            color: AppColors.accent1Shade1)),
                 state: FieldState.normal,
                 validationFunc: (value) {
                   if ((value == null || value.isEmpty) &&
-                      BlocProvider.of<LoginCubit>(context).emailController.text.isNotEmpty) {
+                      BlocProvider.of<LoginCubit>(context)
+                          .emailController
+                          .text
+                          .isNotEmpty) {
                     return context.translation!.feedback_field_required;
                   }
                   if (value.length < 6) {
@@ -73,7 +81,6 @@ class _LoginFormSectionState extends State<LoginFormSection> {
                   PrimaryTextButton(
                     label: context.translation!.forgot_password,
                     onTap: () {
-                      if (!emailFieldKey.currentState!.validate()) {}
                       BlocProvider.of<LoginCubit>(context).forgetPassword();
                     },
                     labelColor: AppColors.accent1Shade1,

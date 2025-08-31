@@ -1,24 +1,36 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
-import 'package:hader_pharm_mobile/config/di/di.dart';
-import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
-
 import 'package:flutter/material.dart';
+import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/config/language_config/resources/app_localizations.dart';
+import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler.dart';
-
 
 part 'forgot_pasword_state.dart';
 
 bool testWithAccountOne = true;
+
 class ForgotPasswordCubit extends Cubit<ForgotPaswordState> {
   bool isObscured = true;
+  bool isResendActive = true;
+  final UserManager userManager;
 
-  TextEditingController emailController = TextEditingController(text: testWithAccountOne ? "ayoub1@gmail.com" : "nocompany@gmail.com");
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  GlobalKey<FormFieldState> passwordFieldKey = GlobalKey<FormFieldState>();
 
-  ForgotPasswordCubit() : super(ForgotPasswordInitial());
+  TextEditingController emailController = TextEditingController(text: "");
+  TextEditingController newPasswordController = TextEditingController(text: "");
+
+  ForgotPasswordCubit({
+    required this.userManager,
+  }) : super(ForgotPasswordInitial());
 
   void forgetPassword() async {
     try {
-      await getItInstance.get<UserManager>().sendResetPasswordMail(email: emailController.text);
+      await getItInstance
+          .get<UserManager>()
+          .sendResetPasswordMail(email: emailController.text);
       emit(ResetLinkSent());
     } catch (e) {
       GlobalExceptionHandler.handle(
@@ -27,4 +39,45 @@ class ForgotPasswordCubit extends Cubit<ForgotPaswordState> {
     }
   }
 
+  resendOtp() async {
+    try {
+      emit(ResendOtpLoading());
+      await userManager.resendOtpCode(email: emailController.text);
+      int counter = 10;
+      Timer.periodic(const Duration(seconds: 1), (timer) {
+        isResendActive = false;
+        counter--;
+        if (counter == 0) {
+          timer.cancel();
+          isResendActive = true;
+        }
+        emit(TimerCountChanged(count: counter));
+      });
+    } catch (e) {
+      GlobalExceptionHandler.handle(exception: e);
+    }
+  }
+
+  Future<void> resetPassword(String otp, AppLocalizations translation) async {
+    try {
+      if (formKey.currentState!.validate()) {
+        await userManager.forgotPassword(
+            email: emailController.text,
+            otp: otp,
+            newPassword: newPasswordController.text);
+        emit(ResetPasswordSuccess());
+      }
+    } catch (e) {
+      GlobalExceptionHandler.handle(exception: e);
+    }
+  }
+
+  void navigateBack() {
+    emit(ForgotPasswordInitial());
+  }
+
+  void showPassword() {
+    isObscured = !isObscured;
+    emit(PasswordVisibilityChanged());
+  }
 }

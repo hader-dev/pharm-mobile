@@ -1003,6 +1003,14 @@ class AppLocalizationsFr extends AppLocalizations {
   String get failed => 'Échoué';
 
   @override
+  String get password_reset_success =>
+      'Réinitialisation du mot de passe avec successe';
+
+  @override
+  String get hint_please_enter_otp_sent_to_email =>
+      'Veuillez saisir le code OTP envoyé par email';
+
+  @override
   String get unauthorized_distributor_login => 'Connexion non autorisée';
 
   @override

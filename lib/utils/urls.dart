@@ -21,6 +21,7 @@ class Urls {
   static String get resendOtp => "$auth/resend-email-otp";
   static String get forgotPassword => "$auth/forgot-password";
   static String get changePassword => "$auth/change-password";
+  static String get resetPassword => "$auth/reset-password";
 
   //Client
   static String get client => "/clients";

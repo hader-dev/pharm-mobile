@@ -294,6 +294,8 @@
   "proforma": "فاتورة أولية",
   "failed": "فشل",
   "packaging": "التغليف",
+  "password_reset_success": "تم تغيير كلمة المرور بنجاح",
+  "hint_please_enter_otp_sent_to_email": "يرجى ادخال الرمز المرسل إلى البريد الإلكتروني",
   "type": "النوع",
   "refresh": "تحديث",
   "app_name": "حاضر صيدلية",

@@ -989,6 +989,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get failed => 'فشل';
 
   @override
+  String get password_reset_success => 'تم تغيير كلمة المرور بنجاح';
+
+  @override
+  String get hint_please_enter_otp_sent_to_email =>
+      'يرجى ادخال الرمز المرسل إلى البريد الإلكتروني';
+
+  @override
   String get unauthorized_distributor_login => 'تسجيل دخول غير مصرح به';
 
   @override

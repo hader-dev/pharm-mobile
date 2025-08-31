@@ -156,7 +156,7 @@ class UserManager {
   Future<String?> getCompanyId() async {
     String? token = await tokenManagerInstance.getAccessToken();
     if (token == null) return null;
-    
+
     JwtDecoded decodedJwt = decodeJwt(token);
     return decodedJwt.companyId;
   }
@@ -170,5 +170,13 @@ class UserManager {
       tokenManagerInstance.removeToken(),
       getItInstance.get<INetworkService>().deletePersistantCookiesJar()
     ]);
+  }
+
+  Future<void> forgotPassword(
+      {required String email,
+      required String otp,
+      required String newPassword}) {
+    return userRepo.forgotPassword(
+        email: email, otp: otp, newPassword: newPassword);
   }
 }

@@ -187,5 +187,16 @@ class UserRepository implements IUserRepository {
             }));
   }
 
-  
+  @override
+  Future<void> forgotPassword(
+      {required String email,
+      required String otp,
+      required String newPassword}) async {
+    return client.sendRequest(() => client.post(Urls.resetPassword,
+            payload: <String, String>{
+              "email": email,
+              "otp": otp,
+              "password": newPassword
+            }));
+  }
 }

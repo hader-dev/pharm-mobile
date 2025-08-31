@@ -1996,6 +1996,18 @@ abstract class AppLocalizations {
   /// **'Failed'**
   String get failed;
 
+  /// No description provided for @password_reset_success.
+  ///
+  /// In en, this message translates to:
+  /// **'Password reset success'**
+  String get password_reset_success;
+
+  /// No description provided for @hint_please_enter_otp_sent_to_email.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter the OTP sent to your email'**
+  String get hint_please_enter_otp_sent_to_email;
+
   /// No description provided for @unauthorized_distributor_login.
   ///
   /// In en, this message translates to:

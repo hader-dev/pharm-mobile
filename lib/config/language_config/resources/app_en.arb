@@ -315,6 +315,8 @@
   "invoice": "Invoice",
   "proforma": "Proforma Invoice",
   "failed": "Failed",
+  "password_reset_success": "Password reset success",
+  "hint_please_enter_otp_sent_to_email":"Please enter the OTP sent to your email",
   "unauthorized_distributor_login": "Unauthorized distributor login",
   "feedback_no_changes_to_update": "No changes to update",
   "feedback_failed_to_load_company_details": "Failed to load company details",

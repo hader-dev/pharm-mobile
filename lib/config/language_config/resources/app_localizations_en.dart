@@ -992,6 +992,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get failed => 'Failed';
 
   @override
+  String get password_reset_success => 'Password reset success';
+
+  @override
+  String get hint_please_enter_otp_sent_to_email =>
+      'Please enter the OTP sent to your email';
+
+  @override
   String get unauthorized_distributor_login => 'Unauthorized distributor login';
 
   @override

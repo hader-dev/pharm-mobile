@@ -8,10 +8,19 @@ abstract class IUserRepository {
     String username,
     String password,
   );
-  Future<String> emailSignUp(String email, String fullName, String password, {String? userImagePath});
-  Future<void> changePassword({required String currentPassword, required String newPassword});
-  Future<String> sendUserEmailCheckOtpCode({required String email, required String otp});
+  Future<String> emailSignUp(String email, String fullName, String password,
+      {String? userImagePath});
+  Future<void> changePassword(
+      {required String currentPassword, required String newPassword});
+  Future<String> sendUserEmailCheckOtpCode(
+      {required String email, required String otp});
   Future<void> resendOtp({required String email});
   Future<void> sendResetPasswordMail({required String email});
-  Future<void> updateProfile({required EditProfileFormDataModel updatedProfileData, bool shouldRemoveImage = false});
+  Future<void> updateProfile(
+      {required EditProfileFormDataModel updatedProfileData,
+      bool shouldRemoveImage = false});
+  Future<void> forgotPassword(
+      {required String email,
+      required String otp,
+      required String newPassword});
 }
