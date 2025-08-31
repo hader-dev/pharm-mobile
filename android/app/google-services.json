@@ -1,32 +1,13 @@
 {
   "project_info": {
-    "project_number": "406202220091",
-    "project_id": "hader-9f8a3",
-    "storage_bucket": "hader-9f8a3.firebasestorage.app"
+    "project_number": "97099770049",
+    "project_id": "hader-pharm",
+    "storage_bucket": "hader-pharm.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:406202220091:android:6a28dee38ee94161bda61e",
-        "android_client_info": {
-          "package_name": "com.example.hader_pharm_mobile"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCzd1-cqEVupvX_nuGT9FYRd3sK3k1SjWg"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:406202220091:android:934ade724555c834bda61e",
+        "mobilesdk_app_id": "1:97099770049:android:8d509d2f019d927475cc40",
         "android_client_info": {
           "package_name": "com.hader.pharma"
         }
@@ -34,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCzd1-cqEVupvX_nuGT9FYRd3sK3k1SjWg"
+          "current_key": "AIzaSyCbPAs79EVCbxWhdqAuAtoH_KtkAqPieoc"
         }
       ],
       "services": {

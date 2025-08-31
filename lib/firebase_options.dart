@@ -51,19 +51,19 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCzd1-cqEVupvX_nuGT9FYRd3sK3k1SjWg',
-    appId: '1:406202220091:android:934ade724555c834bda61e',
-    messagingSenderId: '406202220091',
-    projectId: 'hader-9f8a3',
-    storageBucket: 'hader-9f8a3.firebasestorage.app',
+    apiKey: 'AIzaSyCbPAs79EVCbxWhdqAuAtoH_KtkAqPieoc',
+    appId: '1:97099770049:android:8d509d2f019d927475cc40',
+    messagingSenderId: '97099770049',
+    projectId: 'hader-pharm',
+    storageBucket: 'hader-pharm.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyC0jy4rxGvmIZhrrBYGl7Ja7NUKr6G4QWA',
-    appId: '1:406202220091:ios:46dae02d681aaba8bda61e',
-    messagingSenderId: '406202220091',
-    projectId: 'hader-9f8a3',
-    storageBucket: 'hader-9f8a3.firebasestorage.app',
+    apiKey: 'AIzaSyDFDEEOCGOskrm5qq1S7r9SmmkyX7TgUH8',
+    appId: '1:97099770049:ios:1a6a08fd28cdd89975cc40',
+    messagingSenderId: '97099770049',
+    projectId: 'hader-pharm',
+    storageBucket: 'hader-pharm.firebasestorage.app',
     iosBundleId: 'com.hader.pharma',
   );
 
