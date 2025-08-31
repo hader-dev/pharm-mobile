@@ -8,12 +8,14 @@ import '../../../../utils/constants.dart';
 class SettingsTile extends StatelessWidget {
   final IconData icon;
   final String title;
+  final String? subtitle;
   final Widget? trailing;
   final Function()? onTap;
   const SettingsTile({
     required this.icon,
     required this.title,
     this.trailing,
+    this.subtitle,
     super.key,
     this.onTap,
   });
@@ -42,6 +44,13 @@ class SettingsTile extends StatelessWidget {
             title,
             style: context.responsiveTextTheme.current.body3Medium,
           ),
+          subtitle: subtitle != null
+              ? Text(
+                  subtitle!,
+                  style: context.responsiveTextTheme.current.body3Medium
+                      .copyWith(color: TextColors.ternary.color),
+                )
+              : null,
           trailing: trailing ??
               Icon(
                 Directionality.of(context) == TextDirection.rtl

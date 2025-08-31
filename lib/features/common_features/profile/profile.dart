@@ -185,6 +185,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       SettingsTile(
                         icon: LucideIcons.helpCircle,
                         title: context.translation!.help_support,
+                        onTap: (){
+                          GoRouter.of(context)
+                              .pushNamed(RoutingManager.helpSupportScreen);
+                        },
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(

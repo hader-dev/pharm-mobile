@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/routes/deeplinks_routes.dart';
-import 'package:hader_pharm_mobile/features/common_features/anouncement_details/announcement_details.dart';
 import 'package:hader_pharm_mobile/features/common_features/announcements/all_announcements_screen.dart';
+import 'package:hader_pharm_mobile/features/common_features/anouncement_details/announcement_details.dart';
+import 'package:hader_pharm_mobile/features/common_features/help_support/help_support.dart';
 import 'package:hader_pharm_mobile/features/common_features/leagal_policies/leagal_policies.dart';
 import 'package:hader_pharm_mobile/features/common_features/notification/notification.dart';
 import 'package:hader_pharm_mobile/features/common_features/order_complaint_details/complaint.dart';
@@ -61,6 +62,7 @@ class RoutingManager {
   static const String announcementDetailsScreen = '/AnnouncementDetailsScreen';
   static const String allAnnouncementsScreen = '/AllAnnouncementsScreen';
   static const String orderComplaint = '/OrderComplaint';
+  static const String helpSupportScreen = '/HelpSupportScreen';
 
   static const String editProfileScreen = '/EditProfileScreen';
   static const String editCompanyScreen = '/EditCompanyScreen';
@@ -100,6 +102,13 @@ class RoutingManager {
           path: languagesScreen,
           builder: (BuildContext context, GoRouterState state) {
             return const LanguagesScreen();
+          },
+        ),
+        GoRoute(
+          name: helpSupportScreen,
+          path: helpSupportScreen,
+          builder: (BuildContext context, GoRouterState state) {
+            return const HelpAndSupportScreen();
           },
         ),
         GoRoute(
