@@ -10,16 +10,14 @@ import 'package:hader_pharm_mobile/utils/responsive/silver_grid_params.dart';
 
 import 'cubit/para_pharma_cubit.dart';
 
-class ParaPharmaSearchFilterBottomSheet extends StatefulWidget {
-  const ParaPharmaSearchFilterBottomSheet({super.key});
+class ParaPharmaProductsPage extends StatefulWidget {
+  const ParaPharmaProductsPage({super.key});
 
   @override
-  State<ParaPharmaSearchFilterBottomSheet> createState() =>
-      _ParaPharmaSearchFilterBottomSheetState();
+  State<ParaPharmaProductsPage> createState() => _ParaPharmaProductsPageState();
 }
 
-class _ParaPharmaSearchFilterBottomSheetState
-    extends State<ParaPharmaSearchFilterBottomSheet>
+class _ParaPharmaProductsPageState extends State<ParaPharmaProductsPage>
     with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {

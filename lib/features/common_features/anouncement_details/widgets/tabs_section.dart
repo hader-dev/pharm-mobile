@@ -28,8 +28,8 @@ class _AnnouncementDetailsTabBarSectionState
     final translation = context.translation!;
     final List<String> tabs = [
       translation.overview,
-      translation.medicines,
       translation.para_pharma,
+      translation.medicines,
     ];
 
     TextStyle tabTextStyle = context.responsiveTextTheme.current.body3Medium;
@@ -65,8 +65,8 @@ class _AnnouncementDetailsTabBarSectionState
             controller: tabsController,
             children: [
               AnnouncementOverviewPage(),
-              MedicineProductsPage(),
               ParapharmaProductsPage(),
+              MedicineProductsPage(),
             ],
           ),
         ),

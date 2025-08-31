@@ -61,7 +61,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 listener: (BuildContext context, ChangePasswordState state) {
                   if (state is ChangePasswordSuccessful) {
                     getItInstance.get<ToastManager>().showToast(
-                          message: "Password changed successfully",
+                          message: context
+                              .translation!.password_changed_successfully,
                           type: ToastType.success,
                         );
                   }

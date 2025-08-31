@@ -992,7 +992,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get failed => 'Failed';
 
   @override
+  String get order_placed_successfully => 'Order placed successfully';
+
+  @override
   String get password_reset_success => 'Password reset success';
+
+  @override
+  String get password_changed_successfully => 'Password changed successfully';
 
   @override
   String get hint_please_enter_otp_sent_to_email =>

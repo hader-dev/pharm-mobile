@@ -1003,8 +1003,15 @@ class AppLocalizationsFr extends AppLocalizations {
   String get failed => 'Échoué';
 
   @override
+  String get order_placed_successfully => 'Commande placée avec successe';
+
+  @override
   String get password_reset_success =>
       'Réinitialisation du mot de passe avec successe';
+
+  @override
+  String get password_changed_successfully =>
+      'Mot de passe changé avec successe';
 
   @override
   String get hint_please_enter_otp_sent_to_email =>

@@ -1996,11 +1996,23 @@ abstract class AppLocalizations {
   /// **'Failed'**
   String get failed;
 
+  /// No description provided for @order_placed_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Order placed successfully'**
+  String get order_placed_successfully;
+
   /// No description provided for @password_reset_success.
   ///
   /// In en, this message translates to:
   /// **'Password reset success'**
   String get password_reset_success;
+
+  /// No description provided for @password_changed_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Password changed successfully'**
+  String get password_changed_successfully;
 
   /// No description provided for @hint_please_enter_otp_sent_to_email.
   ///

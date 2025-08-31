@@ -44,9 +44,27 @@ class ButtonsSection extends StatelessWidget {
                   Expanded(
                     child: PrimaryTextButton(
                       isOutLined: true,
+                      label: translation.buy_now,
+                      spalshColor: AppColors.accent1Shade1.withAlpha(50),
+                      labelColor: AppColors.accent1Shade1,
+                      borderColor: AppColors.accent1Shade1,
+                      maxWidth: MediaQuery.of(context).size.width * 0.25,
+                      leadingIcon: Iconsax.money4,
+                      onTap: () {
+                        BottomSheetHelper.showCommonBottomSheet(
+                                context: context,
+                                child: MakeOrderBottomSheet(
+                                    cubit: parapharmDetailsCubit))
+                            .then((res) => onAction?.call());
+                      },
+                    ),
+                  ),
+                  Gap(AppSizesManager.s8),
+                  Expanded(
+                    child: PrimaryTextButton(
                       label: translation.add_cart,
                       leadingIcon: Iconsax.add,
-                      labelColor: AppColors.accent1Shade1,
+                      color: AppColors.accent1Shade1,
                       onTap: () {
                         BlocProvider.of<CartCubit>(context).addToCart(
                             CreateCartItemModel(
@@ -64,24 +82,6 @@ class ButtonsSection extends StatelessWidget {
                             true);
                         onAction?.call();
                       },
-                      borderColor: AppColors.accent1Shade1,
-                    ),
-                  ),
-                  Gap(AppSizesManager.s8),
-                  Expanded(
-                    child: PrimaryTextButton(
-                      label: translation.buy_now,
-                      maxWidth: MediaQuery.of(context).size.width * 0.25,
-                      leadingIcon: Iconsax.money4,
-                      spalshColor: AppColors.accent1Shade1.withAlpha(50),
-                      onTap: () {
-                        BottomSheetHelper.showCommonBottomSheet(
-                                context: context,
-                                child: MakeOrderBottomSheet(
-                                    cubit: parapharmDetailsCubit))
-                            .then((res) => onAction?.call());
-                      },
-                      color: AppColors.accent1Shade1,
                     ),
                   ),
                 ],

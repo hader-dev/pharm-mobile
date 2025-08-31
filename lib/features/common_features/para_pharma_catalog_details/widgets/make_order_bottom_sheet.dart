@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/app_layout/app_layout.dart';
@@ -16,6 +17,7 @@ import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
+import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 import 'package:iconsax/iconsax.dart' show Iconsax;
 
 class MakeOrderBottomSheet extends StatelessWidget {
@@ -223,6 +225,12 @@ class MakeOrderBottomSheet extends StatelessWidget {
                             context
                                 .read<ParaPharmaDetailsCubit>()
                                 .passQuickOrder();
+
+                            getItInstance.get<ToastManager>().showToast(
+                                  message: context
+                                      .translation!.order_placed_successfully,
+                                  type: ToastType.success,
+                                );
                           },
                           color: AppColors.accent1Shade1,
                         ),

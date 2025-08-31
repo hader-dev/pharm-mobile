@@ -26,8 +26,8 @@ class _MarketPlaceTabBarSectionState extends State<MarketPlaceTabBarSection>
   Widget build(BuildContext context) {
     final translation = context.translation!;
     final List<String> tabs = [
-      translation.medicines,
       translation.para_pharma,
+      translation.medicines,
       translation.vendors
     ];
     TextStyle tabTextStyle = context.responsiveTextTheme.current.body3Medium;
@@ -60,8 +60,8 @@ class _MarketPlaceTabBarSectionState extends State<MarketPlaceTabBarSection>
             physics: const NeverScrollableScrollPhysics(),
             controller: tabsController,
             children: [
+              ParaPharmaProductsPage(),
               MedicineProductsPage(),
-              ParaPharmaSearchFilterBottomSheet(),
               VendorsPage()
             ],
           ),

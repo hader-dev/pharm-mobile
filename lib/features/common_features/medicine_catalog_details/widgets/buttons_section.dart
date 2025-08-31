@@ -45,16 +45,35 @@ class ButtonsSection extends StatelessWidget {
                     child: PrimaryTextButton(
                       isOutLined: true,
                       textOverflow: TextOverflow.ellipsis,
-                      label: translation.add_cart,
-                      leadingIcon: Iconsax.add,
+                      label: translation.buy_now,
+                      maxWidth: MediaQuery.of(context).size.width * 0.25,
+                      leadingIcon: Iconsax.money4,
                       spalshColor: AppColors.accent1Shade1.withAlpha(50),
                       labelColor: AppColors.accent1Shade1,
+                      borderColor: AppColors.accent1Shade1,
+                      onTap: () {
+                        BottomSheetHelper.showCommonBottomSheet(
+                            context: context,
+                            child: MakeOrderBottomSheet(
+                              cubit: medicineDetailsCubit,
+                            )).then((res) => onAction?.call());
+                      },
+                    ),
+                  ),
+                  Gap(AppSizesManager.s8),
+                  Expanded(
+                    child: PrimaryTextButton(
+                      textOverflow: TextOverflow.ellipsis,
+                      label: translation.add_cart,
+                      leadingIcon: Iconsax.add,
+                      color: AppColors.accent1Shade1,
                       onTap: () {
                         BlocProvider.of<CartCubit>(context).addToCart(
                           CreateCartItemModel(
                               productId:
                                   BlocProvider.of<MedicineDetailsCubit>(context)
-                                      .state.medicineCatalogData!
+                                      .state
+                                      .medicineCatalogData!
                                       .id,
                               quantity: int.parse(
                                   BlocProvider.of<MedicineDetailsCubit>(context)
@@ -64,24 +83,6 @@ class ButtonsSection extends StatelessWidget {
                         );
                         onAction?.call();
                       },
-                      borderColor: AppColors.accent1Shade1,
-                    ),
-                  ),
-                  Gap(AppSizesManager.s8),
-                  Expanded(
-                    child: PrimaryTextButton(
-                      textOverflow: TextOverflow.ellipsis,
-                      label: translation.buy_now,
-                      maxWidth: MediaQuery.of(context).size.width * 0.25,
-                      leadingIcon: Iconsax.money4,
-                      onTap: () {
-                        BottomSheetHelper.showCommonBottomSheet(
-                            context: context,
-                            child: MakeOrderBottomSheet(
-                              cubit: medicineDetailsCubit,
-                            )).then((res) => onAction?.call());
-                      },
-                      color: AppColors.accent1Shade1,
                     ),
                   ),
                 ],
