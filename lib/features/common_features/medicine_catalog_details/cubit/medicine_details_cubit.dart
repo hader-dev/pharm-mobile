@@ -71,7 +71,7 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
           await medicineCatalogRepository.getMedicineCatalogById(id);
       emit(state.loaded(medicineCatalogData));
     } catch (e) {
-      emit(MedicineDetailsLoadError());
+      emit(state.loadError());
     }
   }
 
@@ -112,7 +112,7 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
     if (formKey.currentState?.validate() == false) return false;
 
     try {
-      emit(PassingQuickOrder());
+      emit(state.passingQuickOrder());
       await ordersRepository.createQuickOrder(
           orderDetails: CreateQuickOrderModel(
         deliveryAddress: state.shippingAddress,
@@ -120,11 +120,11 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
         medicineCatalogId: state.medicineCatalogData!.id,
         qty: int.parse(quantityController.text),
       ));
-      emit(QuickOrderPassed());
+      emit(state.quickOrderPassed());
       return true;
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
-      emit(PassQuickOrderFailed());
+      emit(state.loadError());
       return false;
     }
   }
