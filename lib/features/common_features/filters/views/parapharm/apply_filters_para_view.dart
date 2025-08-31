@@ -69,7 +69,7 @@ class ParaMedicalFiltersApply extends StatelessWidget {
           ),
           onChanged: (searchValue) {
             BlocProvider.of<ParaMedicalFiltersCubit>(context)
-                .updateVisibleItems();
+                .loadParaMedicalFilters();
           },
           validationFunc: (value) {},
         ),

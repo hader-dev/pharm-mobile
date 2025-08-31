@@ -82,7 +82,7 @@ class ParamsLoadFiltersParaMedical {
     this.rootPath = "assets/json/filters",
     this.jsonStringLoader,
     this.filterItems = const [
-      ParaMedicalFiltersKeys.distributorSku,
+      ParaMedicalFiltersKeys.sku,
       ParaMedicalFiltersKeys.name,
       ParaMedicalFiltersKeys.description,
       ParaMedicalFiltersKeys.dosage,
@@ -95,7 +95,7 @@ class ParamsLoadFiltersParaMedical {
       ParaMedicalFiltersKeys.stabilityDuration,
       ParaMedicalFiltersKeys.code,
       ParaMedicalFiltersKeys.reimbursement,
-      ParaMedicalFiltersKeys.distributorSku,
+      ParaMedicalFiltersKeys.sku,
     ],
   });
 }

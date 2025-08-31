@@ -75,7 +75,11 @@ class ParaMedicalFiltersCubit extends Cubit<ParaMedicalFiltersState> {
   void goToApplyFilters(ParaMedicalFiltersKeys key) {
     _pageIndex = 1;
     currentkey = key;
+    searchController.clear();
+
     emit(ParaMedicalFiltersPageChanged());
+
+    loadParaMedicalFilters();
   }
 
   void updatePriceRange(double minPrice, double maxPrice) {
@@ -88,13 +92,11 @@ class ParaMedicalFiltersCubit extends Cubit<ParaMedicalFiltersState> {
 
   void resetCurrentFilters() {
     if (currentkey == ParaMedicalFiltersKeys.unitPriceHt) {
-      // Reset price filters
       appliedFilters = appliedFilters.copyWith(
         gteUnitPriceHt: null,
         lteUnitPriceHt: null,
       );
     } else {
-      // Reset normal filters
       appliedFilters = appliedFilters.updateFilterList(currentkey, []);
       searchController.clear();
       updateVisibleItems();

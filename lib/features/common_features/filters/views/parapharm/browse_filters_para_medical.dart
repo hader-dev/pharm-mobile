@@ -50,9 +50,9 @@ class FiltersParaMedicalBrowse extends StatelessWidget {
               InkAccordionItem(
                 rawTitle: context.translation!.filter_items_sku,
                 onTap: () => navigateToParaFiltersApplyView(
-                    context, ParaMedicalFiltersKeys.distributorSku),
+                    context, ParaMedicalFiltersKeys.sku),
                 rawSubtitle: getDisplayedParaFiltersAsRawString(
-                    context, ParaMedicalFiltersKeys.distributorSku),
+                    context, ParaMedicalFiltersKeys.sku),
               ),
             ],
           ),

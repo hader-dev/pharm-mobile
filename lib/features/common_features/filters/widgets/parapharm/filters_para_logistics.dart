@@ -36,9 +36,9 @@ class FiltersAccordionParaLogistics extends StatelessWidget {
             InkAccordionItem(
               rawTitle: translation.distributor_sku,
               onTap: () => navigateToParaFiltersApplyView(
-                  context, ParaMedicalFiltersKeys.distributorSku),
+                  context, ParaMedicalFiltersKeys.sku),
               rawSubtitle: getDisplayedParaFiltersAsRawString(
-                  context, ParaMedicalFiltersKeys.distributorSku),
+                  context, ParaMedicalFiltersKeys.sku),
             ),
           ],
         ),

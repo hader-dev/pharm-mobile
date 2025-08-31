@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 enum ParaMedicalFiltersKeys {
-  distributorSku,
+  sku,
   name,
   description,
   dosage,
@@ -128,7 +128,7 @@ class ParaMedicalFilters extends Equatable {
       case ParaMedicalFiltersKeys.description:
         return copyWith(description: matchList(description));
 
-      case ParaMedicalFiltersKeys.distributorSku:
+      case ParaMedicalFiltersKeys.sku:
         return copyWith(sku: matchList(sku));
 
       case ParaMedicalFiltersKeys.dosage:
@@ -162,7 +162,7 @@ class ParaMedicalFilters extends Equatable {
         return name;
       case ParaMedicalFiltersKeys.description:
         return description;
-      case ParaMedicalFiltersKeys.distributorSku:
+      case ParaMedicalFiltersKeys.sku:
         return sku;
 
       case ParaMedicalFiltersKeys.dosage:
@@ -197,7 +197,7 @@ class ParaMedicalFilters extends Equatable {
         return copyWith(name: updatedFilters);
       case ParaMedicalFiltersKeys.description:
         return copyWith(description: updatedFilters);
-      case ParaMedicalFiltersKeys.distributorSku:
+      case ParaMedicalFiltersKeys.sku:
         return copyWith(sku: updatedFilters);
 
       case ParaMedicalFiltersKeys.dosage:
