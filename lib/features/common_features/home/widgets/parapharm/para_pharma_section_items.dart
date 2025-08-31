@@ -31,11 +31,9 @@ class ParaPharmaSectionItems extends StatelessWidget {
           );
         }
         void onFavoriteCallback(BaseParaPharmaCatalogModel medicine) {
-          if (medicine.isLiked) {
-            paraPharmaProductsCubit.likeParaPharmaCatalog(medicine.id);
-          } else {
-            paraPharmaProductsCubit.unlikeParaPharmaCatalog(medicine.id);
-          }
+          medicine.isLiked
+              ? paraPharmaProductsCubit.unlikeParaPharmaCatalog(medicine.id)
+              : paraPharmaProductsCubit.likeParaPharmaCatalog(medicine.id);
         }
 
         return SizedBox(

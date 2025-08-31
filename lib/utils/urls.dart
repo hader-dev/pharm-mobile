@@ -54,11 +54,13 @@ class Urls {
   static String get favorites => "/favorite-";
 
   //Medicines
-  static String get medicinesCatalog1 => "/medications-catalog";
+  static String get medicinesCatalog1 => "medications-catalog";
   static String get medicines => "/medicines";
 
   //Medicine parapharm-catalog
   static String get paraPharamaCatalog1 => "/parapharm-catalog";
+  static String get paraPharamaCatalog2 => "parapharm-catalog";
+
   static String get parapharms => "/parapharm-categories";
 
   static String get favoritesLikeMedicineCatalog =>
@@ -66,9 +68,9 @@ class Urls {
   static String get favoritesUnlikeMedicineCatalog =>
       "$favorites$medicinesCatalog1/by-medicine-catalog-id";
   static String get favoritesLikeParaPharmaCatalog =>
-      "$favorites$paraPharamaCatalog1";
+      "$favorites$paraPharamaCatalog2";
   static String get favoritesUnLikeParaPharmaCatalog =>
-      "$favorites$paraPharamaCatalog1/by-parapharm-catalog-id";
+      "$favorites$paraPharamaCatalog2/by-parapharm-catalog-id";
   static String get favoritesCompany => "${favorites}companies";
 
   static String get publicFiles => "/files";

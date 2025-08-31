@@ -31,11 +31,10 @@ class MedicinesSectionItems extends StatelessWidget {
           );
         }
         void onFavoriteCallback(BaseMedicineCatalogModel medicine) {
-          if (medicine.isLiked) {
-            medicinesCubit.likeMedicinesCatalog(medicine.id);
-          } else {
-            medicinesCubit.unlikeMedicinesCatalog(medicine.id);
-          }
+                    medicine.isLiked
+              ? medicinesCubit.unlikeMedicinesCatalog(medicine.id)
+              : medicinesCubit.likeMedicinesCatalog(medicine.id);
+        
         }
 
         return SizedBox(

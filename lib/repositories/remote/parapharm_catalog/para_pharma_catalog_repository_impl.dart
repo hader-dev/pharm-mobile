@@ -80,6 +80,7 @@ class ParaPharmaRepository extends IParaPharmaRepository {
     try {
       var decodedResponse = await client.sendRequest(
           () => client.get(Urls.paraPharamaCatalog, queryParams: queryParams));
+
       return ParaPharmaResponse.fromJson(decodedResponse);
     } catch (e) {
       debugPrint("$e");
