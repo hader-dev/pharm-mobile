@@ -84,80 +84,67 @@ class MakeOrderBottomSheet extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         vertical: AppSizesManager.p8),
-                    child: Row(children: [
-                      PrimaryIconButton(
-                        borderColor: StrokeColors.normal.color,
-                        isBordered: true,
-                        bgColor: Colors.transparent,
-                        onPressed: () {
-                          context
-                              .read<MedicineDetailsCubit>()
-                              .decrementQuantity();
-                        },
-                        icon: Icon(
-                          Iconsax.minus,
-                          color: Colors.black,
+                    child: Row(
+                      children: [
+                        PrimaryIconButton(
+                          borderColor: StrokeColors.normal.color,
+                          isBordered: true,
+                          bgColor: Colors.transparent,
+                          onPressed: () {
+                            context.read<MedicineDetailsCubit>().decrementQuantity();
+                          },
+                          icon: Icon(
+                            Iconsax.minus,
+                            color: Colors.black,
+                          ),
                         ),
-                      ),
-                      Spacer(),
-                      SizedBox(
-                        height: AppSizesManager.buttonHeight,
-                        width: MediaQuery.sizeOf(context).width * 4 / 6,
-                        child: Form(
-                            child: TextFormField(
+                        SizedBox(width: 8),
+                        Flexible(
+                          child: SizedBox(
+                            height: AppSizesManager.buttonHeight,
+                            child: Form(
+                              child: TextFormField(
                                 cursorColor: AppColors.accentGreenShade1,
-                                controller: context
-                                    .read<MedicineDetailsCubit>()
-                                    .quantityController,
+                                controller: context.read<MedicineDetailsCubit>().quantityController,
                                 textAlign: TextAlign.center,
                                 keyboardType: TextInputType.number,
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.digitsOnly
-                                ],
-                                validator: (value) =>
-                                    value == null || value.isEmpty ? '' : null,
-                                style: context
-                                    .responsiveTextTheme.current.body3Medium,
+                                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                                validator: (value) => value == null || value.isEmpty ? '' : null,
+                                style: context.responsiveTextTheme.current.body3Medium,
                                 decoration: InputDecoration(
-                                  contentPadding:
-                                      EdgeInsets.all(AppSizesManager.p12),
+                                  contentPadding: EdgeInsets.all(AppSizesManager.p12),
                                   enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(
-                                        AppSizesManager.commonWidgetsRadius),
-                                    borderSide: BorderSide(
-                                        color:
-                                            FieldState.normal.color.secondary),
+                                    borderRadius: BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+                                    borderSide: BorderSide(color: FieldState.normal.color.secondary),
                                   ),
                                   disabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(
-                                        AppSizesManager.commonWidgetsRadius),
-                                    borderSide:
-                                        BorderSide(color: AppColors.bgDisabled),
+                                    borderRadius: BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+                                    borderSide: BorderSide(color: AppColors.bgDisabled),
                                   ),
                                   focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(
-                                        AppSizesManager.commonWidgetsRadius),
-                                    borderSide: BorderSide(
-                                        color: StrokeColors.focused.color),
+                                    borderRadius: BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+                                    borderSide: BorderSide(color: StrokeColors.focused.color),
                                   ),
-                                ))),
-                      ),
-                      Spacer(),
-                      PrimaryIconButton(
-                        borderColor: StrokeColors.normal.color,
-                        isBordered: true,
-                        bgColor: Colors.transparent,
-                        onPressed: () {
-                          context
-                              .read<MedicineDetailsCubit>()
-                              .incrementQuantity();
-                        },
-                        icon: Icon(
-                          Iconsax.add,
-                          color: Colors.black,
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                    ]),
+                        SizedBox(width: 8),
+                        PrimaryIconButton(
+                          borderColor: StrokeColors.normal.color,
+                          isBordered: true,
+                          bgColor: Colors.transparent,
+                          onPressed: () {
+                            context.read<MedicineDetailsCubit>().incrementQuantity();
+                          },
+                          icon: Icon(
+                            Iconsax.add,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                   Gap(AppSizesManager.s12),
                   InfoWidget(
