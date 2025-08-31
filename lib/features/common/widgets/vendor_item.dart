@@ -4,15 +4,13 @@ import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
+import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common_features/create_company_profile/sub_pages/review_and_sumbit/widgets/info_row.dart';
 import 'package:hader_pharm_mobile/models/company.dart';
+import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
-
-import '../../../config/theme/colors_manager.dart';
-import '../../../utils/assets_strings.dart';
-import '../../../utils/enums.dart';
-
 class VendorItem extends StatelessWidget {
   final bool hideRemoveButton;
   final VoidCallback? onRemoveFromFavorites;
@@ -125,17 +123,17 @@ class VendorItem extends StatelessWidget {
                 ),
                 const Gap(AppSizesManager.s8),
                 InfoRow(
-                  label: "Address",
+                  label: context.translation!.address,
                   dataValue: companyData.address ?? "",
                   contentDirection: Axis.vertical,
                 ),
                 InfoRow(
-                  label: "Phone",
+                  label: context.translation!.phone,
                   dataValue: companyData.phone ?? "",
                   contentDirection: Axis.vertical,
                 ),
                 InfoRow(
-                  label: "Email",
+                  label: context.translation!.email,
                   dataValue: companyData.email ?? "",
                   contentDirection: Axis.vertical,
                 ),

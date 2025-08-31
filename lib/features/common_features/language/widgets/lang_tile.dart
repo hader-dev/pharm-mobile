@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:hader_pharm_mobile/config/language_config/cubit/lang_cubit.dart';
+import 'package:hader_pharm_mobile/config/language_config/cubit/lang_state.dart';
+import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
-import '../../../../config/language_config/cubit/lang_cubit.dart';
-import '../../../../config/language_config/cubit/lang_state.dart';
-import '../../../../config/theme/colors_manager.dart';
-import '../../../../utils/constants.dart';
+
 
 class LangTile extends StatelessWidget {
   final String langValue;

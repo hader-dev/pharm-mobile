@@ -23,6 +23,7 @@ class BaseButton extends StatelessWidget {
   final Color? spalshColor;
   final TextOverflow? textOverflow;
   final double? maxWidth;
+  final TextStyle? labelTextStyle;
 
   const BaseButton({
     super.key,
@@ -44,6 +45,7 @@ class BaseButton extends StatelessWidget {
     this.leadingIcon,
     this.spalshColor,
     this.trailingIcon,
+    this.labelTextStyle,
   });
 
   @override
@@ -99,8 +101,7 @@ class BaseButton extends StatelessWidget {
                       maxWidth: maxWidth ?? double.maxFinite),
                   child: Text(
                     label,
-                    style: context.responsiveTextTheme.current.headLine4Medium
-                        .copyWith(
+                    style: labelTextStyle ?? context.responsiveTextTheme.current.headLine4Medium.copyWith(
                       color: onTap == null ? Colors.grey : labelColor,
                     ),
                     overflow: textOverflow,

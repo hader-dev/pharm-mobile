@@ -1,8 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hader_pharm_mobile/config/language_config/language.dart';
+import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler.dart';
 
-import '../language.dart';
 
-import '../../../../utils/app_exceptions/global_expcetion_handler.dart';
+
+
 import 'lang_state.dart';
 
 class LangCubit extends Cubit<LangState> {
