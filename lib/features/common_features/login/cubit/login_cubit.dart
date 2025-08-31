@@ -12,16 +12,12 @@ import '../../../../config/routes/routing_manager.dart' show RoutingManager;
 
 part 'login_state.dart';
 
-bool testWithAccountOne = false;
-
 class LoginCubit extends Cubit<LoginState> {
   bool isObscured = true;
 
-  TextEditingController emailController = TextEditingController(
-      text: testWithAccountOne ? "ayoub1@gmail.com" : "pharma@mail.com");
+  TextEditingController emailController = TextEditingController(text: "");
 
-  TextEditingController passwordController = TextEditingController(
-      text: testWithAccountOne ? "Strong@12" : "Strong@12");
+  TextEditingController passwordController = TextEditingController(text: "");
 
   LoginCubit() : super(LoginInitial());
 
