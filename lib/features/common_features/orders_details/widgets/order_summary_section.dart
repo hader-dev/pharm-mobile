@@ -46,7 +46,7 @@ class OrderSummarySection extends StatelessWidget {
                     orElse: () => PaymentMethods.cash)
                 .translation(context.translation!),
           ),
-          SummaryRow(label: context.translation!.discount, value: '10%'),
+          // SummaryRow(label: context.translation!.discount, value: cubit.orderData!.discount.formatAsPercentage()),
           //   const SummaryRow(label: 'Shipping (Standard)', value: '10.00 context.translation!.currencyAbbreviation'),
           SummaryRow(
               label: context.translation!.total_ht,

@@ -26,6 +26,7 @@ class OrderDetailsModel extends BaseOrderModel {
     required super.id,
     super.invoiceType,
     super.paymentMethod,
+    required super.discount,
     required super.createdAt,
     required super.updatedAt,
     required super.deliveryAddress,
@@ -48,41 +49,42 @@ class OrderDetailsModel extends BaseOrderModel {
     required this.sellerCompany,
   });
 
-  factory OrderDetailsModel.fromJson(Map<String, dynamic> json) =>
-      OrderDetailsModel(
-        id: json['id'],
-        invoiceType: json['invoiceType'],
-        paymentMethod: json['paymentMethod'],
-        createdAt: DateTime.parse(json['createdAt']),
-        updatedAt: DateTime.parse(json['updatedAt']),
-        deliveryAddress: json['deliveryAddress'],
-        status: json['status'],
-        totalAmountExclTax: json['totalAmountHt'] != null
-            ? double.parse(json['totalAmountHt'])
-            : 0.0,
-        totalAmountInclTax: json['totalAmountTtc '] != null
-            ? double.parse(json['totalAmountTtc'])
-            : 0.0,
-        latitude:
-            json['latitude'] != null ? double.parse(json['latitude']) : 0.0,
-        longitude:
-            json['longitude'] != null ? double.parse(json['longitude']) : 0.0,
-        clientCompanyId: json['clientCompanyId'],
-        sellerCompanyId: json['sellerCompanyId'],
-        delegateUserId: json['delegateUserId'],
-        operatorUserId: json['operatorUserId'],
-        stockUserId: json['stockUserId'],
-        deliveryTownId: json['deliveryTownId'],
-        clientNote: json['clientNote'] ?? "",
-        privateNote: json['privateNote'] ?? "",
-        orderItems: List<OrderItem>.from(
-            json['orderItems'].map((x) => OrderItem.fromJson(x))),
-        orderStatusHistories: List<OrderStatusHistory>.from(
-            (json['orderStatusHistories'] as List)
-                .map((x) => OrderStatusHistory.fromJson(x))),
-        clientCompany: jsonToCompany(json['clientCompany']),
-        sellerCompany: jsonToCompany(json['sellerCompany']),
-      );
+  factory OrderDetailsModel.fromJson(Map<String, dynamic> json) {
+    return OrderDetailsModel(
+      id: json['id'],
+      discount: json['discount'] != null ? double.parse(json['discount']) : 0.0,
+      invoiceType: json['invoiceType'],
+      paymentMethod: json['paymentMethod'],
+      createdAt: DateTime.parse(json['createdAt']),
+      updatedAt: DateTime.parse(json['updatedAt']),
+      deliveryAddress: json['deliveryAddress'],
+      status: json['status'],
+      totalAmountExclTax: json['totalAmountHt'] != null
+          ? double.parse(json['totalAmountHt'])
+          : 0.0,
+      totalAmountInclTax: json['totalAmountTtc'] != null
+          ? double.parse(json['totalAmountTtc'])
+          : 0.0,
+      latitude: json['latitude'] != null ? double.parse(json['latitude']) : 0.0,
+      longitude:
+          json['longitude'] != null ? double.parse(json['longitude']) : 0.0,
+      clientCompanyId: json['clientCompanyId'],
+      sellerCompanyId: json['sellerCompanyId'],
+      delegateUserId: json['delegateUserId'],
+      operatorUserId: json['operatorUserId'],
+      stockUserId: json['stockUserId'],
+      deliveryTownId: json['deliveryTownId'],
+      clientNote: json['clientNote'] ?? "",
+      privateNote: json['privateNote'] ?? "",
+      orderItems: List<OrderItem>.from(
+          json['orderItems'].map((x) => OrderItem.fromJson(x))),
+      orderStatusHistories: List<OrderStatusHistory>.from(
+          (json['orderStatusHistories'] as List)
+              .map((x) => OrderStatusHistory.fromJson(x))),
+      clientCompany: jsonToCompany(json['clientCompany']),
+      sellerCompany: jsonToCompany(json['sellerCompany']),
+    );
+  }
 }
 
 class OrderItem {

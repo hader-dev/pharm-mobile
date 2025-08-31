@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
+import 'package:hader_pharm_mobile/config/language_config/language.dart';
 
 /// An interceptor for [Dio] that injects and persists cookies using a [CookieJar].
 ///
@@ -22,7 +23,6 @@ class CustomCookieInjector extends Interceptor {
     this.appBaseUrl,
   );
   String getCookies(List<Cookie> cookies) {
-    // Sort cookies by path (longer path first).
     cookies.sort((a, b) {
       if (a.path == null && b.path == null) {
         return 0;
@@ -47,6 +47,9 @@ class CustomCookieInjector extends Interceptor {
       ]);
       options.headers[HttpHeaders.cookieHeader] =
           newCookies.isNotEmpty ? newCookies : null;
+
+      options.headers[HttpHeaders.acceptLanguageHeader] =
+          LanguageHelper.getCurrentLanguage;
       handler.next(options);
     } catch (e, s) {
       final error = DioException(

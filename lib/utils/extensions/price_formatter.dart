@@ -19,4 +19,12 @@ extension PriceFormatter on double {
 
     return priceFormat.format(this).replaceAll(',', ' ');
   }
+
+  String formatAsPercentage({int decimalDigits = 2}) {
+    final NumberFormat percentFormat = NumberFormat.percentPattern('en')
+      ..minimumFractionDigits = decimalDigits
+      ..maximumFractionDigits = decimalDigits;
+
+    return percentFormat.format(this);
+  }
 }
