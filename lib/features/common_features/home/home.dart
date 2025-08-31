@@ -62,6 +62,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   PromotionSection(
                     announcements: context.read<HomeCubit>().announcements,
                   ),
+                Gap(AppSizesManager.s12),
+                ParapharmaSection(minSectionHeight: minSectionHeight),
                 Gap(AppSizesManager.s16),
                 VendorSection(
                     minSectionHeight:
@@ -72,8 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(
                     height: MediaQuery.of(context).size.width <= 414 ? 1 : 12),
                 MedicineSection(minSectionHeight: minSectionHeight),
-                Gap(AppSizesManager.s12),
-                ParapharmaSection(minSectionHeight: minSectionHeight),
+
                 Gap(AppSizesManager.s12),
               ],
             ));
