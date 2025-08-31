@@ -1,8 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/features/app_layout/app_layout.dart';
 import 'package:hader_pharm_mobile/features/common_features/cart/cubit/cart_cubit.dart';
@@ -33,15 +33,16 @@ class _QuickCartAddModalState extends State<QuickCartAddModal>
     final tabs = medicineCatalogDetailsTabData(context);
 
     final medicineDetailsCubit = MedicineDetailsCubit(
-              quantityController: TextEditingController(
-                  text: existingCartItem?.quantity.toString() ?? '1'),
-              tabController: TabController(length: tabs.length, vsync: this),
-              ordersRepository:
-                  OrderRepository(client: getItInstance.get<INetworkService>()),
-              medicineCatalogRepository: MedicineCatalogRepository(
-                  client: getItInstance.get<INetworkService>()),
-              favoriteRepository: FavoriteRepository(
-                  client: getItInstance.get<INetworkService>()));
+        quantityController: TextEditingController(
+            text: existingCartItem?.quantity.toString() ?? '1'),
+        tabController: TabController(length: tabs.length, vsync: this),
+        shippingAddress: getItInstance.get<UserManager>().currentUser.address,
+        ordersRepository:
+            OrderRepository(client: getItInstance.get<INetworkService>()),
+        medicineCatalogRepository: MedicineCatalogRepository(
+            client: getItInstance.get<INetworkService>()),
+        favoriteRepository:
+            FavoriteRepository(client: getItInstance.get<INetworkService>()));
 
     return MultiBlocProvider(
       providers: [

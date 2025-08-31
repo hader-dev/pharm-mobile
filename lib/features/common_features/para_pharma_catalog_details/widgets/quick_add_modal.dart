@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/features/app_layout/app_layout.dart';
 import 'package:hader_pharm_mobile/features/common_features/cart/cubit/cart_cubit.dart';
@@ -33,6 +34,7 @@ class _QuickCartAddModalState extends State<QuickCartAddModal>
     final tabs = paraPharmaCatalogDetailsTabData(context);
 
     final detailsCubit = ParaPharmaDetailsCubit(
+        shippingAddress: getItInstance.get<UserManager>().currentUser.address,
         quantityController: TextEditingController(
             text: existingCartItem?.quantity.toString() ?? '1'),
         tabController: TabController(length: tabs.length, vsync: this),
@@ -54,8 +56,7 @@ class _QuickCartAddModalState extends State<QuickCartAddModal>
       child: ButtonsSection(
         onAction: () => context.pop(),
         quantitySectionAlignment: MainAxisAlignment.center,
-                parapharmDetailsCubit: detailsCubit,
-
+        parapharmDetailsCubit: detailsCubit,
       ),
     );
   }
