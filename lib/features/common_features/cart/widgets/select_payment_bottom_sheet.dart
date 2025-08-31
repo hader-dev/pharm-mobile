@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/invoice_input.dart';
@@ -10,6 +11,7 @@ import 'package:hader_pharm_mobile/features/common_features/cart/cubit/cart_cubi
 import 'package:hader_pharm_mobile/features/common_features/orders/cubit/orders_cubit.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
+import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 import 'package:hader_pharm_mobile/utils/validators.dart';
 import 'package:iconsax/iconsax.dart' show Iconsax;
 
@@ -156,6 +158,12 @@ class SelectPaymentMethodBottomSheet extends StatelessWidget {
                               leadingIcon: Iconsax.money4,
                               onTap: () {
                                 context.read<CartCubit>().passOrder();
+
+                                getItInstance.get<ToastManager>().showToast(
+                                      message: context.translation!
+                                          .order_placed_successfully,
+                                      type: ToastType.success,
+                                    );
                               },
                               color: AppColors.accent1Shade1,
                             ),

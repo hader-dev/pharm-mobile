@@ -7,6 +7,7 @@ import 'package:hader_pharm_mobile/config/services/network/network_interface.dar
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/cubit/para_pharma_details_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/widgets/appbar.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/widgets/trademark_widget.dart';
+import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
@@ -16,37 +17,44 @@ class ParaPharmaProductPhotoSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<ParaPharmaDetailsCubit>();
     return Stack(
       children: [
-        CacheNetworkImagePlus(
-          height: 320,
-          width: double.maxFinite,
-          boxFit: BoxFit.fill,
-          imageUrl: BlocProvider.of<ParaPharmaDetailsCubit>(context)
-                      .paraPharmaCatalogData
-                      ?.image !=
-                  null
-              ? getItInstance.get<INetworkService>().getFilesPath(
-                  BlocProvider.of<ParaPharmaDetailsCubit>(context)
-                      .paraPharmaCatalogData!
-                      .image!
-                      .path)
-              : "",
-          errorWidget: Column(
-            children: [
-              Spacer(),
-              Icon(Iconsax.image,
-                  color: Color.fromARGB(255, 197, 197, 197),
-                  size: AppSizesManager.iconSize30),
-              Gap(AppSizesManager.s8),
-              Text(
-                context.translation!.image_not_available,
-                style: context.responsiveTextTheme.current.body3Medium
-                    .copyWith(color: const Color.fromARGB(255, 197, 197, 197)),
+        cubit.paraPharmaCatalogData?.image != null
+            ? CacheNetworkImagePlus(
+                height: 320,
+                width: double.maxFinite,
+                boxFit: BoxFit.fill,
+                imageUrl: cubit.paraPharmaCatalogData?.image != null
+                    ? getItInstance.get<INetworkService>().getFilesPath(
+                        BlocProvider.of<ParaPharmaDetailsCubit>(context)
+                            .paraPharmaCatalogData!
+                            .image!
+                            .path)
+                    : "",
+                errorWidget: Column(
+                  children: [
+                    Spacer(),
+                    Icon(Iconsax.image,
+                        color: Color.fromARGB(255, 197, 197, 197),
+                        size: AppSizesManager.iconSize30),
+                    Gap(AppSizesManager.s8),
+                    Text(
+                      context.translation!.image_not_available,
+                      style: context.responsiveTextTheme.current.body3Medium
+                          .copyWith(
+                              color: const Color.fromARGB(255, 197, 197, 197)),
+                    ),
+                  ],
+                ),
+              )
+            : Image(
+                image:
+                    AssetImage(DrawableAssetStrings.paraPharmaPlaceHolderImg),
+                fit: BoxFit.cover,
+                height: 320,
+                width: double.maxFinite,
               ),
-            ],
-          ),
-        ),
         ParaPharmaCatalogAppBar(),
         Positioned(bottom: 10, right: 10, child: TrademarkWidget())
       ],
