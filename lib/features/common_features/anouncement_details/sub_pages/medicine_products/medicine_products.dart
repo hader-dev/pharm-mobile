@@ -16,61 +16,64 @@ class _MedicineProductsPageState extends State<MedicineProductsPage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Scaffold(
-      body: Column(
-        children: [
-          Expanded(
-            child: BlocBuilder<AnnouncementCubit, AnnouncementState>(
-              builder: (context, state) {
-                final cubit = BlocProvider.of<AnnouncementCubit>(context);
-                final medicines = cubit.medicines;
-
-                if (state is AnnouncementIsLoading) {
-                  return const Center(child: CircularProgressIndicator());
-                }
-
-                if (medicines.isEmpty) {
-                  return const Center(child: EmptyListWidget());
-                }
-
-                final bool isLoadingMore = state is AnnouncementIsLoading;
-
-                return RefreshIndicator(
-                  onRefresh: () => cubit.loadAnnouncement(),
-                  child: ListView.builder(
-                    controller: cubit.scrollController,
-                    physics: const AlwaysScrollableScrollPhysics(),
-                    itemCount: medicines.length + (isLoadingMore ? 1 : 0),
-                    itemBuilder: (context, index) {
-                      if (index < medicines.length) {
-                        final medicine = medicines[index];
-                        return MedicineWidget2(
-                          hideLikeButton: false,
-                          medicineData: medicine,
-                          isLiked: medicine.isLiked,
-                          onLikeTapped: () {
-                            final id = medicine.id;
-                            medicine.isLiked
-                                ? cubit.unlikeMedicinesCatalog(id)
-                                : cubit.likeMedicinesCatalog(id);
-                          },
-                        );
-                      } else {
-                        if (isLoadingMore) {
-                          return const Padding(
-                            padding: EdgeInsets.all(16.0),
-                            child: Center(child: CircularProgressIndicator()),
+    return RefreshIndicator(
+      onRefresh: () => context.read<AnnouncementCubit>().loadAnnouncement(),
+      child: Scaffold(
+        body: Column(
+          children: [
+            Expanded(
+              child: BlocBuilder<AnnouncementCubit, AnnouncementState>(
+                builder: (context, state) {
+                  final cubit = BlocProvider.of<AnnouncementCubit>(context);
+                  final medicines = cubit.medicines;
+      
+                  if (state is AnnouncementIsLoading) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+      
+                  if (medicines.isEmpty) {
+                    return const Center(child: EmptyListWidget());
+                  }
+      
+                  final bool isLoadingMore = state is AnnouncementIsLoading;
+      
+                  return RefreshIndicator(
+                    onRefresh: () => cubit.loadAnnouncement(),
+                    child: ListView.builder(
+                      controller: cubit.scrollController,
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      itemCount: medicines.length + (isLoadingMore ? 1 : 0),
+                      itemBuilder: (context, index) {
+                        if (index < medicines.length) {
+                          final medicine = medicines[index];
+                          return MedicineWidget2(
+                            hideLikeButton: false,
+                            medicineData: medicine,
+                            isLiked: medicine.isLiked,
+                            onLikeTapped: () {
+                              final id = medicine.id;
+                              medicine.isLiked
+                                  ? cubit.unlikeMedicinesCatalog(id)
+                                  : cubit.likeMedicinesCatalog(id);
+                            },
                           );
+                        } else {
+                          if (isLoadingMore) {
+                            return const Padding(
+                              padding: EdgeInsets.all(16.0),
+                              child: Center(child: CircularProgressIndicator()),
+                            );
+                          }
                         }
-                      }
-                      return const SizedBox.shrink();
-                    },
-                  ),
-                );
-              },
-            ),
-          )
-        ],
+                        return const SizedBox.shrink();
+                      },
+                    ),
+                  );
+                },
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

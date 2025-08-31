@@ -18,56 +18,58 @@ class _VendorsPageState extends State<VendorsPage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Material(
-        child: Column(
-      children: [
-      
-        Expanded(
-          child: BlocBuilder<VendorsCubit, VendorsState>(
-            builder: (context, state) {
-              final cubit = BlocProvider.of<VendorsCubit>(context);
-              final vendors = cubit.vendorsList;
+    return RefreshIndicator(
+      onRefresh: () => context.read<VendorsCubit>().fetchVendors(),
+      child: Material(
+          child: Column(
+        children: [
+          Expanded(
+            child: BlocBuilder<VendorsCubit, VendorsState>(
+              builder: (context, state) {
+                final cubit = BlocProvider.of<VendorsCubit>(context);
+                final vendors = cubit.vendorsList;
 
-              if (state is VendorsLoading ) {
-                return const Center(child: CircularProgressIndicator());
-              }
+                if (state is VendorsLoading) {
+                  return const Center(child: CircularProgressIndicator());
+                }
 
-              if (vendors.isEmpty) {
-                return EmptyListWidget();
-              }
+                if (vendors.isEmpty) {
+                  return EmptyListWidget();
+                }
 
-              final bool isLoadingMore = state is VendorsLoadingMore;
-              final bool hasReachedEnd = state is VendorsLoadLimitReached;
+                final bool isLoadingMore = state is VendorsLoadingMore;
+                final bool hasReachedEnd = state is VendorsLoadLimitReached;
 
-              return RefreshIndicator(
-                onRefresh: () => cubit.fetchVendors(),
-                child: ListView.builder(
-                  controller: cubit.scrollController,
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  itemCount:
-                      vendors.length + (isLoadingMore || hasReachedEnd ? 1 : 0),
-                  itemBuilder: (context, index) {
-                    if (index < vendors.length) {
-                      return VendorItem(companyData: vendors[index]);
-                    } else {
-                      if (isLoadingMore) {
-                        return const Padding(
-                          padding: EdgeInsets.all(16.0),
-                          child: Center(child: CircularProgressIndicator()),
-                        );
-                      } else if (hasReachedEnd) {
-                        return const EndOfLoadResultWidget();
+                return RefreshIndicator(
+                  onRefresh: () => cubit.fetchVendors(),
+                  child: ListView.builder(
+                    controller: cubit.scrollController,
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    itemCount: vendors.length +
+                        (isLoadingMore || hasReachedEnd ? 1 : 0),
+                    itemBuilder: (context, index) {
+                      if (index < vendors.length) {
+                        return VendorItem(companyData: vendors[index]);
+                      } else {
+                        if (isLoadingMore) {
+                          return const Padding(
+                            padding: EdgeInsets.all(16.0),
+                            child: Center(child: CircularProgressIndicator()),
+                          );
+                        } else if (hasReachedEnd) {
+                          return const EndOfLoadResultWidget();
+                        }
                       }
-                    }
-                    return const SizedBox.shrink();
-                  },
-                ),
-              );
-            },
+                      return const SizedBox.shrink();
+                    },
+                  ),
+                );
+              },
+            ),
           ),
-        ),
-      ],
-    ));
+        ],
+      )),
+    );
   }
 
   @override

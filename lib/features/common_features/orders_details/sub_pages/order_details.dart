@@ -30,112 +30,117 @@ class OrdersDetailsPage extends StatelessWidget {
         right: AppSizesManager.p6,
         bottom: AppSizesManager.p6);
 
-    return BlocBuilder<OrderDetailsCubit, OrdersDetailsState>(
-      builder: (context, state) {
-        if (state is OrderDetailsLoading) {
-          return Center(
-            child: CircularProgressIndicator(),
+    return RefreshIndicator(
+      onRefresh: () => context.read<OrderDetailsCubit>().reloadOrderData(),
+      child: BlocBuilder<OrderDetailsCubit, OrdersDetailsState>(
+        builder: (context, state) {
+          if (state is OrderDetailsLoading) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          if (state is OrderDetailsLoadingFailed) {
+            return const EmptyListWidget();
+          }
+          final cubit = context.read<OrderDetailsCubit>();
+
+          final item = cubit.orderData!;
+
+          return SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                ShippingAddressSection(
+                  address: item.deliveryAddress,
+                  latitude: cubit.orderData!.latitude,
+                  longitude: cubit.orderData!.longitude,
+                ),
+                Container(
+                  margin:
+                      const EdgeInsets.symmetric(vertical: AppSizesManager.p4),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: AppSizesManager.p4),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(
+                        AppSizesManager.commonWidgetsRadius),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      if (context
+                              .read<OrderDetailsCubit>()
+                              .orderData!
+                              .invoiceType !=
+                          null)
+                        OrderInvoiceSection(
+                          invoiceType: InvoiceTypes.values.firstWhere(
+                              (element) =>
+                                  context
+                                      .read<OrderDetailsCubit>()
+                                      .orderData!
+                                      .invoiceType ==
+                                  element.id),
+                        ),
+                      if (context
+                          .read<OrderDetailsCubit>()
+                          .orderData!
+                          .clientNote
+                          .isNotEmpty)
+                        ClientNoteSection(),
+                      const OrderSummarySection(),
+                      Padding(
+                        padding: buttonsPadding,
+                        child: PrimaryTextButton(
+                          label: context.translation!.order_tracking,
+                          onTap: () {
+                            BottomSheetHelper.showCommonBottomSheet(
+                                context: context,
+                                child: OrderTrackingBottomSheet());
+                          },
+                          color: AppColors.accent1Shade1,
+                        ),
+                      ),
+                      Padding(
+                        padding: buttonsPadding,
+                        child: PrimaryTextButton(
+                          label: context.translation!.item_complaint,
+                          onTap: () {
+                            RoutingManager.router.pushNamed(
+                                RoutingManager.orderComplaint,
+                                extra: {
+                                  "orderId": item.id,
+                                  "itemId": item.id
+                                }).then((value) => {
+                                  if (value == true)
+                                    {cubit.getOrderComplaints()}
+                                });
+                          },
+                          color: AppColors.accent1Shade1,
+                        ),
+                      ),
+                      Padding(
+                        padding: buttonsPadding,
+                        child: PrimaryTextButton(
+                          label: context.translation!.cancel,
+                          onTap: () {
+                            BottomSheetHelper.showCommonBottomSheet(
+                                initialChildSize: 0.3,
+                                context: context,
+                                child: CancelOrderBottomSheet());
+                          },
+                          color: theme.colorScheme.error,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           );
-        }
-        if (state is OrderDetailsLoadingFailed) {
-          return const EmptyListWidget();
-        }
-        final cubit = context.read<OrderDetailsCubit>();
-
-        final item = cubit.orderData!;
-
-        return SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              ShippingAddressSection(
-                address: item.deliveryAddress,
-                latitude: cubit.orderData!.latitude,
-                longitude: cubit.orderData!.longitude,
-              ),
-              Container(
-                margin:
-                    const EdgeInsets.symmetric(vertical: AppSizesManager.p4),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: AppSizesManager.p4),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(
-                      AppSizesManager.commonWidgetsRadius),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    if (context
-                            .read<OrderDetailsCubit>()
-                            .orderData!
-                            .invoiceType !=
-                        null)
-                      OrderInvoiceSection(
-                        invoiceType: InvoiceTypes.values.firstWhere((element) =>
-                            context
-                                .read<OrderDetailsCubit>()
-                                .orderData!
-                                .invoiceType ==
-                            element.id),
-                      ),
-                    if (context
-                        .read<OrderDetailsCubit>()
-                        .orderData!
-                        .clientNote
-                        .isNotEmpty)
-                      ClientNoteSection(),
-                    const OrderSummarySection(),
-                    Padding(
-                      padding: buttonsPadding,
-                      child: PrimaryTextButton(
-                        label: context.translation!.order_tracking,
-                        onTap: () {
-                          BottomSheetHelper.showCommonBottomSheet(
-                              context: context,
-                              child: OrderTrackingBottomSheet());
-                        },
-                        color: AppColors.accent1Shade1,
-                      ),
-                    ),
-                    Padding(
-                      padding: buttonsPadding,
-                      child: PrimaryTextButton(
-                        label: context.translation!.item_complaint,
-                        onTap: () {
-                          RoutingManager.router.pushNamed(
-                              RoutingManager.orderComplaint,
-                              extra: {
-                                "orderId": item.id,
-                                "itemId": item.id
-                              }).then((value) => {
-                                if (value == true) {cubit.getOrderComplaints()}
-                              });
-                        },
-                        color: AppColors.accent1Shade1,
-                      ),
-                    ),
-                    Padding(
-                      padding: buttonsPadding,
-                      child: PrimaryTextButton(
-                        label: context.translation!.cancel,
-                        onTap: () {
-                          BottomSheetHelper.showCommonBottomSheet(
-                              initialChildSize: 0.3,
-                              context: context,
-                              child: CancelOrderBottomSheet());
-                        },
-                        color: theme.colorScheme.error,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        );
-      },
+        },
+      ),
     );
   }
 }

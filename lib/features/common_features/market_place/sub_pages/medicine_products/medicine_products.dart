@@ -22,76 +22,79 @@ class _MedicineProductsPageState extends State<MedicineProductsPage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Scaffold(
-      body: Column(
-        children: [
-          Expanded(
-            child: BlocBuilder<MedicineProductsCubit, MedicineProductsState>(
-              builder: (context, state) {
-                final cubit = BlocProvider.of<MedicineProductsCubit>(context);
-                final medicines = cubit.medicines;
-                if (state is MedicineProductsLoading) {
-                  return const Center(child: CircularProgressIndicator());
-                }
-                if (state is MedicineProductsLoadingFailed ||
-                    medicines.isEmpty) {
-                  return const Center(child: EmptyListWidget());
-                }
-
-                final bool isLoadingMore = state is MedicineProductsLoading;
-                final bool hasReachedEnd = state is MedicinesLoadLimitReached;
-
-                void onLikeTapped(BaseMedicineCatalogModel medicine) {
-                  final id = medicine.id;
-                  medicine.isLiked
-                      ? cubit.unlikeMedicinesCatalog(id)
-                      : cubit.likeMedicinesCatalog(id);
-                }
-
-                return RefreshIndicator(
-                  onRefresh: () => cubit.getMedicines(),
-                  child: GridView.builder(
-                    controller: cubit.scrollController,
-                    physics: const AlwaysScrollableScrollPhysics(),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: calculateMarketplaceCrossAxisCount(
-                          context.deviceSize),
-                      crossAxisSpacing:
-                          calculateMarketplaceGridSpacing(context.deviceSize),
-                      mainAxisSpacing: calculateMarketplaceMainAxisSpacing(
-                          context.deviceSize),
-                      childAspectRatio:
-                          calculateMarketplaceAspectRatio(context.deviceSize),
-                    ),
-                    itemCount: medicines.length +
-                        (isLoadingMore || hasReachedEnd ? 1 : 0),
-                    itemBuilder: (context, index) {
-                      if (index < medicines.length) {
-                        final medicine = medicines[index];
-                        return MedicineWidget3(
-                          medicineData: medicine,
-                          onFavoriteCallback: onLikeTapped,
-                        );
-                      } else {
-                        if (isLoadingMore) {
-                          return const Padding(
-                            padding: EdgeInsets.all(16.0),
-                            child: Center(child: CircularProgressIndicator()),
+    return RefreshIndicator(
+      onRefresh: () => context.read<MedicineProductsCubit>().getMedicines(),
+      child: Scaffold(
+        body: Column(
+          children: [
+            Expanded(
+              child: BlocBuilder<MedicineProductsCubit, MedicineProductsState>(
+                builder: (context, state) {
+                  final cubit = BlocProvider.of<MedicineProductsCubit>(context);
+                  final medicines = cubit.medicines;
+                  if (state is MedicineProductsLoading) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  if (state is MedicineProductsLoadingFailed ||
+                      medicines.isEmpty) {
+                    return const Center(child: EmptyListWidget());
+                  }
+      
+                  final bool isLoadingMore = state is MedicineProductsLoading;
+                  final bool hasReachedEnd = state is MedicinesLoadLimitReached;
+      
+                  void onLikeTapped(BaseMedicineCatalogModel medicine) {
+                    final id = medicine.id;
+                    medicine.isLiked
+                        ? cubit.unlikeMedicinesCatalog(id)
+                        : cubit.likeMedicinesCatalog(id);
+                  }
+      
+                  return RefreshIndicator(
+                    onRefresh: () => cubit.getMedicines(),
+                    child: GridView.builder(
+                      controller: cubit.scrollController,
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: calculateMarketplaceCrossAxisCount(
+                            context.deviceSize),
+                        crossAxisSpacing:
+                            calculateMarketplaceGridSpacing(context.deviceSize),
+                        mainAxisSpacing: calculateMarketplaceMainAxisSpacing(
+                            context.deviceSize),
+                        childAspectRatio:
+                            calculateMarketplaceAspectRatio(context.deviceSize),
+                      ),
+                      itemCount: medicines.length +
+                          (isLoadingMore || hasReachedEnd ? 1 : 0),
+                      itemBuilder: (context, index) {
+                        if (index < medicines.length) {
+                          final medicine = medicines[index];
+                          return MedicineWidget3(
+                            medicineData: medicine,
+                            onFavoriteCallback: onLikeTapped,
                           );
-                        } else if (hasReachedEnd) {
-                          return const EndOfLoadResultWidget();
+                        } else {
+                          if (isLoadingMore) {
+                            return const Padding(
+                              padding: EdgeInsets.all(16.0),
+                              child: Center(child: CircularProgressIndicator()),
+                            );
+                          } else if (hasReachedEnd) {
+                            return const EndOfLoadResultWidget();
+                          }
                         }
-                      }
-                      return const SizedBox.shrink();
-                    },
-                  ),
-                );
-              },
-            ),
-          )
-        ],
+                        return const SizedBox.shrink();
+                      },
+                    ),
+                  );
+                },
+              ),
+            )
+          ],
+        ),
+        floatingActionButton: FloatingFilterMedical(),
       ),
-      floatingActionButton: FloatingFilterMedical(),
     );
   }
 

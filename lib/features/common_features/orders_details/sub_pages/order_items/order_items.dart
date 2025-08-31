@@ -9,22 +9,25 @@ class OrderDetailsItemsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<OrderDetailsCubit, OrdersDetailsState>(
-        builder: (context, state) {
-      final cubit = context.read<OrderDetailsCubit>();
+    return RefreshIndicator(
+      onRefresh: () => context.read<OrderDetailsCubit>().reloadOrderData(),
+      child: BlocBuilder<OrderDetailsCubit, OrdersDetailsState>(
+          builder: (context, state) {
+        final cubit = context.read<OrderDetailsCubit>();
 
-      if (state is OrderDetailsLoading) {
-        return Center(
-          child: CircularProgressIndicator(),
-        );
-      }
+        if (state is OrderDetailsLoading) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
 
-      final isEmpty = cubit.orderData?.orderItems.isEmpty ?? true;
-      if (state is OrderDetailsLoadingFailed || isEmpty) {
-        return Center(child: const EmptyListWidget());
-      }
-      return SingleChildScrollView(
-          child: OrderItemsSection(orderItems: cubit.orderData!.orderItems));
-    });
+        final isEmpty = cubit.orderData?.orderItems.isEmpty ?? true;
+        if (state is OrderDetailsLoadingFailed || isEmpty) {
+          return Center(child: const EmptyListWidget());
+        }
+        return SingleChildScrollView(
+            child: OrderItemsSection(orderItems: cubit.orderData!.orderItems));
+      }),
+    );
   }
 }

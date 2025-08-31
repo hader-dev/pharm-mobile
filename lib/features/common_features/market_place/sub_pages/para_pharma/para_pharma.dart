@@ -22,79 +22,83 @@ class _ParaPharmaProductsPageState extends State<ParaPharmaProductsPage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: BlocBuilder<ParaPharmaCubit, ParaPharmaState>(
-              builder: (context, state) {
-                final cubit = BlocProvider.of<ParaPharmaCubit>(context);
-                final products = cubit.paraPharmaProducts;
+    return RefreshIndicator(
+      onRefresh: () => context.read<ParaPharmaCubit>().getParaPharmas(),
+      child: Scaffold(
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: BlocBuilder<ParaPharmaCubit, ParaPharmaState>(
+                builder: (context, state) {
+                  final cubit = BlocProvider.of<ParaPharmaCubit>(context);
+                  final products = cubit.paraPharmaProducts;
 
-                if (state is ParaPharmaProductsLoadingFailed) {
-                  return const Center(child: EmptyListWidget());
-                }
-                if (state is ParaPharmaProductsLoading && products.isEmpty) {
-                  return const Center(child: CircularProgressIndicator());
-                }
-                if (state is ParaPharmaProductsLoaded && products.isEmpty) {
-                  return const Center(child: EmptyListWidget());
-                }
+                  if (state is ParaPharmaProductsLoadingFailed) {
+                    return const Center(child: EmptyListWidget());
+                  }
+                  if (state is ParaPharmaProductsLoading && products.isEmpty) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  if (state is ParaPharmaProductsLoaded && products.isEmpty) {
+                    return const Center(child: EmptyListWidget());
+                  }
 
-                final bool isLoadingMore = state is LoadingMoreParaPharma;
-                final bool hasReachedEnd = state is ParaPharmasLoadLimitReached;
+                  final bool isLoadingMore = state is LoadingMoreParaPharma;
+                  final bool hasReachedEnd =
+                      state is ParaPharmasLoadLimitReached;
 
-                void onLikeTapped(BaseParaPharmaCatalogModel medicine) {
-                  final id = medicine.id;
-                  medicine.isLiked
-                      ? cubit.unlikeParaPharmaCatalog(id)
-                      : cubit.likeParaPharmaCatalog(id);
-                }
+                  void onLikeTapped(BaseParaPharmaCatalogModel medicine) {
+                    final id = medicine.id;
+                    medicine.isLiked
+                        ? cubit.unlikeParaPharmaCatalog(id)
+                        : cubit.likeParaPharmaCatalog(id);
+                  }
 
-                return RefreshIndicator(
-                  onRefresh: () => cubit.getParaPharmas(),
-                  child: GridView.builder(
-                    controller: cubit.scrollController,
-                    physics: const AlwaysScrollableScrollPhysics(),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: calculateMarketplaceCrossAxisCount(
-                          context.deviceSize),
-                      crossAxisSpacing:
-                          calculateMarketplaceGridSpacing(context.deviceSize),
-                      mainAxisSpacing: calculateMarketplaceMainAxisSpacing(
-                          context.deviceSize),
-                      childAspectRatio:
-                          calculateMarketplaceAspectRatio(context.deviceSize),
-                    ),
-                    itemCount: products.length +
-                        (isLoadingMore || hasReachedEnd ? 1 : 0),
-                    itemBuilder: (context, index) {
-                      if (index < products.length) {
-                        final paraPharma = products[index];
-                        return ParaPharmaWidget2(
-                            paraPharmData: paraPharma,
-                            onFavoriteCallback: onLikeTapped);
-                      } else {
-                        if (isLoadingMore) {
-                          return const Padding(
-                            padding: EdgeInsets.all(16.0),
-                            child: Center(child: CircularProgressIndicator()),
-                          );
-                        } else if (hasReachedEnd) {
-                          return const EndOfLoadResultWidget();
+                  return RefreshIndicator(
+                    onRefresh: () => cubit.getParaPharmas(),
+                    child: GridView.builder(
+                      controller: cubit.scrollController,
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: calculateMarketplaceCrossAxisCount(
+                            context.deviceSize),
+                        crossAxisSpacing:
+                            calculateMarketplaceGridSpacing(context.deviceSize),
+                        mainAxisSpacing: calculateMarketplaceMainAxisSpacing(
+                            context.deviceSize),
+                        childAspectRatio:
+                            calculateMarketplaceAspectRatio(context.deviceSize),
+                      ),
+                      itemCount: products.length +
+                          (isLoadingMore || hasReachedEnd ? 1 : 0),
+                      itemBuilder: (context, index) {
+                        if (index < products.length) {
+                          final paraPharma = products[index];
+                          return ParaPharmaWidget2(
+                              paraPharmData: paraPharma,
+                              onFavoriteCallback: onLikeTapped);
+                        } else {
+                          if (isLoadingMore) {
+                            return const Padding(
+                              padding: EdgeInsets.all(16.0),
+                              child: Center(child: CircularProgressIndicator()),
+                            );
+                          } else if (hasReachedEnd) {
+                            return const EndOfLoadResultWidget();
+                          }
                         }
-                      }
-                      return const SizedBox.shrink();
-                    },
-                  ),
-                );
-              },
+                        return const SizedBox.shrink();
+                      },
+                    ),
+                  );
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
+        floatingActionButton: FloatingFilterParaMedical(),
       ),
-      floatingActionButton: FloatingFilterParaMedical(),
     );
   }
 

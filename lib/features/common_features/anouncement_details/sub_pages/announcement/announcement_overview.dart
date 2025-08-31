@@ -9,21 +9,24 @@ class AnnouncementOverviewPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AnnouncementCubit, AnnouncementState>(
-        builder: (context, state) {
-      final cubit = context.read<AnnouncementCubit>();
-
-      if (state is AnnouncementIsLoading) {
-        return const Center(child: CircularProgressIndicator());
-      }
-
-      if (cubit.announcement == null || cubit.announcement?.content == "") {
-        return const Center(child: EmptyListWidget());
-      }
-      return Center(
-          child: Markdown(
-        data: cubit.announcement?.content ?? "",
-      ));
-    });
+    return RefreshIndicator(
+      onRefresh: () => context.read<AnnouncementCubit>().loadAnnouncement(),
+      child: BlocBuilder<AnnouncementCubit, AnnouncementState>(
+          builder: (context, state) {
+        final cubit = context.read<AnnouncementCubit>();
+      
+        if (state is AnnouncementIsLoading) {
+          return const Center(child: CircularProgressIndicator());
+        }
+      
+        if (cubit.announcement == null || cubit.announcement?.content == "") {
+          return const Center(child: EmptyListWidget());
+        }
+        return Center(
+            child: Markdown(
+          data: cubit.announcement?.content ?? "",
+        ));
+      }),
+    );
   }
 }
