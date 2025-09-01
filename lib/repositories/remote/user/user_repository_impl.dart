@@ -133,7 +133,8 @@ class UserRepository implements IUserRepository {
           FormData formData = FormData.fromMap({
             "email": updatedProfileData.email,
             "fullName": updatedProfileData.fullName,
-            "phone": updatedProfileData.phone,
+            if (updatedProfileData.phone.isNotEmpty)
+              "phone": updatedProfileData.phone,
             "address": updatedProfileData.address,
             'image': file,
             if (shouldRemoveImage) 'removeImage': true,

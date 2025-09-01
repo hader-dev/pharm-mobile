@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
+import 'package:hader_pharm_mobile/utils/validators.dart';
 
 import '../../../../config/theme/colors_manager.dart';
 import '../../../../utils/constants.dart';
@@ -20,6 +21,8 @@ class FormSection extends StatefulWidget {
 class _FormSectionState extends State<FormSection> {
   @override
   Widget build(BuildContext context) {
+    final translation = context.translation!;
+
     return BlocBuilder<EditProfileCubit, EditProfileState>(
       builder: (context, state) {
         return Form(
@@ -76,29 +79,6 @@ class _FormSectionState extends State<FormSection> {
                 ),
                 Gap(AppSizesManager.s4),
                 CustomTextField(
-                  label: '${context.translation!.shipping_address}*',
-                  initValue: BlocProvider.of<EditProfileCubit>(context)
-                      .profileData
-                      .address,
-                  state: FieldState.normal,
-                  validationFunc: (value) {
-                    if (value == null || value.isEmpty) {
-                      return context.translation!.feedback_field_required;
-                    }
-                  },
-                  onChanged: (newValue) {
-                    BlocProvider.of<EditProfileCubit>(context)
-                        .changeProfileData(
-                            modifiedData:
-                                BlocProvider.of<EditProfileCubit>(context)
-                                    .profileData
-                                    .copyWith(
-                                      address: newValue,
-                                    ));
-                  },
-                ),
-                Gap(AppSizesManager.s4),
-                CustomTextField(
                   label: context.translation!.phone_mobile,
                   state: FieldState.normal,
                   initValue: BlocProvider.of<EditProfileCubit>(context)
@@ -115,13 +95,11 @@ class _FormSectionState extends State<FormSection> {
                                       phone: newValue,
                                     ));
                   },
-                  validationFunc: (value) {
-                    return;
-                  },
+                  validationFunc: (v) => validateIsMobileNumber(v, translation),
                 ),
                 Gap(AppSizesManager.s24),
                 PrimaryTextButton(
-                  label: context.translation!.update_profile,
+                  label: translation.update_profile,
                   isLoading: context.watch<EditProfileCubit>().state
                       is EditProfileLoading,
                   onTap: () {

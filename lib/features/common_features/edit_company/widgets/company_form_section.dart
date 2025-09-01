@@ -9,8 +9,6 @@ import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
-
-
 class CompanyFormSection extends StatefulWidget {
   const CompanyFormSection({super.key});
 
@@ -34,14 +32,12 @@ class _CompanyFormSectionState extends State<CompanyFormSection> {
                       .companyName,
                   state: FieldState.normal,
                   onChanged: (newValue) {
-                    BlocProvider.of<EditCompanyCubit>(context)
-                        .changeFormData(
-                            modifiedData:
-                                BlocProvider.of<EditCompanyCubit>(context)
-                                    .formData
-                                    .copyWith(
-                                      companyName: newValue,
-                                    ));
+                    BlocProvider.of<EditCompanyCubit>(context).changeFormData(
+                        modifiedData: BlocProvider.of<EditCompanyCubit>(context)
+                            .formData
+                            .copyWith(
+                              companyName: newValue,
+                            ));
                   },
                   validationFunc: (value) {
                     if (value == null || value.isEmpty) {
@@ -53,9 +49,8 @@ class _CompanyFormSectionState extends State<CompanyFormSection> {
                 Gap(AppSizesManager.s4),
                 CustomTextField(
                   label: '${context.translation!.email}*',
-                  initValue: BlocProvider.of<EditCompanyCubit>(context)
-                      .formData
-                      .email,
+                  initValue:
+                      BlocProvider.of<EditCompanyCubit>(context).formData.email,
                   state: FieldState.normal,
                   validationFunc: (value) {
                     if (value == null || value.isEmpty) {
@@ -67,57 +62,44 @@ class _CompanyFormSectionState extends State<CompanyFormSection> {
                     return null;
                   },
                   onChanged: (newValue) {
-                    BlocProvider.of<EditCompanyCubit>(context)
-                        .changeFormData(
-                            modifiedData:
-                                BlocProvider.of<EditCompanyCubit>(context)
-                                    .formData
-                                    .copyWith(
-                                      email: newValue,
-                                    ));
+                    BlocProvider.of<EditCompanyCubit>(context).changeFormData(
+                        modifiedData: BlocProvider.of<EditCompanyCubit>(context)
+                            .formData
+                            .copyWith(
+                              email: newValue,
+                            ));
                   },
                 ),
                 Gap(AppSizesManager.s4),
                 CustomTextField(
-                  label: '${context.translation!.full_address}*',
+                  label: context.translation!.full_address,
                   initValue: BlocProvider.of<EditCompanyCubit>(context)
                       .formData
                       .address,
                   state: FieldState.normal,
-                  validationFunc: (value) {
-                    if (value == null || value.isEmpty) {
-                      return context.translation!.feedback_field_required;
-                    }
-                    return null;
-                  },
                   onChanged: (newValue) {
-                    BlocProvider.of<EditCompanyCubit>(context)
-                        .changeFormData(
-                            modifiedData:
-                                BlocProvider.of<EditCompanyCubit>(context)
-                                    .formData
-                                    .copyWith(
-                                      address: newValue,
-                                    ));
+                    BlocProvider.of<EditCompanyCubit>(context).changeFormData(
+                        modifiedData: BlocProvider.of<EditCompanyCubit>(context)
+                            .formData
+                            .copyWith(
+                              address: newValue,
+                            ));
                   },
                 ),
                 Gap(AppSizesManager.s4),
                 CustomTextField(
                   label: context.translation!.phone_mobile,
                   state: FieldState.normal,
-                  initValue: BlocProvider.of<EditCompanyCubit>(context)
-                      .formData
-                      .phone,
+                  initValue:
+                      BlocProvider.of<EditCompanyCubit>(context).formData.phone,
                   keyBoadType: TextInputType.phone,
                   onChanged: (newValue) {
-                    BlocProvider.of<EditCompanyCubit>(context)
-                        .changeFormData(
-                            modifiedData:
-                                BlocProvider.of<EditCompanyCubit>(context)
-                                    .formData
-                                    .copyWith(
-                                      phone: newValue,
-                                    ));
+                    BlocProvider.of<EditCompanyCubit>(context).changeFormData(
+                        modifiedData: BlocProvider.of<EditCompanyCubit>(context)
+                            .formData
+                            .copyWith(
+                              phone: newValue,
+                            ));
                   },
                   validationFunc: (value) {
                     return null;
@@ -132,14 +114,12 @@ class _CompanyFormSectionState extends State<CompanyFormSection> {
                       .phone2,
                   keyBoadType: TextInputType.phone,
                   onChanged: (newValue) {
-                    BlocProvider.of<EditCompanyCubit>(context)
-                        .changeFormData(
-                            modifiedData:
-                                BlocProvider.of<EditCompanyCubit>(context)
-                                    .formData
-                                    .copyWith(
-                                      phone2: newValue,
-                                    ));
+                    BlocProvider.of<EditCompanyCubit>(context).changeFormData(
+                        modifiedData: BlocProvider.of<EditCompanyCubit>(context)
+                            .formData
+                            .copyWith(
+                              phone2: newValue,
+                            ));
                   },
                   validationFunc: (value) {
                     return null;
@@ -149,19 +129,16 @@ class _CompanyFormSectionState extends State<CompanyFormSection> {
                 CustomTextField(
                   label: context.translation!.fax,
                   state: FieldState.normal,
-                  initValue: BlocProvider.of<EditCompanyCubit>(context)
-                      .formData
-                      .fax,
+                  initValue:
+                      BlocProvider.of<EditCompanyCubit>(context).formData.fax,
                   keyBoadType: TextInputType.phone,
                   onChanged: (newValue) {
-                    BlocProvider.of<EditCompanyCubit>(context)
-                        .changeFormData(
-                            modifiedData:
-                                BlocProvider.of<EditCompanyCubit>(context)
-                                    .formData
-                                    .copyWith(
-                                      fax: newValue,
-                                    ));
+                    BlocProvider.of<EditCompanyCubit>(context).changeFormData(
+                        modifiedData: BlocProvider.of<EditCompanyCubit>(context)
+                            .formData
+                            .copyWith(
+                              fax: newValue,
+                            ));
                   },
                   validationFunc: (value) {
                     return null;
@@ -175,14 +152,12 @@ class _CompanyFormSectionState extends State<CompanyFormSection> {
                       .formData
                       .website,
                   onChanged: (newValue) {
-                    BlocProvider.of<EditCompanyCubit>(context)
-                        .changeFormData(
-                            modifiedData:
-                                BlocProvider.of<EditCompanyCubit>(context)
-                                    .formData
-                                    .copyWith(
-                                      website: newValue,
-                                    ));
+                    BlocProvider.of<EditCompanyCubit>(context).changeFormData(
+                        modifiedData: BlocProvider.of<EditCompanyCubit>(context)
+                            .formData
+                            .copyWith(
+                              website: newValue,
+                            ));
                   },
                   validationFunc: (value) {
                     return null;
@@ -197,14 +172,12 @@ class _CompanyFormSectionState extends State<CompanyFormSection> {
                       .formData
                       .description,
                   onChanged: (newValue) {
-                    BlocProvider.of<EditCompanyCubit>(context)
-                        .changeFormData(
-                            modifiedData:
-                                BlocProvider.of<EditCompanyCubit>(context)
-                                    .formData
-                                    .copyWith(
-                                      description: newValue,
-                                    ));
+                    BlocProvider.of<EditCompanyCubit>(context).changeFormData(
+                        modifiedData: BlocProvider.of<EditCompanyCubit>(context)
+                            .formData
+                            .copyWith(
+                              description: newValue,
+                            ));
                   },
                   validationFunc: (value) {
                     return null;
@@ -221,7 +194,7 @@ class _CompanyFormSectionState extends State<CompanyFormSection> {
                     }
 
                     BlocProvider.of<EditCompanyCubit>(context).updateCompany(
-                        BlocProvider.of<EditCompanyCubit>(context).formData, 
+                        BlocProvider.of<EditCompanyCubit>(context).formData,
                         context.translation!);
                   },
                   color: AppColors.accent1Shade1,
