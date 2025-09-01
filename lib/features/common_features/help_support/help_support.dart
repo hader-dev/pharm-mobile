@@ -50,7 +50,7 @@ class HelpAndSupportScreen extends StatelessWidget {
             ),
             SettingsTile(
               icon: LucideIcons.phone,
-              title: context.translation!.help_support,
+              title: context.translation!.phone,
               onTap: launchDeveloperPhoneCall,
               subtitle: phone,
             ),
