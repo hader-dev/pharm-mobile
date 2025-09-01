@@ -998,6 +998,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get password_reset_success => 'Password reset success';
 
   @override
+  String get make_complaint_success => 'Complaint made successfully';
+
+  @override
   String get password_changed_successfully => 'Password changed successfully';
 
   @override

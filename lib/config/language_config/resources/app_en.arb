@@ -317,6 +317,7 @@
   "failed": "Failed",
   "order_placed_successfully": "Order placed successfully",
   "password_reset_success": "Password reset success",
+  "make_complaint_success": "Complaint made successfully",
   "password_changed_successfully": "Password changed successfully",
   "hint_please_enter_otp_sent_to_email":"Please enter the OTP sent to your email",
   "unauthorized_distributor_login": "Unauthorized distributor login",

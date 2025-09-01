@@ -46,10 +46,10 @@ class MakeComplaintView extends StatelessWidget {
           ),
           Gap(AppSizesManager.s8),
           PrimaryTextButton(
-            label: translation.confirm, 
-            
+            label: translation.confirm,
             color: AppColors.accent1Shade1,
-            onTap: () => makeComplaint(cubit,formKey),)
+            onTap: () => makeComplaint(cubit, formKey, translation),
+          )
         ],
       ),
     );

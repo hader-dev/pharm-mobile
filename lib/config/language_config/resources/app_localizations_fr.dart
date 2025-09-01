@@ -1010,6 +1010,9 @@ class AppLocalizationsFr extends AppLocalizations {
       'Réinitialisation du mot de passe avec successe';
 
   @override
+  String get make_complaint_success => 'Reclamation effectuée avec successe';
+
+  @override
   String get password_changed_successfully =>
       'Mot de passe changé avec successe';
 

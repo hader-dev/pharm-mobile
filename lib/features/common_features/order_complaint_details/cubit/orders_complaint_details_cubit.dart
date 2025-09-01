@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/config/language_config/resources/app_localizations.dart';
 import 'package:hader_pharm_mobile/config/routes/go_router_extension.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/models/order_claim.dart';
@@ -7,6 +9,7 @@ import 'package:hader_pharm_mobile/models/order_details.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/order_repository.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/params/item_complaint.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/response/response_item_complaint_make.dart';
+import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 
 part 'orders_complaint_details_state.dart';
 
@@ -78,7 +81,7 @@ class OrderComplaintsCubit extends Cubit<OrdersComplaintState> {
     }
   }
 
-  Future<ResponseItemComplaintMake> makeComplaint() async {
+  Future<ResponseItemComplaintMake> makeComplaint(AppLocalizations translation) async {
     if (subject.isEmpty || description.isEmpty) {
       return ResponseItemComplaintMake();
     }
@@ -93,6 +96,10 @@ class OrderComplaintsCubit extends Cubit<OrdersComplaintState> {
 
       emit(OrderComplaintsLoaded());
 
+      getItInstance.get<ToastManager>().showToast(
+            message: translation.make_complaint_success,
+            type: ToastType.success,
+          );
       RoutingManager.router.safePop(true);
 
       return res;
