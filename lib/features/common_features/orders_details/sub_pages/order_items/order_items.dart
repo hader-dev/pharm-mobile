@@ -26,6 +26,7 @@ class OrderDetailsItemsPage extends StatelessWidget {
           return Center(child: const EmptyListWidget());
         }
         return SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
             child: OrderItemsSection(orderItems: cubit.orderData!.orderItems));
       }),
     );

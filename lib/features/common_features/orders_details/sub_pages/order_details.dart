@@ -30,6 +30,7 @@ class OrdersDetailsPage extends StatelessWidget {
         left: AppSizesManager.p6,
         right: AppSizesManager.p6,
         bottom: AppSizesManager.p6);
+    final translation = context.translation!;
 
     return RefreshIndicator(
       onRefresh: () => context.read<OrderDetailsCubit>().reloadOrderData(),
@@ -48,6 +49,7 @@ class OrdersDetailsPage extends StatelessWidget {
           final item = cubit.orderData!;
 
           return SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,31 +72,19 @@ class OrdersDetailsPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      if (context
-                              .read<OrderDetailsCubit>()
-                              .orderData!
-                              .invoiceType !=
-                          null)
+                      if (cubit.orderData!.invoiceType != null)
                         OrderInvoiceSection(
                           invoiceType: InvoiceTypes.values.firstWhere(
                               (element) =>
-                                  context
-                                      .read<OrderDetailsCubit>()
-                                      .orderData!
-                                      .invoiceType ==
-                                  element.id),
+                                  cubit.orderData!.invoiceType == element.id),
                         ),
-                      if (context
-                          .read<OrderDetailsCubit>()
-                          .orderData!
-                          .clientNote
-                          .isNotEmpty)
+                      if (cubit.orderData!.clientNote.isNotEmpty)
                         ClientNoteSection(),
                       const OrderSummarySection(),
                       Padding(
                         padding: buttonsPadding,
                         child: PrimaryTextButton(
-                          label: context.translation!.order_tracking,
+                          label: translation.order_tracking,
                           onTap: () {
                             BottomSheetHelper.showCommonBottomSheet(
                                 context: context,
@@ -106,7 +96,7 @@ class OrdersDetailsPage extends StatelessWidget {
                       Padding(
                         padding: buttonsPadding,
                         child: PrimaryTextButton(
-                          label: context.translation!.item_complaint,
+                          label: translation.item_complaint,
                           onTap: () {
                             RoutingManager.router.pushNamed(
                                 RoutingManager.orderComplaint,
@@ -125,7 +115,7 @@ class OrdersDetailsPage extends StatelessWidget {
                         Padding(
                           padding: buttonsPadding,
                           child: PrimaryTextButton(
-                            label: context.translation!.cancel,
+                            label: translation.cancel,
                             onTap: () {
                               BottomSheetHelper.showCommonBottomSheet(
                                   initialChildSize: 0.3,

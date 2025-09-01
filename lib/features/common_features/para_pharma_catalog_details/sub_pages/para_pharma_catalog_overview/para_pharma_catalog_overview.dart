@@ -32,11 +32,11 @@ ${paraPharmaCatalogData.description}
         h1: context.responsiveTextTheme.current.headLine3SemiBold
             .copyWith(color: AppColors.accent1Shade1),
         h2: context.responsiveTextTheme.current.headLine3SemiBold
-            .copyWith(color: AppColors.accentGreenShade2),
+            .copyWith(color: AppColors.accent1Shade1),
         p: context.responsiveTextTheme.current.body2Regular,
-        listBullet: TextStyle(color: AppColors.accentGreenShade2),
+        listBullet: TextStyle(color: AppColors.accent1Shade1),
         strong: TextStyle(
-          color: AppColors.accentGreenShade2,
+          color: AppColors.accent1Shade1,
           fontWeight: FontWeight.bold,
         ),
       ),

@@ -14,7 +14,9 @@ class DistributorDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final translations = context.translation!;
     MedicineCatalogModel medicineCatalogData =
-        BlocProvider.of<MedicineDetailsCubit>(context).state.medicineCatalogData!;
+        BlocProvider.of<MedicineDetailsCubit>(context)
+            .state
+            .medicineCatalogData!;
 
     final company = medicineCatalogData.company;
     final specialty =
@@ -42,9 +44,9 @@ ${company.description ?? translations.no_description_available}
         h2: context.responsiveTextTheme.current.headLine4SemiBold
             .copyWith(color: AppColors.accent1Shade1),
         p: context.responsiveTextTheme.current.body2Regular,
-        listBullet: TextStyle(color: AppColors.accentGreenShade2),
+        listBullet: TextStyle(color: AppColors.accent1Shade1),
         strong: TextStyle(
-          color: AppColors.accentGreenShade2,
+          color: AppColors.accent1Shade1,
           fontWeight: FontWeight.bold,
         ),
       ),
