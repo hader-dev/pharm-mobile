@@ -111,7 +111,7 @@ class ParaPharmaDetailsCubit extends Cubit<ParaPharmaDetailsState> {
       await ordersRepository.createQuickOrder(
           orderDetails: CreateQuickOrderModel(
         deliveryAddress: shippingAddress,
-        deliveryTownId: 10,
+        deliveryTownId: 1166,
         paraPharmaCatalogId: paraPharmaCatalogData!.id,
         qty: int.parse(quantityController.text),
       ));

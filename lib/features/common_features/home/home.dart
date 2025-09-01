@@ -44,40 +44,53 @@ class _HomeScreenState extends State<HomeScreen> {
               return const Center(child: CircularProgressIndicator());
             }
             if (state is PromotionLoadingFailed) {
-              return Center(
-                child: EmptyListWidget(
-                  onRefresh: () {
-                    context.read<HomeCubit>().getPromotions();
-                  },
+              return RefreshIndicator(
+                onRefresh: () => context.read<HomeCubit>().getPromotions(),
+                child: SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  child: Center(
+                    child: EmptyListWidget(
+                      onRefresh: () {
+                        context.read<HomeCubit>().getPromotions();
+                      },
+                    ),
+                  ),
                 ),
               );
             }
 
-            return SingleChildScrollView(
-                child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Gap(AppSizesManager.s12),
-                if (context.read<HomeCubit>().announcements.isNotEmpty)
-                  PromotionSection(
-                    announcements: context.read<HomeCubit>().announcements,
-                  ),
-                Gap(AppSizesManager.s12),
-                ParapharmaSection(minSectionHeight: minSectionHeight),
-                Gap(AppSizesManager.s16),
-                VendorSection(
-                    minSectionHeight:
-                        context.read<VendorsCubit>().vendorsList.length < 4
-                            ? minSectionHeight * 0.8
-                            : minSectionHeight),
-                // Ultra-minimal spacing between vendors and medicines for phones
-                SizedBox(
-                    height: MediaQuery.of(context).size.width <= 414 ? 1 : 12),
-                MedicineSection(minSectionHeight: minSectionHeight),
-
-                Gap(AppSizesManager.s12),
-              ],
-            ));
+            return RefreshIndicator(
+              onRefresh: () => context.read<HomeCubit>().getPromotions(),
+              child: SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Gap(AppSizesManager.s12),
+                      if (context.read<HomeCubit>().announcements.isNotEmpty)
+                        PromotionSection(
+                          announcements:
+                              context.read<HomeCubit>().announcements,
+                        ),
+                      Gap(AppSizesManager.s12),
+                      ParapharmaSection(minSectionHeight: minSectionHeight),
+                      Gap(AppSizesManager.s16),
+                      VendorSection(
+                          minSectionHeight:
+                              context.read<VendorsCubit>().vendorsList.length <
+                                      4
+                                  ? minSectionHeight * 0.8
+                                  : minSectionHeight),
+                      // Ultra-minimal spacing between vendors and medicines for phones
+                      SizedBox(
+                          height: MediaQuery.of(context).size.width <= 414
+                              ? 1
+                              : 12),
+                      MedicineSection(minSectionHeight: minSectionHeight),
+                      Gap(AppSizesManager.s12),
+                    ],
+                  )),
+            );
           },
         ),
       ),

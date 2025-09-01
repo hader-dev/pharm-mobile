@@ -116,7 +116,7 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
       await ordersRepository.createQuickOrder(
           orderDetails: CreateQuickOrderModel(
         deliveryAddress: state.shippingAddress,
-        deliveryTownId: 10,
+        deliveryTownId: 1166,
         medicineCatalogId: state.medicineCatalogData!.id,
         qty: int.parse(quantityController.text),
       ));
