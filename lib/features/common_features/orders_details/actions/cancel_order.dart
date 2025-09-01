@@ -17,18 +17,20 @@ Future<void> cancelOrder(
       context.pop();
     }
 
-    if(v.success && context.mounted) {
+    if (v.success && context.mounted) {
       orderDetailsCubit.reloadOrderData();
-      final ordersCubit = AppLayout.appLayoutScaffoldKey.currentContext!.read<OrdersCubit>();
+      final ordersCubit =
+          AppLayout.appLayoutScaffoldKey.currentContext!.read<OrdersCubit>();
       ordersCubit.getOrders();
     }
 
     final toastType = v.success ? ToastType.success : ToastType.error;
-    final message = v.success ? appLocalizations.order_cancelled : appLocalizations.feedback_server_error;
+    final message = v.success
+        ? appLocalizations.order_cancelled
+        : appLocalizations.feedback_server_error;
 
     ToastManager toastManager = getItInstance.get<ToastManager>();
 
-    toastManager.showToast(
-        message: message, type: toastType);
+    toastManager.showToast(message: message, type: toastType);
   });
 }
