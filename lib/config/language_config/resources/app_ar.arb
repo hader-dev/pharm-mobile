@@ -293,6 +293,7 @@
   "invoice": "فاتورة",
   "proforma": "فاتورة أولية",
   "failed": "فشل",
+  "read_more": "قراءة المزيد",
   "packaging": "التغليف",
   "password_changed_successfully": "تم تغيير كلمة المرور بنجاح",
   "order_placed_successfully": "تم تقديم الطلب بنجاح",

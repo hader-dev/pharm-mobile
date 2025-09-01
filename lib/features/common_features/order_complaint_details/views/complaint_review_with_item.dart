@@ -1,15 +1,15 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/common/image/cached_network_image_with_asset_fallback.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/info_widget.dart';
 import 'package:hader_pharm_mobile/features/common_features/order_complaint_details/cubit/orders_complaint_details_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/order_complaint_details/views/complaint_status_history.dart';
+import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
-import 'package:hader_pharm_mobile/utils/urls.dart';
 
 class ComplaintReviewView extends StatelessWidget {
   const ComplaintReviewView({super.key});
@@ -30,13 +30,14 @@ class ComplaintReviewView extends StatelessWidget {
               borderRadius: BorderRadius.circular(AppSizesManager.p8),
               color: item.imageUrl == null ? Colors.grey.shade100 : null,
             ),
-            child: CachedNetworkImage(
-              imageUrl: getItInstance.get<INetworkService>().getFilesPath(
-                    '${Urls.publicFiles}${item.imageUrl}',
-                  ),
+            child: CachedNetworkImageWithAssetFallback(
+              imageUrl: getItInstance
+                  .get<INetworkService>()
+                  .getFilesPath(item.imageUrl ?? ""),
+              fit: BoxFit.cover,
               width: double.infinity,
               height: MediaQuery.of(context).size.height * 0.15,
-              fit: BoxFit.fill,
+              assetImage: DrawableAssetStrings.medicinePlaceHolderImg,
             ),
           ),
           const SizedBox(height: AppSizesManager.s12),

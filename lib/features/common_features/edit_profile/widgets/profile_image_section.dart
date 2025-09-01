@@ -1,20 +1,17 @@
 import 'dart:io' show File;
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-
+import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
+import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
+import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_icon_button.dart';
+import 'package:hader_pharm_mobile/features/common/image/cached_network_image_with_asset_fallback.dart';
+import 'package:hader_pharm_mobile/features/common_features/edit_profile/cubit/edit_profile_cubit.dart';
+import 'package:hader_pharm_mobile/utils/assets_strings.dart';
+import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:iconsax/iconsax.dart';
-import '../../../../config/di/di.dart';
-import '../../../../config/services/auth/user_manager.dart';
-import '../../../../config/services/network/network_interface.dart';
-import '../../../../config/theme/colors_manager.dart';
-import '../../../../utils/assets_strings.dart';
-
-import '../../../../utils/constants.dart';
-import '../../../common/buttons/solid/primary_icon_button.dart';
-import '../cubit/edit_profile_cubit.dart';
 
 class ProfileImageSection extends StatelessWidget {
   const ProfileImageSection({super.key});
@@ -30,31 +27,31 @@ class ProfileImageSection extends StatelessWidget {
     // Responsive image size for tablets
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 768;
-    final imageSize = isTablet 
+    final imageSize = isTablet
         ? 120.0 // Smaller fixed size for tablets
         : MediaQuery.sizeOf(context).height * 0.2; // Responsive for phones
 
     return SizedBox(
-          width: double.maxFinite,
-          child: Column(
-            children: [
-              InkWell(
-                onTap: () {
-                  cubit.pickUserImage();
-                },
-                splashColor: Colors.transparent,
-                child: Stack(
-                  children: [
-                    Container(
-                        margin: EdgeInsets.symmetric(vertical: AppSizesManager.p4),
-                        clipBehavior: Clip.antiAlias,
-                        height: imageSize,
-                        width: imageSize,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: AppColors.bgDarken,
-                            border: Border.all(color: AppColors.bgDarken2)),
-                        child: _buildImageWidget(cubit, imageUrl)),
+      width: double.maxFinite,
+      child: Column(
+        children: [
+          InkWell(
+            onTap: () {
+              cubit.pickUserImage();
+            },
+            splashColor: Colors.transparent,
+            child: Stack(
+              children: [
+                Container(
+                    margin: EdgeInsets.symmetric(vertical: AppSizesManager.p4),
+                    clipBehavior: Clip.antiAlias,
+                    height: imageSize,
+                    width: imageSize,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: AppColors.bgDarken,
+                        border: Border.all(color: AppColors.bgDarken2)),
+                    child: _buildImageWidget(cubit, imageUrl)),
                 Positioned(
                     bottom: AppSizesManager.s4,
                     right: AppSizesManager.s4 / 2,
@@ -62,7 +59,9 @@ class ProfileImageSection extends StatelessWidget {
                       scale: 0.7,
                       child: PrimaryIconButton(
                         icon: Icon(
-                          cubit.pickedImage != null ? Iconsax.edit_2 : Iconsax.add,
+                          cubit.pickedImage != null
+                              ? Iconsax.edit_2
+                              : Iconsax.add,
                           color: Colors.white,
                         ),
                         isBordered: true,
@@ -101,27 +100,17 @@ class ProfileImageSection extends StatelessWidget {
   }
 
   Widget _buildImageWidget(EditProfileCubit cubit, String? imageUrl) {
-    // If user picked a new image, show it
     if (cubit.pickedImage != null) {
       return Image.file(
         File(cubit.pickedImage!.path),
         fit: BoxFit.cover,
       );
     }
-    
-    // If user has an existing profile image and hasn't removed it, show it
-    if (imageUrl != null && !cubit.shouldRemoveImage) {
-      return CachedNetworkImage(
-        imageUrl: imageUrl,
-        fit: BoxFit.cover,
-        placeholder: (context, url) => const CircularProgressIndicator(),
-        errorWidget: (context, url, error) {
-          return SvgPicture.asset(DrawableAssetStrings.defaultProfileImgIcon);
-        },
-      );
-    }
-    
-    // Default placeholder when no image or image removed
-    return SvgPicture.asset(DrawableAssetStrings.defaultProfileImgIcon);
+
+    return CachedNetworkImageWithAssetFallback(
+      imageUrl: imageUrl ?? "",
+      fit: BoxFit.cover,
+      assetImage: DrawableAssetStrings.defaultProfileImgIcon,
+    );
   }
 }

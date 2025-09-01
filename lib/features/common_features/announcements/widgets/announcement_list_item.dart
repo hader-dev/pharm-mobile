@@ -1,12 +1,13 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/features/common/widgets/image_load_error_widget.dart';
+import 'package:hader_pharm_mobile/features/common/image/cached_network_image_with_asset_fallback.dart';
 import 'package:hader_pharm_mobile/models/announcement.dart';
+import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class AnnouncementListItem extends StatelessWidget {
   final AnnouncementModel announcement;
@@ -18,6 +19,8 @@ class AnnouncementListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final translation = context.translation!;
+
     return GestureDetector(
       onTap: () {
         RoutingManager.router.pushNamed(
@@ -42,7 +45,6 @@ class AnnouncementListItem extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Image
             ClipRRect(
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(AppSizesManager.commonWidgetsRadius),
@@ -51,43 +53,22 @@ class AnnouncementListItem extends StatelessWidget {
               child: SizedBox(
                 height: 180,
                 width: double.infinity,
-                child: announcement.thumbnailImage != null &&
-                        announcement.thumbnailImage!.path.isNotEmpty
-                    ? CachedNetworkImage(
-                        imageUrl: getItInstance
-                            .get<INetworkService>()
-                            .getFilesPath(announcement.thumbnailImage!.path),
-                        fit: BoxFit.cover,
-                        width: double.infinity,
-                        height: double.infinity,
-                        errorWidget: (context, url, error) => Container(
-                          color: AppColors.bgDarken,
-                          child: const Center(
-                            child: ImageLoadErrorWidget(),
-                          ),
-                        ),
-                        placeholder: (context, url) => Container(
-                          color: AppColors.bgDarken,
-                          child: const Center(
-                            child: CircularProgressIndicator(),
-                          ),
-                        ),
-                      )
-                    : Container(
-                        color: AppColors.bgDarken,
-                        child: const Center(
-                          child: ImageLoadErrorWidget(),
-                        ),
-                      ),
+                child: CachedNetworkImageWithAssetFallback(
+                  imageUrl: getItInstance
+                      .get<INetworkService>()
+                      .getFilesPath(announcement.thumbnailImage?.path ?? ""),
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                  height: double.infinity,
+                  assetImage: DrawableAssetStrings.medicinePlaceHolderImg,
+                ),
               ),
             ),
-            // Content
             Padding(
               padding: const EdgeInsets.all(AppSizesManager.p16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Title
                   Text(
                     announcement.title,
                     style: const TextStyle(
@@ -99,7 +80,6 @@ class AnnouncementListItem extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 8),
-                  // Description
                   if (announcement.content.isNotEmpty)
                     Text(
                       announcement.content,
@@ -112,12 +92,11 @@ class AnnouncementListItem extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                   const SizedBox(height: 12),
-                  // Date or additional info
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'View Details',
+                        translation.show_more,
                         style: TextStyle(
                           fontSize: 14,
                           color: AppColors.accent1Shade1,

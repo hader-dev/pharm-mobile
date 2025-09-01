@@ -1,7 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/features/common/image/cached_network_image_with_asset_fallback.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 
 import '../../../../config/services/auth/user_manager.dart';
@@ -41,18 +40,15 @@ class _UserImageState extends State<UserImage> {
             ),
             height: imageSize,
             width: imageSize,
-            child: userImage == null
-                ? SvgPicture.asset(DrawableAssetStrings.defaultProfileImgIcon)
-                : CachedNetworkImage(
-                    imageUrl: '${imageUrl!}?v=${DateTime.now().millisecondsSinceEpoch}',
-                    fit: BoxFit.cover,
-                    placeholder: (context, url) =>
-                        const CircularProgressIndicator(),
-                    errorWidget: (context, url, error) {
-                      return SvgPicture.asset(
-                          DrawableAssetStrings.defaultProfileImgIcon);
-                    },
-                  ),
+            child: CachedNetworkImageWithAssetFallback(
+              imageUrl: imageUrl != null
+                  ? '$imageUrl?v=${DateTime.now().millisecondsSinceEpoch}'
+                  : "",
+              fit: BoxFit.cover,
+              width: double.infinity,
+              height: double.infinity,
+              assetImage: DrawableAssetStrings.defaultProfileImgIcon,
+            ),
           ),
         ),
       ),

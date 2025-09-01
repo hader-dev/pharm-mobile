@@ -1,13 +1,14 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/features/common/accordions/ink_accordion.dart';
+import 'package:hader_pharm_mobile/features/common/image/cached_network_image_with_asset_fallback.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders_details/sub_pages/order_items/widgets/order_item_content.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders_details/widgets/order_item_note.dart';
 import 'package:hader_pharm_mobile/models/order_details.dart';
+import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
@@ -54,24 +55,28 @@ class OrderItemWidget extends StatelessWidget {
                       Flexible(
                         flex: 2,
                         child: Container(
-                          clipBehavior: Clip.antiAlias,
-                          decoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.circular(AppSizesManager.p8),
-                            color: item.imageUrl == null
-                                ? const Color.fromARGB(255, 145, 106, 106)
-                                : null,
-                          ),
-                          child: CachedNetworkImage(
-                            imageUrl:
-                                getItInstance.get<INetworkService>().getFilesPath(
-                                      item.imageUrl ?? "",
-                                    ),
-                            width: 60,
-                            height: 60,
-                            fit: BoxFit.fill,
-                          ),
-                        ),
+                            clipBehavior: Clip.antiAlias,
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.circular(AppSizesManager.p8),
+                              color: item.imageUrl == null
+                                  ? const Color.fromARGB(255, 145, 106, 106)
+                                  : null,
+                            ),
+                            child: CachedNetworkImageWithAssetFallback(
+                              assetImage:
+                                  DrawableAssetStrings.medicinePlaceHolderImg,
+                              imageUrl: item.imageUrl != null
+                                  ? getItInstance
+                                      .get<INetworkService>()
+                                      .getFilesPath(
+                                        item.imageUrl!,
+                                      )
+                                  : "",
+                              width: 60,
+                              height: 60,
+                              fit: BoxFit.fill,
+                            )),
                       ),
                       const SizedBox(width: AppSizesManager.s8),
                       Expanded(

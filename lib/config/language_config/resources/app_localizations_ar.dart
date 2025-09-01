@@ -998,6 +998,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get make_complaint_success => 'Complaint made successfully';
 
   @override
+  String get read_more => 'قراءة المزيد';
+
+  @override
   String get password_changed_successfully => 'تم تغيير كلمة المرور بنجاح';
 
   @override

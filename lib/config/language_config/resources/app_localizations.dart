@@ -2014,6 +2014,12 @@ abstract class AppLocalizations {
   /// **'Complaint made successfully'**
   String get make_complaint_success;
 
+  /// No description provided for @read_more.
+  ///
+  /// In en, this message translates to:
+  /// **'Read More'**
+  String get read_more;
+
   /// No description provided for @password_changed_successfully.
   ///
   /// In en, this message translates to:

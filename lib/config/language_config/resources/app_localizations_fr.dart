@@ -1013,6 +1013,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get make_complaint_success => 'Reclamation effectuée avec successe';
 
   @override
+  String get read_more => 'Lire plus';
+
+  @override
   String get password_changed_successfully =>
       'Mot de passe changé avec successe';
 

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
+import 'package:hader_pharm_mobile/features/common/image/cached_network_image_with_asset_fallback.dart';
 import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/sub_pages/distribitor_details/widgets/trademark_widget.dart';
 import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/widgets/appbar.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
@@ -22,6 +23,17 @@ class MedicineProductPhotoSection extends StatelessWidget {
 
     return Stack(
       children: [
+        CachedNetworkImageWithAssetFallback(
+          assetImage: DrawableAssetStrings.medicinePlaceHolderImg,
+          imageUrl: cubit.state.medicineCatalogData?.image != null
+              ? getItInstance.get<INetworkService>().getFilesPath(
+                    cubit.state.medicineCatalogData!.image!.path,
+                  )
+              : "",
+          height: 320,
+          width: double.maxFinite,
+          fit: BoxFit.fill,
+        ),
         cubit.state.medicineCatalogData?.image != null
             ? CacheNetworkImagePlus(
                 height: 320,

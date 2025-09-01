@@ -1001,6 +1001,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get make_complaint_success => 'Complaint made successfully';
 
   @override
+  String get read_more => 'Read More';
+
+  @override
   String get password_changed_successfully => 'Password changed successfully';
 
   @override
