@@ -5,6 +5,7 @@ import 'package:hader_pharm_mobile/features/common/widgets/end_of_load_result_wi
 import 'package:hader_pharm_mobile/features/common/widgets/medicine_widget_3.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/medicine_products/widget/floating_filter.dart';
 import 'package:hader_pharm_mobile/models/medicine_catalog.dart';
+import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/responsive/silver_grid_params.dart';
 
@@ -39,17 +40,17 @@ class _MedicineProductsPageState extends State<MedicineProductsPage>
                       medicines.isEmpty) {
                     return const Center(child: EmptyListWidget());
                   }
-      
+
                   final bool isLoadingMore = state is MedicineProductsLoading;
                   final bool hasReachedEnd = state is MedicinesLoadLimitReached;
-      
+
                   void onLikeTapped(BaseMedicineCatalogModel medicine) {
                     final id = medicine.id;
                     medicine.isLiked
                         ? cubit.unlikeMedicinesCatalog(id)
                         : cubit.likeMedicinesCatalog(id);
                   }
-      
+
                   return RefreshIndicator(
                     onRefresh: () => cubit.getMedicines(),
                     child: GridView.builder(
@@ -62,8 +63,8 @@ class _MedicineProductsPageState extends State<MedicineProductsPage>
                             calculateMarketplaceGridSpacing(context.deviceSize),
                         mainAxisSpacing: calculateMarketplaceMainAxisSpacing(
                             context.deviceSize),
-                        childAspectRatio:
-                            calculateMarketplaceAspectRatio(context.deviceSize),
+                        childAspectRatio: calculateMarketplaceAspectRatio(
+                            context.deviceSize, context.orientation),
                       ),
                       itemCount: medicines.length +
                           (isLoadingMore || hasReachedEnd ? 1 : 0),
@@ -77,7 +78,7 @@ class _MedicineProductsPageState extends State<MedicineProductsPage>
                         } else {
                           if (isLoadingMore) {
                             return const Padding(
-                              padding: EdgeInsets.all(16.0),
+                              padding: EdgeInsets.all(AppSizesManager.s16),
                               child: Center(child: CircularProgressIndicator()),
                             );
                           } else if (hasReachedEnd) {

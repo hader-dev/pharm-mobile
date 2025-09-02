@@ -60,7 +60,7 @@ class _AnnouncementsPageState extends State<AnnouncementsPage>
                                 calculateMarketplaceMainAxisSpacing(
                                     context.deviceSize),
                             childAspectRatio: calculateMarketplaceAspectRatio(
-                                context.deviceSize),
+                                context.deviceSize, context.orientation),
                           ),
                           controller:
                               BlocProvider.of<AllAnnouncementsCubit>(bContext)

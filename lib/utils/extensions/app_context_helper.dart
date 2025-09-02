@@ -26,6 +26,8 @@ extension BuildContextHelper on BuildContext {
   ResponsiveAppSizeTheme get responsiveAppSizeTheme =>
       Theme.of(this).extension<ResponsiveAppSizeTheme>()!;
 
+  Orientation get orientation => MediaQuery.of(this).orientation;
+
   DeviceSizes get deviceSize {
     final width = MediaQuery.of(this).size.width;
 

@@ -19,7 +19,7 @@ extension DeviceSizesExtension on DeviceSizes {
       case DeviceSizes.smallTablet:
         return 768.0;
       case DeviceSizes.mediumTablet:
-        return 834.0;
+        return 800.0;
       case DeviceSizes.largeTablet:
         return 1024.0;
     }
