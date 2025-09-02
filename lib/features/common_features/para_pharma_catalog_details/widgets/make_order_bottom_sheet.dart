@@ -85,66 +85,54 @@ class MakeOrderBottomSheet extends StatelessWidget {
                       isBordered: true,
                       bgColor: Colors.transparent,
                       onPressed: () {
-                        context
-                            .read<ParaPharmaDetailsCubit>()
-                            .decrementQuantity();
+                        context.read<ParaPharmaDetailsCubit>().decrementQuantity();
                       },
                       icon: Icon(
                         Iconsax.minus,
                         color: Colors.black,
                       ),
                     ),
-                    Spacer(),
-                    SizedBox(
-                      height: AppSizesManager.buttonHeight,
-                      width: MediaQuery.sizeOf(context).width * 4 / 6,
-                      child: Form(
+                    SizedBox(width: 8),
+                    Flexible(
+                      child: SizedBox(
+                        height: AppSizesManager.buttonHeight,
+                        child: Form(
                           child: TextFormField(
-                              cursorColor: AppColors.accentGreenShade1,
-                              controller: context
-                                  .read<ParaPharmaDetailsCubit>()
-                                  .quantityController,
-                              textAlign: TextAlign.center,
-                              keyboardType: TextInputType.number,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.digitsOnly
-                              ],
-                              validator: (value) =>
-                                  value == null || value.isEmpty ? '' : null,
-                              style: context
-                                  .responsiveTextTheme.current.body3Medium,
-                              decoration: InputDecoration(
-                                contentPadding:
-                                    EdgeInsets.all(AppSizesManager.p12),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(
-                                      AppSizesManager.commonWidgetsRadius),
-                                  borderSide: BorderSide(
-                                      color: FieldState.normal.color.secondary),
-                                ),
-                                disabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(
-                                      AppSizesManager.commonWidgetsRadius),
-                                  borderSide:
-                                      BorderSide(color: AppColors.bgDisabled),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(
-                                      AppSizesManager.commonWidgetsRadius),
-                                  borderSide: BorderSide(
-                                      color: StrokeColors.focused.color),
-                                ),
-                              ))),
+                            cursorColor: AppColors.accentGreenShade1,
+                            controller: context
+                                .read<ParaPharmaDetailsCubit>()
+                                .quantityController,
+                            textAlign: TextAlign.center,
+                            keyboardType: TextInputType.number,
+                            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                            validator: (value) => value == null || value.isEmpty ? '' : null,
+                            style: context.responsiveTextTheme.current.body3Medium,
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.all(AppSizesManager.p12),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+                                borderSide: BorderSide(color: FieldState.normal.color.secondary),
+                              ),
+                              disabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+                                borderSide: BorderSide(color: AppColors.bgDisabled),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+                                borderSide: BorderSide(color: StrokeColors.focused.color),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
-                    Spacer(),
+                    SizedBox(width: 8),
                     PrimaryIconButton(
                       borderColor: StrokeColors.normal.color,
                       isBordered: true,
                       bgColor: Colors.transparent,
                       onPressed: () {
-                        context
-                            .read<ParaPharmaDetailsCubit>()
-                            .incrementQuantity();
+                        context.read<ParaPharmaDetailsCubit>().incrementQuantity();
                       },
                       icon: Icon(
                         Iconsax.add,

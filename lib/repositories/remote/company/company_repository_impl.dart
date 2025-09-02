@@ -200,7 +200,7 @@ class CompanyRepository extends ICompanyRepository {
       debugPrint("Company update - SUCCESS with image: $response");
     } catch (e) {
       debugPrint("Company update - Failed with image, trying without: $e");
-      // Fallback to update without image
+      
       await _updateCompanyWithoutImage(companyData, false);
     }
   }
@@ -208,13 +208,13 @@ class CompanyRepository extends ICompanyRepository {
   Future<void> _updateCompanyWithoutImage(EditCompanyFormDataModel companyData, bool shouldRemoveImage) async {
     try {
       String? companyId = await userManager.getCompanyId();
-      if (companyId == null || companyId.isEmpty || companyId == "null") {
+      if (companyId?.isEmpty ?? true) {
         throw Exception("Company ID not found");
       }
 
       Map<String, dynamic> payload = companyData.toJson();
       
-      // If we should remove the image, add a flag or remove image field
+      
       if (shouldRemoveImage) {
         payload['removeImage'] = true;
       }
