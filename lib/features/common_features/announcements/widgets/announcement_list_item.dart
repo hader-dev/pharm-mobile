@@ -71,22 +71,22 @@ class AnnouncementListItem extends StatelessWidget {
                 children: [
                   Text(
                     announcement.title,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
+                    style:
+                        context.responsiveTextTheme.current.headLine2.copyWith(
                       color: Colors.black87,
+                      shadows: [Shadow(blurRadius: 4, color: Colors.black)],
                     ),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: AppSizesManager.s8),
                   if (announcement.content.isNotEmpty)
                     Text(
                       announcement.content,
-                      style: const TextStyle(
-                        fontSize: 14,
+                      style: context.responsiveTextTheme.current.body3Regular
+                          .copyWith(
                         color: Colors.black54,
-                        height: 1.4,
+                        shadows: [Shadow(blurRadius: 4, color: Colors.black)],
                       ),
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
@@ -97,8 +97,8 @@ class AnnouncementListItem extends StatelessWidget {
                     children: [
                       Text(
                         translation.show_more,
-                        style: TextStyle(
-                          fontSize: 14,
+                        style: context.responsiveTextTheme.current.body3Regular
+                            .copyWith(
                           color: AppColors.accent1Shade1,
                           fontWeight: FontWeight.w500,
                         ),

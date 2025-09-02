@@ -14,8 +14,12 @@ import 'promotion_item_widget.dart';
 class PromotionSection extends StatelessWidget {
   final List<AnnouncementModel> announcements;
   final PageController pageController = PageController(initialPage: 0);
+  final double minSectionHeight;
+
   PromotionSection(
-      {super.key, this.announcements = const <AnnouncementModel>[]});
+      {super.key,
+      this.announcements = const <AnnouncementModel>[],
+      required this.minSectionHeight});
 
   @override
   Widget build(BuildContext context) {
@@ -45,14 +49,13 @@ class PromotionSection extends StatelessWidget {
           ),
           child: Column(
             children: [
-              // Header with title and see all button
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     context.translation!.announcements,
-                    style: const TextStyle(
-                      fontSize: 18,
+                    style:
+                        context.responsiveTextTheme.current.headLine2.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -72,8 +75,7 @@ class PromotionSection extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 8),
-              // Announcement carousel
+              const SizedBox(height: AppSizesManager.s8),
               Stack(
                 alignment: Alignment.bottomCenter,
                 children: <Widget>[
@@ -82,14 +84,15 @@ class PromotionSection extends StatelessWidget {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(
                             AppSizesManager.commonWidgetsRadius)),
-                    height: 130,
+                    height: minSectionHeight * 1.5,
                     width: MediaQuery.of(context).size.width,
                     child: PageView(
                       controller: pageController,
                       scrollDirection: Axis.horizontal,
                       children: announcements
                           .map(
-                            (AnnouncementModel announcement) => PromotionItemWidget(
+                            (AnnouncementModel announcement) =>
+                                PromotionItemWidget(
                               announcement: announcement,
                               filterColor: AppColors.accent1Shade2,
                               onForegroundColor: Colors.white,

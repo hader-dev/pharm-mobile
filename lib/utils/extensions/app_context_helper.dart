@@ -14,6 +14,11 @@ extension BuildContextHelper on BuildContext {
 
   ColorScheme get colorScheme => theme.colorScheme;
 
+  Locale get locale => Localizations.localeOf(this);
+
+  TextDirection get textDirection =>
+      locale.languageCode == 'ar' ? TextDirection.rtl : TextDirection.ltr;
+
   ResponsiveTextTheme get responsiveTextTheme =>
       Theme.of(this).extension<ResponsiveTextTheme>()!;
 
@@ -34,5 +39,4 @@ extension BuildContextHelper on BuildContext {
       return DeviceSizes.largeTablet;
     }
   }
-
 }

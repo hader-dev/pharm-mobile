@@ -113,6 +113,7 @@ class CustomTextField extends StatelessWidget {
           obscureText: isObscure,
           minLines: minLines,
           maxLines: maxLines,
+          textDirection: context.textDirection,
           obscuringCharacter: '*',
           decoration: InputDecoration(
               hintText: hintText,

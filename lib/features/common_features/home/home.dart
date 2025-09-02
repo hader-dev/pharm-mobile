@@ -69,9 +69,15 @@ class _HomeScreenState extends State<HomeScreen> {
                       Gap(AppSizesManager.s12),
                       if (context.read<HomeCubit>().announcements.isNotEmpty)
                         PromotionSection(
-                          announcements:
-                              context.read<HomeCubit>().announcements,
-                        ),
+                            announcements:
+                                context.read<HomeCubit>().announcements,
+                            minSectionHeight: context
+                                        .read<VendorsCubit>()
+                                        .vendorsList
+                                        .length <
+                                    4
+                                ? minSectionHeight * 0.8
+                                : minSectionHeight),
                       Gap(AppSizesManager.s12),
                       ParapharmaSection(minSectionHeight: minSectionHeight),
                       Gap(AppSizesManager.s16),

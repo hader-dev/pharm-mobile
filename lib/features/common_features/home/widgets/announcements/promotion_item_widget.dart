@@ -4,6 +4,7 @@ import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/image_load_error_widget.dart';
 import 'package:hader_pharm_mobile/models/announcement.dart';
+import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 typedef OnTapCallback = void Function(AnnouncementModel announcement);
@@ -46,64 +47,54 @@ class PromotionItemWidget extends StatelessWidget {
               color: filterColor!.withAlpha(150),
             ),
           Positioned(
-            left: 16,
-            right: 16,
-            bottom: 24,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          announcement.title,
-                          style: TextStyle(
-                            color: onForegroundColor,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            height: 1.3,
-                            shadows: [
-                              Shadow(blurRadius: 4, color: Colors.black)
-                            ],
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          announcement.title,
-                          style: TextStyle(
-                            color: onForegroundColor,
-                            fontSize: 18,
-                            height: 1.4,
-                            shadows: [
-                              Shadow(blurRadius: 4, color: Colors.black)
-                            ],
-                          ),
-                        ),
-                      ],
+            left: AppSizesManager.s8,
+            top: AppSizesManager.s8,
+            child: Padding(
+              padding: const EdgeInsets.only(right: AppSizesManager.s16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    announcement.title,
+                    style:
+                        context.responsiveTextTheme.current.headLine2.copyWith(
+                      color: onForegroundColor,
+                      fontWeight: FontWeight.bold,
+                      shadows: [Shadow(blurRadius: 4, color: Colors.black)],
                     ),
                   ),
-                ),
-                ElevatedButton(
-                  onPressed: () => onTap?.call(announcement),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    foregroundColor: Colors.black,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 12),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
+                  const SizedBox(height: AppSizesManager.s4),
+                  Text(
+                    announcement.title,
+                    style: context.responsiveTextTheme.current.body1Regular
+                        .copyWith(
+                      color: onForegroundColor,
+                      shadows: [Shadow(blurRadius: 4, color: Colors.black)],
                     ),
-                    elevation: 4,
                   ),
-                  child: Text(translation.learn_more),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
+          Positioned(
+            bottom: AppSizesManager.s16,
+            left: AppSizesManager.s8,
+            child: ElevatedButton(
+              onPressed: () => onTap?.call(announcement),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.white,
+                foregroundColor: Colors.black,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                elevation: 4,
+              ),
+              child: Text(translation.learn_more),
+            ),
+          )
         ],
       ),
     );
