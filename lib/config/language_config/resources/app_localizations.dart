@@ -1810,7 +1810,6 @@ abstract class AppLocalizations {
   /// **'last week'**
   String get last_week;
 
-<<<<<<< Updated upstream
   /// No description provided for @app_name.
   ///
   /// In en, this message translates to:
@@ -1828,19 +1827,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Refresh'**
   String get refresh;
-=======
-  /// No description provided for @week_ago.
-  ///
-  /// In en, this message translates to:
-  /// **'One week ago'**
-  String get week_ago;
-
-  /// No description provided for @weeks_ago.
-  ///
-  /// In en, this message translates to:
-  /// **'{weeks} weeks ago'**
-  String weeks_ago(Object weeks);
->>>>>>> Stashed changes
 
   /// No description provided for @announcements.
   ///
@@ -1908,7 +1894,6 @@ abstract class AppLocalizations {
   /// **'Country of Origin'**
   String get country_of_origin;
 
-<<<<<<< Updated upstream
   /// No description provided for @week_ago.
   ///
   /// In en, this message translates to:
@@ -1921,8 +1906,6 @@ abstract class AppLocalizations {
   /// **'{weeks} weeks ago'**
   String weeks_ago(Object weeks);
 
-=======
->>>>>>> Stashed changes
   /// No description provided for @no_description_available.
   ///
   /// In en, this message translates to:
@@ -2078,7 +2061,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Unauthorized distributor login'**
   String get unauthorized_distributor_login;
-<<<<<<< Updated upstream
 
   /// No description provided for @feedback_no_changes_to_update.
   ///
@@ -2211,8 +2193,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Vendor added to your favorites list'**
   String get vendor_added_to_favorites;
-=======
->>>>>>> Stashed changes
 }
 
 class _AppLocalizationsDelegate

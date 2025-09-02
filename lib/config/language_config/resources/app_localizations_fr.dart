@@ -909,7 +909,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get last_week => 'last week';
 
   @override
-<<<<<<< Updated upstream
   String get app_name => 'Hader Pharma';
 
   @override
@@ -917,14 +916,6 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get refresh => 'Rafraîchir';
-=======
-  String get week_ago => 'il y a 1 semaine';
-
-  @override
-  String weeks_ago(Object weeks) {
-    return 'il y a $weeks semaines';
-  }
->>>>>>> Stashed changes
 
   @override
   String get announcements => 'Annonces';
@@ -960,7 +951,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get country_of_origin => 'Pays d\'origine';
 
   @override
-<<<<<<< Updated upstream
   String get week_ago => 'il y a 1 semaine';
 
   @override
@@ -969,8 +959,6 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-=======
->>>>>>> Stashed changes
   String get no_description_available => 'Aucune description disponible';
 
   @override

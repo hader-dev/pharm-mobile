@@ -894,7 +894,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get last_week => 'last week';
 
   @override
-<<<<<<< Updated upstream
   String get app_name => 'حاضر صيدلية';
 
   @override
@@ -902,14 +901,6 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get refresh => 'تحديث';
-=======
-  String get week_ago => 'week ago';
-
-  @override
-  String weeks_ago(Object weeks) {
-    return '$weeks week ago';
-  }
->>>>>>> Stashed changes
 
   @override
   String get announcements => 'الإعلانات';
@@ -945,7 +936,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get country_of_origin => 'بلد المنشأ';
 
   @override
-<<<<<<< Updated upstream
   String get week_ago => 'week ago';
 
   @override
@@ -954,8 +944,6 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-=======
->>>>>>> Stashed changes
   String get no_description_available => 'لا يوجد وصف متاح';
 
   @override
@@ -1033,7 +1021,6 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get unauthorized_distributor_login => 'تسجيل دخول غير مصرح به';
-<<<<<<< Updated upstream
 
   @override
   String get feedback_no_changes_to_update => 'لا توجد تغييرات للتحديث';
@@ -1106,6 +1093,4 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get vendor_added_to_favorites => 'تم إضافة المورد إلى قائمة المفضلة';
-=======
->>>>>>> Stashed changes
 }
