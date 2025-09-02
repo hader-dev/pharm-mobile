@@ -10,7 +10,6 @@ import 'package:iconsax/iconsax.dart';
 
 import '../../../../../../utils/constants.dart';
 import '../../../config/theme/colors_manager.dart';
-import '../../../config/theme/typography/typoghrapy_source.dart';
 import '../../../utils/enums.dart';
 import '../../common/buttons/solid/primary_text_button.dart';
 import '../../common/text_fields/custom_text_field.dart';
@@ -84,8 +83,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                           ),
                           Text(
                               context.translation!.set_new_password_description,
-                              style:
-                                  AppTypographySource.body1MediumStyle.copyWith(
+                              style: context
+                                  .responsiveTextTheme.current.body1Medium
+                                  .copyWith(
                                 color: TextColors.ternary.color,
                               )),
                           const Gap(

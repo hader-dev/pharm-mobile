@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hader_pharm_mobile/config/theme/typography/app_fonts.dart';
+import 'package:hader_pharm_mobile/config/responsive/typography/app_fonts.dart';
 
 class AppTypography {
   final TextStyle headLine1;

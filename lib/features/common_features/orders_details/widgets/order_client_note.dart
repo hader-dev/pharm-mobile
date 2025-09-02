@@ -4,7 +4,6 @@ import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
-import '../../../../config/theme/typography/typoghrapy_source.dart';
 import '../../../../utils/helper_func.dart';
 import '../cubit/orders_details_cubit.dart';
 
@@ -35,7 +34,7 @@ class ClientNoteSection extends StatelessWidget {
                                 .read<OrderDetailsCubit>()
                                 .orderData!
                                 .clientNote,
-                            AppTypographySource.bodySmallStyle,
+                            context.responsiveTextTheme.current.bodySmall,
                             MediaQuery.sizeOf(context).width) >
                         3
                     ? Stack(
@@ -52,20 +51,15 @@ class ClientNoteSection extends StatelessWidget {
                                         .responsiveTextTheme.current.bodySmall
                                         .copyWith(
                                       height: 1.5,
-                                      fontWeight:
-                                          AppTypographySource.appFontRegular,
                                     ),
                                     children: [
                                         TextSpan(
-                                          text: '(show_less)',
-                                          style: AppTypographySource
-                                              .bodySmallStyle
-                                              .copyWith(
-                                            height: 1.5,
-                                            fontWeight: AppTypographySource
-                                                .appFontRegular,
-                                          ),
-                                        )
+                                            text: '(show_less)',
+                                            style: context.responsiveTextTheme
+                                                .current.bodySmall
+                                                .copyWith(
+                                              height: 1.5,
+                                            ))
                                       ])
                                 : TextSpan(
                                     text: context
@@ -76,18 +70,14 @@ class ClientNoteSection extends StatelessWidget {
                                         .responsiveTextTheme.current.bodySmall
                                         .copyWith(
                                       height: 1.5,
-                                      fontWeight:
-                                          AppTypographySource.appFontRegular,
                                     ),
                                     children: [
                                         TextSpan(
                                           text: ' (show_more)',
-                                          style: AppTypographySource
-                                              .bodySmallStyle
+                                          style: context.responsiveTextTheme
+                                              .current.bodySmall
                                               .copyWith(
                                             height: 1.5,
-                                            fontWeight: AppTypographySource
-                                                .appFontRegular,
                                           ),
                                         )
                                       ]),

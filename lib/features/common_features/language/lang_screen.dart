@@ -8,7 +8,6 @@ import 'package:iconsax/iconsax.dart';
 import '../../../config/language_config/cubit/lang_cubit.dart';
 import '../../../config/language_config/cubit/lang_state.dart';
 import '../../../config/theme/colors_manager.dart';
-import '../../../config/theme/typography/typoghrapy_source.dart';
 import '../../../utils/assets_strings.dart';
 import '../../../utils/constants.dart';
 import '../../../utils/extensions/app_context_helper.dart';
@@ -65,8 +64,9 @@ class LanguagesScreen extends StatelessWidget {
                           height: AppSizesManager.p10,
                         ),
                         Text(context.translation!.select_language_description,
-                            style:
-                                AppTypographySource.body1MediumStyle.copyWith(
+                            style: context
+                                .responsiveTextTheme.current.body1Medium
+                                .copyWith(
                               color: TextColors.ternary.color,
                             )),
                         const SizedBox(

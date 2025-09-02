@@ -5,7 +5,6 @@ import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/price_formatter.dart';
 
-import '../../../../config/theme/typography/typoghrapy_source.dart';
 import '../../../../utils/constants.dart';
 import '../cubit/orders_details_cubit.dart';
 
@@ -99,7 +98,7 @@ class SummaryRow extends StatelessWidget {
             style: TextStyle(
               fontSize: isBold
                   ? context.responsiveTextTheme.current.appFont.headLine4
-                  : AppTypographySource.headLine5,
+                  : context.responsiveTextTheme.current.appFont.headLine5,
               fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
               color: isBold ? Colors.black : Colors.grey[700],
             ),
@@ -109,7 +108,7 @@ class SummaryRow extends StatelessWidget {
             style: TextStyle(
               fontSize: isBold
                   ? context.responsiveTextTheme.current.appFont.headLine4
-                  : AppTypographySource.headLine5,
+                  : context.responsiveTextTheme.current.appFont.headLine5,
               fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
               color: isBold ? Colors.black : Colors.grey[700],
             ),

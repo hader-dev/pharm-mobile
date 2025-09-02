@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/responsive/device_size.dart';
-import 'package:hader_pharm_mobile/config/theme/typography/app_typography.dart';
+import 'package:hader_pharm_mobile/config/responsive/typography/app_typography.dart';
 
 class ResponsiveTextTheme extends ThemeExtension<ResponsiveTextTheme> {
   final AppTypography small;

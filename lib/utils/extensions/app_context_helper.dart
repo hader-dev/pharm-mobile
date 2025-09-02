@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hader_pharm_mobile/config/responsive/app_sizes/app_size_extension.dart';
 import 'package:hader_pharm_mobile/config/responsive/device_size.dart';
-import 'package:hader_pharm_mobile/config/theme/typography/theme_extension.dart';
+import 'package:hader_pharm_mobile/config/responsive/typography/theme_extension.dart';
 
 import '../../config/language_config/resources/app_localizations.dart'
     show AppLocalizations;
@@ -21,6 +22,9 @@ extension BuildContextHelper on BuildContext {
 
   ResponsiveTextTheme get responsiveTextTheme =>
       Theme.of(this).extension<ResponsiveTextTheme>()!;
+
+  ResponsiveAppSizeTheme get responsiveAppSizeTheme =>
+      Theme.of(this).extension<ResponsiveAppSizeTheme>()!;
 
   DeviceSizes get deviceSize {
     final width = MediaQuery.of(this).size.width;

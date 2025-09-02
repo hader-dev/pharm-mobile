@@ -6,7 +6,6 @@ import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/config/theme/typography/typoghrapy_source.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_icon_button.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/widgets/quick_add_modal.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
@@ -116,8 +115,8 @@ class ParaPharmaWidget4 extends StatelessWidget {
                                     .responsiveTextTheme.current.bodySmall
                                     .copyWith(
                                         color: SystemColors.green.primary,
-                                        fontWeight: AppTypographySource
-                                            .appFontSemiBold)),
+                                        fontWeight: context.responsiveTextTheme
+                                            .current.appFont.appFontSemiBold)),
                           ],
                         ),
                       ),

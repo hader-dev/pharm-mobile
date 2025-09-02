@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hader_pharm_mobile/config/language_config/cubit/lang_cubit.dart';
 import 'package:hader_pharm_mobile/config/language_config/cubit/lang_state.dart';
+import 'package:hader_pharm_mobile/config/responsive/typography/widgets/responsive_theme_provider.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
-import 'package:hader_pharm_mobile/config/theme/typography/widgets/responsive_theme_provider.dart';
 
 import '../../config/language_config/resources/app_localizations.dart';
 
