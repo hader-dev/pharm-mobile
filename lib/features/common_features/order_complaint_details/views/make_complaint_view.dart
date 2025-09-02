@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field.dart';
 import 'package:hader_pharm_mobile/features/common_features/order_complaint_details/actions/make_complaint.dart';
 import 'package:hader_pharm_mobile/features/common_features/order_complaint_details/cubit/orders_complaint_details_cubit.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/validators.dart';
@@ -35,7 +34,7 @@ class MakeComplaintView extends StatelessWidget {
             validationFunc: (v) => requiredValidator(v, translation),
             onChanged: (v) => cubit.updateClaimSubject(v),
           ),
-          Gap(AppSizesManager.s4),
+          const ResponsiveGap.s4(),
           CustomTextField(
             label: '${context.translation!.description}*',
             controller: descriptionController,
@@ -44,7 +43,7 @@ class MakeComplaintView extends StatelessWidget {
             validationFunc: (v) => requiredValidator(v, translation),
             onChanged: (v) => cubit.updateClaimDescription(v),
           ),
-          Gap(AppSizesManager.s8),
+          const ResponsiveGap.s8(),
           PrimaryTextButton(
             label: translation.confirm,
             color: AppColors.accent1Shade1,

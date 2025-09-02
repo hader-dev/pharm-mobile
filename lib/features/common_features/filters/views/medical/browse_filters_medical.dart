@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/bottom_sheet_header.dart';
 import 'package:hader_pharm_mobile/features/common_features/filters/cubit/medical_filters_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/filters/widgets/filter_price_section.dart';
@@ -29,9 +29,9 @@ class FiltersMedicalBrowse extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           BottomSheetHeader(title: context.translation!.search_filters),
-          Gap(AppSizesManager.s12),
+          const ResponsiveGap.s12(),
           Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
-          Gap(AppSizesManager.s12),
+          const ResponsiveGap.s12(),
           Column(
             children: [
               FiltersAccordionClinical(),
@@ -41,7 +41,7 @@ class FiltersMedicalBrowse extends StatelessWidget {
               FiltersAccordionOthers()
             ],
           ),
-          Gap(AppSizesManager.s12),
+          const ResponsiveGap.s12(),
           BlocBuilder<MedicalFiltersCubit, MedicalFiltersState>(
             builder: (context, state) {
               final cubit = context.read<MedicalFiltersCubit>();
@@ -57,7 +57,7 @@ class FiltersMedicalBrowse extends StatelessWidget {
             },
           ),
           Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
-          Gap(AppSizesManager.s12),
+          const ResponsiveGap.s12(),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p4),
             child: Row(
@@ -78,7 +78,7 @@ class FiltersMedicalBrowse extends StatelessWidget {
                     borderColor: AppColors.accent1Shade1,
                   ),
                 ),
-                Gap(AppSizesManager.s8),
+                const ResponsiveGap.s8(),
                 Expanded(
                   flex: 2,
                   child: PrimaryTextButton(

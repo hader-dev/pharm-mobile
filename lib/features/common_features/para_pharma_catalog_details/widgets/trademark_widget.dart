@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/cubit/para_pharma_details_cubit.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
@@ -41,7 +41,7 @@ class TrademarkWidget extends StatelessWidget {
                 ),
               ),
             ),
-            Gap(AppSizesManager.s4),
+            const ResponsiveGap.s4(),
             Text(catalogData.company!.name,
                 style: context.responsiveTextTheme.current.body3Regular
                     .copyWith(color: Colors.white)),

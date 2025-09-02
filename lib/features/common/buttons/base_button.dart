@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
@@ -93,7 +93,7 @@ class BaseButton extends StatelessWidget {
                         color: onTap == null ? Colors.grey : labelColor,
                         size: AppSizesManager.s16,
                       ),
-                      const Gap(AppSizesManager.s8),
+                      const ResponsiveGap.s8(),
                     ],
                   ),
                 ConstrainedBox(
@@ -112,7 +112,7 @@ class BaseButton extends StatelessWidget {
                 if (trailingIcon != null)
                   Row(
                     children: [
-                      const Gap(AppSizesManager.s8),
+                      const ResponsiveGap.s8(),
                       Icon(
                         trailingIcon,
                         color: onTap == null ? Colors.grey : labelColor,

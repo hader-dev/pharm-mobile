@@ -1,9 +1,9 @@
 import 'package:cached_network_image_plus/flutter_cached_network_image_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/widgets/quick_add_modal.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
@@ -109,7 +109,7 @@ class ParaPharmaWidget2 extends StatelessWidget {
                               : Icon(Iconsax.box_2,
                                   color: SystemColors.red.primary,
                                   size: AppSizesManager.iconSize16),
-                          const Gap(AppSizesManager.s4),
+                          const ResponsiveGap.s4(),
                           Text(
                               paraPharmData.stockQuantity > 0
                                   ? context.translation!.in_stock
@@ -156,7 +156,7 @@ class ParaPharmaWidget2 extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Gap(AppSizesManager.s8),
+                const ResponsiveGap.s8(),
                 // Row(children: [
                 //   Transform.scale(
                 //       alignment: Alignment.centerLeft,
@@ -167,14 +167,14 @@ class ParaPharmaWidget2 extends StatelessWidget {
                 //           onTap: () {})),
                 //   Spacer()
                 // ]),
-                Gap(AppSizesManager.s8),
+                const ResponsiveGap.s8(),
                 Text(paraPharmData.name,
                     maxLines: 1,
                     softWrap: true,
                     overflow: TextOverflow.ellipsis,
                     style: context.responsiveTextTheme.current.headLine4SemiBold
                         .copyWith(color: TextColors.primary.color)),
-                Gap(AppSizesManager.s4),
+                ResponsiveGap.s4(),
                 Row(
                   children: [
                     Icon(
@@ -182,7 +182,7 @@ class ParaPharmaWidget2 extends StatelessWidget {
                       color: AppColors.accent1Shade1,
                       size: AppSizesManager.iconSize18,
                     ),
-                    Gap(AppSizesManager.s4),
+                    ResponsiveGap.s4(),
                     Text.rich(
                       TextSpan(
                         children: [

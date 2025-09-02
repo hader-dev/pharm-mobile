@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/create_company_profile/sub_pages/review_and_sumbit/widgets/info_row.dart';
 import 'package:hader_pharm_mobile/models/cart_item.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
@@ -43,7 +43,7 @@ class CartItemWidget extends StatelessWidget {
           //     children: [
           //       Spacer(),
           //       Icon(Iconsax.image, color: Color.fromARGB(255, 197, 197, 197), size: AppSizesManager.iconSize30),
-          //       Gap(AppSizesManager.s8),
+          //        const ResponsiveGap.s8(),
           //       Text(
           //         "Image not available",
           //         style: context.responsiveTextTheme.current.body3Medium.copyWith(color: const Color.fromARGB(255, 197, 197, 197)),
@@ -53,7 +53,7 @@ class CartItemWidget extends StatelessWidget {
           //   ),
           // ),
 
-          const Gap(AppSizesManager.s12),
+          const ResponsiveGap.s12(),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,7 +81,7 @@ class CartItemWidget extends StatelessWidget {
                     )
                   ],
                 ),
-                const Gap(AppSizesManager.s12),
+                const ResponsiveGap.s12(),
                 Column(
                   children: [
                     InfoRow(

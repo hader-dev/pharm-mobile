@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/widgets/make_order_bottom_sheet.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class FilterPriceSection extends StatefulWidget {
@@ -40,7 +39,8 @@ class _FilterPriceSectionState extends State<FilterPriceSection> {
   @override
   void didUpdateWidget(FilterPriceSection oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.minPrice != widget.minPrice || oldWidget.maxPrice != widget.maxPrice) {
+    if (oldWidget.minPrice != widget.minPrice ||
+        oldWidget.maxPrice != widget.maxPrice) {
       setState(() {
         _currentRangeValues = RangeValues(
           widget.minPrice ?? widget.minLimit,
@@ -61,11 +61,15 @@ class _FilterPriceSectionState extends State<FilterPriceSection> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              PriceTag(label: context.translation!.min, value: _currentRangeValues.start),
-              PriceTag(label: context.translation!.max, value: _currentRangeValues.end),
+              PriceTag(
+                  label: context.translation!.min,
+                  value: _currentRangeValues.start),
+              PriceTag(
+                  label: context.translation!.max,
+                  value: _currentRangeValues.end),
             ],
           ),
-          const Gap(AppSizesManager.s12),
+          const ResponsiveGap.s12(),
           RangeSlider(
             values: _currentRangeValues,
             min: widget.minLimit,
@@ -107,8 +111,8 @@ class PriceTag extends StatelessWidget {
         Text(
           '${value.toStringAsFixed(0)} ${context.translation!.currency}',
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
+                fontWeight: FontWeight.bold,
+              ),
         ),
       ],
     );

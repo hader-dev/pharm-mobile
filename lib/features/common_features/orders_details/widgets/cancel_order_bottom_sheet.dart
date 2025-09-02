@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders_details/actions/cancel_order.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders_details/cubit/orders_details_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders_details/orders_details.dart';
@@ -25,7 +25,7 @@ class CancelOrderBottomSheet extends StatelessWidget {
       children: [
         Text(translation.are_you_sure_cancel_order,
             style: context.responsiveTextTheme.current.body1Medium),
-        Gap(AppSizesManager.s16),
+        const ResponsiveGap.s16(),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p4),
           child: PrimaryTextButton(
@@ -34,7 +34,7 @@ class CancelOrderBottomSheet extends StatelessWidget {
             color: theme.colorScheme.error,
           ),
         ),
-        Gap(AppSizesManager.s12),
+        const ResponsiveGap.s12(),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p4),
           child: PrimaryTextButton(

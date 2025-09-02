@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
@@ -25,7 +25,7 @@ class InfoRow extends StatelessWidget {
             child: Row(
               children: [
                 if (icon != null) Icon(icon, color: Colors.grey[700], size: 20),
-                const Gap(AppSizesManager.s8),
+                const ResponsiveGap.s8(),
                 Text(label,
                     style: context.responsiveTextTheme.current.body3Medium
                         .copyWith(color: TextColors.ternary.color)),
@@ -57,7 +57,7 @@ class InfoRow extends StatelessWidget {
               Text(label,
                   style: context.responsiveTextTheme.current.body3Medium
                       .copyWith(color: TextColors.ternary.color)),
-              Gap(AppSizesManager.s6),
+              const ResponsiveGap.s6(),
               Tooltip(
                 message: dataValue.isEmpty
                     ? context.translation!.feedback_not_provided

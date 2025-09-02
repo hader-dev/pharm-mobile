@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/decorations/field.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
@@ -88,7 +88,7 @@ class CustomTextField extends StatelessWidget {
                 style: context.responsiveTextTheme.current.body3Medium
                     .copyWith(color: TextColors.ternary.color)),
           ),
-        if (label.isNotEmpty) const Gap(AppSizesManager.s6),
+        if (label.isNotEmpty) const ResponsiveGap.s6(),
         TextFormField(
           key: fieldKey,
           initialValue: initValue,
@@ -127,7 +127,7 @@ class CustomTextField extends StatelessWidget {
               helper: Row(
                 children: [
                   getSuffixIcon(state) ?? const SizedBox.shrink(),
-                  const Gap(AppSizesManager.s6),
+                  const ResponsiveGap.s12(),
                   Text(
                     state.wordKey,
                     style: context.responsiveTextTheme.current.bodyXSmall

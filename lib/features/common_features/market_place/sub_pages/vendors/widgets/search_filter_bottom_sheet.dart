@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/filter_option_value.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/vendors/cubit/vendors_cubit.dart';
-
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart' show Iconsax;
 
 import '../../../../../../utils/enums.dart';
-
 import '../../../../../common/buttons/solid/primary_text_button.dart';
 import '../../../../../common/widgets/bottom_sheet_header.dart';
 import '../../../../../common/widgets/info_widget.dart' show InfoWidget;
@@ -25,7 +21,8 @@ class VandorsSearchFilterBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
-      value: MarketPlaceScreen.marketPlaceScaffoldKey.currentContext!.read<VendorsCubit>(),
+      value: MarketPlaceScreen.marketPlaceScaffoldKey.currentContext!
+          .read<VendorsCubit>(),
       child: BlocBuilder<VendorsCubit, VendorsState>(
         builder: (context, state) {
           if (state is! VendorsLoading) {}
@@ -33,9 +30,9 @@ class VandorsSearchFilterBottomSheet extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               BottomSheetHeader(title: context.translation!.search_filters),
-              Gap(AppSizesManager.s12),
+       const ResponsiveGap.s12(),
               Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
-              Gap(AppSizesManager.s12),
+       const ResponsiveGap.s12(),
               InfoWidget(
                   label: context.translation!.filters,
                   bgColor: AppColors.bgWhite,
@@ -45,14 +42,16 @@ class VandorsSearchFilterBottomSheet extends StatelessWidget {
                         .map((seachFilter) => FilterOptionValueWidget(
                             title: seachFilter.name,
                             onSelected: () =>
-                                BlocProvider.of<VendorsCubit>(context).changeVendorsSearchFilter(seachFilter),
-                            isSelected:
-                                BlocProvider.of<VendorsCubit>(context).selectedVendorSearchFilter == seachFilter))
+                                BlocProvider.of<VendorsCubit>(context)
+                                    .changeVendorsSearchFilter(seachFilter),
+                            isSelected: BlocProvider.of<VendorsCubit>(context)
+                                    .selectedVendorSearchFilter ==
+                                seachFilter))
                         .toList(),
                   )),
-              Gap(AppSizesManager.s12),
+       const ResponsiveGap.s12(),
               Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
-              Gap(AppSizesManager.s12),
+       const ResponsiveGap.s12(),
               InfoWidget(
                   label: context.translation!.types,
                   bgColor: AppColors.bgWhite,
@@ -61,10 +60,12 @@ class VandorsSearchFilterBottomSheet extends StatelessWidget {
                     children: DistributorCategory.values
                         .map((seachFilter) => FilterOptionValueWidget(
                             title: seachFilter.name,
-                            onSelected: () =>
-                                BlocProvider.of<VendorsCubit>(context).changeDistributorsCategoryFilter(seachFilter),
-                            isSelected:
-                                BlocProvider.of<VendorsCubit>(context).selectedDistributorTypeFilter == seachFilter))
+                            onSelected: () => BlocProvider.of<VendorsCubit>(
+                                    context)
+                                .changeDistributorsCategoryFilter(seachFilter),
+                            isSelected: BlocProvider.of<VendorsCubit>(context)
+                                    .selectedDistributorTypeFilter ==
+                                seachFilter))
                         .toList(),
                   )),
               Padding(
@@ -78,13 +79,14 @@ class VandorsSearchFilterBottomSheet extends StatelessWidget {
                         label: context.translation!.reset,
                         labelColor: AppColors.accent1Shade1,
                         onTap: () {
-                          BlocProvider.of<VendorsCubit>(context).resetSearchFilters();
+                          BlocProvider.of<VendorsCubit>(context)
+                              .resetSearchFilters();
                           context.pop(context);
                         },
                         borderColor: AppColors.accent1Shade1,
                       ),
                     ),
-                    Gap(AppSizesManager.s8),
+                    const ResponsiveGap.s8(),
                     Expanded(
                       flex: 2,
                       child: PrimaryTextButton(

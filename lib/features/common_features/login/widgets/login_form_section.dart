@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/login/cubit/login_cubit.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
@@ -44,7 +44,7 @@ class _LoginFormSectionState extends State<LoginFormSection> {
                   }
                 },
               ),
-              Gap(AppSizesManager.s4),
+              const ResponsiveGap.s4(),
               CustomTextField(
                 label: '${context.translation!.password}*',
                 controller:
@@ -73,7 +73,7 @@ class _LoginFormSectionState extends State<LoginFormSection> {
                   }
                 },
               ),
-              Gap(AppSizesManager.s12),
+              const ResponsiveGap.s12(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -87,7 +87,7 @@ class _LoginFormSectionState extends State<LoginFormSection> {
                   ),
                 ],
               ),
-              Gap(AppSizesManager.s24),
+              const ResponsiveGap.s24(),
               PrimaryTextButton(
                 label: context.translation!.login,
                 isLoading: state is LoginLoading,

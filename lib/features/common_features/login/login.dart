@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/outlined/outlined_text_button.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/forgot_password/forgot_password.dart';
 import 'package:hader_pharm_mobile/features/common_features/login/cubit/login_cubit.dart';
 import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
@@ -50,9 +50,9 @@ class LoginScreen extends StatelessWidget {
                 physics: const BouncingScrollPhysics(),
                 children: [
                   LoginHeaderSection(),
-                  Gap(AppSizesManager.s32),
+                  const ResponsiveGap.s32(),
                   LoginFormSection(),
-                  Gap(AppSizesManager.s16),
+                  const ResponsiveGap.s16(),
                   OutLinedTextButton(
                     label: context.translation!.register,
                     labelColor: AppColors.accent1Shade1,
@@ -62,7 +62,7 @@ class LoginScreen extends StatelessWidget {
                     },
                     borderColor: AppColors.accent1Shade1,
                   ),
-                  Gap(AppSizesManager.s16),
+                  const ResponsiveGap.s16(),
                 ],
               ),
             ),

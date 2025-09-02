@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/validators.dart';
 
@@ -51,7 +51,7 @@ class _FormSectionState extends State<FormSection> {
                     }
                   },
                 ),
-                Gap(AppSizesManager.s4),
+                const ResponsiveGap.s4(),
                 CustomTextField(
                   label: '${context.translation!.email}*',
                   initValue: BlocProvider.of<EditProfileCubit>(context)
@@ -77,7 +77,7 @@ class _FormSectionState extends State<FormSection> {
                                     ));
                   },
                 ),
-                Gap(AppSizesManager.s4),
+                ResponsiveGap.s4(),
                 CustomTextField(
                   label: context.translation!.phone_mobile,
                   state: FieldState.normal,
@@ -97,7 +97,7 @@ class _FormSectionState extends State<FormSection> {
                   },
                   validationFunc: (v) => validateIsMobileNumber(v, translation),
                 ),
-                Gap(AppSizesManager.s24),
+                const ResponsiveGap.s24(),
                 PrimaryTextButton(
                   label: translation.update_profile,
                   isLoading: context.watch<EditProfileCubit>().state

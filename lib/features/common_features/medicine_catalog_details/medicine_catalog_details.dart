@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/cubit/provider.dart';
 import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/helpers/medicine_catalog_details_tab_data.dart';
@@ -66,7 +66,7 @@ class _MedicineCatalogDetailsScreenState
                           thickness: 3.5,
                           height: 1),
                       ProductDetailsTabBarSection(),
-                      Gap(AppSizesManager.s24),
+                      const ResponsiveGap.s24(),
                       if (BlocProvider.of<MedicineDetailsCubit>(context)
                               .tabController
                               .index ==
@@ -77,7 +77,7 @@ class _MedicineCatalogDetailsScreenState
                               .index ==
                           1)
                         DistributorDetailsPage(),
-                      Gap(AppSizesManager.s24),
+                      const ResponsiveGap.s24(),
                       Divider(
                           color: AppColors.bgDisabled,
                           thickness: 3.5,

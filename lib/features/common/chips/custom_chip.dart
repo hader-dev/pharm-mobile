@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
@@ -41,7 +41,7 @@ class CustomChip extends StatelessWidget {
                 color: labelColor,
                 size: AppSizesManager.iconSize20,
               ),
-              const Gap(AppSizesManager.s4),
+              const ResponsiveGap.s4(),
             ],
             Container(
               constraints: BoxConstraints(

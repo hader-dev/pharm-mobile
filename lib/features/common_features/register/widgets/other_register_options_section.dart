@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../../config/theme/colors_manager.dart';
 import '../../../../utils/assets_strings.dart';
-import '../../../../utils/constants.dart';
 import '../../../common/widgets/social_media_button.dart';
 
 class OtherRegisterOptionsSection extends StatelessWidget {
@@ -21,24 +20,24 @@ class OtherRegisterOptionsSection extends StatelessWidget {
           indent: MediaQuery.sizeOf(context).width * 0.2,
           endIndent: MediaQuery.sizeOf(context).width * 0.2,
         ),
-        Gap(AppSizesManager.s16),
+        const ResponsiveGap.s16(),
         Text('Or Sign in with',
             style: context.responsiveTextTheme.current.body3Medium.copyWith(
               color: TextColors.ternary.color,
             )),
-        Gap(AppSizesManager.s16),
+        const ResponsiveGap.s16(),
         Row(
           children: [
             SocialMediaButton(
               iconPath: DrawableAssetStrings.appleIcon,
               onTap: () {},
             ),
-            Gap(AppSizesManager.s8),
+            const ResponsiveGap.s8(),
             SocialMediaButton(
               iconPath: DrawableAssetStrings.googleIcon,
               onTap: () {},
             ),
-            Gap(AppSizesManager.s8),
+            const ResponsiveGap.s8(),
             SocialMediaButton(
               iconPath: DrawableAssetStrings.facebookIcon,
               onTap: () {},

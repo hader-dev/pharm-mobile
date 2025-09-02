@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/cubit/home_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/cubit/provider.dart';
@@ -9,7 +9,6 @@ import 'package:hader_pharm_mobile/features/common_features/home/widgets/medicin
 import 'package:hader_pharm_mobile/features/common_features/home/widgets/parapharm/para_pharma_section.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/widgets/vendors/vendors_section.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/vendors/cubit/vendors_cubit.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 
 import 'widgets/announcements/promotion_section.dart';
 
@@ -66,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Gap(AppSizesManager.s12),
+                      const ResponsiveGap.s12(),
                       if (context.read<HomeCubit>().announcements.isNotEmpty)
                         PromotionSection(
                             announcements:
@@ -78,9 +77,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                     4
                                 ? minSectionHeight * 0.8
                                 : minSectionHeight),
-                      Gap(AppSizesManager.s12),
+                      const ResponsiveGap.s12(),
                       ParapharmaSection(minSectionHeight: minSectionHeight),
-                      Gap(AppSizesManager.s16),
+                      const ResponsiveGap.s16(),
                       VendorSection(
                           minSectionHeight:
                               context.read<VendorsCubit>().vendorsList.length <
@@ -93,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ? 1
                               : 12),
                       MedicineSection(minSectionHeight: minSectionHeight),
-                      Gap(AppSizesManager.s12),
+                      const ResponsiveGap.s12(),
                     ],
                   )),
             );

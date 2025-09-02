@@ -1,6 +1,6 @@
 import 'package:hader_pharm_mobile/config/responsive/app_sizes/app_size.dart';
 
-const appSizesMeduim = AppSizes(
+final appSizesMedium = AppSizes(
   p4: 4,
   p6: 6,
   p8: 8,

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
-import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field.dart';
 import 'package:hader_pharm_mobile/features/common_features/forgot_password/cubit/forgot_password_cubit.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
@@ -25,7 +25,7 @@ class PasswordResetOtpScreen extends StatelessWidget {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const Gap(AppSizesManager.s24),
+          const ResponsiveGap.s24(),
           Row(
             children: [
               IconButton(
@@ -45,16 +45,15 @@ class PasswordResetOtpScreen extends StatelessWidget {
               ),
             ],
           ),
-          const Gap(AppSizesManager.s24),
+          const ResponsiveGap.s24(),
           Text(
             context.translation!.hint_please_enter_otp_sent_to_email,
             textAlign: TextAlign.center,
-            style:
-                context.responsiveTextTheme.current.headLine4Medium.copyWith(
+            style: context.responsiveTextTheme.current.headLine4Medium.copyWith(
               color: AppColors.accent1Shade1,
             ),
           ),
-          const Gap(AppSizesManager.s24),
+          const ResponsiveGap.s24(),
           OtpTextField(
             numberOfFields: 5,
             borderColor: StrokeColors.normal.color,
@@ -72,7 +71,7 @@ class PasswordResetOtpScreen extends StatelessWidget {
               controls = controllers;
             },
           ),
-          const Gap(AppSizesManager.s24),
+          const ResponsiveGap.s24(),
           Form(
             key: cubit.formKey,
             child: CustomTextField(
@@ -95,8 +94,7 @@ class PasswordResetOtpScreen extends StatelessWidget {
                           color: AppColors.accent1Shade1)),
             ),
           ),
-          Gap(AppSizesManager.s24),
-
+          const ResponsiveGap.s24(),
           PrimaryTextButton(
             label: translation.verify,
             isLoading: cubit.state is ResetpasswordIsLoading,

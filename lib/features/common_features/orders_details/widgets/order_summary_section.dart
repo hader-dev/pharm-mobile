@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/price_formatter.dart';
@@ -30,8 +30,7 @@ class OrderSummarySection extends StatelessWidget {
             context.translation!.order_summary,
             style: context.responsiveTextTheme.current.headLine4SemiBold,
           ),
-          const Gap(AppSizesManager.s12),
-
+          const ResponsiveGap.s12(),
           SummaryRow(
             label: context.translation!.payment_method,
             value: PaymentMethods.values

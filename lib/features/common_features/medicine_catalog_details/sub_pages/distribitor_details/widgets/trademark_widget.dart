@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/cubit/medicine_details_cubit.dart';
 import 'package:hader_pharm_mobile/models/medicine_catalog.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
@@ -16,7 +16,9 @@ class TrademarkWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MedicineCatalogModel medicineCatalogData =
-        BlocProvider.of<MedicineDetailsCubit>(context).state.medicineCatalogData!;
+        BlocProvider.of<MedicineDetailsCubit>(context)
+            .state
+            .medicineCatalogData!;
 
     return ColoredBox(
       color: AppColors.accent1Shade2.withAlpha(200),
@@ -43,7 +45,7 @@ class TrademarkWidget extends StatelessWidget {
                 ),
               ),
             ),
-            Gap(AppSizesManager.s4),
+            const ResponsiveGap.s4(),
             Text(medicineCatalogData.company.name,
                 style: context.responsiveTextTheme.current.body3Regular
                     .copyWith(color: Colors.white)),

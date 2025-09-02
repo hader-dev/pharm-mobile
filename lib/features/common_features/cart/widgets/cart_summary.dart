@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../../config/theme/colors_manager.dart';
@@ -156,12 +157,12 @@ class CartSummarySection extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Gap(AppSizesManager.s8), // Reduced gap
+                      const ResponsiveGap.s8(),
                       BlocBuilder<CartCubit, CartState>(
                           builder: (context, state) {
                         return ConstrainedBox(
                           constraints: BoxConstraints(
-                            maxWidth: MediaQuery.of(context).size.width - 32, // Ensure button fits
+                            maxWidth: MediaQuery.of(context).size.width - 32,
                           ),
                           child: PrimaryTextButton(
                             label: context.translation!.checkout,
@@ -170,7 +171,8 @@ class CartSummarySection extends StatelessWidget {
                                 : () {
                                     BottomSheetHelper.showCommonBottomSheet(
                                         context: context,
-                                        child: SelectPaymentMethodBottomSheet());
+                                        child:
+                                            SelectPaymentMethodBottomSheet());
                                   },
                             color: AppColors.accent1Shade1,
                           ),

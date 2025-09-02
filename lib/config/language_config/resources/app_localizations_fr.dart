@@ -48,6 +48,19 @@ class AppLocalizationsFr extends AppLocalizations {
   String get full_name => 'Nom complet';
 
   @override
+  String get hader_pharm => 'Hader Pharma';
+
+  @override
+  String get we_wish_you_good_health_welcome =>
+      'Nous vous souhaitons bonne sante et bienvenue';
+
+  @override
+  String get welcome_to_hader => 'Bienvenue sur Hader';
+
+  @override
+  String get change_phone_number => 'Modifier le numérique';
+
+  @override
   String get phone_mobile => ' Numéro Téléphone';
 
   @override

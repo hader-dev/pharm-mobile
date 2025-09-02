@@ -48,6 +48,18 @@ class AppLocalizationsAr extends AppLocalizations {
   String get full_name => 'الاسم الكامل';
 
   @override
+  String get hader_pharm => 'صيدلية حاضر';
+
+  @override
+  String get we_wish_you_good_health_welcome => 'مرحبا نتمنى لك صحة جيدة';
+
+  @override
+  String get welcome_to_hader => 'مرحبا في صيدلية حاضر';
+
+  @override
+  String get change_phone_number => 'تغيير رقم الهاتف';
+
+  @override
   String get phone_mobile => 'رقم الهاتف ';
 
   @override

@@ -18,7 +18,7 @@ import 'company_repository.dart';
 class CompanyRepository extends ICompanyRepository {
   final INetworkService client;
   final UserManager userManager;
-  
+
   CompanyRepository({required this.client, required this.userManager});
   @override
   Future<void> createCompany(
@@ -133,8 +133,7 @@ class CompanyRepository extends ICompanyRepository {
   @override
   Future<Company> getMyCompany() async {
     // Get company information from user data
-    var decodedResponse = await client
-        .sendRequest(() => client.get(Urls.me));
+    var decodedResponse = await client.sendRequest(() => client.get(Urls.me));
 
     // Extract company data from user response
     if (decodedResponse["company"] != null) {
@@ -145,7 +144,9 @@ class CompanyRepository extends ICompanyRepository {
   }
 
   @override
-  Future<void> updateMyCompany({required EditCompanyFormDataModel companyData, bool shouldRemoveImage = false}) async {
+  Future<void> updateMyCompany(
+      {required EditCompanyFormDataModel companyData,
+      bool shouldRemoveImage = false}) async {
     try {
       // If there's an image, try multipart upload first
       if (companyData.logoPath != null && !shouldRemoveImage) {
@@ -161,15 +162,16 @@ class CompanyRepository extends ICompanyRepository {
     }
   }
 
-  Future<void> _updateCompanyWithImage(EditCompanyFormDataModel companyData) async {
+  Future<void> _updateCompanyWithImage(
+      EditCompanyFormDataModel companyData) async {
     try {
       String? companyId = await userManager.getCompanyId();
-      if (companyId?.isEmpty ?? true || companyId == "null") {
+      if (companyId?.isEmpty ?? true) {
         throw Exception("Company ID not found");
       }
 
       Map<String, dynamic> dataAsMap = companyData.toJson();
-      
+
       late MultipartFile file;
       final String? logoPath = companyData.logoPath;
 
@@ -192,10 +194,10 @@ class CompanyRepository extends ICompanyRepository {
       });
 
       var response = await client.sendRequest(() => client.patch(
-        '${Urls.company}/$companyId',
-        payload: formData,
-        headers: {'Content-Type': 'multipart/form-data'},
-      ));
+            '${Urls.company}/$companyId',
+            payload: formData,
+            headers: {'Content-Type': 'multipart/form-data'},
+          ));
 
       debugPrint("Company update - SUCCESS with image: $response");
     } catch (e) {
@@ -205,7 +207,8 @@ class CompanyRepository extends ICompanyRepository {
     }
   }
 
-  Future<void> _updateCompanyWithoutImage(EditCompanyFormDataModel companyData, bool shouldRemoveImage) async {
+  Future<void> _updateCompanyWithoutImage(
+      EditCompanyFormDataModel companyData, bool shouldRemoveImage) async {
     try {
       String? companyId = await userManager.getCompanyId();
       if (companyId?.isEmpty ?? true) {
@@ -213,17 +216,17 @@ class CompanyRepository extends ICompanyRepository {
       }
 
       Map<String, dynamic> payload = companyData.toJson();
-      
-      
+
+      // If we should remove the image, add a flag or remove image field
       if (shouldRemoveImage) {
         payload['removeImage'] = true;
       }
 
       var response = await client.sendRequest(() => client.patch(
-        '${Urls.company}/$companyId',
-        payload: payload,
-        headers: {'Content-Type': 'application/json'},
-      ));
+            '${Urls.company}/$companyId',
+            payload: payload,
+            headers: {'Content-Type': 'application/json'},
+          ));
 
       debugPrint("Company update - SUCCESS: $response");
     } catch (e) {

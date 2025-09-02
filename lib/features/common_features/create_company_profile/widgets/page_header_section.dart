@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
@@ -42,7 +42,7 @@ class PageHeaderSection extends StatelessWidget {
         CustomStepper(
           currentStep: currentStep,
         ),
-        Gap(AppSizesManager.s16),
+        const ResponsiveGap.s16(),
         Row(
           children: [
             Container(
@@ -69,7 +69,7 @@ class PageHeaderSection extends StatelessWidget {
                     style: context.responsiveTextTheme.current.headLine3SemiBold
                         .copyWith(color: AppColors.accent1Shade1),
                   ),
-                  Gap(AppSizesManager.s4),
+                  const ResponsiveGap.s4(),
                   Text(
                     pagesTitles[currentStep]["subtitle"] ?? '',
                     style: context.responsiveTextTheme.current.bodySmall,

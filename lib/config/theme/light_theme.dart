@@ -9,6 +9,7 @@ import 'package:hader_pharm_mobile/config/responsive/typography/config/font_larg
 import 'package:hader_pharm_mobile/config/responsive/typography/config/font_meduim.dart';
 import 'package:hader_pharm_mobile/config/responsive/typography/config/font_small.dart';
 import 'package:hader_pharm_mobile/config/responsive/typography/theme_extension.dart';
+import 'package:hader_pharm_mobile/utils/constants.dart';
 
 import '../responsive/typography/typoghrapy_source.dart';
 import 'colors_manager.dart';
@@ -30,7 +31,7 @@ class LightTheme {
           backgroundColor: AppColors.accent1Shade1,
         ),
       ),
-      iconTheme: IconThemeData(size: ResponsiveAppSizeTheme.current.iconSize20),
+      iconTheme: IconThemeData(size: AppSizesManager.iconSize20),
       extensions: <ThemeExtension<dynamic>>[
         ResponsiveTextTheme(
             small: AppTypography(appFont: appFontSmall),
@@ -39,7 +40,7 @@ class LightTheme {
             deviceSize: deviceSize),
         ResponsiveAppSizeTheme(
             small: appSizesSmall,
-            medium: appSizesMeduim,
+            medium: appSizesMedium,
             large: appSizesLarge,
             deviceSize: deviceSize),
       ],

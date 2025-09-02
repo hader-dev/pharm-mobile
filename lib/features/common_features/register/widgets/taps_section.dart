@@ -36,7 +36,7 @@
 //               color: selectedTab == 0 ? AppColors.accent1Shade1 : AppColors.bgWhite,
 //             ),
 //           ),
-//           Gap(AppSizesManager.s8),
+//            const ResponsiveGap.s8(),
 //           Expanded(
 //             child: PrimaryTextButton(
 //               label: "Phone Number",

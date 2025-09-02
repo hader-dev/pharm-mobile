@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/create_company_profile/actions/previous_step_or_logout.dart';
 import 'package:hader_pharm_mobile/features/common_features/create_company_profile/cubit/create_company_profile_cubit.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
@@ -29,7 +29,7 @@ class NavigationButtonsSection extends StatelessWidget {
               borderColor: AppColors.accent1Shade1,
             ),
           ),
-          Gap(AppSizesManager.s8),
+          const ResponsiveGap.s8(),
           Expanded(
             child: PrimaryTextButton(
               label: BlocProvider.of<CreateCompanyProfileCubit>(context)

@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 import 'package:iconsax/iconsax.dart';
@@ -203,7 +204,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                               ),
                             ],
                           ),
-                          Gap(AppSizesManager.s16),
+                          const ResponsiveGap.s16(),
                           PrimaryTextButton(
                             label: context.translation!.change_password,
                             isLoading: state is ChangePasswordLoading,
@@ -216,7 +217,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                             },
                             color: AppColors.accent1Shade1,
                           ),
-                          Gap(AppSizesManager.s24),
+                          const ResponsiveGap.s24(),
                         ],
                       ),
                     );

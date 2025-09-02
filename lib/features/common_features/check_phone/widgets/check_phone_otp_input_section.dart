@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
-import 'package:gap/gap.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../../config/theme/colors_manager.dart';
@@ -40,7 +40,7 @@ class CheckPhoneOtpInputSection extends StatelessWidget {
           },
           onSubmit: (String verificationCode) {}, // end onSubmit
         ),
-        Gap(AppSizesManager.s12),
+        const ResponsiveGap.s12(),
         Padding(
           padding: const EdgeInsets.all(AppSizesManager.p12),
           child: Text(
@@ -51,15 +51,15 @@ class CheckPhoneOtpInputSection extends StatelessWidget {
                 decorationColor: TextColors.secondary.color),
           ),
         ),
-        Gap(AppSizesManager.s24),
+        const ResponsiveGap.s24(),
         PrimaryTextButton(
-          label: "Verify",
+          label: context.translation!.verify,
           onTap: () {},
           color: AppColors.accent1Shade1,
         ),
-        Gap(AppSizesManager.s12),
+        const ResponsiveGap.s12(),
         PrimaryTextButton(
-          label: "Change Phone Number",
+          label: context.translation!.change_phone_number,
           onTap: () {},
           labelColor: AppColors.accent1Shade1,
         ),

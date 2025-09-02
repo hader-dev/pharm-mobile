@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field.dart';
 import 'package:hader_pharm_mobile/features/common_features/edit_company/cubit/edit_company_cubit.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
@@ -46,7 +46,7 @@ class _CompanyFormSectionState extends State<CompanyFormSection> {
                     return null;
                   },
                 ),
-                Gap(AppSizesManager.s4),
+                const ResponsiveGap.s4(),
                 CustomTextField(
                   label: '${context.translation!.email}*',
                   initValue:
@@ -70,7 +70,7 @@ class _CompanyFormSectionState extends State<CompanyFormSection> {
                             ));
                   },
                 ),
-                Gap(AppSizesManager.s4),
+                ResponsiveGap.s4(),
                 CustomTextField(
                   label: context.translation!.full_address,
                   initValue: BlocProvider.of<EditCompanyCubit>(context)
@@ -86,7 +86,7 @@ class _CompanyFormSectionState extends State<CompanyFormSection> {
                             ));
                   },
                 ),
-                Gap(AppSizesManager.s4),
+                ResponsiveGap.s4(),
                 CustomTextField(
                   label: context.translation!.phone_mobile,
                   state: FieldState.normal,
@@ -105,7 +105,7 @@ class _CompanyFormSectionState extends State<CompanyFormSection> {
                     return null;
                   },
                 ),
-                Gap(AppSizesManager.s4),
+                ResponsiveGap.s4(),
                 CustomTextField(
                   label: context.translation!.phone_2,
                   state: FieldState.normal,
@@ -125,7 +125,7 @@ class _CompanyFormSectionState extends State<CompanyFormSection> {
                     return null;
                   },
                 ),
-                Gap(AppSizesManager.s4),
+                ResponsiveGap.s4(),
                 CustomTextField(
                   label: context.translation!.fax,
                   state: FieldState.normal,
@@ -144,7 +144,7 @@ class _CompanyFormSectionState extends State<CompanyFormSection> {
                     return null;
                   },
                 ),
-                Gap(AppSizesManager.s4),
+                ResponsiveGap.s4(),
                 CustomTextField(
                   label: context.translation!.website,
                   state: FieldState.normal,
@@ -163,7 +163,7 @@ class _CompanyFormSectionState extends State<CompanyFormSection> {
                     return null;
                   },
                 ),
-                Gap(AppSizesManager.s4),
+                ResponsiveGap.s4(),
                 CustomTextField(
                   label: context.translation!.description,
                   state: FieldState.normal,
@@ -183,7 +183,7 @@ class _CompanyFormSectionState extends State<CompanyFormSection> {
                     return null;
                   },
                 ),
-                Gap(AppSizesManager.s24),
+                const ResponsiveGap.s24(),
                 PrimaryTextButton(
                   label: context.translation!.update_company,
                   isLoading: context.watch<EditCompanyCubit>().state

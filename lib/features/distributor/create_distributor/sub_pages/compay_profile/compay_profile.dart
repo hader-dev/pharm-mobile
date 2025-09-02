@@ -2,10 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_icon_button.dart'
     show PrimaryIconButton;
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field.dart';
 import 'package:hader_pharm_mobile/features/common_features/create_company_profile/cubit/create_company_profile_cubit.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
@@ -91,7 +91,7 @@ class _DistributorProfilePageState extends State<DistributorProfilePage>
                         ],
                       ),
                     ),
-                    Gap(AppSizesManager.s16),
+                    const ResponsiveGap.s16(),
                     CustomTextField(
                       label: context.translation!.description,
                       state: FieldState.normal,

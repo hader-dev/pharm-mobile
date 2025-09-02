@@ -2,9 +2,9 @@ import 'dart:io' show File;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_icon_button.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field.dart';
 import 'package:hader_pharm_mobile/features/common_features/create_company_profile/cubit/create_company_profile_cubit.dart'
     show CreateCompanyProfileState, CreateCompanyProfileCubit;
@@ -86,7 +86,7 @@ class _PharmacyProfilePageState extends State<PharmacyProfilePage>
                                     //     children: [
                                     //       const Icon(Iconsax.gallery_add,
                                     //           color: AppColors.accent1Shade1, size: AppSizesManager.iconSize25),
-                                    //       Gap(AppSizesManager.s4),
+                                    //       ResponsiveGap.s4(),
                                     //       Transform.scale(
                                     //         scale: 0.8,
                                     //         child: PrimaryTextButton(
@@ -165,7 +165,7 @@ class _PharmacyProfilePageState extends State<PharmacyProfilePage>
                         ),
                       ),
                     ),
-                    Gap(AppSizesManager.s16),
+                    const ResponsiveGap.s16(),
                     CustomTextField(
                       label: context.translation!.description,
                       state: FieldState.normal,

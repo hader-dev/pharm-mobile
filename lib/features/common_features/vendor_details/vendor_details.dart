@@ -6,13 +6,13 @@ import 'package:flutter_bloc/flutter_bloc.dart'
         MultiBlocProvider,
         ReadContext,
         BlocListener;
-import 'package:gap/gap.dart' show Gap;
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/announcements/cubit/all_announcements_cubit.dart';
 import 'package:hader_pharm_mobile/repositories/remote/announcement/announcement_repository_impl.dart';
 import 'package:hader_pharm_mobile/repositories/remote/company/company_repository_impl.dart';
@@ -108,7 +108,7 @@ class VendorDetails extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Gap(AppSizesManager.s8),
+                    const ResponsiveGap.s8(),
                     Text(context.read<VendorDetailsCubit>().vendorData.name,
                         style: context
                             .responsiveTextTheme.current.headLine4SemiBold

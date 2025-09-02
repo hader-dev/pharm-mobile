@@ -2,7 +2,7 @@ import 'dart:io' show File;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -20,19 +20,19 @@ class RegisterHeaderSection extends StatelessWidget {
       width: double.maxFinite,
       child: Column(
         children: [
-          Gap(AppSizesManager.s24),
+          const ResponsiveGap.s24(),
           Text(
             context.translation!.create_account,
             style: context.responsiveTextTheme.current.headLine1.copyWith(
                 fontSize: AppSizesManager.p24, color: AppColors.accent1Shade1),
           ),
-          Gap(AppSizesManager.s8),
+          const ResponsiveGap.s8(),
           Text(
             context.translation!.welcome_back,
             style: context.responsiveTextTheme.current.body3Regular
                 .copyWith(color: TextColors.ternary.color),
           ),
-          Gap(AppSizesManager.s24),
+          const ResponsiveGap.s24(),
           InkWell(
             onTap: () {
               BlocProvider.of<RegisterCubit>(context).pickUserImage();

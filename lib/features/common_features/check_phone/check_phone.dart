@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../config/theme/colors_manager.dart';
@@ -20,21 +20,21 @@ class CheckPhoneScreen extends StatelessWidget {
           child: Column(
             children: [
               CheckEmailHeaderSection(),
-              Gap(AppSizesManager.s32),
+              const ResponsiveGap.s32(),
               CheckPhoneOtpInputSection(),
-              Gap(AppSizesManager.s32),
+              const ResponsiveGap.s32(),
               Spacer(),
               Text.rich(
                   textAlign: TextAlign.center,
                   style: TextStyle(height: 1.5),
                   TextSpan(children: [
                     TextSpan(
-                      text: 'By Signing Up, you agree to our',
+                      text: context.translation!.by_signing_up_you_agree_to_our,
                       style: context.responsiveTextTheme.current.body3Regular
                           .copyWith(color: TextColors.ternary.color),
                     ),
                     TextSpan(
-                      text: ' Terms of Services ',
+                      text: ' ${context.translation!.terms_of_services} ',
                       style: context.responsiveTextTheme.current.body3Regular
                           .copyWith(
                               fontWeight: context.responsiveTextTheme.current
@@ -42,12 +42,12 @@ class CheckPhoneScreen extends StatelessWidget {
                               color: AppColors.accent1Shade1),
                     ),
                     TextSpan(
-                      text: ' and',
+                      text: context.translation!.and,
                       style: context.responsiveTextTheme.current.body3Regular
                           .copyWith(color: TextColors.ternary.color),
                     ),
                     TextSpan(
-                      text: ' Privacy Policy',
+                      text: context.translation!.privacy_policy,
                       style: context.responsiveTextTheme.current.body3Regular
                           .copyWith(
                               fontWeight: context.responsiveTextTheme.current
@@ -55,7 +55,7 @@ class CheckPhoneScreen extends StatelessWidget {
                               color: AppColors.accent1Shade1),
                     ),
                   ])),
-              Gap(AppSizesManager.s12),
+              const ResponsiveGap.s12(),
             ],
           ),
         ),

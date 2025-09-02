@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart' show Gap;
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field.dart';
 import 'package:hader_pharm_mobile/features/common_features/create_company_profile/cubit/create_company_profile_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/wilaya/town.dart';
@@ -48,16 +48,19 @@ class _DistributorGeneralInformationPageState
                               left: AppSizesManager.p4,
                               top: AppSizesManager.p8),
                           child: Text("${translation.what_you_distribute}*",
-                              style: context.responsiveTextTheme.current.body3Medium
+                              style: context
+                                  .responsiveTextTheme.current.body3Medium
                                   .copyWith(color: TextColors.ternary.color)),
                         ),
                         DropdownButtonFormField(
-                            initialValue: BlocProvider.of<CreateCompanyProfileCubit>(
-                                    context)
-                                .companyData
-                                .distributorCategoryId,
+                            initialValue:
+                                BlocProvider.of<CreateCompanyProfileCubit>(
+                                        context)
+                                    .companyData
+                                    .distributorCategoryId,
                             hint: Text(translation.select_category,
-                                style: context.responsiveTextTheme.current.body3Regular
+                                style: context
+                                    .responsiveTextTheme.current.body3Regular
                                     .copyWith(color: TextColors.ternary.color)),
                             validator: (value) {
                               if (value == null) {
@@ -99,7 +102,7 @@ class _DistributorGeneralInformationPageState
                                           .copyWith(
                                               distributorCategoryId: newValue));
                             }),
-                        const Gap(AppSizesManager.s6),
+                        const ResponsiveGap.s6(),
                         CustomTextField(
                           label: "${translation.company_name}*",
                           value: BlocProvider.of<CreateCompanyProfileCubit>(
@@ -214,7 +217,8 @@ class _DistributorGeneralInformationPageState
                         WilayaDropdown(),
                         TownDropdown(
                             isRequired: true,
-                            validator: (v) => requiredValidator(v?.label, translation),
+                            validator: (v) =>
+                                requiredValidator(v?.label, translation),
                             onChanged: (newValue) {
                               if (newValue == null) return;
                               BlocProvider.of<CreateCompanyProfileCubit>(

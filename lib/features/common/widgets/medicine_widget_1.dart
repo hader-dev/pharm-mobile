@@ -1,8 +1,8 @@
 import 'package:cached_network_image_plus/flutter_cached_network_image_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/models/medicine_catalog.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
@@ -74,7 +74,7 @@ class MedicineWidget1 extends StatelessWidget {
                       style: context
                           .responsiveTextTheme.current.headLine4SemiBold
                           .copyWith(color: AppColors.bgWhite)),
-                Gap(AppSizesManager.s12),
+                const ResponsiveGap.s12(),
                 Row(children: [
                   Container(
                       height: 35,
@@ -98,14 +98,14 @@ class MedicineWidget1 extends StatelessWidget {
                                         ),
                                   ),
                           ))),
-                  Gap(AppSizesManager.s4),
+                  ResponsiveGap.s4(),
                   Spacer(),
                   Icon(
                     Iconsax.wallet_money,
                     color: AppColors.bgWhite,
                     size: AppSizesManager.iconSize18,
                   ),
-                  Gap(AppSizesManager.s4),
+                  ResponsiveGap.s4(),
                   Text.rich(
                     TextSpan(
                       children: [

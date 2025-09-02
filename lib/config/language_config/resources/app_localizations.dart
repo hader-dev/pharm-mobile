@@ -178,6 +178,30 @@ abstract class AppLocalizations {
   /// **'Full Name'**
   String get full_name;
 
+  /// No description provided for @hader_pharm.
+  ///
+  /// In en, this message translates to:
+  /// **'Hader Pharm'**
+  String get hader_pharm;
+
+  /// No description provided for @we_wish_you_good_health_welcome.
+  ///
+  /// In en, this message translates to:
+  /// **'We wish you a good experience , your health is our priority.'**
+  String get we_wish_you_good_health_welcome;
+
+  /// No description provided for @welcome_to_hader.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome to Hader Pharmacy'**
+  String get welcome_to_hader;
+
+  /// No description provided for @change_phone_number.
+  ///
+  /// In en, this message translates to:
+  /// **'Change phone number'**
+  String get change_phone_number;
+
   /// No description provided for @phone_mobile.
   ///
   /// In en, this message translates to:

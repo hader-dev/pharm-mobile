@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../config/theme/colors_manager.dart';
@@ -37,7 +37,7 @@ class InfoWidget extends StatelessWidget {
               color: TextColors.ternary.color,
             ),
           ),
-          const Gap(AppSizesManager.s4),
+          const ResponsiveGap.s4(),
           value
         ],
       ),

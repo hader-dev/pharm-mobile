@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
@@ -22,7 +22,7 @@ class OrderInvoiceSection extends StatelessWidget {
             context.translation!.order_invoice,
             style: context.responsiveTextTheme.current.headLine4SemiBold,
           ),
-          Gap(AppSizesManager.s4),
+          const ResponsiveGap.s4(),
           SummaryRow(
             label: context.translation!.invoice_type,
             value: invoiceType.name,

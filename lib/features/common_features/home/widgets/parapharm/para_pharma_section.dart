@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/widgets/parapharm/para_pharma_section_items.dart';
 import 'package:hader_pharm_mobile/features/common_features/profile/widgets/section_title.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
@@ -23,7 +23,7 @@ class ParapharmaSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Gap(AppSizesManager.s4),
+          const ResponsiveGap.s4(),
           SectionTitle(title: translation.para_pharma),
           ParaPharmaSectionItems(
             minSectionHeight: minSectionHeight,

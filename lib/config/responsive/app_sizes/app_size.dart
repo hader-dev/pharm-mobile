@@ -44,8 +44,9 @@ class AppSizes {
 
   final double buttonHeight;
   final double commonWidgetsRadius;
+  late final Map<String, double> _map;
 
-  const AppSizes({
+  AppSizes({
     required this.p4,
     required this.p6,
     required this.p8,
@@ -85,7 +86,52 @@ class AppSizes {
     required this.iconSize48,
     required this.buttonHeight,
     required this.commonWidgetsRadius,
-  });
+  }) {
+    _map = {
+      "p4": p4,
+      "p6": p6,
+      "p8": p8,
+      "p10": p10,
+      "p12": p12,
+      "p16": p16,
+      "p24": p24,
+      "p32": p32,
+      "p64": p64,
+      "s2": s2,
+      "s4": s4,
+      "s6": s6,
+      "s8": s8,
+      "s12": s12,
+      "s16": s16,
+      "s24": s24,
+      "s32": s32,
+      "s48": s48,
+      "s52": s52,
+      "r4": r4,
+      "r6": r6,
+      "r8": r8,
+      "r10": r10,
+      "r12": r12,
+      "r20": r20,
+      "r30": r30,
+      "r40": r40,
+      "r60": r60,
+      "r80": r80,
+      "iconSize10": iconSize10,
+      "iconSize14": iconSize14,
+      "iconSize16": iconSize16,
+      "iconSize18": iconSize18,
+      "iconSize20": iconSize20,
+      "iconSize25": iconSize25,
+      "iconSize30": iconSize30,
+      "iconSize48": iconSize48,
+      "buttonHeight": buttonHeight,
+      "commonWidgetsRadius": commonWidgetsRadius,
+    };
+  }
+
+  double operator [](String key) =>
+      _map[key] ?? (throw ArgumentError('Invalid AppSizes key: $key'));
 
   static AppSizes lerp(AppSizes a, AppSizes b, double t) {
     return AppSizes(

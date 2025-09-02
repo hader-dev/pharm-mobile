@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
-import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/edit_company/cubit/edit_company_cubit.dart';
+import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class CompanyInfoDisplay extends StatelessWidget {
   const CompanyInfoDisplay({super.key});
@@ -15,9 +15,10 @@ class CompanyInfoDisplay extends StatelessWidget {
       builder: (context, state) {
         final cubit = BlocProvider.of<EditCompanyCubit>(context);
         final company = cubit.companyData;
-        
+
         if (company == null) {
-          return Center(child: Text(context.translation!.no_company_data_available));
+          return Center(
+              child: Text(context.translation!.no_company_data_available));
         }
 
         return Column(
@@ -27,19 +28,35 @@ class CompanyInfoDisplay extends StatelessWidget {
               context,
               title: context.translation!.general_info_title,
               children: [
-                _buildInfoColumn(context, context.translation!.company_name, company.name),
-                _buildInfoColumn(context, context.translation!.email, company.email ?? context.translation!.feedback_not_provided),
-                _buildInfoColumn(context, context.translation!.full_address, company.address ?? context.translation!.feedback_not_provided),
-                _buildInfoColumn(context, context.translation!.phone_mobile, company.phone ?? context.translation!.feedback_not_provided),
+                _buildInfoColumn(
+                    context, context.translation!.company_name, company.name),
+                _buildInfoColumn(
+                    context,
+                    context.translation!.email,
+                    company.email ??
+                        context.translation!.feedback_not_provided),
+                _buildInfoColumn(
+                    context,
+                    context.translation!.full_address,
+                    company.address ??
+                        context.translation!.feedback_not_provided),
+                _buildInfoColumn(
+                    context,
+                    context.translation!.phone_mobile,
+                    company.phone ??
+                        context.translation!.feedback_not_provided),
                 if (company.phone2 != null && company.phone2!.isNotEmpty)
-                  _buildInfoColumn(context, context.translation!.phone_2, company.phone2!),
+                  _buildInfoColumn(
+                      context, context.translation!.phone_2, company.phone2!),
                 if (company.fax != null && company.fax!.isNotEmpty)
-                  _buildInfoColumn(context, context.translation!.fax, company.fax!),
+                  _buildInfoColumn(
+                      context, context.translation!.fax, company.fax!),
                 if (company.website != null && company.website!.isNotEmpty)
-                  _buildInfoColumn(context, context.translation!.website, company.website!),
+                  _buildInfoColumn(
+                      context, context.translation!.website, company.website!),
               ],
             ),
-            Gap(AppSizesManager.s16),
+            const ResponsiveGap.s16(),
             if (company.description != null && company.description!.isNotEmpty)
               _buildInfoCard(
                 context,
@@ -47,28 +64,36 @@ class CompanyInfoDisplay extends StatelessWidget {
                 children: [
                   Text(
                     company.description!,
-                    style: context.responsiveTextTheme.current.body1Regular.copyWith(
+                    style: context.responsiveTextTheme.current.body1Regular
+                        .copyWith(
                       color: TextColors.primary.color,
                     ),
                   ),
                 ],
               ),
-            Gap(AppSizesManager.s16),
+            const ResponsiveGap.s16(),
             if (_hasLegalInfo(company))
               _buildInfoCard(
                 context,
                 title: context.translation!.legal_info_title,
                 children: [
                   if (company.rcNumber != null && company.rcNumber!.isNotEmpty)
-                    _buildInfoColumn(context, context.translation!.rc_number, company.rcNumber!),
-                  if (company.nisNumber != null && company.nisNumber!.isNotEmpty)
-                    _buildInfoColumn(context, context.translation!.nis_number, company.nisNumber!),
+                    _buildInfoColumn(context, context.translation!.rc_number,
+                        company.rcNumber!),
+                  if (company.nisNumber != null &&
+                      company.nisNumber!.isNotEmpty)
+                    _buildInfoColumn(context, context.translation!.nis_number,
+                        company.nisNumber!),
                   if (company.aiNumber != null && company.aiNumber!.isNotEmpty)
-                    _buildInfoColumn(context, context.translation!.ai_number, company.aiNumber!),
+                    _buildInfoColumn(context, context.translation!.ai_number,
+                        company.aiNumber!),
                   if (company.fiscalId != null && company.fiscalId!.isNotEmpty)
-                    _buildInfoColumn(context, context.translation!.fiscal_id, company.fiscalId!),
-                  if (company.bankAccount != null && company.bankAccount!.isNotEmpty)
-                    _buildInfoColumn(context, context.translation!.bank_account, company.bankAccount!),
+                    _buildInfoColumn(context, context.translation!.fiscal_id,
+                        company.fiscalId!),
+                  if (company.bankAccount != null &&
+                      company.bankAccount!.isNotEmpty)
+                    _buildInfoColumn(context, context.translation!.bank_account,
+                        company.bankAccount!),
                 ],
               ),
           ],
@@ -79,19 +104,21 @@ class CompanyInfoDisplay extends StatelessWidget {
 
   bool _hasLegalInfo(company) {
     return (company.rcNumber != null && company.rcNumber!.isNotEmpty) ||
-           (company.nisNumber != null && company.nisNumber!.isNotEmpty) ||
-           (company.aiNumber != null && company.aiNumber!.isNotEmpty) ||
-           (company.fiscalId != null && company.fiscalId!.isNotEmpty) ||
-           (company.bankAccount != null && company.bankAccount!.isNotEmpty);
+        (company.nisNumber != null && company.nisNumber!.isNotEmpty) ||
+        (company.aiNumber != null && company.aiNumber!.isNotEmpty) ||
+        (company.fiscalId != null && company.fiscalId!.isNotEmpty) ||
+        (company.bankAccount != null && company.bankAccount!.isNotEmpty);
   }
 
-  Widget _buildInfoCard(BuildContext context, {required String title, required List<Widget> children}) {
+  Widget _buildInfoCard(BuildContext context,
+      {required String title, required List<Widget> children}) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(AppSizesManager.p16),
       decoration: BoxDecoration(
         color: AppColors.bgWhite,
-        borderRadius: BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+        borderRadius:
+            BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
         border: Border.all(color: AppColors.bgDarken2),
         boxShadow: [
           BoxShadow(
@@ -109,7 +136,7 @@ class CompanyInfoDisplay extends StatelessWidget {
             title,
             style: context.responsiveTextTheme.current.headLine4SemiBold,
           ),
-          Gap(AppSizesManager.s12),
+          const ResponsiveGap.s12(),
           ...children,
         ],
       ),
@@ -130,7 +157,7 @@ class CompanyInfoDisplay extends StatelessWidget {
               color: Colors.black,
             ),
           ),
-          Gap(AppSizesManager.s4),
+          const ResponsiveGap.s4(),
           Text(
             value,
             style: context.responsiveTextTheme.current.body1Regular.copyWith(

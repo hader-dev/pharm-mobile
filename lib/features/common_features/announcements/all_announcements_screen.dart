@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common_features/announcements/cubit/all_announcements_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/announcements/widgets/announcement_list_item.dart';
@@ -97,8 +97,7 @@ class _AllAnnouncementsScreenState extends State<AllAnnouncementsScreen> {
                 padding: const EdgeInsets.all(AppSizesManager.p16),
                 itemCount:
                     state.announcements.length + (state.hasReachedMax ? 0 : 1),
-                separatorBuilder: (context, index) =>
-                    const Gap(AppSizesManager.s12),
+                separatorBuilder: (context, index) => const ResponsiveGap.s12(),
                 itemBuilder: (context, index) {
                   if (index >= state.announcements.length) {
                     return const Center(

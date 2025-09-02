@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
+import 'package:hader_pharm_mobile/utils/assets_strings.dart';
+import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
-
-import '../../../config/theme/colors_manager.dart';
-import '../../../utils/assets_strings.dart' show DrawableAssetStrings;
-import '../../../utils/constants.dart';
 
 class WelcomingWidget extends StatelessWidget {
   const WelcomingWidget({super.key});
@@ -44,21 +43,21 @@ class WelcomingWidget extends StatelessWidget {
               ],
             ),
             Text(
-              'Welcome to Hader Pharm',
+              context.translation!.welcome_to_hader,
               style: context.responsiveTextTheme.current.headLine3SemiBold,
             ),
-            Gap(AppSizesManager.s16),
+            const ResponsiveGap.s16(),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p8),
               child: Text(
-                'We wish you a good experience , your health is our priority.',
+                context.translation!.we_wish_you_good_health_welcome,
                 style: context.responsiveTextTheme.current.body3Regular,
                 textAlign: TextAlign.center,
               ),
             ),
-            Gap(AppSizesManager.s16),
+            const ResponsiveGap.s16(),
             PrimaryTextButton(
-                label: "Close",
+                label: context.translation!.close,
                 labelColor: AppColors.accent1Shade1,
                 onTap: () {
                   context.pop();

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import 'actions/setup_company_or_go_home.dart';
@@ -35,9 +34,9 @@ class SplashScreen extends StatelessWidget {
                           height: 145,
                           width: 145,
                         ),
-                        Gap(AppSizesManager.s32),
+                        const ResponsiveGap.s32(),
                         Text(
-                          'HADER PHARM',
+                          context.translation!.hader_pharm,
                           style: context.responsiveTextTheme.current.headLine1
                               .copyWith(color: TextColors.primary.color),
                         ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/help_support/actions/launch_developer_email.dart';
 import 'package:hader_pharm_mobile/features/common_features/help_support/actions/launch_developer_phone.dart';
 import 'package:hader_pharm_mobile/features/common_features/profile/widgets/settings_tile.dart';
@@ -41,7 +41,7 @@ class HelpAndSupportScreen extends StatelessWidget {
         ),
         body: Column(
           children: [
-            Gap(AppSizesManager.s24),
+            const ResponsiveGap.s24(),
             SettingsTile(
               icon: LucideIcons.mail,
               title: context.translation!.email,

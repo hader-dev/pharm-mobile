@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/edit_profile/cubit/edit_profile_cubit.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart' show Iconsax;
@@ -58,17 +58,17 @@ class EditProfileScreen extends StatelessWidget {
                   shrinkWrap: true,
                   physics: const BouncingScrollPhysics(),
                   children: [
-                    Gap(AppSizesManager.s16),
+                    const ResponsiveGap.s16(),
                     Text(context.translation!.update_profile_description,
                         style: context.responsiveTextTheme.current.body1Medium
                             .copyWith(
                           color: TextColors.ternary.color,
                         )),
-                    Gap(AppSizesManager.s24),
+                    const ResponsiveGap.s24(),
                     ProfileImageSection(),
-                    Gap(AppSizesManager.s24),
+                    const ResponsiveGap.s24(),
                     FormSection(),
-                    Gap(AppSizesManager.s16),
+                    const ResponsiveGap.s16(),
                   ],
                 );
               },

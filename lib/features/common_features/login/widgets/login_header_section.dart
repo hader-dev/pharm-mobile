@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:gap/gap.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../../config/theme/colors_manager.dart';
@@ -45,7 +45,7 @@ class LoginHeaderSection extends StatelessWidget {
             style: context.responsiveTextTheme.current.headLine1.copyWith(
                 fontSize: AppSizesManager.p24, color: AppColors.accent1Shade1),
           ),
-          Gap(AppSizesManager.s8),
+          const ResponsiveGap.s8(),
           Text(
             context.translation!.welcome_back,
             style: context.responsiveTextTheme.current.body3Regular

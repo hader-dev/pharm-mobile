@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:gap/gap.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
-import '../../../../config/theme/colors_manager.dart';
-import '../../../../utils/assets_strings.dart';
-
-import '../../../../utils/constants.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../../../../config/theme/colors_manager.dart';
+import '../../../../utils/assets_strings.dart';
 import '../../../../utils/enums.dart';
 import '../../../common/text_fields/custom_text_field.dart';
 
@@ -24,7 +22,7 @@ class PhoneRegisterFormSection extends StatelessWidget {
           state: FieldState.normal,
           validationFunc: () {},
         ),
-        Gap(AppSizesManager.s4),
+        const ResponsiveGap.s4(),
         CustomTextField(
           label: context.translation!.phone_mobile,
           value: '',
@@ -34,7 +32,7 @@ class PhoneRegisterFormSection extends StatelessWidget {
           state: FieldState.normal,
           validationFunc: () {},
         ),
-        Gap(AppSizesManager.s4),
+        ResponsiveGap.s4(),
         CustomTextField(
           label: context.translation!.password,
           value: '',
@@ -44,7 +42,7 @@ class PhoneRegisterFormSection extends StatelessWidget {
           state: FieldState.normal,
           validationFunc: () {},
         ),
-        Gap(AppSizesManager.s4),
+        ResponsiveGap.s4(),
         CustomTextField(
           label: context.translation!.confirm_password,
           value: '',

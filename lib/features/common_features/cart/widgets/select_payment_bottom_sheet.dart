@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/invoice_input.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/payment_input.dart';
 import 'package:hader_pharm_mobile/features/common_features/cart/cubit/cart_cubit.dart';
@@ -51,10 +51,10 @@ class SelectPaymentMethodBottomSheet extends StatelessWidget {
                   children: [
                     BottomSheetHeader(
                         title: context.translation!.checkout_process),
-                    Gap(AppSizesManager.s12),
+                    const ResponsiveGap.s12(),
                     Divider(
                         color: AppColors.bgDisabled, thickness: 1, height: 1),
-                    Gap(AppSizesManager.s12),
+                    const ResponsiveGap.s12(),
                     InfoWidget(
                         label: context.translation!.payment_methods,
                         bgColor: AppColors.bgWhite,
@@ -108,7 +108,7 @@ class SelectPaymentMethodBottomSheet extends StatelessWidget {
                               .responsiveTextTheme.current.bodySmall
                               .copyWith(color: Colors.grey),
                         )),
-                    Gap(AppSizesManager.s12),
+                    const ResponsiveGap.s12(),
                     InfoWidget(
                       label: context.translation!.total_amount,
                       bgColor: AppColors.accentGreenShade3,
@@ -128,10 +128,10 @@ class SelectPaymentMethodBottomSheet extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Gap(AppSizesManager.s12),
+                    const ResponsiveGap.s12(),
                     Divider(
                         color: AppColors.bgDisabled, thickness: 1, height: 1),
-                    Gap(AppSizesManager.s12),
+                    const ResponsiveGap.s12(),
                     Padding(
                       padding: EdgeInsets.symmetric(
                           vertical: AppSizesManager.p4,
@@ -150,7 +150,7 @@ class SelectPaymentMethodBottomSheet extends StatelessWidget {
                               borderColor: AppColors.accent1Shade1,
                             ),
                           ),
-                          Gap(AppSizesManager.s8),
+                          const ResponsiveGap.s8(),
                           Expanded(
                             flex: 2,
                             child: PrimaryTextButton(

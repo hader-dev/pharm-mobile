@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/accordions/ink_accordion_item.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/bottom_sheet_header.dart';
 import 'package:hader_pharm_mobile/features/common_features/filters/actions/get_applied_para_filters_as_raw_string.dart';
 import 'package:hader_pharm_mobile/features/common_features/filters/actions/navigate_to_para_filters_apply_view.dart';
@@ -28,9 +28,9 @@ class FiltersParaMedicalBrowse extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           BottomSheetHeader(title: context.translation!.search_filters),
-          Gap(AppSizesManager.s12),
+          const ResponsiveGap.s12(),
           Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
-          Gap(AppSizesManager.s12),
+          const ResponsiveGap.s12(),
           Column(
             children: [
               InkAccordionItem(
@@ -56,7 +56,7 @@ class FiltersParaMedicalBrowse extends StatelessWidget {
               ),
             ],
           ),
-          Gap(AppSizesManager.s12),
+          const ResponsiveGap.s12(),
           BlocBuilder<ParaMedicalFiltersCubit, ParaMedicalFiltersState>(
             builder: (context, state) {
               final cubit = context.read<ParaMedicalFiltersCubit>();
@@ -72,7 +72,7 @@ class FiltersParaMedicalBrowse extends StatelessWidget {
             },
           ),
           Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
-          Gap(AppSizesManager.s12),
+          const ResponsiveGap.s12(),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p4),
             child: Row(
@@ -93,7 +93,7 @@ class FiltersParaMedicalBrowse extends StatelessWidget {
                     borderColor: AppColors.accent1Shade1,
                   ),
                 ),
-                Gap(AppSizesManager.s8),
+                const ResponsiveGap.s8(),
                 Expanded(
                   flex: 2,
                   child: PrimaryTextButton(

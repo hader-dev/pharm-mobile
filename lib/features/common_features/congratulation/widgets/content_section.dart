@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../../config/theme/colors_manager.dart';
@@ -43,7 +43,7 @@ class ContentSection extends StatelessWidget {
           },
           color: AppColors.accent1Shade1,
         ),
-        Gap(AppSizesManager.s12),
+        const ResponsiveGap.s12(),
         PrimaryTextButton(
           label: context.translation!.already_member_btn,
           onTap: () {

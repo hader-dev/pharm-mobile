@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders_details/actions/navigate_back.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders_details/cubit/orders_details_cubit.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
@@ -37,7 +37,7 @@ class OrderDetailsAppbar extends StatelessWidget
         children: [
           const Icon(Iconsax.box_2,
               size: AppSizesManager.iconSize25, color: AppColors.bgWhite),
-          Gap(AppSizesManager.s12),
+          const ResponsiveGap.s12(),
           Expanded(
             child: Text(
               context.translation!.order,

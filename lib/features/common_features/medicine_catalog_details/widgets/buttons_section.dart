@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/cart/cubit/cart_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/cubit/medicine_details_cubit.dart';
 import 'package:hader_pharm_mobile/models/create_cart_item.dart';
@@ -60,7 +60,7 @@ class ButtonsSection extends StatelessWidget {
                       },
                     ),
                   ),
-                  Gap(AppSizesManager.s8),
+                  const ResponsiveGap.s8(),
                   Expanded(
                     child: PrimaryTextButton(
                       textOverflow: TextOverflow.ellipsis,

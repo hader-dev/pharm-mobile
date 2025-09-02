@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
@@ -43,7 +43,7 @@ class CategoryCircularWidget extends StatelessWidget {
               ),
             ),
           ),
-          const Gap(AppSizesManager.s6),
+          const ResponsiveGap.s6(),
           Text(
             categoryName,
             style: context.responsiveTextTheme.current.body3Medium,

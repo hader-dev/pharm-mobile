@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/create_company_profile/sub_pages/review_and_sumbit/widgets/info_row.dart';
 import 'package:hader_pharm_mobile/models/order.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
@@ -98,19 +98,19 @@ class OrderCard extends StatelessWidget {
                 ),
               ],
             ),
-            const Gap(AppSizesManager.s8),
+            const ResponsiveGap.s8(),
             InfoRow(
               label: context.translation!.vendor,
               dataValue: orderData.sellerCompanyName ?? "N/A",
               contentDirection: Axis.vertical,
             ),
-            const Gap(AppSizesManager.s12),
+            const ResponsiveGap.s12(),
             InfoRow(
               label: context.translation!.deliver_to,
               dataValue: orderData.deliveryAddress,
               contentDirection: Axis.vertical,
             ),
-            const Gap(AppSizesManager.s12),
+            const ResponsiveGap.s12(),
             Padding(
               padding: const EdgeInsets.only(right: AppSizesManager.p8),
               child: Row(

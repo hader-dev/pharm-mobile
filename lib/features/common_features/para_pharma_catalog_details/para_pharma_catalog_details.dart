@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/helpers/para_pharma_catalog_details_tab_data.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
@@ -69,7 +69,7 @@ class _ParaPharmaCatalogDetailsScreenState
                               thickness: 3.5,
                               height: 1),
                           ProductDetailsTabBarSection(),
-                          Gap(AppSizesManager.s24),
+                          const ResponsiveGap.s24(),
 
                           ParaPharmaOverViewPage(),
 

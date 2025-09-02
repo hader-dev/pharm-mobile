@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/features/common/accordions/ink_accordion.dart';
 import 'package:hader_pharm_mobile/features/common/image/cached_network_image_with_asset_fallback.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders_details/sub_pages/order_items/widgets/order_item_content.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders_details/widgets/order_item_note.dart';
 import 'package:hader_pharm_mobile/models/order_details.dart';
@@ -92,7 +92,7 @@ class OrderItemWidget extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const Gap(AppSizesManager.s8),
+                  const ResponsiveGap.s8(),
                 ],
               ),
               children: [

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -23,10 +22,10 @@ class PasswordResetSuccessSentScreen extends StatelessWidget {
             color: AppColors.accent1Shade1,
             opticalSize: 30,
           ),
-          const Gap(AppSizesManager.s24),
+          const ResponsiveGap.s24(),
           Text(context.translation!.password_reset_success,
               style: context.responsiveTextTheme.current.headLine2),
-          const Gap(AppSizesManager.s24),
+          const ResponsiveGap.s24(),
           PrimaryTextButton(
               label: context.translation!.back_to_login,
               onTap: () {

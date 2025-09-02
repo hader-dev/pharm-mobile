@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/language_config/cubit/lang_cubit.dart';
 import 'package:hader_pharm_mobile/config/language_config/cubit/lang_state.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
-
-
 
 class LangTile extends StatelessWidget {
   final String langValue;
@@ -45,7 +43,7 @@ class LangTile extends StatelessWidget {
                   width: AppSizesManager.iconSize20 * 2.3,
                 ),
               ),
-              Gap(AppSizesManager.s12),
+              const ResponsiveGap.s12(),
               Text(
                 langName,
                 style: context.responsiveTextTheme.current.body1Medium

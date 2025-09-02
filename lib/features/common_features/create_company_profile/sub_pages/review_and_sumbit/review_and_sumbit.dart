@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/create_company_profile/cubit/create_company_profile_cubit.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
@@ -61,7 +61,7 @@ class ReviewSubmitPage extends StatelessWidget {
                 //   ),
                 //   child: const Icon(Icons.local_pharmacy, color: Colors.white, size: 40),
                 // ),
-                const Gap(AppSizesManager.s24),
+                const ResponsiveGap.s24(),
 
                 // Company Info
                 Text(
@@ -70,7 +70,7 @@ class ReviewSubmitPage extends StatelessWidget {
                         .companyName,
                     style: context.responsiveTextTheme.current.headLine2),
 
-                const Gap(AppSizesManager.s4),
+                const ResponsiveGap.s4(),
                 Text(
                     CompanyType.values
                         .where((e) =>
@@ -82,7 +82,7 @@ class ReviewSubmitPage extends StatelessWidget {
                         .name,
                     style: context.responsiveTextTheme.current.body1Medium
                         .copyWith(color: TextColors.ternary.color)),
-                const Gap(AppSizesManager.s12),
+                const ResponsiveGap.s12(),
 
                 Text(
                   "${BlocProvider.of<CreateCompanyProfileCubit>(context).companyData.description}.",
@@ -90,7 +90,7 @@ class ReviewSubmitPage extends StatelessWidget {
                   style: context.responsiveTextTheme.current.body2Regular
                       .copyWith(color: TextColors.ternary.color),
                 ),
-                const Gap(AppSizesManager.s24),
+                const ResponsiveGap.s24(),
 
                 // General information
                 InfoRow(

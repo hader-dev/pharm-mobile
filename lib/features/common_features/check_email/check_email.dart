@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/routes/go_router_extension.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/check_email/cubit/check_email_cubit.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
@@ -53,9 +53,9 @@ class CheckEmailScreen extends StatelessWidget {
                   return Column(
                     children: [
                       CheckEmailHeaderSection(),
-                      Gap(AppSizesManager.s32),
+                      const ResponsiveGap.s32(),
                       CheckEmailOtpInputSection(),
-                      Gap(AppSizesManager.s32),
+                      const ResponsiveGap.s32(),
                       Spacer(),
                       Text.rich(
                           textAlign: TextAlign.center,
@@ -92,7 +92,7 @@ class CheckEmailScreen extends StatelessWidget {
                                       color: AppColors.accent1Shade1),
                             ),
                           ])),
-                      Gap(AppSizesManager.s12),
+                      const ResponsiveGap.s12(),
                     ],
                   );
                 },

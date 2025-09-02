@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
-import 'package:hader_pharm_mobile/features/common/chips/custom_chip.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/common/chips/custom_chip.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 
 class SelectedFiltersDisplay extends StatelessWidget {
@@ -23,38 +23,40 @@ class SelectedFiltersDisplay extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Gap(AppSizesManager.s8),
+        const ResponsiveGap.s8(),
         Container(
-        width: double.infinity,
-        padding: const EdgeInsets.all(AppSizesManager.p8),
-        decoration: BoxDecoration(
-          color: AppColors.bgDarken.withValues(alpha: 0.3),
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: AppColors.accent1Shade1.withValues(alpha: 0.2)),
-        ),
-        child: SizedBox(
-          height: 40,
-          child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            itemCount: selectedFilters.length,
-            separatorBuilder: (context, index) => const SizedBox(width: AppSizesManager.s4),
-            itemBuilder: (context, index) {
-              final filter = selectedFilters[index];
-              return Transform.scale(
-                scale: 0.85,
-                child: CustomChip(
-                  label: filter,
-                  color: AppColors.accent1Shade1.withValues(alpha: 0.1),
-                  labelColor: AppColors.accent1Shade1,
-                  icon: Icons.close,
-                  onTap: () => onRemoveFilter(filter),
-                ),
-              );
-            },
+          width: double.infinity,
+          padding: const EdgeInsets.all(AppSizesManager.p8),
+          decoration: BoxDecoration(
+            color: AppColors.bgDarken.withValues(alpha: 0.3),
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(
+                color: AppColors.accent1Shade1.withValues(alpha: 0.2)),
+          ),
+          child: SizedBox(
+            height: 40,
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              itemCount: selectedFilters.length,
+              separatorBuilder: (context, index) =>
+                  const SizedBox(width: AppSizesManager.s4),
+              itemBuilder: (context, index) {
+                final filter = selectedFilters[index];
+                return Transform.scale(
+                  scale: 0.85,
+                  child: CustomChip(
+                    label: filter,
+                    color: AppColors.accent1Shade1.withValues(alpha: 0.1),
+                    labelColor: AppColors.accent1Shade1,
+                    icon: Icons.close,
+                    onTap: () => onRemoveFilter(filter),
+                  ),
+                );
+              },
+            ),
           ),
         ),
-      ),
-        const Gap(AppSizesManager.s8),
+        const ResponsiveGap.s8(),
       ],
     );
   }

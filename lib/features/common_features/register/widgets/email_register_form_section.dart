@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:gap/gap.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -37,7 +37,7 @@ class EmailRegisterFormSection extends HookWidget {
               }
             },
           ),
-          Gap(AppSizesManager.s4),
+          const ResponsiveGap.s4(),
           CustomTextField(
             label: '${context.translation!.email} *',
             value: formData.value.email,
@@ -54,16 +54,18 @@ class EmailRegisterFormSection extends HookWidget {
               formData.value = formData.value.copyWith(email: newValue);
             },
           ),
-          Gap(AppSizesManager.s4),
+          ResponsiveGap.s4(),
           CustomTextField(
             label: '${context.translation!.password}*',
             value: formData.value.password,
             isObscure: BlocProvider.of<RegisterCubit>(context).isObscured,
             suffixIcon: InkWell(
-                onTap: () => BlocProvider.of<RegisterCubit>(context).showPassword(),
+                onTap: () =>
+                    BlocProvider.of<RegisterCubit>(context).showPassword(),
                 child: BlocProvider.of<RegisterCubit>(context).isObscured
                     ? const Icon(Iconsax.eye, color: AppColors.accent1Shade1)
-                    : const Icon(Iconsax.eye_slash, color: AppColors.accent1Shade1)),
+                    : const Icon(Iconsax.eye_slash,
+                        color: AppColors.accent1Shade1)),
             state: FieldState.normal,
             validationFunc: (value) {
               if (value == null || value.isEmpty) {
@@ -74,27 +76,32 @@ class EmailRegisterFormSection extends HookWidget {
               formData.value = formData.value.copyWith(password: newValue);
             },
           ),
-          Gap(AppSizesManager.s4),
+          ResponsiveGap.s4(),
           BlocBuilder<RegisterCubit, RegisterState>(
             builder: (context, state) {
               return CustomTextField(
                 label: '${context.translation!.confirm_password}*',
                 value: formData.value.confirmPassword,
                 onChanged: (newValue) {
-                  formData.value = formData.value.copyWith(confirmPassword: newValue);
+                  formData.value =
+                      formData.value.copyWith(confirmPassword: newValue);
                 },
                 isObscure: BlocProvider.of<RegisterCubit>(context).isObscured,
                 suffixIcon: InkWell(
-                    onTap: () => BlocProvider.of<RegisterCubit>(context).showPassword(),
+                    onTap: () =>
+                        BlocProvider.of<RegisterCubit>(context).showPassword(),
                     child: BlocProvider.of<RegisterCubit>(context).isObscured
-                        ? const Icon(Iconsax.eye, color: AppColors.accent1Shade1)
-                        : const Icon(Iconsax.eye_slash, color: AppColors.accent1Shade1)),
+                        ? const Icon(Iconsax.eye,
+                            color: AppColors.accent1Shade1)
+                        : const Icon(Iconsax.eye_slash,
+                            color: AppColors.accent1Shade1)),
                 state: FieldState.normal,
                 validationFunc: (value) {
                   if (value == null || value.isEmpty) {
                     return context.translation!.feedback_field_required;
                   }
-                  if (formData.value.password != formData.value.confirmPassword) {
+                  if (formData.value.password !=
+                      formData.value.confirmPassword) {
                     return context.translation!.feedback_passwords_do_not_match;
                   }
                   return null;
@@ -102,13 +109,14 @@ class EmailRegisterFormSection extends HookWidget {
               );
             },
           ),
-          Gap(AppSizesManager.s24),
+          const ResponsiveGap.s24(),
           PrimaryTextButton(
             label: context.translation!.sign_up,
             isLoading: context.watch<RegisterCubit>().state is RegisterLoading,
             onTap: () {
               if (formKey.currentState!.validate()) {
-                BlocProvider.of<RegisterCubit>(context).emailRegister(formData.value);
+                BlocProvider.of<RegisterCubit>(context)
+                    .emailRegister(formData.value);
               }
             },
             color: AppColors.accent1Shade1,

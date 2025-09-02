@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
@@ -23,7 +23,7 @@ class ClientNoteSection extends StatelessWidget {
             'Client notes',
             style: context.responsiveTextTheme.current.headLine4SemiBold,
           ),
-          Gap(AppSizesManager.s4),
+          const ResponsiveGap.s4(),
           ValueListenableBuilder(
             valueListenable: showMore,
             builder: (BuildContext ctx, value, Widget? child) {

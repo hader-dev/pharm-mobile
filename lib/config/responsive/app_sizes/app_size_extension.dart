@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/responsive/app_sizes/app_size.dart';
-import 'package:hader_pharm_mobile/config/responsive/app_sizes/config/app_size_medium.dart';
 import 'package:hader_pharm_mobile/config/responsive/device_size.dart';
 
 class ResponsiveAppSizeTheme extends ThemeExtension<ResponsiveAppSizeTheme> {
@@ -8,14 +7,16 @@ class ResponsiveAppSizeTheme extends ThemeExtension<ResponsiveAppSizeTheme> {
   final AppSizes medium;
   final AppSizes large;
   DeviceSizes deviceSize;
-  static const AppSizes current = appSizesMeduim;
+  late final AppSizes current;
 
   ResponsiveAppSizeTheme({
     required this.small,
     required this.medium,
     required this.large,
     this.deviceSize = DeviceSizes.mediumMobile,
-  });
+  }) {
+    current = currentDynamic;
+  }
 
   @override
   ResponsiveAppSizeTheme copyWith({

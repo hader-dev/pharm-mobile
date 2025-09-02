@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
@@ -8,6 +7,7 @@ import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common_features/edit_company/cubit/edit_company_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/edit_company/view_company/widgets/company_info_display.dart';
@@ -19,20 +19,19 @@ import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart' show Iconsax;
 
-
-
 enum CompanyScreenMode { view, edit }
 
 class CompanyManagementScreen extends StatefulWidget {
   final CompanyScreenMode? initialMode;
-  
+
   const CompanyManagementScreen({
     super.key,
     this.initialMode = CompanyScreenMode.view,
   });
 
   @override
-  State<CompanyManagementScreen> createState() => _CompanyManagementScreenState();
+  State<CompanyManagementScreen> createState() =>
+      _CompanyManagementScreenState();
 }
 
 class _CompanyManagementScreenState extends State<CompanyManagementScreen> {
@@ -46,8 +45,8 @@ class _CompanyManagementScreenState extends State<CompanyManagementScreen> {
 
   void toggleMode() {
     setState(() {
-      currentMode = currentMode == CompanyScreenMode.view 
-          ? CompanyScreenMode.edit 
+      currentMode = currentMode == CompanyScreenMode.view
+          ? CompanyScreenMode.edit
           : CompanyScreenMode.view;
     });
   }
@@ -55,12 +54,12 @@ class _CompanyManagementScreenState extends State<CompanyManagementScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          EditCompanyCubit(companyRepository: CompanyRepository(
-            client: getItInstance.get<INetworkService>(),
-            userManager: getItInstance.get<UserManager>(),
-          ))
-            ..initCompanyData(),
+      create: (context) => EditCompanyCubit(
+          companyRepository: CompanyRepository(
+        client: getItInstance.get<INetworkService>(),
+        userManager: getItInstance.get<UserManager>(),
+      ))
+        ..initCompanyData(),
       child: SafeArea(
         child: Scaffold(
           backgroundColor: AppColors.bgWhite,
@@ -78,7 +77,7 @@ class _CompanyManagementScreenState extends State<CompanyManagementScreen> {
               },
             ),
             title: Text(
-              currentMode == CompanyScreenMode.edit 
+              currentMode == CompanyScreenMode.edit
                   ? context.translation!.edit_company
                   : context.translation!.view_company,
               style: context.responsiveTextTheme.current.headLine3SemiBold
@@ -88,10 +87,11 @@ class _CompanyManagementScreenState extends State<CompanyManagementScreen> {
               BlocBuilder<EditCompanyCubit, EditCompanyState>(
                 builder: (context, state) {
                   // Only show toggle button when company data is loaded
-                  if (state is EditCompanySuccess || state is CompanyDataLoaded) {
+                  if (state is EditCompanySuccess ||
+                      state is CompanyDataLoaded) {
                     return IconButton(
                       icon: Icon(
-                        currentMode == CompanyScreenMode.view 
+                        currentMode == CompanyScreenMode.view
                             ? Iconsax.edit
                             : Iconsax.eye,
                         color: AppColors.bgWhite,
@@ -127,7 +127,8 @@ class _CompanyManagementScreenState extends State<CompanyManagementScreen> {
                         SizedBox(height: 16),
                         Text(
                           context.translation!.no_company_found,
-                          style: context.responsiveTextTheme.current.headLine3SemiBold,
+                          style: context
+                              .responsiveTextTheme.current.headLine3SemiBold,
                         ),
                         SizedBox(height: 8),
                         Text(
@@ -154,7 +155,8 @@ class _CompanyManagementScreenState extends State<CompanyManagementScreen> {
                             ElevatedButton(
                               onPressed: () {
                                 context.pop(); // Go back first
-                                context.pushNamed(RoutingManager.createCompanyProfile);
+                                context.pushNamed(
+                                    RoutingManager.createCompanyProfile);
                               },
                               child: Text(context.translation!.create_company),
                             ),
@@ -179,11 +181,11 @@ class _CompanyManagementScreenState extends State<CompanyManagementScreen> {
                   shrinkWrap: true,
                   physics: const BouncingScrollPhysics(),
                   children: [
-                    Gap(AppSizesManager.s16),
+                    const ResponsiveGap.s16(),
                     _buildDescriptionText(context),
-                    Gap(AppSizesManager.s24),
+                    const ResponsiveGap.s24(),
                     _buildCompanyContent(),
-                    Gap(AppSizesManager.s16),
+                    const ResponsiveGap.s16(),
                   ],
                 );
               },
@@ -210,7 +212,7 @@ class _CompanyManagementScreenState extends State<CompanyManagementScreen> {
       return Column(
         children: [
           const CompanyLogoSection(),
-          Gap(AppSizesManager.s24),
+          const ResponsiveGap.s24(),
           const CompanyFormSection(),
         ],
       );
@@ -218,7 +220,7 @@ class _CompanyManagementScreenState extends State<CompanyManagementScreen> {
       return Column(
         children: [
           const CompanyLogoDisplay(),
-          Gap(AppSizesManager.s24),
+          const ResponsiveGap.s24(),
           const CompanyInfoDisplay(),
         ],
       );

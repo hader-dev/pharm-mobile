@@ -1,6 +1,6 @@
 import 'package:cached_network_image_plus/flutter_cached_network_image_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
@@ -44,7 +44,7 @@ class FeaturedEntity extends StatelessWidget {
                 ),
               ),
             ),
-            const Gap(AppSizesManager.s4),
+            const ResponsiveGap.s4(),
             Expanded(
               child: Text(
                 title,

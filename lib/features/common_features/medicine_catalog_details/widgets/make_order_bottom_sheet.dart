@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/app_layout/app_layout.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_icon_button.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/bottom_sheet_header.dart';
 import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/cubit/medicine_details_cubit.dart';
@@ -59,12 +59,13 @@ class MakeOrderBottomSheet extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   BottomSheetHeader(title: translation.make_order),
-                  Gap(AppSizesManager.s12),
+                  const ResponsiveGap.s12(),
                   LabeledInfoWidget(
                     label: translation.product,
                     value: context
                         .read<MedicineDetailsCubit>()
-                        .state.medicineCatalogData!
+                        .state
+                        .medicineCatalogData!
                         .medicine
                         .dci,
                   ),
@@ -73,7 +74,7 @@ class MakeOrderBottomSheet extends StatelessWidget {
                     value:
                         "${(num.parse(context.read<MedicineDetailsCubit>().state.medicineCatalogData!.unitPriceHt).toStringAsFixed(2))} ${translation.currency}",
                   ),
-                  Gap(AppSizesManager.s12),
+                  const ResponsiveGap.s12(),
                   Text(
                     translation.quantity,
                     style: context.responsiveTextTheme.current.body3Medium
@@ -91,7 +92,9 @@ class MakeOrderBottomSheet extends StatelessWidget {
                           isBordered: true,
                           bgColor: Colors.transparent,
                           onPressed: () {
-                            context.read<MedicineDetailsCubit>().decrementQuantity();
+                            context
+                                .read<MedicineDetailsCubit>()
+                                .decrementQuantity();
                           },
                           icon: Icon(
                             Iconsax.minus,
@@ -105,25 +108,39 @@ class MakeOrderBottomSheet extends StatelessWidget {
                             child: Form(
                               child: TextFormField(
                                 cursorColor: AppColors.accentGreenShade1,
-                                controller: context.read<MedicineDetailsCubit>().quantityController,
+                                controller: context
+                                    .read<MedicineDetailsCubit>()
+                                    .quantityController,
                                 textAlign: TextAlign.center,
                                 keyboardType: TextInputType.number,
-                                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                                validator: (value) => value == null || value.isEmpty ? '' : null,
-                                style: context.responsiveTextTheme.current.body3Medium,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],
+                                validator: (value) =>
+                                    value == null || value.isEmpty ? '' : null,
+                                style: context
+                                    .responsiveTextTheme.current.body3Medium,
                                 decoration: InputDecoration(
-                                  contentPadding: EdgeInsets.all(AppSizesManager.p12),
+                                  contentPadding:
+                                      EdgeInsets.all(AppSizesManager.p12),
                                   enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
-                                    borderSide: BorderSide(color: FieldState.normal.color.secondary),
+                                    borderRadius: BorderRadius.circular(
+                                        AppSizesManager.commonWidgetsRadius),
+                                    borderSide: BorderSide(
+                                        color:
+                                            FieldState.normal.color.secondary),
                                   ),
                                   disabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
-                                    borderSide: BorderSide(color: AppColors.bgDisabled),
+                                    borderRadius: BorderRadius.circular(
+                                        AppSizesManager.commonWidgetsRadius),
+                                    borderSide:
+                                        BorderSide(color: AppColors.bgDisabled),
                                   ),
                                   focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
-                                    borderSide: BorderSide(color: StrokeColors.focused.color),
+                                    borderRadius: BorderRadius.circular(
+                                        AppSizesManager.commonWidgetsRadius),
+                                    borderSide: BorderSide(
+                                        color: StrokeColors.focused.color),
                                   ),
                                 ),
                               ),
@@ -136,7 +153,9 @@ class MakeOrderBottomSheet extends StatelessWidget {
                           isBordered: true,
                           bgColor: Colors.transparent,
                           onPressed: () {
-                            context.read<MedicineDetailsCubit>().incrementQuantity();
+                            context
+                                .read<MedicineDetailsCubit>()
+                                .incrementQuantity();
                           },
                           icon: Icon(
                             Iconsax.add,
@@ -146,7 +165,7 @@ class MakeOrderBottomSheet extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Gap(AppSizesManager.s12),
+                  const ResponsiveGap.s12(),
                   InfoWidget(
                       label: context.translation!.shipping_address,
                       bgColor: AppColors.bgWhite,
@@ -167,9 +186,9 @@ class MakeOrderBottomSheet extends StatelessWidget {
                             .responsiveTextTheme.current.bodySmall
                             .copyWith(color: Colors.grey),
                       )),
-                  Gap(AppSizesManager.s12),
+                  const ResponsiveGap.s12(),
                   Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
-                  Gap(AppSizesManager.s12),
+                  const ResponsiveGap.s12(),
                   InfoWidget(
                     label: translation.total_price,
                     bgColor: AppColors.accentGreenShade3,
@@ -188,9 +207,9 @@ class MakeOrderBottomSheet extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Gap(AppSizesManager.s12),
+                  const ResponsiveGap.s12(),
                   Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
-                  Gap(AppSizesManager.s12),
+                  const ResponsiveGap.s12(),
                   Padding(
                     padding:
                         EdgeInsets.symmetric(horizontal: AppSizesManager.p4),
@@ -209,7 +228,7 @@ class MakeOrderBottomSheet extends StatelessWidget {
                             borderColor: AppColors.accent1Shade1,
                           ),
                         ),
-                        Gap(AppSizesManager.s8),
+                        const ResponsiveGap.s8(),
                         Expanded(
                           flex: 2,
                           child: PrimaryTextButton(
@@ -291,7 +310,7 @@ class InfoWidget extends StatelessWidget {
               color: TextColors.ternary.color,
             ),
           ),
-          const Gap(AppSizesManager.s4),
+          const ResponsiveGap.s4(),
           value
         ],
       ),
