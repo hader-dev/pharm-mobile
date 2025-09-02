@@ -57,42 +57,39 @@ class _ParaPharmaProductsPageState extends State<ParaPharmaProductsPage>
 
                   return RefreshIndicator(
                     onRefresh: () => cubit.getParaPharmas(),
-                    child: LayoutBuilder(
-                      builder: (context, constraints) =>
-                       GridView.builder(
-                        controller: cubit.scrollController,
-                        physics: const AlwaysScrollableScrollPhysics(),
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: calculateMarketplaceCrossAxisCount(
-                              context.deviceSize),
-                          crossAxisSpacing:
-                              calculateMarketplaceGridSpacing(context.deviceSize),
-                          mainAxisSpacing: calculateMarketplaceMainAxisSpacing(
-                              context.deviceSize),
-                          childAspectRatio: calculateMarketplaceAspectRatio(
-                              context.deviceSize, context.orientation),
-                        ),
-                        itemCount: products.length +
-                            (isLoadingMore || hasReachedEnd ? 1 : 0),
-                        itemBuilder: (context, index) {
-                          if (index < products.length) {
-                            final paraPharma = products[index];
-                            return ParaPharmaWidget2(
-                                paraPharmData: paraPharma,
-                                onFavoriteCallback: onLikeTapped);
-                          } else {
-                            if (isLoadingMore) {
-                              return const Padding(
-                                padding: EdgeInsets.all(16.0),
-                                child: Center(child: CircularProgressIndicator()),
-                              );
-                            } else if (hasReachedEnd) {
-                              return const EndOfLoadResultWidget();
-                            }
-                          }
-                          return const SizedBox.shrink();
-                        },
+                    child: GridView.builder(
+                      controller: cubit.scrollController,
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: calculateMarketplaceCrossAxisCount(
+                            context.deviceSize),
+                        crossAxisSpacing:
+                            calculateMarketplaceGridSpacing(context.deviceSize),
+                        mainAxisSpacing: calculateMarketplaceMainAxisSpacing(
+                            context.deviceSize),
+                        childAspectRatio: calculateMarketplaceAspectRatio(
+                            context.deviceSize, context.orientation),
                       ),
+                      itemCount: products.length +
+                          (isLoadingMore || hasReachedEnd ? 1 : 0),
+                      itemBuilder: (context, index) {
+                        if (index < products.length) {
+                          final paraPharma = products[index];
+                          return ParaPharmaWidget2(
+                              paraPharmData: paraPharma,
+                              onFavoriteCallback: onLikeTapped);
+                        } else {
+                          if (isLoadingMore) {
+                            return const Padding(
+                              padding: EdgeInsets.all(16.0),
+                              child: Center(child: CircularProgressIndicator()),
+                            );
+                          } else if (hasReachedEnd) {
+                            return const EndOfLoadResultWidget();
+                          }
+                        }
+                        return const SizedBox.shrink();
+                      },
                     ),
                   );
                 },

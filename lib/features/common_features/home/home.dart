@@ -65,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const ResponsiveGap.s12(),
+                      const ResponsiveGap.s24(),
                       if (context.read<HomeCubit>().announcements.isNotEmpty)
                         PromotionSection(
                             announcements:

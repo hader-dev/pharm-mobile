@@ -6,8 +6,8 @@ import 'package:hader_pharm_mobile/config/services/network/network_interface.dar
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/promotion_item_widget.dart';
 import 'package:hader_pharm_mobile/features/common_features/announcements/cubit/all_announcements_cubit.dart';
-import 'package:hader_pharm_mobile/features/common_features/announcements/widgets/announcement_list_item.dart';
 import 'package:hader_pharm_mobile/repositories/remote/announcement/announcement_repository_impl.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
@@ -92,28 +92,35 @@ class _AllAnnouncementsScreenState extends State<AllAnnouncementsScreen> {
               onRefresh: () async {
                 context.read<AllAnnouncementsCubit>().refreshAnnouncements();
               },
-              child: ListView.separated(
-                controller: _scrollController,
-                padding: const EdgeInsets.all(AppSizesManager.p16),
-                itemCount:
-                    state.announcements.length + (state.hasReachedMax ? 0 : 1),
-                separatorBuilder: (context, index) => const ResponsiveGap.s12(),
-                itemBuilder: (context, index) {
-                  if (index >= state.announcements.length) {
-                    return const Center(
-                      child: Padding(
-                        padding: EdgeInsets.all(AppSizesManager.p16),
-                        child: CircularProgressIndicator(),
+              child: LayoutBuilder(builder: (context, constraints) {
+                return ListView.separated(
+                  shrinkWrap: true,
+                  controller: _scrollController,
+                  padding: const EdgeInsets.all(AppSizesManager.p16),
+                  itemCount: state.announcements.length +
+                      (state.hasReachedMax ? 0 : 1),
+                  separatorBuilder: (context, index) =>
+                      const ResponsiveGap.s12(),
+                  itemBuilder: (context, index) {
+                    if (index >= state.announcements.length) {
+                      return const Center(
+                        child: Padding(
+                          padding: EdgeInsets.all(AppSizesManager.p16),
+                          child: CircularProgressIndicator(),
+                        ),
+                      );
+                    }
+
+                    final announcement = state.announcements[index];
+                    return SizedBox(
+                      height:  constraints.maxHeight * 0.3,
+                      child: PromotionItemWidget(
+                        announcement: announcement,
                       ),
                     );
-                  }
-
-                  final announcement = state.announcements[index];
-                  return AnnouncementListItem(
-                    announcement: announcement,
-                  );
-                },
-              ),
+                  },
+                );
+              }),
             );
           },
         ),
