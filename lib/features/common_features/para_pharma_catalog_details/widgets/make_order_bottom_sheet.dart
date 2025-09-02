@@ -92,16 +92,18 @@ class MakeOrderBottomSheet extends StatelessWidget {
                         color: Colors.black,
                       ),
                     ),
-                    SizedBox(width: 8),
+
+                    Gap(AppSizesManager.s12),
+
                     Flexible(
                       child: SizedBox(
                         height: AppSizesManager.buttonHeight,
                         child: Form(
                           child: TextFormField(
                             cursorColor: AppColors.accentGreenShade1,
-                            controller: context
-                                .read<ParaPharmaDetailsCubit>()
-                                .quantityController,
+
+                            controller: context.read<ParaPharmaDetailsCubit>().quantityController,
+
                             textAlign: TextAlign.center,
                             keyboardType: TextInputType.number,
                             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
@@ -126,7 +128,9 @@ class MakeOrderBottomSheet extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(width: 8),
+
+                    Gap(AppSizesManager.s12),
+
                     PrimaryIconButton(
                       borderColor: StrokeColors.normal.color,
                       isBordered: true,

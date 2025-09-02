@@ -164,7 +164,7 @@ class CompanyRepository extends ICompanyRepository {
   Future<void> _updateCompanyWithImage(EditCompanyFormDataModel companyData) async {
     try {
       String? companyId = await userManager.getCompanyId();
-      if (companyId!.isEmpty || companyId == "null") {
+      if (companyId?.isEmpty ?? true || companyId == "null") {
         throw Exception("Company ID not found");
       }
 
