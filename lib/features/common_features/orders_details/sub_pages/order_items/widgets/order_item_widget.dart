@@ -78,7 +78,7 @@ class OrderItemWidget extends StatelessWidget {
                               fit: BoxFit.fill,
                             )),
                       ),
-                      const SizedBox(width: AppSizesManager.s8),
+                      const ResponsiveGap.s8(),
                       Expanded(
                         flex: 6,
                         child: Text(

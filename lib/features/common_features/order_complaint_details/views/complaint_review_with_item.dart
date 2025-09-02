@@ -4,6 +4,7 @@ import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/image/cached_network_image_with_asset_fallback.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/info_widget.dart';
 import 'package:hader_pharm_mobile/features/common_features/order_complaint_details/cubit/orders_complaint_details_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/order_complaint_details/views/complaint_status_history.dart';
@@ -40,7 +41,7 @@ class ComplaintReviewView extends StatelessWidget {
               assetImage: DrawableAssetStrings.medicinePlaceHolderImg,
             ),
           ),
-          const SizedBox(height: AppSizesManager.s12),
+          const ResponsiveGap.s12(),
           InfoWidget(
             label: translation.item_complaint,
             value: Text(

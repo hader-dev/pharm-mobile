@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/cubit/home_cubit.dart';
 import 'package:hader_pharm_mobile/models/announcement.dart';
@@ -75,7 +76,7 @@ class PromotionSection extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: AppSizesManager.s8),
+              const ResponsiveGap.s8(),
               Stack(
                 alignment: Alignment.bottomCenter,
                 children: <Widget>[

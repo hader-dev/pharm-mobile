@@ -101,7 +101,7 @@ class MakeOrderBottomSheet extends StatelessWidget {
                             color: Colors.black,
                           ),
                         ),
-                        Gap(AppSizesManager.s12),
+                        const ResponsiveGap.s12(),
                         Flexible(
                           child: SizedBox(
                             height: AppSizesManager.buttonHeight,
@@ -147,7 +147,7 @@ class MakeOrderBottomSheet extends StatelessWidget {
                             ),
                           ),
                         ),
-                       Gap(AppSizesManager.s12),
+                        const ResponsiveGap.s12(),
                         PrimaryIconButton(
                           borderColor: StrokeColors.normal.color,
                           isBordered: true,

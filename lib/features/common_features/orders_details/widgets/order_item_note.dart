@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class OrderNoteDialog extends StatelessWidget {
@@ -47,9 +47,8 @@ class OrderNoteDialog extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 10),
+            const ResponsiveGap.s12(),
 
-            // Note Content
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
@@ -63,7 +62,7 @@ class OrderNoteDialog extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(height: AppSizesManager.p8),
+            const ResponsiveGap.s8(),
           ],
         ),
       ),

@@ -1,12 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/edit_company/cubit/edit_company_cubit.dart';
+import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
+import 'package:iconsax/iconsax.dart';
 
 class CompanyLogoDisplay extends StatelessWidget {
   const CompanyLogoDisplay({super.key});
@@ -18,23 +20,24 @@ class CompanyLogoDisplay extends StatelessWidget {
         final cubit = BlocProvider.of<EditCompanyCubit>(context);
         final companyImage = cubit.companyData?.image;
         final imageUrl = companyImage != null
-            ? getItInstance.get<INetworkService>().getFilesPath(companyImage.path)
+            ? getItInstance
+                .get<INetworkService>()
+                .getFilesPath(companyImage.path)
             : null;
 
-       
-        final imageSize = MediaQuery.of(context).size.width > 600 
+        final imageSize = MediaQuery.of(context).size.width > 600
             ? MediaQuery.of(context).size.height * 0.18
             : MediaQuery.of(context).size.height * 0.14;
 
         return Column(
           children: [
             Text(
-              'Company Logo',
+              context.translation!.company_logo,
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: TextColors.ternary.color,
-              ),
+                    color: TextColors.ternary.color,
+                  ),
             ),
-            const SizedBox(height: AppSizesManager.s16),
+            const ResponsiveGap.s16(),
             Container(
               height: imageSize,
               width: imageSize,

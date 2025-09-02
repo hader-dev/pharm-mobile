@@ -123,20 +123,20 @@ class _EditCompanyScreenState extends State<EditCompanyScreen> {
                           size: 64,
                           color: Colors.grey,
                         ),
-                        SizedBox(height: 16),
+                        ResponsiveGap.s16(),
                         Text(
                           context.translation!.no_company_found,
                           style: context
                               .responsiveTextTheme.current.headLine3SemiBold,
                         ),
-                        SizedBox(height: 8),
+                        ResponsiveGap.s8(),
                         Text(
                           context.translation!.create_company_profile_required,
                           style: context.responsiveTextTheme.current.body1Medium
                               .copyWith(color: TextColors.ternary.color),
                           textAlign: TextAlign.center,
                         ),
-                        SizedBox(height: 24),
+                        ResponsiveGap.s24(),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -150,10 +150,10 @@ class _EditCompanyScreenState extends State<EditCompanyScreen> {
                               ),
                               child: Text(context.translation!.go_back),
                             ),
-                            SizedBox(width: 16),
+                            const SizedBox(width: AppSizesManager.s16),
                             ElevatedButton(
                               onPressed: () {
-                                context.pop(); // Go back first
+                                context.pop();
                                 context.pushNamed(
                                     RoutingManager.createCompanyProfile);
                               },

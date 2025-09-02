@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/image_load_error_widget.dart';
 import 'package:hader_pharm_mobile/models/announcement.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
@@ -64,7 +65,7 @@ class PromotionItemWidget extends StatelessWidget {
                       shadows: [Shadow(blurRadius: 4, color: Colors.black)],
                     ),
                   ),
-                  const SizedBox(height: AppSizesManager.s4),
+                  const ResponsiveGap.s4(),
                   Text(
                     announcement.title,
                     style: context.responsiveTextTheme.current.body1Regular

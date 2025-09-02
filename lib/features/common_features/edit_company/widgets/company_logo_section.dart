@@ -7,12 +7,11 @@ import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_icon_button.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/edit_company/cubit/edit_company_cubit.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
-
-
 
 class CompanyLogoSection extends StatelessWidget {
   const CompanyLogoSection({super.key});
@@ -25,8 +24,7 @@ class CompanyLogoSection extends StatelessWidget {
         ? getItInstance.get<INetworkService>().getFilesPath(companyImage.path)
         : null;
 
-    
-    final imageSize = MediaQuery.of(context).size.width > 600 
+    final imageSize = MediaQuery.of(context).size.width > 600
         ? MediaQuery.of(context).size.height * 0.18
         : MediaQuery.of(context).size.height * 0.14;
 
@@ -37,10 +35,10 @@ class CompanyLogoSection extends StatelessWidget {
             Text(
               context.translation!.companyLogo,
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: TextColors.ternary.color,
-              ),
+                    color: TextColors.ternary.color,
+                  ),
             ),
-            const SizedBox(height: AppSizesManager.s16),
+            const ResponsiveGap.s16(),
             Stack(
               children: [
                 Container(
@@ -96,7 +94,9 @@ class CompanyLogoSection extends StatelessWidget {
                     scale: 0.7,
                     child: PrimaryIconButton(
                       icon: Icon(
-                        cubit.pickedImage != null ? Iconsax.edit_2 : Iconsax.add,
+                        cubit.pickedImage != null
+                            ? Iconsax.edit_2
+                            : Iconsax.add,
                         color: Colors.white,
                       ),
                       isBordered: true,

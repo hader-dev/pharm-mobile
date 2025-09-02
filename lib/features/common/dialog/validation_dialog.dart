@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../utils/constants.dart';
@@ -55,7 +56,7 @@ class ValidateActionDialog {
                     ),
                     if (title != null)
                       Align(alignment: Alignment.center, child: title),
-                    const SizedBox(height: AppSizesManager.s12),
+                    const ResponsiveGap.s12(),
                     if (content != null)
                       Align(alignment: Alignment.center, child: content),
                     Padding(

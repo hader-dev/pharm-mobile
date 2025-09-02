@@ -38,8 +38,7 @@ class SelectedFiltersDisplay extends StatelessWidget {
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               itemCount: selectedFilters.length,
-              separatorBuilder: (context, index) =>
-                  const SizedBox(width: AppSizesManager.s4),
+              separatorBuilder: (context, index) => const ResponsiveGap.s4(),
               itemBuilder: (context, index) {
                 final filter = selectedFilters[index];
                 return Transform.scale(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
@@ -34,7 +35,7 @@ class EmptyListWidget extends StatelessWidget {
                 height: imageSize,
                 width: imageSize,
               ),
-              const SizedBox(height: 16),
+              const ResponsiveGap.s16(),
               Text(context.translation!.no_items_found,
                   textAlign: TextAlign.center,
                   style:
@@ -42,7 +43,7 @@ class EmptyListWidget extends StatelessWidget {
                     color: TextColors.ternary.color,
                   )),
               if (onRefresh != null) ...[
-                const SizedBox(height: 16),
+                const ResponsiveGap.s16(),
                 PrimaryTextButton(
                   label: context.translation!.refresh,
                   labelColor: AppColors.accent1Shade1,

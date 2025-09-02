@@ -75,7 +75,7 @@ class OrderCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(width: 8), // Small spacing
+                const ResponsiveGap.s8(), // Small spacing
                 Expanded(
                   child: Container(
                     padding: EdgeInsets.all(AppSizesManager.p6),
@@ -124,7 +124,7 @@ class OrderCard extends StatelessWidget {
                       contentDirection: Axis.vertical,
                     ),
                   ),
-                  const SizedBox(width: 8), // Small spacing
+                  const ResponsiveGap.s8(), // Small spacing
                   Expanded(
                     child: InfoRow(
                       label: context.translation!.total_ttc_amount,

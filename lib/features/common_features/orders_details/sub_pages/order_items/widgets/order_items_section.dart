@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/models/order_details.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
@@ -37,7 +38,7 @@ class OrderItemsSection extends StatelessWidget {
                   ),
                 )
               ])),
-          const SizedBox(height: 12),
+          const ResponsiveGap.s12(),
           Container(
             constraints: const BoxConstraints(
               maxHeight: 450,

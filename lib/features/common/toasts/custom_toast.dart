@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 
 import '../../../utils/constants.dart';
 import '../../../utils/toast_helper.dart';
@@ -27,7 +28,8 @@ class CustomToastWidget extends StatefulWidget {
   State<CustomToastWidget> createState() => _CustomToastWidgetState();
 }
 
-class _CustomToastWidgetState extends State<CustomToastWidget> with SingleTickerProviderStateMixin {
+class _CustomToastWidgetState extends State<CustomToastWidget>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _fade;
 
@@ -47,7 +49,7 @@ class _CustomToastWidgetState extends State<CustomToastWidget> with SingleTicker
     _controller.addListener(() async {
       if (_controller.isForwardOrCompleted) {
         await Future.delayed(Duration(seconds: 2, milliseconds: 600));
-        if(context.mounted){
+        if (context.mounted) {
           _controller.reverse();
         }
       }
@@ -76,19 +78,24 @@ class _CustomToastWidgetState extends State<CustomToastWidget> with SingleTicker
                   padding: const EdgeInsets.all(AppSizesManager.p16),
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                        colors: widget.type.colors, begin: Alignment.centerLeft, end: Alignment.centerRight),
+                        colors: widget.type.colors,
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight),
                     borderRadius: BorderRadius.circular(AppSizesManager.r12),
                   ),
                   child: Row(
                     children: [
                       Icon(widget.type.icon, color: Colors.white),
-                      const SizedBox(width: AppSizesManager.s12),
+                      const ResponsiveGap.s12(),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(widget.title,
-                                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white)),
+                                style: const TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white)),
                             if (widget.message != null)
                               Text(widget.message!,
                                   style: const TextStyle(
@@ -101,7 +108,8 @@ class _CustomToastWidgetState extends State<CustomToastWidget> with SingleTicker
                       if (widget.actionText != null)
                         TextButton(
                           onPressed: widget.onAction,
-                          style: TextButton.styleFrom(foregroundColor: Colors.white),
+                          style: TextButton.styleFrom(
+                              foregroundColor: Colors.white),
                           child: Text(widget.actionText!),
                         ),
                       IconButton(

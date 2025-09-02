@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_date_helper.dart';
 
@@ -54,7 +55,7 @@ class TrackingStepWidget extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(width: 10),
+        const ResponsiveGap.s12(),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,7 +68,7 @@ class TrackingStepWidget extends StatelessWidget {
                 historyStep.createdAt.toLocal().format,
                 style: context.responsiveTextTheme.current.body3Regular,
               ),
-              const SizedBox(height: 4),
+              const ResponsiveGap.s4(),
               // Text(
               //   OrderStatus.translateDescription(context, orderStatus),
               //   style: const TextStyle(
@@ -75,7 +76,7 @@ class TrackingStepWidget extends StatelessWidget {
               //     color: Colors.black54,
               //   ),
               // ),
-              const SizedBox(height: 20),
+              const ResponsiveGap.s24(),
             ],
           ),
         ),

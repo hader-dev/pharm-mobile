@@ -54,7 +54,7 @@
 //                   ),
 //                 ],
 //               ),
-//               const SizedBox(height: 10),
+//               const ResponsiveGap.s12()),
 
 //               // Note Content
 //               Align(

@@ -2,6 +2,7 @@ import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_sized_box.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../utils/constants.dart';
@@ -28,7 +29,8 @@ class CustomDatePickerWidget {
           color: Colors.grey.withAlpha(128),
           child: Builder(builder: (context) {
             return Container(
-              padding: const EdgeInsets.symmetric(horizontal: AppSizesManager.p10),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: AppSizesManager.p10),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -36,7 +38,8 @@ class CustomDatePickerWidget {
                   Container(
                     clipBehavior: Clip.antiAlias,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+                      borderRadius: BorderRadius.circular(
+                          AppSizesManager.commonWidgetsRadius),
                       color: Colors.white,
                     ),
                     child: Column(
@@ -54,7 +57,7 @@ class CustomDatePickerWidget {
                             dates = value;
                           },
                         ),
-                        const SizedBox(height: AppSizesManager.p6),
+                        const ResponsiveGap.s6(),
                         Row(
                           children: [
                             const Spacer(),
@@ -62,13 +65,13 @@ class CustomDatePickerWidget {
                               onPressed: () {
                                 GoRouter.of(context).pop(false);
                               },
-                              child: Text("cancel"),
+                              child: Text(context.translation!.cancel),
                             ),
                             TextButton(
                               onPressed: () {
                                 GoRouter.of(context).pop(true);
                               },
-                              child: Text("ok"),
+                              child: Text(context.translation!.confirm),
                             )
                           ],
                         )

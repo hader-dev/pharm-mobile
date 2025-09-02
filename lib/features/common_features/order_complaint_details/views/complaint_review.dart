@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/info_widget.dart';
 import 'package:hader_pharm_mobile/features/common_features/order_complaint_details/cubit/orders_complaint_details_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/order_complaint_details/views/complaint_status_history.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class ComplaintReviewView extends StatelessWidget {
@@ -19,7 +19,7 @@ class ComplaintReviewView extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: AppSizesManager.s12),
+          const ResponsiveGap.s12(),
           InfoWidget(
             label: translation.item_complaint,
             value: Text(

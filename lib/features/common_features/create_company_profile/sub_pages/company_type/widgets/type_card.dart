@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
@@ -51,7 +52,7 @@ class TypeCard extends StatelessWidget {
                           ? AppColors.accent1Shade1
                           : TextColors.primary.color),
             ),
-            const SizedBox(height: 12),
+            const ResponsiveGap.s12(),
             SvgPicture.asset(
               imagePath,
               height: 90,

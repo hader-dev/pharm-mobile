@@ -68,20 +68,20 @@ class ViewCompanyScreen extends StatelessWidget {
                           size: 64,
                           color: Colors.grey,
                         ),
-                        SizedBox(height: 16),
+                        ResponsiveGap.s16(),
                         Text(
                           context.translation!.no_company_found,
                           style: context
                               .responsiveTextTheme.current.headLine3SemiBold,
                         ),
-                        SizedBox(height: 8),
+                        ResponsiveGap.s8(),
                         Text(
                           context.translation!.no_company_associated,
                           style: context.responsiveTextTheme.current.body1Medium
                               .copyWith(color: TextColors.ternary.color),
                           textAlign: TextAlign.center,
                         ),
-                        SizedBox(height: 24),
+                        ResponsiveGap.s24(),
                         ElevatedButton(
                           onPressed: () {
                             context.pop();

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 
 class CustomAppBarV2 extends StatelessWidget implements PreferredSizeWidget {
   final Widget title;
@@ -93,7 +93,7 @@ class CustomAppBarV2 extends StatelessWidget implements PreferredSizeWidget {
         textBaseline: TextBaseline.alphabetic,
         mainAxisSize: MainAxisSize.max,
         children: [
-          leading ?? const SizedBox(width: AppSizesManager.s4),
+          leading ?? const ResponsiveGap.s4(),
           if (isExpanded)
             Expanded(flex: 5, child: title)
           else

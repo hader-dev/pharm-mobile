@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 typedef OnSelectedCallback = void Function(String value, bool selected);
@@ -27,7 +28,7 @@ class FilterLabel extends StatelessWidget {
                 value: isSelected,
                 onChanged: (v) => onSelected?.call(label, v!),
               ),
-              const SizedBox(width: 8),
+              const ResponsiveGap.s8(),
               Expanded(
                 child: Text(
                   label,
