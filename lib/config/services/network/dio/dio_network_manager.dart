@@ -108,12 +108,13 @@ class DioNetworkManager extends INetworkService {
 
   @override
   Future<Response> get(String url,
-      {Map<String, String>? headers, Map<String, Object>? queryParams}) async {
+      {Map<String, String>? headers, Map<String, Object>? queryParams,bool isBinary=false}) async {
     // await _ensureTokenIsValid(TokenManager.instance);
 
     Response apiResponse = await _client.getUri(
         prepareUrl(url, queryParams: queryParams),
         options: Options(
+            responseType: isBinary ? ResponseType.bytes : ResponseType.json,
             headers: _mergeCustomHeaders(headers ?? <String, String>{})));
     return apiResponse;
   }

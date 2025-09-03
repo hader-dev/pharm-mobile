@@ -111,6 +111,17 @@ class OrdersDetailsPage extends StatelessWidget {
                           color: AppColors.accent1Shade1,
                         ),
                       ),
+                      Padding(
+                        padding: buttonsPadding,
+                        child: PrimaryTextButton(
+                          label: translation.invoice,
+                          onTap: () {
+                            RoutingManager.router
+                                .pushNamed(RoutingManager.invoiceScreen);
+                          },
+                          color: AppColors.accent1Shade1,
+                        ),
+                      ),
                       if (canCancelOrderByStatusId(item.status))
                         Padding(
                           padding: buttonsPadding,

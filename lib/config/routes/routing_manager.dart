@@ -4,6 +4,8 @@ import 'package:hader_pharm_mobile/config/routes/deeplinks_routes.dart';
 import 'package:hader_pharm_mobile/features/common_features/announcements/all_announcements_screen.dart';
 import 'package:hader_pharm_mobile/features/common_features/anouncement_details/announcement_details.dart';
 import 'package:hader_pharm_mobile/features/common_features/help_support/help_support.dart';
+import 'package:hader_pharm_mobile/features/common_features/invoice/invoice.dart';
+import 'package:hader_pharm_mobile/features/common_features/invoice/sample_invoice_data.dart';
 import 'package:hader_pharm_mobile/features/common_features/leagal_policies/leagal_policies.dart';
 import 'package:hader_pharm_mobile/features/common_features/notification/notification.dart';
 import 'package:hader_pharm_mobile/features/common_features/order_complaint_details/complaint.dart';
@@ -47,6 +49,7 @@ class RoutingManager {
   static const String checkEmailScreen = '/CheckEmailScreen';
   static const String checkPhoneScreen = '/CheckPhoneScreen';
   static const String legalPoliciesScreen = '/LegalPoliciesScreen';
+  static const String invoiceScreen = '/InvoiceScreen';
 
   static const String congratulationScreen = '/CongratulationScreen';
   static const String createCompanyProfile = '/CreateCompanyProfile';
@@ -95,6 +98,15 @@ class RoutingManager {
           path: legalPoliciesScreen,
           builder: (BuildContext context, GoRouterState state) {
             return const LegalPoliciesScreen();
+          },
+        ),
+        GoRoute(
+          name: invoiceScreen,
+          path: invoiceScreen,
+          builder: (BuildContext context, GoRouterState state) {
+            return const InvoiceGenerator(
+              invoiceData: invoiceSampleData,
+            );
           },
         ),
         GoRoute(
