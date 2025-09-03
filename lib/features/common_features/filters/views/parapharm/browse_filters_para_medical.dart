@@ -6,10 +6,11 @@ import 'package:hader_pharm_mobile/features/common/accordions/ink_accordion_item
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/bottom_sheet_header.dart';
+import 'package:hader_pharm_mobile/features/common_features/filters/actions/apply_filters.dart';
 import 'package:hader_pharm_mobile/features/common_features/filters/actions/get_applied_para_filters_as_raw_string.dart';
 import 'package:hader_pharm_mobile/features/common_features/filters/actions/navigate_to_para_filters_apply_view.dart';
-import 'package:hader_pharm_mobile/features/common_features/filters/cubit/para_medical_filters_cubit.dart';
-import 'package:hader_pharm_mobile/features/common_features/filters/widgets/filter_price_section.dart';
+import 'package:hader_pharm_mobile/features/common_features/filters/cubit/parapharm/para_medical_filters_cubit.dart';
+import 'package:hader_pharm_mobile/features/common_features/filters/widgets/price/filter_price_section.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/cubit/para_pharma_cubit.dart';
 import 'package:hader_pharm_mobile/models/para_medical_filters.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
@@ -100,14 +101,7 @@ class FiltersParaMedicalBrowse extends StatelessWidget {
                     label: context.translation!.apply,
                     leadingIcon: Iconsax.money4,
                     onTap: () {
-                      final appliedFilters = context
-                          .read<ParaMedicalFiltersCubit>()
-                          .appliedFilters;
-                      final medicineCatalogCubit =
-                          context.read<ParaPharmaCubit>();
-                      medicineCatalogCubit.updatedFilters(appliedFilters);
-                      medicineCatalogCubit.getParaPharmas();
-
+                      applyFiltersParaPharm(context);
                       context.pop();
                     },
                     color: AppColors.accent1Shade1,

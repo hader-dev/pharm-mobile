@@ -97,7 +97,7 @@ class _MedicinesPageState extends State<MedicinesPage>
               ),
               onTap: () {
                 BottomSheetHelper.showCommonBottomSheet(
-                    context: context, child: SearchFilterBottomSheet());
+                    context: context, child: SearchMedicineFilterBottomSheet());
               },
             ),
           ],

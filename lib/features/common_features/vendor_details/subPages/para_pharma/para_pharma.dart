@@ -97,7 +97,7 @@ class _ParapharmaPageState extends State<ParapharmaPage>
               ),
               onTap: () {
                 BottomSheetHelper.showCommonBottomSheet(
-                    context: context, child: SearchFilterBottomSheet());
+                    context: context, child: SearchMedicineFilterBottomSheet());
               },
             ),
           ],

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 
 import '../../../utils/constants.dart';
 
 class BaseIconButton extends StatelessWidget {
   final Widget icon;
+  final Widget? label;
   final Color bgColor;
   final bool isBordered;
   final Color borderColor;
@@ -11,6 +13,7 @@ class BaseIconButton extends StatelessWidget {
   const BaseIconButton(
       {super.key,
       required this.icon,
+      this.label,
       this.bgColor = Colors.transparent,
       this.isBordered = false,
       this.onPressed,
@@ -19,7 +22,13 @@ class BaseIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: icon,
+      icon: Row(
+        children: [
+          icon,
+          if (label != null) const ResponsiveGap.s4(),
+          if (label != null) label!,
+        ],
+      ),
       onPressed: onPressed,
       style: IconButton.styleFrom(
         backgroundColor: bgColor,

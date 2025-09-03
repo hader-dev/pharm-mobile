@@ -56,7 +56,6 @@ class FloatingFilter extends StatelessWidget {
       );
     }
 
-    // Default style
     return InkWell(
       onTap: onTap,
       child: Padding(

@@ -16,77 +16,76 @@ class SearchWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-          children: [
-            Flexible(
-              child: Padding(
-                padding: const EdgeInsets.only(left: AppSizesManager.p8),
-                child: CustomTextField(
-                  hintText: context.translation!.medicines_search_field_hint,
-                  controller: BlocProvider.of<MedicineProductsCubit>(context)
-                      .searchController,
-                  state: FieldState.normal,
-                  isEnabled: true,
-                  prefixIcon: Icon(
-                    Iconsax.search_normal,
-                    color: AppColors.accent1Shade1,
-                  ),
-                  suffixIcon: InkWell(
-                    onTap: () {
-                      BlocProvider.of<MedicineProductsCubit>(context)
-                          .searchController
-                          .clear();
-                      BlocProvider.of<MedicineProductsCubit>(context)
-                          .searchMedicineCatalog(null);
-                    },
-                    child: Icon(
-                      Icons.clear,
+      children: [
+        Flexible(
+          child: Padding(
+            padding: const EdgeInsets.only(left: AppSizesManager.p8),
+            child: CustomTextField(
+              hintText: context.translation!.medicines_search_field_hint,
+              controller: BlocProvider.of<MedicineProductsCubit>(context)
+                  .searchController,
+              state: FieldState.normal,
+              isEnabled: true,
+              prefixIcon: Icon(
+                Iconsax.search_normal,
+                color: AppColors.accent1Shade1,
+              ),
+              suffixIcon: InkWell(
+                onTap: () {
+                  BlocProvider.of<MedicineProductsCubit>(context)
+                      .searchController
+                      .clear();
+                  BlocProvider.of<MedicineProductsCubit>(context)
+                      .searchMedicineCatalog(null);
+                },
+                child: Icon(
+                  Icons.clear,
+                  color: AppColors.accent1Shade1,
+                ),
+              ),
+              onChanged: (searchValue) {
+                BlocProvider.of<MedicineProductsCubit>(context)
+                    .searchMedicineCatalog(searchValue);
+              },
+              validationFunc: (value) {},
+            ),
+          ),
+        ),
+        InkWell(
+          child: Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: AppSizesManager.p12),
+            child: BlocBuilder<MedicineProductsCubit, MedicineProductsState>(
+              builder: (context, state) {
+                return Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    Icon(
+                      Iconsax.filter,
                       color: AppColors.accent1Shade1,
                     ),
-                  ),
-                  onChanged: (searchValue) {
-                    BlocProvider.of<MedicineProductsCubit>(context)
-                        .searchMedicineCatalog(searchValue);
-                  },
-                  validationFunc: (value) {},
-                ),
-              ),
-            ),
-            InkWell(
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: AppSizesManager.p12),
-                child:
-                    BlocBuilder<MedicineProductsCubit, MedicineProductsState>(
-                  builder: (context, state) {
-                    return Stack(
-                      clipBehavior: Clip.none,
-                      children: [
-                        Icon(
-                          Iconsax.filter,
-                          color: AppColors.accent1Shade1,
+                    if (BlocProvider.of<MedicineProductsCubit>(context)
+                            .selectedMedicineSearchFilter !=
+                        null)
+                      Positioned(
+                        top: -4,
+                        right: -4,
+                        child: CircleAvatar(
+                          radius: AppSizesManager.commonWidgetsRadius,
+                          backgroundColor: Colors.red,
                         ),
-                        if (BlocProvider.of<MedicineProductsCubit>(context)
-                                .selectedMedicineSearchFilter !=
-                            null)
-                          Positioned(
-                            top: -4,
-                            right: -4,
-                            child: CircleAvatar(
-                              radius: AppSizesManager.commonWidgetsRadius,
-                              backgroundColor: Colors.red,
-                            ),
-                          )
-                      ],
-                    );
-                  },
-                ),
-              ),
-              onTap: () {
-                BottomSheetHelper.showCommonBottomSheet(
-                    context: context, child: SearchFilterBottomSheet());
+                      )
+                  ],
+                );
               },
             ),
-          ],
-        );
+          ),
+          onTap: () {
+            BottomSheetHelper.showCommonBottomSheet(
+                context: context, child: SearchMedicineFilterBottomSheet());
+          },
+        ),
+      ],
+    );
   }
 }
