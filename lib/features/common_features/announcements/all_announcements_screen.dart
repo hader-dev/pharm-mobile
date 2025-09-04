@@ -8,7 +8,6 @@ import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/promotion_item_widget.dart';
 import 'package:hader_pharm_mobile/features/common_features/announcements/cubit/all_announcements_cubit.dart';
-import 'package:hader_pharm_mobile/features/common_features/announcements/widgets/announcement_list_item.dart';
 import 'package:hader_pharm_mobile/features/common_features/announcements/widgets/announcements_search_widget.dart';
 import 'package:hader_pharm_mobile/repositories/remote/announcement/announcement_repository_impl.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
