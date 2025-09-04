@@ -912,6 +912,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get all_announcements => 'جميع الإعلانات';
 
   @override
+  String get search_announcements => 'البحث في الإعلانات';
+
+  @override
   String get main_features => 'الميزات الرئيسية';
 
   @override

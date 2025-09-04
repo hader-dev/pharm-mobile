@@ -916,6 +916,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get all_announcements => 'All Announcements';
 
   @override
+  String get search_announcements => 'Search announcements';
+
+  @override
   String get main_features => 'Main Features';
 
   @override

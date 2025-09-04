@@ -50,6 +50,7 @@ class VendorDetails extends StatelessWidget {
                       client: getItInstance.get<INetworkService>(),
                     ),
                     scrollController: ScrollController(),
+                    searchController: TextEditingController(),
                   )..getAnnouncements()),
         ],
         child: BlocListener<VendorDetailsCubit, VendorDetailsState>(

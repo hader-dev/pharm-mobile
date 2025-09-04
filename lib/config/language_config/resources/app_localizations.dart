@@ -1846,6 +1846,12 @@ abstract class AppLocalizations {
   /// **'All Announcements'**
   String get all_announcements;
 
+  /// No description provided for @search_announcements.
+  ///
+  /// In en, this message translates to:
+  /// **'Search announcements'**
+  String get search_announcements;
+
   /// No description provided for @main_features.
   ///
   /// In en, this message translates to:

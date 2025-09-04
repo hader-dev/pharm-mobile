@@ -927,6 +927,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get all_announcements => 'Toutes les Annonces';
 
   @override
+  String get search_announcements => 'Rechercher des annonces';
+
+  @override
   String get main_features => 'Caractéristiques principales';
 
   @override

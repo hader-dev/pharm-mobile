@@ -8,6 +8,8 @@ import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/promotion_item_widget.dart';
 import 'package:hader_pharm_mobile/features/common_features/announcements/cubit/all_announcements_cubit.dart';
+import 'package:hader_pharm_mobile/features/common_features/announcements/widgets/announcement_list_item.dart';
+import 'package:hader_pharm_mobile/features/common_features/announcements/widgets/announcements_search_widget.dart';
 import 'package:hader_pharm_mobile/repositories/remote/announcement/announcement_repository_impl.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
@@ -22,16 +24,19 @@ class AllAnnouncementsScreen extends StatefulWidget {
 
 class _AllAnnouncementsScreenState extends State<AllAnnouncementsScreen> {
   late ScrollController _scrollController;
+  late TextEditingController _searchController;
 
   @override
   void initState() {
     super.initState();
     _scrollController = ScrollController();
+    _searchController = TextEditingController();
   }
 
   @override
   void dispose() {
     _scrollController.dispose();
+    _searchController.dispose();
     super.dispose();
   }
 
@@ -43,11 +48,10 @@ class _AllAnnouncementsScreenState extends State<AllAnnouncementsScreen> {
           client: getItInstance.get<INetworkService>(),
         ),
         scrollController: _scrollController,
+        searchController: _searchController,
       )..getAnnouncements(),
       child: Scaffold(
         appBar: CustomAppBarV2.alternate(
-          topPadding: MediaQuery.of(context).padding.top,
-          bottomPadding: MediaQuery.of(context).padding.bottom,
           leading: IconButton(
             icon: const Icon(
               Iconsax.arrow_left,
@@ -64,66 +68,74 @@ class _AllAnnouncementsScreenState extends State<AllAnnouncementsScreen> {
             ),
           ),
         ),
-        body: BlocBuilder<AllAnnouncementsCubit, AllAnnouncementsState>(
-          builder: (context, state) {
-            if (state is AllAnnouncementsLoading &&
-                state.announcements.isEmpty) {
-              return const Center(child: CircularProgressIndicator());
-            }
+        body: Column(children: [
+          const AnnouncementsSearchWidget(),
+          Expanded(
+            child: BlocBuilder<AllAnnouncementsCubit, AllAnnouncementsState>(
+              builder: (context, state) {
+                if (state is AllAnnouncementsLoading) {
+                  return const Center(child: CircularProgressIndicator());
+                }
 
-            if (state is AllAnnouncementsLoadingFailed &&
-                state.announcements.isEmpty) {
-              return Center(
-                child: EmptyListWidget(
-                  onRefresh: () {
-                    context.read<AllAnnouncementsCubit>().getAnnouncements();
+                if (state.announcements.isEmpty ||
+                    state is AllAnnouncementsLoadingFailed) {
+                  return Center(
+                    child: EmptyListWidget(
+                      onRefresh: () {
+                        context
+                            .read<AllAnnouncementsCubit>()
+                            .getAnnouncements();
+                      },
+                    ),
+                  );
+                }
+
+                if (state.announcements.isEmpty) {
+                  return const Center(
+                    child: EmptyListWidget(),
+                  );
+                }
+
+                return RefreshIndicator(
+                  onRefresh: () async {
+                    context
+                        .read<AllAnnouncementsCubit>()
+                        .refreshAnnouncements();
                   },
-                ),
-              );
-            }
+                  child: LayoutBuilder(builder: (context, constraints) {
+                    return ListView.separated(
+                      shrinkWrap: true,
+                      controller: _scrollController,
+                      padding: const EdgeInsets.all(AppSizesManager.p16),
+                      itemCount: state.announcements.length +
+                          (state.hasReachedMax ? 0 : 1),
+                      separatorBuilder: (context, index) =>
+                          const ResponsiveGap.s12(),
+                      itemBuilder: (context, index) {
+                        if (index >= state.announcements.length) {
+                          return const Center(
+                            child: Padding(
+                              padding: EdgeInsets.all(AppSizesManager.p16),
+                              child: CircularProgressIndicator(),
+                            ),
+                          );
+                        }
 
-            if (state.announcements.isEmpty) {
-              return const Center(
-                child: EmptyListWidget(),
-              );
-            }
-
-            return RefreshIndicator(
-              onRefresh: () async {
-                context.read<AllAnnouncementsCubit>().refreshAnnouncements();
-              },
-              child: LayoutBuilder(builder: (context, constraints) {
-                return ListView.separated(
-                  shrinkWrap: true,
-                  controller: _scrollController,
-                  padding: const EdgeInsets.all(AppSizesManager.p16),
-                  itemCount: state.announcements.length +
-                      (state.hasReachedMax ? 0 : 1),
-                  separatorBuilder: (context, index) =>
-                      const ResponsiveGap.s12(),
-                  itemBuilder: (context, index) {
-                    if (index >= state.announcements.length) {
-                      return const Center(
-                        child: Padding(
-                          padding: EdgeInsets.all(AppSizesManager.p16),
-                          child: CircularProgressIndicator(),
-                        ),
-                      );
-                    }
-
-                    final announcement = state.announcements[index];
-                    return SizedBox(
-                      height:  constraints.maxHeight * 0.3,
-                      child: PromotionItemWidget(
-                        announcement: announcement,
-                      ),
+                        final announcement = state.announcements[index];
+                        return SizedBox(
+                          height: constraints.maxHeight * 0.3,
+                          child: PromotionItemWidget(
+                            announcement: announcement,
+                          ),
+                        );
+                      },
                     );
-                  },
+                  }),
                 );
-              }),
-            );
-          },
-        ),
+              },
+            ),
+          ),
+        ]),
       ),
     );
   }
