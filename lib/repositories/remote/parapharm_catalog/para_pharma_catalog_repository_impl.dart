@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/models/para_medical_filters.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
-import 'package:hader_pharm_mobile/models/para_pharma_response.dart';
+import 'package:hader_pharm_mobile/repositories/remote/parapharm_catalog/response/para_pharma_response.dart';
 import 'package:hader_pharm_mobile/repositories/remote/parapharm_catalog/mappers/json_to_parapharma_catalogue_item.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/urls.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 import '../../../config/services/network/network_interface.dart';
-import '../../../models/cart_items_response.dart';
+import 'response/cart_items_response.dart';
 import '../../../models/create_cart_item.dart';
 import '../../../utils/urls.dart';
 import 'carti_tems_repository.dart';

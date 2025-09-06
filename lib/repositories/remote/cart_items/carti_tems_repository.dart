@@ -1,4 +1,4 @@
-import '../../../models/cart_items_response.dart';
+import 'response/cart_items_response.dart';
 import '../../../models/create_cart_item.dart';
 
 abstract class ICartItemsRepository {

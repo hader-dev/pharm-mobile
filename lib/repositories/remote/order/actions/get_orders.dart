@@ -1,5 +1,5 @@
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
-import 'package:hader_pharm_mobile/models/order_response.dart';
+import 'package:hader_pharm_mobile/repositories/remote/order/response/order_response.dart';
 import 'package:hader_pharm_mobile/utils/urls.dart';
 
 Future<OrderResponse> getOrders(

@@ -1,4 +1,4 @@
-import 'medicine_catalog.dart';
+import '../../../../models/medicine_catalog.dart';
 
 class MedicineResponse {
   final int totalItems;

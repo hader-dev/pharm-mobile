@@ -2,7 +2,7 @@ import 'package:hader_pharm_mobile/config/services/network/network_interface.dar
 import 'package:hader_pharm_mobile/models/create_order_model.dart';
 import 'package:hader_pharm_mobile/models/create_quick_order_model.dart';
 import 'package:hader_pharm_mobile/models/order_details.dart';
-import 'package:hader_pharm_mobile/models/order_response.dart';
+import 'package:hader_pharm_mobile/repositories/remote/order/response/order_response.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/params/item_complaint.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/params/order_complaint.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/response/response_item_complaint_find.dart';

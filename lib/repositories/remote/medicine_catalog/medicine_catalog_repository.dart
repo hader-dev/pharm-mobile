@@ -1,7 +1,7 @@
 
 import 'package:hader_pharm_mobile/models/medical_filters.dart';
 import 'package:hader_pharm_mobile/models/medicine_catalog.dart';
-import 'package:hader_pharm_mobile/models/medicine_catalog_response.dart';
+import 'package:hader_pharm_mobile/repositories/remote/medicine_catalog/response/medicine_catalog_response.dart';
 
 abstract class IMedicineCatalogRepository {
   Future<MedicineResponse> getMedicinesCatalog(

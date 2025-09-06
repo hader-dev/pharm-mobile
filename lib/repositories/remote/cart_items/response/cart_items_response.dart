@@ -1,4 +1,4 @@
-import 'cart_item.dart';
+import '../../../../models/cart_item.dart';
 
 class CartItemsResponse {
   final List<CartItemModel> data;

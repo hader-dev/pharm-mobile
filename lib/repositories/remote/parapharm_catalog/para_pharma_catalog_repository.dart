@@ -1,6 +1,6 @@
 import 'package:hader_pharm_mobile/models/para_medical_filters.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
-import 'package:hader_pharm_mobile/models/para_pharma_response.dart';
+import 'package:hader_pharm_mobile/repositories/remote/parapharm_catalog/response/para_pharma_response.dart';
 
 
 abstract class IParaPharmaRepository {
