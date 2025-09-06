@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/models/image.dart';
+import 'package:hader_pharm_mobile/utils/enums.dart';
 
 class BaseCompany with EquatableMixin {
   static final baseCompanyFields = [
@@ -73,6 +74,10 @@ class Company extends BaseCompany {
   final bool? isLiked;
   final bool? isFollowing;
 
+  final String? willaya;
+  final String? town;
+  final String? regionId;
+
   Company({
     required super.id,
     required super.thumbnailImage,
@@ -80,6 +85,9 @@ class Company extends BaseCompany {
     required super.name,
     super.address,
     super.phone,
+    this.willaya,
+    this.town,
+    this.regionId,
     this.isFollowing,
     this.isLiked,
     this.latitude,
@@ -130,6 +138,36 @@ class Company extends BaseCompany {
       nisNumber: null,
       contactInfo: null,
       isActive: null,
+    );
+  }
+
+  factory Company.mock() {
+    return Company(
+      id: 'cmp_001',
+      thumbnailImage: ImageModel.mock(),
+      image: ImageModel.mock(),
+      name: 'Mock Company',
+      address: '123 Mock St, Test City',
+      phone: '+1234567890',
+      latitude: "36.75",
+      longitude: "3.04",
+      createdAt: DateTime.now().subtract(Duration(days: 100)),
+      updatedAt: DateTime.now(),
+      managerUserId: 'user_001',
+      type: CompanyType.distributor.id,
+      distributorCategory: DistributorCategory.both,
+      phone2: '+1234567891',
+      fax: '+1234567892',
+      website: 'https://mockcompany.test',
+      email: 'info@mockcompany.test',
+      description: 'This is a mock company used for testing.',
+      bankAccount: 'DE89 3704 0044 0532 0130 00',
+      fiscalId: 'FISC123456',
+      rcNumber: 'RC789456',
+      aiNumber: 'AI987654',
+      nisNumber: 'NIS654321',
+      contactInfo: 'John Doe - Manager',
+      isActive: true,
     );
   }
 

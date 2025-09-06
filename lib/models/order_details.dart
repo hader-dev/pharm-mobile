@@ -1,5 +1,3 @@
-import 'package:hader_pharm_mobile/repositories/remote/company/mappers/json_to_company.dart';
-
 import 'company.dart';
 import 'order.dart';
 
@@ -48,43 +46,6 @@ class OrderDetailsModel extends BaseOrderModel {
     required this.clientCompany,
     required this.sellerCompany,
   });
-
-  factory OrderDetailsModel.fromJson(Map<String, dynamic> json) {
-    return OrderDetailsModel(
-      id: json['id'],
-      discount: json['discount'] != null ? double.parse(json['discount']) : 0.0,
-      invoiceType: json['invoiceType'],
-      paymentMethod: json['paymentMethod'],
-      createdAt: DateTime.parse(json['createdAt']),
-      updatedAt: DateTime.parse(json['updatedAt']),
-      deliveryAddress: json['deliveryAddress'],
-      status: json['status'],
-      totalAmountExclTax: json['totalAmountHt'] != null
-          ? double.parse(json['totalAmountHt'])
-          : 0.0,
-      totalAmountInclTax: json['totalAmountTtc'] != null
-          ? double.parse(json['totalAmountTtc'])
-          : 0.0,
-      latitude: json['latitude'] != null ? double.parse(json['latitude']) : 0.0,
-      longitude:
-          json['longitude'] != null ? double.parse(json['longitude']) : 0.0,
-      clientCompanyId: json['clientCompanyId'],
-      sellerCompanyId: json['sellerCompanyId'],
-      delegateUserId: json['delegateUserId'],
-      operatorUserId: json['operatorUserId'],
-      stockUserId: json['stockUserId'],
-      deliveryTownId: json['deliveryTownId'],
-      clientNote: json['clientNote'] ?? "",
-      privateNote: json['privateNote'] ?? "",
-      orderItems: List<OrderItem>.from(
-          json['orderItems'].map((x) => OrderItem.fromJson(x))),
-      orderStatusHistories: List<OrderStatusHistory>.from(
-          (json['orderStatusHistories'] as List)
-              .map((x) => OrderStatusHistory.fromJson(x))),
-      clientCompany: jsonToCompany(json['clientCompany']),
-      sellerCompany: jsonToCompany(json['sellerCompany']),
-    );
-  }
 }
 
 class OrderItem {
@@ -132,38 +93,53 @@ class OrderItem {
     this.imageUrl,
   });
 
-  factory OrderItem.fromJson(Map<String, dynamic> json) => OrderItem(
-        id: json['id'],
-        totalAmountTtc: json['totalAmountTtc'] != null
-            ? double.parse(json['totalAmountTtc'])
-            : 0.0,
-        totalAmountHt: json['totalAmountHt'] != null
-            ? double.parse(json['totalAmountHt'])
-            : 0.0,
-        tvaPercentage: json['tvaPercentage'] != null
-            ? double.parse(json['tvaPercentage'])
-            : 0.0,
-        unitPriceHt: json['unitPriceHt'] != null
-            ? double.parse(json['unitPriceHt'])
-            : 0.0,
-        unitPriceTtc: json['unitPriceTtc'] != null
-            ? double.parse(json['unitPriceTtc'])
-            : 0.0,
-        createdAt: DateTime.parse(json['createdAt']),
-        updatedAt: DateTime.parse(json['updatedAt']),
-        medicineCatalogId: json['medicineCatalogId'],
-        parapharmCatalogId: json['parapharmCatalogId'],
-        quantity: json['quantity'],
-        designation: json['designation'],
-        lotNumber: json['lotNumber'],
-        imageUrl: json['thumbnailImage']?['path'],
-        expirationDate: json['expirationDate'],
-        margin: json['margin'] != null ? double.parse(json['margin']) : 0.0,
-        discountAmount: json['discountAmount'] != null
-            ? double.parse(json['discountAmount'])
-            : 0.0,
-        orderId: json['orderId'],
-      );
+  factory OrderItem.empty() {
+    return OrderItem(
+      id: '',
+      totalAmountTtc: 0.0,
+      totalAmountHt: 0.0,
+      tvaPercentage: 0.0,
+      unitPriceHt: 0.0,
+      unitPriceTtc: 0.0,
+      createdAt: DateTime.fromMillisecondsSinceEpoch(0),
+      updatedAt: DateTime.fromMillisecondsSinceEpoch(0),
+      medicineCatalogId: null,
+      parapharmCatalogId: null,
+      quantity: 0,
+      designation: null,
+      lotNumber: null,
+      expirationDate: null,
+      margin: 0.0,
+      discountAmount: 0.0,
+      orderId: '',
+      imageUrl: null,
+      note: null,
+    );
+  }
+
+  factory OrderItem.mock() {
+    return OrderItem(
+      id: 'item_001',
+      totalAmountTtc: 132.00,
+      totalAmountHt: 120.00,
+      tvaPercentage: 10.0,
+      unitPriceHt: 12.00,
+      unitPriceTtc: 13.20,
+      createdAt: DateTime.now().subtract(Duration(days: 10)),
+      updatedAt: DateTime.now(),
+      medicineCatalogId: 'med_123',
+      parapharmCatalogId: null,
+      quantity: 10,
+      designation: 'Mock Medicine',
+      lotNumber: 'LOT2025A',
+      expirationDate: DateTime.now().add(Duration(days: 365)),
+      margin: 5.0,
+      discountAmount: 10.0,
+      orderId: 'order_001',
+      imageUrl: 'https://example.com/product.jpg',
+      note: 'Urgent delivery',
+    );
+  }
 }
 
 class OrderStatusHistory {
@@ -184,14 +160,4 @@ class OrderStatusHistory {
     required this.changedByUserId,
     required this.note,
   });
-  factory OrderStatusHistory.fromJson(Map<String, dynamic> json) =>
-      OrderStatusHistory(
-        id: json['id'],
-        createdAt: DateTime.parse(json['createdAt']),
-        updatedAt: DateTime.parse(json['updatedAt']),
-        orderId: json['orderId'],
-        orderStatusId: json['orderStatusId'],
-        changedByUserId: json['changedByUserId'],
-        note: json['note'],
-      );
 }

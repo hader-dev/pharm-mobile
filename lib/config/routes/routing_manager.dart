@@ -5,7 +5,6 @@ import 'package:hader_pharm_mobile/features/common_features/announcements/all_an
 import 'package:hader_pharm_mobile/features/common_features/anouncement_details/announcement_details.dart';
 import 'package:hader_pharm_mobile/features/common_features/help_support/help_support.dart';
 import 'package:hader_pharm_mobile/features/common_features/invoice/invoice.dart';
-import 'package:hader_pharm_mobile/features/common_features/invoice/sample_invoice_data.dart';
 import 'package:hader_pharm_mobile/features/common_features/leagal_policies/leagal_policies.dart';
 import 'package:hader_pharm_mobile/features/common_features/notification/notification.dart';
 import 'package:hader_pharm_mobile/features/common_features/order_complaint_details/complaint.dart';
@@ -104,8 +103,8 @@ class RoutingManager {
           name: invoiceScreen,
           path: invoiceScreen,
           builder: (BuildContext context, GoRouterState state) {
-            return const InvoiceGenerator(
-              invoiceData: invoiceSampleData,
+            return InvoiceGenerator(
+              invoiceId: state.extra as String,
             );
           },
         ),

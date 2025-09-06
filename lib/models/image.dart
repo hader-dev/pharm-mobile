@@ -18,4 +18,21 @@ class ImageModel {
         size: json["size"] ?? 0,
       );
 
+  factory ImageModel.empty() {
+    return ImageModel(
+      path: '',
+      filename: '',
+      mimetype: '',
+      size: 0,
+    );
+  }
+
+  factory ImageModel.mock() {
+    return ImageModel(
+      path: '/public/users/1/1757154776341-571378210.jpg',
+      filename: 'mock_file.pdf',
+      mimetype: 'application/pdf',
+      size: 123456,
+    );
+  }
 }

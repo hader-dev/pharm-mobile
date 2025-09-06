@@ -2,25 +2,27 @@ import 'package:hader_pharm_mobile/config/services/network/network_interface.dar
 import 'package:hader_pharm_mobile/models/create_order_model.dart';
 import 'package:hader_pharm_mobile/models/create_quick_order_model.dart';
 import 'package:hader_pharm_mobile/models/order_details.dart';
-import 'package:hader_pharm_mobile/repositories/remote/order/response/order_response.dart';
+import 'package:hader_pharm_mobile/repositories/remote/order/params/invoice.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/params/item_complaint.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/params/order_complaint.dart';
+import 'package:hader_pharm_mobile/repositories/remote/order/response/invoice_response.dart';
+import 'package:hader_pharm_mobile/repositories/remote/order/response/order_response.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/response/response_item_complaint_find.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/response/response_item_complaint_make.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/response/response_order_cancel.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/response/response_order_complaints.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 
-import 'order_repository.dart';
 import 'actions/cancel_order.dart' as actions;
-import 'actions/create_quick_order.dart' as actions;
 import 'actions/create_order.dart' as actions;
+import 'actions/create_quick_order.dart' as actions;
+import 'actions/find_complaint.dart' as find_complaint_action;
+import 'actions/get_invoice.dart' as invoice_action;
 import 'actions/get_more_order.dart' as actions;
 import 'actions/get_orders.dart' as actions;
-import 'actions/find_complaint.dart' as find_complaint_action;
 import 'actions/make_complaint.dart' as make_complaint_action;
 import 'actions/order_complaint.dart' as order_complaint_action;
-
+import 'order_repository.dart';
 
 class OrderRepository extends IOrderRepository {
   final INetworkService client;
@@ -46,7 +48,6 @@ class OrderRepository extends IOrderRepository {
     return actions.getMoreOrderById(id, client);
   }
 
-
   @override
   Future<void> createOrder({required CreateOrderModel orderDetails}) async {
     return actions.createOrder(orderDetails, client);
@@ -64,7 +65,6 @@ class OrderRepository extends IOrderRepository {
   }
 
   @override
-
   Future<ResponseItemComplaintFind> findComplaint(ParamsGetComplaint params) {
     return find_complaint_action.findComplaint(params, client);
   }
@@ -75,7 +75,13 @@ class OrderRepository extends IOrderRepository {
   }
 
   @override
-  Future<ResponseOrderComplaints> getOrderClaims(ParamsGetOrderComplaints params) {
+  Future<ResponseOrderComplaints> getOrderClaims(
+      ParamsGetOrderComplaints params) {
     return order_complaint_action.getOrderComplaints(params, client);
+  }
+
+  @override
+  Future<ResponseInvoice> invoiceDetails(ParamsGetInvoice params) {
+    return invoice_action.getMockInvoiceDetaills(params, client);
   }
 }

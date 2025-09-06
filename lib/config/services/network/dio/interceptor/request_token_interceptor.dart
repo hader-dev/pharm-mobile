@@ -3,18 +3,17 @@ import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/services/auth/token_manager.dart';
-
-import '../../../../../utils/enums.dart';
-import '../../network_interface.dart';
+import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
+import 'package:hader_pharm_mobile/utils/enums.dart';
 
 class TokenCheckerInterceptor extends Interceptor {
   bool isLastRefreshTry = false;
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) async {
-    final isTokenError =
-        ((err.response?.data["code"] == ApiErrorCodes.TOKEN_EXPIRED.label) ||
-            (err.response?.data["code"] == ApiErrorCodes.NO_TOKEN.label));
     try {
+      final isTokenError =
+          ((err.response?.data["code"] == ApiErrorCodes.TOKEN_EXPIRED.label) ||
+              (err.response?.data["code"] == ApiErrorCodes.NO_TOKEN.label));
       if (err.response?.statusCode == 401 &&
           isTokenError &&
           !isLastRefreshTry) {

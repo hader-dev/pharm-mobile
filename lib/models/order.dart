@@ -45,4 +45,36 @@ class BaseOrderModel {
       sellerCompanyName: json['companyInfo']['name'],
     );
   }
+
+  factory BaseOrderModel.empty() {
+    return BaseOrderModel(
+      id: '',
+      status: 0,
+      totalAmountExclTax: 0.0,
+      totalAmountInclTax: 0.0,
+      paymentMethod: null,
+      invoiceType: null,
+      deliveryAddress: '',
+      createdAt: DateTime.fromMillisecondsSinceEpoch(0),
+      updatedAt: DateTime.fromMillisecondsSinceEpoch(0),
+      discount: 0.0,
+      sellerCompanyName: null,
+    );
+  }
+
+  factory BaseOrderModel.mock() {
+    return BaseOrderModel(
+      id: 'order_001',
+      status: 1,
+      totalAmountExclTax: 1200.50,
+      totalAmountInclTax: 1320.55,
+      paymentMethod: 2,
+      invoiceType: 1,
+      deliveryAddress: '456 Example Ave, Mock City',
+      createdAt: DateTime.now().subtract(Duration(days: 15)),
+      updatedAt: DateTime.now(),
+      discount: 50.00,
+      sellerCompanyName: 'Mock Seller Co.',
+    );
+  }
 }

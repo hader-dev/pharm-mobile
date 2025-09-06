@@ -1,18 +1,17 @@
+import 'package:hader_pharm_mobile/models/company.dart';
+import 'package:hader_pharm_mobile/models/invoice.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
 class PharmaceuticalInvoice {
-  static List<pw.Page> build(Map<String, dynamic> invoiceData,
-      pw.ImageProvider logoImage, final double padding) {
-    final company = invoiceData['company'];
-    final invoice = invoiceData['invoice'];
-    final client = invoiceData['client'];
-    final items = List<Map<String, dynamic>>.from(invoiceData['items']);
-    final totals = invoiceData['totals'];
-    final conditions = invoiceData['conditions'];
+  static List<pw.Page> build(
+      Invoice invoice, pw.ImageProvider logoImage, final double padding) {
+    final company = invoice.sellerCompany!;
+    final client = invoice.clientCompany!;
+    final items = invoice.invoiceItems!;
 
     const itemsPerPage = 10;
-    final itemChunks = <List<Map<String, dynamic>>>[];
+    final itemChunks = <List<InvoiceItem>>[];
     for (var i = 0; i < items.length; i += itemsPerPage) {
       itemChunks.add(items.sublist(
         i,
@@ -40,7 +39,7 @@ class PharmaceuticalInvoice {
                 pw.SizedBox(height: 10),
                 _buildTable(chunk),
                 if (chunkIndex == itemChunks.length - 1)
-                  _buildFooter(items, invoice, totals, conditions),
+                  _buildFooter(items, invoice),
               ],
             );
           },
@@ -54,11 +53,8 @@ class PharmaceuticalInvoice {
   // -------------------------------
   // HEADER
   // -------------------------------
-  static pw.Widget _buildHeader(
-      Map<String, dynamic> company,
-      Map<String, dynamic> invoice,
-      Map<String, dynamic> client,
-      pw.ImageProvider logoImage) {
+  static pw.Widget _buildHeader(Company company, Invoice invoice,
+      Company client, pw.ImageProvider logoImage) {
     return pw.Column(
       crossAxisAlignment: pw.CrossAxisAlignment.start,
       children: [
@@ -77,40 +73,40 @@ class PharmaceuticalInvoice {
               pw.Column(
                 crossAxisAlignment: pw.CrossAxisAlignment.start,
                 children: [
-                  pw.Text(company['name'],
+                  pw.Text(company.name,
                       style: pw.TextStyle(
                           fontSize: 18, fontWeight: pw.FontWeight.bold)),
-                  pw.Text(company['description'] ?? '',
+                  pw.Text(company.description ?? '',
                       style: const pw.TextStyle(fontSize: 9)),
-                  pw.Text(company['address'] ?? '',
+                  pw.Text(company.address ?? '',
                       style: const pw.TextStyle(fontSize: 9)),
-                  pw.Text("Tél : ${company['phone']}",
+                  pw.Text("Tél : ${company.phone}",
                       style: const pw.TextStyle(fontSize: 9)),
-                  pw.Text("Fax : ${company['fax']}",
+                  pw.Text("Fax : ${company.fax}",
                       style: const pw.TextStyle(fontSize: 9)),
-                  pw.Text("Compte : ${company['account']}",
+                  pw.Text("Compte : ${company.bankAccount}",
                       style: const pw.TextStyle(fontSize: 9)),
-                  pw.Text("E-mail : ${company['email']}",
+                  pw.Text("E-mail : ${company.email}",
                       style: const pw.TextStyle(fontSize: 9)),
                 ],
               ),
               pw.Column(
                 crossAxisAlignment: pw.CrossAxisAlignment.end,
                 children: [
-                  if (company['logo'] != null)
+                  if (company.image?.path != null)
                     pw.Container(
                       width: 100,
                       height: 100,
                       child: pw.Image(logoImage, fit: pw.BoxFit.cover),
                     ),
                   pw.SizedBox(height: 10),
-                  pw.Text("Id Fiscal : ${company['fiscalId']}",
+                  pw.Text("Id Fiscal : ${company.fiscalId}",
                       style: const pw.TextStyle(fontSize: 9)),
-                  pw.Text("RC : ${company['rc']}",
+                  pw.Text("RC : ${company.rcNumber}",
                       style: const pw.TextStyle(fontSize: 9)),
-                  pw.Text("AI : ${company['ai']}",
+                  pw.Text("AI : ${company.aiNumber}",
                       style: const pw.TextStyle(fontSize: 9)),
-                  pw.Text("NIS : ${company['nis']}",
+                  pw.Text("NIS : ${company.nisNumber}",
                       style: const pw.TextStyle(fontSize: 9)),
                 ],
               )
@@ -126,30 +122,28 @@ class PharmaceuticalInvoice {
             pw.Column(
               crossAxisAlignment: pw.CrossAxisAlignment.start,
               children: [
-                pw.Text("FACTURE N°: ${invoice['number']}",
+                pw.Text("FACTURE N°: ${invoice.formattedInvoiceNumber}",
                     style: pw.TextStyle(
                         fontSize: 14, fontWeight: pw.FontWeight.bold)),
-                pw.Text(invoice['reference'] ?? '',
+                pw.Text(invoice.id, style: const pw.TextStyle(fontSize: 9)),
+                pw.Text("Code Client : ${invoice.clientCompany?.id}",
                     style: const pw.TextStyle(fontSize: 9)),
-                pw.Text("Code Client : ${invoice['clientCode']}",
+                pw.Text("Code Région : ${invoice.sellerCompany?.regionId}",
                     style: const pw.TextStyle(fontSize: 9)),
-                pw.Text("Code Région : ${invoice['regionCode']}",
+                pw.Text("Wilaya : ${invoice.sellerCompany?.willaya}",
                     style: const pw.TextStyle(fontSize: 9)),
-                pw.Text("Wilaya : ${invoice['wilaya']}",
+                pw.Text("Mode paiement : ${invoice.paymentMethod?.label}",
                     style: const pw.TextStyle(fontSize: 9)),
-                pw.Text("Mode paiement : ${invoice['paymentMode']}",
-                    style: const pw.TextStyle(fontSize: 9)),
-                pw.Text("Date Echéance : ${invoice['dueDate']}",
+                pw.Text("Date Echéance : ${invoice.dueDate}",
                     style: const pw.TextStyle(fontSize: 9)),
               ],
             ),
             pw.Column(
               crossAxisAlignment: pw.CrossAxisAlignment.end,
               children: [
-                pw.Text("Le : ${invoice['date']}",
+                pw.Text("Le : ${invoice.issueDate}",
                     style: const pw.TextStyle(fontSize: 9)),
-                pw.Text("DOIT : ${invoice['doit']}",
-                    style: const pw.TextStyle(fontSize: 9)),
+                pw.Text("DOIT : TBD??", style: const pw.TextStyle(fontSize: 9)),
               ],
             )
           ],
@@ -167,15 +161,15 @@ class PharmaceuticalInvoice {
           child: pw.Column(
             crossAxisAlignment: pw.CrossAxisAlignment.start,
             children: [
-              pw.Text("Pharmacie : ${client['name']}",
+              pw.Text("Pharmacie : ${client.name}",
                   style: pw.TextStyle(
                       fontSize: 11, fontWeight: pw.FontWeight.bold)),
-              pw.Text(client['address'],
+              pw.Text(client.address ?? "",
                   style: const pw.TextStyle(fontSize: 9)),
-              pw.Text("${client['city']} WILAYA: ${client['wilaya']}",
+              pw.Text("${client.town} WILAYA: ${client.willaya}",
                   style: const pw.TextStyle(fontSize: 9)),
               pw.Text(
-                  "IF: ${client['if']} AI: ${client['ai']} RC: ${client['rc']} NIS: ${client['nis']}",
+                  "IF: ${client.fiscalId} AI: ${client.aiNumber} RC: ${client.rcNumber} NIS: ${client.nisNumber}",
                   style: const pw.TextStyle(fontSize: 9)),
             ],
           ),
@@ -187,8 +181,8 @@ class PharmaceuticalInvoice {
   // -------------------------------
   // CONTINUATION HEADER
   // -------------------------------
-  static pw.Widget _buildContinuationHeader(Map<String, dynamic> company,
-      Map<String, dynamic> invoice, int pageNumber) {
+  static pw.Widget _buildContinuationHeader(
+      Company company, Invoice invoice, int pageNumber) {
     return pw.Container(
       padding: const pw.EdgeInsets.only(bottom: 10),
       decoration: pw.BoxDecoration(
@@ -199,10 +193,10 @@ class PharmaceuticalInvoice {
       child: pw.Row(
         mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
         children: [
-          pw.Text(company['name'],
+          pw.Text(company.name,
               style:
                   pw.TextStyle(fontSize: 18, fontWeight: pw.FontWeight.bold)),
-          pw.Text("FACTURE N°: ${invoice['number']} - Page $pageNumber",
+          pw.Text("FACTURE N°: ${invoice.invoiceNumber} - Page $pageNumber",
               style:
                   pw.TextStyle(fontSize: 14, fontWeight: pw.FontWeight.bold)),
         ],
@@ -213,7 +207,7 @@ class PharmaceuticalInvoice {
   // -------------------------------
   // TABLE
   // -------------------------------
-  static pw.Widget _buildTable(List<Map<String, dynamic>> itemsChunk) {
+  static pw.Widget _buildTable(List<InvoiceItem> itemsChunk) {
     return pw.Column(
       children: [
         // Table Header
@@ -251,16 +245,16 @@ class PharmaceuticalInvoice {
             ),
             child: pw.Row(
               children: [
-                _col(item['designation'], 3),
-                _col("${item['quantity']}", 1, center: true),
-                _col(item['lotNumber'], 1, center: true),
-                _col(item['ppa'], 1, center: true),
-                _col(item['shp'], 1, center: true),
-                _col(item['puHt'], 1, center: true),
-                _col(item['expiry'], 1, center: true),
-                _col(item['tva'], 1, center: true),
-                _col(item['mge'], 1, center: true),
-                _col(item['mtHt'], 1, center: true),
+                _col(item.designation, 3),
+                _col("${item.quantity}", 1, center: true),
+                _col(item.lotNumber, 1, center: true),
+                _col(item.ppa, 1, center: true),
+                _col(item.shp, 1, center: true),
+                _col(item.puHt, 1, center: true),
+                _col(item.expiry, 1, center: true),
+                _col(item.tva, 1, center: true),
+                _col(item.mge, 1, center: true),
+                _col(item.mtHt, 1, center: true),
               ],
             ),
           );
@@ -285,10 +279,8 @@ class PharmaceuticalInvoice {
   // FOOTER
   // -------------------------------
   static pw.Widget _buildFooter(
-    List<Map<String, dynamic>> items,
-    Map<String, dynamic> invoice,
-    Map<String, dynamic> totals,
-    Map<String, dynamic> conditions,
+    List<InvoiceItem> items,
+    Invoice invoice,
   ) {
     return pw.Column(
       crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -303,7 +295,7 @@ class PharmaceuticalInvoice {
           padding: const pw.EdgeInsets.all(5),
           margin: const pw.EdgeInsets.only(bottom: 10),
           child: pw.Text(
-            "Lignes : ${items.length} NB: ${invoice['itemCount']} SHP: ${totals['totalShp']} PPA: ${totals['totalPpa']} Rist: ${totals['rist']}",
+            "Lignes : ${items.length} NB: ${invoice.invoiceSummary.totalItems} SHP: ${invoice.invoiceSummary.totalShipping} PPA: ${invoice.invoiceSummary.totalPpa} Rist: ${invoice.invoiceSummary.totalRist}",
             style: const pw.TextStyle(fontSize: 8),
           ),
         ),
@@ -317,7 +309,7 @@ class PharmaceuticalInvoice {
                 children: [
                   pw.Text("Arrêtée la présente facture à la somme de :",
                       style: const pw.TextStyle(fontSize: 10)),
-                  pw.Text("${totals['amountInWords']}",
+                  pw.Text(invoice.invoiceSummary.amountInWords,
                       style: const pw.TextStyle(fontSize: 10)),
                 ],
               ),
@@ -329,9 +321,9 @@ class PharmaceuticalInvoice {
               ),
               child: pw.Column(
                 children: [
-                  _totalRow("TOTAL HT", totals['totalHt']),
-                  _totalRow("TVA", totals['tva']),
-                  _totalRow("TIMBRE", totals['timbre']),
+                  _totalRow("TOTAL HT", invoice.invoiceSummary.totalExclTax),
+                  _totalRow("TVA", invoice.invoiceSummary.vatAmount),
+                  _totalRow("TIMBRE", invoice.invoiceSummary.stampDuty),
                   pw.Container(
                     color: PdfColors.grey300,
                     padding: const pw.EdgeInsets.all(5),
@@ -341,7 +333,7 @@ class PharmaceuticalInvoice {
                         pw.Text("NET A PAYER",
                             style: pw.TextStyle(
                                 fontSize: 10, fontWeight: pw.FontWeight.bold)),
-                        pw.Text("${totals['netToPay']}",
+                        pw.Text("${invoice.invoiceSummary.netToPay}",
                             style: pw.TextStyle(
                                 fontSize: 10, fontWeight: pw.FontWeight.bold)),
                       ],
@@ -362,7 +354,7 @@ class PharmaceuticalInvoice {
             children: [
               _conditionBox("Colis"),
               _conditionBox("Psycho"),
-              _conditionBox("Frigo", value: conditions['frigo']),
+              _conditionBox("Frigo"),
             ],
           ),
         )

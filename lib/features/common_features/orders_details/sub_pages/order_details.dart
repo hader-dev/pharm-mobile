@@ -116,8 +116,9 @@ class OrdersDetailsPage extends StatelessWidget {
                         child: PrimaryTextButton(
                           label: translation.invoice,
                           onTap: () {
-                            RoutingManager.router
-                                .pushNamed(RoutingManager.invoiceScreen);
+                            RoutingManager.router.pushNamed(
+                                RoutingManager.invoiceScreen,
+                                extra: orderId);
                           },
                           color: AppColors.accent1Shade1,
                         ),
