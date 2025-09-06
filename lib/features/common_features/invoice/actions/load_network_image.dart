@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
+import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:pdf/widgets.dart' as pw;
 
 Future<pw.ImageProvider> loadNetworkLogo(String url,
@@ -17,8 +19,12 @@ Future<pw.ImageProvider> loadNetworkLogo(String url,
       final Uint8List bytes = Uint8List.fromList(response.data!);
       return pw.MemoryImage(bytes);
     }
-    return pw.MemoryImage(Uint8List.fromList([]));
-  } catch (e) {
-    return pw.MemoryImage(Uint8List.fromList([]));
+  } catch (e, stacktrace) {
+    debugPrint("$e");
+    debugPrintStack(stackTrace: stacktrace);
   }
+
+  final fallback =
+      await rootBundle.load(DrawableAssetStrings.paraPharmaPlaceHolderImg);
+  return pw.MemoryImage(fallback.buffer.asUint8List());
 }

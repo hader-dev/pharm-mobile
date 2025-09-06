@@ -22,8 +22,8 @@ class InvoiceGenerator extends StatelessWidget {
         .invoice;
 
     final logoImage = await loadNetworkLogo(
-     invoice.sellerCompany?.image?.path ?? "",
-    );
+        "" // RN disabled to trigger fallback api not ready invoice.sellerCompany?.image?.path ?? "",
+        );
 
     final pdf = pw.Document();
 

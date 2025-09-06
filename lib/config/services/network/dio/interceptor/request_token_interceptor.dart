@@ -10,10 +10,14 @@ class TokenCheckerInterceptor extends Interceptor {
   bool isLastRefreshTry = false;
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) async {
+    final data = err.response?.data;
+    final isJson = data is Map<String, dynamic>;
+
+    final isTokenError = isJson &&
+        (data["code"] == ApiErrorCodes.TOKEN_EXPIRED.label ||
+            data["code"] == ApiErrorCodes.NO_TOKEN.label);
+
     try {
-      final isTokenError =
-          ((err.response?.data["code"] == ApiErrorCodes.TOKEN_EXPIRED.label) ||
-              (err.response?.data["code"] == ApiErrorCodes.NO_TOKEN.label));
       if (err.response?.statusCode == 401 &&
           isTokenError &&
           !isLastRefreshTry) {
