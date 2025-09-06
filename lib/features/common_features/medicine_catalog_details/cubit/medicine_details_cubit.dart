@@ -80,7 +80,8 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
       try {
         final product = state.medicineCatalogData!;
 
-        final deepLinkUrl = 'https://pharma.com/product/medicine/${product.id}';
+        final deepLinkUrl =
+            'https://hader-pharm.com/product/medicine/${product.id}';
 
         await SharePlus.instance
             .share(ShareParams(uri: Uri.parse(deepLinkUrl)));

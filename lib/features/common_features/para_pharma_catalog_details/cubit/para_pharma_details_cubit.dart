@@ -76,7 +76,7 @@ class ParaPharmaDetailsCubit extends Cubit<ParaPharmaDetailsState> {
         final product = paraPharmaCatalogData!;
 
         final deepLinkUrl =
-            'https://pharma.com/product/parapharma/${product.id}';
+            'https://hader-pharm.com/product/parapharma/${product.id}';
 
         await SharePlus.instance
             .share(ShareParams(uri: Uri.parse(deepLinkUrl)));

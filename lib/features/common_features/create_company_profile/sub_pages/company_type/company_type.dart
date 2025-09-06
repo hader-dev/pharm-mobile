@@ -11,36 +11,40 @@ class CompanyTypePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final supportedCompanyTypes = [
+      CompanyType.pharmacy,
+      CompanyType.commercial,
+    ];
+
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p16),
-      child: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child:
-            BlocBuilder<CreateCompanyProfileCubit, CreateCompanyProfileState>(
-          builder: (context, state) {
-            return TypeCard(
-              title: CompanyType.pharmacy.name,
-              index: CompanyType.pharmacy.id,
-              selectedTypeIndex:
+      child: BlocBuilder<CreateCompanyProfileCubit, CreateCompanyProfileState>(
+                builder: (context, state) {
+      return ListView.builder(
+        itemCount: supportedCompanyTypes.length,
+        itemBuilder: (ctx, idx) => TypeCard(
+          title: supportedCompanyTypes[idx].name,
+          index: supportedCompanyTypes[idx].id,
+          selectedTypeIndex:
+              BlocProvider.of<CreateCompanyProfileCubit>(context)
+                  .companyData
+                  .companyType,
+          imagePath: supportedCompanyTypes[idx].imgPath,
+          onTap: () {
+            BlocProvider.of<CreateCompanyProfileCubit>(context)
+                .changeCompanyData(
+              modifiedData:
                   BlocProvider.of<CreateCompanyProfileCubit>(context)
                       .companyData
-                      .companyType,
-              imagePath: CompanyType.pharmacy.imgPath,
-              onTap: () {
-                BlocProvider.of<CreateCompanyProfileCubit>(context)
-                    .changeCompanyData(
-                  modifiedData:
-                      BlocProvider.of<CreateCompanyProfileCubit>(context)
-                          .companyData
-                          .copyWith(
-                            companyType: CompanyType.pharmacy.id,
-                          ),
-                );
-              },
+                      .copyWith(
+                        companyType: supportedCompanyTypes[idx].id,
+                      ),
             );
           },
         ),
-      ),
+      );
+                },
+              ),
     );
   }
 }

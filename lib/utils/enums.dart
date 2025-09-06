@@ -202,7 +202,8 @@ enum InvoiceTypes {
 
 enum CompanyType {
   distributor(id: 1, imgPath: DrawableAssetStrings.companyIllustration2),
-  pharmacy(id: 2, imgPath: DrawableAssetStrings.companyIllustration1);
+  pharmacy(id: 2, imgPath: DrawableAssetStrings.companyIllustration1),
+  commercial(id: 4, imgPath: DrawableAssetStrings.companyIllustration3);
 
   final int id;
   final String imgPath;

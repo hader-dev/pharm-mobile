@@ -62,7 +62,7 @@ class CreateCompanyProfile extends StatelessWidget {
                 return Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-             const ResponsiveGap.s24(),
+                    const ResponsiveGap.s24(),
                     PageHeaderSection(
                       currentStep:
                           BlocProvider.of<CreateCompanyProfileCubit>(context)
@@ -77,10 +77,7 @@ class CreateCompanyProfile extends StatelessWidget {
                       physics: NeverScrollableScrollPhysics(),
                       children: [
                         CompanyTypePage(),
-                        if (BlocProvider.of<CreateCompanyProfileCubit>(context)
-                                .companyData
-                                .companyType ==
-                            CompanyType.pharmacy.id) ...[
+                        if (isCommercialOrPharmaType(context)) ...[
                           PharmacyGeneralInformationPage(),
                           PharmacyLegalInformationPage(),
                           PharmacyProfilePage()
@@ -106,5 +103,16 @@ class CreateCompanyProfile extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  bool isCommercialOrPharmaType(BuildContext context) {
+    return (BlocProvider.of<CreateCompanyProfileCubit>(context)
+                .companyData
+                .companyType ==
+            CompanyType.pharmacy.id) ||
+        (BlocProvider.of<CreateCompanyProfileCubit>(context)
+                .companyData
+                .companyType ==
+            CompanyType.commercial.id);
   }
 }

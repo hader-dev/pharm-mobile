@@ -11,6 +11,7 @@ InputDecoration buildDropdownInputDecoration(
       contentPadding: EdgeInsets.all(AppSizesManager.p12),
       fillColor: AppColors.bgWhite,
       enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.grey),
         borderRadius:
             BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
       ),
@@ -20,6 +21,7 @@ InputDecoration buildDropdownInputDecoration(
         borderSide: BorderSide(color: AppColors.bgDisabled),
       ),
       focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.grey),
         borderRadius:
             BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
       ),
