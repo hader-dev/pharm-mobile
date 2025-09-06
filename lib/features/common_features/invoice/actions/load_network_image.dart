@@ -16,9 +16,8 @@ Future<pw.ImageProvider> loadNetworkLogo(String url,
     if (response.statusCode == 200 && response.data != null) {
       final Uint8List bytes = Uint8List.fromList(response.data!);
       return pw.MemoryImage(bytes);
-    } else {
-      throw Exception("Failed to load logo from $url");
     }
+    return pw.MemoryImage(Uint8List.fromList([]));
   } catch (e) {
     return pw.MemoryImage(Uint8List.fromList([]));
   }
