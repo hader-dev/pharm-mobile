@@ -78,7 +78,7 @@ sealed class ParaPharmaState {
   ParaPharmaLiked liked({required String paraPharmaId, required bool isLiked}) {
     final updated = paraPharmaProducts.map((element) {
       if (element.id == paraPharmaId) {
-        return element.copyWith(isLiked: isLiked); // ✅ actually toggle
+        return element.copyWith(isLiked: isLiked); 
       }
       return element;
     }).toList();

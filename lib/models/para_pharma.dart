@@ -23,8 +23,29 @@ class BaseParaPharmaCatalogModel {
       required this.isActive,
       this.company,
       this.isLiked = false});
-
-
+  BaseParaPharmaCatalogModel copyWith({
+    String? id,
+    String? unitPriceHt,
+    ImageModel? thumbnailImage,
+    ImageModel? image,
+    String? name,
+    int? stockQuantity,
+    bool? isActive,
+    BaseCompany? company,
+    bool? isLiked,
+  }) {
+    return BaseParaPharmaCatalogModel(
+      id: id ?? this.id,
+      unitPriceHt: unitPriceHt ?? this.unitPriceHt,
+      thumbnailImage: thumbnailImage ?? this.thumbnailImage,
+      image: image ?? this.image,
+      name: name ?? this.name,
+      stockQuantity: stockQuantity ?? this.stockQuantity,
+      isActive: isActive ?? this.isActive,
+      company: company ?? this.company,
+      isLiked: isLiked ?? this.isLiked,
+    );
+  }
 }
 
 class BaseBrand {
