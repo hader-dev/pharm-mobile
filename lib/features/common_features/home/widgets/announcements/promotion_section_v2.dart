@@ -9,14 +9,13 @@ import 'package:hader_pharm_mobile/features/common_features/home/cubit/home_cubi
 import 'package:hader_pharm_mobile/models/announcement.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class PromotionSection extends StatelessWidget {
+class PromotionSectionV2 extends StatelessWidget {
   final List<AnnouncementModel> announcements;
   final PageController pageController = PageController(initialPage: 0);
   final double minSectionHeight;
 
-  PromotionSection(
+  PromotionSectionV2(
       {super.key,
       this.announcements = const <AnnouncementModel>[],
       required this.minSectionHeight});
@@ -72,54 +71,27 @@ class PromotionSection extends StatelessWidget {
                   ],
                 ),
                 const ResponsiveGap.s8(),
-                Column(
-                  children: <Widget>[
-                    Container(
-                      clipBehavior: Clip.antiAlias,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(
-                              AppSizesManager.commonWidgetsRadius)),
-                      height: minSectionHeight * 1.5,
-                      width: MediaQuery.of(context).size.width * 0.95,
-                      child: LayoutBuilder(builder: (context, constraints) {
-                        return PageView(
-                          controller: pageController,
-                          scrollDirection: Axis.horizontal,
-                          children: announcements
-                              .map((AnnouncementModel announcement) =>
-                                  PromotionItemWidget2(
-                                    announcement: announcement,
-                                    onTap: (announcement) =>
-                                        RoutingManager.router.pushNamed(
-                                            RoutingManager
-                                                .announcementDetailsScreen,
-                                            extra: announcement.id),
-                                  ))
-                              .toList(),
+                Expanded(
+                  child: LayoutBuilder(builder: (context, constraints) {
+                    return ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      itemCount: announcements.length,
+                      separatorBuilder: (context, index) => const ResponsiveGap.s8(),
+                      itemBuilder: (context, index) {
+                        return SizedBox(
+                          width: constraints.maxWidth * 0.65,
+                          child: PromotionItemWidget2(
+                            announcement: announcements[index],
+                            onTap: (announcement) => RoutingManager.router
+                                .pushNamed(
+                                    RoutingManager.announcementDetailsScreen,
+                                    extra: announcement.id),
+                          ),
                         );
-                      }),
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.black45,
-                        borderRadius: BorderRadius.circular(
-                            AppSizesManager.commonWidgetsRadius),
-                      ),
-                      padding: const EdgeInsets.all(AppSizesManager.p4),
-                      margin: const EdgeInsets.all(AppSizesManager.p4),
-                      child: SmoothPageIndicator(
-                        controller: pageController,
-                        effect: const ExpandingDotsEffect(
-                          dotHeight: 4,
-                          dotWidth: 4,
-                          spacing: 2,
-                          dotColor: Colors.grey,
-                          activeDotColor: Colors.white,
-                        ),
-                        count: announcements.length,
-                      ),
-                    ),
-                  ],
+                      },
+                    );
+                  }),
                 ),
               ],
             ),

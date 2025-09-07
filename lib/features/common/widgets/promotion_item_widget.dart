@@ -4,7 +4,6 @@ import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/image/cached_network_image_with_asset_fallback.dart';
-import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/models/announcement.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
@@ -43,6 +42,7 @@ class PromotionItemWidget extends StatelessWidget {
               flex: 2,
               child: CachedNetworkImageWithAssetFallback(
                 width: double.infinity,
+                height: double.infinity,
                 imageUrl: getItInstance
                     .get<INetworkService>()
                     .getFilesPath(announcement.thumbnailImage?.path ?? ""),
@@ -57,25 +57,11 @@ class PromotionItemWidget extends StatelessWidget {
               flex: 1,
               child: Padding(
                 padding: const EdgeInsets.all(AppSizesManager.p8),
-                child: Column(
-                  children: [
-                    Text(
-                      announcement.title,
-                      style: context
-                          .responsiveTextTheme.current.headLine3SemiBold
-                          .copyWith(
-                        color: Colors.black87,
-                      ),
-                    ),
-                    const ResponsiveGap.s2(),
-                    Text(
-                      announcement.title,
-                      style: context.responsiveTextTheme.current.body3Regular
-                          .copyWith(
-                        color: Colors.black87,
-                      ),
-                    )
-                  ],
+                child: Text(
+                  announcement.title,
+                  style: context.responsiveTextTheme.current.body3Regular
+                      .copyWith(
+                          color: Colors.black, overflow: TextOverflow.fade),
                 ),
               ),
             ),
