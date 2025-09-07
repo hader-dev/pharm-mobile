@@ -42,7 +42,7 @@ class PromotionSection extends StatelessWidget {
             left: AppSizesManager.p8,
           ),
           child: SizedBox(
-            height: minSectionHeight * 2.2, 
+            height: minSectionHeight * 2.2,
             child: Column(
               children: [
                 Row(
@@ -63,9 +63,9 @@ class PromotionSection extends StatelessWidget {
                       },
                       child: Text(
                         context.translation!.see_all,
-                        style: const TextStyle(
+                        style: context.responsiveTextTheme.current.body3Regular
+                            .copyWith(
                           color: AppColors.accent1Shade1,
-                          fontWeight: FontWeight.w500,
                         ),
                       ),
                     ),

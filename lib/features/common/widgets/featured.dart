@@ -20,7 +20,7 @@ class FeaturedEntity extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: size * 1.25,
+      height: size,
       width: size,
       child: InkWell(
         onTap: onPress,
@@ -37,7 +37,7 @@ class FeaturedEntity extends StatelessWidget {
                 borderRadius: BorderRadius.circular(6),
                 child: CacheNetworkImagePlus(
                   width: size,
-                  height: (size * 0.5) - AppSizesManager.p8,
+                  height: (size * 0.6) - AppSizesManager.p8,
                   boxFit: BoxFit.cover,
                   imageUrl: imageUrl ??
                       "https://images.aeonmedia.co/images/afef287f-dd6f-4a6a-b8a6-4f0a09330657/sized-kendal-l4ikccachoc-unsplash.jpg?width=3840&quality=75&format=auto",

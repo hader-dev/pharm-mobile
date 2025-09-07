@@ -52,8 +52,8 @@ class VendorsSectionItems extends StatelessWidget {
             spacing: spacing,
             runSpacing: spacing,
             children:
-                List.generate(min(maxVisibleItems, items.length), (index) {
-              final entity = visibleItems[index];
+                List.generate(min(maxVisibleItems, 8), (index) {
+              final entity = visibleItems[0];
               return FeaturedEntity(
                 size: itemWidth,
                 title: entity.name,

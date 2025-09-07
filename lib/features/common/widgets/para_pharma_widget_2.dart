@@ -157,17 +157,6 @@ class ParaPharmaWidget2 extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 const ResponsiveGap.s8(),
-                // Row(children: [
-                //   Transform.scale(
-                //       alignment: Alignment.centerLeft,
-                //       scale: .9,
-                //       child: CustomChip(
-                //           label: "Antibiotic",
-                //           color: AppColors.bgDarken2,
-                //           onTap: () {})),
-                //   Spacer()
-                // ]),
-                const ResponsiveGap.s8(),
                 Text(paraPharmData.name,
                     maxLines: 1,
                     softWrap: true,

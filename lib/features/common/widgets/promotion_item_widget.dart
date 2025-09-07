@@ -5,6 +5,7 @@ import 'package:hader_pharm_mobile/config/services/network/network_interface.dar
 import 'package:hader_pharm_mobile/features/common/image/cached_network_image_with_asset_fallback.dart';
 import 'package:hader_pharm_mobile/models/announcement.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
+import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 typedef OnTapCallback = void Function(AnnouncementModel announcement);
@@ -37,7 +38,7 @@ class PromotionItemWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Flexible(
-              flex: 3, 
+              flex: 3,
               child: CachedNetworkImageWithAssetFallback(
                 width: double.infinity,
                 height: double.infinity,
@@ -49,39 +50,15 @@ class PromotionItemWidget extends StatelessWidget {
               ),
             ),
             Flexible(
-              flex: 2, 
+              flex: 2,
               child: Padding(
-                padding: const EdgeInsets.all(2.0), 
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Flexible(
-                      child: Text(
-                        announcement.title,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: context
-                            .responsiveTextTheme.current.headLine3SemiBold
-                            .copyWith(
-                          color: Colors.black87,
-                        ),
-                      ),
-                    ),
-                    Flexible(
-                      child: Text(
-                        announcement.title,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: context.responsiveTextTheme.current.body3Regular
-                            .copyWith(
-                          color: Colors.black87,
-                        ),
-                      ),
-                    )
-                  ],
-
-             
+                padding: const EdgeInsets.all(AppSizesManager.p8),
+                child: Text(
+                  announcement.title,
+                  style: context.responsiveTextTheme.current.headLine3SemiBold
+                      .copyWith(
+                    color: Colors.black87,
+                  ),
                 ),
               ),
             ),

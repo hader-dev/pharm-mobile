@@ -78,19 +78,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ? minSectionHeight * 0.8
                                 : minSectionHeight),
                       const ResponsiveGap.s12(),
+                      VendorSection(),
+                      const ResponsiveGap.s12(),
                       ParapharmaSection(minSectionHeight: minSectionHeight),
-                      const ResponsiveGap.s16(),
-                      VendorSection(
-                          minSectionHeight:
-                              context.read<VendorsCubit>().vendorsList.length <
-                                      4
-                                  ? minSectionHeight * 0.8
-                                  : minSectionHeight),
-                      // Ultra-minimal spacing between vendors and medicines for phones
-                      SizedBox(
-                          height: MediaQuery.of(context).size.width <= 414
-                              ? 1
-                              : 12),
+                      const ResponsiveGap.s12(),
                       MedicineSection(minSectionHeight: minSectionHeight),
                       const ResponsiveGap.s12(),
                     ],
