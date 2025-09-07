@@ -33,7 +33,7 @@ double calculateMarketplaceGridSpacing(DeviceSizes deviceSize) =>
     deviceSize.width <= DeviceSizes.mediumTablet.width ? 4 : 10;
 
 double calculateMarketplaceMainAxisSpacing(DeviceSizes deviceSize) =>
-    deviceSize.width <= DeviceSizes.mediumTablet.width ? 4 : 6;
+    deviceSize.width <= DeviceSizes.mediumTablet.width ? 2 : 4;
 
 int calculateMarketplaceCrossAxisCount(DeviceSizes deviceSize) =>
     deviceSize.width <= DeviceSizes.mediumTablet.width ? 1 : 2;

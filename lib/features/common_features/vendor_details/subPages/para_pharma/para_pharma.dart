@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hader_pharm_mobile/config/responsive/device_size.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
@@ -9,10 +8,12 @@ import 'package:hader_pharm_mobile/features/common/widgets/para_pharma_widget_2.
 import 'package:hader_pharm_mobile/features/common_features/anouncement_details/sub_pages/para_pharma/cubit/para_pharma_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/medicine_products/cubit/medicine_products_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/medicine_products/widget/search_filter_bottom_sheet.dart';
+import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
+import 'package:hader_pharm_mobile/utils/responsive/silver_grid_params.dart';
 import 'package:iconsax/iconsax.dart';
 
 class ParapharmaPage extends StatefulWidget {
@@ -110,16 +111,25 @@ class _ParapharmaPageState extends State<ParapharmaPage>
                 return const Center(child: CircularProgressIndicator());
               }
 
-              final crossAxisCount =
-                  bContext.deviceSize.width <= DeviceSizes.mediumMobile.width
-                      ? 1
-                      : 2;
+              final paraPharmaProducts = BlocProvider.of<ParaPharmaCubit>(bContext)
+                  .paraPharmaProducts;
 
-              if (BlocProvider.of<ParaPharmaCubit>(bContext)
-                  .paraPharmaProducts
-                  .isEmpty) {
+              if (paraPharmaProducts.isEmpty) {
                 return EmptyListWidget();
               }
+
+              final bool isLoadingMore = state is LoadingMoreParaPharma;
+              final bool hasReachedEnd = state is ParaPharmasLoadLimitReached;
+
+              void onLikeTapped(BaseParaPharmaCatalogModel paraPharma) {
+                final id = paraPharma.id;
+                paraPharma.isLiked
+                    ? BlocProvider.of<ParaPharmaCubit>(bContext)
+                        .unlikeParaPharmaCatalog(id)
+                    : BlocProvider.of<ParaPharmaCubit>(bContext)
+                        .likeParaPharmaCatalog(id);
+              }
+
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -131,20 +141,41 @@ class _ParapharmaPageState extends State<ParapharmaPage>
                       },
                       child: GridView.builder(
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: crossAxisCount,
-                            childAspectRatio: 0.7),
+                          crossAxisCount: calculateMarketplaceCrossAxisCount(
+                              bContext.deviceSize),
+                          crossAxisSpacing: calculateMarketplaceGridSpacing(
+                              bContext.deviceSize),
+                          mainAxisSpacing: calculateMarketplaceMainAxisSpacing(
+                              bContext.deviceSize),
+                          childAspectRatio: calculateMarketplaceAspectRatio(
+                              bContext.deviceSize, bContext.orientation),
+                        ),
                         controller: BlocProvider.of<ParaPharmaCubit>(bContext)
                             .scrollController,
                         shrinkWrap: true,
                         physics: const AlwaysScrollableScrollPhysics(),
-                        itemCount: BlocProvider.of<ParaPharmaCubit>(bContext)
-                            .paraPharmaProducts
-                            .length,
-                        itemBuilder: (context, index) => ParaPharmaWidget2(
-                          paraPharmData:
-                              BlocProvider.of<ParaPharmaCubit>(context)
-                                  .paraPharmaProducts[index],
-                        ),
+                        itemCount: paraPharmaProducts.length +
+                            (isLoadingMore || hasReachedEnd ? 1 : 0),
+                        itemBuilder: (context, index) {
+                          if (index < paraPharmaProducts.length) {
+                            final paraPharma = paraPharmaProducts[index];
+                            return ParaPharmaWidget2(
+                              paraPharmData: paraPharma,
+                              onFavoriteCallback: onLikeTapped,
+                            );
+                          } else {
+                            if (isLoadingMore) {
+                              return const Padding(
+                                padding: EdgeInsets.all(AppSizesManager.s16),
+                                child:
+                                    Center(child: CircularProgressIndicator()),
+                              );
+                            } else if (hasReachedEnd) {
+                              return const EndOfLoadResultWidget();
+                            }
+                          }
+                          return const SizedBox.shrink();
+                        },
                       ),
                     ),
                   ),
