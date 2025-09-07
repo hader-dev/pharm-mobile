@@ -16,78 +16,76 @@ class SearchWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-          children: [
-            Flexible(
-              child: Padding(
-                padding: const EdgeInsets.only(left: AppSizesManager.p8),
-                child: CustomTextField(
-                  hintText: context.translation!.search_by_name_packaging_sku,
-                  controller: BlocProvider.of<ParaPharmaCubit>(context)
-                      .searchController,
-                  state: FieldState.normal,
-                  isEnabled: true,
-                  prefixIcon: Icon(
-                    Iconsax.search_normal,
-                    color: AppColors.accent1Shade1,
-                  ),
-                  suffixIcon: InkWell(
-                    onTap: () {
-                      BlocProvider.of<ParaPharmaCubit>(context)
-                          .searchController
-                          .clear();
-                      BlocProvider.of<ParaPharmaCubit>(context)
-                          .searchParaPharmaCatalog(null);
-                    },
-                    child: Icon(
-                      Icons.clear,
+      children: [
+        Flexible(
+          child: Padding(
+            padding: const EdgeInsets.only(left: AppSizesManager.p8),
+            child: CustomTextField(
+              hintText: context.translation!.search_by_name_packaging_sku,
+              controller:
+                  BlocProvider.of<ParaPharmaCubit>(context).searchController,
+              state: FieldState.normal,
+              isEnabled: true,
+              prefixIcon: Icon(
+                Iconsax.search_normal,
+                color: AppColors.accent1Shade1,
+              ),
+              suffixIcon: InkWell(
+                onTap: () {
+                  BlocProvider.of<ParaPharmaCubit>(context)
+                      .searchController
+                      .clear();
+                  BlocProvider.of<ParaPharmaCubit>(context)
+                      .searchParaPharmaCatalog(null);
+                },
+                child: Icon(
+                  Icons.clear,
+                  color: AppColors.accent1Shade1,
+                ),
+              ),
+              onChanged: (searchValue) {
+                BlocProvider.of<ParaPharmaCubit>(context)
+                    .searchParaPharmaCatalog(searchValue);
+              },
+              validationFunc: (value) {},
+            ),
+          ),
+        ),
+        InkWell(
+          child: Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: AppSizesManager.p12),
+            child: BlocBuilder<ParaPharmaCubit, ParaPharmaState>(
+              builder: (context, state) {
+                return Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    Icon(
+                      Iconsax.filter,
                       color: AppColors.accent1Shade1,
                     ),
-                  ),
-                  onChanged: (searchValue) {
-                    BlocProvider.of<ParaPharmaCubit>(context)
-                        .searchParaPharmaCatalog(searchValue);
-                  },
-                  validationFunc: (value) {},
-                ),
-              ),
-            ),
-            InkWell(
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: AppSizesManager.p12),
-                child: BlocBuilder<ParaPharmaCubit, ParaPharmaState>(
-                  builder: (context, state) {
-                    return Stack(
-                      clipBehavior: Clip.none,
-                      children: [
-                        Icon(
-                          Iconsax.filter,
-                          color: AppColors.accent1Shade1,
+                    if (state.filters.isNotEmpty)
+                      Positioned(
+                        top: -4,
+                        right: -4,
+                        child: CircleAvatar(
+                          radius: AppSizesManager.commonWidgetsRadius,
+                          backgroundColor: Colors.red,
                         ),
-                        if (BlocProvider.of<ParaPharmaCubit>(context)
-                                .selectedParaPharmaSearchFilter !=
-                            null)
-                          Positioned(
-                            top: -4,
-                            right: -4,
-                            child: CircleAvatar(
-                              radius: AppSizesManager.commonWidgetsRadius,
-                              backgroundColor: Colors.red,
-                            ),
-                          )
-                      ],
-                    );
-                  },
-                ),
-              ),
-              onTap: () {
-                BottomSheetHelper.showCommonBottomSheet(
-                  context: context,
-                  child: SearchParaPharmFilterBottomSheet(),
+                      )
+                  ],
                 );
               },
             ),
-          ],
-        );
+          ),
+          onTap: () {
+            BottomSheetHelper.showCommonBottomSheet(
+              context: context,
+              child: SearchParaPharmFilterBottomSheet(),
+            );
+          },
+        ),
+      ],
+    );
   }
 }

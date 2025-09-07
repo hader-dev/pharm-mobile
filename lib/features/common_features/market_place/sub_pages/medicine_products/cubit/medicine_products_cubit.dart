@@ -13,13 +13,6 @@ import 'package:hader_pharm_mobile/utils/enums.dart';
 part 'medicine_products_state.dart';
 
 class MedicineProductsCubit extends Cubit<MedicineProductsState> {
-  int totalItemsCount = 0;
-  int offSet = 0;
-  Timer? _debounce;
-  SearchMedicineFilters? selectedMedicineSearchFilter;
-  List<BaseMedicineCatalogModel> medicines = [];
-  MedicalFilters params = const MedicalFilters();
-
   final MedicineCatalogRepository medicineRepository;
   final FavoriteRepository favoriteRepository;
   final ScrollController scrollController;
@@ -38,52 +31,51 @@ class MedicineProductsCubit extends Cubit<MedicineProductsState> {
     String? companyIdFilter,
   }) async {
     try {
-      emit(MedicineProductsLoading());
+      emit(state.loading(offset: offset));
       var medicinesResponse = await medicineRepository.getMedicinesCatalog(
         offset: offset,
-        filters: params,
+        filters: state.params,
         companyId: companyIdFilter,
       );
-      totalItemsCount = medicinesResponse.totalItems;
-      medicines = medicinesResponse.data;
-      emit(MedicineProductsLoaded());
+      emit(state.loaded(
+          medicines: medicinesResponse.data,
+          totalItemsCount: medicinesResponse.totalItems));
     } catch (e) {
-      emit(MedicineProductsLoadingFailed());
+      emit(state.loadingFailed());
     }
   }
 
   Future<void> loadMoreMedicines() async {
     try {
-      if (offSet >= totalItemsCount) {
-        emit(MedicinesLoadLimitReached());
+      if (state.offSet >= state.totalItemsCount) {
+        emit(state.loadLimitReached());
         return;
       }
 
-      offSet = offSet + PaginationConstants.resultsPerPage;
-      emit(MedicineProductsLoading());
+      final newOffset = state.offSet + PaginationConstants.resultsPerPage;
+      emit(state.loadingMore());
       var medicinesResponse = await medicineRepository.getMedicinesCatalog(
-        offset: offSet,
-        filters: params,
+        offset: newOffset,
+        filters: state.params,
       );
-      totalItemsCount = medicinesResponse.totalItems;
-      medicines.addAll(medicinesResponse.data);
-      emit(MedicineProductsLoaded());
+      final updatedMedicines = [...state.medicines, ...medicinesResponse.data];
+      emit(state.loaded(
+          medicines: updatedMedicines,
+          totalItemsCount: medicinesResponse.totalItems));
     } catch (e) {
-      offSet = offSet - PaginationConstants.resultsPerPage;
-      emit(MedicineProductsLoadingFailed());
+      emit(state.loadingFailed());
     }
   }
 
   resetMedicinesSearchFilter() {
-    selectedMedicineSearchFilter = null;
-    params = const MedicalFilters();
+    emit(state.searchFilterChanged(
+        searchFilter: SearchMedicineFilters.dci,
+        params: const MedicalFilters()));
     getMedicines();
-    emit(MedicineSearchFilterChanged());
   }
 
   void changeMedicineSearchFilter(SearchMedicineFilters filter) {
-    selectedMedicineSearchFilter = filter;
-    emit(MedicineSearchFilterChanged());
+    emit(state.searchFilterChanged(searchFilter: filter));
   }
 
   void searchMedicineCatalog(String? text) =>
@@ -91,41 +83,32 @@ class MedicineProductsCubit extends Cubit<MedicineProductsState> {
 
   Future<void> _debounceFunction(Future<void> Function() func,
       [int milliseconds = 500]) async {
-    if (_debounce?.isActive ?? false) _debounce?.cancel();
-    _debounce = Timer(Duration(milliseconds: milliseconds), () async {
+    if (state.debounce?.isActive ?? false) state.debounce?.cancel();
+    final timer = Timer(Duration(milliseconds: milliseconds), () async {
       await func();
-      _debounce = null;
     });
+    emit(state.copyWith(debounce: timer));
   }
 
   Future<void> likeMedicinesCatalog(String medicineCatalogId) async {
-    var index = medicines
-        .lastIndexWhere((medicine) => medicine.id == medicineCatalogId);
     try {
-      medicines[index].isLiked = true;
       await favoriteRepository.likeMedicineCatalog(
           medicineCatalogId: medicineCatalogId);
-
-      emit(MedicineLiked(medicineId: medicineCatalogId));
+      emit(state.liked(medicineId: medicineCatalogId, isLiked: true));
     } catch (e) {
-      medicines[index].isLiked = false;
       GlobalExceptionHandler.handle(exception: e);
-      emit(MedicineLikeFailed(medicineId: medicineCatalogId));
+      emit(state.likeFailed(medicineId: medicineCatalogId));
     }
   }
 
   Future<void> unlikeMedicinesCatalog(String medicineCatalogId) async {
-    var index = medicines
-        .lastIndexWhere((medicine) => medicine.id == medicineCatalogId);
     try {
-      medicines[index].isLiked = false;
       await favoriteRepository.unLikeMedicineCatalog(
           medicineCatalogId: medicineCatalogId);
-      emit(MedicineLiked(medicineId: medicineCatalogId));
+      emit(state.liked(medicineId: medicineCatalogId, isLiked: false));
     } catch (e) {
-      medicines[index].isLiked = true;
       GlobalExceptionHandler.handle(exception: e);
-      emit(MedicineLikeFailed(medicineId: medicineCatalogId));
+      emit(state.likeFailed(medicineId: medicineCatalogId));
     }
   }
 
@@ -133,16 +116,29 @@ class MedicineProductsCubit extends Cubit<MedicineProductsState> {
     scrollController.addListener(() async {
       if (scrollController.position.pixels >=
           scrollController.position.maxScrollExtent) {
-        if (offSet < totalItemsCount) {
+        if (state.offSet < state.totalItemsCount) {
           await loadMoreMedicines();
         } else {
-          emit(MedicinesLoadLimitReached());
+          emit(state.loadLimitReached());
         }
+      }
+
+      final currentOffset = scrollController.offset;
+      bool newDisplayFilters = state.displayFilters;
+
+      if (currentOffset > state.lastOffset) {
+        newDisplayFilters = false;
+      } else if (currentOffset < state.lastOffset) {
+        newDisplayFilters = true;
+      }
+
+      if (newDisplayFilters != state.displayFilters) {
+        emit(state.scroll(offset: currentOffset, displayFilters: newDisplayFilters));
       }
     });
   }
 
   void updatedFilters(MedicalFilters appliedFilters) {
-    params = appliedFilters;
+    emit(state.copyWith(params: appliedFilters));
   }
 }

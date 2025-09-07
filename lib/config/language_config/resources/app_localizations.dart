@@ -166,6 +166,12 @@ abstract class AppLocalizations {
   /// **'Client'**
   String get client;
 
+  /// No description provided for @search_results.
+  ///
+  /// In en, this message translates to:
+  /// **'Search Results'**
+  String get search_results;
+
   /// No description provided for @edit.
   ///
   /// In en, this message translates to:

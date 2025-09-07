@@ -42,6 +42,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get client => 'Client';
 
   @override
+  String get search_results => 'Search Results';
+
+  @override
   String get edit => 'Edit';
 
   @override

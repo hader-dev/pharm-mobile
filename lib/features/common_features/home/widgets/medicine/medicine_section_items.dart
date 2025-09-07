@@ -15,9 +15,7 @@ class MedicinesSectionItems extends StatelessWidget {
 
     return BlocBuilder<MedicineProductsCubit, MedicineProductsState>(
       builder: (context, state) {
-        MedicineProductsCubit medicinesCubit =
-            context.read<MedicineProductsCubit>();
-        final items = medicinesCubit.medicines;
+        final items = state.medicines;
 
         if (state is MedicineProductsLoading) {
           return Center(
@@ -31,10 +29,10 @@ class MedicinesSectionItems extends StatelessWidget {
           );
         }
         void onFavoriteCallback(BaseMedicineCatalogModel medicine) {
-                    medicine.isLiked
-              ? medicinesCubit.unlikeMedicinesCatalog(medicine.id)
-              : medicinesCubit.likeMedicinesCatalog(medicine.id);
-        
+          final cubit = context.read<MedicineProductsCubit>();
+          medicine.isLiked
+              ? cubit.unlikeMedicinesCatalog(medicine.id)
+              : cubit.likeMedicinesCatalog(medicine.id);
         }
 
         return SizedBox(

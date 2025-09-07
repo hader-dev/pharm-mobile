@@ -42,6 +42,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get client => 'العميل';
 
   @override
+  String get search_results => 'نتائج البحث';
+
+  @override
   String get edit => 'تعديل';
 
   @override

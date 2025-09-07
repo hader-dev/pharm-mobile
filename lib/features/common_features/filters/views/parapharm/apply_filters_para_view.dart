@@ -5,6 +5,7 @@ import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_bu
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/bottom_sheet_header.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common_features/filters/cubit/parapharm/para_medical_filters_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/filters/widgets/common/filter_label.dart';
 import 'package:hader_pharm_mobile/features/common_features/filters/widgets/common/selected_filters_display.dart';
@@ -105,16 +106,21 @@ class ParaMedicalFiltersApply extends StatelessWidget {
                                   child: BlocBuilder<ParaMedicalFiltersCubit,
                                       ParaMedicalFiltersState>(
                                     builder: (context, state) {
+                                      final workingFilters = cubit.getCurrentWorkSourceFilters();
+                                      
+                                      // Show empty widget when no filters are available
+                                      if (workingFilters.isEmpty) {
+                                        return const Center(
+                                          child: EmptyListWidget(),
+                                        );
+                                      }
+                                      
                                       return ListView.separated(
                                         padding: EdgeInsets.zero,
-                                        itemCount: cubit
-                                            .getCurrentWorkSourceFilters()
-                                            .length,
+                                        itemCount: workingFilters.length,
                                         separatorBuilder: (context, index) =>
                                             const ResponsiveGap.s8(),
                                         itemBuilder: (context, index) {
-                                          var workingFilters = cubit
-                                              .getCurrentWorkSourceFilters();
                                           var filter = workingFilters[index];
                                           var appliedWorkingFilters = cubit
                                               .getCurrentWorkAppliedFilters();

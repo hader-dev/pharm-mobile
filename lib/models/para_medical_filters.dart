@@ -115,6 +115,22 @@ class ParaMedicalFilters extends Equatable {
         lteUnitPriceHt,
       ];
 
+  get isNotEmpty =>
+      name.isNotEmpty ||
+      description.isNotEmpty ||
+      sku.isNotEmpty ||
+      dosage.isNotEmpty ||
+      status.isNotEmpty ||
+      country.isNotEmpty ||
+      patent.isNotEmpty ||
+      brand.isNotEmpty ||
+      condition.isNotEmpty ||
+      type.isNotEmpty ||
+      stabilityDuration.isNotEmpty ||
+      code.isNotEmpty ||
+      reimbursement.isNotEmpty ||
+      (gteUnitPriceHt != null && lteUnitPriceHt != null);
+
   ParaMedicalFilters updateSearchFilter(
       ParaMedicalFiltersKeys key, String text) {
     matchList(List<String> list) => list

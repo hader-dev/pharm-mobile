@@ -17,7 +17,7 @@ class ParaPharmaSectionItems extends StatelessWidget {
       builder: (context, state) {
         ParaPharmaCubit paraPharmaProductsCubit =
             context.read<ParaPharmaCubit>();
-        final items = paraPharmaProductsCubit.paraPharmaProducts;
+        final items = state.paraPharmaProducts;
 
         if (state is ParaPharmaProductsLoading) {
           return Center(

@@ -57,25 +57,27 @@ class SearchWidget extends StatelessWidget {
                 const EdgeInsets.symmetric(horizontal: AppSizesManager.p12),
             child: BlocBuilder<MedicineProductsCubit, MedicineProductsState>(
               builder: (context, state) {
-                return Stack(
-                  clipBehavior: Clip.none,
-                  children: [
-                    Icon(
-                      Iconsax.filter,
-                      color: AppColors.accent1Shade1,
-                    ),
-                    if (BlocProvider.of<MedicineProductsCubit>(context)
-                            .selectedMedicineSearchFilter !=
-                        null)
-                      Positioned(
-                        top: -4,
-                        right: -4,
-                        child: CircleAvatar(
-                          radius: AppSizesManager.commonWidgetsRadius,
-                          backgroundColor: Colors.red,
+                return BlocBuilder<MedicineProductsCubit, MedicineProductsState>(
+                  builder: (context, state) {
+                    return Stack(
+                      clipBehavior: Clip.none,
+                      children: [
+                        Icon(
+                          Iconsax.filter,
+                          color: AppColors.accent1Shade1,
                         ),
-                      )
-                  ],
+                        if (state.selectedMedicineSearchFilter != SearchMedicineFilters.dci)
+                          Positioned(
+                            top: -4,
+                            right: -4,
+                            child: CircleAvatar(
+                              radius: AppSizesManager.commonWidgetsRadius,
+                              backgroundColor: Colors.red,
+                            ),
+                          )
+                      ],
+                    );
+                  },
                 );
               },
             ),

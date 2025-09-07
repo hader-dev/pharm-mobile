@@ -23,6 +23,8 @@ class BaseParaPharmaCatalogModel {
       required this.isActive,
       this.company,
       this.isLiked = false});
+
+
 }
 
 class BaseBrand {
