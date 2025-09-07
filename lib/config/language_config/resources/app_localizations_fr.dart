@@ -730,7 +730,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get in_stock => 'En stock';
 
   @override
-  String get out_stock => 'Rupture de stock';
+  String get out_stock => 'Rupture';
 
   @override
   String get feedback_error_loading_cart =>

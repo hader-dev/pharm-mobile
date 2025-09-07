@@ -1,3 +1,5 @@
+import 'package:hader_pharm_mobile/repositories/remote/medicine_catalog/mappers/json_to_base_medicine_catalog.dart';
+
 import '../../../../models/medicine_catalog.dart';
 
 class MedicineResponse {
@@ -9,7 +11,9 @@ class MedicineResponse {
   factory MedicineResponse.fromJson(Map<String, dynamic> json) {
     return MedicineResponse(
       totalItems: json["totalItems"] ?? 0,
-      data: (json["data"] as List).map((e) => BaseMedicineCatalogModel.fromJson(e)).toList(),
+      data: (json["data"] as List)
+          .map((e) => jsonToBaseMedicineCatalog(e))
+          .toList(),
     );
   }
 }
