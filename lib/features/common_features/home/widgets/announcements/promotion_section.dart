@@ -42,7 +42,7 @@ class PromotionSection extends StatelessWidget {
             left: AppSizesManager.p8,
           ),
           child: SizedBox(
-            height: minSectionHeight * 3.2, // Further increased to 3.2
+            height: minSectionHeight * 2.2, 
             child: Column(
               children: [
                 Row(
