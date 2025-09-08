@@ -49,7 +49,7 @@ class CustomCookieInjector extends Interceptor {
           newCookies.isNotEmpty ? newCookies : null;
 
       options.headers[HttpHeaders.acceptLanguageHeader] =
-          LanguageHelper.getCurrentLanguage;
+          LanguageHelper.getCurrentLanguage();
       handler.next(options);
     } catch (e, s) {
       final error = DioException(
