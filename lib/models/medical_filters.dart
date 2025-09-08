@@ -61,10 +61,12 @@ class MedicalFilters extends Equatable {
     List<String>? reimbursement,
     String? gteUnitPriceHt,
     String? lteUnitPriceHt,
+    bool resetGteUnitPriceHt = false,
+    bool resetLteUnitPriceHt = false,
   }) {
     return MedicalFilters(
-      gteUnitPriceHt: gteUnitPriceHt ?? this.gteUnitPriceHt,
-      lteUnitPriceHt: lteUnitPriceHt ?? this.lteUnitPriceHt,
+      gteUnitPriceHt: resetGteUnitPriceHt ? null : (gteUnitPriceHt ?? this.gteUnitPriceHt),
+      lteUnitPriceHt: resetLteUnitPriceHt ? null : (lteUnitPriceHt ?? this.lteUnitPriceHt),
       dci: dci ?? this.dci,
       dosage: dosage ?? this.dosage,
       form: form ?? this.form,
@@ -125,12 +127,8 @@ class MedicalFilters extends Equatable {
         return copyWith(patent: matchList(patent));
       case MedicalFiltersKeys.brandName:
         return copyWith(brand: matchList(brand));
-      // case MedicalFiltersKeys.condition:
-      //   return copyWith(condition: matchList(condition));
       case MedicalFiltersKeys.type:
         return copyWith(type: matchList(type));
-      // case MedicalFiltersKeys.stabilityDuration:
-      //   return copyWith(stabilityDuration: matchList(stabilityDuration));
       case MedicalFiltersKeys.code:
         return copyWith(code: matchList(code));
       case MedicalFiltersKeys.p1:
@@ -158,12 +156,8 @@ class MedicalFilters extends Equatable {
         return patent;
       case MedicalFiltersKeys.brandName:
         return brand;
-      // case MedicalFiltersKeys.condition:
-      //   return condition;
       case MedicalFiltersKeys.type:
         return type;
-      // case MedicalFiltersKeys.stabilityDuration:
-      //   return stabilityDuration;
       case MedicalFiltersKeys.code:
         return code;
       case MedicalFiltersKeys.p1:
@@ -192,12 +186,8 @@ class MedicalFilters extends Equatable {
         return copyWith(patent: updatedFilters);
       case MedicalFiltersKeys.brandName:
         return copyWith(brand: updatedFilters);
-      // case MedicalFiltersKeys.condition:
-      //   return copyWith(condition: updatedFilters);
       case MedicalFiltersKeys.type:
         return copyWith(type: updatedFilters);
-      // case MedicalFiltersKeys.stabilityDuration:
-      //   return copyWith(stabilityDuration: updatedFilters);
       case MedicalFiltersKeys.code:
         return copyWith(code: updatedFilters);
 
@@ -217,9 +207,7 @@ enum MedicalFiltersKeys {
   laboratoryCountry,
   laboratoryHolder,
   brandName,
-  // condition, api not supported
   type,
-  // stabilityDuration, api not supported
   code,
   p1,
   distributorSku,

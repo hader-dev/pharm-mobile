@@ -30,6 +30,15 @@ class FiltersButtonParapharm extends StatelessWidget {
           label: localization.filter_items_name,
           onPressed: onPressed);
 
+  factory FiltersButtonParapharm.price({
+    required AppLocalizations localization,
+    VoidCallback? onPressed,
+  }) =>
+      FiltersButtonParapharm(
+          icon: Iconsax.money4,
+          label: localization.price,
+          onPressed: onPressed);
+
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(

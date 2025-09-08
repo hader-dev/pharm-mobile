@@ -24,8 +24,11 @@ class ParaMedicalFiltersApply extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<ParaMedicalFiltersCubit>();
-
-    cubit.loadParaMedicalFilters();
+    
+    // Initialize filters when widget loads
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      cubit.initializeFilters();
+    });
 
     return Column(
       mainAxisSize: MainAxisSize.max,
@@ -68,8 +71,9 @@ class ParaMedicalFiltersApply extends StatelessWidget {
             color: AppColors.accent1Shade1,
           ),
           onChanged: (searchValue) {
+            // Handle search text changes through cubit
             BlocProvider.of<ParaMedicalFiltersCubit>(context)
-                .loadParaMedicalFilters();
+                .onSearchChanged(searchValue ?? '');
           },
           validationFunc: (value) {},
         ),

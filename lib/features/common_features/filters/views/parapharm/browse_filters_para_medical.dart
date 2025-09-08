@@ -69,6 +69,8 @@ class FiltersParaMedicalBrowse extends StatelessWidget {
                     ? double.tryParse(cubit.appliedFilters.lteUnitPriceHt!)
                     : null,
                 onChanged: (min, max) => cubit.updatePriceRange(min, max),
+                minLimit: 0,
+                maxLimit: 100000,
               );
             },
           ),

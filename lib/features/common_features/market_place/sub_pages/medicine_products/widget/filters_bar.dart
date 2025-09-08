@@ -6,6 +6,7 @@ import 'package:hader_pharm_mobile/features/common_features/filters/cubit/medica
 import 'package:hader_pharm_mobile/features/common_features/filters/widgets/common/filters_button_medical.dart';
 import 'package:hader_pharm_mobile/features/common_features/filters/widgets/common/filters_button_parapharm.dart';
 import 'package:hader_pharm_mobile/features/common_features/filters/widgets/quick_apply/quick_apply_filter_medical.dart';
+import 'package:hader_pharm_mobile/features/common_features/filters/widgets/quick_apply/quick_apply_price_filter_medical.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/medicine_products/cubit/medicine_products_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/medicine_products/widget/search_filter_bottom_sheet.dart';
 import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
@@ -41,6 +42,19 @@ class FiltersBar extends StatelessWidget {
                   child: MedicalFilterProvider(
                       child: QuickApplyFilterMedical(
                     title: translation.filter_items_dci,
+                  )),
+                );
+              },
+            ),
+            const ResponsiveGap.s4(),
+            FiltersButtonMedical.price(
+              localization: translation,
+              onPressed: () {
+                BottomSheetHelper.showCommonBottomSheet(
+                  context: context,
+                  child: MedicalFilterProvider(
+                      child: QuickApplyPriceFilterMedical(
+                    title: translation.price_range_ht,
                   )),
                 );
               },

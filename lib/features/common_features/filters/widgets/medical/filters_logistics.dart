@@ -18,13 +18,7 @@ class FiltersAccordionLogistics extends StatelessWidget {
           rawTitle: translation.filters_logisctics,
           isExpanded: false,
           children: [
-            // InkAccordionItem(
-            //   rawTitle: translation.filter_items_stability_duration,
-            //   onTap: () => navigateToMedicalFiltersApplyView(
-            //       context, MedicalFiltersKeys.stabilityDuration),
-            //   rawSubtitle: getDisplayedFiltersAsRawString(
-            //       context, MedicalFiltersKeys.stabilityDuration),
-            // ),
+        
             InkAccordionItem(
               rawTitle: translation.filter_items_country,
               onTap: () => navigateToMedicalFiltersApplyView(

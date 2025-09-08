@@ -39,13 +39,17 @@ class _FilterPriceSectionState extends State<FilterPriceSection> {
   @override
   void didUpdateWidget(FilterPriceSection oldWidget) {
     super.didUpdateWidget(oldWidget);
+    
     if (oldWidget.minPrice != widget.minPrice ||
-        oldWidget.maxPrice != widget.maxPrice) {
+        oldWidget.maxPrice != widget.maxPrice ||
+        oldWidget.minLimit != widget.minLimit ||
+        oldWidget.maxLimit != widget.maxLimit) {
+      
+      final newMin = widget.minPrice ?? widget.minLimit;
+      final newMax = widget.maxPrice ?? widget.maxLimit;
+      
       setState(() {
-        _currentRangeValues = RangeValues(
-          widget.minPrice ?? widget.minLimit,
-          widget.maxPrice ?? widget.maxLimit,
-        );
+        _currentRangeValues = RangeValues(newMin, newMax);
       });
     }
   }
@@ -78,6 +82,8 @@ class _FilterPriceSectionState extends State<FilterPriceSection> {
               setState(() {
                 _currentRangeValues = values;
               });
+            },
+            onChangeEnd: (RangeValues values) {
               widget.onChanged(values.start, values.end);
             },
             activeColor: AppColors.accent1Shade1,

@@ -35,6 +35,23 @@ class _PriceRangeSliderState extends State<PriceRangeSlider> {
   }
 
   @override
+  void didUpdateWidget(PriceRangeSlider oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    
+    
+    final oldMin = oldWidget.minPrice ?? oldWidget.minLimit;
+    final oldMax = oldWidget.maxPrice ?? oldWidget.maxLimit;
+    final newMin = widget.minPrice ?? widget.minLimit;
+    final newMax = widget.maxPrice ?? widget.maxLimit;
+    
+    if (oldMin != newMin || oldMax != newMax) {
+      setState(() {
+        _currentRangeValues = RangeValues(newMin, newMax);
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/models/para_medical_filters.dart';
@@ -15,6 +16,7 @@ class ParaMedicalFiltersCubit extends Cubit<ParaMedicalFiltersState> {
   get pageIndex => _pageIndex;
 
   final searchController = TextEditingController();
+  Timer? _searchDebounceTimer;
 
   ParaMedicalFilters filtersSource = const ParaMedicalFilters();
   ParaMedicalFilters appliedFilters = const ParaMedicalFilters();
@@ -28,6 +30,12 @@ class ParaMedicalFiltersCubit extends Cubit<ParaMedicalFiltersState> {
 
   void loadParaMedicalFilters([ParamsLoadFiltersParaMedical? params]) async {
     try {
+      if (currentkey == ParaMedicalFiltersKeys.unitPriceHt) {
+        emit(ParaMedicalFiltersIsLoading());
+        emit(ParaMedicalFiltersLoaded());
+        return;
+      }
+      
       emit(ParaMedicalFiltersIsLoading());
       final data = await _filtersRepository.getParaMedicalFilter(
           ParamLoadParaMedicalFilter(
@@ -47,10 +55,16 @@ class ParaMedicalFiltersCubit extends Cubit<ParaMedicalFiltersState> {
   }
 
   List<String> getCurrentWorkSourceFilters() {
+    if (currentkey == ParaMedicalFiltersKeys.unitPriceHt) {
+      return [];
+    }
     return filtersSource.getFilterBykey(currentkey);
   }
 
   List<String> getCurrentWorkAppliedFilters() {
+    if (currentkey == ParaMedicalFiltersKeys.unitPriceHt) {
+      return [];
+    }
     return appliedFilters.getFilterBykey(currentkey);
   }
 
@@ -73,13 +87,27 @@ class ParaMedicalFiltersCubit extends Cubit<ParaMedicalFiltersState> {
   }
 
   void goToApplyFilters(ParaMedicalFiltersKeys key) {
+    if (key == ParaMedicalFiltersKeys.unitPriceHt) {
+      return;
+    }
+    
     _pageIndex = 1;
     currentkey = key;
-    searchController.clear();
+    
+    if (key != ParaMedicalFiltersKeys.name && searchController.text.isNotEmpty) {
+    }
 
     emit(ParaMedicalFiltersPageChanged());
+    _refreshFiltersForCurrentKey();
+  }
 
-    loadParaMedicalFilters();
+  void _refreshFiltersForCurrentKey() {
+    if (currentkey == ParaMedicalFiltersKeys.name && 
+        filtersSource.getFilterBykey(currentkey).isEmpty) {
+      loadParaMedicalFilters();
+    } else if (currentkey != ParaMedicalFiltersKeys.unitPriceHt) {
+      loadParaMedicalFilters();
+    }
   }
 
   void updatePriceRange(double minPrice, double maxPrice) {
@@ -90,27 +118,78 @@ class ParaMedicalFiltersCubit extends Cubit<ParaMedicalFiltersState> {
     emit(ParaMedicalFiltersUpdated());
   }
 
+  void initializePriceFilter() {
+    emit(ParaMedicalFiltersUpdated());
+  }
+
+  void resetPriceFilter() {
+    appliedFilters = appliedFilters.copyWith(
+      resetGteUnitPriceHt: true,
+      resetLteUnitPriceHt: true,
+    );
+    emit(ParaMedicalFiltersUpdated());
+  }
+
   void resetCurrentFilters() {
     if (currentkey == ParaMedicalFiltersKeys.unitPriceHt) {
       appliedFilters = appliedFilters.copyWith(
-        gteUnitPriceHt: null,
-        lteUnitPriceHt: null,
+        resetGteUnitPriceHt: true,
+        resetLteUnitPriceHt: true,
       );
     } else {
       appliedFilters = appliedFilters.updateFilterList(currentkey, []);
       searchController.clear();
-      updateVisibleItems();
+      loadParaMedicalFilters();
     }
     emit(ParaMedicalFiltersUpdated());
   }
 
   void resetAllFilters() {
+    final savedNameFilters = filtersSource.getFilterBykey(ParaMedicalFiltersKeys.name);
+    
     appliedFilters = const ParaMedicalFilters();
+    searchController.clear();
+    
+    if (savedNameFilters.isNotEmpty) {
+      filtersSource = filtersSource.updateFilterList(ParaMedicalFiltersKeys.name, savedNameFilters);
+    }
+    
+    currentkey = ParaMedicalFiltersKeys.name;
+    
     loadParaMedicalFilters();
+    emit(ParaMedicalFiltersUpdated());
   }
 
   void clearSearch() {
     searchController.clear();
     loadParaMedicalFilters();
+  }
+
+    void initializeFilters() {
+    if (currentkey == ParaMedicalFiltersKeys.unitPriceHt) {
+      currentkey = ParaMedicalFiltersKeys.name;
+    }
+    
+    loadParaMedicalFilters();
+    emit(ParaMedicalFiltersUpdated());
+  }
+
+  void onSearchChanged(String searchText) {
+    _searchDebounceTimer?.cancel();
+    
+    if (searchController.text != searchText) {
+      searchController.text = searchText;
+    }
+    
+    _searchDebounceTimer = Timer(const Duration(milliseconds: 500), () {
+      loadParaMedicalFilters();
+    });
+  }
+
+  @override
+  Future<void> close() {
+    _searchDebounceTimer?.cancel();
+    searchController.dispose();
+    return super.close();
   }
 }

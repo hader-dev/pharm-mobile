@@ -25,13 +25,6 @@ class FiltersAccordionCommercial extends StatelessWidget {
               rawSubtitle: getDisplayedFiltersAsRawString(
                   context, MedicalFiltersKeys.brandName),
             ),
-            // InkAccordionItem(
-            //   rawTitle: translation.filter_items_condition,
-            //   onTap: () => navigateToMedicalFiltersApplyView(
-            //       context, MedicalFiltersKeys.condition),
-            //   rawSubtitle: getDisplayedFiltersAsRawString(
-            //       context, MedicalFiltersKeys.condition),
-            // ),
             InkAccordionItem(
               rawTitle: translation.filter_items_type,
               onTap: () => navigateToMedicalFiltersApplyView(

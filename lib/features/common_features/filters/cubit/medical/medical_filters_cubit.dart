@@ -47,11 +47,17 @@ class MedicalFiltersCubit extends Cubit<MedicalFiltersState> {
   }
 
   List<String> getCurrentWorkSourceFilters() {
+    if (currentkey == MedicalFiltersKeys.unitPriceHt) {
+      return [];
+    }
     final data = filtersSource.getFilterBykey(currentkey);
     return data;
   }
 
   List<String> getCurrentWorkAppliedFilters() {
+    if (currentkey == MedicalFiltersKeys.unitPriceHt) {
+      return [];
+    }
     return appliedFilters.getFilterBykey(currentkey);
   }
 
@@ -82,6 +88,10 @@ class MedicalFiltersCubit extends Cubit<MedicalFiltersState> {
   }
 
   void goToApplyFilters(MedicalFiltersKeys key) {
+    if (key == MedicalFiltersKeys.unitPriceHt) {
+      return;
+    }
+    
     _pageIndex = 1;
     currentkey = key;
     searchController.clear();
@@ -90,11 +100,24 @@ class MedicalFiltersCubit extends Cubit<MedicalFiltersState> {
     loadMedicalFilters();
   }
 
+  void initializePriceFilter() {
+    currentkey = MedicalFiltersKeys.unitPriceHt;
+    emit(MedicalFiltersUpdated());
+  }
+
+  void resetPriceFilter() {
+    appliedFilters = appliedFilters.copyWith(
+      resetGteUnitPriceHt: true,
+      resetLteUnitPriceHt: true,
+    );
+    emit(MedicalFiltersUpdated());
+  }
+
   void resetCurrentFilters() {
     if (currentkey == MedicalFiltersKeys.unitPriceHt) {
       appliedFilters = appliedFilters.copyWith(
-        gteUnitPriceHt: null,
-        lteUnitPriceHt: null,
+        resetGteUnitPriceHt: true,
+        resetLteUnitPriceHt: true,
       );
     } else {
       appliedFilters = appliedFilters.updateFilterList(currentkey, []);
@@ -104,9 +127,19 @@ class MedicalFiltersCubit extends Cubit<MedicalFiltersState> {
   }
 
   void resetAllFilters() {
+    final savedDciFilters = filtersSource.getFilterBykey(MedicalFiltersKeys.dci);
+    
     appliedFilters = const MedicalFilters();
     searchController.clear();
+    
+    if (savedDciFilters.isNotEmpty) {
+      filtersSource = filtersSource.updateFilterList(MedicalFiltersKeys.dci, savedDciFilters);
+    }
+    
+    currentkey = MedicalFiltersKeys.dci;
+    
     loadMedicalFilters();
+    emit(MedicalFiltersUpdated());
   }
 
   void clearSearch() {

@@ -30,6 +30,15 @@ class FiltersButtonMedical extends StatelessWidget {
           label: localization.filter_items_dci,
           onPressed: onPressed);
 
+  factory FiltersButtonMedical.price({
+    required AppLocalizations localization,
+    VoidCallback? onPressed,
+  }) =>
+      FiltersButtonMedical(
+          icon: Iconsax.money4,
+          label: localization.price,
+          onPressed: onPressed);
+
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(

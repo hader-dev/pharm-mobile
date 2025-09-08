@@ -32,6 +32,7 @@ class _CustomToastWidgetState extends State<CustomToastWidget>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _fade;
+  bool _isDisposed = false;
 
   @override
   void initState() {
@@ -42,25 +43,29 @@ class _CustomToastWidgetState extends State<CustomToastWidget>
     );
     _fade = CurvedAnimation(parent: _controller, curve: Curves.easeInCubic);
     _controller.forward();
+    
+    // Add listener in initState, not in build method
+    _controller.addListener(_animationListener);
+  }
+
+  void _animationListener() async {
+    if (_controller.isForwardOrCompleted) {
+      await Future.delayed(Duration(seconds: 2, milliseconds: 600));
+      // Check if widget is still mounted AND controller is not disposed
+      if (mounted && !_isDisposed) {
+        _controller.reverse();
+      }
+    }
+    if (_controller.isDismissed) {
+      await Future.delayed(widget.animationDuration);
+      if (mounted && !_isDisposed) {
+        widget.onClose?.call();
+      }
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    _controller.addListener(() async {
-      if (_controller.isForwardOrCompleted) {
-        await Future.delayed(Duration(seconds: 2, milliseconds: 600));
-        if (context.mounted) {
-          _controller.reverse();
-        }
-      }
-      if (_controller.isDismissed) {
-        _controller.removeListener(
-          () {},
-        );
-        await Future.delayed(widget.animationDuration);
-        widget.onClose?.call();
-      }
-    });
     return Positioned(
       bottom: 20,
       left: 20,
@@ -127,6 +132,8 @@ class _CustomToastWidgetState extends State<CustomToastWidget>
 
   @override
   void dispose() {
+    _isDisposed = true;
+    _controller.removeListener(_animationListener);
     _controller.dispose();
     super.dispose();
   }

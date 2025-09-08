@@ -27,8 +27,10 @@ class QuickApplyFilterParapharm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<ParaMedicalFiltersCubit>();
-
-    cubit.loadParaMedicalFilters();
+    
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      cubit.initializeFilters();
+    });
 
     return Column(
       mainAxisSize: MainAxisSize.max,
@@ -56,9 +58,8 @@ class QuickApplyFilterParapharm extends StatelessWidget {
               color: AppColors.accent1Shade1,
             ),
           ),
-          onChanged: (searchValue) {
-            BlocProvider.of<ParaMedicalFiltersCubit>(context)
-                .loadParaMedicalFilters();
+          onChanged: (text) {
+            cubit.onSearchChanged(text ?? '');
           },
           validationFunc: (value) {},
         ),
@@ -133,14 +134,35 @@ class QuickApplyFilterParapharm extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 8.0, vertical: 12.0),
-                    child: PrimaryTextButton(
-                      label: context.translation!.confirm,
-                      leadingIcon: Iconsax.money4,
-                      onTap: () {
-                        applyFiltersParaPharm(context);
-                        context.pop();
-                      },
-                      color: AppColors.accent1Shade1,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: PrimaryTextButton(
+                            isOutLined: true,
+                            label: context.translation!.reset,
+                            spalshColor: AppColors.accent1Shade1.withAlpha(50),
+                            labelColor: AppColors.accent1Shade1,
+                            onTap: () {
+                              cubit.resetCurrentFilters();
+                            },
+                            borderColor: AppColors.accent1Shade1,
+                          ),
+                        ),
+                        const ResponsiveGap.s8(),
+                        Expanded(
+                          flex: 2,
+                          child: PrimaryTextButton(
+                            label: context.translation!.confirm,
+                            leadingIcon: Iconsax.money4,
+                            onTap: () {
+                              applyFiltersParaPharm(context);
+                              context.pop();
+                            },
+                            color: AppColors.accent1Shade1,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),

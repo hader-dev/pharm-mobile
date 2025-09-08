@@ -75,6 +75,8 @@ class ParaMedicalFilters extends Equatable {
     List<String>? reimbursement,
     String? gteUnitPriceHt,
     String? lteUnitPriceHt,
+    bool resetGteUnitPriceHt = false,
+    bool resetLteUnitPriceHt = false,
   }) {
     return ParaMedicalFilters(
       name: name ?? this.name,
@@ -90,8 +92,8 @@ class ParaMedicalFilters extends Equatable {
       stabilityDuration: stabilityDuration ?? this.stabilityDuration,
       code: code ?? this.code,
       reimbursement: reimbursement ?? this.reimbursement,
-      gteUnitPriceHt: gteUnitPriceHt ?? this.gteUnitPriceHt,
-      lteUnitPriceHt: lteUnitPriceHt ?? this.lteUnitPriceHt,
+      gteUnitPriceHt: resetGteUnitPriceHt ? null : (gteUnitPriceHt ?? this.gteUnitPriceHt),
+      lteUnitPriceHt: resetLteUnitPriceHt ? null : (lteUnitPriceHt ?? this.lteUnitPriceHt),
     );
   }
 
