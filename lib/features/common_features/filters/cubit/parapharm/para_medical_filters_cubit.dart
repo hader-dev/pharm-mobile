@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/models/para_medical_filters.dart';
@@ -17,6 +18,7 @@ class ParaMedicalFiltersCubit extends Cubit<ParaMedicalFiltersState> {
 
   final searchController = TextEditingController();
   Timer? _searchDebounceTimer;
+  Timer? _searchDebounceTimer;
 
   ParaMedicalFilters filtersSource = const ParaMedicalFilters();
   ParaMedicalFilters appliedFilters = const ParaMedicalFilters();
@@ -30,12 +32,6 @@ class ParaMedicalFiltersCubit extends Cubit<ParaMedicalFiltersState> {
 
   void loadParaMedicalFilters([ParamsLoadFiltersParaMedical? params]) async {
     try {
-      if (currentkey == ParaMedicalFiltersKeys.unitPriceHt) {
-        emit(ParaMedicalFiltersIsLoading());
-        emit(ParaMedicalFiltersLoaded());
-        return;
-      }
-      
       emit(ParaMedicalFiltersIsLoading());
       final data = await _filtersRepository.getParaMedicalFilter(
           ParamLoadParaMedicalFilter(
@@ -58,10 +54,16 @@ class ParaMedicalFiltersCubit extends Cubit<ParaMedicalFiltersState> {
     if (currentkey == ParaMedicalFiltersKeys.unitPriceHt) {
       return [];
     }
+    if (currentkey == ParaMedicalFiltersKeys.unitPriceHt) {
+      return [];
+    }
     return filtersSource.getFilterBykey(currentkey);
   }
 
   List<String> getCurrentWorkAppliedFilters() {
+    if (currentkey == ParaMedicalFiltersKeys.unitPriceHt) {
+      return [];
+    }
     if (currentkey == ParaMedicalFiltersKeys.unitPriceHt) {
       return [];
     }
@@ -87,22 +89,23 @@ class ParaMedicalFiltersCubit extends Cubit<ParaMedicalFiltersState> {
   }
 
   void goToApplyFilters(ParaMedicalFiltersKeys key) {
-    if (key == ParaMedicalFiltersKeys.unitPriceHt) {
-      return;
-    }
-    
     _pageIndex = 1;
     currentkey = key;
-    
-    if (key != ParaMedicalFiltersKeys.name && searchController.text.isNotEmpty) {
-    }
 
     emit(ParaMedicalFiltersPageChanged());
     _refreshFiltersForCurrentKey();
   }
 
+  void resetPriceFilter() {
+    appliedFilters = appliedFilters.copyWith(
+      resetGteUnitPriceHt: true,
+      resetLteUnitPriceHt: true,
+    );
+    emit(ParaMedicalFiltersUpdated());
+  }
+
   void _refreshFiltersForCurrentKey() {
-    if (currentkey == ParaMedicalFiltersKeys.name && 
+    if (currentkey == ParaMedicalFiltersKeys.name &&
         filtersSource.getFilterBykey(currentkey).isEmpty) {
       loadParaMedicalFilters();
     } else if (currentkey != ParaMedicalFiltersKeys.unitPriceHt) {
@@ -118,15 +121,9 @@ class ParaMedicalFiltersCubit extends Cubit<ParaMedicalFiltersState> {
     emit(ParaMedicalFiltersUpdated());
   }
 
-  void initializePriceFilter() {
-    emit(ParaMedicalFiltersUpdated());
-  }
-
-  void resetPriceFilter() {
-    appliedFilters = appliedFilters.copyWith(
-      resetGteUnitPriceHt: true,
-      resetLteUnitPriceHt: true,
-    );
+  void updateFilterKey(ParaMedicalFiltersKeys key) {
+    currentkey = key;
+    loadParaMedicalFilters();
     emit(ParaMedicalFiltersUpdated());
   }
 
@@ -135,28 +132,24 @@ class ParaMedicalFiltersCubit extends Cubit<ParaMedicalFiltersState> {
       appliedFilters = appliedFilters.copyWith(
         resetGteUnitPriceHt: true,
         resetLteUnitPriceHt: true,
+        resetGteUnitPriceHt: true,
+        resetLteUnitPriceHt: true,
       );
     } else {
       appliedFilters = appliedFilters.updateFilterList(currentkey, []);
       searchController.clear();
+      loadParaMedicalFilters();
       loadParaMedicalFilters();
     }
     emit(ParaMedicalFiltersUpdated());
   }
 
   void resetAllFilters() {
-    final savedNameFilters = filtersSource.getFilterBykey(ParaMedicalFiltersKeys.name);
-    
     appliedFilters = const ParaMedicalFilters();
     searchController.clear();
-    
-    if (savedNameFilters.isNotEmpty) {
-      filtersSource = filtersSource.updateFilterList(ParaMedicalFiltersKeys.name, savedNameFilters);
-    }
-    
-    currentkey = ParaMedicalFiltersKeys.name;
-    
+
     loadParaMedicalFilters();
+    emit(ParaMedicalFiltersUpdated());
     emit(ParaMedicalFiltersUpdated());
   }
 
@@ -165,22 +158,13 @@ class ParaMedicalFiltersCubit extends Cubit<ParaMedicalFiltersState> {
     loadParaMedicalFilters();
   }
 
-    void initializeFilters() {
-    if (currentkey == ParaMedicalFiltersKeys.unitPriceHt) {
-      currentkey = ParaMedicalFiltersKeys.name;
-    }
-    
-    loadParaMedicalFilters();
-    emit(ParaMedicalFiltersUpdated());
-  }
-
   void onSearchChanged(String searchText) {
     _searchDebounceTimer?.cancel();
-    
+
     if (searchController.text != searchText) {
       searchController.text = searchText;
     }
-    
+
     _searchDebounceTimer = Timer(const Duration(milliseconds: 500), () {
       loadParaMedicalFilters();
     });

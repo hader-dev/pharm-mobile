@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/models/medical_filters.dart';
@@ -14,6 +15,7 @@ class MedicalFiltersCubit extends Cubit<MedicalFiltersState> {
   get pageIndex => _pageIndex;
 
   final searchController = TextEditingController();
+  Timer? _searchDebounceTimer;
 
   MedicalFilters filtersSource = MedicalFilters();
   MedicalFilters appliedFilters = MedicalFilters();
@@ -32,9 +34,8 @@ class MedicalFiltersCubit extends Cubit<MedicalFiltersState> {
           ParamLoadMedicalFilter(
               key: currentkey, query: searchController.text));
 
-      debugPrint(data.data.length.toString());
       filtersSource = filtersSource.updateFilterList(currentkey, data.data);
-
+      
       emit(MedicalFiltersLoaded());
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
@@ -50,11 +51,13 @@ class MedicalFiltersCubit extends Cubit<MedicalFiltersState> {
     if (currentkey == MedicalFiltersKeys.unitPriceHt) {
       return [];
     }
-    final data = filtersSource.getFilterBykey(currentkey);
-    return data;
+    return filtersSource.getFilterBykey(currentkey);
   }
 
   List<String> getCurrentWorkAppliedFilters() {
+    if (currentkey == MedicalFiltersKeys.unitPriceHt) {
+      return [];
+    }
     if (currentkey == MedicalFiltersKeys.unitPriceHt) {
       return [];
     }
@@ -88,20 +91,25 @@ class MedicalFiltersCubit extends Cubit<MedicalFiltersState> {
   }
 
   void goToApplyFilters(MedicalFiltersKeys key) {
-    if (key == MedicalFiltersKeys.unitPriceHt) {
-      return;
-    }
-    
+
     _pageIndex = 1;
     currentkey = key;
-    searchController.clear();
-    emit(MedicalFiltersPageChanged());
-
+    
     loadMedicalFilters();
+    
+    emit(MedicalFiltersPageChanged());
   }
 
+  void updateFilterKey(MedicalFiltersKeys key) {
+    currentkey = key;
+    loadMedicalFilters();
+    emit(MedicalFiltersUpdated());
+  }
+
+
+  
+
   void initializePriceFilter() {
-    currentkey = MedicalFiltersKeys.unitPriceHt;
     emit(MedicalFiltersUpdated());
   }
 
@@ -118,6 +126,8 @@ class MedicalFiltersCubit extends Cubit<MedicalFiltersState> {
       appliedFilters = appliedFilters.copyWith(
         resetGteUnitPriceHt: true,
         resetLteUnitPriceHt: true,
+        resetGteUnitPriceHt: true,
+        resetLteUnitPriceHt: true,
       );
     } else {
       appliedFilters = appliedFilters.updateFilterList(currentkey, []);
@@ -127,23 +137,34 @@ class MedicalFiltersCubit extends Cubit<MedicalFiltersState> {
   }
 
   void resetAllFilters() {
-    final savedDciFilters = filtersSource.getFilterBykey(MedicalFiltersKeys.dci);
     
     appliedFilters = const MedicalFilters();
     searchController.clear();
-    
-    if (savedDciFilters.isNotEmpty) {
-      filtersSource = filtersSource.updateFilterList(MedicalFiltersKeys.dci, savedDciFilters);
-    }
-    
-    currentkey = MedicalFiltersKeys.dci;
     
     loadMedicalFilters();
     emit(MedicalFiltersUpdated());
   }
 
+  void onSearchChanged(String searchText) {
+    _searchDebounceTimer?.cancel();
+    
+    if (searchController.text != searchText) {
+      searchController.text = searchText;
+    }
+    
+    _searchDebounceTimer = Timer(const Duration(milliseconds: 500), () {
+      loadMedicalFilters();
+    });
+  }
+
   void clearSearch() {
     searchController.clear();
     loadMedicalFilters();
+  }
+
+  @override
+  Future<void> close() {
+    _searchDebounceTimer?.cancel();
+    return super.close();
   }
 }

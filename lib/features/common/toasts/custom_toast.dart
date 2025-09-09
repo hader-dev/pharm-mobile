@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
+import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 
-import '../../../utils/constants.dart';
-import '../../../utils/toast_helper.dart';
+
 
 class CustomToastWidget extends StatefulWidget {
   final String title;
@@ -46,21 +47,29 @@ class _CustomToastWidgetState extends State<CustomToastWidget>
     
     // Add listener in initState, not in build method
     _controller.addListener(_animationListener);
+    
+    // Add listener in initState, not in build method
+    _controller.addListener(_animationListener);
   }
 
   void _animationListener() async {
     if (_controller.isForwardOrCompleted) {
       await Future.delayed(Duration(seconds: 2, milliseconds: 600));
-      // Check if widget is still mounted AND controller is not disposed
-      if (mounted && !_isDisposed) {
+      // Check if widget is still mounted
+      if (mounted) {
         _controller.reverse();
       }
     }
     if (_controller.isDismissed) {
       await Future.delayed(widget.animationDuration);
-      if (mounted && !_isDisposed) {
+      if (mounted) {
         widget.onClose?.call();
       }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     }
   }
 
@@ -132,7 +141,6 @@ class _CustomToastWidgetState extends State<CustomToastWidget>
 
   @override
   void dispose() {
-    _isDisposed = true;
     _controller.removeListener(_animationListener);
     _controller.dispose();
     super.dispose();

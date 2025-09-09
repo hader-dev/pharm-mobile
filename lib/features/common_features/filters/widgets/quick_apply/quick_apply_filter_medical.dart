@@ -12,12 +12,18 @@ import 'package:hader_pharm_mobile/features/common_features/filters/widgets/comm
 import 'package:hader_pharm_mobile/features/common_features/filters/widgets/common/selected_filters_display.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
+import 'package:hader_pharm_mobile/models/medical_filters.dart';
 import 'package:iconsax/iconsax.dart';
 
 class QuickApplyFilterMedical extends StatelessWidget {
-  const QuickApplyFilterMedical({super.key, required this.title});
+  const QuickApplyFilterMedical({
+    super.key, 
+    required this.title,
+    this.filterKey = MedicalFiltersKeys.dci,
+  });
 
   final String title;
+  final MedicalFiltersKeys filterKey;
 
   void onFilterSelected(
       String value, bool selected, MedicalFiltersCubit cubit) {
@@ -27,8 +33,8 @@ class QuickApplyFilterMedical extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<MedicalFiltersCubit>();
-
-    cubit.loadMedicalFilters();
+    
+   cubit.updateFilterKey(filterKey);
 
     return Column(
       mainAxisSize: MainAxisSize.max,
@@ -56,8 +62,8 @@ class QuickApplyFilterMedical extends StatelessWidget {
               color: AppColors.accent1Shade1,
             ),
           ),
-          onChanged: (searchValue) {
-            BlocProvider.of<MedicalFiltersCubit>(context).loadMedicalFilters();
+          onChanged: (text) {
+            cubit.onSearchChanged(text ?? '');
           },
           validationFunc: (value) {},
         ),

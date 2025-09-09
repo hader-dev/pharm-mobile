@@ -25,8 +25,6 @@ class MedicalFiltersApply extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<MedicalFiltersCubit>();
 
-    cubit.loadMedicalFilters();
-
     return Column(
       mainAxisSize: MainAxisSize.max,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,7 +67,7 @@ class MedicalFiltersApply extends StatelessWidget {
             ),
           ),
           onChanged: (searchValue) {
-            BlocProvider.of<MedicalFiltersCubit>(context).loadMedicalFilters();
+            cubit.onSearchChanged(searchValue ?? '');
           },
           validationFunc: (value) {},
         ),

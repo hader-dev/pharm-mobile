@@ -11,6 +11,7 @@ import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pag
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/medicine_products/widget/search_filter_bottom_sheet.dart';
 import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
+import 'package:hader_pharm_mobile/models/medical_filters.dart';
 
 class FiltersBar extends StatelessWidget {
   const FiltersBar({super.key});
@@ -42,6 +43,20 @@ class FiltersBar extends StatelessWidget {
                   child: MedicalFilterProvider(
                       child: QuickApplyFilterMedical(
                     title: translation.filter_items_dci,
+                    filterKey: MedicalFiltersKeys.dci,
+                  )),
+                );
+              },
+            ),
+            const ResponsiveGap.s4(),
+            FiltersButtonMedical.price(
+              localization: translation,
+              onPressed: () {
+                BottomSheetHelper.showCommonBottomSheet(
+                  context: context,
+                  child: MedicalFilterProvider(
+                      child: QuickApplyPriceFilterMedical(
+                    title: translation.price_range_ht,
                   )),
                 );
               },
@@ -76,3 +91,4 @@ class FiltersBar extends StatelessWidget {
     );
   }
 }
+

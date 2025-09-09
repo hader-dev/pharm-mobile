@@ -20,7 +20,7 @@ class QuickApplyPriceFilterParapharm extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<ParaMedicalFiltersCubit>();
 
-    cubit.initializePriceFilter();
+    cubit.loadParaMedicalFilters();
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -68,7 +68,7 @@ class QuickApplyPriceFilterParapharm extends StatelessWidget {
                     spalshColor: AppColors.accent1Shade1.withAlpha(50),
                     labelColor: AppColors.accent1Shade1,
                     onTap: () {
-                      context.read<ParaMedicalFiltersCubit>().resetPriceFilter();
+                     context.read<ParaMedicalFiltersCubit>().resetPriceFilter();
                     },
                     borderColor: AppColors.accent1Shade1,
                   ),
