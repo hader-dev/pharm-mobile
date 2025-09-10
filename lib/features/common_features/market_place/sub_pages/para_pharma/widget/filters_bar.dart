@@ -8,9 +8,9 @@ import 'package:hader_pharm_mobile/features/common_features/filters/widgets/quic
 import 'package:hader_pharm_mobile/features/common_features/filters/widgets/quick_apply/quick_apply_price_filter_parapharm.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/cubit/para_pharma_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/widget/search_filter_bottom_sheet.dart';
+import 'package:hader_pharm_mobile/models/para_medical_filters.dart';
 import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
-import 'package:hader_pharm_mobile/models/para_medical_filters.dart';
 
 class FiltersBar extends StatelessWidget {
   const FiltersBar({super.key});
@@ -30,62 +30,50 @@ class FiltersBar extends StatelessWidget {
               ? Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      children: [
-                        FiltersButtonParapharm.filters(
-                          localization: translation,
-                          onPressed: () {
-                            BottomSheetHelper.showCommonBottomSheet(
-                              context: context,
-                              child: SearchParaPharmFilterBottomSheet(),
-                            );
-                          },
-                        ),
-                        const ResponsiveGap.s4(),
-                        FiltersButtonParapharm.name(
-                          localization: translation,
-                          onPressed: () {
-
-                            BottomSheetHelper.showCommonBottomSheet(
-                              context: context,
-                              child: ParaPharmFilterProvider(
-                                child: QuickApplyFilterParapharm(
-                                  title: translation.filter_items_name,
-                                  filterKey: ParaMedicalFiltersKeys.name,
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          FiltersButtonParapharm.filters(
+                            localization: translation,
+                            onPressed: () {
+                              BottomSheetHelper.showCommonBottomSheet(
+                                context: context,
+                                child: SearchParaPharmFilterBottomSheet(),
+                              );
+                            },
+                          ),
+                          const ResponsiveGap.s4(),
+                          FiltersButtonParapharm.name(
+                            localization: translation,
+                            onPressed: () {
+                              BottomSheetHelper.showCommonBottomSheet(
+                                context: context,
+                                child: ParaPharmFilterProvider(
+                                  child: QuickApplyFilterParapharm(
+                                    title: translation.filter_items_name,
+                                    filterKey: ParaMedicalFiltersKeys.name,
+                                  ),
                                 ),
-                              ),
-                            );
-                          },
-                        ),
-                        const ResponsiveGap.s4(),
-                        FiltersButtonParapharm.price(
-                          localization: translation,
-                          onPressed: () {
-                            BottomSheetHelper.showCommonBottomSheet(
-                              context: context,
-                              child: ParaPharmFilterProvider(
-                                child: QuickApplyPriceFilterParapharm(
-                                  title: translation.price_range_ht,
+                              );
+                            },
+                          ),
+                          const ResponsiveGap.s4(),
+                          FiltersButtonParapharm.price(
+                            localization: translation,
+                            onPressed: () {
+                              BottomSheetHelper.showCommonBottomSheet(
+                                context: context,
+                                child: ParaPharmFilterProvider(
+                                  child: QuickApplyPriceFilterParapharm(
+                                    title: translation.price_range_ht,
+                                  ),
                                 ),
-                              ),
-                            );
-                          },
-                        ),
-                        const ResponsiveGap.s4(),
-                        FiltersButtonParapharm.price(
-                          localization: translation,
-                          onPressed: () {
-                            BottomSheetHelper.showCommonBottomSheet(
-                              context: context,
-                              child: ParaPharmFilterProvider(
-                                child: QuickApplyPriceFilterParapharm(
-                                  title: translation.price_range_ht,
-                                ),
-                              ),
-                            );
-                          },
-                        )
-                      ],
+                              );
+                            },
+                          ),
+                        ],
+                      ),
                     ),
                     const ResponsiveGap.s4(),
                     Text(
