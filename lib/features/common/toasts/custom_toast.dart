@@ -3,8 +3,6 @@ import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 
-
-
 class CustomToastWidget extends StatefulWidget {
   final String title;
   final String? message;
@@ -33,7 +31,6 @@ class _CustomToastWidgetState extends State<CustomToastWidget>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _fade;
-  bool _isDisposed = false;
 
   @override
   void initState() {
@@ -44,18 +41,15 @@ class _CustomToastWidgetState extends State<CustomToastWidget>
     );
     _fade = CurvedAnimation(parent: _controller, curve: Curves.easeInCubic);
     _controller.forward();
-    
-    // Add listener in initState, not in build method
+
     _controller.addListener(_animationListener);
-    
-    // Add listener in initState, not in build method
+
     _controller.addListener(_animationListener);
   }
 
   void _animationListener() async {
     if (_controller.isForwardOrCompleted) {
       await Future.delayed(Duration(seconds: 2, milliseconds: 600));
-      // Check if widget is still mounted
       if (mounted) {
         _controller.reverse();
       }
@@ -65,11 +59,6 @@ class _CustomToastWidgetState extends State<CustomToastWidget>
       if (mounted) {
         widget.onClose?.call();
       }
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
     }
   }
 

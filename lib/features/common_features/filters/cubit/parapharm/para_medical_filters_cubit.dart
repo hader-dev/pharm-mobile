@@ -18,7 +18,6 @@ class ParaMedicalFiltersCubit extends Cubit<ParaMedicalFiltersState> {
 
   final searchController = TextEditingController();
   Timer? _searchDebounceTimer;
-  Timer? _searchDebounceTimer;
 
   ParaMedicalFilters filtersSource = const ParaMedicalFilters();
   ParaMedicalFilters appliedFilters = const ParaMedicalFilters();
@@ -130,8 +129,6 @@ class ParaMedicalFiltersCubit extends Cubit<ParaMedicalFiltersState> {
   void resetCurrentFilters() {
     if (currentkey == ParaMedicalFiltersKeys.unitPriceHt) {
       appliedFilters = appliedFilters.copyWith(
-        resetGteUnitPriceHt: true,
-        resetLteUnitPriceHt: true,
         resetGteUnitPriceHt: true,
         resetLteUnitPriceHt: true,
       );

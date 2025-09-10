@@ -10,14 +10,14 @@ import 'package:hader_pharm_mobile/features/common_features/filters/actions/appl
 import 'package:hader_pharm_mobile/features/common_features/filters/cubit/parapharm/para_medical_filters_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/filters/widgets/common/filter_label.dart';
 import 'package:hader_pharm_mobile/features/common_features/filters/widgets/common/selected_filters_display.dart';
+import 'package:hader_pharm_mobile/models/para_medical_filters.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
-import 'package:hader_pharm_mobile/models/para_medical_filters.dart';
 import 'package:iconsax/iconsax.dart';
 
 class QuickApplyFilterParapharm extends StatelessWidget {
   const QuickApplyFilterParapharm({
-    super.key, 
+    super.key,
     required this.title,
     this.filterKey = ParaMedicalFiltersKeys.name,
   });
@@ -33,7 +33,7 @@ class QuickApplyFilterParapharm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<ParaMedicalFiltersCubit>();
-    
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       cubit.updateFilterKey(filterKey);
     });
@@ -64,8 +64,6 @@ class QuickApplyFilterParapharm extends StatelessWidget {
               color: AppColors.accent1Shade1,
             ),
           ),
-          onChanged: (text) {
-            cubit.onSearchChanged(text ?? '');
           onChanged: (text) {
             cubit.onSearchChanged(text ?? '');
           },
@@ -142,35 +140,6 @@ class QuickApplyFilterParapharm extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 8.0, vertical: 12.0),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: PrimaryTextButton(
-                            isOutLined: true,
-                            label: context.translation!.reset,
-                            spalshColor: AppColors.accent1Shade1.withAlpha(50),
-                            labelColor: AppColors.accent1Shade1,
-                            onTap: () {
-                              cubit.resetCurrentFilters();
-                            },
-                            borderColor: AppColors.accent1Shade1,
-                          ),
-                        ),
-                        const ResponsiveGap.s8(),
-                        Expanded(
-                          flex: 2,
-                          child: PrimaryTextButton(
-                            label: context.translation!.confirm,
-                            leadingIcon: Iconsax.money4,
-                            onTap: () {
-                              applyFiltersParaPharm(context);
-                              context.pop();
-                            },
-                            color: AppColors.accent1Shade1,
-                          ),
-                        ),
-                      ],
                     child: Row(
                       children: [
                         Expanded(

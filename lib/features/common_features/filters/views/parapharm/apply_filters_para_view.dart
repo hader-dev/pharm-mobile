@@ -24,8 +24,8 @@ class ParaMedicalFiltersApply extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<ParaMedicalFiltersCubit>();
-    
-   cubit.loadParaMedicalFilters();
+
+    cubit.loadParaMedicalFilters();
 
     return Column(
       mainAxisSize: MainAxisSize.max,
@@ -72,7 +72,6 @@ class ParaMedicalFiltersApply extends StatelessWidget {
             // Handle search text changes through cubit
             BlocProvider.of<ParaMedicalFiltersCubit>(context)
                 .onSearchChanged(searchValue ?? '');
-                .onSearchChanged(searchValue ?? '');
           },
           validationFunc: (value) {},
         ),
@@ -109,15 +108,16 @@ class ParaMedicalFiltersApply extends StatelessWidget {
                                   child: BlocBuilder<ParaMedicalFiltersCubit,
                                       ParaMedicalFiltersState>(
                                     builder: (context, state) {
-                                      final workingFilters = cubit.getCurrentWorkSourceFilters();
-                                      
+                                      final workingFilters =
+                                          cubit.getCurrentWorkSourceFilters();
+
                                       // Show empty widget when no filters are available
                                       if (workingFilters.isEmpty) {
                                         return const Center(
                                           child: EmptyListWidget(),
                                         );
                                       }
-                                      
+
                                       return ListView.separated(
                                         padding: EdgeInsets.zero,
                                         itemCount: workingFilters.length,
