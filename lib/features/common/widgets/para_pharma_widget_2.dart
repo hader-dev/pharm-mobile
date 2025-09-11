@@ -55,7 +55,7 @@ class ParaPharmaWidget2 extends StatelessWidget {
                 child: Stack(children: [
                   paraPharmData.image != null
                       ? CacheNetworkImagePlus(
-                          boxFit: BoxFit.cover,
+                          boxFit: BoxFit.contain,
                           width: double.maxFinite,
                           height: double.maxFinite,
                           imageUrl: getItInstance

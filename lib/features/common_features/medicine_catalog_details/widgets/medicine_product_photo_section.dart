@@ -30,9 +30,9 @@ class MedicineProductPhotoSection extends StatelessWidget {
                     cubit.state.medicineCatalogData!.image!.path,
                   )
               : "",
-          height: 320,
+          height:  MediaQuery.of(context).size.width > 768 ? 400 : 320,
           width: double.maxFinite,
-          fit: BoxFit.fill,
+          fit: BoxFit.contain,
         ),
         cubit.state.medicineCatalogData?.image != null
             ? CacheNetworkImagePlus(

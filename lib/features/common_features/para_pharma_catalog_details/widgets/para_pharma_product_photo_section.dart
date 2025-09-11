@@ -22,9 +22,9 @@ class ParaPharmaProductPhotoSection extends StatelessWidget {
       children: [
         cubit.paraPharmaCatalogData?.image != null
             ? CacheNetworkImagePlus(
-                height: 320,
+                height: MediaQuery.of(context).size.width > 768 ? 400 : 320,
                 width: double.maxFinite,
-                boxFit: BoxFit.fill,
+                boxFit: BoxFit.contain,
                 imageUrl: cubit.paraPharmaCatalogData?.image != null
                     ? getItInstance.get<INetworkService>().getFilesPath(
                         BlocProvider.of<ParaPharmaDetailsCubit>(context)

@@ -156,7 +156,7 @@ class _ImageSection extends StatelessWidget {
       child: Stack(children: [
         medicineData.image != null
             ? CacheNetworkImagePlus(
-                boxFit: BoxFit.cover,
+                boxFit: BoxFit.contain,
                 width: double.maxFinite,
                 height: double.maxFinite,
                 imageUrl: getItInstance
@@ -168,7 +168,7 @@ class _ImageSection extends StatelessWidget {
                   image:
                       AssetImage(DrawableAssetStrings.medicinePlaceHolderImg),
                   fit: BoxFit.cover,
-                  height: 80,
+                  height: 120,
                   width: 80,
                 ),
               ),
