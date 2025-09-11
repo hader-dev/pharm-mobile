@@ -57,7 +57,7 @@ class CompanyRepository extends ICompanyRepository {
   Future<List<Company>> getCompanies(
       {int limit = PaginationConstants.resultsPerPage,
       int offset = 0,
-      String sortDirection = 'ASC',
+      String sortDirection = 'DESC',
       String search = '',
       SearchVendorFilters? searchFilter,
       int? distributorCategoryId,
@@ -202,7 +202,7 @@ class CompanyRepository extends ICompanyRepository {
       debugPrint("Company update - SUCCESS with image: $response");
     } catch (e) {
       debugPrint("Company update - Failed with image, trying without: $e");
-      
+
       await _updateCompanyWithoutImage(companyData, false);
     }
   }

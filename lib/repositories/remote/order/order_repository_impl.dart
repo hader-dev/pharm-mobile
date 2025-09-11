@@ -32,7 +32,7 @@ class OrderRepository extends IOrderRepository {
   Future<OrderResponse> getOrders({
     int limit = PaginationConstants.resultsPerPage,
     int offset = 0,
-    String sortDirection = 'ASC',
+    String sortDirection = 'DESC',
   }) async {
     final Map<String, String> queryParams = {
       'limit': limit.toString(),

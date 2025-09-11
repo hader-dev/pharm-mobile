@@ -17,7 +17,7 @@ class ParaPharmaRepository extends IParaPharmaRepository {
   Future<ParaPharmaResponse> getParaPharmaCatalog(
       {int limit = PaginationConstants.resultsPerPage,
       int offset = 0,
-      String sortDirection = 'ASC',
+      String sortDirection = 'DESC',
       List<String> fields = const [],
       String? companyId,
       ParaMedicalFilters filters = const ParaMedicalFilters()}) async {
