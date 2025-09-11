@@ -3,6 +3,7 @@ import 'package:hader_pharm_mobile/features/common_features/edit_profile/hooks_d
 import 'package:hader_pharm_mobile/models/jwt_decoded.dart';
 import 'package:hader_pharm_mobile/utils/app_exceptions/exceptions.dart';
 import 'package:hader_pharm_mobile/utils/login_jwt_decoder.dart';
+import 'package:hader_pharm_mobile/utils/urls.dart';
 
 import '../../../models/user.dart';
 import '../../../repositories/remote/user/user_repository_impl.dart';
@@ -168,8 +169,13 @@ class UserManager {
   Future<void> logout() async {
     await Future.wait([
       tokenManagerInstance.removeToken(),
-      getItInstance.get<INetworkService>().deletePersistantCookiesJar()
+      getItInstance.get<INetworkService>().deletePersistantCookiesJar(),
+      _remoteLogout()
     ]);
+  }
+
+  Future<void> _remoteLogout() {
+    return getItInstance.get<INetworkService>().post(Urls.logout);
   }
 
   Future<void> forgotPassword(

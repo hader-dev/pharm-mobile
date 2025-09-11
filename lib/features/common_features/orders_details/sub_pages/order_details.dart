@@ -22,6 +22,7 @@ class OrdersDetailsPage extends StatelessWidget {
   static final GlobalKey<ScaffoldState> ordersDetailsScaffoldKey =
       GlobalKey<ScaffoldState>();
   const OrdersDetailsPage({super.key, required this.orderId});
+  final bool isInvoiceWorkInProgress = true;
 
   @override
   Widget build(BuildContext context) {
@@ -111,18 +112,19 @@ class OrdersDetailsPage extends StatelessWidget {
                           color: AppColors.accent1Shade1,
                         ),
                       ),
-                      Padding(
-                        padding: buttonsPadding,
-                        child: PrimaryTextButton(
-                          label: translation.invoice,
-                          onTap: () {
-                            RoutingManager.router.pushNamed(
-                                RoutingManager.invoiceScreen,
-                                extra: orderId);
-                          },
-                          color: AppColors.accent1Shade1,
+                      if (!isInvoiceWorkInProgress)
+                        Padding(
+                          padding: buttonsPadding,
+                          child: PrimaryTextButton(
+                            label: translation.invoice,
+                            onTap: () {
+                              RoutingManager.router.pushNamed(
+                                  RoutingManager.invoiceScreen,
+                                  extra: orderId);
+                            },
+                            color: AppColors.accent1Shade1,
+                          ),
                         ),
-                      ),
                       if (canCancelOrderByStatusId(item.status))
                         Padding(
                           padding: buttonsPadding,
