@@ -7,36 +7,34 @@ import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/bottom_sheet_header.dart';
 import 'package:hader_pharm_mobile/features/common_features/filters/actions/apply_filters.dart';
-import 'package:hader_pharm_mobile/features/common_features/filters/cubit/parapharm/para_medical_filters_cubit.dart';
+import 'package:hader_pharm_mobile/features/common_features/filters/cubit/medical/medical_filters_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/filters/widgets/common/filter_label.dart';
 import 'package:hader_pharm_mobile/features/common_features/filters/widgets/common/selected_filters_display.dart';
-import 'package:hader_pharm_mobile/models/para_medical_filters.dart';
+import 'package:hader_pharm_mobile/models/medical_filters.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
-class QuickApplyFilterParapharm extends StatelessWidget {
-  const QuickApplyFilterParapharm({
+class QuickApplyFilterMedical extends StatelessWidget {
+  const QuickApplyFilterMedical({
     super.key,
     required this.title,
-    this.filterKey = ParaMedicalFiltersKeys.name,
+    this.filterKey = MedicalFiltersKeys.dci,
   });
 
   final String title;
-  final ParaMedicalFiltersKeys filterKey;
+  final MedicalFiltersKeys filterKey;
 
   void onFilterSelected(
-      String value, bool selected, ParaMedicalFiltersCubit cubit) {
+      String value, bool selected, MedicalFiltersCubit cubit) {
     cubit.updatedAppliedFilters(value, selected);
   }
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<ParaMedicalFiltersCubit>();
+    final cubit = context.read<MedicalFiltersCubit>();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      cubit.updateFilterKey(filterKey);
-    });
+    cubit.updateFilterKey(filterKey);
 
     return Column(
       mainAxisSize: MainAxisSize.max,
@@ -69,7 +67,7 @@ class QuickApplyFilterParapharm extends StatelessWidget {
           },
           validationFunc: (value) {},
         ),
-        BlocBuilder<ParaMedicalFiltersCubit, ParaMedicalFiltersState>(
+        BlocBuilder<MedicalFiltersCubit, MedicalFiltersState>(
           builder: (context, state) {
             return SelectedFiltersDisplay(
               selectedFilters: cubit.getCurrentWorkAppliedFilters(),
@@ -81,7 +79,7 @@ class QuickApplyFilterParapharm extends StatelessWidget {
         const ResponsiveGap.s8(),
         SizedBox(
           height: MediaQuery.of(context).size.height * 0.5,
-          child: BlocBuilder<ParaMedicalFiltersCubit, ParaMedicalFiltersState>(
+          child: BlocBuilder<MedicalFiltersCubit, MedicalFiltersState>(
             builder: (context, state) {
               return Scaffold(
                 resizeToAvoidBottomInset: true,
@@ -157,12 +155,12 @@ class QuickApplyFilterParapharm extends StatelessWidget {
                         ),
                         const ResponsiveGap.s8(),
                         Expanded(
-                          flex: 2,
+                          flex: 1,
                           child: PrimaryTextButton(
                             label: context.translation!.confirm,
                             leadingIcon: Iconsax.money4,
                             onTap: () {
-                              applyFiltersParaPharm(context);
+                              applyFiltersMedical(context);
                               context.pop();
                             },
                             color: AppColors.accent1Shade1,
