@@ -1,8 +1,8 @@
 # Politique de Confidentialité  
 
-**Date d’entrée en vigueur :** [Insérer la date]  
+**Date d’entrée en vigueur :**   
 
-[Nom de votre société/application] (« nous », « notre » ou « nos ») s’engage à protéger votre vie privée. La présente Politique de Confidentialité explique comment nous collectons, utilisons, divulguons et protégeons vos informations lorsque vous utilisez notre [site web/application/service].  
+[Nom de votre société/application] (« nous », « notre » ou « nos ») s’engage à protéger votre vie privée. La présente Politique de Confidentialité explique comment nous collectons, utilisons, divulguons et protégeons vos informations lorsque vous utilisez notre https://hader-pharm.com.  
 
 ---
 
@@ -53,7 +53,7 @@ Selon votre juridiction, vous pouvez avoir le droit de :
 - Retirer votre consentement (le cas échéant)  
 - Déposer une plainte auprès d’une autorité de protection des données  
 
-Pour exercer ces droits, veuillez nous contacter à : **[Insérer adresse e-mail]**  
+Pour exercer ces droits, veuillez nous contacter à : **contact@hader-pharm.com**  
 
 ---
 
@@ -79,6 +79,6 @@ Nous pouvons mettre à jour la présente Politique de Confidentialité de temps 
 
 Pour toute question concernant cette Politique de Confidentialité, vous pouvez nous contacter à :  
 
-**[Nom de votre société/application]**  
-**Email :** [Insérer adresse e-mail]  
-**Adresse :** [Insérer adresse postale]  
+**Hader**  
+**Email :** contact@hader-pharm.com  
+

@@ -1,8 +1,8 @@
 # Privacy Policy  
 
-**Effective Date:** [Insert Date]  
+**Effective Date:** 
 
-[Your Company/App Name] ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our [website/app/service].  
+[Your Company/App Name] ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our https://hader-pharm.com.  
 
 ---
 
@@ -53,7 +53,7 @@ Depending on your location, you may have the right to:
 - Withdraw consent (where applicable)  
 - Lodge a complaint with a data protection authority  
 
-To exercise these rights, please contact us at: **[Insert Contact Email]**  
+To exercise these rights, please contact us at: **contact@hader-pharm.com **  
 
 ---
 
@@ -79,6 +79,6 @@ We may update this Privacy Policy from time to time. Updates will be posted here
 
 If you have questions about this Privacy Policy, you can contact us at:  
 
-**[Your Company/App Name]**  
-**Email:** [Insert Email]  
-**Address:** [Insert Address]  
+**Hader**  
+**Email:** contact@hader-pharm.com  
+
