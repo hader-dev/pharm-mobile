@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/app_layout/actions/show_new_app_version_dialog.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/notification/cubit/notifications_cubit.dart';
@@ -61,6 +62,16 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
                     );
                   },
                 ),
+                const ResponsiveGap.s4(),
+                IconButton(
+                  onPressed: () =>
+                      showNewAppVersionDialog(triggerdManually: true),
+                  icon: Icon(
+                    Iconsax.refresh,
+                    size: 28,
+                    color: Colors.white,
+                  ),
+                )
               ],
             ),
             const ResponsiveGap.s12(),

@@ -9,6 +9,15 @@ class AppLocalizationsFr extends AppLocalizations {
   AppLocalizationsFr([String locale = 'fr']) : super(locale);
 
   @override
+  String get version => 'version';
+
+  @override
+  String get update_now => 'Mettre à jour maintenant';
+
+  @override
+  String get new_version_available => 'Nouvelle version disponible';
+
+  @override
   String get user_name => 'Nom d\'utilisateur';
 
   @override
@@ -1098,10 +1107,18 @@ class AppLocalizationsFr extends AppLocalizations {
   String get nis_number => 'Numéro NIS';
 
   @override
+  String get cart_item_added_successfully =>
+      'Article ajouté au panier avec successe';
+
+  @override
   String get ai_number => 'Numéro AI';
 
   @override
   String get companyLogo => 'Logo de la société';
+
+  @override
+  String get app_version_is_already_latest =>
+      'La version de l\'application est deja la plus recente';
 
   @override
   String get no_company_is_associated_with_this_account =>

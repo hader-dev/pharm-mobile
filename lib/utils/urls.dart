@@ -1,4 +1,5 @@
 class Urls {
+  static String get mobileAppVersion => "/mobile/app-version";
   // Notifications
   static String get notifications => "/notifications";
   static String get notificationsUnreadCount => "/notifications/count";

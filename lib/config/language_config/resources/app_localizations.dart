@@ -100,6 +100,24 @@ abstract class AppLocalizations {
     Locale('fr')
   ];
 
+  /// No description provided for @version.
+  ///
+  /// In en, this message translates to:
+  /// **'version'**
+  String get version;
+
+  /// No description provided for @update_now.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Now'**
+  String get update_now;
+
+  /// No description provided for @new_version_available.
+  ///
+  /// In en, this message translates to:
+  /// **'New Version Available'**
+  String get new_version_available;
+
   /// No description provided for @user_name.
   ///
   /// In en, this message translates to:
@@ -2164,6 +2182,12 @@ abstract class AppLocalizations {
   /// **'NIS Number'**
   String get nis_number;
 
+  /// No description provided for @cart_item_added_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Item added to cart successfully'**
+  String get cart_item_added_successfully;
+
   /// No description provided for @ai_number.
   ///
   /// In en, this message translates to:
@@ -2175,6 +2199,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Company Logo'**
   String get companyLogo;
+
+  /// No description provided for @app_version_is_already_latest.
+  ///
+  /// In en, this message translates to:
+  /// **'App version is already latest'**
+  String get app_version_is_already_latest;
 
   /// No description provided for @no_company_is_associated_with_this_account.
   ///

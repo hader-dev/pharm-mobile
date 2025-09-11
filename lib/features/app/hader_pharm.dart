@@ -20,11 +20,10 @@ class HaderPharmApp extends StatelessWidget {
           return ResponsiveThemeProvider(
             child: Builder(
               builder: (themeContext) {
-                // The provider above supplies ThemeData with ResponsiveTextTheme
                 return MaterialApp.router(
                   debugShowCheckedModeBanner: false,
                   title: 'Hader Pharm',
-                  theme: Theme.of(themeContext), // ✅ dynamic theme
+                  theme: Theme.of(themeContext),
                   routerConfig: RoutingManager.router,
                   localizationsDelegates: const [
                     AppLocalizations.delegate,

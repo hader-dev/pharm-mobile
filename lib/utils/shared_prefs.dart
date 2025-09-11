@@ -11,15 +11,20 @@ class Prefs {
   }
 
   //sets
-  static Future<bool> setBool(String key, bool value) async => await _prefs.setBool(key, value);
+  static Future<bool> setBool(String key, bool value) async =>
+      await _prefs.setBool(key, value);
 
-  static Future<bool> setDouble(String key, double value) async => await _prefs.setDouble(key, value);
+  static Future<bool> setDouble(String key, double value) async =>
+      await _prefs.setDouble(key, value);
 
-  static Future<bool> setInt(String key, int value) async => await _prefs.setInt(key, value);
+  static Future<bool> setInt(String key, int value) async =>
+      await _prefs.setInt(key, value);
 
-  static Future<bool> setString(String key, String value) async => await _prefs.setString(key, value);
+  static Future<bool> setString(String key, String value) async =>
+      await _prefs.setString(key, value);
 
-  static Future<bool> setStringList(String key, List<String> value) async => await _prefs.setStringList(key, value);
+  static Future<bool> setStringList(String key, List<String> value) async =>
+      await _prefs.setStringList(key, value);
 
   //gets
   static bool? getBool(String key) => _prefs.getBool(key);
@@ -47,6 +52,8 @@ class SPKeys {
   static const String language = 'Language';
   static const String isLoggedIn = 'isLoggedIn';
   static const String isFirstTime = 'isFirstTime';
+  static const String updateAppDialogCountDisplayLimist =
+      'updateAppDialogCountDisplayLimist';
   static const String isFirstLoggin = 'isFirstLoggin';
   static const String isNotificationsEnabled = 'isNotificationsEnabled';
   static const String theme = 'theme';

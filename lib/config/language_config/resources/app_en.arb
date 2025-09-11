@@ -1,4 +1,7 @@
 {
+  "version": "version",
+  "update_now": "Update Now",
+  "new_version_available": "New Version Available",
   "user_name": "user_name",
   "password": "Password",
   "login": "Login",
@@ -343,8 +346,10 @@
   "phone_2": "Phone 2",
   "rc_number": "RC Number",
   "nis_number": "NIS Number",
+  "cart_item_added_successfully": "Item added to cart successfully",
   "ai_number": "AI Number",
   "companyLogo": "Company Logo",
+  "app_version_is_already_latest": "App version is already latest",
   "no_company_is_associated_with_this_account": "No company is associated with this account.",
   "create_company_action": "Create Company",
   "loading_text": "Loading...",

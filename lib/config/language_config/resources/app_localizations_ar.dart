@@ -9,6 +9,15 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
+  String get version => 'الإصدار';
+
+  @override
+  String get update_now => 'حدث الآن';
+
+  @override
+  String get new_version_available => 'إصدار جديد متاح';
+
+  @override
   String get user_name => 'اسم المستخدم';
 
   @override
@@ -1079,10 +1088,18 @@ class AppLocalizationsAr extends AppLocalizations {
   String get nis_number => 'رقم NIS';
 
   @override
+  String get cart_item_added_successfully =>
+      'تمت اضافة العنصر الى سلة التسوق بنجاح';
+
+  @override
   String get ai_number => 'رقم AI';
 
   @override
   String get companyLogo => 'شعار الشركة';
+
+  @override
+  String get app_version_is_already_latest =>
+      'النسخة الحالية من التطبيق هي الاحدث';
 
   @override
   String get no_company_is_associated_with_this_account =>

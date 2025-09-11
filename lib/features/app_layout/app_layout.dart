@@ -2,24 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
+import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/config/services/notification/notification_service_port.dart';
+import 'package:hader_pharm_mobile/features/app_layout/actions/show_new_app_version_dialog.dart';
+import 'package:hader_pharm_mobile/features/app_layout/actions/show_welcome_dialog.dart';
+import 'package:hader_pharm_mobile/features/common_features/cart/cart.dart';
 import 'package:hader_pharm_mobile/features/common_features/cart/cubit/cart_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/home.dart';
+import 'package:hader_pharm_mobile/features/common_features/market_place/market_place.dart';
 import 'package:hader_pharm_mobile/features/common_features/notification/cubit/notifications_cubit.dart';
+import 'package:hader_pharm_mobile/features/common_features/orders/cubit/orders_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders/orders.dart';
+import 'package:hader_pharm_mobile/features/common_features/profile/profile.dart';
+import 'package:hader_pharm_mobile/repositories/remote/cart_items/cart_items_repository_impl.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/order_repository_impl.dart';
-import 'package:hader_pharm_mobile/utils/shared_prefs.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
+import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 
-import '../../config/routes/routing_manager.dart';
-import '../../config/services/network/network_interface.dart';
-import '../../repositories/remote/cart_items/cart_items_repository_impl.dart';
-import '../../utils/toast_helper.dart';
-import '../common/widgets/welcoming_widget.dart';
-import '../common_features/cart/cart.dart';
-import '../common_features/market_place/market_place.dart';
-import '../common_features/orders/cubit/orders_cubit.dart';
-import '../common_features/profile/profile.dart';
 import 'cubit/app_layout_cubit.dart';
 import 'widgets/app_nav_bar/app_nav_bar.dart';
 
@@ -37,24 +36,11 @@ class AppLayout extends StatelessWidget {
   ];
   const AppLayout({super.key});
 
-  void showWelcomingDialog() {
-    if (getItInstance.get<SharedPreferences>().getBool(SPKeys.isFirstLoggin) ??
-        true) {
-      Future.delayed(Duration(milliseconds: 400), () {
-        showDialog(
-            context: RoutingManager.rootNavigatorKey.currentContext!,
-            builder: (context) =>
-                Dialog(clipBehavior: Clip.antiAlias, child: WelcomingWidget()));
-      });
-      getItInstance
-          .get<SharedPreferences>()
-          .setBool(SPKeys.isFirstLoggin, false);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     Future.microtask(() => showWelcomingDialog());
+    Future.microtask(() => showNewAppVersionDialog());
+
     return SafeArea(
       child: MultiBlocProvider(
         providers: [
@@ -89,7 +75,8 @@ class AppLayout extends StatelessWidget {
           listener: (context, state) {
             if (state is CartItemAdded) {
               getItInstance.get<ToastManager>().showToast(
-                  type: ToastType.success, message: 'Item added to cart');
+                  type: ToastType.success,
+                  message: context.translation!.cart_item_added_successfully);
             }
           },
           child: BlocBuilder<CartCubit, CartState>(
