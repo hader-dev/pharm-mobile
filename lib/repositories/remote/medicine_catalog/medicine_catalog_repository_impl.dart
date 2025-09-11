@@ -17,7 +17,7 @@ class MedicineCatalogRepository extends IMedicineCatalogRepository {
   Future<MedicineResponse> getMedicinesCatalog(
       {int limit = PaginationConstants.resultsPerPage,
       int offset = 0,
-      String sortDirection = 'ASC',
+      String sortDirection = 'DESC',
       String? companyId,
       MedicalFilters filters = const MedicalFilters()}) async {
     final queryParams = {

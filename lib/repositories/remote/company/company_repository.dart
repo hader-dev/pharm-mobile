@@ -10,7 +10,7 @@ abstract class ICompanyRepository {
   Future<List<Company>> getCompanies(
       {int limit = PaginationConstants.resultsPerPage,
       int offset = 0,
-      String sortDirection = 'ASC',
+      String sortDirection = 'DESC',
       String search = '',
       SearchVendorFilters? searchFilter,
       required CompanyType companyType,
@@ -25,8 +25,10 @@ abstract class ICompanyRepository {
   Future<void> removeCompanyFromFavorites({required String companyId});
 
   Future<void> unJoinCompanyAsCLient({required String companyId});
-  
+
   // Company management for current user
   Future<Company> getMyCompany();
-  Future<void> updateMyCompany({required EditCompanyFormDataModel companyData, bool shouldRemoveImage = false});
+  Future<void> updateMyCompany(
+      {required EditCompanyFormDataModel companyData,
+      bool shouldRemoveImage = false});
 }
