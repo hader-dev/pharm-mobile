@@ -157,13 +157,18 @@ class SelectPaymentMethodBottomSheet extends StatelessWidget {
                               label: context.translation!.confirm_order,
                               leadingIcon: Iconsax.money4,
                               onTap: () {
-                                context.read<CartCubit>().passOrder();
-
-                                getItInstance.get<ToastManager>().showToast(
-                                      message: context.translation!
-                                          .order_placed_successfully,
-                                      type: ToastType.success,
-                                    );
+                                context.read<CartCubit>().passOrder().then(
+                                    (sucess) => getItInstance
+                                        .get<ToastManager>()
+                                        .showToast(
+                                          message: sucess
+                                              ? translation
+                                                  .order_placed_successfully
+                                              : translation.order_placed_failed,
+                                          type: sucess
+                                              ? ToastType.success
+                                              : ToastType.error,
+                                        ));
                               },
                               color: AppColors.accent1Shade1,
                             ),

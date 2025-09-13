@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/app_layout/app_layout.dart';
@@ -16,6 +17,7 @@ import 'package:hader_pharm_mobile/features/common_features/orders/cubit/orders_
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
+import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 import 'package:hader_pharm_mobile/utils/validators.dart';
 import 'package:iconsax/iconsax.dart' show Iconsax;
 
@@ -238,7 +240,18 @@ class MakeOrderBottomSheet extends StatelessWidget {
                             onTap: () {
                               context
                                   .read<MedicineDetailsCubit>()
-                                  .passQuickOrder();
+                                  .passQuickOrder()
+                                  .then((sucess) => getItInstance
+                                      .get<ToastManager>()
+                                      .showToast(
+                                        message: sucess
+                                            ? translation
+                                                .order_placed_successfully
+                                            : translation.order_placed_failed,
+                                        type: sucess
+                                            ? ToastType.success
+                                            : ToastType.error,
+                                      ));
                             },
                             color: AppColors.accent1Shade1,
                           ),

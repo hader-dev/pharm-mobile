@@ -18,6 +18,7 @@ import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/toast_helper.dart';
+import 'package:hader_pharm_mobile/utils/validators.dart';
 import 'package:iconsax/iconsax.dart' show Iconsax;
 
 class MakeOrderBottomSheet extends StatelessWidget {
@@ -66,7 +67,7 @@ class MakeOrderBottomSheet extends StatelessWidget {
                 LabeledInfoWidget(
                   label: translation.unit_total_price,
                   value:
-                      "${(num.parse(context.read<ParaPharmaDetailsCubit>().paraPharmaCatalogData!.unitPriceHt).toStringAsFixed(2))} translationContext.currency",
+                      "${(num.parse(context.read<ParaPharmaDetailsCubit>().paraPharmaCatalogData!.unitPriceHt).toStringAsFixed(2))} ${translation.currency}",
                 ),
                 const ResponsiveGap.s12(),
                 Text(
@@ -85,7 +86,9 @@ class MakeOrderBottomSheet extends StatelessWidget {
                       isBordered: true,
                       bgColor: Colors.transparent,
                       onPressed: () {
-                        context.read<ParaPharmaDetailsCubit>().decrementQuantity();
+                        context
+                            .read<ParaPharmaDetailsCubit>()
+                            .decrementQuantity();
                       },
                       icon: Icon(
                         Iconsax.minus,
@@ -143,7 +146,9 @@ class MakeOrderBottomSheet extends StatelessWidget {
                       isBordered: true,
                       bgColor: Colors.transparent,
                       onPressed: () {
-                        context.read<ParaPharmaDetailsCubit>().incrementQuantity();
+                        context
+                            .read<ParaPharmaDetailsCubit>()
+                            .incrementQuantity();
                       },
                       icon: Icon(
                         Iconsax.add,
@@ -158,13 +163,12 @@ class MakeOrderBottomSheet extends StatelessWidget {
                     bgColor: AppColors.bgWhite,
                     value: CustomTextField(
                       verticalPadding: 0,
+                      fieldKey: cubit!.shippingAddressKey,
                       horizontalPadding: AppSizesManager.p6,
                       initValue: UserManager.instance.currentUser.address,
-                      onChanged: (text) => context
-                          .read<ParaPharmaDetailsCubit>()
-                          .updateShippingAddress(text ?? ''),
                       maxLines: 3,
-                      validationFunc: (String? value) {},
+                      validationFunc: (value) =>
+                          requiredValidator(value, translation,2),
                       isFilled: false,
                       isBorderEnabled: true,
                       hintText: context.translation!.shipping_address,
@@ -223,13 +227,17 @@ class MakeOrderBottomSheet extends StatelessWidget {
                           onTap: () {
                             context
                                 .read<ParaPharmaDetailsCubit>()
-                                .passQuickOrder();
-
-                            getItInstance.get<ToastManager>().showToast(
-                                  message: context
-                                      .translation!.order_placed_successfully,
-                                  type: ToastType.success,
-                                );
+                                .passQuickOrder()
+                                .then((sucess) =>
+                                    getItInstance.get<ToastManager>().showToast(
+                                          message: sucess
+                                              ? translation
+                                                  .order_placed_successfully
+                                              : translation.order_placed_failed,
+                                          type: sucess
+                                              ? ToastType.success
+                                              : ToastType.error,
+                                        ));
                           },
                           color: AppColors.accent1Shade1,
                         ),

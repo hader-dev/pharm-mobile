@@ -19,16 +19,16 @@ class ParaPharmaDetailsCubit extends Cubit<ParaPharmaDetailsState> {
   final FavoriteRepository favoriteRepository;
 
   final TextEditingController quantityController;
-  String shippingAddress;
+  final GlobalKey<FormFieldState<dynamic>> shippingAddressKey = GlobalKey();
 
   ParaPharmaDetailsCubit(
       {required this.quantityController,
       required this.paraPharmaCatalogRepository,
       required this.tabController,
       required this.favoriteRepository,
-      this.shippingAddress = '',
       required this.ordersRepository})
       : super(ParaPharmaDetailsInitial());
+
   getParaPharmaCatalogData(String id) async {
     try {
       emit(ParaPharmaDetailsLoading());
@@ -106,11 +106,14 @@ class ParaPharmaDetailsCubit extends Cubit<ParaPharmaDetailsState> {
   }
 
   Future<bool> passQuickOrder() async {
+    if (!(shippingAddressKey.currentState?.validate() ?? false)) {
+      return false;
+    }
     try {
       emit(PassingQuickOrder());
       await ordersRepository.createQuickOrder(
           orderDetails: CreateQuickOrderModel(
-        deliveryAddress: shippingAddress,
+        deliveryAddress: shippingAddressKey.currentState!.value,
         deliveryTownId: 1166,
         paraPharmaCatalogId: paraPharmaCatalogData!.id,
         qty: int.parse(quantityController.text),
@@ -122,9 +125,5 @@ class ParaPharmaDetailsCubit extends Cubit<ParaPharmaDetailsState> {
       emit(PassQuickOrderFailed());
       return false;
     }
-  }
-
-  void updateShippingAddress(String value) {
-    shippingAddress = value;
   }
 }

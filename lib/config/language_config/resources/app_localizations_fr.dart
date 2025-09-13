@@ -930,10 +930,18 @@ class AppLocalizationsFr extends AppLocalizations {
   String get refresh => 'Rafraîchir';
 
   @override
+  String get order_placed_failed => 'Échec de la commande';
+
+  @override
   String get announcements => 'Annonces';
 
   @override
   String get see_all => 'Voir Tout';
+
+  @override
+  String feedback_value_too_short(Object length) {
+    return 'La valeur est trop courte, elle doit contenir au moins $length caractères';
+  }
 
   @override
   String get all_announcements => 'Toutes les Annonces';

@@ -915,10 +915,18 @@ class AppLocalizationsAr extends AppLocalizations {
   String get refresh => 'تحديث';
 
   @override
+  String get order_placed_failed => 'فشل في إتمام الطلب';
+
+  @override
   String get announcements => 'الإعلانات';
 
   @override
   String get see_all => 'عرض الكل';
+
+  @override
+  String feedback_value_too_short(Object length) {
+    return 'القيمة قصيرة جدًا، يجب أن تحتوي على $length أحرف على الأقل';
+  }
 
   @override
   String get all_announcements => 'جميع الإعلانات';

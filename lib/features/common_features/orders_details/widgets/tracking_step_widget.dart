@@ -61,7 +61,7 @@ class TrackingStepWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                orderStatus.name,
+                OrderStatus.getTranslatedStatus(orderStatus),
                 style: context.responsiveTextTheme.current.body3Medium,
               ),
               Text(

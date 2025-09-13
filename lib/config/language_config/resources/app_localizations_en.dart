@@ -919,10 +919,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get refresh => 'Refresh';
 
   @override
+  String get order_placed_failed => 'Placing Order failed';
+
+  @override
   String get announcements => 'Announcements';
 
   @override
   String get see_all => 'See All';
+
+  @override
+  String feedback_value_too_short(Object length) {
+    return 'Value is too short , must be at least $length characters';
+  }
 
   @override
   String get all_announcements => 'All Announcements';

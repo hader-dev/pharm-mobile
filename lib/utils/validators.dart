@@ -1,23 +1,24 @@
-
-
-
 import 'package:hader_pharm_mobile/config/language_config/resources/app_localizations.dart';
 
 String? emptyValidator(String? value, AppLocalizations translation) {
   return null;
 }
 
-
-String? requiredValidator(String? value, AppLocalizations translation) {
+String? requiredValidator(String? value, AppLocalizations translation,
+    [int minLength = 0]) {
   final trimmed = value?.trim() ?? '';
   if (trimmed.isEmpty) {
     return translation.feedback_field_required;
   }
+
+  if (trimmed.length < minLength) {
+    return translation.feedback_value_too_short(minLength);
+  }
   return null;
 }
 
-
-String? validateIsEmail(String? value, AppLocalizations translation, [bool required = false]) {
+String? validateIsEmail(String? value, AppLocalizations translation,
+    [bool required = false]) {
   final trimmed = value?.trim() ?? '';
 
   if (!required && trimmed.isEmpty) {
@@ -36,7 +37,8 @@ String? validateIsEmail(String? value, AppLocalizations translation, [bool requi
   return null;
 }
 
-String? validateIsWilayaNumber(String? value, AppLocalizations translation, [bool required = false]) {
+String? validateIsWilayaNumber(String? value, AppLocalizations translation,
+    [bool required = false]) {
   final trimmed = value?.trim() ?? '';
 
   if (!required && trimmed.isEmpty) {
@@ -59,8 +61,8 @@ String? validateIsWilayaNumber(String? value, AppLocalizations translation, [boo
   return null;
 }
 
-
-String? validateIsCommuneNumber(String? value, AppLocalizations translation, [bool required = false]) {
+String? validateIsCommuneNumber(String? value, AppLocalizations translation,
+    [bool required = false]) {
   final trimmed = value?.trim() ?? '';
 
   if (!required && trimmed.isEmpty) {
@@ -83,8 +85,8 @@ String? validateIsCommuneNumber(String? value, AppLocalizations translation, [bo
   return null;
 }
 
-
-String? validateIsNumber(String? value, AppLocalizations translation, [bool required = false]) {
+String? validateIsNumber(String? value, AppLocalizations translation,
+    [bool required = false]) {
   final trimmed = value?.trim() ?? '';
 
   if (!required && trimmed.isEmpty) {
@@ -103,7 +105,8 @@ String? validateIsNumber(String? value, AppLocalizations translation, [bool requ
   return null;
 }
 
-String? validateIsMobileNumber(String? value, AppLocalizations appLocalizations, [bool required = false]) {
+String? validateIsMobileNumber(String? value, AppLocalizations appLocalizations,
+    [bool required = false]) {
   final trimmed = value?.trim() ?? '';
 
   if (!required && trimmed.isEmpty) {
@@ -122,8 +125,8 @@ String? validateIsMobileNumber(String? value, AppLocalizations appLocalizations,
   return null;
 }
 
-
-String? validateIsFaxNumber(String? value, AppLocalizations appLocalizations, [bool required = false]) {
+String? validateIsFaxNumber(String? value, AppLocalizations appLocalizations,
+    [bool required = false]) {
   final trimmed = value?.trim() ?? '';
 
   if (!required && trimmed.isEmpty) {

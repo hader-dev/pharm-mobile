@@ -1852,6 +1852,12 @@ abstract class AppLocalizations {
   /// **'Refresh'**
   String get refresh;
 
+  /// No description provided for @order_placed_failed.
+  ///
+  /// In en, this message translates to:
+  /// **'Placing Order failed'**
+  String get order_placed_failed;
+
   /// No description provided for @announcements.
   ///
   /// In en, this message translates to:
@@ -1863,6 +1869,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'See All'**
   String get see_all;
+
+  /// No description provided for @feedback_value_too_short.
+  ///
+  /// In en, this message translates to:
+  /// **'Value is too short , must be at least {length} characters'**
+  String feedback_value_too_short(Object length);
 
   /// No description provided for @all_announcements.
   ///
