@@ -7,6 +7,7 @@ class UserModel {
   final DateTime createdAt;
   final DateTime updatedAt;
   final String email;
+  final int townId;
   final String fullName;
   final dynamic phone;
   final bool isActive;
@@ -18,6 +19,7 @@ class UserModel {
 
   UserModel({
     required this.id,
+    required this.townId,
     required this.image,
     required this.createdAt,
     required this.updatedAt,
@@ -35,6 +37,7 @@ class UserModel {
   factory UserModel.empty() {
     return UserModel(
       id: '',
+      townId: 1166,
       image: null,
       createdAt: DateTime.fromMillisecondsSinceEpoch(0),
       updatedAt: DateTime.fromMillisecondsSinceEpoch(0),
@@ -53,6 +56,7 @@ class UserModel {
   factory UserModel.mock() {
     return UserModel(
       id: 'user_123',
+      townId: 1166,
       image: ImageModel.mock(),
       createdAt: DateTime.now().subtract(Duration(days: 200)),
       updatedAt: DateTime.now(),

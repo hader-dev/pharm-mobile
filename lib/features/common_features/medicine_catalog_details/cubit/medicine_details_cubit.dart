@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/models/create_quick_order_model.dart';
 import 'package:hader_pharm_mobile/models/medicine_catalog.dart';
 import 'package:hader_pharm_mobile/repositories/remote/favorite/favorite_repository_impl.dart';
@@ -117,7 +119,7 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
       await ordersRepository.createQuickOrder(
           orderDetails: CreateQuickOrderModel(
         deliveryAddress: state.shippingAddress,
-        deliveryTownId: 1166,
+        deliveryTownId: getItInstance.get<UserManager>().currentUser.townId,
         medicineCatalogId: state.medicineCatalogData!.id,
         qty: int.parse(quantityController.text),
       ));

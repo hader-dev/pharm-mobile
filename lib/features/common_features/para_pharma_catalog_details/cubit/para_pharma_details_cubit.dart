@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/models/create_quick_order_model.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/repositories/remote/favorite/favorite_repository_impl.dart';
@@ -114,7 +116,7 @@ class ParaPharmaDetailsCubit extends Cubit<ParaPharmaDetailsState> {
       await ordersRepository.createQuickOrder(
           orderDetails: CreateQuickOrderModel(
         deliveryAddress: shippingAddressKey.currentState!.value,
-        deliveryTownId: 1166,
+        deliveryTownId: getItInstance.get<UserManager>().currentUser.townId,
         paraPharmaCatalogId: paraPharmaCatalogData!.id,
         qty: int.parse(quantityController.text),
       ));

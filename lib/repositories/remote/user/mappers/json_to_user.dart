@@ -7,6 +7,7 @@ UserModel jsonToUser(Map<String, dynamic> json) {
     address: json["company"] != null ? json["company"]["address"] ?? "" : "",
     role: Role.fromId(json["roleId"]),
     id: json["id"],
+    townId: json["company"] != null ? json["company"]["townId"] ?? 1166 : 1166,
     image: json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
     createdAt: DateTime.parse(json["createdAt"]),
     updatedAt: DateTime.parse(json["updatedAt"]),
