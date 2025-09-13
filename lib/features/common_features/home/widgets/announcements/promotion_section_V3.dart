@@ -11,12 +11,12 @@ import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class PromotionSection extends StatelessWidget {
+class PromotionSectionV3 extends StatelessWidget {
   final List<AnnouncementModel> announcements;
   final PageController pageController = PageController(initialPage: 0);
   final double minSectionHeight;
 
-  PromotionSection(
+  PromotionSectionV3(
       {super.key,
       this.announcements = const <AnnouncementModel>[],
       required this.minSectionHeight});

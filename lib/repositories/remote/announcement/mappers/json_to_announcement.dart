@@ -12,6 +12,12 @@ import 'package:hader_pharm_mobile/repositories/remote/parapharm_catalog/mappers
 AnnouncementModel jsonToAnnouncement(Map<String, dynamic> json) {
   return AnnouncementModel(
     id: json["id"] ?? "unknown",
+    createdAt: json["createdAt"] != null
+        ? DateTime.tryParse(json["createdAt"]) ?? DateTime(1970)
+        : DateTime(1970),
+    updatedAt: json["updatedAt"] != null
+        ? DateTime.tryParse(json["updatedAt"]) ?? DateTime(1970)
+        : null,
     image: json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
     title: json['title'] ?? "unknown",
     content: json['content'] ?? "unknown",
