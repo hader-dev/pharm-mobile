@@ -298,7 +298,7 @@
   "packaging": "Conditionnement",
   "type": "Type",
   "lifetime": "Durée de vie",
-  "no_items_found": "Aucun produit trouvé",
+  "no_items_found": "Aucun élément trouvé",
   "refresh": "Rafraîchir",
   "app_name": "Hader Pharma",
   "laboratory": "Laboratoire",
@@ -349,5 +349,10 @@
   "proforma": "Facture proforma",
   "delivered": "Livré",
   "returned": "Retourné",
-  "failed": "Échoué"
+  "failed": "Échoué",
+  "filters_commercial": "Commercial",
+  "filter_items_brand": "Brand",
+  "filter_items_condition": "Condition",
+  "filter_items_type": "Type",
+  "last_week": "Dernière semaine"
 }

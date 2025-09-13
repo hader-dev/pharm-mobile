@@ -900,16 +900,16 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-  String get yesterday => 'yesterday';
+  String get yesterday => 'اليوم الماضي';
 
   @override
-  String get last_week => 'last week';
+  String get last_week => 'اخر الاسبوع';
 
   @override
   String get app_name => 'حاضر صيدلية';
 
   @override
-  String get no_items_found => 'لا يوجد منتجات';
+  String get no_items_found => 'لايوجد عناصر';
 
   @override
   String get refresh => 'تحديث';
@@ -1022,7 +1022,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get password_reset_success => 'تم تغيير كلمة المرور بنجاح';
 
   @override
-  String get make_complaint_success => 'Complaint made successfully';
+  String get make_complaint_success => 'تم تقديم الشكوى بنجاح';
 
   @override
   String get read_more => 'قراءة المزيد';

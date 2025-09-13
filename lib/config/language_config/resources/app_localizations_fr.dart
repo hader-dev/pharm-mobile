@@ -918,13 +918,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get yesterday => 'hier';
 
   @override
-  String get last_week => 'last week';
+  String get last_week => 'Dernière semaine';
 
   @override
   String get app_name => 'Hader Pharma';
 
   @override
-  String get no_items_found => 'Aucun produit trouvé';
+  String get no_items_found => 'Aucun élément trouvé';
 
   @override
   String get refresh => 'Rafraîchir';
