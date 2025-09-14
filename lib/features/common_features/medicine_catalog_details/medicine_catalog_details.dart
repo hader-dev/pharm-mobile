@@ -84,7 +84,10 @@ class _MedicineCatalogDetailsScreenState
                           height: 1),
                       Padding(
                         padding: const EdgeInsets.all(AppSizesManager.p12),
-                        child: ButtonsSection(),
+                        child: ButtonsSection(
+                          medicineDetailsCubit:
+                              context.read<MedicineDetailsCubit>(),
+                        ),
                       ),
                     ],
                   ),

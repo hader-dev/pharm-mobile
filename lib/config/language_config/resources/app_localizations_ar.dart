@@ -1018,7 +1018,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get invoice => 'فاتورة';
 
   @override
-  String get proforma => 'فاتورة أولية';
+  String get proforma => 'EDF';
 
   @override
   String get failed => 'فشل';

@@ -85,6 +85,8 @@ class _ParaPharmaCatalogDetailsScreenState
                       padding: const EdgeInsets.all(AppSizesManager.p12),
                       child: ButtonsSection(
                         quantitySectionAlignment: MainAxisAlignment.center,
+                        parapharmDetailsCubit:
+                            context.read<ParaPharmaDetailsCubit>(),
                       ),
                     ),
                   ],

@@ -302,7 +302,7 @@
   "delivered": "تم التوصيل",
   "returned": "تم الإرجاع",
   "invoice": "فاتورة",
-  "proforma": "فاتورة أولية",
+  "proforma": "EDF",
   "failed": "فشل",
   "read_more": "قراءة المزيد",
   "packaging": "التغليف",

@@ -1022,7 +1022,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get invoice => 'Invoice';
 
   @override
-  String get proforma => 'Proforma Invoice';
+  String get proforma => 'EDF';
 
   @override
   String get failed => 'Failed';

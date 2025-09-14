@@ -324,7 +324,7 @@
   "delivered": "Delivered",
   "returned": "Returned",
   "invoice": "Invoice",
-  "proforma": "Proforma Invoice",
+  "proforma": "EDF",
   "failed": "Failed",
   "order_placed_successfully": "Order placed successfully",
   "password_reset_success": "Password reset success",

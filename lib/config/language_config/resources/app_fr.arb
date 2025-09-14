@@ -346,7 +346,7 @@
   "invoice": "Facture",
   "hint_please_enter_otp_sent_to_email": "Veuillez saisir le code OTP envoyé par email",
   "password_reset_success": "Réinitialisation du mot de passe avec successe",
-  "proforma": "Facture proforma",
+  "proforma": "EDF",
   "delivered": "Livré",
   "returned": "Retourné",
   "failed": "Échoué",

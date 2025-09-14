@@ -2053,7 +2053,7 @@ abstract class AppLocalizations {
   /// No description provided for @proforma.
   ///
   /// In en, this message translates to:
-  /// **'Proforma Invoice'**
+  /// **'EDF'**
   String get proforma;
 
   /// No description provided for @failed.

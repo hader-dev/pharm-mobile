@@ -1033,7 +1033,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get invoice => 'Facture';
 
   @override
-  String get proforma => 'Facture proforma';
+  String get proforma => 'EDF';
 
   @override
   String get failed => 'Échoué';
