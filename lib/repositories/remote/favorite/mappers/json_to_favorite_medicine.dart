@@ -7,6 +7,7 @@ BaseMedicineCatalogModel jsonToFavoriteBaseMedicine(Map<String, dynamic> base) {
   Map<String, dynamic>? jsonCompany = base["company"];
 
   return BaseMedicineCatalogModel(
+    packageSize: jsonMedicine["packageSize"] ?? 1,
     id: jsonMedicine["id"] ?? "",
     unitPriceTtc: jsonMedicine["unitPriceTtc"] ?? "",
     unitPriceHt: jsonMedicine["unitPriceHt"] ?? "",

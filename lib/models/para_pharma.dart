@@ -12,9 +12,11 @@ class BaseParaPharmaCatalogModel {
   final bool isActive;
   final BaseCompany? company;
   bool isLiked;
+  final int packageSize;
 
   BaseParaPharmaCatalogModel(
       {required this.id,
+      required this.packageSize,
       required this.unitPriceHt,
       required this.thumbnailImage,
       required this.image,
@@ -23,18 +25,19 @@ class BaseParaPharmaCatalogModel {
       required this.isActive,
       this.company,
       this.isLiked = false});
-  BaseParaPharmaCatalogModel copyWith({
-    String? id,
-    String? unitPriceHt,
-    ImageModel? thumbnailImage,
-    ImageModel? image,
-    String? name,
-    int? stockQuantity,
-    bool? isActive,
-    BaseCompany? company,
-    bool? isLiked,
-  }) {
+  BaseParaPharmaCatalogModel copyWith(
+      {String? id,
+      String? unitPriceHt,
+      ImageModel? thumbnailImage,
+      ImageModel? image,
+      String? name,
+      int? stockQuantity,
+      bool? isActive,
+      BaseCompany? company,
+      bool? isLiked,
+      int? packageSize}) {
     return BaseParaPharmaCatalogModel(
+      packageSize: packageSize ?? this.packageSize,
       id: id ?? this.id,
       unitPriceHt: unitPriceHt ?? this.unitPriceHt,
       thumbnailImage: thumbnailImage ?? this.thumbnailImage,
@@ -109,6 +112,7 @@ class ParaPharmaCatalogModel extends BaseParaPharmaCatalogModel {
   ParaPharmaCatalogModel({
     required super.id,
     required super.isLiked,
+    required super.packageSize,
     required super.unitPriceHt,
     required super.thumbnailImage,
     required super.image,
@@ -138,6 +142,7 @@ class ParaPharmaCatalogModel extends BaseParaPharmaCatalogModel {
         id: '',
         name: '',
         unitPriceHt: '',
+        packageSize: 1,
         unitPriceTtc: '',
         tvaPercentage: '',
         thumbnailImage: null,

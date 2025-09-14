@@ -21,10 +21,13 @@ class ParaPharmaDetailsCubit extends Cubit<ParaPharmaDetailsState> {
   final FavoriteRepository favoriteRepository;
 
   final TextEditingController quantityController;
+  final TextEditingController packageQuantityController;
+
   final GlobalKey<FormFieldState<dynamic>> shippingAddressKey = GlobalKey();
 
   ParaPharmaDetailsCubit(
       {required this.quantityController,
+      required this.packageQuantityController,
       required this.paraPharmaCatalogRepository,
       required this.tabController,
       required this.favoriteRepository,
@@ -38,6 +41,7 @@ class ParaPharmaDetailsCubit extends Cubit<ParaPharmaDetailsState> {
           await paraPharmaCatalogRepository.getParaPharmaCatalogById(id);
       emit(ParaPharmaDetailsLoaded());
     } catch (e) {
+      debugPrint(e.toString());
       emit(ParaPharmaDetailsLoadError());
     }
   }
@@ -94,16 +98,48 @@ class ParaPharmaDetailsCubit extends Cubit<ParaPharmaDetailsState> {
   }
 
   void incrementQuantity() {
-    quantityController.text =
-        (int.parse(quantityController.text) + 1).toString();
+    final updatedQuantity = int.parse(quantityController.text) + 1;
+    quantityController.text = (updatedQuantity).toString();
+
+    packageQuantityController.text =
+        (updatedQuantity ~/ (paraPharmaCatalogData?.packageSize ?? 1))
+            .toString();
     emit(ParaPharmaQuantityChanged());
   }
 
   void decrementQuantity() {
-    if (int.parse(quantityController.text) > 1) {
-      quantityController.text =
-          (int.parse(quantityController.text) - 1).toString();
+    final updatedQuantity = int.parse(quantityController.text) - 1;
+    if (updatedQuantity > 0) {
+      quantityController.text = (updatedQuantity).toString();
+
+      packageQuantityController.text =
+          (updatedQuantity ~/ (paraPharmaCatalogData?.packageSize ?? 1))
+              .toString();
     }
+    emit(ParaPharmaQuantityChanged());
+  }
+
+  void incrementPackageQuantity() {
+    final currPackageQuantity = int.parse(packageQuantityController.text) + 1;
+
+    packageQuantityController.text = currPackageQuantity.toString();
+    quantityController.text =
+        (currPackageQuantity * (paraPharmaCatalogData?.packageSize ?? 1))
+            .toString();
+    emit(ParaPharmaQuantityChanged());
+  }
+
+  void decrementPackageQuantity() {
+    final currPackageQuantity = int.parse(packageQuantityController.text) - 1;
+
+    final updatedItemQuantity =
+        (currPackageQuantity * (paraPharmaCatalogData?.packageSize ?? 1));
+
+    packageQuantityController.text =
+        (currPackageQuantity < 1 ? 1 : currPackageQuantity).toString();
+
+    quantityController.text =
+        (updatedItemQuantity < 1 ? 1 : updatedItemQuantity).toString();
     emit(ParaPharmaQuantityChanged());
   }
 

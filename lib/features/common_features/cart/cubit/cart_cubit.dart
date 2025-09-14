@@ -4,10 +4,10 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/language_config/resources/app_localizations.dart';
 import 'package:hader_pharm_mobile/models/cart_item.dart';
-import 'package:hader_pharm_mobile/repositories/remote/cart_items/response/cart_items_response.dart';
 import 'package:hader_pharm_mobile/models/create_cart_item.dart';
 import 'package:hader_pharm_mobile/models/create_order_model.dart';
 import 'package:hader_pharm_mobile/repositories/remote/cart_items/cart_items_repository_impl.dart';
+import 'package:hader_pharm_mobile/repositories/remote/cart_items/response/cart_items_response.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/order_repository_impl.dart';
 import 'package:hader_pharm_mobile/utils/app_exceptions/exceptions.dart';
 import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler.dart';
@@ -106,6 +106,53 @@ class CartCubit extends Cubit<CartState> {
       updateTotals();
 
       emit(CartLoadingSuccess());
+    } catch (e) {
+      GlobalExceptionHandler.handle(exception: e);
+      emit(CartError(error: e.toString()));
+    }
+  }
+
+  void decreaseCartPackageQuantity(String cartItemId) {
+    try {
+      int cartItemIndex =
+          cartItems.lastIndexWhere((element) => element.id == cartItemId);
+      if (cartItems[cartItemIndex].quantity <= 1) {
+        throw TemplateException(
+            message: "quantity should be greater than or equal 1.");
+      }
+
+      cartItems[cartItemIndex] = cartItems[cartItemIndex]
+          .copyWith(quantity: cartItems[cartItemIndex].quantity - 1);
+      updateTotals();
+      _debounceFunction(() async {
+        updateItemQuantity(cartItemId, cartItems[cartItemIndex].quantity);
+      });
+      emit(CartQuantityUpdated(updatedItemId: cartItemId));
+    } catch (e) {
+      GlobalExceptionHandler.handle(exception: e);
+    }
+  }
+
+  void increaseCartPackageQuantity(String cartItemId) {
+    try {
+      int cartItemIndex =
+          cartItems.lastIndexWhere((element) => element.id == cartItemId);
+      if ((cartItems[cartItemIndex].medicinesCatalogId != null &&
+              cartItems[cartItemIndex].quantity ==
+                  cartItems[cartItemIndex].medicineCatalogStockQty) ||
+          (cartItems[cartItemIndex].parapharmCatalogId != null &&
+              cartItems[cartItemIndex].quantity ==
+                  cartItems[cartItemIndex].parapharmCatalogStockQty)) {
+        throw TemplateException(message: "you reached the limit of the stock.");
+      }
+
+      cartItems[cartItemIndex] = cartItems[cartItemIndex]
+          .copyWith(quantity: cartItems[cartItemIndex].quantity + 1);
+      updateTotals();
+      _debounceFunction(() async {
+        updateItemQuantity(cartItemId, cartItems[cartItemIndex].quantity);
+      });
+      emit(CartQuantityUpdated(updatedItemId: cartItemId));
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
       emit(CartError(error: e.toString()));

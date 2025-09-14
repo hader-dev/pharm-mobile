@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_icon_button.dart';
+import 'package:hader_pharm_mobile/features/common_features/cart/widgets/quantity/quantity.dart';
 import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/cubit/medicine_details_cubit.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
-import 'package:iconsax/iconsax.dart' show Iconsax;
 
 class QuantitySectionModified extends StatelessWidget {
   const QuantitySectionModified({
@@ -15,66 +12,30 @@ class QuantitySectionModified extends StatelessWidget {
   });
 
   final MainAxisAlignment mainAxisAlignment;
+  final bool disabledPackageQuantity = true;
 
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<MedicineDetailsCubit>();
+    final translation = context.translation!;
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: AppSizesManager.p8),
-      child: Row(mainAxisAlignment: mainAxisAlignment, children: [
-        PrimaryIconButton(
-          borderColor: StrokeColors.normal.color,
-          isBordered: true,
-          bgColor: Colors.transparent,
-          onPressed: () {
-            cubit.decrementQuantity();
-          },
-          icon: Icon(
-            Iconsax.minus,
-            color: Colors.black,
-          ),
+      child: Column(mainAxisAlignment: mainAxisAlignment, children: [
+        BaseQuantityController(
+          label: translation.quantity,
+          quantityController: cubit.quantityController,
+          decrement: cubit.decrementQuantity,
+          increment: cubit.incrementQuantity,
         ),
-        SizedBox(
-          height: AppSizesManager.buttonHeight,
-          width: 80,
-          child: Form(
-              // key: formKey,
-              //autovalidateMode: AutovalidateMode.onUserInteraction,
-              child: TextFormField(
-                  cursorColor: AppColors.accentGreenShade1,
-                  controller: cubit.quantityController,
-                  textAlign: TextAlign.center,
-                  keyboardType: TextInputType.number,
-                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                  validator: (value) =>
-                      value == null || value.isEmpty ? '' : null,
-                  style: context.responsiveTextTheme.current.body1Medium,
-                  decoration: InputDecoration(
-                    enabledBorder: InputBorder.none,
-                    disabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(
-                          AppSizesManager.commonWidgetsRadius),
-                      borderSide: BorderSide(color: AppColors.bgDisabled),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(
-                          AppSizesManager.commonWidgetsRadius),
-                      borderSide: BorderSide(color: StrokeColors.focused.color),
-                    ),
-                  ))),
-        ),
-        PrimaryIconButton(
-          borderColor: StrokeColors.normal.color,
-          isBordered: true,
-          bgColor: Colors.transparent,
-          onPressed: () {
-            cubit.incrementQuantity();
-          },
-          icon: Icon(
-            Iconsax.add,
-            color: Colors.black,
-          ),
-        ),
+        if (!disabledPackageQuantity)
+          BaseQuantityController(
+            label:
+                "${translation.pacakge_quantity} (${cubit.state.medicineCatalogData?.packageSize})",
+            quantityController: cubit.packageQuantityController,
+            decrement: cubit.decrementPackageQuantity,
+            increment: cubit.incrementPackageQuantity,
+          )
       ]),
     );
   }

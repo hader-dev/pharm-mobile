@@ -19,11 +19,13 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
   final OrderRepository ordersRepository;
   final FavoriteRepository favoriteRepository;
   final TabController tabController;
+  final TextEditingController packageQuantityController;
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   MedicineDetailsCubit(
       {required this.medicineCatalogRepository,
+      required this.packageQuantityController,
       required this.quantityController,
       required this.tabController,
       required this.ordersRepository,
@@ -98,16 +100,48 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
   }
 
   void incrementQuantity() {
-    quantityController.text =
-        (int.parse(quantityController.text) + 1).toString();
+    final updatedQuantity = int.parse(quantityController.text) + 1;
+    quantityController.text = (updatedQuantity).toString();
+
+    packageQuantityController.text =
+        (updatedQuantity ~/ (state.medicineCatalogData?.packageSize ?? 1))
+            .toString();
     emit(state.quantityChanged());
   }
 
   void decrementQuantity() {
-    if (int.parse(quantityController.text) > 1) {
-      quantityController.text =
-          (int.parse(quantityController.text) - 1).toString();
+    final updatedQuantity = int.parse(quantityController.text) - 1;
+    if (updatedQuantity > 0) {
+      quantityController.text = (updatedQuantity).toString();
+
+      packageQuantityController.text =
+          (updatedQuantity ~/ (state.medicineCatalogData?.packageSize ?? 1))
+              .toString();
     }
+    emit(state.quantityChanged());
+  }
+
+  void incrementPackageQuantity() {
+    final currPackageQuantity = int.parse(packageQuantityController.text) + 1;
+
+    packageQuantityController.text = currPackageQuantity.toString();
+    quantityController.text =
+        (currPackageQuantity * (state.medicineCatalogData?.packageSize ?? 1))
+            .toString();
+    emit(state.quantityChanged());
+  }
+
+  void decrementPackageQuantity() {
+    final currPackageQuantity = int.parse(packageQuantityController.text) - 1;
+
+    final updatedItemQuantity =
+        (currPackageQuantity * (state.medicineCatalogData?.packageSize ?? 1));
+
+    packageQuantityController.text =
+        (currPackageQuantity < 1 ? 1 : currPackageQuantity).toString();
+
+    quantityController.text =
+        (updatedItemQuantity < 1 ? 1 : updatedItemQuantity).toString();
     emit(state.quantityChanged());
   }
 

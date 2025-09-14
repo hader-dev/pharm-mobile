@@ -1024,6 +1024,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get failed => 'فشل';
 
   @override
+  String get package_size => 'حجم العبوة';
+
+  @override
+  String get pacakge_quantity => 'كمية العبوة';
+
+  @override
   String get order_placed_successfully => 'تم تقديم الطلب بنجاح';
 
   @override

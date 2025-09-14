@@ -7,6 +7,7 @@ import 'package:hader_pharm_mobile/repositories/remote/medicine_catalog/mappers/
 
 MedicineCatalogModel jsonToMedicineCatalogItem(Map<String, dynamic> json) {
   return MedicineCatalogModel(
+    packageSize: json["packageSize"] ?? 1,
     id: json["id"] ?? "",
     unitPriceTtc: json["unitPriceTtc"] ?? "",
     unitPriceHt: json["unitPriceHt"] ?? "",

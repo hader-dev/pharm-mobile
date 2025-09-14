@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/app_layout/app_layout.dart';
-import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_icon_button.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/bottom_sheet_header.dart';
+import 'package:hader_pharm_mobile/features/common_features/cart/widgets/quantity/quantity.dart';
 import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/cubit/medicine_details_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/medicine_catalog_details.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders/cubit/orders_cubit.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
-import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 import 'package:hader_pharm_mobile/utils/validators.dart';
@@ -25,7 +23,7 @@ class MakeOrderBottomSheet extends StatelessWidget {
   const MakeOrderBottomSheet({super.key, this.cubit});
 
   final MedicineDetailsCubit? cubit;
-
+  final bool disabledPackageQuantity = true;
   @override
   Widget build(BuildContext context) {
     final translation = context.translation!;
@@ -77,96 +75,19 @@ class MakeOrderBottomSheet extends StatelessWidget {
                         "${(num.parse(context.read<MedicineDetailsCubit>().state.medicineCatalogData!.unitPriceHt).toStringAsFixed(2))} ${translation.currency}",
                   ),
                   const ResponsiveGap.s12(),
-                  Text(
-                    translation.quantity,
-                    style: context.responsiveTextTheme.current.body3Medium
-                        .copyWith(
-                      color: TextColors.ternary.color,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: AppSizesManager.p8),
-                    child: Row(
-                      children: [
-                        PrimaryIconButton(
-                          borderColor: StrokeColors.normal.color,
-                          isBordered: true,
-                          bgColor: Colors.transparent,
-                          onPressed: () {
-                            context
-                                .read<MedicineDetailsCubit>()
-                                .decrementQuantity();
-                          },
-                          icon: Icon(
-                            Iconsax.minus,
-                            color: Colors.black,
-                          ),
-                        ),
-                        const ResponsiveGap.s12(),
-                        Flexible(
-                          child: SizedBox(
-                            height: AppSizesManager.buttonHeight,
-                            child: Form(
-                              child: TextFormField(
-                                cursorColor: AppColors.accentGreenShade1,
-                                controller: context
-                                    .read<MedicineDetailsCubit>()
-                                    .quantityController,
-                                textAlign: TextAlign.center,
-                                keyboardType: TextInputType.number,
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.digitsOnly
-                                ],
-                                validator: (value) =>
-                                    value == null || value.isEmpty ? '' : null,
-                                style: context
-                                    .responsiveTextTheme.current.body3Medium,
-                                decoration: InputDecoration(
-                                  contentPadding:
-                                      EdgeInsets.all(AppSizesManager.p12),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(
-                                        AppSizesManager.commonWidgetsRadius),
-                                    borderSide: BorderSide(
-                                        color:
-                                            FieldState.normal.color.secondary),
-                                  ),
-                                  disabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(
-                                        AppSizesManager.commonWidgetsRadius),
-                                    borderSide:
-                                        BorderSide(color: AppColors.bgDisabled),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(
-                                        AppSizesManager.commonWidgetsRadius),
-                                    borderSide: BorderSide(
-                                        color: StrokeColors.focused.color),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        const ResponsiveGap.s12(),
-                        PrimaryIconButton(
-                          borderColor: StrokeColors.normal.color,
-                          isBordered: true,
-                          bgColor: Colors.transparent,
-                          onPressed: () {
-                            context
-                                .read<MedicineDetailsCubit>()
-                                .incrementQuantity();
-                          },
-                          icon: Icon(
-                            Iconsax.add,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  BaseQuantityController(
+                      label: translation.quantity,
+                      decrement: cubit.decrementQuantity,
+                      increment: cubit.incrementQuantity,
+                      quantityController: cubit.quantityController),
+                  if (!disabledPackageQuantity)
+                    BaseQuantityController(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        label:
+                            "${translation.pacakge_quantity} (${cubit.state.medicineCatalogData!.packageSize})",
+                        decrement: cubit.decrementPackageQuantity,
+                        increment: cubit.incrementPackageQuantity,
+                        quantityController: cubit.packageQuantityController),
                   const ResponsiveGap.s12(),
                   InfoWidget(
                       label: context.translation!.shipping_address,

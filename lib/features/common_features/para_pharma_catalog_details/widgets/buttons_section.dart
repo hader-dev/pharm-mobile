@@ -16,19 +16,20 @@ import 'make_order_bottom_sheet.dart' show MakeOrderBottomSheet;
 import 'quantity_section.dart' show QuantitySectionModified;
 
 class ButtonsSection extends StatelessWidget {
-  const ButtonsSection(
-      {super.key,
-      this.onAction,
-      this.quantitySectionAlignment = MainAxisAlignment.end,
-      this.parapharmDetailsCubit});
+  const ButtonsSection({
+    super.key,
+    this.onAction,
+    this.quantitySectionAlignment = MainAxisAlignment.end,
+  });
 
   final VoidCallback? onAction;
   final MainAxisAlignment quantitySectionAlignment;
-  final ParaPharmaDetailsCubit? parapharmDetailsCubit;
 
   @override
   Widget build(BuildContext context) {
     final translation = context.translation!;
+    final parapharmDetailsCubit =
+        BlocProvider.of<ParaPharmaDetailsCubit>(context);
 
     return BlocBuilder<CartCubit, CartState>(
       builder: (context, state) {
@@ -68,16 +69,10 @@ class ButtonsSection extends StatelessWidget {
                       onTap: () {
                         BlocProvider.of<CartCubit>(context).addToCart(
                             CreateCartItemModel(
-                                productId:
-                                    BlocProvider.of<ParaPharmaDetailsCubit>(
-                                            context)
-                                        .paraPharmaCatalogData!
-                                        .id,
-                                quantity: int.parse(
-                                    BlocProvider.of<ParaPharmaDetailsCubit>(
-                                            context)
-                                        .quantityController
-                                        .text),
+                                productId: parapharmDetailsCubit
+                                    .paraPharmaCatalogData!.id,
+                                quantity: int.parse(parapharmDetailsCubit
+                                    .quantityController.text),
                                 productType: ProductTypes.para_pharmacy),
                             true);
                         onAction?.call();

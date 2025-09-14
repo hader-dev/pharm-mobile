@@ -1028,6 +1028,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get failed => 'Failed';
 
   @override
+  String get package_size => 'Package Size';
+
+  @override
+  String get pacakge_quantity => 'Package Quantity';
+
+  @override
   String get order_placed_successfully => 'Order placed successfully';
 
   @override

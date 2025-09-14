@@ -7,6 +7,7 @@ ParaPharmaCatalogModel jsonToParapharmaCatalogueItem(
     Map<String, dynamic> json) {
   return ParaPharmaCatalogModel(
     id: json['id'] ?? "",
+    packageSize: json['packageSize'] ?? 1,
     unitPriceHt: json['unitPriceHt'] ?? "0",
     unitPriceTtc: json['unitPriceTtc'] ?? "0",
     tvaPercentage: json['tvaPercentage'] ?? "0",

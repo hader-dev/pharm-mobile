@@ -326,6 +326,8 @@
   "invoice": "Invoice",
   "proforma": "EDF",
   "failed": "Failed",
+  "package_size": "Package Size",
+  "pacakge_quantity": "Package Quantity",
   "order_placed_successfully": "Order placed successfully",
   "password_reset_success": "Password reset success",
   "make_complaint_success": "Complaint made successfully",

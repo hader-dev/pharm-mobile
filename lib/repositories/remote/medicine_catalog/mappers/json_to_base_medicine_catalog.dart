@@ -6,6 +6,7 @@ import 'package:hader_pharm_mobile/models/medicine_catalog.dart';
 
 BaseMedicineCatalogModel jsonToBaseMedicineCatalog(Map<String, dynamic> json) {
     return BaseMedicineCatalogModel(
+      packageSize: json["packageSize"] ?? 1,
       id: json["id"] ?? "",
       unitPriceTtc: json["unitPriceTtc"] ?? "",
       unitPriceHt: json["unitPriceHt"] ?? "",

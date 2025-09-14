@@ -33,6 +33,8 @@ class _QuickCartAddModalState extends State<QuickCartAddModal>
     final tabs = paraPharmaCatalogDetailsTabData(context);
 
     final detailsCubit = ParaPharmaDetailsCubit(
+        packageQuantityController: TextEditingController(
+            text: existingCartItem?.packageQuantity.toString() ?? '1'),
         quantityController: TextEditingController(
             text: existingCartItem?.quantity.toString() ?? '1'),
         tabController: TabController(length: tabs.length, vsync: this),
@@ -51,11 +53,13 @@ class _QuickCartAddModalState extends State<QuickCartAddModal>
         ),
         BlocProvider.value(value: cartCubit),
       ],
-      child: ButtonsSection(
-        onAction: () => context.pop(),
-        quantitySectionAlignment: MainAxisAlignment.center,
-        parapharmDetailsCubit: detailsCubit,
-      ),
+      child: BlocBuilder<ParaPharmaDetailsCubit, ParaPharmaDetailsState>(
+          builder: (context, state) {
+        return ButtonsSection(
+          onAction: () => context.pop(),
+          quantitySectionAlignment: MainAxisAlignment.center,
+        );
+      }),
     );
   }
 }

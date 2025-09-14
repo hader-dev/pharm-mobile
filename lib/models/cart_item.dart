@@ -14,6 +14,7 @@ class CartItemModel {
   final String? medicinesCatalogId;
   final String? parapharmCatalogId;
   final int quantity;
+  final int packageSize;
   final String designation;
   final dynamic lotNumber;
   final dynamic expirationDate;
@@ -46,13 +47,21 @@ class CartItemModel {
     required this.discountAmount,
     required this.buyerCompanyId,
     required this.sellerCompanyId,
+    required this.packageSize,
     this.medicineCatalogStockQty = 0,
     this.parapharmCatalogStockQty = 0,
     required this.sellerCompany,
   });
 
+  int get packageQuantity {
+    final packageCount = (quantity / packageSize).round();
+
+    return packageCount == 0 ? 1 : packageCount;
+  }
+
   factory CartItemModel.fromJson(Map<String, dynamic> json) {
     return CartItemModel(
+      packageSize: json['packageSize'] ?? 1,
       id: json['id'],
       totalAmountTtc: json['totalAmountTtc'],
       totalAmountHt: json['totalAmountHt'],
@@ -77,30 +86,31 @@ class CartItemModel {
       image: json['image'] != null ? ImageModel.fromJson(json['image']) : null,
     );
   }
-  CartItemModel copyWith({
-    String? id,
-    String? totalAmountTtc,
-    String? totalAmountHt,
-    String? tvaPercentage,
-    String? unitPriceHt,
-    String? unitPriceTtc,
-    DateTime? createdAt,
-    DateTime? updatedAt,
-    String? medicinesCatalogId,
-    dynamic parapharmCatalogId,
-    int? quantity,
-    String? designation,
-    dynamic lotNumber,
-    dynamic expirationDate,
-    String? margin,
-    String? discountAmount,
-    String? buyerCompanyId,
-    String? sellerCompanyId,
-    MedicinesCatalog? medicinesCatalog,
-    dynamic parapharmCatalog,
-    BaseCompany? sellerCompany,
-  }) {
+  CartItemModel copyWith(
+      {String? id,
+      String? totalAmountTtc,
+      String? totalAmountHt,
+      String? tvaPercentage,
+      String? unitPriceHt,
+      String? unitPriceTtc,
+      DateTime? createdAt,
+      DateTime? updatedAt,
+      String? medicinesCatalogId,
+      dynamic parapharmCatalogId,
+      int? quantity,
+      String? designation,
+      dynamic lotNumber,
+      dynamic expirationDate,
+      String? margin,
+      String? discountAmount,
+      String? buyerCompanyId,
+      String? sellerCompanyId,
+      MedicinesCatalog? medicinesCatalog,
+      dynamic parapharmCatalog,
+      BaseCompany? sellerCompany,
+      int? packageSize}) {
     return CartItemModel(
+      packageSize: packageSize ?? this.packageSize,
       id: id ?? this.id,
       totalAmountTtc: totalAmountTtc ?? this.totalAmountTtc,
       totalAmountHt: totalAmountHt ?? this.totalAmountHt,

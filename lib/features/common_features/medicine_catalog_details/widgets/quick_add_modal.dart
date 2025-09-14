@@ -33,6 +33,8 @@ class _QuickCartAddModalState extends State<QuickCartAddModal>
     final tabs = medicineCatalogDetailsTabData(context);
 
     final medicineDetailsCubit = MedicineDetailsCubit(
+        packageQuantityController: TextEditingController(
+            text: existingCartItem?.quantity.toString() ?? '1'),
         quantityController: TextEditingController(
             text: existingCartItem?.quantity.toString() ?? '1'),
         tabController: TabController(length: tabs.length, vsync: this),

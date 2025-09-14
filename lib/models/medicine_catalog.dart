@@ -19,6 +19,7 @@ class BaseMedicineCatalogModel {
   final String margin;
   final int stockQuantity;
   final int minOrderQuantity;
+  final int packageSize;
   final int maxOrderQuantity;
   final bool isPsychoactive;
   final bool requiresColdChain;
@@ -30,6 +31,7 @@ class BaseMedicineCatalogModel {
   bool isLiked;
 
   BaseMedicineCatalogModel({
+    required this.packageSize,
     required this.id,
     required this.unitPriceTtc,
     required this.unitPriceHt,
@@ -56,8 +58,6 @@ class BaseMedicineCatalogModel {
     required this.company,
     this.isLiked = false,
   });
-
-  
 }
 
 class MedicineCatalogModel extends BaseMedicineCatalogModel {
@@ -94,39 +94,41 @@ class MedicineCatalogModel extends BaseMedicineCatalogModel {
     required this.company,
     required this.medicine,
     required super.isLiked,
+    required super.packageSize,
   }) : super(
           company: company,
         );
 
-  MedicineCatalogModel copyWith({
-    String? id,
-    String? unitPriceTtc,
-    String? unitPriceHt,
-    String? tvaPercentage,
-    dynamic thumbnailImage,
-    ImageModel? image,
-    DateTime? createdAt,
-    DateTime? updatedAt,
-    String? companyId,
-    dynamic dci,
-    String? registrationNumber,
-    String? sku,
-    bool? isPrivate,
-    String? margin,
-    int? stockQuantity,
-    int? minOrderQuantity,
-    int? maxOrderQuantity,
-    bool? isPsychoactive,
-    bool? requiresColdChain,
-    bool? isActive,
-    bool? isQuota,
-    bool? isFeatured,
-    int? displayOrder,
-    Company? company,
-    Medicine? medicine,
-    bool? isLiked,
-  }) {
+  MedicineCatalogModel copyWith(
+      {String? id,
+      String? unitPriceTtc,
+      String? unitPriceHt,
+      String? tvaPercentage,
+      dynamic thumbnailImage,
+      ImageModel? image,
+      DateTime? createdAt,
+      DateTime? updatedAt,
+      String? companyId,
+      dynamic dci,
+      String? registrationNumber,
+      String? sku,
+      bool? isPrivate,
+      String? margin,
+      int? stockQuantity,
+      int? minOrderQuantity,
+      int? maxOrderQuantity,
+      bool? isPsychoactive,
+      bool? requiresColdChain,
+      bool? isActive,
+      bool? isQuota,
+      bool? isFeatured,
+      int? displayOrder,
+      Company? company,
+      Medicine? medicine,
+      bool? isLiked,
+      int? packageSize}) {
     return MedicineCatalogModel(
+      packageSize: packageSize ?? this.packageSize,
       id: id ?? this.id,
       unitPriceTtc: unitPriceTtc ?? this.unitPriceTtc,
       unitPriceHt: unitPriceHt ?? this.unitPriceHt,

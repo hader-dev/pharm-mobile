@@ -9,6 +9,7 @@ BaseParaPharmaCatalogModel jsonToFavoriteBaseParapharm(
 
   return BaseParaPharmaCatalogModel(
     id: json['id'],
+    packageSize: json['packageSize'] ?? 1,
     unitPriceHt: json['unitPriceHt'],
     thumbnailImage: json["thumbnailImage"] != null
         ? ImageModel.fromJson(json["thumbnailImage"])

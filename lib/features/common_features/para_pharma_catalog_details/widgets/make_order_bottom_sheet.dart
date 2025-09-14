@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/app_layout/app_layout.dart';
-import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_icon_button.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/bottom_sheet_header.dart';
+import 'package:hader_pharm_mobile/features/common_features/cart/widgets/quantity/quantity.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders/cubit/orders_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/cubit/para_pharma_details_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/para_pharma_catalog_details.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
-import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 import 'package:hader_pharm_mobile/utils/validators.dart';
@@ -24,6 +22,7 @@ import 'package:iconsax/iconsax.dart' show Iconsax;
 class MakeOrderBottomSheet extends StatelessWidget {
   const MakeOrderBottomSheet({super.key, this.cubit});
   final ParaPharmaDetailsCubit? cubit;
+  final disabledPackageQuantity = true;
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +51,8 @@ class MakeOrderBottomSheet extends StatelessWidget {
         },
         child: BlocBuilder<ParaPharmaDetailsCubit, ParaPharmaDetailsState>(
           builder: (context, state) {
+            final cubit = context.read<ParaPharmaDetailsCubit>();
+
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -59,116 +60,39 @@ class MakeOrderBottomSheet extends StatelessWidget {
                 const ResponsiveGap.s12(),
                 LabeledInfoWidget(
                   label: translation.product,
-                  value: context
-                      .read<ParaPharmaDetailsCubit>()
-                      .paraPharmaCatalogData!
-                      .name,
+                  value: cubit.paraPharmaCatalogData!.name,
                 ),
                 LabeledInfoWidget(
                   label: translation.unit_total_price,
                   value:
-                      "${(num.parse(context.read<ParaPharmaDetailsCubit>().paraPharmaCatalogData!.unitPriceHt).toStringAsFixed(2))} ${translation.currency}",
+                      "${(num.parse(cubit.paraPharmaCatalogData!.unitPriceHt).toStringAsFixed(2))} ${translation.currency}",
                 ),
                 const ResponsiveGap.s12(),
-                Text(
-                  translation.quantity,
-                  style:
-                      context.responsiveTextTheme.current.body3Medium.copyWith(
-                    color: TextColors.ternary.color,
-                  ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: AppSizesManager.p8),
-                  child: Row(children: [
-                    PrimaryIconButton(
-                      borderColor: StrokeColors.normal.color,
-                      isBordered: true,
-                      bgColor: Colors.transparent,
-                      onPressed: () {
-                        context
-                            .read<ParaPharmaDetailsCubit>()
-                            .decrementQuantity();
-                      },
-                      icon: Icon(
-                        Iconsax.minus,
-                        color: Colors.black,
-                      ),
-                    ),
-                    const ResponsiveGap.s12(),
-                    Flexible(
-                      child: SizedBox(
-                        height: AppSizesManager.buttonHeight,
-                        child: Form(
-                          child: TextFormField(
-                            cursorColor: AppColors.accentGreenShade1,
-                            controller: context
-                                .read<ParaPharmaDetailsCubit>()
-                                .quantityController,
-                            textAlign: TextAlign.center,
-                            keyboardType: TextInputType.number,
-                            inputFormatters: [
-                              FilteringTextInputFormatter.digitsOnly
-                            ],
-                            validator: (value) =>
-                                value == null || value.isEmpty ? '' : null,
-                            style:
-                                context.responsiveTextTheme.current.body3Medium,
-                            decoration: InputDecoration(
-                              contentPadding:
-                                  EdgeInsets.all(AppSizesManager.p12),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(
-                                    AppSizesManager.commonWidgetsRadius),
-                                borderSide: BorderSide(
-                                    color: FieldState.normal.color.secondary),
-                              ),
-                              disabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(
-                                    AppSizesManager.commonWidgetsRadius),
-                                borderSide:
-                                    BorderSide(color: AppColors.bgDisabled),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(
-                                    AppSizesManager.commonWidgetsRadius),
-                                borderSide: BorderSide(
-                                    color: StrokeColors.focused.color),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const ResponsiveGap.s12(),
-                    PrimaryIconButton(
-                      borderColor: StrokeColors.normal.color,
-                      isBordered: true,
-                      bgColor: Colors.transparent,
-                      onPressed: () {
-                        context
-                            .read<ParaPharmaDetailsCubit>()
-                            .incrementQuantity();
-                      },
-                      icon: Icon(
-                        Iconsax.add,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ]),
-                ),
+                BaseQuantityController(
+                    label: translation.quantity,
+                    decrement: cubit.decrementQuantity,
+                    increment: cubit.incrementQuantity,
+                    quantityController: cubit.quantityController),
+                if (!disabledPackageQuantity)
+                  BaseQuantityController(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      label:
+                          "${translation.pacakge_quantity} (${cubit.paraPharmaCatalogData!.packageSize})",
+                      decrement: cubit.decrementPackageQuantity,
+                      increment: cubit.incrementPackageQuantity,
+                      quantityController: cubit.packageQuantityController),
                 const ResponsiveGap.s12(),
                 InfoWidget(
                     label: context.translation!.shipping_address,
                     bgColor: AppColors.bgWhite,
                     value: CustomTextField(
                       verticalPadding: 0,
-                      fieldKey: cubit!.shippingAddressKey,
+                      fieldKey: cubit.shippingAddressKey,
                       horizontalPadding: AppSizesManager.p6,
                       initValue: UserManager.instance.currentUser.address,
                       maxLines: 3,
                       validationFunc: (value) =>
-                          requiredValidator(value, translation,2),
+                          requiredValidator(value, translation, 2),
                       isFilled: false,
                       isBorderEnabled: true,
                       hintText: context.translation!.shipping_address,
@@ -185,7 +109,7 @@ class MakeOrderBottomSheet extends StatelessWidget {
                   value: Row(
                     children: [
                       Text(
-                        "${(num.parse(context.read<ParaPharmaDetailsCubit>().quantityController.text) * num.parse(context.read<ParaPharmaDetailsCubit>().paraPharmaCatalogData!.unitPriceHt)).toStringAsFixed(2)} ${translation.currency}",
+                        "${(num.parse(cubit.quantityController.text) * num.parse(cubit.paraPharmaCatalogData!.unitPriceHt)).toStringAsFixed(2)} ${translation.currency}",
                         style: context.responsiveTextTheme.current.body2Medium
                             .copyWith(color: AppColors.accent1Shade1),
                       ),

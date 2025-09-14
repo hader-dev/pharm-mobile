@@ -2062,6 +2062,18 @@ abstract class AppLocalizations {
   /// **'Failed'**
   String get failed;
 
+  /// No description provided for @package_size.
+  ///
+  /// In en, this message translates to:
+  /// **'Package Size'**
+  String get package_size;
+
+  /// No description provided for @pacakge_quantity.
+  ///
+  /// In en, this message translates to:
+  /// **'Package Quantity'**
+  String get pacakge_quantity;
+
   /// No description provided for @order_placed_successfully.
   ///
   /// In en, this message translates to:

@@ -8,7 +8,7 @@ import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../cubit/cart_cubit.dart';
-import 'cart_item_quantity_section.dart';
+import 'quantity/cart_item_quantity_section.dart';
 
 class CartItemWidget extends StatelessWidget {
   final CartItemModel cartItemData;

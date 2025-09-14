@@ -33,6 +33,8 @@ class StateProvider extends StatelessWidget {
       BlocProvider(
         create: (context) => MedicineDetailsCubit(
           shippingAddress: getItInstance.get<UserManager>().currentUser.address,
+          packageQuantityController: TextEditingController(
+              text: existingCartItem?.quantity.toString() ?? '1'),
           quantityController: TextEditingController(
               text: existingCartItem?.quantity.toString() ?? '1'),
           tabController: TabController(length: tabs.length, vsync: vsync),
