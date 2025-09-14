@@ -111,8 +111,8 @@ class _ParapharmaPageState extends State<ParapharmaPage>
                 return const Center(child: CircularProgressIndicator());
               }
 
-              final paraPharmaProducts = BlocProvider.of<ParaPharmaCubit>(bContext)
-                  .paraPharmaProducts;
+              final paraPharmaProducts =
+                  BlocProvider.of<ParaPharmaCubit>(bContext).paraPharmaProducts;
 
               if (paraPharmaProducts.isEmpty) {
                 return EmptyListWidget();
@@ -147,8 +147,9 @@ class _ParapharmaPageState extends State<ParapharmaPage>
                               bContext.deviceSize),
                           mainAxisSpacing: calculateMarketplaceMainAxisSpacing(
                               bContext.deviceSize),
-                          childAspectRatio: calculateMarketplaceAspectRatio(
-                              bContext.deviceSize, bContext.orientation),
+                          childAspectRatio:
+                              calculateAllAnnouncementsAspectRatio(
+                                  bContext.deviceSize, bContext.orientation),
                         ),
                         controller: BlocProvider.of<ParaPharmaCubit>(bContext)
                             .scrollController,

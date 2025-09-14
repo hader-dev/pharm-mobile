@@ -9,7 +9,7 @@ double calculateMarketplaceAspectRatio(
     return 0.85;
   }
 
-  if (deviceSize.width < DeviceSizes.smallTablet.width) {
+  if (deviceSize.width <= DeviceSizes.smallTablet.width) {
     return 1.5;
   }
 
@@ -17,9 +17,9 @@ double calculateMarketplaceAspectRatio(
   final deviceMin =
       min(DeviceSizes.smallTablet.width, DeviceSizes.smallTablet.height);
   final deviceMax =
-      min(DeviceSizes.largeMobile.width, DeviceSizes.largeMobile.height);
+      min(DeviceSizes.largeTablet.width, DeviceSizes.largeTablet.height);
 
-  final minRatio = 2.0;
+  final minRatio = 1.5;
   final maxRatio = orientation == Orientation.portrait ? 3.0 : 2.5;
 
   if (current <= deviceMin) return minRatio;
@@ -29,6 +29,20 @@ double calculateMarketplaceAspectRatio(
   return minRatio + (maxRatio - minRatio) * t;
 }
 
+double calculateAllAnnouncementsAspectRatio(
+    DeviceSizes deviceSize, Orientation orientation) {
+  return 0.85;
+}
+
+double calculateFeaturesAnnouncementsAspectRatio(
+    DeviceSizes deviceSize, Orientation orientation) {
+  if (deviceSize.width < DeviceSizes.mediumMobile.width) {
+    return 0.85;
+  }
+
+  return 1.5;
+}
+
 double calculateMarketplaceGridSpacing(DeviceSizes deviceSize) =>
     deviceSize.width <= DeviceSizes.mediumTablet.width ? 4 : 10;
 
@@ -36,4 +50,4 @@ double calculateMarketplaceMainAxisSpacing(DeviceSizes deviceSize) =>
     deviceSize.width <= DeviceSizes.mediumTablet.width ? 2 : 4;
 
 int calculateMarketplaceCrossAxisCount(DeviceSizes deviceSize) =>
-    deviceSize.width <= DeviceSizes.mediumTablet.width ? 1 : 2;
+    deviceSize.width < DeviceSizes.mediumTablet.width ? 1 : 2;

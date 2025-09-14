@@ -51,7 +51,7 @@ class PromotionItemWidget3 extends StatelessWidget {
                   borderRadius: BorderRadius.circular(
                       AppSizesManager.commonWidgetsRadius),
                   child: CachedNetworkImageWithAssetFallback(
-                    fit: BoxFit.contain,
+                    fit: BoxFit.cover,
                     width: width ?? double.infinity,
                     height: height,
                     imageUrl: getItInstance

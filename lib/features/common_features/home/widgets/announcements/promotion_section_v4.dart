@@ -9,6 +9,7 @@ import 'package:hader_pharm_mobile/features/common_features/home/cubit/home_cubi
 import 'package:hader_pharm_mobile/models/announcement.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
+import 'package:hader_pharm_mobile/utils/responsive/silver_grid_params.dart';
 
 class PromotionSectionV4 extends StatelessWidget {
   final List<AnnouncementModel> announcements;
@@ -73,15 +74,23 @@ class PromotionSectionV4 extends StatelessWidget {
                 const ResponsiveGap.s8(),
                 Expanded(
                   child: LayoutBuilder(builder: (context, constraints) {
-                    return ListView.builder(
+                    return GridView.builder(
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 1,
+                        crossAxisSpacing:
+                            calculateMarketplaceGridSpacing(context.deviceSize),
+                        mainAxisSpacing: calculateMarketplaceMainAxisSpacing(
+                            context.deviceSize),
+                        childAspectRatio: calculateAllAnnouncementsAspectRatio(
+                            context.deviceSize, context.orientation),
+                      ),
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (ctx, index) => PromotionItemWidget3(
-                        width: constraints.maxWidth * 0.85,
-                        height: constraints.maxHeight,
                         announcement: announcements[index],
-                        onTap: (announcement) => RoutingManager.router.pushNamed(
-                            RoutingManager.announcementDetailsScreen,
-                            extra: announcement.id),
+                        onTap: (announcement) => RoutingManager.router
+                            .pushNamed(RoutingManager.announcementDetailsScreen,
+                                extra: announcement.id),
                       ),
                     );
                   }),

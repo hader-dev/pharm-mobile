@@ -34,67 +34,67 @@ class _MedicineProductsPageState extends State<MedicineProductsPage>
               children: [
                 if (state.displayFilters) const FiltersBar(),
                 Expanded(
-                  child: Builder(
-                    builder: (context) {
-                      final medicines = state.medicines;
-                  if (state is MedicineProductsLoading) {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-                  if (state is MedicineProductsLoadingFailed ||
-                      medicines.isEmpty) {
-                    return const Center(child: EmptyListWidget());
-                  }
-
-                  final bool isLoadingMore = state is MedicineProductsLoading;
-                  final bool hasReachedEnd = state is MedicinesLoadLimitReached;
-
-                  void onLikeTapped(BaseMedicineCatalogModel medicine) {
-                    final id = medicine.id;
-                    medicine.isLiked
-                        ? cubit.unlikeMedicinesCatalog(id)
-                        : cubit.likeMedicinesCatalog(id);
-                  }
-
-                  return RefreshIndicator(
-                    onRefresh: () => cubit.getMedicines(),
-                    child: GridView.builder(
-                      controller: cubit.scrollController,
-                      physics: const AlwaysScrollableScrollPhysics(),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: calculateMarketplaceCrossAxisCount(
-                            context.deviceSize),
-                        crossAxisSpacing:
-                            calculateMarketplaceGridSpacing(context.deviceSize),
-                        mainAxisSpacing: calculateMarketplaceMainAxisSpacing(
-                            context.deviceSize),
-                        childAspectRatio: calculateMarketplaceAspectRatio(
-                            context.deviceSize, context.orientation),
-                      ),
-                      itemCount: medicines.length +
-                          (isLoadingMore || hasReachedEnd ? 1 : 0),
-                      itemBuilder: (context, index) {
-                        if (index < medicines.length) {
-                          final medicine = medicines[index];
-                          return MedicineWidget3(
-                            medicineData: medicine,
-                            onFavoriteCallback: onLikeTapped,
-                          );
-                        } else {
-                          if (isLoadingMore) {
-                            return const Padding(
-                              padding: EdgeInsets.all(AppSizesManager.s16),
-                              child: Center(child: CircularProgressIndicator()),
-                            );
-                          } else if (hasReachedEnd) {
-                            return const EndOfLoadResultWidget();
-                          }
-                        }
-                        return const SizedBox.shrink();
-                      },
-                    ),
-                  );
+                  child: Builder(builder: (context) {
+                    final medicines = state.medicines;
+                    if (state is MedicineProductsLoading) {
+                      return const Center(child: CircularProgressIndicator());
                     }
-                  ),
+                    if (state is MedicineProductsLoadingFailed ||
+                        medicines.isEmpty) {
+                      return const Center(child: EmptyListWidget());
+                    }
+
+                    final bool isLoadingMore = state is MedicineProductsLoading;
+                    final bool hasReachedEnd =
+                        state is MedicinesLoadLimitReached;
+
+                    void onLikeTapped(BaseMedicineCatalogModel medicine) {
+                      final id = medicine.id;
+                      medicine.isLiked
+                          ? cubit.unlikeMedicinesCatalog(id)
+                          : cubit.likeMedicinesCatalog(id);
+                    }
+
+                    return RefreshIndicator(
+                      onRefresh: () => cubit.getMedicines(),
+                      child: GridView.builder(
+                        controller: cubit.scrollController,
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: calculateMarketplaceCrossAxisCount(
+                              context.deviceSize),
+                          crossAxisSpacing: calculateMarketplaceGridSpacing(
+                              context.deviceSize),
+                          mainAxisSpacing: calculateMarketplaceMainAxisSpacing(
+                              context.deviceSize),
+                          childAspectRatio: calculateMarketplaceAspectRatio(
+                              context.deviceSize, context.orientation),
+                        ),
+                        itemCount: medicines.length +
+                            (isLoadingMore || hasReachedEnd ? 1 : 0),
+                        itemBuilder: (context, index) {
+                          if (index < medicines.length) {
+                            final medicine = medicines[index];
+                            return MedicineWidget3(
+                              medicineData: medicine,
+                              onFavoriteCallback: onLikeTapped,
+                            );
+                          } else {
+                            if (isLoadingMore) {
+                              return const Padding(
+                                padding: EdgeInsets.all(AppSizesManager.s16),
+                                child:
+                                    Center(child: CircularProgressIndicator()),
+                              );
+                            } else if (hasReachedEnd) {
+                              return const EndOfLoadResultWidget();
+                            }
+                          }
+                          return const SizedBox.shrink();
+                        },
+                      ),
+                    );
+                  }),
                 )
               ],
             ),

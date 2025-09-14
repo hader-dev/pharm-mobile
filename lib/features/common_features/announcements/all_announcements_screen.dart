@@ -4,14 +4,14 @@ import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
-import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
-import 'package:hader_pharm_mobile/features/common/widgets/promotion_item_widget.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/promotion_item_widget_3.dart';
 import 'package:hader_pharm_mobile/features/common_features/announcements/cubit/all_announcements_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/announcements/widgets/announcements_search_widget.dart';
 import 'package:hader_pharm_mobile/repositories/remote/announcement/announcement_repository_impl.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
+import 'package:hader_pharm_mobile/utils/responsive/silver_grid_params.dart';
 import 'package:iconsax/iconsax.dart';
 
 class AllAnnouncementsScreen extends StatefulWidget {
@@ -102,14 +102,21 @@ class _AllAnnouncementsScreenState extends State<AllAnnouncementsScreen> {
                         .refreshAnnouncements();
                   },
                   child: LayoutBuilder(builder: (context, constraints) {
-                    return ListView.separated(
-                      shrinkWrap: true,
+                    return GridView.builder(
                       controller: _scrollController,
-                      padding: const EdgeInsets.all(AppSizesManager.p16),
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: calculateMarketplaceCrossAxisCount(
+                            context.deviceSize),
+                        crossAxisSpacing:
+                            calculateMarketplaceGridSpacing(context.deviceSize),
+                        mainAxisSpacing: calculateMarketplaceMainAxisSpacing(
+                            context.deviceSize),
+                        childAspectRatio: calculateAllAnnouncementsAspectRatio(
+                            context.deviceSize, context.orientation),
+                      ),
                       itemCount: state.announcements.length +
                           (state.hasReachedMax ? 0 : 1),
-                      separatorBuilder: (context, index) =>
-                          const ResponsiveGap.s12(),
                       itemBuilder: (context, index) {
                         if (index >= state.announcements.length) {
                           return const Center(
@@ -123,7 +130,7 @@ class _AllAnnouncementsScreenState extends State<AllAnnouncementsScreen> {
                         final announcement = state.announcements[index];
                         return SizedBox(
                           height: constraints.maxHeight * 0.3,
-                          child: PromotionItemWidget(
+                          child: PromotionItemWidget3(
                             announcement: announcement,
                           ),
                         );
