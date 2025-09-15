@@ -1,9 +1,15 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 
 import '../../../utils/app_exceptions/exceptions.dart';
 
 class ResponseHandler {
   static dynamic processResponse(dynamic response) {
+    debugPrint("Response: $response");
+
+    if (response == null) {
+      throw FetchDataException();
+    }
     final dynamic decodedResponse = decodeResponse(response);
     switch (response.statusCode!) {
       case >= 200 && < 300:

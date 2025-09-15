@@ -160,7 +160,6 @@ class ParaMedicalFiltersApply extends StatelessWidget {
                     child: Row(
                       children: [
                         Expanded(
-                          flex: 1,
                           child: PrimaryTextButton(
                             isOutLined: true,
                             label: context.translation!.reset,

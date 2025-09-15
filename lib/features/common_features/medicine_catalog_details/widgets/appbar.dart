@@ -9,11 +9,16 @@ import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:iconsax/iconsax.dart';
 
 class MedicineCatalogAppBar extends StatelessWidget {
-  const MedicineCatalogAppBar({super.key});
+  const MedicineCatalogAppBar({super.key, this.height, this.width});
+
+  final double? height;
+  final double? width;
 
   @override
   Widget build(BuildContext context) {
     return CustomAppBarV2(
+      height: height,
+      width: width,
       bgColor: AppColors.accent1Shade2.withAlpha(200),
       leading: IconButton(
         icon: Icon(

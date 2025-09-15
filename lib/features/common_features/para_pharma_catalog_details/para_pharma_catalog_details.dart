@@ -4,6 +4,7 @@ import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/helpers/para_pharma_catalog_details_tab_data.dart';
+import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/widgets/appbar.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 
 import 'cubit/para_pharma_details_cubit.dart';
@@ -38,56 +39,65 @@ class _ParaPharmaCatalogDetailsScreenState
         tabs: tabs,
         vsync: this,
         catalogId: widget.paraPharmaCatalogId,
-        child: Scaffold(
-            key: ParaPharmaCatalogDetailsScreen.paraPharmaDetailsScaffoldKey,
-            body: BlocBuilder<ParaPharmaDetailsCubit, ParaPharmaDetailsState>(
-              builder: (context, state) {
-                if (state is ParaPharmaDetailsLoading) {
-                  return Center(child: CircularProgressIndicator());
-                }
-                if (state is ParaPharmaDetailsLoadError) {
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      BackButton(
-                        color: AppColors.accent1Shade1,
-                      ),
-                      Center(child: EmptyListWidget()),
-                    ],
-                  );
-                }
-                return Column(
-                  children: [
-                    Flexible(
-                      child: ListView(
-                        shrinkWrap: true,
-                        children: [
-                          ParaPharmaProductPhotoSection(),
-                          HeaderSection(),
-                          Divider(
-                              color: AppColors.bgDisabled,
-                              thickness: 3.5,
-                              height: 1),
-                          ProductDetailsTabBarSection(),
-                          const ResponsiveGap.s24(),
-                          ParaPharmaOverViewPage(),
-                          Divider(
-                              color: AppColors.bgDisabled,
-                              thickness: 3.5,
-                              height: 1),
-                        ],
-                      ),
+        child: BlocBuilder<ParaPharmaDetailsCubit, ParaPharmaDetailsState>(
+          builder: (context, state) {
+            if (state is ParaPharmaDetailsLoading) {
+              return Center(child: CircularProgressIndicator());
+            }
+            if (state is ParaPharmaDetailsLoadError) {
+              return const Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  BackButton(
+                    color: AppColors.accent1Shade1,
+                  ),
+                  Center(child: EmptyListWidget()),
+                ],
+              );
+            }
+            return Scaffold(
+              key: ParaPharmaCatalogDetailsScreen.paraPharmaDetailsScaffoldKey,
+              body: Stack(
+                children: [
+                  SingleChildScrollView(
+                    child: const Column(
+                      children: [
+                        ParaPharmaProductPhotoSection(),
+                        HeaderSection(),
+                        Divider(
+                            color: AppColors.bgDisabled,
+                            thickness: 3.5,
+                            height: 1),
+                        ProductDetailsTabBarSection(),
+                        ResponsiveGap.s24(),
+                        ParaPharmaOverViewPage(),
+                        ResponsiveGap.s24(),
+                        Divider(
+                            color: AppColors.bgDisabled,
+                            thickness: 3.5,
+                            height: 1),
+                      ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(AppSizesManager.p12),
-                      child: ButtonsSection(
-                        quantitySectionAlignment: MainAxisAlignment.center,
-                      ),
-                    ),
-                  ],
-                );
-              },
-            )),
+                  ),
+                  const Positioned(
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      child: ParaPharmaCatalogAppBar()),
+                ],
+              ),
+              bottomNavigationBar: Padding(
+                padding: const EdgeInsets.all(AppSizesManager.p12),
+                child: SizedBox(
+                  height: kBottomNavigationBarHeight * 3,
+                  child: ButtonsSection(
+                    quantitySectionAlignment: MainAxisAlignment.center,
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
       ),
     );
   }

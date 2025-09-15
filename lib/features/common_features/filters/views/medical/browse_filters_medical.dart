@@ -66,7 +66,6 @@ class FiltersMedicalBrowse extends StatelessWidget {
             child: Row(
               children: [
                 Expanded(
-                  flex: 1,
                   child: PrimaryTextButton(
                     isOutLined: true,
                     label: context.translation!.reset,
@@ -83,7 +82,6 @@ class FiltersMedicalBrowse extends StatelessWidget {
                 ),
                 const ResponsiveGap.s8(),
                 Expanded(
-                  flex: 2,
                   child: PrimaryTextButton(
                     label: context.translation!.apply,
                     leadingIcon: Iconsax.money4,

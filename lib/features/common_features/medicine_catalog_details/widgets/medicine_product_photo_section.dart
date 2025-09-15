@@ -6,7 +6,6 @@ import 'package:hader_pharm_mobile/config/services/network/network_interface.dar
 import 'package:hader_pharm_mobile/features/common/image/cached_network_image_with_asset_fallback.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/sub_pages/distribitor_details/widgets/trademark_widget.dart';
-import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/widgets/appbar.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
@@ -30,7 +29,7 @@ class MedicineProductPhotoSection extends StatelessWidget {
                     cubit.state.medicineCatalogData!.image!.path,
                   )
               : "",
-          height:  MediaQuery.of(context).size.width > 768 ? 400 : 320,
+          height: MediaQuery.of(context).size.width > 768 ? 400 : 320,
           width: double.maxFinite,
           fit: BoxFit.contain,
         ),
@@ -70,7 +69,6 @@ class MedicineProductPhotoSection extends StatelessWidget {
                 height: 320,
                 width: double.maxFinite,
               ),
-        MedicineCatalogAppBar(),
         Positioned(bottom: 10, right: 10, child: TrademarkWidget())
       ],
     );

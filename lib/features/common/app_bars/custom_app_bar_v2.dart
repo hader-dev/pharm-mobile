@@ -15,6 +15,9 @@ class CustomAppBarV2 extends StatelessWidget implements PreferredSizeWidget {
   final bool isExpanded;
   final bool useSpacer;
 
+  final double? height;
+  final double? width;
+
   const CustomAppBarV2({
     super.key,
     required this.title,
@@ -28,6 +31,8 @@ class CustomAppBarV2 extends StatelessWidget implements PreferredSizeWidget {
     this.useSpacer = true,
     this.isExpanded = false,
     required this.bgColor,
+    this.height,
+    this.width,
   });
 
   const CustomAppBarV2.normal({
@@ -43,6 +48,8 @@ class CustomAppBarV2 extends StatelessWidget implements PreferredSizeWidget {
     this.useSpacer = true,
     this.isExpanded = false,
     this.bgColor = Colors.white,
+    this.height,
+    this.width,
   });
 
   const CustomAppBarV2.expanded({
@@ -56,6 +63,8 @@ class CustomAppBarV2 extends StatelessWidget implements PreferredSizeWidget {
     this.leftPadding = 0,
     this.rightPadding = 0,
     required this.bgColor,
+    this.height,
+    this.width,
   })  : titleWidthConstraiontRatio = null,
         isExpanded = true;
 
@@ -72,11 +81,15 @@ class CustomAppBarV2 extends StatelessWidget implements PreferredSizeWidget {
     this.titleWidthConstraiontRatio,
     this.isExpanded = false,
     this.bgColor = AppColors.accent1Shade2,
+    this.height,
+    this.width,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: height,
+      width: width ?? double.infinity,
       alignment: Alignment.center,
       padding: EdgeInsets.only(
         top: topPadding == 0 ? MediaQuery.of(context).padding.top : topPadding,
@@ -87,7 +100,6 @@ class CustomAppBarV2 extends StatelessWidget implements PreferredSizeWidget {
         right: rightPadding,
       ),
       color: bgColor,
-      width: double.infinity,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         textBaseline: TextBaseline.alphabetic,

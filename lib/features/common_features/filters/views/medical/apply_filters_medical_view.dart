@@ -104,15 +104,15 @@ class MedicalFiltersApply extends StatelessWidget {
                                   child: BlocBuilder<MedicalFiltersCubit,
                                       MedicalFiltersState>(
                                     builder: (context, state) {
-                                      final workingFilters = cubit.getCurrentWorkSourceFilters();
-                                      
-                                      // Show empty widget when no filters are available
+                                      final workingFilters =
+                                          cubit.getCurrentWorkSourceFilters();
+
                                       if (workingFilters.isEmpty) {
                                         return const Center(
                                           child: EmptyListWidget(),
                                         );
                                       }
-                                      
+
                                       return ListView.separated(
                                         padding: EdgeInsets.zero,
                                         itemCount: workingFilters.length,
@@ -170,7 +170,7 @@ class MedicalFiltersApply extends StatelessWidget {
                         ),
                         const ResponsiveGap.s8(),
                         Expanded(
-                          flex: 2,
+                          flex: 1,
                           child: PrimaryTextButton(
                             label: context.translation!.confirm,
                             leadingIcon: Iconsax.money4,

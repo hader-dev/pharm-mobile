@@ -17,6 +17,7 @@ class ParaPharmaOverViewPage extends StatelessWidget {
         BlocProvider.of<ParaPharmaDetailsCubit>(context).paraPharmaCatalogData!;
     return Markdown(
       shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
       data: """
 # ${translations.description}
 

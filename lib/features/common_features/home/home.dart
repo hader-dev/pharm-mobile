@@ -75,9 +75,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ? minSectionHeight * 1.4
                                 : minSectionHeight),
                       const ResponsiveGap.s12(),
-                      VendorSection(),
-                      const ResponsiveGap.s12(),
                       ParapharmaSection(minSectionHeight: minSectionHeight),
+                      const ResponsiveGap.s12(),
+                      const VendorSection(),
                       const ResponsiveGap.s12(),
                       MedicineSection(minSectionHeight: minSectionHeight),
                       const ResponsiveGap.s12(),
