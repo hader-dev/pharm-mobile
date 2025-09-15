@@ -13,9 +13,11 @@ class BaseParaPharmaCatalogModel {
   final BaseCompany? company;
   bool isLiked;
   final int packageSize;
+  final List<String> tags;
 
   BaseParaPharmaCatalogModel(
       {required this.id,
+      required this.tags,
       required this.packageSize,
       required this.unitPriceHt,
       required this.thumbnailImage,
@@ -35,8 +37,10 @@ class BaseParaPharmaCatalogModel {
       bool? isActive,
       BaseCompany? company,
       bool? isLiked,
+      List<String>? tags,
       int? packageSize}) {
     return BaseParaPharmaCatalogModel(
+      tags: tags ?? this.tags,
       packageSize: packageSize ?? this.packageSize,
       id: id ?? this.id,
       unitPriceHt: unitPriceHt ?? this.unitPriceHt,
@@ -116,6 +120,7 @@ class ParaPharmaCatalogModel extends BaseParaPharmaCatalogModel {
     required super.unitPriceHt,
     required super.thumbnailImage,
     required super.image,
+    required super.tags,
     required super.name,
     required super.stockQuantity,
     required super.isActive,
@@ -144,6 +149,7 @@ class ParaPharmaCatalogModel extends BaseParaPharmaCatalogModel {
         unitPriceHt: '',
         packageSize: 1,
         unitPriceTtc: '',
+        tags: [],
         tvaPercentage: '',
         thumbnailImage: null,
         image: null,

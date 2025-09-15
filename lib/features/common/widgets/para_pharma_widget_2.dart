@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/silver_tags.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/widgets/quick_add_modal.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
@@ -22,9 +23,13 @@ typedef OnFavoriteCallback = void Function(BaseParaPharmaCatalogModel medicine);
 class ParaPharmaWidget2 extends StatelessWidget {
   final BaseParaPharmaCatalogModel paraPharmData;
   final OnFavoriteCallback? onFavoriteCallback;
+  final bool displayTags;
 
   const ParaPharmaWidget2(
-      {super.key, required this.paraPharmData, this.onFavoriteCallback});
+      {super.key,
+      this.displayTags = false,
+      required this.paraPharmData,
+      this.onFavoriteCallback});
 
   @override
   Widget build(BuildContext context) {
@@ -41,18 +46,19 @@ class ParaPharmaWidget2 extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-                margin: const EdgeInsets.only(right: AppSizesManager.p8),
-                clipBehavior: Clip.antiAlias,
-                height: 120,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(AppSizesManager.r6),
-                  border: paraPharmData.image != null
-                      ? null
-                      : Border.all(
-                          color: AppColors.bgDisabled,
-                        ),
-                ),
-                child: Stack(children: [
+              margin: const EdgeInsets.only(right: AppSizesManager.p8),
+              clipBehavior: Clip.antiAlias,
+              height: 120,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(AppSizesManager.r6),
+                border: paraPharmData.image != null
+                    ? null
+                    : Border.all(
+                        color: AppColors.bgDisabled,
+                      ),
+              ),
+              child: Stack(
+                children: [
                   paraPharmData.image != null
                       ? CacheNetworkImagePlus(
                           boxFit: BoxFit.contain,
@@ -151,19 +157,21 @@ class ParaPharmaWidget2 extends StatelessWidget {
                         },
                       ),
                     )
-                ])),
+                ],
+              ),
+            ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 const ResponsiveGap.s8(),
                 Text(paraPharmData.name,
-                    maxLines: 1,
                     softWrap: true,
-                    overflow: TextOverflow.ellipsis,
                     style: context.responsiveTextTheme.current.headLine4SemiBold
                         .copyWith(color: TextColors.primary.color)),
-                ResponsiveGap.s4(),
+                const ResponsiveGap.s4(),
+                if (paraPharmData.tags.isNotEmpty && displayTags)
+                  SilverTags(tags: paraPharmData.tags),
                 Row(
                   children: [
                     Icon(

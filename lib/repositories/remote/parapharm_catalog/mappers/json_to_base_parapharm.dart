@@ -1,10 +1,12 @@
 import 'package:hader_pharm_mobile/models/image.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/repositories/remote/company/mappers/json_to_company.dart';
+import 'package:hader_pharm_mobile/repositories/remote/utility/mappers/dynamic_list_cast.dart';
 
 BaseParaPharmaCatalogModel jsonToBaseParapharm(Map<String, dynamic> json) {
   return BaseParaPharmaCatalogModel(
     id: json['id'],
+    tags: mapJsonDynamicListToTypedList(json['tags']),
     packageSize: json['packageSize'] ?? 1,
     unitPriceHt: json['unitPriceHt'],
     thumbnailImage: json["thumbnailImage"] != null

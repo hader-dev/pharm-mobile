@@ -2,11 +2,13 @@ import 'package:hader_pharm_mobile/models/company.dart';
 import 'package:hader_pharm_mobile/models/image.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/repositories/remote/company/mappers/json_to_company.dart';
+import 'package:hader_pharm_mobile/repositories/remote/utility/mappers/dynamic_list_cast.dart';
 
 ParaPharmaCatalogModel jsonToParapharmaCatalogueItem(
     Map<String, dynamic> json) {
   return ParaPharmaCatalogModel(
     id: json['id'] ?? "",
+    tags: mapJsonDynamicListToTypedList(json['tags']),
     packageSize: json['packageSize'] ?? 1,
     unitPriceHt: json['unitPriceHt'] ?? "0",
     unitPriceTtc: json['unitPriceTtc'] ?? "0",

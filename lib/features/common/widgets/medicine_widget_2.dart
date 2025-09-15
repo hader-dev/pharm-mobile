@@ -166,9 +166,7 @@ class MedicineWidget2 extends StatelessWidget {
                   const ResponsiveGap.s8(),
                   if (medicineData.dci != null)
                     Text(medicineData.dci,
-                        maxLines: 2,
                         softWrap: true,
-                        overflow: TextOverflow.visible,
                         style: context
                             .responsiveTextTheme.current.headLine4SemiBold
                             .copyWith(color: TextColors.primary.color)),
