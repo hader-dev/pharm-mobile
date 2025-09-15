@@ -19,10 +19,8 @@ class _VendorsPageState extends State<VendorsPage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return RefreshIndicator(
-      onRefresh: () => context.read<VendorsCubit>().fetchVendors(),
-      child: Material(
-          child: Padding(
+    return Material(
+      child: Padding(
         padding: const EdgeInsets.all(AppSizesManager.p8),
         child: Column(
           children: [
@@ -36,43 +34,53 @@ class _VendorsPageState extends State<VendorsPage>
                     return const Center(child: CircularProgressIndicator());
                   }
 
-                  if (vendors.isEmpty) {
-                    return EmptyListWidget();
-                  }
-
                   final bool isLoadingMore = state is VendorsLoadingMore;
                   final bool hasReachedEnd = state is VendorsLoadLimitReached;
 
+                  // Always wrap with RefreshIndicator, even when empty
                   return RefreshIndicator(
                     onRefresh: () => cubit.fetchVendors(),
-                    child: ListView.builder(
-                      controller: cubit.scrollController,
-                      physics: const AlwaysScrollableScrollPhysics(),
-                      itemCount: vendors.length +
-                          (isLoadingMore || hasReachedEnd ? 1 : 0),
-                      itemBuilder: (context, index) {
-                        if (index < vendors.length) {
-                          return VendorItem(companyData: vendors[index]);
-                        } else {
-                          if (isLoadingMore) {
-                            return const Padding(
-                              padding: EdgeInsets.all(16.0),
-                              child: Center(child: CircularProgressIndicator()),
-                            );
-                          } else if (hasReachedEnd) {
-                            return const EndOfLoadResultWidget();
-                          }
-                        }
-                        return const SizedBox.shrink();
-                      },
-                    ),
+                    child: vendors.isEmpty
+                        ? LayoutBuilder(
+                            builder: (context, constraints) {
+                              return SingleChildScrollView(
+                                physics: const AlwaysScrollableScrollPhysics(),
+                                child: SizedBox(
+                                  height: constraints.maxHeight,
+                                  child: const Center(child: EmptyListWidget()),
+                                ),
+                              );
+                            },
+                          )
+                        : ListView.builder(
+                            controller: cubit.scrollController,
+                            physics: const AlwaysScrollableScrollPhysics(),
+                            itemCount: vendors.length +
+                                (isLoadingMore || hasReachedEnd ? 1 : 0),
+                            itemBuilder: (context, index) {
+                              if (index < vendors.length) {
+                                return VendorItem(companyData: vendors[index]);
+                              } else {
+                                if (isLoadingMore) {
+                                  return const Padding(
+                                    padding: EdgeInsets.all(16.0),
+                                    child: Center(
+                                        child: CircularProgressIndicator()),
+                                  );
+                                } else if (hasReachedEnd) {
+                                  return const EndOfLoadResultWidget();
+                                }
+                              }
+                              return const SizedBox.shrink();
+                            },
+                          ),
                   );
                 },
               ),
             ),
           ],
         ),
-      )),
+      ),
     );
   }
 

@@ -13,8 +13,7 @@ We may collect the following types of information:
 - **Personal Information**: such as name, email address, phone number, billing details, or any information you provide voluntarily.  
 - **Usage Data**: such as IP address, device information, browser type, operating system, and interactions with our service.  
 - **Cookies & Tracking**: we may use cookies and similar technologies to improve functionality and analyze usage.  
-
----
+--- 
 
 ## 2. How We Use Your Information  
 
@@ -78,7 +77,6 @@ We may update this Privacy Policy from time to time. Updates will be posted here
 ## 9. Contact Us  
 
 If you have questions about this Privacy Policy, you can contact us at:  
-
 **Hader**  
 **Email:** contact@hader-pharm.com  
 
