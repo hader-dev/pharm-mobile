@@ -37,7 +37,6 @@ class _VendorsPageState extends State<VendorsPage>
                   final bool isLoadingMore = state is VendorsLoadingMore;
                   final bool hasReachedEnd = state is VendorsLoadLimitReached;
 
-                  // Always wrap with RefreshIndicator, even when empty
                   return RefreshIndicator(
                     onRefresh: () => cubit.fetchVendors(),
                     child: vendors.isEmpty

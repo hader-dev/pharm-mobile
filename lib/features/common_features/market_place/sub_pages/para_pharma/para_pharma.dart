@@ -52,7 +52,6 @@ class _ParaPharmaProductsPageState extends State<ParaPharmaProductsPage>
                         : cubit.likeParaPharmaCatalog(id);
                   }
 
-                  // Always wrap with RefreshIndicator, even when empty or failed
                   return RefreshIndicator(
                     onRefresh: () => cubit.getParaPharmas(),
                     child: (state is ParaPharmaProductsLoadingFailed ||

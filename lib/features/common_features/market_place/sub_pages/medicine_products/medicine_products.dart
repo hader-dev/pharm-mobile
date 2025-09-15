@@ -51,7 +51,6 @@ class _MedicineProductsPageState extends State<MedicineProductsPage>
                           : cubit.likeMedicinesCatalog(id);
                     }
 
-                    // Always wrap with RefreshIndicator, even when empty or failed
                     return RefreshIndicator(
                       onRefresh: () => cubit.getMedicines(),
                       child: (state is MedicineProductsLoadingFailed ||
