@@ -7,7 +7,8 @@ import 'package:hader_pharm_mobile/config/services/network/network_interface.dar
 import 'package:hader_pharm_mobile/utils/enums.dart';
 
 class TokenCheckerInterceptor extends Interceptor {
-  bool isLastRefreshTry = false;
+  int retryCount = 0;
+  final int maxRetries = 5;
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) async {
     final data = err.response?.data;
@@ -17,25 +18,28 @@ class TokenCheckerInterceptor extends Interceptor {
         (data["code"] == ApiErrorCodes.TOKEN_EXPIRED.label ||
             data["code"] == ApiErrorCodes.NO_TOKEN.label);
 
+    final reachedMaxRetries = retryCount >= maxRetries;
+
     try {
       if (err.response?.statusCode == 401 &&
           isTokenError &&
-          !isLastRefreshTry) {
-        isLastRefreshTry = true;
+          !reachedMaxRetries) {
+        retryCount += 1;
         await getItInstance
             .get<TokenManager>()
             .refreshToken(getItInstance.get<INetworkService>());
         err.requestOptions.headers[TokenManager.tokenHeaderKey] =
-            ' Bearer ${getItInstance.get<TokenManager>().token}';
+            'Bearer ${getItInstance.get<TokenManager>().token}';
 
         var client = getItInstance.get<INetworkService>().getClientInstance();
         final Response response =
             await (client as Dio).fetch(err.requestOptions);
         return handler.resolve(response);
       }
+      retryCount = 0;
       return handler.next(err);
     } catch (e) {
-      isLastRefreshTry = false;
+      retryCount = 0;
       await getItInstance.get<TokenManager>().removeToken();
       RoutingManager.rootNavigatorKey.currentContext!
           .pushReplacementNamed(RoutingManager.loginScreen);

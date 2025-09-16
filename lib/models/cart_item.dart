@@ -164,7 +164,7 @@ class MedicinesCatalog {
       unitPriceHt: json['unitPriceHt'],
       tvaPercentage: json['tvaPercentage'],
       dci: json['dci'],
-      stockQuantity: json['stockQuantity'],
+      stockQuantity: json['stockQuantity'] ?? 0,
     );
   }
 }

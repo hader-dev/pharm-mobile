@@ -5,16 +5,16 @@ import 'package:hader_pharm_mobile/repositories/remote/utility/mappers/dynamic_l
 
 BaseParaPharmaCatalogModel jsonToBaseParapharm(Map<String, dynamic> json) {
   return BaseParaPharmaCatalogModel(
-    id: json['id'],
+    id: json['id'] ?? "",
     tags: mapJsonDynamicListToTypedList(json['tags']),
     packageSize: json['packageSize'] ?? 1,
-    unitPriceHt: json['unitPriceHt'],
+    unitPriceHt: json['unitPriceHt'] ?? "0.0",
     thumbnailImage: json["thumbnailImage"] != null
         ? ImageModel.fromJson(json["thumbnailImage"])
         : null,
     image: json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
-    name: json['name'],
-    stockQuantity: json['stockQuantity'],
+    name: json['name'] ?? "",
+    stockQuantity: json['stockQuantity'] ?? 0,
     isActive: json['isActive'],
     isLiked: json["isFavorite"] ?? false,
     company: json['company'] != null ? jsonToCompany(json['company']) : null,

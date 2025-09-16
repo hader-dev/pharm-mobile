@@ -33,19 +33,10 @@ class OrderItemsComplaintPage extends StatelessWidget {
 
       if (cubit.orderClaims.isEmpty || state is OrderDetailsLoadingFailed) {
         return RefreshIndicator(
-          onRefresh: () => cubit.getOrderComplaints(),
-          child: SingleChildScrollView(
-            physics: const AlwaysScrollableScrollPhysics(),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Center(
-                  child: EmptyListWidget(),
-                ),
-              ],
-            ),
-          ),
-        );
+            onRefresh: () => cubit.getOrderComplaints(),
+            child: Center(
+              child: EmptyListWidget(),
+            ));
       }
 
       return RefreshIndicator(

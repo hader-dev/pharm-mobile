@@ -43,7 +43,7 @@ class OrdersDetailsPage extends StatelessWidget {
             );
           }
           if (state is OrderDetailsLoadingFailed) {
-            return const EmptyListWidget();
+            return Center(child: const EmptyListWidget());
           }
           final cubit = context.read<OrderDetailsCubit>();
 

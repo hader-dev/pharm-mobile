@@ -9,9 +9,9 @@ MedicineCatalogModel jsonToMedicineCatalogItem(Map<String, dynamic> json) {
   return MedicineCatalogModel(
     packageSize: json["packageSize"] ?? 1,
     id: json["id"] ?? "",
-    unitPriceTtc: json["unitPriceTtc"] ?? "",
-    unitPriceHt: json["unitPriceHt"] ?? "",
-    tvaPercentage: json["tvaPercentage"] ?? "",
+    unitPriceTtc: json["unitPriceTtc"] ?? "0",
+    unitPriceHt: json["unitPriceHt"] ?? "0",
+    tvaPercentage: json["tvaPercentage"] ?? "0",
     thumbnailImage: json["thumbnailImage"],
     image: json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
     createdAt: DateTime.parse(json["createdAt"]),

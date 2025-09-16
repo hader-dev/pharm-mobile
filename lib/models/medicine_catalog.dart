@@ -157,4 +157,36 @@ class MedicineCatalogModel extends BaseMedicineCatalogModel {
       isLiked: isLiked ?? this.isLiked,
     );
   }
+
+  factory MedicineCatalogModel.empty() {
+    return MedicineCatalogModel(
+      packageSize: 1,
+      id: "",
+      unitPriceTtc: "0",
+      unitPriceHt: "0",
+      tvaPercentage: "0",
+      thumbnailImage: "",
+      image: null,
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+      companyId: "",
+      dci: "",
+      registrationNumber: "",
+      sku: "",
+      isPrivate: false,
+      margin: "",
+      stockQuantity: 0,
+      minOrderQuantity: 0,
+      maxOrderQuantity: 0,
+      isPsychoactive: false,
+      requiresColdChain: false,
+      isActive: false,
+      isQuota: false,
+      isFeatured: false,
+      displayOrder: 0,
+      company: Company.empty(),
+      medicine: Medicine.empty(),
+      isLiked: false,
+    );
+  }
 }

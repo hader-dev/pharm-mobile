@@ -66,8 +66,8 @@ class BaseBrand {
 
   factory BaseBrand.fromJson(Map<String, dynamic> json) {
     return BaseBrand(
-      id: json['id'],
-      name: json['name'],
+      id: json['id'] ?? "",
+      name: json['name'] ?? "",
     );
   }
 }
@@ -83,8 +83,8 @@ class Category {
 
   factory Category.fromJson(Map<String, dynamic> json) {
     return Category(
-      id: json['id'],
-      name: json['name'],
+      id: json['id'] ?? "",
+      name: json['name'] ?? "",
     );
   }
 
@@ -146,16 +146,16 @@ class ParaPharmaCatalogModel extends BaseParaPharmaCatalogModel {
     return ParaPharmaCatalogModel(
         id: '',
         name: '',
-        unitPriceHt: '',
+        unitPriceHt: '0',
         packageSize: 1,
-        unitPriceTtc: '',
+        unitPriceTtc: '0',
         tags: [],
-        tvaPercentage: '',
+        tvaPercentage: '0',
         thumbnailImage: null,
         image: null,
         stockQuantity: 0,
         isActive: false,
-        company: null,
+        company: Company.empty(),
         brand: Brand.empty(),
         category: Category.empty(),
         isLiked: false,

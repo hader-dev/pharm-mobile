@@ -100,10 +100,15 @@ class MedicineCatalogRepository extends IMedicineCatalogRepository {
 
   @override
   Future<MedicineCatalogModel> getMedicineCatalogById(String id) async {
+    try{
     var decodedResponse = await client.sendRequest(
         () => client.get("${Urls.medicinesCatalog}/$id", queryParams: {
               'computed[isFavorite]': 'true',
             }));
     return jsonToMedicineCatalogItem(decodedResponse);
+    }
+    catch(e){
+      return MedicineCatalogModel.empty();
+    }
   }
 }
