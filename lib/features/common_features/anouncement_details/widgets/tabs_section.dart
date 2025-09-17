@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common_features/anouncement_details/sub_pages/announcement/announcement_overview.dart';
+import 'package:hader_pharm_mobile/features/common_features/anouncement_details/sub_pages/documents/announcement_documents.dart';
 import 'package:hader_pharm_mobile/features/common_features/anouncement_details/sub_pages/medicine_products/medicine_products.dart';
 import 'package:hader_pharm_mobile/features/common_features/anouncement_details/sub_pages/para_pharma/para_pharma.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
@@ -20,7 +21,7 @@ class _AnnouncementDetailsTabBarSectionState
   @override
   void initState() {
     super.initState();
-    tabsController = TabController(length: 3, vsync: this);
+    tabsController = TabController(length: 4, vsync: this);
   }
 
   @override
@@ -30,6 +31,7 @@ class _AnnouncementDetailsTabBarSectionState
       translation.overview,
       translation.para_pharma,
       translation.medicines,
+      translation.documents,
     ];
 
     TextStyle tabTextStyle = context.responsiveTextTheme.current.body3Medium;
@@ -67,6 +69,7 @@ class _AnnouncementDetailsTabBarSectionState
               AnnouncementOverviewPage(),
               ParapharmaProductsPage(),
               MedicineProductsPage(),
+              AnnouncementDocumentsPage(),
             ],
           ),
         ),

@@ -184,6 +184,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get para_pharma => 'Para-Pharma';
 
   @override
+  String get documents => 'Documents';
+
+  @override
   String get select_language_description =>
       'Choisissez la langue que vous souhaitez utiliser dans l\'application.';
 
@@ -737,6 +740,10 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get feedback_loading_failed => 'Échec du chargement';
+
+  @override
+  String get feedback_pdf_load_error =>
+      'Impossible de charger le document PDF. Veuillez vérifier votre connexion Internet et réessayer.';
 
   @override
   String get in_stock => 'En stock';

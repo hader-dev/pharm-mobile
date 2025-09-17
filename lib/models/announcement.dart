@@ -1,5 +1,28 @@
 import 'package:hader_pharm_mobile/models/image.dart';
 
+class PdfDocument {
+  final String path;
+  final String filename;
+  final String mimetype;
+  final int size;
+
+  PdfDocument({
+    required this.path,
+    required this.filename,
+    required this.mimetype,
+    required this.size,
+  });
+
+  factory PdfDocument.fromJson(Map<String, dynamic> json) {
+    return PdfDocument(
+      path: json['path'] ?? '',
+      filename: json['filename'] ?? '',
+      mimetype: json['mimetype'] ?? '',
+      size: json['size'] ?? 0,
+    );
+  }
+}
+
 class AnnouncementModel {
   final String id;
   final ImageModel? image;
@@ -8,6 +31,8 @@ class AnnouncementModel {
   final DateTime createdAt;
   final DateTime? updatedAt;
   final ImageModel? thumbnailImage;
+  final PdfDocument? pdf;
+
   AnnouncementModel({
     required this.id,
     required this.createdAt,
@@ -16,5 +41,6 @@ class AnnouncementModel {
     required this.content,
     this.image,
     this.thumbnailImage,
+    this.pdf,
   });
 }

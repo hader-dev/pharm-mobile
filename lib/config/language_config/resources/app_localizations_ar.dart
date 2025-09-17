@@ -182,6 +182,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get para_pharma => 'الشبه صيدلة';
 
   @override
+  String get documents => 'المستندات';
+
+  @override
   String get select_language_description =>
       'اختر اللغة التي تفضل استخدامها في التطبيق.';
 
@@ -724,6 +727,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get feedback_loading_failed => 'فشل في التحميل';
+
+  @override
+  String get feedback_pdf_load_error =>
+      'تعذر تحميل مستند PDF. يرجى التحقق من اتصال الإنترنت والمحاولة مرة أخرى.';
 
   @override
   String get in_stock => 'متوفر';

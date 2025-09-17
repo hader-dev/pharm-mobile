@@ -442,6 +442,12 @@ abstract class AppLocalizations {
   /// **'Para-Pharma'**
   String get para_pharma;
 
+  /// No description provided for @documents.
+  ///
+  /// In en, this message translates to:
+  /// **'Documents'**
+  String get documents;
+
   /// No description provided for @select_language_description.
   ///
   /// In en, this message translates to:
@@ -1497,6 +1503,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Failed to load'**
   String get feedback_loading_failed;
+
+  /// No description provided for @feedback_pdf_load_error.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load the PDF document. Please check your internet connection and try again.'**
+  String get feedback_pdf_load_error;
 
   /// No description provided for @in_stock.
   ///
