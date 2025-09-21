@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
@@ -18,34 +20,42 @@ class TrademarkWidget extends StatelessWidget {
     ParaPharmaCatalogModel catalogData =
         BlocProvider.of<ParaPharmaDetailsCubit>(context).paraPharmaCatalogData!;
 
-    return ColoredBox(
-      color: AppColors.accent1Shade2.withAlpha(200),
-      child: Padding(
-        padding: const EdgeInsets.all(AppSizesManager.p4),
-        child: Row(
-          children: [
-            Container(
-              height: 35,
-              width: 35,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(color: AppColors.bgDisabled, width: 1.5),
-                image: DecorationImage(
-                  image: catalogData.company?.thumbnailImage?.path == null
-                      ? AssetImage(DrawableAssetStrings.companyPlaceHolderImg)
-                      : NetworkImage(
-                          getItInstance.get<INetworkService>().getFilesPath(
-                                catalogData.company!.thumbnailImage!.path,
-                              ),
-                        ),
+    return GestureDetector(
+      onTap: () {
+        GoRouter.of(context).pushNamed(
+          RoutingManager.vendorDetails,
+          extra: catalogData.company!.id,
+        );
+      },
+      child: ColoredBox(
+        color: AppColors.accent1Shade2.withAlpha(200),
+        child: Padding(
+          padding: const EdgeInsets.all(AppSizesManager.p4),
+          child: Row(
+            children: [
+              Container(
+                height: 35,
+                width: 35,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(color: AppColors.bgDisabled, width: 1.5),
+                  image: DecorationImage(
+                    image: catalogData.company?.thumbnailImage?.path == null
+                        ? AssetImage(DrawableAssetStrings.companyPlaceHolderImg)
+                        : NetworkImage(
+                            getItInstance.get<INetworkService>().getFilesPath(
+                                  catalogData.company!.thumbnailImage!.path,
+                                ),
+                          ),
+                  ),
                 ),
               ),
-            ),
-            const ResponsiveGap.s4(),
-            Text(catalogData.company!.name,
-                style: context.responsiveTextTheme.current.body3Regular
-                    .copyWith(color: Colors.white)),
-          ],
+              const ResponsiveGap.s4(),
+              Text(catalogData.company!.name,
+                  style: context.responsiveTextTheme.current.body3Regular
+                      .copyWith(color: Colors.white)),
+            ],
+          ),
         ),
       ),
     );

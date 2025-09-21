@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
@@ -20,36 +22,44 @@ class TrademarkWidget extends StatelessWidget {
             .state
             .medicineCatalogData!;
 
-    return ColoredBox(
-      color: AppColors.accent1Shade2.withAlpha(200),
-      child: Padding(
-        padding: const EdgeInsets.all(AppSizesManager.p4),
-        child: Row(
-          children: [
-            Container(
-              height: 35,
-              width: 35,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(color: AppColors.bgDisabled, width: 1.5),
-                image: DecorationImage(
-                  image: medicineCatalogData.company.thumbnailImage?.path ==
-                          null
-                      ? AssetImage(DrawableAssetStrings.companyPlaceHolderImg)
-                      : NetworkImage(
-                          getItInstance.get<INetworkService>().getFilesPath(
-                                medicineCatalogData
-                                    .company.thumbnailImage!.path,
-                              ),
-                        ),
+    return GestureDetector(
+      onTap: () {
+        GoRouter.of(context).pushNamed(
+          RoutingManager.vendorDetails,
+          extra: medicineCatalogData.company.id,
+        );
+      },
+      child: ColoredBox(
+        color: AppColors.accent1Shade2.withAlpha(200),
+        child: Padding(
+          padding: const EdgeInsets.all(AppSizesManager.p4),
+          child: Row(
+            children: [
+              Container(
+                height: 35,
+                width: 35,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(color: AppColors.bgDisabled, width: 1.5),
+                  image: DecorationImage(
+                    image: medicineCatalogData.company.thumbnailImage?.path ==
+                            null
+                        ? AssetImage(DrawableAssetStrings.companyPlaceHolderImg)
+                        : NetworkImage(
+                            getItInstance.get<INetworkService>().getFilesPath(
+                                  medicineCatalogData
+                                      .company.thumbnailImage!.path,
+                                ),
+                          ),
+                  ),
                 ),
               ),
-            ),
-            const ResponsiveGap.s4(),
-            Text(medicineCatalogData.company.name,
-                style: context.responsiveTextTheme.current.body3Regular
-                    .copyWith(color: Colors.white)),
-          ],
+              const ResponsiveGap.s4(),
+              Text(medicineCatalogData.company.name,
+                  style: context.responsiveTextTheme.current.body3Regular
+                      .copyWith(color: Colors.white)),
+            ],
+          ),
         ),
       ),
     );

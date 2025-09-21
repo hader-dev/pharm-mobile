@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
-import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/helpers/para_pharma_catalog_details_tab_data.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/widgets/appbar.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 
@@ -13,7 +12,6 @@ import 'sub_pages/para_pharma_catalog_overview/para_pharma_catalog_overview.dart
 import 'widgets/buttons_section.dart';
 import 'widgets/header_section.dart';
 import 'widgets/para_pharma_product_photo_section.dart';
-import 'widgets/tap_bar_section.dart';
 
 class ParaPharmaCatalogDetailsScreen extends StatefulWidget {
   final String paraPharmaCatalogId;
@@ -32,11 +30,9 @@ class _ParaPharmaCatalogDetailsScreenState
     with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    final tabs = paraPharmaCatalogDetailsTabData(context);
-
     return SafeArea(
       child: StateProvider(
-        tabs: tabs,
+        tabs: const [],
         vsync: this,
         catalogId: widget.paraPharmaCatalogId,
         child: BlocBuilder<ParaPharmaDetailsCubit, ParaPharmaDetailsState>(
@@ -68,7 +64,6 @@ class _ParaPharmaCatalogDetailsScreenState
                             color: AppColors.bgDisabled,
                             thickness: 3.5,
                             height: 1),
-                        ProductDetailsTabBarSection(),
                         ResponsiveGap.s24(),
                         ParaPharmaOverViewPage(),
                         ResponsiveGap.s24(),
