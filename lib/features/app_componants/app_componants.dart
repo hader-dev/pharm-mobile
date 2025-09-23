@@ -58,83 +58,11 @@ class _AppComponanatsPageState extends State<AppComponentsScreen> {
         floatingActionButton: SolidFAB(
           icon: Icons.add,
           color: AppColors.accent1Shade1,
-          onPressed: () {
-            //  ToastManager().showToast();
-          },
-        )
-        //  GradientFAB(
-        //     icon: Icons.add,
-        //     gradientColors: [
-        //       AppColors.accentGreenShade2,
-        //       AppColors.accent1Shade1,
-        //     ],
-        //     onPressed: () {
-        //       ToastManager().showToast(
-        //         context: context,
-        //       );
-        //     }
-        //     //   },
-        //     ),
-        ,
+          onPressed: () {},
+        ),
         body: SingleChildScrollView(
           child: Column(children: [
-            // PrimaryTextButton(),
-            // SecondaryTextButton(),
-            // OutLinedTextButton(),
             OutLinedFilledTextButton(),
-            //MedicineWidget1(),
-            // ProductWidget2(),
-            //   Row(
-            //    children: [
-            // PrimaryIconButton(
-            //   icon: Iconsax.arrow_right_2,
-            // ),
-            // SecondaryIconButton(
-            //   icon: Iconsax.arrow_right_2,
-            // ),
-            // OutlinedIconButton(
-            //   icon: Iconsax.arrow_right_2,
-            // ),
-            // OutlinedFilledIconButton(
-            //   icon: Iconsax.arrow_right_2,
-            // ),
-            //
-            // Padding(
-            //   padding: const EdgeInsets.all(8.0),
-            //   child: CustomTextField(
-            //     label: "Label",
-            //     value: "",
-            //     state: FieldState.error,
-            //     isOutlined: true,
-            //     onChanged: (value) {
-            //       print("Text changed: $value");
-            //     },
-            //   ),
-            // ),
-            // Padding(
-            //   padding: const EdgeInsets.all(8.0),
-            //   child: CustomTextField(
-            //     label: "Label",
-            //     value: "",
-            //     state: FieldState.warning,
-            //     isOutlined: true,
-            //     onChanged: (value) {
-            //       print("Text changed: $value");
-            //     },
-            //   ),
-            // ),
-            // Padding(
-            //   padding: const EdgeInsets.all(8.0),
-            //   child: CustomTextField(
-            //     label: "Label",
-            //     value: "",
-            //     state: FieldState.success,
-            //     isOutlined: true,
-            //     onChanged: (value) {
-            //       print("Text changed: $value");
-            //     },
-            //   ),
-            // )
           ]),
         ));
   }

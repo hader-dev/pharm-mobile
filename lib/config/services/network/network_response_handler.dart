@@ -1,12 +1,9 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 
 import '../../../utils/app_exceptions/exceptions.dart';
 
 class ResponseHandler {
   static dynamic processResponse(dynamic response) {
-    debugPrint("Response: $response");
-
     if (response == null) {
       throw FetchDataException();
     }
