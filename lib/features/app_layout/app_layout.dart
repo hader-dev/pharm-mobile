@@ -6,14 +6,9 @@ import 'package:hader_pharm_mobile/config/services/network/network_interface.dar
 import 'package:hader_pharm_mobile/config/services/notification/notification_service_port.dart';
 import 'package:hader_pharm_mobile/features/app_layout/actions/show_new_app_version_dialog.dart';
 import 'package:hader_pharm_mobile/features/app_layout/actions/show_welcome_dialog.dart';
-import 'package:hader_pharm_mobile/features/common_features/cart/cart.dart';
 import 'package:hader_pharm_mobile/features/common_features/cart/cubit/cart_cubit.dart';
-import 'package:hader_pharm_mobile/features/common_features/home/home.dart';
-import 'package:hader_pharm_mobile/features/common_features/market_place/market_place.dart';
 import 'package:hader_pharm_mobile/features/common_features/notification/cubit/notifications_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders/cubit/orders_cubit.dart';
-import 'package:hader_pharm_mobile/features/common_features/orders/orders.dart';
-import 'package:hader_pharm_mobile/features/common_features/profile/profile.dart';
 import 'package:hader_pharm_mobile/repositories/remote/cart_items/cart_items_repository_impl.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/order_repository_impl.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
@@ -25,15 +20,7 @@ import 'widgets/app_nav_bar/app_nav_bar.dart';
 class AppLayout extends StatelessWidget {
   static final GlobalKey<ScaffoldState> appLayoutScaffoldKey =
       GlobalKey<ScaffoldState>();
-  final List<Widget> screens = const [
-    HomeScreen(),
-    MarketPlaceScreen(),
-    CartScreen(),
-    OrdersScreen(),
-    ProfileScreen(
-      openedFrom: "",
-    )
-  ];
+
   const AppLayout({super.key});
 
   @override
@@ -88,7 +75,8 @@ class AppLayout extends StatelessWidget {
                     bottomNavigationBar: AppNavBar(),
                     body: IndexedStack(
                       index: BlocProvider.of<AppLayoutCubit>(context).pageIndex,
-                      children: screens,
+                      children:
+                          BlocProvider.of<AppLayoutCubit>(context).screens,
                     ),
                   );
                 },

@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:iconsax/iconsax.dart';
-
-import '../../../../utils/constants.dart';
-import '../../../../utils/extensions/app_context_helper.dart';
-import '../../cubit/app_layout_cubit.dart';
+import 'package:hader_pharm_mobile/features/app_layout/cubit/app_layout_cubit.dart';
+import 'package:hader_pharm_mobile/features/app_layout/widgets/app_nav_bar/client_nav_bar.dart';
+import 'package:hader_pharm_mobile/features/app_layout/widgets/app_nav_bar/deligate_nav_bar.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class AppNavBar extends StatelessWidget {
   const AppNavBar({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final items = UserManager.instance.currentUser.role.isDelegate
+        ? deligateNavbarItems(context.translation!)
+        : clientNavbarItems(context.translation!);
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.end,
@@ -24,7 +28,7 @@ class AppNavBar extends StatelessWidget {
               thickness: 1,
             ),
             NavBarIndicator(
-              tapsCount: 5,
+              tapsCount: items.length,
               selectedIndex: BlocProvider.of<AppLayoutCubit>(context).pageIndex,
             ),
           ],
@@ -40,38 +44,7 @@ class AppNavBar extends StatelessWidget {
           onTap: (index) {
             BlocProvider.of<AppLayoutCubit>(context).changePage(index);
           },
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Padding(
-                  padding: EdgeInsets.symmetric(vertical: AppSizesManager.p6),
-                  child: Icon(Iconsax.home)),
-              label: context.translation!.home,
-            ),
-            BottomNavigationBarItem(
-              icon: Padding(
-                  padding: EdgeInsets.symmetric(vertical: AppSizesManager.p6),
-                  child: Icon(Iconsax.shop)),
-              label: context.translation!.market_place,
-            ),
-            BottomNavigationBarItem(
-              icon: Padding(
-                  padding: EdgeInsets.symmetric(vertical: AppSizesManager.p6),
-                  child: Icon(Iconsax.bag_2)),
-              label: context.translation!.cart,
-            ),
-            BottomNavigationBarItem(
-              icon: Padding(
-                  padding: EdgeInsets.symmetric(vertical: AppSizesManager.p6),
-                  child: Icon(Iconsax.box)),
-              label: context.translation!.orders,
-            ),
-            BottomNavigationBarItem(
-              icon: Padding(
-                  padding: EdgeInsets.symmetric(vertical: AppSizesManager.p6),
-                  child: Icon(Iconsax.profile_circle)),
-              label: context.translation!.account,
-            ),
-          ],
+          items: items,
         ),
       ],
     );
