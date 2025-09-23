@@ -81,4 +81,6 @@ initAppDependencies() async {
       ConfigRepository(client: dioNetworkManager);
   getItInstance
       .registerLazySingleton<IConfigRepository>(() => configRepository);
+
+
 }
