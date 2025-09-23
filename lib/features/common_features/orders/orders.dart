@@ -57,15 +57,21 @@ class OrdersScreen extends StatelessWidget {
             if (state is OrdersLoading) {
               return const Center(child: CircularProgressIndicator());
             }
-            if (state is OrdersLoaded &&
-                BlocProvider.of<OrdersCubit>(context).orders.isEmpty) {
-              return ConstrainedBox(
-                  constraints: const BoxConstraints(minWidth: double.maxFinite),
-                  child: EmptyListWidget(
-                    onRefresh: () {
-                      BlocProvider.of<OrdersCubit>(context).getOrders();
-                    },
-                  ));
+            if (BlocProvider.of<OrdersCubit>(context).orders.isEmpty) {
+              return RefreshIndicator(
+                onRefresh: () =>
+                    BlocProvider.of<OrdersCubit>(context).getOrders(),
+                child: Center(
+                  child: SingleChildScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    child: EmptyListWidget(
+                      onRefresh: () {
+                        BlocProvider.of<OrdersCubit>(context).getOrders();
+                      },
+                    ),
+                  ),
+                ),
+              );
             }
             return Column(
               mainAxisSize: MainAxisSize.min,

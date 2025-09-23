@@ -57,7 +57,6 @@ class CartScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               BlocBuilder<CartCubit, CartState>(builder: (context, state) {
-                if (state is CartQuantityUpdated) {}
                 if (state is CartLoading) {
                   return Expanded(
                     child: Container(
@@ -65,8 +64,7 @@ class CartScreen extends StatelessWidget {
                         child: const CircularProgressIndicator()),
                   );
                 }
-                if (state is CartLoadingSuccess &&
-                    BlocProvider.of<CartCubit>(context).cartItems.isEmpty) {
+                if (BlocProvider.of<CartCubit>(context).cartItems.isEmpty) {
                   return Expanded(
                     child: EmptyListWidget(
                       onRefresh: () {
