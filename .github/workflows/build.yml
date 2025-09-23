@@ -1,5 +1,4 @@
 name: Flutter Build
-
 on:
   workflow_dispatch: 
   push:
@@ -12,31 +11,76 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
+      
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.35.1' 
+          flutter-version: '3.24.3'  # Updated to stable version
+          cache: true  # Enable caching for faster builds
+          
+      - name: Verify Flutter installation
+        run: |
+          flutter --version
+          flutter doctor -v
           
       - name: Install dependencies
         run: flutter pub get
-
-      - name: Install Android SDK command line tools
+        
+      - name: Run Flutter analyzer
+        run: flutter analyze
+        continue-on-error: true  # Don't fail build on analyzer warnings
+        
+      - name: Set up Android SDK
         run: |
+          # Install required packages
           sudo apt-get update -y
-          sudo apt-get install -y wget unzip
-          wget https://dl.google.com/android/repository/commandlinetools-linux-10406996_latest.zip
+          sudo apt-get install -y wget unzip default-jdk
+          
+          # Download and install Android SDK command line tools
+          wget -q https://dl.google.com/android/repository/commandlinetools-linux-10406996_latest.zip
           sudo mkdir -p /usr/local/lib/android/sdk/cmdline-tools
-          sudo unzip commandlinetools-linux-*.zip -d /usr/local/lib/android/sdk/cmdline-tools
+          sudo unzip -q commandlinetools-linux-*.zip -d /usr/local/lib/android/sdk/cmdline-tools
           sudo mv /usr/local/lib/android/sdk/cmdline-tools/cmdline-tools /usr/local/lib/android/sdk/cmdline-tools/latest
+          
+          # Set environment variables
+          echo "ANDROID_HOME=/usr/local/lib/android/sdk" >> $GITHUB_ENV
+          echo "ANDROID_SDK_ROOT=/usr/local/lib/android/sdk" >> $GITHUB_ENV
+          echo "/usr/local/lib/android/sdk/cmdline-tools/latest/bin" >> $GITHUB_PATH
+          echo "/usr/local/lib/android/sdk/platform-tools" >> $GITHUB_PATH
+          
+      - name: Accept Android licenses
+        run: |
           export ANDROID_HOME=/usr/local/lib/android/sdk
           export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH
-          yes | sdkmanager --licenses
-
-      - name: Build APK
-        run: flutter build apk --debug #  add a proper signing key
-
+          yes | sdkmanager --licenses || true
+          
+      - name: Install Android SDK components
+        run: |
+          export ANDROID_HOME=/usr/local/lib/android/sdk
+          export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH
+          sdkmanager "platform-tools" "platforms;android-33" "build-tools;33.0.2"
+          
+      - name: Build APK (Debug)
+        run: flutter build apk --debug --verbose
+        
+      - name: Build APK (Release) 
+        run: flutter build apk --release --verbose
+        continue-on-error: true  # Allow this to fail if no signing key
+        
+      - name: Upload Debug APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: debug-apk
+          path: build/app/outputs/flutter-apk/app-debug.apk
+          retention-days: 30
+          
+      - name: Upload Release APK
+        uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: release-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
+          retention-days: 30
