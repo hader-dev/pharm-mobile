@@ -45,9 +45,9 @@ class _HomeScreenState extends State<HomeScreen> {
             if (state is PromotionLoadingFailed) {
               return RefreshIndicator(
                 onRefresh: () => context.read<HomeCubit>().getPromotions(),
-                child: SingleChildScrollView(
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  child: Center(
+                child: Center(
+                  child: SingleChildScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
                     child: EmptyListWidget(
                       onRefresh: () {
                         context.read<HomeCubit>().getPromotions();
