@@ -20,4 +20,10 @@ List<BottomNavigationBarItem> deligateNavbarItems(
         ),
         label: translation.order,
       ),
+      BottomNavigationBarItem(
+        icon: Padding(
+            padding: EdgeInsets.symmetric(vertical: AppSizesManager.p6),
+            child: Icon(Iconsax.profile_circle)),
+        label: translation.account,
+      ),
     ];

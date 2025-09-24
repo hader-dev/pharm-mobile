@@ -41,8 +41,7 @@ class OrdersScreen extends StatelessWidget {
                       .copyWith(color: AppColors.bgWhite),
                   children: [
                     TextSpan(
-                        text:
-                            " (${BlocProvider.of<OrdersCubit>(context).orders.length})",
+                        text: " (${state.orders.length})",
                         style: context.responsiveTextTheme.current.bodySmall
                             .copyWith(
                                 color: AppColors.accent1Shade2Deemphasized)),
@@ -57,7 +56,7 @@ class OrdersScreen extends StatelessWidget {
             if (state is OrdersLoading) {
               return const Center(child: CircularProgressIndicator());
             }
-            if (BlocProvider.of<OrdersCubit>(context).orders.isEmpty) {
+            if (state.orders.isEmpty) {
               return RefreshIndicator(
                 onRefresh: () =>
                     BlocProvider.of<OrdersCubit>(context).getOrders(),
@@ -86,11 +85,9 @@ class OrdersScreen extends StatelessWidget {
                             .scrollController,
                         shrinkWrap: true,
                         physics: const AlwaysScrollableScrollPhysics(),
-                        itemCount:
-                            BlocProvider.of<OrdersCubit>(context).orders.length,
+                        itemCount: state.orders.length,
                         itemBuilder: (context, index) => OrderCard(
-                              orderData: BlocProvider.of<OrdersCubit>(context)
-                                  .orders[index],
+                              orderData: state.orders[index],
                             )),
                   ),
                 ),

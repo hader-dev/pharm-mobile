@@ -38,12 +38,12 @@ class LoginCubit extends Cubit<LoginState> {
             );
       }
       if (e.errorCode == ApiErrorCodes.EMAIL_NOT_VERIFIED.name) {
-        getItInstance.get<ToastManager>().showToast(
-              type: ToastType.warning,
-              message: RoutingManager.rootNavigatorKey.currentContext!
-                  .translation!.email_not_verified,
-            );
         resendEmailOtp(emailController.text);
+        RoutingManager.router.pushNamed(RoutingManager.checkEmailScreen,
+            extra: {
+              "email": emailController.text,
+              "popInsteadOfPushReplacement": true
+            });
       }
       GlobalExceptionHandler.handle(
         exception: e,

@@ -14,10 +14,11 @@ import 'package:hader_pharm_mobile/utils/extensions/price_formatter.dart';
 class OrderCard extends StatelessWidget {
   final BaseOrderModel orderData;
   late final OrderStatus orderStatus;
-  OrderCard({
-    super.key,
-    required this.orderData,
-  }) {
+  final bool displayClientCompanyOrVendor;
+  OrderCard(
+      {super.key,
+      required this.orderData,
+      this.displayClientCompanyOrVendor = false}) {
     orderStatus = OrderStatus.values.firstWhere(
       (element) => element.id == orderData.status,
       orElse: () => OrderStatus.created,
@@ -100,8 +101,8 @@ class OrderCard extends StatelessWidget {
             ),
             const ResponsiveGap.s8(),
             InfoRow(
-              label: context.translation!.vendor,
-              dataValue: orderData.sellerCompanyName ?? "N/A",
+              label: displayClientCompanyOrVendor ? context.translation!.client : context.translation!.vendor,
+              dataValue: (displayClientCompanyOrVendor ? orderData.clientCompanyName : orderData.sellerCompanyName) ?? "N/A",
               contentDirection: Axis.vertical,
             ),
             const ResponsiveGap.s12(),

@@ -36,7 +36,11 @@ class AppLayoutCubit extends Cubit<AppLayoutState> {
   }
 
   void deligateAppScreens() {
-    screens = [ClientScreen(), DeligateOrdersScreen()];
+    screens = [
+      ClientScreen(),
+      DeligateOrdersScreen(),
+      ProfileScreen(openedFrom: "")
+    ];
     emit(CurrentUserLoaded());
   }
 

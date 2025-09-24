@@ -11,9 +11,11 @@ class BaseOrderModel {
   final DateTime updatedAt;
   final double discount;
   final String? sellerCompanyName;
+  final String? clientCompanyName;
 
   BaseOrderModel({
     required this.id,
+    this.clientCompanyName,
     required this.status,
     required this.totalAmountExclTax,
     required this.totalAmountInclTax,
@@ -43,6 +45,7 @@ class BaseOrderModel {
       createdAt: DateTime.parse(json['createdAt']),
       updatedAt: DateTime.parse(json['updatedAt']),
       sellerCompanyName: json['companyInfo']['name'],
+      clientCompanyName: json['clientCompany']['name'],
     );
   }
 
@@ -74,6 +77,7 @@ class BaseOrderModel {
       createdAt: DateTime.now().subtract(Duration(days: 15)),
       updatedAt: DateTime.now(),
       discount: 50.00,
+      clientCompanyName: 'Mock Client Co.',
       sellerCompanyName: 'Mock Seller Co.',
     );
   }

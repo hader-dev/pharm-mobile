@@ -86,6 +86,7 @@ class PromotionSectionV4 extends StatelessWidget {
                             context.deviceSize, context.orientation),
                       ),
                       scrollDirection: Axis.horizontal,
+                      itemCount: announcements.length,
                       itemBuilder: (ctx, index) => PromotionItemWidget3(
                         announcement: announcements[index],
                         onTap: (announcement) => RoutingManager.router

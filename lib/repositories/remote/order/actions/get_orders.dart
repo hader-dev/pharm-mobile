@@ -1,12 +1,28 @@
+import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
+import 'package:hader_pharm_mobile/models/order.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/response/order_response.dart';
 import 'package:hader_pharm_mobile/utils/urls.dart';
 
 Future<OrderResponse> getOrders(
     Map<String, String> queryParams, INetworkService client) async {
-  var decodedResponse = await client.sendRequest(() => client.get(
-        Urls.orders,
-        queryParams: queryParams,
-      ));
-  return OrderResponse.fromJson(decodedResponse);
+  try {
+    var decodedResponse = await client.sendRequest(() => client.get(
+          Urls.orders,
+          queryParams: queryParams,
+        ));
+    return OrderResponse.fromJson(decodedResponse);
+  } catch (e, stack) {
+    debugPrint("$e");
+    debugPrintStack(stackTrace: stack);
+    return OrderResponse(totalItems: 0, data: []);
+  }
+}
+
+Future<OrderResponse> getMockOrders(
+    Map<String, String> queryParams, INetworkService client) async {
+  return OrderResponse(totalItems: 2, data: [
+    BaseOrderModel.mock(),
+    BaseOrderModel.mock(),
+  ]);
 }

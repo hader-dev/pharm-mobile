@@ -85,6 +85,14 @@ class AppStateDeligateProvider extends StatelessWidget {
       BlocProvider(
         create: (context) => AppLayoutCubit(),
       ),
+      BlocProvider(
+        create: (context) => OrdersCubit(
+          scrollController: ScrollController(),
+          orderRepository: OrderRepository(
+            client: getItInstance.get<INetworkService>(),
+          ),
+        )..getOrders(),
+      ),
     ], child: child);
   }
 }
