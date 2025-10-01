@@ -20,14 +20,14 @@ enum OrderClaimStatus {
     icon: Icons.play_arrow,
   ),
   rejected(
-    id: 3,
-    color: Colors.green,
-    icon: Icons.check_circle,
+    id: 5,
+    color: Colors.red,
+    icon: Icons.cancel,
   ),
   resolved(
     id: 4,
-    color: Colors.red,
-    icon: Icons.cancel,
+    color: Colors.green,
+    icon: Icons.check_circle,
   );
 
   final int id;

@@ -59,7 +59,7 @@ class AnnouncementDocumentsPage extends StatelessWidget {
   }
 
   Widget _buildDocumentCard(BuildContext context, PdfDocument pdf) {
-    final sizeInMB = (pdf.size / (1024 * 1024)).toStringAsFixed(2);
+    final sizeInMB = (int.parse(pdf.size) / (1024 * 1024)).toStringAsFixed(2);
 
     return Card(
       elevation: 2,
@@ -157,7 +157,7 @@ class AnnouncementDocumentsPage extends StatelessWidget {
       } else {
         final networkService = getItInstance.get<INetworkService>();
         final baseUrl = networkService.baseUrl;
-        fullUrl = '$baseUrl/v1/files/${pdf.path}';
+        fullUrl = '$baseUrl/files/${pdf.path}';
       }
 
       Navigator.of(context).push(

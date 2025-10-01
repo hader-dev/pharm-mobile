@@ -6,8 +6,8 @@ import 'package:hader_pharm_mobile/config/services/network/network_interface.dar
 import 'package:hader_pharm_mobile/features/common_features/clients/cubit/clients_cubit.dart';
 import 'package:hader_pharm_mobile/repositories/remote/clients/clients_repository_impl.dart';
 
-class DeligateStateProvider extends StatelessWidget {
-  const DeligateStateProvider({super.key, required this.child});
+class DeligateClientsStateProvider extends StatelessWidget {
+  const DeligateClientsStateProvider({super.key, required this.child});
   final Widget child;
   @override
   Widget build(BuildContext context) {

@@ -33,10 +33,51 @@ class AppLocalizationsFr extends AppLocalizations {
   String get summary => 'Résumé';
 
   @override
+  String get search_products => 'Rechercher des produits';
+
+  @override
   String get delete => 'Supprimer';
 
   @override
   String get tva => 'TVA';
+
+  @override
+  String get search_clients => 'Rechercher des clients';
+
+  @override
+  String get custom_price => 'Prix personnalisé';
+
+  @override
+  String get feedback_select_client_and_add_items =>
+      'Sélectionnez le client et ajoutez des articles';
+
+  @override
+  String get feedback_file_save_failed => 'Erreur de sauvegarde du fichier';
+
+  @override
+  String get feedback_file_saved_successfully =>
+      'Fichier enregistré avec successe';
+
+  @override
+  String get add_client => 'Ajouter client';
+
+  @override
+  String get default_price => 'Prix par defaut';
+
+  @override
+  String get client_add_success => 'Client ajouté avec succès';
+
+  @override
+  String get client_add_fail => 'Échec de l’ajout du client';
+
+  @override
+  String get select_product => 'Sélectionner un produit';
+
+  @override
+  String get add_products_to_order => 'Ajouter des produits à la commande';
+
+  @override
+  String get select_client => 'Sélectionner le client';
 
   @override
   String get total_ht_amount => 'Total HT';

@@ -196,7 +196,7 @@ class Brand extends BaseBrand {
         id: json["id"],
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
-        thumbnailImage: json["thumbnailImage"],
+        thumbnailImage: json["image"],
         image: json["image"],
         companyId: json["companyId"],
         name: json["name"],

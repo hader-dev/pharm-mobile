@@ -29,7 +29,7 @@ OrderItem jsonToOrderItem(Map<String, dynamic> json) {
     quantity: json['quantity'],
     designation: json['designation'],
     lotNumber: json['lotNumber'],
-    imageUrl: json['thumbnailImage']?['path'],
+    imageUrl: json['image']?['path'],
     expirationDate: json['expirationDate'],
     margin: json['margin'] != null ? double.parse(json['margin']) : 0.0,
     discountAmount: json['discountAmount'] != null

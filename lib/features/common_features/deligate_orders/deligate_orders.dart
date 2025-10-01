@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
+import 'package:hader_pharm_mobile/features/common_features/deligate_orders/widgets/create_order_button.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders/cubit/orders_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders/cubit/orders_provider.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders/widget/order_card.dart';
@@ -37,6 +38,7 @@ class DeligateOrdersScreen extends StatelessWidget {
                   .copyWith(color: AppColors.bgWhite),
             ),
           ),
+          floatingActionButton: const CreateOrderButton(),
           body:
               BlocBuilder<OrdersCubit, OrdersState>(builder: (context, state) {
             if (state.orders.isEmpty) {
@@ -50,15 +52,18 @@ class DeligateOrdersScreen extends StatelessWidget {
                 ),
               );
             }
-            return ListView.builder(
-              itemCount: state.orders.length,
-              itemBuilder: (context, index) {
-                final order = state.orders[index];
-                return OrderCard(
-                  orderData: order,
-                  displayClientCompanyOrVendor: true,
-                );
-              },
+            return RefreshIndicator(
+              onRefresh: () => context.read<OrdersCubit>().getOrders(),
+              child: ListView.builder(
+                itemCount: state.orders.length,
+                itemBuilder: (context, index) {
+                  final order = state.orders[index];
+                  return OrderCard(
+                    orderData: order,
+                    displayClientCompanyOrVendor: true,
+                  );
+                },
+              ),
             );
           }),
         ),

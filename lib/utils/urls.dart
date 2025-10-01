@@ -11,6 +11,7 @@ class Urls {
   static String get users => "/users";
   static String get me => "$users/me";
   static String get uploadUserImage => "$users/upload-image";
+  static String get deligateCreateClient => "$users/deligate/clients";
 
   //Auth endpoint
 

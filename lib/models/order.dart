@@ -8,7 +8,7 @@ class BaseOrderModel {
   final int? invoiceType;
   final String deliveryAddress;
   final DateTime createdAt;
-  final DateTime updatedAt;
+  final DateTime? updatedAt;
   final double discount;
   final String? sellerCompanyName;
   final String? clientCompanyName;
@@ -22,7 +22,7 @@ class BaseOrderModel {
     required this.paymentMethod,
     required this.invoiceType,
     required this.createdAt,
-    required this.updatedAt,
+    this.updatedAt,
     required this.deliveryAddress,
     required this.discount,
     this.sellerCompanyName,
@@ -43,7 +43,8 @@ class BaseOrderModel {
       deliveryAddress: json['deliveryAddress'],
       invoiceType: json['invoiceType'],
       createdAt: DateTime.parse(json['createdAt']),
-      updatedAt: DateTime.parse(json['updatedAt']),
+      updatedAt:
+          json['updatedAt'] != null ? DateTime.parse(json['updatedAt']) : null,
       sellerCompanyName: json['companyInfo']['name'],
       clientCompanyName: json['clientCompany']['name'],
     );

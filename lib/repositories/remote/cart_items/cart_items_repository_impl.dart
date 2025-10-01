@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
 
 import '../../../config/services/network/network_interface.dart';
-import 'response/cart_items_response.dart';
 import '../../../models/create_cart_item.dart';
 import '../../../utils/urls.dart';
 import 'carti_tems_repository.dart';
+import 'response/cart_items_response.dart';
 
 class CartItemRepository extends ICartItemsRepository {
   final INetworkService client;
@@ -16,19 +16,15 @@ class CartItemRepository extends ICartItemsRepository {
       var decodedResponse = await client.sendRequest(() => client.get(
             Urls.cartItems,
             queryParams: {
-              "include[sellerCompany][fields][]": [
-                "id",
-                "name",
-                "thumbnailImage",
-                "image"
-              ],
+              "include[sellerCompany][fields][]": ["id", "name"],
               "include[parapharmCatalog][fields][]": ["stockQuantity"],
               "include[medicineCatalog][fields][]": ["stockQuantity"]
             },
           ));
 
       return CartItemsResponse.fromJson(decodedResponse);
-    } catch (e) {
+    } catch (e, stackTrace) {
+      debugPrintStack(stackTrace: stackTrace);
       debugPrint("$e");
       return CartItemsResponse(data: []);
     }

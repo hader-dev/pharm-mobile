@@ -113,6 +113,7 @@ dependencies:
   printing: ^5.14.2
   package_info_plus: ^8.3.1
   webview_flutter: ^4.7.0
+  flutter_pdfview: ^1.4.3
 
 dev_dependencies:
   flutter_test:

@@ -35,6 +35,7 @@ class CheckEmailScreen extends StatelessWidget {
       child: SafeArea(
         child: BlocListener<CheckEmailCubit, CheckEmailState>(
           listener: (context, state) {
+            debugPrint('CheckEmailState: $state');
             if (state is CheckEmailSuccuss) {
               if (popInsteadOfPushReplacement) {
                 GoRouter.of(context).safePop();

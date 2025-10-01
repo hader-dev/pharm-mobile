@@ -59,7 +59,9 @@ class VendorsCubit extends Cubit<VendorsState> {
           search: searchValue);
       totalVendorsCount = vendorsList.length;
       emit(VendorsLoaded());
-    } catch (e) {
+    } catch (e,stack) {
+      debugPrintStack(stackTrace: stack);
+      debugPrint("Error fetching vendors: $e");
       vendorsList = [];
       emit(VendorsLoadingFailed());
     }

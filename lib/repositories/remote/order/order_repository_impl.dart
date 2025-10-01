@@ -2,6 +2,7 @@ import 'package:hader_pharm_mobile/config/services/network/network_interface.dar
 import 'package:hader_pharm_mobile/models/create_order_model.dart';
 import 'package:hader_pharm_mobile/models/create_quick_order_model.dart';
 import 'package:hader_pharm_mobile/models/order_details.dart';
+import 'package:hader_pharm_mobile/repositories/remote/order/params/create_deligate_order.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/params/invoice.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/params/item_complaint.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/params/order_complaint.dart';
@@ -14,6 +15,7 @@ import 'package:hader_pharm_mobile/repositories/remote/order/response/response_o
 import 'package:hader_pharm_mobile/utils/constants.dart';
 
 import 'actions/cancel_order.dart' as actions;
+import 'actions/create_deligate_order.dart' as actions;
 import 'actions/create_order.dart' as actions;
 import 'actions/create_quick_order.dart' as actions;
 import 'actions/find_complaint.dart' as find_complaint_action;
@@ -83,5 +85,28 @@ class OrderRepository extends IOrderRepository {
   @override
   Future<ResponseInvoice> invoiceDetails(ParamsGetInvoice params) {
     return invoice_action.getMockInvoiceDetaills(params, client);
+  }
+
+  @override
+  Future<void> createDeligateOrder(ParamsCreateDeligateOrder params) async {
+    final orderData = {
+      'deliveryAddress': params.deliveryAddress,
+      'deliveryTownId': params.deliveryTownId,
+      'clientUserId': params.clientId,
+      'clientCompanyId': params.clientCompanyId,
+      if (params.clientNote != null && params.clientNote!.isNotEmpty)
+        'clientNote': params.clientNote,
+      'orderItems': params.orderItems
+          .map((item) => {
+                'isParapharm': item.isParapharm,
+                'itemId': item.product.id,
+                'quantity': item.quantity,
+                if (item.suggestedPrice != null)
+                  'suggestedPrice': item.suggestedPrice,
+              })
+          .toList(),
+    };
+
+    return actions.createDeligateOrder(orderData: orderData, client: client);
   }
 }

@@ -2,7 +2,7 @@ class ImageModel {
   final String path;
   final String filename;
   final String mimetype;
-  final int size;
+  final String size;
 
   ImageModel({
     required this.path,
@@ -14,8 +14,8 @@ class ImageModel {
   factory ImageModel.fromJson(Map<String, dynamic> json) => ImageModel(
         path: json["path"] ?? "",
         filename: json["filename"] ?? "",
-        mimetype: json["mimetype"] ?? "",
-        size: json["size"] ?? 0,
+        mimetype: json["mimeType"] ?? "",
+        size: json["size"] ?? "0",
       );
 
   factory ImageModel.empty() {
@@ -23,7 +23,7 @@ class ImageModel {
       path: '',
       filename: '',
       mimetype: '',
-      size: 0,
+      size: "0",
     );
   }
 
@@ -32,7 +32,7 @@ class ImageModel {
       path: '/public/users/1/1757154776341-571378210.jpg',
       filename: 'mock_file.pdf',
       mimetype: 'application/pdf',
-      size: 123456,
+      size: "123456",
     );
   }
 }

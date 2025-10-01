@@ -15,7 +15,9 @@ Future<ResponseItemComplaintFind> findComplaint(
         ));
 
     return ResponseItemComplaintFind(
-        orderClaimModel: jsonToOrderClaimModel(decodedResponse));
+        orderClaimModel: jsonToOrderClaimModel(decodedResponse),
+        claimStatusHistory: jsonToOrderClaimStatusHistoryList(
+            decodedResponse["complaintStatusHistory"]));
   } catch (e, stackTrace) {
     debugPrint("$e");
     debugPrintStack(stackTrace: stackTrace);

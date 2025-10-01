@@ -53,11 +53,10 @@ class _DistributorGeneralInformationPageState
                                   .copyWith(color: TextColors.ternary.color)),
                         ),
                         DropdownButtonFormField(
-                            initialValue:
-                                BlocProvider.of<CreateCompanyProfileCubit>(
-                                        context)
-                                    .companyData
-                                    .distributorCategoryId,
+                            value: BlocProvider.of<CreateCompanyProfileCubit>(
+                                    context)
+                                .companyData
+                                .distributorCategoryId,
                             hint: Text(translation.select_category,
                                 style: context
                                     .responsiveTextTheme.current.body3Regular

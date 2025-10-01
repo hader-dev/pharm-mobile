@@ -90,7 +90,7 @@ class _ParaPharmaProductsPageState extends State<ParaPharmaProductsPage>
                                 final paraPharma = products[index];
                                 return ParaPharmaWidget2(
                                     paraPharmData: paraPharma,
-                                    displayTags: true,
+                                    displayTags: false,
                                     onFavoriteCallback: onLikeTapped);
                               } else {
                                 if (isLoadingMore) {

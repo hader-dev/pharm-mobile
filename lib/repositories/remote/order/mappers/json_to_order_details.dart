@@ -3,15 +3,19 @@ import 'package:hader_pharm_mobile/repositories/remote/company/mappers/json_to_c
 import 'package:hader_pharm_mobile/repositories/remote/order/mappers/json_to_order_item.dart';
 
 OrderDetailsModel jsonToOrderDetails(Map<String, dynamic> json) {
+  final sellerCompany = jsonToCompany(json['sellerCompany']);
+  final clientCompany = jsonToCompany(json['clientCompany']);
+
   return OrderDetailsModel(
     id: json['id'],
     discount: json['discount'] != null ? double.parse(json['discount']) : 0.0,
     invoiceType: json['invoiceType'],
     paymentMethod: json['paymentMethod'],
     createdAt: DateTime.parse(json['createdAt']),
-    updatedAt: DateTime.parse(json['updatedAt']),
-    deliveryAddress: json['deliveryAddress'],
-    status: json['status'],
+    updatedAt:
+        json['updatedAt'] != null ? DateTime.parse(json['updatedAt']) : null,
+    deliveryAddress: json['deliveryAddress'] ?? '',
+    status: json['status'] ?? 1,
     totalAmountExclTax: json['totalAmountHt'] != null
         ? double.parse(json['totalAmountHt'])
         : 0.0,
@@ -21,8 +25,8 @@ OrderDetailsModel jsonToOrderDetails(Map<String, dynamic> json) {
     latitude: json['latitude'] != null ? double.parse(json['latitude']) : 0.0,
     longitude:
         json['longitude'] != null ? double.parse(json['longitude']) : 0.0,
-    clientCompanyId: json['clientCompanyId'],
-    sellerCompanyId: json['sellerCompanyId'],
+    clientCompanyId: sellerCompany.id,
+    sellerCompanyId: sellerCompany.id,
     delegateUserId: json['delegateUserId'],
     operatorUserId: json['operatorUserId'],
     stockUserId: json['stockUserId'],
@@ -32,7 +36,7 @@ OrderDetailsModel jsonToOrderDetails(Map<String, dynamic> json) {
     orderItems: jsonToOrderItemModelList(json['orderItems']),
     orderStatusHistories:
         jsonToOrderStatusHistoryList(json['orderStatusHistories']),
-    clientCompany: jsonToCompany(json['clientCompany']),
-    sellerCompany: jsonToCompany(json['sellerCompany']),
+    clientCompany: clientCompany,
+    sellerCompany: sellerCompany,
   );
 }

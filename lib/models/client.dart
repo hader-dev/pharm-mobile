@@ -13,7 +13,7 @@ class DeligateClient {
   final int status;
   final Company buyerCompany;
 
-  DeligateClient({
+  const DeligateClient({
     required this.id,
     required this.createdAt,
     required this.updatedAt,
@@ -26,4 +26,18 @@ class DeligateClient {
     required this.status,
     required this.buyerCompany,
   });
+
+  factory DeligateClient.empty() {
+    return DeligateClient(
+      id: '',
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+      sellerCompanyId: '',
+      buyerCompanyId: '',
+      createdByUserId: '',
+      joinMethod: 0,
+      status: 0,
+      buyerCompany: Company.empty(),
+    );
+  }
 }

@@ -24,12 +24,14 @@ class ParaPharmaWidget2 extends StatelessWidget {
   final BaseParaPharmaCatalogModel paraPharmData;
   final OnFavoriteCallback? onFavoriteCallback;
   final bool displayTags;
+  final bool showQuickAddButton;
 
   const ParaPharmaWidget2(
       {super.key,
       this.displayTags = false,
       required this.paraPharmData,
-      this.onFavoriteCallback});
+      this.onFavoriteCallback,
+      this.showQuickAddButton = true});
 
   @override
   Widget build(BuildContext context) {
@@ -200,25 +202,26 @@ class ParaPharmaWidget2 extends StatelessWidget {
                       ),
                     ),
                     Spacer(),
-                    Transform.scale(
-                      scale: .6,
-                      child: PrimaryIconButton(
-                        isBordered: true,
-                        borderColor: AppColors.accent1Shade1,
-                        bgColor: Colors.transparent,
-                        onPressed: () {
-                          BottomSheetHelper.showCommonBottomSheet(
-                              initialChildSize: .3,
-                              context: context,
-                              child: QuickCartAddModal(
-                                paraPharmaCatalogId: paraPharmData.id,
-                              ));
-                        },
-                        icon: Icon(Iconsax.add,
-                            color: Colors.black,
-                            size: AppSizesManager.iconSize30),
-                      ),
-                    )
+                    if (showQuickAddButton)
+                      Transform.scale(
+                        scale: .6,
+                        child: PrimaryIconButton(
+                          isBordered: true,
+                          borderColor: AppColors.accent1Shade1,
+                          bgColor: Colors.transparent,
+                          onPressed: () {
+                            BottomSheetHelper.showCommonBottomSheet(
+                                initialChildSize: .3,
+                                context: context,
+                                child: QuickCartAddModal(
+                                  paraPharmaCatalogId: paraPharmData.id,
+                                ));
+                          },
+                          icon: Icon(Iconsax.add,
+                              color: Colors.black,
+                              size: AppSizesManager.iconSize30),
+                        ),
+                      )
                   ],
                 ),
               ],

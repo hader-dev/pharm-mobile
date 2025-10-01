@@ -106,7 +106,9 @@ class CartCubit extends Cubit<CartState> {
       updateTotals();
 
       emit(CartLoadingSuccess());
-    } catch (e) {
+    } catch (e, stackTrace) {
+      debugPrintStack(stackTrace: stackTrace);
+      debugPrint("$e");
       GlobalExceptionHandler.handle(exception: e);
       emit(CartError(error: e.toString()));
     }

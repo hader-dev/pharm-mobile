@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
-import 'package:hader_pharm_mobile/models/para_medical_filters.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/repositories/remote/parapharm_catalog/mappers/json_to_parapharma_catalogue_item.dart';
+import 'package:hader_pharm_mobile/repositories/remote/parapharm_catalog/params/params_load_parapharma.dart';
 import 'package:hader_pharm_mobile/repositories/remote/parapharm_catalog/response/para_pharma_response.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/urls.dart';
 
 import 'para_pharma_catalog_repository.dart';
@@ -15,66 +14,69 @@ class ParaPharmaRepository extends IParaPharmaRepository {
 
   @override
   Future<ParaPharmaResponse> getParaPharmaCatalog(
-      {int limit = PaginationConstants.resultsPerPage,
-      int offset = 0,
-      String sortDirection = 'DESC',
-      List<String> fields = const [],
-      String? companyId,
-      ParaMedicalFilters filters = const ParaMedicalFilters()}) async {
+      ParamsLoadParapharma params) async {
     final queryParams = {
-      'limit': limit.toString(),
-      'offset': offset.toString(),
-      'sort[id]': sortDirection,
-      'computed[isFavorite]': 'true',
-      'include[company][fields][]': ['id', 'name', 'thumbnailImage'],
+      'limit': params.limit.toString(),
+      'offset': params.offset.toString(),
+      'sort[id]': params.sortDirection,
+      'include[company][fields][]': [
+        'id',
+        'name',
+      ],
     };
 
-    if (filters.code.isNotEmpty) {
-      queryParams['search[code]'] = filters.code.first;
-    }
-    if (filters.dosage.isNotEmpty) {
-      queryParams['search[dosage]'] = filters.dosage.first;
-    }
-    if (filters.status.isNotEmpty) {
-      queryParams['search[status]'] = filters.status.first;
-    }
-    if (filters.country.isNotEmpty) {
-      queryParams['search[country]'] = filters.country.first;
-    }
-    if (filters.patent.isNotEmpty) {
-      queryParams['search[patent]'] = filters.patent.first;
-    }
-    if (filters.brand.isNotEmpty) {
-      queryParams['search[brand]'] = filters.brand.first;
-    }
-    if (filters.condition.isNotEmpty) {
-      queryParams['search[condition]'] = filters.condition.first;
-    }
-    if (filters.type.isNotEmpty) {
-      queryParams['search[type]'] = filters.type.first;
-    }
-    if (filters.stabilityDuration.isNotEmpty) {
-      queryParams['search[stabilityDuration]'] =
-          filters.stabilityDuration.first;
-    }
-    if (filters.reimbursement.isNotEmpty) {
-      queryParams['search[reimbursement]'] = filters.reimbursement.first;
-    }
-    if (filters.sku.isNotEmpty) {
-      queryParams['search[sku]'] = filters.sku.first;
-    }
-    if (filters.name.isNotEmpty) {
-      queryParams['search[name]'] = filters.name.first;
-    }
-    if (filters.gteUnitPriceHt != null && filters.gteUnitPriceHt!.isNotEmpty) {
-      queryParams['gte[unitPriceHt]'] = filters.gteUnitPriceHt!;
-    }
-    if (filters.lteUnitPriceHt != null && filters.lteUnitPriceHt!.isNotEmpty) {
-      queryParams['lte[unitPriceHt]'] = filters.lteUnitPriceHt!;
+    if (params.includeFavorites) {
+      queryParams['computed[isFavorite]'] = 'true';
     }
 
-    if (companyId != null && companyId.isNotEmpty) {
-      queryParams['filter[companyId]'] = companyId;
+    if (params.filters.code.isNotEmpty) {
+      queryParams['search[code]'] = params.filters.code.first;
+    }
+    if (params.filters.dosage.isNotEmpty) {
+      queryParams['search[dosage]'] = params.filters.dosage.first;
+    }
+    if (params.filters.status.isNotEmpty) {
+      queryParams['search[status]'] = params.filters.status.first;
+    }
+    if (params.filters.country.isNotEmpty) {
+      queryParams['search[country]'] = params.filters.country.first;
+    }
+    if (params.filters.patent.isNotEmpty) {
+      queryParams['search[patent]'] = params.filters.patent.first;
+    }
+    if (params.filters.brand.isNotEmpty) {
+      queryParams['search[brand]'] = params.filters.brand.first;
+    }
+    if (params.filters.condition.isNotEmpty) {
+      queryParams['search[condition]'] = params.filters.condition.first;
+    }
+    if (params.filters.type.isNotEmpty) {
+      queryParams['search[type]'] = params.filters.type.first;
+    }
+    if (params.filters.stabilityDuration.isNotEmpty) {
+      queryParams['search[stabilityDuration]'] =
+          params.filters.stabilityDuration.first;
+    }
+    if (params.filters.reimbursement.isNotEmpty) {
+      queryParams['search[reimbursement]'] = params.filters.reimbursement.first;
+    }
+    if (params.filters.sku.isNotEmpty) {
+      queryParams['search[sku]'] = params.filters.sku.first;
+    }
+    if (params.filters.name.isNotEmpty) {
+      queryParams['search[name]'] = params.filters.name.first;
+    }
+    if (params.filters.gteUnitPriceHt != null &&
+        params.filters.gteUnitPriceHt!.isNotEmpty) {
+      queryParams['gte[unitPriceHt]'] = params.filters.gteUnitPriceHt!;
+    }
+    if (params.filters.lteUnitPriceHt != null &&
+        params.filters.lteUnitPriceHt!.isNotEmpty) {
+      queryParams['lte[unitPriceHt]'] = params.filters.lteUnitPriceHt!;
+    }
+
+    if (params.companyId != null && params.companyId!.isNotEmpty) {
+      queryParams['filter[companyId]'] = params.companyId!;
     }
 
     try {

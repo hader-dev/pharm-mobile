@@ -6,6 +6,7 @@ import 'package:hader_pharm_mobile/models/para_medical_filters.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/repositories/remote/favorite/favorite_repository_impl.dart';
 import 'package:hader_pharm_mobile/repositories/remote/parapharm_catalog/para_pharma_catalog_repository_impl.dart';
+import 'package:hader_pharm_mobile/repositories/remote/parapharm_catalog/params/params_load_parapharma.dart';
 import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
@@ -35,11 +36,11 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
     try {
       emit(state.loading());
       var paraPharmaCatalogResponse =
-          await paraPharmaRepository.getParaPharmaCatalog(
+          await paraPharmaRepository.getParaPharmaCatalog(ParamsLoadParapharma(
         offset: offset,
         filters: state.filters,
         companyId: companyIdFilter,
-      );
+      ));
       emit(state.loaded(
           paraPharmaProducts: paraPharmaCatalogResponse.data,
           totalItemsCount: paraPharmaCatalogResponse.totalItems));
@@ -60,7 +61,7 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
       emit(state.loading(
           offset: state.offSet + PaginationConstants.resultsPerPage));
       var medicinesResponse = await paraPharmaRepository.getParaPharmaCatalog(
-          offset: state.offSet, filters: state.filters);
+          ParamsLoadParapharma(offset: state.offSet, filters: state.filters));
 
       final updatedProducts =
           List<BaseParaPharmaCatalogModel>.from(state.paraPharmaProducts);

@@ -21,9 +21,8 @@ AnnouncementModel jsonToAnnouncement(Map<String, dynamic> json) {
     image: json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
     title: json['title'] ?? "unknown",
     content: json['content'] ?? "unknown",
-    thumbnailImage: json["thumbnailImage"] != null
-        ? ImageModel.fromJson(json["thumbnailImage"])
-        : null,
+    thumbnailImage:
+        json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
     pdf: json["pdf"] != null ? PdfDocument.fromJson(json["pdf"]) : null,
   );
 }

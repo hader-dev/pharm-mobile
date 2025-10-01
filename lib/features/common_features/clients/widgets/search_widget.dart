@@ -16,7 +16,7 @@ class ClientDeligateSearchWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(AppSizesManager.p16),
       child: CustomTextField(
-        hintText: context.translation!.search_announcements,
+        hintText: context.translation!.search_clients,
         controller:
             BlocProvider.of<DeligateClientsCubit>(context).searchController,
         state: FieldState.normal,

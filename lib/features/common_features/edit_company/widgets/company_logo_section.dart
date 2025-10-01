@@ -30,45 +30,57 @@ class CompanyLogoSection extends StatelessWidget {
 
     return BlocBuilder<EditCompanyCubit, EditCompanyState>(
       builder: (context, state) {
-        return Column(
-          children: [
-            Text(
-              context.translation!.companyLogo,
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: TextColors.ternary.color,
-                  ),
-            ),
-            const ResponsiveGap.s16(),
-            Stack(
-              children: [
-                Container(
-                  height: imageSize,
-                  width: imageSize,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: AppColors.bgDarken,
-                    border: Border.all(
-                      color: AppColors.bgDarken2,
-                      width: 2,
+        return MaterialButton(
+          onPressed: cubit.pickCompanyLogo,
+          child: Column(
+            children: [
+              Text(
+                context.translation!.companyLogo,
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      color: TextColors.ternary.color,
                     ),
-                  ),
-                  child: ClipOval(
-                    child: cubit.pickedImage != null
-                        ? Image.file(
-                            File(cubit.pickedImage!.path),
-                            fit: BoxFit.cover,
-                          )
-                        : imageUrl != null && !cubit.shouldRemoveImage
-                            ? CachedNetworkImage(
-                                imageUrl: imageUrl,
-                                fit: BoxFit.cover,
-                                placeholder: (context, url) => Container(
-                                  color: AppColors.bgDarken,
-                                  child: const Center(
-                                    child: CircularProgressIndicator(),
+              ),
+              const ResponsiveGap.s16(),
+              Stack(
+                children: [
+                  Container(
+                    height: imageSize,
+                    width: imageSize,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: AppColors.bgDarken,
+                      border: Border.all(
+                        color: AppColors.bgDarken2,
+                        width: 2,
+                      ),
+                    ),
+                    child: ClipOval(
+                      child: cubit.pickedImage != null
+                          ? Image.file(
+                              File(cubit.pickedImage!.path),
+                              fit: BoxFit.cover,
+                            )
+                          : imageUrl != null && !cubit.shouldRemoveImage
+                              ? CachedNetworkImage(
+                                  imageUrl: imageUrl,
+                                  fit: BoxFit.cover,
+                                  placeholder: (context, url) => Container(
+                                    color: AppColors.bgDarken,
+                                    child: const Center(
+                                      child: CircularProgressIndicator(),
+                                    ),
                                   ),
-                                ),
-                                errorWidget: (context, url, error) => Container(
+                                  errorWidget: (context, url, error) =>
+                                      Container(
+                                    color: AppColors.bgDarken,
+                                    child: const Icon(
+                                      Iconsax.building,
+                                      size: AppSizesManager.iconSize48,
+                                      color: AppColors.accent1Shade1,
+                                    ),
+                                  ),
+                                )
+                              : Container(
                                   color: AppColors.bgDarken,
                                   child: const Icon(
                                     Iconsax.building,
@@ -76,60 +88,52 @@ class CompanyLogoSection extends StatelessWidget {
                                     color: AppColors.accent1Shade1,
                                   ),
                                 ),
-                              )
-                            : Container(
-                                color: AppColors.bgDarken,
-                                child: const Icon(
-                                  Iconsax.building,
-                                  size: AppSizesManager.iconSize48,
-                                  color: AppColors.accent1Shade1,
-                                ),
-                              ),
-                  ),
-                ),
-                Positioned(
-                  bottom: AppSizesManager.s4,
-                  right: AppSizesManager.s4 / 2,
-                  child: Transform.scale(
-                    scale: 0.7,
-                    child: PrimaryIconButton(
-                      icon: Icon(
-                        cubit.pickedImage != null
-                            ? Iconsax.edit_2
-                            : Iconsax.add,
-                        color: Colors.white,
-                      ),
-                      isBordered: true,
-                      borderColor: Colors.white,
-                      onPressed: () {
-                        cubit.pickCompanyLogo();
-                      },
                     ),
                   ),
-                ),
-                if (cubit.pickedImage != null)
                   Positioned(
-                    top: AppSizesManager.s4,
+                    bottom: AppSizesManager.s4,
                     right: AppSizesManager.s4 / 2,
                     child: Transform.scale(
                       scale: 0.7,
                       child: PrimaryIconButton(
-                        isBordered: true,
-                        borderColor: Colors.white,
-                        icon: const Icon(
-                          Icons.close,
+                        icon: Icon(
+                          cubit.pickedImage != null
+                              ? Iconsax.edit_2
+                              : Iconsax.add,
                           color: Colors.white,
                         ),
-                        bgColor: SystemColors.red.primary,
+                        isBordered: true,
+                        borderColor: Colors.white,
                         onPressed: () {
-                          cubit.removeImage();
+                          cubit.pickCompanyLogo();
                         },
                       ),
                     ),
-                  )
-              ],
-            ),
-          ],
+                  ),
+                  if (cubit.pickedImage != null)
+                    Positioned(
+                      top: AppSizesManager.s4,
+                      right: AppSizesManager.s4 / 2,
+                      child: Transform.scale(
+                        scale: 0.7,
+                        child: PrimaryIconButton(
+                          isBordered: true,
+                          borderColor: Colors.white,
+                          icon: const Icon(
+                            Icons.close,
+                            color: Colors.white,
+                          ),
+                          bgColor: SystemColors.red.primary,
+                          onPressed: () {
+                            cubit.removeImage();
+                          },
+                        ),
+                      ),
+                    )
+                ],
+              ),
+            ],
+          ),
         );
       },
     );

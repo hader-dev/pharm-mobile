@@ -33,10 +33,50 @@ class AppLocalizationsEn extends AppLocalizations {
   String get summary => 'Summary';
 
   @override
+  String get search_products => 'Search Products';
+
+  @override
   String get delete => 'Delete';
 
   @override
   String get tva => 'VAT';
+
+  @override
+  String get search_clients => 'Search Clients';
+
+  @override
+  String get custom_price => 'Custom Price';
+
+  @override
+  String get feedback_select_client_and_add_items =>
+      'Select client and add items';
+
+  @override
+  String get feedback_file_save_failed => 'File save failed';
+
+  @override
+  String get feedback_file_saved_successfully => 'File saved successfully';
+
+  @override
+  String get add_client => 'Add client';
+
+  @override
+  String get default_price => 'Default Price';
+
+  @override
+  String get client_add_success => 'Client added successfully';
+
+  @override
+  String get client_add_fail => 'Client addition failed';
+
+  @override
+  String get select_product => 'Select Product';
+
+  @override
+  String get add_products_to_order => 'Add products to order';
+
+  @override
+  String get select_client => 'Select Client';
 
   @override
   String get total_ht_amount => 'Total excl. tax';

@@ -1,6 +1,7 @@
 import 'dart:async' show Timer;
 
 import 'package:bloc/bloc.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/language_config/resources/app_localizations.dart';
 import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
@@ -20,15 +21,17 @@ class CheckEmailCubit extends Cubit<CheckEmailState> {
     emit(InitEmail());
   }
 
-  void checkEmail(String otp,AppLocalizations translation) async {
+  void checkEmail(String otp, AppLocalizations translation) async {
     try {
       emit(CheckEmailLoading());
       await userManager.sendUserEmailCheckOtpCode(email: userEmail, otp: otp);
-      getItInstance
-          .get<ToastManager>()
-          .showToast(message: "${translation.verification_successful_for} $userEmail ", type: ToastType.success);
+      getItInstance.get<ToastManager>().showToast(
+          message: "${translation.verification_successful_for} $userEmail ",
+          type: ToastType.success);
       emit(CheckEmailSuccuss());
-    } catch (e) {
+    } catch (e, stackTrace) {
+      debugPrint(e.toString());
+      debugPrintStack(stackTrace: stackTrace);
       emit(CheckEmailFailed());
     }
   }
@@ -47,7 +50,9 @@ class CheckEmailCubit extends Cubit<CheckEmailState> {
         }
         emit(TimerCountChanged(count: counter));
       });
-    } catch (e) {
+    } catch (e, stack) {
+      debugPrint(e.toString());
+      debugPrintStack(stackTrace: stack);
       GlobalExceptionHandler.handle(exception: e);
       emit(CheckEmailFailed());
     }

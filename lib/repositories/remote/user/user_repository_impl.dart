@@ -90,12 +90,10 @@ class UserRepository implements IUserRepository {
 
   @override
   Future<void> resendOtp({required String email}) async {
-    var decodedResponse = await client.sendRequest(
+    await client.sendRequest(
         () => client.post(Urls.resendOtp, payload: <String, String>{
               "email": email,
             }));
-
-    return decodedResponse["accessToken"];
   }
 
   @override

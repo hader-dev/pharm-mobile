@@ -25,7 +25,10 @@ class MedicineCatalogRepository extends IMedicineCatalogRepository {
       'offset': offset.toString(),
       'sort[id]': sortDirection,
       'computed[isFavorite]': 'true',
-      'include[company][fields][]': ['id', 'name', 'thumbnailImage'],
+      'include[company][fields][]': [
+        'id',
+        'name',
+      ],
     };
 
     if (filters.dci.isNotEmpty) queryParams['search[dci]'] = filters.dci.first;
@@ -100,14 +103,13 @@ class MedicineCatalogRepository extends IMedicineCatalogRepository {
 
   @override
   Future<MedicineCatalogModel> getMedicineCatalogById(String id) async {
-    try{
-    var decodedResponse = await client.sendRequest(
-        () => client.get("${Urls.medicinesCatalog}/$id", queryParams: {
-              'computed[isFavorite]': 'true',
-            }));
-    return jsonToMedicineCatalogItem(decodedResponse);
-    }
-    catch(e){
+    try {
+      var decodedResponse = await client.sendRequest(
+          () => client.get("${Urls.medicinesCatalog}/$id", queryParams: {
+                'computed[isFavorite]': 'true',
+              }));
+      return jsonToMedicineCatalogItem(decodedResponse);
+    } catch (e) {
       return MedicineCatalogModel.empty();
     }
   }

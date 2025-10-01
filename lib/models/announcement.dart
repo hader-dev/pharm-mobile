@@ -4,7 +4,7 @@ class PdfDocument {
   final String path;
   final String filename;
   final String mimetype;
-  final int size;
+  final String size;
 
   PdfDocument({
     required this.path,
@@ -18,7 +18,7 @@ class PdfDocument {
       path: json['path'] ?? '',
       filename: json['filename'] ?? '',
       mimetype: json['mimetype'] ?? '',
-      size: json['size'] ?? 0,
+      size: json['size'] ?? "0",
     );
   }
 }

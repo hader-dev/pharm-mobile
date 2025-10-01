@@ -1,38 +1,35 @@
-
-
-  import 'package:hader_pharm_mobile/models/company.dart';
+import 'package:hader_pharm_mobile/models/company.dart';
 import 'package:hader_pharm_mobile/models/image.dart';
 import 'package:hader_pharm_mobile/models/medicine_catalog.dart';
 
 BaseMedicineCatalogModel jsonToBaseMedicineCatalog(Map<String, dynamic> json) {
-    return BaseMedicineCatalogModel(
-      packageSize: json["packageSize"] ?? 1,
-      id: json["id"] ?? "",
-      unitPriceTtc: json["unitPriceTtc"] ?? "0",
-      unitPriceHt: json["unitPriceHt"] ?? "0",
-      tvaPercentage: json["tvaPercentage"] ?? "0",
-      thumbnailImage: json["thumbnailImage"],
-      image: json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
-      createdAt: DateTime.parse(json["createdAt"]),
-      updatedAt: DateTime.parse(json["updatedAt"]),
-      companyId: json["companyId"] ?? "",
-      dci: json["dci"],
-      registrationNumber: json["registrationNumber"] ?? "",
-      sku: json["sku"] ?? "",
-      isPrivate: json["isPrivate"] ?? false,
-      margin: json["margin"] ?? "",
-      stockQuantity: json["stockQuantity"] ?? 0,
-      minOrderQuantity: json["minOrderQuantity"] ?? 0,
-      maxOrderQuantity: json["maxOrderQuantity"] ?? 0,
-      isPsychoactive: json["isPsychoactive"] ?? false,
-      requiresColdChain: json["requiresColdChain"] ?? false,
-      isActive: json["isActive"] ?? false,
-      isQuota: json["isQuota"] ?? false,
-      isFeatured: json["isFeatured"] ?? false,
-      displayOrder: json["displayOrder"] ?? 0,
-      isLiked: json["isFavorite"] ?? false,
-      company: json["company"] != null
-          ? BaseCompany.fromJson(json["company"])
-          : null,
-    );
-  }
+  return BaseMedicineCatalogModel(
+    packageSize: json["packageSize"] ?? 1,
+    id: json["id"] ?? "",
+    unitPriceTtc: json["unitPriceTtc"] ?? "0",
+    unitPriceHt: json["unitPriceHt"] ?? "0",
+    tvaPercentage: json["tvaPercentage"] ?? "0",
+    thumbnailImage: json["image"],
+    image: json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
+    createdAt: DateTime.parse(json["createdAt"]),
+    updatedAt: DateTime.parse(json["updatedAt"]),
+    companyId: json["companyId"] ?? "",
+    dci: json["dci"],
+    registrationNumber: json["registrationNumber"] ?? "",
+    sku: json["sku"] ?? "",
+    isPrivate: json["isPrivate"] ?? false,
+    margin: json["margin"] ?? "",
+    stockQuantity: json["stockQuantity"] ?? 0,
+    minOrderQuantity: json["minOrderQuantity"] ?? 0,
+    maxOrderQuantity: json["maxOrderQuantity"] ?? 0,
+    isPsychoactive: json["isPsychoactive"] ?? false,
+    requiresColdChain: json["requiresColdChain"] ?? false,
+    isActive: json["isActive"] ?? false,
+    isQuota: json["isQuota"] ?? false,
+    isFeatured: json["isFeatured"] ?? false,
+    displayOrder: json["displayOrder"] ?? 0,
+    isLiked: json["isFavorite"] ?? false,
+    company:
+        json["company"] != null ? BaseCompany.fromJson(json["company"]) : null,
+  );
+}

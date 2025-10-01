@@ -14,7 +14,7 @@ class CartItemModel {
   final String? medicinesCatalogId;
   final String? parapharmCatalogId;
   final int quantity;
-  final int packageSize;
+  final String packageSize;
   final String designation;
   final dynamic lotNumber;
   final dynamic expirationDate;
@@ -54,14 +54,14 @@ class CartItemModel {
   });
 
   int get packageQuantity {
-    final packageCount = (quantity / packageSize).round();
+    final packageCount = (quantity / int.parse(packageSize)).round();
 
     return packageCount == 0 ? 1 : packageCount;
   }
 
   factory CartItemModel.fromJson(Map<String, dynamic> json) {
     return CartItemModel(
-      packageSize: json['packageSize'] ?? 1,
+      packageSize: json['packageSize'] ?? "1",
       id: json['id'],
       totalAmountTtc: json['totalAmountTtc'],
       totalAmountHt: json['totalAmountHt'],
@@ -108,7 +108,7 @@ class CartItemModel {
       MedicinesCatalog? medicinesCatalog,
       dynamic parapharmCatalog,
       BaseCompany? sellerCompany,
-      int? packageSize}) {
+      String? packageSize}) {
     return CartItemModel(
       packageSize: packageSize ?? this.packageSize,
       id: id ?? this.id,

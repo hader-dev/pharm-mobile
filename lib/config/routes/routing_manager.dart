@@ -3,6 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/routes/deeplinks_routes.dart';
 import 'package:hader_pharm_mobile/features/common_features/announcements/all_announcements_screen.dart';
 import 'package:hader_pharm_mobile/features/common_features/anouncement_details/announcement_details.dart';
+import 'package:hader_pharm_mobile/features/common_features/deligate_create_client/deligate_create_client.dart';
+import 'package:hader_pharm_mobile/features/common_features/deligate_create_order/deligate_create_order.dart';
 import 'package:hader_pharm_mobile/features/common_features/help_support/help_support.dart';
 import 'package:hader_pharm_mobile/features/common_features/invoice/invoice.dart';
 import 'package:hader_pharm_mobile/features/common_features/leagal_policies/leagal_policies.dart';
@@ -69,6 +71,8 @@ class RoutingManager {
   static const String editProfileScreen = '/EditProfileScreen';
   static const String editCompanyScreen = '/EditCompanyScreen';
   static const String notificationsScreen = '/Notifications';
+  static const String deligateCreateOrderScreen = '/Deligate/CreateOrder';
+  static const String deligateCreateClientScreen = '/Deligate/CreateClient';
 
   static const String languagesScreen = '/LanguagesScreen';
 
@@ -97,6 +101,20 @@ class RoutingManager {
           path: legalPoliciesScreen,
           builder: (BuildContext context, GoRouterState state) {
             return const LegalPoliciesScreen();
+          },
+        ),
+        GoRoute(
+          name: deligateCreateClientScreen,
+          path: deligateCreateClientScreen,
+          builder: (BuildContext context, GoRouterState state) {
+            return DeligateCreateClientScreen();
+          },
+        ),
+        GoRoute(
+          name: deligateCreateOrderScreen,
+          path: deligateCreateOrderScreen,
+          builder: (BuildContext context, GoRouterState state) {
+            return DeligateCreateOrderScreen();
           },
         ),
         GoRoute(

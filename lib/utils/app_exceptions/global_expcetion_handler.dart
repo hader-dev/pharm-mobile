@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 
@@ -13,6 +14,9 @@ import 'exceptions.dart';
 class GlobalExceptionHandler {
   static void handle(
       {dynamic exception, StackTrace? exceptionStackTrace}) async {
+    debugPrintStack(stackTrace: exceptionStackTrace);
+    debugPrint("$exception");
+
     ToastManager toastManager = getItInstance.get<ToastManager>();
     if (exception is SocketException ||
         exception is TimeoutException ||

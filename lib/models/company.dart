@@ -5,15 +5,7 @@ import 'package:hader_pharm_mobile/models/image.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 
 class BaseCompany with EquatableMixin {
-  static final baseCompanyFields = [
-    "id",
-    "thumbnailImage",
-    "image",
-    "name",
-    "address",
-    "phone",
-    "email"
-  ];
+  static final baseCompanyFields = ["id", "name", "address", "phone", "email"];
   final String id;
   final ImageModel? thumbnailImage;
   final ImageModel? image;
@@ -21,7 +13,7 @@ class BaseCompany with EquatableMixin {
   final String? address;
   final String? phone;
   final String? email;
-  BaseCompany({
+  const BaseCompany({
     required this.id,
     required this.thumbnailImage,
     required this.image,
@@ -33,9 +25,8 @@ class BaseCompany with EquatableMixin {
   factory BaseCompany.fromJson(Map<String, dynamic> json) {
     return BaseCompany(
       id: json["id"] ?? "",
-      thumbnailImage: json["thumbnailImage"] != null
-          ? ImageModel.fromJson(json["thumbnailImage"])
-          : null,
+      thumbnailImage:
+          json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
       image: json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
       name: json["name"] ?? "",
       address: json["address"],
@@ -78,7 +69,7 @@ class Company extends BaseCompany {
   final String? town;
   final String? regionId;
 
-  Company({
+  const Company({
     required super.id,
     required super.thumbnailImage,
     required super.image,
@@ -170,6 +161,34 @@ class Company extends BaseCompany {
       isActive: true,
     );
   }
+
+  static const placeholder = Company(
+    id: '',
+    thumbnailImage: null,
+    image: null,
+    name: '',
+    address: null,
+    phone: null,
+    latitude: null,
+    longitude: null,
+    createdAt: null,
+    updatedAt: null,
+    managerUserId: null,
+    type: null,
+    distributorCategory: null,
+    phone2: null,
+    fax: null,
+    website: null,
+    email: null,
+    description: null,
+    bankAccount: null,
+    fiscalId: null,
+    rcNumber: null,
+    aiNumber: null,
+    nisNumber: null,
+    contactInfo: null,
+    isActive: null,
+  );
 
   String? get thumbnailImageUrl => thumbnailImage is String
       ? thumbnailImage as String

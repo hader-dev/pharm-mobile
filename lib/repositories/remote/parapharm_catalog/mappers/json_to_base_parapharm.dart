@@ -9,9 +9,8 @@ BaseParaPharmaCatalogModel jsonToBaseParapharm(Map<String, dynamic> json) {
     tags: mapJsonDynamicListToTypedList(json['tags']),
     packageSize: json['packageSize'] ?? 1,
     unitPriceHt: json['unitPriceHt'] ?? "0.0",
-    thumbnailImage: json["thumbnailImage"] != null
-        ? ImageModel.fromJson(json["thumbnailImage"])
-        : null,
+    thumbnailImage:
+        json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
     image: json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
     name: json['name'] ?? "",
     stockQuantity: json['stockQuantity'] ?? 0,

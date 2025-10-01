@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/repositories/remote/announcement/mappers/json_to_announcement.dart';
 import 'package:hader_pharm_mobile/repositories/remote/announcement/response/response_load_announcements.dart';
@@ -24,10 +25,9 @@ Future<ResponseLoadAnnouncements> loadAnnouncements(INetworkService client,
     final response = jsonToAnnouncementsResponse(decodedResponse);
 
     return response;
-  } catch (e) {
-    if (search != null && search.isNotEmpty) {
-      return ResponseLoadAnnouncements(announcements: [], totalItems: 0);
-    }
-    rethrow;
+  } catch (e, stackTrace) {
+    debugPrint("$e");
+    debugPrintStack(stackTrace: stackTrace);
+    return ResponseLoadAnnouncements(announcements: [], totalItems: 0);
   }
 }

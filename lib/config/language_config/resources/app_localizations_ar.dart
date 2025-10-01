@@ -33,10 +33,50 @@ class AppLocalizationsAr extends AppLocalizations {
   String get summary => 'الملخص';
 
   @override
+  String get search_products => 'ابحث عن المنتجات';
+
+  @override
   String get delete => 'حذف';
 
   @override
   String get tva => 'الضريبة';
+
+  @override
+  String get search_clients => 'ابحث عن العملاء';
+
+  @override
+  String get custom_price => 'السعر المخصص';
+
+  @override
+  String get feedback_select_client_and_add_items =>
+      'اختر العميل واضف المنتجات';
+
+  @override
+  String get feedback_file_save_failed => 'فشل حفظ ملف';
+
+  @override
+  String get feedback_file_saved_successfully => 'تم حفظ ملف بنجاح';
+
+  @override
+  String get add_client => 'اضافة زبون';
+
+  @override
+  String get default_price => 'السعر الافتراضي';
+
+  @override
+  String get client_add_success => 'تم اضافة العميل بنجاح';
+
+  @override
+  String get client_add_fail => 'فشل اضافة العميل';
+
+  @override
+  String get select_product => 'اختر المنتج';
+
+  @override
+  String get add_products_to_order => 'أضف منتجات إلى الطلب';
+
+  @override
+  String get select_client => 'اختر العميل';
 
   @override
   String get total_ht_amount => 'المجموع بدون ضريبة';

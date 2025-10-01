@@ -157,7 +157,13 @@ class _EditCompanyScreenState extends State<EditCompanyScreen> {
                                 context.pushNamed(
                                     RoutingManager.createCompanyProfile);
                               },
-                              child: Text(context.translation!.create_company),
+                              child: Text(
+                                context.translation!.create_company,
+                                style: context
+                                    .responsiveTextTheme.current.body1Medium.copyWith(
+                                      color: Colors.white
+                                    ),
+                              ),
                             ),
                           ],
                         ),

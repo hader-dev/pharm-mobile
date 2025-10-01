@@ -6,9 +6,8 @@ Company? jsonToBaseCompany(Map<String, dynamic> json) {
 
   result = Company(
       id: json["id"],
-      thumbnailImage: json["thumbnailImage"] != null
-          ? ImageModel.fromJson(json["thumbnailImage"])
-          : null,
+      thumbnailImage:
+          json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
       image: json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
       name: json["name"]);
 

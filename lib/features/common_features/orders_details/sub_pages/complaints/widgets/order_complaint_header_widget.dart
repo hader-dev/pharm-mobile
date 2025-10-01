@@ -14,8 +14,9 @@ class OrderComplaintHeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final status =
-        OrderClaimStatus.values.firstWhere((e) => e.id == claim.claimStatusId);
+    final status = OrderClaimStatus.values.firstWhere(
+        (e) => e.id == claim.claimStatusId,
+        orElse: () => OrderClaimStatus.pending);
 
     return InkAccordionItem(
       title: Column(

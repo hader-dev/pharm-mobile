@@ -148,6 +148,12 @@ abstract class AppLocalizations {
   /// **'Summary'**
   String get summary;
 
+  /// No description provided for @search_products.
+  ///
+  /// In en, this message translates to:
+  /// **'Search Products'**
+  String get search_products;
+
   /// No description provided for @delete.
   ///
   /// In en, this message translates to:
@@ -159,6 +165,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'VAT'**
   String get tva;
+
+  /// No description provided for @search_clients.
+  ///
+  /// In en, this message translates to:
+  /// **'Search Clients'**
+  String get search_clients;
+
+  /// No description provided for @custom_price.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom Price'**
+  String get custom_price;
+
+  /// No description provided for @feedback_select_client_and_add_items.
+  ///
+  /// In en, this message translates to:
+  /// **'Select client and add items'**
+  String get feedback_select_client_and_add_items;
+
+  /// No description provided for @feedback_file_save_failed.
+  ///
+  /// In en, this message translates to:
+  /// **'File save failed'**
+  String get feedback_file_save_failed;
+
+  /// No description provided for @feedback_file_saved_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'File saved successfully'**
+  String get feedback_file_saved_successfully;
+
+  /// No description provided for @add_client.
+  ///
+  /// In en, this message translates to:
+  /// **'Add client'**
+  String get add_client;
+
+  /// No description provided for @default_price.
+  ///
+  /// In en, this message translates to:
+  /// **'Default Price'**
+  String get default_price;
+
+  /// No description provided for @client_add_success.
+  ///
+  /// In en, this message translates to:
+  /// **'Client added successfully'**
+  String get client_add_success;
+
+  /// No description provided for @client_add_fail.
+  ///
+  /// In en, this message translates to:
+  /// **'Client addition failed'**
+  String get client_add_fail;
+
+  /// No description provided for @select_product.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Product'**
+  String get select_product;
+
+  /// No description provided for @add_products_to_order.
+  ///
+  /// In en, this message translates to:
+  /// **'Add products to order'**
+  String get add_products_to_order;
+
+  /// No description provided for @select_client.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Client'**
+  String get select_client;
 
   /// No description provided for @total_ht_amount.
   ///
