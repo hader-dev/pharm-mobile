@@ -23,6 +23,12 @@ List<BottomNavigationBarItem> deligateNavbarItems(
       BottomNavigationBarItem(
         icon: Padding(
             padding: EdgeInsets.symmetric(vertical: AppSizesManager.p6),
+            child: Icon(Iconsax.shop)),
+        label: translation.market_place,
+      ),
+      BottomNavigationBarItem(
+        icon: Padding(
+            padding: EdgeInsets.symmetric(vertical: AppSizesManager.p6),
             child: Icon(Iconsax.profile_circle)),
         label: translation.account,
       ),

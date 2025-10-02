@@ -4,6 +4,7 @@ import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/features/common_features/cart/cart.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_clients/clients.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_orders/deligate_orders.dart';
+import 'package:hader_pharm_mobile/features/common_features/deligate_products/deligate_products.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/home.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/market_place.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders/orders.dart';
@@ -39,6 +40,7 @@ class AppLayoutCubit extends Cubit<AppLayoutState> {
     screens = [
       ClientScreen(),
       DeligateOrdersScreen(),
+      DeligateProductsScreen(),
       ProfileScreen(openedFrom: "")
     ];
     emit(CurrentUserLoaded());

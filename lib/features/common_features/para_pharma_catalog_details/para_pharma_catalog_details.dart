@@ -15,10 +15,12 @@ import 'widgets/para_pharma_product_photo_section.dart';
 
 class ParaPharmaCatalogDetailsScreen extends StatefulWidget {
   final String paraPharmaCatalogId;
+  final bool canOrder;
   static final GlobalKey<ScaffoldState> paraPharmaDetailsScaffoldKey =
       GlobalKey<ScaffoldState>();
+
   const ParaPharmaCatalogDetailsScreen(
-      {super.key, required this.paraPharmaCatalogId});
+      {super.key, required this.paraPharmaCatalogId, required this.canOrder});
 
   @override
   State<ParaPharmaCatalogDetailsScreen> createState() =>
@@ -81,7 +83,7 @@ class _ParaPharmaCatalogDetailsScreenState
                       child: ParaPharmaCatalogAppBar()),
                 ],
               ),
-              bottomNavigationBar: Padding(
+              bottomNavigationBar:widget.canOrder ? Padding(
                 padding: const EdgeInsets.all(AppSizesManager.p12),
                 child: SizedBox(
                   height: kBottomNavigationBarHeight * 3,
@@ -89,7 +91,7 @@ class _ParaPharmaCatalogDetailsScreenState
                     quantitySectionAlignment: MainAxisAlignment.center,
                   ),
                 ),
-              ),
+              ):SizedBox.shrink(),
             );
           },
         ),

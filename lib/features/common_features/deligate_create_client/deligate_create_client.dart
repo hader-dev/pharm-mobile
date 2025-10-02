@@ -55,6 +55,7 @@ class DeligateCreateClientScreen extends StatelessWidget {
                             );
                           },
                         ),
+                        const ResponsiveGap.s12(),
                         CustomTextField(
                           label: "${translation.full_name}*",
                           controller: cubit.fullNameController,

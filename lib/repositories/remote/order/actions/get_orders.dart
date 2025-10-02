@@ -11,9 +11,7 @@ Future<OrderResponse> getOrders(
     'limit': params.limit.toString(),
     'offset': params.offset.toString(),
     'sort[id]': params.sortDirection,
-
-    // TODO USE THIS
-    //if(params.searchQuery != null ) 'search[displayId]': params.searchQuery! ,
+    if (params.searchQuery != null) 'search[displayId]': params.searchQuery!,
   };
 
   try {

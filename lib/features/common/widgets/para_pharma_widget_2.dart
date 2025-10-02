@@ -25,10 +25,12 @@ class ParaPharmaWidget2 extends StatelessWidget {
   final OnFavoriteCallback? onFavoriteCallback;
   final bool displayTags;
   final bool showQuickAddButton;
+  final bool canOrder;
 
   const ParaPharmaWidget2(
       {super.key,
       this.displayTags = false,
+      this.canOrder = true,
       required this.paraPharmData,
       this.onFavoriteCallback,
       this.showQuickAddButton = true});
@@ -41,7 +43,7 @@ class ParaPharmaWidget2 extends StatelessWidget {
       child: InkWell(
         onTap: () {
           GoRouter.of(context).pushNamed(RoutingManager.paraPharmaDetailsScreen,
-              extra: paraPharmData.id);
+              extra: {"id": paraPharmData.id, "canOrder": canOrder});
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

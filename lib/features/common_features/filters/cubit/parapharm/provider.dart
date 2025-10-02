@@ -14,6 +14,7 @@ class ParaPharmFilterProvider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //TODO Refactor with a better approach using it also in Deligate Products !
     final parapharmCubit = MarketPlaceScreen
         .marketPlaceScaffoldKey.currentContext!
         .read<ParaPharmaCubit>();

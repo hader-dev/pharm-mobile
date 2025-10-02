@@ -2,8 +2,11 @@ import 'dart:async';
 
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
+import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/decorations/field.dart';
 import 'package:hader_pharm_mobile/features/common/decorations/input.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
+import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
@@ -48,25 +51,37 @@ class ClientTypeSelector extends StatelessWidget {
     final translation = context.translation!;
     final clients = CompanyType.values;
 
-    return DropdownSearch<CompanyType>(
-      validator: validator,
-      selectedItem: currentSelection,
-      items: (query, props) async => itemsWithSearch(query, clients),
-      compareFn: compareFn,
-      popupProps: PopupProps.modalBottomSheet(
-        showSearchBox: true,
-        searchFieldProps: TextFieldProps(
-          decoration: buildInputDecorationCustomFieldStyle(
-              translation.select_client, FieldState.normal, context),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: AppSizesManager.p4),
+          child: Text(translation.company_type_title,
+              style: context.responsiveTextTheme.current.body3Medium
+                  .copyWith(color: TextColors.ternary.color)),
         ),
-      ),
-      itemAsString: (item) => item.name,
-      dropdownBuilder: buildDisplayWidget,
-      onChanged: onChanged?.call,
-      decoratorProps: DropDownDecoratorProps(
-        decoration: buildDropdownInputDecoration(
-            context.translation!.company_type_title, context),
-      ),
+        const ResponsiveGap.s6(),
+        DropdownSearch<CompanyType>(
+          validator: validator,
+          selectedItem: currentSelection,
+          items: (query, props) async => itemsWithSearch(query, clients),
+          compareFn: compareFn,
+          popupProps: PopupProps.modalBottomSheet(
+            showSearchBox: true,
+            searchFieldProps: TextFieldProps(
+              decoration: buildInputDecorationCustomFieldStyle(
+                  translation.select_client, FieldState.normal, context),
+            ),
+          ),
+          itemAsString: (item) => item.name,
+          dropdownBuilder: buildDisplayWidget,
+          onChanged: onChanged?.call,
+          decoratorProps: DropDownDecoratorProps(
+            decoration: buildDropdownInputDecoration(
+                context.translation!.company_type_title, context),
+          ),
+        ),
+      ],
     );
   }
 }
