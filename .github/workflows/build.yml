@@ -4,15 +4,24 @@ on:
   push:
     branches: [ main, dev ]
   pull_request:
-    branches: [ main,  dev]
+    branches: [ main, dev ]
   workflow_dispatch:
 
 jobs:
   build-android:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Cache Flutter SDK
+        uses: actions/cache@v3
+        with:
+          path: ~/.flutter
+          key: flutter-sdk-${{ runner.os }}-stable
+          restore-keys: |
+            flutter-sdk-${{ runner.os }}-
 
       - name: Setup Java
         uses: actions/setup-java@v4
@@ -25,14 +34,29 @@ jobs:
         with:
           flutter-version: '3.35.5'
           channel: 'stable'
-          cache: true
+          cache: false    # disable flutter-action internal caching, we do manual caching below
+
+      - name: Cache Pub packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.pub-cache
+          key: pub-cache-${{ hashFiles('**/pubspec.yaml') }}
+          restore-keys: |
+            pub-cache-
 
       - name: Install dependencies
         run: flutter pub get
 
+      - name: Cache Build Output
+        uses: actions/cache@v3
+        with:
+          path: build
+          key: build-cache-${{ hashFiles('**/*.dart', '**/pubspec.yaml') }}
+          restore-keys: |
+            build-cache-
 
       - name: Decode Keystore
-        run: echo "${{ secrets.KEYSTORE_BASE64 }}" | tr -d '\n' | base64 --decode > android/app/release-keystore.jks
+        run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/app/release-keystore.jks
         shell: bash
 
       - name: Create key.properties
