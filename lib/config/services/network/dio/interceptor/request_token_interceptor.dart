@@ -4,26 +4,24 @@ import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/services/auth/token_manager.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
-import 'package:hader_pharm_mobile/utils/enums.dart';
 
 class TokenCheckerInterceptor extends Interceptor {
   int retryCount = 0;
   final int maxRetries = 5;
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) async {
-    final data = err.response?.data;
-    final isJson = data is Map<String, dynamic>;
+    // final data = err.response?.data;
+    // final isJson = data is Map<String, dynamic>;
 
-    final isTokenError = isJson &&
-        (data["code"] == ApiErrorCodes.TOKEN_EXPIRED.label ||
-            data["code"] == ApiErrorCodes.NO_TOKEN.label);
+    //TODO : review if this is trully needed or not
+    // final isTokenError = isJson &&
+    //     (data["code"] == ApiErrorCodes.TOKEN_EXPIRED.label ||
+    //         data["code"] == ApiErrorCodes.NO_TOKEN.label);
 
     final reachedMaxRetries = retryCount >= maxRetries;
 
     try {
-      if (err.response?.statusCode == 401 &&
-          isTokenError &&
-          !reachedMaxRetries) {
+      if (err.response?.statusCode == 401 && !reachedMaxRetries) {
         retryCount += 1;
         await getItInstance
             .get<TokenManager>()
