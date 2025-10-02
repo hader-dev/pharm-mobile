@@ -44,6 +44,7 @@ class AppStateProvider extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => OrdersCubit(
+            searchController: TextEditingController(),
             scrollController: ScrollController(),
             orderRepository: OrderRepository(
               client: getItInstance.get<INetworkService>(),
@@ -99,6 +100,7 @@ class AppStateDeligateProvider extends StatelessWidget {
       ),
       BlocProvider(
         create: (context) => OrdersCubit(
+          searchController: TextEditingController(),
           scrollController: ScrollController(),
           orderRepository: OrderRepository(
             client: getItInstance.get<INetworkService>(),

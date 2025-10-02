@@ -39,6 +39,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get delete => 'Delete';
 
   @override
+  String get search_orders => 'Search Orders';
+
+  @override
   String get tva => 'VAT';
 
   @override

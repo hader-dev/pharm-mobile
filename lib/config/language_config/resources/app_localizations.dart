@@ -160,6 +160,12 @@ abstract class AppLocalizations {
   /// **'Delete'**
   String get delete;
 
+  /// No description provided for @search_orders.
+  ///
+  /// In en, this message translates to:
+  /// **'Search Orders'**
+  String get search_orders;
+
   /// No description provided for @tva.
   ///
   /// In en, this message translates to:

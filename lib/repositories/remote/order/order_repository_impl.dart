@@ -3,6 +3,7 @@ import 'package:hader_pharm_mobile/models/create_order_model.dart';
 import 'package:hader_pharm_mobile/models/create_quick_order_model.dart';
 import 'package:hader_pharm_mobile/models/order_details.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/params/create_deligate_order.dart';
+import 'package:hader_pharm_mobile/repositories/remote/order/params/get_orders.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/params/invoice.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/params/item_complaint.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/params/order_complaint.dart';
@@ -12,7 +13,6 @@ import 'package:hader_pharm_mobile/repositories/remote/order/response/response_i
 import 'package:hader_pharm_mobile/repositories/remote/order/response/response_item_complaint_make.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/response/response_order_cancel.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/response/response_order_complaints.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 
 import 'actions/cancel_order.dart' as actions;
 import 'actions/create_deligate_order.dart' as actions;
@@ -31,18 +31,10 @@ class OrderRepository extends IOrderRepository {
   OrderRepository({required this.client});
 
   @override
-  Future<OrderResponse> getOrders({
-    int limit = PaginationConstants.resultsPerPage,
-    int offset = 0,
-    String sortDirection = 'DESC',
-  }) async {
-    final Map<String, String> queryParams = {
-      'limit': limit.toString(),
-      'offset': offset.toString(),
-      'sort[id]': sortDirection,
-    };
+  Future<OrderResponse> getOrders(ParamsGetOrder params) async {
+   
 
-    return actions.getOrders(queryParams, client);
+    return actions.getOrders(params, client);
   }
 
   @override

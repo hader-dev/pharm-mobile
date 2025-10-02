@@ -13,6 +13,7 @@ class OrdersProviderState extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
         create: (context) => OrdersCubit(
+            searchController: TextEditingController(),
             orderRepository:
                 OrderRepository(client: getItInstance.get<INetworkService>()),
             scrollController: ScrollController())

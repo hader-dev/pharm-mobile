@@ -9,6 +9,7 @@
   "summary": "Résumé",
   "delete": "Supprimer",
   "tva": "TVA",
+  "search_orders": "Rechercher des commandes",
   "search_clients": "Rechercher des clients",
   "custom_price": "Prix personnalisé",
   "search_products": "Rechercher des produits",

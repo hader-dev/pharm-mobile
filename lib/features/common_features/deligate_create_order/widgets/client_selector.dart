@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/features/common/decorations/field.dart';
 import 'package:hader_pharm_mobile/features/common/decorations/input.dart';
-import 'package:hader_pharm_mobile/features/common_features/clients/cubit/clients_cubit.dart';
+import 'package:hader_pharm_mobile/features/common_features/deligate_clients/cubit/clients_cubit.dart';
 import 'package:hader_pharm_mobile/models/client.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';

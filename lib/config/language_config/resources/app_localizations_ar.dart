@@ -39,6 +39,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get delete => 'حذف';
 
   @override
+  String get search_orders => 'ابحث عن الطلبات';
+
+  @override
   String get tva => 'الضريبة';
 
   @override
