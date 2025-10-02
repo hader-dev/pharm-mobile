@@ -5,12 +5,14 @@ import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/services/auth/token_manager.dart';
 import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/app_layout/actions/show_new_app_version_dialog.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
 import 'package:hader_pharm_mobile/features/common/dialog/log_out_dialog.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/edit_company/edit_company.dart';
 import 'package:hader_pharm_mobile/models/jwt_decoded.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/env_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/login_jwt_decoder.dart';
 import 'package:iconsax/iconsax.dart';
@@ -191,6 +193,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         onTap: () {
                           GoRouter.of(context)
                               .pushNamed(RoutingManager.helpSupportScreen);
+                        },
+                      ),
+                      SettingsTile(
+                        icon: LucideIcons.upload,
+                        title: context.translation!.app_version,
+                        subtitle:
+                            EnvHelper.getStoredEnvValue(EnvHelper.appVersion),
+                        onTap: () {
+                          showNewAppVersionDialog(triggerdManually: true);
                         },
                       ),
                       Padding(

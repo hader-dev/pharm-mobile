@@ -5,7 +5,7 @@ import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
-import 'package:hader_pharm_mobile/features/common_features/create_company_profile/sub_pages/review_and_sumbit/widgets/info_row.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/info_widget.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_create_order/cubit/create_order_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_create_order/widgets/custom_price_input.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_create_order/widgets/quantity_widget.dart';
@@ -125,18 +125,34 @@ class _DeligateOrderItemWidgetState extends State<DeligateOrderItemWidget> {
             onPriceChanged: (value) =>
                 cubit.updateItemCustomPrice(value, widget.item),
           ),
-          const Divider(
-            color: AppColors.accent1Shade1,
+       
+          InfoWidget(
+            label: context.translation!.total_amount,
+            bgColor: AppColors.accentGreenShade3,
+            value: Row(
+              children: [
+                Text(
+                  "${totalPrice.toStringAsFixed(2)} ${context.translation!.currency}",
+                  style: context.responsiveTextTheme.current.body2Medium
+                      .copyWith(color: AppColors.accent1Shade1),
+                ),
+                Spacer(),
+                Icon(
+                  Iconsax.wallet_money,
+                  color: AppColors.accent1Shade1,
+                ),
+              ],
+            ),
           ),
-          InfoRow(
-              label: context.translation!.quantity,
-              dataValue: widget.item.quantity.toString()),
-          InfoRow(
-              label: context.translation!.price,
-              dataValue: unitPrice.toString()),
-          InfoRow(
-              label: context.translation!.total_price,
-              dataValue: totalPrice.toString()),
+          // InfoRow(
+          //     label: context.translation!.quantity,
+          //     dataValue: widget.item.quantity.toString()),
+          // InfoRow(
+          //     label: context.translation!.price,
+          //     dataValue: unitPrice.toString()),
+          // InfoRow(
+          //     label: context.translation!.total_price,
+          //     dataValue: totalPrice.toString()),
         ],
       ),
     );

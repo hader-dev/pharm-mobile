@@ -42,6 +42,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get search_orders => 'ابحث عن الطلبات';
 
   @override
+  String get app_version => 'نسخة التطبيق';
+
+  @override
   String get tva => 'الضريبة';
 
   @override
