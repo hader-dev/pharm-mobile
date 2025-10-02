@@ -1,4 +1,17 @@
-- name: Write Keystore to File
-  run: |
-    echo "${{ secrets.KEYSTORE_BINARY }}" > android/app/release-keystore.jks
-  shell: bash
+name: Flutter Cache Example
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Write Keystore to File
+        run: |
+          echo "${{ secrets.KEYSTORE_BINARY }}" > android/app/release-keystore.jks
+        shell: bash
