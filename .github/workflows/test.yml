@@ -1,45 +1,4 @@
-name: Flutter Cache Example
-
-on:
-  push:
-
-jobs:
-  TestCache:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Cache Flutter SDK
-        uses: actions/cache@v3
-        with:
-          path: ~/.flutter
-          key: flutter-sdk-${{ runner.os }}-stable
-          restore-keys: |
-            flutter-sdk-${{ runner.os }}-
-
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: 'stable'
-
-      - name: Cache Pub packages
-        uses: actions/cache@v3
-        with:
-          path: ~/.pub-cache
-          key: pub-cache-${{ hashFiles('**/pubspec.yaml') }}
-          restore-keys: |
-            pub-cache-
-
-      - name: Flutter pub get
-        run: flutter pub get
-
-      - name: Cache Build Output
-        uses: actions/cache@v3
-        with:
-          path: build
-          key: build-cache-${{ hashFiles('**/*.dart', '**/pubspec.yaml') }}
-          restore-keys: |
-            build-cache-
-
-      - name: Run tests
-        run: flutter test
+- name: Write Keystore to File
+  run: |
+    echo "${{ secrets.KEYSTORE_BINARY }}" > android/app/release-keystore.jks
+  shell: bash
