@@ -39,6 +39,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get delete => 'Supprimer';
 
   @override
+  String get search_orders => 'Rechercher des commandes';
+
+  @override
   String get tva => 'TVA';
 
   @override
