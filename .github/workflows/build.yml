@@ -66,6 +66,10 @@ jobs:
           EOF
         shell: bash
 
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+
       - name: Build APK
         run: flutter build apk --release
 
