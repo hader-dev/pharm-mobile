@@ -201,9 +201,9 @@ enum InvoiceTypes {
 }
 
 enum CompanyType {
-  distributor(id: 1, imgPath: DrawableAssetStrings.companyIllustration2),
-  pharmacy(id: 2, imgPath: DrawableAssetStrings.companyIllustration1),
-  commercial(id: 4, imgPath: DrawableAssetStrings.companyIllustration3);
+  Distributor(id: 1, imgPath: DrawableAssetStrings.companyIllustration2),
+  Pharmacy(id: 2, imgPath: DrawableAssetStrings.companyIllustration1),
+  Other(id: 4, imgPath: DrawableAssetStrings.companyIllustration3);
 
   final int id;
   final String imgPath;
@@ -214,10 +214,23 @@ enum CompanyType {
   });
 }
 
+extension CompanyTypeDisplayNameExtension on CompanyType {
+  String displayName(AppLocalizations translation) {
+    switch (this) {
+      case CompanyType.Distributor:
+        return translation.distrubutor;
+      case CompanyType.Pharmacy:
+        return translation.pharmacy;
+      case CompanyType.Other:
+        return translation.other_activity;
+    }
+  }
+}
+
 enum DistributorCategory {
-  pharmacy(id: 1, color: Colors.green),
-  paraPharmacy(id: 2, color: Colors.blue),
-  both(id: 3, color: Color.fromARGB(255, 96, 79, 183));
+  Pharmacy(id: 1, color: Colors.green),
+  ParaPharmacy(id: 2, color: Colors.blue),
+  Both(id: 3, color: Color.fromARGB(255, 96, 79, 183));
 
   final int id;
   final Color color;

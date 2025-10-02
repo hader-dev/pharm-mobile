@@ -85,7 +85,7 @@ class CreateCompanyProfile extends StatelessWidget {
                         if (BlocProvider.of<CreateCompanyProfileCubit>(context)
                                 .companyData
                                 .companyType ==
-                            CompanyType.distributor.id) ...[
+                            CompanyType.Distributor.id) ...[
                           DistributorGeneralInformationPage(),
                           DistributorLegalInformationPage(),
                           DistributorProfilePage()
@@ -109,10 +109,10 @@ class CreateCompanyProfile extends StatelessWidget {
     return (BlocProvider.of<CreateCompanyProfileCubit>(context)
                 .companyData
                 .companyType ==
-            CompanyType.pharmacy.id) ||
+            CompanyType.Pharmacy.id) ||
         (BlocProvider.of<CreateCompanyProfileCubit>(context)
                 .companyData
                 .companyType ==
-            CompanyType.commercial.id);
+            CompanyType.Other.id);
   }
 }

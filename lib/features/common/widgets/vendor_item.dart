@@ -26,7 +26,7 @@ class VendorItem extends StatelessWidget {
   }) {
     distributorCategory = DistributorCategory.values.firstWhere(
         (element) => element.id == companyData.distributorCategory,
-        orElse: () => DistributorCategory.both);
+        orElse: () => DistributorCategory.Both);
   }
 
   @override
@@ -107,7 +107,7 @@ class VendorItem extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                              distributorCategory == DistributorCategory.both
+                              distributorCategory == DistributorCategory.Both
                                   ? "pharmacy,para-pharmacy"
                                   : distributorCategory.name,
                               style: context

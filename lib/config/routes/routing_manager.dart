@@ -82,6 +82,7 @@ class RoutingManager {
   static final GoRouter router = GoRouter(
       navigatorKey: rootNavigatorKey,
       initialLocation: splashScreen,
+      
       redirect: (context, state) {
         debugPrint(
             "redirect ---------> ${state.fullPath}${state.pathParameters}");

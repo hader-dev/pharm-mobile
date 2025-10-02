@@ -178,11 +178,35 @@ abstract class AppLocalizations {
   /// **'VAT'**
   String get tva;
 
+  /// No description provided for @other_activity.
+  ///
+  /// In en, this message translates to:
+  /// **'Other Activity'**
+  String get other_activity;
+
+  /// No description provided for @distrubutor.
+  ///
+  /// In en, this message translates to:
+  /// **'Distributor'**
+  String get distrubutor;
+
+  /// No description provided for @pharmacy.
+  ///
+  /// In en, this message translates to:
+  /// **'Pharmacy'**
+  String get pharmacy;
+
   /// No description provided for @search_clients.
   ///
   /// In en, this message translates to:
   /// **'Search Clients'**
   String get search_clients;
+
+  /// No description provided for @other_company_type_description.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g. Supermarkets, Wholesalers'**
+  String get other_company_type_description;
 
   /// No description provided for @custom_price.
   ///

@@ -48,7 +48,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get tva => 'VAT';
 
   @override
+  String get other_activity => 'Other Activity';
+
+  @override
+  String get distrubutor => 'Distributor';
+
+  @override
+  String get pharmacy => 'Pharmacy';
+
+  @override
   String get search_clients => 'Search Clients';
+
+  @override
+  String get other_company_type_description => 'e.g. Supermarkets, Wholesalers';
 
   @override
   String get custom_price => 'Custom Price';

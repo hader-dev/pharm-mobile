@@ -7,20 +7,27 @@ class DrawableAssetStrings {
 
 // //app images
 
-  static const String congratsIllustrationImg = 'assets/images/congrats_illustration.svg';
-  static const String companyIllustration1 = 'assets/images/company_illustration_1.svg';
-  static const String companyIllustration2 = 'assets/images/company_illustration_2.svg';
-  static const String companyIllustration3 = 'assets/images/company_illustration_3.svg';
-  static const String companyPlaceHolderImg = 'assets/images/company_place_holder.webp';
-  static const String medicinePlaceHolderImg = 'assets/images/medicine_place_holder.webp';
-  static const String paraPharmaPlaceHolderImg = 'assets/images/para_pharm_place_holder.webp';
+  static const String congratsIllustrationImg =
+      'assets/images/congrats_illustration.svg';
+  static const String companyIllustration1 =
+      'assets/images/company_illustration_1.svg';
+  static const String companyIllustration2 =
+      'assets/images/company_illustration_2.svg';
+  static const String companyIllustration3 =
+      'assets/images/company_illustration_3.svg';
+  static const String companyPlaceHolderImg =
+      'assets/images/company_place_holder.webp';
+  static const String medicinePlaceHolderImg =
+      'assets/images/medicine_place_holder.webp';
+  static const String paraPharmaPlaceHolderImg =
+      'assets/images/para_pharm_place_holder.webp';
   static const String board1Img = 'assets/images/board_1.webp';
   static const String board2Img = 'assets/images/board_2.webp';
   static const String board3Img = 'assets/images/board_3.webp';
   static const String doctoreIllustration = 'assets/images/doctore.webp';
   static const String welcomingBg = 'assets/images/welcoming_bg.webp';
   static const String logoBg = 'assets/images/Logo.png';
-  static const String logoImg = 'assets/images/Logo.svg';
+  static const String logoImg = 'assets/images/Logo.png';
   static const String medicinesBg = 'assets/images/medicines_bg.webp';
   static const String paraPharmsBg = 'assets/images/paras_bg.webp';
 

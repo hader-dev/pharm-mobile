@@ -48,7 +48,20 @@ class AppLocalizationsAr extends AppLocalizations {
   String get tva => 'الضريبة';
 
   @override
+  String get other_activity => 'نشاط آخر';
+
+  @override
+  String get distrubutor => 'موزع';
+
+  @override
+  String get pharmacy => 'صيدلية';
+
+  @override
   String get search_clients => 'ابحث عن العملاء';
+
+  @override
+  String get other_company_type_description =>
+      'مثال: محلات السوبرماركت، تجار الجملة .';
 
   @override
   String get custom_price => 'السعر المخصص';

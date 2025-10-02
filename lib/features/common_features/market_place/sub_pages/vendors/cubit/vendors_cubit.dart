@@ -32,7 +32,8 @@ class VendorsCubit extends Cubit<VendorsState> {
 
   _onScroll() {
     scrollController.addListener(() async {
-      if (scrollController.position.pixels >= scrollController.position.maxScrollExtent) {
+      if (scrollController.position.pixels >=
+          scrollController.position.maxScrollExtent) {
         if (offSet < totalVendorsCount) {
           await loadMoreVendors();
         } else {
@@ -54,12 +55,14 @@ class VendorsCubit extends Cubit<VendorsState> {
           searchFilter: selectedVendorSearchFilter,
           fields: BaseCompany.baseCompanyFields,
           distributorCategoryId:
-              selectedDistributorTypeFilter == DistributorCategory.both ? null : selectedDistributorTypeFilter?.id,
-          companyType: CompanyType.distributor,
+              selectedDistributorTypeFilter == DistributorCategory.Both
+                  ? null
+                  : selectedDistributorTypeFilter?.id,
+          companyType: CompanyType.Distributor,
           search: searchValue);
       totalVendorsCount = vendorsList.length;
       emit(VendorsLoaded());
-    } catch (e,stack) {
+    } catch (e, stack) {
       debugPrintStack(stackTrace: stack);
       debugPrint("Error fetching vendors: $e");
       vendorsList = [];
@@ -82,7 +85,7 @@ class VendorsCubit extends Cubit<VendorsState> {
         searchFilter: selectedVendorSearchFilter,
         distributorCategoryId: selectedDistributorTypeFilter?.id,
         search: searchController.text,
-        companyType: CompanyType.distributor,
+        companyType: CompanyType.Distributor,
       );
 
       vendorsList.addAll(moreCompanies);
@@ -111,9 +114,11 @@ class VendorsCubit extends Cubit<VendorsState> {
     emit(VendorSearchFilterChanged());
   }
 
-  void searchVendor(String? text) => _debounceFunction(() => fetchVendors(searchValue: text ?? ''));
+  void searchVendor(String? text) =>
+      _debounceFunction(() => fetchVendors(searchValue: text ?? ''));
 
-  Future<void> _debounceFunction(Future<void> Function() func, [int milliseconds = 500]) async {
+  Future<void> _debounceFunction(Future<void> Function() func,
+      [int milliseconds = 500]) async {
     if (_debounce?.isActive ?? false) _debounce?.cancel();
     _debounce = Timer(Duration(milliseconds: milliseconds), () async {
       await func();

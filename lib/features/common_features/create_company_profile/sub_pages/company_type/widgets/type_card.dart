@@ -9,12 +9,14 @@ class TypeCard extends StatelessWidget {
   final int selectedTypeIndex;
   final int index;
   final String title;
+  final String? subtitle;
   final String imagePath;
   final VoidCallback? onTap;
 
   const TypeCard({
     super.key,
     required this.title,
+    this.subtitle,
     required this.imagePath,
     this.onTap,
     required this.selectedTypeIndex,
@@ -58,6 +60,16 @@ class TypeCard extends StatelessWidget {
               height: 90,
               fit: BoxFit.contain,
             ),
+            const ResponsiveGap.s12(),
+            if (subtitle != null)
+              Text(
+                subtitle!,
+                style: context.responsiveTextTheme.current.body3Medium
+                    .copyWith(
+                        color: selectedTypeIndex == index
+                            ? AppColors.accent1Shade1
+                            : TextColors.primary.color),
+              ),
           ],
         ),
       ),

@@ -42,7 +42,7 @@ abstract class DeligateCreateClientState extends Equatable {
     String fullName = '',
     String phone = "",
     String name = "",
-    CompanyType companyType = CompanyType.pharmacy,
+    CompanyType companyType = CompanyType.Pharmacy,
     int townId = 20,
   }) {
     return DeligateClientsInitial(
@@ -80,7 +80,7 @@ final class DeligateClientsInitial extends DeligateCreateClientState {
     super.phone = '',
     super.townId = 20,
     super.fullName = '',
-    super.companyType = CompanyType.pharmacy,
+    super.companyType = CompanyType.Pharmacy,
   });
 }
 
