@@ -42,7 +42,9 @@ class OrderClientSelector extends StatelessWidget {
   Widget buildDisplayWidget(
       BuildContext context, DeligateClient? selectedItem) {
     return Text(
-      selectedItem?.buyerCompany.name ?? context.translation!.select_client,
+      selectedItem!.buyerCompany.name.isNotEmpty
+          ? selectedItem.buyerCompany.name
+          : context.translation!.select_client,
       style: context.responsiveTextTheme.current.body3Regular,
     );
   }

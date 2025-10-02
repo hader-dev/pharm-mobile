@@ -42,6 +42,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get search_orders => 'Search Orders';
 
   @override
+  String get app_version => 'App Version';
+
+  @override
   String get tva => 'VAT';
 
   @override

@@ -166,6 +166,12 @@ abstract class AppLocalizations {
   /// **'Search Orders'**
   String get search_orders;
 
+  /// No description provided for @app_version.
+  ///
+  /// In en, this message translates to:
+  /// **'App Version'**
+  String get app_version;
+
   /// No description provided for @tva.
   ///
   /// In en, this message translates to:

@@ -5,6 +5,7 @@ class EnvHelper {
   static const String baseUrlEnvKey = 'API_BASE_URL';
   static const String apiVersionEnvKey = 'API_VERSION';
   static const String fileUrl = 'FILE_URL';
+  static const String appVersion = 'APP_VERSION';
 
   static Future<void> loadAppEnvVars() async {
     await dotenv.load();

@@ -9,6 +9,7 @@
   "summary": "Résumé",
   "delete": "Supprimer",
   "tva": "TVA",
+  "app_version": "Version de l'application",
   "search_orders": "Rechercher des commandes",
   "search_clients": "Rechercher des clients",
   "custom_price": "Prix personnalisé",

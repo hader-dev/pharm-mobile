@@ -7,6 +7,7 @@ import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
 import 'package:hader_pharm_mobile/features/common/decorations/field.dart';
 import 'package:hader_pharm_mobile/features/common/decorations/input.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/para_pharma_widget_2.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_create_order/cubit/create_order_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_create_order/widgets/custom_price_input.dart';
@@ -59,20 +60,13 @@ class OrderProductSelector extends StatelessWidget {
               quantityController: cubit.quantityController,
               onDecrement: cubit.decrementQuantity,
               onIncrement: cubit.incrementQuantity),
-          const SizedBox(height: AppSizesManager.s8),
-          Text(
-            translation.price,
-            style: context.responsiveTextTheme.current.body3Medium.copyWith(
-              color: TextColors.ternary.color,
-            ),
-          ),
-          const SizedBox(height: AppSizesManager.s12),
+          const ResponsiveGap.s12(),
           CustomPriceFormField(
             customPriceController: cubit.customPriceController,
             translation: translation,
             onPriceChanged: cubit.updateCustomPrice,
           ),
-          const SizedBox(height: AppSizesManager.s8),
+          const ResponsiveGap.s8(),
           InfoWidget(
             label: context.translation!.total_amount,
             bgColor: AppColors.accentGreenShade3,
@@ -83,7 +77,7 @@ class OrderProductSelector extends StatelessWidget {
                   style: context.responsiveTextTheme.current.body2Medium
                       .copyWith(color: AppColors.accent1Shade1),
                 ),
-                Spacer(),
+                const Spacer(),
                 Icon(
                   Iconsax.wallet_money,
                   color: AppColors.accent1Shade1,
@@ -91,7 +85,7 @@ class OrderProductSelector extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: AppSizesManager.s8),
+          const ResponsiveGap.s8(),
           PrimaryTextButton(
             onTap: cubit.addOrderItem,
             label: context.translation!.add_cart,
