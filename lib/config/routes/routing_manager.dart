@@ -5,6 +5,7 @@ import 'package:hader_pharm_mobile/features/common_features/announcements/all_an
 import 'package:hader_pharm_mobile/features/common_features/anouncement_details/announcement_details.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_create_client/deligate_create_client.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_create_order/deligate_create_order.dart';
+import 'package:hader_pharm_mobile/features/common_features/deligate_orders_details/orders_details.dart';
 import 'package:hader_pharm_mobile/features/common_features/help_support/help_support.dart';
 import 'package:hader_pharm_mobile/features/common_features/invoice/invoice.dart';
 import 'package:hader_pharm_mobile/features/common_features/leagal_policies/leagal_policies.dart';
@@ -35,9 +36,6 @@ import '../../features/common_features/register/register.dart';
 import '../../features/common_features/splash/splash.dart';
 import '../../features/common_features/vendor_details/vendor_details.dart';
 
-// import '../../view/screens/login/login.dart';
-// import '../../view/screens/splash/splash.dart';
-
 class RoutingManager {
   static List<String> screenStack = [];
 
@@ -57,6 +55,8 @@ class RoutingManager {
   static const String medicineDetailsScreen = '/MedicineDetailsScreen';
   static const String paraPharmaDetailsScreen = '/ParaPharmaDetailsScreen';
   static const String ordersScreen = '/OrdersScreen';
+  static const String deligateOrderDetailsScreen =
+      '/DeligateOrderDetailsScreen';
   static const String onboardingScreen = '/OnboardingScreen';
   static const String profileScreen = '/ProfileScreen';
   static const String changePasswordScreen = 'ChangePasswordScreen';
@@ -82,7 +82,6 @@ class RoutingManager {
   static final GoRouter router = GoRouter(
       navigatorKey: rootNavigatorKey,
       initialLocation: splashScreen,
-      
       redirect: (context, state) {
         debugPrint(
             "redirect ---------> ${state.fullPath}${state.pathParameters}");
@@ -192,6 +191,15 @@ class RoutingManager {
             // Check if mode is passed as extra parameter
             final mode = state.extra as CompanyScreenMode?;
             return EditCompanyScreen(initialMode: mode);
+          },
+        ),
+        GoRoute(
+          name: deligateOrderDetailsScreen,
+          path: deligateOrderDetailsScreen,
+          builder: (BuildContext context, GoRouterState state) {
+            return DeligateOrdersDetailsScreen(
+              orderId: state.extra as String,
+            );
           },
         ),
         GoRoute(
@@ -322,9 +330,7 @@ class RoutingManager {
               final id = params["id"] as String;
               final canOrder = params["canOrder"] as bool;
               return ParaPharmaCatalogDetailsScreen(
-                paraPharmaCatalogId: id,
-                canOrder:canOrder
-              );
+                  paraPharmaCatalogId: id, canOrder: canOrder);
             }),
         GoRoute(
             name: ordersScreen,

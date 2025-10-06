@@ -7,10 +7,11 @@ import 'package:hader_pharm_mobile/features/common_features/deligate_orders/widg
 import 'package:hader_pharm_mobile/features/common_features/deligate_orders/widgets/search_widget.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders/cubit/orders_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders/cubit/orders_provider.dart';
-import 'package:hader_pharm_mobile/features/common_features/orders/widget/order_card.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
+
+import 'widgets/order_card.dart';
 
 class DeligateOrdersScreen extends StatelessWidget {
   const DeligateOrdersScreen({
