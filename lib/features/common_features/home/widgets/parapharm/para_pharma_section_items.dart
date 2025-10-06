@@ -37,14 +37,14 @@ class ParaPharmaSectionItems extends StatelessWidget {
               .marketPlaceScaffoldKey.currentContext!
               .read<ParaPharmaCubit>();
           final hCubit =
-              HomeScreen.scaffoldKey.currentContext!.read<ParaPharmaCubit>();
+              HomeScreen.scaffoldKey.currentContext?.read<ParaPharmaCubit>();
           medicine.isLiked
               ? paraPharmaProductsCubit.unlikeParaPharmaCatalog(medicine.id)
               : paraPharmaProductsCubit.likeParaPharmaCatalog(medicine.id);
 
           gCubit.refreshParaPharmaCatalogFavorite(
               medicine.id, !medicine.isLiked);
-          hCubit.refreshParaPharmaCatalogFavorite(
+          hCubit?.refreshParaPharmaCatalogFavorite(
               medicine.id, !medicine.isLiked);
         }
 

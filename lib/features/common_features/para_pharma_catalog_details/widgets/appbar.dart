@@ -36,7 +36,7 @@ class ParaPharmaCatalogAppBar extends StatelessWidget {
                 .marketPlaceScaffoldKey.currentContext!
                 .read<ParaPharmaCubit>();
             final hCubit =
-                HomeScreen.scaffoldKey.currentContext!.read<ParaPharmaCubit>();
+                HomeScreen.scaffoldKey.currentContext?.read<ParaPharmaCubit>();
 
             final isLiked = cubit.paraPharmaCatalogData?.isLiked ?? false;
 
@@ -50,14 +50,14 @@ class ParaPharmaCatalogAppBar extends StatelessWidget {
                   cubit.unlikeParaPharma().then((liked) {
                     gCubit.refreshParaPharmaCatalogFavorite(
                         cubit.paraPharmaCatalogData!.id, liked);
-                    hCubit.refreshParaPharmaCatalogFavorite(
+                    hCubit?.refreshParaPharmaCatalogFavorite(
                         cubit.paraPharmaCatalogData!.id, liked);
                   });
                 } else {
                   cubit.likeParaPharma().then((liked) {
                     gCubit.refreshParaPharmaCatalogFavorite(
                         cubit.paraPharmaCatalogData!.id, liked);
-                    hCubit.refreshParaPharmaCatalogFavorite(
+                    hCubit?.refreshParaPharmaCatalogFavorite(
                         cubit.paraPharmaCatalogData!.id, liked);
                   });
                 }

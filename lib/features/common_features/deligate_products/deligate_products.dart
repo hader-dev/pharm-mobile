@@ -48,9 +48,6 @@ class _DeligateProductsPageState extends State<DeligateProductsPage>
             const FiltersBar(),
             Expanded(
               child: BlocBuilder<ParaPharmaCubit, ParaPharmaState>(
-                buildWhen: (prev, curr) =>
-                    prev.paraPharmaProducts.length !=
-                    curr.paraPharmaProducts.length,
                 builder: (bcontext, state) {
                   final products = state.paraPharmaProducts;
 

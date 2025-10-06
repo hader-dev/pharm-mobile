@@ -42,8 +42,8 @@ class _ParaPharmaProductsPageState extends State<ParaPharmaProductsPage>
                   final gCubit = MarketPlaceScreen
                       .marketPlaceScaffoldKey.currentContext!
                       .read<ParaPharmaCubit>();
-                  final hCubit = HomeScreen.scaffoldKey.currentContext!
-                      .read<ParaPharmaCubit>();
+                  final hCubit = HomeScreen.scaffoldKey.currentContext
+                      ?.read<ParaPharmaCubit>();
 
                   final bool isLoadingMore = state is LoadingMoreParaPharma;
                   final bool hasReachedEnd =
@@ -56,7 +56,7 @@ class _ParaPharmaProductsPageState extends State<ParaPharmaProductsPage>
                         : cubit.likeParaPharmaCatalog(id);
                     gCubit.refreshParaPharmaCatalogFavorite(
                         id, !medicine.isLiked);
-                    hCubit.refreshParaPharmaCatalogFavorite(
+                    hCubit?.refreshParaPharmaCatalogFavorite(
                         id, !medicine.isLiked);
                   }
 

@@ -55,6 +55,9 @@ class QuantitySection extends StatelessWidget {
                       validator: (value) =>
                           value == null || value.isEmpty ? '' : null,
                       style: context.responsiveTextTheme.current.body1Medium,
+                      onFieldSubmitted: (value) =>
+                          cubit.updateCartItemInputQuantity(
+                              cartData.id, int.parse(value)),
                       decoration: InputDecoration(
                         contentPadding: const EdgeInsets.all(0),
                         enabledBorder: InputBorder.none,

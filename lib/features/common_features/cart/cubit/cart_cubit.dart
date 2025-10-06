@@ -182,6 +182,23 @@ class CartCubit extends Cubit<CartState> {
     }
   }
 
+  void updateCartItemInputQuantity(String cartItemId, int quantity) {
+    _debounceFunction(() async {
+      try {
+        int cartItemIndex =
+            cartItems.lastIndexWhere((element) => element.id == cartItemId);
+
+        cartItems[cartItemIndex] =
+            cartItems[cartItemIndex].copyWith(quantity: quantity);
+        updateTotals();
+        updateItemQuantity(cartItemId, cartItems[cartItemIndex].quantity);
+        emit(CartQuantityUpdated(updatedItemId: cartItemId));
+      } catch (e) {
+        GlobalExceptionHandler.handle(exception: e);
+      }
+    }, 500);
+  }
+
   void increaseCartItemQuantity(String cartItemId) {
     try {
       int cartItemIndex =
