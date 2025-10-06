@@ -1,0 +1,3 @@
+class ResponseUpdateOrderItem {
+  ResponseUpdateOrderItem();
+}

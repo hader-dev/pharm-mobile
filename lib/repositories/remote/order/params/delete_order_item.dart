@@ -5,7 +5,7 @@ class ParamsDeleteOrderItem {
 
   Map<String, dynamic> toJson() {
     return {
-      "deleteOrderItem": [itemId]
+      "deleteOrderItemsIds": [itemId]
     };
   }
 }

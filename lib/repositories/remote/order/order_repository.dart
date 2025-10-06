@@ -8,6 +8,7 @@ import 'package:hader_pharm_mobile/repositories/remote/order/params/get_orders.d
 import 'package:hader_pharm_mobile/repositories/remote/order/params/invoice.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/params/item_complaint.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/params/order_complaint.dart';
+import 'package:hader_pharm_mobile/repositories/remote/order/params/update_order_item.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/response/delete_order_item.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/response/invoice_response.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/response/order_response.dart';
@@ -15,6 +16,7 @@ import 'package:hader_pharm_mobile/repositories/remote/order/response/response_i
 import 'package:hader_pharm_mobile/repositories/remote/order/response/response_item_complaint_make.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/response/response_order_cancel.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/response/response_order_complaints.dart';
+import 'package:hader_pharm_mobile/repositories/remote/order/response/update_order_item.dart';
 
 abstract class IOrderRepository {
   Future<OrderResponse> getOrders(ParamsGetOrder params);
@@ -34,4 +36,6 @@ abstract class IOrderRepository {
   Future<ResponseInvoice> invoiceDetails(ParamsGetInvoice params);
   Future<ResponseDeleteOrderItem> deleteOrderItem(ParamsDeleteOrderItem params);
   Future<void> createDeligateOrder(ParamsCreateDeligateOrder params);
+
+  Future<ResponseUpdateOrderItem> updateOrderItem(ParamsUpdateOrderItem params);
 }

@@ -5,6 +5,7 @@ import 'package:hader_pharm_mobile/models/order_details.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/order_repository.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/params/cancel_order.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/params/delete_order_item.dart';
+import 'package:hader_pharm_mobile/repositories/remote/order/params/update_order_item.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/response/response_order_cancel.dart';
 import 'package:hader_pharm_mobile/utils/debounce.dart';
 
@@ -88,6 +89,11 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
 
     final updatedItem = item.copyWith(quantity: updatedQuantity);
 
+    orderRepository.updateOrderItem(ParamsUpdateOrderItem(
+        orderId: orderData!.id,
+        itemId: item.product.id,
+        quantity: updatedQuantity));
+
     orderItems = orderItems
         .map((el) => el.product.id == item.product.id ? updatedItem : el)
         .toList();
@@ -103,6 +109,11 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
     final updatedQuantity = quantity + 1;
 
     itemQuantityController.text = updatedQuantity.toString();
+
+    orderRepository.updateOrderItem(ParamsUpdateOrderItem(
+        orderId: orderData!.id,
+        itemId: item.product.id,
+        quantity: updatedQuantity));
 
     final updatedItem = item.copyWith(quantity: updatedQuantity);
     orderItems = orderItems
@@ -136,6 +147,12 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
           orderItems = orderItems
               .map((el) => el.product.id == item.product.id ? updatedItem : el)
               .toList();
+
+          orderRepository.updateOrderItem(ParamsUpdateOrderItem(
+              orderId: orderData!.id,
+              itemId: item.product.id,
+              quantity: quantityValue));
+
           emit(OrderDetailsLoaded());
         });
   }
