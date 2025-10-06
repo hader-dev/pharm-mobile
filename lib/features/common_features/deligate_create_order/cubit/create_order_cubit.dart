@@ -153,7 +153,7 @@ class DeligateCreateOrderCubit extends Cubit<DeligateCreateOrderState> {
   }
 
   void decrementItemQuantity(
-      DeligateOrderItem item,
+      DeligateParahparmOrderItem item,
       TextEditingController itemQuantityController,
       TextEditingController itemCustomPriceController) {
     final updatedQuantity = item.quantity > 1 ? item.quantity - 1 : 1;
@@ -170,7 +170,7 @@ class DeligateCreateOrderCubit extends Cubit<DeligateCreateOrderState> {
   }
 
   void incrementItemQuantity(
-      DeligateOrderItem item,
+      DeligateParahparmOrderItem item,
       TextEditingController itemQuantityController,
       TextEditingController itemCustomPriceController) {
     final updatedQuantity = item.quantity + 1;
@@ -199,7 +199,7 @@ class DeligateCreateOrderCubit extends Cubit<DeligateCreateOrderState> {
         price: priceValue, totalPrice: (priceValue ?? 0) * state.quantity));
   }
 
-  void updateItemCustomPrice(String? value, DeligateOrderItem item) =>
+  void updateItemCustomPrice(String? value, DeligateParahparmOrderItem item) =>
       debounceManager.debounce(
           tag: "price",
           duration: const Duration(milliseconds: 1000),
@@ -219,7 +219,7 @@ class DeligateCreateOrderCubit extends Cubit<DeligateCreateOrderState> {
     final customPrice = double.tryParse(customPriceController.text);
     emit(
       state.productsUpdated(
-        item: DeligateOrderItem(
+        item: DeligateParahparmOrderItem(
             isParapharm: true,
             product: state.selectedProduct!,
             quantity: quantity,
@@ -233,7 +233,7 @@ class DeligateCreateOrderCubit extends Cubit<DeligateCreateOrderState> {
         );
   }
 
-  void removeOrderItem(DeligateOrderItem item) {
+  void removeOrderItem(DeligateParahparmOrderItem item) {
     emit(
       state.productsUpdated(
         item: item,

@@ -80,5 +80,4 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
       emit(OrderDetailsLoadingFailed());
     }
   }
-
 }

@@ -1,20 +1,19 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:hader_pharm_mobile/models/order_claim.dart';
+import 'package:hader_pharm_mobile/models/deligate_order.dart';
 import 'package:hader_pharm_mobile/models/order_details.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/order_repository.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/params/cancel_order.dart';
-import 'package:hader_pharm_mobile/repositories/remote/order/params/order_complaint.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/response/response_order_cancel.dart';
-import 'package:hader_pharm_mobile/repositories/remote/order/response/response_order_complaints.dart';
+import 'package:hader_pharm_mobile/utils/debounce.dart';
 
 part 'orders_details_state.dart';
 
 class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
   OrderDetailsModel? orderData;
   final IOrderRepository orderRepository;
-
-  List<OrderClaimHeaderModel> orderClaims = [];
+  List<DeligateOrderItem> orderItems = [];
+  DebouncerManager debounceManager = DebouncerManager();
 
   OrderDetailsCubit({
     required this.orderRepository,
@@ -26,15 +25,21 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
 
       var results = await Future.wait([
         orderRepository.getMOrderById(orderId),
-        orderRepository
-            .getOrderClaims(ParamsGetOrderComplaints(orderId: orderId))
       ]);
 
-      final orderData = results[0] as OrderDetailsModel;
-      final orderClaims = results[1] as ResponseOrderComplaints;
+      final orderData = results[0];
 
       this.orderData = orderData;
-      this.orderClaims = orderClaims.claims;
+      for (var element in orderData.orderItems) {
+        orderItems.add(
+          DeligateOrderItem(
+            product: element,
+            quantity: element.quantity,
+            isParapharm: element.parapharmCatalogId != null,
+            suggestedPrice: element.unitPriceHt,
+          ),
+        );
+      }
 
       emit(OrderDetailsLoaded());
     } catch (e, stacktrace) {
@@ -48,7 +53,6 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
   Future<void> reloadOrderData() async {
     try {
       emit(OrderDetailsLoading());
-
       orderData = await orderRepository.getMOrderById(orderData!.id);
       emit(OrderDetailsLoaded());
     } catch (e, stacktrace) {
@@ -64,21 +68,72 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
     return orderRepository.cancelOrder(ParamsCancelOrder(id: orderData!.id));
   }
 
-  Future<void> getOrderComplaints() async {
-    try {
-      emit(OrderDetailsLoading());
-
-      var res = await orderRepository
-          .getOrderClaims(ParamsGetOrderComplaints(orderId: orderData!.id));
-      orderClaims = res.claims;
-
-      emit(OrderDetailsLoaded());
-    } catch (e, stacktrace) {
-      debugPrint("$e");
-      debugPrintStack(stackTrace: stacktrace);
-
-      emit(OrderDetailsLoadingFailed());
-    }
+  void removeOrderItem(DeligateOrderItem item) {
+    orderItems =
+        orderItems.where((el) => el.product.id != item.product.id).toList();
+    emit(OrderDetailsLoaded());
   }
 
+  void decrementItemQuantity(
+      DeligateOrderItem item,
+      TextEditingController itemQuantityController,
+      TextEditingController itemCustomPriceController) {
+    final quantity = int.parse(itemQuantityController.text);
+    final updatedQuantity = quantity > 1 ? quantity - 1 : 1;
+
+    itemQuantityController.text = updatedQuantity.toString();
+
+    final updatedItem = item.copyWith(quantity: updatedQuantity);
+
+    orderItems = orderItems
+        .map((el) => el.product.id == item.product.id ? updatedItem : el)
+        .toList();
+    emit(OrderDetailsLoaded());
+  }
+
+  void incrementItemQuantity(
+      DeligateOrderItem item,
+      TextEditingController itemQuantityController,
+      TextEditingController itemCustomPriceController) {
+    final quantity = int.parse(itemQuantityController.text);
+
+    final updatedQuantity = quantity + 1;
+
+    itemQuantityController.text = updatedQuantity.toString();
+
+    final updatedItem = item.copyWith(quantity: updatedQuantity);
+    orderItems = orderItems
+        .map((el) => el.product.id == item.product.id ? updatedItem : el)
+        .toList();
+
+    emit(OrderDetailsLoaded());
+  }
+
+  void updateItemCustomPrice(String value, DeligateOrderItem item) {
+    debounceManager.debounce(
+        tag: "price",
+        duration: const Duration(milliseconds: 1000),
+        action: () {
+          final priceValue = double.tryParse(value);
+          final updatedItem = item.copyWith(suggestedPrice: priceValue);
+          orderItems = orderItems
+              .map((el) => el.product.id == item.product.id ? updatedItem : el)
+              .toList();
+          emit(OrderDetailsLoaded());
+        });
+  }
+
+  void updateCustomQuantity(String value, DeligateOrderItem item) {
+    debounceManager.debounce(
+        tag: "quantity",
+        duration: const Duration(milliseconds: 1000),
+        action: () {
+          final quantityValue = int.tryParse(value);
+          final updatedItem = item.copyWith(quantity: quantityValue);
+          orderItems = orderItems
+              .map((el) => el.product.id == item.product.id ? updatedItem : el)
+              .toList();
+          emit(OrderDetailsLoaded());
+        });
+  }
 }

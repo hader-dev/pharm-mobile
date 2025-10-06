@@ -6,32 +6,31 @@ import 'package:hader_pharm_mobile/config/services/network/network_interface.dar
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/info_widget.dart';
-import 'package:hader_pharm_mobile/features/common_features/deligate_create_order/cubit/create_order_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_create_order/widgets/custom_price_input.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_create_order/widgets/quantity_widget.dart';
+import 'package:hader_pharm_mobile/features/common_features/deligate_orders_details/cubit/orders_details_cubit.dart';
 import 'package:hader_pharm_mobile/models/deligate_order.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
-class DeligateOrderItemWidget extends StatefulWidget {
-  DeligateOrderItemWidget({super.key, required this.item});
-  final DeligateParahparmOrderItem item;
+class OrderItemEditable extends StatefulWidget {
+  OrderItemEditable({super.key, required this.item});
+  final DeligateOrderItem item;
   final quantityController = TextEditingController();
   final customPriceController = TextEditingController();
 
   @override
-  State<DeligateOrderItemWidget> createState() =>
-      _DeligateOrderItemWidgetState();
+  State<OrderItemEditable> createState() => _OrderItemEditableState();
 }
 
-class _DeligateOrderItemWidgetState extends State<DeligateOrderItemWidget> {
+class _OrderItemEditableState extends State<OrderItemEditable> {
   @override
   Widget build(BuildContext context) {
     final translation = context.translation!;
-    final cubit = BlocProvider.of<DeligateCreateOrderCubit>(context);
-    final unitPrice = (widget.item.suggestedPrice ??
-        double.parse(widget.item.product.unitPriceHt));
+    final cubit = BlocProvider.of<OrderDetailsCubit>(context);
+    final unitPrice =
+        (widget.item.suggestedPrice ?? widget.item.product.unitPriceHt);
     final totalPrice = unitPrice * widget.item.quantity;
     widget.quantityController.text = widget.item.quantity.toString();
     widget.customPriceController.text = unitPrice.toString();
@@ -54,10 +53,10 @@ class _DeligateOrderItemWidgetState extends State<DeligateOrderItemWidget> {
                 height: 70,
                 width: 70,
                 boxFit: BoxFit.fill,
-                imageUrl: widget.item.product.image?.path != null
+                imageUrl: widget.item.product.imageUrl != null
                     ? getItInstance
                         .get<INetworkService>()
-                        .getFilesPath(widget.item.product.image!.path)
+                        .getFilesPath(widget.item.product.imageUrl!)
                     : "",
                 errorWidget: Column(
                   children: [
@@ -84,7 +83,7 @@ class _DeligateOrderItemWidgetState extends State<DeligateOrderItemWidget> {
                     Row(
                       children: [
                         Text(
-                          widget.item.product.name,
+                          widget.item.product.designation,
                           softWrap: true,
                           overflow: TextOverflow.ellipsis,
                           style: context
@@ -114,6 +113,8 @@ class _DeligateOrderItemWidgetState extends State<DeligateOrderItemWidget> {
           DeligateOrderItemQuantity(
               translation: translation,
               quantityController: widget.quantityController,
+              onChanged: (value) =>
+                  cubit.updateCustomQuantity(value ?? "1", widget.item),
               onDecrement: () => cubit.decrementItemQuantity(widget.item,
                   widget.quantityController, widget.customPriceController),
               onIncrement: () => cubit.incrementItemQuantity(widget.item,
@@ -135,23 +136,14 @@ class _DeligateOrderItemWidgetState extends State<DeligateOrderItemWidget> {
                   style: context.responsiveTextTheme.current.body2Medium
                       .copyWith(color: AppColors.accent1Shade1),
                 ),
-                Spacer(),
-                Icon(
+                const Spacer(),
+                const Icon(
                   Iconsax.wallet_money,
                   color: AppColors.accent1Shade1,
                 ),
               ],
             ),
           ),
-          // InfoRow(
-          //     label: context.translation!.quantity,
-          //     dataValue: widget.item.quantity.toString()),
-          // InfoRow(
-          //     label: context.translation!.price,
-          //     dataValue: unitPrice.toString()),
-          // InfoRow(
-          //     label: context.translation!.total_price,
-          //     dataValue: totalPrice.toString()),
         ],
       ),
     );

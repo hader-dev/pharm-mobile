@@ -10,16 +10,17 @@ import 'package:hader_pharm_mobile/utils/validators.dart';
 typedef OnPriceChanged = void Function(String price);
 
 class CustomPriceFormField extends StatelessWidget {
-  const CustomPriceFormField({
-    super.key,
-    required this.translation,
-    required this.customPriceController,
-    required this.onPriceChanged,
-  });
+  const CustomPriceFormField(
+      {super.key,
+      required this.translation,
+      required this.customPriceController,
+      required this.onPriceChanged,
+      this.onEditComplete});
 
   final AppLocalizations translation;
   final TextEditingController customPriceController;
   final OnPriceChanged onPriceChanged;
+  final VoidCallback? onEditComplete;
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +60,7 @@ class CustomPriceFormField extends StatelessWidget {
               ),
             ),
             onChanged: (value) => onPriceChanged(value),
+            onEditingComplete: onEditComplete,
             validator: (value) => validateIsNumber(value, translation),
           ),
         ),

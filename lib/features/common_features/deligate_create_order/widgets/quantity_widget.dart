@@ -8,18 +8,21 @@ import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
 class DeligateOrderItemQuantity extends StatelessWidget {
-  const DeligateOrderItemQuantity({
-    super.key,
-    required this.translation,
-    required this.onIncrement,
-    required this.onDecrement,
-    required this.quantityController,
-  });
+  const DeligateOrderItemQuantity(
+      {super.key,
+      required this.translation,
+      required this.onIncrement,
+      required this.onDecrement,
+      required this.quantityController,
+      this.onChanged,
+      this.onEditComplete});
 
   final AppLocalizations translation;
   final VoidCallback onIncrement;
   final VoidCallback onDecrement;
+  final VoidCallback? onEditComplete;
   final TextEditingController quantityController;
+  final void Function(String?)? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -69,6 +72,8 @@ class DeligateOrderItemQuantity extends StatelessWidget {
                         ],
                         validator: (value) =>
                             value == null || value.isEmpty ? '' : null,
+                        onEditingComplete: onEditComplete,
+                        onChanged: onChanged,
                         style: context.responsiveTextTheme.current.body3Medium,
                         decoration: InputDecoration(
                           contentPadding: const EdgeInsets.symmetric(

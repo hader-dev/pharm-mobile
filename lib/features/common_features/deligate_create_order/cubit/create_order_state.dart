@@ -3,7 +3,7 @@ part of 'create_order_cubit.dart';
 abstract class DeligateCreateOrderState extends Equatable {
   final DeligateClient client;
   final List<BaseParaPharmaCatalogModel> products;
-  final List<DeligateOrderItem> orderProducts;
+  final List<DeligateParahparmOrderItem> orderProducts;
 
   final bool hasReachedMax;
   final int totalItemsCount;
@@ -45,7 +45,7 @@ abstract class DeligateCreateOrderState extends Equatable {
   DeligateCreateOrderState copyWith({
     DeligateClient? client,
     List<BaseParaPharmaCatalogModel>? products,
-    List<DeligateOrderItem>? orderProducts,
+    List<DeligateParahparmOrderItem>? orderProducts,
     bool? hasReachedMax,
     int? totalItemsCount,
     int? offSet,
@@ -123,9 +123,10 @@ abstract class DeligateCreateOrderState extends Equatable {
       DeligateOrderLoading.fromState(copyWith(offSet: offset ?? offSet));
 
   DeligateOrderProductsUpdated productsUpdated(
-      {required DeligateOrderItem item, bool removed = false}) {
+      {required DeligateParahparmOrderItem item, bool removed = false}) {
     bool updatedExisting = false;
-    List<DeligateOrderItem> orderProducts = this.orderProducts.map((el) {
+    List<DeligateParahparmOrderItem> orderProducts =
+        this.orderProducts.map((el) {
       final exists = !removed && el.product.id == item.product.id;
 
       if (exists) {

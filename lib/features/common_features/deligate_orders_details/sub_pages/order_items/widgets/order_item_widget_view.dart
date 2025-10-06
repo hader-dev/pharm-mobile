@@ -7,13 +7,13 @@ import 'package:hader_pharm_mobile/features/common/image/cached_network_image_wi
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_orders_details/sub_pages/order_items/widgets/order_item_content.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_orders_details/widgets/order_item_note.dart';
-import 'package:hader_pharm_mobile/models/order_details.dart';
+import 'package:hader_pharm_mobile/models/deligate_order.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class OrderItemWidget extends StatelessWidget {
-  final OrderItem item;
+  final DeligateOrderItem item;
 
   const OrderItemWidget({
     super.key,
@@ -29,7 +29,7 @@ class OrderItemWidget extends StatelessWidget {
             motion: const ScrollMotion(),
             extentRatio: 0.3,
             children: <Widget>[
-              if (item.note != null)
+              if (item.product.note != null)
                 SlidableAction(
                   flex: 1,
                   onPressed: (BuildContext context) {
@@ -37,7 +37,7 @@ class OrderItemWidget extends StatelessWidget {
                       context: context,
                       builder: (BuildContext context) => OrderNoteDialog(
                         title: context.translation!.note,
-                        note: item.note ?? "",
+                        note: item.product.note ?? "",
                       ),
                     );
                   },
@@ -59,18 +59,18 @@ class OrderItemWidget extends StatelessWidget {
                             decoration: BoxDecoration(
                               borderRadius:
                                   BorderRadius.circular(AppSizesManager.p8),
-                              color: item.imageUrl == null
+                              color: item.product.imageUrl == null
                                   ? const Color.fromARGB(255, 145, 106, 106)
                                   : null,
                             ),
                             child: CachedNetworkImageWithAssetFallback(
                               assetImage:
                                   DrawableAssetStrings.medicinePlaceHolderImg,
-                              imageUrl: item.imageUrl != null
+                              imageUrl: item.product.imageUrl != null
                                   ? getItInstance
                                       .get<INetworkService>()
                                       .getFilesPath(
-                                        item.imageUrl!,
+                                        item.product.imageUrl!,
                                       )
                                   : "",
                               width: 60,
@@ -82,7 +82,8 @@ class OrderItemWidget extends StatelessWidget {
                       Expanded(
                         flex: 6,
                         child: Text(
-                          item.designation ?? context.translation!.unknown,
+                          item.product.designation ??
+                              context.translation!.unknown,
                           softWrap: true,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
@@ -99,10 +100,11 @@ class OrderItemWidget extends StatelessWidget {
                 SizedBox(
                   width: constraints.maxWidth * 0.8,
                   child: ItemContent(
-                    itemId: item.id,
+                    itemId: item.product.id,
                     quantity: item.quantity,
-                    price: item.unitPriceHt.toString(),
-                    orderId: item.orderId,
+                    price: item.suggestedPrice?.toString() ??
+                        item.product.unitPriceHt.toString(),
+                    orderId: item.product.orderId,
                   ),
                 )
               ]),

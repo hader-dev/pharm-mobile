@@ -3,7 +3,7 @@ import 'package:hader_pharm_mobile/models/deligate_order.dart';
 class ParamsCreateDeligateOrder {
   final String deliveryAddress;
   final int deliveryTownId;
-  final List<DeligateOrderItem> orderItems;
+  final List<DeligateParahparmOrderItem> orderItems;
   final String clientId;
   final String clientCompanyId;
   final String? clientNote;
