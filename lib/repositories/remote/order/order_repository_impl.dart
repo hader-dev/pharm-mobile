@@ -3,10 +3,12 @@ import 'package:hader_pharm_mobile/models/create_order_model.dart';
 import 'package:hader_pharm_mobile/models/create_quick_order_model.dart';
 import 'package:hader_pharm_mobile/models/order_details.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/params/create_deligate_order.dart';
+import 'package:hader_pharm_mobile/repositories/remote/order/params/delete_order_item.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/params/get_orders.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/params/invoice.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/params/item_complaint.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/params/order_complaint.dart';
+import 'package:hader_pharm_mobile/repositories/remote/order/response/delete_order_item.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/response/invoice_response.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/response/order_response.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/response/response_item_complaint_find.dart';
@@ -18,6 +20,7 @@ import 'actions/cancel_order.dart' as actions;
 import 'actions/create_deligate_order.dart' as actions;
 import 'actions/create_order.dart' as actions;
 import 'actions/create_quick_order.dart' as actions;
+import 'actions/delete_order_item.dart' as actions;
 import 'actions/find_complaint.dart' as find_complaint_action;
 import 'actions/get_invoice.dart' as invoice_action;
 import 'actions/get_more_order.dart' as actions;
@@ -32,8 +35,6 @@ class OrderRepository extends IOrderRepository {
 
   @override
   Future<OrderResponse> getOrders(ParamsGetOrder params) async {
-   
-
     return actions.getOrders(params, client);
   }
 
@@ -100,5 +101,11 @@ class OrderRepository extends IOrderRepository {
     };
 
     return actions.createDeligateOrder(orderData: orderData, client: client);
+  }
+
+  @override
+  Future<ResponseDeleteOrderItem> deleteOrderItem(
+      ParamsDeleteOrderItem params) {
+    return actions.deleteOrderItem(params, client);
   }
 }

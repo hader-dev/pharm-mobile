@@ -4,6 +4,7 @@ import 'package:hader_pharm_mobile/models/deligate_order.dart';
 import 'package:hader_pharm_mobile/models/order_details.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/order_repository.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/params/cancel_order.dart';
+import 'package:hader_pharm_mobile/repositories/remote/order/params/delete_order_item.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/response/response_order_cancel.dart';
 import 'package:hader_pharm_mobile/utils/debounce.dart';
 
@@ -71,6 +72,8 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
   void removeOrderItem(DeligateOrderItem item) {
     orderItems =
         orderItems.where((el) => el.product.id != item.product.id).toList();
+    orderRepository.deleteOrderItem(
+        ParamsDeleteOrderItem(orderId: orderData!.id, itemId: item.product.id));
     emit(OrderDetailsLoaded());
   }
 
