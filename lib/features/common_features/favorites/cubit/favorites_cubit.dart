@@ -1,11 +1,9 @@
 import 'package:bloc/bloc.dart';
-
 import 'package:hader_pharm_mobile/models/company.dart';
 import 'package:hader_pharm_mobile/models/medicine_catalog.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/repositories/remote/favorite/favorite_repository_impl.dart';
-
-import '../../../../utils/app_exceptions/global_expcetion_handler.dart';
+import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler.dart';
 
 part 'favorites_state.dart';
 
@@ -14,18 +12,23 @@ class FavoritesCubit extends Cubit<FavoritesState> {
   List<BaseParaPharmaCatalogModel> likedParaPharmaCatalogs = [];
   List<Company> likedVendors = [];
   FavoriteRepository favoriteRepository;
-  FavoritesCubit({required this.favoriteRepository}) : super(FavoritesInitial());
+  FavoritesCubit({required this.favoriteRepository})
+      : super(FavoritesInitial());
 
   fetchFavorites() async {
-    await Future.wait([fetchLikedMedicines(), fetchLikedParaPharma(), fetchLikedVendors()]);
+    await Future.wait(
+        [fetchLikedMedicines(), fetchLikedParaPharma(), fetchLikedVendors()]);
   }
 
   Future<void> fetchLikedMedicines() async {
     try {
       emit(FavoritesMedicinesLoading());
-      likedMedicinesCatalogs = await favoriteRepository.getFavoritesMedicinesCatalogs();
+      likedMedicinesCatalogs =
+          await favoriteRepository.getFavoritesMedicinesCatalogs();
       emit(FavoritesMedicinesLoaded());
     } catch (e) {
+      // debugPrintStack(stackTrace: stackTrace);
+      // debugPrint("$e");
       GlobalExceptionHandler.handle(exception: e);
       emit(FavoritesMedicinesLoadingFailed());
     }
@@ -34,7 +37,8 @@ class FavoritesCubit extends Cubit<FavoritesState> {
   Future<void> fetchLikedParaPharma() async {
     try {
       emit(FavoritesParaPharmaLoading());
-      likedParaPharmaCatalogs = await favoriteRepository.getFavoritesParaPharmasCatalogs();
+      likedParaPharmaCatalogs =
+          await favoriteRepository.getFavoritesParaPharmasCatalogs();
       emit(FavoritesParaPharmaLoaded());
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
@@ -60,8 +64,10 @@ class FavoritesCubit extends Cubit<FavoritesState> {
   }
 
   void removeParaPharmaFromFavorites(String paraPharmaId) {
-    likedParaPharmaCatalogs.removeWhere((paraPharma) => paraPharma.id == paraPharmaId);
-    favoriteRepository.unLikeParaPharmaCatalog(paraPharmaCatalogId: paraPharmaId);
+    likedParaPharmaCatalogs
+        .removeWhere((paraPharma) => paraPharma.id == paraPharmaId);
+    favoriteRepository.unLikeParaPharmaCatalog(
+        paraPharmaCatalogId: paraPharmaId);
     emit(FavoritesParaPharmaLoaded());
   }
 

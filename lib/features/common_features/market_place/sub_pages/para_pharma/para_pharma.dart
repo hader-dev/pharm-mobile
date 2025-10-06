@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/end_of_load_result_widget.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/para_pharma_widget_2.dart';
+import 'package:hader_pharm_mobile/features/common_features/home/home.dart';
+import 'package:hader_pharm_mobile/features/common_features/market_place/market_place.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/widget/filters_bar.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
@@ -35,11 +37,13 @@ class _ParaPharmaProductsPageState extends State<ParaPharmaProductsPage>
             const FiltersBar(),
             Expanded(
               child: BlocBuilder<ParaPharmaCubit, ParaPharmaState>(
-                buildWhen: (prev, curr) =>
-                    prev.paraPharmaProducts.length !=
-                    curr.paraPharmaProducts.length,
                 builder: (context, state) {
                   final products = state.paraPharmaProducts;
+                  final gCubit = MarketPlaceScreen
+                      .marketPlaceScaffoldKey.currentContext!
+                      .read<ParaPharmaCubit>();
+                  final hCubit = HomeScreen.scaffoldKey.currentContext!
+                      .read<ParaPharmaCubit>();
 
                   final bool isLoadingMore = state is LoadingMoreParaPharma;
                   final bool hasReachedEnd =
@@ -50,6 +54,10 @@ class _ParaPharmaProductsPageState extends State<ParaPharmaProductsPage>
                     medicine.isLiked
                         ? cubit.unlikeParaPharmaCatalog(id)
                         : cubit.likeParaPharmaCatalog(id);
+                    gCubit.refreshParaPharmaCatalogFavorite(
+                        id, !medicine.isLiked);
+                    hCubit.refreshParaPharmaCatalogFavorite(
+                        id, !medicine.isLiked);
                   }
 
                   return RefreshIndicator(

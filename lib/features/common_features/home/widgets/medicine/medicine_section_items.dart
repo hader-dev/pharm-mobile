@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/medicine_widget_3.dart';
+import 'package:hader_pharm_mobile/features/common_features/home/home.dart';
+import 'package:hader_pharm_mobile/features/common_features/market_place/market_place.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/medicine_products/cubit/medicine_products_cubit.dart';
 import 'package:hader_pharm_mobile/models/medicine_catalog.dart';
 
@@ -30,9 +32,20 @@ class MedicinesSectionItems extends StatelessWidget {
         }
         void onFavoriteCallback(BaseMedicineCatalogModel medicine) {
           final cubit = context.read<MedicineProductsCubit>();
+          final gCubit = MarketPlaceScreen
+              .marketPlaceScaffoldKey.currentContext!
+              .read<MedicineProductsCubit>();
+          final hCubit = HomeScreen.scaffoldKey.currentContext!
+              .read<MedicineProductsCubit>();
+
           medicine.isLiked
               ? cubit.unlikeMedicinesCatalog(medicine.id)
               : cubit.likeMedicinesCatalog(medicine.id);
+
+          gCubit.refreshMedicineCatalogFavorite(
+              medicine.id, !medicine.isLiked);
+          hCubit.refreshMedicineCatalogFavorite(
+              medicine.id, !medicine.isLiked);
         }
 
         return SizedBox(

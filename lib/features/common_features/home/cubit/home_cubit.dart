@@ -15,4 +15,5 @@ class HomeCubit extends Cubit<HomeState> {
     announcements = (await announcementsRepo.getPromotions()).announcements;
     emit(PromotionLoadingSuccess());
   }
+
 }

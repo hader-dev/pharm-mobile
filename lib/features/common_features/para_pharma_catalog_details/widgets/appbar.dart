@@ -4,6 +4,9 @@ import 'package:hader_pharm_mobile/config/routes/go_router_extension.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
+import 'package:hader_pharm_mobile/features/common_features/home/home.dart';
+import 'package:hader_pharm_mobile/features/common_features/market_place/market_place.dart';
+import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/cubit/para_pharma_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/cubit/para_pharma_details_cubit.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:iconsax/iconsax.dart';
@@ -29,6 +32,12 @@ class ParaPharmaCatalogAppBar extends StatelessWidget {
         BlocBuilder<ParaPharmaDetailsCubit, ParaPharmaDetailsState>(
           builder: (context, state) {
             final cubit = BlocProvider.of<ParaPharmaDetailsCubit>(context);
+            final gCubit = MarketPlaceScreen
+                .marketPlaceScaffoldKey.currentContext!
+                .read<ParaPharmaCubit>();
+            final hCubit =
+                HomeScreen.scaffoldKey.currentContext!.read<ParaPharmaCubit>();
+
             final isLiked = cubit.paraPharmaCatalogData?.isLiked ?? false;
 
             return IconButton(
@@ -38,9 +47,19 @@ class ParaPharmaCatalogAppBar extends StatelessWidget {
               ),
               onPressed: () {
                 if (isLiked) {
-                  cubit.unlikeParaPharma();
+                  cubit.unlikeParaPharma().then((liked) {
+                    gCubit.refreshParaPharmaCatalogFavorite(
+                        cubit.paraPharmaCatalogData!.id, liked);
+                    hCubit.refreshParaPharmaCatalogFavorite(
+                        cubit.paraPharmaCatalogData!.id, liked);
+                  });
                 } else {
-                  cubit.likeParaPharma();
+                  cubit.likeParaPharma().then((liked) {
+                    gCubit.refreshParaPharmaCatalogFavorite(
+                        cubit.paraPharmaCatalogData!.id, liked);
+                    hCubit.refreshParaPharmaCatalogFavorite(
+                        cubit.paraPharmaCatalogData!.id, liked);
+                  });
                 }
               },
             );

@@ -133,12 +133,17 @@ class MedicineProductsCubit extends Cubit<MedicineProductsState> {
       }
 
       if (newDisplayFilters != state.displayFilters) {
-        emit(state.scroll(offset: currentOffset, displayFilters: newDisplayFilters));
+        emit(state.scroll(
+            offset: currentOffset, displayFilters: newDisplayFilters));
       }
     });
   }
 
   void updatedFilters(MedicalFilters appliedFilters) {
     emit(state.copyWith(params: appliedFilters));
+  }
+
+  void refreshMedicineCatalogFavorite(String id, bool bool) {
+    emit(state.liked(medicineId: id, isLiked: bool));
   }
 }

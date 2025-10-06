@@ -38,34 +38,39 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
       }
     });
   }
-  Future<void> likeMedicine() async {
-    if (state.medicineCatalogData == null) return;
+  Future<bool> likeMedicine() async {
+    if (state.medicineCatalogData == null) return false;
     try {
       emit(state.loaded(
         state.medicineCatalogData!.copyWith(isLiked: true),
       ));
       await favoriteRepository.likeMedicineCatalog(
           medicineCatalogId: state.medicineCatalogData!.id);
+      return true;
     } catch (e) {
       emit(state.loaded(state.medicineCatalogData!.copyWith(isLiked: false)));
       GlobalExceptionHandler.handle(exception: e);
+      return false;
     }
   }
 
-  Future<void> unlikeMedicine() async {
+  Future<bool> unlikeMedicine() async {
     if (state.medicineCatalogData != null) {
       try {
         emit(state.loaded(state.medicineCatalogData!.copyWith(isLiked: false)));
         await favoriteRepository.unLikeMedicineCatalog(
             medicineCatalogId: state.medicineCatalogData!.id);
+        return false;
       } catch (e) {
         state.medicineCatalogData!.isLiked = true;
         emit(state.loaded(
           state.medicineCatalogData!.copyWith(isLiked: true),
         ));
         GlobalExceptionHandler.handle(exception: e);
+        return true;
       }
     }
+    return true;
   }
 
   getMedicineCatalogData(String id) async {

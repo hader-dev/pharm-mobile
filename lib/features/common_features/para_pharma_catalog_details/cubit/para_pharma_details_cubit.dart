@@ -46,34 +46,41 @@ class ParaPharmaDetailsCubit extends Cubit<ParaPharmaDetailsState> {
     }
   }
 
-  Future<void> likeParaPharma() async {
+  Future<bool> likeParaPharma() async {
     if (paraPharmaCatalogData != null) {
       try {
         paraPharmaCatalogData!.isLiked = true;
         emit(ParaPharmaDetailsLoaded());
         await favoriteRepository.likeParaPharmaCatalog(
             paraPharmaCatalogId: paraPharmaCatalogData!.id);
+
+        return true;
       } catch (e) {
         paraPharmaCatalogData!.isLiked = false;
         emit(ParaPharmaDetailsLoaded());
         GlobalExceptionHandler.handle(exception: e);
+        return false;
       }
     }
+    return false;
   }
 
-  Future<void> unlikeParaPharma() async {
+  Future<bool> unlikeParaPharma() async {
     if (paraPharmaCatalogData != null) {
       try {
         paraPharmaCatalogData!.isLiked = false;
         emit(ParaPharmaDetailsLoaded());
         await favoriteRepository.unLikeParaPharmaCatalog(
             paraPharmaCatalogId: paraPharmaCatalogData!.id);
+        return false;
       } catch (e) {
         paraPharmaCatalogData!.isLiked = true;
         emit(ParaPharmaDetailsLoaded());
         GlobalExceptionHandler.handle(exception: e);
+        return true;
       }
     }
+    return false;
   }
 
   void shareProduct() async {
@@ -163,5 +170,9 @@ class ParaPharmaDetailsCubit extends Cubit<ParaPharmaDetailsState> {
       emit(PassQuickOrderFailed());
       return false;
     }
+  }
+
+  void refreshUi() {
+    emit(ParaPharmaDetailsLoaded());
   }
 }

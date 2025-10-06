@@ -14,6 +14,8 @@ import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+  static final GlobalKey<ScaffoldState> scaffoldKey =
+      GlobalKey<ScaffoldState>();
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -36,6 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return StateProvider(
       child: Scaffold(
+        key: HomeScreen.scaffoldKey,
         appBar: HomeAppbar(),
         body: BlocBuilder<HomeCubit, HomeState>(
           builder: (context, state) {

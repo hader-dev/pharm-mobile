@@ -165,4 +165,9 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
       }
     });
   }
+
+  void refreshParaPharmaCatalogFavorite(
+      String paraPharmaCatalogId, bool liked) {
+    emit(state.liked(paraPharmaId: paraPharmaCatalogId, isLiked: liked));
+  }
 }
