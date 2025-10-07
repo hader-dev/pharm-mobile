@@ -15,12 +15,14 @@ class CustomPriceFormField extends StatelessWidget {
       required this.translation,
       required this.customPriceController,
       required this.onPriceChanged,
+      this.enabled = true,
       this.onEditComplete});
 
   final AppLocalizations translation;
   final TextEditingController customPriceController;
   final OnPriceChanged onPriceChanged;
   final VoidCallback? onEditComplete;
+  final bool enabled;
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +39,7 @@ class CustomPriceFormField extends StatelessWidget {
         SizedBox(
           height: AppSizesManager.s32,
           child: TextFormField(
+            enabled: enabled,
             controller: customPriceController,
             keyboardType: TextInputType.numberWithOptions(decimal: true),
             inputFormatters: [
@@ -57,6 +60,11 @@ class CustomPriceFormField extends StatelessWidget {
                 borderRadius:
                     BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
                 borderSide: BorderSide(color: StrokeColors.focused.color),
+              ),
+              disabledBorder: OutlineInputBorder(
+                borderRadius:
+                    BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+                borderSide: BorderSide(color: StrokeColors.normal.color),
               ),
             ),
             onChanged: (value) => onPriceChanged(value),

@@ -120,6 +120,7 @@ class _DeligateOrderItemWidgetState extends State<DeligateOrderItemWidget> {
                   widget.quantityController, widget.customPriceController)),
           const SizedBox(height: AppSizesManager.s12),
           CustomPriceFormField(
+            enabled: false,
             customPriceController: widget.customPriceController,
             translation: translation,
             onPriceChanged: (value) =>

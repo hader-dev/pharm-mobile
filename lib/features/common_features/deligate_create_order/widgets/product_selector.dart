@@ -62,6 +62,7 @@ class OrderProductSelector extends StatelessWidget {
               onIncrement: cubit.incrementQuantity),
           const ResponsiveGap.s12(),
           CustomPriceFormField(
+            enabled: false,
             customPriceController: cubit.customPriceController,
             translation: translation,
             onPriceChanged: cubit.updateCustomPrice,
