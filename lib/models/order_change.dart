@@ -36,17 +36,23 @@ class OrderItemAdd {
   final String productId;
   final int quantity;
   final bool isParapharm;
+  final double price;
 
   OrderItemAdd(
       {required this.productId,
       required this.quantity,
+      required this.price,
       this.isParapharm = true});
 
   OrderItemAdd copyWith({
     int? quantity,
+    double? price,
   }) {
     return OrderItemAdd(
-        productId: productId, quantity: quantity ?? this.quantity);
+      productId: productId,
+      price: price ?? this.price,
+      quantity: quantity ?? this.quantity,
+    );
   }
 
   Map<String, dynamic> toJson() {
@@ -77,6 +83,16 @@ class OrderChangeModel {
       addOrderItems.isNotEmpty;
 
   void removeOrderItem(DeligateOrderItem item) {
+    final isNewItem = addOrderItems.indexWhere((el) =>
+            el.productId == item.product.parapharmCatalogId ||
+            el.productId == item.product.medicineCatalogId) ==
+        -1;
+
+    if (isNewItem) {
+      addOrderItems.removeWhere((el) => el.productId == item.product.id);
+      return;
+    }
+
     deleteOrderItems.add(OrderItemDelete(id: item.product.id, item: item));
   }
 
@@ -92,6 +108,18 @@ class OrderChangeModel {
       return;
     }
 
+    final isNewItemIndex = addOrderItems.indexWhere((el) =>
+        el.productId == item.product.parapharmCatalogId ||
+        el.productId == item.product.medicineCatalogId);
+
+    if (isNewItemIndex != -1) {
+      addOrderItems[isNewItemIndex] = addOrderItems[isNewItemIndex].copyWith(
+        quantity: item.quantity,
+        price: item.suggestedPrice,
+      );
+      return;
+    }
+
     updateOrderItems.add(OrderItemChange(
         id: item.product.id,
         quantity: item.quantity,
@@ -102,5 +130,17 @@ class OrderChangeModel {
     deleteOrderItems = [];
     updateOrderItems = [];
     addOrderItems = [];
+  }
+
+  void addOrderItem(DeligateOrderItem newOrderItem) {
+    addOrderItems.add(
+      OrderItemAdd(
+          productId: newOrderItem.isParapharm
+              ? newOrderItem.product.parapharmCatalogId!
+              : newOrderItem.product.medicineCatalogId!,
+          price:
+              newOrderItem.suggestedPrice ?? newOrderItem.product.unitPriceHt,
+          quantity: newOrderItem.quantity),
+    );
   }
 }

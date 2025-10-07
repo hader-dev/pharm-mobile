@@ -16,7 +16,7 @@ class ParamsUpdateOrder {
     return {
       'deleteOrderItemsIds': deleteOrderItems.map((el) => el.id).toList(),
       'updateOrderItems': updateOrderItems.map((el) => el.toJson()).toList(),
-      'addOrderItems': addOrderItems.map((el) => el.toJson()).toList(),
+      'createOrderItems': addOrderItems.map((el) => el.toJson()).toList(),
     };
   }
 }

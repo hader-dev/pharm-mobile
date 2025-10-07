@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
-import 'package:hader_pharm_mobile/features/common_features/deligate_orders_details/cubit/add/provider.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
@@ -13,21 +12,19 @@ class DeligateOrderDetailsAddOrderItemsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final translation = context.translation!;
 
-    return DeligateEditOrderStateProvider(
-      child: Padding(
-        padding: const EdgeInsets.all(AppSizesManager.p8),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              translation.product,
-              style: context.responsiveTextTheme.current.headLine3Medium
-                  .copyWith(),
-            ),
-            const ResponsiveGap.s4(),
-            const Expanded(child: OrderProductSelector()),
-          ],
-        ),
+    return Padding(
+      padding: const EdgeInsets.all(AppSizesManager.p8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            translation.product,
+            style:
+                context.responsiveTextTheme.current.headLine3Medium.copyWith(),
+          ),
+          const ResponsiveGap.s4(),
+          const Expanded(child: OrderProductSelector()),
+        ],
       ),
     );
   }

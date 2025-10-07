@@ -85,10 +85,13 @@ class OrdersDetailsState {
     bool updatedExisting = false;
 
     List<DeligateOrderItem> updatedOrderItems = orderItems.map((el) {
-      final exists = !removed && el.product.id == item.product.id;
+      final exists = !removed &&
+          (el.product.parapharmCatalogId == item.product.parapharmCatalogId);
 
       if (exists) {
         updatedExisting = true;
+        return el.copyWith(
+            quantity: item.quantity, suggestedPrice: item.suggestedPrice);
       }
 
       return exists ? item : el;
@@ -100,7 +103,8 @@ class OrdersDetailsState {
       updatedOrderItems.add(item);
     }
 
-    return OrderItemsUpdated.fromState(copyWith(orderItems: updatedOrderItems));
+    return OrderItemsUpdated.fromState(
+        copyWith(orderItems: updatedOrderItems, didChange: true));
   }
 }
 

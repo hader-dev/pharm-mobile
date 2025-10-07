@@ -222,16 +222,20 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
     if (selectedProduct == null) return;
 
     final customPrice = double.tryParse(customPriceController.text);
-    emit(
-      state.itemsUpdated(
-        item: DeligateOrderItem(
-            isParapharm: true,
-            product: OrderItem.empty()
-                .copyWith(parapharmCatalogId: selectedProduct.id),
-            quantity: quantity,
-            suggestedPrice: customPrice),
-      ),
-    );
+
+    final newOrderItem = DeligateOrderItem(
+        isParapharm: true,
+        product: OrderItem.empty().copyWith(
+          parapharmCatalogId: selectedProduct.id,
+          designation: selectedProduct.name,
+          imageUrl: selectedProduct.image?.path,
+        ),
+        quantity: quantity,
+        suggestedPrice: customPrice);
+
+      orderChangeModel.addOrderItem(newOrderItem);
+
+    emit(state.itemsUpdated(item: newOrderItem));
 
     getItInstance.get<ToastManager>().showToast(
           message: translation.order_placed_successfully,
