@@ -61,9 +61,7 @@ class OrderDetailsAppbar extends StatelessWidget
                   ));
             }
             OrderStatus orderStatus = OrderStatus.values.firstWhere(
-              (statusItem) =>
-                  statusItem.id ==
-                  (context.read<OrderDetailsCubit>().orderData?.status ?? 1),
+              (statusItem) => statusItem.id == (state.orderData.status),
             );
             return Container(
               margin: EdgeInsets.only(right: AppSizesManager.p12),
@@ -77,12 +75,14 @@ class OrderDetailsAppbar extends StatelessWidget
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(OrderStatus.getTranslatedStatus(orderStatus),
-                      style: context.responsiveTextTheme.current.bodySmall
-                          .copyWith(
-                              color: orderStatus.color,
-                              fontWeight: context.responsiveTextTheme.current
-                                  .appFont.appFontSemiBold)),
+                  Text(
+                    OrderStatus.getTranslatedStatus(orderStatus),
+                    style: context.responsiveTextTheme.current.bodySmall
+                        .copyWith(
+                            color: orderStatus.color,
+                            fontWeight: context.responsiveTextTheme.current
+                                .appFont.appFontSemiBold),
+                  ),
                 ],
               ),
             );

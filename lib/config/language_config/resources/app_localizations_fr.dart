@@ -170,6 +170,12 @@ class AppLocalizationsFr extends AppLocalizations {
   String get medicines => 'Médicaments';
 
   @override
+  String get feedback_action_success => 'Opération effectuée avec successe';
+
+  @override
+  String get feedback_action_failed => 'Opération echouée';
+
+  @override
   String get profile => 'Profil';
 
   @override

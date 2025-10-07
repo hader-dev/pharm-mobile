@@ -412,6 +412,18 @@ abstract class AppLocalizations {
   /// **'Medicines'**
   String get medicines;
 
+  /// No description provided for @feedback_action_success.
+  ///
+  /// In en, this message translates to:
+  /// **'Operation successful'**
+  String get feedback_action_success;
+
+  /// No description provided for @feedback_action_failed.
+  ///
+  /// In en, this message translates to:
+  /// **'Operation failed'**
+  String get feedback_action_failed;
+
   /// No description provided for @profile.
   ///
   /// In en, this message translates to:

@@ -20,7 +20,7 @@ class OrderDetailsModel extends BaseOrderModel {
   final Company clientCompany;
   final Company sellerCompany;
 
-  OrderDetailsModel({
+  const OrderDetailsModel({
     required super.id,
     super.invoiceType,
     super.paymentMethod,
@@ -46,6 +46,35 @@ class OrderDetailsModel extends BaseOrderModel {
     required this.clientCompany,
     required this.sellerCompany,
   });
+
+  factory OrderDetailsModel.empty() {
+    return OrderDetailsModel(
+      id: "empty",
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+      invoiceType: 0,
+      paymentMethod: 0,
+      discount: 0.0,
+      deliveryAddress: "",
+      status: 1,
+      totalAmountExclTax: 0.0,
+      totalAmountInclTax: 0.0,
+      latitude: 0.0,
+      longitude: 0.0,
+      clientCompanyId: "",
+      sellerCompanyId: "",
+      delegateUserId: "",
+      operatorUserId: "",
+      stockUserId: "",
+      deliveryTownId: 0,
+      clientNote: "",
+      privateNote: "",
+      orderItems: [],
+      orderStatusHistories: [],
+      clientCompany: Company.empty(),
+      sellerCompany: Company.empty(),
+    );
+  }
 }
 
 class OrderItem {

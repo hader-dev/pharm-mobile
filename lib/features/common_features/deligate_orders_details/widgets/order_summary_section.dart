@@ -14,6 +14,8 @@ class OrderSummarySection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     OrderDetailsCubit cubit = context.read<OrderDetailsCubit>();
+    final state = cubit.state;
+
     return Container(
       margin: const EdgeInsets.all(AppSizesManager.p4),
       padding: const EdgeInsets.symmetric(
@@ -35,12 +37,7 @@ class OrderSummarySection extends StatelessWidget {
             label: context.translation!.payment_method,
             value: PaymentMethods.values
                 .firstWhere(
-                    (element) =>
-                        element.id ==
-                        context
-                            .read<OrderDetailsCubit>()
-                            .orderData!
-                            .paymentMethod,
+                    (element) => element.id == state.orderData.paymentMethod,
                     orElse: () => PaymentMethods.cash)
                 .translation(context.translation!),
           ),
@@ -49,11 +46,11 @@ class OrderSummarySection extends StatelessWidget {
           SummaryRow(
               label: context.translation!.total_ht,
               value:
-                  cubit.orderData!.totalAmountExclTax.formatAsPriceForPrint()),
+                  state.orderData.totalAmountExclTax.formatAsPriceForPrint()),
           SummaryRow(
               label: context.translation!.total_ttc,
               value:
-                  cubit.orderData!.totalAmountInclTax.formatAsPriceForPrint()),
+                  state.orderData.totalAmountInclTax.formatAsPriceForPrint()),
           // const Divider(height: 24, thickness: 1),
           // SummaryRow(
           //   label: context.translation!.total_ht_amount,

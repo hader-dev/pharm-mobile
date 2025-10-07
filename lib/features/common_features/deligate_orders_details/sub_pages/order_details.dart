@@ -47,7 +47,8 @@ class OrdersDetailsPage extends StatelessWidget {
           }
           final cubit = context.read<OrderDetailsCubit>();
 
-          final item = cubit.orderData!;
+          final item = cubit.state.orderData;
+
 
           return SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),
@@ -57,8 +58,8 @@ class OrdersDetailsPage extends StatelessWidget {
               children: <Widget>[
                 ShippingAddressSection(
                   address: item.deliveryAddress,
-                  latitude: cubit.orderData!.latitude,
-                  longitude: cubit.orderData!.longitude,
+                  latitude: cubit.state.orderData.latitude,
+                  longitude: cubit.state.orderData.longitude,
                 ),
                 Container(
                   margin:
@@ -73,13 +74,14 @@ class OrdersDetailsPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      if (cubit.orderData!.invoiceType != null)
+                      if (cubit.state.orderData.invoiceType != null)
                         OrderInvoiceSection(
                           invoiceType: InvoiceTypes.values.firstWhere(
                               (element) =>
-                                  cubit.orderData!.invoiceType == element.id),
+                                  cubit.state.orderData.invoiceType ==
+                                  element.id),
                         ),
-                      if (cubit.orderData!.clientNote.isNotEmpty)
+                      if (cubit.state.orderData.clientNote.isNotEmpty)
                         ClientNoteSection(),
                       const OrderSummarySection(),
                       Padding(

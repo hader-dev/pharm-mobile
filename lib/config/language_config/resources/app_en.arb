@@ -51,6 +51,8 @@
   "view_details": "View Details",
   "market_place": "Market Place",
   "medicines": "Medicines",
+  "feedback_action_success": "Operation successful",
+  "feedback_action_failed": "Operation failed",
   "profile": "Profile",
   "legal_and_policies": "Legal and Policies",
   "help_and_support": "Help and Support",

@@ -33,24 +33,13 @@ class OrderTrackingBottomSheet extends StatelessWidget {
               const ResponsiveGap.s12(),
               ListView.builder(
                 shrinkWrap: true,
-                itemCount: context
-                    .read<OrderDetailsCubit>()
-                    .orderData!
-                    .orderStatusHistories
-                    .length,
+                itemCount: state.orderData.orderStatusHistories.length,
                 itemBuilder: (BuildContext context, int index) {
-                  final OrderStatusHistory step = context
-                      .read<OrderDetailsCubit>()
-                      .orderData!
-                      .orderStatusHistories[index];
+                  final OrderStatusHistory step =
+                      state.orderData.orderStatusHistories[index];
                   final bool isFirst = index == 0;
-                  final bool isLast = index ==
-                      context
-                              .read<OrderDetailsCubit>()
-                              .orderData!
-                              .orderStatusHistories
-                              .length -
-                          1;
+                  final bool isLast =
+                      index == state.orderData.orderStatusHistories.length - 1;
                   return TrackingStepWidget(
                     historyStep: step,
                     isFirst: isFirst,

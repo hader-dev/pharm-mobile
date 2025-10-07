@@ -169,6 +169,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get medicines => 'Medicines';
 
   @override
+  String get feedback_action_success => 'Operation successful';
+
+  @override
+  String get feedback_action_failed => 'Operation failed';
+
+  @override
   String get profile => 'Profile';
 
   @override

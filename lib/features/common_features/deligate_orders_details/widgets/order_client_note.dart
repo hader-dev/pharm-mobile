@@ -13,6 +13,9 @@ class ClientNoteSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final state = context.read<OrderDetailsCubit>().state;
+    final localization = context.translation!;
+
     return Padding(
       padding: const EdgeInsets.symmetric(
           vertical: AppSizesManager.p12, horizontal: AppSizesManager.p8),
@@ -20,7 +23,7 @@ class ClientNoteSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Client notes',
+            localization.client_notes,
             style: context.responsiveTextTheme.current.headLine4SemiBold,
           ),
           const ResponsiveGap.s4(),
@@ -30,10 +33,7 @@ class ClientNoteSection extends StatelessWidget {
               return InkWell(
                 onTap: () => showMore.value = !showMore.value,
                 child: calculateNumberOfLines(
-                            context
-                                .read<OrderDetailsCubit>()
-                                .orderData!
-                                .clientNote,
+                            state.orderData.clientNote,
                             context.responsiveTextTheme.current.bodySmall,
                             MediaQuery.sizeOf(context).width) >
                         3
@@ -43,10 +43,7 @@ class ClientNoteSection extends StatelessWidget {
                           Text.rich(
                             showMore.value
                                 ? TextSpan(
-                                    text: context
-                                        .read<OrderDetailsCubit>()
-                                        .orderData!
-                                        .clientNote,
+                                    text: state.orderData.clientNote,
                                     style: context
                                         .responsiveTextTheme.current.bodySmall
                                         .copyWith(
@@ -54,7 +51,7 @@ class ClientNoteSection extends StatelessWidget {
                                     ),
                                     children: [
                                         TextSpan(
-                                            text: '(show_less)',
+                                            text: '(${localization.show_less})',
                                             style: context.responsiveTextTheme
                                                 .current.bodySmall
                                                 .copyWith(
@@ -62,10 +59,7 @@ class ClientNoteSection extends StatelessWidget {
                                             ))
                                       ])
                                 : TextSpan(
-                                    text: context
-                                        .read<OrderDetailsCubit>()
-                                        .orderData!
-                                        .clientNote,
+                                    text: state.orderData.clientNote,
                                     style: context
                                         .responsiveTextTheme.current.bodySmall
                                         .copyWith(
@@ -73,7 +67,7 @@ class ClientNoteSection extends StatelessWidget {
                                     ),
                                     children: [
                                         TextSpan(
-                                          text: ' (show_more)',
+                                          text: ' (${localization.show_more})',
                                           style: context.responsiveTextTheme
                                               .current.bodySmall
                                               .copyWith(
@@ -92,11 +86,12 @@ class ClientNoteSection extends StatelessWidget {
                         ],
                       )
                     : Text(
-                        context.read<OrderDetailsCubit>().orderData!.clientNote,
+                        state.orderData.clientNote,
                         style: context.responsiveTextTheme.current.bodySmall
                             .copyWith(
                           height: 1.5,
-                        )),
+                        ),
+                      ),
               );
             },
           ),

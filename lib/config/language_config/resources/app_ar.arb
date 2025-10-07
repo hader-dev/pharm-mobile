@@ -80,6 +80,8 @@
   "change_password_title": "تغيير كلمة المرور",
   "add_cart": "أضف إلى السلة",
   "similar_products": "منتجات مشابهة",
+  "feedback_action_success": "تمت العملية بنجاح",
+  "feedback_action_failed": "فشلت العملية",
   "no_additional_notes": "لا توجد ملاحظات إضافية لهذا العنصر.",
   "para_pharma": "الشبه صيدلة",
   "documents": "المستندات",

@@ -52,6 +52,8 @@
   "note": "Remarque",
   "total_amount": "Montant total",
   "view_details": "Voir les détails",
+  "feedback_action_success": "Opération effectuée avec successe",
+  "feedback_action_failed": "Opération echouée",
   "market_place": "Marché",
   "medicines": "Médicaments",
   "profile": "Profil",

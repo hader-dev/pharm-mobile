@@ -1,21 +1,23 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/config/language_config/resources/app_localizations.dart';
 import 'package:hader_pharm_mobile/models/deligate_order.dart';
+import 'package:hader_pharm_mobile/models/order_change.dart';
 import 'package:hader_pharm_mobile/models/order_details.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/order_repository.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/params/cancel_order.dart';
-import 'package:hader_pharm_mobile/repositories/remote/order/params/delete_order_item.dart';
-import 'package:hader_pharm_mobile/repositories/remote/order/params/update_order_item.dart';
+import 'package:hader_pharm_mobile/repositories/remote/order/params/update_order.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/response/response_order_cancel.dart';
 import 'package:hader_pharm_mobile/utils/debounce.dart';
+import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 
 part 'orders_details_state.dart';
 
 class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
-  OrderDetailsModel? orderData;
   final IOrderRepository orderRepository;
-  List<DeligateOrderItem> orderItems = [];
   DebouncerManager debounceManager = DebouncerManager();
+  OrderChangeModel orderChangeModel = OrderChangeModel();
 
   OrderDetailsCubit({
     required this.orderRepository,
@@ -23,15 +25,16 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
 
   Future<void> getOrdersDetails({required String orderId}) async {
     try {
-      emit(OrderDetailsLoading());
+      emit(state.loading());
 
       var results = await Future.wait([
-        orderRepository.getMOrderById(orderId),
+        orderRepository.getMorderById(orderId),
       ]);
 
       final orderData = results[0];
 
-      this.orderData = orderData;
+      final orderItems = <DeligateOrderItem>[];
+
       for (var element in orderData.orderItems) {
         orderItems.add(
           DeligateOrderItem(
@@ -43,39 +46,46 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
         );
       }
 
-      emit(OrderDetailsLoaded());
+      emit(state.loaded(
+        orderData: orderData,
+        orderItems: orderItems,
+        originalOrderItems: orderItems.map((el) => el).toList(),
+      ));
     } catch (e, stacktrace) {
       debugPrint("$e");
       debugPrintStack(stackTrace: stacktrace);
 
-      emit(OrderDetailsLoadingFailed());
+      emit(state.loadingFailed());
     }
   }
 
   Future<void> reloadOrderData() async {
     try {
-      emit(OrderDetailsLoading());
-      orderData = await orderRepository.getMOrderById(orderData!.id);
-      emit(OrderDetailsLoaded());
+      emit(state.loading());
+      final orderData = await orderRepository.getMorderById(state.orderData.id);
+      emit(state.loaded(orderData: orderData));
     } catch (e, stacktrace) {
       debugPrint("$e");
       debugPrintStack(stackTrace: stacktrace);
 
-      emit(OrderDetailsLoadingFailed());
+      emit(state.loadingFailed());
     }
   }
 
   Future<ResponseOrderCancel> cancelOrder() async {
-    if (orderData == null) return ResponseOrderCancel.error();
-    return orderRepository.cancelOrder(ParamsCancelOrder(id: orderData!.id));
+    if (state.orderData.id == "empty") return ResponseOrderCancel.error();
+    return orderRepository
+        .cancelOrder(ParamsCancelOrder(id: state.orderData.id));
   }
 
   void removeOrderItem(DeligateOrderItem item) {
-    orderItems =
-        orderItems.where((el) => el.product.id != item.product.id).toList();
-    orderRepository.deleteOrderItem(
-        ParamsDeleteOrderItem(orderId: orderData!.id, itemId: item.product.id));
-    emit(OrderDetailsLoaded());
+    final orderItems = state.orderItems
+        .where((el) => el.product.id != item.product.id)
+        .toList();
+
+    orderChangeModel.removeOrderItem(item);
+
+    emit(state.initial(orderItems: orderItems, didChange: true));
   }
 
   void decrementItemQuantity(
@@ -89,15 +99,16 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
 
     final updatedItem = item.copyWith(quantity: updatedQuantity);
 
-    orderRepository.updateOrderItem(ParamsUpdateOrderItem(
-        orderId: orderData!.id,
-        itemId: item.product.id,
-        quantity: updatedQuantity));
-
-    orderItems = orderItems
+    final orderItems = state.orderItems
         .map((el) => el.product.id == item.product.id ? updatedItem : el)
         .toList();
-    emit(OrderDetailsLoaded());
+
+    orderChangeModel.updateOrderItem(updatedItem);
+
+    emit(state.initial(
+      orderItems: orderItems,
+      didChange: true,
+    ));
   }
 
   void incrementItemQuantity(
@@ -110,17 +121,17 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
 
     itemQuantityController.text = updatedQuantity.toString();
 
-    orderRepository.updateOrderItem(ParamsUpdateOrderItem(
-        orderId: orderData!.id,
-        itemId: item.product.id,
-        quantity: updatedQuantity));
-
     final updatedItem = item.copyWith(quantity: updatedQuantity);
-    orderItems = orderItems
+    orderChangeModel.updateOrderItem(updatedItem);
+
+    final orderItems = state.orderItems
         .map((el) => el.product.id == item.product.id ? updatedItem : el)
         .toList();
 
-    emit(OrderDetailsLoaded());
+    emit(state.initial(
+      orderItems: orderItems,
+      didChange: true,
+    ));
   }
 
   void updateItemCustomPrice(String value, DeligateOrderItem item) {
@@ -130,10 +141,15 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
         action: () {
           final priceValue = double.tryParse(value);
           final updatedItem = item.copyWith(suggestedPrice: priceValue);
-          orderItems = orderItems
+          final orderItems = state.orderItems
               .map((el) => el.product.id == item.product.id ? updatedItem : el)
               .toList();
-          emit(OrderDetailsLoaded());
+
+          orderChangeModel.updateOrderItem(updatedItem);
+          emit(state.initial(
+            orderItems: orderItems,
+            didChange: true,
+          ));
         });
   }
 
@@ -144,16 +160,55 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
         action: () {
           final quantityValue = int.tryParse(value);
           final updatedItem = item.copyWith(quantity: quantityValue);
-          orderItems = orderItems
+          final orderItems = state.orderItems
               .map((el) => el.product.id == item.product.id ? updatedItem : el)
               .toList();
 
-          orderRepository.updateOrderItem(ParamsUpdateOrderItem(
-              orderId: orderData!.id,
-              itemId: item.product.id,
-              quantity: quantityValue));
+          orderChangeModel.updateOrderItem(updatedItem);
 
-          emit(OrderDetailsLoaded());
+          emit(state.initial(
+            orderItems: orderItems,
+            didChange: true,
+          ));
         });
+  }
+
+  void cancelUpdateOrder() {
+    orderChangeModel.reset();
+    emit(
+      state.cancelChanges(),
+    );
+  }
+
+  void confirmUpdateOrder(AppLocalizations translation) {
+    debugPrint("Triggered confirm update order");
+    orderRepository
+        .updateOrder(
+      ParamsUpdateOrder(
+        orderId: state.orderData.id,
+        deleteOrderItems: orderChangeModel.deleteOrderItems.toList(),
+        updateOrderItems: orderChangeModel.updateOrderItems.toList(),
+        addOrderItems: orderChangeModel.addOrderItems.toList(),
+      ),
+    )
+        .then((res) {
+      final toastManager = getItInstance.get<ToastManager>();
+      toastManager.showToast(
+        message: res.affectedRows > 0
+            ? translation.feedback_action_success
+            : translation.feedback_action_failed,
+        type: res.affectedRows > 0 ? ToastType.success : ToastType.error,
+      );
+
+      if (res.affectedRows > 0) {
+        orderChangeModel.reset();
+
+        emit(
+          state.initial(
+            didChange: false,
+          ),
+        );
+      }
+    });
   }
 }

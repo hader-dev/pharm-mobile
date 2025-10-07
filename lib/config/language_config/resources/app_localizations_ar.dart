@@ -169,6 +169,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get medicines => 'الأدوية';
 
   @override
+  String get feedback_action_success => 'تمت العملية بنجاح';
+
+  @override
+  String get feedback_action_failed => 'فشلت العملية';
+
+  @override
   String get profile => 'الملف الشخصي';
 
   @override

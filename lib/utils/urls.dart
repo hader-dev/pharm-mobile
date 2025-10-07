@@ -34,7 +34,7 @@ class Urls {
   static String get company => "/companies";
 
   //clients-companies
-  static String get clientsCompanies => "/clients-companies";
+  static String get clientsCompanies => "/company-clients";
   static String get clientsCompaniesJoin => "$clientsCompanies/requests/join";
   static String get myClients => "$clientsCompanies/my-clients";
 

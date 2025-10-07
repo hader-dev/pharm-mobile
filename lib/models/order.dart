@@ -13,7 +13,7 @@ class BaseOrderModel {
   final String? sellerCompanyName;
   final String? clientCompanyName;
 
-  BaseOrderModel({
+  const BaseOrderModel({
     required this.id,
     this.clientCompanyName,
     required this.status,
