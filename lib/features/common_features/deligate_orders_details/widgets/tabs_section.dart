@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/common_features/deligate_orders_details/sub_pages/add_page/add_page.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_orders_details/sub_pages/order_details.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_orders_details/sub_pages/order_items/order_items.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class OrderDetailsTabBarSection extends StatefulWidget {
-  const OrderDetailsTabBarSection({super.key, required this.orderId});
+  const OrderDetailsTabBarSection(
+      {super.key, required this.orderId, this.isEditable = false});
   final String orderId;
+  final bool isEditable;
 
   @override
   State<OrderDetailsTabBarSection> createState() =>
@@ -19,7 +22,8 @@ class _OrderDetailsTabBarSectionState extends State<OrderDetailsTabBarSection>
   @override
   void initState() {
     super.initState();
-    tabsController = TabController(length: 2, vsync: this);
+    tabsController =
+        TabController(length: widget.isEditable ? 3 : 2, vsync: this);
   }
 
   @override
@@ -27,6 +31,7 @@ class _OrderDetailsTabBarSectionState extends State<OrderDetailsTabBarSection>
     final translation = context.translation!;
     final List<String> tabs = [
       translation.overview,
+      if (widget.isEditable) translation.add_products_to_order,
       translation.order_items,
     ];
 
@@ -65,24 +70,12 @@ class _OrderDetailsTabBarSectionState extends State<OrderDetailsTabBarSection>
               OrdersDetailsPage(
                 orderId: widget.orderId,
               ),
+              if (widget.isEditable) DeligateOrderDetailsAddOrderItemsPage(),
               OrderDetailsItemsPage(),
             ],
           ),
         ),
       ],
     );
-  }
-
-  getTabTranslation(String label) {
-    switch (label) {
-      case "Overview":
-        return context.translation!.overview;
-      case "Order Items":
-        return context.translation!.order_items;
-      case "Order Complaint":
-        return context.translation!.order_complaint;
-      default:
-        return "Tab";
-    }
   }
 }

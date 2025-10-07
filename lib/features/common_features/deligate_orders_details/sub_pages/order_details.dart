@@ -5,7 +5,7 @@ import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_orders_details/actions/can_cancel_order.dart';
-import 'package:hader_pharm_mobile/features/common_features/deligate_orders_details/cubit/orders_details_cubit.dart';
+import 'package:hader_pharm_mobile/features/common_features/deligate_orders_details/cubit/order_details/orders_details_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_orders_details/widgets/cancel_order_bottom_sheet.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_orders_details/widgets/order_client_note.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_orders_details/widgets/order_invoice_section.dart';

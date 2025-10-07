@@ -5,6 +5,7 @@ import 'package:hader_pharm_mobile/config/language_config/resources/app_localiza
 import 'package:hader_pharm_mobile/models/deligate_order.dart';
 import 'package:hader_pharm_mobile/models/order_change.dart';
 import 'package:hader_pharm_mobile/models/order_details.dart';
+import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/order_repository.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/params/cancel_order.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/params/update_order.dart';
@@ -210,5 +211,31 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
         );
       }
     });
+  }
+
+  void addOrderItem({
+    required TextEditingController customPriceController,
+    required int quantity,
+    BaseParaPharmaCatalogModel? selectedProduct,
+    required AppLocalizations translation,
+  }) {
+    if (selectedProduct == null) return;
+
+    final customPrice = double.tryParse(customPriceController.text);
+    emit(
+      state.itemsUpdated(
+        item: DeligateOrderItem(
+            isParapharm: true,
+            product: OrderItem.empty()
+                .copyWith(parapharmCatalogId: selectedProduct.id),
+            quantity: quantity,
+            suggestedPrice: customPrice),
+      ),
+    );
+
+    getItInstance.get<ToastManager>().showToast(
+          message: translation.order_placed_successfully,
+          type: ToastType.success,
+        );
   }
 }

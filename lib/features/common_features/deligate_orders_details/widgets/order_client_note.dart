@@ -5,7 +5,7 @@ import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../../utils/helper_func.dart';
-import '../cubit/orders_details_cubit.dart';
+import '../cubit/order_details/orders_details_cubit.dart';
 
 class ClientNoteSection extends StatelessWidget {
   final ValueNotifier showMore = ValueNotifier(false);

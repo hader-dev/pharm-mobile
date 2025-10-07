@@ -79,6 +79,29 @@ class OrdersDetailsState {
       didChange: false,
     );
   }
+
+  OrderItemsUpdated itemsUpdated(
+      {required DeligateOrderItem item, bool removed = false}) {
+    bool updatedExisting = false;
+
+    List<DeligateOrderItem> updatedOrderItems = orderItems.map((el) {
+      final exists = !removed && el.product.id == item.product.id;
+
+      if (exists) {
+        updatedExisting = true;
+      }
+
+      return exists ? item : el;
+    }).toList();
+
+    if (removed) {
+      updatedOrderItems.remove(item);
+    } else if (!updatedExisting) {
+      updatedOrderItems.add(item);
+    }
+
+    return OrderItemsUpdated.fromState(copyWith(orderItems: updatedOrderItems));
+  }
 }
 
 final class OrdersInitial extends OrdersDetailsState {
@@ -149,4 +172,15 @@ final class OrderDetailsLoadingFailed extends OrdersDetailsState {
       orderItems: state.orderItems,
     );
   }
+}
+
+final class OrderItemsUpdated extends OrdersDetailsState {
+  OrderItemsUpdated.fromState(
+    OrdersDetailsState state,
+  ) : super(
+          orderData: state.orderData,
+          didChange: state.didChange,
+          originalOrderItems: state.originalOrderItems,
+          orderItems: state.orderItems,
+        );
 }

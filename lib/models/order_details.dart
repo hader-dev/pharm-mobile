@@ -169,6 +169,50 @@ class OrderItem {
       note: 'Urgent delivery',
     );
   }
+
+  OrderItem copyWith({
+    String? id,
+    double? totalAmountTtc,
+    double? totalAmountHt,
+    double? tvaPercentage,
+    double? unitPriceHt,
+    double? unitPriceTtc,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    String? medicineCatalogId,
+    String? parapharmCatalogId,
+    int? quantity,
+    dynamic designation,
+    dynamic lotNumber,
+    dynamic expirationDate,
+    double? margin,
+    double? discountAmount,
+    String? orderId,
+    String? imageUrl,
+    String? note,
+  }) {
+    return OrderItem(
+      id: id ?? this.id,
+      totalAmountTtc: totalAmountTtc ?? this.totalAmountTtc,
+      totalAmountHt: totalAmountHt ?? this.totalAmountHt,
+      tvaPercentage: tvaPercentage ?? this.tvaPercentage,
+      unitPriceHt: unitPriceHt ?? this.unitPriceHt,
+      unitPriceTtc: unitPriceTtc ?? this.unitPriceTtc,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      medicineCatalogId: medicineCatalogId ?? this.medicineCatalogId,
+      parapharmCatalogId: parapharmCatalogId ?? this.parapharmCatalogId,
+      quantity: quantity ?? this.quantity,
+      designation: designation ?? this.designation,
+      lotNumber: lotNumber ?? this.lotNumber,
+      expirationDate: expirationDate ?? this.expirationDate,
+      margin: margin ?? this.margin,
+      discountAmount: discountAmount ?? this.discountAmount,
+      orderId: orderId ?? this.orderId,
+      imageUrl: imageUrl ?? this.imageUrl,
+      note: note ?? this.note,
+    );
+  }
 }
 
 class OrderStatusHistory {

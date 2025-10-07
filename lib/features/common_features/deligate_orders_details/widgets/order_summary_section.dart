@@ -6,7 +6,7 @@ import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/price_formatter.dart';
 
 import '../../../../utils/constants.dart';
-import '../cubit/orders_details_cubit.dart';
+import '../cubit/order_details/orders_details_cubit.dart';
 
 class OrderSummarySection extends StatelessWidget {
   const OrderSummarySection({super.key});
