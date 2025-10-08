@@ -6,6 +6,7 @@ import 'package:hader_pharm_mobile/utils/login_jwt_decoder.dart';
 
 void setupCompanyOrSkipToHome() {
   final token = getItInstance.get<TokenManager>().token;
+
   if (token != null) {
     JwtDecoded decodedJwt = decodeJwt(token);
 

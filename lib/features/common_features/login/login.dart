@@ -32,13 +32,13 @@ class LoginScreen extends StatelessWidget {
               BottomSheetHelper.showCommonBottomSheet(
                   context: context, child: ForgotPasswordScreen());
             }
-            if (state is EmailOtpResentSuccessfully) {
-              GoRouter.of(context).goNamed(RoutingManager.checkEmailScreen,
-                  extra: {
-                    "email": state.email,
-                    "redirectTo": RoutingManager.createCompanyProfile
-                  });
-            }
+            // if (state is EmailOtpResentSuccessfully) {
+            //   GoRouter.of(context).goNamed(RoutingManager.checkEmailScreen,
+            //       extra: {
+            //         "email": state.email,
+            //         "redirectTo": RoutingManager.createCompanyProfile
+            //       });
+            // }
           },
           child: Scaffold(
             backgroundColor: AppColors.bgWhite,
