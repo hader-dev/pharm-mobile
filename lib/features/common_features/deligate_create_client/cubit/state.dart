@@ -1,6 +1,6 @@
 part of 'cubit.dart';
 
-abstract class DeligateCreateClientState extends Equatable {
+class DeligateCreateClientState extends Equatable {
   final String address;
   final String email;
   final String name;
@@ -21,12 +21,13 @@ abstract class DeligateCreateClientState extends Equatable {
   DeligateCreateClientState copyWith(
       {String? address,
       String? email,
+      String? password,
       String? fullName,
       String? phone,
       String? name,
       int? townId,
       CompanyType? companyType}) {
-    return DeligateClientsInitial(
+    return DeligateCreateClientState(
         address: address ?? this.address,
         email: email ?? this.email,
         name: name ?? this.name,
@@ -62,6 +63,10 @@ abstract class DeligateCreateClientState extends Equatable {
   DeligateCreateClientLoading loading() =>
       DeligateCreateClientLoading.fromState(this);
 
+  DeligateClientCreated created(
+          {required String password, required String email}) =>
+      DeligateClientCreated.fromState(this, password: password, email: email);
+
   @override
   List<Object?> get props => [
         address,
@@ -82,6 +87,33 @@ final class DeligateClientsInitial extends DeligateCreateClientState {
     super.fullName = '',
     super.companyType = CompanyType.Pharmacy,
   });
+}
+
+final class DeligateClientCreated extends DeligateCreateClientState {
+  final String password;
+
+  const DeligateClientCreated({
+    super.address = '',
+    super.email = '',
+    super.name = '',
+    super.phone = '',
+    super.fullName = '',
+    super.townId = 20,
+    required this.password,
+    super.companyType = CompanyType.Pharmacy,
+  });
+
+  DeligateClientCreated.fromState(
+    DeligateCreateClientState state, {
+    required this.password,
+    required super.email,
+  }) : super(
+            address: state.address,
+            name: state.name,
+            phone: state.phone,
+            townId: state.townId,
+            fullName: state.fullName,
+            companyType: state.companyType);
 }
 
 final class DeligateCreateClientLoading extends DeligateCreateClientState {

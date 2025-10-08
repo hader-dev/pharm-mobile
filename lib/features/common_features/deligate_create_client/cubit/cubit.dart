@@ -47,7 +47,7 @@ class DeligateCreateClientCubit extends Cubit<DeligateCreateClientState> {
     try {
       if (formKeys.currentState!.validate()) {
         emit(state.loading());
-        await clientsRepo.createClient(
+        final res = await clientsRepo.createClient(
           ParamsCreateClient(
               email: emailController.text,
               name: nameController.text,
@@ -59,7 +59,8 @@ class DeligateCreateClientCubit extends Cubit<DeligateCreateClientState> {
         );
         getItInstance.get<ToastManager>().showToast(
             type: ToastType.success, message: translation.client_add_success);
-        emit(state.initial());
+
+        emit(state.created(password: res.password, email: res.email));
       }
     } catch (e) {
       getItInstance.get<ToastManager>().showToast(

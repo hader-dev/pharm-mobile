@@ -2,9 +2,8 @@ import 'package:hader_pharm_mobile/repositories/remote/clients/responses/respons
 
 ResponseCreateClient jsonToResponseCreateClient(Map<String, dynamic> json) {
   return ResponseCreateClient(
-    id: json["id"] ?? "",
+    id: json["safeUser"]["id"] ?? "",
     password: json["password"] ?? '',
-    email: json["email"] ?? '',
-    
+    email: json["safeUser"]["email"] ?? '',
   );
 }

@@ -56,8 +56,8 @@ class DioNetworkManager extends INetworkService {
       ignoreExpires: true,
     );
   }
-  @override
 
+  @override
   Future<void> deletePersistantCookiesJar() async {
     await cookieJar.deleteAll();
   }
@@ -70,6 +70,7 @@ class DioNetworkManager extends INetworkService {
       return decodedResponse;
     } on DioException catch (e, stack) {
       debugPrintStack(stackTrace: stack);
+      debugPrint("$e");
       var decodedResponse = ResponseHandler.processResponse(e.response);
       return decodedResponse;
     }
@@ -108,7 +109,9 @@ class DioNetworkManager extends INetworkService {
 
   @override
   Future<Response> get(String url,
-      {Map<String, String>? headers, Map<String, Object>? queryParams,bool isBinary=false}) async {
+      {Map<String, String>? headers,
+      Map<String, Object>? queryParams,
+      bool isBinary = false}) async {
     // await _ensureTokenIsValid(TokenManager.instance);
 
     Response apiResponse = await _client.getUri(
