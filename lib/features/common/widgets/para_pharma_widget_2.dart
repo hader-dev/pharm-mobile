@@ -2,6 +2,7 @@ import 'package:cached_network_image_plus/flutter_cached_network_image_plus.dart
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/silver_tags.dart';
@@ -18,11 +19,9 @@ import '../../../config/routes/routing_manager.dart';
 import '../../../config/theme/colors_manager.dart';
 import '../buttons/solid/primary_icon_button.dart';
 
-typedef OnFavoriteCallback = void Function(BaseParaPharmaCatalogModel medicine);
-
 class ParaPharmaWidget2 extends StatelessWidget {
   final BaseParaPharmaCatalogModel paraPharmData;
-  final OnFavoriteCallback? onFavoriteCallback;
+  final void Function(BaseParaPharmaCatalogModel)? onFavoriteCallback;
   final bool displayTags;
   final bool showQuickAddButton;
   final bool canOrder;
@@ -42,8 +41,12 @@ class ParaPharmaWidget2 extends StatelessWidget {
           horizontal: AppSizesManager.p6, vertical: AppSizesManager.p12),
       child: InkWell(
         onTap: () {
+          final userRole = getItInstance.get<UserManager>().currentUser.role;
+          // Delegates get view-only, pharmacy/company get marketplace with ordering
+          final canOrderBasedOnRole = !userRole.isDelegate;
+
           GoRouter.of(context).pushNamed(RoutingManager.paraPharmaDetailsScreen,
-              extra: {"id": paraPharmData.id, "canOrder": canOrder});
+              extra: {"id": paraPharmData.id, "canOrder": canOrderBasedOnRole});
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
