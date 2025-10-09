@@ -1,0 +1,34 @@
+# .gitea/workflows/guard-branch-source.yml
+name: Guard Branch Source
+
+on:
+   workflow_call:
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check PR source branch
+        run: |
+          BASE="${{ github.base_ref }}"
+          HEAD="${{ github.head_ref }}"
+          echo "Base: $BASE, Head: $HEAD"
+
+          # staging: only dev
+          if [ "$BASE" = "staging" ] && [ "$HEAD" != "dev" ]; then
+            echo "❌ Only PRs from 'dev' allowed into 'staging'."
+            exit 1
+          fi
+
+          # main: only staging or dev
+          if [ "$BASE" = "main" ] && [ "$HEAD" != "staging" ] && [ "$HEAD" != "dev" ]; then
+            echo "❌ Only PRs from 'staging' or 'dev' allowed into 'main'."
+            exit 1
+          fi
+
+          # dev: block main or staging
+          if [ "$BASE" = "dev" ] && { [ "$HEAD" = "main" ] || [ "$HEAD" = "staging" ]; }; then
+            echo "❌ PRs from 'main' or 'staging' into 'dev' are not allowed."
+            exit 1
+          fi
+          echo "✅ PR source branch is valid."
