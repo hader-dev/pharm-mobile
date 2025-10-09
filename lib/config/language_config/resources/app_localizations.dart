@@ -442,6 +442,12 @@ abstract class AppLocalizations {
   /// **'Help and Support'**
   String get help_and_support;
 
+  /// No description provided for @verify_email.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify Email'**
+  String get verify_email;
+
   /// No description provided for @current_password.
   ///
   /// In en, this message translates to:

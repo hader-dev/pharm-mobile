@@ -10,14 +10,6 @@ class TokenCheckerInterceptor extends Interceptor {
   final int maxRetries = 5;
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) async {
-    // final data = err.response?.data;
-    // final isJson = data is Map<String, dynamic>;
-
-    //TODO : review if this is trully needed or not
-    // final isTokenError = isJson &&
-    //     (data["code"] == ApiErrorCodes.TOKEN_EXPIRED.label ||
-    //         data["code"] == ApiErrorCodes.NO_TOKEN.label);
-
     final reachedMaxRetries = retryCount >= maxRetries;
 
     try {

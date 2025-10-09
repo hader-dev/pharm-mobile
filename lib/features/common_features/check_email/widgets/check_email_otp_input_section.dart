@@ -51,10 +51,10 @@ class _CheckEmailOtpInputSectionState extends State<CheckEmailOtpInputSection> {
           child: BlocBuilder<CheckEmailCubit, CheckEmailState>(
             builder: (context, state) {
               return InkWell(
-                onTap: context.read<CheckEmailCubit>().isResendActive
+                onTap: state.isResendActive
                     ? () => context
                         .read<CheckEmailCubit>()
-                        .resendOtp(context.read<CheckEmailCubit>().userEmail)
+                        .resendOtp(state.userEmail)
                     : null,
                 child: Text.rich(TextSpan(
                   children: [
@@ -63,14 +63,14 @@ class _CheckEmailOtpInputSectionState extends State<CheckEmailOtpInputSection> {
                       style: context.responsiveTextTheme.current.body3Regular
                           .copyWith(
                               color:
-                                  context.read<CheckEmailCubit>().isResendActive
+                                  state.isResendActive
                                       ? AppColors.accent1Shade1
                                       : TextColors.secondary.color,
                               decoration: TextDecoration.underline,
                               decorationColor: TextColors.secondary.color),
                     ),
                     if (state is TimerCountChanged &&
-                        !context.read<CheckEmailCubit>().isResendActive)
+                        !state.isResendActive)
                       TextSpan(
                         text: ' (${state.count}s)',
                         style: context.responsiveTextTheme.current.body3Regular

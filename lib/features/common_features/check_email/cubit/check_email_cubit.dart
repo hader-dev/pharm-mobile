@@ -11,36 +11,40 @@ import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 part 'check_email_state.dart';
 
 class CheckEmailCubit extends Cubit<CheckEmailState> {
-  late final String userEmail;
   final UserManager userManager;
-  bool isResendActive = true;
   CheckEmailCubit({required this.userManager}) : super(CheckEmailInitial());
 
   initEmail(String email) {
-    userEmail = email;
-    emit(InitEmail());
+    emit(state.initEmail(email: email));
   }
 
   void checkEmail(String otp, AppLocalizations translation) async {
+    final toastManager = getItInstance.get<ToastManager>();
+
     try {
-      emit(CheckEmailLoading());
-      await userManager.sendUserEmailCheckOtpCode(email: userEmail, otp: otp);
-      getItInstance.get<ToastManager>().showToast(
-          message: "${translation.verification_successful_for} $userEmail ",
+      emit(state.loading());
+      await userManager.sendUserEmailCheckOtpCode(
+          email: state.userEmail, otp: otp);
+      toastManager.showToast(
+          message:
+              "${translation.verification_successful_for} ${state.userEmail} ",
           type: ToastType.success);
-      emit(CheckEmailSuccuss());
+      emit(state.success());
     } catch (e, stackTrace) {
       debugPrint(e.toString());
       debugPrintStack(stackTrace: stackTrace);
-      emit(CheckEmailFailed());
+      toastManager.showToast(
+          message: translation.feedback_action_failed, type: ToastType.error);
+      emit(state.failed());
     }
   }
 
   resendOtp(String email) async {
     try {
-      emit(ResendOtpLoading());
-      await userManager.resendOtpCode(email: userEmail);
+      emit(state.loading());
+      await userManager.resendOtpCode(email: state.userEmail);
       int counter = 10;
+      bool isResendActive = false;
       Timer.periodic(const Duration(seconds: 1), (timer) {
         isResendActive = false;
         counter--;
@@ -48,13 +52,14 @@ class CheckEmailCubit extends Cubit<CheckEmailState> {
           timer.cancel();
           isResendActive = true;
         }
-        emit(TimerCountChanged(count: counter));
+        emit(state.counterTicked(
+            count: counter, isResendActive: isResendActive));
       });
     } catch (e, stack) {
       debugPrint(e.toString());
       debugPrintStack(stackTrace: stack);
       GlobalExceptionHandler.handle(exception: e);
-      emit(CheckEmailFailed());
+      emit(state.failed());
     }
   }
 }

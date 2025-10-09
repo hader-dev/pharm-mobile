@@ -185,6 +185,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get help_and_support => 'Aide et support';
 
   @override
+  String get verify_email => 'Veuillez verifier votre adresse email';
+
+  @override
   String get current_password => 'Mot de passe actuel';
 
   @override

@@ -35,8 +35,7 @@ class CheckEmailScreen extends StatelessWidget {
       child: SafeArea(
         child: BlocListener<CheckEmailCubit, CheckEmailState>(
           listener: (context, state) {
-            debugPrint('CheckEmailState: $state');
-            if (state is CheckEmailSuccuss) {
+            if (state is CheckEmailSuccess) {
               if (popInsteadOfPushReplacement) {
                 GoRouter.of(context).safePop();
               } else {
@@ -57,7 +56,7 @@ class CheckEmailScreen extends StatelessWidget {
                       const ResponsiveGap.s32(),
                       CheckEmailOtpInputSection(),
                       const ResponsiveGap.s32(),
-                      Spacer(),
+                      const Spacer(),
                       Text.rich(
                           textAlign: TextAlign.center,
                           style: TextStyle(height: 1.5),

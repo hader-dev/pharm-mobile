@@ -184,6 +184,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get help_and_support => 'Help and Support';
 
   @override
+  String get verify_email => 'Verify Email';
+
+  @override
   String get current_password => 'Current Password';
 
   @override

@@ -184,6 +184,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get help_and_support => 'المساعدة والدعم';
 
   @override
+  String get verify_email => 'تحقق من بريدك الإلكتروني';
+
+  @override
   String get current_password => 'كلمة المرور الحالية';
 
   @override
