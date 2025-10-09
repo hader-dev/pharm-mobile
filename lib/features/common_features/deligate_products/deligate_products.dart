@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/end_of_load_result_widget.dart';
-import 'package:hader_pharm_mobile/features/common/widgets/para_pharma_widget_2.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/para_pharma_widget_1.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_products/widgets/appbar.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/market_place.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/cubit/para_pharma_cubit.dart';
@@ -98,16 +98,16 @@ class _DeligateProductsPageState extends State<DeligateProductsPage>
                             itemBuilder: (context, index) {
                               if (index < products.length) {
                                 final paraPharma = products[index];
-                                return ParaPharmaWidget2(
+                                return ParaPharmaWidget1(
                                     paraPharmData: paraPharma,
-                                    displayTags: false,
                                     canOrder: false,
-                                    showQuickAddButton: false,
+                                    isLiked: paraPharma.isLiked,
                                     onFavoriteCallback: onLikeTapped);
                               } else {
                                 if (isLoadingMore) {
                                   return const Padding(
-                                    padding: EdgeInsets.all(16.0),
+                                    padding:
+                                        EdgeInsets.all(AppSizesManager.s16),
                                     child: Center(
                                         child: CircularProgressIndicator()),
                                   );

@@ -47,11 +47,10 @@ class FavoritesVendors extends StatelessWidget {
                           .likedVendors[index],
                       hideRemoveButton: false,
                       onRemoveFromFavorites: () =>
-                          BlocProvider.of<FavoritesCubit>(context)
-                              .removeFromFavoritesVendors(
-                                  BlocProvider.of<FavoritesCubit>(context)
-                                      .likedVendors[index]
-                                      .id),
+                          BlocProvider.of<FavoritesCubit>(context).unlikeVendor(
+                              BlocProvider.of<FavoritesCubit>(context)
+                                  .likedVendors[index]
+                                  .id),
                     );
                   },
                 ),

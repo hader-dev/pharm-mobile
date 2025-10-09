@@ -57,13 +57,19 @@ class FavoritesCubit extends Cubit<FavoritesState> {
     }
   }
 
-  void removeFromFavoritesMedicines(String medicineId) {
+  void unlikeMedicine(String medicineId) {
     likedMedicinesCatalogs.removeWhere((medicine) => medicine.id == medicineId);
     favoriteRepository.unLikeMedicineCatalog(medicineCatalogId: medicineId);
     emit(FavoritesMedicinesLoaded());
   }
 
-  void removeParaPharmaFromFavorites(String paraPharmaId) {
+  Future<void> likeMedicine(String medicineId) async {
+    favoriteRepository.likeMedicineCatalog(medicineCatalogId: medicineId);
+
+    emit(FavoritesMedicinesLoaded());
+  }
+
+  void unlikeParaPharma(String paraPharmaId) {
     likedParaPharmaCatalogs
         .removeWhere((paraPharma) => paraPharma.id == paraPharmaId);
     favoriteRepository.unLikeParaPharmaCatalog(
@@ -71,9 +77,22 @@ class FavoritesCubit extends Cubit<FavoritesState> {
     emit(FavoritesParaPharmaLoaded());
   }
 
-  void removeFromFavoritesVendors(String vendorId) {
+  Future<void> likeParaPharmaCatalog(String paraPharmaCatalogId) async {
+    favoriteRepository.likeParaPharmaCatalog(
+        paraPharmaCatalogId: paraPharmaCatalogId);
+
+    emit(FavoritesParaPharmaLoaded());
+  }
+
+  void unlikeVendor(String vendorId) {
     likedVendors.removeWhere((vendor) => vendor.id == vendorId);
     favoriteRepository.unLikeVendors(vendorId: vendorId);
+    emit(FavoritesVendorsLoaded());
+  }
+
+  Future<void> likeVendor(String vendorId) async {
+    favoriteRepository.likeVendors(vendorId: vendorId);
+
     emit(FavoritesVendorsLoaded());
   }
 }

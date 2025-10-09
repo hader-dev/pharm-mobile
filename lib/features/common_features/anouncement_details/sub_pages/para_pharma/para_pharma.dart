@@ -4,8 +4,10 @@ import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/end_of_load_result_widget.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/para_pharma_widget_1.dart';
 import 'package:hader_pharm_mobile/features/common_features/anouncement_details/cubit/announcement_cubit.dart';
-
-import 'cubit/para_pharma_cubit.dart';
+import 'package:hader_pharm_mobile/features/common_features/home/home.dart';
+import 'package:hader_pharm_mobile/features/common_features/market_place/market_place.dart';
+import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/cubit/para_pharma_cubit.dart';
+import 'package:hader_pharm_mobile/models/para_pharma.dart';
 
 class ParapharmaProductsPage extends StatefulWidget {
   const ParapharmaProductsPage({super.key});
@@ -19,6 +21,11 @@ class _ParapharmaProductsPageState extends State<ParapharmaProductsPage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
+    final gCubit = MarketPlaceScreen.marketPlaceScaffoldKey.currentContext!
+        .read<ParaPharmaCubit>();
+    final hCubit =
+        HomeScreen.scaffoldKey.currentContext?.read<ParaPharmaCubit>();
+
     return RefreshIndicator(
       onRefresh: () => context.read<AnnouncementCubit>().loadAnnouncement(),
       child: Scaffold(
@@ -53,16 +60,24 @@ class _ParapharmaProductsPageState extends State<ParapharmaProductsPage>
                       itemBuilder: (context, index) {
                         if (index < products.length) {
                           final paraPharma = products[index];
+
+                          void onLikeTapped(
+                              BaseParaPharmaCatalogModel medicine) {
+                            final id = medicine.id;
+                            medicine.isLiked
+                                ? cubit.unlikeParaPharmaCatalog(id)
+                                : cubit.likeParaPharmaCatalog(id);
+
+                            gCubit.refreshParaPharmaCatalogFavorite(
+                                id, !medicine.isLiked);
+                            hCubit?.refreshParaPharmaCatalogFavorite(
+                                id, !medicine.isLiked);
+                          }
+
                           return ParaPharmaWidget1(
-                            hideLikeButton: false,
-                            paraPharmData: paraPharma,
-                            isLiked: paraPharma.isLiked,
-                            onLike: paraPharma.isLiked
-                                ? () =>
-                                    cubit.unlikeParaPharmaCatalog(paraPharma.id)
-                                : () =>
-                                    cubit.likeParaPharmaCatalog(paraPharma.id),
-                          );
+                              paraPharmData: paraPharma,
+                              isLiked: paraPharma.isLiked,
+                              onFavoriteCallback: onLikeTapped);
                         } else {
                           if (isLoadingMore) {
                             return const Padding(

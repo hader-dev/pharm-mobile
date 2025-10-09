@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/end_of_load_result_widget.dart';
-import 'package:hader_pharm_mobile/features/common/widgets/para_pharma_widget_2.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/para_pharma_widget_1.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/home.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/market_place.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/widget/filters_bar.dart';
@@ -96,10 +96,11 @@ class _ParaPharmaProductsPageState extends State<ParaPharmaProductsPage>
                             itemBuilder: (context, index) {
                               if (index < products.length) {
                                 final paraPharma = products[index];
-                                return ParaPharmaWidget2(
-                                    paraPharmData: paraPharma,
-                                    displayTags: false,
-                                    onFavoriteCallback: onLikeTapped);
+                                return ParaPharmaWidget1(
+                                  paraPharmData: paraPharma,
+                                  onFavoriteCallback: onLikeTapped,
+                                  isLiked: paraPharma.isLiked,
+                                );
                               } else {
                                 if (isLoadingMore) {
                                   return const Padding(

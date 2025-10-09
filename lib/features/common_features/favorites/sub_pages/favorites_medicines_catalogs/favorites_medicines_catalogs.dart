@@ -46,11 +46,10 @@ class FavoritesMedicinesCatalog extends StatelessWidget {
                   itemBuilder: (context, index) => MedicineWidget2(
                     hideRemoveButton: false,
                     onRemoveFromFavorites: () =>
-                        BlocProvider.of<FavoritesCubit>(context)
-                            .removeFromFavoritesMedicines(
-                                BlocProvider.of<FavoritesCubit>(context)
-                                    .likedMedicinesCatalogs[index]
-                                    .id),
+                        BlocProvider.of<FavoritesCubit>(context).unlikeMedicine(
+                            BlocProvider.of<FavoritesCubit>(context)
+                                .likedMedicinesCatalogs[index]
+                                .id),
                     medicineData: BlocProvider.of<FavoritesCubit>(context)
                         .likedMedicinesCatalogs[index],
                     isLiked: true,

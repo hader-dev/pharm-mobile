@@ -10,7 +10,7 @@ double calculateMarketplaceAspectRatio(
   }
 
   if (deviceSize.width <= DeviceSizes.smallTablet.width) {
-    return 1.5;
+    return 2.5;
   }
 
   final current = min(deviceSize.width, deviceSize.height);
@@ -19,7 +19,7 @@ double calculateMarketplaceAspectRatio(
   final deviceMax =
       min(DeviceSizes.largeTablet.width, DeviceSizes.largeTablet.height);
 
-  final minRatio = 1.5;
+  final minRatio = 2.5;
   final maxRatio = orientation == Orientation.portrait ? 3.0 : 2.5;
 
   if (current <= deviceMin) return minRatio;
@@ -40,7 +40,7 @@ double calculateFeaturesAnnouncementsAspectRatio(
     return 0.85;
   }
 
-  return 1.5;
+  return 2.5;
 }
 
 double calculateMarketplaceGridSpacing(DeviceSizes deviceSize) =>

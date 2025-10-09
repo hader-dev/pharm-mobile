@@ -113,7 +113,9 @@ class VendorDetails extends StatelessWidget {
                     Text(context.read<VendorDetailsCubit>().vendorData.name,
                         style: context
                             .responsiveTextTheme.current.headLine4SemiBold
-                            .copyWith(color: AppColors.bgWhite))
+                            .copyWith(
+                                color: AppColors.bgWhite,
+                                overflow: TextOverflow.ellipsis))
                   ]);
                 },
               ),

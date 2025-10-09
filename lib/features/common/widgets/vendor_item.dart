@@ -37,110 +37,86 @@ class VendorItem extends StatelessWidget {
         GoRouter.of(context)
             .pushNamed(RoutingManager.vendorDetails, extra: companyData.id);
       },
-      child: Stack(
-        children: [
-          Positioned(
-            bottom: 0,
-            right: 0,
-            child: Opacity(
-              opacity: .15,
-              child: Image(
-                image: companyData.thumbnailImage?.path == null
-                    ? AssetImage(DrawableAssetStrings.companyPlaceHolderImg)
-                    : NetworkImage(
-                        getItInstance.get<INetworkService>().getFilesPath(
-                              companyData.thumbnailImage!.path,
-                            ),
-                      ),
-              ),
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.all(AppSizesManager.p12),
-            padding: EdgeInsets.all(AppSizesManager.p8),
-            decoration: BoxDecoration(
-              borderRadius:
-                  BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
-              border: Border.all(color: StrokeColors.normal.color, width: 1),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                if (!hideRemoveButton)
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: AppSizesManager.p4),
-                    child: Align(
-                      alignment: Alignment.topRight,
-                      child: InkWell(
-                        splashColor: Colors.transparent,
-                        onTap: onRemoveFromFavorites,
-                        child: const Icon(
-                          Icons.close,
-                          color: Colors.red,
-                          size: AppSizesManager.iconSize16,
-                        ),
-                      ),
+      child: Container(
+        margin: const EdgeInsets.all(AppSizesManager.p12),
+        padding: EdgeInsets.all(AppSizesManager.p8),
+        decoration: BoxDecoration(
+          borderRadius:
+              BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+          border: Border.all(color: StrokeColors.normal.color, width: 1),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (!hideRemoveButton)
+              Padding(
+                padding: const EdgeInsets.only(bottom: AppSizesManager.p4),
+                child: Align(
+                  alignment: Alignment.topRight,
+                  child: InkWell(
+                    splashColor: Colors.transparent,
+                    onTap: onRemoveFromFavorites,
+                    child: const Icon(
+                      Icons.close,
+                      color: Colors.red,
+                      size: AppSizesManager.iconSize16,
                     ),
                   ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        companyData.name,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                        softWrap: true,
-                        style: context
-                            .responsiveTextTheme.current.headLine4SemiBold,
-                      ),
+                ),
+              ),
+            Row(
+              children: [
+                Container(
+                  height: 45,
+                  width: 45,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border:
+                        Border.all(color: AppColors.accent1Shade2, width: 1.5),
+                    image: DecorationImage(
+                      image: companyData.thumbnailImage?.path == null
+                          ? AssetImage(
+                                  DrawableAssetStrings.companyPlaceHolderImg)
+                              as ImageProvider
+                          : NetworkImage(
+                              getItInstance.get<INetworkService>().getFilesPath(
+                                    companyData.thumbnailImage!.path,
+                                  ),
+                            ),
                     ),
-                    Spacer(),
-                    Container(
-                      padding: EdgeInsets.all(AppSizesManager.p6),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            bottomRight: Radius.circular(AppSizesManager.r6),
-                            topLeft: Radius.circular(AppSizesManager.r6)),
-                        color: distributorCategory.color.withAlpha(50),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                              distributorCategory == DistributorCategory.Both
-                                  ? "pharmacy,para-pharmacy"
-                                  : distributorCategory.name,
-                              style: context
-                                  .responsiveTextTheme.current.bodySmall
-                                  .copyWith(
-                                      color: distributorCategory.color,
-                                      fontWeight: context.responsiveTextTheme
-                                          .current.appFont.appFontSemiBold)),
-                        ],
-                      ),
-                    )
-                  ],
+                  ),
                 ),
                 const ResponsiveGap.s8(),
-                InfoRow(
-                  label: context.translation!.address,
-                  dataValue: companyData.address ?? "",
-                  contentDirection: Axis.vertical,
-                ),
-                InfoRow(
-                  label: context.translation!.phone,
-                  dataValue: companyData.phone ?? "",
-                  contentDirection: Axis.vertical,
-                ),
-                InfoRow(
-                  label: context.translation!.email,
-                  dataValue: companyData.email ?? "",
-                  contentDirection: Axis.vertical,
+                Expanded(
+                  child: Text(
+                    companyData.name,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                    softWrap: true,
+                    style:
+                        context.responsiveTextTheme.current.headLine4SemiBold,
+                  ),
                 ),
               ],
             ),
-          ),
-        ],
+            const ResponsiveGap.s8(),
+            InfoRow(
+              label: context.translation!.address,
+              dataValue: companyData.address ?? "",
+              contentDirection: Axis.vertical,
+            ),
+            InfoRow(
+              label: context.translation!.phone,
+              dataValue: companyData.phone ?? "",
+              contentDirection: Axis.vertical,
+            ),
+            InfoRow(
+              label: context.translation!.email,
+              dataValue: companyData.email ?? "",
+              contentDirection: Axis.vertical,
+            ),
+          ],
+        ),
       ),
     );
   }

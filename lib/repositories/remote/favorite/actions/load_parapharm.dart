@@ -10,7 +10,8 @@ Future<List<BaseParaPharmaCatalogModel>> getFavoritesParaPharmasCatalogs(
   final decodedResponse = await client.sendRequest(
       () => client.get(Urls.favoritesLikeParaPharmaCatalog, queryParams: {
             "include[parapharmCatalog][_load]": jsonEncode(true),
-            "include[company][_load]": jsonEncode(true)
+            "include[company][_load]": jsonEncode(true),
+            "include[medicineCatalog][_load]": jsonEncode(true)
           }));
 
   return (decodedResponse as List)
