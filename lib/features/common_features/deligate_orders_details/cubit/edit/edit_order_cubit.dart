@@ -21,12 +21,14 @@ class DeligateEditOrderCubit extends Cubit<DeligateEditOrderState> {
   final TextEditingController searchController;
   final TextEditingController customPriceController;
   final TextEditingController quantityController;
+  final TextEditingController packageQuantityController;
 
   DebouncerManager debounceManager = DebouncerManager();
 
   DeligateEditOrderCubit({
     required this.parapharmaRepo,
     required this.orderRepo,
+    required this.packageQuantityController,
     required this.scrollController,
     required this.searchController,
     required this.quantityController,
@@ -101,12 +103,16 @@ class DeligateEditOrderCubit extends Cubit<DeligateEditOrderState> {
   }
 
   void decrementItemQuantity(
-      DeligateParahparmOrderItem item,
-      TextEditingController itemQuantityController,
-      TextEditingController itemCustomPriceController) {
+      {required DeligateParahparmOrderItem item,
+      required TextEditingController itemQuantityController,
+      required TextEditingController itemPackageQuantityController,
+      required TextEditingController itemCustomPriceController}) {
     final updatedQuantity = item.quantity > 1 ? item.quantity - 1 : 1;
 
     itemQuantityController.text = updatedQuantity.toString();
+
+    itemPackageQuantityController.text =
+        (updatedQuantity ~/ (item.product.packageSize)).toString();
 
     final updatedItem = item.copyWith(quantity: updatedQuantity);
 
@@ -118,12 +124,16 @@ class DeligateEditOrderCubit extends Cubit<DeligateEditOrderState> {
   }
 
   void incrementItemQuantity(
-      DeligateParahparmOrderItem item,
-      TextEditingController itemQuantityController,
-      TextEditingController itemCustomPriceController) {
+      {required DeligateParahparmOrderItem item,
+      required TextEditingController itemQuantityController,
+      required TextEditingController itemPackageQuantityController,
+      required TextEditingController itemCustomPriceController}) {
     final updatedQuantity = item.quantity + 1;
 
     itemQuantityController.text = updatedQuantity.toString();
+
+    itemPackageQuantityController.text =
+        (updatedQuantity ~/ (item.product.packageSize)).toString();
 
     final updatedItem = item.copyWith(quantity: updatedQuantity);
 
@@ -159,10 +169,13 @@ class DeligateEditOrderCubit extends Cubit<DeligateEditOrderState> {
             emit(state.productsUpdated(item: updatedItem));
           });
 
-
   void updateQuantity(String value) {
     final quantity = int.tryParse(value);
     quantityController.text = quantity.toString();
     emit(state.updateSuggestedPrice(quantity: quantity));
   }
+
+  void decrementPackageQuantity() {}
+
+  void incrementPackageQuantity() {}
 }

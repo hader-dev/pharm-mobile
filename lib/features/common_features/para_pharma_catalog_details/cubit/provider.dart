@@ -31,10 +31,10 @@ class StateProvider extends StatelessWidget {
     return MultiBlocProvider(providers: [
       BlocProvider(
         create: (context) => ParaPharmaDetailsCubit(
-          packageQuantityController: TextEditingController(
-              text: existingCartItem?.quantity.toString() ?? '1'),
+            packageQuantityController: TextEditingController(
+                text: existingCartItem?.model.quantity.toString() ?? '1'),
             quantityController: TextEditingController(
-                text: existingCartItem?.quantity.toString() ?? '1'),
+                text: existingCartItem?.model.quantity.toString() ?? '1'),
             tabController: TabController(length: tabs.length, vsync: vsync),
             ordersRepository:
                 OrderRepository(client: getItInstance.get<INetworkService>()),

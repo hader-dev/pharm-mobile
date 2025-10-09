@@ -91,7 +91,9 @@ class CartScreen extends StatelessWidget {
                                       BlocProvider.of<CartCubit>(context)
                                           .cartItems
                                           .firstWhere((element) =>
-                                              element.sellerCompanyId == vendor)
+                                              element.model.sellerCompanyId ==
+                                              vendor)
+                                          .model
                                           .sellerCompany,
                                   cartItems: BlocProvider.of<CartCubit>(context)
                                           .cartItemsByVendor[vendor] ??

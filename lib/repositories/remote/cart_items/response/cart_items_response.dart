@@ -1,4 +1,4 @@
-import '../../../../models/cart_item.dart';
+import 'package:hader_pharm_mobile/models/cart_item.dart';
 
 class CartItemsResponse {
   final List<CartItemModel> data;

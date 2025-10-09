@@ -2209,13 +2209,13 @@ abstract class AppLocalizations {
   /// No description provided for @package_size.
   ///
   /// In en, this message translates to:
-  /// **'Package Size'**
+  /// **'Packing Size'**
   String get package_size;
 
   /// No description provided for @pacakge_quantity.
   ///
   /// In en, this message translates to:
-  /// **'Package Quantity'**
+  /// **'Packing Quantity'**
   String get pacakge_quantity;
 
   /// No description provided for @order_placed_successfully.

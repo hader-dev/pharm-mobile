@@ -23,9 +23,7 @@ class CartCubit extends Cubit<CartState> {
   InvoiceTypes? selectedInvoiceType = InvoiceTypes.facture;
   String orderNote = '';
   String shippingAddress;
-  // int totalItemsCount = 0;
-  // int offSet = 0;
-  List<CartItemModel> cartItems = <CartItemModel>[];
+  List<CartItemModelUi> cartItems = <CartItemModelUi>[];
   Map<String, List<String>> cartItemsByVendor = {};
 
   final CartItemRepository cartItemRepository;
@@ -39,20 +37,7 @@ class CartCubit extends Cubit<CartState> {
     required this.scrollController,
     required this.ordersRepository,
     this.shippingAddress = '',
-  }) : super(CartInitial()) {
-    _onScroll();
-  }
-  _onScroll() {
-    // scrollController.addListener(() async {
-    //   if (scrollController.position.pixels >= scrollController.position.maxScrollExtent) {
-    //     if (offSet < totalItemsCount) {
-    //       //  await loadMoreOrders();
-    //     } else {
-    //       emit(CartLoadLimitReached());
-    //     }
-    //   }
-    // });
-  }
+  }) : super(CartInitial());
 
   Future<void> addToCart(CreateCartItemModel cartItem,
       [bool isParapharma = false]) async {
@@ -64,7 +49,7 @@ class CartCubit extends Cubit<CartState> {
       if (existingItem != null) {
         final updatedItem = {"quantity": cartItem.quantity};
 
-        await cartItemRepository.updateItem(existingItem.id, updatedItem);
+        await cartItemRepository.updateItem(existingItem.model.id, updatedItem);
       } else {
         await cartItemRepository.addCartItem(cartItem);
       }
@@ -94,14 +79,14 @@ class CartCubit extends Cubit<CartState> {
 
   Future<void> getCartItem() async {
     try {
-      cartItems = <CartItemModel>[];
+      cartItems = <CartItemModelUi>[];
       cartItemsByVendor = {};
 
       emit(CartLoading());
 
       CartItemsResponse response = await cartItemRepository.getCartItem();
-      cartItems = response.data;
-      cartItemsByVendor = await prepareOrderCartitemsByVendor(cartItems);
+      cartItems = cartItemModelDataToUi(response.data);
+      cartItemsByVendor = await prepareOrderCartitemsByVendor(response.data);
 
       updateTotals();
 
@@ -117,17 +102,17 @@ class CartCubit extends Cubit<CartState> {
   void decreaseCartPackageQuantity(String cartItemId) {
     try {
       int cartItemIndex =
-          cartItems.lastIndexWhere((element) => element.id == cartItemId);
-      if (cartItems[cartItemIndex].quantity <= 1) {
+          cartItems.lastIndexWhere((element) => element.model.id == cartItemId);
+      if (cartItems[cartItemIndex].model.quantity <= 1) {
         throw TemplateException(
             message: "quantity should be greater than or equal 1.");
       }
 
       cartItems[cartItemIndex] = cartItems[cartItemIndex]
-          .copyWith(quantity: cartItems[cartItemIndex].quantity - 1);
+          .copyWith(quantity: cartItems[cartItemIndex].model.quantity - 1);
       updateTotals();
       _debounceFunction(() async {
-        updateItemQuantity(cartItemId, cartItems[cartItemIndex].quantity);
+        updateItemQuantity(cartItemId, cartItems[cartItemIndex].model.quantity);
       });
       emit(CartQuantityUpdated(updatedItemId: cartItemId));
     } catch (e) {
@@ -138,21 +123,21 @@ class CartCubit extends Cubit<CartState> {
   void increaseCartPackageQuantity(String cartItemId) {
     try {
       int cartItemIndex =
-          cartItems.lastIndexWhere((element) => element.id == cartItemId);
-      if ((cartItems[cartItemIndex].medicinesCatalogId != null &&
-              cartItems[cartItemIndex].quantity ==
-                  cartItems[cartItemIndex].medicineCatalogStockQty) ||
-          (cartItems[cartItemIndex].parapharmCatalogId != null &&
-              cartItems[cartItemIndex].quantity ==
-                  cartItems[cartItemIndex].parapharmCatalogStockQty)) {
+          cartItems.lastIndexWhere((element) => element.model.id == cartItemId);
+      if ((cartItems[cartItemIndex].model.medicinesCatalogId != null &&
+              cartItems[cartItemIndex].model.quantity ==
+                  cartItems[cartItemIndex].model.medicineCatalogStockQty) ||
+          (cartItems[cartItemIndex].model.parapharmCatalogId != null &&
+              cartItems[cartItemIndex].model.quantity ==
+                  cartItems[cartItemIndex].model.parapharmCatalogStockQty)) {
         throw TemplateException(message: "you reached the limit of the stock.");
       }
 
       cartItems[cartItemIndex] = cartItems[cartItemIndex]
-          .copyWith(quantity: cartItems[cartItemIndex].quantity + 1);
+          .copyWith(quantity: cartItems[cartItemIndex].model.quantity + 1);
       updateTotals();
       _debounceFunction(() async {
-        updateItemQuantity(cartItemId, cartItems[cartItemIndex].quantity);
+        updateItemQuantity(cartItemId, cartItems[cartItemIndex].model.quantity);
       });
       emit(CartQuantityUpdated(updatedItemId: cartItemId));
     } catch (e) {
@@ -164,17 +149,17 @@ class CartCubit extends Cubit<CartState> {
   void decreaseCartItemQuantity(String cartItemId) {
     try {
       int cartItemIndex =
-          cartItems.lastIndexWhere((element) => element.id == cartItemId);
-      if (cartItems[cartItemIndex].quantity <= 1) {
+          cartItems.lastIndexWhere((element) => element.model.id == cartItemId);
+      if (cartItems[cartItemIndex].model.quantity <= 1) {
         throw TemplateException(
             message: "quantity should be greater than or equal 1.");
       }
 
       cartItems[cartItemIndex] = cartItems[cartItemIndex]
-          .copyWith(quantity: cartItems[cartItemIndex].quantity - 1);
+          .copyWith(quantity: cartItems[cartItemIndex].model.quantity - 1);
       updateTotals();
       _debounceFunction(() async {
-        updateItemQuantity(cartItemId, cartItems[cartItemIndex].quantity);
+        updateItemQuantity(cartItemId, cartItems[cartItemIndex].model.quantity);
       });
       emit(CartQuantityUpdated(updatedItemId: cartItemId));
     } catch (e) {
@@ -185,13 +170,13 @@ class CartCubit extends Cubit<CartState> {
   void updateCartItemInputQuantity(String cartItemId, int quantity) {
     _debounceFunction(() async {
       try {
-        int cartItemIndex =
-            cartItems.lastIndexWhere((element) => element.id == cartItemId);
+        int cartItemIndex = cartItems
+            .lastIndexWhere((element) => element.model.id == cartItemId);
 
         cartItems[cartItemIndex] =
             cartItems[cartItemIndex].copyWith(quantity: quantity);
         updateTotals();
-        updateItemQuantity(cartItemId, cartItems[cartItemIndex].quantity);
+        updateItemQuantity(cartItemId, cartItems[cartItemIndex].model.quantity);
         emit(CartQuantityUpdated(updatedItemId: cartItemId));
       } catch (e) {
         GlobalExceptionHandler.handle(exception: e);
@@ -202,21 +187,21 @@ class CartCubit extends Cubit<CartState> {
   void increaseCartItemQuantity(String cartItemId) {
     try {
       int cartItemIndex =
-          cartItems.lastIndexWhere((element) => element.id == cartItemId);
-      if ((cartItems[cartItemIndex].medicinesCatalogId != null &&
-              cartItems[cartItemIndex].quantity ==
-                  cartItems[cartItemIndex].medicineCatalogStockQty) ||
-          (cartItems[cartItemIndex].parapharmCatalogId != null &&
-              cartItems[cartItemIndex].quantity ==
-                  cartItems[cartItemIndex].parapharmCatalogStockQty)) {
+          cartItems.lastIndexWhere((element) => element.model.id == cartItemId);
+      if ((cartItems[cartItemIndex].model.medicinesCatalogId != null &&
+              cartItems[cartItemIndex].model.quantity ==
+                  cartItems[cartItemIndex].model.medicineCatalogStockQty) ||
+          (cartItems[cartItemIndex].model.parapharmCatalogId != null &&
+              cartItems[cartItemIndex].model.quantity ==
+                  cartItems[cartItemIndex].model.parapharmCatalogStockQty)) {
         throw TemplateException(message: "you reached the limit of the stock.");
       }
 
       cartItems[cartItemIndex] = cartItems[cartItemIndex]
-          .copyWith(quantity: cartItems[cartItemIndex].quantity + 1);
+          .copyWith(quantity: cartItems[cartItemIndex].model.quantity + 1);
       updateTotals();
       _debounceFunction(() async {
-        updateItemQuantity(cartItemId, cartItems[cartItemIndex].quantity);
+        updateItemQuantity(cartItemId, cartItems[cartItemIndex].model.quantity);
       });
       emit(CartQuantityUpdated(updatedItemId: cartItemId));
     } catch (e) {
@@ -225,11 +210,49 @@ class CartCubit extends Cubit<CartState> {
     }
   }
 
+  void decreaseCartItemPackageQuantity(String id) {
+    final cartItemIndex =
+        cartItems.indexWhere((element) => element.model.id == id);
+    final cartItem = cartItems[cartItemIndex].model;
+
+    final updatedPackageQuantity =
+        cartItem.packageQuantity > 1 ? cartItem.packageQuantity - 1 : 1;
+    final updatedQuantity = updatedPackageQuantity * cartItem.packageSize;
+
+    cartItems[cartItemIndex] =
+        cartItems[cartItemIndex].copyWith(quantity: updatedQuantity);
+
+    updateTotals();
+    _debounceFunction(() async {
+      updateItemQuantity(id, cartItems[cartItemIndex].model.quantity);
+    });
+    emit(CartQuantityUpdated(updatedItemId: id));
+  }
+
+  void increaseCartItemPackageQuantity(String id) {
+    final cartItemIndex =
+        cartItems.indexWhere((element) => element.model.id == id);
+    final cartItem = cartItems[cartItemIndex];
+
+    final updatedPackageQuantity = cartItem.model.packageQuantity + 1;
+    final updatedQuantity = updatedPackageQuantity * cartItem.model.packageSize;
+
+    cartItems[cartItemIndex] =
+        cartItems[cartItemIndex].copyWith(quantity: updatedQuantity);
+
+    updateTotals();
+    _debounceFunction(() async {
+      updateItemQuantity(id, cartItems[cartItemIndex].model.quantity);
+    });
+    emit(CartQuantityUpdated(updatedItemId: id));
+  }
+
   deleteCartItem(String cartItemId) async {
     try {
       await cartItemRepository.deleteItem(cartItemId);
-      cartItems.removeWhere((element) => element.id == cartItemId);
-      cartItemsByVendor = await prepareOrderCartitemsByVendor(cartItems);
+      cartItems.removeWhere((element) => element.model.id == cartItemId);
+      cartItemsByVendor =
+          await prepareOrderCartitemsByVendor(cartItemModelUiToData(cartItems));
       updateTotals();
       emit(CartLoadingSuccess());
     } catch (e) {
@@ -252,18 +275,18 @@ class CartCubit extends Cubit<CartState> {
     totalTTCAmount = calculateTotalAmountTtc(cartItems);
   }
 
-  num calculateTotalAmountTtc(List<CartItemModel> cartItems) {
+  num calculateTotalAmountTtc(List<CartItemModelUi> cartItems) {
     double totalAmount = 0;
     for (var element in cartItems) {
-      totalAmount += element.getTotalPrice()["totalTTCPrice"]!;
+      totalAmount += element.model.getTotalPrice()["totalTTCPrice"]!;
     }
     return totalAmount;
   }
 
-  num calculateTotalAmountHt(List<CartItemModel> cartItems) {
+  num calculateTotalAmountHt(List<CartItemModelUi> cartItems) {
     num totalAmount = 0;
     for (var element in cartItems) {
-      totalAmount += element.getTotalPrice()["totalHtPrice"]!;
+      totalAmount += element.model.getTotalPrice()["totalHtPrice"]!;
     }
     return totalAmount;
   }
@@ -331,11 +354,11 @@ class CartCubit extends Cubit<CartState> {
     }
   }
 
-  CartItemModel? getItemIfExists(String id, [bool isParapharma = false]) {
+  CartItemModelUi? getItemIfExists(String id, [bool isParapharma = false]) {
     final existingItem = cartItems
         .where((element) => isParapharma
-            ? element.parapharmCatalogId == id
-            : element.medicinesCatalogId == id)
+            ? element.model.parapharmCatalogId == id
+            : element.model.medicinesCatalogId == id)
         .firstOrNull;
 
     return existingItem;

@@ -6,9 +6,9 @@ import 'package:hader_pharm_mobile/config/services/network/network_interface.dar
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/info_widget.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/quantity_section.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_create_order/cubit/create_order_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_create_order/widgets/custom_price_input.dart';
-import 'package:hader_pharm_mobile/features/common_features/deligate_create_order/widgets/quantity_widget.dart';
 import 'package:hader_pharm_mobile/models/deligate_order.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
@@ -19,6 +19,7 @@ class DeligateOrderItemWidget extends StatefulWidget {
   final DeligateParahparmOrderItem item;
   final quantityController = TextEditingController();
   final customPriceController = TextEditingController();
+  final packageQuantityController = TextEditingController();
 
   @override
   State<DeligateOrderItemWidget> createState() =>
@@ -35,6 +36,8 @@ class _DeligateOrderItemWidgetState extends State<DeligateOrderItemWidget> {
     final totalPrice = unitPrice * widget.item.quantity;
     widget.quantityController.text = widget.item.quantity.toString();
     widget.customPriceController.text = unitPrice.toString();
+    widget.packageQuantityController.text =
+        (widget.item.quantity ~/ widget.item.product.packageSize).toString();
 
     return Container(
       margin: const EdgeInsets.symmetric(
@@ -111,13 +114,32 @@ class _DeligateOrderItemWidgetState extends State<DeligateOrderItemWidget> {
           const Divider(
             color: AppColors.accent1Shade1,
           ),
-          DeligateOrderItemQuantity(
-              translation: translation,
-              quantityController: widget.quantityController,
-              onDecrement: () => cubit.decrementItemQuantity(widget.item,
-                  widget.quantityController, widget.customPriceController),
-              onIncrement: () => cubit.incrementItemQuantity(widget.item,
-                  widget.quantityController, widget.customPriceController)),
+          QuantitySectionModified(
+            quantityController: widget.quantityController,
+            packageQuantityController: widget.packageQuantityController,
+            packageSize: widget.item.product.packageSize,
+            disabledPackageQuantity: false,
+            decrementPackageQuantity: () => cubit.decrementPackageItemQuantity(
+                item: widget.item,
+                itemQuantityController: widget.quantityController,
+                itemPackageQuantityController: widget.packageQuantityController,
+                itemCustomPriceController: widget.customPriceController),
+            incrementPackageQuantity: () => cubit.incrementPackageItemQuantity(
+                item: widget.item,
+                itemQuantityController: widget.quantityController,
+                itemPackageQuantityController: widget.packageQuantityController,
+                itemCustomPriceController: widget.customPriceController),
+            incrementQuantity: () => cubit.incrementItemQuantity(
+                item: widget.item,
+                itemQuantityController: widget.quantityController,
+                itemPackageQuantityController: widget.packageQuantityController,
+                itemCustomPriceController: widget.customPriceController),
+            decrementQuantity: () => cubit.incrementItemQuantity(
+                item: widget.item,
+                itemQuantityController: widget.quantityController,
+                itemPackageQuantityController: widget.packageQuantityController,
+                itemCustomPriceController: widget.customPriceController),
+          ),
           const SizedBox(height: AppSizesManager.s12),
           CustomPriceFormField(
             enabled: false,
@@ -144,15 +166,6 @@ class _DeligateOrderItemWidgetState extends State<DeligateOrderItemWidget> {
               ],
             ),
           ),
-          // InfoRow(
-          //     label: context.translation!.quantity,
-          //     dataValue: widget.item.quantity.toString()),
-          // InfoRow(
-          //     label: context.translation!.price,
-          //     dataValue: unitPrice.toString()),
-          // InfoRow(
-          //     label: context.translation!.total_price,
-          //     dataValue: totalPrice.toString()),
         ],
       ),
     );

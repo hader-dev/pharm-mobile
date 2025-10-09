@@ -16,7 +16,7 @@ class LoginCubit extends Cubit<LoginState> {
   bool isObscured = true;
 
   TextEditingController emailController =
-      TextEditingController(text: "gt@mail.com");
+      TextEditingController(text: "ouanis@mail.com");
 
   TextEditingController passwordController =
       TextEditingController(text: "Strong@12");

@@ -95,7 +95,8 @@ class VendorCartSectionState extends State<VendorCartSection> {
               .map((e) => CartItemWidget(
                   cartItemData: BlocProvider.of<CartCubit>(context)
                       .cartItems
-                      .firstWhere((item) => item.id == e)))
+                      .firstWhere((item) => item.model.id == e)
+                      .model))
               .toList(),
         ),
       ),

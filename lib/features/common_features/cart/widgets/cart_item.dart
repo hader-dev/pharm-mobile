@@ -1,22 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/quantity_section.dart';
+import 'package:hader_pharm_mobile/features/common_features/cart/cubit/cart_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/create_company_profile/sub_pages/review_and_sumbit/widgets/info_row.dart';
 import 'package:hader_pharm_mobile/models/cart_item.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
-import '../cubit/cart_cubit.dart';
-import 'quantity/cart_item_quantity_section.dart';
-
 class CartItemWidget extends StatelessWidget {
   final CartItemModel cartItemData;
-
-  const CartItemWidget({super.key, required this.cartItemData});
+  final TextEditingController quantityController = TextEditingController();
+  final TextEditingController packageQuantityController =
+      TextEditingController();
+  CartItemWidget({super.key, required this.cartItemData});
 
   @override
   Widget build(BuildContext context) {
+    final cartCubit = context.read<CartCubit>();
+
+    quantityController.text = cartItemData.quantity.toString();
+    packageQuantityController.text = cartItemData.packageQuantity.toString();
+
     return Container(
       margin: const EdgeInsets.symmetric(
           vertical: AppSizesManager.p8, horizontal: AppSizesManager.p4),
@@ -29,30 +35,6 @@ class CartItemWidget extends StatelessWidget {
       ),
       child: Row(
         children: [
-          //   CacheNetworkImagePlus(
-          //   height: 70,
-          //   width: 70,
-
-          //   boxFit: BoxFit.fill,
-          //   imageUrl: cartItemData.image?.path!= null
-          //       ? getItInstance
-          //           .get<INetworkService>()
-          //           .getFilesPath(cartItemData.image!.path)
-          //       : "",
-          //   errorWidget: Column(
-          //     children: [
-          //       Spacer(),
-          //       Icon(Iconsax.image, color: Color.fromARGB(255, 197, 197, 197), size: AppSizesManager.iconSize30),
-          //        const ResponsiveGap.s8(),
-          //       Text(
-          //         "Image not available",
-          //         style: context.responsiveTextTheme.current.body3Medium.copyWith(color: const Color.fromARGB(255, 197, 197, 197)),
-          //       ),
-          //       Spacer(),
-          //     ],
-          //   ),
-          // ),
-
           const ResponsiveGap.s12(),
           Expanded(
             child: Column(
@@ -70,8 +52,7 @@ class CartItemWidget extends StatelessWidget {
                     Spacer(),
                     InkWell(
                       onTap: () {
-                        BlocProvider.of<CartCubit>(context)
-                            .deleteCartItem(cartItemData.id);
+                        cartCubit.deleteCartItem(cartItemData.id);
                       },
                       child: const Icon(
                         Iconsax.trash,
@@ -99,8 +80,18 @@ class CartItemWidget extends StatelessWidget {
                       dataValue: num.parse(cartItemData.tvaPercentage)
                           .toStringAsFixed(2),
                     ),
-                    QuantitySection(
-                      cartData: cartItemData,
+                    QuantitySectionModified(
+                      disabledPackageQuantity: false,
+                      decrementQuantity: () =>
+                          cartCubit.decreaseCartItemQuantity(cartItemData.id),
+                      incrementQuantity: () =>
+                          cartCubit.increaseCartItemQuantity(cartItemData.id),
+                      decrementPackageQuantity: () => cartCubit
+                          .decreaseCartItemPackageQuantity(cartItemData.id),
+                      incrementPackageQuantity: () => cartCubit
+                          .increaseCartItemPackageQuantity(cartItemData.id),
+                      quantityController: quantityController,
+                      packageQuantityController: packageQuantityController,
                     ),
                   ],
                 )

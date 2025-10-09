@@ -1114,10 +1114,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get failed => 'Échoué';
 
   @override
-  String get package_size => 'Taille du coller';
+  String get package_size => 'Taille du colisage';
 
   @override
-  String get pacakge_quantity => 'Quantité de coller';
+  String get pacakge_quantity => 'Quantité de colisage';
 
   @override
   String get order_placed_successfully => 'Commande placée avec successe';
