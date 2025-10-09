@@ -9,7 +9,7 @@ import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_bu
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/bottom_sheet_header.dart';
-import 'package:hader_pharm_mobile/features/common_features/cart/widgets/quantity/quantity.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/quantity_section.dart';
 import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/cubit/medicine_details_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/medicine_catalog_details.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders/cubit/orders_cubit.dart';
@@ -25,7 +25,7 @@ class MakeOrderBottomSheet extends StatelessWidget {
   final MedicineDetailsCubit? cubit;
   final bool disabledPackageQuantity = true;
   @override
-  Widget build(BuildContext context) {
+  StatelessWidget build(BuildContext context) {
     final translation = context.translation!;
 
     return MultiBlocProvider(
@@ -75,19 +75,16 @@ class MakeOrderBottomSheet extends StatelessWidget {
                         "${(num.parse(context.read<MedicineDetailsCubit>().state.medicineCatalogData!.unitPriceHt).toStringAsFixed(2))} ${translation.currency}",
                   ),
                   const ResponsiveGap.s12(),
-                  BaseQuantityController(
-                      label: translation.quantity,
-                      decrement: cubit.decrementQuantity,
-                      increment: cubit.incrementQuantity,
-                      quantityController: cubit.quantityController),
-                  if (!disabledPackageQuantity)
-                    BaseQuantityController(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        label:
-                            "${translation.pacakge_quantity} (${cubit.state.medicineCatalogData!.packageSize})",
-                        decrement: cubit.decrementPackageQuantity,
-                        increment: cubit.incrementPackageQuantity,
-                        quantityController: cubit.packageQuantityController),
+                  QuantitySectionModified(
+                      quantityController: cubit.quantityController,
+                      packageQuantityController:
+                          cubit.packageQuantityController,
+                      packageSize: cubit.state.medicineCatalogData?.packageSize,
+                      disabledPackageQuantity: false,
+                      decrementPackageQuantity: cubit.decrementPackageQuantity,
+                      incrementPackageQuantity: cubit.incrementPackageQuantity,
+                      incrementQuantity: cubit.incrementQuantity,
+                      decrementQuantity: cubit.decrementQuantity),
                   const ResponsiveGap.s12(),
                   InfoWidget(
                       label: context.translation!.shipping_address,
@@ -201,7 +198,7 @@ class LabeledInfoWidget extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  StatelessWidget build(BuildContext context) {
     return InfoWidget(
       label: label,
       value: Text(
@@ -225,7 +222,7 @@ class InfoWidget extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  StatelessWidget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(AppSizesManager.p12),
       width: double.maxFinite,

@@ -242,4 +242,8 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
           type: ToastType.success,
         );
   }
+
+  void decrementPackageItemQuantity(DeligateOrderItem item, TextEditingController quantityController, TextEditingController customPriceController) {}
+
+  void incrementPackageItemQuantity(DeligateOrderItem item, TextEditingController quantityController, TextEditingController customPriceController) {}
 }

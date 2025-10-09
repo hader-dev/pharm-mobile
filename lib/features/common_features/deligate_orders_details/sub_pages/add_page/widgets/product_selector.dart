@@ -9,9 +9,9 @@ import 'package:hader_pharm_mobile/features/common/decorations/field.dart';
 import 'package:hader_pharm_mobile/features/common/decorations/input.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/para_pharma_widget_2.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/quantity_section.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_create_order/widgets/custom_price_input.dart';
-import 'package:hader_pharm_mobile/features/common_features/deligate_create_order/widgets/quantity_widget.dart';
-import 'package:hader_pharm_mobile/features/common_features/deligate_orders_details/cubit/add/edit_order_cubit.dart';
+import 'package:hader_pharm_mobile/features/common_features/deligate_orders_details/cubit/edit/edit_order_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_orders_details/cubit/order_details/orders_details_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/widgets/make_order_bottom_sheet.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
@@ -58,11 +58,15 @@ class OrderProductSelector extends StatelessWidget {
             showQuickAddButton: false,
           ),
           const SizedBox(height: AppSizesManager.s12),
-          DeligateOrderItemQuantity(
-              translation: translation,
-              quantityController: cubit.quantityController,
-              onDecrement: cubit.decrementQuantity,
-              onIncrement: cubit.incrementQuantity),
+          QuantitySectionModified(
+            quantityController: cubit.quantityController,
+            packageQuantityController: cubit.packageQuantityController,
+            packageSize: product.packageSize,
+            decrementPackageQuantity: cubit.decrementPackageQuantity,
+            incrementPackageQuantity: cubit.incrementPackageQuantity,
+            incrementQuantity: cubit.incrementQuantity,
+            decrementQuantity: cubit.decrementQuantity,
+          ),
           const ResponsiveGap.s12(),
           CustomPriceFormField(
             enabled: false,

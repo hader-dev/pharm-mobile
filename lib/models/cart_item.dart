@@ -1,6 +1,41 @@
+import 'package:flutter/widgets.dart';
 import 'package:hader_pharm_mobile/models/image.dart';
 
 import 'company.dart';
+
+List<CartItemModel> cartItemModelUiToData(List<CartItemModelUi> cartItems) {
+  return cartItems.map((e) => e.model).toList();
+}
+
+List<CartItemModelUi> cartItemModelDataToUi(List<CartItemModel> cartItems) {
+  return cartItems
+      .map((e) => CartItemModelUi(
+          model: e,
+          quantityController: TextEditingController(),
+          packageQuantityController: TextEditingController()))
+      .toList();
+}
+
+class CartItemModelUi {
+  final TextEditingController quantityController;
+  final TextEditingController packageQuantityController;
+
+  final CartItemModel model;
+
+  CartItemModelUi({
+    required this.quantityController,
+    required this.packageQuantityController,
+    required this.model,
+  });
+
+  CartItemModelUi copyWith({required int quantity}) {
+    return CartItemModelUi(
+      quantityController: quantityController,
+      packageQuantityController: packageQuantityController,
+      model: model.copyWith(quantity: quantity),
+    );
+  }
+}
 
 class CartItemModel {
   final String id;
@@ -14,7 +49,7 @@ class CartItemModel {
   final String? medicinesCatalogId;
   final String? parapharmCatalogId;
   final int quantity;
-  final String packageSize;
+  final int packageSize;
   final String designation;
   final dynamic lotNumber;
   final dynamic expirationDate;
@@ -54,14 +89,14 @@ class CartItemModel {
   });
 
   int get packageQuantity {
-    final packageCount = (quantity / int.parse(packageSize)).round();
+    final packageCount = (quantity / packageSize).round();
 
     return packageCount == 0 ? 1 : packageCount;
   }
 
   factory CartItemModel.fromJson(Map<String, dynamic> json) {
     return CartItemModel(
-      packageSize: json['packageSize'] ?? "1",
+      packageSize: int.tryParse(json['packageSize'] ?? "1") ?? 1,
       id: json['id'],
       totalAmountTtc: json['totalAmountTtc'],
       totalAmountHt: json['totalAmountHt'],
@@ -108,7 +143,7 @@ class CartItemModel {
       MedicinesCatalog? medicinesCatalog,
       dynamic parapharmCatalog,
       BaseCompany? sellerCompany,
-      String? packageSize}) {
+      int? packageSize}) {
     return CartItemModel(
       packageSize: packageSize ?? this.packageSize,
       id: id ?? this.id,

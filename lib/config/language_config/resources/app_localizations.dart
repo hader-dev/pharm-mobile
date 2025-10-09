@@ -442,6 +442,12 @@ abstract class AppLocalizations {
   /// **'Help and Support'**
   String get help_and_support;
 
+  /// No description provided for @verify_email.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify Email'**
+  String get verify_email;
+
   /// No description provided for @current_password.
   ///
   /// In en, this message translates to:
@@ -2203,13 +2209,13 @@ abstract class AppLocalizations {
   /// No description provided for @package_size.
   ///
   /// In en, this message translates to:
-  /// **'Package Size'**
+  /// **'Packing Size'**
   String get package_size;
 
   /// No description provided for @pacakge_quantity.
   ///
   /// In en, this message translates to:
-  /// **'Package Quantity'**
+  /// **'Packing Quantity'**
   String get pacakge_quantity;
 
   /// No description provided for @order_placed_successfully.

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/quantity_section.dart';
 import 'package:hader_pharm_mobile/features/common_features/cart/cubit/cart_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/cubit/medicine_details_cubit.dart';
 import 'package:hader_pharm_mobile/models/create_cart_item.dart';
@@ -13,30 +14,37 @@ import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
 import 'make_order_bottom_sheet.dart';
-import 'quantity_section.dart';
 
 class ButtonsSection extends StatelessWidget {
   const ButtonsSection(
       {super.key,
       this.medicineDetailsCubit,
       this.onAction,
-      this.quantitySectionAlignment = MainAxisAlignment.center});
+      this.quantitySectionAlignment = MainAxisAlignment.center,
+      this.disabledPackageQuanity = false});
 
   final VoidCallback? onAction;
   final MainAxisAlignment quantitySectionAlignment;
   final MedicineDetailsCubit? medicineDetailsCubit;
-
+  final bool disabledPackageQuanity;
   @override
   Widget build(BuildContext context) {
     final translation = context.translation!;
+    final cubit = context.read<MedicineDetailsCubit>();
 
     return BlocBuilder<CartCubit, CartState>(
       builder: (context, state) {
         return Column(
           children: [
             QuantitySectionModified(
-              mainAxisAlignment: quantitySectionAlignment,
-            ),
+                mainAxisAlignment: quantitySectionAlignment,
+                disabledPackageQuantity: disabledPackageQuanity,
+                decrementQuantity: cubit.decrementQuantity,
+                incrementQuantity: cubit.incrementQuantity,
+                decrementPackageQuantity: cubit.decrementPackageQuantity,
+                incrementPackageQuantity: cubit.incrementPackageQuantity,
+                quantityController: cubit.quantityController,
+                packageQuantityController: cubit.packageQuantityController),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p4),
               child: Row(

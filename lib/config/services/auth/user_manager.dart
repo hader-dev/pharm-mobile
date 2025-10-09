@@ -116,6 +116,7 @@ class UserManager {
     await tokenManagerInstance.storeAccessToken(token);
     (getItInstance.get<INetworkService>() as DioNetworkManager)
         .initDefaultHeaders(token);
+    await getMe();
   }
 
   Future<void> sendResetPasswordMail({
@@ -167,11 +168,12 @@ class UserManager {
   /// This method clears the token from [TokenManager], effectively logging out the user.
 
   Future<void> logout() async {
-    await Future.wait([
-      tokenManagerInstance.removeToken(),
-      getItInstance.get<INetworkService>().deletePersistantCookiesJar(),
-      _remoteLogout()
-    ]);
+    _remoteLogout().then((v) async {
+      await Future.wait([
+        tokenManagerInstance.removeToken(),
+        getItInstance.get<INetworkService>().deletePersistantCookiesJar(),
+      ]);
+    });
   }
 
   Future<void> _remoteLogout() {

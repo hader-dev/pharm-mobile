@@ -13,8 +13,12 @@ import 'package:hader_pharm_mobile/repositories/remote/order/order_repository_im
 import 'package:hader_pharm_mobile/repositories/remote/parapharm_catalog/para_pharma_catalog_repository_impl.dart';
 
 class QuickCartAddModal extends StatefulWidget {
-  const QuickCartAddModal({super.key, required this.paraPharmaCatalogId});
+  const QuickCartAddModal(
+      {super.key,
+      required this.paraPharmaCatalogId,
+      this.disabledPackageQuanity = false});
   final String paraPharmaCatalogId;
+  final bool disabledPackageQuanity;
 
   @override
   State<QuickCartAddModal> createState() => _QuickCartAddModalState();
@@ -34,9 +38,9 @@ class _QuickCartAddModalState extends State<QuickCartAddModal>
 
     final detailsCubit = ParaPharmaDetailsCubit(
         packageQuantityController: TextEditingController(
-            text: existingCartItem?.packageQuantity.toString() ?? '1'),
+            text: existingCartItem?.model.packageQuantity.toString() ?? '1'),
         quantityController: TextEditingController(
-            text: existingCartItem?.quantity.toString() ?? '1'),
+            text: existingCartItem?.model.quantity.toString() ?? '1'),
         tabController: TabController(length: tabs.length, vsync: this),
         ordersRepository:
             OrderRepository(client: getItInstance.get<INetworkService>()),
@@ -58,6 +62,7 @@ class _QuickCartAddModalState extends State<QuickCartAddModal>
         return ButtonsSection(
           onAction: () => context.pop(),
           quantitySectionAlignment: MainAxisAlignment.center,
+          disabledPackageQuanity: widget.disabledPackageQuanity,
         );
       }),
     );

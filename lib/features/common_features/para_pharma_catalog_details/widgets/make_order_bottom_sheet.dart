@@ -9,7 +9,7 @@ import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_bu
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/bottom_sheet_header.dart';
-import 'package:hader_pharm_mobile/features/common_features/cart/widgets/quantity/quantity.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/quantity_section.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders/cubit/orders_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/cubit/para_pharma_details_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/para_pharma_catalog_details.dart';
@@ -68,19 +68,15 @@ class MakeOrderBottomSheet extends StatelessWidget {
                       "${(num.parse(cubit.paraPharmaCatalogData!.unitPriceHt).toStringAsFixed(2))} ${translation.currency}",
                 ),
                 const ResponsiveGap.s12(),
-                BaseQuantityController(
-                    label: translation.quantity,
-                    decrement: cubit.decrementQuantity,
-                    increment: cubit.incrementQuantity,
-                    quantityController: cubit.quantityController),
-                if (!disabledPackageQuantity)
-                  BaseQuantityController(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      label:
-                          "${translation.pacakge_quantity} (${cubit.paraPharmaCatalogData!.packageSize})",
-                      decrement: cubit.decrementPackageQuantity,
-                      increment: cubit.incrementPackageQuantity,
-                      quantityController: cubit.packageQuantityController),
+                QuantitySectionModified(
+                    quantityController: cubit.quantityController,
+                    packageQuantityController: cubit.packageQuantityController,
+                    packageSize: cubit.paraPharmaCatalogData?.packageSize,
+                    disabledPackageQuantity: false,
+                    decrementPackageQuantity: cubit.decrementPackageQuantity,
+                    incrementPackageQuantity: cubit.incrementPackageQuantity,
+                    incrementQuantity: cubit.incrementQuantity,
+                    decrementQuantity: cubit.decrementQuantity),
                 const ResponsiveGap.s12(),
                 InfoWidget(
                     label: context.translation!.shipping_address,

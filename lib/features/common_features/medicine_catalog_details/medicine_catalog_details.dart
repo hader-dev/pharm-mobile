@@ -15,10 +15,14 @@ import 'widgets/medicine_product_photo_section.dart';
 
 class MedicineCatalogDetailsScreen extends StatefulWidget {
   final String medicineCatalogId;
+  final bool disabledPackageQuanity;
+
   static final GlobalKey<ScaffoldState> medicineDetailsScaffoldKey =
       GlobalKey<ScaffoldState>();
   const MedicineCatalogDetailsScreen(
-      {super.key, required this.medicineCatalogId});
+      {super.key,
+      required this.medicineCatalogId,
+      this.disabledPackageQuanity = false});
 
   @override
   State<MedicineCatalogDetailsScreen> createState() =>
@@ -27,6 +31,16 @@ class MedicineCatalogDetailsScreen extends StatefulWidget {
 
 class _MedicineCatalogDetailsScreenState
     extends State<MedicineCatalogDetailsScreen> with TickerProviderStateMixin {
+  double bottomNavbarHeightModifier = 1;
+
+  @override
+  void initState() {
+    super.initState();
+    bottomNavbarHeightModifier = widget.disabledPackageQuanity
+        ? AppSizesManager.deafultQuantityNavbarHeightModifier
+        : AppSizesManager.expendedQuantityNavbarHeightModifier;
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -83,9 +97,11 @@ class _MedicineCatalogDetailsScreenState
               bottomNavigationBar: Padding(
                 padding: const EdgeInsets.all(AppSizesManager.p12),
                 child: SizedBox(
-                  height: kBottomNavigationBarHeight * 3,
+                  height:
+                      kBottomNavigationBarHeight * bottomNavbarHeightModifier,
                   child: ButtonsSection(
                     medicineDetailsCubit: context.read<MedicineDetailsCubit>(),
+                    disabledPackageQuanity: widget.disabledPackageQuanity,
                   ),
                 ),
               ),

@@ -184,6 +184,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get help_and_support => 'Help and Support';
 
   @override
+  String get verify_email => 'Verify Email';
+
+  @override
   String get current_password => 'Current Password';
 
   @override
@@ -1099,10 +1102,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get failed => 'Failed';
 
   @override
-  String get package_size => 'Package Size';
+  String get package_size => 'Packing Size';
 
   @override
-  String get pacakge_quantity => 'Package Quantity';
+  String get pacakge_quantity => 'Packing Quantity';
 
   @override
   String get order_placed_successfully => 'Order placed successfully';

@@ -6,8 +6,8 @@ import 'package:hader_pharm_mobile/config/services/network/network_interface.dar
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/info_widget.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/quantity_section.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_create_order/widgets/custom_price_input.dart';
-import 'package:hader_pharm_mobile/features/common_features/deligate_create_order/widgets/quantity_widget.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_orders_details/cubit/order_details/orders_details_cubit.dart';
 import 'package:hader_pharm_mobile/models/deligate_order.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
@@ -19,6 +19,7 @@ class OrderItemEditable extends StatefulWidget {
   final DeligateOrderItem item;
   final quantityController = TextEditingController();
   final customPriceController = TextEditingController();
+  final packageQuantityController = TextEditingController();
 
   @override
   State<OrderItemEditable> createState() => _OrderItemEditableState();
@@ -34,6 +35,8 @@ class _OrderItemEditableState extends State<OrderItemEditable> {
     final totalPrice = unitPrice * widget.item.quantity;
     widget.quantityController.text = widget.item.quantity.toString();
     widget.customPriceController.text = unitPrice.toString();
+
+    widget.packageQuantityController.text = (widget.item.quantity).toString();
 
     return Container(
       margin: const EdgeInsets.symmetric(
@@ -110,15 +113,22 @@ class _OrderItemEditableState extends State<OrderItemEditable> {
           const Divider(
             color: AppColors.accent1Shade1,
           ),
-          DeligateOrderItemQuantity(
-              translation: translation,
-              quantityController: widget.quantityController,
-              onChanged: (value) =>
-                  cubit.updateCustomQuantity(value ?? "1", widget.item),
-              onDecrement: () => cubit.decrementItemQuantity(widget.item,
-                  widget.quantityController, widget.customPriceController),
-              onIncrement: () => cubit.incrementItemQuantity(widget.item,
-                  widget.quantityController, widget.customPriceController)),
+          QuantitySectionModified(
+            quantityController: widget.quantityController,
+            packageQuantityController: widget.packageQuantityController,
+            decrementPackageQuantity: () => cubit.decrementPackageItemQuantity(
+                widget.item,
+                widget.quantityController,
+                widget.customPriceController),
+            incrementPackageQuantity: () => cubit.incrementPackageItemQuantity(
+                widget.item,
+                widget.quantityController,
+                widget.customPriceController),
+            incrementQuantity: () => cubit.incrementItemQuantity(widget.item,
+                widget.quantityController, widget.customPriceController),
+            decrementQuantity: () => cubit.incrementItemQuantity(widget.item,
+                widget.quantityController, widget.customPriceController),
+          ),
           const SizedBox(height: AppSizesManager.s12),
           CustomPriceFormField(
             enabled: false,

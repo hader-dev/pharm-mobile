@@ -9,9 +9,9 @@ import 'package:hader_pharm_mobile/features/common/decorations/field.dart';
 import 'package:hader_pharm_mobile/features/common/decorations/input.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/para_pharma_widget_2.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/quantity_section.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_create_order/cubit/create_order_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_create_order/widgets/custom_price_input.dart';
-import 'package:hader_pharm_mobile/features/common_features/deligate_create_order/widgets/quantity_widget.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/widgets/make_order_bottom_sheet.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
@@ -55,11 +55,16 @@ class OrderProductSelector extends StatelessWidget {
             showQuickAddButton: false,
           ),
           const SizedBox(height: AppSizesManager.s12),
-          DeligateOrderItemQuantity(
-              translation: translation,
-              quantityController: cubit.quantityController,
-              onDecrement: cubit.decrementQuantity,
-              onIncrement: cubit.incrementQuantity),
+          QuantitySectionModified(
+            quantityController: cubit.quantityController,
+            packageQuantityController: cubit.packageQuantityController,
+            disabledPackageQuantity: false,
+            packageSize: product.packageSize,
+            decrementPackageQuantity: cubit.decrementPackageQuantity,
+            incrementPackageQuantity: cubit.incrementPackageQuantity,
+            incrementQuantity: cubit.incrementQuantity,
+            decrementQuantity: cubit.decrementQuantity,
+          ),
           const ResponsiveGap.s12(),
           CustomPriceFormField(
             enabled: false,

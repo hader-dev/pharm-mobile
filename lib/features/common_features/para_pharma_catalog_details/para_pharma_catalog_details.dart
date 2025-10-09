@@ -16,11 +16,15 @@ import 'widgets/para_pharma_product_photo_section.dart';
 class ParaPharmaCatalogDetailsScreen extends StatefulWidget {
   final String paraPharmaCatalogId;
   final bool canOrder;
+  final bool disabledPackageQuanity;
   static final GlobalKey<ScaffoldState> paraPharmaDetailsScaffoldKey =
       GlobalKey<ScaffoldState>();
 
   const ParaPharmaCatalogDetailsScreen(
-      {super.key, required this.paraPharmaCatalogId, required this.canOrder});
+      {super.key,
+      required this.paraPharmaCatalogId,
+      required this.canOrder,
+      this.disabledPackageQuanity = false});
 
   @override
   State<ParaPharmaCatalogDetailsScreen> createState() =>
@@ -30,6 +34,16 @@ class ParaPharmaCatalogDetailsScreen extends StatefulWidget {
 class _ParaPharmaCatalogDetailsScreenState
     extends State<ParaPharmaCatalogDetailsScreen>
     with TickerProviderStateMixin {
+  double bottomNavbarHeightModifier = 1;
+
+  @override
+  void initState() {
+    super.initState();
+    bottomNavbarHeightModifier = widget.disabledPackageQuanity
+        ? AppSizesManager.deafultQuantityNavbarHeightModifier
+        : AppSizesManager.expendedQuantityNavbarHeightModifier;
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -83,15 +97,19 @@ class _ParaPharmaCatalogDetailsScreenState
                       child: ParaPharmaCatalogAppBar()),
                 ],
               ),
-              bottomNavigationBar:widget.canOrder ? Padding(
-                padding: const EdgeInsets.all(AppSizesManager.p12),
-                child: SizedBox(
-                  height: kBottomNavigationBarHeight * 3,
-                  child: ButtonsSection(
-                    quantitySectionAlignment: MainAxisAlignment.center,
-                  ),
-                ),
-              ):SizedBox.shrink(),
+              bottomNavigationBar: widget.canOrder
+                  ? Padding(
+                      padding: const EdgeInsets.all(AppSizesManager.p12),
+                      child: SizedBox(
+                        height: kBottomNavigationBarHeight *
+                            bottomNavbarHeightModifier,
+                        child: ButtonsSection(
+                          quantitySectionAlignment: MainAxisAlignment.center,
+                          disabledPackageQuanity: widget.disabledPackageQuanity,
+                        ),
+                      ),
+                    )
+                  : SizedBox.shrink(),
             );
           },
         ),

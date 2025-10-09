@@ -45,6 +45,10 @@ class AppSizesManager {
   static const double buttonHeight = 40;
   //common widgets radius
   static const double commonWidgetsRadius = r4;
+
+  static double deafultQuantityNavbarHeightModifier = 3.0;
+
+  static double expendedQuantityNavbarHeightModifier = 4.5;
 }
 
 class PaginationConstants {
