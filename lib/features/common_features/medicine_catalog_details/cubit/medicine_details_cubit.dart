@@ -174,4 +174,30 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
   void updateShippingAddress(String value) {
     emit(state.initial(shippingAddress: value));
   }
+
+  void updateQuantity(String v) {
+    final updatedQuantity = int.parse(v);
+    if (updatedQuantity > 0) {
+      quantityController.text = (updatedQuantity).toString();
+
+      packageQuantityController.text =
+          (updatedQuantity ~/ (state.medicineCatalogData?.packageSize ?? 1))
+              .toString();
+    }
+    emit(state.quantityChanged());
+  }
+
+  void updateQuantityPackage(String v) {
+    final currPackageQuantity = int.parse(v);
+
+    final updatedItemQuantity =
+        (currPackageQuantity * (state.medicineCatalogData?.packageSize ?? 1));
+
+    packageQuantityController.text =
+        (currPackageQuantity < 1 ? 1 : currPackageQuantity).toString();
+
+    quantityController.text =
+        (updatedItemQuantity < 1 ? 1 : updatedItemQuantity).toString();
+    emit(state.quantityChanged());
+  }
 }

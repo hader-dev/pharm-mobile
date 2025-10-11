@@ -175,4 +175,30 @@ class ParaPharmaDetailsCubit extends Cubit<ParaPharmaDetailsState> {
   void refreshUi() {
     emit(ParaPharmaDetailsLoaded());
   }
+
+  void updateQuantityPackage(String v) {
+    final currPackageQuantity = int.parse(v);
+
+    final updatedItemQuantity =
+        (currPackageQuantity * (paraPharmaCatalogData?.packageSize ?? 1));
+
+    packageQuantityController.text =
+        (currPackageQuantity < 1 ? 1 : currPackageQuantity).toString();
+
+    quantityController.text =
+        (updatedItemQuantity < 1 ? 1 : updatedItemQuantity).toString();
+    emit(ParaPharmaQuantityChanged());
+  }
+
+  void updateQuantity(String v) {
+    final updatedQuantity = int.parse(v);
+    if (updatedQuantity > 0) {
+      quantityController.text = (updatedQuantity).toString();
+
+      packageQuantityController.text =
+          (updatedQuantity ~/ (paraPharmaCatalogData?.packageSize ?? 1))
+              .toString();
+    }
+    emit(ParaPharmaQuantityChanged());
+  }
 }

@@ -3,7 +3,7 @@ part of 'edit_order_cubit.dart';
 abstract class DeligateEditOrderState extends Equatable {
   final DeligateClient client;
   final List<BaseParaPharmaCatalogModel> products;
-  final List<DeligateParahparmOrderItem> orderProducts;
+  final List<DeligateParahparmOrderItemUi> orderProducts;
 
   final bool hasReachedMax;
   final int totalItemsCount;
@@ -45,7 +45,7 @@ abstract class DeligateEditOrderState extends Equatable {
   DeligateEditOrderState copyWith({
     DeligateClient? client,
     List<BaseParaPharmaCatalogModel>? products,
-    List<DeligateParahparmOrderItem>? orderProducts,
+    List<DeligateParahparmOrderItemUi>? orderProducts,
     bool? hasReachedMax,
     int? totalItemsCount,
     int? offSet,
@@ -123,11 +123,11 @@ abstract class DeligateEditOrderState extends Equatable {
       DeligateOrderLoading.fromState(copyWith(offSet: offset ?? offSet));
 
   DeligateOrderProductsUpdated productsUpdated(
-      {required DeligateParahparmOrderItem item, bool removed = false}) {
+      {required DeligateParahparmOrderItemUi item, bool removed = false}) {
     bool updatedExisting = false;
-    List<DeligateParahparmOrderItem> orderProducts =
+    List<DeligateParahparmOrderItemUi> orderProducts =
         this.orderProducts.map((el) {
-      final exists = !removed && el.product.id == item.product.id;
+      final exists = !removed && el.model.product.id == item.model.product.id;
 
       if (exists) {
         updatedExisting = true;
@@ -239,8 +239,7 @@ final class DeligateOrderProductsUpdated extends DeligateEditOrderState {
         );
 }
 
-final class DeligateOrderUpdateSelectedProduct
-    extends DeligateEditOrderState {
+final class DeligateOrderUpdateSelectedProduct extends DeligateEditOrderState {
   DeligateOrderUpdateSelectedProduct.fromState(DeligateEditOrderState state)
       : super(
           client: state.client,

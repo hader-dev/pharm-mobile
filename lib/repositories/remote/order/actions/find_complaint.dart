@@ -60,6 +60,7 @@ Future<ResponseItemComplaintFind> mockResponse(
           orderId: "order-789",
           imageUrl: "https://via.placeholder.com/150",
           note: "Urgent delivery",
+          packageSize: 10,
         ),
         claimStatusHistory: [
           ClaimStatusHistoryModel(

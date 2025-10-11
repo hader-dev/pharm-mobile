@@ -37,14 +37,17 @@ class ButtonsSection extends StatelessWidget {
         return Column(
           children: [
             QuantitySectionModified(
-                mainAxisAlignment: quantitySectionAlignment,
-                disabledPackageQuantity: disabledPackageQuanity,
-                decrementQuantity: cubit.decrementQuantity,
-                incrementQuantity: cubit.incrementQuantity,
-                decrementPackageQuantity: cubit.decrementPackageQuantity,
-                incrementPackageQuantity: cubit.incrementPackageQuantity,
-                quantityController: cubit.quantityController,
-                packageQuantityController: cubit.packageQuantityController),
+              mainAxisAlignment: quantitySectionAlignment,
+              disabledPackageQuantity: disabledPackageQuanity,
+              decrementQuantity: cubit.decrementQuantity,
+              incrementQuantity: cubit.incrementQuantity,
+              decrementPackageQuantity: cubit.decrementPackageQuantity,
+              incrementPackageQuantity: cubit.incrementPackageQuantity,
+              quantityController: cubit.quantityController,
+              packageQuantityController: cubit.packageQuantityController,
+              onQuantityChanged: (v) => cubit.updateQuantity(v),
+              onPackageQuantityChanged: (v) => cubit.updateQuantityPackage(v),
+            ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p4),
               child: Row(

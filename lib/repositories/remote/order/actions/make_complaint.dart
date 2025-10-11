@@ -41,6 +41,7 @@ Future<ResponseItemComplaintMake> mockResponse(
         orderItemModel: OrderItem(
           id: "item-001",
           totalAmountTtc: 120.50,
+          packageSize: 10,
           totalAmountHt: 100.42,
           tvaPercentage: 20.0,
           unitPriceHt: 50.21,

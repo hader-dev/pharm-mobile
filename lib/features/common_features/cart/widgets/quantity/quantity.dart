@@ -8,6 +8,8 @@ import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
+typedef OnQuantityChanged = void Function(String quantity);
+
 class BaseQuantityController extends StatelessWidget {
   const BaseQuantityController(
       {super.key,
@@ -15,12 +17,14 @@ class BaseQuantityController extends StatelessWidget {
       required this.decrement,
       required this.increment,
       this.crossAxisAlignment = CrossAxisAlignment.center,
+      this.onQuantityChanged,
       required this.quantityController});
   final String label;
   final VoidCallback decrement;
   final TextEditingController quantityController;
   final VoidCallback increment;
   final CrossAxisAlignment crossAxisAlignment;
+  final OnQuantityChanged? onQuantityChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +62,22 @@ class BaseQuantityController extends StatelessWidget {
                       textAlign: TextAlign.center,
                       keyboardType: TextInputType.number,
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      onChanged: (value) {
+                        final parsed = int.tryParse(value);
+
+                        if (value.isEmpty || parsed == null || parsed < 1) {
+                          quantityController.text = '1';
+                          quantityController.selection =
+                              TextSelection.fromPosition(
+                            TextPosition(
+                                offset: quantityController.text.length),
+                          );
+
+                          onQuantityChanged?.call('1');
+                        } else {
+                          onQuantityChanged?.call(value);
+                        }
+                      },
                       validator: (value) =>
                           value == null || value.isEmpty ? '' : null,
                       style: context.responsiveTextTheme.current.body3Medium,

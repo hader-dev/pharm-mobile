@@ -11,7 +11,6 @@ Future<ResponseMyClients> loadMyClients(
       await client.sendRequest(() => client.get(Urls.myClients, queryParams: {
             'limit': params.limit.toString(),
             'offset': params.offset.toString(),
-            'filters[myAssignedClientsOnly]': 'true',
             'filters[includeBuyerCompany]': 'true',
             if (params.searchQuery?.isNotEmpty ?? false)
               'search[clientName]': params.searchQuery!

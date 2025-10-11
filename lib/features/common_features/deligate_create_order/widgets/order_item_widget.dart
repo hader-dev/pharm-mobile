@@ -15,11 +15,8 @@ import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
 class DeligateOrderItemWidget extends StatefulWidget {
-  DeligateOrderItemWidget({super.key, required this.item});
-  final DeligateParahparmOrderItem item;
-  final quantityController = TextEditingController();
-  final customPriceController = TextEditingController();
-  final packageQuantityController = TextEditingController();
+  const DeligateOrderItemWidget({super.key, required this.item});
+  final DeligateParahparmOrderItemUi item;
 
   @override
   State<DeligateOrderItemWidget> createState() =>
@@ -31,13 +28,9 @@ class _DeligateOrderItemWidgetState extends State<DeligateOrderItemWidget> {
   Widget build(BuildContext context) {
     final translation = context.translation!;
     final cubit = BlocProvider.of<DeligateCreateOrderCubit>(context);
-    final unitPrice = (widget.item.suggestedPrice ??
-        double.parse(widget.item.product.unitPriceHt));
-    final totalPrice = unitPrice * widget.item.quantity;
-    widget.quantityController.text = widget.item.quantity.toString();
-    widget.customPriceController.text = unitPrice.toString();
-    widget.packageQuantityController.text =
-        (widget.item.quantity ~/ widget.item.product.packageSize).toString();
+    final unitPrice = (widget.item.model.suggestedPrice ??
+        double.parse(widget.item.model.product.unitPriceHt));
+    final totalPrice = unitPrice * widget.item.model.quantity;
 
     return Container(
       margin: const EdgeInsets.symmetric(
@@ -57,14 +50,14 @@ class _DeligateOrderItemWidgetState extends State<DeligateOrderItemWidget> {
                 height: 70,
                 width: 70,
                 boxFit: BoxFit.fill,
-                imageUrl: widget.item.product.image?.path != null
+                imageUrl: widget.item.model.product.image?.path != null
                     ? getItInstance
                         .get<INetworkService>()
-                        .getFilesPath(widget.item.product.image!.path)
+                        .getFilesPath(widget.item.model.product.image!.path)
                     : "",
                 errorWidget: Column(
                   children: [
-                    Spacer(),
+                    const Spacer(),
                     Icon(Iconsax.image,
                         color: Color.fromARGB(255, 197, 197, 197),
                         size: AppSizesManager.iconSize30),
@@ -87,7 +80,7 @@ class _DeligateOrderItemWidgetState extends State<DeligateOrderItemWidget> {
                     Row(
                       children: [
                         Text(
-                          widget.item.product.name,
+                          widget.item.model.product.name,
                           softWrap: true,
                           overflow: TextOverflow.ellipsis,
                           style: context
@@ -115,35 +108,34 @@ class _DeligateOrderItemWidgetState extends State<DeligateOrderItemWidget> {
             color: AppColors.accent1Shade1,
           ),
           QuantitySectionModified(
-            quantityController: widget.quantityController,
-            packageQuantityController: widget.packageQuantityController,
-            packageSize: widget.item.product.packageSize,
+            quantityController: widget.item.quantityController,
+            packageQuantityController: widget.item.packageQuantityController,
+            packageSize: widget.item.model.product.packageSize,
             disabledPackageQuantity: false,
             decrementPackageQuantity: () => cubit.decrementPackageItemQuantity(
-                item: widget.item,
-                itemQuantityController: widget.quantityController,
-                itemPackageQuantityController: widget.packageQuantityController,
-                itemCustomPriceController: widget.customPriceController),
+              item: widget.item,
+            ),
             incrementPackageQuantity: () => cubit.incrementPackageItemQuantity(
-                item: widget.item,
-                itemQuantityController: widget.quantityController,
-                itemPackageQuantityController: widget.packageQuantityController,
-                itemCustomPriceController: widget.customPriceController),
+              item: widget.item,
+            ),
             incrementQuantity: () => cubit.incrementItemQuantity(
-                item: widget.item,
-                itemQuantityController: widget.quantityController,
-                itemPackageQuantityController: widget.packageQuantityController,
-                itemCustomPriceController: widget.customPriceController),
-            decrementQuantity: () => cubit.incrementItemQuantity(
-                item: widget.item,
-                itemQuantityController: widget.quantityController,
-                itemPackageQuantityController: widget.packageQuantityController,
-                itemCustomPriceController: widget.customPriceController),
+              item: widget.item,
+            ),
+            decrementQuantity: () => cubit.decrementItemQuantity(
+              item: widget.item,
+            ),
+            onQuantityChanged: (String quantity) => cubit.updateItemQuantity(
+              item: widget.item,
+            ),
+            onPackageQuantityChanged: (String quantity) =>
+                cubit.updateItemPackageQuantity(
+              item: widget.item,
+            ),
           ),
           const SizedBox(height: AppSizesManager.s12),
           CustomPriceFormField(
             enabled: false,
-            customPriceController: widget.customPriceController,
+            customPriceController: widget.item.customPriceController,
             translation: translation,
             onPriceChanged: (value) =>
                 cubit.updateItemCustomPrice(value, widget.item),
@@ -158,8 +150,8 @@ class _DeligateOrderItemWidgetState extends State<DeligateOrderItemWidget> {
                   style: context.responsiveTextTheme.current.body2Medium
                       .copyWith(color: AppColors.accent1Shade1),
                 ),
-                Spacer(),
-                Icon(
+                const Spacer(),
+                const Icon(
                   Iconsax.wallet_money,
                   color: AppColors.accent1Shade1,
                 ),

@@ -3,6 +3,8 @@ import 'package:hader_pharm_mobile/features/common_features/cart/widgets/quantit
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
+typedef OnQuantityChanged = void Function(String quantity);
+
 class QuantitySectionModified extends StatelessWidget {
   const QuantitySectionModified({
     super.key,
@@ -14,6 +16,8 @@ class QuantitySectionModified extends StatelessWidget {
     required this.incrementPackageQuantity,
     required this.quantityController,
     required this.packageQuantityController,
+    required this.onQuantityChanged,
+    required this.onPackageQuantityChanged,
     this.packageSize,
   });
   final MainAxisAlignment mainAxisAlignment;
@@ -22,6 +26,8 @@ class QuantitySectionModified extends StatelessWidget {
   final VoidCallback incrementQuantity;
   final VoidCallback decrementPackageQuantity;
   final VoidCallback incrementPackageQuantity;
+  final OnQuantityChanged onQuantityChanged;
+  final OnQuantityChanged onPackageQuantityChanged;
   final TextEditingController quantityController;
   final TextEditingController packageQuantityController;
   final int? packageSize;
@@ -40,6 +46,7 @@ class QuantitySectionModified extends StatelessWidget {
             quantityController: quantityController,
             decrement: decrementQuantity,
             increment: incrementQuantity,
+            onQuantityChanged: onQuantityChanged,
           ),
           if (!disabledPackageQuantity)
             BaseQuantityController(
@@ -47,6 +54,7 @@ class QuantitySectionModified extends StatelessWidget {
               quantityController: packageQuantityController,
               decrement: decrementPackageQuantity,
               increment: incrementPackageQuantity,
+              onQuantityChanged: onPackageQuantityChanged,
             )
         ],
       ),

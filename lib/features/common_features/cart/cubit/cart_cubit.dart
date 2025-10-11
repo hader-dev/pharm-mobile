@@ -367,4 +367,6 @@ class CartCubit extends Cubit<CartState> {
   void updateShippingAddress(String value) {
     shippingAddress = value;
   }
+
+  void updateItemPackageQuantity(String id, int parse) {}
 }

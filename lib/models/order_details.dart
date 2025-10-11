@@ -94,6 +94,7 @@ class OrderItem {
   final dynamic expirationDate;
   final double margin;
   final double discountAmount;
+  final int packageSize;
   final String orderId;
 
   final String? imageUrl;
@@ -114,6 +115,7 @@ class OrderItem {
     required this.parapharmCatalogId,
     required this.quantity,
     required this.designation,
+    required this.packageSize,
     required this.lotNumber,
     required this.expirationDate,
     required this.margin,
@@ -135,6 +137,7 @@ class OrderItem {
       medicineCatalogId: null,
       parapharmCatalogId: null,
       quantity: 0,
+      packageSize: 0,
       designation: null,
       lotNumber: null,
       expirationDate: null,
@@ -153,6 +156,7 @@ class OrderItem {
       totalAmountHt: 120.00,
       tvaPercentage: 10.0,
       unitPriceHt: 12.00,
+      packageSize: 10,
       unitPriceTtc: 13.20,
       createdAt: DateTime.now().subtract(Duration(days: 10)),
       updatedAt: DateTime.now(),
@@ -189,10 +193,12 @@ class OrderItem {
     double? discountAmount,
     String? orderId,
     String? imageUrl,
+    int? packageSize,
     String? note,
   }) {
     return OrderItem(
       id: id ?? this.id,
+      packageSize: packageSize ?? this.packageSize,
       totalAmountTtc: totalAmountTtc ?? this.totalAmountTtc,
       totalAmountHt: totalAmountHt ?? this.totalAmountHt,
       tvaPercentage: tvaPercentage ?? this.tvaPercentage,

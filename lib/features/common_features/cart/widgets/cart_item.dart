@@ -91,6 +91,12 @@ class CartItemWidget extends StatelessWidget {
                       incrementPackageQuantity: () => cartCubit
                           .increaseCartItemPackageQuantity(cartItemData.id),
                       quantityController: quantityController,
+                      onQuantityChanged: (value) =>
+                          cartCubit.updateItemQuantity(
+                              cartItemData.id, int.parse(value)),
+                      onPackageQuantityChanged: (value) =>
+                          cartCubit.updateItemPackageQuantity(
+                              cartItemData.id, int.parse(value)),
                       packageQuantityController: packageQuantityController,
                     ),
                   ],

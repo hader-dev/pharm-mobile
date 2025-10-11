@@ -162,19 +162,19 @@ class DeligateCreateOrderCubit extends Cubit<DeligateCreateOrderState> {
             updatedQuantity)));
   }
 
-  void decrementItemQuantity(
-      {required DeligateParahparmOrderItem item,
-      required TextEditingController itemQuantityController,
-      required TextEditingController itemPackageQuantityController,
-      required TextEditingController itemCustomPriceController}) {
-    final updatedQuantity = item.quantity > 1 ? item.quantity - 1 : 1;
+  void decrementItemQuantity({
+    required DeligateParahparmOrderItemUi item,
+  }) {
+    final tempQuantity = int.parse(item.quantityController.text);
+    final updatedQuantity = tempQuantity > 1 ? tempQuantity - 1 : 1;
 
-    itemPackageQuantityController.text =
-        (updatedQuantity ~/ (item.product.packageSize)).toString();
+    item.packageQuantityController.text =
+        (updatedQuantity ~/ (item.model.product.packageSize)).toString();
 
-    itemQuantityController.text = updatedQuantity.toString();
+    item.quantityController.text = updatedQuantity.toString();
 
-    final updatedItem = item.copyWith(quantity: updatedQuantity);
+    final updatedItem =
+        item.copyWith(model: item.model.copyWith(quantity: updatedQuantity));
 
     emit(
       state.productsUpdated(
@@ -183,19 +183,20 @@ class DeligateCreateOrderCubit extends Cubit<DeligateCreateOrderState> {
     );
   }
 
-  void incrementItemQuantity(
-      {required DeligateParahparmOrderItem item,
-      required TextEditingController itemQuantityController,
-      required TextEditingController itemPackageQuantityController,
-      required TextEditingController itemCustomPriceController}) {
-    final updatedQuantity = item.quantity + 1;
+  void incrementItemQuantity({
+    required DeligateParahparmOrderItemUi item,
+  }) {
+    final tempQuantity = int.parse(item.quantityController.text);
 
-    itemQuantityController.text = updatedQuantity.toString();
+    final updatedQuantity = tempQuantity + 1;
 
-    itemPackageQuantityController.text =
-        (updatedQuantity ~/ (item.product.packageSize)).toString();
+    item.quantityController.text = updatedQuantity.toString();
 
-    final updatedItem = item.copyWith(quantity: updatedQuantity);
+    item.packageQuantityController.text =
+        (updatedQuantity ~/ (item.model.product.packageSize)).toString();
+
+    final updatedItem =
+        item.copyWith(model: item.model.copyWith(quantity: updatedQuantity));
 
     emit(
       state.productsUpdated(
@@ -217,14 +218,16 @@ class DeligateCreateOrderCubit extends Cubit<DeligateCreateOrderState> {
         price: priceValue, totalPrice: (priceValue ?? 0) * state.quantity));
   }
 
-  void updateItemCustomPrice(String? value, DeligateParahparmOrderItem item) =>
+  void updateItemCustomPrice(
+          String? value, DeligateParahparmOrderItemUi item) =>
       debounceManager.debounce(
           tag: "price",
           duration: const Duration(milliseconds: 1000),
           action: () async {
             final priceValue = double.tryParse(value ?? '0');
 
-            final updatedItem = item.copyWith(suggestedPrice: priceValue);
+            final updatedItem = item.copyWith(
+                model: item.model.copyWith(suggestedPrice: priceValue));
 
             emit(state.productsUpdated(item: updatedItem));
           });
@@ -235,13 +238,21 @@ class DeligateCreateOrderCubit extends Cubit<DeligateCreateOrderState> {
         AppLayout.appLayoutScaffoldKey.currentContext!.translation!;
     final quantity = state.quantity;
     final customPrice = double.tryParse(customPriceController.text);
+
     emit(
       state.productsUpdated(
-        item: DeligateParahparmOrderItem(
-            isParapharm: true,
-            product: state.selectedProduct!,
-            quantity: quantity,
-            suggestedPrice: customPrice),
+        item: DeligateParahparmOrderItemUi(
+            quantityController:
+                TextEditingController(text: quantityController.text),
+            customPriceController:
+                TextEditingController(text: customPriceController.text),
+            packageQuantityController:
+                TextEditingController(text: packageQuantityController.text),
+            model: DeligateParahparmOrderItem(
+                isParapharm: true,
+                product: state.selectedProduct!,
+                quantity: quantity,
+                suggestedPrice: customPrice)),
       ),
     );
 
@@ -251,7 +262,7 @@ class DeligateCreateOrderCubit extends Cubit<DeligateCreateOrderState> {
         );
   }
 
-  void removeOrderItem(DeligateParahparmOrderItem item) {
+  void removeOrderItem(DeligateParahparmOrderItemUi item) {
     emit(
       state.productsUpdated(
         item: item,
@@ -281,7 +292,7 @@ class DeligateCreateOrderCubit extends Cubit<DeligateCreateOrderState> {
       await orderRepo.createDeligateOrder(ParamsCreateDeligateOrder(
         deliveryAddress: userManager.currentUser.address,
         deliveryTownId: userManager.currentUser.townId,
-        orderItems: state.orderProducts,
+        orderItems: state.orderProducts.map((el) => el.model).toList(),
         clientId: state.client.buyerCompany.managerUserId!,
         clientCompanyId: state.client.buyerCompany.id,
       ));
@@ -296,46 +307,52 @@ class DeligateCreateOrderCubit extends Cubit<DeligateCreateOrderState> {
     }
   }
 
-  void updateQuantity(String value) {
-    final quantity = int.tryParse(value);
-    quantityController.text = quantity.toString();
-    emit(state.updateSuggestedPrice(quantity: quantity));
-  }
-
-  void decrementPackageItemQuantity(
-      {required DeligateParahparmOrderItem item,
-      required TextEditingController itemQuantityController,
-      required TextEditingController itemPackageQuantityController,
-      required TextEditingController itemCustomPriceController}) {
+  void decrementPackageItemQuantity({
+    required DeligateParahparmOrderItemUi item,
+  }) {
     final currPackageQuantity =
-        int.parse(itemPackageQuantityController.text) - 1;
+        int.parse(item.packageQuantityController.text) - 1;
 
     final updatedItemQuantity =
-        (currPackageQuantity * (state.selectedProduct?.packageSize ?? 1));
+        (currPackageQuantity * (item.model.product.packageSize));
 
-    itemPackageQuantityController.text =
+    item.packageQuantityController.text =
         (currPackageQuantity < 1 ? 1 : currPackageQuantity).toString();
 
-    itemQuantityController.text =
+    item.quantityController.text =
         (updatedItemQuantity < 1 ? 1 : updatedItemQuantity).toString();
-    emit(state.updateSuggestedPrice(quantity: updatedItemQuantity));
+
+    final updatedItem = item.copyWith(
+        model: item.model.copyWith(quantity: updatedItemQuantity));
+
+    emit(
+      state.productsUpdated(
+        item: updatedItem,
+      ),
+    );
   }
 
-  void incrementPackageItemQuantity(
-      {required DeligateParahparmOrderItem item,
-      required TextEditingController itemQuantityController,
-      required TextEditingController itemPackageQuantityController,
-      required TextEditingController itemCustomPriceController}) {
+  void incrementPackageItemQuantity({
+    required DeligateParahparmOrderItemUi item,
+  }) {
     final currPackageQuantity =
-        int.parse(itemPackageQuantityController.text) + 1;
+        int.parse(item.packageQuantityController.text) + 1;
 
     final updatedItemQuantity =
-        (currPackageQuantity * (state.selectedProduct?.packageSize ?? 1));
+        (currPackageQuantity * (item.model.product.packageSize));
 
-    itemPackageQuantityController.text = currPackageQuantity.toString();
+    item.packageQuantityController.text = currPackageQuantity.toString();
 
-    itemQuantityController.text = updatedItemQuantity.toString();
-    emit(state.updateSuggestedPrice(quantity: updatedItemQuantity));
+    item.quantityController.text = updatedItemQuantity.toString();
+
+    final updatedItem = item.copyWith(
+        model: item.model.copyWith(quantity: updatedItemQuantity));
+
+    emit(
+      state.productsUpdated(
+        item: updatedItem,
+      ),
+    );
   }
 
   void decrementPackageQuantity() {
@@ -349,7 +366,10 @@ class DeligateCreateOrderCubit extends Cubit<DeligateCreateOrderState> {
 
     quantityController.text =
         (updatedItemQuantity < 1 ? 1 : updatedItemQuantity).toString();
-    emit(state.updateSuggestedPrice(quantity: updatedItemQuantity));
+    emit(state.updateSuggestedPrice(
+        quantity: updatedItemQuantity,
+        totalPrice: ((double.tryParse(customPriceController.text) ?? 0) *
+            updatedItemQuantity)));
   }
 
   void incrementPackageQuantity() {
@@ -361,6 +381,79 @@ class DeligateCreateOrderCubit extends Cubit<DeligateCreateOrderState> {
     packageQuantityController.text = currPackageQuantity.toString();
 
     quantityController.text = updatedItemQuantity.toString();
-    emit(state.updateSuggestedPrice(quantity: updatedItemQuantity));
+    emit(state.updateSuggestedPrice(
+        quantity: updatedItemQuantity,
+        totalPrice: ((double.tryParse(customPriceController.text) ?? 0) *
+            updatedItemQuantity)));
+  }
+
+  void updateItemQuantity({
+    required DeligateParahparmOrderItemUi item,
+  }) {
+    final updatedItemQuantity = int.parse(item.quantityController.text);
+
+    item.packageQuantityController.text =
+        (updatedItemQuantity ~/ item.model.product.packageSize).toString();
+
+    item.quantityController.text = updatedItemQuantity.toString();
+
+    final updatedItem = item.copyWith(
+        model: item.model.copyWith(quantity: updatedItemQuantity));
+
+    emit(
+      state.productsUpdated(
+        item: updatedItem,
+      ),
+    );
+  }
+
+  void updateItemPackageQuantity({
+    required DeligateParahparmOrderItemUi item,
+  }) {
+    final currPackageQuantity = int.parse(item.packageQuantityController.text);
+
+    final updatedItemQuantity =
+        (currPackageQuantity * (item.model.product.packageSize));
+    item.packageQuantityController.text = currPackageQuantity.toString();
+
+    item.quantityController.text = updatedItemQuantity.toString();
+
+    final updatedItem = item.copyWith(
+        model: item.model.copyWith(quantity: updatedItemQuantity));
+
+    emit(
+      state.productsUpdated(
+        item: updatedItem,
+      ),
+    );
+  }
+
+  void updateQuantityPackage(String quantity) {
+    final currPackageQuantity = int.parse(quantity);
+
+    final updatedItemQuantity =
+        (currPackageQuantity * (state.selectedProduct?.packageSize ?? 1));
+    packageQuantityController.text = currPackageQuantity.toString();
+
+    quantityController.text = updatedItemQuantity.toString();
+    emit(state.updateSuggestedPrice(
+        quantity: updatedItemQuantity,
+        totalPrice: ((double.tryParse(customPriceController.text) ?? 0) *
+            updatedItemQuantity)));
+  }
+
+  void updateQuantity(String quantity) {
+    final updatedQuantity = int.parse(quantity);
+
+    quantityController.text = updatedQuantity.toString();
+
+    packageQuantityController.text =
+        (updatedQuantity ~/ (state.selectedProduct?.packageSize ?? 1))
+            .toString();
+
+    emit(state.updateSuggestedPrice(
+        quantity: updatedQuantity,
+        totalPrice: ((double.tryParse(customPriceController.text) ?? 0) *
+            updatedQuantity)));
   }
 }

@@ -13,7 +13,7 @@ import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class OrderItemWidget extends StatelessWidget {
-  final DeligateOrderItem item;
+  final DeligateOrderItemUi item;
 
   const OrderItemWidget({
     super.key,
@@ -29,7 +29,7 @@ class OrderItemWidget extends StatelessWidget {
             motion: const ScrollMotion(),
             extentRatio: 0.3,
             children: <Widget>[
-              if (item.product.note != null)
+              if (item.model.product.note != null)
                 SlidableAction(
                   flex: 1,
                   onPressed: (BuildContext context) {
@@ -37,7 +37,7 @@ class OrderItemWidget extends StatelessWidget {
                       context: context,
                       builder: (BuildContext context) => OrderNoteDialog(
                         title: context.translation!.note,
-                        note: item.product.note ?? "",
+                        note: item.model.product.note ?? "",
                       ),
                     );
                   },
@@ -59,18 +59,18 @@ class OrderItemWidget extends StatelessWidget {
                             decoration: BoxDecoration(
                               borderRadius:
                                   BorderRadius.circular(AppSizesManager.p8),
-                              color: item.product.imageUrl == null
+                              color: item.model.product.imageUrl == null
                                   ? const Color.fromARGB(255, 145, 106, 106)
                                   : null,
                             ),
                             child: CachedNetworkImageWithAssetFallback(
                               assetImage:
                                   DrawableAssetStrings.medicinePlaceHolderImg,
-                              imageUrl: item.product.imageUrl != null
+                              imageUrl: item.model.product.imageUrl != null
                                   ? getItInstance
                                       .get<INetworkService>()
                                       .getFilesPath(
-                                        item.product.imageUrl!,
+                                        item.model.product.imageUrl!,
                                       )
                                   : "",
                               width: 60,
@@ -82,7 +82,7 @@ class OrderItemWidget extends StatelessWidget {
                       Expanded(
                         flex: 6,
                         child: Text(
-                          item.product.designation ??
+                          item.model.product.designation ??
                               context.translation!.unknown,
                           softWrap: true,
                           overflow: TextOverflow.ellipsis,
@@ -100,11 +100,11 @@ class OrderItemWidget extends StatelessWidget {
                 SizedBox(
                   width: constraints.maxWidth * 0.8,
                   child: ItemContent(
-                    itemId: item.product.id,
-                    quantity: item.quantity,
-                    price: item.suggestedPrice?.toString() ??
-                        item.product.unitPriceHt.toString(),
-                    orderId: item.product.orderId,
+                    itemId: item.model.product.id,
+                    quantity: item.model.quantity,
+                    price: item.model.suggestedPrice?.toString() ??
+                        item.model.product.unitPriceHt.toString(),
+                    orderId: item.model.product.orderId,
                   ),
                 )
               ]),

@@ -45,6 +45,8 @@ class ButtonsSection extends StatelessWidget {
                   decrementPackageQuantity: cubit.decrementPackageQuantity,
                   incrementPackageQuantity: cubit.incrementPackageQuantity,
                   quantityController: cubit.quantityController,
+                  onQuantityChanged: (v) => cubit.updateQuantity(v),
+                  onPackageQuantityChanged: (v) => cubit.updateQuantityPackage(v),
                   packageQuantityController: cubit.packageQuantityController),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p4),

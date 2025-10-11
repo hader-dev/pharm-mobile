@@ -15,11 +15,8 @@ import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
 class OrderItemEditable extends StatefulWidget {
-  OrderItemEditable({super.key, required this.item});
-  final DeligateOrderItem item;
-  final quantityController = TextEditingController();
-  final customPriceController = TextEditingController();
-  final packageQuantityController = TextEditingController();
+  const OrderItemEditable({super.key, required this.item});
+  final DeligateOrderItemUi item;
 
   @override
   State<OrderItemEditable> createState() => _OrderItemEditableState();
@@ -30,13 +27,12 @@ class _OrderItemEditableState extends State<OrderItemEditable> {
   Widget build(BuildContext context) {
     final translation = context.translation!;
     final cubit = BlocProvider.of<OrderDetailsCubit>(context);
-    final unitPrice =
-        (widget.item.suggestedPrice ?? widget.item.product.unitPriceHt);
-    final totalPrice = unitPrice * widget.item.quantity;
-    widget.quantityController.text = widget.item.quantity.toString();
-    widget.customPriceController.text = unitPrice.toString();
+    final unitPrice = (widget.item.model.suggestedPrice ??
+        widget.item.model.product.unitPriceHt);
+    final totalPrice = unitPrice * widget.item.model.quantity;
 
-    widget.packageQuantityController.text = (widget.item.quantity).toString();
+    widget.item.packageQuantityController.text =
+        (widget.item.model.quantity).toString();
 
     return Container(
       margin: const EdgeInsets.symmetric(
@@ -56,10 +52,10 @@ class _OrderItemEditableState extends State<OrderItemEditable> {
                 height: 70,
                 width: 70,
                 boxFit: BoxFit.fill,
-                imageUrl: widget.item.product.imageUrl != null
+                imageUrl: widget.item.model.product.imageUrl != null
                     ? getItInstance
                         .get<INetworkService>()
-                        .getFilesPath(widget.item.product.imageUrl!)
+                        .getFilesPath(widget.item.model.product.imageUrl!)
                     : "",
                 errorWidget: Column(
                   children: [
@@ -86,7 +82,7 @@ class _OrderItemEditableState extends State<OrderItemEditable> {
                     Row(
                       children: [
                         Text(
-                          widget.item.product.designation,
+                          widget.item.model.product.designation,
                           softWrap: true,
                           overflow: TextOverflow.ellipsis,
                           style: context
@@ -114,25 +110,27 @@ class _OrderItemEditableState extends State<OrderItemEditable> {
             color: AppColors.accent1Shade1,
           ),
           QuantitySectionModified(
-            quantityController: widget.quantityController,
-            packageQuantityController: widget.packageQuantityController,
+            quantityController: widget.item.quantityController,
+            packageQuantityController: widget.item.packageQuantityController,
             decrementPackageQuantity: () => cubit.decrementPackageItemQuantity(
-                widget.item,
-                widget.quantityController,
-                widget.customPriceController),
+              item: widget.item,
+            ),
             incrementPackageQuantity: () => cubit.incrementPackageItemQuantity(
-                widget.item,
-                widget.quantityController,
-                widget.customPriceController),
-            incrementQuantity: () => cubit.incrementItemQuantity(widget.item,
-                widget.quantityController, widget.customPriceController),
-            decrementQuantity: () => cubit.incrementItemQuantity(widget.item,
-                widget.quantityController, widget.customPriceController),
+              item: widget.item,
+            ),
+            incrementQuantity: () => cubit.incrementItemQuantity(widget.item),
+            decrementQuantity: () => cubit.decrementItemQuantity(widget.item),
+            onQuantityChanged: (v) => cubit.updateItemQuantity(
+              item: widget.item,
+            ),
+            onPackageQuantityChanged: (v) => cubit.updateItemQuantityPackage(
+              item: widget.item,
+            ),
           ),
           const SizedBox(height: AppSizesManager.s12),
           CustomPriceFormField(
             enabled: false,
-            customPriceController: widget.customPriceController,
+            customPriceController: widget.item.customPriceController,
             translation: translation,
             onPriceChanged: (value) =>
                 cubit.updateItemCustomPrice(value, widget.item),

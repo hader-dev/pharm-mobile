@@ -2,8 +2,8 @@ part of 'orders_details_cubit.dart';
 
 class OrdersDetailsState {
   final OrderDetailsModel orderData;
-  final List<DeligateOrderItem> orderItems;
-  final List<DeligateOrderItem> originalOrderItems;
+  final List<DeligateOrderItemUi> orderItems;
+  final List<DeligateOrderItemUi> originalOrderItems;
   final bool didChange;
 
   const OrdersDetailsState(
@@ -14,8 +14,8 @@ class OrdersDetailsState {
 
   OrdersDetailsState copyWith({
     OrderDetailsModel? orderData,
-    List<DeligateOrderItem>? orderItems,
-    List<DeligateOrderItem>? originalOrderItems,
+    List<DeligateOrderItemUi>? orderItems,
+    List<DeligateOrderItemUi>? originalOrderItems,
     bool? didChange,
   }) {
     return OrdersDetailsState(
@@ -28,7 +28,7 @@ class OrdersDetailsState {
 
   OrdersInitial initial({
     OrderDetailsModel? orderData,
-    List<DeligateOrderItem>? orderItems,
+    List<DeligateOrderItemUi>? orderItems,
     bool? didChange,
   }) {
     return OrdersInitial.fromState(copyWith(
@@ -41,7 +41,7 @@ class OrdersDetailsState {
 
   OrderDetailsLoading loading({
     OrderDetailsModel? orderData,
-    List<DeligateOrderItem>? orderItems,
+    List<DeligateOrderItemUi>? orderItems,
   }) {
     return OrderDetailsLoading.fromState(copyWith(
       orderData: orderData ?? this.orderData,
@@ -52,8 +52,8 @@ class OrdersDetailsState {
 
   OrderDetailsLoaded loaded({
     OrderDetailsModel? orderData,
-    List<DeligateOrderItem>? orderItems,
-    List<DeligateOrderItem>? originalOrderItems,
+    List<DeligateOrderItemUi>? orderItems,
+    List<DeligateOrderItemUi>? originalOrderItems,
   }) {
     return OrderDetailsLoaded.fromState(copyWith(
       orderData: orderData ?? this.orderData,
@@ -64,7 +64,7 @@ class OrdersDetailsState {
 
   OrderDetailsLoadingFailed loadingFailed({
     OrderDetailsModel? orderData,
-    List<DeligateOrderItem>? orderItems,
+    List<DeligateOrderItemUi>? orderItems,
   }) {
     return OrderDetailsLoadingFailed.fromState(copyWith(
       orderData: orderData ?? this.orderData,
@@ -81,17 +81,20 @@ class OrdersDetailsState {
   }
 
   OrderItemsUpdated itemsUpdated(
-      {required DeligateOrderItem item, bool removed = false}) {
+      {required DeligateOrderItemUi item, bool removed = false}) {
     bool updatedExisting = false;
 
-    List<DeligateOrderItem> updatedOrderItems = orderItems.map((el) {
+    List<DeligateOrderItemUi> updatedOrderItems = orderItems.map((el) {
       final exists = !removed &&
-          (el.product.parapharmCatalogId == item.product.parapharmCatalogId);
+          (el.model.product.parapharmCatalogId ==
+              item.model.product.parapharmCatalogId);
 
       if (exists) {
         updatedExisting = true;
         return el.copyWith(
-            quantity: item.quantity, suggestedPrice: item.suggestedPrice);
+            model: (el.model.copyWith(
+                quantity: item.model.quantity,
+                suggestedPrice: item.model.suggestedPrice)));
       }
 
       return exists ? item : el;

@@ -8,7 +8,7 @@ import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'order_item_widget_view.dart';
 
 class OrderItemsSection extends StatelessWidget {
-  final List<DeligateOrderItem> orderItems;
+  final List<DeligateOrderItemUi> orderItems;
   final bool canEdit;
   const OrderItemsSection(
       {super.key, required this.orderItems, required this.canEdit});
@@ -63,11 +63,11 @@ class OrderItemsSection extends StatelessWidget {
     );
   }
 
-  List<Widget> itemBuilderView(List<DeligateOrderItem> orderItems,
+  List<Widget> itemBuilderView(List<DeligateOrderItemUi> orderItems,
       [bool canEdit = false]) {
     return orderItems
         .map(
-          (DeligateOrderItem item) => canEdit
+          (DeligateOrderItemUi item) => canEdit
               ? OrderItemEditable(
                   item: item,
                 )
