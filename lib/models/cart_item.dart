@@ -100,7 +100,7 @@ class CartItemModel {
 
   factory CartItemModel.fromJson(Map<String, dynamic> json) {
     return CartItemModel(
-      packageSize: int.tryParse(json['packageSize'] ?? "1") ?? 1,
+      packageSize: json['packageSize'] ?? 1,
       id: json['id'],
       totalAmountTtc: json['totalAmountTtc'],
       totalAmountHt: json['totalAmountHt'],

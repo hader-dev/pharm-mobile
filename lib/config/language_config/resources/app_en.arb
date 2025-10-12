@@ -252,7 +252,7 @@
   "feedback_failed_to_load_medicine_details": "Failed to load medicine details",
   "product_overview": "Product overview",
   "feedback_failed_to_load_para_pharma_details": "Failed to load para-pharmaceutical details",
-  "buy_now": "Buy Now",
+  "buy_now": "Buy",
   "loading": "Loading",
   "feedback_loading_failed": "Failed to load",
   "feedback_pdf_load_error": "Could not load the PDF document. Please check your internet connection and try again.",

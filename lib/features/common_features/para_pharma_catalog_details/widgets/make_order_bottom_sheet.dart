@@ -121,10 +121,12 @@ class MakeOrderBottomSheet extends StatelessWidget {
                   ),
                 ),
                 const ResponsiveGap.s12(),
-                Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
+                const Divider(
+                    color: AppColors.bgDisabled, thickness: 1, height: 1),
                 const ResponsiveGap.s12(),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p4),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: AppSizesManager.p4),
                   child: Row(
                     children: [
                       Expanded(

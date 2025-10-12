@@ -214,7 +214,7 @@ class ParaPharmaWidget2 extends StatelessWidget {
                           bgColor: Colors.transparent,
                           onPressed: () {
                             BottomSheetHelper.showCommonBottomSheet(
-                                initialChildSize: .3,
+                                initialChildSize: .5,
                                 context: context,
                                 child: QuickCartAddModal(
                                   paraPharmaCatalogId: paraPharmData.id,

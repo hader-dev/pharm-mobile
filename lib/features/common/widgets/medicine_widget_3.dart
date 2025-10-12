@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
+import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/widgets/quick_add_modal.dart';
@@ -33,8 +34,10 @@ class MedicineWidget3 extends StatelessWidget {
       child: InkWell(
         splashColor: Colors.transparent,
         onTap: () {
+          final userRole = getItInstance.get<UserManager>().currentUser.role;
+          final canOrderBasedOnRole = !userRole.isDelegate;
           GoRouter.of(context).pushNamed(RoutingManager.medicineDetailsScreen,
-              extra: medicineData.id);
+              extra: {"id": medicineData.id, "canOrder": canOrderBasedOnRole});
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,17 +50,6 @@ class MedicineWidget3 extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                // ResponsiveGap.s8(), not implemented on api ? no such information
-                // Row(children: [
-                //   Transform.scale(
-                //       alignment: Alignment.centerLeft,
-                //       scale: .9,
-                //       child: CustomChip(
-                //           label: "Antibiotic",
-                //           color: AppColors.bgDarken2,
-                //           onTap: () {})),
-                //   Spacer()
-                // ]),
                 const ResponsiveGap.s8(),
                 if (medicineData.dci != null)
                   Text(medicineData.dci,
@@ -77,7 +69,7 @@ class MedicineWidget3 extends StatelessWidget {
                       color: AppColors.accent1Shade1,
                       size: AppSizesManager.iconSize18,
                     ),
-                    ResponsiveGap.s4(),
+                    const ResponsiveGap.s4(),
                     Text.rich(
                       TextSpan(
                         children: [
@@ -97,7 +89,7 @@ class MedicineWidget3 extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Transform.scale(
                       scale: .55,
                       child: PrimaryIconButton(
@@ -106,7 +98,7 @@ class MedicineWidget3 extends StatelessWidget {
                         bgColor: Colors.transparent,
                         onPressed: () {
                           BottomSheetHelper.showCommonBottomSheet(
-                              initialChildSize: .3,
+                              initialChildSize: .5,
                               context: context,
                               child: QuickCartAddModal(
                                 medicineCatalogId: medicineData.id,

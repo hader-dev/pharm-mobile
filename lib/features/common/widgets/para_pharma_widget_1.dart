@@ -130,7 +130,7 @@ class ParaPharmaWidget1 extends StatelessWidget {
                         ),
                       ),
                     ),
-                    ResponsiveGap.s4(),
+                    const ResponsiveGap.s4(),
                     Text(paraPharmData.company?.name ?? "",
                         style: context.responsiveTextTheme.current.bodyXSmall
                             .copyWith(

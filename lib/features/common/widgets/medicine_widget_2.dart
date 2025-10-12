@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
+import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
@@ -37,8 +38,10 @@ class MedicineWidget2 extends StatelessWidget {
           horizontal: AppSizesManager.p8, vertical: AppSizesManager.p12),
       child: InkWell(
         onTap: () {
+          final userRole = getItInstance.get<UserManager>().currentUser.role;
+          final canOrderBasedOnRole = !userRole.isDelegate;
           GoRouter.of(context).pushNamed(RoutingManager.medicineDetailsScreen,
-              extra: medicineData.id);
+              extra: {"id": medicineData.id, "canOrder": canOrderBasedOnRole});
         },
         splashColor: Colors.transparent,
         child: Row(

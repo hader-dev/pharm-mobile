@@ -51,6 +51,7 @@ class CartCubit extends Cubit<CartState> {
       emit(state.cartItemAdded());
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
+      emit(state.cartError(error: e.toString()));
     }
   }
 

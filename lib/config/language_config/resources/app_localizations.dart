@@ -1621,7 +1621,7 @@ abstract class AppLocalizations {
   /// No description provided for @buy_now.
   ///
   /// In en, this message translates to:
-  /// **'Buy Now'**
+  /// **'Buy'**
   String get buy_now;
 
   /// No description provided for @loading.

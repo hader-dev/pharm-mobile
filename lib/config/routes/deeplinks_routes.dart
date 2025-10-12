@@ -29,6 +29,7 @@ abstract class DeeplinksRoutes {
 
         return MedicineCatalogDetailsScreen(
           medicineCatalogId: productId,
+          canOrder: true,
         );
       },
     ),

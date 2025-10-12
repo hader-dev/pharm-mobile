@@ -789,7 +789,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Failed to load para-pharmaceutical details';
 
   @override
-  String get buy_now => 'Buy Now';
+  String get buy_now => 'Buy';
 
   @override
   String get loading => 'Loading';

@@ -801,7 +801,7 @@ class AppLocalizationsFr extends AppLocalizations {
       'Échec du chargement des détails parapharmaceutiques';
 
   @override
-  String get buy_now => 'Acheter maintenant';
+  String get buy_now => 'Acheter';
 
   @override
   String get loading => 'Chargement';

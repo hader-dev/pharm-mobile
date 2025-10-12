@@ -97,9 +97,17 @@ class _ParaPharmaCatalogDetailsScreenState
                       child: ParaPharmaCatalogAppBar()),
                 ],
               ),
+              resizeToAvoidBottomInset: true,
               bottomNavigationBar: widget.canOrder
-                  ? Padding(
-                      padding: const EdgeInsets.all(AppSizesManager.p12),
+                  ? AnimatedPadding(
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeOut,
+                      padding: EdgeInsets.only(
+                        bottom: MediaQuery.of(context).viewInsets.bottom +
+                            AppSizesManager.p12,
+                        left: AppSizesManager.p12,
+                        right: AppSizesManager.p12,
+                      ),
                       child: SizedBox(
                         height: kBottomNavigationBarHeight *
                             bottomNavbarHeightModifier,
@@ -109,7 +117,7 @@ class _ParaPharmaCatalogDetailsScreenState
                         ),
                       ),
                     )
-                  : SizedBox.shrink(),
+                  : const SizedBox.shrink(),
             );
           },
         ),

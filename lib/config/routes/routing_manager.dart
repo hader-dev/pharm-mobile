@@ -318,8 +318,13 @@ class RoutingManager {
             name: medicineDetailsScreen,
             path: medicineDetailsScreen,
             builder: (BuildContext context, GoRouterState state) {
+              final params = state.extra as Map<String, dynamic>;
+
+              final canOrder = params["canOrder"] as bool;
+
               return MedicineCatalogDetailsScreen(
                 medicineCatalogId: state.extra as String,
+                canOrder: canOrder,
               );
             }),
         GoRoute(

@@ -16,12 +16,14 @@ import 'widgets/medicine_product_photo_section.dart';
 class MedicineCatalogDetailsScreen extends StatefulWidget {
   final String medicineCatalogId;
   final bool disabledPackageQuanity;
+  final bool canOrder;
 
   static final GlobalKey<ScaffoldState> medicineDetailsScaffoldKey =
       GlobalKey<ScaffoldState>();
   const MedicineCatalogDetailsScreen(
       {super.key,
       required this.medicineCatalogId,
+      required this.canOrder,
       this.disabledPackageQuanity = false});
 
   @override
@@ -94,17 +96,28 @@ class _MedicineCatalogDetailsScreenState
                       child: const MedicineCatalogAppBar()),
                 ],
               ),
-              bottomNavigationBar: Padding(
-                padding: const EdgeInsets.all(AppSizesManager.p12),
-                child: SizedBox(
-                  height:
-                      kBottomNavigationBarHeight * bottomNavbarHeightModifier,
-                  child: ButtonsSection(
-                    medicineDetailsCubit: context.read<MedicineDetailsCubit>(),
-                    disabledPackageQuanity: widget.disabledPackageQuanity,
-                  ),
-                ),
-              ),
+              bottomNavigationBar: widget.canOrder
+                  ? AnimatedPadding(
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeOut,
+                      padding: EdgeInsets.only(
+                        bottom: MediaQuery.of(context).viewInsets.bottom +
+                            AppSizesManager.p12,
+                        left: AppSizesManager.p12,
+                        right: AppSizesManager.p12,
+                      ),
+                      child: SizedBox(
+                        height: kBottomNavigationBarHeight *
+                            bottomNavbarHeightModifier,
+                        child: ButtonsSection(
+                          medicineDetailsCubit:
+                              context.read<MedicineDetailsCubit>(),
+                          quantitySectionAlignment: MainAxisAlignment.center,
+                          disabledPackageQuanity: widget.disabledPackageQuanity,
+                        ),
+                      ),
+                    )
+                  : const SizedBox.shrink(),
             );
           },
         ),
