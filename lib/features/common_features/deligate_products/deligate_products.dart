@@ -66,17 +66,7 @@ class _DeligateProductsPageState extends State<DeligateProductsPage>
                     onRefresh: () => cubit.getParaPharmas(),
                     child: (state is ParaPharmaProductsLoadingFailed ||
                             products.isEmpty)
-                        ? LayoutBuilder(
-                            builder: (context, constraints) {
-                              return SingleChildScrollView(
-                                physics: const AlwaysScrollableScrollPhysics(),
-                                child: SizedBox(
-                                  height: constraints.maxHeight,
-                                  child: const Center(child: EmptyListWidget()),
-                                ),
-                              );
-                            },
-                          )
+                        ? const Center(child: EmptyListWidget())
                         : GridView.builder(
                             controller: cubit.scrollController,
                             physics: const AlwaysScrollableScrollPhysics(),

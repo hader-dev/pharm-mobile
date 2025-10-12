@@ -42,6 +42,11 @@ class _MedicineProductsPageState extends State<MedicineProductsPage>
                       return const Center(child: CircularProgressIndicator());
                     }
 
+                    if (state is MedicineProductsLoadingFailed ||
+                        medicines.isEmpty) {
+                      return const Center(child: EmptyListWidget());
+                    }
+
                     final bool isLoadingMore = state is MedicineProductsLoading;
                     final bool hasReachedEnd =
                         state is MedicinesLoadLimitReached;
@@ -65,64 +70,42 @@ class _MedicineProductsPageState extends State<MedicineProductsPage>
 
                     return RefreshIndicator(
                       onRefresh: () => cubit.getMedicines(),
-                      child: (state is MedicineProductsLoadingFailed ||
-                              medicines.isEmpty)
-                          ? LayoutBuilder(
-                              builder: (context, constraints) {
-                                return SingleChildScrollView(
-                                  physics:
-                                      const AlwaysScrollableScrollPhysics(),
-                                  child: SizedBox(
-                                    height: constraints.maxHeight,
-                                    child:
-                                        const Center(child: EmptyListWidget()),
-                                  ),
-                                );
-                              },
-                            )
-                          : GridView.builder(
-                              controller: cubit.scrollController,
-                              physics: const AlwaysScrollableScrollPhysics(),
-                              gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount:
-                                    calculateMarketplaceCrossAxisCount(
-                                        context.deviceSize),
-                                crossAxisSpacing:
-                                    calculateMarketplaceGridSpacing(
-                                        context.deviceSize),
-                                mainAxisSpacing:
-                                    calculateMarketplaceMainAxisSpacing(
-                                        context.deviceSize),
-                                childAspectRatio:
-                                    calculateMarketplaceAspectRatio(
-                                        context.deviceSize,
-                                        context.orientation),
-                              ),
-                              itemCount: medicines.length +
-                                  (isLoadingMore || hasReachedEnd ? 1 : 0),
-                              itemBuilder: (context, index) {
-                                if (index < medicines.length) {
-                                  final medicine = medicines[index];
-                                  return MedicineWidget3(
-                                    medicineData: medicine,
-                                    onFavoriteCallback: onLikeTapped,
-                                  );
-                                } else {
-                                  if (isLoadingMore) {
-                                    return const Padding(
-                                      padding:
-                                          EdgeInsets.all(AppSizesManager.s16),
-                                      child: Center(
-                                          child: CircularProgressIndicator()),
-                                    );
-                                  } else if (hasReachedEnd) {
-                                    return const EndOfLoadResultWidget();
-                                  }
-                                }
-                                return const SizedBox.shrink();
-                              },
-                            ),
+                      child: GridView.builder(
+                        controller: cubit.scrollController,
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: calculateMarketplaceCrossAxisCount(
+                              context.deviceSize),
+                          crossAxisSpacing: calculateMarketplaceGridSpacing(
+                              context.deviceSize),
+                          mainAxisSpacing: calculateMarketplaceMainAxisSpacing(
+                              context.deviceSize),
+                          childAspectRatio: calculateMarketplaceAspectRatio(
+                              context.deviceSize, context.orientation),
+                        ),
+                        itemCount: medicines.length +
+                            (isLoadingMore || hasReachedEnd ? 1 : 0),
+                        itemBuilder: (context, index) {
+                          if (index < medicines.length) {
+                            final medicine = medicines[index];
+                            return MedicineWidget3(
+                              medicineData: medicine,
+                              onFavoriteCallback: onLikeTapped,
+                            );
+                          } else {
+                            if (isLoadingMore) {
+                              return const Padding(
+                                padding: EdgeInsets.all(AppSizesManager.s16),
+                                child:
+                                    Center(child: CircularProgressIndicator()),
+                              );
+                            } else if (hasReachedEnd) {
+                              return const EndOfLoadResultWidget();
+                            }
+                          }
+                          return const SizedBox.shrink();
+                        },
+                      ),
                     );
                   }),
                 )

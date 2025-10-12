@@ -51,13 +51,9 @@ class FavoritesParaPharmaCatalogs extends StatelessWidget {
                     itemBuilder: (context, index) {
                       void onLikeTapped(BaseParaPharmaCatalogModel medicine) {
                         final id = medicine.id;
-                        medicine.isLiked
-                            ? cubit.unlikeParaPharma(id)
-                            : cubit.likeParaPharmaCatalog(id);
-                        gCubit.refreshParaPharmaCatalogFavorite(
-                            id, !medicine.isLiked);
-                        hCubit?.refreshParaPharmaCatalogFavorite(
-                            id, !medicine.isLiked);
+                        cubit.unlikeParaPharma(id);
+                        gCubit.refreshParaPharmaCatalogFavorite(id, false);
+                        hCubit?.refreshParaPharmaCatalogFavorite(id, false);
                       }
 
                       return ParaPharmaWidget1(

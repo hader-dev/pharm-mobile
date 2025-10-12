@@ -40,17 +40,7 @@ class _VendorsPageState extends State<VendorsPage>
                   return RefreshIndicator(
                     onRefresh: () => cubit.fetchVendors(),
                     child: vendors.isEmpty
-                        ? LayoutBuilder(
-                            builder: (context, constraints) {
-                              return SingleChildScrollView(
-                                physics: const AlwaysScrollableScrollPhysics(),
-                                child: SizedBox(
-                                  height: constraints.maxHeight,
-                                  child: const Center(child: EmptyListWidget()),
-                                ),
-                              );
-                            },
-                          )
+                        ? const Center(child: EmptyListWidget())
                         : ListView.builder(
                             controller: cubit.scrollController,
                             physics: const AlwaysScrollableScrollPhysics(),

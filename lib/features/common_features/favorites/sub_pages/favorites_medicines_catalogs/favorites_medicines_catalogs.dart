@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/medicine_widget_2.dart';
 import 'package:hader_pharm_mobile/features/common_features/favorites/cubit/favorites_cubit.dart';
-
-import '../../../../common/widgets/empty_list.dart';
-import '../../../../common/widgets/medicine_widget_2.dart';
+import 'package:hader_pharm_mobile/features/common_features/home/home.dart';
+import 'package:hader_pharm_mobile/features/common_features/market_place/market_place.dart';
+import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/medicine_products/cubit/medicine_products_cubit.dart';
 
 class FavoritesMedicinesCatalog extends StatelessWidget {
   const FavoritesMedicinesCatalog({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final gCubit = MarketPlaceScreen.marketPlaceScaffoldKey.currentContext!
+        .read<MedicineProductsCubit>();
+    final hCubit =
+        HomeScreen.scaffoldKey.currentContext?.read<MedicineProductsCubit>();
+    final cubit = context.read<FavoritesCubit>();
+
     return BlocBuilder<FavoritesCubit, FavoritesState>(
       buildWhen: (previous, current) {
         if (current is FavoritesMedicinesLoaded ||
@@ -23,9 +31,7 @@ class FavoritesMedicinesCatalog extends StatelessWidget {
         if (state is FavoritesMedicinesLoading) {
           return const Center(child: CircularProgressIndicator());
         }
-        if (BlocProvider.of<FavoritesCubit>(context)
-            .likedMedicinesCatalogs
-            .isEmpty) {
+        if (cubit.likedMedicinesCatalogs.isEmpty) {
           return EmptyListWidget();
         }
         return Column(
@@ -33,10 +39,7 @@ class FavoritesMedicinesCatalog extends StatelessWidget {
           children: [
             Expanded(
               child: RefreshIndicator(
-                onRefresh: () {
-                  return BlocProvider.of<FavoritesCubit>(context)
-                      .fetchLikedMedicines();
-                },
+                onRefresh: cubit.fetchLikedMedicines,
                 child: ListView.builder(
                   shrinkWrap: true,
                   physics: const AlwaysScrollableScrollPhysics(),
@@ -45,11 +48,12 @@ class FavoritesMedicinesCatalog extends StatelessWidget {
                       .length,
                   itemBuilder: (context, index) => MedicineWidget2(
                     hideRemoveButton: false,
-                    onRemoveFromFavorites: () =>
-                        BlocProvider.of<FavoritesCubit>(context).unlikeMedicine(
-                            BlocProvider.of<FavoritesCubit>(context)
-                                .likedMedicinesCatalogs[index]
-                                .id),
+                    onRemoveFromFavorites: () {
+                      final id = cubit.likedMedicinesCatalogs[index].id;
+                      cubit.unlikeMedicine(id);
+                      gCubit.refreshMedicineCatalogFavorite(id, false);
+                      hCubit?.refreshMedicineCatalogFavorite(id, false);
+                    },
                     medicineData: BlocProvider.of<FavoritesCubit>(context)
                         .likedMedicinesCatalogs[index],
                     isLiked: true,
