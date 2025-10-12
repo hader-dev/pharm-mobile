@@ -16,19 +16,10 @@ import 'package:hader_pharm_mobile/utils/enums.dart';
 part 'cart_state.dart';
 
 class CartCubit extends Cubit<CartState> {
-  num totalHtAmount = 0;
-  num totalTTCAmount = 0;
-  Timer? _debounce;
-  PaymentMethods selectedPaymentMethod = PaymentMethods.cash;
-  InvoiceTypes? selectedInvoiceType = InvoiceTypes.facture;
-  String orderNote = '';
-  String shippingAddress;
-  List<CartItemModelUi> cartItems = <CartItemModelUi>[];
-  Map<String, List<String>> cartItemsByVendor = {};
-
   final CartItemRepository cartItemRepository;
   final OrderRepository ordersRepository;
   final ScrollController scrollController;
+  Timer? _debounce;
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -36,13 +27,15 @@ class CartCubit extends Cubit<CartState> {
     required this.cartItemRepository,
     required this.scrollController,
     required this.ordersRepository,
-    this.shippingAddress = '',
-  }) : super(CartInitial());
+    String shippingAddress = '',
+  }) : super(CartInitial(
+          shippingAddress: shippingAddress,
+        ));
 
   Future<void> addToCart(CreateCartItemModel cartItem,
       [bool isParapharma = false]) async {
     try {
-      emit(AddCartItemLoading());
+      emit(state.loading());
 
       final existingItem = getItemIfExists(cartItem.productId, isParapharma);
 
@@ -55,7 +48,7 @@ class CartCubit extends Cubit<CartState> {
       }
 
       getCartItem();
-      emit(CartItemAdded());
+      emit(state.cartItemAdded());
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
     }
@@ -79,216 +72,203 @@ class CartCubit extends Cubit<CartState> {
 
   Future<void> getCartItem() async {
     try {
-      cartItems = <CartItemModelUi>[];
-      cartItemsByVendor = {};
-
-      emit(CartLoading());
+      emit(state.loading());
 
       CartItemsResponse response = await cartItemRepository.getCartItem();
-      cartItems = cartItemModelDataToUi(response.data);
-      cartItemsByVendor = await prepareOrderCartitemsByVendor(response.data);
+      final cartItems = cartItemModelDataToUi(response.data);
+      final cartItemsByVendor =
+          await prepareOrderCartitemsByVendor(response.data);
 
-      updateTotals();
-
-      emit(CartLoadingSuccess());
+      emit(state.loadingSuccess(
+        cartItems: cartItems,
+        cartItemsByVendor: cartItemsByVendor,
+      ));
     } catch (e, stackTrace) {
       debugPrintStack(stackTrace: stackTrace);
       debugPrint("$e");
       GlobalExceptionHandler.handle(exception: e);
-      emit(CartError(error: e.toString()));
+      emit(state.cartError(error: e.toString()));
     }
   }
 
-  void decreaseCartPackageQuantity(String cartItemId) {
+  void decreaseCartPackageQuantity(CartItemModelUi item) {
     try {
-      int cartItemIndex =
-          cartItems.lastIndexWhere((element) => element.model.id == cartItemId);
-      if (cartItems[cartItemIndex].model.quantity <= 1) {
+      if (item.model.quantity <= 1) {
         throw TemplateException(
             message: "quantity should be greater than or equal 1.");
       }
 
-      cartItems[cartItemIndex] = cartItems[cartItemIndex]
-          .copyWith(quantity: cartItems[cartItemIndex].model.quantity - 1);
-      updateTotals();
+      final updatedItem = item.copyWith(quantity: item.model.quantity - 1);
       _debounceFunction(() async {
-        updateItemQuantity(cartItemId, cartItems[cartItemIndex].model.quantity);
+        applyUpdateItemQuantity(item.model.id, updatedItem.model.quantity);
       });
-      emit(CartQuantityUpdated(updatedItemId: cartItemId));
+      emit(state.itemUpdated(updatedItem: updatedItem));
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
     }
   }
 
-  void increaseCartPackageQuantity(String cartItemId) {
+  void increaseCartPackageQuantity(CartItemModelUi item) {
     try {
-      int cartItemIndex =
-          cartItems.lastIndexWhere((element) => element.model.id == cartItemId);
-      if ((cartItems[cartItemIndex].model.medicinesCatalogId != null &&
-              cartItems[cartItemIndex].model.quantity ==
-                  cartItems[cartItemIndex].model.medicineCatalogStockQty) ||
-          (cartItems[cartItemIndex].model.parapharmCatalogId != null &&
-              cartItems[cartItemIndex].model.quantity ==
-                  cartItems[cartItemIndex].model.parapharmCatalogStockQty)) {
+      if ((item.model.medicinesCatalogId != null &&
+              item.model.quantity == item.model.medicineCatalogStockQty) ||
+          (item.model.parapharmCatalogId != null &&
+              item.model.quantity == item.model.parapharmCatalogStockQty)) {
         throw TemplateException(message: "you reached the limit of the stock.");
       }
 
-      cartItems[cartItemIndex] = cartItems[cartItemIndex]
-          .copyWith(quantity: cartItems[cartItemIndex].model.quantity + 1);
-      updateTotals();
+      final updatedQuantity =
+          int.parse(item.packageQuantityController.text) + 1;
+      final updatedPackageQuantity = updatedQuantity ~/ item.model.packageSize;
+
+      final updatedItem = item.copyWith(quantity: updatedQuantity);
+
+      item.packageQuantityController.text = updatedPackageQuantity.toString();
+      item.quantityController.text = updatedQuantity.toString();
+
       _debounceFunction(() async {
-        updateItemQuantity(cartItemId, cartItems[cartItemIndex].model.quantity);
+        applyUpdateItemQuantity(
+            updatedItem.model.id, updatedItem.model.quantity);
       });
-      emit(CartQuantityUpdated(updatedItemId: cartItemId));
+
+      emit(state.itemUpdated(updatedItem: updatedItem));
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
-      emit(CartError(error: e.toString()));
+      emit(state.cartError(error: e.toString()));
     }
   }
 
-  void decreaseCartItemQuantity(String cartItemId) {
+  void decreaseCartItemQuantity(CartItemModelUi item) {
     try {
-      int cartItemIndex =
-          cartItems.lastIndexWhere((element) => element.model.id == cartItemId);
-      if (cartItems[cartItemIndex].model.quantity <= 1) {
+      if (item.model.quantity <= 1) {
         throw TemplateException(
             message: "quantity should be greater than or equal 1.");
       }
 
-      cartItems[cartItemIndex] = cartItems[cartItemIndex]
-          .copyWith(quantity: cartItems[cartItemIndex].model.quantity - 1);
-      updateTotals();
+      final updatedQuantity =
+          int.parse(item.packageQuantityController.text) - 1;
+      final updatedPackageQuantity = updatedQuantity ~/ item.model.packageSize;
+
+      final updatedItem = item.copyWith(quantity: updatedQuantity);
+
+      item.packageQuantityController.text = updatedPackageQuantity.toString();
+      item.quantityController.text = updatedQuantity.toString();
+
       _debounceFunction(() async {
-        updateItemQuantity(cartItemId, cartItems[cartItemIndex].model.quantity);
+        applyUpdateItemQuantity(item.model.id, updatedItem.model.quantity);
       });
-      emit(CartQuantityUpdated(updatedItemId: cartItemId));
+      emit(state.itemUpdated(updatedItem: updatedItem));
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
     }
   }
 
-  void updateCartItemInputQuantity(String cartItemId, int quantity) {
+  void updateCartItemInputQuantity(CartItemModelUi item, int quantity) {
     _debounceFunction(() async {
       try {
-        int cartItemIndex = cartItems
-            .lastIndexWhere((element) => element.model.id == cartItemId);
-
-        cartItems[cartItemIndex] =
-            cartItems[cartItemIndex].copyWith(quantity: quantity);
-        updateTotals();
-        updateItemQuantity(cartItemId, cartItems[cartItemIndex].model.quantity);
-        emit(CartQuantityUpdated(updatedItemId: cartItemId));
+        final updatedItem = item.copyWith(quantity: quantity);
+        applyUpdateItemQuantity(item.model.id, updatedItem.model.quantity);
+        emit(state.itemUpdated(updatedItem: updatedItem));
       } catch (e) {
         GlobalExceptionHandler.handle(exception: e);
       }
     }, 500);
   }
 
-  void increaseCartItemQuantity(String cartItemId) {
+  void increaseCartItemQuantity(CartItemModelUi item) {
     try {
-      int cartItemIndex =
-          cartItems.lastIndexWhere((element) => element.model.id == cartItemId);
-      if ((cartItems[cartItemIndex].model.medicinesCatalogId != null &&
-              cartItems[cartItemIndex].model.quantity ==
-                  cartItems[cartItemIndex].model.medicineCatalogStockQty) ||
-          (cartItems[cartItemIndex].model.parapharmCatalogId != null &&
-              cartItems[cartItemIndex].model.quantity ==
-                  cartItems[cartItemIndex].model.parapharmCatalogStockQty)) {
+      if ((item.model.medicinesCatalogId != null &&
+              item.model.quantity == item.model.medicineCatalogStockQty) ||
+          (item.model.parapharmCatalogId != null &&
+              item.model.quantity == item.model.parapharmCatalogStockQty)) {
         throw TemplateException(message: "you reached the limit of the stock.");
       }
 
-      cartItems[cartItemIndex] = cartItems[cartItemIndex]
-          .copyWith(quantity: cartItems[cartItemIndex].model.quantity + 1);
-      updateTotals();
+      final updatedQuantity = item.model.quantity + 1;
+      final updatedPackageQuantity = updatedQuantity ~/ item.model.packageSize;
+
+      final updatedItem = item.copyWith(quantity: updatedQuantity);
+
+      item.packageQuantityController.text = updatedPackageQuantity.toString();
+      item.quantityController.text = updatedQuantity.toString();
+
       _debounceFunction(() async {
-        updateItemQuantity(cartItemId, cartItems[cartItemIndex].model.quantity);
+        applyUpdateItemQuantity(
+            updatedItem.model.id, updatedItem.model.quantity);
       });
-      emit(CartQuantityUpdated(updatedItemId: cartItemId));
+
+      emit(state.itemUpdated(updatedItem: updatedItem));
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
-      emit(CartError(error: e.toString()));
+      emit(state.cartError(error: e.toString()));
     }
   }
 
-  void decreaseCartItemPackageQuantity(String id) {
-    final cartItemIndex =
-        cartItems.indexWhere((element) => element.model.id == id);
-    final cartItem = cartItems[cartItemIndex].model;
+  void decreaseCartItemPackageQuantity(CartItemModelUi item) {
+    final cartItem = item.model;
 
     final updatedPackageQuantity =
         cartItem.packageQuantity > 1 ? cartItem.packageQuantity - 1 : 1;
     final updatedQuantity = updatedPackageQuantity * cartItem.packageSize;
 
-    cartItems[cartItemIndex] =
-        cartItems[cartItemIndex].copyWith(quantity: updatedQuantity);
+    final updatedItem = item.copyWith(quantity: updatedQuantity);
 
-    updateTotals();
+    item.packageQuantityController.text = updatedPackageQuantity.toString();
+    item.quantityController.text = updatedQuantity.toString();
+
     _debounceFunction(() async {
-      updateItemQuantity(id, cartItems[cartItemIndex].model.quantity);
+      applyUpdateItemQuantity(updatedItem.model.id, updatedItem.model.quantity);
     });
-    emit(CartQuantityUpdated(updatedItemId: id));
+    emit(state.itemUpdated(updatedItem: updatedItem));
   }
 
-  void increaseCartItemPackageQuantity(String id) {
-    final cartItemIndex =
-        cartItems.indexWhere((element) => element.model.id == id);
-    final cartItem = cartItems[cartItemIndex];
-
-    final updatedPackageQuantity = cartItem.model.packageQuantity + 1;
-    final updatedQuantity = updatedPackageQuantity * cartItem.model.packageSize;
-
-    cartItems[cartItemIndex] =
-        cartItems[cartItemIndex].copyWith(quantity: updatedQuantity);
-
-    updateTotals();
-    _debounceFunction(() async {
-      updateItemQuantity(id, cartItems[cartItemIndex].model.quantity);
-    });
-    emit(CartQuantityUpdated(updatedItemId: id));
-  }
-
-  deleteCartItem(String cartItemId) async {
+  void increaseCartItemPackageQuantity(CartItemModelUi item) {
     try {
-      await cartItemRepository.deleteItem(cartItemId);
-      cartItems.removeWhere((element) => element.model.id == cartItemId);
-      cartItemsByVendor =
-          await prepareOrderCartitemsByVendor(cartItemModelUiToData(cartItems));
-      updateTotals();
-      emit(CartLoadingSuccess());
+      if ((item.model.medicinesCatalogId != null &&
+              item.model.quantity == item.model.medicineCatalogStockQty) ||
+          (item.model.parapharmCatalogId != null &&
+              item.model.quantity == item.model.parapharmCatalogStockQty)) {
+        throw TemplateException(message: "you reached the limit of the stock.");
+      }
+
+      final updatedPackageQuantity =
+          int.parse(item.packageQuantityController.text) + 1;
+
+      final updatedQuantity = updatedPackageQuantity * item.model.packageSize;
+
+      item.packageQuantityController.text = updatedPackageQuantity.toString();
+      item.quantityController.text = updatedQuantity.toString();
+
+      final updatedItem = item.copyWith(quantity: updatedQuantity);
+
+      _debounceFunction(() async {
+        applyUpdateItemQuantity(item.model.id, updatedItem.model.quantity);
+      });
+      emit(state.itemUpdated(updatedItem: updatedItem));
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
-      emit(CartError(error: e.toString()));
+      emit(state.cartError(error: e.toString()));
     }
   }
 
-  Future<void> updateItemQuantity(String cartItemId, int quantity) async {
+  deleteCartItem(CartItemModelUi item) async {
+    try {
+      await cartItemRepository.deleteItem(item.model.id);
+
+      emit(state.itemUpdated(updatedItem: item, removed: true));
+    } catch (e) {
+      GlobalExceptionHandler.handle(exception: e);
+      emit(state.cartError(error: e.toString()));
+    }
+  }
+
+  Future<void> applyUpdateItemQuantity(String cartItemId, int quantity) async {
     try {
       await cartItemRepository.updateItem(cartItemId, {"quantity": quantity});
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
-      emit(CartError(error: e.toString()));
+      emit(state.cartError(error: e.toString()));
     }
-  }
-
-  updateTotals() {
-    totalHtAmount = calculateTotalAmountHt(cartItems);
-    totalTTCAmount = calculateTotalAmountTtc(cartItems);
-  }
-
-  num calculateTotalAmountTtc(List<CartItemModelUi> cartItems) {
-    double totalAmount = 0;
-    for (var element in cartItems) {
-      totalAmount += element.model.getTotalPrice()["totalTTCPrice"]!;
-    }
-    return totalAmount;
-  }
-
-  num calculateTotalAmountHt(List<CartItemModelUi> cartItems) {
-    num totalAmount = 0;
-    for (var element in cartItems) {
-      totalAmount += element.model.getTotalPrice()["totalHtPrice"]!;
-    }
-    return totalAmount;
   }
 
   Future<void> _debounceFunction(Future<void> Function() func,
@@ -301,61 +281,61 @@ class CartCubit extends Cubit<CartState> {
   }
 
   void changeInvoiceType(InvoiceTypes invoiceType) {
-    selectedInvoiceType = invoiceType;
-    emit(InvoiceTypeChanged());
+    emit(state.initial(state.copyWith(selectedInvoiceType: invoiceType)));
   }
 
   void changePaymentMethod(PaymentMethods paymentMethod) {
-    selectedPaymentMethod = paymentMethod;
-    emit(PaymentMethodChanged());
+    emit(state.initial(state.copyWith(selectedPaymentMethod: paymentMethod)));
   }
 
   Future<bool> passOrder() async {
     if (formKey.currentState?.validate() == false) return false;
 
     try {
-      emit(PassOrderLoading());
+      emit(state.loading());
 
-      await Future.wait(cartItemsByVendor.keys.map((sellerId) async {
+      await Future.wait(state.cartItemsByVendor.keys.map((sellerId) async {
         return ordersRepository.createOrder(
             orderDetails: CreateOrderModel(
-          deliveryAddress: shippingAddress,
+          deliveryAddress: state.shippingAddress,
           deliveryTownId: 10,
           sellerCompanyId: sellerId,
-          cartItemsIds: cartItemsByVendor[sellerId] ?? [],
-          clientNote: orderNote,
+          cartItemsIds: state.cartItemsByVendor[sellerId] ?? [],
+          clientNote: state.orderNote,
         ));
       }));
 
-      emit(PassOrderLoaded());
+      emit(state.passOrderSuccess());
       return true;
     } catch (e, stack) {
       debugPrint("$e");
       debugPrintStack(stackTrace: stack);
-      emit(PassOrderLoadingFailed());
+      emit(state.passOrderError());
       return false;
     }
   }
 
   changeOrderNote(String text) {
-    orderNote = text;
+    emit(
+      state.initial(state.copyWith(orderNote: text)),
+    );
   }
 
   void clearCart(AppLocalizations translation) async {
     try {
-      cartItems.clear();
-      cartItemsByVendor.clear();
-      updateTotals();
       await cartItemRepository.removeAll();
-      emit(CartLoadingSuccess());
+      emit(state.loadingSuccess(
+        cartItems: [],
+        cartItemsByVendor: {},
+      ));
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
-      emit(CartError(error: translation.feedback_error_loading_cart));
+      emit(state.cartError(error: translation.feedback_error_loading_cart));
     }
   }
 
   CartItemModelUi? getItemIfExists(String id, [bool isParapharma = false]) {
-    final existingItem = cartItems
+    final existingItem = state.cartItems
         .where((element) => isParapharma
             ? element.model.parapharmCatalogId == id
             : element.model.medicinesCatalogId == id)
@@ -365,8 +345,27 @@ class CartCubit extends Cubit<CartState> {
   }
 
   void updateShippingAddress(String value) {
-    shippingAddress = value;
+    emit(state.initial(state.copyWith(shippingAddress: value)));
   }
 
-  void updateItemPackageQuantity(String id, int parse) {}
+  void updateItemPackageQuantity(CartItemModelUi item) {
+    final updatedQuantity =
+        int.parse(item.packageQuantityController.text) * item.model.packageSize;
+
+    item.quantityController.text = updatedQuantity.toString();
+
+    final updatedItem = item.copyWith(quantity: updatedQuantity);
+
+    emit(state.itemUpdated(updatedItem: updatedItem));
+  }
+
+  void updateItemQuantity(CartItemModelUi item) {
+    final quantity = int.parse(item.quantityController.text);
+    final updatedItem = item.copyWith(quantity: quantity);
+
+    updatedItem.packageQuantityController.text =
+        (quantity ~/ updatedItem.model.packageSize).toString();
+
+    emit(state.itemUpdated(updatedItem: updatedItem));
+  }
 }

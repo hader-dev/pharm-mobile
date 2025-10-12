@@ -10,18 +10,13 @@ import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
 class CartItemWidget extends StatelessWidget {
-  final CartItemModel cartItemData;
-  final TextEditingController quantityController = TextEditingController();
-  final TextEditingController packageQuantityController =
-      TextEditingController();
-  CartItemWidget({super.key, required this.cartItemData});
+  final CartItemModelUi item;
+
+  const CartItemWidget({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
     final cartCubit = context.read<CartCubit>();
-
-    quantityController.text = cartItemData.quantity.toString();
-    packageQuantityController.text = cartItemData.packageQuantity.toString();
 
     return Container(
       margin: const EdgeInsets.symmetric(
@@ -43,16 +38,16 @@ class CartItemWidget extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      cartItemData.designation,
+                      item.model.designation,
                       softWrap: true,
                       overflow: TextOverflow.ellipsis,
                       style:
                           context.responsiveTextTheme.current.headLine5SemiBold,
                     ),
-                    Spacer(),
+                    const Spacer(),
                     InkWell(
                       onTap: () {
-                        cartCubit.deleteCartItem(cartItemData.id);
+                        cartCubit.deleteCartItem(item);
                       },
                       child: const Icon(
                         Iconsax.trash,
@@ -67,37 +62,35 @@ class CartItemWidget extends StatelessWidget {
                   children: [
                     InfoRow(
                       label: context.translation!.unit_ht_price,
-                      dataValue: num.parse(cartItemData.unitPriceHt)
-                          .toStringAsFixed(2),
+                      dataValue:
+                          num.parse(item.model.unitPriceHt).toStringAsFixed(2),
                     ),
                     InfoRow(
                       label: context.translation!.unit_ttc_price,
-                      dataValue: num.parse(cartItemData.unitPriceTtc)
-                          .toStringAsFixed(2),
+                      dataValue:
+                          num.parse(item.model.unitPriceTtc).toStringAsFixed(2),
                     ),
                     InfoRow(
                       label: "${context.translation!.tva}%",
-                      dataValue: num.parse(cartItemData.tvaPercentage)
+                      dataValue: num.parse(item.model.tvaPercentage)
                           .toStringAsFixed(2),
                     ),
                     QuantitySectionModified(
                       disabledPackageQuantity: false,
                       decrementQuantity: () =>
-                          cartCubit.decreaseCartItemQuantity(cartItemData.id),
+                          cartCubit.decreaseCartItemQuantity(item),
                       incrementQuantity: () =>
-                          cartCubit.increaseCartItemQuantity(cartItemData.id),
-                      decrementPackageQuantity: () => cartCubit
-                          .decreaseCartItemPackageQuantity(cartItemData.id),
-                      incrementPackageQuantity: () => cartCubit
-                          .increaseCartItemPackageQuantity(cartItemData.id),
-                      quantityController: quantityController,
+                          cartCubit.increaseCartItemQuantity(item),
+                      decrementPackageQuantity: () =>
+                          cartCubit.decreaseCartItemPackageQuantity(item),
+                      incrementPackageQuantity: () =>
+                          cartCubit.increaseCartItemPackageQuantity(item),
+                      quantityController: item.quantityController,
                       onQuantityChanged: (value) =>
-                          cartCubit.updateItemQuantity(
-                              cartItemData.id, int.parse(value)),
+                          cartCubit.updateItemQuantity(item),
                       onPackageQuantityChanged: (value) =>
-                          cartCubit.updateItemPackageQuantity(
-                              cartItemData.id, int.parse(value)),
-                      packageQuantityController: packageQuantityController,
+                          cartCubit.updateItemPackageQuantity(item),
+                      packageQuantityController: item.packageQuantityController,
                     ),
                   ],
                 )

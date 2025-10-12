@@ -4,7 +4,12 @@ import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/app_layout/app_layout.dart';
+import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
+import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/bottom_sheet_header.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/info_widget.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/invoice_input.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/payment_input.dart';
 import 'package:hader_pharm_mobile/features/common_features/cart/cubit/cart_cubit.dart';
@@ -14,12 +19,6 @@ import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 import 'package:hader_pharm_mobile/utils/validators.dart';
 import 'package:iconsax/iconsax.dart' show Iconsax;
-
-import '../../../app_layout/app_layout.dart';
-import '../../../common/buttons/solid/primary_text_button.dart';
-import '../../../common/text_fields/custom_text_field.dart';
-import '../../../common/widgets/bottom_sheet_header.dart';
-import '../../../common/widgets/info_widget.dart' show InfoWidget;
 
 class SelectPaymentMethodBottomSheet extends StatelessWidget {
   const SelectPaymentMethodBottomSheet({super.key});
@@ -95,7 +94,7 @@ class SelectPaymentMethodBottomSheet extends StatelessWidget {
                         value: CustomTextField(
                           verticalPadding: 0,
                           horizontalPadding: AppSizesManager.p6,
-                          initValue: context.read<CartCubit>().orderNote,
+                          initValue: state.orderNote,
                           onChanged: (text) => context
                               .read<CartCubit>()
                               .changeOrderNote(text ?? ''),
@@ -115,7 +114,7 @@ class SelectPaymentMethodBottomSheet extends StatelessWidget {
                       value: Row(
                         children: [
                           Text(
-                            "${context.read<CartCubit>().totalTTCAmount.toStringAsFixed(2)} ${context.translation!.currency}",
+                            "${state.totalTTCAmount.toStringAsFixed(2)} ${context.translation!.currency}",
                             style: context
                                 .responsiveTextTheme.current.body2Medium
                                 .copyWith(color: AppColors.accent1Shade1),

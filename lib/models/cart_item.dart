@@ -11,8 +11,12 @@ List<CartItemModelUi> cartItemModelDataToUi(List<CartItemModel> cartItems) {
   return cartItems
       .map((e) => CartItemModelUi(
           model: e,
-          quantityController: TextEditingController(),
-          packageQuantityController: TextEditingController()))
+          quantityController: TextEditingController(
+            text: e.quantity.toString(),
+          ),
+          packageQuantityController: TextEditingController(
+            text: (e.quantity ~/ e.packageSize).toString(),
+          )))
       .toList();
 }
 

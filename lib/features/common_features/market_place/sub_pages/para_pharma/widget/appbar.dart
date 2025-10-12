@@ -37,10 +37,7 @@ class MarketplaceAppbar extends StatelessWidget implements PreferredSizeWidget {
           icon: BlocBuilder<CartCubit, CartState>(
             builder: (context, state) {
               return Badge.count(
-                  count: AppLayout.appLayoutScaffoldKey.currentContext!
-                      .read<CartCubit>()
-                      .cartItems
-                      .length,
+                  count: state.cartItems.length,
                   offset: Offset(7, -9),
                   child: const Icon(
                     Iconsax.bag_2,

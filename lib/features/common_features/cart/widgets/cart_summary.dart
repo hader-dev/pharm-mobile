@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/formatted_price.dart';
+import 'package:hader_pharm_mobile/features/common_features/cart/cubit/cart_cubit.dart';
+import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
+import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
-import '../../../../config/theme/colors_manager.dart';
-import '../../../../utils/bottom_sheet_helper.dart';
-import '../../../../utils/constants.dart';
-import '../../../common/buttons/solid/primary_text_button.dart';
-import '../../../common/widgets/formatted_price.dart';
-import '../cubit/cart_cubit.dart';
 import 'select_payment_bottom_sheet.dart';
 
 class CartSummarySection extends StatelessWidget {
@@ -76,10 +76,8 @@ class CartSummarySection extends StatelessWidget {
                           BlocBuilder<CartCubit, CartState>(
                             builder: (context, state) {
                               return FormattedPrice(
-                                price: num.parse(context
-                                    .read<CartCubit>()
-                                    .totalHtAmount
-                                    .toStringAsFixed(2)),
+                                price: num.parse(
+                                    state.totalHtAmount.toStringAsFixed(2)),
                                 valueStyle: context
                                     .responsiveTextTheme.current.body3Medium
                                     .copyWith(
@@ -109,10 +107,8 @@ class CartSummarySection extends StatelessWidget {
                           BlocBuilder<CartCubit, CartState>(
                             builder: (context, state) {
                               return FormattedPrice(
-                                price: num.parse(context
-                                    .read<CartCubit>()
-                                    .totalTTCAmount
-                                    .toStringAsFixed(2)),
+                                price: num.parse(
+                                    state.totalTTCAmount.toStringAsFixed(2)),
                                 valueStyle: context
                                     .responsiveTextTheme.current.body3Medium
                                     .copyWith(
@@ -145,7 +141,7 @@ class CartSummarySection extends StatelessWidget {
                           BlocBuilder<CartCubit, CartState>(
                             builder: (context, state) {
                               return Text(
-                                  "${((num.parse(context.read<CartCubit>().totalTTCAmount.toStringAsFixed(2)) - num.parse(context.read<CartCubit>().totalHtAmount.toStringAsFixed(2))) / 100).toStringAsFixed(2)} %",
+                                  "${((num.parse(state.totalTTCAmount.toStringAsFixed(2)) - num.parse(state.totalHtAmount.toStringAsFixed(2))) / 100).toStringAsFixed(2)} %",
                                   style: context
                                       .responsiveTextTheme.current.body3Medium
                                       .copyWith(
@@ -166,7 +162,7 @@ class CartSummarySection extends StatelessWidget {
                           ),
                           child: PrimaryTextButton(
                             label: context.translation!.checkout,
-                            onTap: context.read<CartCubit>().cartItems.isEmpty
+                            onTap: state.cartItems.isEmpty
                                 ? null
                                 : () {
                                     BottomSheetHelper.showCommonBottomSheet(

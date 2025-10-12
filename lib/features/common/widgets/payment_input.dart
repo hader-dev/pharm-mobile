@@ -17,7 +17,8 @@ class PaymentRadioInput extends StatelessWidget {
   Widget build(BuildContext context) {
     return FormField<PaymentMethods>(
       validator: validator,
-      initialValue: BlocProvider.of<CartCubit>(context).selectedPaymentMethod,
+      initialValue:
+          BlocProvider.of<CartCubit>(context).state.selectedPaymentMethod,
       builder: (field) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,

@@ -42,8 +42,7 @@ class CartScreen extends StatelessWidget {
                         .copyWith(color: AppColors.bgWhite),
                     children: [
                       TextSpan(
-                          text:
-                              " (${BlocProvider.of<CartCubit>(context).cartItems.length})",
+                          text: " (${state.cartItems.length})",
                           style: context.responsiveTextTheme.current.bodySmall
                               .copyWith(
                                   color: AppColors.accent1Shade2Deemphasized)),
@@ -57,6 +56,8 @@ class CartScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               BlocBuilder<CartCubit, CartState>(builder: (context, state) {
+                final cubit = context.read<CartCubit>();
+
                 if (state is CartLoading) {
                   return Expanded(
                     child: Container(
@@ -64,40 +65,32 @@ class CartScreen extends StatelessWidget {
                         child: const CircularProgressIndicator()),
                   );
                 }
-                if (BlocProvider.of<CartCubit>(context).cartItems.isEmpty) {
-                  return Expanded(
-                    child: EmptyListWidget(
-                      onRefresh: () {
-                        BlocProvider.of<CartCubit>(context).getCartItem();
-                      },
-                    ),
+                if (state.cartItems.isEmpty) {
+                  return EmptyListWidget(
+                    onRefresh: () {
+                      cubit.getCartItem();
+                    },
                   );
                 }
                 return Expanded(
                   child: RefreshIndicator(
                     onRefresh: () {
-                      return BlocProvider.of<CartCubit>(context).getCartItem();
+                      return cubit.getCartItem();
                     },
                     child: ListView(
-                        controller: BlocProvider.of<CartCubit>(context)
-                            .scrollController,
+                        controller: cubit.scrollController,
                         shrinkWrap: true,
                         physics: const AlwaysScrollableScrollPhysics(),
-                        children: BlocProvider.of<CartCubit>(context)
-                            .cartItemsByVendor
-                            .keys
+                        children: state.cartItemsByVendor.keys
                             .map((vendor) => VendorCartSection(
-                                  vendorData:
-                                      BlocProvider.of<CartCubit>(context)
-                                          .cartItems
-                                          .firstWhere((element) =>
-                                              element.model.sellerCompanyId ==
-                                              vendor)
-                                          .model
-                                          .sellerCompany,
-                                  cartItems: BlocProvider.of<CartCubit>(context)
-                                          .cartItemsByVendor[vendor] ??
-                                      [],
+                                  vendorData: state.cartItems
+                                      .firstWhere((element) =>
+                                          element.model.sellerCompanyId ==
+                                          vendor)
+                                      .model
+                                      .sellerCompany,
+                                  cartItems:
+                                      state.cartItemsByVendor[vendor] ?? [],
                                 ))
                             .toList()),
                   ),

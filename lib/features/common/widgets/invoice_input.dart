@@ -17,7 +17,8 @@ class InvoiceRadioInput extends StatelessWidget {
   Widget build(BuildContext context) {
     return FormField<InvoiceTypes>(
       validator: validator,
-      initialValue: BlocProvider.of<CartCubit>(context).selectedInvoiceType,
+      initialValue:
+          BlocProvider.of<CartCubit>(context).state.selectedInvoiceType,
       builder: (field) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,

@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
+import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
+import 'package:hader_pharm_mobile/features/common_features/cart/cubit/cart_cubit.dart';
 import 'package:hader_pharm_mobile/models/company.dart';
+import 'package:hader_pharm_mobile/utils/assets_strings.dart';
+import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
-import '../../../../config/theme/colors_manager.dart';
-import '../../../../utils/assets_strings.dart';
-import '../../../../utils/constants.dart';
-import '../cubit/cart_cubit.dart';
 import 'cart_item.dart';
 
 // }
@@ -93,10 +93,10 @@ class VendorCartSectionState extends State<VendorCartSection> {
           },
           children: widget.cartItems
               .map((e) => CartItemWidget(
-                  cartItemData: BlocProvider.of<CartCubit>(context)
+                  item: BlocProvider.of<CartCubit>(context)
+                      .state
                       .cartItems
-                      .firstWhere((item) => item.model.id == e)
-                      .model))
+                      .firstWhere((item) => item.model.id == e)))
               .toList(),
         ),
       ),
