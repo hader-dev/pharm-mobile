@@ -31,7 +31,7 @@ class VendorsSectionItems extends StatelessWidget {
 
     return BlocBuilder<VendorsCubit, VendorsState>(
       builder: (context, state) {
-        final items = context.read<VendorsCubit>().vendorsList;
+        final items = state.vendorsList;
 
         if (state is VendorsLoading) {
           return Center(

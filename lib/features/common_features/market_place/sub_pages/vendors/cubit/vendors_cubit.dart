@@ -2,23 +2,15 @@ import 'dart:async' show Timer;
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-
 import 'package:hader_pharm_mobile/models/company.dart';
+import 'package:hader_pharm_mobile/repositories/remote/company/company_repository_impl.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
-
-import '../../../../../../repositories/remote/company/company_repository_impl.dart';
-import '../../../../../../utils/enums.dart';
+import 'package:hader_pharm_mobile/utils/enums.dart';
 
 part 'vendors_state.dart';
 
 class VendorsCubit extends Cubit<VendorsState> {
-  int totalVendorsCount = 0;
-
-  int offSet = 0;
   Timer? _debounce;
-  List<Company> vendorsList = [];
-  SearchVendorFilters? selectedVendorSearchFilter;
-  DistributorCategory? selectedDistributorTypeFilter;
   CompanyRepository companyRepository;
   final ScrollController scrollController;
   final TextEditingController searchController;
@@ -34,10 +26,10 @@ class VendorsCubit extends Cubit<VendorsState> {
     scrollController.addListener(() async {
       if (scrollController.position.pixels >=
           scrollController.position.maxScrollExtent) {
-        if (offSet < totalVendorsCount) {
+        if (state.offSet < state.totalVendorsCount) {
           await loadMoreVendors();
         } else {
-          emit(VendorsLoadLimitReached());
+          emit(state.toLoadLimitReached());
         }
       }
     });
@@ -48,70 +40,72 @@ class VendorsCubit extends Cubit<VendorsState> {
     String searchValue = '',
   }) async {
     try {
-      emit(VendorsLoading());
-      vendorsList = await companyRepository.getCompanies(
+      emit(state.toLoading());
+      final vendorsList = await companyRepository.getCompanies(
           limit: PaginationConstants.resultsPerPage,
-          offset: offSet,
-          searchFilter: selectedVendorSearchFilter,
+          offset: state.offSet,
+          searchFilter: state.selectedVendorSearchFilter,
           fields: BaseCompany.baseCompanyFields,
           distributorCategoryId:
-              selectedDistributorTypeFilter == DistributorCategory.Both
+              state.selectedDistributorTypeFilter == DistributorCategory.Both
                   ? null
-                  : selectedDistributorTypeFilter?.id,
+                  : state.selectedDistributorTypeFilter?.id,
           companyType: CompanyType.Distributor,
           search: searchValue);
-      totalVendorsCount = vendorsList.length;
-      emit(VendorsLoaded());
+      emit(state.toLoaded(vendors: vendorsList));
     } catch (e, stack) {
       debugPrintStack(stackTrace: stack);
       debugPrint("Error fetching vendors: $e");
-      vendorsList = [];
-      emit(VendorsLoadingFailed());
+      emit(state.toLoadingFailed());
     }
   }
 
   Future<void> loadMoreVendors() async {
     try {
-      if (offSet >= totalVendorsCount) {
-        emit(VendorsLoadLimitReached());
-        return;
-      }
-
-      offSet = offSet + PaginationConstants.resultsPerPage;
-      emit(VendorsLoading());
+      final offSet = state.offSet + PaginationConstants.resultsPerPage;
+      emit(state.toLoadingMore());
       List<Company> moreCompanies = await companyRepository.getCompanies(
         limit: PaginationConstants.resultsPerPage,
         offset: offSet,
-        searchFilter: selectedVendorSearchFilter,
-        distributorCategoryId: selectedDistributorTypeFilter?.id,
+        searchFilter: state.selectedVendorSearchFilter,
+        distributorCategoryId: state.selectedDistributorTypeFilter?.id,
         search: searchController.text,
         companyType: CompanyType.Distributor,
       );
 
+      final vendorsList = state.vendorsList.toList();
       vendorsList.addAll(moreCompanies);
-      totalVendorsCount = vendorsList.length;
-      emit(VendorsLoaded());
+
+      if (moreCompanies.isEmpty) {
+        emit(state.toLoadLimitReached());
+        return;
+      }
+      emit(state.toLoaded(
+        vendors: vendorsList,
+      ));
     } catch (e) {
-      offSet = offSet - PaginationConstants.resultsPerPage;
-      emit(VendorsLoadingFailed());
+      emit(state.toLoadingFailed());
     }
   }
 
-  resetSearchFilters() {
-    selectedVendorSearchFilter = null;
-    selectedDistributorTypeFilter = null;
+  void resetSearchFilters() {
     fetchVendors();
-    emit(VendorSearchFilterChanged());
+    emit(state.toFiltersChanged(
+      resetSearchFilter: true,
+      resetDistributorTypeFilter: true,
+    ));
   }
 
   void changeVendorsSearchFilter(SearchVendorFilters filter) {
-    selectedVendorSearchFilter = filter;
-    emit(VendorSearchFilterChanged());
+    emit(state.toFiltersChanged(
+      selectedVendorSearchFilter: filter,
+    ));
   }
 
   void changeDistributorsCategoryFilter(DistributorCategory filter) {
-    selectedDistributorTypeFilter = filter;
-    emit(VendorSearchFilterChanged());
+    emit(state.toFiltersChanged(
+      selectedDistributorTypeFilter: filter,
+    ));
   }
 
   void searchVendor(String? text) =>
