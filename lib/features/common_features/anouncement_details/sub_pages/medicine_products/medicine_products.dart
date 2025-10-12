@@ -25,22 +25,22 @@ class _MedicineProductsPageState extends State<MedicineProductsPage>
               child: BlocBuilder<AnnouncementCubit, AnnouncementState>(
                 builder: (context, state) {
                   final cubit = BlocProvider.of<AnnouncementCubit>(context);
-                  final medicines = cubit.medicines;
-      
+                  final medicines = state.medicines;
+
                   if (state is AnnouncementIsLoading) {
                     return const Center(child: CircularProgressIndicator());
                   }
-      
+
                   if (medicines.isEmpty) {
                     return const Center(child: EmptyListWidget());
                   }
-      
+
                   final bool isLoadingMore = state is AnnouncementIsLoading;
-      
+
                   return RefreshIndicator(
                     onRefresh: () => cubit.loadAnnouncement(),
                     child: ListView.builder(
-                      controller: cubit.scrollController,
+                      controller: state.scrollController,
                       physics: const AlwaysScrollableScrollPhysics(),
                       itemCount: medicines.length + (isLoadingMore ? 1 : 0),
                       itemBuilder: (context, index) {
@@ -51,10 +51,9 @@ class _MedicineProductsPageState extends State<MedicineProductsPage>
                             medicineData: medicine,
                             isLiked: medicine.isLiked,
                             onLikeTapped: () {
-                              final id = medicine.id;
                               medicine.isLiked
-                                  ? cubit.unlikeMedicinesCatalog(id)
-                                  : cubit.likeMedicinesCatalog(id);
+                                  ? cubit.unlikeMedicinesCatalog(medicine)
+                                  : cubit.likeMedicinesCatalog(medicine);
                             },
                           );
                         } else {

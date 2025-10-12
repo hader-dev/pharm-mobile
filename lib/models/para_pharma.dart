@@ -15,18 +15,6 @@ class BaseParaPharmaCatalogModel {
   final int packageSize;
   final List<String> tags;
 
-  BaseParaPharmaCatalogModel(
-      {required this.id,
-      required this.tags,
-      required this.packageSize,
-      required this.unitPriceHt,
-      required this.thumbnailImage,
-      required this.image,
-      required this.name,
-      required this.stockQuantity,
-      required this.isActive,
-      this.company,
-      this.isLiked = false});
   BaseParaPharmaCatalogModel copyWith(
       {String? id,
       String? unitPriceHt,
@@ -53,6 +41,19 @@ class BaseParaPharmaCatalogModel {
       isLiked: isLiked ?? this.isLiked,
     );
   }
+
+  BaseParaPharmaCatalogModel(
+      {required this.id,
+      required this.tags,
+      required this.packageSize,
+      required this.unitPriceHt,
+      required this.thumbnailImage,
+      required this.image,
+      required this.name,
+      required this.stockQuantity,
+      required this.isActive,
+      this.company,
+      this.isLiked = false});
 }
 
 class BaseBrand {
@@ -170,6 +171,63 @@ class ParaPharmaCatalogModel extends BaseParaPharmaCatalogModel {
         metaData: {},
         minOrderQuantity: 0,
         maxOrderQuantity: 0);
+  }
+
+  ParaPharmaCatalogModel copyWith({
+    String? id,
+    String? unitPriceHt,
+    ImageModel? thumbnailImage,
+    ImageModel? image,
+    String? name,
+    int? stockQuantity,
+    bool? isActive,
+    BaseCompany? company,
+    bool? isLiked,
+    List<String>? tags,
+    int? packageSize,
+    String? unitPriceTtc,
+    String? tvaPercentage,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    String? companyId,
+    String? categoryId,
+    String? brandId,
+    String? packaging,
+    String? sku,
+    String? description,
+    Map<String, dynamic>? metaData,
+    int? minOrderQuantity,
+    int? maxOrderQuantity,
+    Brand? brand,
+    Category? category,
+  }) {
+    return ParaPharmaCatalogModel(
+        tags: tags ?? this.tags,
+        packageSize: packageSize ?? this.packageSize,
+        id: id ?? this.id,
+        unitPriceHt: unitPriceHt ?? this.unitPriceHt,
+        thumbnailImage: thumbnailImage ?? this.thumbnailImage,
+        image: image ?? this.image,
+        name: name ?? this.name,
+        stockQuantity: stockQuantity ?? this.stockQuantity,
+        isActive: isActive ?? this.isActive,
+        company: company ?? this.company,
+        isLiked: isLiked ?? this.isLiked,
+        unitPriceTtc: unitPriceTtc ?? this.unitPriceTtc,
+        tvaPercentage: tvaPercentage ?? this.tvaPercentage,
+        createdAt: createdAt ?? this.createdAt,
+        updatedAt: updatedAt ?? this.updatedAt,
+        companyId: companyId ?? this.companyId,
+        categoryId: categoryId ?? this.categoryId,
+        brandId: brandId ?? this.brandId,
+        packaging: packaging ?? this.packaging,
+        sku: sku ?? this.sku,
+        description: description ?? this.description,
+        metaData: metaData ?? this.metaData,
+        minOrderQuantity: minOrderQuantity ?? this.minOrderQuantity,
+        maxOrderQuantity: maxOrderQuantity ?? this.maxOrderQuantity,
+        brand: brand ?? this.brand,
+        category: category ?? this.category);
   }
 }
 

@@ -36,7 +36,7 @@ class _ParapharmaProductsPageState extends State<ParapharmaProductsPage>
               child: BlocBuilder<AnnouncementCubit, AnnouncementState>(
                 builder: (context, state) {
                   final cubit = context.read<AnnouncementCubit>();
-                  final products = cubit.paraPharmas;
+                  final products = state.paraPharmas;
 
                   if (state is ParaPharmaProductsLoading) {
                     return const Center(child: CircularProgressIndicator());
@@ -53,7 +53,7 @@ class _ParapharmaProductsPageState extends State<ParapharmaProductsPage>
                   return RefreshIndicator(
                     onRefresh: () => cubit.loadAnnouncement(),
                     child: ListView.builder(
-                      controller: cubit.scrollController,
+                      controller: state.scrollController,
                       physics: const AlwaysScrollableScrollPhysics(),
                       itemCount: products.length +
                           (isLoadingMore || hasReachedEnd ? 1 : 0),
@@ -61,12 +61,11 @@ class _ParapharmaProductsPageState extends State<ParapharmaProductsPage>
                         if (index < products.length) {
                           final paraPharma = products[index];
 
-                          void onLikeTapped(
-                              BaseParaPharmaCatalogModel medicine) {
+                          void onLikeTapped(ParaPharmaCatalogModel medicine) {
                             final id = medicine.id;
                             medicine.isLiked
-                                ? cubit.unlikeParaPharmaCatalog(id)
-                                : cubit.likeParaPharmaCatalog(id);
+                                ? cubit.unlikeParaPharmaCatalog(medicine)
+                                : cubit.likeParaPharmaCatalog(medicine);
 
                             gCubit.refreshParaPharmaCatalogFavorite(
                                 id, !medicine.isLiked);
@@ -77,7 +76,8 @@ class _ParapharmaProductsPageState extends State<ParapharmaProductsPage>
                           return ParaPharmaWidget1(
                               paraPharmData: paraPharma,
                               isLiked: paraPharma.isLiked,
-                              onFavoriteCallback: onLikeTapped);
+                              onFavoriteCallback: (v) =>
+                                  onLikeTapped(v as ParaPharmaCatalogModel));
                         } else {
                           if (isLoadingMore) {
                             return const Padding(

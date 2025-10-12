@@ -20,13 +20,11 @@ class AnnouncementDocumentsPage extends StatelessWidget {
       onRefresh: () => context.read<AnnouncementCubit>().loadAnnouncement(),
       child: BlocBuilder<AnnouncementCubit, AnnouncementState>(
           builder: (context, state) {
-        final cubit = context.read<AnnouncementCubit>();
-
         if (state is AnnouncementIsLoading) {
           return const Center(child: CircularProgressIndicator());
         }
 
-        final hasApiPdf = cubit.announcement?.pdf != null;
+        final hasApiPdf = state.announcement.pdf != null;
 
         if (!hasApiPdf) {
           return RefreshIndicator(
@@ -50,7 +48,7 @@ class AnnouncementDocumentsPage extends StatelessWidget {
           child: Column(
             children: [
               if (hasApiPdf)
-                _buildDocumentCard(context, cubit.announcement!.pdf!),
+                _buildDocumentCard(context, state.announcement.pdf!),
             ],
           ),
         );

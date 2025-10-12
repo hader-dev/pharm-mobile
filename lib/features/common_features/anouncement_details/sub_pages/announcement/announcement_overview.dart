@@ -19,13 +19,12 @@ class AnnouncementOverviewPage extends StatelessWidget {
       onRefresh: () => context.read<AnnouncementCubit>().loadAnnouncement(),
       child: BlocBuilder<AnnouncementCubit, AnnouncementState>(
           builder: (context, state) {
-        final cubit = context.read<AnnouncementCubit>();
-
         if (state is AnnouncementIsLoading) {
           return const Center(child: CircularProgressIndicator());
         }
 
-        if (cubit.announcement == null || cubit.announcement?.content == "") {
+        if (state.announcement.id.isEmpty ||
+            state.announcement.content.isEmpty) {
           return const Center(child: EmptyListWidget());
         }
 
@@ -34,8 +33,7 @@ class AnnouncementOverviewPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Display product image if available
-              if (cubit.announcement?.image != null) ...[
+              if (state.announcement.image != null) ...[
                 Container(
                   width: double.infinity,
                   height: 200,
@@ -47,17 +45,15 @@ class AnnouncementOverviewPage extends StatelessWidget {
                   child: CachedNetworkImageWithAssetFallback(
                     imageUrl: getItInstance
                         .get<INetworkService>()
-                        .getFilesPath(cubit.announcement!.image!.path),
+                        .getFilesPath(state.announcement.image!.path),
                     assetImage: DrawableAssetStrings.companyPlaceHolderImg,
                     fit: BoxFit.cover,
                   ),
                 ),
                 const ResponsiveGap.s16(),
               ],
-
-              // Display markdown content
               MarkdownBody(
-                data: cubit.announcement?.content ?? "",
+                data: state.announcement.content,
               ),
             ],
           ),

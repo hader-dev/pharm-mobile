@@ -43,4 +43,17 @@ class AnnouncementModel {
     this.thumbnailImage,
     this.pdf,
   });
+
+  factory AnnouncementModel.empty() {
+    return AnnouncementModel(
+      id: "",
+      createdAt: DateTime(1970),
+      updatedAt: null,
+      title: "",
+      content: "",
+      image: null,
+      thumbnailImage: null,
+      pdf: null,
+    );
+  }
 }
