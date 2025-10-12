@@ -25,7 +25,7 @@ import '../services/network/network_interface.dart';
 
 GetIt getItInstance = GetIt.instance;
 
-initAppDependencies() async {
+Future<void> initAppDependencies() async {
   final SharedPreferences storage = await Prefs.init();
 
   const FlutterSecureStorage securedStorage = FlutterSecureStorage();
@@ -81,6 +81,4 @@ initAppDependencies() async {
       ConfigRepository(client: dioNetworkManager);
   getItInstance
       .registerLazySingleton<IConfigRepository>(() => configRepository);
-
-
 }

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/edit_company/cubit/edit_company_cubit.dart';
+import 'package:hader_pharm_mobile/models/company.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
@@ -102,7 +103,7 @@ class CompanyInfoDisplay extends StatelessWidget {
     );
   }
 
-  bool _hasLegalInfo(company) {
+  bool _hasLegalInfo(Company company) {
     return (company.rcNumber != null && company.rcNumber!.isNotEmpty) ||
         (company.nisNumber != null && company.nisNumber!.isNotEmpty) ||
         (company.aiNumber != null && company.aiNumber!.isNotEmpty) ||

@@ -70,7 +70,7 @@ class _MarketPlaceTabBarSectionState extends State<MarketPlaceTabBarSection>
     );
   }
 
-  getTabTranslation(String label) {
+  String getTabTranslation(String label) {
     switch (label) {
       case "Medicines":
         return context.translation!.medicines;

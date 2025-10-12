@@ -78,7 +78,7 @@ class _FavoritesTabBarSectionState extends State<FavoritesTabBarSection>
     );
   }
 
-  getTabTranslation(String label) {
+  String getTabTranslation(String label) {
     switch (label) {
       case "Medicines":
         return context.translation!.medicines;

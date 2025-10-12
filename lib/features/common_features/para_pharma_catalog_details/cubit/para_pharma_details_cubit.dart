@@ -34,7 +34,7 @@ class ParaPharmaDetailsCubit extends Cubit<ParaPharmaDetailsState> {
       required this.ordersRepository})
       : super(ParaPharmaDetailsInitial());
 
-  getParaPharmaCatalogData(String id) async {
+  Future<void> getParaPharmaCatalogData(String id) async {
     try {
       emit(ParaPharmaDetailsLoading());
       paraPharmaCatalogData =

@@ -81,7 +81,8 @@ class CreateCompanyProfileCubit extends Cubit<CreateCompanyProfileState> {
     emit(StepChanged());
   }
 
-  changeCompanyData({required CreateCompanyProfileFormDataModel modifiedData}) {
+  void changeCompanyData(
+      {required CreateCompanyProfileFormDataModel modifiedData}) {
     debugPrint(modifiedData.toString());
     companyData = modifiedData;
     emit(CompanyDataChanged());

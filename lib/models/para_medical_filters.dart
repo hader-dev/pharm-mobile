@@ -92,8 +92,10 @@ class ParaMedicalFilters extends Equatable {
       stabilityDuration: stabilityDuration ?? this.stabilityDuration,
       code: code ?? this.code,
       reimbursement: reimbursement ?? this.reimbursement,
-      gteUnitPriceHt: resetGteUnitPriceHt ? null : (gteUnitPriceHt ?? this.gteUnitPriceHt),
-      lteUnitPriceHt: resetLteUnitPriceHt ? null : (lteUnitPriceHt ?? this.lteUnitPriceHt),
+      gteUnitPriceHt:
+          resetGteUnitPriceHt ? null : (gteUnitPriceHt ?? this.gteUnitPriceHt),
+      lteUnitPriceHt:
+          resetLteUnitPriceHt ? null : (lteUnitPriceHt ?? this.lteUnitPriceHt),
     );
   }
 
@@ -117,7 +119,7 @@ class ParaMedicalFilters extends Equatable {
         lteUnitPriceHt,
       ];
 
-  get isNotEmpty =>
+  bool get isNotEmpty =>
       name.isNotEmpty ||
       description.isNotEmpty ||
       sku.isNotEmpty ||

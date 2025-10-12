@@ -15,7 +15,7 @@ class FavoritesCubit extends Cubit<FavoritesState> {
   FavoritesCubit({required this.favoriteRepository})
       : super(FavoritesInitial());
 
-  fetchFavorites() async {
+  void fetchFavorites() async {
     await Future.wait(
         [fetchLikedMedicines(), fetchLikedParaPharma(), fetchLikedVendors()]);
   }

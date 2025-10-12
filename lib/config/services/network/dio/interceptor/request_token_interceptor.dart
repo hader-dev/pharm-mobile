@@ -4,6 +4,7 @@ import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/services/auth/token_manager.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
+import 'package:hader_pharm_mobile/utils/enums.dart';
 
 class TokenCheckerInterceptor extends Interceptor {
   int retryCount = 0;
@@ -12,8 +13,16 @@ class TokenCheckerInterceptor extends Interceptor {
   void onError(DioException err, ErrorInterceptorHandler handler) async {
     final reachedMaxRetries = retryCount >= maxRetries;
 
+    final String errorCode = err.response?.data['code'] ?? "";
+
+    final refreshTokenErrorExcludeList = [
+      ApiErrorCodes.INCORRECT_PASSWORD.name,
+    ];
+
     try {
-      if (err.response?.statusCode == 401 && !reachedMaxRetries) {
+      if (err.response?.statusCode == 401 &&
+          !reachedMaxRetries &&
+          !refreshTokenErrorExcludeList.contains(errorCode)) {
         retryCount += 1;
         await getItInstance
             .get<TokenManager>()

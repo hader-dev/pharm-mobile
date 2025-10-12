@@ -12,7 +12,7 @@ part 'splash_state.dart';
 
 class SplashCubit extends Cubit<SplashState> {
   SplashCubit() : super(SplashInitial());
-  init() async {
+  Future<void> init() async {
     try {
       UserManager userManager = getItInstance.get<UserManager>();
       // ignore: unused_local_variable

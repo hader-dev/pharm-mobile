@@ -110,7 +110,7 @@ class AllAnnouncementsCubit extends Cubit<AllAnnouncementsState> {
     await getAnnouncements();
   }
 
-  _onScroll() {
+  void _onScroll() {
     scrollController.addListener(() async {
       if (scrollController.position.pixels >=
           scrollController.position.maxScrollExtent) {

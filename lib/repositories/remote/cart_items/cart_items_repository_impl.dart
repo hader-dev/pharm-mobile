@@ -11,7 +11,8 @@ class CartItemRepository extends ICartItemsRepository {
   CartItemRepository({required this.client});
 
   @override
-  Future<CartItemsResponse> getCartItem({offset = 0, limit = 10}) async {
+  Future<CartItemsResponse> getCartItem(
+      {int offset = 0, int limit = 10}) async {
     try {
       var decodedResponse = await client.sendRequest(() => client.get(
             Urls.cartItems,

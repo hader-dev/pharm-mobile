@@ -67,7 +67,7 @@ class MedicineProductsCubit extends Cubit<MedicineProductsState> {
     }
   }
 
-  resetMedicinesSearchFilter() {
+  void resetMedicinesSearchFilter() {
     emit(state.searchFilterChanged(
         searchFilter: SearchMedicineFilters.dci,
         params: const MedicalFilters()));
@@ -112,7 +112,7 @@ class MedicineProductsCubit extends Cubit<MedicineProductsState> {
     }
   }
 
-  _onScroll() {
+  void _onScroll() {
     scrollController.addListener(() async {
       if (scrollController.position.pixels >=
           scrollController.position.maxScrollExtent) {

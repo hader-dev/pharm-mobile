@@ -40,7 +40,7 @@ class ForgotPasswordCubit extends Cubit<ForgotPaswordState> {
     }
   }
 
-  resendOtp() async {
+  Future<void> resendOtp() async {
     try {
       emit(ResendOtpLoading());
       await userManager.resendOtpCode(email: emailController.text);

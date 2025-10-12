@@ -2,7 +2,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 
 import 'mock_notification_model.dart';
 
-mockRemoteMessage() {
+RemoteMessage mockRemoteMessage() {
   return RemoteMessage(
     senderId: 'mockSenderId',
     category: 'mockCategory',

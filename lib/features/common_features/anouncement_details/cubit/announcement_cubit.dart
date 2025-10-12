@@ -12,7 +12,7 @@ part 'annoncement_state.dart';
 
 class AnnouncementCubit extends Cubit<AnnouncementState> {
   int _pageIndex = 0;
-  get pageIndex => _pageIndex;
+  int get pageIndex => _pageIndex;
 
   final searchController = TextEditingController();
   String announcementId;

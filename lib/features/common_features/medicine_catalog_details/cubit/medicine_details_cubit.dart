@@ -73,7 +73,7 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
     return true;
   }
 
-  getMedicineCatalogData(String id) async {
+  Future<void> getMedicineCatalogData(String id) async {
     try {
       emit(state.loading());
       final medicineCatalogData =

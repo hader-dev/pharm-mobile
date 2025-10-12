@@ -3,17 +3,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
+import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
+import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field.dart';
+import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
-import '../../../../../../utils/constants.dart';
-import '../../../config/theme/colors_manager.dart';
-import '../../../utils/enums.dart';
-import '../../common/buttons/solid/primary_text_button.dart';
-import '../../common/text_fields/custom_text_field.dart';
 import 'cubit/change_password_cubit.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
@@ -66,9 +66,16 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                           type: ToastType.success,
                         );
                   }
+                  if (state is ChangePasswordFailed) {
+                    getItInstance.get<ToastManager>().showToast(
+                          message: context.translation!.failed,
+                          type: ToastType.error,
+                        );
+                  }
                 },
                 child: BlocBuilder<ChangePasswordCubit, ChangePasswordState>(
                   builder: (BuildContext ctx, ChangePasswordState state) {
+                    final cubit = BlocProvider.of<ChangePasswordCubit>(ctx);
                     return SingleChildScrollView(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -100,20 +107,11 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                               CustomTextField(
                                 label:
                                     '${context.translation!.current_password}*',
-                                controller:
-                                    BlocProvider.of<ChangePasswordCubit>(ctx)
-                                        .currentPasswordController,
-                                isObscure:
-                                    BlocProvider.of<ChangePasswordCubit>(ctx)
-                                        .isObscured,
+                                controller: state.currentPasswordController,
+                                isObscure: state.isObscured,
                                 suffixIcon: InkWell(
-                                    onTap: () =>
-                                        BlocProvider.of<ChangePasswordCubit>(
-                                                ctx)
-                                            .showPassword(),
-                                    child: BlocProvider.of<ChangePasswordCubit>(
-                                                ctx)
-                                            .isObscured
+                                    onTap: () => cubit.showPassword(),
+                                    child: state.isObscured
                                         ? const Icon(Iconsax.eye,
                                             color: AppColors.accent1Shade1)
                                         : const Icon(Iconsax.eye_slash,
@@ -128,20 +126,11 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                               ),
                               CustomTextField(
                                 label: '${context.translation!.new_password}*',
-                                controller:
-                                    BlocProvider.of<ChangePasswordCubit>(ctx)
-                                        .newPasswordController,
-                                isObscure:
-                                    BlocProvider.of<ChangePasswordCubit>(ctx)
-                                        .isObscured,
+                                controller: state.newPasswordController,
+                                isObscure: state.isObscured,
                                 suffixIcon: InkWell(
-                                    onTap: () =>
-                                        BlocProvider.of<ChangePasswordCubit>(
-                                                ctx)
-                                            .showPassword(),
-                                    child: BlocProvider.of<ChangePasswordCubit>(
-                                                ctx)
-                                            .isObscured
+                                    onTap: () => cubit.showPassword(),
+                                    child: state.isObscured
                                         ? const Icon(Iconsax.eye,
                                             color: AppColors.accent1Shade1)
                                         : const Icon(Iconsax.eye_slash,
@@ -165,20 +154,11 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                               CustomTextField(
                                 label:
                                     '${context.translation!.confirm_password}*',
-                                controller:
-                                    BlocProvider.of<ChangePasswordCubit>(ctx)
-                                        .confirmPasswordController,
-                                isObscure:
-                                    BlocProvider.of<ChangePasswordCubit>(ctx)
-                                        .isObscured,
+                                controller: state.confirmPasswordController,
+                                isObscure: state.isObscured,
                                 suffixIcon: InkWell(
-                                    onTap: () =>
-                                        BlocProvider.of<ChangePasswordCubit>(
-                                                ctx)
-                                            .showPassword(),
-                                    child: BlocProvider.of<ChangePasswordCubit>(
-                                                ctx)
-                                            .isObscured
+                                    onTap: () => cubit.showPassword(),
+                                    child: state.isObscured
                                         ? const Icon(Iconsax.eye,
                                             color: AppColors.accent1Shade1)
                                         : const Icon(Iconsax.eye_slash,
@@ -194,9 +174,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                         .translation!.passwor_min_length;
                                   }
                                   if (value !=
-                                      BlocProvider.of<ChangePasswordCubit>(ctx)
-                                          .newPasswordController
-                                          .text) {
+                                      state.newPasswordController.text) {
                                     return context.translation!
                                         .feedback_passwords_do_not_match;
                                   }

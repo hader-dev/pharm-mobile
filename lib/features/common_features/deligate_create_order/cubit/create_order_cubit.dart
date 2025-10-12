@@ -112,7 +112,7 @@ class DeligateCreateOrderCubit extends Cubit<DeligateCreateOrderState> {
     await getProducts();
   }
 
-  _onScroll() {
+  void _onScroll() {
     scrollController.addListener(() async {
       if (scrollController.position.pixels >=
           scrollController.position.maxScrollExtent) {

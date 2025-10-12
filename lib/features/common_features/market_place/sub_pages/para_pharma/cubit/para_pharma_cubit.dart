@@ -93,7 +93,7 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
     })));
   }
 
-  resetParaPharmaSearchFilter() {
+  void resetParaPharmaSearchFilter() {
     getParaPharmas();
     emit(state.searchFilterChanged(
       searchFilter: null,
@@ -130,7 +130,7 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
     }
   }
 
-  _onScroll() {
+  void _onScroll() {
     scrollController.addListener(() async {
       if (scrollController.position.pixels >=
           scrollController.position.maxScrollExtent) {

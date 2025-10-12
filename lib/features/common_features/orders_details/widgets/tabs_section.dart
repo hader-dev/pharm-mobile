@@ -76,7 +76,7 @@ class _OrderDetailsTabBarSectionState extends State<OrderDetailsTabBarSection>
     );
   }
 
-  getTabTranslation(String label) {
+  String getTabTranslation(String label) {
     switch (label) {
       case "Overview":
         return context.translation!.overview;

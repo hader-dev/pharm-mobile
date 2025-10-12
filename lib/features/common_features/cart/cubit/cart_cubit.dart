@@ -252,7 +252,7 @@ class CartCubit extends Cubit<CartState> {
     }
   }
 
-  deleteCartItem(CartItemModelUi item) async {
+  Future<void> deleteCartItem(CartItemModelUi item) async {
     try {
       await cartItemRepository.deleteItem(item.model.id);
 
@@ -316,7 +316,7 @@ class CartCubit extends Cubit<CartState> {
     }
   }
 
-  changeOrderNote(String text) {
+  void changeOrderNote(String text) {
     emit(
       state.initial(state.copyWith(orderNote: text)),
     );

@@ -21,7 +21,7 @@ class EditProfileCubit extends Cubit<EditProfileState> {
 
   EditProfileCubit({required this.userManager}) : super(EditProfileInitial());
 
-  initProfileData() async {
+  Future<void> initProfileData() async {
     try {
       emit(EditProfileLoading());
 
@@ -51,15 +51,14 @@ class EditProfileCubit extends Cubit<EditProfileState> {
         updatedProfileData: formData,
         shouldRemoveImage: shouldRemoveImage,
       );
-      
+
       await _refreshUserData();
 
       shouldRemoveImage = false;
       pickedImage = null;
 
-      getItInstance
-          .get<ToastManager>()
-          .showToast(message: "Profile updated successfully", type: ToastType.success);
+      getItInstance.get<ToastManager>().showToast(
+          message: "Profile updated successfully", type: ToastType.success);
 
       emit(EditProfileSuccuss());
     } catch (e) {
@@ -88,7 +87,7 @@ class EditProfileCubit extends Cubit<EditProfileState> {
     }
   }
 
-  changeProfileData({required EditProfileFormDataModel modifiedData}) {
+  void changeProfileData({required EditProfileFormDataModel modifiedData}) {
     profileData = modifiedData;
     emit(ProfileDataLoaded());
   }

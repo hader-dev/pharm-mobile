@@ -61,7 +61,7 @@ class OrdersCubit extends Cubit<OrdersState> {
     }
   }
 
-  _onScroll() {
+  void _onScroll() {
     scrollController.addListener(() async {
       if (scrollController.position.pixels >=
           scrollController.position.maxScrollExtent) {

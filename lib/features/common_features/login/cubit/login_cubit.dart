@@ -63,7 +63,7 @@ class LoginCubit extends Cubit<LoginState> {
     emit(ForgotPassword());
   }
 
-  resendEmailOtp(String email) async {
+  Future<void> resendEmailOtp(String email) async {
     try {
       await getItInstance.get<UserManager>().resendOtpCode(email: email);
       emit(EmailOtpResentSuccessfully(email: email));

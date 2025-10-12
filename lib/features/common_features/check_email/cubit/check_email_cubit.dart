@@ -14,7 +14,7 @@ class CheckEmailCubit extends Cubit<CheckEmailState> {
   final UserManager userManager;
   CheckEmailCubit({required this.userManager}) : super(CheckEmailInitial());
 
-  initEmail(String email) {
+  void initEmail(String email) {
     emit(state.initEmail(email: email));
   }
 
@@ -39,7 +39,7 @@ class CheckEmailCubit extends Cubit<CheckEmailState> {
     }
   }
 
-  resendOtp(String email) async {
+  Future<void> resendOtp(String email) async {
     try {
       emit(state.loading());
       await userManager.resendOtpCode(email: state.userEmail);
