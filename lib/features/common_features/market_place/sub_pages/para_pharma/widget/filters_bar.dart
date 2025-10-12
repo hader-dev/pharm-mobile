@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/dividers.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/filters/cubit/parapharm/provider.dart';
 import 'package:hader_pharm_mobile/features/common_features/filters/widgets/common/filters_button_parapharm.dart';
@@ -80,7 +80,7 @@ class FiltersBar extends StatelessWidget {
                       "${translation.search_results} ${state.totalItemsCount}",
                       style: context.responsiveTextTheme.current.bodySmall,
                     ),
-                    const Divider(color: AppColors.accent1Shade1),
+                    const AppDivider.tiny()
                   ],
                 )
               : const SizedBox.shrink(),

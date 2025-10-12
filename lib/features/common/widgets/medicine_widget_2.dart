@@ -7,6 +7,8 @@ import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/blackened_background.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/stock_availlable.dart';
 import 'package:hader_pharm_mobile/models/medicine_catalog.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
@@ -47,19 +49,20 @@ class MedicineWidget2 extends StatelessWidget {
         child: Row(
           children: [
             Container(
-                margin: const EdgeInsets.only(right: AppSizesManager.p8),
-                clipBehavior: Clip.antiAlias,
-                height: 130,
-                width: 130,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(AppSizesManager.r6),
-                  border: medicineData.image != null
-                      ? null
-                      : Border.all(
-                          color: AppColors.bgDisabled,
-                        ),
-                ),
-                child: Stack(children: [
+              margin: const EdgeInsets.only(right: AppSizesManager.p8),
+              clipBehavior: Clip.antiAlias,
+              height: 130,
+              width: 130,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(AppSizesManager.r6),
+                border: medicineData.image != null
+                    ? null
+                    : Border.all(
+                        color: AppColors.bgDisabled,
+                      ),
+              ),
+              child: Stack(
+                children: [
                   medicineData.image != null
                       ? CacheNetworkImagePlus(
                           boxFit: BoxFit.cover,
@@ -76,60 +79,12 @@ class MedicineWidget2 extends StatelessWidget {
                           height: double.maxFinite,
                           width: double.maxFinite,
                         ),
-                  if (medicineData.image != null)
-                    Container(
-                        decoration: const BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: <Color>[
-                              Colors.black26,
-                              Colors.transparent,
-                              Colors.transparent,
-                              Colors.transparent,
-                              Colors.black26,
-                            ],
-                          ),
-                        ),
-                        child: null),
-                  Transform.scale(
-                    alignment: Alignment.topLeft,
-                    scale: .8,
-                    child: Container(
-                      padding: EdgeInsets.all(AppSizesManager.p4),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            bottomRight: Radius.circular(AppSizesManager.r6),
-                            topLeft: Radius.circular(AppSizesManager.r6)),
-                        color: const Color.fromARGB(255, 195, 252, 222)
-                            .withValues(alpha: 0.8),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          medicineData.stockQuantity > 0
-                              ? Icon(Iconsax.box_2,
-                                  color: SystemColors.green.primary,
-                                  size: AppSizesManager.iconSize16)
-                              : Icon(Iconsax.box_2,
-                                  color: SystemColors.red.primary,
-                                  size: AppSizesManager.iconSize16),
-                          const ResponsiveGap.s4(),
-                          Text(
-                              medicineData.stockQuantity > 0
-                                  ? context.translation!.in_stock
-                                  : context.translation!.out_stock,
-                              style: context
-                                  .responsiveTextTheme.current.bodySmall
-                                  .copyWith(
-                                      color: SystemColors.green.primary,
-                                      fontWeight: context.responsiveTextTheme
-                                          .current.appFont.appFontSemiBold)),
-                        ],
-                      ),
-                    ),
-                  )
-                ])),
+                  if (medicineData.image != null) BlackenedBackground(),
+                  StockAvaillableContainerWidget(
+                      isAvaillable: medicineData.stockQuantity > 0),
+                ],
+              ),
+            ),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

@@ -6,7 +6,10 @@ import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/common/chips/custom_chip.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/blackened_background.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/stock_availlable.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
@@ -73,22 +76,9 @@ class ParaPharmaWidget1 extends StatelessWidget {
                       height: double.maxFinite,
                       width: double.maxFinite,
                     ),
-                  if (paraPharmData.image != null)
-                    Container(
-                        decoration: const BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: <Color>[
-                              Colors.black26,
-                              Colors.transparent,
-                              Colors.transparent,
-                              Colors.transparent,
-                              Colors.black26,
-                            ],
-                          ),
-                        ),
-                        child: null),
+                  if (paraPharmData.image != null) BlackenedBackground(),
+                  StockAvaillableContainerWidget(
+                      isAvaillable: paraPharmData.stockQuantity > 0),
                 ],
               ),
             ),
@@ -96,8 +86,28 @@ class ParaPharmaWidget1 extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CustomChip(
+                        label: paraPharmData.name,
+                        color: AppColors.bgDarken,
+                      ),
+                      if (onFavoriteCallback != null)
+                        IconButton(
+                          onPressed: () {
+                            onFavoriteCallback?.call(paraPharmData);
+                          },
+                          icon: Icon(
+                            isLiked ? Iconsax.heart5 : Iconsax.heart,
+                            color: isLiked ? Colors.red : Colors.black,
+                            size: AppSizesManager.iconSize25,
+                          ),
+                        )
+                    ],
+                  ),
                   Text(
                     paraPharmData.name,
                     maxLines: 1,
@@ -136,16 +146,16 @@ class ParaPharmaWidget1 extends StatelessWidget {
                             .copyWith(
                                 fontWeight: context.responsiveTextTheme.current
                                     .appFont.appFontSemiBold,
-                                color: TextColors.primary.color)),
+                                color: TextColors.ternary.color)),
                   ]),
                   Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Iconsax.wallet_money,
                         color: AppColors.accent1Shade1,
                         size: AppSizesManager.iconSize18,
                       ),
-                      ResponsiveGap.s4(),
+                      const ResponsiveGap.s4(),
                       Text.rich(
                         TextSpan(
                           children: [
@@ -170,25 +180,6 @@ class ParaPharmaWidget1 extends StatelessWidget {
                 ],
               ),
             ),
-            if (onFavoriteCallback != null)
-              IconButton(
-                icon: Container(
-                  width: 50,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: AppColors.accent1Shade1.withAlpha(150),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(
-                    isLiked ? Iconsax.heart5 : Iconsax.heart,
-                    color: isLiked ? Colors.red : Colors.black,
-                    size: AppSizesManager.iconSize30,
-                  ),
-                ),
-                onPressed: () {
-                  onFavoriteCallback?.call(paraPharmData);
-                },
-              ),
           ],
         ),
       ),

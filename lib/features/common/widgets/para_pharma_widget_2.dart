@@ -8,7 +8,9 @@ import 'package:hader_pharm_mobile/config/services/network/network_interface.dar
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_icon_button.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/blackened_background.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/silver_tags.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/stock_availlable.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/widgets/quick_add_modal.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
@@ -82,59 +84,9 @@ class ParaPharmaWidget2 extends StatelessWidget {
                             width: 80,
                           ),
                         ),
-                  if (paraPharmData.image != null)
-                    Container(
-                        decoration: const BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: <Color>[
-                              Colors.black26,
-                              Colors.transparent,
-                              Colors.transparent,
-                              Colors.transparent,
-                              Colors.black26,
-                            ],
-                          ),
-                        ),
-                        child: null),
-                  Transform.scale(
-                    alignment: Alignment.topLeft,
-                    scale: .8,
-                    child: Container(
-                      padding: EdgeInsets.all(AppSizesManager.p4),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            bottomRight: Radius.circular(AppSizesManager.r6),
-                            topLeft: Radius.circular(AppSizesManager.r6)),
-                        color: const Color.fromARGB(255, 195, 252, 222)
-                            .withValues(alpha: 0.8),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          paraPharmData.stockQuantity > 0
-                              ? Icon(Iconsax.box_2,
-                                  color: SystemColors.green.primary,
-                                  size: AppSizesManager.iconSize16)
-                              : Icon(Iconsax.box_2,
-                                  color: SystemColors.red.primary,
-                                  size: AppSizesManager.iconSize16),
-                          const ResponsiveGap.s4(),
-                          Text(
-                              paraPharmData.stockQuantity > 0
-                                  ? context.translation!.in_stock
-                                  : context.translation!.out_stock,
-                              style: context
-                                  .responsiveTextTheme.current.bodySmall
-                                  .copyWith(
-                                      color: SystemColors.green.primary,
-                                      fontWeight: context.responsiveTextTheme
-                                          .current.appFont.appFontSemiBold)),
-                        ],
-                      ),
-                    ),
-                  ),
+                  if (paraPharmData.image != null) BlackenedBackground(),
+                  StockAvaillableContainerWidget(
+                      isAvaillable: paraPharmData.stockQuantity > 0),
                   if (onFavoriteCallback != null)
                     Positioned(
                       bottom: 0,
