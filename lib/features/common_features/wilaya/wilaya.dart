@@ -36,8 +36,8 @@ class WilayaDropdown extends StatelessWidget {
           const ResponsiveGap.s6(),
           BaseWilayaDropdown(
             validator: validator,
-            wilayas: cubit.wilayas,
-            currentSelection: cubit.selectedWilaya,
+            wilayas: state.wilayas,
+            currentSelection: state.selectedWilaya,
             onChanged: (selected) => handleSelectionChanged(selected, cubit),
           ),
           const ResponsiveGap.s6(),

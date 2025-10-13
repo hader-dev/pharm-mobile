@@ -8,59 +8,53 @@ import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler
 part 'wilaya_state.dart';
 
 class WilayaCubit extends Cubit<WilayaState> {
-  late List<Wilaya> wilayas = [];
-  late List<Town> towns = [];
-  late bool loadedWilaya = false;
-  Wilaya? selectedWilaya;
-  Town? selectedTown;
-  String locale = "en";
-
   final IWilayaRepository wilayaRepository;
   WilayaCubit({required this.wilayaRepository}) : super(WilayaStateInitial());
 
   void loadWilayas() async {
     try {
-      if (loadedWilaya) return;
-      emit(WilayaIsLoading());
-      wilayas =
+      if (state.loadedWilaya) return;
+      emit(state.toLoadingWilaya());
+      final wilayas =
           (await wilayaRepository.getWilayas(ParamsLoadWilayas())).wilayas;
-      loadedWilaya = true;
-      emit(WilayaLoaded());
+      emit(state.toLoadedWilaya(
+        wilayas: wilayas,
+      ));
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
-      emit(WilayaLoadingError());
+      emit(state.toLoadingWilayaError());
     }
   }
 
   void loadTowns() async {
     try {
-      emit(TownlsLoading());
-      if (selectedWilaya == null) {
-        towns = [];
-      }
-      towns = (await wilayaRepository.getWilayaTowns(ParamsLoadWilayaTowns(
-              locale: locale, wilayaId: selectedWilaya!.id)))
+      emit(state.toLoadingTowns());
+
+      final towns = (await wilayaRepository.getWilayaTowns(
+              ParamsLoadWilayaTowns(
+                  locale: state.locale, wilayaId: state.selectedWilaya!.id)))
           .towns;
-      emit(TownLoaded());
+      emit(state.toLoadedTowns(
+        towns: towns,
+      ));
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
-      emit(TownLoadingError());
+      emit(state.toLoadingTownsError());
     }
   }
 
   void updateSelectedWilaya(Wilaya? wilaya) {
-    selectedWilaya = wilaya;
-    if(wilaya != null) {
+    if (wilaya != null) {
       loadTowns();
     }
+    emit(state.toSelectWilaya(wilaya: wilaya));
   }
 
   void updateSelectedTown(Town? town) {
-    selectedTown = town;
+    emit(state.toSelectTown(town: town));
   }
 
   void updateLocale(String locale) {
-    this.locale = locale;
-    loadedWilaya = false;
+    emit(state.toInitial(locale: locale));
   }
 }

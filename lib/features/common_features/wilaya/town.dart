@@ -37,8 +37,8 @@ class TownDropdown extends StatelessWidget {
           const ResponsiveGap.s6(),
           BaseTownDropdown(
             validator: validator,
-            towns: cubit.towns,
-            currentSelection: cubit.selectedTown,
+            towns: state.towns,
+            currentSelection: state.selectedTown,
             onChanged: (selected) => handleSelectionChanged(selected, cubit),
           ),
           const ResponsiveGap.s6(),
