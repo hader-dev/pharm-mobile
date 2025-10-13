@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/social_media_button.dart';
+import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
-
-import '../../../../config/theme/colors_manager.dart';
-import '../../../../utils/assets_strings.dart';
-import '../../../common/widgets/social_media_button.dart';
 
 class OtherLoginOptionsSection extends StatelessWidget {
   const OtherLoginOptionsSection({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final translation = context.translation!;
+
     return Column(
       children: [
         Divider(
@@ -21,7 +22,7 @@ class OtherLoginOptionsSection extends StatelessWidget {
           endIndent: MediaQuery.sizeOf(context).width * 0.2,
         ),
         const ResponsiveGap.s16(),
-        Text('Or Sign in with',
+        Text(translation.other_login_options,
             style: context.responsiveTextTheme.current.body3Medium.copyWith(
               color: TextColors.ternary.color,
             )),

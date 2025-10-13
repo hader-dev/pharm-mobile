@@ -57,6 +57,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get pharmacy => 'صيدلية';
 
   @override
+  String get other_login_options => 'او تسجيل الدخول ب';
+
+  @override
   String get search_clients => 'ابحث عن العملاء';
 
   @override

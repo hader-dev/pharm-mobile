@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/utils/app_exceptions/exceptions.dart';
 import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler.dart';
@@ -8,29 +9,19 @@ import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 
-import '../../../../config/routes/routing_manager.dart' show RoutingManager;
-
 part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
-  bool isObscured = true;
-
-  TextEditingController emailController =
-      TextEditingController(text: "");
-
-  TextEditingController passwordController =
-      TextEditingController(text: "");
-
   LoginCubit() : super(LoginInitial());
 
   Future<void> login(String userName, String password) async {
     try {
-      emit(LoginLoading());
+      emit(state.toLoginLoading());
       // ignore: unused_local_variable
       var token = await getItInstance
           .get<UserManager>()
           .login(userName: userName, password: password);
-      emit(LoginSuccessful());
+      emit(state.toLoginSuccessful());
     } on UnAuthorizedException catch (e) {
       if (e.errorCode == ApiErrorCodes.UNAUTHORIZED_DISTRIBUTOR_LOGIN.name) {
         getItInstance.get<ToastManager>().showToast(
@@ -42,7 +33,7 @@ class LoginCubit extends Cubit<LoginState> {
       if (e.errorCode == ApiErrorCodes.EMAIL_NOT_VERIFIED.name) {
         RoutingManager.router.pushNamed(RoutingManager.checkEmailScreen,
             extra: {
-              "email": emailController.text,
+              "email": state.emailController.text,
               "redirectTo": RoutingManager.appLayout
             });
       }
@@ -50,23 +41,23 @@ class LoginCubit extends Cubit<LoginState> {
         exception: e,
       );
 
-      emit(LoginFailed());
+      emit(state.toLoginFailed());
     } catch (e, stackTrace) {
       GlobalExceptionHandler.handle(
           exception: e, exceptionStackTrace: stackTrace);
 
-      emit(LoginFailed());
+      emit(state.toLoginFailed());
     }
   }
 
   void forgetPassword() async {
-    emit(ForgotPassword());
+    emit(state.toForgotPassword());
   }
 
   Future<void> resendEmailOtp(String email) async {
     try {
       await getItInstance.get<UserManager>().resendOtpCode(email: email);
-      emit(EmailOtpResentSuccessfully(email: email));
+      emit(state.toEmailOtpResentSuccessfully(email: email));
     } catch (e) {
       GlobalExceptionHandler.handle(
         exception: e,
@@ -75,7 +66,8 @@ class LoginCubit extends Cubit<LoginState> {
   }
 
   void showPassword() {
-    isObscured = !isObscured;
-    emit(PasswordVisibilityChanged());
+    emit(state.toPasswordVisibilityChanged(
+      isObscured: !state.isObscured,
+    ));
   }
 }

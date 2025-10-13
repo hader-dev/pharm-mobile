@@ -196,6 +196,12 @@ abstract class AppLocalizations {
   /// **'Pharmacy'**
   String get pharmacy;
 
+  /// No description provided for @other_login_options.
+  ///
+  /// In en, this message translates to:
+  /// **'Or login with'**
+  String get other_login_options;
+
   /// No description provided for @search_clients.
   ///
   /// In en, this message translates to:

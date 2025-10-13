@@ -57,6 +57,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get pharmacy => 'Pharmacy';
 
   @override
+  String get other_login_options => 'Or login with';
+
+  @override
   String get search_clients => 'Search Clients';
 
   @override

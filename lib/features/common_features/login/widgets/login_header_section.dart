@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
+import 'package:hader_pharm_mobile/utils/assets_strings.dart';
+import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
-
-import '../../../../config/theme/colors_manager.dart';
-import '../../../../utils/assets_strings.dart';
-import '../../../../utils/constants.dart';
 
 class LoginHeaderSection extends StatelessWidget {
   const LoginHeaderSection({super.key});
@@ -25,14 +24,6 @@ class LoginHeaderSection extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius:
                   const BorderRadius.all(Radius.circular(AppSizesManager.r4)),
-              // gradient: LinearGradient(
-              //   begin: Alignment.topCenter,
-              //   end: Alignment.bottomCenter,
-              //   colors: [
-              //     AppColors.accentGreenShade2,
-              //     AppColors.accent1Shade1,
-              //   ],
-              // ),
             ),
             child: SvgPicture.asset(
               DrawableAssetStrings.logoImg,

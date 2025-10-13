@@ -57,6 +57,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get pharmacy => 'Pharmacie';
 
   @override
+  String get other_login_options => 'Ou se connecter avec';
+
+  @override
   String get search_clients => 'Rechercher des clients';
 
   @override

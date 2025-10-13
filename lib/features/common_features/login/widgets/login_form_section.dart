@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
+import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field.dart';
 import 'package:hader_pharm_mobile/features/common_features/login/cubit/login_cubit.dart';
+import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
+import 'package:hader_pharm_mobile/utils/validators.dart';
 import 'package:iconsax/iconsax.dart';
-
-import '../../../../config/theme/colors_manager.dart';
-import '../../../../utils/constants.dart';
-import '../../../../utils/enums.dart';
-import '../../../common/buttons/solid/primary_text_button.dart';
-import '../../../common/text_fields/custom_text_field.dart';
 
 class LoginFormSection extends StatefulWidget {
   const LoginFormSection({super.key});
@@ -21,40 +20,31 @@ class LoginFormSection extends StatefulWidget {
 class _LoginFormSectionState extends State<LoginFormSection> {
   @override
   Widget build(BuildContext context) {
-    GlobalKey<FormState> formKey = GlobalKey<FormState>();
-    GlobalKey<FormFieldState> emailFieldKey = GlobalKey<FormFieldState>();
+    LoginCubit cubit = context.read<LoginCubit>();
+
     return BlocBuilder<LoginCubit, LoginState>(
       builder: (context, state) {
         return Form(
-          key: formKey,
+          key: state.formKey,
           child: Column(
             children: [
               CustomTextField(
-                fieldKey: emailFieldKey,
+                fieldKey: state.emailFieldKey,
                 label: '${context.translation!.email}*',
-                controller:
-                    BlocProvider.of<LoginCubit>(context).emailController,
+                controller: state.emailController,
                 state: FieldState.normal,
-                validationFunc: (value) {
-                  if (value == null || value.isEmpty) {
-                    return context.translation!.feedback_field_required;
-                  }
-                  if (!emailRegex.hasMatch(value)) {
-                    return context.translation!.feedback_invalid_email_format;
-                  }
-                },
+                validationFunc: (value) =>
+                    validateIsEmail(value, context.translation!),
               ),
               const ResponsiveGap.s4(),
               CustomTextField(
                 label: '${context.translation!.password}*',
-                controller:
-                    BlocProvider.of<LoginCubit>(context).passwordController,
+                controller: state.passwordController,
                 onChanged: (value) {},
-                isObscure: BlocProvider.of<LoginCubit>(context).isObscured,
+                isObscure: state.isObscured,
                 suffixIcon: InkWell(
-                    onTap: () =>
-                        BlocProvider.of<LoginCubit>(context).showPassword(),
-                    child: BlocProvider.of<LoginCubit>(context).isObscured
+                    onTap: () => cubit.showPassword(),
+                    child: state.isObscured
                         ? const Icon(Iconsax.eye,
                             color: AppColors.accent1Shade1)
                         : const Icon(Iconsax.eye_slash,
@@ -62,10 +52,7 @@ class _LoginFormSectionState extends State<LoginFormSection> {
                 state: FieldState.normal,
                 validationFunc: (value) {
                   if ((value == null || value.isEmpty) &&
-                      BlocProvider.of<LoginCubit>(context)
-                          .emailController
-                          .text
-                          .isNotEmpty) {
+                      state.emailController.text.isNotEmpty) {
                     return context.translation!.feedback_field_required;
                   }
                   if (value.length < 6) {
@@ -77,11 +64,11 @@ class _LoginFormSectionState extends State<LoginFormSection> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Spacer(),
+                  const Spacer(),
                   PrimaryTextButton(
                     label: context.translation!.forgot_password,
                     onTap: () {
-                      BlocProvider.of<LoginCubit>(context).forgetPassword();
+                      cubit.forgetPassword();
                     },
                     labelColor: AppColors.accent1Shade1,
                   ),
@@ -93,12 +80,12 @@ class _LoginFormSectionState extends State<LoginFormSection> {
                 isLoading: state is LoginLoading,
                 onTap: () {
                   FocusScope.of(context).unfocus();
-                  if (!formKey.currentState!.validate()) {
+                  if (!state.formKey.currentState!.validate()) {
                     return;
                   }
-                  BlocProvider.of<LoginCubit>(context).login(
-                    context.read<LoginCubit>().emailController.text,
-                    context.read<LoginCubit>().passwordController.text,
+                  cubit.login(
+                    state.emailController.text,
+                    state.passwordController.text,
                   );
                 },
                 color: AppColors.accent1Shade1,
