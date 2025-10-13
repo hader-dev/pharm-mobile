@@ -31,7 +31,7 @@ class FavoritesMedicinesCatalog extends StatelessWidget {
         if (state is FavoritesMedicinesLoading) {
           return const Center(child: CircularProgressIndicator());
         }
-        if (cubit.likedMedicinesCatalogs.isEmpty) {
+        if (state.likedMedicinesCatalogs.isEmpty) {
           return EmptyListWidget();
         }
         return Column(
@@ -43,19 +43,16 @@ class FavoritesMedicinesCatalog extends StatelessWidget {
                 child: ListView.builder(
                   shrinkWrap: true,
                   physics: const AlwaysScrollableScrollPhysics(),
-                  itemCount: BlocProvider.of<FavoritesCubit>(context)
-                      .likedMedicinesCatalogs
-                      .length,
+                  itemCount: state.likedMedicinesCatalogs.length,
                   itemBuilder: (context, index) => MedicineWidget2(
                     hideRemoveButton: false,
                     onRemoveFromFavorites: () {
-                      final id = cubit.likedMedicinesCatalogs[index].id;
+                      final id = state.likedMedicinesCatalogs[index].id;
                       cubit.unlikeMedicine(id);
                       gCubit.refreshMedicineCatalogFavorite(id, false);
                       hCubit?.refreshMedicineCatalogFavorite(id, false);
                     },
-                    medicineData: BlocProvider.of<FavoritesCubit>(context)
-                        .likedMedicinesCatalogs[index],
+                    medicineData: state.likedMedicinesCatalogs[index],
                     isLiked: true,
                   ),
                 ),

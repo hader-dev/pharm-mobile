@@ -8,9 +8,6 @@ import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler
 part 'favorites_state.dart';
 
 class FavoritesCubit extends Cubit<FavoritesState> {
-  List<BaseMedicineCatalogModel> likedMedicinesCatalogs = [];
-  List<BaseParaPharmaCatalogModel> likedParaPharmaCatalogs = [];
-  List<Company> likedVendors = [];
   FavoriteRepository favoriteRepository;
   FavoritesCubit({required this.favoriteRepository})
       : super(FavoritesInitial());
@@ -22,77 +19,82 @@ class FavoritesCubit extends Cubit<FavoritesState> {
 
   Future<void> fetchLikedMedicines() async {
     try {
-      emit(FavoritesMedicinesLoading());
-      likedMedicinesCatalogs =
+      emit(state.toLoadingMedicines());
+      final likedMedicinesCatalogs =
           await favoriteRepository.getFavoritesMedicinesCatalogs();
-      emit(FavoritesMedicinesLoaded());
+      emit(state.toLoadedMedicines(
+        medicines: likedMedicinesCatalogs,
+      ));
     } catch (e) {
-      // debugPrintStack(stackTrace: stackTrace);
-      // debugPrint("$e");
       GlobalExceptionHandler.handle(exception: e);
-      emit(FavoritesMedicinesLoadingFailed());
+      emit(state.toLoadingMedicinesFailed());
     }
   }
 
   Future<void> fetchLikedParaPharma() async {
     try {
-      emit(FavoritesParaPharmaLoading());
-      likedParaPharmaCatalogs =
+      emit(state.toLoadingParaPharma());
+      final likedParaPharmaCatalogs =
           await favoriteRepository.getFavoritesParaPharmasCatalogs();
-      emit(FavoritesParaPharmaLoaded());
+      emit(state.toLoadedParaPharma(
+        paraPharmas: likedParaPharmaCatalogs,
+      ));
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
-      emit(FavoritesParaPharmaLoadingFailed());
+      emit(state.toLoadingParaPharmaFailed());
     }
   }
 
   Future<void> fetchLikedVendors() async {
     try {
-      emit(FavoritesVendorsLoading());
-      likedVendors = await favoriteRepository.getFavoritesVendors();
-      emit(FavoritesVendorsLoaded());
+      emit(state.toLoadingVendors());
+      final likedVendors = await favoriteRepository.getFavoritesVendors();
+      emit(state.toLoadedVendors(
+        vendors: likedVendors,
+      ));
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
-      emit(FavoritesVendorsLoadingFailed());
+      emit(state.toLoadingVendorsFailed());
     }
   }
 
   void unlikeMedicine(String medicineId) {
-    likedMedicinesCatalogs.removeWhere((medicine) => medicine.id == medicineId);
+    final medicines = state.likedMedicinesCatalogs.toList();
+    medicines.removeWhere((medicine) => medicine.id == medicineId);
+
     favoriteRepository.unLikeMedicineCatalog(medicineCatalogId: medicineId);
-    emit(FavoritesMedicinesLoaded());
+    emit(state.toLoadedMedicines(
+      medicines: medicines,
+    ));
   }
 
   Future<void> likeMedicine(String medicineId) async {
     favoriteRepository.likeMedicineCatalog(medicineCatalogId: medicineId);
-
-    emit(FavoritesMedicinesLoaded());
   }
 
   void unlikeParaPharma(String paraPharmaId) {
-    likedParaPharmaCatalogs
-        .removeWhere((paraPharma) => paraPharma.id == paraPharmaId);
+    final parapharmas = state.likedParaPharmaCatalogs.toList();
+    parapharmas.removeWhere((paraPharma) => paraPharma.id == paraPharmaId);
     favoriteRepository.unLikeParaPharmaCatalog(
         paraPharmaCatalogId: paraPharmaId);
-    emit(FavoritesParaPharmaLoaded());
+    emit(state.toLoadedParaPharma(paraPharmas: parapharmas));
   }
 
   Future<void> likeParaPharmaCatalog(String paraPharmaCatalogId) async {
     favoriteRepository.likeParaPharmaCatalog(
         paraPharmaCatalogId: paraPharmaCatalogId);
-
-    emit(FavoritesParaPharmaLoaded());
   }
 
   void unlikeVendor(String vendorId) {
-    likedVendors.removeWhere((vendor) => vendor.id == vendorId);
+    final vendors = state.likedVendors.toList();
+    vendors.removeWhere((vendor) => vendor.id == vendorId);
     favoriteRepository.unLikeVendors(vendorId: vendorId);
-    emit(FavoritesVendorsLoaded());
+    emit(state.toLoadedVendors(
+      vendors: vendors,
+    ));
   }
 
   Future<void> likeVendor(String vendorId) async {
     favoriteRepository.likeVendors(vendorId: vendorId);
-
-    emit(FavoritesVendorsLoaded());
   }
 }

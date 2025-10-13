@@ -24,7 +24,7 @@ class FavoritesVendors extends StatelessWidget {
         if (state is FavoritesVendorsLoading) {
           return const Center(child: CircularProgressIndicator());
         }
-        if (cubit.likedVendors.isEmpty) {
+        if (state.likedVendors.isEmpty) {
           return EmptyListWidget();
         }
         return Column(
@@ -36,16 +36,13 @@ class FavoritesVendors extends StatelessWidget {
                 child: ListView.builder(
                   shrinkWrap: true,
                   physics: const AlwaysScrollableScrollPhysics(),
-                  itemCount: BlocProvider.of<FavoritesCubit>(context)
-                      .likedVendors
-                      .length,
+                  itemCount: state.likedVendors.length,
                   itemBuilder: (_, index) {
                     return VendorItem(
-                        companyData: BlocProvider.of<FavoritesCubit>(context)
-                            .likedVendors[index],
+                        companyData: state.likedVendors[index],
                         hideRemoveButton: false,
                         onRemoveFromFavorites: () {
-                          final id = cubit.likedVendors[index].id;
+                          final id = state.likedVendors[index].id;
                           cubit.unlikeVendor(id);
                         });
                   },

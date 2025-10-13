@@ -32,7 +32,7 @@ class FavoritesParaPharmaCatalogs extends StatelessWidget {
         if (state is FavoritesParaPharmaLoading) {
           return const Center(child: CircularProgressIndicator());
         }
-        if (cubit.likedParaPharmaCatalogs.isEmpty) {
+        if (state.likedParaPharmaCatalogs.isEmpty) {
           return EmptyListWidget();
         }
 
@@ -47,7 +47,7 @@ class FavoritesParaPharmaCatalogs extends StatelessWidget {
                 child: ListView.builder(
                     shrinkWrap: true,
                     physics: const AlwaysScrollableScrollPhysics(),
-                    itemCount: cubit.likedParaPharmaCatalogs.length,
+                    itemCount: state.likedParaPharmaCatalogs.length,
                     itemBuilder: (context, index) {
                       void onLikeTapped(BaseParaPharmaCatalogModel medicine) {
                         final id = medicine.id;
@@ -59,7 +59,7 @@ class FavoritesParaPharmaCatalogs extends StatelessWidget {
                       return ParaPharmaWidget1(
                         isLiked: true,
                         onFavoriteCallback: onLikeTapped,
-                        paraPharmData: cubit.likedParaPharmaCatalogs[index],
+                        paraPharmData: state.likedParaPharmaCatalogs[index],
                       );
                     }),
               ),
