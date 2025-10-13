@@ -12,31 +12,28 @@ class PasswordResetLinkSentScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SvgPicture.asset(
-            DrawableAssetStrings.emailIcon,
-            height: 150,
-            width: 150,
-          ),
-          Text(context.translation!.check_email,
-              style: context.responsiveTextTheme.current.headLine1),
-          const ResponsiveGap.s24(),
-          Text(context.translation!.password_reset_sent,
-              textAlign: TextAlign.center,
-              style: context.responsiveTextTheme.current.body1Regular),
-          const ResponsiveGap.s24(),
-          PrimaryTextButton(
-              label: context.translation!.back_to_login,
-              onTap: () {
-                context.pop();
-              },
-              color: AppColors.accent1Shade1),
-        ],
-      ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SvgPicture.asset(
+          DrawableAssetStrings.emailIcon,
+          height: 150,
+          width: 150,
+        ),
+        Text(context.translation!.check_email,
+            style: context.responsiveTextTheme.current.headLine1),
+        const ResponsiveGap.s24(),
+        Text(context.translation!.password_reset_sent,
+            textAlign: TextAlign.center,
+            style: context.responsiveTextTheme.current.body1Regular),
+        const ResponsiveGap.s24(),
+        PrimaryTextButton(
+            label: context.translation!.back_to_login,
+            onTap: () {
+              context.pop();
+            },
+            color: AppColors.accent1Shade1),
+      ],
     );
   }
 }

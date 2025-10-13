@@ -13,15 +13,9 @@ part 'forgot_pasword_state.dart';
 bool testWithAccountOne = true;
 
 class ForgotPasswordCubit extends Cubit<ForgotPaswordState> {
-  bool isObscured = true;
-  bool isResendActive = true;
   final UserManager userManager;
 
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  GlobalKey<FormFieldState> passwordFieldKey = GlobalKey<FormFieldState>();
-
-  TextEditingController emailController = TextEditingController(text: "");
-  TextEditingController newPasswordController = TextEditingController(text: "");
+  List<TextEditingController?> otpControllers = [];
 
   ForgotPasswordCubit({
     required this.userManager,
@@ -31,70 +25,82 @@ class ForgotPasswordCubit extends Cubit<ForgotPaswordState> {
     try {
       await getItInstance
           .get<UserManager>()
-          .sendResetPasswordMail(email: emailController.text);
-      emit(ResetLinkSent());
+          .sendResetPasswordMail(email: state.emailController.text);
+      emit(state.toResetLinkSent());
     } catch (e) {
+      debugPrint("$e");
       GlobalExceptionHandler.handle(
         exception: e,
       );
+      emit(state.toError());
     }
   }
 
   Future<void> resendOtp() async {
     try {
-      emit(ResendOtpLoading());
-      await userManager.resendOtpCode(email: emailController.text);
+      emit(state.toResendOtpLoading());
+      await userManager.resendOtpCode(email: state.emailController.text);
       int counter = 10;
       Timer.periodic(const Duration(seconds: 1), (timer) {
-        isResendActive = false;
+        bool isResendActive = false;
         counter--;
         if (counter == 0) {
           timer.cancel();
           isResendActive = true;
         }
-        emit(TimerCountChanged(count: counter));
+        emit(state.toCounterTicked(
+            count: counter, isResendActive: isResendActive));
       });
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
+      emit(state.toError());
     }
   }
 
   Future<void> resetPassword(String otp, AppLocalizations translation) async {
     try {
-      if (formKey.currentState!.validate()) {
+      if (state.formKey.currentState!.validate()) {
+        emit(state.toResetPasswordLoading());
         await userManager.forgotPassword(
-            email: emailController.text,
+            email: state.emailController.text,
             otp: otp,
-            newPassword: newPasswordController.text);
+            newPassword: state.newPasswordController.text);
 
         final success = await getItInstance.get<UserManager>().login(
-            userName: emailController.text,
-            password: newPasswordController.text);
+            userName: state.emailController.text,
+            password: state.newPasswordController.text);
 
         if (success) {
           setupCompanyOrSkipToHome();
         }
         _reset();
-        emit(ResetPasswordSuccess());
+        emit(state.toResetPasswordSuccess());
       }
     } catch (e) {
       debugPrint("$e");
       GlobalExceptionHandler.handle(exception: e);
+      emit(state.toError());
     }
   }
 
   void _reset() {
-    emailController.clear();
-    newPasswordController.clear();
+    state.emailController.clear();
+    state.newPasswordController.clear();
+
+    emit(state.toInitial());
   }
 
   void navigateBack() {
     _reset();
-    emit(ForgotPasswordInitial());
   }
 
   void showPassword() {
-    isObscured = !isObscured;
-    emit(PasswordVisibilityChanged());
+    emit(state.toPasswordVisibilityChanged(
+      isObscured: !state.isObscured,
+    ));
+  }
+
+  void setupOtpControllers(List<TextEditingController?> controllers) {
+    otpControllers = controllers;
   }
 }

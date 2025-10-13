@@ -18,7 +18,6 @@ class PasswordResetOtpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final translation = context.translation!;
     final cubit = context.read<ForgotPasswordCubit>();
-    late List<TextEditingController?> controls;
 
     return BlocBuilder<ForgotPasswordCubit, ForgotPaswordState>(
         builder: (context, state) {
@@ -55,6 +54,7 @@ class PasswordResetOtpScreen extends StatelessWidget {
           ),
           const ResponsiveGap.s24(),
           OtpTextField(
+            onSubmit: (otpCode) => cubit.resetPassword(otpCode, translation),
             numberOfFields: 5,
             borderColor: StrokeColors.normal.color,
             focusedBorderColor: StrokeColors.focused.color,
@@ -67,28 +67,25 @@ class PasswordResetOtpScreen extends StatelessWidget {
             textStyle: context.responsiveTextTheme.current.body1Medium.copyWith(
                 fontSize:
                     context.responsiveTextTheme.current.appFont.headLine4),
-            handleControllers: (controllers) {
-              controls = controllers;
-            },
+            handleControllers: cubit.setupOtpControllers,
           ),
           const ResponsiveGap.s24(),
           Form(
-            key: cubit.formKey,
+            key: state.formKey,
             child: CustomTextField(
-              fieldKey: cubit.passwordFieldKey,
+              fieldKey: state.passwordFieldKey,
               label: '${context.translation!.new_password}*',
-              controller: BlocProvider.of<ForgotPasswordCubit>(context)
-                  .newPasswordController,
+              controller: state.newPasswordController,
               state: FieldState.normal,
               validationFunc: (value) {
                 if (value == null || value.isEmpty) {
                   return context.translation!.feedback_field_required;
                 }
               },
-              isObscure: cubit.isObscured,
+              isObscure: state.isObscured,
               suffixIcon: InkWell(
                   onTap: () => cubit.showPassword(),
-                  child: cubit.isObscured
+                  child: state.isObscured
                       ? const Icon(Iconsax.eye, color: AppColors.accent1Shade1)
                       : const Icon(Iconsax.eye_slash,
                           color: AppColors.accent1Shade1)),
@@ -99,7 +96,7 @@ class PasswordResetOtpScreen extends StatelessWidget {
             label: translation.verify,
             isLoading: cubit.state is ResetpasswordIsLoading,
             onTap: () => cubit.resetPassword(
-                controls.map((e) => e!.text).join(""), translation),
+                cubit.otpControllers.map((e) => e!.text).join(""), translation),
             color: AppColors.accent1Shade1,
           ),
         ],
