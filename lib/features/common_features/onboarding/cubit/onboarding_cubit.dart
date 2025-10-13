@@ -1,42 +1,39 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
+import 'package:hader_pharm_mobile/utils/shared_prefs.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../../../config/di/di.dart';
-import '../../../../config/routes/routing_manager.dart';
-import '../../../../utils/shared_prefs.dart';
 
 part 'onboarding_state.dart';
 
 class OnboardingCubit extends Cubit<OnboardingState> {
-  int currentIndex = 0;
-  int pagesCount = 0;
-  PageController pageController = PageController();
   OnboardingCubit() : super(OnboardingInitial());
 
   void initPagesCount(int pages) {
-    pagesCount = pages;
-    emit(OnboardingInitial());
+    emit(state.toInitial(pagesCount: pages));
   }
 
   Future<void> nextPage() async {
-    if (currentIndex < pagesCount) {
+    int currentIndex = state.currentIndex;
+
+    if (state.currentIndex < state.pagesCount) {
       currentIndex = currentIndex + 1;
-      await pageController.nextPage(
+      await state.pageController.nextPage(
           duration: const Duration(milliseconds: 300), curve: Curves.ease);
     }
-    emit(OnboardingPageChanged());
+    emit(state.toPageChanged(
+      currentIndex: currentIndex + 1,
+      pagesCount: state.pagesCount,
+    ));
   }
 
-  // void previousPage() async {
-  //   currentIndex = currentIndex - 1;
-  //   await pageController.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.ease);
-  // }
-
   void onPageChanged(int value) {
-    currentIndex = value;
-    emit(OnboardingComplete());
+    emit(state.toPageChanged(
+      currentIndex: value,
+      pagesCount: state.pagesCount,
+    ));
   }
 
   void redirectToLoginPage(BuildContext context) async {

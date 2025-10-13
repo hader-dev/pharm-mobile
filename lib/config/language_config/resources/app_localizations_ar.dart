@@ -39,6 +39,33 @@ class AppLocalizationsAr extends AppLocalizations {
   String get delete => 'حذف';
 
   @override
+  String get onboarding_find_medicines_descirption =>
+      'اكتشف مجموعة واسعة من الأدوية والمنتجات الصحية من خلال ميزة البحث السهلة الاستخدام لدينا. ابحث عما تحتاجه بسرعة وكفاءة.';
+
+  @override
+  String get onboarding_seamless_shopping => 'تجربة شراء سهلة';
+
+  @override
+  String get onboarding_get_started => 'ابدا';
+
+  @override
+  String get onboarding_get_started_desc =>
+      'استضافة صيدلية حاضر اليوم واستهداف استخدام سهل لمنتجات الصحة في مختلف المواقع. ابدا الان !';
+
+  @override
+  String get skip => 'تخطي';
+
+  @override
+  String get start => 'ابدا';
+
+  @override
+  String get onboarding_seamless_shopping_desc =>
+      'ادارة سهلة للطلبات وحفظ خدمة عالية جدا للعملاء. استمتع بتجربة شراء سهلة مع واجهة المستخدم سهلة الاستخدام.';
+
+  @override
+  String get find_medicines => 'ابحث عن الادوية';
+
+  @override
   String get search_orders => 'ابحث عن الطلبات';
 
   @override

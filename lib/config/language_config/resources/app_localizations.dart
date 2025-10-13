@@ -160,6 +160,54 @@ abstract class AppLocalizations {
   /// **'Delete'**
   String get delete;
 
+  /// No description provided for @onboarding_find_medicines_descirption.
+  ///
+  /// In en, this message translates to:
+  /// **'Discover a wide range of medicines and health products with our easy-to-use search feature. Find what you need quickly and efficiently.'**
+  String get onboarding_find_medicines_descirption;
+
+  /// No description provided for @onboarding_seamless_shopping.
+  ///
+  /// In en, this message translates to:
+  /// **'Seamless Shopping Experience'**
+  String get onboarding_seamless_shopping;
+
+  /// No description provided for @onboarding_get_started.
+  ///
+  /// In en, this message translates to:
+  /// **'Get Started'**
+  String get onboarding_get_started;
+
+  /// No description provided for @onboarding_get_started_desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Join Hader Pharma today and enjoy convenient access to pharmaceutical products across different locations. Start now!'**
+  String get onboarding_get_started_desc;
+
+  /// No description provided for @skip.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get skip;
+
+  /// No description provided for @start.
+  ///
+  /// In en, this message translates to:
+  /// **'Start'**
+  String get start;
+
+  /// No description provided for @onboarding_seamless_shopping_desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Easily manage orders and maintain an organized, top-notch service for customers. Enjoy a seamless shopping experience with our user-friendly interface.'**
+  String get onboarding_seamless_shopping_desc;
+
+  /// No description provided for @find_medicines.
+  ///
+  /// In en, this message translates to:
+  /// **'Find Medicines'**
+  String get find_medicines;
+
   /// No description provided for @search_orders.
   ///
   /// In en, this message translates to:

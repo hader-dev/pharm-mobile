@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
-
-import '../../../../utils/constants.dart';
 
 class Board extends StatelessWidget {
   final Widget img;
@@ -22,8 +21,7 @@ class Board extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(30.0),
           child: ClipRRect(
-            borderRadius:
-                BorderRadius.circular(60), // Adjust the radius as needed
+            borderRadius: BorderRadius.circular(60),
             child: img,
           ),
         ),

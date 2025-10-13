@@ -39,6 +39,33 @@ class AppLocalizationsEn extends AppLocalizations {
   String get delete => 'Delete';
 
   @override
+  String get onboarding_find_medicines_descirption =>
+      'Discover a wide range of medicines and health products with our easy-to-use search feature. Find what you need quickly and efficiently.';
+
+  @override
+  String get onboarding_seamless_shopping => 'Seamless Shopping Experience';
+
+  @override
+  String get onboarding_get_started => 'Get Started';
+
+  @override
+  String get onboarding_get_started_desc =>
+      'Join Hader Pharma today and enjoy convenient access to pharmaceutical products across different locations. Start now!';
+
+  @override
+  String get skip => 'Skip';
+
+  @override
+  String get start => 'Start';
+
+  @override
+  String get onboarding_seamless_shopping_desc =>
+      'Easily manage orders and maintain an organized, top-notch service for customers. Enjoy a seamless shopping experience with our user-friendly interface.';
+
+  @override
+  String get find_medicines => 'Find Medicines';
+
+  @override
   String get search_orders => 'Search Orders';
 
   @override

@@ -39,6 +39,33 @@ class AppLocalizationsFr extends AppLocalizations {
   String get delete => 'Supprimer';
 
   @override
+  String get onboarding_find_medicines_descirption =>
+      'Découvrez une large gamme de médicaments et de produits de santé grâce à notre fonction de recherche facile à utiliser. Trouvez ce dont vous avez besoin rapidement et efficacement.';
+
+  @override
+  String get onboarding_seamless_shopping => 'Expérience d\'achat fluide';
+
+  @override
+  String get onboarding_get_started => 'Commencer';
+
+  @override
+  String get onboarding_get_started_desc =>
+      'Rejoignez Hader Pharma aujourd\'hui et profitez d\'un accès facile aux produits pharmaceutiques dans diverses localisations. Commencez maintenant !';
+
+  @override
+  String get skip => 'Passer';
+
+  @override
+  String get start => 'Commencer';
+
+  @override
+  String get onboarding_seamless_shopping_desc =>
+      'Gestion facile des commandes et maintien d\'un service de haute qualité pour les clients. Profitez d\'une expérience d\'achat fluide avec notre interface utilisateur facile d\'utilisation.';
+
+  @override
+  String get find_medicines => 'Trouver des médicaments';
+
+  @override
   String get search_orders => 'Rechercher des commandes';
 
   @override
