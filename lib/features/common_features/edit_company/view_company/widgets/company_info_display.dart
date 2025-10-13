@@ -14,10 +14,9 @@ class CompanyInfoDisplay extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<EditCompanyCubit, EditCompanyState>(
       builder: (context, state) {
-        final cubit = BlocProvider.of<EditCompanyCubit>(context);
-        final company = cubit.companyData;
+        final company = state.companyData;
 
-        if (company == null) {
+        if (company.id.isEmpty) {
           return Center(
               child: Text(context.translation!.no_company_data_available));
         }

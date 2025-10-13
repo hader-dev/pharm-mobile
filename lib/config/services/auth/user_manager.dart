@@ -69,14 +69,12 @@ class UserManager {
 
     final user = await getMe();
 
-    JwtDecoded decodedJwt = decodeJwt(token);
+    // JwtDecoded decodedJwt = decodeJwt(token);
 
-    bool noCompany =
-        decodedJwt.companyId == null || decodedJwt.companyId == "null";
+    // bool noCompany =
+    //     decodedJwt.companyId == null || decodedJwt.companyId == "null";
 
-    if (!noCompany) {
-      getItInstance.get<INotificationService>().registerUserDevice();
-    }
+    getItInstance.get<INotificationService>().registerUserDevice();
 
     if (user.role.isDistributor) {
       await Future.wait([

@@ -17,8 +17,7 @@ class CompanyLogoDisplay extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<EditCompanyCubit, EditCompanyState>(
       builder: (context, state) {
-        final cubit = BlocProvider.of<EditCompanyCubit>(context);
-        final companyImage = cubit.companyData?.image;
+        final companyImage = state.companyData.image;
         final imageUrl = companyImage != null
             ? getItInstance
                 .get<INetworkService>()

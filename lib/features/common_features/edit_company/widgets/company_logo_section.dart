@@ -19,7 +19,8 @@ class CompanyLogoSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = BlocProvider.of<EditCompanyCubit>(context);
-    final companyImage = cubit.companyData?.image;
+    final state = cubit.state;
+    final companyImage = state.companyData.image;
     final imageUrl = companyImage != null
         ? getItInstance.get<INetworkService>().getFilesPath(companyImage.path)
         : null;
@@ -55,12 +56,12 @@ class CompanyLogoSection extends StatelessWidget {
                       ),
                     ),
                     child: ClipOval(
-                      child: cubit.pickedImage != null
+                      child: state.pickedImage != null
                           ? Image.file(
-                              File(cubit.pickedImage!.path),
+                              File(state.pickedImage!.path),
                               fit: BoxFit.cover,
                             )
-                          : imageUrl != null && !cubit.shouldRemoveImage
+                          : imageUrl != null && !state.shouldRemoveImage
                               ? CachedNetworkImage(
                                   imageUrl: imageUrl,
                                   fit: BoxFit.cover,
@@ -97,7 +98,7 @@ class CompanyLogoSection extends StatelessWidget {
                       scale: 0.7,
                       child: PrimaryIconButton(
                         icon: Icon(
-                          cubit.pickedImage != null
+                          state.pickedImage != null
                               ? Iconsax.edit_2
                               : Iconsax.add,
                           color: Colors.white,
@@ -110,7 +111,7 @@ class CompanyLogoSection extends StatelessWidget {
                       ),
                     ),
                   ),
-                  if (cubit.pickedImage != null)
+                  if (state.pickedImage != null)
                     Positioned(
                       top: AppSizesManager.s4,
                       right: AppSizesManager.s4 / 2,

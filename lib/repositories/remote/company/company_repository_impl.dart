@@ -132,10 +132,8 @@ class CompanyRepository extends ICompanyRepository {
 
   @override
   Future<Company> getMyCompany() async {
-    // Get company information from user data
     var decodedResponse = await client.sendRequest(() => client.get(Urls.me));
 
-    // Extract company data from user response
     if (decodedResponse["company"] != null) {
       return jsonToCompany(decodedResponse["company"]);
     } else {
@@ -148,12 +146,9 @@ class CompanyRepository extends ICompanyRepository {
       {required EditCompanyFormDataModel companyData,
       bool shouldRemoveImage = false}) async {
     try {
-      // If there's an image, try multipart upload first
       if (companyData.logoPath != null && !shouldRemoveImage) {
-        debugPrint("Company update: Image provided - ${companyData.logoPath}");
         await _updateCompanyWithImage(companyData);
       } else {
-        debugPrint("Company update: No image or removing image");
         await _updateCompanyWithoutImage(companyData, shouldRemoveImage);
       }
     } catch (e) {
@@ -166,6 +161,7 @@ class CompanyRepository extends ICompanyRepository {
       EditCompanyFormDataModel companyData) async {
     try {
       String? companyId = await userManager.getCompanyId();
+
       if (companyId?.isEmpty ?? true) {
         throw Exception("Company ID not found");
       }
@@ -180,7 +176,6 @@ class CompanyRepository extends ICompanyRepository {
         String fileExtension = fileName.split('.').last.toLowerCase();
         String mimeType = getMimeTypeFromExtension(fileExtension);
 
-        debugPrint("Company update - Image file: $mimeType");
         file = await MultipartFile.fromFile(
           logoPath,
           filename: fileName,
@@ -193,13 +188,11 @@ class CompanyRepository extends ICompanyRepository {
         if (logoPath != null) 'image': file,
       });
 
-      var response = await client.sendRequest(() => client.patch(
+      await client.sendRequest(() => client.patch(
             '${Urls.company}/$companyId',
             payload: formData,
             headers: {'Content-Type': 'multipart/form-data'},
           ));
-
-      debugPrint("Company update - SUCCESS with image: $response");
     } catch (e) {
       debugPrint("Company update - Failed with image, trying without: $e");
 

@@ -54,43 +54,9 @@ class ViewCompanyScreen extends StatelessWidget {
                 const EdgeInsets.symmetric(horizontal: AppSizesManager.p16),
             child: BlocBuilder<EditCompanyCubit, EditCompanyState>(
               builder: (context, state) {
+                
                 if (state is EditCompanyLoading) {
                   return const Center(child: CircularProgressIndicator());
-                }
-
-                if (state is EditCompanyFailed) {
-                  return Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.business_outlined,
-                          size: 64,
-                          color: Colors.grey,
-                        ),
-                        ResponsiveGap.s16(),
-                        Text(
-                          context.translation!.no_company_found,
-                          style: context
-                              .responsiveTextTheme.current.headLine3SemiBold,
-                        ),
-                        ResponsiveGap.s8(),
-                        Text(
-                          context.translation!.no_company_associated,
-                          style: context.responsiveTextTheme.current.body1Medium
-                              .copyWith(color: TextColors.ternary.color),
-                          textAlign: TextAlign.center,
-                        ),
-                        ResponsiveGap.s24(),
-                        ElevatedButton(
-                          onPressed: () {
-                            context.pop();
-                          },
-                          child: Text(context.translation!.go_back),
-                        ),
-                      ],
-                    ),
-                  );
                 }
 
                 return ListView(

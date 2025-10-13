@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/config/services/notification/notification_service_port.dart';
 import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/toast_helper.dart';
@@ -38,6 +39,8 @@ class RegisterCubit extends Cubit<RegisterState> {
                 .translation!.check_email_for_verification,
             type: ToastType.success);
       });
+      getItInstance.get<INotificationService>().registerUserDevice();
+
       emit(RegisterSuccuss(email: formData.email));
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);

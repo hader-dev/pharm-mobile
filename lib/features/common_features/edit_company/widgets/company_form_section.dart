@@ -5,9 +5,9 @@ import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_bu
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field.dart';
 import 'package:hader_pharm_mobile/features/common_features/edit_company/cubit/edit_company_cubit.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
+import 'package:hader_pharm_mobile/utils/validators.dart';
 
 class CompanyFormSection extends StatefulWidget {
   const CompanyFormSection({super.key});
@@ -19,6 +19,10 @@ class CompanyFormSection extends StatefulWidget {
 class _CompanyFormSectionState extends State<CompanyFormSection> {
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<EditCompanyCubit>();
+
+    final translation = context.translation!;
+
     return BlocBuilder<EditCompanyCubit, EditCompanyState>(
       builder: (context, state) {
         return Form(
@@ -26,158 +30,114 @@ class _CompanyFormSectionState extends State<CompanyFormSection> {
             return Column(
               children: [
                 CustomTextField(
-                  label: '${context.translation!.company_name}*',
-                  initValue: BlocProvider.of<EditCompanyCubit>(context)
-                      .formData
-                      .companyName,
+                    label: '${context.translation!.company_name}*',
+                    initValue: state.formData.companyName,
+                    state: FieldState.normal,
+                    onChanged: (newValue) {
+                      cubit.changeFormData(
+                          modifiedData: state.formData.copyWith(
+                        companyName: newValue,
+                      ));
+                    },
+                    validationFunc: (v) => requiredValidator(v, translation)),
+                const ResponsiveGap.s4(),
+                CustomTextField(
+                  label: '${context.translation!.email}*',
+                  initValue: state.formData.email,
                   state: FieldState.normal,
+                  validationFunc: (v) => validateIsEmail(v, translation),
                   onChanged: (newValue) {
-                    BlocProvider.of<EditCompanyCubit>(context).changeFormData(
-                        modifiedData: BlocProvider.of<EditCompanyCubit>(context)
-                            .formData
-                            .copyWith(
-                              companyName: newValue,
-                            ));
+                    cubit.changeFormData(
+                        modifiedData: state.formData.copyWith(
+                      email: newValue,
+                    ));
+                  },
+                ),
+                const ResponsiveGap.s4(),
+                CustomTextField(
+                  label: "${context.translation!.full_address}*",
+                  initValue: state.formData.address,
+                  state: FieldState.normal,
+                  validationFunc: (v) => requiredValidator(v, translation),
+                  onChanged: (newValue) {
+                    cubit.changeFormData(
+                        modifiedData: state.formData.copyWith(
+                      address: newValue,
+                    ));
+                  },
+                ),
+                const ResponsiveGap.s4(),
+                CustomTextField(
+                  label: "${context.translation!.phone_mobile}*",
+                  state: FieldState.normal,
+                  initValue: state.formData.phone,
+                  keyBoadType: TextInputType.phone,
+                  validationFunc: (v) => validateIsMobileNumber(v, translation),
+                  onChanged: (newValue) {
+                    cubit.changeFormData(
+                        modifiedData: state.formData.copyWith(
+                      phone: newValue,
+                    ));
+                  },
+                ),
+                const ResponsiveGap.s4(),
+                CustomTextField(
+                  label: context.translation!.phone_2,
+                  state: FieldState.normal,
+                  initValue: state.formData.phone2,
+                  keyBoadType: TextInputType.phone,
+                  onChanged: (newValue) {
+                    cubit.changeFormData(
+                        modifiedData: state.formData.copyWith(
+                      phone2: newValue,
+                    ));
                   },
                   validationFunc: (value) {
-                    if (value == null || value.isEmpty) {
-                      return context.translation!.feedback_field_required;
-                    }
                     return null;
                   },
                 ),
                 const ResponsiveGap.s4(),
                 CustomTextField(
-                  label: '${context.translation!.email}*',
-                  initValue:
-                      BlocProvider.of<EditCompanyCubit>(context).formData.email,
-                  state: FieldState.normal,
-                  validationFunc: (value) {
-                    if (value == null || value.isEmpty) {
-                      return context.translation!.feedback_field_required;
-                    }
-                    if (!emailRegex.hasMatch(value)) {
-                      return context.translation!.feedback_invalid_email_format;
-                    }
-                    return null;
-                  },
-                  onChanged: (newValue) {
-                    BlocProvider.of<EditCompanyCubit>(context).changeFormData(
-                        modifiedData: BlocProvider.of<EditCompanyCubit>(context)
-                            .formData
-                            .copyWith(
-                              email: newValue,
-                            ));
-                  },
-                ),
-                ResponsiveGap.s4(),
-                CustomTextField(
-                  label: context.translation!.full_address,
-                  initValue: BlocProvider.of<EditCompanyCubit>(context)
-                      .formData
-                      .address,
-                  state: FieldState.normal,
-                  onChanged: (newValue) {
-                    BlocProvider.of<EditCompanyCubit>(context).changeFormData(
-                        modifiedData: BlocProvider.of<EditCompanyCubit>(context)
-                            .formData
-                            .copyWith(
-                              address: newValue,
-                            ));
-                  },
-                ),
-                ResponsiveGap.s4(),
-                CustomTextField(
-                  label: context.translation!.phone_mobile,
-                  state: FieldState.normal,
-                  initValue:
-                      BlocProvider.of<EditCompanyCubit>(context).formData.phone,
-                  keyBoadType: TextInputType.phone,
-                  onChanged: (newValue) {
-                    BlocProvider.of<EditCompanyCubit>(context).changeFormData(
-                        modifiedData: BlocProvider.of<EditCompanyCubit>(context)
-                            .formData
-                            .copyWith(
-                              phone: newValue,
-                            ));
-                  },
-                  validationFunc: (value) {
-                    return null;
-                  },
-                ),
-                ResponsiveGap.s4(),
-                CustomTextField(
-                  label: context.translation!.phone_2,
-                  state: FieldState.normal,
-                  initValue: BlocProvider.of<EditCompanyCubit>(context)
-                      .formData
-                      .phone2,
-                  keyBoadType: TextInputType.phone,
-                  onChanged: (newValue) {
-                    BlocProvider.of<EditCompanyCubit>(context).changeFormData(
-                        modifiedData: BlocProvider.of<EditCompanyCubit>(context)
-                            .formData
-                            .copyWith(
-                              phone2: newValue,
-                            ));
-                  },
-                  validationFunc: (value) {
-                    return null;
-                  },
-                ),
-                ResponsiveGap.s4(),
-                CustomTextField(
                   label: context.translation!.fax,
                   state: FieldState.normal,
-                  initValue:
-                      BlocProvider.of<EditCompanyCubit>(context).formData.fax,
+                  initValue: state.formData.fax,
                   keyBoadType: TextInputType.phone,
                   onChanged: (newValue) {
-                    BlocProvider.of<EditCompanyCubit>(context).changeFormData(
-                        modifiedData: BlocProvider.of<EditCompanyCubit>(context)
-                            .formData
-                            .copyWith(
-                              fax: newValue,
-                            ));
+                    cubit.changeFormData(
+                        modifiedData: state.formData.copyWith(
+                      fax: newValue,
+                    ));
                   },
                   validationFunc: (value) {
                     return null;
                   },
                 ),
-                ResponsiveGap.s4(),
+                const ResponsiveGap.s4(),
                 CustomTextField(
                   label: context.translation!.website,
                   state: FieldState.normal,
-                  initValue: BlocProvider.of<EditCompanyCubit>(context)
-                      .formData
-                      .website,
+                  initValue: state.formData.website,
                   onChanged: (newValue) {
-                    BlocProvider.of<EditCompanyCubit>(context).changeFormData(
-                        modifiedData: BlocProvider.of<EditCompanyCubit>(context)
-                            .formData
-                            .copyWith(
-                              website: newValue,
-                            ));
+                    cubit.changeFormData(
+                        modifiedData: state.formData.copyWith(
+                      website: newValue,
+                    ));
                   },
                   validationFunc: (value) {
                     return null;
                   },
                 ),
-                ResponsiveGap.s4(),
+                const ResponsiveGap.s4(),
                 CustomTextField(
                   label: context.translation!.description,
                   state: FieldState.normal,
                   maxLines: 4,
-                  initValue: BlocProvider.of<EditCompanyCubit>(context)
-                      .formData
-                      .description,
+                  initValue: state.formData.description,
                   onChanged: (newValue) {
-                    BlocProvider.of<EditCompanyCubit>(context).changeFormData(
-                        modifiedData: BlocProvider.of<EditCompanyCubit>(context)
-                            .formData
-                            .copyWith(
-                              description: newValue,
-                            ));
+                    cubit.changeFormData(
+                        modifiedData: state.formData.copyWith(
+                      description: newValue,
+                    ));
                   },
                   validationFunc: (value) {
                     return null;
@@ -193,9 +153,8 @@ class _CompanyFormSectionState extends State<CompanyFormSection> {
                       return;
                     }
 
-                    BlocProvider.of<EditCompanyCubit>(context).updateCompany(
-                        BlocProvider.of<EditCompanyCubit>(context).formData,
-                        context.translation!);
+                    BlocProvider.of<EditCompanyCubit>(context)
+                        .updateCompany(state.formData, context.translation!);
                   },
                   color: AppColors.accent1Shade1,
                 ),
