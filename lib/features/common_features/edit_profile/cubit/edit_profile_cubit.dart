@@ -1,69 +1,65 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
+import 'package:hader_pharm_mobile/features/common_features/edit_profile/hooks_data_model/edit_profile_form.dart';
 import 'package:hader_pharm_mobile/models/user.dart';
 import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler.dart';
+import 'package:hader_pharm_mobile/utils/device_gallery_helper.dart';
 import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 import 'package:image_picker/image_picker.dart';
-
-import '../../../../config/services/auth/user_manager.dart';
-import '../../../../utils/device_gallery_helper.dart';
-import '../hooks_data_model/edit_profile_form.dart';
 
 part 'edit_profile_state.dart';
 
 class EditProfileCubit extends Cubit<EditProfileState> {
   final UserManager userManager;
-  UserModel? userData;
-  EditProfileFormDataModel profileData = EditProfileFormDataModel();
-  XFile? pickedImage;
-  bool shouldRemoveImage = false;
 
   EditProfileCubit({required this.userManager}) : super(EditProfileInitial());
 
   Future<void> initProfileData() async {
     try {
-      emit(EditProfileLoading());
+      emit(state.toLoading());
+      final currentUser = getItInstance.get<UserManager>().currentUser;
 
-      profileData = profileData.copyWith(
-        email: getItInstance.get<UserManager>().currentUser.email,
-        fullName: getItInstance.get<UserManager>().currentUser.fullName,
-        phone: getItInstance.get<UserManager>().currentUser.phone,
-        address: getItInstance.get<UserManager>().currentUser.address,
-        imagePath: getItInstance.get<UserManager>().currentUser.image?.filename,
+      final profileData = state.profileData.copyWith(
+        email: currentUser.email,
+        fullName: currentUser.fullName,
+        phone: currentUser.phone,
+        address: currentUser.address,
+        imagePath: currentUser.image?.filename,
       );
-      emit(EditProfileSuccuss());
+      emit(state.toSuccess(profileData: profileData, userData: currentUser));
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
-      emit(EditProfileFailed());
+      emit(state.toFailed());
     }
   }
 
   void editProfile(EditProfileFormDataModel formData) async {
     try {
-      emit(EditProfileLoading());
+      emit(state.toLoading());
 
-      if (pickedImage != null) {
-        formData = formData.copyWith(imagePath: pickedImage?.path);
+      if (state.pickedImage != null) {
+        formData = formData.copyWith(imagePath: state.pickedImage?.path);
       }
 
       await userManager.updateProfile(
         updatedProfileData: formData,
-        shouldRemoveImage: shouldRemoveImage,
+        shouldRemoveImage: state.shouldRemoveImage,
       );
 
       await _refreshUserData();
 
-      shouldRemoveImage = false;
-      pickedImage = null;
-
       getItInstance.get<ToastManager>().showToast(
           message: "Profile updated successfully", type: ToastType.success);
 
-      emit(EditProfileSuccuss());
+      emit(state.toUserImagePicked(
+        shouldRemoveImage: false,
+        pickedImage: null,
+      ));
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
-      emit(EditProfileFailed());
+      emit(state.toFailed());
     }
   }
 
@@ -77,10 +73,12 @@ class EditProfileCubit extends Cubit<EditProfileState> {
 
   Future<void> pickUserImage() async {
     try {
-      pickedImage = await DeviceGalleryHelper.pickImageFromGallery();
+      final pickedImage = await DeviceGalleryHelper.pickImageFromGallery();
       if (pickedImage != null) {
-        shouldRemoveImage = false;
-        emit(UserImagePicked());
+        emit(state.toUserImagePicked(
+          shouldRemoveImage: false,
+          pickedImage: pickedImage,
+        ));
       }
     } catch (e) {
       debugPrint(e.toString());
@@ -88,13 +86,13 @@ class EditProfileCubit extends Cubit<EditProfileState> {
   }
 
   void changeProfileData({required EditProfileFormDataModel modifiedData}) {
-    profileData = modifiedData;
-    emit(ProfileDataLoaded());
+    emit(state.toProfileDataLoaded(profileData: modifiedData));
   }
 
   void removeImage() {
-    pickedImage = null;
-    shouldRemoveImage = true;
-    emit(UserImagePicked());
+    emit(state.toUserImagePicked(
+      shouldRemoveImage: true,
+      pickedImage: null,
+    ));
   }
 }

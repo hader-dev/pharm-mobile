@@ -19,17 +19,16 @@ class ProfileImageSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = BlocProvider.of<EditProfileCubit>(context);
+    final state = cubit.state;
     final userImage = getItInstance.get<UserManager>().currentUser.image;
     final imageUrl = userImage != null
         ? getItInstance.get<INetworkService>().getFilesPath(userImage.path)
         : null;
 
-    // Responsive image size for tablets
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 768;
-    final imageSize = isTablet
-        ? 120.0 // Smaller fixed size for tablets
-        : MediaQuery.sizeOf(context).height * 0.2; // Responsive for phones
+    final imageSize =
+        isTablet ? 120.0 : MediaQuery.sizeOf(context).height * 0.2;
 
     return SizedBox(
       width: double.maxFinite,
@@ -51,7 +50,7 @@ class ProfileImageSection extends StatelessWidget {
                         shape: BoxShape.circle,
                         color: AppColors.bgDarken,
                         border: Border.all(color: AppColors.bgDarken2)),
-                    child: _buildImageWidget(cubit, imageUrl)),
+                    child: _buildImageWidget(state, imageUrl)),
                 Positioned(
                     bottom: AppSizesManager.s4,
                     right: AppSizesManager.s4 / 2,
@@ -59,7 +58,7 @@ class ProfileImageSection extends StatelessWidget {
                       scale: 0.7,
                       child: PrimaryIconButton(
                         icon: Icon(
-                          cubit.pickedImage != null
+                          state.pickedImage != null
                               ? Iconsax.edit_2
                               : Iconsax.add,
                           color: Colors.white,
@@ -71,7 +70,7 @@ class ProfileImageSection extends StatelessWidget {
                         },
                       ),
                     )),
-                if (cubit.pickedImage != null)
+                if (state.pickedImage != null)
                   Positioned(
                     top: AppSizesManager.s4,
                     right: AppSizesManager.s4 / 2,
@@ -99,10 +98,10 @@ class ProfileImageSection extends StatelessWidget {
     );
   }
 
-  Widget _buildImageWidget(EditProfileCubit cubit, String? imageUrl) {
-    if (cubit.pickedImage != null) {
+  Widget _buildImageWidget(EditProfileState state, String? imageUrl) {
+    if (state.pickedImage != null) {
       return Image.file(
-        File(cubit.pickedImage!.path),
+        File(state.pickedImage!.path),
         fit: BoxFit.cover,
       );
     }

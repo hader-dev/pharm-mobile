@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
+import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field.dart';
+import 'package:hader_pharm_mobile/features/common_features/edit_profile/cubit/edit_profile_cubit.dart';
+import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/validators.dart';
-
-import '../../../../config/theme/colors_manager.dart';
-import '../../../../utils/constants.dart';
-import '../../../../utils/enums.dart';
-import '../../../common/buttons/solid/primary_text_button.dart';
-import '../../../common/text_fields/custom_text_field.dart';
-import '../cubit/edit_profile_cubit.dart';
 
 class FormSection extends StatefulWidget {
   const FormSection({super.key});
@@ -22,6 +20,7 @@ class _FormSectionState extends State<FormSection> {
   @override
   Widget build(BuildContext context) {
     final translation = context.translation!;
+    final cubit = context.read<EditProfileCubit>();
 
     return BlocBuilder<EditProfileCubit, EditProfileState>(
       builder: (context, state) {
@@ -31,19 +30,13 @@ class _FormSectionState extends State<FormSection> {
               children: [
                 CustomTextField(
                   label: '${context.translation!.full_name}*',
-                  initValue: BlocProvider.of<EditProfileCubit>(context)
-                      .profileData
-                      .fullName,
+                  initValue: state.profileData.fullName,
                   state: FieldState.normal,
                   onChanged: (newValue) {
-                    BlocProvider.of<EditProfileCubit>(context)
-                        .changeProfileData(
-                            modifiedData:
-                                BlocProvider.of<EditProfileCubit>(context)
-                                    .profileData
-                                    .copyWith(
-                                      fullName: newValue,
-                                    ));
+                    cubit.changeProfileData(
+                        modifiedData: state.profileData.copyWith(
+                      fullName: newValue,
+                    ));
                   },
                   validationFunc: (value) {
                     if (value == null || value.isEmpty) {
@@ -54,46 +47,28 @@ class _FormSectionState extends State<FormSection> {
                 const ResponsiveGap.s4(),
                 CustomTextField(
                   label: '${context.translation!.email}*',
-                  initValue: BlocProvider.of<EditProfileCubit>(context)
-                      .profileData
-                      .email,
+                  initValue: state.profileData.email,
                   state: FieldState.normal,
-                  validationFunc: (value) {
-                    if (value == null || value.isEmpty) {
-                      return context.translation!.feedback_field_required;
-                    }
-                    if (!emailRegex.hasMatch(value)) {
-                      return context.translation!.feedback_invalid_email_format;
-                    }
-                  },
+                  validationFunc: (value) =>
+                      validateIsEmail(value, translation),
                   onChanged: (newValue) {
-                    BlocProvider.of<EditProfileCubit>(context)
-                        .changeProfileData(
-                            modifiedData:
-                                BlocProvider.of<EditProfileCubit>(context)
-                                    .profileData
-                                    .copyWith(
-                                      email: newValue,
-                                    ));
+                    cubit.changeProfileData(
+                        modifiedData: state.profileData.copyWith(
+                      email: newValue,
+                    ));
                   },
                 ),
                 ResponsiveGap.s4(),
                 CustomTextField(
                   label: context.translation!.phone_mobile,
                   state: FieldState.normal,
-                  initValue: BlocProvider.of<EditProfileCubit>(context)
-                      .profileData
-                      .phone,
+                  initValue: state.profileData.phone,
                   keyBoadType: TextInputType.phone,
                   onChanged: (newValue) {
-                    BlocProvider.of<EditProfileCubit>(context)
-                        .changeProfileData(
-                            modifiedData:
-                                BlocProvider.of<EditProfileCubit>(context)
-                                    .profileData
-                                    .copyWith(
-                                      phone: newValue,
-                                    ));
+                    cubit.changeProfileData(
+                        modifiedData: state.profileData.copyWith(
+                      phone: newValue,
+                    ));
                   },
                   validationFunc: (v) => validateIsMobileNumber(v, translation),
                 ),
@@ -107,8 +82,7 @@ class _FormSectionState extends State<FormSection> {
                       return;
                     }
 
-                    BlocProvider.of<EditProfileCubit>(context).editProfile(
-                        BlocProvider.of<EditProfileCubit>(context).profileData);
+                    cubit.editProfile(state.profileData);
                   },
                   color: AppColors.accent1Shade1,
                 ),

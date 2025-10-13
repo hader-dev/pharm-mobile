@@ -101,76 +101,48 @@ class UserRepository implements IUserRepository {
       {required EditProfileFormDataModel updatedProfileData,
       bool shouldRemoveImage = false}) async {
     try {
-      debugPrint("Profile update - Starting update process");
+      bool hasImage = updatedProfileData.imagePath?.isNotEmpty == true;
 
-      if (updatedProfileData.imagePath != null &&
-          updatedProfileData.imagePath!.isNotEmpty) {
-        debugPrint("Profile update - Attempting multipart upload with image");
-
+      MultipartFile? file;
+      if (hasImage) {
         try {
-          late MultipartFile file;
-          String fileName = updatedProfileData.imagePath!.split('/').last;
-
-          // Get file extension and determine correct mimetype
+          String path = updatedProfileData.imagePath!;
+          String fileName = path.split('/').last;
           String fileExtension = fileName.split('.').last.toLowerCase();
           String mimeType = getMimeTypeFromExtension(fileExtension);
 
-          debugPrint("Profile update - Image file: $fileName");
-          debugPrint("Profile update - Detected mimetype: $mimeType");
-
-          // Read file bytes and create MultipartFile with correct content type
-          File imageFile = File(updatedProfileData.imagePath!);
-          List<int> fileBytes = await imageFile.readAsBytes();
+          List<int> fileBytes = await File(path).readAsBytes();
 
           file = MultipartFile.fromBytes(
             fileBytes,
             filename: fileName,
             contentType: MediaType.parse(mimeType),
           );
-
-          FormData formData = FormData.fromMap({
-            "email": updatedProfileData.email,
-            "fullName": updatedProfileData.fullName,
-            if (updatedProfileData.phone.isNotEmpty)
-              "phone": updatedProfileData.phone,
-            "address": updatedProfileData.address,
-            'image': file,
-            if (shouldRemoveImage) 'removeImage': true,
-          });
-
-          var response = await client.sendRequest(() => client.patch(
-                Urls.me,
-                payload: formData,
-                headers: {'Content-Type': 'multipart/form-data'},
-              ));
-
-          debugPrint("Profile update with image - SUCCESS: $response");
-          return;
         } catch (imageError) {
           debugPrint("Profile update with image - FAILED: $imageError");
           debugPrint("Falling back to text-only update...");
         }
       }
 
-      Map<String, dynamic> payload = {
-        "fullName": updatedProfileData.fullName,
+      final isMultipart = file != null;
+      final data = {
         "email": updatedProfileData.email,
-        "phone": updatedProfileData.phone,
+        "fullName": updatedProfileData.fullName,
         "address": updatedProfileData.address,
+        if (updatedProfileData.phone.isNotEmpty)
+          "phone": updatedProfileData.phone,
+        if (file != null) "image": file,
+        if (shouldRemoveImage) "removeImage": true,
       };
 
-      if (shouldRemoveImage) {
-        payload['removeImage'] = true;
-      }
-
-      debugPrint("Profile update - Sending JSON payload");
-      var response = await client.sendRequest(() => client.patch(
+      await client.sendRequest(() => client.patch(
             Urls.me,
-            payload: payload,
-            headers: {'Content-Type': 'application/json'},
+            payload: isMultipart ? FormData.fromMap(data) : data,
+            headers: {
+              'Content-Type':
+                  isMultipart ? 'multipart/form-data' : 'application/json',
+            },
           ));
-
-      debugPrint("Profile update - SUCCESS: $response");
     } catch (e, stackTrace) {
       debugPrint("Profile update - Error occurred: $e");
       debugPrint("Profile update - Stack trace: $stackTrace");
