@@ -2,20 +2,21 @@ import 'dart:io' show File;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_icon_button.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
+import 'package:hader_pharm_mobile/features/common_features/register/cubit/register_cubit.dart';
+import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
-
-import '../../../../config/theme/colors_manager.dart';
-import '../../../../utils/constants.dart';
-import '../../../common/buttons/solid/primary_icon_button.dart';
-import '../cubit/register_cubit.dart';
 
 class RegisterHeaderSection extends StatelessWidget {
   const RegisterHeaderSection({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<RegisterCubit>();
+    final state = cubit.state;
     return SizedBox(
       width: double.maxFinite,
       child: Column(
@@ -35,7 +36,7 @@ class RegisterHeaderSection extends StatelessWidget {
           const ResponsiveGap.s24(),
           InkWell(
             onTap: () {
-              BlocProvider.of<RegisterCubit>(context).pickUserImage();
+              cubit.pickUserImage();
             },
             splashColor: Colors.transparent,
             child: Stack(
@@ -49,20 +50,16 @@ class RegisterHeaderSection extends StatelessWidget {
                         shape: BoxShape.circle,
                         color: AppColors.bgDarken,
                         border: Border.all(color: AppColors.bgDarken2)),
-                    child:
-                        BlocProvider.of<RegisterCubit>(context).pickedImage !=
-                                null
-                            ? Image.file(
-                                File(BlocProvider.of<RegisterCubit>(context)
-                                    .pickedImage!
-                                    .path),
-                                fit: BoxFit.fill,
-                              )
-                            : Icon(
-                                Iconsax.gallery,
-                                color: AppColors.accent1Shade1,
-                                size: AppSizesManager.iconSize25,
-                              )),
+                    child: state.pickedImage != null
+                        ? Image.file(
+                            File(state.pickedImage!.path),
+                            fit: BoxFit.fill,
+                          )
+                        : Icon(
+                            Iconsax.gallery,
+                            color: AppColors.accent1Shade1,
+                            size: AppSizesManager.iconSize25,
+                          )),
                 Positioned(
                     bottom: AppSizesManager.s4,
                     right: AppSizesManager.s4 / 2,
@@ -70,8 +67,7 @@ class RegisterHeaderSection extends StatelessWidget {
                       scale: 0.7,
                       child: PrimaryIconButton(
                         icon: Icon(
-                          BlocProvider.of<RegisterCubit>(context).pickedImage !=
-                                  null
+                          state.pickedImage != null
                               ? Iconsax.edit_2
                               : Iconsax.add,
                           color: Colors.white,
@@ -79,12 +75,11 @@ class RegisterHeaderSection extends StatelessWidget {
                         isBordered: true,
                         borderColor: Colors.white,
                         onPressed: () {
-                          BlocProvider.of<RegisterCubit>(context)
-                              .pickUserImage();
+                          cubit.pickUserImage();
                         },
                       ),
                     )),
-                if (BlocProvider.of<RegisterCubit>(context).pickedImage != null)
+                if (state.pickedImage != null)
                   Positioned(
                     top: AppSizesManager.s4,
                     right: AppSizesManager.s4 / 2,
@@ -99,7 +94,7 @@ class RegisterHeaderSection extends StatelessWidget {
                         ),
                         bgColor: SystemColors.red.primary,
                         onPressed: () {
-                          BlocProvider.of<RegisterCubit>(context).removeImage();
+                          cubit.removeImage();
                         },
                       ),
                     ),

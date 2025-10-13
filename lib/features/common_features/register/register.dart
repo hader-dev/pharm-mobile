@@ -26,7 +26,7 @@ class RegisterScreen extends StatelessWidget {
       child: SafeArea(
         child: BlocListener<RegisterCubit, RegisterState>(
           listener: (context, state) {
-            if (state is RegisterSuccuss) {
+            if (state is RegisterSuccess) {
               GoRouter.of(context)
                   .pushReplacement(RoutingManager.checkEmailScreen, extra: {
                 "email": state.email,
@@ -48,9 +48,7 @@ class RegisterScreen extends StatelessWidget {
                       RegisterHeaderSection(),
                       const ResponsiveGap.s4(),
                       const ResponsiveGap.s24(),
-                      if (BlocProvider.of<RegisterCubit>(context)
-                              .selectedTapIndex ==
-                          0)
+                      if (state.selectedTapIndex == 0)
                         EmailRegisterFormSection(),
                       const ResponsiveGap.s16(),
                       OutLinedTextButton(

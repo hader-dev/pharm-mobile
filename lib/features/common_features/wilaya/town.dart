@@ -24,7 +24,6 @@ class TownDropdown extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<WilayaCubit, WilayaState>(builder: (context, state) {
       final cubit = context.read<WilayaCubit>();
-
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

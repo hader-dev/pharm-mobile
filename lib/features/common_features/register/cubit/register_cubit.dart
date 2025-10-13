@@ -1,34 +1,30 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
+import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/config/services/notification/notification_service_port.dart';
+import 'package:hader_pharm_mobile/features/common_features/register/hooks_data_model/register_email_form.dart';
 import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler.dart';
+import 'package:hader_pharm_mobile/utils/device_gallery_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../../../config/routes/routing_manager.dart' show RoutingManager;
-import '../../../../config/services/auth/user_manager.dart';
-import '../../../../utils/device_gallery_helper.dart';
-import '../hooks_data_model/register_email_form.dart';
-
 part 'register_state.dart';
 
 class RegisterCubit extends Cubit<RegisterState> {
-  int selectedTapIndex = 0;
-  bool isObscured = true;
   final UserManager userManager;
-  XFile? pickedImage;
   RegisterCubit({required this.userManager}) : super(RegisterInitial());
 
   void emailRegister(EmailRegisterFormDataModel formData) async {
     try {
-      emit(RegisterLoading());
+      emit(state.toLoading());
       await userManager.emailSignUp(
           email: formData.email,
           fullName: formData.fullName,
           password: formData.password,
-          userImagePath: pickedImage?.path);
+          userImagePath: state.pickedImage?.path);
       getItInstance.get<ToastManager>().showToast(
           message: RoutingManager.rootNavigatorKey.currentContext!.translation!
               .registration_success,
@@ -41,23 +37,27 @@ class RegisterCubit extends Cubit<RegisterState> {
       });
       getItInstance.get<INotificationService>().registerUserDevice();
 
-      emit(RegisterSuccuss(email: formData.email));
+      emit(state.toSuccess(email: formData.email));
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
-      emit(RegisterFailed());
+      emit(state.toFailed());
     }
   }
 
   void changeTab(int index) {
-    selectedTapIndex = index;
-    emit(TapChanged());
+    emit(state.toTapChanged(
+      selectedTapIndex: index,
+    ));
   }
 
   Future<void> pickUserImage() async {
     try {
-      pickedImage = await DeviceGalleryHelper.pickImageFromGallery();
+      final pickedImage = await DeviceGalleryHelper.pickImageFromGallery();
       if (pickedImage != null) {
-        emit(UserImagePicked());
+        emit(state.toImagePicked(
+          shouldRemoveImage: true,
+          pickedImage: pickedImage,
+        ));
       }
     } catch (e) {
       debugPrint(e.toString());
@@ -65,12 +65,21 @@ class RegisterCubit extends Cubit<RegisterState> {
   }
 
   void showPassword() {
-    isObscured = !isObscured;
-    emit(PasswordVisibilityChanged());
+    emit(state.toPasswordVisibilityChanged(
+      isObscured: !state.isObscured,
+    ));
   }
 
   void removeImage() {
-    pickedImage = null;
-    emit(UserImagePicked());
+    emit(state.toImagePicked(
+      shouldRemoveImage: false,
+      pickedImage: null,
+    ));
+  }
+
+  void updateFormData(EmailRegisterFormDataModel formData) {
+    emit(state.toUpdateFormData(
+      formData: formData,
+    ));
   }
 }

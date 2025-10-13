@@ -38,7 +38,10 @@ sealed class WilayaState {
     required Wilaya? wilaya,
   }) =>
       SelectionUpdated.fromState(
-          state: this, selectedWilaya: wilaya, selectedTown: null);
+          state: this,
+          selectedWilaya: wilaya,
+          selectedTown: null,
+          resetTowns: true);
 
   SelectionUpdated toSelectTown({
     required Town? town,
@@ -77,10 +80,13 @@ final class WilayaStateInitial extends WilayaState {
 
 final class SelectionUpdated extends WilayaState {
   SelectionUpdated.fromState(
-      {required WilayaState state, super.selectedWilaya, super.selectedTown})
+      {required WilayaState state,
+      bool resetTowns = false,
+      super.selectedWilaya,
+      super.selectedTown})
       : super(
             wilayas: state.wilayas,
-            towns: state.towns,
+            towns: resetTowns ? [] : state.towns,
             loadedWilaya: state.loadedWilaya,
             locale: state.locale);
 }

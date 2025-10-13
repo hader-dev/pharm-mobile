@@ -26,13 +26,12 @@ class WilayaCubit extends Cubit<WilayaState> {
     }
   }
 
-  void loadTowns() async {
+  void loadTowns(int wilayaId) async {
     try {
       emit(state.toLoadingTowns());
 
       final towns = (await wilayaRepository.getWilayaTowns(
-              ParamsLoadWilayaTowns(
-                  locale: state.locale, wilayaId: state.selectedWilaya!.id)))
+              ParamsLoadWilayaTowns(locale: state.locale, wilayaId: wilayaId)))
           .towns;
       emit(state.toLoadedTowns(
         towns: towns,
@@ -45,7 +44,9 @@ class WilayaCubit extends Cubit<WilayaState> {
 
   void updateSelectedWilaya(Wilaya? wilaya) {
     if (wilaya != null) {
-      loadTowns();
+      loadTowns(
+        wilaya.id,
+      );
     }
     emit(state.toSelectWilaya(wilaya: wilaya));
   }
