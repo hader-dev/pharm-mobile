@@ -129,7 +129,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         extra: CompanyScreenMode.view);
                                     setState(() {});
                                   } catch (e) {
-                                    // If there's an error, user might need to create company
                                     debugPrint(
                                         "Error navigating to view company: $e");
                                   }
@@ -201,7 +200,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         subtitle:
                             EnvHelper.getStoredEnvValue(EnvHelper.appVersion),
                         onTap: () {
-                          showNewAppVersionDialog(triggerdManually: true);
+                          if (EnvHelper.getFeatureFlag(
+                                  EnvHelper.featureFlagUpdatePopup) ==
+                              true) {
+                            showNewAppVersionDialog(triggerdManually: true);
+                          }
                         },
                       ),
                       Padding(

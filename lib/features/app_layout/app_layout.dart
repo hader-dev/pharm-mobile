@@ -4,6 +4,7 @@ import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/features/app_layout/actions/show_new_app_version_dialog.dart';
 import 'package:hader_pharm_mobile/features/app_layout/actions/show_welcome_dialog.dart';
 import 'package:hader_pharm_mobile/features/app_layout/cubit/app_state_provider.dart';
+import 'package:hader_pharm_mobile/utils/env_helper.dart';
 
 import 'cubit/app_layout_cubit.dart';
 import 'widgets/app_nav_bar/app_nav_bar.dart';
@@ -17,7 +18,10 @@ class AppLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future.microtask(() => showWelcomingDialog());
-    Future.microtask(() => showNewAppVersionDialog());
+
+    if (EnvHelper.getFeatureFlag(EnvHelper.featureFlagUpdatePopup) == true) {
+      Future.microtask(() => showNewAppVersionDialog());
+    }
 
     final app = BlocBuilder<AppLayoutCubit, AppLayoutState>(
       builder: (context, state) {
