@@ -53,5 +53,3 @@ app.*.map.json
 .fvm/
 android/build/reports/problems/problems-report.html
 .env
-.env
-.env

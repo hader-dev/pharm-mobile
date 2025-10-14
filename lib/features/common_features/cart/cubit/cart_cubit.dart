@@ -1,5 +1,3 @@
-import 'dart:async' show Timer;
-
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/language_config/resources/app_localizations.dart';
@@ -11,6 +9,7 @@ import 'package:hader_pharm_mobile/repositories/remote/cart_items/response/cart_
 import 'package:hader_pharm_mobile/repositories/remote/order/order_repository_impl.dart';
 import 'package:hader_pharm_mobile/utils/app_exceptions/exceptions.dart';
 import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler.dart';
+import 'package:hader_pharm_mobile/utils/debounce.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 
 part 'cart_state.dart';
@@ -19,7 +18,7 @@ class CartCubit extends Cubit<CartState> {
   final CartItemRepository cartItemRepository;
   final OrderRepository ordersRepository;
   final ScrollController scrollController;
-  Timer? _debounce;
+  final DebouncerManager debouncerManager = DebouncerManager();
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -35,7 +34,7 @@ class CartCubit extends Cubit<CartState> {
   Future<void> addToCart(CreateCartItemModel cartItem,
       [bool isParapharma = false]) async {
     try {
-      emit(state.loading());
+      emit(state.toLoading());
 
       final existingItem = getItemIfExists(cartItem.productId, isParapharma);
 
@@ -48,10 +47,10 @@ class CartCubit extends Cubit<CartState> {
       }
 
       getCartItem();
-      emit(state.cartItemAdded());
+      emit(state.toCartItemAdded());
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
-      emit(state.cartError(error: e.toString()));
+      emit(state.toError(error: e.toString()));
     }
   }
 
@@ -73,14 +72,15 @@ class CartCubit extends Cubit<CartState> {
 
   Future<void> getCartItem() async {
     try {
-      emit(state.loading());
+      emit(state.toLoading());
 
       CartItemsResponse response = await cartItemRepository.getCartItem();
       final cartItems = cartItemModelDataToUi(response.data);
       final cartItemsByVendor =
           await prepareOrderCartitemsByVendor(response.data);
+      
 
-      emit(state.loadingSuccess(
+      emit(state.toLoadingSuccess(
         cartItems: cartItems,
         cartItemsByVendor: cartItemsByVendor,
       ));
@@ -88,7 +88,7 @@ class CartCubit extends Cubit<CartState> {
       debugPrintStack(stackTrace: stackTrace);
       debugPrint("$e");
       GlobalExceptionHandler.handle(exception: e);
-      emit(state.cartError(error: e.toString()));
+      emit(state.toError(error: e.toString()));
     }
   }
 
@@ -100,10 +100,12 @@ class CartCubit extends Cubit<CartState> {
       }
 
       final updatedItem = item.copyWith(quantity: item.model.quantity - 1);
-      _debounceFunction(() async {
-        applyUpdateItemQuantity(item.model.id, updatedItem.model.quantity);
-      });
-      emit(state.itemUpdated(updatedItem: updatedItem));
+      debouncerManager.debounce(
+          tag: "updateQuantity",
+          action: () async {
+            applyUpdateItemQuantity(item.model.id, updatedItem.model.quantity);
+          });
+      emit(state.toItemUpdated(updatedItem: updatedItem));
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
     }
@@ -127,15 +129,17 @@ class CartCubit extends Cubit<CartState> {
       item.packageQuantityController.text = updatedPackageQuantity.toString();
       item.quantityController.text = updatedQuantity.toString();
 
-      _debounceFunction(() async {
-        applyUpdateItemQuantity(
-            updatedItem.model.id, updatedItem.model.quantity);
-      });
+      debouncerManager.debounce(
+          tag: "updateQuantity",
+          action: () async {
+            applyUpdateItemQuantity(
+                updatedItem.model.id, updatedItem.model.quantity);
+          });
 
-      emit(state.itemUpdated(updatedItem: updatedItem));
+      emit(state.toItemUpdated(updatedItem: updatedItem));
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
-      emit(state.cartError(error: e.toString()));
+      emit(state.toError(error: e.toString()));
     }
   }
 
@@ -155,25 +159,30 @@ class CartCubit extends Cubit<CartState> {
       item.packageQuantityController.text = updatedPackageQuantity.toString();
       item.quantityController.text = updatedQuantity.toString();
 
-      _debounceFunction(() async {
-        applyUpdateItemQuantity(item.model.id, updatedItem.model.quantity);
-      });
-      emit(state.itemUpdated(updatedItem: updatedItem));
+      debouncerManager.debounce(
+          tag: "updateQuantity",
+          action: () async {
+            applyUpdateItemQuantity(item.model.id, updatedItem.model.quantity);
+          });
+      emit(state.toItemUpdated(updatedItem: updatedItem));
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
     }
   }
 
   void updateCartItemInputQuantity(CartItemModelUi item, int quantity) {
-    _debounceFunction(() async {
-      try {
-        final updatedItem = item.copyWith(quantity: quantity);
-        applyUpdateItemQuantity(item.model.id, updatedItem.model.quantity);
-        emit(state.itemUpdated(updatedItem: updatedItem));
-      } catch (e) {
-        GlobalExceptionHandler.handle(exception: e);
-      }
-    }, 500);
+    debouncerManager.debounce(
+      tag: "updateQuantity",
+      action: () async {
+        try {
+          final updatedItem = item.copyWith(quantity: quantity);
+          applyUpdateItemQuantity(item.model.id, updatedItem.model.quantity);
+          emit(state.toItemUpdated(updatedItem: updatedItem));
+        } catch (e) {
+          GlobalExceptionHandler.handle(exception: e);
+        }
+      },
+    );
   }
 
   void increaseCartItemQuantity(CartItemModelUi item) {
@@ -193,15 +202,17 @@ class CartCubit extends Cubit<CartState> {
       item.packageQuantityController.text = updatedPackageQuantity.toString();
       item.quantityController.text = updatedQuantity.toString();
 
-      _debounceFunction(() async {
-        applyUpdateItemQuantity(
-            updatedItem.model.id, updatedItem.model.quantity);
-      });
+      debouncerManager.debounce(
+          tag: "updateQuantity",
+          action: () async {
+            applyUpdateItemQuantity(
+                updatedItem.model.id, updatedItem.model.quantity);
+          });
 
-      emit(state.itemUpdated(updatedItem: updatedItem));
+      emit(state.toItemUpdated(updatedItem: updatedItem));
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
-      emit(state.cartError(error: e.toString()));
+      emit(state.toError(error: e.toString()));
     }
   }
 
@@ -217,10 +228,13 @@ class CartCubit extends Cubit<CartState> {
     item.packageQuantityController.text = updatedPackageQuantity.toString();
     item.quantityController.text = updatedQuantity.toString();
 
-    _debounceFunction(() async {
-      applyUpdateItemQuantity(updatedItem.model.id, updatedItem.model.quantity);
-    });
-    emit(state.itemUpdated(updatedItem: updatedItem));
+    debouncerManager.debounce(
+        tag: "updateQuantity",
+        action: () async {
+          applyUpdateItemQuantity(
+              updatedItem.model.id, updatedItem.model.quantity);
+        });
+    emit(state.toItemUpdated(updatedItem: updatedItem));
   }
 
   void increaseCartItemPackageQuantity(CartItemModelUi item) {
@@ -242,13 +256,15 @@ class CartCubit extends Cubit<CartState> {
 
       final updatedItem = item.copyWith(quantity: updatedQuantity);
 
-      _debounceFunction(() async {
-        applyUpdateItemQuantity(item.model.id, updatedItem.model.quantity);
-      });
-      emit(state.itemUpdated(updatedItem: updatedItem));
+      debouncerManager.debounce(
+          tag: "updateQuantity",
+          action: () async {
+            applyUpdateItemQuantity(item.model.id, updatedItem.model.quantity);
+          });
+      emit(state.toItemUpdated(updatedItem: updatedItem));
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
-      emit(state.cartError(error: e.toString()));
+      emit(state.toError(error: e.toString()));
     }
   }
 
@@ -256,10 +272,10 @@ class CartCubit extends Cubit<CartState> {
     try {
       await cartItemRepository.deleteItem(item.model.id);
 
-      emit(state.itemUpdated(updatedItem: item, removed: true));
+      emit(state.toItemUpdated(updatedItem: item, removed: true));
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
-      emit(state.cartError(error: e.toString()));
+      emit(state.toError(error: e.toString()));
     }
   }
 
@@ -268,32 +284,25 @@ class CartCubit extends Cubit<CartState> {
       await cartItemRepository.updateItem(cartItemId, {"quantity": quantity});
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
-      emit(state.cartError(error: e.toString()));
+      emit(state.toError(error: e.toString()));
     }
   }
 
-  Future<void> _debounceFunction(Future<void> Function() func,
-      [int milliseconds = 500]) async {
-    if (_debounce?.isActive ?? false) _debounce?.cancel();
-    _debounce = Timer(Duration(milliseconds: milliseconds), () async {
-      await func();
-      _debounce = null;
-    });
-  }
-
   void changeInvoiceType(InvoiceTypes invoiceType) {
-    emit(state.initial(state.copyWith(selectedInvoiceType: invoiceType)));
+    emit(state.toInitial(
+        state: state.copyWith(selectedInvoiceType: invoiceType)));
   }
 
   void changePaymentMethod(PaymentMethods paymentMethod) {
-    emit(state.initial(state.copyWith(selectedPaymentMethod: paymentMethod)));
+    emit(state.toInitial(
+        state: state.copyWith(selectedPaymentMethod: paymentMethod)));
   }
 
   Future<bool> passOrder() async {
     if (formKey.currentState?.validate() == false) return false;
 
     try {
-      emit(state.loading());
+      emit(state.toLoading());
 
       await Future.wait(state.cartItemsByVendor.keys.map((sellerId) async {
         return ordersRepository.createOrder(
@@ -306,32 +315,32 @@ class CartCubit extends Cubit<CartState> {
         ));
       }));
 
-      emit(state.passOrderSuccess());
+      emit(state.toPassOrderSuccess());
       return true;
     } catch (e, stack) {
       debugPrint("$e");
       debugPrintStack(stackTrace: stack);
-      emit(state.passOrderError());
+      emit(state.toPassOrderError());
       return false;
     }
   }
 
   void changeOrderNote(String text) {
     emit(
-      state.initial(state.copyWith(orderNote: text)),
+      state.toInitial(state: state.copyWith(orderNote: text)),
     );
   }
 
   void clearCart(AppLocalizations translation) async {
     try {
       await cartItemRepository.removeAll();
-      emit(state.loadingSuccess(
+      emit(state.toLoadingSuccess(
         cartItems: [],
         cartItemsByVendor: {},
       ));
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
-      emit(state.cartError(error: translation.feedback_error_loading_cart));
+      emit(state.toError(error: translation.feedback_error_loading_cart));
     }
   }
 
@@ -346,7 +355,7 @@ class CartCubit extends Cubit<CartState> {
   }
 
   void updateShippingAddress(String value) {
-    emit(state.initial(state.copyWith(shippingAddress: value)));
+    emit(state.toInitial(state: state.copyWith(shippingAddress: value)));
   }
 
   void updateItemPackageQuantity(CartItemModelUi item) {
@@ -357,7 +366,7 @@ class CartCubit extends Cubit<CartState> {
 
     final updatedItem = item.copyWith(quantity: updatedQuantity);
 
-    emit(state.itemUpdated(updatedItem: updatedItem));
+    emit(state.toItemUpdated(updatedItem: updatedItem));
   }
 
   void updateItemQuantity(CartItemModelUi item) {
@@ -367,6 +376,6 @@ class CartCubit extends Cubit<CartState> {
     updatedItem.packageQuantityController.text =
         (quantity ~/ updatedItem.model.packageSize).toString();
 
-    emit(state.itemUpdated(updatedItem: updatedItem));
+    emit(state.toItemUpdated(updatedItem: updatedItem));
   }
 }

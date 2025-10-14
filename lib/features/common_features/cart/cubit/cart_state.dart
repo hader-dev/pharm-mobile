@@ -20,6 +20,22 @@ class CartState {
       required this.cartItems,
       required this.cartItemsByVendor});
 
+  static num calculateTotalAmountTtc(List<CartItemModelUi> items) {
+    double totalAmount = 0;
+    for (var element in items) {
+      totalAmount += element.model.getTotalPrice()["totalTTCPrice"]!;
+    }
+    return totalAmount;
+  }
+
+  static num calculateTotalAmountHt(List<CartItemModelUi> items) {
+    num totalAmount = 0;
+    for (var element in items) {
+      totalAmount += element.model.getTotalPrice()["totalHtPrice"]!;
+    }
+    return totalAmount;
+  }
+
   CartState copyWith({
     num? totalHtAmount,
     num? totalTTCAmount,
@@ -43,41 +59,30 @@ class CartState {
     );
   }
 
-  static num calculateTotalAmountTtc(List<CartItemModelUi> items) {
-    double totalAmount = 0;
-    for (var element in items) {
-      totalAmount += element.model.getTotalPrice()["totalTTCPrice"]!;
-    }
-    return totalAmount;
-  }
+  CartInitial toInitial({required CartState state}) =>
+      CartInitial.fromState(state: state);
 
-  static num calculateTotalAmountHt(List<CartItemModelUi> items) {
-    num totalAmount = 0;
-    for (var element in items) {
-      totalAmount += element.model.getTotalPrice()["totalHtPrice"]!;
-    }
-    return totalAmount;
-  }
+  CartLoading toLoading() => CartLoading.fromState(state: this);
 
-  CartInitial initial(CartState state) => CartInitial.fromState(state: state);
+  CartLoadingUpdate toLoadingUpdate() =>
+      CartLoadingUpdate.fromState(state: this);
 
-  CartLoading loading() => CartLoading.fromState(state: this);
-
-  CartLoadingUpdate loadingUpdate() => CartLoadingUpdate.fromState(this);
-
-  CartLoadingSuccess loadingSuccess({
+  CartLoadingSuccess toLoadingSuccess({
     required List<CartItemModelUi> cartItems,
     required Map<String, List<String>> cartItemsByVendor,
   }) =>
-      CartLoadingSuccess.fromState(copyWith(
+      CartLoadingSuccess.fromState(
+        state: this,
         cartItems: cartItems,
         cartItemsByVendor: cartItemsByVendor,
-      ));
+        totalHtAmount: calculateTotalAmountHt(cartItems),
+        totalTTCAmount: calculateTotalAmountTtc(cartItems),
+      );
 
-  CartError cartError({required String error}) =>
+  CartError toError({required String error}) =>
       CartError.fromState(state: this, error: error);
 
-  CartItemUpdated itemUpdated(
+  CartItemUpdated toItemUpdated(
       {required CartItemModelUi updatedItem, bool removed = false}) {
     if (removed) {
       final updatedItems = cartItems
@@ -110,16 +115,16 @@ class CartState {
     );
   }
 
-  PassOrderLoaded passOrderSuccess() {
-    return PassOrderLoaded.fromState(this);
+  PassOrderLoaded toPassOrderSuccess() {
+    return PassOrderLoaded.fromState(state: this);
   }
 
-  PassOrderLoadingFailed passOrderError() {
-    return PassOrderLoadingFailed.fromState(this);
+  PassOrderLoadingFailed toPassOrderError() {
+    return PassOrderLoadingFailed.fromState(state: this);
   }
 
-  CartItemAdded cartItemAdded() {
-    return CartItemAdded.fromState(this);
+  CartItemAdded toCartItemAdded() {
+    return CartItemAdded.fromState(state: this);
   }
 }
 
@@ -147,7 +152,7 @@ final class CartInitial extends CartState {
         );
 }
 
-final class CartLoading extends CartInitial {
+final class CartLoading extends CartState {
   CartLoading.fromState({required CartState state})
       : super(
           totalHtAmount: state.totalHtAmount,
@@ -161,8 +166,8 @@ final class CartLoading extends CartInitial {
         );
 }
 
-final class CartLoadingUpdate extends CartInitial {
-  CartLoadingUpdate.fromState(CartState state)
+final class CartLoadingUpdate extends CartState {
+  CartLoadingUpdate.fromState({required CartState state})
       : super(
           totalHtAmount: state.totalHtAmount,
           totalTTCAmount: state.totalTTCAmount,
@@ -175,21 +180,22 @@ final class CartLoadingUpdate extends CartInitial {
         );
 }
 
-final class CartLoadingSuccess extends CartInitial {
-  CartLoadingSuccess.fromState(CartState state)
+final class CartLoadingSuccess extends CartState {
+  CartLoadingSuccess.fromState(
+      {required CartState state,
+      required super.cartItems,
+      required super.cartItemsByVendor,
+      required super.totalHtAmount,
+      required super.totalTTCAmount})
       : super(
-          totalHtAmount: state.totalHtAmount,
-          totalTTCAmount: state.totalTTCAmount,
           selectedPaymentMethod: state.selectedPaymentMethod,
           selectedInvoiceType: state.selectedInvoiceType,
           orderNote: state.orderNote,
           shippingAddress: state.shippingAddress,
-          cartItems: state.cartItems,
-          cartItemsByVendor: state.cartItemsByVendor,
         );
 }
 
-final class CartItemUpdated extends CartInitial {
+final class CartItemUpdated extends CartState {
   CartItemUpdated.fromState(
       {required CartState state,
       required super.cartItems,
@@ -204,8 +210,8 @@ final class CartItemUpdated extends CartInitial {
             cartItemsByVendor: cartItemsByVendor ?? state.cartItemsByVendor);
 }
 
-final class CartItemsUpdated extends CartInitial {
-  CartItemsUpdated.fromState(CartState state)
+final class CartItemsUpdated extends CartState {
+  CartItemsUpdated.fromState({required CartState state})
       : super(
           totalHtAmount: state.totalHtAmount,
           totalTTCAmount: state.totalTTCAmount,
@@ -218,8 +224,8 @@ final class CartItemsUpdated extends CartInitial {
         );
 }
 
-final class AddCartItemLoading extends CartInitial {
-  AddCartItemLoading.fromState(CartState state)
+final class AddCartItemLoading extends CartState {
+  AddCartItemLoading.fromState({required CartState state})
       : super(
           totalHtAmount: state.totalHtAmount,
           totalTTCAmount: state.totalTTCAmount,
@@ -232,8 +238,8 @@ final class AddCartItemLoading extends CartInitial {
         );
 }
 
-final class CartLoadLimitReached extends CartInitial {
-  CartLoadLimitReached.fromState(CartState state)
+final class CartLoadLimitReached extends CartState {
+  CartLoadLimitReached.fromState({required CartState state})
       : super(
           totalHtAmount: state.totalHtAmount,
           totalTTCAmount: state.totalTTCAmount,
@@ -246,8 +252,8 @@ final class CartLoadLimitReached extends CartInitial {
         );
 }
 
-final class InvoiceTypeChanged extends CartInitial {
-  InvoiceTypeChanged.fromState(CartState state)
+final class InvoiceTypeChanged extends CartState {
+  InvoiceTypeChanged.fromState({required CartState state})
       : super(
           totalHtAmount: state.totalHtAmount,
           totalTTCAmount: state.totalTTCAmount,
@@ -260,8 +266,8 @@ final class InvoiceTypeChanged extends CartInitial {
         );
 }
 
-final class PaymentMethodChanged extends CartInitial {
-  PaymentMethodChanged.fromState(CartState state)
+final class PaymentMethodChanged extends CartState {
+  PaymentMethodChanged.fromState({required CartState state})
       : super(
           totalHtAmount: state.totalHtAmount,
           totalTTCAmount: state.totalTTCAmount,
@@ -274,8 +280,8 @@ final class PaymentMethodChanged extends CartInitial {
         );
 }
 
-final class PassOrderLoading extends CartInitial {
-  PassOrderLoading.fromState(CartState state)
+final class PassOrderLoading extends CartState {
+  PassOrderLoading.fromState({required CartState state})
       : super(
           totalHtAmount: state.totalHtAmount,
           totalTTCAmount: state.totalTTCAmount,
@@ -288,8 +294,8 @@ final class PassOrderLoading extends CartInitial {
         );
 }
 
-final class PassOrderLoaded extends CartInitial {
-  PassOrderLoaded.fromState(CartState state)
+final class PassOrderLoaded extends CartState {
+  PassOrderLoaded.fromState({required CartState state})
       : super(
           totalHtAmount: state.totalHtAmount,
           totalTTCAmount: state.totalTTCAmount,
@@ -302,8 +308,8 @@ final class PassOrderLoaded extends CartInitial {
         );
 }
 
-final class PassOrderLoadingFailed extends CartInitial {
-  PassOrderLoadingFailed.fromState(CartState state)
+final class PassOrderLoadingFailed extends CartState {
+  PassOrderLoadingFailed.fromState({required CartState state})
       : super(
           totalHtAmount: state.totalHtAmount,
           totalTTCAmount: state.totalTTCAmount,
@@ -316,8 +322,8 @@ final class PassOrderLoadingFailed extends CartInitial {
         );
 }
 
-final class CartItemAdded extends CartInitial {
-  CartItemAdded.fromState(CartState state)
+final class CartItemAdded extends CartState {
+  CartItemAdded.fromState({required CartState state})
       : super(
           totalHtAmount: state.totalHtAmount,
           totalTTCAmount: state.totalTTCAmount,
@@ -330,10 +336,8 @@ final class CartItemAdded extends CartInitial {
         );
 }
 
-final class CartError extends CartInitial {
+final class CartError extends CartState {
   final String error;
-
-  CartError({required this.error});
 
   CartError.fromState({required CartState state, required this.error})
       : super(
