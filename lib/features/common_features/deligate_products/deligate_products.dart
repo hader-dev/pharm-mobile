@@ -68,7 +68,7 @@ class _DeligateProductsPageState extends State<DeligateProductsPage>
                             products.isEmpty)
                         ? const Center(child: EmptyListWidget())
                         : GridView.builder(
-                            controller: cubit.scrollController,
+                            controller: state.scrollController,
                             physics: const AlwaysScrollableScrollPhysics(),
                             gridDelegate:
                                 SliverGridDelegateWithFixedCrossAxisCount(

@@ -3,12 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/search_filter_button.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/end_of_load_result_widget.dart';
-import 'package:hader_pharm_mobile/features/common/widgets/para_pharma_widget_2.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/para_pharma_widget_1.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/search_bar_with_filter.dart';
-import 'package:hader_pharm_mobile/features/common_features/anouncement_details/sub_pages/para_pharma/cubit/para_pharma_cubit.dart';
-import 'package:hader_pharm_mobile/features/common_features/filters/cubit/parapharm/provider.dart';
+import 'package:hader_pharm_mobile/features/common_features/filters/cubit/parapharm/para_medical_filters_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/filters/widgets/pages/para_medical_filters.dart';
-import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/medicine_products/cubit/medicine_products_cubit.dart';
+import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/cubit/para_pharma_cubit.dart';
+import 'package:hader_pharm_mobile/features/common_features/vendor_details/cubit/providers.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
@@ -27,8 +27,10 @@ class _ParapharmaPageState extends State<ParapharmaPage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    final cubit = context.read<ParaPharmaCubit>();
-    final state = cubit.state;
+    final parapharmCubit = context.read<ParaPharmaCubit>();
+    final filterCubit = context.read<ParaMedicalFiltersCubit>();
+
+    final state = parapharmCubit.state;
 
     return Material(
         child: Column(
@@ -39,11 +41,11 @@ class _ParapharmaPageState extends State<ParapharmaPage>
             Flexible(
               child: SearchWithFilterBarWidget(
                 onChanged: (searchValue) {
-                  cubit.searchParaPharmaCatalog(searchValue);
+                  parapharmCubit.searchParaPharmaCatalog(searchValue);
                 },
                 onFilterTap: () {
                   state.searchController.clear();
-                  cubit.searchParaPharmaCatalog(null);
+                  parapharmCubit.searchParaPharmaCatalog(null);
                 },
                 hintText: context.translation!.search_by_dci_brand_sku,
                 searchController: state.searchController,
@@ -57,7 +59,10 @@ class _ParapharmaPageState extends State<ParapharmaPage>
                     BottomSheetHelper.showCommonBottomSheet(
                       context: context,
                       child: ParaPharmFilterProvider(
-                          child: ParaMedicalFiltersView()),
+                        parapharmCubit: parapharmCubit,
+                        filterCubit: filterCubit,
+                        child: ParaMedicalFiltersView(),
+                      ),
                     );
                   });
             }),
@@ -94,7 +99,7 @@ class _ParapharmaPageState extends State<ParapharmaPage>
                   Expanded(
                     child: RefreshIndicator(
                       onRefresh: () {
-                        return cubit.getParaPharmas();
+                        return parapharmCubit.getParaPharmas();
                       },
                       child: GridView.builder(
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -115,9 +120,10 @@ class _ParapharmaPageState extends State<ParapharmaPage>
                         itemBuilder: (context, index) {
                           if (index < paraPharmaProducts.length) {
                             final paraPharma = paraPharmaProducts[index];
-                            return ParaPharmaWidget2(
+                            return ParaPharmaWidget1(
                               paraPharmData: paraPharma,
                               onFavoriteCallback: onLikeTapped,
+                              isLiked: paraPharma.isLiked,
                             );
                           } else {
                             if (isLoadingMore) {
@@ -135,10 +141,10 @@ class _ParapharmaPageState extends State<ParapharmaPage>
                       ),
                     ),
                   ),
-                  if (state is LoadingMoreMedicine)
+                  if (state is LoadingMoreParaPharma)
                     const Center(child: CircularProgressIndicator()),
                   if (state is ParaPharmasLoadLimitReached)
-                    EndOfLoadResultWidget(),
+                    const EndOfLoadResultWidget(),
                 ],
               );
             },

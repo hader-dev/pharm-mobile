@@ -74,7 +74,7 @@ class FiltersParaMedicalBrowse extends StatelessWidget {
               );
             },
           ),
-          Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
+          const Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
           const ResponsiveGap.s12(),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p4),

@@ -26,15 +26,15 @@ class MedicineProductsCubit extends Cubit<MedicineProductsState> {
       : super(MedicineProductsInitial()) {
     _onScroll();
   }
-  Future<void> getMedicines({
-    int offset = 0,
-    String? companyIdFilter,
-  }) async {
+  Future<void> getMedicines(
+      {int offset = 0,
+      String? companyIdFilter,
+      MedicalFilters? filters}) async {
     try {
       emit(state.loading(offset: offset));
       var medicinesResponse = await medicineRepository.getMedicinesCatalog(
         offset: offset,
-        filters: state.params,
+        filters: filters ?? state.params,
         companyId: companyIdFilter,
       );
       emit(state.loaded(

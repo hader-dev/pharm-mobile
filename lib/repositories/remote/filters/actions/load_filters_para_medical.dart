@@ -17,8 +17,6 @@ Future<ResponseLoadFilter> loadFiltersParaMedical(
       if (param.query.isNotEmpty) 'search[${param.key.name}]': param.query
     };
 
-    debugPrint("Query params: $queryParams");
-
     final res = await client.sendRequest(() => client.get(
           Urls.paraPharamaCatalog1,
           queryParams: queryParams,

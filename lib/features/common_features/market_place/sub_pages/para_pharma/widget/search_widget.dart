@@ -15,6 +15,7 @@ class SearchWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final state = context.read<ParaPharmaCubit>().state;
     return Row(
       children: [
         Flexible(
@@ -22,8 +23,7 @@ class SearchWidget extends StatelessWidget {
             padding: const EdgeInsets.only(left: AppSizesManager.p8),
             child: CustomTextField(
               hintText: context.translation!.search_by_name_packaging_sku,
-              controller:
-                  BlocProvider.of<ParaPharmaCubit>(context).searchController,
+              controller: state.searchController,
               state: FieldState.normal,
               isEnabled: true,
               prefixIcon: Icon(
@@ -32,9 +32,7 @@ class SearchWidget extends StatelessWidget {
               ),
               suffixIcon: InkWell(
                 onTap: () {
-                  BlocProvider.of<ParaPharmaCubit>(context)
-                      .searchController
-                      .clear();
+                  state.searchController.clear();
                   BlocProvider.of<ParaPharmaCubit>(context)
                       .searchParaPharmaCatalog(null);
                 },

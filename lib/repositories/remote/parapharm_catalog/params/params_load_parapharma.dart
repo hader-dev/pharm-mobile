@@ -9,11 +9,13 @@ class ParamsLoadParapharma {
   final int offset;
   final String? companyId;
   final bool includeFavorites;
+  final String? searchQuery;
 
   ParamsLoadParapharma(
       {this.limit = 8,
       this.page = 1,
       this.companyId,
+      this.searchQuery,
       this.offset = 0,
       this.sortDirection = 'DESC',
       this.fields = const [],

@@ -63,9 +63,15 @@ class ParaPharmaRepository extends IParaPharmaRepository {
     if (params.filters.sku.isNotEmpty) {
       queryParams['search[sku]'] = params.filters.sku.first;
     }
+
     if (params.filters.name.isNotEmpty) {
       queryParams['search[name]'] = params.filters.name.first;
     }
+
+    if (params.searchQuery != null && params.searchQuery!.isNotEmpty) {
+      queryParams['search[name]'] = params.searchQuery!;
+    }
+
     if (params.filters.gteUnitPriceHt != null &&
         params.filters.gteUnitPriceHt!.isNotEmpty) {
       queryParams['gte[unitPriceHt]'] = params.filters.gteUnitPriceHt!;

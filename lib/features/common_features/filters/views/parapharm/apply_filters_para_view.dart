@@ -68,8 +68,6 @@ class ParaMedicalFiltersApply extends StatelessWidget {
             color: AppColors.accent1Shade1,
           ),
           onChanged: (searchValue) {
-            // Handle search text changes through cubit
-            // Handle search text changes through cubit
             BlocProvider.of<ParaMedicalFiltersCubit>(context)
                 .onSearchChanged(searchValue ?? '');
           },
@@ -111,7 +109,6 @@ class ParaMedicalFiltersApply extends StatelessWidget {
                                       final workingFilters =
                                           cubit.getCurrentWorkSourceFilters();
 
-                                      // Show empty widget when no filters are available
                                       if (workingFilters.isEmpty) {
                                         return const Center(
                                           child: EmptyListWidget(),
@@ -140,7 +137,7 @@ class ParaMedicalFiltersApply extends StatelessWidget {
                                     },
                                   ),
                                 ),
-                                Divider(
+                                const Divider(
                                     color: AppColors.bgDisabled,
                                     thickness: 1,
                                     height: 1),

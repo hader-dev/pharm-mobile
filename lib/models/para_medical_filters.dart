@@ -40,6 +40,7 @@ class ParaMedicalFilters extends Equatable {
   final String? gteUnitPriceHt;
   final String? lteUnitPriceHt;
 
+
   const ParaMedicalFilters({
     this.name = const [],
     this.description = const [],
