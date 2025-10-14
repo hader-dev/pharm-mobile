@@ -24,8 +24,11 @@ class FavoritesVendors extends StatelessWidget {
         if (state is FavoritesVendorsLoading) {
           return const Center(child: CircularProgressIndicator());
         }
+
         if (state.likedVendors.isEmpty) {
-          return EmptyListWidget();
+          return EmptyListWidget(
+            onRefresh: cubit.fetchLikedVendors,
+          );
         }
         return Column(
           mainAxisSize: MainAxisSize.min,

@@ -62,7 +62,7 @@ class _MedicineCatalogDetailsScreenState
                   BackButton(
                     color: AppColors.accent1Shade1,
                   ),
-                  Center(child: EmptyListWidget()),
+                  Expanded(child: Center(child: EmptyListWidget())),
                 ],
               );
             }
@@ -73,9 +73,9 @@ class _MedicineCatalogDetailsScreenState
                   SingleChildScrollView(
                     child: Column(
                       children: [
-                        MedicineProductPhotoSection(),
-                        HeaderSection(),
-                        Divider(
+                        const MedicineProductPhotoSection(),
+                        const HeaderSection(),
+                        const Divider(
                             color: AppColors.bgDisabled,
                             thickness: 3.5,
                             height: 1),

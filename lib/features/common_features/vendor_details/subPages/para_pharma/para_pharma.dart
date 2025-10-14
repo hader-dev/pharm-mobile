@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field.dart';
+import 'package:hader_pharm_mobile/features/common/buttons/search_filter_button.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/end_of_load_result_widget.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/para_pharma_widget_2.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/search_bar_with_filter.dart';
 import 'package:hader_pharm_mobile/features/common_features/anouncement_details/sub_pages/para_pharma/cubit/para_pharma_cubit.dart';
+import 'package:hader_pharm_mobile/features/common_features/filters/cubit/parapharm/provider.dart';
+import 'package:hader_pharm_mobile/features/common_features/filters/widgets/pages/para_medical_filters.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/medicine_products/cubit/medicine_products_cubit.dart';
-import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/medicine_products/widget/search_filter_bottom_sheet.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
-import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/responsive/silver_grid_params.dart';
-import 'package:iconsax/iconsax.dart';
 
 class ParapharmaPage extends StatefulWidget {
   const ParapharmaPage({super.key});
@@ -28,91 +27,50 @@ class _ParapharmaPageState extends State<ParapharmaPage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
+    final cubit = context.read<ParaPharmaCubit>();
+    final state = cubit.state;
+
     return Material(
         child: Column(
       children: [
         Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Flexible(
-              child: Padding(
-                padding: const EdgeInsets.only(left: AppSizesManager.p8),
-                child: CustomTextField(
-                  hintText: context.translation!.search_by_dci_brand_sku,
-                  controller: BlocProvider.of<ParaPharmaCubit>(context)
-                      .searchController,
-                  state: FieldState.normal,
-                  isEnabled: true,
-                  prefixIcon: Icon(
-                    Iconsax.search_normal,
-                    color: AppColors.accent1Shade1,
-                  ),
-                  suffixIcon: InkWell(
-                    onTap: () {
-                      BlocProvider.of<ParaPharmaCubit>(context)
-                          .searchController
-                          .clear();
-                      BlocProvider.of<ParaPharmaCubit>(context)
-                          .searchParaPharmaCatalog(null);
-                    },
-                    child: Icon(
-                      Icons.clear,
-                      color: AppColors.accent1Shade1,
-                    ),
-                  ),
-                  onChanged: (searchValue) {
-                    BlocProvider.of<ParaPharmaCubit>(context)
-                        .searchParaPharmaCatalog(searchValue);
-                  },
-                  validationFunc: (value) {},
-                ),
+              child: SearchWithFilterBarWidget(
+                onChanged: (searchValue) {
+                  cubit.searchParaPharmaCatalog(searchValue);
+                },
+                onFilterTap: () {
+                  state.searchController.clear();
+                  cubit.searchParaPharmaCatalog(null);
+                },
+                hintText: context.translation!.search_by_dci_brand_sku,
+                searchController: state.searchController,
               ),
             ),
-            InkWell(
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: AppSizesManager.p12),
-                child: BlocBuilder<ParaPharmaCubit, ParaPharmaState>(
-                  builder: (context, state) {
-                    return Stack(
-                      clipBehavior: Clip.none,
-                      children: [
-                        Icon(
-                          Iconsax.filter,
-                          color: AppColors.accent1Shade1,
-                        ),
-                        if (BlocProvider.of<ParaPharmaCubit>(context)
-                                .selectedParaPharmaSearchFilter !=
-                            null)
-                          Positioned(
-                            top: -4,
-                            right: -4,
-                            child: CircleAvatar(
-                              radius: AppSizesManager.commonWidgetsRadius,
-                              backgroundColor: Colors.red,
-                            ),
-                          )
-                      ],
+            BlocBuilder<ParaPharmaCubit, ParaPharmaState>(
+                builder: (context, state) {
+              return SearchFilterButton(
+                  hasActiveFilters: state.hasActiveFilters,
+                  onTap: () {
+                    BottomSheetHelper.showCommonBottomSheet(
+                      context: context,
+                      child: ParaPharmFilterProvider(
+                          child: ParaMedicalFiltersView()),
                     );
-                  },
-                ),
-              ),
-              onTap: () {
-                BottomSheetHelper.showCommonBottomSheet(
-                    context: context, child: SearchMedicineFilterBottomSheet());
-              },
-            ),
+                  });
+            }),
           ],
         ),
         Expanded(
           child: BlocBuilder<ParaPharmaCubit, ParaPharmaState>(
             builder: (bContext, state) {
-              if (state is MedicineLiked || state is MedicineLikeFailed) {}
-              if (state is MedicineProductsLoading) {
+              if (state is ParaPharmaProductsLoading) {
                 return const Center(child: CircularProgressIndicator());
               }
 
-              final paraPharmaProducts =
-                  BlocProvider.of<ParaPharmaCubit>(bContext).paraPharmaProducts;
+              final paraPharmaProducts = state.paraPharmaProducts;
 
               if (paraPharmaProducts.isEmpty) {
                 return EmptyListWidget();
@@ -136,8 +94,7 @@ class _ParapharmaPageState extends State<ParapharmaPage>
                   Expanded(
                     child: RefreshIndicator(
                       onRefresh: () {
-                        return BlocProvider.of<ParaPharmaCubit>(bContext)
-                            .getParaPharmas();
+                        return cubit.getParaPharmas();
                       },
                       child: GridView.builder(
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -147,12 +104,10 @@ class _ParapharmaPageState extends State<ParapharmaPage>
                               bContext.deviceSize),
                           mainAxisSpacing: calculateMarketplaceMainAxisSpacing(
                               bContext.deviceSize),
-                          childAspectRatio:
-                              calculateAllAnnouncementsAspectRatio(
-                                  bContext.deviceSize, bContext.orientation),
+                          childAspectRatio: calculateVendorItemsAspectRatio(
+                              bContext.deviceSize, bContext.orientation),
                         ),
-                        controller: BlocProvider.of<ParaPharmaCubit>(bContext)
-                            .scrollController,
+                        controller: state.scrollController,
                         shrinkWrap: true,
                         physics: const AlwaysScrollableScrollPhysics(),
                         itemCount: paraPharmaProducts.length +

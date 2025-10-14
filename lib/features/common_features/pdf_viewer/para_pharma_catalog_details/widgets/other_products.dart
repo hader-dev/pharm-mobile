@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
-import '../../../../config/theme/colors_manager.dart';
+import '../../../../../config/theme/colors_manager.dart';
 
 class OtherProductsSection extends StatelessWidget {
   const OtherProductsSection({super.key});

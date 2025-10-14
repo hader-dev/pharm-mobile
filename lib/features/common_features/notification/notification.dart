@@ -19,23 +19,22 @@ class NotificaitonScreen extends StatelessWidget {
 
     return BlocProvider.value(
       value: cubit..getNotifications(),
-      child: RefreshIndicator(
-        onRefresh: () => cubit.getNotifications(),
-        child: Scaffold(
-          appBar: const NotificationAppbar(),
-          body: Padding(
-            padding: const EdgeInsets.all(AppSizesManager.p8),
-            child: Column(
-              children: [
-                Expanded(child: NotificationList()),
-                PrimaryTextButton(
-                  color: AppColors.accent1Shade1,
-                  minWidth: double.maxFinite,
-                  label: context.translation!.mark_all_as_read,
-                  onTap: () => cubit.markAllNotificationRead(),
-                )
-              ],
-            ),
+      child: Scaffold(
+        appBar: const NotificationAppbar(),
+        body: Padding(
+          padding: const EdgeInsets.all(AppSizesManager.p8),
+          child: Column(
+            children: [
+              Expanded(
+                  child:
+                      NotificationList()),
+              PrimaryTextButton(
+                color: AppColors.accent1Shade1,
+                minWidth: double.maxFinite,
+                label: context.translation!.mark_all_as_read,
+                onTap: () => cubit.markAllNotificationRead(),
+              )
+            ],
           ),
         ),
       ),

@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart' show getItInstance;
+import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
+import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
 import 'package:hader_pharm_mobile/features/common_features/favorites/cubit/favorites_cubit.dart';
+import 'package:hader_pharm_mobile/repositories/remote/favorite/favorite_repository_impl.dart';
+import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
-import '../../../config/services/network/network_interface.dart';
-import '../../../config/theme/colors_manager.dart';
-import '../../../repositories/remote/favorite/favorite_repository_impl.dart';
-import '../../../utils/constants.dart';
 import 'widget/tabs_section.dart';
 
 class FavoritesScreen extends StatelessWidget {

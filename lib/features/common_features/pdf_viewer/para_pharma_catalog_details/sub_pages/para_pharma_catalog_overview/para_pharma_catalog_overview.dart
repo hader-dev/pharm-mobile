@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
-import '../../../../../config/theme/colors_manager.dart';
-import '../../../../../models/para_pharma.dart';
+import '../../../../../../config/theme/colors_manager.dart';
+import '../../../../../../models/para_pharma.dart';
 import '../../cubit/para_pharma_details_cubit.dart';
 
 class ParaPharmaOverViewPage extends StatelessWidget {

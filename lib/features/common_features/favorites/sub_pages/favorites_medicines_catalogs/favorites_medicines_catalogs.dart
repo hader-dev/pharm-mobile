@@ -32,7 +32,9 @@ class FavoritesMedicinesCatalog extends StatelessWidget {
           return const Center(child: CircularProgressIndicator());
         }
         if (state.likedMedicinesCatalogs.isEmpty) {
-          return EmptyListWidget();
+          return EmptyListWidget(
+            onRefresh: cubit.fetchLikedMedicines,
+          );
         }
         return Column(
           mainAxisSize: MainAxisSize.min,

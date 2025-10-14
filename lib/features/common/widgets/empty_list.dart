@@ -23,50 +23,58 @@ class EmptyListWidget extends StatelessWidget {
 
         final imageSize = availableHeight < 600 ? 120.0 : 200.0;
 
-        final mainWidget = Padding(
-          padding: const EdgeInsets.all(AppSizesManager.p8),
-          child: SizedBox(
-            height: imageSize * 2,
-            child: ListView(
-              children: [
-                SvgPicture.asset(
-                  emptyIllustrationPath,
-                  height: imageSize,
-                  width: imageSize,
-                ),
-                const ResponsiveGap.s16(),
-                Text(context.translation!.no_items_found,
-                    textAlign: TextAlign.center,
-                    style: context.responsiveTextTheme.current.body2Medium
-                        .copyWith(
-                      color: TextColors.ternary.color,
-                    )),
-                if (onRefresh != null) ...[
-                  const ResponsiveGap.s16(),
-                  PrimaryTextButton(
-                    label: context.translation!.refresh,
-                    labelColor: AppColors.accent1Shade1,
-                    onTap: onRefresh,
-                    height: AppSizesManager.buttonHeight,
-                  )
-                ]
-              ],
+        final mainWidget = Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SvgPicture.asset(
+              emptyIllustrationPath,
+              height: imageSize,
+              width: imageSize,
             ),
-          ),
+            const ResponsiveGap.s16(),
+            Text(context.translation!.no_items_found,
+                textAlign: TextAlign.center,
+                style: context.responsiveTextTheme.current.body2Medium.copyWith(
+                  color: TextColors.ternary.color,
+                )),
+            if (onRefresh != null) ...[
+              const ResponsiveGap.s16(),
+              PrimaryTextButton(
+                label: context.translation!.refresh,
+                labelColor: AppColors.accent1Shade1,
+                onTap: onRefresh,
+                height: AppSizesManager.buttonHeight,
+              )
+            ]
+          ],
         );
 
         if (onRefresh != null) {
           return RefreshIndicator(
-              onRefresh: () {
-                if (onRefresh != null) {
-                  onRefresh!();
-                }
-                return Future.value();
-              },
-              child: mainWidget);
+            onRefresh: () {
+              if (onRefresh != null) {
+                onRefresh!();
+              }
+              return Future.value();
+            },
+            child: SizedBox(
+              height: availableHeight,
+              child: Padding(
+                padding: const EdgeInsets.all(AppSizesManager.p8),
+                child: SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  child: mainWidget,
+                ),
+              ),
+            ),
+          );
         }
 
-        return mainWidget;
+        return Padding(
+          padding: const EdgeInsets.all(AppSizesManager.p8),
+          child: SizedBox(height: imageSize * 2, child: mainWidget),
+        );
       },
     );
   }

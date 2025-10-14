@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
-import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/widgets/appbar.dart';
+import 'package:hader_pharm_mobile/features/common_features/pdf_viewer/para_pharma_catalog_details/widgets/appbar.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 
 import 'cubit/para_pharma_details_cubit.dart';
@@ -63,7 +63,7 @@ class _ParaPharmaCatalogDetailsScreenState
                   BackButton(
                     color: AppColors.accent1Shade1,
                   ),
-                  Center(child: EmptyListWidget()),
+                  Expanded(child: Center(child: EmptyListWidget())),
                 ],
               );
             }

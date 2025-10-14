@@ -173,6 +173,7 @@ class ParaPharmaCatalogModel extends BaseParaPharmaCatalogModel {
         maxOrderQuantity: 0);
   }
 
+  @override
   ParaPharmaCatalogModel copyWith({
     String? id,
     String? unitPriceHt,

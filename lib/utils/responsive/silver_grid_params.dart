@@ -29,6 +29,32 @@ double calculateMarketplaceAspectRatio(
   return minRatio + (maxRatio - minRatio) * t;
 }
 
+double calculateVendorItemsAspectRatio(
+    DeviceSizes deviceSize, Orientation orientation) {
+  if (deviceSize.width < DeviceSizes.mediumMobile.width) {
+    return 0.85;
+  }
+
+  if (deviceSize.width <= DeviceSizes.smallTablet.width) {
+    return 1.7;
+  }
+
+  final current = min(deviceSize.width, deviceSize.height);
+  final deviceMin =
+      min(DeviceSizes.smallTablet.width, DeviceSizes.smallTablet.height);
+  final deviceMax =
+      min(DeviceSizes.largeTablet.width, DeviceSizes.largeTablet.height);
+
+  final minRatio = 1.7;
+  final maxRatio = orientation == Orientation.portrait ? 3.0 : 1.7;
+
+  if (current <= deviceMin) return minRatio;
+  if (current >= deviceMax) return maxRatio;
+
+  final t = (current - deviceMin) / (deviceMax - deviceMin);
+  return minRatio + (maxRatio - minRatio) * t;
+}
+
 double calculateAllAnnouncementsAspectRatio(
     DeviceSizes deviceSize, Orientation orientation) {
   return 0.85;

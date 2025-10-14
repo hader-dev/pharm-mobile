@@ -6,61 +6,60 @@ import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler
 part 'vendor_details_state.dart';
 
 class VendorDetailsCubit extends Cubit<VendorDetailsState> {
-  Company vendorData = Company.empty();
   final ICompanyRepository companyRepo;
   VendorDetailsCubit({required this.companyRepo})
       : super(VendorDetailsInitial());
 
   void getVendorDetails(String companyId) async {
     try {
-      emit(VendorDetailsLoading());
-      vendorData = await companyRepo.getCompanyById(companyId: companyId);
-      emit(VendorDetailsLoaded());
+      emit(state.toLoading());
+      final vendorData = await companyRepo.getCompanyById(companyId: companyId);
+      emit(state.toLoaded(vendor: vendorData));
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
-      emit(VendorDetailsLoadingError());
+      emit(state.toError());
     }
   }
 
   Future<void> requestJoinVendorAsClient(String vendorId) async {
     try {
-      emit(SendingJoinRequest());
+      emit(state.toSendingJoinRequest());
       await companyRepo.joinCompanyAsCLient(companyId: vendorId);
-      emit(JoinRequestSent());
+      emit(state.toJoinRequestSent());
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
-      emit(VendorDetailsLoadingError());
+      emit(state.toError());
     }
   }
 
   Future<void> likeVendor(String vendorId) async {
     try {
       await companyRepo.addCompanyToFavorites(companyId: vendorId);
-      emit(VendorLiked());
+      emit(state.toVendorLiked());
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
-      emit(VendorLikeFailed());
+      emit(state.toVendorLikeFailed());
     }
   }
 
   void unlikeVendor(String id) {
     try {
       companyRepo.removeCompanyFromFavorites(companyId: id);
-      emit(VendorLiked());
+      emit(state.toVendorLiked());
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
-      emit(VendorLikeFailed());
+      emit(state.toVendorLikeFailed());
     }
   }
 
   void unfollowVendor(String id) async {
     try {
-      emit(SendingJoinRequest());
+      emit(state.toSendingJoinRequest());
       await companyRepo.unJoinCompanyAsCLient(companyId: id);
-      emit(JoinRequestSent());
+      emit(state.toJoinRequestSent());
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
-      emit(VendorDetailsLoadingError());
+      emit(state.toError());
     }
   }
 }

@@ -99,8 +99,8 @@ class _VandorDetailsTabBarSectionState extends State<VandorDetailsTabBarSection>
               controller: tabsController,
               children: [
                 VendorDetailsPage(
-                    vendorData: BlocProvider.of<VendorDetailsCubit>(context)
-                        .vendorData),
+                    vendorData:
+                        context.read<VendorDetailsCubit>().state.vendor),
                 MedicinesPage(),
                 ParapharmaPage(),
                 AnnouncementsPage()

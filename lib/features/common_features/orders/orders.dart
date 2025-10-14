@@ -57,19 +57,10 @@ class OrdersScreen extends StatelessWidget {
               return const Center(child: CircularProgressIndicator());
             }
             if (state.orders.isEmpty) {
-              return RefreshIndicator(
-                onRefresh: () =>
-                    BlocProvider.of<OrdersCubit>(context).getOrders(),
-                child: Center(
-                  child: SingleChildScrollView(
-                    physics: const AlwaysScrollableScrollPhysics(),
-                    child: EmptyListWidget(
-                      onRefresh: () {
-                        BlocProvider.of<OrdersCubit>(context).getOrders();
-                      },
-                    ),
-                  ),
-                ),
+              return EmptyListWidget(
+                onRefresh: () {
+                  BlocProvider.of<OrdersCubit>(context).getOrders();
+                },
               );
             }
             return Column(

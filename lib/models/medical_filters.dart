@@ -65,8 +65,10 @@ class MedicalFilters extends Equatable {
     bool resetLteUnitPriceHt = false,
   }) {
     return MedicalFilters(
-      gteUnitPriceHt: resetGteUnitPriceHt ? null : (gteUnitPriceHt ?? this.gteUnitPriceHt),
-      lteUnitPriceHt: resetLteUnitPriceHt ? null : (lteUnitPriceHt ?? this.lteUnitPriceHt),
+      gteUnitPriceHt:
+          resetGteUnitPriceHt ? null : (gteUnitPriceHt ?? this.gteUnitPriceHt),
+      lteUnitPriceHt:
+          resetLteUnitPriceHt ? null : (lteUnitPriceHt ?? this.lteUnitPriceHt),
       dci: dci ?? this.dci,
       dosage: dosage ?? this.dosage,
       form: form ?? this.form,
@@ -84,6 +86,12 @@ class MedicalFilters extends Equatable {
       reimbursement: reimbursement ?? this.reimbursement,
     );
   }
+
+  bool get isNotEmpty =>
+      dci.isNotEmpty ||
+      dosage.isNotEmpty ||
+      form.isNotEmpty ||
+      status.isNotEmpty;
 
   @override
   List<Object?> get props => [

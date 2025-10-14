@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/medicine_catalog_details.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders_details/orders_details.dart';
-import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/para_pharma_catalog_details.dart';
+import 'package:hader_pharm_mobile/features/common_features/pdf_viewer/para_pharma_catalog_details/para_pharma_catalog_details.dart';
 
 abstract class DeeplinksRoutes {
   static const String deepLinkOrderDetails = '/order';

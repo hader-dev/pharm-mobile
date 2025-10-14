@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart'
-    show
-        BlocBuilder,
-        BlocProvider,
-        MultiBlocProvider,
-        ReadContext,
-        BlocListener;
+    show BlocBuilder, BlocProvider, MultiBlocProvider, BlocListener;
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
@@ -14,8 +9,11 @@ import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/announcements/cubit/all_announcements_cubit.dart';
+import 'package:hader_pharm_mobile/features/common_features/filters/cubit/medical/medical_filters_cubit.dart';
+import 'package:hader_pharm_mobile/features/common_features/filters/cubit/parapharm/para_medical_filters_cubit.dart';
 import 'package:hader_pharm_mobile/repositories/remote/announcement/announcement_repository_impl.dart';
 import 'package:hader_pharm_mobile/repositories/remote/company/company_repository_impl.dart';
+import 'package:hader_pharm_mobile/repositories/remote/filters/filters_repository.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
@@ -44,14 +42,25 @@ class VendorDetails extends StatelessWidget {
               ..getVendorDetails(companyId),
           ),
           BlocProvider(
-              create: (context) => AllAnnouncementsCubit(
-                    companyId: companyId,
-                    announcementsRepo: PromotionRepository(
-                      client: getItInstance.get<INetworkService>(),
-                    ),
-                    scrollController: ScrollController(),
-                    searchController: TextEditingController(),
-                  )..getAnnouncements()),
+            create: (context) => ParaMedicalFiltersCubit(
+              filtersRepository: getItInstance.get<IFiltersRepository>(),
+            ),
+          ),
+          BlocProvider(
+            create: (context) => MedicalFiltersCubit(
+              filtersRepository: getItInstance.get<IFiltersRepository>(),
+            ),
+          ),
+          BlocProvider(
+            create: (context) => AllAnnouncementsCubit(
+              companyId: companyId,
+              announcementsRepo: PromotionRepository(
+                client: getItInstance.get<INetworkService>(),
+              ),
+              scrollController: ScrollController(),
+              searchController: TextEditingController(),
+            )..getAnnouncements(),
+          ),
         ],
         child: BlocListener<VendorDetailsCubit, VendorDetailsState>(
           listener: (context, state) {
@@ -90,27 +99,19 @@ class VendorDetails extends StatelessWidget {
                         border:
                             Border.all(color: AppColors.bgDisabled, width: 1.5),
                         image: DecorationImage(
-                          image: context
-                                      .read<VendorDetailsCubit>()
-                                      .vendorData
-                                      .image
-                                      ?.path ==
-                                  null
+                          image: state.vendor.image?.path == null
                               ? AssetImage(
                                   DrawableAssetStrings.companyPlaceHolderImg)
                               : NetworkImage(getItInstance
-                                  .get<INetworkService>()
-                                  .getFilesPath(context
-                                          .read<VendorDetailsCubit>()
-                                          .vendorData
-                                          .image
-                                          ?.path ??
-                                      '')) as ImageProvider,
+                                      .get<INetworkService>()
+                                      .getFilesPath(
+                                          state.vendor.image?.path ?? ''))
+                                  as ImageProvider,
                         ),
                       ),
                     ),
                     const ResponsiveGap.s8(),
-                    Text(context.read<VendorDetailsCubit>().vendorData.name,
+                    Text(state.vendor.name,
                         style: context
                             .responsiveTextTheme.current.headLine4SemiBold
                             .copyWith(

@@ -11,7 +11,7 @@ import 'package:hader_pharm_mobile/features/common_features/invoice/invoice.dart
 import 'package:hader_pharm_mobile/features/common_features/leagal_policies/leagal_policies.dart';
 import 'package:hader_pharm_mobile/features/common_features/notification/notification.dart';
 import 'package:hader_pharm_mobile/features/common_features/order_complaint_details/complaint.dart';
-import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/para_pharma_catalog_details.dart';
+import 'package:hader_pharm_mobile/features/common_features/pdf_viewer/para_pharma_catalog_details/para_pharma_catalog_details.dart';
 import 'package:hader_pharm_mobile/features/common_features/profile/profile.dart';
 
 import '../../features/app_componants/app_componants.dart';

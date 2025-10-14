@@ -18,15 +18,20 @@ class NotificationList extends StatelessWidget {
       }
 
       if (cubit.notifications.isEmpty) {
-        return Center(
-          child: EmptyListWidget(),
+        return EmptyListWidget(
+          onRefresh: cubit.getNotifications,
         );
       }
 
-      return ListView.builder(
-        itemCount: cubit.notifications.length,
-        itemBuilder: (ctx, idx) =>
-            NotificationWidget(notification: cubit.notifications[idx], cubit: cubit,),
+      return RefreshIndicator(
+        onRefresh: cubit.getNotifications,
+        child: ListView.builder(
+          itemCount: cubit.notifications.length,
+          itemBuilder: (ctx, idx) => NotificationWidget(
+            notification: cubit.notifications[idx],
+            cubit: cubit,
+          ),
+        ),
       );
     });
   }

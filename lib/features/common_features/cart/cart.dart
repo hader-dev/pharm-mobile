@@ -52,55 +52,50 @@ class CartScreen extends StatelessWidget {
               },
             ),
           ),
-          body: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              BlocBuilder<CartCubit, CartState>(builder: (context, state) {
-                final cubit = context.read<CartCubit>();
+          body: BlocBuilder<CartCubit, CartState>(builder: (context, state) {
+            final cubit = context.read<CartCubit>();
 
-                if (state is CartLoading) {
-                  return Expanded(
-                    child: Container(
-                        alignment: Alignment.center,
-                        child: const CircularProgressIndicator()),
-                  );
-                }
-                if (state.cartItems.isEmpty) {
-                  return EmptyListWidget(
-                    onRefresh: () {
-                      cubit.getCartItem();
-                    },
-                  );
-                }
-                return Expanded(
-                  child: RefreshIndicator(
-                    onRefresh: () {
-                      return cubit.getCartItem();
-                    },
+            if (state is CartLoading) {
+              return Center(child: const CircularProgressIndicator());
+            }
+            if (state.cartItems.isEmpty) {
+              return EmptyListWidget(
+                onRefresh: () {
+                  cubit.getCartItem();
+                },
+              );
+            }
+
+            final widgets = [
+              ...state.cartItemsByVendor.keys.map((vendor) => VendorCartSection(
+                    vendorData: state.cartItems
+                        .firstWhere((element) =>
+                            element.model.sellerCompanyId == vendor)
+                        .model
+                        .sellerCompany,
+                    cartItems: state.cartItemsByVendor[vendor] ?? [],
+                  )),
+            ];
+            return RefreshIndicator(
+              onRefresh: () {
+                return cubit.getCartItem();
+              },
+              child: Column(
+                children: [
+                  Expanded(
                     child: ListView(
                         controller: cubit.scrollController,
                         shrinkWrap: true,
                         physics: const AlwaysScrollableScrollPhysics(),
-                        children: state.cartItemsByVendor.keys
-                            .map((vendor) => VendorCartSection(
-                                  vendorData: state.cartItems
-                                      .firstWhere((element) =>
-                                          element.model.sellerCompanyId ==
-                                          vendor)
-                                      .model
-                                      .sellerCompany,
-                                  cartItems:
-                                      state.cartItemsByVendor[vendor] ?? [],
-                                ))
-                            .toList()),
+                        children: widgets),
                   ),
-                );
-                // if (state is LoadingMoreOrders) const Center(child: CircularProgressIndicator()),
-                // if (state is OrdersLoadLimitReached) EndOfLoadResultWidget(),
-              }),
-              CartSummarySection()
-            ],
-          ),
+                  CartSummarySection()
+                ],
+              ),
+            );
+            // if (state is LoadingMoreOrders) const Center(child: CircularProgressIndicator()),
+            // if (state is OrdersLoadLimitReached) EndOfLoadResultWidget(),
+          }),
         ),
       ),
     );

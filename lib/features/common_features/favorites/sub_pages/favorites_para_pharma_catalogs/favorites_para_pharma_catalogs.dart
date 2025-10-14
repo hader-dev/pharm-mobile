@@ -33,7 +33,9 @@ class FavoritesParaPharmaCatalogs extends StatelessWidget {
           return const Center(child: CircularProgressIndicator());
         }
         if (state.likedParaPharmaCatalogs.isEmpty) {
-          return EmptyListWidget();
+          return EmptyListWidget(
+            onRefresh: cubit.fetchLikedParaPharma,
+          );
         }
 
         return Column(
@@ -41,9 +43,7 @@ class FavoritesParaPharmaCatalogs extends StatelessWidget {
           children: [
             Expanded(
               child: RefreshIndicator(
-                onRefresh: () {
-                  return cubit.fetchLikedParaPharma();
-                },
+                onRefresh: cubit.fetchLikedParaPharma,
                 child: ListView.builder(
                     shrinkWrap: true,
                     physics: const AlwaysScrollableScrollPhysics(),

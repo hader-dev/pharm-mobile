@@ -14,22 +14,18 @@ import 'package:hader_pharm_mobile/utils/enums.dart';
 part 'para_pharma_state.dart';
 
 class ParaPharmaCubit extends Cubit<ParaPharmaState> {
-  int totalItemsCount = 0;
-  int offSet = 0;
-  SearchParaPharmaFilters? selectedParaPharmaSearchFilter;
-  List<BaseParaPharmaCatalogModel> paraPharmaProducts = [];
-  ParaMedicalFilters filters = const ParaMedicalFilters();
   final ParaPharmaRepository paraPharmaRepository;
-  final TextEditingController searchController;
-  final ScrollController scrollController;
   final FavoriteRepository favoriteRepository;
   Timer? _debounce;
   ParaPharmaCubit(
       {required this.paraPharmaRepository,
-      required this.scrollController,
-      required this.searchController,
+      required ScrollController scrollController,
+      required TextEditingController searchController,
       required this.favoriteRepository})
-      : super(ParaPharmaInitial()) {
+      : super(ParaPharmaInitial(
+          scrollController: scrollController,
+          searchController: searchController,
+        )) {
     _onScroll();
   }
   Future<void> getParaPharmas({
@@ -38,44 +34,51 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
     String? companyIdFilter,
   }) async {
     try {
-      emit(ParaPharmaProductsLoading());
+      emit(state.toLoading());
       var paraPharmaCatalogResponse =
           await paraPharmaRepository.getParaPharmaCatalog(ParamsLoadParapharma(
         offset: offset,
-        filters: filters,
+        filters: state.filters,
       ));
-      totalItemsCount = paraPharmaCatalogResponse.totalItems;
-      paraPharmaProducts = paraPharmaCatalogResponse.data;
-      emit(ParaPharmaProductsLoaded());
+      final totalItemsCount = paraPharmaCatalogResponse.totalItems;
+      final paraPharmaProducts = paraPharmaCatalogResponse.data;
+      emit(state.toLoaded(
+        paraPharmaProducts: paraPharmaProducts,
+        totalItemsCount: totalItemsCount,
+      ));
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
-      emit(ParaPharmaProductsLoadingFailed());
+      emit(state.toLoadingFailed());
     }
   }
 
   Future<void> loadMoreParaPharmas() async {
     try {
-      if (offSet >= totalItemsCount) {
-        emit(ParaPharmasLoadLimitReached());
+      if (state.offSet >= state.totalItemsCount) {
+        emit(state.toLoadLimitReached());
         return;
       }
 
-      offSet = offSet + PaginationConstants.resultsPerPage;
-      emit(ParaPharmaProductsLoading());
+      final offSet = state.offSet + PaginationConstants.resultsPerPage;
+      emit(state.toLoading());
       var medicinesResponse = await paraPharmaRepository.getParaPharmaCatalog(
-          ParamsLoadParapharma(offset: offSet, filters: filters));
-      totalItemsCount = medicinesResponse.totalItems;
+          ParamsLoadParapharma(offset: offSet, filters: state.filters));
+      final totalItemsCount = medicinesResponse.totalItems;
+      final paraPharmaProducts = state.paraPharmaProducts;
       paraPharmaProducts.addAll(medicinesResponse.data);
-      emit(ParaPharmaProductsLoaded());
+      emit(state.toLoaded(
+        paraPharmaProducts: paraPharmaProducts,
+        totalItemsCount: totalItemsCount,
+      ));
     } catch (e) {
-      offSet = offSet - PaginationConstants.resultsPerPage;
-      emit(ParaPharmaProductsLoadingFailed());
+      emit(state.toLoadingFailed());
     }
   }
 
   void changeParaPharmaSearchFilter(SearchParaPharmaFilters filter) {
-    selectedParaPharmaSearchFilter = filter;
-    emit(ParaPharmaSearchFilterChanged());
+    emit(state.toSearchFilterChanged(
+      selectedParaPharmaSearchFilter: filter,
+    ));
   }
 
   void searchParaPharmaCatalog(String? text) =>
@@ -91,55 +94,51 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
   }
 
   void resetParaPharmaSearchFilter() {
-    selectedParaPharmaSearchFilter = null;
-    filters = const ParaMedicalFilters();
     getParaPharmas();
-    emit(ParaPharmaSearchFilterChanged());
+    emit(state.toSearchFilterChanged(
+      selectedParaPharmaSearchFilter: null,
+      filters: const ParaMedicalFilters(),
+    ));
   }
 
   void updatedFilters(ParaMedicalFilters appliedFilters) {
-    filters = appliedFilters;
+    emit(state.toSearchFilterChanged(
+      selectedParaPharmaSearchFilter: state.selectedParaPharmaSearchFilter,
+      filters: appliedFilters,
+    ));
   }
 
   Future<void> likeParaPharmaCatalog(String paraPharmaCatalogId) async {
-    var index = paraPharmaProducts
-        .lastIndexWhere((paraProd) => paraProd.id == paraPharmaCatalogId);
     try {
-      paraPharmaProducts[index].isLiked = true;
       await favoriteRepository.likeParaPharmaCatalog(
           paraPharmaCatalogId: paraPharmaCatalogId);
 
-      emit(ParaPharmaLiked(paraPharmaId: paraPharmaCatalogId));
+      emit(state.toLiked(paraPharmaId: paraPharmaCatalogId, liked: true));
     } catch (e) {
-      paraPharmaProducts[index].isLiked = false;
       GlobalExceptionHandler.handle(exception: e);
-      emit(ParaPharmaLikeFailed(paraPharmaId: paraPharmaCatalogId));
+      emit(state.tolikeFailed(paraPharmaId: paraPharmaCatalogId));
     }
   }
 
   Future<void> unlikeParaPharmaCatalog(String paraPharmaCatalogId) async {
-    var index = paraPharmaProducts
-        .lastIndexWhere((paraProd) => paraProd.id == paraPharmaCatalogId);
     try {
-      paraPharmaProducts[index].isLiked = false;
       await favoriteRepository.unLikeParaPharmaCatalog(
           paraPharmaCatalogId: paraPharmaCatalogId);
-      emit(ParaPharmaLiked(paraPharmaId: paraPharmaCatalogId));
+      emit(state.toLiked(paraPharmaId: paraPharmaCatalogId, liked: false));
     } catch (e) {
-      paraPharmaProducts[index].isLiked = true;
       GlobalExceptionHandler.handle(exception: e);
-      emit(ParaPharmaLikeFailed(paraPharmaId: paraPharmaCatalogId));
+      emit(state.tolikeFailed(paraPharmaId: paraPharmaCatalogId));
     }
   }
 
   void _onScroll() {
-    scrollController.addListener(() async {
-      if (scrollController.position.pixels >=
-          scrollController.position.maxScrollExtent) {
-        if (offSet < totalItemsCount) {
+    state.scrollController.addListener(() async {
+      if (state.scrollController.position.pixels >=
+          state.scrollController.position.maxScrollExtent) {
+        if (state.offSet < state.totalItemsCount) {
           await loadMoreParaPharmas();
         } else {
-          emit(ParaPharmasLoadLimitReached());
+          emit(state.toLoadLimitReached());
         }
       }
     });

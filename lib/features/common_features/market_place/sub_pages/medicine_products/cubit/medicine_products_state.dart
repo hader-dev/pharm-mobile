@@ -21,6 +21,11 @@ sealed class MedicineProductsState {
     required this.selectedMedicineSearchFilter,
   });
 
+  bool get hasActiveFilters =>
+      params.isNotEmpty ||
+      params.gteUnitPriceHt != null ||
+      params.lteUnitPriceHt != null;
+
   MedicineProductsState copyWith({
     double? lastOffset,
     Timer? debounce,
