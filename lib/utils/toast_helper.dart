@@ -1,13 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:hader_pharm_mobile/utils/constants.dart';
 
 import '../config/routes/routing_manager.dart';
 import '../features/common/toasts/custom_toast.dart';
 
 enum ToastType {
-  success(colors: [Color.fromARGB(255, 102, 187, 106), Color.fromARGB(255, 67, 160, 71)], icon: Icons.check_circle),
-  info(colors: [Color.fromARGB(255, 66, 165, 245), Color.fromARGB(255, 30, 136, 229)], icon: Icons.info),
-  warning(colors: [Color.fromARGB(255, 255, 167, 38), Color.fromARGB(255, 251, 140, 0)], icon: Icons.warning),
-  error(colors: [Color.fromARGB(255, 239, 83, 80), Color.fromARGB(255, 229, 57, 53)], icon: Icons.error),
+  success(colors: [
+    Color.fromARGB(255, 102, 187, 106),
+    Color.fromARGB(255, 67, 160, 71)
+  ], icon: Icons.check_circle),
+  info(colors: [
+    Color.fromARGB(255, 66, 165, 245),
+    Color.fromARGB(255, 30, 136, 229)
+  ], icon: Icons.info),
+  warning(colors: [
+    Color.fromARGB(255, 255, 167, 38),
+    Color.fromARGB(255, 251, 140, 0)
+  ], icon: Icons.warning),
+  error(colors: [
+    Color.fromARGB(255, 239, 83, 80),
+    Color.fromARGB(255, 229, 57, 53)
+  ], icon: Icons.error),
   ;
 
   final List<Color> colors;
@@ -40,16 +53,23 @@ class ToastManager {
     }
     _overlayEntry = OverlayEntry(
       maintainState: true,
-      builder: (_) => CustomToastWidget(
+      builder: (context) => Positioned(
+        top: MediaQuery.of(context).padding.top + AppSizesManager.p10,
+        left: AppSizesManager.p16,
+        right: AppSizesManager.p16,
+        child: CustomToastWidget(
           title: type.name,
           message: message ?? 'Custom toast via OverlayEntry!',
           type: type,
           animationDuration: duration,
           onClose: () {
             hideToast();
-          }),
+          },
+        ),
+      ),
     );
 
-    Overlay.of(RoutingManager.rootNavigatorKey.currentContext!).insert(_overlayEntry!);
+    Overlay.of(RoutingManager.rootNavigatorKey.currentContext!)
+        .insert(_overlayEntry!);
   }
 }

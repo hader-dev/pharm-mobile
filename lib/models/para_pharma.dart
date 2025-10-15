@@ -14,6 +14,8 @@ class BaseParaPharmaCatalogModel {
   bool isLiked;
   final int packageSize;
   final List<String> tags;
+  final Category? category;
+  final Brand? brand;
 
   BaseParaPharmaCatalogModel copyWith(
       {String? id,
@@ -52,6 +54,8 @@ class BaseParaPharmaCatalogModel {
       required this.name,
       required this.stockQuantity,
       required this.isActive,
+      this.category,
+      this.brand,
       this.company,
       this.isLiked = false});
 }

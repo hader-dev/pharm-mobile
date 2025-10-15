@@ -92,7 +92,8 @@ class ParaPharmaWidget1 extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       CustomChip(
-                        label: paraPharmData.name,
+                        label:
+                            paraPharmData.category?.name ?? paraPharmData.name,
                         color: AppColors.bgDarken,
                       ),
                       if (onFavoriteCallback != null)
