@@ -120,6 +120,7 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
 
   Future<void> unlikeParaPharmaCatalog(String paraPharmaCatalogId) async {
     try {
+      
       await favoriteRepository.unLikeParaPharmaCatalog(
           paraPharmaCatalogId: paraPharmaCatalogId);
       emit(state.toLiked(paraPharmaId: paraPharmaCatalogId, isLiked: false));

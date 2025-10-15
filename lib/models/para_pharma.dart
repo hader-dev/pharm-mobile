@@ -41,6 +41,8 @@ class BaseParaPharmaCatalogModel {
       isActive: isActive ?? this.isActive,
       company: company ?? this.company,
       isLiked: isLiked ?? this.isLiked,
+      brand: brand,
+      category: category,
     );
   }
 
