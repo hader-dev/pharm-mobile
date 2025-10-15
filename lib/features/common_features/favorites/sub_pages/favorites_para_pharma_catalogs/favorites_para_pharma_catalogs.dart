@@ -13,8 +13,8 @@ class FavoritesParaPharmaCatalogs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final gCubit = MarketPlaceScreen.marketPlaceScaffoldKey.currentContext!
-        .read<ParaPharmaCubit>();
+    final gCubit = MarketPlaceScreen.marketPlaceScaffoldKey.currentContext
+        ?.read<ParaPharmaCubit>();
     final hCubit =
         HomeScreen.scaffoldKey.currentContext?.read<ParaPharmaCubit>();
     final cubit = context.read<FavoritesCubit>();
@@ -52,7 +52,7 @@ class FavoritesParaPharmaCatalogs extends StatelessWidget {
                       void onLikeTapped(BaseParaPharmaCatalogModel medicine) {
                         final id = medicine.id;
                         cubit.unlikeParaPharma(id);
-                        gCubit.refreshParaPharmaCatalogFavorite(id, false);
+                        gCubit?.refreshParaPharmaCatalogFavorite(id, false);
                         hCubit?.refreshParaPharmaCatalogFavorite(id, false);
                       }
 

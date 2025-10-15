@@ -39,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return StateProvider(
       child: Scaffold(
         key: HomeScreen.scaffoldKey,
-        appBar: HomeAppbar(),
+        appBar: const HomeAppbar(),
         body: BlocBuilder<HomeCubit, HomeState>(
           builder: (context, state) {
             if (state is PromotionLoading) {

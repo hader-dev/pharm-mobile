@@ -13,7 +13,13 @@ class TokenCheckerInterceptor extends Interceptor {
   void onError(DioException err, ErrorInterceptorHandler handler) async {
     final reachedMaxRetries = retryCount >= maxRetries;
 
-    final String errorCode = err.response?.data['code'] ?? "";
+    String errorCode = "";
+
+    try {
+      err.response?.data['code'] ?? "";
+    } catch (e) {
+      errorCode = "";
+    }
 
     final refreshTokenErrorExcludeList = [
       ApiErrorCodes.INCORRECT_PASSWORD.name,

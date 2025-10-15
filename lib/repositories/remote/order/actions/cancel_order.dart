@@ -6,11 +6,10 @@ import 'package:hader_pharm_mobile/utils/urls.dart';
 Future<ResponseOrderCancel> cancelOrder(
     ParamsCancelOrder params, INetworkService client) async {
   try {
-    await client
-        .sendRequest(() => client.patch("${Urls.orders}/${params.id}/status/canceled"));
+    await client.sendRequest(
+        () => client.patch("${Urls.orders}/${params.id}/status/cancelled"));
   } catch (e) {
-    
-    return ResponseOrderCancel(statusCode: 400,success: false);
+    return ResponseOrderCancel(statusCode: 400, success: false);
   }
 
   return ResponseOrderCancel();

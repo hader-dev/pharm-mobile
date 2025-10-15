@@ -19,7 +19,8 @@ class EmptyListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        final availableHeight = constraints.maxHeight;
+        double availableHeight = constraints.maxHeight;
+        availableHeight = availableHeight.isInfinite ? 400.0 : availableHeight;
 
         final imageSize = availableHeight < 600 ? 120.0 : 200.0;
 

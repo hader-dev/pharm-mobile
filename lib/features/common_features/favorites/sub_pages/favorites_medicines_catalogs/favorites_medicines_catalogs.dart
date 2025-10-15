@@ -12,10 +12,10 @@ class FavoritesMedicinesCatalog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final gCubit = MarketPlaceScreen.marketPlaceScaffoldKey.currentContext!
-        .read<MedicineProductsCubit>();
+    final gCubit = MarketPlaceScreen.marketPlaceScaffoldKey.currentContext
+        ?.read<MedicineProductsCubit?>();
     final hCubit =
-        HomeScreen.scaffoldKey.currentContext?.read<MedicineProductsCubit>();
+        HomeScreen.scaffoldKey.currentContext?.read<MedicineProductsCubit?>();
     final cubit = context.read<FavoritesCubit>();
 
     return BlocBuilder<FavoritesCubit, FavoritesState>(
@@ -51,7 +51,7 @@ class FavoritesMedicinesCatalog extends StatelessWidget {
                     onRemoveFromFavorites: () {
                       final id = state.likedMedicinesCatalogs[index].id;
                       cubit.unlikeMedicine(id);
-                      gCubit.refreshMedicineCatalogFavorite(id, false);
+                      gCubit?.refreshMedicineCatalogFavorite(id, false);
                       hCubit?.refreshMedicineCatalogFavorite(id, false);
                     },
                     medicineData: state.likedMedicinesCatalogs[index],
