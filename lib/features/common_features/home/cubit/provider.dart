@@ -23,7 +23,9 @@ class StateProvider extends StatelessWidget {
         create: (context) => HomeCubit(
             announcementsRepo: PromotionRepository(
                 client: getItInstance.get<INetworkService>()))
-          ..getPromotions(),
+          ..getPromotions(
+            limit: 5,
+          ),
       ),
       BlocProvider(
         create: (context) => VendorsCubit(

@@ -69,10 +69,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const ResponsiveGap.s24(),
-                      if (context.read<HomeCubit>().announcements.isNotEmpty)
+                      if (state.announcements.isNotEmpty)
                         PromotionSectionV4(
-                            announcements:
-                                context.read<HomeCubit>().announcements,
+                            announcements: state.announcements,
                             minSectionHeight: context.deviceSize.width <=
                                     DeviceSizes.mediumMobile.width
                                 ? minSectionHeight * 1.4

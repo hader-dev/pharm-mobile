@@ -10,6 +10,7 @@ Future<ResponseLoadAnnouncements> loadAnnouncements(INetworkService client,
     'limit': limit.toString(),
     'offset': offset.toString(),
     if (companyId != null) 'filters[companyId]': companyId,
+    'sort[createdAt]': 'DESC',
   };
 
   if (search != null && search.isNotEmpty) {

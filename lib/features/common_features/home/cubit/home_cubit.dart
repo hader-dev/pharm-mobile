@@ -6,14 +6,13 @@ import 'package:hader_pharm_mobile/repositories/remote/announcement/announcement
 part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
-  List<AnnouncementModel> announcements = <AnnouncementModel>[];
   final PromotionRepository announcementsRepo;
   HomeCubit({required this.announcementsRepo}) : super(HomeInitial());
 
-  Future<void> getPromotions() async {
-    emit(PromotionLoading());
-    announcements = (await announcementsRepo.getPromotions()).announcements;
-    emit(PromotionLoadingSuccess());
+  Future<void> getPromotions({int limit = 10}) async {
+    emit(state.toLoading());
+    final announcements =
+        (await announcementsRepo.getPromotions(limit: limit)).announcements;
+    emit(state.toLoadingSuccess(announcements: announcements));
   }
-
 }
