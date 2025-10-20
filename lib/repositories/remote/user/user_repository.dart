@@ -1,6 +1,5 @@
-import '../../../features/common_features/edit_profile/hooks_data_model/edit_profile_form.dart'
-    show EditProfileFormDataModel;
-import '../../../models/user.dart';
+import 'package:hader_pharm_mobile/features/common_features/edit_profile/hooks_data_model/edit_profile_form.dart';
+import 'package:hader_pharm_mobile/models/user.dart';
 
 abstract class IUserRepository {
   Future<UserModel> getCurrentUserData();

@@ -37,6 +37,7 @@ class UserManager {
   }) async {
     await userRepo.emailSignUp(email, fullName, password,
         userImagePath: userImagePath);
+    getItInstance.get<INotificationService>().registerUserDevice();
   }
 
   /// Resends the OTP code for the given email.
