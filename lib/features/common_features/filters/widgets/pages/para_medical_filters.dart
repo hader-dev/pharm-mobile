@@ -15,12 +15,12 @@ class ParaMedicalFiltersView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ParaMedicalFiltersCubit, ParaMedicalFiltersState>(
-      builder: (context, state) {
-        return IndexedStack(
-          index: BlocProvider.of<ParaMedicalFiltersCubit>(context).pageIndex,
-          children: screens,
-        );
-      }
-    );
+        builder: (context, state) {
+      return IndexedStack(
+        index:
+            BlocProvider.of<ParaMedicalFiltersCubit>(context).state.pageIndex,
+        children: screens,
+      );
+    });
   }
 }

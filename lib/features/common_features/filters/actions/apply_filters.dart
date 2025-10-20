@@ -13,7 +13,8 @@ void applyFiltersMedical(BuildContext context) {
 }
 
 void applyFiltersParaPharm(BuildContext context) {
-  final appliedFilters = context.read<ParaMedicalFiltersCubit>().appliedFilters;
+  final appliedFilters =
+      context.read<ParaMedicalFiltersCubit>().state.appliedFilters;
   final medicineCatalogCubit = context.read<ParaPharmaCubit>();
   medicineCatalogCubit.updatedFilters(appliedFilters);
   medicineCatalogCubit.getParaPharmas(filters: appliedFilters);

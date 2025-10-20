@@ -9,34 +9,56 @@ class FiltersButtonParapharm extends StatelessWidget {
   final IconData icon;
   final String label;
   final VoidCallback? onPressed;
+  final bool isActive;
   const FiltersButtonParapharm(
-      {super.key, required this.icon, required this.label, this.onPressed});
+      {super.key,
+      required this.isActive,
+      required this.icon,
+      required this.label,
+      this.onPressed});
 
   factory FiltersButtonParapharm.filters({
     required AppLocalizations localization,
+    required bool isActive,
     VoidCallback? onPressed,
   }) =>
       FiltersButtonParapharm(
+          isActive: isActive,
           icon: Iconsax.filter_search,
           label: localization.filters,
           onPressed: onPressed);
 
   factory FiltersButtonParapharm.name({
+    required bool isActive,
     required AppLocalizations localization,
     VoidCallback? onPressed,
   }) =>
       FiltersButtonParapharm(
+          isActive: isActive,
           icon: Iconsax.search_favorite,
           label: localization.filter_items_name,
           onPressed: onPressed);
 
   factory FiltersButtonParapharm.price({
     required AppLocalizations localization,
+    required bool isActive,
     VoidCallback? onPressed,
   }) =>
       FiltersButtonParapharm(
+          isActive: isActive,
           icon: Iconsax.money4,
           label: localization.price,
+          onPressed: onPressed);
+
+  factory FiltersButtonParapharm.clear({
+    required AppLocalizations localization,
+    required bool isActive,
+    VoidCallback? onPressed,
+  }) =>
+      FiltersButtonParapharm(
+          isActive: isActive,
+          icon: Iconsax.refresh_circle,
+          label: localization.reset,
           onPressed: onPressed);
 
   @override
@@ -44,7 +66,8 @@ class FiltersButtonParapharm extends StatelessWidget {
     return OutlinedButton(
       style: OutlinedButton.styleFrom(
         side: const BorderSide(color: AppColors.accent1Shade1),
-        iconColor: AppColors.accent1Shade1,
+        iconColor: isActive ? AppColors.bgWhite : AppColors.accent1Shade1,
+        backgroundColor: isActive ? AppColors.accent1Shade1 : AppColors.bgWhite,
       ),
       onPressed: onPressed,
       child: Row(
@@ -53,8 +76,9 @@ class FiltersButtonParapharm extends StatelessWidget {
           const ResponsiveGap.s4(),
           Text(
             label,
-            style: context.responsiveTextTheme.current.bodySmall
-                .copyWith(color: AppColors.accent1Shade1),
+            style: context.responsiveTextTheme.current.bodySmall.copyWith(
+              color: isActive ? AppColors.bgWhite : AppColors.accent1Shade1,
+            ),
           ),
         ],
       ),

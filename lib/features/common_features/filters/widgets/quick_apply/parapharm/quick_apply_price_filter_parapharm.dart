@@ -30,20 +30,21 @@ class QuickApplyPriceFilterParapharm extends StatelessWidget {
           title: title,
         ),
         const ResponsiveGap.s12(),
-        Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
+        const Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
         const ResponsiveGap.s24(),
         BlocBuilder<ParaMedicalFiltersCubit, ParaMedicalFiltersState>(
           builder: (context, state) {
             final cubit = context.read<ParaMedicalFiltersCubit>();
+            final valueKey = ValueKey(
+                '${state.appliedFilters.gteUnitPriceHt ?? 'null'}_${state.appliedFilters.lteUnitPriceHt ?? 'null'}');
             return FilterPriceSection(
-              key: ValueKey(
-                  '${cubit.appliedFilters.gteUnitPriceHt ?? 'null'}_${cubit.appliedFilters.lteUnitPriceHt ?? 'null'}'),
-              minPrice: cubit.appliedFilters.gteUnitPriceHt != null
-                  ? double.tryParse(cubit.appliedFilters.gteUnitPriceHt!)
-                  : null,
-              maxPrice: cubit.appliedFilters.lteUnitPriceHt != null
-                  ? double.tryParse(cubit.appliedFilters.lteUnitPriceHt!)
-                  : null,
+              key: valueKey,
+              minPrice: double.tryParse(
+                      state.appliedFilters.gteUnitPriceHt ?? "0.0") ??
+                  0,
+              maxPrice: double.tryParse(
+                      state.appliedFilters.lteUnitPriceHt ?? "100000") ??
+                  100000,
               onChanged: (min, max) => cubit.updatePriceRange(min, max),
               minLimit: 0,
               maxLimit: 100000,
@@ -68,6 +69,7 @@ class QuickApplyPriceFilterParapharm extends StatelessWidget {
                       context
                           .read<ParaMedicalFiltersCubit>()
                           .resetPriceFilter();
+                      context.pop();
                     },
                     borderColor: AppColors.accent1Shade1,
                   ),

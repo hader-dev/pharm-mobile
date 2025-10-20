@@ -40,7 +40,6 @@ class ParaMedicalFilters extends Equatable {
   final String? gteUnitPriceHt;
   final String? lteUnitPriceHt;
 
-
   const ParaMedicalFilters({
     this.name = const [],
     this.description = const [],
@@ -133,8 +132,7 @@ class ParaMedicalFilters extends Equatable {
       type.isNotEmpty ||
       stabilityDuration.isNotEmpty ||
       code.isNotEmpty ||
-      reimbursement.isNotEmpty ||
-      (gteUnitPriceHt != null && lteUnitPriceHt != null);
+      reimbursement.isNotEmpty;
 
   ParaMedicalFilters updateSearchFilter(
       ParaMedicalFiltersKeys key, String text) {

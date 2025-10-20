@@ -34,7 +34,7 @@ class _ParaPharmaProductsPageState extends State<ParaPharmaProductsPage>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const FiltersBar(),
+            FiltersBar(),
             Expanded(
               child: BlocBuilder<ParaPharmaCubit, ParaPharmaState>(
                 builder: (context, state) {

@@ -9,6 +9,7 @@ sealed class MedicineProductsState {
   final Timer? debounce;
   final double lastOffset;
   final bool displayFilters;
+  final TextEditingController searchController;
 
   const MedicineProductsState({
     required this.lastOffset,
@@ -18,13 +19,16 @@ sealed class MedicineProductsState {
     required this.medicines,
     required this.displayFilters,
     required this.params,
+    required this.searchController,
     required this.selectedMedicineSearchFilter,
   });
 
   bool get hasActiveFilters =>
-      params.isNotEmpty ||
-      params.gteUnitPriceHt != null ||
-      params.lteUnitPriceHt != null;
+      params.isNotEmpty || hasPriceFilters || searchController.text.isNotEmpty;
+
+  bool get hasPriceFilters =>
+      (params.gteUnitPriceHt != null && params.gteUnitPriceHt != "0.0") ||
+      (params.lteUnitPriceHt != null && params.lteUnitPriceHt != "100000.0");
 
   MedicineProductsState copyWith({
     double? lastOffset,
@@ -46,6 +50,7 @@ sealed class MedicineProductsState {
       params: params ?? this.params,
       selectedMedicineSearchFilter:
           selectedMedicineSearchFilter ?? this.selectedMedicineSearchFilter,
+      searchController: searchController,
     );
   }
 
@@ -63,6 +68,7 @@ sealed class MedicineProductsState {
     return MedicineProductsInitial(
       lastOffset: lastOffset,
       debounce: debounce,
+      searchController: searchController,
       totalItemsCount: totalItemsCount,
       offSet: offSet,
       medicines: medicines,
@@ -143,6 +149,7 @@ sealed class MedicineProductsState {
 
 final class MedicineProductsInitial extends MedicineProductsState {
   MedicineProductsInitial({
+    required super.searchController,
     super.lastOffset = 0.0,
     super.debounce,
     super.totalItemsCount = 0,
@@ -165,6 +172,7 @@ final class MedicineProductsLoading extends MedicineProductsState {
           displayFilters: state.displayFilters,
           params: state.params,
           selectedMedicineSearchFilter: state.selectedMedicineSearchFilter,
+          searchController: state.searchController,
         );
 }
 
@@ -179,6 +187,7 @@ final class LoadingMoreMedicine extends MedicineProductsState {
           displayFilters: state.displayFilters,
           params: state.params,
           selectedMedicineSearchFilter: state.selectedMedicineSearchFilter,
+          searchController: state.searchController,
         );
 }
 
@@ -193,6 +202,7 @@ final class MedicineProductsLoaded extends MedicineProductsState {
           displayFilters: state.displayFilters,
           params: state.params,
           selectedMedicineSearchFilter: state.selectedMedicineSearchFilter,
+          searchController: state.searchController,
         );
 }
 
@@ -207,6 +217,7 @@ final class MedicineProductsLoadingFailed extends MedicineProductsState {
           displayFilters: state.displayFilters,
           params: state.params,
           selectedMedicineSearchFilter: state.selectedMedicineSearchFilter,
+          searchController: state.searchController,
         );
 }
 
@@ -221,6 +232,7 @@ final class MedicinesLoadLimitReached extends MedicineProductsState {
           displayFilters: state.displayFilters,
           params: state.params,
           selectedMedicineSearchFilter: state.selectedMedicineSearchFilter,
+          searchController: state.searchController,
         );
 }
 
@@ -235,6 +247,7 @@ final class MedicineSearchFilterChanged extends MedicineProductsState {
           displayFilters: state.displayFilters,
           params: state.params,
           selectedMedicineSearchFilter: state.selectedMedicineSearchFilter,
+          searchController: state.searchController,
         );
 }
 
@@ -249,6 +262,7 @@ final class MedicineProductsScroll extends MedicineProductsState {
           displayFilters: state.displayFilters,
           params: state.params,
           selectedMedicineSearchFilter: state.selectedMedicineSearchFilter,
+          searchController: state.searchController,
         );
 }
 
@@ -269,6 +283,7 @@ final class MedicineLiked extends MedicineProductsState {
           displayFilters: state.displayFilters,
           params: state.params,
           selectedMedicineSearchFilter: state.selectedMedicineSearchFilter,
+          searchController: state.searchController,
         );
 }
 
@@ -287,5 +302,6 @@ final class MedicineLikeFailed extends MedicineProductsState {
           displayFilters: state.displayFilters,
           params: state.params,
           selectedMedicineSearchFilter: state.selectedMedicineSearchFilter,
+          searchController: state.searchController,
         );
 }

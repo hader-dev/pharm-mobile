@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
-class PriceRangeSlider extends StatefulWidget {
+class PriceRangeSlider extends StatelessWidget {
   final double? minPrice;
   final double? maxPrice;
   final Function(double min, double max) onChanged;
@@ -19,40 +20,9 @@ class PriceRangeSlider extends StatefulWidget {
   });
 
   @override
-  State<PriceRangeSlider> createState() => _PriceRangeSliderState();
-}
-
-class _PriceRangeSliderState extends State<PriceRangeSlider> {
-  late RangeValues _currentRangeValues;
-
-  @override
-  void initState() {
-    super.initState();
-    _currentRangeValues = RangeValues(
-      widget.minPrice ?? widget.minLimit,
-      widget.maxPrice ?? widget.maxLimit,
-    );
-  }
-
-  @override
-  void didUpdateWidget(PriceRangeSlider oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    
-    
-    final oldMin = oldWidget.minPrice ?? oldWidget.minLimit;
-    final oldMax = oldWidget.maxPrice ?? oldWidget.maxLimit;
-    final newMin = widget.minPrice ?? widget.minLimit;
-    final newMax = widget.maxPrice ?? widget.maxLimit;
-    
-    if (oldMin != newMin || oldMax != newMax) {
-      setState(() {
-        _currentRangeValues = RangeValues(newMin, newMax);
-      });
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final range = RangeValues(minPrice ?? minLimit, maxPrice ?? maxLimit);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -60,23 +30,22 @@ class _PriceRangeSliderState extends State<PriceRangeSlider> {
           context.translation!.price_range_ht,
           style: Theme.of(context).textTheme.titleMedium,
         ),
-        Gap(8),
+        const Gap(AppSizesManager.p8),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('${_currentRangeValues.start.toStringAsFixed(0)} ${context.translation!.currency_symbol}'),
-            Text('${_currentRangeValues.end.toStringAsFixed(0)} ${context.translation!.currency_symbol}'),
+            Text(
+                '${range.start.toStringAsFixed(0)} ${context.translation!.currency_symbol}'),
+            Text(
+                '${range.end.toStringAsFixed(0)} ${context.translation!.currency_symbol}'),
           ],
         ),
         RangeSlider(
-          values: _currentRangeValues,
-          min: widget.minLimit,
-          max: widget.maxLimit,
+          values: range,
+          min: minLimit,
+          max: maxLimit,
           onChanged: (RangeValues values) {
-            setState(() {
-              _currentRangeValues = values;
-            });
-            widget.onChanged(values.start, values.end);
+            onChanged(values.start, values.end);
           },
         ),
       ],

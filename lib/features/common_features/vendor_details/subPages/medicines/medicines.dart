@@ -38,11 +38,11 @@ class _MedicinesPageState extends State<MedicinesPage>
                   cubit.searchMedicineCatalog(searchValue);
                 },
                 onFilterTap: () {
-                  cubit.searchController.clear();
+                  cubit.state.searchController.clear();
                   cubit.searchMedicineCatalog(null);
                 },
                 hintText: context.translation!.search_by_dci_brand_sku,
-                searchController: cubit.searchController,
+                searchController: cubit.state.searchController,
               ),
             ),
             BlocBuilder<MedicineProductsCubit, MedicineProductsState>(

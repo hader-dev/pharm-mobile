@@ -92,8 +92,9 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
   void searchParaPharmaCatalog(String? text) => debouncerManager.debounce(
       tag: "search", action: () => getParaPharmas(searchValue: text));
 
-  void resetParaPharmaSearchFilter() {
-    getParaPharmas();
+  void resetParaPharmaFilters() {
+    getParaPharmas(filters: const ParaMedicalFilters(), searchValue: null);
+
     emit(state.toSearchFilterChanged(
       searchFilter: null,
       filters: const ParaMedicalFilters(),
@@ -120,7 +121,6 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
 
   Future<void> unlikeParaPharmaCatalog(String paraPharmaCatalogId) async {
     try {
-      
       await favoriteRepository.unLikeParaPharmaCatalog(
           paraPharmaCatalogId: paraPharmaCatalogId);
       emit(state.toLiked(paraPharmaId: paraPharmaCatalogId, isLiked: false));

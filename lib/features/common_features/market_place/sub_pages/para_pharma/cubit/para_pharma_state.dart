@@ -24,10 +24,11 @@ sealed class ParaPharmaState {
   });
 
   bool get hasActiveFilters =>
-      filters.isNotEmpty ||
-      filters.gteUnitPriceHt != null ||
-      filters.lteUnitPriceHt != null ||
-      searchController.text.isNotEmpty;
+      filters.isNotEmpty || hasPriceFilters || searchController.text.isNotEmpty;
+
+  bool get hasPriceFilters =>
+      (filters.gteUnitPriceHt != null && filters.gteUnitPriceHt != "0.0") ||
+      (filters.lteUnitPriceHt != null && filters.lteUnitPriceHt != "100000.0");
 
   ParaPharmaInitial toInitial({
     double lastOffset = 0.0,

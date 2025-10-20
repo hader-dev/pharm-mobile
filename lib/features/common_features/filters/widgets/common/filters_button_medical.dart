@@ -9,34 +9,56 @@ class FiltersButtonMedical extends StatelessWidget {
   final IconData icon;
   final String label;
   final VoidCallback? onPressed;
+  final bool isActive;
   const FiltersButtonMedical(
-      {super.key, required this.icon, required this.label, this.onPressed});
+      {super.key,
+      required this.icon,
+      required this.label,
+      this.onPressed,
+      required this.isActive});
 
   factory FiltersButtonMedical.filters({
     required AppLocalizations localization,
+    required bool isActive,
     VoidCallback? onPressed,
   }) =>
       FiltersButtonMedical(
+          isActive: isActive,
           icon: Iconsax.filter_search,
           label: localization.filters,
           onPressed: onPressed);
 
   factory FiltersButtonMedical.dci({
     required AppLocalizations localization,
+    required bool isActive,
     VoidCallback? onPressed,
   }) =>
       FiltersButtonMedical(
+          isActive: isActive,
           icon: Iconsax.search_favorite,
           label: localization.filter_items_dci,
           onPressed: onPressed);
 
   factory FiltersButtonMedical.price({
     required AppLocalizations localization,
+    required bool isActive,
     VoidCallback? onPressed,
   }) =>
       FiltersButtonMedical(
+          isActive: isActive,
           icon: Iconsax.money4,
           label: localization.price,
+          onPressed: onPressed);
+
+  factory FiltersButtonMedical.clear({
+    required AppLocalizations localization,
+    required bool isActive,
+    VoidCallback? onPressed,
+  }) =>
+      FiltersButtonMedical(
+          isActive: isActive,
+          icon: Iconsax.refresh_circle,
+          label: localization.reset,
           onPressed: onPressed);
 
   @override

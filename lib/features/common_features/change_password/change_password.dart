@@ -80,13 +80,13 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Gap(
+                          const Gap(
                             AppSizesManager.s12,
                           ),
                           Text(context.translation!.change_password,
                               style: context
                                   .responsiveTextTheme.current.headLine2),
-                          Gap(
+                          const Gap(
                             AppSizesManager.s12,
                           ),
                           Text(

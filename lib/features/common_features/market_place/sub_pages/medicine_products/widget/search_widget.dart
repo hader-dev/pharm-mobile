@@ -22,8 +22,8 @@ class SearchWidget extends StatelessWidget {
             padding: const EdgeInsets.only(left: AppSizesManager.p8),
             child: CustomTextField(
               hintText: context.translation!.medicines_search_field_hint,
-              controller: BlocProvider.of<MedicineProductsCubit>(context)
-                  .searchController,
+              controller:
+                  context.read<MedicineProductsCubit>().state.searchController,
               state: FieldState.normal,
               isEnabled: true,
               prefixIcon: Icon(
@@ -32,7 +32,9 @@ class SearchWidget extends StatelessWidget {
               ),
               suffixIcon: InkWell(
                 onTap: () {
-                  BlocProvider.of<MedicineProductsCubit>(context)
+                  context
+                      .read<MedicineProductsCubit>()
+                      .state
                       .searchController
                       .clear();
                   BlocProvider.of<MedicineProductsCubit>(context)
@@ -57,7 +59,8 @@ class SearchWidget extends StatelessWidget {
                 const EdgeInsets.symmetric(horizontal: AppSizesManager.p12),
             child: BlocBuilder<MedicineProductsCubit, MedicineProductsState>(
               builder: (context, state) {
-                return BlocBuilder<MedicineProductsCubit, MedicineProductsState>(
+                return BlocBuilder<MedicineProductsCubit,
+                    MedicineProductsState>(
                   builder: (context, state) {
                     return Stack(
                       clipBehavior: Clip.none,
@@ -66,7 +69,8 @@ class SearchWidget extends StatelessWidget {
                           Iconsax.filter,
                           color: AppColors.accent1Shade1,
                         ),
-                        if (state.selectedMedicineSearchFilter != SearchMedicineFilters.dci)
+                        if (state.selectedMedicineSearchFilter !=
+                            SearchMedicineFilters.dci)
                           Positioned(
                             top: -4,
                             right: -4,

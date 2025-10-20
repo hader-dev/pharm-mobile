@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/dividers.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
+import 'package:hader_pharm_mobile/features/common_features/filters/cubit/medical/medical_filters_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/filters/cubit/medical/provider.dart';
 import 'package:hader_pharm_mobile/features/common_features/filters/widgets/common/filters_button_medical.dart';
 import 'package:hader_pharm_mobile/features/common_features/filters/widgets/common/filters_button_parapharm.dart';
@@ -19,6 +20,8 @@ class FiltersBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final translation = context.translation!;
+    final cubit = context.read<MedicineProductsCubit>();
+    final filtersCubit = context.read<MedicalFiltersCubit>();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -28,6 +31,7 @@ class FiltersBar extends StatelessWidget {
           child: Row(
             children: [
               FiltersButtonParapharm.filters(
+                isActive: cubit.state.hasActiveFilters,
                 localization: translation,
                 onPressed: () {
                   BottomSheetHelper.showCommonBottomSheet(
@@ -38,6 +42,7 @@ class FiltersBar extends StatelessWidget {
               ),
               const ResponsiveGap.s4(),
               FiltersButtonMedical.dci(
+                isActive: cubit.state.params.dci.isNotEmpty,
                 localization: translation,
                 onPressed: () {
                   BottomSheetHelper.showCommonBottomSheet(
@@ -53,6 +58,8 @@ class FiltersBar extends StatelessWidget {
               const ResponsiveGap.s4(),
               FiltersButtonMedical.price(
                 localization: translation,
+                isActive: cubit.state.params.gteUnitPriceHt != null ||
+                    cubit.state.params.lteUnitPriceHt != null,
                 onPressed: () {
                   BottomSheetHelper.showCommonBottomSheet(
                     context: context,
@@ -62,7 +69,16 @@ class FiltersBar extends StatelessWidget {
                     )),
                   );
                 },
-              )
+              ),
+              const ResponsiveGap.s4(),
+              FiltersButtonMedical.clear(
+                isActive: cubit.state.hasActiveFilters,
+                localization: translation,
+                onPressed: () {
+                  cubit.resetMedicinesSearchFilter();
+                  filtersCubit.resetAllFilters();
+                },
+              ),
             ],
           ),
         ),

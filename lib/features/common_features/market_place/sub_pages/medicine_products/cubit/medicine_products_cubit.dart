@@ -1,6 +1,7 @@
 import 'dart:async' show Timer;
 
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hader_pharm_mobile/models/medical_filters.dart';
 import 'package:hader_pharm_mobile/models/medicine_catalog.dart';
@@ -16,14 +17,15 @@ class MedicineProductsCubit extends Cubit<MedicineProductsState> {
   final MedicineCatalogRepository medicineRepository;
   final FavoriteRepository favoriteRepository;
   final ScrollController scrollController;
-  final TextEditingController searchController;
 
   MedicineProductsCubit(
       {required this.medicineRepository,
       required this.favoriteRepository,
       required this.scrollController,
-      required this.searchController})
-      : super(MedicineProductsInitial()) {
+      required TextEditingController searchController})
+      : super(MedicineProductsInitial(
+          searchController: searchController,
+      )) {
     _onScroll();
   }
   Future<void> getMedicines(
@@ -68,10 +70,14 @@ class MedicineProductsCubit extends Cubit<MedicineProductsState> {
   }
 
   void resetMedicinesSearchFilter() {
-    emit(state.searchFilterChanged(
+    getMedicines(filters: const MedicalFilters());
+
+    emit(
+      state.searchFilterChanged(
         searchFilter: SearchMedicineFilters.dci,
-        params: const MedicalFilters()));
-    getMedicines();
+        params: const MedicalFilters(),
+      ),
+    );
   }
 
   void changeMedicineSearchFilter(SearchMedicineFilters filter) {

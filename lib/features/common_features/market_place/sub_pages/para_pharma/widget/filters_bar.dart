@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/dividers.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
+import 'package:hader_pharm_mobile/features/common_features/filters/cubit/parapharm/para_medical_filters_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/filters/cubit/parapharm/provider.dart';
 import 'package:hader_pharm_mobile/features/common_features/filters/widgets/common/filters_button_parapharm.dart';
 import 'package:hader_pharm_mobile/features/common_features/filters/widgets/quick_apply/parapharm/quick_apply_filter_parapharm.dart';
@@ -18,10 +19,10 @@ class FiltersBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final translation = context.translation!;
+    final cubit = context.read<ParaPharmaCubit>();
+    final filtersCubit = context.read<ParaMedicalFiltersCubit>();
+
     return BlocBuilder<ParaPharmaCubit, ParaPharmaState>(
-      buildWhen: (prev, curr) =>
-          (prev.displayFilters != curr.displayFilters) ||
-          (prev.totalItemsCount != curr.totalItemsCount),
       builder: (context, state) {
         return AnimatedSize(
           duration: const Duration(milliseconds: 250),
@@ -35,6 +36,7 @@ class FiltersBar extends StatelessWidget {
                       child: Row(
                         children: [
                           FiltersButtonParapharm.filters(
+                            isActive: state.hasActiveFilters,
                             localization: translation,
                             onPressed: () {
                               BottomSheetHelper.showCommonBottomSheet(
@@ -45,6 +47,7 @@ class FiltersBar extends StatelessWidget {
                           ),
                           const ResponsiveGap.s4(),
                           FiltersButtonParapharm.name(
+                            isActive: state.filters.name.isNotEmpty,
                             localization: translation,
                             onPressed: () {
                               BottomSheetHelper.showCommonBottomSheet(
@@ -60,6 +63,7 @@ class FiltersBar extends StatelessWidget {
                           ),
                           const ResponsiveGap.s4(),
                           FiltersButtonParapharm.price(
+                            isActive: state.hasPriceFilters,
                             localization: translation,
                             onPressed: () {
                               BottomSheetHelper.showCommonBottomSheet(
@@ -72,6 +76,15 @@ class FiltersBar extends StatelessWidget {
                               );
                             },
                           ),
+                          const ResponsiveGap.s4(),
+                          FiltersButtonParapharm.clear(
+                            isActive: state.hasActiveFilters,
+                            localization: translation,
+                            onPressed: () {
+                              cubit.resetParaPharmaFilters();
+                              filtersCubit.resetAllFilters();
+                            },
+                          )
                         ],
                       ),
                     ),
