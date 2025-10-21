@@ -92,7 +92,6 @@ class MedicineWidget2 extends StatelessWidget {
                 children: [
                   if (!hideLikeButton)
                     Row(children: [
-                      //    CustomChip(label: "Antibiotic", color: AppColors.bgDarken2, onTap: () {}),
                       Spacer(),
                       InkWell(
                         splashColor: Colors.transparent,
@@ -107,7 +106,6 @@ class MedicineWidget2 extends StatelessWidget {
                     ]),
                   if (!hideRemoveButton)
                     Row(children: [
-                      // CustomChip(label: "Antibiotic", color: AppColors.bgDarken2, onTap: () {}),
                       Spacer(),
                       InkWell(
                         splashColor: Colors.transparent,
@@ -154,7 +152,9 @@ class MedicineWidget2 extends StatelessWidget {
                       ),
                     ),
                     ResponsiveGap.s4(),
-                    Text(medicineData.company?.name ?? "unkown",
+                    Text(
+                        medicineData.company?.name ??
+                            context.translation!.unknown,
                         style: context.responsiveTextTheme.current.bodyXSmall
                             .copyWith(
                                 fontWeight: context.responsiveTextTheme.current

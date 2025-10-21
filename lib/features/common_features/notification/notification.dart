@@ -25,9 +25,7 @@ class NotificaitonScreen extends StatelessWidget {
           padding: const EdgeInsets.all(AppSizesManager.p8),
           child: Column(
             children: [
-              Expanded(
-                  child:
-                      NotificationList()),
+              Expanded(child: NotificationList()),
               PrimaryTextButton(
                 color: AppColors.accent1Shade1,
                 minWidth: double.maxFinite,

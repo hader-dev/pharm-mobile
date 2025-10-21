@@ -21,8 +21,8 @@ class FiltersAccordionClinical extends StatelessWidget {
           children: [
             InkAccordionItem(
               rawTitle: translation.filter_items_dci,
-              onTap: () =>
-                  navigateToMedicalFiltersApplyView(context, MedicalFiltersKeys.dci),
+              onTap: () => navigateToMedicalFiltersApplyView(
+                  context, MedicalFiltersKeys.dci),
               rawSubtitle: getDisplayedFiltersAsRawString(
                   context, MedicalFiltersKeys.dci),
             ),
@@ -35,8 +35,8 @@ class FiltersAccordionClinical extends StatelessWidget {
             ),
             InkAccordionItem(
               rawTitle: translation.filter_items_form,
-              onTap: () =>
-                  navigateToMedicalFiltersApplyView(context, MedicalFiltersKeys.form),
+              onTap: () => navigateToMedicalFiltersApplyView(
+                  context, MedicalFiltersKeys.form),
               rawSubtitle: getDisplayedFiltersAsRawString(
                   context, MedicalFiltersKeys.form),
             ),

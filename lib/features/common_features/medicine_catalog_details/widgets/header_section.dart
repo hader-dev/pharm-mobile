@@ -29,7 +29,7 @@ class HeaderSection extends StatelessWidget {
         children: [
           Text(medicineCatalogData.dci ?? "No dci Available",
               style: context.responsiveTextTheme.current.headLine2),
-   const ResponsiveGap.s12(),
+          const ResponsiveGap.s12(),
           IntrinsicWidth(
             child: CustomChip(
               label: medicineCatalogData.medicine.brandName,
@@ -37,7 +37,7 @@ class HeaderSection extends StatelessWidget {
               onTap: () {},
             ),
           ),
-   const ResponsiveGap.s12(),
+          const ResponsiveGap.s12(),
           Row(
             children: [
               Icon(

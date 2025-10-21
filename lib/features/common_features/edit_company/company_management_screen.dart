@@ -160,9 +160,8 @@ class _EditCompanyScreenState extends State<EditCompanyScreen> {
                               child: Text(
                                 context.translation!.create_company,
                                 style: context
-                                    .responsiveTextTheme.current.body1Medium.copyWith(
-                                      color: Colors.white
-                                    ),
+                                    .responsiveTextTheme.current.body1Medium
+                                    .copyWith(color: Colors.white),
                               ),
                             ),
                           ],

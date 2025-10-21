@@ -17,7 +17,7 @@ class JwtDecoded {
     return JwtDecoded(
       sub: map['sub'] ?? "",
       roleId: map['roleId'] ?? 3,
-      companyId: map['companyId'] ,
+      companyId: map['companyId'],
       iat: map['iat'] ?? 0,
       exp: map['exp'] ?? 0,
     );
@@ -33,7 +33,8 @@ class JwtDecoded {
     };
   }
 
-  DateTime get expirationDate => DateTime.fromMillisecondsSinceEpoch(exp * 1000);
+  DateTime get expirationDate =>
+      DateTime.fromMillisecondsSinceEpoch(exp * 1000);
 
   DateTime get issuedAtDate => DateTime.fromMillisecondsSinceEpoch(iat * 1000);
 }

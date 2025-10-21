@@ -29,13 +29,13 @@ class OrderClaimHeaderModel {
 
   final String orderItemId;
   final int claimStatusId;
-  final String subject ;
+  final String subject;
   final DateTime createdAt;
 
   OrderClaimHeaderModel(
       {required this.id,
       required this.createdAt,
-      required this.subject, 
+      required this.subject,
       required this.fromCompanyId,
       required this.toCompanyId,
       required this.orderId,

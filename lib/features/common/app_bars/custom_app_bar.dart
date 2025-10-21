@@ -29,8 +29,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Container(
       alignment: Alignment.center,
       padding: EdgeInsets.only(
-          top: topPadding == 0 ? topPadding : MediaQuery.of(context).padding.top,
-          bottom: bottomPadding == 0 ? bottomPadding : MediaQuery.of(context).padding.bottom,
+          top:
+              topPadding == 0 ? topPadding : MediaQuery.of(context).padding.top,
+          bottom: bottomPadding == 0
+              ? bottomPadding
+              : MediaQuery.of(context).padding.bottom,
           left: leftPadding,
           right: rightPadding),
       color: bgColor,
@@ -43,9 +46,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           const SizedBox(
             width: AppSizesManager.s4,
           ),
-          ConstrainedBox(constraints: BoxConstraints(maxWidth: MediaQuery.sizeOf(context).width * 2 / 4), child: title),
+          ConstrainedBox(
+              constraints: BoxConstraints(
+                  maxWidth: MediaQuery.sizeOf(context).width * 2 / 4),
+              child: title),
           const Spacer(),
-          if (trailing != null) Row(crossAxisAlignment: CrossAxisAlignment.center, children: [...trailing!]),
+          if (trailing != null)
+            Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [...trailing!]),
         ],
       ),
     );

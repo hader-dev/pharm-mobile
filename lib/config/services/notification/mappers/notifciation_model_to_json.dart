@@ -10,6 +10,6 @@ Map<String, dynamic> mapNotificationModelToJson(NotificationModel model) {
     'createdAt': model.createdAt.toIso8601String(),
     'clientId': model.clientId,
     'redirectUrl': model.redirectUrl,
-    'payload':model.actionPayload
+    'payload': model.actionPayload
   };
 }

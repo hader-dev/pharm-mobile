@@ -49,7 +49,6 @@ class OrdersDetailsPage extends StatelessWidget {
 
           final item = cubit.state.orderData;
 
-
           return SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),
             child: Column(

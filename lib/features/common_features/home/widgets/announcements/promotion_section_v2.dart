@@ -77,7 +77,8 @@ class PromotionSectionV2 extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       physics: const AlwaysScrollableScrollPhysics(),
                       itemCount: announcements.length,
-                      separatorBuilder: (context, index) => const ResponsiveGap.s8(),
+                      separatorBuilder: (context, index) =>
+                          const ResponsiveGap.s8(),
                       itemBuilder: (context, index) {
                         return SizedBox(
                           width: constraints.maxWidth * 0.65,

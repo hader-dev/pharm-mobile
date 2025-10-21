@@ -7,8 +7,7 @@ import 'package:hader_pharm_mobile/utils/data_loader_helper.dart';
 Future<ResponseLoadAnnouncements> loadDummyAnnouncements() async {
   var data = jsonDecode(
       await DataLoaderHelper.loadDummyData(JsonAssetStrings.promotionsJson));
-  var parsedList =
-      jsonToAnnouncementsList(data);
+  var parsedList = jsonToAnnouncementsList(data);
 
   return ResponseLoadAnnouncements(announcements: parsedList);
 }

@@ -78,7 +78,8 @@ class PromotionItemWidget3 extends StatelessWidget {
 
               Text(
                 announcement.title,
-                style: context.responsiveTextTheme.current.headLine3Medium.copyWith(
+                style: context.responsiveTextTheme.current.headLine3Medium
+                    .copyWith(
                   color: AppColors.accent1Shade1,
                 ),
               ),
@@ -86,10 +87,8 @@ class PromotionItemWidget3 extends StatelessWidget {
 
               Text(
                 announcement.createdAt.formatYMD,
-                style:
-                    context.responsiveTextTheme.current.body3Medium.copyWith(
-                      color: Colors.grey
-                    ),
+                style: context.responsiveTextTheme.current.body3Medium
+                    .copyWith(color: Colors.grey),
               ),
               const ResponsiveGap.s4(),
             ],

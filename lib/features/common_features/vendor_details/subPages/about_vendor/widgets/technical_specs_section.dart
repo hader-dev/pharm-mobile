@@ -21,7 +21,8 @@ class SpecificationsWidget extends StatelessWidget {
             child: InfoRow(
                 label: entry.key,
                 contentDirection: Axis.vertical,
-                dataValue: entry.value.isNotEmpty ? entry.value : "No data available"),
+                dataValue:
+                    entry.value.isNotEmpty ? entry.value : "No data available"),
           );
         }),
       ],

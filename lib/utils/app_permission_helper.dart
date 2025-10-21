@@ -55,7 +55,8 @@ class AppPermissionsHelper {
       if (Platform.isAndroid) {
         sdkInt = await DeviceInfo.getSdkInt();
         if (sdkInt > 29) {
-          statuses = await <Permission>[Permission.manageExternalStorage].request();
+          statuses =
+              await <Permission>[Permission.manageExternalStorage].request();
         } else {
           statuses = await <Permission>[Permission.storage].request();
         }
@@ -69,7 +70,8 @@ class AppPermissionsHelper {
 
       if (Platform.isAndroid) {
         if (sdkInt > 29) {
-          if ((statuses[Permission.manageExternalStorage] == PermissionStatus.granted)) {
+          if ((statuses[Permission.manageExternalStorage] ==
+              PermissionStatus.granted)) {
             permissionsGranted = true;
             break;
           }

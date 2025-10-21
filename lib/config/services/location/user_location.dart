@@ -19,7 +19,8 @@ class LocationManager {
             context: RoutingManager.rootNavigatorKey.currentContext!,
             builder: (BuildContext context) => AlertDialog(
                     title: const Text('Location Permission Required'),
-                    content: const Text('Please enable location permission in settings.'),
+                    content: const Text(
+                        'Please enable location permission in settings.'),
                     actions: <Widget>[
                       TextButton(
                         child: const Text('Settings'),
@@ -36,7 +37,10 @@ class LocationManager {
     return currentLocation;
   }
 
-  Future<PermissionStatus> requestLocationPermission(Function? onDeniedCallbackFunc) async {
-    return await Permission.location.onDeniedCallback(onDeniedCallbackFunc!()).request();
+  Future<PermissionStatus> requestLocationPermission(
+      Function? onDeniedCallbackFunc) async {
+    return await Permission.location
+        .onDeniedCallback(onDeniedCallbackFunc!())
+        .request();
   }
 }

@@ -26,7 +26,8 @@ class DioNetworkManager extends INetworkService {
 
   DioNetworkManager._internal();
 
-  Future<void> init(String apiUrl, Dio client, TokenManager tokenManager) async {
+  Future<void> init(
+      String apiUrl, Dio client, TokenManager tokenManager) async {
     baseUrl = apiUrl.replaceAll(RegExp(r'\s+'), '');
 
     client.options.baseUrl = baseUrl;

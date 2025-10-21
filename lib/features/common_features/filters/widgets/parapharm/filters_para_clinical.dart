@@ -19,8 +19,6 @@ class FiltersAccordionParaClinical extends StatelessWidget {
           rawTitle: translation.filters_clinincal,
           isExpanded: false,
           children: [
-           
-            
             InkAccordionItem(
               rawTitle: translation.filter_items_dosage,
               onTap: () => navigateToParaFiltersApplyView(
@@ -28,11 +26,10 @@ class FiltersAccordionParaClinical extends StatelessWidget {
               rawSubtitle: getDisplayedParaFiltersAsRawString(
                   context, ParaMedicalFiltersKeys.dosage),
             ),
-
             InkAccordionItem(
               rawTitle: translation.filter_items_condition,
-              onTap: () =>
-                  navigateToParaFiltersApplyView(context, ParaMedicalFiltersKeys.condition),
+              onTap: () => navigateToParaFiltersApplyView(
+                  context, ParaMedicalFiltersKeys.condition),
               rawSubtitle: getDisplayedParaFiltersAsRawString(
                   context, ParaMedicalFiltersKeys.condition),
             ),

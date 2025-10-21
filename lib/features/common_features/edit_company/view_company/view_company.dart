@@ -54,7 +54,6 @@ class ViewCompanyScreen extends StatelessWidget {
                 const EdgeInsets.symmetric(horizontal: AppSizesManager.p16),
             child: BlocBuilder<EditCompanyCubit, EditCompanyState>(
               builder: (context, state) {
-                
                 if (state is EditCompanyLoading) {
                   return const Center(child: CircularProgressIndicator());
                 }

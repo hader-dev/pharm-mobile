@@ -7,7 +7,6 @@ import 'package:hader_pharm_mobile/repositories/locale/wilaya/responses/load_wil
 import 'wilaya_repository.dart';
 
 class WilayaRepositoryImpl implements IWilayaRepository {
-
   @override
   Future<ResponseLoadWilayaTowns> getWilayaTowns(ParamsLoadWilayaTowns params) {
     return loadWilayaTowns(params);
@@ -15,7 +14,6 @@ class WilayaRepositoryImpl implements IWilayaRepository {
 
   @override
   Future<ResponseLoadWilayas> getWilayas(ParamsLoadWilayas params) {
-   return loadFilters(params);
+    return loadFilters(params);
   }
-
 }

@@ -60,11 +60,10 @@ class InkAccordionState extends State<InkAccordion> {
               Text.rich(
                 TextSpan(
                   text: widget.rawTitle,
-                  style: context.responsiveTextTheme.current.bodySmall
-                      .copyWith(
-                          fontWeight: context.responsiveTextTheme.current
-                              .appFont.appFontBold,
-                          color: TextColors.primary.color),
+                  style: context.responsiveTextTheme.current.bodySmall.copyWith(
+                      fontWeight: context
+                          .responsiveTextTheme.current.appFont.appFontBold,
+                      color: TextColors.primary.color),
                 ),
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,

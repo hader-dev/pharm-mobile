@@ -6,7 +6,11 @@ class CreateCartItemModel {
   final ProductTypes productType;
 
   String note;
-  CreateCartItemModel({required this.productId, required this.quantity, required this.productType, this.note = ''});
+  CreateCartItemModel(
+      {required this.productId,
+      required this.quantity,
+      required this.productType,
+      this.note = ''});
   Map<String, dynamic> toMap() => {
         if (productType == ProductTypes.medicine) ...{
           'medicineCatalogId': productId

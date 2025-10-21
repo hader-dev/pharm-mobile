@@ -102,7 +102,6 @@ class Company extends BaseCompany {
     this.isActive,
   });
 
-
   factory Company.empty() {
     return Company(
       id: '',

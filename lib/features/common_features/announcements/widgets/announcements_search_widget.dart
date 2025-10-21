@@ -17,7 +17,8 @@ class AnnouncementsSearchWidget extends StatelessWidget {
       padding: const EdgeInsets.all(AppSizesManager.p16),
       child: CustomTextField(
         hintText: context.translation!.search_announcements,
-        controller: BlocProvider.of<AllAnnouncementsCubit>(context).searchController,
+        controller:
+            BlocProvider.of<AllAnnouncementsCubit>(context).searchController,
         state: FieldState.normal,
         isEnabled: true,
         prefixIcon: Icon(

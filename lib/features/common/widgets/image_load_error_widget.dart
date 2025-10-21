@@ -5,7 +5,8 @@ import 'package:lucide_icons/lucide_icons.dart';
 
 class ImageLoadErrorWidget extends StatelessWidget {
   final double iconSize;
-  const ImageLoadErrorWidget({super.key, this.iconSize = AppSizesManager.iconSize20});
+  const ImageLoadErrorWidget(
+      {super.key, this.iconSize = AppSizesManager.iconSize20});
 
   @override
   Widget build(BuildContext context) {

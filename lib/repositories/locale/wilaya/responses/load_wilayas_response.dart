@@ -1,4 +1,3 @@
-
 import 'package:hader_pharm_mobile/models/wilaya.dart';
 
 class ResponseLoadWilayas {

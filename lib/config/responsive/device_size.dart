@@ -49,7 +49,7 @@ extension DeviceSizesExtension on DeviceSizes {
       return DeviceSizes.mediumMobile;
     } else if (width < DeviceSizes.smallTablet.width) {
       return DeviceSizes.largeMobile;
-    }else {
+    } else {
       return DeviceSizes.largeTablet;
     }
   }

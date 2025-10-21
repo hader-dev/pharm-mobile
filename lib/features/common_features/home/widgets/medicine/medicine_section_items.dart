@@ -42,10 +42,8 @@ class MedicinesSectionItems extends StatelessWidget {
               ? cubit.unlikeMedicinesCatalog(medicine.id)
               : cubit.likeMedicinesCatalog(medicine.id);
 
-          gCubit.refreshMedicineCatalogFavorite(
-              medicine.id, !medicine.isLiked);
-          hCubit.refreshMedicineCatalogFavorite(
-              medicine.id, !medicine.isLiked);
+          gCubit.refreshMedicineCatalogFavorite(medicine.id, !medicine.isLiked);
+          hCubit.refreshMedicineCatalogFavorite(medicine.id, !medicine.isLiked);
         }
 
         return SizedBox(

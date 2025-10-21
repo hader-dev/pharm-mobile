@@ -78,7 +78,6 @@ class CartCubit extends Cubit<CartState> {
       final cartItems = cartItemModelDataToUi(response.data);
       final cartItemsByVendor =
           await prepareOrderCartitemsByVendor(response.data);
-      
 
       emit(state.toLoadingSuccess(
         cartItems: cartItems,

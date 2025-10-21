@@ -29,11 +29,10 @@ class StateProvider extends StatelessWidget {
       ),
       BlocProvider(
         create: (context) => VendorsCubit(
-          companyRepository:
-              CompanyRepository(
-                client: getItInstance.get<INetworkService>(),
-                userManager: getItInstance.get<UserManager>(),
-              ),
+          companyRepository: CompanyRepository(
+            client: getItInstance.get<INetworkService>(),
+            userManager: getItInstance.get<UserManager>(),
+          ),
           scrollController: ScrollController(),
           searchController: TextEditingController(text: ""),
         )..fetchVendors(),

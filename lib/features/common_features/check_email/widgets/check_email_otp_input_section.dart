@@ -62,15 +62,13 @@ class _CheckEmailOtpInputSectionState extends State<CheckEmailOtpInputSection> {
                       text: translation.resend,
                       style: context.responsiveTextTheme.current.body3Regular
                           .copyWith(
-                              color:
-                                  state.isResendActive
-                                      ? AppColors.accent1Shade1
-                                      : TextColors.secondary.color,
+                              color: state.isResendActive
+                                  ? AppColors.accent1Shade1
+                                  : TextColors.secondary.color,
                               decoration: TextDecoration.underline,
                               decorationColor: TextColors.secondary.color),
                     ),
-                    if (state is TimerCountChanged &&
-                        !state.isResendActive)
+                    if (state is TimerCountChanged && !state.isResendActive)
                       TextSpan(
                         text: ' (${state.count}s)',
                         style: context.responsiveTextTheme.current.body3Regular

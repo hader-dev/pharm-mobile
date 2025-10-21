@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/features/common_features/filters/cubit/medical/medical_filters_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/filters/views/medical/apply_filters_medical_view.dart';
 import 'package:hader_pharm_mobile/features/common_features/filters/views/medical/browse_filters_medical.dart';
+
 class MedicalFiltersView extends StatelessWidget {
   const MedicalFiltersView({super.key});
 
@@ -13,15 +14,12 @@ class MedicalFiltersView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    return  BlocBuilder<MedicalFiltersCubit, MedicalFiltersState>(
-          builder: (context,state) {
-            return IndexedStack(
-              index: BlocProvider.of<MedicalFiltersCubit>(context).pageIndex,
-              children: screens,
-            );
-          }
-        );
-
+    return BlocBuilder<MedicalFiltersCubit, MedicalFiltersState>(
+        builder: (context, state) {
+      return IndexedStack(
+        index: BlocProvider.of<MedicalFiltersCubit>(context).pageIndex,
+        children: screens,
+      );
+    });
   }
 }

@@ -4,9 +4,11 @@ import 'package:permission_handler/permission_handler.dart';
 
 class DeviceGalleryHelper {
   // Method to pick an image from the gallery
-  static Future<XFile?> pickImageFromGallery({ImageSource source = ImageSource.gallery}) async {
+  static Future<XFile?> pickImageFromGallery(
+      {ImageSource source = ImageSource.gallery}) async {
     XFile? image;
-    PermissionStatus isPermissionGranted = await AppPermissionsHelper.checkPhotosPermission();
+    PermissionStatus isPermissionGranted =
+        await AppPermissionsHelper.checkPhotosPermission();
     if (isPermissionGranted == PermissionStatus.granted) {
       final ImagePicker picker = ImagePicker();
       image = await picker.pickImage(source: source);

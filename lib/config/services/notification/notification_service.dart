@@ -100,7 +100,7 @@ class NotificationService implements INotificationService {
   Future<ResponseMarkRead> markReadNotification(ParamsMarkRead params) {
     return notificationRepository.markReadNotification(params);
   }
-  
+
   @override
   Future<ResponseMarkAllRead> markReadAllNotifications() async {
     return notificationRepository.markAllReadNotification();

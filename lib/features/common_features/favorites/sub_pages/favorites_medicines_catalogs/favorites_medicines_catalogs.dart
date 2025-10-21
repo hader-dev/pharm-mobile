@@ -47,6 +47,7 @@ class FavoritesMedicinesCatalog extends StatelessWidget {
                   physics: const AlwaysScrollableScrollPhysics(),
                   itemCount: state.likedMedicinesCatalogs.length,
                   itemBuilder: (context, index) => MedicineWidget2(
+                    hideLikeButton: true,
                     hideRemoveButton: false,
                     onRemoveFromFavorites: () {
                       final id = state.likedMedicinesCatalogs[index].id;

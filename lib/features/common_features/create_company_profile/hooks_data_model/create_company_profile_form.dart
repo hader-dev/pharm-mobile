@@ -33,7 +33,7 @@ class CreateCompanyProfileFormDataModel {
   final String description;
   final bool isActive = true;
 
-  CreateCompanyProfileFormDataModel( {
+  CreateCompanyProfileFormDataModel({
     this.townId = 34000,
     this.companyType = 0,
     this.companyName = '',
@@ -83,10 +83,10 @@ class CreateCompanyProfileFormDataModel {
         description: description ?? this.description,
         rc: rc ?? this.rc,
         bankAccount: bankAccount ?? this.bankAccount,
-        distributorCategoryId: distributorCategoryId ?? this.distributorCategoryId,
-        townId:  townId ?? this.townId,
+        distributorCategoryId:
+            distributorCategoryId ?? this.distributorCategoryId,
+        townId: townId ?? this.townId,
         fiscalId: fiscalId ?? this.fiscalId);
-
   }
 
   Map<String, dynamic> toJson() {

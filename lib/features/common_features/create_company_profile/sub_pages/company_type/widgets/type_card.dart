@@ -64,11 +64,10 @@ class TypeCard extends StatelessWidget {
             if (subtitle != null)
               Text(
                 subtitle!,
-                style: context.responsiveTextTheme.current.body3Medium
-                    .copyWith(
-                        color: selectedTypeIndex == index
-                            ? AppColors.accent1Shade1
-                            : TextColors.primary.color),
+                style: context.responsiveTextTheme.current.body3Medium.copyWith(
+                    color: selectedTypeIndex == index
+                        ? AppColors.accent1Shade1
+                        : TextColors.primary.color),
               ),
           ],
         ),

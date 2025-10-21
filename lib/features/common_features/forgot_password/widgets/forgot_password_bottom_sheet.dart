@@ -16,7 +16,6 @@ class RequestForgotPasswordScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   
     final cubit = context.read<ForgotPasswordCubit>();
     final state = cubit.state;
     final translation = context.translation!;

@@ -1,4 +1,3 @@
-
 import 'package:hader_pharm_mobile/models/medical_filters.dart';
 
 class ResponseLoadFiltersMedical {

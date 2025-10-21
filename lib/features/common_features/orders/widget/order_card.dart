@@ -101,8 +101,13 @@ class OrderCard extends StatelessWidget {
             ),
             const ResponsiveGap.s8(),
             InfoRow(
-              label: displayClientCompanyOrVendor ? context.translation!.client : context.translation!.vendor,
-              dataValue: (displayClientCompanyOrVendor ? orderData.clientCompanyName : orderData.sellerCompanyName) ?? "N/A",
+              label: displayClientCompanyOrVendor
+                  ? context.translation!.client
+                  : context.translation!.vendor,
+              dataValue: (displayClientCompanyOrVendor
+                      ? orderData.clientCompanyName
+                      : orderData.sellerCompanyName) ??
+                  "N/A",
               contentDirection: Axis.vertical,
             ),
             const ResponsiveGap.s12(),

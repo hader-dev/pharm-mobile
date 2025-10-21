@@ -45,7 +45,8 @@ class DeligateOrdersScreen extends StatelessWidget {
             children: [
               const DeligateOrdersSearchWidget(),
               Expanded(
-                child: BlocBuilder<OrdersCubit, OrdersState>(builder: (context, state) {
+                child: BlocBuilder<OrdersCubit, OrdersState>(
+                    builder: (context, state) {
                   if (state.orders.isEmpty) {
                     return RefreshIndicator(
                       onRefresh: () => context.read<OrdersCubit>().getOrders(),

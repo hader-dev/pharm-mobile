@@ -65,9 +65,9 @@ class OrderProductSelector extends StatelessWidget {
             decrementPackageQuantity: cubit.decrementPackageQuantity,
             incrementPackageQuantity: cubit.incrementPackageQuantity,
             incrementQuantity: cubit.incrementQuantity,
-            decrementQuantity: cubit.decrementQuantity, 
-            onQuantityChanged:cubit.updateQuantity,
-             onPackageQuantityChanged:cubit.updateQuantityPackage,
+            decrementQuantity: cubit.decrementQuantity,
+            onQuantityChanged: cubit.updateQuantity,
+            onPackageQuantityChanged: cubit.updateQuantityPackage,
           ),
           const ResponsiveGap.s12(),
           CustomPriceFormField(

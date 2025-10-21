@@ -81,7 +81,8 @@ class OrderComplaintsCubit extends Cubit<OrdersComplaintState> {
     }
   }
 
-  Future<ResponseItemComplaintMake> makeComplaint(AppLocalizations translation) async {
+  Future<ResponseItemComplaintMake> makeComplaint(
+      AppLocalizations translation) async {
     if (subject.isEmpty || description.isEmpty) {
       return ResponseItemComplaintMake();
     }

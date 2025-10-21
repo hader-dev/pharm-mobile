@@ -46,7 +46,8 @@ class _DistributorLegalInformationPageState
                         .companyData
                         .bankAccount,
                     state: FieldState.normal,
-                    validationFunc: ( value) => validateIsNumber(value, translation),
+                    validationFunc: (value) =>
+                        validateIsNumber(value, translation),
                     onChanged: (newValue) {
                       BlocProvider.of<CreateCompanyProfileCubit>(context)
                           .changeCompanyData(
@@ -58,13 +59,13 @@ class _DistributorLegalInformationPageState
                     },
                   ),
                   CustomTextField(
-                    label:
-                        '${translation.nis} (${translation.nis_expanded})',
+                    label: '${translation.nis} (${translation.nis_expanded})',
                     value: BlocProvider.of<CreateCompanyProfileCubit>(context)
                         .companyData
                         .nis,
                     state: FieldState.normal,
-                    validationFunc: (value) => emptyValidator(value, translation),
+                    validationFunc: (value) =>
+                        emptyValidator(value, translation),
                     onChanged: (newValue) {
                       BlocProvider.of<CreateCompanyProfileCubit>(context)
                           .changeCompanyData(
@@ -76,13 +77,13 @@ class _DistributorLegalInformationPageState
                     },
                   ),
                   CustomTextField(
-                    label:
-                        '${translation.rc} (${translation.rc_expanded})',
+                    label: '${translation.rc} (${translation.rc_expanded})',
                     value: BlocProvider.of<CreateCompanyProfileCubit>(context)
                         .companyData
                         .rc,
                     state: FieldState.normal,
-                    validationFunc: (value) => emptyValidator(value, translation),
+                    validationFunc: (value) =>
+                        emptyValidator(value, translation),
                     onChanged: (newValue) {
                       BlocProvider.of<CreateCompanyProfileCubit>(context)
                           .changeCompanyData(
@@ -99,7 +100,8 @@ class _DistributorLegalInformationPageState
                         .companyData
                         .fiscalId,
                     state: FieldState.normal,
-                    validationFunc: (value) => emptyValidator(value, translation),
+                    validationFunc: (value) =>
+                        emptyValidator(value, translation),
                     onChanged: (newValue) {
                       BlocProvider.of<CreateCompanyProfileCubit>(context)
                           .changeCompanyData(
@@ -111,10 +113,10 @@ class _DistributorLegalInformationPageState
                     },
                   ),
                   CustomTextField(
-                    label:
-                        '${translation.ai} (${translation.ai_expanded})',
+                    label: '${translation.ai} (${translation.ai_expanded})',
                     state: FieldState.normal,
-                    validationFunc: (value) => emptyValidator(value, translation),
+                    validationFunc: (value) =>
+                        emptyValidator(value, translation),
                     value: BlocProvider.of<CreateCompanyProfileCubit>(context)
                         .companyData
                         .ai,

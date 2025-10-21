@@ -23,7 +23,7 @@ class DeligateEditOrderStateProvider extends StatelessWidget {
           ),
           scrollController: ScrollController(),
           searchController: TextEditingController(),
-          packageQuantityController: TextEditingController(text:"1"),
+          packageQuantityController: TextEditingController(text: "1"),
           quantityController: TextEditingController(text: "1"),
           customPriceController: TextEditingController(),
         )..getProducts(),

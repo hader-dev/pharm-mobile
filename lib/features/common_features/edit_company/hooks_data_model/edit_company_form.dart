@@ -79,7 +79,8 @@ class EditCompanyFormDataModel {
       if (nisNumber != null && nisNumber!.isNotEmpty) 'nisNumber': nisNumber,
       if (aiNumber != null && aiNumber!.isNotEmpty) 'aiNumber': aiNumber,
       if (fiscalId != null && fiscalId!.isNotEmpty) 'fiscalId': fiscalId,
-      if (bankAccount != null && bankAccount!.isNotEmpty) 'bankAccount': bankAccount,
+      if (bankAccount != null && bankAccount!.isNotEmpty)
+        'bankAccount': bankAccount,
     };
   }
 

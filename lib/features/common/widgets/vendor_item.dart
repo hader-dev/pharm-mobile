@@ -13,6 +13,9 @@ import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class VendorItem extends StatelessWidget {
+  final bool hideLikeButton;
+  final VoidCallback? onLike;
+  final bool isLiked;
   final bool hideRemoveButton;
   final VoidCallback? onRemoveFromFavorites;
 
@@ -21,6 +24,9 @@ class VendorItem extends StatelessWidget {
   VendorItem({
     super.key,
     required this.companyData,
+    this.hideLikeButton = true,
+    this.onLike,
+    this.isLiked = false,
     this.hideRemoveButton = true,
     this.onRemoveFromFavorites,
   }) {
@@ -48,6 +54,21 @@ class VendorItem extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            if (!hideLikeButton)
+              Padding(
+                padding: const EdgeInsets.only(bottom: AppSizesManager.p4),
+                child: Align(
+                  alignment: Alignment.topRight,
+                  child: InkWell(
+                    splashColor: Colors.transparent,
+                    onTap: onLike,
+                    child: !isLiked
+                        ? Icon(Icons.favorite_border_rounded,
+                            color: Colors.black54)
+                        : Icon(Icons.favorite, color: Colors.red),
+                  ),
+                ),
+              ),
             if (!hideRemoveButton)
               Padding(
                 padding: const EdgeInsets.only(bottom: AppSizesManager.p4),

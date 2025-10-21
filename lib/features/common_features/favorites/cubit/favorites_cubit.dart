@@ -20,15 +20,76 @@ class FavoritesCubit extends Cubit<FavoritesState> {
   Future<void> fetchLikedMedicines() async {
     try {
       emit(state.toLoadingMedicines());
+
+      // TEMPORARY: Always use mock data for testing the widget display
+      // Remove this and uncomment the API call when backend is ready
+      final mockMedicines = _getMockMedicines();
+      emit(state.toLoadedMedicines(
+        medicines: mockMedicines,
+      ));
+
+      /* Uncomment this when API is working:
       final likedMedicinesCatalogs =
           await favoriteRepository.getFavoritesMedicinesCatalogs();
-      emit(state.toLoadedMedicines(
-        medicines: likedMedicinesCatalogs,
-      ));
+
+      // Add mock data for testing if empty
+      if (likedMedicinesCatalogs.isEmpty) {
+        final mockMedicines = _getMockMedicines();
+        emit(state.toLoadedMedicines(
+          medicines: mockMedicines,
+        ));
+      } else {
+        emit(state.toLoadedMedicines(
+          medicines: likedMedicinesCatalogs,
+        ));
+      }
+      */
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
       emit(state.toLoadingMedicinesFailed());
     }
+  }
+
+  List<BaseMedicineCatalogModel> _getMockMedicines() {
+    return List.generate(
+      5,
+      (index) => BaseMedicineCatalogModel(
+        id: 'mock_medicine_$index',
+        dci: 'Mock Medicine ${index + 1}',
+        unitPriceHt: '${(index + 1) * 150}.00',
+        unitPriceTtc: '${(index + 1) * 180}.00',
+        tvaPercentage: '19',
+        thumbnailImage: null,
+        image: null,
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now(),
+        companyId: 'mock_company_$index',
+        registrationNumber: 'REG${index}001',
+        sku: 'SKU${index}001',
+        isPrivate: false,
+        margin: '20',
+        stockQuantity: index % 2 == 0 ? 100 : 0,
+        minOrderQuantity: 1,
+        maxOrderQuantity: 100,
+        packageSize: 10,
+        isPsychoactive: false,
+        requiresColdChain: false,
+        isActive: true,
+        isQuota: false,
+        isFeatured: false,
+        displayOrder: index,
+        company: Company(
+          id: 'mock_company_$index',
+          name: 'Mock Pharma Company ${index + 1}',
+          email: 'company$index@example.com',
+          phone: '055512345$index',
+          address: 'Mock Address ${index + 1}',
+          thumbnailImage: null,
+          image: null,
+        ),
+        isLiked: true,
+      ),
+    );
   }
 
   Future<void> fetchLikedParaPharma() async {

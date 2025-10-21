@@ -6,14 +6,14 @@ import 'package:hader_pharm_mobile/repositories/remote/announcement/response/res
 import 'package:hader_pharm_mobile/utils/urls.dart';
 
 Future<ResponseLoadAnnouncementDetails> loadAnnouncementDetails(
-    INetworkService client,ParamsLoadAnnouncementDetails params) async {
+    INetworkService client, ParamsLoadAnnouncementDetails params) async {
   var decodedResponse = await client.sendRequest(() => client.get(
         "${Urls.announcements}/${params.id}",
       ));
 
   try {
     return jsonToAnnouncementDetailsResponse(decodedResponse);
-  } catch (e,stackTrace) {
+  } catch (e, stackTrace) {
     debugPrint("$e");
     debugPrintStack(stackTrace: stackTrace);
 

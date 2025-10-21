@@ -14,7 +14,9 @@ class MedicineOverViewPage extends StatelessWidget {
     final translations = context.translation!;
 
     MedicineCatalogModel medicineCatalogData =
-        BlocProvider.of<MedicineDetailsCubit>(context).state.medicineCatalogData!;
+        BlocProvider.of<MedicineDetailsCubit>(context)
+            .state
+            .medicineCatalogData!;
 
     return Markdown(
       shrinkWrap: true,

@@ -12,7 +12,7 @@ class FiltersAccordionParaCommercial extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final translation = context.translation!;
-    
+
     return Column(
       children: [
         InkAccordion(
@@ -26,7 +26,6 @@ class FiltersAccordionParaCommercial extends StatelessWidget {
               rawSubtitle: getDisplayedParaFiltersAsRawString(
                   context, ParaMedicalFiltersKeys.brand),
             ),
-            
             InkAccordionItem(
               rawTitle: translation.filter_items_type,
               onTap: () => navigateToParaFiltersApplyView(

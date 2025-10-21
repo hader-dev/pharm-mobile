@@ -14,7 +14,6 @@ Future<ResponseLoadWilayas> loadFilters(ParamsLoadWilayas params) async {
         await jsonLoader('${params.rootPath}/wilaya_${params.locale}.json');
     final Map<String, dynamic> jsonMap = json.decode(jsonString);
 
-
     return jsonToLoadWilayasResponse(jsonMap);
   } catch (e, stack) {
     debugPrint("[loadWilayas] Failed to load wilayas: $e");

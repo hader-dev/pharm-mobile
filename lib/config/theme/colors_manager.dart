@@ -62,7 +62,7 @@ class AppColors {
   static const Color accent1Shade1 = Color(0xFF167D85);
   static const Color accent1Shade2 = Color(0xFF12646A);
   static const Color accent1Shade3 = Color(0xFFE8F2F3);
-static const Color accent1Shade2Deemphasized = Color(0xFF5F9599);
+  static const Color accent1Shade2Deemphasized = Color(0xFF5F9599);
 
   // Accent Green
   static const Color accentGreenShade1 = Color(0xFF147082);

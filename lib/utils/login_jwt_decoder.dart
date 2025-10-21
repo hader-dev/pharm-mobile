@@ -10,7 +10,7 @@ JwtDecoded decodeJwt(String? token) {
   try {
     decodedJwt =
         JwtDecoder.decode(getItInstance.get<TokenManager>().token ?? "");
-        debugPrint("CompanyId ${decodedJwt['companyId']}");
+    debugPrint("CompanyId ${decodedJwt['companyId']}");
   } catch (e) {
     decodedJwt = {};
   }

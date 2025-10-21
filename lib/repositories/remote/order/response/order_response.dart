@@ -9,7 +9,9 @@ class OrderResponse {
   factory OrderResponse.fromJson(Map<String, dynamic> json) {
     return OrderResponse(
       totalItems: json["totalItems"] ?? 0,
-      data: (json["data"] as List).map((e) => BaseOrderModel.fromJson(e)).toList(),
+      data: (json["data"] as List)
+          .map((e) => BaseOrderModel.fromJson(e))
+          .toList(),
     );
   }
 }

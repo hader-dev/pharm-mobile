@@ -16,7 +16,7 @@ class SilverTags extends StatelessWidget {
       spacing: AppSizesManager.s4,
       children: tags
           .map((tag) => Badge(
-            padding: const EdgeInsets.all(AppSizesManager.p4),
+                padding: const EdgeInsets.all(AppSizesManager.p4),
                 backgroundColor: backgroundColor,
                 label: Text(tag),
               ))

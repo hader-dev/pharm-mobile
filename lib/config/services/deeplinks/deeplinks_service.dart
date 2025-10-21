@@ -5,9 +5,8 @@ import 'package:hader_pharm_mobile/config/services/deeplinks/actions/handle_orde
 import 'package:hader_pharm_mobile/config/services/deeplinks/deeplinks_service_port.dart';
 
 class DeeplinksService implements DeeplinksServicePort {
-
   StreamSubscription? _linksStream;
-  
+
   @override
   Future<void> init() async {
     _linksStream = AppLinks().uriLinkStream.listen(handleDeepLinkUri);
@@ -18,35 +17,30 @@ class DeeplinksService implements DeeplinksServicePort {
       handleDeepLinkUri(initialUri);
     }
   }
-  
+
   @override
   void handleDeepLinkUri(Uri? uri) {
     final segments = uri?.pathSegments;
     final String? rootSegment = segments?.firstOrNull;
 
-
-    if(rootSegment!=null){
-      switch(rootSegment){
+    if (rootSegment != null) {
+      switch (rootSegment) {
         case "order":
           handleOrderDeepLink(uri!);
-      default:
-        debugPrint("No handler registered");
+        default:
+          debugPrint("No handler registered");
       }
     }
-
   }
 
-
-  
   @override
-  void handleDeepLink(String link)  {
+  void handleDeepLink(String link) {
     final uri = Uri.parse(link);
     handleDeepLinkUri(uri);
   }
-  
+
   @override
   void cancelStreamSubscribtion() {
     _linksStream?.cancel();
   }
-
 }

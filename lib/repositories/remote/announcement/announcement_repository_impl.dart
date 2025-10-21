@@ -12,7 +12,10 @@ class PromotionRepository extends IPromotionRepository {
   PromotionRepository({required this.client});
   @override
   Future<ResponseLoadAnnouncements> getPromotions(
-      {int limit = 20, int offset = 0, String? companyId, String? search}) async {
+      {int limit = 20,
+      int offset = 0,
+      String? companyId,
+      String? search}) async {
     return loadAnnouncements(client,
         limit: limit, offset: offset, companyId: companyId, search: search);
   }

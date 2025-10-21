@@ -4,7 +4,11 @@ class EmailRegisterFormDataModel {
   String password;
   String confirmPassword;
 
-  EmailRegisterFormDataModel({this.fullName = "", this.email = "", this.password = "", this.confirmPassword = ""});
+  EmailRegisterFormDataModel(
+      {this.fullName = "",
+      this.email = "",
+      this.password = "",
+      this.confirmPassword = ""});
 
   EmailRegisterFormDataModel copyWith({
     String? email,

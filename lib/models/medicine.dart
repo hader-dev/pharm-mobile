@@ -44,29 +44,27 @@ class Medicine {
   });
 
   factory Medicine.empty() {
-  return Medicine(
-    image: '',
-    registrationNumber: '',
-    code: '',
-    dci: '',
-    brandName: '',
-    form: '',
-    dosage: '',
-    packaging: '',
-    list: '',
-    p1: '',
-    p2: '',
-    obs: '',
-    laboratoryHolder: '',
-    laboratoryCountry: '',
-    initialRegistrationDate: DateTime.now(),
-    finalRegistrationDate: DateTime.now(),
-    type: '',
-    status: '',
-    lifeTime: '',
-    isActive: false,
-  );
-}
-
-
+    return Medicine(
+      image: '',
+      registrationNumber: '',
+      code: '',
+      dci: '',
+      brandName: '',
+      form: '',
+      dosage: '',
+      packaging: '',
+      list: '',
+      p1: '',
+      p2: '',
+      obs: '',
+      laboratoryHolder: '',
+      laboratoryCountry: '',
+      initialRegistrationDate: DateTime.now(),
+      finalRegistrationDate: DateTime.now(),
+      type: '',
+      status: '',
+      lifeTime: '',
+      isActive: false,
+    );
+  }
 }

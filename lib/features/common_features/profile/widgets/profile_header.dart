@@ -19,7 +19,8 @@ class ProfileHeader extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         color: AppColors.accent1Shade3,
-        borderRadius: BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+        borderRadius:
+            BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
       ),
       child: Row(
         children: <Widget>[

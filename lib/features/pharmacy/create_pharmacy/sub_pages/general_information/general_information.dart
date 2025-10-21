@@ -151,7 +151,8 @@ class _PharmacyGeneralInformationPageState
                       WilayaDropdown(),
                       TownDropdown(
                           isRequired: true,
-                          validator: (v) => requiredValidator(v?.label, translation),
+                          validator: (v) =>
+                              requiredValidator(v?.label, translation),
                           onChanged: (newValue) {
                             if (newValue == null) return;
                             BlocProvider.of<CreateCompanyProfileCubit>(context)
