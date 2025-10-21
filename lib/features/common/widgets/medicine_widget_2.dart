@@ -92,21 +92,33 @@ class MedicineWidget2 extends StatelessWidget {
                 children: [
                   if (!hideLikeButton)
                     Row(children: [
-                      Spacer(),
-                      InkWell(
-                        splashColor: Colors.transparent,
-                        onTap: () {
+                      if (medicineData.dci != null)
+                        Text(medicineData.dci,
+                            softWrap: true,
+                            style: context
+                                .responsiveTextTheme.current.headLine4SemiBold
+                                .copyWith(color: TextColors.primary.color)),
+                      const Spacer(),
+                      IconButton(
+                        onPressed: () {
                           onLikeTapped?.call();
                         },
-                        child: !isLiked
-                            ? Icon(Icons.favorite_border_rounded,
-                                color: Colors.black54)
-                            : Icon(Icons.favorite, color: Colors.red),
+                        icon: Icon(
+                          isLiked ? Iconsax.heart5 : Iconsax.heart,
+                          color: isLiked ? Colors.red : Colors.black,
+                          size: AppSizesManager.iconSize25,
+                        ),
                       )
                     ]),
                   if (!hideRemoveButton)
                     Row(children: [
-                      Spacer(),
+                      if (medicineData.dci != null)
+                        Text(medicineData.dci,
+                            softWrap: true,
+                            style: context
+                                .responsiveTextTheme.current.headLine4SemiBold
+                                .copyWith(color: TextColors.primary.color)),
+                      const Spacer(),
                       InkWell(
                         splashColor: Colors.transparent,
                         onTap: () {
@@ -119,13 +131,6 @@ class MedicineWidget2 extends StatelessWidget {
                         ),
                       )
                     ]),
-                  const ResponsiveGap.s8(),
-                  if (medicineData.dci != null)
-                    Text(medicineData.dci,
-                        softWrap: true,
-                        style: context
-                            .responsiveTextTheme.current.headLine4SemiBold
-                            .copyWith(color: TextColors.primary.color)),
                   const ResponsiveGap.s8(),
                   Row(children: [
                     Container(

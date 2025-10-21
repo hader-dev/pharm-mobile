@@ -21,36 +21,18 @@ class FavoritesCubit extends Cubit<FavoritesState> {
     try {
       emit(state.toLoadingMedicines());
 
-      // TEMPORARY: Always use mock data for testing the widget display
-      // Remove this and uncomment the API call when backend is ready
-      final mockMedicines = _getMockMedicines();
-      emit(state.toLoadedMedicines(
-        medicines: mockMedicines,
-      ));
-
-      /* Uncomment this when API is working:
       final likedMedicinesCatalogs =
           await favoriteRepository.getFavoritesMedicinesCatalogs();
-
-      // Add mock data for testing if empty
-      if (likedMedicinesCatalogs.isEmpty) {
-        final mockMedicines = _getMockMedicines();
-        emit(state.toLoadedMedicines(
-          medicines: mockMedicines,
-        ));
-      } else {
-        emit(state.toLoadedMedicines(
-          medicines: likedMedicinesCatalogs,
-        ));
-      }
-      */
+      emit(state.toLoadedMedicines(
+        medicines: likedMedicinesCatalogs,
+      ));
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
       emit(state.toLoadingMedicinesFailed());
     }
   }
 
-  List<BaseMedicineCatalogModel> _getMockMedicines() {
+  List<BaseMedicineCatalogModel> getMockMedicines() {
     return List.generate(
       5,
       (index) => BaseMedicineCatalogModel(

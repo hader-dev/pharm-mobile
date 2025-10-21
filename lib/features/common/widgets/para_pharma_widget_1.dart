@@ -82,6 +82,7 @@ class ParaPharmaWidget1 extends StatelessWidget {
                 ],
               ),
             ),
+            const ResponsiveGap.s4(),
             Expanded(
               child: Column(
                 mainAxisSize: MainAxisSize.max,

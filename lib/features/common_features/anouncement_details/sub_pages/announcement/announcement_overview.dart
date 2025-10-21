@@ -34,20 +34,17 @@ class AnnouncementOverviewPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               if (state.announcement.image != null) ...[
-                Container(
-                  width: double.infinity,
-                  height: 200,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(AppSizesManager.r8),
-                    border: Border.all(color: Colors.grey.shade300),
-                  ),
-                  clipBehavior: Clip.antiAlias,
-                  child: CachedNetworkImageWithAssetFallback(
-                    imageUrl: getItInstance
-                        .get<INetworkService>()
-                        .getFilesPath(state.announcement.image!.path),
-                    assetImage: DrawableAssetStrings.companyPlaceHolderImg,
-                    fit: BoxFit.cover,
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(AppSizesManager.r8),
+                  child: AspectRatio(
+                    aspectRatio: 1.5,
+                    child: CachedNetworkImageWithAssetFallback(
+                      imageUrl: getItInstance
+                          .get<INetworkService>()
+                          .getFilesPath(state.announcement.image!.path),
+                      assetImage: DrawableAssetStrings.companyPlaceHolderImg,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 const ResponsiveGap.s16(),

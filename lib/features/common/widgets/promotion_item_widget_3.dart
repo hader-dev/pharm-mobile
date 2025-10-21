@@ -48,16 +48,17 @@ class PromotionItemWidget3 extends StatelessWidget {
             children: [
               Expanded(
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(
-                      AppSizesManager.commonWidgetsRadius),
-                  child: CachedNetworkImageWithAssetFallback(
-                    fit: BoxFit.cover,
-                    width: width ?? double.infinity,
-                    height: height,
-                    imageUrl: getItInstance
-                        .get<INetworkService>()
-                        .getFilesPath(announcement.thumbnailImage?.path ?? ""),
-                    assetImage: DrawableAssetStrings.medicinePlaceHolderImg,
+                  borderRadius: BorderRadius.circular(AppSizesManager.r8),
+                  child: AspectRatio(
+                    aspectRatio: 1.5,
+                    child: CachedNetworkImageWithAssetFallback(
+                      imageUrl: getItInstance
+                          .get<INetworkService>()
+                          .getFilesPath(
+                              announcement.thumbnailImage?.path ?? ""),
+                      assetImage: DrawableAssetStrings.companyPlaceHolderImg,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
