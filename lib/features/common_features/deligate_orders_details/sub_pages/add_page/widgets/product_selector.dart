@@ -47,6 +47,7 @@ class OrderProductSelector extends StatelessWidget {
 
     final translation = context.translation!;
 
+
     return Container(
       margin: const EdgeInsets.only(top: AppSizesManager.s8),
       child: Column(
@@ -59,8 +60,8 @@ class OrderProductSelector extends StatelessWidget {
           ),
           const SizedBox(height: AppSizesManager.s12),
           QuantitySectionModified(
-            quantityController: cubit.quantityController,
-            packageQuantityController: cubit.packageQuantityController,
+            quantityController: cubit.state.quantityController,
+            packageQuantityController: cubit.state.packageQuantityController,
             packageSize: product.packageSize,
             decrementPackageQuantity: cubit.decrementPackageQuantity,
             incrementPackageQuantity: cubit.incrementPackageQuantity,
@@ -72,7 +73,7 @@ class OrderProductSelector extends StatelessWidget {
           const ResponsiveGap.s12(),
           CustomPriceFormField(
             enabled: false,
-            customPriceController: cubit.customPriceController,
+            customPriceController: cubit.state.customPriceController,
             translation: translation,
             onPriceChanged: cubit.updateCustomPrice,
           ),
@@ -101,7 +102,7 @@ class OrderProductSelector extends StatelessWidget {
               translation: translation,
               selectedProduct: product,
               quantity: cubit.state.quantity,
-              customPriceController: cubit.customPriceController,
+              customPriceController: cubit.state.customPriceController,
             ),
             label: context.translation!.add_cart,
             labelColor: Colors.white,

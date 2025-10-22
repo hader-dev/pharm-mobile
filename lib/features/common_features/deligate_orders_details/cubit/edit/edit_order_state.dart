@@ -1,6 +1,6 @@
 part of 'edit_order_cubit.dart';
 
-abstract class DeligateEditOrderState extends Equatable {
+abstract class DeligateEditOrderState {
   final DeligateClient client;
   final List<BaseParaPharmaCatalogModel> products;
   final List<DeligateParahparmOrderItemUi> orderProducts;
@@ -14,6 +14,12 @@ abstract class DeligateEditOrderState extends Equatable {
   final BaseParaPharmaCatalogModel? selectedProduct;
   final double? suggestedPrice;
 
+  final ScrollController scrollController;
+  final TextEditingController searchController;
+  final TextEditingController customPriceController;
+  final TextEditingController quantityController;
+  final TextEditingController packageQuantityController;
+
   const DeligateEditOrderState(
       {required this.client,
       required this.products,
@@ -25,52 +31,14 @@ abstract class DeligateEditOrderState extends Equatable {
       required this.quantity,
       required this.totalItemsCount,
       required this.offSet,
+      required this.scrollController,
+      required this.searchController,
+      required this.customPriceController,
+      required this.quantityController,
+      required this.packageQuantityController,
       required this.limit});
 
-  @override
-  List<Object?> get props => [
-        client,
-        products,
-        orderProducts,
-        hasReachedMax,
-        totalItemsCount,
-        offSet,
-        quantity,
-        limit,
-        totalPrice,
-        suggestedPrice,
-        selectedProduct,
-      ];
-
-  DeligateEditOrderState copyWith({
-    DeligateClient? client,
-    List<BaseParaPharmaCatalogModel>? products,
-    List<DeligateParahparmOrderItemUi>? orderProducts,
-    bool? hasReachedMax,
-    int? totalItemsCount,
-    int? offSet,
-    int? quantity,
-    int? limit,
-    double? totalPrice,
-    double? suggestedPrice,
-    BaseParaPharmaCatalogModel? selectedProduct,
-  }) {
-    return DeligateOrderInitial(
-      quantity: quantity ?? this.quantity,
-      suggestedPrice: suggestedPrice ?? this.suggestedPrice,
-      selectedProduct: selectedProduct ?? this.selectedProduct,
-      client: client ?? this.client,
-      orderProducts: orderProducts ?? this.orderProducts,
-      products: products ?? this.products,
-      hasReachedMax: hasReachedMax ?? this.hasReachedMax,
-      totalItemsCount: totalItemsCount ?? this.totalItemsCount,
-      offSet: offSet ?? this.offSet,
-      limit: limit ?? this.limit,
-      totalPrice: totalPrice ?? this.totalPrice,
-    );
-  }
-
-  DeligateOrderInitial initial({
+  DeligateOrderInitial toInitial({
     DeligateClient? client,
     bool resetClient = false,
     List<BaseParaPharmaCatalogModel> products = const [],
@@ -83,6 +51,10 @@ abstract class DeligateEditOrderState extends Equatable {
     int limit = 20,
     bool resetSelectedProduct = false,
     BaseParaPharmaCatalogModel? selectedProduct,
+    TextEditingController? quantityController,
+    TextEditingController? packageQuantityController,
+    TextEditingController? customPriceController,
+    ScrollController? scrollController,
   }) {
     return DeligateOrderInitial(
       client: resetClient ? DeligateClient.empty() : client ?? this.client,
@@ -100,29 +72,29 @@ abstract class DeligateEditOrderState extends Equatable {
     );
   }
 
-  DeligateOrderUpdateSelectedProduct updateSelectedProduct(
+  DeligateOrderUpdateSelectedProduct toUpdateSelectedProduct(
       {required BaseParaPharmaCatalogModel product}) {
     return DeligateOrderUpdateSelectedProduct.fromState(
-      copyWith(
-          selectedProduct: product,
-          quantity: 1,
-          totalPrice: double.parse(product.unitPriceHt),
-          suggestedPrice: double.parse(product.unitPriceHt)),
-    );
+        state: this,
+        selectedProduct: product,
+        quantity: 1,
+        totalPrice: double.parse(product.unitPriceHt),
+        suggestedPrice: double.parse(product.unitPriceHt));
   }
 
-  DeligateOrderUpdateSuggestedPrice updateSuggestedPrice(
+  DeligateOrderUpdateSuggestedPrice toUpdateSuggestedPrice(
       {double? price, double? totalPrice, int? quantity}) {
     return DeligateOrderUpdateSuggestedPrice.fromState(
-      copyWith(
-          suggestedPrice: price, quantity: quantity, totalPrice: totalPrice),
-    );
+        state: this,
+        suggestedPrice: price,
+        quantity: quantity,
+        totalPrice: totalPrice);
   }
 
-  DeligateOrderLoading loading({int? offset}) =>
-      DeligateOrderLoading.fromState(copyWith(offSet: offset ?? offSet));
+  DeligateOrderLoading toLoading({int? offset}) =>
+      DeligateOrderLoading.fromState(state: this, offSet: offset ?? offSet);
 
-  DeligateOrderProductsUpdated productsUpdated(
+  DeligateOrderProductsUpdated toProductsUpdated(
       {required DeligateParahparmOrderItemUi item, bool removed = false}) {
     bool updatedExisting = false;
     List<DeligateParahparmOrderItemUi> orderProducts =
@@ -143,35 +115,33 @@ abstract class DeligateEditOrderState extends Equatable {
     }
 
     return DeligateOrderProductsUpdated.fromState(
-        copyWith(orderProducts: orderProducts));
+        state: this, orderProducts: orderProducts);
   }
 
-  DeligateOrderClientUpdated clientUpdated({required DeligateClient client}) {
-    return DeligateOrderClientUpdated.fromState(copyWith(client: client));
+  DeligateOrderClientUpdated toClientUpdated({required DeligateClient client}) {
+    return DeligateOrderClientUpdated.fromState(state: this, client: client);
   }
 
-  DeligateOrderLoaded loaded({
+  DeligateOrderLoaded toLoaded({
     List<BaseParaPharmaCatalogModel>? products,
     bool? hasReachedMax,
     int? totalItemsCount,
   }) =>
       DeligateOrderLoaded.fromState(
-        copyWith(
+          state: this,
           products: products ?? this.products,
           hasReachedMax: hasReachedMax ?? this.hasReachedMax,
-          totalItemsCount: totalItemsCount ?? this.totalItemsCount,
-        ),
-      );
+          totalItemsCount: totalItemsCount ?? this.totalItemsCount);
 
-  DeligateOrderLoadLimitReached limitReached() =>
+  DeligateOrderLoadLimitReached toLimitReached() =>
       DeligateOrderLoadLimitReached.fromState(this);
 
-  DeligateOrderLoadingFailed failed(String message) =>
+  DeligateOrderLoadingFailed toFailed(String message) =>
       DeligateOrderLoadingFailed.fromState(this, message: message);
 }
 
 final class DeligateOrderInitial extends DeligateEditOrderState {
-  const DeligateOrderInitial({
+  DeligateOrderInitial({
     required super.client,
     super.products = const [],
     super.orderProducts = const [],
@@ -183,11 +153,26 @@ final class DeligateOrderInitial extends DeligateEditOrderState {
     super.totalPrice = 0,
     super.limit = 20,
     super.suggestedPrice,
-  });
+    ScrollController? scrollController,
+    TextEditingController? searchController,
+    TextEditingController? quantityController,
+    TextEditingController? packageQuantityController,
+    TextEditingController? customPriceController,
+  }) : super(
+          scrollController: scrollController ?? ScrollController(),
+          searchController: searchController ?? TextEditingController(),
+          quantityController:
+              quantityController ?? TextEditingController(text: "1"),
+          packageQuantityController:
+              packageQuantityController ?? TextEditingController(text: "1"),
+          customPriceController:
+              customPriceController ?? TextEditingController(),
+        );
 }
 
 final class DeligateOrderLoading extends DeligateEditOrderState {
-  DeligateOrderLoading.fromState(DeligateEditOrderState state)
+  DeligateOrderLoading.fromState(
+      {required DeligateEditOrderState state, int? offSet})
       : super(
           client: state.client,
           selectedProduct: state.selectedProduct,
@@ -198,16 +183,21 @@ final class DeligateOrderLoading extends DeligateEditOrderState {
           totalPrice: state.totalPrice,
           totalItemsCount: state.totalItemsCount,
           orderProducts: state.orderProducts,
-          offSet: state.offSet,
+          offSet: offSet ?? state.offSet,
           limit: state.limit,
+          scrollController: state.scrollController,
+          searchController: state.searchController,
+          quantityController: state.quantityController,
+          packageQuantityController: state.packageQuantityController,
+          customPriceController: state.customPriceController,
         );
 }
 
 final class DeligateOrderClientUpdated extends DeligateEditOrderState {
-  DeligateOrderClientUpdated.fromState(
-    DeligateEditOrderState state,
-  ) : super(
-          client: state.client,
+  DeligateOrderClientUpdated.fromState({
+    required DeligateEditOrderState state,
+    required super.client,
+  }) : super(
           selectedProduct: state.selectedProduct,
           suggestedPrice: state.suggestedPrice,
           quantity: state.quantity,
@@ -218,75 +208,108 @@ final class DeligateOrderClientUpdated extends DeligateEditOrderState {
           offSet: state.offSet,
           products: state.products,
           limit: state.limit,
+          scrollController: state.scrollController,
+          searchController: state.searchController,
+          quantityController: state.quantityController,
+          packageQuantityController: state.packageQuantityController,
+          customPriceController: state.customPriceController,
         );
 }
 
 final class DeligateOrderProductsUpdated extends DeligateEditOrderState {
-  DeligateOrderProductsUpdated.fromState(
-    DeligateEditOrderState state,
-  ) : super(
+  DeligateOrderProductsUpdated.fromState({
+    required DeligateEditOrderState state,
+    required super.orderProducts,
+  }) : super(
           hasReachedMax: state.hasReachedMax,
           client: state.client,
           totalPrice: state.totalPrice,
           selectedProduct: state.selectedProduct,
           suggestedPrice: state.suggestedPrice,
           quantity: state.quantity,
-          orderProducts: state.orderProducts,
-          totalItemsCount: state.totalItemsCount,
+          totalItemsCount: orderProducts.length,
           offSet: state.offSet,
           products: state.products,
           limit: state.limit,
+          scrollController: state.scrollController,
+          searchController: state.searchController,
+          quantityController: state.quantityController,
+          packageQuantityController: state.packageQuantityController,
+          customPriceController: state.customPriceController,
         );
 }
 
 final class DeligateOrderUpdateSelectedProduct extends DeligateEditOrderState {
-  DeligateOrderUpdateSelectedProduct.fromState(DeligateEditOrderState state)
+  DeligateOrderUpdateSelectedProduct.fromState(
+      {required DeligateEditOrderState state,
+      required BaseParaPharmaCatalogModel super.selectedProduct,
+      required super.quantity,
+      required super.totalPrice,
+      required double super.suggestedPrice})
       : super(
           client: state.client,
           hasReachedMax: state.hasReachedMax,
-          totalPrice: state.totalPrice,
           orderProducts: state.orderProducts,
-          selectedProduct: state.selectedProduct,
-          suggestedPrice: state.suggestedPrice,
-          quantity: state.quantity,
           totalItemsCount: state.totalItemsCount,
           offSet: state.offSet,
           products: state.products,
           limit: state.limit,
+          scrollController: state.scrollController,
+          searchController: state.searchController,
+          quantityController: state.quantityController,
+          packageQuantityController: state.packageQuantityController,
+          customPriceController: state.customPriceController,
         );
 }
 
 final class DeligateOrderUpdateSuggestedPrice extends DeligateEditOrderState {
-  DeligateOrderUpdateSuggestedPrice.fromState(DeligateEditOrderState state)
+  DeligateOrderUpdateSuggestedPrice.fromState(
+      {required DeligateEditOrderState state,
+      int? quantity,
+      double? totalPrice,
+      double? suggestedPrice})
       : super(
+          suggestedPrice: suggestedPrice ?? state.suggestedPrice,
+          quantity: quantity ?? state.quantity,
+          totalPrice: totalPrice ?? state.totalPrice,
           client: state.client,
           hasReachedMax: state.hasReachedMax,
           orderProducts: state.orderProducts,
-          selectedProduct: state.selectedProduct,
-          suggestedPrice: state.suggestedPrice,
-          quantity: state.quantity,
-          totalPrice: state.totalPrice,
           totalItemsCount: state.totalItemsCount,
           offSet: state.offSet,
           products: state.products,
+          selectedProduct: state.selectedProduct,
           limit: state.limit,
+          scrollController: state.scrollController,
+          searchController: state.searchController,
+          quantityController: state.quantityController,
+          packageQuantityController: state.packageQuantityController,
+          customPriceController: state.customPriceController,
         );
 }
 
 final class DeligateOrderLoaded extends DeligateEditOrderState {
-  DeligateOrderLoaded.fromState(DeligateEditOrderState state)
-      : super(
+  DeligateOrderLoaded.fromState({
+    required DeligateEditOrderState state,
+    required super.products,
+    bool? hasReachedMax,
+    int? totalItemsCount,
+  }) : super(
           client: state.client,
-          hasReachedMax: state.hasReachedMax,
+          hasReachedMax: hasReachedMax ?? state.hasReachedMax,
           orderProducts: state.orderProducts,
           selectedProduct: state.selectedProduct,
           suggestedPrice: state.suggestedPrice,
           totalPrice: state.totalPrice,
           quantity: state.quantity,
-          totalItemsCount: state.totalItemsCount,
+          totalItemsCount: totalItemsCount ?? state.totalItemsCount,
           offSet: state.offSet,
-          products: state.products,
           limit: state.limit,
+          scrollController: state.scrollController,
+          searchController: state.searchController,
+          quantityController: state.quantityController,
+          packageQuantityController: state.packageQuantityController,
+          customPriceController: state.customPriceController,
         );
 }
 
@@ -304,6 +327,11 @@ final class DeligateOrderLoadLimitReached extends DeligateEditOrderState {
           totalItemsCount: state.totalItemsCount,
           offSet: state.offSet,
           limit: state.limit,
+          scrollController: state.scrollController,
+          searchController: state.searchController,
+          quantityController: state.quantityController,
+          packageQuantityController: state.packageQuantityController,
+          customPriceController: state.customPriceController,
         );
 }
 
@@ -325,8 +353,10 @@ final class DeligateOrderLoadingFailed extends DeligateEditOrderState {
           totalItemsCount: state.totalItemsCount,
           offSet: state.offSet,
           limit: state.limit,
+          scrollController: state.scrollController,
+          searchController: state.searchController,
+          quantityController: state.quantityController,
+          packageQuantityController: state.packageQuantityController,
+          customPriceController: state.customPriceController,
         );
-
-  @override
-  List<Object> get props => [client, hasReachedMax, message];
 }

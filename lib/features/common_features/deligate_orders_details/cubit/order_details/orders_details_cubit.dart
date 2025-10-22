@@ -245,6 +245,7 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
             parapharmCatalogId: selectedProduct.id,
             designation: selectedProduct.name,
             imageUrl: selectedProduct.image?.path,
+            packageSize: selectedProduct.packageSize,
           ),
           quantity: quantity,
           suggestedPrice: customPrice),

@@ -25,7 +25,7 @@ class StateProvider extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => DeligateEditOrderCubit(
-            packageQuantityController: TextEditingController(),
+            packageQuantityController: TextEditingController(text: "0"),
             parapharmaRepo: ParaPharmaRepository(
               client: getItInstance.get<INetworkService>(),
             ),

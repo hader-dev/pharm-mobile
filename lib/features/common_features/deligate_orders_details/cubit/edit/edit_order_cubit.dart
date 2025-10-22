@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/models/client.dart';
 import 'package:hader_pharm_mobile/models/deligate_order.dart';
@@ -17,32 +16,34 @@ part 'edit_order_state.dart';
 class DeligateEditOrderCubit extends Cubit<DeligateEditOrderState> {
   final IParaPharmaRepository parapharmaRepo;
   final IOrderRepository orderRepo;
-  final ScrollController scrollController;
-  final TextEditingController searchController;
-  final TextEditingController customPriceController;
-  final TextEditingController quantityController;
-  final TextEditingController packageQuantityController;
 
   DebouncerManager debounceManager = DebouncerManager();
 
   DeligateEditOrderCubit({
     required this.parapharmaRepo,
     required this.orderRepo,
-    required this.packageQuantityController,
-    required this.scrollController,
-    required this.searchController,
-    required this.quantityController,
-    required this.customPriceController,
-  }) : super(DeligateOrderInitial(client: DeligateClient.empty()));
+    required TextEditingController packageQuantityController,
+    required ScrollController scrollController,
+    required TextEditingController searchController,
+    required TextEditingController quantityController,
+    required TextEditingController customPriceController,
+  }) : super(DeligateOrderInitial(
+          client: DeligateClient.empty(),
+          scrollController: scrollController,
+          searchController: searchController,
+          quantityController: quantityController,
+          packageQuantityController: packageQuantityController,
+          customPriceController: customPriceController,
+        ));
 
   void searchProducts([String? text]) =>
       debounceManager.debounce(tag: "search", action: () => getProducts());
 
   Future<void> getProducts({int offset = 0}) async {
     try {
-      final searchText = searchController.text.trim();
+      final searchText = state.searchController.text.trim();
 
-      emit(state.loading(offset: offset));
+      emit(state.toLoading(offset: offset));
 
       final response = await parapharmaRepo.getParaPharmaCatalog(
         ParamsLoadParapharma(
@@ -55,21 +56,21 @@ class DeligateEditOrderCubit extends Cubit<DeligateEditOrderState> {
         ),
       );
 
-      emit(state.loaded(
+      emit(state.toLoaded(
         products: response.data,
         totalItemsCount: response.totalItems,
         hasReachedMax: response.data.length >= response.totalItems,
       ));
     } catch (e) {
       debugPrint("Error loading clients: $e");
-      emit(state.failed(
+      emit(state.toFailed(
         "Failed to load clients",
       ));
     }
   }
 
   Future<void> refreshProducts() async {
-    emit(state.initial());
+    emit(state.toInitial());
     await getProducts();
   }
 
@@ -82,11 +83,14 @@ class DeligateEditOrderCubit extends Cubit<DeligateEditOrderState> {
   void incrementQuantity() {
     final updatedQuantity = state.quantity + 1;
 
-    quantityController.text = updatedQuantity.toString();
+    state.quantityController.text = updatedQuantity.toString();
+    state.packageQuantityController.text =
+        (updatedQuantity ~/ (state.selectedProduct?.packageSize ?? 1))
+            .toString();
 
-    final newState = state.updateSuggestedPrice(
+    final newState = state.toUpdateSuggestedPrice(
         quantity: updatedQuantity,
-        totalPrice: ((double.tryParse(customPriceController.text) ?? 0) *
+        totalPrice: ((double.tryParse(state.customPriceController.text) ?? 0) *
             updatedQuantity));
     emit(newState);
   }
@@ -94,11 +98,14 @@ class DeligateEditOrderCubit extends Cubit<DeligateEditOrderState> {
   void decrementQuantity() {
     final updatedQuantity = state.quantity > 1 ? state.quantity - 1 : 1;
 
-    quantityController.text = updatedQuantity.toString();
+    state.quantityController.text = updatedQuantity.toString();
+    state.packageQuantityController.text =
+        (updatedQuantity ~/ (state.selectedProduct?.packageSize ?? 1))
+            .toString();
 
-    emit(state.updateSuggestedPrice(
+    emit(state.toUpdateSuggestedPrice(
         quantity: updatedQuantity,
-        totalPrice: ((double.tryParse(customPriceController.text) ?? 0) *
+        totalPrice: ((double.tryParse(state.customPriceController.text) ?? 0) *
             updatedQuantity)));
   }
 
@@ -117,7 +124,7 @@ class DeligateEditOrderCubit extends Cubit<DeligateEditOrderState> {
         item.copyWith(model: item.model.copyWith(quantity: updatedQuantity));
 
     emit(
-      state.productsUpdated(
+      state.toProductsUpdated(
         item: updatedItem,
       ),
     );
@@ -137,22 +144,22 @@ class DeligateEditOrderCubit extends Cubit<DeligateEditOrderState> {
         item.copyWith(model: item.model.copyWith(quantity: updatedQuantity));
 
     emit(
-      state.productsUpdated(
+      state.toProductsUpdated(
         item: updatedItem,
       ),
     );
   }
 
   void selectProduct(BaseParaPharmaCatalogModel product) {
-    emit(state.updateSelectedProduct(product: product));
-    customPriceController.text = product.unitPriceHt;
+    emit(state.toUpdateSelectedProduct(product: product));
+    state.customPriceController.text = product.unitPriceHt;
   }
 
   void updateCustomPrice(String? price) {
     final priceValue =
         double.tryParse(price ?? (state.selectedProduct?.unitPriceHt ?? '0'));
 
-    emit(state.updateSuggestedPrice(
+    emit(state.toUpdateSuggestedPrice(
         price: priceValue, totalPrice: (priceValue ?? 0) * state.quantity));
   }
 
@@ -167,33 +174,35 @@ class DeligateEditOrderCubit extends Cubit<DeligateEditOrderState> {
             final updatedItem = item.copyWith(
                 model: item.model.copyWith(suggestedPrice: priceValue));
 
-            emit(state.productsUpdated(item: updatedItem));
+            emit(state.toProductsUpdated(item: updatedItem));
           });
 
   void decrementPackageQuantity() {
-    final currPackageQuantity = int.parse(packageQuantityController.text) - 1;
+    final currPackageQuantity =
+        int.parse(state.packageQuantityController.text) - 1;
 
     final updatedItemQuantity =
         (currPackageQuantity * (state.selectedProduct?.packageSize ?? 1));
 
-    packageQuantityController.text =
+    state.packageQuantityController.text =
         (currPackageQuantity < 1 ? 1 : currPackageQuantity).toString();
 
-    quantityController.text =
+    state.quantityController.text =
         (updatedItemQuantity < 1 ? 1 : updatedItemQuantity).toString();
-    emit(state.updateSuggestedPrice(quantity: updatedItemQuantity));
+    emit(state.toUpdateSuggestedPrice(quantity: updatedItemQuantity));
   }
 
   void incrementPackageQuantity() {
-    final currPackageQuantity = int.parse(packageQuantityController.text) + 1;
+    final currPackageQuantity =
+        int.parse(state.packageQuantityController.text) + 1;
 
     final updatedItemQuantity =
         (currPackageQuantity * (state.selectedProduct?.packageSize ?? 1));
 
-    packageQuantityController.text = currPackageQuantity.toString();
+    state.packageQuantityController.text = currPackageQuantity.toString();
 
-    quantityController.text = updatedItemQuantity.toString();
-    emit(state.updateSuggestedPrice(quantity: updatedItemQuantity));
+    state.quantityController.text = updatedItemQuantity.toString();
+    emit(state.toUpdateSuggestedPrice(quantity: updatedItemQuantity));
   }
 
   void updateQuantityPackage(String quantity) {
@@ -201,24 +210,24 @@ class DeligateEditOrderCubit extends Cubit<DeligateEditOrderState> {
 
     final updatedItemQuantity =
         (currPackageQuantity * (state.selectedProduct?.packageSize ?? 1));
-    packageQuantityController.text = currPackageQuantity.toString();
+    state.packageQuantityController.text = currPackageQuantity.toString();
 
-    quantityController.text = updatedItemQuantity.toString();
-    emit(state.updateSuggestedPrice(quantity: updatedItemQuantity));
+    state.quantityController.text = updatedItemQuantity.toString();
+    emit(state.toUpdateSuggestedPrice(quantity: updatedItemQuantity));
   }
 
   void updateQuantity(String quantity) {
     final updatedQuantity = int.parse(quantity);
 
-    quantityController.text = updatedQuantity.toString();
+    state.quantityController.text = updatedQuantity.toString();
 
-    packageQuantityController.text =
+    state.packageQuantityController.text =
         (updatedQuantity ~/ (state.selectedProduct?.packageSize ?? 1))
             .toString();
 
-    emit(state.updateSuggestedPrice(
+    emit(state.toUpdateSuggestedPrice(
         quantity: updatedQuantity,
-        totalPrice: ((double.tryParse(customPriceController.text) ?? 0) *
+        totalPrice: ((double.tryParse(state.customPriceController.text) ?? 0) *
             updatedQuantity)));
   }
 }
