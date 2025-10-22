@@ -12,75 +12,63 @@ class OrdersDetailsState {
       required this.originalOrderItems,
       required this.didChange});
 
-  OrdersDetailsState copyWith({
+  OrdersInitial toInitial({
     OrderDetailsModel? orderData,
     List<DeligateOrderItemUi>? orderItems,
-    List<DeligateOrderItemUi>? originalOrderItems,
     bool? didChange,
   }) {
-    return OrdersDetailsState(
-      orderData: orderData ?? this.orderData,
-      didChange: didChange ?? this.didChange,
-      orderItems: orderItems ?? this.orderItems,
-      originalOrderItems: originalOrderItems ?? this.originalOrderItems,
+    return OrdersInitial.fromState(
+      state: this,
+      orderData: orderData,
+      orderItems: orderItems,
+      didChange: didChange,
     );
-  }
-
-  OrdersInitial initial({
-    OrderDetailsModel? orderData,
-    List<DeligateOrderItemUi>? orderItems,
-    bool? didChange,
-  }) {
-    return OrdersInitial.fromState(copyWith(
-      orderData: orderData ?? this.orderData,
-      orderItems: orderItems ?? this.orderItems,
-      originalOrderItems: originalOrderItems,
-      didChange: didChange ?? this.didChange,
-    ));
   }
 
   OrderDetailsLoading loading({
     OrderDetailsModel? orderData,
     List<DeligateOrderItemUi>? orderItems,
   }) {
-    return OrderDetailsLoading.fromState(copyWith(
-      orderData: orderData ?? this.orderData,
-      orderItems: orderItems ?? this.orderItems,
-      originalOrderItems: originalOrderItems,
-    ));
+    return OrderDetailsLoading.fromState(
+      state: this,
+      orderData: orderData,
+      orderItems: orderItems,
+    );
   }
 
   OrderDetailsLoaded loaded({
-    OrderDetailsModel? orderData,
-    List<DeligateOrderItemUi>? orderItems,
-    List<DeligateOrderItemUi>? originalOrderItems,
+    required OrderDetailsModel orderData,
+    required List<DeligateOrderItemUi> orderItems,
+    required List<DeligateOrderItemUi> originalOrderItems,
   }) {
-    return OrderDetailsLoaded.fromState(copyWith(
-      orderData: orderData ?? this.orderData,
-      orderItems: orderItems ?? this.orderItems,
-      originalOrderItems: originalOrderItems ?? this.originalOrderItems,
-    ));
+    return OrderDetailsLoaded.fromState(
+      state: this,
+      orderData: orderData,
+      orderItems: orderItems,
+      originalOrderItems: originalOrderItems,
+    );
   }
 
   OrderDetailsLoadingFailed loadingFailed({
     OrderDetailsModel? orderData,
     List<DeligateOrderItemUi>? orderItems,
   }) {
-    return OrderDetailsLoadingFailed.fromState(copyWith(
-      orderData: orderData ?? this.orderData,
-      orderItems: orderItems ?? this.orderItems,
-      originalOrderItems: originalOrderItems,
-    ));
+    return OrderDetailsLoadingFailed.fromState(
+      state: this,
+      orderData: orderData,
+      orderItems: orderItems,
+    );
   }
 
-  OrdersDetailsState cancelChanges() {
-    return copyWith(
+  OrdersDetailsState toCancelChanges() {
+    return OrderItemsUpdated.fromState(
+      state: this,
       orderItems: originalOrderItems,
       didChange: false,
     );
   }
 
-  OrderItemsUpdated itemsUpdated(
+  OrderItemsUpdated toItemsUpdated(
       {required DeligateOrderItemUi item, bool removed = false}) {
     bool updatedExisting = false;
 
@@ -107,7 +95,10 @@ class OrdersDetailsState {
     }
 
     return OrderItemsUpdated.fromState(
-        copyWith(orderItems: updatedOrderItems, didChange: true));
+      state: this,
+      orderItems: updatedOrderItems,
+      didChange: true,
+    );
   }
 }
 
@@ -119,11 +110,16 @@ final class OrdersInitial extends OrdersDetailsState {
       super.didChange = false})
       : super(orderData: orderData ?? OrderDetailsModel.empty());
 
-  factory OrdersInitial.fromState(OrdersDetailsState state) {
+  factory OrdersInitial.fromState({
+    required OrdersDetailsState state,
+    OrderDetailsModel? orderData,
+    List<DeligateOrderItemUi>? orderItems,
+    bool? didChange,
+  }) {
     return OrdersInitial(
-      orderData: state.orderData,
-      orderItems: state.orderItems,
-      didChange: state.didChange,
+      orderData: orderData ?? state.orderData,
+      orderItems: orderItems ?? state.orderItems,
+      didChange: didChange ?? state.didChange,
       originalOrderItems: state.originalOrderItems,
     );
   }
@@ -137,11 +133,15 @@ final class OrderDetailsLoading extends OrdersDetailsState {
     super.orderItems = const [],
   });
 
-  factory OrderDetailsLoading.fromState(OrdersDetailsState state) {
+  factory OrderDetailsLoading.fromState({
+    required OrdersDetailsState state,
+    OrderDetailsModel? orderData,
+    List<DeligateOrderItemUi>? orderItems,
+  }) {
     return OrderDetailsLoading(
-      orderData: state.orderData,
+      orderData: orderData ?? state.orderData,
       didChange: state.didChange,
-      orderItems: state.orderItems,
+      orderItems: orderItems ?? state.orderItems,
     );
   }
 }
@@ -154,12 +154,17 @@ final class OrderDetailsLoaded extends OrdersDetailsState {
     super.orderItems = const [],
   });
 
-  factory OrderDetailsLoaded.fromState(OrdersDetailsState state) {
+  factory OrderDetailsLoaded.fromState({
+    required OrdersDetailsState state,
+    required OrderDetailsModel orderData,
+    required List<DeligateOrderItemUi> orderItems,
+    required List<DeligateOrderItemUi> originalOrderItems,
+  }) {
     return OrderDetailsLoaded(
-      orderData: state.orderData,
+      orderData: orderData,
       didChange: state.didChange,
-      orderItems: state.orderItems,
-      originalOrderItems: state.originalOrderItems,
+      orderItems: orderItems,
+      originalOrderItems: originalOrderItems,
     );
   }
 }
@@ -172,22 +177,27 @@ final class OrderDetailsLoadingFailed extends OrdersDetailsState {
     super.orderItems = const [],
   });
 
-  factory OrderDetailsLoadingFailed.fromState(OrdersDetailsState state) {
+  factory OrderDetailsLoadingFailed.fromState({
+    required OrdersDetailsState state,
+    OrderDetailsModel? orderData,
+    List<DeligateOrderItemUi>? orderItems,
+  }) {
     return OrderDetailsLoadingFailed(
-      orderData: state.orderData,
+      orderData: orderData ?? state.orderData,
       didChange: state.didChange,
-      orderItems: state.orderItems,
+      orderItems: orderItems ?? state.orderItems,
+      originalOrderItems: state.originalOrderItems,
     );
   }
 }
 
 final class OrderItemsUpdated extends OrdersDetailsState {
-  OrderItemsUpdated.fromState(
-    OrdersDetailsState state,
-  ) : super(
+  OrderItemsUpdated.fromState({
+    required OrdersDetailsState state,
+    required super.orderItems,
+    required super.didChange,
+  }) : super(
           orderData: state.orderData,
-          didChange: state.didChange,
           originalOrderItems: state.originalOrderItems,
-          orderItems: state.orderItems,
         );
 }

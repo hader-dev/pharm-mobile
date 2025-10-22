@@ -72,7 +72,31 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
     try {
       emit(state.loading());
       final orderData = await orderRepository.getMorderById(state.orderData.id);
-      emit(state.loaded(orderData: orderData));
+      final orderItems = <DeligateOrderItemUi>[];
+
+      for (var element in orderData.orderItems) {
+        orderItems.add(
+          DeligateOrderItemUi(
+            model: DeligateOrderItem(
+              product: element,
+              quantity: element.quantity,
+              isParapharm: element.parapharmCatalogId != null,
+              suggestedPrice: element.unitPriceHt,
+            ),
+            quantityController:
+                TextEditingController(text: element.quantity.toString()),
+            packageQuantityController: TextEditingController(
+                text: (element.quantity ~/ element.packageSize).toString()),
+            customPriceController:
+                TextEditingController(text: element.unitPriceHt.toString()),
+          ),
+        );
+      }
+
+      emit(state.loaded(
+          orderData: orderData,
+          orderItems: orderItems,
+          originalOrderItems: orderItems));
     } catch (e, stacktrace) {
       debugPrint("$e");
       debugPrintStack(stackTrace: stacktrace);
@@ -94,7 +118,7 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
 
     orderChangeModel.removeOrderItem(item.model);
 
-    emit(state.initial(orderItems: orderItems, didChange: true));
+    emit(state.toInitial(orderItems: orderItems, didChange: true));
   }
 
   void decrementItemQuantity(
@@ -115,7 +139,7 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
 
     orderChangeModel.updateOrderItem(updatedItem.model);
 
-    emit(state.initial(
+    emit(state.toInitial(
       orderItems: orderItems,
       didChange: true,
     ));
@@ -139,7 +163,7 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
             el.model.product.id == item.model.product.id ? updatedItem : el)
         .toList();
 
-    emit(state.initial(
+    emit(state.toInitial(
       orderItems: orderItems,
       didChange: true,
     ));
@@ -160,7 +184,7 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
               .toList();
 
           orderChangeModel.updateOrderItem(updatedItem.model);
-          emit(state.initial(
+          emit(state.toInitial(
             orderItems: orderItems,
             didChange: true,
           ));
@@ -183,7 +207,7 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
 
           orderChangeModel.updateOrderItem(updatedItem.model);
 
-          emit(state.initial(
+          emit(state.toInitial(
             orderItems: orderItems,
             didChange: true,
           ));
@@ -193,7 +217,7 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
   void cancelUpdateOrder() {
     orderChangeModel.reset();
     emit(
-      state.cancelChanges(),
+      state.toCancelChanges(),
     );
   }
 
@@ -220,7 +244,7 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
         orderChangeModel.reset();
 
         emit(
-          state.initial(
+          state.toInitial(
             didChange: false,
           ),
         );
@@ -258,7 +282,7 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
 
     orderChangeModel.addOrderItem(newOrderItem.model);
 
-    emit(state.itemsUpdated(item: newOrderItem));
+    emit(state.toItemsUpdated(item: newOrderItem));
 
     getItInstance.get<ToastManager>().showToast(
           message: translation.order_placed_successfully,
@@ -283,7 +307,7 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
             el.model.product.id == item.model.product.id ? updatedItem : el)
         .toList();
 
-    emit(state.initial(
+    emit(state.toInitial(
       orderItems: orderItems,
       didChange: true,
     ));
@@ -305,7 +329,7 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
             el.model.product.id == item.model.product.id ? updatedItem : el)
         .toList();
 
-    emit(state.initial(
+    emit(state.toInitial(
       orderItems: orderItems,
       didChange: true,
     ));
@@ -328,7 +352,7 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
             el.model.product.id == item.model.product.id ? updatedItem : el)
         .toList();
 
-    emit(state.initial(
+    emit(state.toInitial(
       orderItems: orderItems,
       didChange: true,
     ));
@@ -351,7 +375,7 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
             el.model.product.id == item.model.product.id ? updatedItem : el)
         .toList();
 
-    emit(state.initial(
+    emit(state.toInitial(
       orderItems: orderItems,
       didChange: true,
     ));

@@ -38,6 +38,10 @@ abstract class DeligateEditOrderState {
       required this.packageQuantityController,
       required this.limit});
 
+  DeligateOrderResetSelectedProduct toResetSelectedProduct() {
+    return DeligateOrderResetSelectedProduct.fromState(state: this);
+  }
+
   DeligateOrderInitial toInitial({
     DeligateClient? client,
     bool resetClient = false,
@@ -74,6 +78,9 @@ abstract class DeligateEditOrderState {
 
   DeligateOrderUpdateSelectedProduct toUpdateSelectedProduct(
       {required BaseParaPharmaCatalogModel product}) {
+    quantityController.text = '1';
+    packageQuantityController.text = '0';
+
     return DeligateOrderUpdateSelectedProduct.fromState(
         state: this,
         selectedProduct: product,
@@ -259,6 +266,29 @@ final class DeligateOrderUpdateSelectedProduct extends DeligateEditOrderState {
           quantityController: state.quantityController,
           packageQuantityController: state.packageQuantityController,
           customPriceController: state.customPriceController,
+        );
+}
+
+final class DeligateOrderResetSelectedProduct extends DeligateEditOrderState {
+  DeligateOrderResetSelectedProduct.fromState({
+    required DeligateEditOrderState state,
+  }) : super(
+          client: state.client,
+          hasReachedMax: state.hasReachedMax,
+          orderProducts: state.orderProducts,
+          totalItemsCount: state.totalItemsCount,
+          offSet: state.offSet,
+          products: state.products,
+          limit: state.limit,
+          scrollController: state.scrollController,
+          searchController: state.searchController,
+          quantityController: state.quantityController,
+          packageQuantityController: state.packageQuantityController,
+          customPriceController: state.customPriceController,
+          suggestedPrice: state.suggestedPrice,
+          selectedProduct: null,
+          quantity: 1,
+          totalPrice: 0,
         );
 }
 

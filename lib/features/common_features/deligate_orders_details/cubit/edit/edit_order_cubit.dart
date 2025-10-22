@@ -230,4 +230,8 @@ class DeligateEditOrderCubit extends Cubit<DeligateEditOrderState> {
         totalPrice: ((double.tryParse(state.customPriceController.text) ?? 0) *
             updatedQuantity)));
   }
+
+  void resetSelectedProduct() {
+    emit(state.toResetSelectedProduct());
+  }
 }

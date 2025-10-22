@@ -3,10 +3,13 @@ import 'dart:async';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
 import 'package:hader_pharm_mobile/features/common/decorations/field.dart';
 import 'package:hader_pharm_mobile/features/common/decorations/input.dart';
+import 'package:hader_pharm_mobile/features/common/image/cached_network_image_with_asset_fallback.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/para_pharma_widget_2.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/quantity_section.dart';
@@ -15,6 +18,7 @@ import 'package:hader_pharm_mobile/features/common_features/deligate_orders_deta
 import 'package:hader_pharm_mobile/features/common_features/deligate_orders_details/cubit/order_details/orders_details_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/pdf_viewer/para_pharma_catalog_details/widgets/make_order_bottom_sheet.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
+import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
@@ -34,9 +38,21 @@ class OrderProductSelector extends StatelessWidget {
 
   Widget buildDisplayWidget(
       BuildContext context, BaseParaPharmaCatalogModel? selectedItem) {
-    return Text(
-      selectedItem?.name ?? context.translation!.select_product,
-      style: context.responsiveTextTheme.current.body3Regular,
+    return Row(
+      children: [
+        CachedNetworkImageWithAssetFallback(
+            height: 50,
+            width: 50,
+            imageUrl: getItInstance.get<INetworkService>().getFilesPath(
+                  selectedItem?.thumbnailImage?.path ?? "",
+                ),
+            assetImage: DrawableAssetStrings.paraPharmaPlaceHolderImg),
+        const SizedBox(width: AppSizesManager.s12),
+        Text(
+          selectedItem?.name ?? context.translation!.select_product,
+          style: context.responsiveTextTheme.current.body3Regular,
+        )
+      ],
     );
   }
 
@@ -46,7 +62,6 @@ class OrderProductSelector extends StatelessWidget {
     final gCubit = context.read<OrderDetailsCubit>();
 
     final translation = context.translation!;
-
 
     return Container(
       margin: const EdgeInsets.only(top: AppSizesManager.s8),
@@ -98,12 +113,15 @@ class OrderProductSelector extends StatelessWidget {
           ),
           const ResponsiveGap.s8(),
           PrimaryTextButton(
-            onTap: () => gCubit.addOrderItem(
-              translation: translation,
-              selectedProduct: product,
-              quantity: cubit.state.quantity,
-              customPriceController: cubit.state.customPriceController,
-            ),
+            onTap: () {
+              cubit.resetSelectedProduct();
+              gCubit.addOrderItem(
+                translation: translation,
+                selectedProduct: product,
+                quantity: cubit.state.quantity,
+                customPriceController: cubit.state.customPriceController,
+              );
+            },
             label: context.translation!.add_cart,
             labelColor: Colors.white,
             color: AppColors.accent1Shade1,
@@ -133,6 +151,11 @@ class OrderProductSelector extends StatelessWidget {
                 compareFn: compareFn,
                 popupProps: PopupProps.modalBottomSheet(
                   showSearchBox: true,
+                  itemBuilder: (context, item, isDisabled, isSelected) =>
+                      Padding(
+                    padding: EdgeInsets.all(AppSizesManager.p12),
+                    child: buildDisplayWidget(context, item),
+                  ),
                   searchFieldProps: TextFieldProps(
                     decoration: buildInputDecorationCustomFieldStyle(
                         translation.select_product, FieldState.normal, context),

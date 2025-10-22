@@ -27,6 +27,7 @@ class OrderItemsSection extends StatelessWidget {
             BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
       ),
       child: Column(
+        mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text.rich(TextSpan(

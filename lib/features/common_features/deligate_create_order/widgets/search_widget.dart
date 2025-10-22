@@ -17,8 +17,9 @@ class CreateOrderSearchWidget extends StatelessWidget {
       padding: const EdgeInsets.all(AppSizesManager.p16),
       child: CustomTextField(
         hintText: context.translation!.search_products,
-        controller:
-            BlocProvider.of<DeligateCreateOrderCubit>(context).searchController,
+        controller: BlocProvider.of<DeligateCreateOrderCubit>(context)
+            .state
+            .searchController,
         state: FieldState.normal,
         isEnabled: true,
         prefixIcon: Icon(
@@ -28,6 +29,7 @@ class CreateOrderSearchWidget extends StatelessWidget {
         suffixIcon: InkWell(
           onTap: () {
             BlocProvider.of<DeligateCreateOrderCubit>(context)
+                .state
                 .searchController
                 .clear();
             BlocProvider.of<DeligateCreateOrderCubit>(context).searchProducts();
