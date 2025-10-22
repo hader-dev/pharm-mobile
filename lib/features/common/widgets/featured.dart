@@ -10,12 +10,14 @@ class FeaturedEntity extends StatelessWidget {
       required this.title,
       required this.imageUrl,
       this.onPress,
+      required this.fallbackAssetImagePlaceholderPath,
       required this.size});
 
   final String title;
   final String? imageUrl;
   final VoidCallback? onPress;
   final double size;
+  final String fallbackAssetImagePlaceholderPath;
 
   @override
   Widget build(BuildContext context) {
@@ -30,18 +32,27 @@ class FeaturedEntity extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey.shade300),
-                borderRadius: BorderRadius.circular(10),
+                borderRadius:
+                    BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
               ),
               padding: const EdgeInsets.all(AppSizesManager.p8),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(6),
-                child: CacheNetworkImagePlus(
-                  width: size,
-                  height: (size * 0.6) - AppSizesManager.p8,
-                  boxFit: BoxFit.cover,
-                  imageUrl: imageUrl ??
-                      "https://images.aeonmedia.co/images/afef287f-dd6f-4a6a-b8a6-4f0a09330657/sized-kendal-l4ikccachoc-unsplash.jpg?width=3840&quality=75&format=auto",
-                ),
+                borderRadius:
+                    BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+                child: (imageUrl != null && imageUrl!.isNotEmpty)
+                    ? CacheNetworkImagePlus(
+                        width: size,
+                        height: (size * 0.6) - AppSizesManager.p8,
+                        boxFit: BoxFit.cover,
+                        imageUrl: imageUrl!)
+                    : Center(
+                        child: Image(
+                          image: AssetImage(fallbackAssetImagePlaceholderPath),
+                          fit: BoxFit.cover,
+                          height: 80,
+                          width: 80,
+                        ),
+                      ),
               ),
             ),
             const ResponsiveGap.s4(),

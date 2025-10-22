@@ -8,6 +8,7 @@ import 'package:hader_pharm_mobile/config/services/network/network_interface.dar
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/featured.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/vendors/cubit/vendors_cubit.dart';
+import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 
 class VendorsSectionItems extends StatelessWidget {
@@ -55,6 +56,8 @@ class VendorsSectionItems extends StatelessWidget {
               return FeaturedEntity(
                 size: itemWidth,
                 title: entity.name,
+                fallbackAssetImagePlaceholderPath:
+                    DrawableAssetStrings.companyPlaceHolderImg,
                 onPress: () => RoutingManager.router.pushNamed(
                   RoutingManager.vendorDetails,
                   extra: entity.id,
