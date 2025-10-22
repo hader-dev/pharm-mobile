@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/language_config/resources/app_localizations.dart';
+import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/repositories/remote/clients/clients_repository.dart';
 import 'package:hader_pharm_mobile/repositories/remote/clients/params/params_create_client.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
@@ -57,6 +58,8 @@ class DeligateCreateClientCubit extends Cubit<DeligateCreateClientState> {
               companyType: state.companyType,
               townId: state.townId),
         );
+
+        RoutingManager.router.pop();
         getItInstance.get<ToastManager>().showToast(
             type: ToastType.success, message: translation.client_add_success);
 
