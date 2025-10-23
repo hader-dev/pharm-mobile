@@ -74,7 +74,7 @@ class OrderProductSelector extends StatelessWidget {
           QuantitySectionModified(
               quantityController: cubit.state.quantityController,
               packageQuantityController: cubit.state.packageQuantityController,
-              disabledPackageQuantity: false,
+              disabledPackageQuantity: true,
               packageSize: product.packageSize,
               decrementPackageQuantity: cubit.decrementPackageQuantity,
               incrementPackageQuantity: cubit.incrementPackageQuantity,

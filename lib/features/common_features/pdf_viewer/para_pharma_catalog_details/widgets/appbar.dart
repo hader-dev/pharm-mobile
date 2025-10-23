@@ -38,7 +38,7 @@ class ParaPharmaCatalogAppBar extends StatelessWidget {
             final hCubit =
                 HomeScreen.scaffoldKey.currentContext?.read<ParaPharmaCubit>();
 
-            final isLiked = cubit.paraPharmaCatalogData?.isLiked ?? false;
+            final isLiked = cubit.state.paraPharmaCatalogData.isLiked;
 
             return IconButton(
               icon: Icon(
@@ -49,16 +49,16 @@ class ParaPharmaCatalogAppBar extends StatelessWidget {
                 if (isLiked) {
                   cubit.unlikeParaPharma().then((liked) {
                     gCubit.refreshParaPharmaCatalogFavorite(
-                        cubit.paraPharmaCatalogData!.id, liked);
+                        cubit.state.paraPharmaCatalogData.id, liked);
                     hCubit?.refreshParaPharmaCatalogFavorite(
-                        cubit.paraPharmaCatalogData!.id, liked);
+                        cubit.state.paraPharmaCatalogData.id, liked);
                   });
                 } else {
                   cubit.likeParaPharma().then((liked) {
                     gCubit.refreshParaPharmaCatalogFavorite(
-                        cubit.paraPharmaCatalogData!.id, liked);
+                        cubit.state.paraPharmaCatalogData.id, liked);
                     hCubit?.refreshParaPharmaCatalogFavorite(
-                        cubit.paraPharmaCatalogData!.id, liked);
+                        cubit.state.paraPharmaCatalogData.id, liked);
                   });
                 }
               },

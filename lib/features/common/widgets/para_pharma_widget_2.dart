@@ -136,7 +136,7 @@ class ParaPharmaWidget2 extends StatelessWidget {
                       color: AppColors.accent1Shade1,
                       size: AppSizesManager.iconSize18,
                     ),
-                    ResponsiveGap.s4(),
+                    const ResponsiveGap.s4(),
                     Text.rich(
                       TextSpan(
                         children: [
@@ -156,7 +156,7 @@ class ParaPharmaWidget2 extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     if (showQuickAddButton)
                       Transform.scale(
                         scale: .6,

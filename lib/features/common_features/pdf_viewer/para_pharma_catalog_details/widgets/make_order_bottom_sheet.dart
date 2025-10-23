@@ -60,19 +60,20 @@ class MakeOrderBottomSheet extends StatelessWidget {
                 const ResponsiveGap.s12(),
                 LabeledInfoWidget(
                   label: translation.product,
-                  value: cubit.paraPharmaCatalogData!.name,
+                  value: cubit.state.paraPharmaCatalogData.name,
                 ),
                 LabeledInfoWidget(
                   label: translation.unit_total_price,
                   value:
-                      "${(num.parse(cubit.paraPharmaCatalogData!.unitPriceHt).toStringAsFixed(2))} ${translation.currency}",
+                      "${(num.parse(cubit.state.paraPharmaCatalogData.unitPriceHt).toStringAsFixed(2))} ${translation.currency}",
                 ),
                 const ResponsiveGap.s12(),
                 QuantitySectionModified(
-                  quantityController: cubit.quantityController,
-                  packageQuantityController: cubit.packageQuantityController,
-                  packageSize: cubit.paraPharmaCatalogData?.packageSize,
-                  disabledPackageQuantity: false,
+                  quantityController: cubit.state.quantityController,
+                  packageQuantityController:
+                      cubit.state.packageQuantityController,
+                  packageSize: cubit.state.paraPharmaCatalogData.packageSize,
+                  disabledPackageQuantity: true,
                   decrementPackageQuantity: cubit.decrementPackageQuantity,
                   incrementPackageQuantity: cubit.incrementPackageQuantity,
                   incrementQuantity: cubit.incrementQuantity,
@@ -108,7 +109,7 @@ class MakeOrderBottomSheet extends StatelessWidget {
                   value: Row(
                     children: [
                       Text(
-                        "${(num.parse(cubit.quantityController.text) * num.parse(cubit.paraPharmaCatalogData!.unitPriceHt)).toStringAsFixed(2)} ${translation.currency}",
+                        "${(num.parse(cubit.state.quantityController.text) * num.parse(cubit.state.paraPharmaCatalogData.unitPriceHt)).toStringAsFixed(2)} ${translation.currency}",
                         style: context.responsiveTextTheme.current.body2Medium
                             .copyWith(color: AppColors.accent1Shade1),
                       ),

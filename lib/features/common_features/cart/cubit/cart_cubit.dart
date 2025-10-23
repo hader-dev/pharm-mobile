@@ -144,13 +144,12 @@ class CartCubit extends Cubit<CartState> {
 
   void decreaseCartItemQuantity(CartItemModelUi item) {
     try {
-      if (item.model.quantity <= 1) {
+      if (item.model.quantity == 1) {
         throw TemplateException(
             message: "quantity should be greater than or equal 1.");
       }
 
-      final updatedQuantity =
-          int.parse(item.packageQuantityController.text) - 1;
+      final updatedQuantity = int.parse(item.quantityController.text) - 1;
       final updatedPackageQuantity = updatedQuantity ~/ item.model.packageSize;
 
       final updatedItem = item.copyWith(quantity: updatedQuantity);

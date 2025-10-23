@@ -18,6 +18,7 @@ class QuickCartAddModal extends StatefulWidget {
       required this.paraPharmaCatalogId,
       this.disabledPackageQuanity = false});
   final String paraPharmaCatalogId;
+
   final bool disabledPackageQuanity;
 
   @override
@@ -60,6 +61,7 @@ class _QuickCartAddModalState extends State<QuickCartAddModal>
       child: BlocBuilder<ParaPharmaDetailsCubit, ParaPharmaDetailsState>(
           builder: (context, state) {
         return ButtonsSection(
+          price: double.tryParse(state.paraPharmaCatalogData.unitPriceHt),
           onAction: () => context.pop(),
           quantitySectionAlignment: MainAxisAlignment.center,
           disabledPackageQuanity: widget.disabledPackageQuanity,

@@ -19,15 +19,16 @@ class ParaPharmaProductPhotoSection extends StatelessWidget {
     final cubit = context.read<ParaPharmaDetailsCubit>();
     return Stack(
       children: [
-        cubit.paraPharmaCatalogData?.image != null
+        cubit.state.paraPharmaCatalogData.image != null
             ? CacheNetworkImagePlus(
                 height: MediaQuery.of(context).size.width > 768 ? 400 : 320,
                 width: double.maxFinite,
                 boxFit: BoxFit.contain,
-                imageUrl: cubit.paraPharmaCatalogData?.image != null
+                imageUrl: cubit.state.paraPharmaCatalogData.image != null
                     ? getItInstance.get<INetworkService>().getFilesPath(
                         BlocProvider.of<ParaPharmaDetailsCubit>(context)
-                            .paraPharmaCatalogData!
+                            .state
+                            .paraPharmaCatalogData
                             .image!
                             .path)
                     : "",

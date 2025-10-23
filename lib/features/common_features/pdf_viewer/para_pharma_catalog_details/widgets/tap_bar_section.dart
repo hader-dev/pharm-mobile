@@ -34,8 +34,9 @@ class _ProductDetailsTabBarSectionState
         overlayColor: WidgetStatePropertyAll(Colors.transparent),
         tabAlignment: TabAlignment.start,
         labelColor: AppColors.accent1Shade1,
-        controller:
-            BlocProvider.of<ParaPharmaDetailsCubit>(context).tabController,
+        controller: BlocProvider.of<ParaPharmaDetailsCubit>(context)
+            .state
+            .tabController,
         onTap: (index) {
           BlocProvider.of<ParaPharmaDetailsCubit>(context, listen: false)
               .changeTapIndex(index);

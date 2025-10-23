@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common_features/cart/widgets/quantity/quantity.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
@@ -9,7 +10,7 @@ class QuantitySectionModified extends StatelessWidget {
   const QuantitySectionModified({
     super.key,
     this.mainAxisAlignment = MainAxisAlignment.end,
-    this.disabledPackageQuantity = false,
+    this.disabledPackageQuantity = true,
     required this.decrementQuantity,
     required this.incrementQuantity,
     required this.decrementPackageQuantity,
@@ -48,14 +49,21 @@ class QuantitySectionModified extends StatelessWidget {
             increment: incrementQuantity,
             onQuantityChanged: onQuantityChanged,
           ),
-          if (!disabledPackageQuantity)
-            BaseQuantityController(
-              label: "${translation.pacakge_quantity} (${packageSize ?? 1})",
-              quantityController: packageQuantityController,
-              decrement: decrementPackageQuantity,
-              increment: incrementPackageQuantity,
-              onQuantityChanged: onPackageQuantityChanged,
-            )
+          // if (!disabledPackageQuantity)
+          //   BaseQuantityController(
+          //     label: "${translation.pacakge_quantity} (${packageSize ?? 1})",
+          //     quantityController: packageQuantityController,
+          //     decrement: decrementPackageQuantity,
+          //     increment: incrementPackageQuantity,
+          //     onQuantityChanged: onPackageQuantityChanged,
+          //   ),
+          if (packageSize != null)
+            Text(
+              "${translation.total_items_in_packages_quantity}: ${packageQuantityController.text},",
+              style: context.responsiveTextTheme.current.body3Medium.copyWith(
+                color: TextColors.ternary.color,
+              ),
+            ),
         ],
       ),
     );

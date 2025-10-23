@@ -39,6 +39,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get delete => 'حذف';
 
   @override
+  String get total_items_in_packages_quantity =>
+      'إجمالي العناصر في كمية العبوات';
+
+  @override
   String get onboarding_find_medicines_descirption =>
       'اكتشف مجموعة واسعة من الأدوية والمنتجات الصحية من خلال ميزة البحث السهلة الاستخدام لدينا. ابحث عما تحتاجه بسرعة وكفاءة.';
 

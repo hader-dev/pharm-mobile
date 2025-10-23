@@ -46,7 +46,7 @@ class BaseQuantityController extends StatelessWidget {
                 isBordered: true,
                 bgColor: Colors.transparent,
                 onPressed: decrement,
-                icon: Icon(
+                icon: const Icon(
                   Iconsax.minus,
                   color: Colors.black,
                 ),

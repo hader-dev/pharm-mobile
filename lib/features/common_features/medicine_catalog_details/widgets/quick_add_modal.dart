@@ -60,6 +60,8 @@ class _QuickCartAddModalState extends State<QuickCartAddModal>
       ],
       child: ButtonsSection(
         onAction: () => context.pop(),
+        price: double.tryParse(
+            medicineDetailsCubit.state.medicineCatalogData!.unitPriceHt),
         quantitySectionAlignment: MainAxisAlignment.center,
         medicineDetailsCubit: medicineDetailsCubit,
         disabledPackageQuanity: widget.disabledPackageQuanity,

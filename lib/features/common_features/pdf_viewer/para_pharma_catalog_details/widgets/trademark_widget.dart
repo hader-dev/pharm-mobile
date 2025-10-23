@@ -18,7 +18,9 @@ class TrademarkWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ParaPharmaCatalogModel catalogData =
-        BlocProvider.of<ParaPharmaDetailsCubit>(context).paraPharmaCatalogData!;
+        BlocProvider.of<ParaPharmaDetailsCubit>(context)
+            .state
+            .paraPharmaCatalogData;
 
     return GestureDetector(
       onTap: () {

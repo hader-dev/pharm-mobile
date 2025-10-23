@@ -20,6 +20,7 @@ class ButtonsSection extends StatelessWidget {
       {super.key,
       this.medicineDetailsCubit,
       this.onAction,
+      this.price,
       this.quantitySectionAlignment = MainAxisAlignment.center,
       this.disabledPackageQuanity = false});
 
@@ -27,6 +28,7 @@ class ButtonsSection extends StatelessWidget {
   final MainAxisAlignment quantitySectionAlignment;
   final MedicineDetailsCubit? medicineDetailsCubit;
   final bool disabledPackageQuanity;
+  final double? price;
   @override
   Widget build(BuildContext context) {
     final translation = context.translation!;
@@ -37,6 +39,8 @@ class ButtonsSection extends StatelessWidget {
         return Column(
           children: [
             QuantitySectionModified(
+              packageSize:
+                  medicineDetailsCubit?.state.medicineCatalogData?.packageSize,
               mainAxisAlignment: quantitySectionAlignment,
               disabledPackageQuantity: disabledPackageQuanity,
               decrementQuantity: cubit.decrementQuantity,
@@ -48,6 +52,22 @@ class ButtonsSection extends StatelessWidget {
               onQuantityChanged: (v) => cubit.updateQuantity(v),
               onPackageQuantityChanged: (v) => cubit.updateQuantityPackage(v),
             ),
+            if (price != null)
+              InfoWidget(
+                label: translation.total_price,
+                bgColor: AppColors.accentGreenShade3,
+                value: Row(
+                  children: [
+                    Text(
+                      "${(price! * int.parse(cubit.quantityController.text)).toStringAsFixed(2)} ${translation.currency}",
+                      style: context.textTheme.bodyLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.accent1Shade1,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p4),
               child: Row(

@@ -16,7 +16,9 @@ class HeaderSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ParaPharmaCatalogModel paraPharmaCatalogData =
-        BlocProvider.of<ParaPharmaDetailsCubit>(context).paraPharmaCatalogData!;
+        BlocProvider.of<ParaPharmaDetailsCubit>(context)
+            .state
+            .paraPharmaCatalogData;
 
     return Padding(
       padding: const EdgeInsets.symmetric(

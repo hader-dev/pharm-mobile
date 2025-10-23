@@ -110,6 +110,7 @@ class _OrderItemEditableState extends State<OrderItemEditable> {
             color: AppColors.accent1Shade1,
           ),
           QuantitySectionModified(
+            packageSize: widget.item.model.product.packageSize,
             quantityController: widget.item.quantityController,
             packageQuantityController: widget.item.packageQuantityController,
             decrementPackageQuantity: () => cubit.decrementPackageItemQuantity(

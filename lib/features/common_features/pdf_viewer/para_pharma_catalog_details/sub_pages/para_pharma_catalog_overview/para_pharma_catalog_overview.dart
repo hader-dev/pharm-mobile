@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/common_features/pdf_viewer/para_pharma_catalog_details/cubit/para_pharma_details_cubit.dart';
+import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
-
-import '../../../../../../config/theme/colors_manager.dart';
-import '../../../../../../models/para_pharma.dart';
-import '../../cubit/para_pharma_details_cubit.dart';
 
 class ParaPharmaOverViewPage extends StatelessWidget {
   const ParaPharmaOverViewPage({super.key});
@@ -14,7 +13,9 @@ class ParaPharmaOverViewPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final translations = context.translation!;
     ParaPharmaCatalogModel paraPharmaCatalogData =
-        BlocProvider.of<ParaPharmaDetailsCubit>(context).paraPharmaCatalogData!;
+        BlocProvider.of<ParaPharmaDetailsCubit>(context)
+            .state
+            .paraPharmaCatalogData;
     return Markdown(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),

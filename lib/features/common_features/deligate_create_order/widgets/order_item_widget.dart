@@ -111,7 +111,7 @@ class _DeligateOrderItemWidgetState extends State<DeligateOrderItemWidget> {
             quantityController: widget.item.quantityController,
             packageQuantityController: widget.item.packageQuantityController,
             packageSize: widget.item.model.product.packageSize,
-            disabledPackageQuantity: false,
+            disabledPackageQuantity: true,
             decrementPackageQuantity: () => cubit.decrementPackageItemQuantity(
               item: widget.item,
             ),

@@ -76,7 +76,8 @@ class CartItemWidget extends StatelessWidget {
                           .toStringAsFixed(2),
                     ),
                     QuantitySectionModified(
-                      disabledPackageQuantity: false,
+                      disabledPackageQuantity: true,
+                      packageSize: item.model.packageSize,
                       decrementQuantity: () =>
                           cartCubit.decreaseCartItemQuantity(item),
                       incrementQuantity: () =>

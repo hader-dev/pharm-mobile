@@ -160,6 +160,12 @@ abstract class AppLocalizations {
   /// **'Delete'**
   String get delete;
 
+  /// No description provided for @total_items_in_packages_quantity.
+  ///
+  /// In en, this message translates to:
+  /// **'Total items in packages quantity'**
+  String get total_items_in_packages_quantity;
+
   /// No description provided for @onboarding_find_medicines_descirption.
   ///
   /// In en, this message translates to:

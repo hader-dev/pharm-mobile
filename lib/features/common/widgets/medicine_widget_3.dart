@@ -102,6 +102,7 @@ class MedicineWidget3 extends StatelessWidget {
                               initialChildSize: .5,
                               context: context,
                               child: QuickCartAddModal(
+                                
                                 medicineCatalogId: medicineData.id,
                               ));
                         },

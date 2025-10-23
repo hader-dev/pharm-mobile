@@ -77,7 +77,7 @@ class MakeOrderBottomSheet extends StatelessWidget {
                   quantityController: cubit.quantityController,
                   packageQuantityController: cubit.packageQuantityController,
                   packageSize: cubit.state.medicineCatalogData?.packageSize,
-                  disabledPackageQuantity: false,
+                  disabledPackageQuantity: true,
                   decrementPackageQuantity: cubit.decrementPackageQuantity,
                   incrementPackageQuantity: cubit.incrementPackageQuantity,
                   incrementQuantity: cubit.incrementQuantity,

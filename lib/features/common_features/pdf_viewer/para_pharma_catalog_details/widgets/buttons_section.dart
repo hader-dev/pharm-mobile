@@ -13,7 +13,7 @@ import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
-import 'make_order_bottom_sheet.dart' show MakeOrderBottomSheet;
+import 'make_order_bottom_sheet.dart' show MakeOrderBottomSheet, InfoWidget;
 
 class ButtonsSection extends StatelessWidget {
   const ButtonsSection({
@@ -21,11 +21,13 @@ class ButtonsSection extends StatelessWidget {
     this.onAction,
     this.quantitySectionAlignment = MainAxisAlignment.end,
     this.disabledPackageQuanity = true,
+    this.price,
   });
 
   final VoidCallback? onAction;
   final MainAxisAlignment quantitySectionAlignment;
   final bool disabledPackageQuanity;
+  final double? price;
 
   @override
   Widget build(BuildContext context) {
@@ -38,17 +40,38 @@ class ButtonsSection extends StatelessWidget {
           child: Column(
             children: [
               QuantitySectionModified(
+                  packageSize: cubit.state.paraPharmaCatalogData.packageSize,
                   mainAxisAlignment: quantitySectionAlignment,
                   disabledPackageQuantity: disabledPackageQuanity,
                   decrementQuantity: cubit.decrementQuantity,
                   incrementQuantity: cubit.incrementQuantity,
                   decrementPackageQuantity: cubit.decrementPackageQuantity,
                   incrementPackageQuantity: cubit.incrementPackageQuantity,
-                  quantityController: cubit.quantityController,
+                  quantityController: cubit.state.quantityController,
                   onQuantityChanged: (v) => cubit.updateQuantity(v),
                   onPackageQuantityChanged: (v) =>
                       cubit.updateQuantityPackage(v),
-                  packageQuantityController: cubit.packageQuantityController),
+                  packageQuantityController:
+                      cubit.state.packageQuantityController),
+              if (price != null)
+                InfoWidget(
+                  label: translation.total_price,
+                  bgColor: AppColors.accentGreenShade3,
+                  value: Row(
+                    children: [
+                      Text(
+                        "${(num.parse(cubit.state.quantityController.text) * num.parse(cubit.state.paraPharmaCatalogData.unitPriceHt)).toStringAsFixed(2)} ${translation.currency}",
+                        style: context.responsiveTextTheme.current.body2Medium
+                            .copyWith(color: AppColors.accent1Shade1),
+                      ),
+                      const Spacer(),
+                      const Icon(
+                        Iconsax.wallet_money,
+                        color: AppColors.accent1Shade1,
+                      ),
+                    ],
+                  ),
+                ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p4),
                 child: Row(
@@ -79,9 +102,10 @@ class ButtonsSection extends StatelessWidget {
                         onTap: () {
                           BlocProvider.of<CartCubit>(context).addToCart(
                               CreateCartItemModel(
-                                  productId: cubit.paraPharmaCatalogData!.id,
-                                  quantity:
-                                      int.parse(cubit.quantityController.text),
+                                  productId:
+                                      cubit.state.paraPharmaCatalogData.id,
+                                  quantity: int.parse(
+                                      cubit.state.quantityController.text),
                                   productType: ProductTypes.para_pharmacy),
                               true);
                           onAction?.call();
