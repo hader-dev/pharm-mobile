@@ -63,7 +63,6 @@ class _AnnouncementDetailsTabBarSectionState
         ),
         Expanded(
           child: TabBarView(
-            physics: const NeverScrollableScrollPhysics(),
             controller: tabsController,
             children: [
               AnnouncementOverviewPage(),

@@ -55,7 +55,6 @@ class _OrderDeligateTabBarSectionState extends State<OrderDeligateTabBarSection>
         ),
         Flexible(
           child: TabBarView(
-            physics: const NeverScrollableScrollPhysics(),
             controller: tabsController,
             children: [
               const DeligateAddOrderItemsPage(),

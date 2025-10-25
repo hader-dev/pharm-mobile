@@ -53,7 +53,6 @@ class _FavoritesTabBarSectionState extends State<FavoritesTabBarSection>
         ),
         Expanded(
           child: TabBarView(
-            physics: const NeverScrollableScrollPhysics(),
             controller: tabsController,
             children: [
               FavoritesMedicinesCatalog(),
