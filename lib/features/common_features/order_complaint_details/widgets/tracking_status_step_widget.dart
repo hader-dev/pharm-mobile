@@ -41,7 +41,7 @@ class TrackingClaimStepWidget extends StatelessWidget {
                   CircleAvatar(
                     child: Icon(orderStatus.icon,
                         color: orderStatus.color,
-                        size: AppSizesManager.iconSize20),
+                        size: AppSizesManager.iconSize30),
                   ),
                   if (!isLast)
                     Container(
