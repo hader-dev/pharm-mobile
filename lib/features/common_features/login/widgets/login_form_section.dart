@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
@@ -33,8 +34,12 @@ class _LoginFormSectionState extends State<LoginFormSection> {
                 label: '${context.translation!.email}*',
                 controller: state.emailController,
                 state: FieldState.normal,
+                formatters: [
+                  FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                ],
+                keyBoadType: TextInputType.emailAddress,
                 validationFunc: (value) =>
-                    validateIsEmail(value, context.translation!),
+                    validateIsEmail(value?.trim(), context.translation!),
               ),
               const ResponsiveGap.s4(),
               CustomTextField(
@@ -42,6 +47,9 @@ class _LoginFormSectionState extends State<LoginFormSection> {
                 controller: state.passwordController,
                 onChanged: (value) {},
                 isObscure: state.isObscured,
+                formatters: [
+                  FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                ],
                 suffixIcon: InkWell(
                     onTap: () => cubit.showPassword(),
                     child: state.isObscured
@@ -51,11 +59,12 @@ class _LoginFormSectionState extends State<LoginFormSection> {
                             color: AppColors.accent1Shade1)),
                 state: FieldState.normal,
                 validationFunc: (value) {
-                  if ((value == null || value.isEmpty) &&
+                  final trimmedValue = value?.trim();
+                  if ((trimmedValue == null || trimmedValue.isEmpty) &&
                       state.emailController.text.isNotEmpty) {
                     return context.translation!.feedback_field_required;
                   }
-                  if (value.length < 6) {
+                  if (trimmedValue != null && trimmedValue.length < 6) {
                     return context.translation!.passwor_min_length;
                   }
                 },
@@ -84,8 +93,8 @@ class _LoginFormSectionState extends State<LoginFormSection> {
                     return;
                   }
                   cubit.login(
-                    state.emailController.text,
-                    state.passwordController.text,
+                    state.emailController.text.trim(),
+                    state.passwordController.text.trim(),
                   );
                 },
                 color: AppColors.accent1Shade1,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
@@ -77,9 +78,16 @@ class PasswordResetOtpScreen extends StatelessWidget {
               label: '${context.translation!.new_password}*',
               controller: state.newPasswordController,
               state: FieldState.normal,
+              formatters: [
+                FilteringTextInputFormatter.deny(RegExp(r'\s')),
+              ],
               validationFunc: (value) {
-                if (value == null || value.isEmpty) {
+                final trimmedValue = value?.trim();
+                if (trimmedValue == null || trimmedValue.isEmpty) {
                   return context.translation!.feedback_field_required;
+                }
+                if (trimmedValue.length < 6) {
+                  return context.translation!.passwor_min_length;
                 }
               },
               isObscure: state.isObscured,
