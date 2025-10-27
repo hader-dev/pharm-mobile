@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
@@ -39,7 +40,11 @@ class RequestForgotPasswordScreen extends StatelessWidget {
               label: '${context.translation!.email}*',
               controller: state.emailController,
               state: FieldState.normal,
-              validationFunc: (value) => validateIsEmail(value, translation)),
+              formatters: [
+                FilteringTextInputFormatter.deny(RegExp(r'\s')),
+              ],
+              keyBoadType: TextInputType.emailAddress,
+              validationFunc: (value) => validateIsEmail(value?.trim(), translation)),
         ),
         const ResponsiveGap.s24(),
         PrimaryTextButton(

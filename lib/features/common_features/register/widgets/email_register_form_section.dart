@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
@@ -28,10 +29,10 @@ class EmailRegisterFormSection extends HookWidget {
             value: state.formData.fullName,
             state: FieldState.normal,
             onChanged: (newVal) => cubit.updateFormData(
-              state.formData.copyWith(fullName: newVal),
+              state.formData.copyWith(fullName: newVal?.trim()),
             ),
             validationFunc: (value) {
-              if (value == null || value.isEmpty) {
+              if (value?.trim() == null || value!.trim().isEmpty) {
                 return context.translation!.feedback_field_required;
               }
             },
@@ -41,10 +42,14 @@ class EmailRegisterFormSection extends HookWidget {
             label: '${context.translation!.email} *',
             value: state.formData.email,
             state: FieldState.normal,
+            formatters: [
+              FilteringTextInputFormatter.deny(RegExp(r'\s')),
+            ],
+            keyBoadType: TextInputType.emailAddress,
             validationFunc: (value) =>
-                validateIsEmail(value, context.translation!),
+                validateIsEmail(value?.trim(), context.translation!),
             onChanged: (newVal) => cubit.updateFormData(
-              state.formData.copyWith(email: newVal),
+              state.formData.copyWith(email: newVal?.trim()),
             ),
           ),
           ResponsiveGap.s4(),
@@ -52,6 +57,9 @@ class EmailRegisterFormSection extends HookWidget {
             label: '${context.translation!.password}*',
             value: state.formData.password,
             isObscure: state.isObscured,
+            formatters: [
+              FilteringTextInputFormatter.deny(RegExp(r'\s')),
+            ],
             suffixIcon: InkWell(
                 onTap: () => cubit.showPassword(),
                 child: state.isObscured
@@ -60,12 +68,13 @@ class EmailRegisterFormSection extends HookWidget {
                         color: AppColors.accent1Shade1)),
             state: FieldState.normal,
             validationFunc: (value) {
-              if (value == null || value.isEmpty) {
+              final trimmedValue = value?.trim();
+              if (trimmedValue == null || trimmedValue.isEmpty) {
                 return context.translation!.feedback_field_required;
               }
             },
             onChanged: (newVal) =>
-                cubit.updateFormData(state.formData.copyWith(password: newVal)),
+                cubit.updateFormData(state.formData.copyWith(password: newVal?.trim())),
           ),
           ResponsiveGap.s4(),
           BlocBuilder<RegisterCubit, RegisterState>(
@@ -74,8 +83,11 @@ class EmailRegisterFormSection extends HookWidget {
                 label: '${context.translation!.confirm_password}*',
                 value: state.formData.confirmPassword,
                 onChanged: (newVal) => cubit.updateFormData(
-                    state.formData.copyWith(confirmPassword: newVal)),
+                    state.formData.copyWith(confirmPassword: newVal?.trim())),
                 isObscure: state.isObscured,
+                formatters: [
+                  FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                ],
                 suffixIcon: InkWell(
                     onTap: () => cubit.showPassword(),
                     child: state.isObscured
@@ -85,11 +97,12 @@ class EmailRegisterFormSection extends HookWidget {
                             color: AppColors.accent1Shade1)),
                 state: FieldState.normal,
                 validationFunc: (value) {
-                  if (value == null || value.isEmpty) {
+                  final trimmedValue = value?.trim();
+                  if (trimmedValue == null || trimmedValue.isEmpty) {
                     return context.translation!.feedback_field_required;
                   }
-                  if (state.formData.password !=
-                      state.formData.confirmPassword) {
+                  if (state.formData.password.trim() !=
+                      state.formData.confirmPassword.trim()) {
                     return context.translation!.feedback_passwords_do_not_match;
                   }
                   return null;
