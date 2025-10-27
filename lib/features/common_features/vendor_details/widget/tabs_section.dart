@@ -95,7 +95,6 @@ class _VandorDetailsTabBarSectionState extends State<VandorDetailsTabBarSection>
               ),
             ],
             child: TabBarView(
-              physics: const NeverScrollableScrollPhysics(),
               controller: tabsController,
               children: [
                 VendorDetailsPage(

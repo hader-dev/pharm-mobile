@@ -64,7 +64,6 @@ class _OrderDetailsTabBarSectionState extends State<OrderDetailsTabBarSection>
         ),
         Expanded(
           child: TabBarView(
-            physics: const NeverScrollableScrollPhysics(),
             controller: tabsController,
             children: [
               OrdersDetailsPage(
