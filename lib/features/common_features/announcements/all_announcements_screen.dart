@@ -101,38 +101,41 @@ class _AllAnnouncementsScreenState extends State<AllAnnouncementsScreen> {
                         .read<AllAnnouncementsCubit>()
                         .refreshAnnouncements();
                   },
-                  child: LayoutBuilder(builder: (context, constraints) {
-                    return GridView.builder(
-                      controller: _scrollController,
-                      physics: const AlwaysScrollableScrollPhysics(),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 1,
-                        crossAxisSpacing:
-                            calculateMarketplaceGridSpacing(context.deviceSize),
-                        mainAxisSpacing: calculateMarketplaceMainAxisSpacing(
-                            context.deviceSize),
-                        childAspectRatio: 1.25,
-                      ),
-                      scrollDirection: Axis.vertical,
-                      itemCount: state.announcements.length +
-                          (state.hasReachedMax ? 0 : 1),
-                      itemBuilder: (context, index) {
-                        if (index >= state.announcements.length) {
-                          return const Center(
-                            child: Padding(
-                              padding: EdgeInsets.all(AppSizesManager.p16),
-                              child: CircularProgressIndicator(),
-                            ),
-                          );
-                        }
+                  child: Padding(
+                    padding: const EdgeInsets.all(AppSizesManager.p16),
+                    child: LayoutBuilder(builder: (context, constraints) {
+                      return GridView.builder(
+                        controller: _scrollController,
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 1,
+                          crossAxisSpacing: calculateMarketplaceGridSpacing(
+                              context.deviceSize),
+                          mainAxisSpacing: calculateMarketplaceMainAxisSpacing(
+                              context.deviceSize),
+                          childAspectRatio: 1.25,
+                        ),
+                        scrollDirection: Axis.vertical,
+                        itemCount: state.announcements.length +
+                            (state.hasReachedMax ? 0 : 1),
+                        itemBuilder: (context, index) {
+                          if (index >= state.announcements.length) {
+                            return const Center(
+                              child: Padding(
+                                padding: EdgeInsets.all(AppSizesManager.p16),
+                                child: CircularProgressIndicator(),
+                              ),
+                            );
+                          }
 
-                        final announcement = state.announcements[index];
-                        return PromotionItemWidget4(
-                          announcement: announcement,
-                        );
-                      },
-                    );
-                  }),
+                          final announcement = state.announcements[index];
+                          return PromotionItemWidget4(
+                            announcement: announcement,
+                          );
+                        },
+                      );
+                    }),
+                  ),
                 );
               },
             ),
