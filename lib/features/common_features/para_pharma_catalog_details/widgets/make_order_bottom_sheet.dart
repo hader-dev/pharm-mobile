@@ -65,7 +65,7 @@ class MakeOrderBottomSheet extends StatelessWidget {
                 LabeledInfoWidget(
                   label: translation.unit_total_price,
                   value:
-                      "${(num.parse(cubit.state.paraPharmaCatalogData.unitPriceHt).toStringAsFixed(2))} ${translation.currency}",
+                      "${(cubit.state.paraPharmaCatalogData.unitPriceHt.toStringAsFixed(2))} ${translation.currency}",
                 ),
                 const ResponsiveGap.s12(),
                 QuantitySectionModified(
@@ -109,7 +109,7 @@ class MakeOrderBottomSheet extends StatelessWidget {
                   value: Row(
                     children: [
                       Text(
-                        "${(num.parse(cubit.state.quantityController.text) * num.parse(cubit.state.paraPharmaCatalogData.unitPriceHt)).toStringAsFixed(2)} ${translation.currency}",
+                        "${(num.parse(cubit.state.quantityController.text) * cubit.state.paraPharmaCatalogData.unitPriceHt).toStringAsFixed(2)} ${translation.currency}",
                         style: context.responsiveTextTheme.current.body2Medium
                             .copyWith(color: AppColors.accent1Shade1),
                       ),

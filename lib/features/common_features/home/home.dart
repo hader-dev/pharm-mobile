@@ -5,7 +5,7 @@ import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/cubit/home_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/cubit/provider.dart';
-import 'package:hader_pharm_mobile/features/common_features/home/widgets/announcements/promotion_section_v4.dart';
+import 'package:hader_pharm_mobile/features/common_features/home/widgets/announcements/promotion_section_v5.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/widgets/appbar.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/widgets/medicine/medicine_section.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/widgets/parapharm/para_pharma_section.dart';
@@ -70,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       const ResponsiveGap.s24(),
                       if (state.announcements.isNotEmpty)
-                        PromotionSectionV4(
+                        PromotionSectionV5(
                             announcements: state.announcements,
                             minSectionHeight: context.deviceSize.width <=
                                     DeviceSizes.mediumMobile.width

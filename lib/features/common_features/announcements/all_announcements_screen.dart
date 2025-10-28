@@ -5,7 +5,7 @@ import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
-import 'package:hader_pharm_mobile/features/common/widgets/promotion_item_widget_3.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/promotion_item_widget_4.dart';
 import 'package:hader_pharm_mobile/features/common_features/announcements/cubit/all_announcements_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/announcements/widgets/announcements_search_widget.dart';
 import 'package:hader_pharm_mobile/repositories/remote/announcement/announcement_repository_impl.dart';
@@ -106,15 +106,14 @@ class _AllAnnouncementsScreenState extends State<AllAnnouncementsScreen> {
                       controller: _scrollController,
                       physics: const AlwaysScrollableScrollPhysics(),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: calculateMarketplaceCrossAxisCount(
-                            context.deviceSize),
+                        crossAxisCount: 1,
                         crossAxisSpacing:
                             calculateMarketplaceGridSpacing(context.deviceSize),
                         mainAxisSpacing: calculateMarketplaceMainAxisSpacing(
                             context.deviceSize),
-                        childAspectRatio: calculateAllAnnouncementsAspectRatio(
-                            context.deviceSize, context.orientation),
+                        childAspectRatio: 1.25,
                       ),
+                      scrollDirection: Axis.vertical,
                       itemCount: state.announcements.length +
                           (state.hasReachedMax ? 0 : 1),
                       itemBuilder: (context, index) {
@@ -128,11 +127,8 @@ class _AllAnnouncementsScreenState extends State<AllAnnouncementsScreen> {
                         }
 
                         final announcement = state.announcements[index];
-                        return SizedBox(
-                          height: constraints.maxHeight * 0.3,
-                          child: PromotionItemWidget3(
-                            announcement: announcement,
-                          ),
+                        return PromotionItemWidget4(
+                          announcement: announcement,
                         );
                       },
                     );

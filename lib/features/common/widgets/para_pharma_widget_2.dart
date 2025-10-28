@@ -141,8 +141,7 @@ class ParaPharmaWidget2 extends StatelessWidget {
                       TextSpan(
                         children: [
                           TextSpan(
-                            text: double.parse(paraPharmData.unitPriceHt)
-                                .formatAsPrice(),
+                            text: paraPharmData.unitPriceHt.formatAsPrice(),
                             style: context
                                 .responsiveTextTheme.current.headLine3SemiBold
                                 .copyWith(color: AppColors.accent1Shade1),

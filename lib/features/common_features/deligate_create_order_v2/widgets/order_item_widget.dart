@@ -29,7 +29,7 @@ class _DeligateOrderItemWidgetState extends State<DeligateOrderItemWidget> {
     final translation = context.translation!;
     final cubit = BlocProvider.of<DeligateCreateOrderCubit>(context);
     final unitPrice = (widget.item.model.suggestedPrice ??
-        double.parse(widget.item.model.product.unitPriceHt));
+        widget.item.model.product.unitPriceHt);
     final totalPrice = unitPrice * widget.item.model.quantity;
 
     return Container(

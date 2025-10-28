@@ -21,9 +21,10 @@ class DeligateParaPharmaCatalogDetailsScreen extends StatelessWidget {
       paraPharmaCatalogId: paraPharmaCatalogId,
       canOrder: canOrder,
       needCartCubit: false,
-      buttonSections: ButtonsSectionDeligate(
+      quantitySectionBuilder: (double price) => ButtonsSectionDeligate(
         quantitySectionAlignment: MainAxisAlignment.center,
         disabledPackageQuanity: disabledPackageQuanity,
+        price: price,
       ),
     );
   }

@@ -12,12 +12,15 @@ import 'sub_pages/para_pharma_catalog_overview/para_pharma_catalog_overview.dart
 import 'widgets/header_section.dart';
 import 'widgets/para_pharma_product_photo_section.dart';
 
+typedef QuantitySectionBuilder = Widget Function(double unitPrice);
+
 class BaseParaPharmaCatalogDetailsScreen extends StatefulWidget {
   final String paraPharmaCatalogId;
   final bool canOrder;
   final bool disabledPackageQuanity;
-  final Widget buttonSections;
+  // final Widget buttonSections;
   final bool needCartCubit;
+  final QuantitySectionBuilder quantitySectionBuilder;
   static final GlobalKey<ScaffoldState> paraPharmaDetailsScaffoldKey =
       GlobalKey<ScaffoldState>();
 
@@ -25,8 +28,9 @@ class BaseParaPharmaCatalogDetailsScreen extends StatefulWidget {
       {super.key,
       required this.paraPharmaCatalogId,
       required this.canOrder,
-      required this.buttonSections,
+      // required this.buttonSections,
       required this.needCartCubit,
+      required this.quantitySectionBuilder,
       this.disabledPackageQuanity = false});
 
   @override
@@ -116,7 +120,8 @@ class _BaseParaPharmaCatalogDetailsScreenState
                       child: SizedBox(
                           height: kBottomNavigationBarHeight *
                               bottomNavbarHeightModifier,
-                          child: widget.buttonSections),
+                          child: widget.quantitySectionBuilder(
+                              state.paraPharmaCatalogData.unitPriceHt)),
                     )
                   : const SizedBox.shrink(),
             );

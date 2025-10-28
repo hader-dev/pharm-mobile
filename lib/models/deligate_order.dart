@@ -8,10 +8,8 @@ class DeligateParahparmOrderItem {
   final int quantity;
   final double? suggestedPrice;
 
-  
-
   Map<String, num> getTotalPrice() {
-    num totalHtPrice = num.parse(product.unitPriceHt) * quantity;
+    num totalHtPrice = product.unitPriceHt * quantity;
     num totalTTCPrice = totalHtPrice * product.tvaPercentage + totalHtPrice;
     return <String, num>{
       "totalHtPrice": totalHtPrice,

@@ -215,12 +215,11 @@ class DeligateCreateOrderCubit extends Cubit<DeligateCreateOrderState> {
 
   void selectProduct(BaseParaPharmaCatalogModel product) {
     emit(state.toUpdateSelectedProduct(product: product));
-    state.customPriceController.text = product.unitPriceHt;
+    state.customPriceController.text = product.unitPriceHt.toString();
   }
 
   void updateCustomPrice(String? price) {
-    final priceValue =
-        double.tryParse(price ?? (state.selectedProduct?.unitPriceHt ?? '0'));
+    final priceValue = state.selectedProduct?.unitPriceHt;
 
     emit(state.toUpdateSuggestedPrice(
         price: priceValue, totalPrice: (priceValue ?? 0) * state.quantity));

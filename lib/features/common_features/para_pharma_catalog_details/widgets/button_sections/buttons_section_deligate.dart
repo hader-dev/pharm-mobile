@@ -58,7 +58,7 @@ class ButtonsSectionDeligate extends StatelessWidget {
                   value: Row(
                     children: [
                       Text(
-                        "${(num.parse(cubit.state.quantityController.text) * num.parse(cubit.state.paraPharmaCatalogData.unitPriceHt)).toStringAsFixed(2)} ${translation.currency}",
+                        "${(num.parse(cubit.state.quantityController.text) * cubit.state.paraPharmaCatalogData.unitPriceHt).toStringAsFixed(2)} ${translation.currency}",
                         style: context.responsiveTextTheme.current.body2Medium
                             .copyWith(color: AppColors.accent1Shade1),
                       ),
@@ -86,8 +86,8 @@ class ButtonsSectionDeligate extends StatelessWidget {
                         quantityController: TextEditingController(
                             text: cubit.state.quantityController.text),
                         customPriceController: TextEditingController(
-                            text:
-                                cubit.state.paraPharmaCatalogData.unitPriceHt),
+                            text: cubit.state.paraPharmaCatalogData.unitPriceHt
+                                .toString()),
                         packageQuantityController: TextEditingController(
                             text: cubit.state.packageQuantityController.text),
                         model: DeligateParahparmOrderItem(
@@ -96,8 +96,9 @@ class ButtonsSectionDeligate extends StatelessWidget {
                           quantity: int.parse(
                             cubit.state.quantityController.text,
                           ),
-                          suggestedPrice: double.parse(
-                              cubit.state.paraPharmaCatalogData.unitPriceHt),
+                          suggestedPrice: double.parse(cubit
+                              .state.paraPharmaCatalogData.unitPriceHt
+                              .toString()),
                         ),
                       ),
                     );

@@ -22,7 +22,7 @@ class CachedNetworkImageWithAssetFallback extends StatelessWidget {
         imageUrl: imageUrl,
         width: width,
         height: height,
-        boxFit: BoxFit.fill,
+        boxFit: fit ?? BoxFit.fill,
         errorWidget: Image.asset(
           assetImage,
           height: height,

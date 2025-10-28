@@ -4,7 +4,7 @@ import 'image.dart';
 
 class BaseParaPharmaCatalogModel {
   final String id;
-  final String unitPriceHt;
+  final double unitPriceHt;
   final ImageModel? thumbnailImage;
   final ImageModel? image;
   final String name;
@@ -21,7 +21,7 @@ class BaseParaPharmaCatalogModel {
 
   BaseParaPharmaCatalogModel copyWith(
       {String? id,
-      String? unitPriceHt,
+      double? unitPriceHt,
       ImageModel? thumbnailImage,
       ImageModel? image,
       String? name,
@@ -159,7 +159,7 @@ class ParaPharmaCatalogModel extends BaseParaPharmaCatalogModel {
     return ParaPharmaCatalogModel(
         id: '',
         name: '',
-        unitPriceHt: '0',
+        unitPriceHt: 0,
         packageSize: 1,
         unitPriceTtc: 0,
         tags: [],
@@ -188,7 +188,7 @@ class ParaPharmaCatalogModel extends BaseParaPharmaCatalogModel {
   @override
   ParaPharmaCatalogModel copyWith({
     String? id,
-    String? unitPriceHt,
+    double? unitPriceHt,
     ImageModel? thumbnailImage,
     ImageModel? image,
     String? name,

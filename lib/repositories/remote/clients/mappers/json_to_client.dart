@@ -1,4 +1,3 @@
-import 'package:flutter/rendering.dart';
 import 'package:hader_pharm_mobile/models/client.dart';
 import 'package:hader_pharm_mobile/models/company.dart';
 import 'package:hader_pharm_mobile/repositories/remote/clients/responses/response_my_clients.dart';
@@ -25,7 +24,6 @@ DeligateClient jsonToClient(Map<String, dynamic> json) {
 }
 
 ResponseMyClients jsonToResponseMyClients(Map<String, dynamic> json) {
-  debugPrint("JSON: $json");
   var clientsJson = json['data'] as List<dynamic>? ?? [];
 
   List<DeligateClient> clients =

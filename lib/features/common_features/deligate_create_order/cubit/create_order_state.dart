@@ -145,8 +145,8 @@ abstract class DeligateCreateOrderState extends Equatable {
       state: this,
       selectedProduct: product,
       quantity: 1,
-      totalPrice: double.parse(product.unitPriceHt),
-      suggestedPrice: double.parse(product.unitPriceHt),
+      totalPrice: product.unitPriceHt,
+      suggestedPrice: product.unitPriceHt,
     );
   }
 

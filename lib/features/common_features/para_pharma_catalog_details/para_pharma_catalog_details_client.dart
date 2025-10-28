@@ -21,9 +21,10 @@ class ClientParaPharmaCatalogDetailsScreen extends StatelessWidget {
       paraPharmaCatalogId: paraPharmaCatalogId,
       canOrder: canOrder,
       needCartCubit: true,
-      buttonSections: ButtonsSection(
+      quantitySectionBuilder: (double price) => ButtonsSection(
         quantitySectionAlignment: MainAxisAlignment.center,
         disabledPackageQuanity: disabledPackageQuanity,
+        price: price,
       ),
     );
   }

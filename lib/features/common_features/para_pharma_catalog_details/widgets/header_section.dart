@@ -39,8 +39,7 @@ class HeaderSection extends StatelessWidget {
             Text.rich(TextSpan(
               children: [
                 TextSpan(
-                  text: double.parse(paraPharmaCatalogData.unitPriceHt)
-                      .formatAsPrice(),
+                  text: paraPharmaCatalogData.unitPriceHt.formatAsPrice(),
                   style: context.responsiveTextTheme.current.headLine3SemiBold
                       .copyWith(color: AppColors.accent1Shade1),
                 ),
