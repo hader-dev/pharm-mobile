@@ -4,9 +4,7 @@ import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/services/auth/token_manager.dart';
 import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
-import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/app_layout/actions/show_new_app_version_dialog.dart';
-import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
 import 'package:hader_pharm_mobile/features/common/dialog/log_out_dialog.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/edit_company/edit_company.dart';
@@ -15,7 +13,6 @@ import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/env_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/login_jwt_decoder.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
 import 'widgets/profile_header.dart';
@@ -51,23 +48,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: CustomAppBarV2.alternate(
-          topPadding: MediaQuery.of(context).padding.top,
-          bottomPadding: MediaQuery.of(context).padding.bottom,
-          leading: IconButton(
-            icon: const Icon(
-              Iconsax.profile_circle,
-              size: AppSizesManager.iconSize25,
-              color: AppColors.bgWhite,
-            ),
-            onPressed: () {},
-          ),
-          title: Text(
-            context.translation!.account,
-            style: context.responsiveTextTheme.current.headLine3SemiBold
-                .copyWith(color: AppColors.bgWhite),
-          ),
-        ),
         body: Column(
           children: <Widget>[
             const ResponsiveGap.s16(),

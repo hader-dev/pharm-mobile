@@ -4,7 +4,6 @@ import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_clients/cubit/clients_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_clients/cubit/provider.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_clients/widgets/add_client_btn.dart';
-import 'package:hader_pharm_mobile/features/common_features/deligate_clients/widgets/appbar.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_clients/widgets/deligate_client.widget.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_clients/widgets/search_widget.dart';
 
@@ -18,7 +17,6 @@ class ClientScreen extends StatelessWidget {
     return DeligateClientsStateProvider(
       child: SafeArea(
         child: Scaffold(
-          appBar: const DeligateClientsAppbar(),
           floatingActionButton: const AddClientBtn(),
           body: BlocBuilder<DeligateClientsCubit, DeligateClientsState>(
               builder: (context, state) {

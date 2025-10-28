@@ -31,7 +31,7 @@ class CartCubit extends Cubit<CartState> {
           shippingAddress: shippingAddress,
         ));
 
-  Future<void> addToCart(CreateCartItemModel cartItem,
+  Future<bool> addToCart(CreateCartItemModel cartItem,
       [bool isParapharma = false]) async {
     try {
       emit(state.toLoading());
@@ -48,9 +48,11 @@ class CartCubit extends Cubit<CartState> {
 
       getCartItem();
       emit(state.toCartItemAdded());
+      return true;
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
       emit(state.toError(error: e.toString()));
+      return false;
     }
   }
 

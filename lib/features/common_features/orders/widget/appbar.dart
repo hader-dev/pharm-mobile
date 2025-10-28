@@ -1,0 +1,50 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
+import 'package:hader_pharm_mobile/features/common_features/orders/cubit/orders_cubit.dart';
+import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
+import 'package:iconsax/iconsax.dart';
+
+class OrdersAppbar extends StatelessWidget implements PreferredSizeWidget {
+  const OrdersAppbar({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomAppBarV2.alternate(
+      topPadding: MediaQuery.of(context).padding.top,
+      bottomPadding: MediaQuery.of(context).padding.bottom,
+      leading: IconButton(
+        icon: const Icon(
+          Iconsax.box,
+          color: AppColors.bgWhite,
+          size: AppSizesManager.iconSize25,
+        ),
+        onPressed: () {},
+      ),
+      title: BlocBuilder<OrdersCubit, OrdersState>(
+        builder: (context, state) {
+          return RichText(
+            text: TextSpan(
+              text: context.translation!.orders,
+              style: context.responsiveTextTheme.current.headLine3SemiBold
+                  .copyWith(color: AppColors.bgWhite),
+              children: [
+                TextSpan(
+                    text: " (${state.orders.length})",
+                    style: context.responsiveTextTheme.current.bodySmall
+                        .copyWith(color: AppColors.accent1Shade2Deemphasized)),
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+}

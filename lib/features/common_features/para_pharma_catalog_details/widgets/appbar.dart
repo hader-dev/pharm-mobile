@@ -11,13 +11,14 @@ import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:iconsax/iconsax.dart';
 
-class ParaPharmaCatalogAppBar extends StatelessWidget {
+class ParaPharmaCatalogAppBar extends StatelessWidget
+    implements PreferredSizeWidget {
   const ParaPharmaCatalogAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
     return CustomAppBarV2(
-      bgColor: AppColors.accent1Shade2.withAlpha(200),
+      bgColor: AppColors.accent1Shade2,
       leading: IconButton(
         icon: Icon(
           Directionality.of(context) == TextDirection.rtl
@@ -79,4 +80,7 @@ class ParaPharmaCatalogAppBar extends StatelessWidget {
       title: SizedBox.shrink(),
     );
   }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

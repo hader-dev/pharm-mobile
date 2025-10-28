@@ -63,3 +63,35 @@ class TrademarkWidget extends StatelessWidget {
     );
   }
 }
+
+class TrademarkWidgetAlternate extends StatelessWidget {
+  const TrademarkWidgetAlternate({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    ParaPharmaCatalogModel catalogData =
+        BlocProvider.of<ParaPharmaDetailsCubit>(context)
+            .state
+            .paraPharmaCatalogData;
+
+    return GestureDetector(
+      onTap: () {
+        GoRouter.of(context).pushNamed(
+          RoutingManager.vendorDetails,
+          extra: catalogData.company!.id,
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.only(
+            left: AppSizesManager.s2, right: AppSizesManager.s2),
+        child: Row(
+          children: [
+            Text(catalogData.company!.name,
+                style: context.responsiveTextTheme.current.body3Regular
+                    .copyWith(fontWeight: FontWeight.bold)),
+          ],
+        ),
+      ),
+    );
+  }
+}

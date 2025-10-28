@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/end_of_load_result_widget.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/para_pharma_widget_1.dart';
-import 'package:hader_pharm_mobile/features/common_features/deligate_products/widgets/appbar.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/market_place.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/cubit/para_pharma_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/cubit/provider.dart';
@@ -39,7 +38,6 @@ class _DeligateProductsPageState extends State<DeligateProductsPage>
 
     return Scaffold(
       key: MarketPlaceScreen.marketPlaceScaffoldKey,
-      appBar: DeligateProductsAppbar(),
       body: Padding(
         padding: const EdgeInsets.all(AppSizesManager.p8),
         child: Column(

@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_orders/widgets/create_order_button.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_orders/widgets/search_widget.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders/cubit/orders_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders/cubit/orders_provider.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
-import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
-import 'package:iconsax/iconsax.dart';
 
 import 'widgets/order_card.dart';
 
@@ -23,23 +18,6 @@ class DeligateOrdersScreen extends StatelessWidget {
     return SafeArea(
       child: OrdersProviderState(
         child: Scaffold(
-          appBar: CustomAppBarV2.alternate(
-            topPadding: MediaQuery.of(context).padding.top,
-            bottomPadding: MediaQuery.of(context).padding.bottom,
-            leading: IconButton(
-              icon: const Icon(
-                Iconsax.bag_2,
-                size: AppSizesManager.iconSize25,
-                color: AppColors.bgWhite,
-              ),
-              onPressed: () {},
-            ),
-            title: Text(
-              context.translation!.orders,
-              style: context.responsiveTextTheme.current.headLine3SemiBold
-                  .copyWith(color: AppColors.bgWhite),
-            ),
-          ),
           floatingActionButton: const CreateOrderButton(),
           body: Column(
             children: [
