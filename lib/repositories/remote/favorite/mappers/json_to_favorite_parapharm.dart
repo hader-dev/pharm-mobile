@@ -21,5 +21,7 @@ BaseParaPharmaCatalogModel jsonToFavoriteBaseParapharm(
     isActive: json['isActive'],
     isLiked: json["isFavorite"] ?? false,
     company: companyJson != null ? jsonToCompany(companyJson) : null,
+    unitPriceTtc: double.parse(json["unitPriceTtc"] ?? "0"),
+    tvaPercentage: double.parse(json["tvaPercentage"] ?? "0"),
   );
 }

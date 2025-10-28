@@ -1,9 +1,11 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/config/language_config/resources/app_localizations.dart';
+import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/features/app_layout/app_layout.dart';
 import 'package:hader_pharm_mobile/models/client.dart';
@@ -15,6 +17,7 @@ import 'package:hader_pharm_mobile/repositories/remote/order/params/create_delig
 import 'package:hader_pharm_mobile/repositories/remote/parapharm_catalog/para_pharma_catalog_repository.dart';
 import 'package:hader_pharm_mobile/repositories/remote/parapharm_catalog/params/params_load_parapharma.dart';
 import 'package:hader_pharm_mobile/utils/debounce.dart';
+import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 
@@ -23,6 +26,7 @@ part 'create_order_state.dart';
 class DeligateCreateOrderCubit extends Cubit<DeligateCreateOrderState> {
   final IParaPharmaRepository parapharmaRepo;
   final IOrderRepository orderRepo;
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   DebouncerManager debounceManager = DebouncerManager();
 
@@ -34,6 +38,7 @@ class DeligateCreateOrderCubit extends Cubit<DeligateCreateOrderState> {
     required TextEditingController searchController,
     required TextEditingController quantityController,
     required TextEditingController customPriceController,
+    required String shippingAddress,
   }) : super(DeligateOrderInitial(
           client: DeligateClient.empty(),
           packageQuantityController: packageQuantityController,
@@ -41,6 +46,7 @@ class DeligateCreateOrderCubit extends Cubit<DeligateCreateOrderState> {
           quantityController: quantityController,
           customPriceController: customPriceController,
           scrollController: scrollController,
+          shippingAddress: shippingAddress,
         )) {
     _onScroll();
   }
@@ -278,38 +284,6 @@ class DeligateCreateOrderCubit extends Cubit<DeligateCreateOrderState> {
     emit(state.toClientUpdated(client: client));
   }
 
-  Future<void> submitOrder() async {
-    final context = AppLayout.appLayoutScaffoldKey.currentContext!;
-    final translation = context.translation!;
-    final messanger = getItInstance.get<ToastManager>();
-
-    if (state.orderProducts.isEmpty || state.client.id.isEmpty) {
-      messanger.showToast(
-          type: ToastType.error,
-          message: translation.feedback_select_client_and_add_items);
-      return;
-    }
-
-    try {
-      final userManager = getItInstance<UserManager>();
-      await orderRepo.createDeligateOrder(ParamsCreateDeligateOrder(
-        deliveryAddress: userManager.currentUser.address,
-        deliveryTownId: userManager.currentUser.townId,
-        orderItems: state.orderProducts.map((el) => el.model).toList(),
-        clientId: state.client.buyerCompany.managerUserId!,
-        clientCompanyId: state.client.buyerCompany.id,
-      ));
-      messanger.showToast(
-          type: ToastType.success,
-          message: translation.order_placed_successfully);
-
-      emit(state.toInitial());
-    } catch (e) {
-      messanger.showToast(
-          type: ToastType.error, message: translation.order_placed_failed);
-    }
-  }
-
   void decrementPackageItemQuantity({
     required DeligateParahparmOrderItemUi item,
   }) {
@@ -460,5 +434,88 @@ class DeligateCreateOrderCubit extends Cubit<DeligateCreateOrderState> {
         quantity: updatedQuantity,
         totalPrice: ((double.tryParse(state.customPriceController.text) ?? 0) *
             updatedQuantity)));
+  }
+
+  void addProvidedOrderItem(
+    DeligateParahparmOrderItemUi item,
+  ) {
+    final translation =
+        AppLayout.appLayoutScaffoldKey.currentContext!.translation!;
+
+    emit(
+      state.toProductsUpdated(item: item),
+    );
+
+    RoutingManager.router.pop();
+    getItInstance.get<ToastManager>().showToast(
+          message: translation.cart_item_added_successfully,
+          type: ToastType.success,
+        );
+  }
+
+  void changeOrderNote(String note) {
+    emit(
+      state.toUpdateMiscs(orderNote: note),
+    );
+  }
+
+  void clearItems(AppLocalizations appLocalizations) {
+    emit(state.toClearProducts());
+  }
+
+  void updateShippingAddress(String shippingAddress) {
+    emit(
+      state.toUpdateMiscs(shippingAddress: shippingAddress),
+    );
+  }
+
+  void updatePaymentMethod(PaymentMethods paymentMethod) {
+    emit(
+      state.toUpdateMiscs(selectedPaymentMethod: paymentMethod),
+    );
+  }
+
+  void updateInvoiceType(InvoiceTypes invoiceType) {
+    emit(
+      state.toUpdateMiscs(selectedInvoiceType: invoiceType),
+    );
+  }
+
+  Future<void> submitOrder() async {
+    await submitOrderWithClient(state.client);
+  }
+
+  Future<void> submitOrderWithClient(DeligateClient client) async {
+    final context = AppLayout.appLayoutScaffoldKey.currentContext!;
+    final translation = context.translation!;
+    final messanger = getItInstance.get<ToastManager>();
+
+    if (state.orderProducts.isEmpty || client.id.isEmpty) {
+      messanger.showToast(
+          type: ToastType.error,
+          message: translation.feedback_select_client_and_add_items);
+      return;
+    }
+
+    try {
+      final userManager = getItInstance<UserManager>();
+      await orderRepo.createDeligateOrder(ParamsCreateDeligateOrder(
+        deliveryAddress: userManager.currentUser.address,
+        deliveryTownId: userManager.currentUser.townId,
+        orderItems: state.orderProducts.map((el) => el.model).toList(),
+        clientId: client.buyerCompany.managerUserId!,
+        clientCompanyId: client.buyerCompany.id,
+      ));
+
+      RoutingManager.router.pop();
+      messanger.showToast(
+          type: ToastType.success,
+          message: translation.order_placed_successfully);
+
+      emit(state.toInitial());
+    } catch (e) {
+      messanger.showToast(
+          type: ToastType.error, message: translation.order_placed_failed);
+    }
   }
 }

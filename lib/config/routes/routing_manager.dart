@@ -5,13 +5,15 @@ import 'package:hader_pharm_mobile/features/common_features/announcements/all_an
 import 'package:hader_pharm_mobile/features/common_features/anouncement_details/announcement_details.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_create_client/deligate_create_client.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_create_order/deligate_create_order.dart';
+import 'package:hader_pharm_mobile/features/common_features/deligate_marketplace/market_place.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_orders_details/orders_details.dart';
 import 'package:hader_pharm_mobile/features/common_features/help_support/help_support.dart';
 import 'package:hader_pharm_mobile/features/common_features/invoice/invoice.dart';
 import 'package:hader_pharm_mobile/features/common_features/leagal_policies/leagal_policies.dart';
 import 'package:hader_pharm_mobile/features/common_features/notification/notification.dart';
 import 'package:hader_pharm_mobile/features/common_features/order_complaint_details/complaint.dart';
-import 'package:hader_pharm_mobile/features/common_features/pdf_viewer/para_pharma_catalog_details/para_pharma_catalog_details.dart';
+import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/para_pharma_catalog_details_client.dart';
+import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/para_pharma_catalog_details_deligate.dart';
 import 'package:hader_pharm_mobile/features/common_features/profile/profile.dart';
 
 import '../../features/app_componants/app_componants.dart';
@@ -73,6 +75,11 @@ class RoutingManager {
   static const String notificationsScreen = '/Notifications';
   static const String deligateCreateOrderScreen = '/Deligate/CreateOrder';
   static const String deligateCreateClientScreen = '/Deligate/CreateClient';
+  static const String deligateMartketPlaceScreen = '/Deligate/MarketPlace';
+  static const String deligateParapharmDetailsScreen =
+      '/Deligate/ParaPharmaDetailsScreen';
+  static const String deligateMedicineDetailsScreen =
+      '/Deligate/MedicineDetailsScreen';
 
   static const String languagesScreen = '/LanguagesScreen';
 
@@ -89,6 +96,38 @@ class RoutingManager {
       },
       debugLogDiagnostics: true,
       routes: <RouteBase>[
+        GoRoute(
+          name: deligateParapharmDetailsScreen,
+          path: deligateParapharmDetailsScreen,
+          builder: (BuildContext context, GoRouterState state) {
+            final params = state.extra as Map<String, dynamic>;
+            final id = params["id"] as String;
+            final canOrder = params["canOrder"] as bool;
+            return DeligateParaPharmaCatalogDetailsScreen(
+                paraPharmaCatalogId: id, canOrder: canOrder);
+          },
+        ),
+        GoRoute(
+          path: deligateMedicineDetailsScreen,
+          name: deligateMedicineDetailsScreen,
+          builder: (BuildContext context, GoRouterState state) {
+            final params = state.extra as Map<String, dynamic>;
+
+            final canOrder = params["canOrder"] as bool;
+
+            return MedicineCatalogDetailsScreen(
+              medicineCatalogId: state.extra as String,
+              canOrder: canOrder,
+            );
+          },
+        ),
+        GoRoute(
+          name: deligateMartketPlaceScreen,
+          path: deligateMartketPlaceScreen,
+          builder: (BuildContext context, GoRouterState state) {
+            return const DeligateMarketPlaceScreen();
+          },
+        ),
         GoRoute(
           name: onboardingScreen,
           path: onboardingScreen,
@@ -334,7 +373,7 @@ class RoutingManager {
               final params = state.extra as Map<String, dynamic>;
               final id = params["id"] as String;
               final canOrder = params["canOrder"] as bool;
-              return ParaPharmaCatalogDetailsScreen(
+              return ClientParaPharmaCatalogDetailsScreen(
                   paraPharmaCatalogId: id, canOrder: canOrder);
             }),
         GoRoute(

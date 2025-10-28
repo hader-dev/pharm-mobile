@@ -57,6 +57,7 @@ class _MarketPlaceTabBarSectionState extends State<MarketPlaceTabBarSection>
         ),
         Expanded(
           child: TabBarView(
+            physics: const NeverScrollableScrollPhysics(),
             controller: tabsController,
             children: [
               ParaPharmaProductsPage(),

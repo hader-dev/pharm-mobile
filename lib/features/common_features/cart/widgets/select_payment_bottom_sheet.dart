@@ -42,8 +42,9 @@ class SelectPaymentMethodBottomSheet extends StatelessWidget {
           builder: (context, state) {
             if (state is! InvoiceTypeChanged &&
                 state is! PaymentMethodChanged) {}
+            final cubit = context.read<CartCubit>();
             return Form(
-              key: context.read<CartCubit>().formKey,
+              key: cubit.formKey,
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,6 +59,8 @@ class SelectPaymentMethodBottomSheet extends StatelessWidget {
                         label: context.translation!.payment_methods,
                         bgColor: AppColors.bgWhite,
                         value: PaymentRadioInput(
+                          initialValue: state.selectedPaymentMethod,
+                          onPaymentMethodChanged: cubit.changePaymentMethod,
                           validator: (v) =>
                               requiredValidator(v?.name, translation),
                         )),
@@ -65,6 +68,8 @@ class SelectPaymentMethodBottomSheet extends StatelessWidget {
                         label: context.translation!.invoice_types,
                         bgColor: AppColors.bgWhite,
                         value: InvoiceRadioInput(
+                          initialValue: state.selectedInvoiceType,
+                          onInvoiceTypeChanged: cubit.changeInvoiceType,
                           validator: (v) =>
                               requiredValidator(v?.name, translation),
                         )),

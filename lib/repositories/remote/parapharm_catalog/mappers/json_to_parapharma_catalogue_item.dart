@@ -1,4 +1,3 @@
-import 'package:flutter/widgets.dart';
 import 'package:hader_pharm_mobile/models/company.dart';
 import 'package:hader_pharm_mobile/models/image.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
@@ -7,14 +6,13 @@ import 'package:hader_pharm_mobile/repositories/remote/utility/mappers/dynamic_l
 
 ParaPharmaCatalogModel jsonToParapharmaCatalogueItem(
     Map<String, dynamic> json) {
-  debugPrint("jsonToParapharmaCatalogueItem: $json");
   return ParaPharmaCatalogModel(
     id: json['id'] ?? "",
     tags: mapJsonDynamicListToTypedList(json['tags']),
     packageSize: json['packageSize'] ?? 1,
+    unitPriceTtc: double.parse(json["unitPriceTtc"] ?? "0"),
+    tvaPercentage: double.parse(json["tvaPercentage"] ?? "0"),
     unitPriceHt: json['unitPriceHt'] ?? "0.0",
-    unitPriceTtc: json['unitPriceTtc'] ?? "0.0",
-    tvaPercentage: json['tvaPercentage'] ?? "0.0",
     thumbnailImage:
         json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
     image: json["image"] != null ? ImageModel.fromJson(json["image"]) : null,

@@ -24,10 +24,11 @@ class DeligateCreateOrderStateProvider extends StatelessWidget {
             client: getItInstance.get<INetworkService>(),
           ),
           scrollController: ScrollController(),
-          packageQuantityController: TextEditingController(text: "1"),
+          packageQuantityController: TextEditingController(text: "0"),
           searchController: TextEditingController(),
           quantityController: TextEditingController(text: "1"),
           customPriceController: TextEditingController(),
+          shippingAddress: getItInstance.get<UserManager>().currentUser.address,
         )..getProducts(),
       ),
       BlocProvider(

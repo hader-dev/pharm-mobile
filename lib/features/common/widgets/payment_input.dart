@@ -1,24 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/filter_option_value.dart';
-import 'package:hader_pharm_mobile/features/common_features/cart/cubit/cart_cubit.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
+typedef OnPaymentMethodChanged = void Function(PaymentMethods paymentMethod);
+
 class PaymentRadioInput extends StatelessWidget {
   final FormFieldValidator<PaymentMethods>? validator;
+  final OnPaymentMethodChanged onPaymentMethodChanged;
+  final PaymentMethods initialValue;
 
   const PaymentRadioInput({
     super.key,
     this.validator,
+    required this.onPaymentMethodChanged,
+    required this.initialValue,
   });
 
   @override
   Widget build(BuildContext context) {
     return FormField<PaymentMethods>(
       validator: validator,
-      initialValue:
-          BlocProvider.of<CartCubit>(context).state.selectedPaymentMethod,
+      initialValue: initialValue,
       builder: (field) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -28,8 +31,8 @@ class PaymentRadioInput extends StatelessWidget {
                 title: paymentMethod.translation(context.translation!),
                 isSelected: field.value == paymentMethod,
                 onSelected: () {
-                  BlocProvider.of<CartCubit>(context)
-                      .changePaymentMethod(paymentMethod);
+                  onPaymentMethodChanged(paymentMethod);
+
                   field.didChange(paymentMethod); // notify FormField
                 },
               ),

@@ -65,9 +65,9 @@ class _CustomToastWidgetState extends State<CustomToastWidget>
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      bottom: 20,
-      left: 20,
-      right: 20,
+      top: MediaQuery.of(context).padding.top + AppSizesManager.p10,
+      left: AppSizesManager.p16,
+      right: AppSizesManager.p16,
       child: AnimatedBuilder(
           animation: _controller,
           builder: (context, child) {

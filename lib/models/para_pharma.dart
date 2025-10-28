@@ -16,6 +16,8 @@ class BaseParaPharmaCatalogModel {
   final List<String> tags;
   final Category? category;
   final Brand? brand;
+  final double unitPriceTtc;
+  final double tvaPercentage;
 
   BaseParaPharmaCatalogModel copyWith(
       {String? id,
@@ -28,8 +30,12 @@ class BaseParaPharmaCatalogModel {
       BaseCompany? company,
       bool? isLiked,
       List<String>? tags,
+      double? unitPriceTtc,
+      double? tvaPercentage,
       int? packageSize}) {
     return BaseParaPharmaCatalogModel(
+      unitPriceTtc: unitPriceTtc ?? this.unitPriceTtc,
+      tvaPercentage: tvaPercentage ?? this.tvaPercentage,
       tags: tags ?? this.tags,
       packageSize: packageSize ?? this.packageSize,
       id: id ?? this.id,
@@ -56,6 +62,8 @@ class BaseParaPharmaCatalogModel {
       required this.name,
       required this.stockQuantity,
       required this.isActive,
+      required this.unitPriceTtc,
+      required this.tvaPercentage,
       this.category,
       this.brand,
       this.company,
@@ -104,8 +112,6 @@ class Category {
 }
 
 class ParaPharmaCatalogModel extends BaseParaPharmaCatalogModel {
-  final String unitPriceTtc;
-  final String tvaPercentage;
   final DateTime createdAt;
   final DateTime updatedAt;
   final String companyId;
@@ -132,8 +138,8 @@ class ParaPharmaCatalogModel extends BaseParaPharmaCatalogModel {
     required super.stockQuantity,
     required super.isActive,
     required super.company,
-    required this.unitPriceTtc,
-    required this.tvaPercentage,
+    required super.unitPriceTtc,
+    required super.tvaPercentage,
     required this.createdAt,
     required this.updatedAt,
     required this.companyId,
@@ -155,9 +161,9 @@ class ParaPharmaCatalogModel extends BaseParaPharmaCatalogModel {
         name: '',
         unitPriceHt: '0',
         packageSize: 1,
-        unitPriceTtc: '0',
+        unitPriceTtc: 0,
         tags: [],
-        tvaPercentage: '0',
+        tvaPercentage: 0,
         thumbnailImage: null,
         image: null,
         stockQuantity: 0,
@@ -192,8 +198,8 @@ class ParaPharmaCatalogModel extends BaseParaPharmaCatalogModel {
     bool? isLiked,
     List<String>? tags,
     int? packageSize,
-    String? unitPriceTtc,
-    String? tvaPercentage,
+    double? unitPriceTtc,
+    double? tvaPercentage,
     DateTime? createdAt,
     DateTime? updatedAt,
     String? companyId,

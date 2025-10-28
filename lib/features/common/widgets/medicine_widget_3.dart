@@ -24,8 +24,12 @@ typedef OnFavoriteCallback = void Function(BaseMedicineCatalogModel medicine);
 class MedicineWidget3 extends StatelessWidget {
   final BaseMedicineCatalogModel medicineData;
   final OnFavoriteCallback? onFavoriteCallback;
+  final String route;
   const MedicineWidget3(
-      {super.key, required this.medicineData, this.onFavoriteCallback});
+      {super.key,
+      this.route = RoutingManager.medicineDetailsScreen,
+      required this.medicineData,
+      this.onFavoriteCallback});
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +41,7 @@ class MedicineWidget3 extends StatelessWidget {
         onTap: () {
           final userRole = getItInstance.get<UserManager>().currentUser.role;
           final canOrderBasedOnRole = !userRole.isDelegate;
-          GoRouter.of(context).pushNamed(RoutingManager.medicineDetailsScreen,
+          GoRouter.of(context).pushNamed(route,
               extra: {"id": medicineData.id, "canOrder": canOrderBasedOnRole});
         },
         child: Column(
@@ -102,7 +106,6 @@ class MedicineWidget3 extends StatelessWidget {
                               initialChildSize: .5,
                               context: context,
                               child: QuickCartAddModal(
-                                
                                 medicineCatalogId: medicineData.id,
                               ));
                         },

@@ -18,78 +18,84 @@ class OrdersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: BlocProvider.value(
-      value: AppLayout.appLayoutScaffoldKey.currentContext!.read<OrdersCubit>(),
-      child: Scaffold(
-        appBar: CustomAppBarV2.alternate(
-          topPadding: MediaQuery.of(context).padding.top,
-          bottomPadding: MediaQuery.of(context).padding.bottom,
-          leading: IconButton(
-            icon: const Icon(
-              Iconsax.box,
-              color: AppColors.bgWhite,
-              size: AppSizesManager.iconSize25,
+      child: BlocProvider.value(
+        value:
+            AppLayout.appLayoutScaffoldKey.currentContext!.read<OrdersCubit>(),
+        child: Scaffold(
+          appBar: CustomAppBarV2.alternate(
+            topPadding: MediaQuery.of(context).padding.top,
+            bottomPadding: MediaQuery.of(context).padding.bottom,
+            leading: IconButton(
+              icon: const Icon(
+                Iconsax.box,
+                color: AppColors.bgWhite,
+                size: AppSizesManager.iconSize25,
+              ),
+              onPressed: () {},
             ),
-            onPressed: () {},
+            title: BlocBuilder<OrdersCubit, OrdersState>(
+              builder: (context, state) {
+                return RichText(
+                  text: TextSpan(
+                    text: context.translation!.orders,
+                    style: context.responsiveTextTheme.current.headLine3SemiBold
+                        .copyWith(color: AppColors.bgWhite),
+                    children: [
+                      TextSpan(
+                          text: " (${state.orders.length})",
+                          style: context.responsiveTextTheme.current.bodySmall
+                              .copyWith(
+                                  color: AppColors.accent1Shade2Deemphasized)),
+                    ],
+                  ),
+                );
+              },
+            ),
           ),
-          title: BlocBuilder<OrdersCubit, OrdersState>(
+          body: BlocBuilder<OrdersCubit, OrdersState>(
             builder: (context, state) {
-              return RichText(
-                text: TextSpan(
-                  text: context.translation!.orders,
-                  style: context.responsiveTextTheme.current.headLine3SemiBold
-                      .copyWith(color: AppColors.bgWhite),
-                  children: [
-                    TextSpan(
-                        text: " (${state.orders.length})",
-                        style: context.responsiveTextTheme.current.bodySmall
-                            .copyWith(
-                                color: AppColors.accent1Shade2Deemphasized)),
-                  ],
+              if (state is OrdersLoading) {
+                return const Center(child: CircularProgressIndicator());
+              }
+              if (state.orders.isEmpty) {
+                return EmptyListWidget(
+                  onRefresh: () {
+                    BlocProvider.of<OrdersCubit>(context).getOrders();
+                  },
+                );
+              }
+
+              return RefreshIndicator(
+                onRefresh: () {
+                  return BlocProvider.of<OrdersCubit>(context).getOrders();
+                },
+                child: ListView.builder(
+                  controller:
+                      BlocProvider.of<OrdersCubit>(context).scrollController,
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  itemCount: state.orders.length + 1,
+                  itemBuilder: (context, index) {
+                    if (index < state.orders.length) {
+                      return OrderCard(orderData: state.orders[index]);
+                    } else {
+                      if (state is LoadingMoreOrders) {
+                        return const Padding(
+                          padding: EdgeInsets.all(16.0),
+                          child: Center(child: CircularProgressIndicator()),
+                        );
+                      } else if (state is OrdersLoadLimitReached) {
+                        return const EndOfLoadResultWidget();
+                      } else {
+                        return const SizedBox.shrink();
+                      }
+                    }
+                  },
                 ),
               );
             },
           ),
         ),
-        body: BlocBuilder<OrdersCubit, OrdersState>(
-          builder: (context, state) {
-            if (state is OrdersLoading) {
-              return const Center(child: CircularProgressIndicator());
-            }
-            if (state.orders.isEmpty) {
-              return EmptyListWidget(
-                onRefresh: () {
-                  BlocProvider.of<OrdersCubit>(context).getOrders();
-                },
-              );
-            }
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Expanded(
-                  child: RefreshIndicator(
-                    onRefresh: () {
-                      return BlocProvider.of<OrdersCubit>(context).getOrders();
-                    },
-                    child: ListView.builder(
-                        controller: BlocProvider.of<OrdersCubit>(context)
-                            .scrollController,
-                        shrinkWrap: true,
-                        physics: const AlwaysScrollableScrollPhysics(),
-                        itemCount: state.orders.length,
-                        itemBuilder: (context, index) => OrderCard(
-                              orderData: state.orders[index],
-                            )),
-                  ),
-                ),
-                if (state is LoadingMoreOrders)
-                  const Center(child: CircularProgressIndicator()),
-                if (state is OrdersLoadLimitReached) EndOfLoadResultWidget(),
-              ],
-            );
-          },
-        ),
       ),
-    ));
+    );
   }
 }

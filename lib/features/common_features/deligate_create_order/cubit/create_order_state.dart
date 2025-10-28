@@ -4,6 +4,7 @@ abstract class DeligateCreateOrderState extends Equatable {
   final DeligateClient client;
   final List<BaseParaPharmaCatalogModel> products;
   final List<DeligateParahparmOrderItemUi> orderProducts;
+  final String shippingAddress;
 
   final bool hasReachedMax;
   final int totalItemsCount;
@@ -13,6 +14,12 @@ abstract class DeligateCreateOrderState extends Equatable {
   final int quantity;
   final BaseParaPharmaCatalogModel? selectedProduct;
   final double? suggestedPrice;
+  final double totalHtAmount;
+  final double totalTtcAmount;
+  final String orderNote;
+
+  final PaymentMethods selectedPaymentMethod;
+  final InvoiceTypes selectedInvoiceType;
 
   final ScrollController scrollController;
   final TextEditingController searchController;
@@ -23,6 +30,7 @@ abstract class DeligateCreateOrderState extends Equatable {
   const DeligateCreateOrderState(
       {required this.client,
       required this.products,
+      required this.shippingAddress,
       required this.totalPrice,
       required this.orderProducts,
       this.selectedProduct,
@@ -33,10 +41,30 @@ abstract class DeligateCreateOrderState extends Equatable {
       required this.offSet,
       required this.limit,
       required this.scrollController,
+      required this.orderNote,
       required this.searchController,
       required this.customPriceController,
       required this.quantityController,
-      required this.packageQuantityController});
+      required this.packageQuantityController,
+      required this.totalHtAmount,
+      required this.selectedPaymentMethod,
+      required this.selectedInvoiceType,
+      required this.totalTtcAmount});
+
+  DeligateOrderUpdateMiscs toUpdateMiscs({
+    String? orderNote,
+    String? shippingAddress,
+    PaymentMethods? selectedPaymentMethod,
+    InvoiceTypes? selectedInvoiceType,
+  }) {
+    return DeligateOrderUpdateMiscs.fromState(
+      state: this,
+      orderNote: orderNote,
+      shippingAddress: shippingAddress,
+      selectedPaymentMethod: selectedPaymentMethod,
+      selectedInvoiceType: selectedInvoiceType,
+    );
+  }
 
   @override
   List<Object?> get props => [
@@ -51,7 +79,28 @@ abstract class DeligateCreateOrderState extends Equatable {
         totalPrice,
         suggestedPrice,
         selectedProduct,
+        totalHtAmount,
+        totalTtcAmount,
+        orderNote
       ];
+
+  static double calculateTotalAmountTtc(
+      List<DeligateParahparmOrderItemUi> items) {
+    double totalAmount = 0;
+    for (var element in items) {
+      totalAmount += element.model.getTotalPrice()["totalTTCPrice"]!;
+    }
+    return totalAmount;
+  }
+
+  static double calculateTotalAmountHt(
+      List<DeligateParahparmOrderItemUi> items) {
+    double totalAmount = 0;
+    for (var element in items) {
+      totalAmount += element.model.getTotalPrice()["totalHtPrice"]!;
+    }
+    return totalAmount;
+  }
 
   DeligateOrderInitial toInitial({
     DeligateClient? client,
@@ -80,6 +129,11 @@ abstract class DeligateCreateOrderState extends Equatable {
       orderProducts: [],
       offSet: offSet,
       limit: limit,
+      shippingAddress: shippingAddress,
+      totalPrice: 0,
+      orderNote: "",
+      totalHtAmount: 0,
+      totalTtcAmount: 0,
     );
   }
 
@@ -158,58 +212,85 @@ abstract class DeligateCreateOrderState extends Equatable {
 
   DeligateOrderLoadingFailed toFailed(String message) =>
       DeligateOrderLoadingFailed.fromState(this, message: message);
+
+  DeligateCreateOrderState toClearProducts() {
+    return DeligateOrderInitial(
+        client: client,
+        products: [],
+        hasReachedMax: false,
+        totalItemsCount: 0,
+        selectedProduct: null,
+        suggestedPrice: null,
+        quantity: 1,
+        orderProducts: [],
+        offSet: 0,
+        limit: 20,
+        shippingAddress: shippingAddress);
+  }
 }
 
 final class DeligateOrderInitial extends DeligateCreateOrderState {
-  DeligateOrderInitial({
-    required super.client,
-    super.products = const [],
-    super.orderProducts = const [],
-    super.hasReachedMax = false,
-    super.totalItemsCount = 0,
-    super.quantity = 1,
-    super.selectedProduct,
-    super.offSet = 0,
-    super.totalPrice = 0,
-    super.limit = 20,
-    super.suggestedPrice,
-    ScrollController? scrollController,
-    TextEditingController? searchController,
-    TextEditingController? customPriceController,
-    TextEditingController? quantityController,
-    TextEditingController? packageQuantityController,
-  }) : super(
-          scrollController: scrollController ?? ScrollController(),
-          searchController: searchController ?? TextEditingController(),
-          customPriceController:
-              customPriceController ?? TextEditingController(),
-          quantityController: quantityController ?? TextEditingController(),
-          packageQuantityController:
-              packageQuantityController ?? TextEditingController(),
-        );
+  DeligateOrderInitial(
+      {required super.client,
+      super.products = const [],
+      super.orderProducts = const [],
+      super.hasReachedMax = false,
+      super.totalItemsCount = 0,
+      super.quantity = 1,
+      super.selectedProduct,
+      super.offSet = 0,
+      super.totalPrice = 0,
+      super.limit = 20,
+      super.suggestedPrice,
+      super.totalHtAmount = 0,
+      super.totalTtcAmount = 0,
+      super.orderNote = "",
+      required super.shippingAddress,
+      ScrollController? scrollController,
+      TextEditingController? searchController,
+      TextEditingController? customPriceController,
+      TextEditingController? quantityController,
+      TextEditingController? packageQuantityController,
+      PaymentMethods? selectedPaymentMethod,
+      InvoiceTypes? selectedInvoiceType})
+      : super(
+            scrollController: scrollController ?? ScrollController(),
+            searchController: searchController ?? TextEditingController(),
+            customPriceController:
+                customPriceController ?? TextEditingController(),
+            quantityController: quantityController ?? TextEditingController(),
+            packageQuantityController:
+                packageQuantityController ?? TextEditingController(),
+            selectedPaymentMethod: selectedPaymentMethod ?? PaymentMethods.cash,
+            selectedInvoiceType: selectedInvoiceType ?? InvoiceTypes.proforma);
 }
 
 final class DeligateOrderLoading extends DeligateCreateOrderState {
   DeligateOrderLoading.fromState(
       {required DeligateCreateOrderState state, int? offset})
       : super(
-          offSet: offset ?? state.offSet,
-          client: state.client,
-          selectedProduct: state.selectedProduct,
-          suggestedPrice: state.suggestedPrice,
-          quantity: state.quantity,
-          products: state.products,
-          hasReachedMax: state.hasReachedMax,
-          totalPrice: state.totalPrice,
-          totalItemsCount: state.totalItemsCount,
-          orderProducts: state.orderProducts,
-          limit: state.limit,
-          scrollController: state.scrollController,
-          searchController: state.searchController,
-          customPriceController: state.customPriceController,
-          quantityController: state.quantityController,
-          packageQuantityController: state.packageQuantityController,
-        );
+            offSet: offset ?? state.offSet,
+            client: state.client,
+            selectedProduct: state.selectedProduct,
+            suggestedPrice: state.suggestedPrice,
+            quantity: state.quantity,
+            products: state.products,
+            hasReachedMax: state.hasReachedMax,
+            totalPrice: state.totalPrice,
+            totalItemsCount: state.totalItemsCount,
+            orderProducts: state.orderProducts,
+            limit: state.limit,
+            scrollController: state.scrollController,
+            searchController: state.searchController,
+            customPriceController: state.customPriceController,
+            quantityController: state.quantityController,
+            packageQuantityController: state.packageQuantityController,
+            totalHtAmount: state.totalHtAmount,
+            totalTtcAmount: state.totalTtcAmount,
+            orderNote: state.orderNote,
+            shippingAddress: state.shippingAddress,
+            selectedPaymentMethod: state.selectedPaymentMethod,
+            selectedInvoiceType: state.selectedInvoiceType);
 }
 
 final class DeligateOrderClientUpdated extends DeligateCreateOrderState {
@@ -217,22 +298,27 @@ final class DeligateOrderClientUpdated extends DeligateCreateOrderState {
     required DeligateCreateOrderState state,
     required super.client,
   }) : super(
-          selectedProduct: state.selectedProduct,
-          suggestedPrice: state.suggestedPrice,
-          quantity: state.quantity,
-          totalPrice: state.totalPrice,
-          hasReachedMax: state.hasReachedMax,
-          orderProducts: state.orderProducts,
-          totalItemsCount: state.totalItemsCount,
-          offSet: state.offSet,
-          products: state.products,
-          limit: state.limit,
-          scrollController: state.scrollController,
-          searchController: state.searchController,
-          customPriceController: state.customPriceController,
-          quantityController: state.quantityController,
-          packageQuantityController: state.packageQuantityController,
-        );
+            selectedProduct: state.selectedProduct,
+            suggestedPrice: state.suggestedPrice,
+            quantity: state.quantity,
+            totalPrice: state.totalPrice,
+            hasReachedMax: state.hasReachedMax,
+            orderProducts: state.orderProducts,
+            totalItemsCount: state.totalItemsCount,
+            offSet: state.offSet,
+            products: state.products,
+            limit: state.limit,
+            scrollController: state.scrollController,
+            searchController: state.searchController,
+            customPriceController: state.customPriceController,
+            quantityController: state.quantityController,
+            packageQuantityController: state.packageQuantityController,
+            totalHtAmount: state.totalHtAmount,
+            totalTtcAmount: state.totalTtcAmount,
+            orderNote: state.orderNote,
+            shippingAddress: state.shippingAddress,
+            selectedPaymentMethod: state.selectedPaymentMethod,
+            selectedInvoiceType: state.selectedInvoiceType);
 }
 
 final class DeligateOrderProductsUpdated extends DeligateCreateOrderState {
@@ -241,21 +327,28 @@ final class DeligateOrderProductsUpdated extends DeligateCreateOrderState {
       required super.orderProducts,
       required super.selectedProduct})
       : super(
-          hasReachedMax: state.hasReachedMax,
-          client: state.client,
-          totalPrice: state.totalPrice,
-          suggestedPrice: state.suggestedPrice,
-          quantity: state.quantity,
-          totalItemsCount: orderProducts.length,
-          offSet: state.offSet,
-          products: state.products,
-          limit: state.limit,
-          scrollController: state.scrollController,
-          searchController: state.searchController,
-          customPriceController: state.customPriceController,
-          quantityController: state.quantityController,
-          packageQuantityController: state.packageQuantityController,
-        );
+            hasReachedMax: state.hasReachedMax,
+            client: state.client,
+            totalPrice: state.totalPrice,
+            suggestedPrice: state.suggestedPrice,
+            quantity: state.quantity,
+            totalItemsCount: orderProducts.length,
+            offSet: state.offSet,
+            products: state.products,
+            limit: state.limit,
+            scrollController: state.scrollController,
+            searchController: state.searchController,
+            customPriceController: state.customPriceController,
+            quantityController: state.quantityController,
+            packageQuantityController: state.packageQuantityController,
+            totalHtAmount:
+                DeligateCreateOrderState.calculateTotalAmountHt(orderProducts),
+            totalTtcAmount:
+                DeligateCreateOrderState.calculateTotalAmountTtc(orderProducts),
+            orderNote: state.orderNote,
+            shippingAddress: state.shippingAddress,
+            selectedPaymentMethod: state.selectedPaymentMethod,
+            selectedInvoiceType: state.selectedInvoiceType);
 }
 
 final class DeligateOrderUpdateSelectedProduct
@@ -267,19 +360,24 @@ final class DeligateOrderUpdateSelectedProduct
       required super.totalPrice,
       required super.suggestedPrice})
       : super(
-          client: state.client,
-          hasReachedMax: state.hasReachedMax,
-          orderProducts: state.orderProducts,
-          totalItemsCount: state.totalItemsCount,
-          offSet: state.offSet,
-          products: state.products,
-          limit: state.limit,
-          scrollController: state.scrollController,
-          searchController: state.searchController,
-          customPriceController: state.customPriceController,
-          quantityController: state.quantityController,
-          packageQuantityController: state.packageQuantityController,
-        );
+            client: state.client,
+            hasReachedMax: state.hasReachedMax,
+            orderProducts: state.orderProducts,
+            totalItemsCount: state.totalItemsCount,
+            offSet: state.offSet,
+            products: state.products,
+            limit: state.limit,
+            scrollController: state.scrollController,
+            searchController: state.searchController,
+            customPriceController: state.customPriceController,
+            quantityController: state.quantityController,
+            packageQuantityController: state.packageQuantityController,
+            totalHtAmount: state.totalHtAmount,
+            totalTtcAmount: state.totalTtcAmount,
+            orderNote: state.orderNote,
+            shippingAddress: state.shippingAddress,
+            selectedPaymentMethod: state.selectedPaymentMethod,
+            selectedInvoiceType: state.selectedInvoiceType);
 }
 
 final class DeligateOrderUpdateSuggestedPrice extends DeligateCreateOrderState {
@@ -289,22 +387,27 @@ final class DeligateOrderUpdateSuggestedPrice extends DeligateCreateOrderState {
     int? quantity,
     double? totalPrice,
   }) : super(
-          quantity: quantity ?? state.quantity,
-          totalPrice: totalPrice ?? state.totalPrice,
-          client: state.client,
-          hasReachedMax: state.hasReachedMax,
-          orderProducts: state.orderProducts,
-          selectedProduct: state.selectedProduct,
-          totalItemsCount: state.totalItemsCount,
-          offSet: state.offSet,
-          products: state.products,
-          limit: state.limit,
-          scrollController: state.scrollController,
-          searchController: state.searchController,
-          customPriceController: state.customPriceController,
-          quantityController: state.quantityController,
-          packageQuantityController: state.packageQuantityController,
-        );
+            quantity: quantity ?? state.quantity,
+            totalPrice: totalPrice ?? state.totalPrice,
+            client: state.client,
+            hasReachedMax: state.hasReachedMax,
+            orderProducts: state.orderProducts,
+            selectedProduct: state.selectedProduct,
+            totalItemsCount: state.totalItemsCount,
+            offSet: state.offSet,
+            products: state.products,
+            limit: state.limit,
+            scrollController: state.scrollController,
+            searchController: state.searchController,
+            customPriceController: state.customPriceController,
+            quantityController: state.quantityController,
+            packageQuantityController: state.packageQuantityController,
+            totalHtAmount: state.totalHtAmount,
+            totalTtcAmount: state.totalTtcAmount,
+            orderNote: state.orderNote,
+            shippingAddress: state.shippingAddress,
+            selectedPaymentMethod: state.selectedPaymentMethod,
+            selectedInvoiceType: state.selectedInvoiceType);
 }
 
 final class DeligateOrderLoaded extends DeligateCreateOrderState {
@@ -314,42 +417,86 @@ final class DeligateOrderLoaded extends DeligateCreateOrderState {
     required super.hasReachedMax,
     required super.totalItemsCount,
   }) : super(
-          client: state.client,
-          orderProducts: state.orderProducts,
-          selectedProduct: state.selectedProduct,
-          suggestedPrice: state.suggestedPrice,
-          totalPrice: state.totalPrice,
-          quantity: state.quantity,
-          offSet: state.offSet,
-          limit: state.limit,
-          scrollController: state.scrollController,
-          searchController: state.searchController,
-          customPriceController: state.customPriceController,
-          quantityController: state.quantityController,
-          packageQuantityController: state.packageQuantityController,
-        );
+            client: state.client,
+            orderProducts: state.orderProducts,
+            selectedProduct: state.selectedProduct,
+            suggestedPrice: state.suggestedPrice,
+            totalPrice: state.totalPrice,
+            quantity: state.quantity,
+            offSet: state.offSet,
+            limit: state.limit,
+            scrollController: state.scrollController,
+            searchController: state.searchController,
+            customPriceController: state.customPriceController,
+            quantityController: state.quantityController,
+            packageQuantityController: state.packageQuantityController,
+            totalHtAmount: state.totalHtAmount,
+            totalTtcAmount: state.totalTtcAmount,
+            orderNote: state.orderNote,
+            shippingAddress: state.shippingAddress,
+            selectedPaymentMethod: state.selectedPaymentMethod,
+            selectedInvoiceType: state.selectedInvoiceType);
 }
 
 final class DeligateOrderLoadLimitReached extends DeligateCreateOrderState {
   DeligateOrderLoadLimitReached.fromState(DeligateCreateOrderState state)
       : super(
-          client: state.client,
-          hasReachedMax: true,
-          orderProducts: state.orderProducts,
-          totalPrice: state.totalPrice,
-          selectedProduct: state.selectedProduct,
-          suggestedPrice: state.suggestedPrice,
-          quantity: state.quantity,
-          products: state.products,
-          totalItemsCount: state.totalItemsCount,
-          offSet: state.offSet,
-          limit: state.limit,
-          scrollController: state.scrollController,
-          searchController: state.searchController,
-          customPriceController: state.customPriceController,
-          quantityController: state.quantityController,
-          packageQuantityController: state.packageQuantityController,
-        );
+            client: state.client,
+            hasReachedMax: true,
+            orderProducts: state.orderProducts,
+            totalPrice: state.totalPrice,
+            selectedProduct: state.selectedProduct,
+            suggestedPrice: state.suggestedPrice,
+            quantity: state.quantity,
+            products: state.products,
+            totalItemsCount: state.totalItemsCount,
+            offSet: state.offSet,
+            limit: state.limit,
+            scrollController: state.scrollController,
+            searchController: state.searchController,
+            customPriceController: state.customPriceController,
+            quantityController: state.quantityController,
+            packageQuantityController: state.packageQuantityController,
+            totalHtAmount: state.totalHtAmount,
+            totalTtcAmount: state.totalTtcAmount,
+            orderNote: state.orderNote,
+            shippingAddress: state.shippingAddress,
+            selectedPaymentMethod: state.selectedPaymentMethod,
+            selectedInvoiceType: state.selectedInvoiceType);
+}
+
+final class DeligateOrderUpdateMiscs extends DeligateCreateOrderState {
+  DeligateOrderUpdateMiscs.fromState({
+    required DeligateCreateOrderState state,
+    String? orderNote,
+    String? shippingAddress,
+    PaymentMethods? selectedPaymentMethod,
+    InvoiceTypes? selectedInvoiceType,
+  }) : super(
+            client: state.client,
+            hasReachedMax: state.hasReachedMax,
+            orderProducts: state.orderProducts,
+            totalPrice: state.totalPrice,
+            selectedProduct: state.selectedProduct,
+            suggestedPrice: state.suggestedPrice,
+            quantity: state.quantity,
+            products: state.products,
+            totalItemsCount: state.totalItemsCount,
+            offSet: state.offSet,
+            limit: state.limit,
+            scrollController: state.scrollController,
+            searchController: state.searchController,
+            customPriceController: state.customPriceController,
+            quantityController: state.quantityController,
+            packageQuantityController: state.packageQuantityController,
+            totalHtAmount: state.totalHtAmount,
+            totalTtcAmount: state.totalTtcAmount,
+            orderNote: orderNote ?? state.orderNote,
+            shippingAddress: shippingAddress ?? state.shippingAddress,
+            selectedPaymentMethod:
+                selectedPaymentMethod ?? state.selectedPaymentMethod,
+            selectedInvoiceType:
+                selectedInvoiceType ?? state.selectedInvoiceType);
 }
 
 final class DeligateOrderLoadingFailed extends DeligateCreateOrderState {
@@ -359,23 +506,28 @@ final class DeligateOrderLoadingFailed extends DeligateCreateOrderState {
     DeligateCreateOrderState state, {
     required this.message,
   }) : super(
-          client: state.client,
-          orderProducts: state.orderProducts,
-          totalPrice: state.totalPrice,
-          products: state.products,
-          hasReachedMax: state.hasReachedMax,
-          selectedProduct: state.selectedProduct,
-          suggestedPrice: state.suggestedPrice,
-          quantity: state.quantity,
-          totalItemsCount: state.totalItemsCount,
-          offSet: state.offSet,
-          limit: state.limit,
-          scrollController: state.scrollController,
-          searchController: state.searchController,
-          customPriceController: state.customPriceController,
-          quantityController: state.quantityController,
-          packageQuantityController: state.packageQuantityController,
-        );
+            client: state.client,
+            orderProducts: state.orderProducts,
+            totalPrice: state.totalPrice,
+            products: state.products,
+            hasReachedMax: state.hasReachedMax,
+            selectedProduct: state.selectedProduct,
+            suggestedPrice: state.suggestedPrice,
+            quantity: state.quantity,
+            totalItemsCount: state.totalItemsCount,
+            offSet: state.offSet,
+            limit: state.limit,
+            scrollController: state.scrollController,
+            searchController: state.searchController,
+            customPriceController: state.customPriceController,
+            quantityController: state.quantityController,
+            packageQuantityController: state.packageQuantityController,
+            totalHtAmount: state.totalHtAmount,
+            totalTtcAmount: state.totalTtcAmount,
+            orderNote: state.orderNote,
+            shippingAddress: state.shippingAddress,
+            selectedPaymentMethod: state.selectedPaymentMethod,
+            selectedInvoiceType: state.selectedInvoiceType);
 
   @override
   List<Object> get props => [client, hasReachedMax, message];

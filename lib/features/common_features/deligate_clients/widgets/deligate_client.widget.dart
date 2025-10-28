@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
@@ -18,8 +20,9 @@ class DeligateClientWidget extends StatelessWidget {
     return InkWell(
       splashColor: Colors.transparent,
       onTap: () {
-        // GoRouter.of(context)
-        //     .pushNamed(RoutingManager.vendorDetails, extra: companyData.id);
+        GoRouter.of(context).pushNamed(
+            RoutingManager.deligateMartketPlaceScreen,
+            extra: client);
       },
       child: Stack(
         children: [

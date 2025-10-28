@@ -22,11 +22,13 @@ class ParaPharmaWidget1 extends StatelessWidget {
   final bool canOrder;
   final void Function(BaseParaPharmaCatalogModel)? onFavoriteCallback;
   final bool isLiked;
+  final String route;
   const ParaPharmaWidget1(
       {super.key,
       required this.paraPharmData,
       required this.isLiked,
       this.canOrder = true,
+      this.route = RoutingManager.paraPharmaDetailsScreen,
       this.onFavoriteCallback});
 
   @override
@@ -39,8 +41,10 @@ class ParaPharmaWidget1 extends StatelessWidget {
           final userRole = getItInstance.get<UserManager>().currentUser.role;
           final canOrderBasedOnRole = !userRole.isDelegate;
 
-          GoRouter.of(context).pushNamed(RoutingManager.paraPharmaDetailsScreen,
-              extra: {"id": paraPharmData.id, "canOrder": canOrderBasedOnRole});
+          GoRouter.of(context).pushNamed(route, extra: {
+            "id": paraPharmData.id,
+            "canOrder": canOrder || canOrderBasedOnRole
+          });
         },
         child: Row(
           children: [

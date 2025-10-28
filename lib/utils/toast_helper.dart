@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 
 import '../config/routes/routing_manager.dart';
 import '../features/common/toasts/custom_toast.dart';
@@ -53,19 +52,14 @@ class ToastManager {
     }
     _overlayEntry = OverlayEntry(
       maintainState: true,
-      builder: (context) => Positioned(
-        top: MediaQuery.of(context).padding.top + AppSizesManager.p10,
-        left: AppSizesManager.p16,
-        right: AppSizesManager.p16,
-        child: CustomToastWidget(
-          title: type.name,
-          message: message ?? 'Custom toast via OverlayEntry!',
-          type: type,
-          animationDuration: duration,
-          onClose: () {
-            hideToast();
-          },
-        ),
+      builder: (context) => CustomToastWidget(
+        title: type.name,
+        message: message ?? 'Custom toast via OverlayEntry!',
+        type: type,
+        animationDuration: duration,
+        onClose: () {
+          hideToast();
+        },
       ),
     );
 

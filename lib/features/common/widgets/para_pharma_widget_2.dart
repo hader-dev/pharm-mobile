@@ -11,7 +11,7 @@ import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/blackened_background.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/silver_tags.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/stock_availlable.dart';
-import 'package:hader_pharm_mobile/features/common_features/pdf_viewer/para_pharma_catalog_details/widgets/quick_add_modal.dart';
+import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/widgets/quick_add_modal.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';

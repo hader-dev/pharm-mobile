@@ -87,18 +87,6 @@ class AppStateDeligateProvider extends StatelessWidget {
         create: (context) => AppLayoutCubit(),
       ),
       BlocProvider(
-        create: (context) => CartCubit(
-          shippingAddress: UserManager.instance.currentUser.address,
-          cartItemRepository: CartItemRepository(
-            client: getItInstance.get<INetworkService>(),
-          ),
-          scrollController: ScrollController(),
-          ordersRepository: OrderRepository(
-            client: getItInstance.get<INetworkService>(),
-          ),
-        )..getCartItem(),
-      ),
-      BlocProvider(
         create: (context) => OrdersCubit(
           searchController: TextEditingController(),
           scrollController: ScrollController(),

@@ -33,3 +33,20 @@ List<BottomNavigationBarItem> deligateNavbarItems(
         label: translation.account,
       ),
     ];
+
+List<BottomNavigationBarItem> deligateMartketPlaceNavbarItems(
+        AppLocalizations translation) =>
+    <BottomNavigationBarItem>[
+      BottomNavigationBarItem(
+        icon: Padding(
+            padding: EdgeInsets.symmetric(vertical: AppSizesManager.p6),
+            child: Icon(Iconsax.shop)),
+        label: translation.market_place,
+      ),
+      BottomNavigationBarItem(
+        icon: Padding(
+            padding: EdgeInsets.symmetric(vertical: AppSizesManager.p6),
+            child: Icon(Iconsax.bag_2)),
+        label: translation.cart,
+      ),
+    ];
