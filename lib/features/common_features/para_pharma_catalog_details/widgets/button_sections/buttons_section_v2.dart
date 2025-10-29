@@ -66,6 +66,7 @@ class ButtonsSectionV2 extends StatelessWidget {
                       child: AddCartBottomSheet(
                         cubit: cubit,
                         onAction: onAction,
+                        needCartCubit: true,
                       ),
                     );
                   },

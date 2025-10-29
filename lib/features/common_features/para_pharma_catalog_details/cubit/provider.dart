@@ -20,14 +20,14 @@ class StateProvider extends StatelessWidget {
       {super.key,
       required this.child,
       required this.tabs,
-      this.needCartCubit = true,
+      required this.needCartCubit,
       required this.vsync,
       required this.catalogId});
 
   @override
   Widget build(BuildContext context) {
     final cartCubit = needCartCubit
-        ? AppLayout.appLayoutScaffoldKey.currentContext!.read<CartCubit>()
+        ? AppLayout.appLayoutScaffoldKey.currentContext?.read<CartCubit>()
         : null;
     final existingCartItem = cartCubit?.getItemIfExists(catalogId);
 
@@ -47,10 +47,7 @@ class StateProvider extends StatelessWidget {
                 client: getItInstance.get<INetworkService>()))
           ..getParaPharmaCatalogData(catalogId),
       ),
-      if (needCartCubit)
-        BlocProvider.value(
-            value: AppLayout.appLayoutScaffoldKey.currentContext!
-                .read<CartCubit>()),
+      if (cartCubit != null) BlocProvider.value(value: cartCubit),
     ], child: child);
   }
 }

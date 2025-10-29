@@ -45,6 +45,10 @@ class ParaPharmaDetailsCubit extends Cubit<ParaPharmaDetailsState> {
     }
   }
 
+  void setupParapharmCatalogData(ParaPharmaCatalogModel paraPharmaCatalogData) {
+    emit(state.toLoaded(data: paraPharmaCatalogData));
+  }
+
   Future<bool> likeParaPharma() async {
     if (state.paraPharmaCatalogData.id.isNotEmpty) {
       try {

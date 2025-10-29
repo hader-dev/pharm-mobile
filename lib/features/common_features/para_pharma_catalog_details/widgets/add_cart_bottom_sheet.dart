@@ -8,21 +8,28 @@ import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/bottom_sheet_header.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/quantity_section.dart';
 import 'package:hader_pharm_mobile/features/common_features/cart/cubit/cart_cubit.dart';
+import 'package:hader_pharm_mobile/features/common_features/deligate_create_order/cubit/create_order_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders/cubit/orders_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/cubit/para_pharma_details_cubit.dart';
+import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/helpers/add_to_cart_or_deligate_items.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/para_pharma_catalog_details.dart';
-import 'package:hader_pharm_mobile/models/create_cart_item.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
-import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart' show Iconsax;
 
 class AddCartBottomSheet extends StatelessWidget {
   const AddCartBottomSheet(
-      {super.key, this.cubit, this.cartCubit, this.onAction});
+      {super.key,
+      this.cubit,
+      required this.needCartCubit,
+      this.cartCubit,
+      this.deligateCreateOrderCubit,
+      this.onAction});
   final ParaPharmaDetailsCubit? cubit;
   final CartCubit? cartCubit;
   final VoidCallback? onAction;
+  final DeligateCreateOrderCubit? deligateCreateOrderCubit;
+  final bool needCartCubit;
 
   final disabledPackageQuantity = true;
 
@@ -32,10 +39,13 @@ class AddCartBottomSheet extends StatelessWidget {
 
     return MultiBlocProvider(
       providers: [
-        BlocProvider.value(
-            value: cartCubit ??
-                AppLayout.appLayoutScaffoldKey.currentContext!
-                    .read<CartCubit>()),
+        if (needCartCubit)
+          BlocProvider.value(
+              value: cartCubit ??
+                  AppLayout.appLayoutScaffoldKey.currentContext!
+                      .read<CartCubit>()),
+        if (deligateCreateOrderCubit != null)
+          BlocProvider.value(value: deligateCreateOrderCubit!),
         BlocProvider.value(
           value: cubit ??
               BaseParaPharmaCatalogDetailsScreen
@@ -137,23 +147,13 @@ class AddCartBottomSheet extends StatelessWidget {
                           label: translation.add_cart,
                           leadingIcon: Iconsax.money4,
                           isLoading: state is PassingQuickOrder,
-                          onTap: () {
-                            BlocProvider.of<CartCubit>(context)
-                                .addToCart(
-                                    CreateCartItemModel(
-                                        productId: cubit
-                                            .state.paraPharmaCatalogData.id,
-                                        quantity: int.parse(cubit
-                                            .state.quantityController.text),
-                                        productType:
-                                            ProductTypes.para_pharmacy),
-                                    true)
-                                .then((res) {
-                              if (res) {
-                                onAction?.call();
-                              }
-                            });
-                          },
+                          onTap: () => addToCartOrDeligateItems(
+                              cubit: cubit,
+                              context: context,
+                              deligateCreateOrderCubit:
+                                  deligateCreateOrderCubit,
+                              onAction: onAction,
+                              needCartCubit: needCartCubit),
                           color: AppColors.accent1Shade1,
                         ),
                       ),

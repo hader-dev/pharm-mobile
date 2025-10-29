@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/end_of_load_result_widget.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/para_pharma_widget_1.dart';
@@ -90,6 +91,8 @@ class _DeligateProductsPageState extends State<DeligateProductsPage>
                                     paraPharmData: paraPharma,
                                     canOrder: false,
                                     isLiked: paraPharma.isLiked,
+                                    route: RoutingManager
+                                        .deligateParapharmDetailsScreen,
                                     onFavoriteCallback: onLikeTapped);
                               } else {
                                 if (isLoadingMore) {

@@ -20,7 +20,6 @@ class BaseParaPharmaCatalogDetailsScreen extends StatefulWidget {
   final String paraPharmaCatalogId;
   final bool canOrder;
   final bool disabledPackageQuanity;
-  // final Widget buttonSections;
   final bool needCartCubit;
   final QuantitySectionBuilder quantitySectionBuilder;
   static final GlobalKey<ScaffoldState> paraPharmaDetailsScaffoldKey =
@@ -30,7 +29,6 @@ class BaseParaPharmaCatalogDetailsScreen extends StatefulWidget {
       {super.key,
       required this.paraPharmaCatalogId,
       required this.canOrder,
-      // required this.buttonSections,
       required this.needCartCubit,
       required this.quantitySectionBuilder,
       this.disabledPackageQuanity = false});

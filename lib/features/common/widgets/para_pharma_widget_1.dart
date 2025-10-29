@@ -21,6 +21,8 @@ class ParaPharmaWidget1 extends StatelessWidget {
   final BaseParaPharmaCatalogModel paraPharmData;
   final bool canOrder;
   final void Function(BaseParaPharmaCatalogModel)? onFavoriteCallback;
+  final void Function(BaseParaPharmaCatalogModel)? onQuickAddCallback;
+
   final bool isLiked;
   final String route;
   const ParaPharmaWidget1(
@@ -28,6 +30,7 @@ class ParaPharmaWidget1 extends StatelessWidget {
       required this.paraPharmData,
       required this.isLiked,
       this.canOrder = true,
+      this.onQuickAddCallback,
       this.route = RoutingManager.paraPharmaDetailsScreen,
       this.onFavoriteCallback});
 
@@ -109,6 +112,17 @@ class ParaPharmaWidget1 extends StatelessWidget {
                           icon: Icon(
                             isLiked ? Iconsax.heart5 : Iconsax.heart,
                             color: isLiked ? Colors.red : Colors.black,
+                            size: AppSizesManager.iconSize25,
+                          ),
+                        )
+                      else if (onQuickAddCallback != null)
+                        IconButton(
+                          onPressed: () {
+                            onQuickAddCallback?.call(paraPharmData);
+                          },
+                          icon: Icon(
+                            Iconsax.add,
+                            color: Colors.black,
                             size: AppSizesManager.iconSize25,
                           ),
                         )

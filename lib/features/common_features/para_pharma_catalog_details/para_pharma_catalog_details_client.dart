@@ -19,6 +19,7 @@ class ClientParaPharmaCatalogDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return BaseParaPharmaCatalogDetailsScreen(
       paraPharmaCatalogId: paraPharmaCatalogId,
       canOrder: canOrder,

@@ -4,10 +4,12 @@ import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/end_of_load_result_widget.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/para_pharma_widget_1.dart';
+import 'package:hader_pharm_mobile/features/common_features/deligate_create_order/cubit/create_order_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_marketplace/market_place.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_marketplace/sub_pages/para_pharma/widget/filters_bar.dart';
-import 'package:hader_pharm_mobile/features/common_features/home/home.dart';
+import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/widgets/add_cart_bottom_sheet_manual.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
+import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/responsive/silver_grid_params.dart';
@@ -40,25 +42,27 @@ class _ParaPharmaProductsPageState extends State<ParaPharmaProductsPage>
               child: BlocBuilder<ParaPharmaCubit, ParaPharmaState>(
                 builder: (context, state) {
                   final products = state.paraPharmaProducts;
-                  final gCubit = DeligateMarketPlaceScreen
-                      .marketPlaceScaffoldKey.currentContext!
-                      .read<ParaPharmaCubit>();
-                  final hCubit = HomeScreen.scaffoldKey.currentContext
-                      ?.read<ParaPharmaCubit>();
 
                   final bool isLoadingMore = state is LoadingMoreParaPharma;
                   final bool hasReachedEnd =
                       state is ParaPharmasLoadLimitReached;
 
-                  void onLikeTapped(BaseParaPharmaCatalogModel medicine) {
-                    final id = medicine.id;
-                    medicine.isLiked
-                        ? cubit.unlikeParaPharmaCatalog(id)
-                        : cubit.likeParaPharmaCatalog(id);
-                    gCubit.refreshParaPharmaCatalogFavorite(
-                        id, !medicine.isLiked);
-                    hCubit?.refreshParaPharmaCatalogFavorite(
-                        id, !medicine.isLiked);
+/*************  ✨ Windsurf Command ⭐  *************/
+/// Show a bottom sheet to quickly add a product to the cart.
+///
+/// [product] is the product to be added to the cart.
+///
+/*******  8f192614-8ea4-4437-9145-cbd42931eef0  *******/
+                  void onQuickAddTapped(BaseParaPharmaCatalogModel product) {
+                    BottomSheetHelper.showCommonBottomSheet(
+                      context: context,
+                      child: AddCartBottomSheetManual(
+                        deligateCreateOrderCubit: DeligateMarketPlaceScreen
+                            .marketPlaceScaffoldKey.currentContext
+                            ?.read<DeligateCreateOrderCubit>(),
+                        product: product,
+                      ),
+                    );
                   }
 
                   return RefreshIndicator(
@@ -99,7 +103,7 @@ class _ParaPharmaProductsPageState extends State<ParaPharmaProductsPage>
                                 final paraPharma = products[index];
                                 return ParaPharmaWidget1(
                                   paraPharmData: paraPharma,
-                                  onFavoriteCallback: onLikeTapped,
+                                  onQuickAddCallback: onQuickAddTapped,
                                   isLiked: paraPharma.isLiked,
                                   route: RoutingManager
                                       .deligateParapharmDetailsScreen,
