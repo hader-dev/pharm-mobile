@@ -34,7 +34,7 @@ class _ProductDetailsTabBarSectionState
         tabAlignment: TabAlignment.start,
         labelColor: AppColors.accent1Shade1,
         controller:
-            BlocProvider.of<MedicineDetailsCubit>(context).tabController,
+            BlocProvider.of<MedicineDetailsCubit>(context).state.tabController,
         onTap: (index) {
           BlocProvider.of<MedicineDetailsCubit>(context, listen: false)
               .changeTapIndex(index);

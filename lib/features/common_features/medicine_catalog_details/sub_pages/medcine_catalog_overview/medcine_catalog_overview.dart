@@ -16,7 +16,7 @@ class MedicineOverViewPage extends StatelessWidget {
     MedicineCatalogModel medicineCatalogData =
         BlocProvider.of<MedicineDetailsCubit>(context)
             .state
-            .medicineCatalogData!;
+            .medicineCatalogData;
 
     return Markdown(
       shrinkWrap: true,

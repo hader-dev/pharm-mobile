@@ -40,15 +40,15 @@ class ButtonsSection extends StatelessWidget {
           children: [
             QuantitySectionModified(
               packageSize:
-                  medicineDetailsCubit?.state.medicineCatalogData?.packageSize,
+                  medicineDetailsCubit?.state.medicineCatalogData.packageSize,
               mainAxisAlignment: quantitySectionAlignment,
               disabledPackageQuantity: disabledPackageQuanity,
               decrementQuantity: cubit.decrementQuantity,
               incrementQuantity: cubit.incrementQuantity,
               decrementPackageQuantity: cubit.decrementPackageQuantity,
               incrementPackageQuantity: cubit.incrementPackageQuantity,
-              quantityController: cubit.quantityController,
-              packageQuantityController: cubit.packageQuantityController,
+              quantityController: cubit.state.quantityController,
+              packageQuantityController: cubit.state.packageQuantityController,
               onQuantityChanged: (v) => cubit.updateQuantity(v),
               onPackageQuantityChanged: (v) => cubit.updateQuantityPackage(v),
             ),
@@ -59,7 +59,7 @@ class ButtonsSection extends StatelessWidget {
                 value: Row(
                   children: [
                     Text(
-                      "${(price! * int.parse(cubit.quantityController.text)).toStringAsFixed(2)} ${translation.currency}",
+                      "${(price! * int.parse(cubit.state.quantityController.text)).toStringAsFixed(2)} ${translation.currency}",
                       style: context.textTheme.bodyLarge?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: AppColors.accent1Shade1,
@@ -104,10 +104,11 @@ class ButtonsSection extends StatelessWidget {
                               productId:
                                   BlocProvider.of<MedicineDetailsCubit>(context)
                                       .state
-                                      .medicineCatalogData!
+                                      .medicineCatalogData
                                       .id,
                               quantity: int.parse(
                                   BlocProvider.of<MedicineDetailsCubit>(context)
+                                      .state
                                       .quantityController
                                       .text),
                               productType: ProductTypes.medicine),

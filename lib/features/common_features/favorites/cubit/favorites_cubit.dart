@@ -38,9 +38,9 @@ class FavoritesCubit extends Cubit<FavoritesState> {
       (index) => BaseMedicineCatalogModel(
         id: 'mock_medicine_$index',
         dci: 'Mock Medicine ${index + 1}',
-        unitPriceHt: '${(index + 1) * 150}.00',
-        unitPriceTtc: '${(index + 1) * 180}.00',
-        tvaPercentage: '19',
+        unitPriceHt: 150,
+        unitPriceTtc: 150,
+        tvaPercentage: 19,
         thumbnailImage: null,
         image: null,
         createdAt: DateTime.now(),

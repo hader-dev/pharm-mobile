@@ -16,7 +16,7 @@ class DistributorDetailsPage extends StatelessWidget {
     MedicineCatalogModel medicineCatalogData =
         BlocProvider.of<MedicineDetailsCubit>(context)
             .state
-            .medicineCatalogData!;
+            .medicineCatalogData;
 
     final company = medicineCatalogData.company;
     final specialty =

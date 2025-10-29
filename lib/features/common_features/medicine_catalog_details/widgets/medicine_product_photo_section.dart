@@ -24,25 +24,25 @@ class MedicineProductPhotoSection extends StatelessWidget {
       children: [
         CachedNetworkImageWithAssetFallback(
           assetImage: DrawableAssetStrings.medicinePlaceHolderImg,
-          imageUrl: cubit.state.medicineCatalogData?.image != null
+          imageUrl: cubit.state.medicineCatalogData.image != null
               ? getItInstance.get<INetworkService>().getFilesPath(
-                    cubit.state.medicineCatalogData!.image!.path,
+                    cubit.state.medicineCatalogData.image!.path,
                   )
               : "",
           height: MediaQuery.of(context).size.width > 768 ? 400 : 320,
           width: double.maxFinite,
           fit: BoxFit.contain,
         ),
-        cubit.state.medicineCatalogData?.image != null
+        cubit.state.medicineCatalogData.image != null
             ? CacheNetworkImagePlus(
                 height: 320,
                 width: double.maxFinite,
                 boxFit: BoxFit.fill,
-                imageUrl: cubit.state.medicineCatalogData?.image != null
+                imageUrl: cubit.state.medicineCatalogData.image != null
                     ? getItInstance.get<INetworkService>().getFilesPath(
                         BlocProvider.of<MedicineDetailsCubit>(context)
                             .state
-                            .medicineCatalogData!
+                            .medicineCatalogData
                             .image!
                             .path)
                     : "",

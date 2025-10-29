@@ -4,9 +4,9 @@ import 'package:hader_pharm_mobile/models/medicine.dart';
 
 class BaseMedicineCatalogModel {
   final String id;
-  final String unitPriceTtc;
-  final String unitPriceHt;
-  final String tvaPercentage;
+  final double unitPriceTtc;
+  final double unitPriceHt;
+  final double tvaPercentage;
   final dynamic thumbnailImage;
   final ImageModel? image;
   final DateTime createdAt;
@@ -101,9 +101,9 @@ class MedicineCatalogModel extends BaseMedicineCatalogModel {
 
   MedicineCatalogModel copyWith(
       {String? id,
-      String? unitPriceTtc,
-      String? unitPriceHt,
-      String? tvaPercentage,
+      double? unitPriceTtc,
+      double? unitPriceHt,
+      double? tvaPercentage,
       dynamic thumbnailImage,
       ImageModel? image,
       DateTime? createdAt,
@@ -162,9 +162,9 @@ class MedicineCatalogModel extends BaseMedicineCatalogModel {
     return MedicineCatalogModel(
       packageSize: 1,
       id: "",
-      unitPriceTtc: "0",
-      unitPriceHt: "0",
-      tvaPercentage: "0",
+      unitPriceTtc: 0,
+      unitPriceHt: 0,
+      tvaPercentage: 0,
       thumbnailImage: "",
       image: null,
       createdAt: DateTime.now(),

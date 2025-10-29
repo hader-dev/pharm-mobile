@@ -11,7 +11,8 @@ import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_det
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:iconsax/iconsax.dart';
 
-class MedicineCatalogAppBar extends StatelessWidget {
+class MedicineCatalogAppBar extends StatelessWidget
+    implements PreferredSizeWidget {
   const MedicineCatalogAppBar({super.key, this.height, this.width});
 
   final double? height;
@@ -22,7 +23,7 @@ class MedicineCatalogAppBar extends StatelessWidget {
     return CustomAppBarV2(
       height: height,
       width: width,
-      bgColor: AppColors.accent1Shade2.withAlpha(200),
+      bgColor: AppColors.accent1Shade2,
       leading: IconButton(
         icon: Icon(
           Directionality.of(context) == TextDirection.rtl
@@ -42,7 +43,7 @@ class MedicineCatalogAppBar extends StatelessWidget {
                 .read<MedicineProductsCubit>();
             final hCubit = HomeScreen.scaffoldKey.currentContext!
                 .read<MedicineProductsCubit>();
-            final isLiked = cubit.state.medicineCatalogData?.isLiked ?? false;
+            final isLiked = cubit.state.medicineCatalogData.isLiked;
 
             return IconButton(
               icon: Icon(
@@ -53,16 +54,16 @@ class MedicineCatalogAppBar extends StatelessWidget {
                 if (isLiked) {
                   cubit.unlikeMedicine().then((value) {
                     gCubit.refreshMedicineCatalogFavorite(
-                        state.medicineCatalogData!.id, false);
+                        state.medicineCatalogData.id, false);
                     hCubit.refreshMedicineCatalogFavorite(
-                        state.medicineCatalogData!.id, false);
+                        state.medicineCatalogData.id, false);
                   });
                 } else {
                   cubit.likeMedicine().then((value) {
                     gCubit.refreshMedicineCatalogFavorite(
-                        state.medicineCatalogData!.id, true);
+                        state.medicineCatalogData.id, true);
                     hCubit.refreshMedicineCatalogFavorite(
-                        state.medicineCatalogData!.id, true);
+                        state.medicineCatalogData.id, true);
                   });
                 }
               },
@@ -83,4 +84,7 @@ class MedicineCatalogAppBar extends StatelessWidget {
       title: SizedBox.shrink(),
     );
   }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

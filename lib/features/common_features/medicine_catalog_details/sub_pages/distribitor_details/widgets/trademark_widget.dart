@@ -20,7 +20,7 @@ class TrademarkWidget extends StatelessWidget {
     MedicineCatalogModel medicineCatalogData =
         BlocProvider.of<MedicineDetailsCubit>(context)
             .state
-            .medicineCatalogData!;
+            .medicineCatalogData;
 
     return GestureDetector(
       onTap: () {

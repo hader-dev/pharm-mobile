@@ -1,27 +1,22 @@
 part of 'medicine_details_cubit.dart';
 
 sealed class MedicineDetailsState {
-  final MedicineCatalogModel? medicineCatalogData;
+  final MedicineCatalogModel medicineCatalogData;
   final int currentTapIndex;
   final String shippingAddress;
 
-  const MedicineDetailsState({
-    this.medicineCatalogData,
-    this.currentTapIndex = 0,
-    this.shippingAddress = "",
-  });
+  final TabController tabController;
+  final TextEditingController packageQuantityController;
+  final TextEditingController quantityController;
 
-  MedicineDetailsState copyWith({
-    MedicineCatalogModel? medicineCatalogData,
-    int? currentTapIndex,
-    String? shippingAddress,
-  }) {
-    return MedicineDetailsInitial(
-      medicineCatalogData: medicineCatalogData ?? this.medicineCatalogData,
-      currentTapIndex: currentTapIndex ?? this.currentTapIndex,
-      shippingAddress: shippingAddress ?? this.shippingAddress,
-    );
-  }
+  const MedicineDetailsState({
+    required this.medicineCatalogData,
+    required this.currentTapIndex,
+    required this.shippingAddress,
+    required this.tabController,
+    required this.packageQuantityController,
+    required this.quantityController,
+  });
 
   // Factory constructors for transitions
   MedicineDetailsInitial initial({
@@ -33,129 +28,158 @@ sealed class MedicineDetailsState {
         medicineCatalogData: medicineCatalogData ?? this.medicineCatalogData,
         currentTapIndex: currentTapIndex ?? this.currentTapIndex,
         shippingAddress: shippingAddress ?? this.shippingAddress,
+        tabController: tabController,
       );
 
-  MedicineDetailsLoading loading() => MedicineDetailsLoading(
-        medicineCatalogData: medicineCatalogData,
-        currentTapIndex: currentTapIndex,
-        shippingAddress: shippingAddress,
+  MedicineDetailsLoading loading() => MedicineDetailsLoading.fromState(
+        state: this,
       );
 
-  MedicineDetailsLoadError loadError() => MedicineDetailsLoadError(
-        medicineCatalogData: medicineCatalogData,
-        currentTapIndex: currentTapIndex,
-        shippingAddress: shippingAddress,
+  MedicineDetailsLoadError loadError() => MedicineDetailsLoadError.fromState(
+        state: this,
       );
 
   MedicineDetailsLoaded loaded(MedicineCatalogModel medicineCatalogData) =>
-      MedicineDetailsLoaded(
+      MedicineDetailsLoaded.fromState(
+        state: this,
         medicineCatalogData: medicineCatalogData,
-        currentTapIndex: currentTapIndex,
-        shippingAddress: shippingAddress,
       );
 
   MedicineDetailsTapIndexChanged tapIndexChanged(int index) =>
-      MedicineDetailsTapIndexChanged(
+      MedicineDetailsTapIndexChanged.fromState(
+        state: this,
         currentTapIndex: index,
-        medicineCatalogData: medicineCatalogData,
-        shippingAddress: shippingAddress,
       );
 
-  MedicineQuantityChanged quantityChanged() => MedicineQuantityChanged(
-        medicineCatalogData: medicineCatalogData,
-        currentTapIndex: currentTapIndex,
-        shippingAddress: shippingAddress,
+  MedicineQuantityChanged quantityChanged() =>
+      MedicineQuantityChanged.fromState(
+        state: this,
       );
 
-  PassingQuickOrder passingQuickOrder() => PassingQuickOrder(
-        medicineCatalogData: medicineCatalogData,
-        currentTapIndex: currentTapIndex,
-        shippingAddress: shippingAddress,
+  PassingQuickOrder passingQuickOrder() => PassingQuickOrder.fromState(
+        state: this,
       );
 
-  QuickOrderPassed quickOrderPassed() => QuickOrderPassed(
-        medicineCatalogData: medicineCatalogData,
-        currentTapIndex: currentTapIndex,
-        shippingAddress: shippingAddress,
+  QuickOrderPassed quickOrderPassed() => QuickOrderPassed.fromState(
+        state: this,
       );
 
-  PassQuickOrderFailed quickOrderFailed() => PassQuickOrderFailed(
-        medicineCatalogData: medicineCatalogData,
-        currentTapIndex: currentTapIndex,
-        shippingAddress: shippingAddress,
+  PassQuickOrderFailed quickOrderFailed() => PassQuickOrderFailed.fromState(
+        state: this,
       );
 }
 
 // ------------------ States ------------------
 
 final class MedicineDetailsInitial extends MedicineDetailsState {
-  const MedicineDetailsInitial({
-    super.medicineCatalogData,
-    super.currentTapIndex,
-    super.shippingAddress,
-  });
+  MedicineDetailsInitial({
+    MedicineCatalogModel? medicineCatalogData,
+    super.currentTapIndex = 0,
+    super.shippingAddress = "",
+    required super.tabController,
+    TextEditingController? packageQuantityController,
+    TextEditingController? quantityController,
+  }) : super(
+          medicineCatalogData:
+              medicineCatalogData ?? MedicineCatalogModel.empty(),
+          packageQuantityController:
+              packageQuantityController ?? TextEditingController(),
+          quantityController: quantityController ?? TextEditingController(),
+        );
 }
 
 final class MedicineDetailsLoading extends MedicineDetailsState {
-  const MedicineDetailsLoading({
-    super.medicineCatalogData,
-    super.currentTapIndex,
-    super.shippingAddress,
-  });
+  MedicineDetailsLoading.fromState({
+    required MedicineDetailsState state,
+  }) : super(
+            medicineCatalogData: state.medicineCatalogData,
+            currentTapIndex: state.currentTapIndex,
+            shippingAddress: state.shippingAddress,
+            tabController: state.tabController,
+            packageQuantityController: state.packageQuantityController,
+            quantityController: state.quantityController);
 }
 
 final class MedicineDetailsLoaded extends MedicineDetailsState {
-  const MedicineDetailsLoaded({
+  MedicineDetailsLoaded.fromState({
+    required MedicineDetailsState state,
     required super.medicineCatalogData,
-    super.currentTapIndex,
-    super.shippingAddress,
-  });
+  }) : super(
+            currentTapIndex: state.currentTapIndex,
+            shippingAddress: state.shippingAddress,
+            tabController: state.tabController,
+            packageQuantityController: state.packageQuantityController,
+            quantityController: state.quantityController);
 }
 
 final class MedicineDetailsLoadError extends MedicineDetailsState {
-  const MedicineDetailsLoadError({
-    super.medicineCatalogData,
-    super.currentTapIndex,
-    super.shippingAddress,
-  });
+  MedicineDetailsLoadError.fromState({
+    required MedicineDetailsState state,
+  }) : super(
+            medicineCatalogData: state.medicineCatalogData,
+            currentTapIndex: state.currentTapIndex,
+            shippingAddress: state.shippingAddress,
+            tabController: state.tabController,
+            packageQuantityController: state.packageQuantityController,
+            quantityController: state.quantityController);
 }
 
 final class MedicineDetailsTapIndexChanged extends MedicineDetailsState {
-  const MedicineDetailsTapIndexChanged({
+  MedicineDetailsTapIndexChanged.fromState({
+    required MedicineDetailsState state,
     required super.currentTapIndex,
-    super.medicineCatalogData,
-    super.shippingAddress,
-  });
+  }) : super(
+            medicineCatalogData: state.medicineCatalogData,
+            shippingAddress: state.shippingAddress,
+            tabController: state.tabController,
+            packageQuantityController: state.packageQuantityController,
+            quantityController: state.quantityController);
 }
 
 final class MedicineQuantityChanged extends MedicineDetailsState {
-  const MedicineQuantityChanged({
-    required super.medicineCatalogData,
-    super.currentTapIndex,
-    super.shippingAddress,
-  });
+  MedicineQuantityChanged.fromState({
+    required MedicineDetailsState state,
+  }) : super(
+            currentTapIndex: state.currentTapIndex,
+            shippingAddress: state.shippingAddress,
+            tabController: state.tabController,
+            medicineCatalogData: state.medicineCatalogData,
+            packageQuantityController: state.packageQuantityController,
+            quantityController: state.quantityController);
 }
 
 final class PassingQuickOrder extends MedicineDetailsState {
-  const PassingQuickOrder({
-    super.medicineCatalogData,
-    super.currentTapIndex,
-    super.shippingAddress,
-  });
+  PassingQuickOrder.fromState({
+    required MedicineDetailsState state,
+  }) : super(
+            medicineCatalogData: state.medicineCatalogData,
+            currentTapIndex: state.currentTapIndex,
+            shippingAddress: state.shippingAddress,
+            tabController: state.tabController,
+            packageQuantityController: state.packageQuantityController,
+            quantityController: state.quantityController);
 }
 
 final class QuickOrderPassed extends MedicineDetailsState {
-  const QuickOrderPassed({
-    super.medicineCatalogData,
-    super.currentTapIndex,
-    super.shippingAddress,
-  });
+  QuickOrderPassed.fromState({
+    required MedicineDetailsState state,
+  }) : super(
+            medicineCatalogData: state.medicineCatalogData,
+            currentTapIndex: state.currentTapIndex,
+            shippingAddress: state.shippingAddress,
+            tabController: state.tabController,
+            packageQuantityController: state.packageQuantityController,
+            quantityController: state.quantityController);
 }
 
 final class PassQuickOrderFailed extends MedicineDetailsState {
-  const PassQuickOrderFailed({
-    super.medicineCatalogData,
-    super.currentTapIndex,
-    super.shippingAddress,
-  });
+  PassQuickOrderFailed.fromState({
+    required MedicineDetailsState state,
+  }) : super(
+            medicineCatalogData: state.medicineCatalogData,
+            currentTapIndex: state.currentTapIndex,
+            shippingAddress: state.shippingAddress,
+            tabController: state.tabController,
+            packageQuantityController: state.packageQuantityController,
+            quantityController: state.quantityController);
 }

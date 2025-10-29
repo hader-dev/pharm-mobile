@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/medicine_catalog_details.dart';
+import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/medicine_catalog_details_client.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders_details/orders_details.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/para_pharma_catalog_details_client.dart';
 
@@ -27,7 +27,7 @@ abstract class DeeplinksRoutes {
       builder: (BuildContext context, GoRouterState state) {
         final productId = state.pathParameters['productId']!;
 
-        return MedicineCatalogDetailsScreen(
+        return MedicineCatalogDetailsClientScreen(
           medicineCatalogId: productId,
           canOrder: true,
         );

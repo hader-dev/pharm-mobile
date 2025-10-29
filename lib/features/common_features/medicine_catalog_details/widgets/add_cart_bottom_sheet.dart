@@ -1,35 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hader_pharm_mobile/config/di/di.dart';
-import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/app_layout/app_layout.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
-import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/bottom_sheet_header.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/quantity_section.dart';
+import 'package:hader_pharm_mobile/features/common_features/cart/cubit/cart_cubit.dart';
+import 'package:hader_pharm_mobile/features/common_features/deligate_create_order/cubit/create_order_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/cubit/medicine_details_cubit.dart';
+import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/helpers/add_to_cart_or_deligate_items.dart';
 import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/medicine_catalog_details.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders/cubit/orders_cubit.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
-import 'package:hader_pharm_mobile/utils/toast_helper.dart';
-import 'package:hader_pharm_mobile/utils/validators.dart';
 import 'package:iconsax/iconsax.dart' show Iconsax;
 
-class MakeOrderBottomSheet extends StatelessWidget {
-  const MakeOrderBottomSheet({super.key, this.cubit});
-
+class AddCartBottomSheet extends StatelessWidget {
+  const AddCartBottomSheet(
+      {super.key,
+      this.cubit,
+      required this.needCartCubit,
+      this.cartCubit,
+      this.deligateCreateOrderCubit,
+      this.onAction});
   final MedicineDetailsCubit? cubit;
-  final bool disabledPackageQuantity = true;
+  final CartCubit? cartCubit;
+  final VoidCallback? onAction;
+  final DeligateCreateOrderCubit? deligateCreateOrderCubit;
+  final bool needCartCubit;
+
+  final disabledPackageQuantity = true;
+
   @override
-  StatelessWidget build(BuildContext context) {
+  Widget build(BuildContext context) {
     final translation = context.translation!;
 
     return MultiBlocProvider(
       providers: [
+        if (needCartCubit)
+          BlocProvider.value(
+              value: cartCubit ??
+                  AppLayout.appLayoutScaffoldKey.currentContext!
+                      .read<CartCubit>()),
+        if (deligateCreateOrderCubit != null)
+          BlocProvider.value(value: deligateCreateOrderCubit!),
         BlocProvider.value(
           value: cubit ??
               BaseMedicineCatalogDetailsScreen
@@ -40,43 +56,39 @@ class MakeOrderBottomSheet extends StatelessWidget {
             value: AppLayout.appLayoutScaffoldKey.currentContext!
                 .read<OrdersCubit>()),
       ],
-      child: BlocBuilder<MedicineDetailsCubit, MedicineDetailsState>(
-        builder: (context, state) {
-          final cubit = context.read<MedicineDetailsCubit>();
-
+      child: BlocListener<MedicineDetailsCubit, MedicineDetailsState>(
+        listener: (context, state) {
           if (state is QuickOrderPassed) {
             AppLayout.appLayoutScaffoldKey.currentContext!
                 .read<OrdersCubit>()
                 .getOrders();
             context.pop();
           }
+        },
+        child: BlocBuilder<MedicineDetailsCubit, MedicineDetailsState>(
+          builder: (context, state) {
+            final cubit = context.read<MedicineDetailsCubit>();
 
-          return Form(
-            key: cubit.formKey,
-            child: Column(
+            return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                BottomSheetHeader(title: translation.make_order),
+                BottomSheetHeader(title: translation.add_cart),
                 const ResponsiveGap.s12(),
                 LabeledInfoWidget(
                   label: translation.product,
-                  value: context
-                      .read<MedicineDetailsCubit>()
-                      .state
-                      .medicineCatalogData
-                      .medicine
-                      .dci,
+                  value: cubit.state.medicineCatalogData.dci,
                 ),
                 LabeledInfoWidget(
                   label: translation.unit_total_price,
                   value:
-                      "${(state.medicineCatalogData.unitPriceHt).toStringAsFixed(2)} ${translation.currency}",
+                      "${(cubit.state.medicineCatalogData.unitPriceHt.toStringAsFixed(2))} ${translation.currency}",
                 ),
                 const ResponsiveGap.s12(),
                 QuantitySectionModified(
-                  quantityController: state.quantityController,
-                  packageQuantityController: state.packageQuantityController,
-                  packageSize: state.medicineCatalogData.packageSize,
+                  quantityController: cubit.state.quantityController,
+                  packageQuantityController:
+                      cubit.state.packageQuantityController,
+                  packageSize: cubit.state.medicineCatalogData.packageSize,
                   disabledPackageQuantity: true,
                   decrementPackageQuantity: cubit.decrementPackageQuantity,
                   incrementPackageQuantity: cubit.incrementPackageQuantity,
@@ -86,28 +98,7 @@ class MakeOrderBottomSheet extends StatelessWidget {
                   onPackageQuantityChanged: cubit.updateQuantityPackage,
                 ),
                 const ResponsiveGap.s12(),
-                InfoWidget(
-                    label: context.translation!.shipping_address,
-                    bgColor: AppColors.bgWhite,
-                    value: CustomTextField(
-                      verticalPadding: 0,
-                      horizontalPadding: AppSizesManager.p6,
-                      initValue: UserManager.instance.currentUser.address,
-                      onChanged: (text) => context
-                          .read<MedicineDetailsCubit>()
-                          .updateShippingAddress(text ?? ''),
-                      maxLines: 3,
-                      validationFunc: (v) => requiredValidator(v, translation),
-                      isFilled: false,
-                      isBorderEnabled: true,
-                      hintText: context.translation!.shipping_address,
-                      hintTextStyle: context
-                          .responsiveTextTheme.current.bodySmall
-                          .copyWith(color: Colors.grey),
-                    )),
-                const ResponsiveGap.s12(),
-                const Divider(
-                    color: AppColors.bgDisabled, thickness: 1, height: 1),
+                Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
                 const ResponsiveGap.s12(),
                 InfoWidget(
                   label: translation.total_price,
@@ -115,7 +106,7 @@ class MakeOrderBottomSheet extends StatelessWidget {
                   value: Row(
                     children: [
                       Text(
-                        "${(num.parse(state.quantityController.text) * state.medicineCatalogData.unitPriceHt).toStringAsFixed(2)} ${translation.currency}",
+                        "${(num.parse(cubit.state.quantityController.text) * cubit.state.medicineCatalogData.unitPriceHt).toStringAsFixed(2)} ${translation.currency}",
                         style: context.responsiveTextTheme.current.body2Medium
                             .copyWith(color: AppColors.accent1Shade1),
                       ),
@@ -132,7 +123,8 @@ class MakeOrderBottomSheet extends StatelessWidget {
                     color: AppColors.bgDisabled, thickness: 1, height: 1),
                 const ResponsiveGap.s12(),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p4),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: AppSizesManager.p4),
                   child: Row(
                     children: [
                       Expanded(
@@ -152,24 +144,16 @@ class MakeOrderBottomSheet extends StatelessWidget {
                       Expanded(
                         flex: 2,
                         child: PrimaryTextButton(
-                          label: translation.buy_now,
+                          label: translation.add_cart,
                           leadingIcon: Iconsax.money4,
                           isLoading: state is PassingQuickOrder,
-                          onTap: () {
-                            context
-                                .read<MedicineDetailsCubit>()
-                                .passQuickOrder()
-                                .then((sucess) =>
-                                    getItInstance.get<ToastManager>().showToast(
-                                          message: sucess
-                                              ? translation
-                                                  .order_placed_successfully
-                                              : translation.order_placed_failed,
-                                          type: sucess
-                                              ? ToastType.success
-                                              : ToastType.error,
-                                        ));
-                          },
+                          onTap: () => addToCartOrDeligateItems(
+                              cubit: cubit,
+                              context: context,
+                              deligateCreateOrderCubit:
+                                  deligateCreateOrderCubit,
+                              onAction: onAction,
+                              needCartCubit: needCartCubit),
                           color: AppColors.accent1Shade1,
                         ),
                       ),
@@ -177,9 +161,9 @@ class MakeOrderBottomSheet extends StatelessWidget {
                   ),
                 )
               ],
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }
@@ -196,7 +180,7 @@ class LabeledInfoWidget extends StatelessWidget {
   });
 
   @override
-  StatelessWidget build(BuildContext context) {
+  Widget build(BuildContext context) {
     return InfoWidget(
       label: label,
       value: Text(
@@ -220,7 +204,7 @@ class InfoWidget extends StatelessWidget {
   });
 
   @override
-  StatelessWidget build(BuildContext context) {
+  Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(AppSizesManager.p12),
       width: double.maxFinite,

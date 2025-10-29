@@ -19,7 +19,7 @@ class HeaderSection extends StatelessWidget {
     MedicineCatalogModel medicineCatalogData =
         BlocProvider.of<MedicineDetailsCubit>(context)
             .state
-            .medicineCatalogData!;
+            .medicineCatalogData;
     return Padding(
       padding: const EdgeInsets.symmetric(
           vertical: AppSizesManager.p16, horizontal: AppSizesManager.p12),
@@ -49,8 +49,7 @@ class HeaderSection extends StatelessWidget {
                 TextSpan(
                   children: [
                     TextSpan(
-                      text: double.parse(medicineCatalogData.unitPriceHt)
-                          .formatAsPrice(),
+                      text: medicineCatalogData.unitPriceHt.formatAsPrice(),
                       style: context
                           .responsiveTextTheme.current.headLine3SemiBold
                           .copyWith(color: AppColors.accent1Shade1),

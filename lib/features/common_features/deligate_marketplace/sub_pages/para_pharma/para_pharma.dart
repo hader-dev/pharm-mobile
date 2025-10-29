@@ -47,12 +47,6 @@ class _ParaPharmaProductsPageState extends State<ParaPharmaProductsPage>
                   final bool hasReachedEnd =
                       state is ParaPharmasLoadLimitReached;
 
-/*************  ✨ Windsurf Command ⭐  *************/
-/// Show a bottom sheet to quickly add a product to the cart.
-///
-/// [product] is the product to be added to the cart.
-///
-/*******  8f192614-8ea4-4437-9145-cbd42931eef0  *******/
                   void onQuickAddTapped(BaseParaPharmaCatalogModel product) {
                     BottomSheetHelper.showCommonBottomSheet(
                       context: context,

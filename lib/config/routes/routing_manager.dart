@@ -10,6 +10,7 @@ import 'package:hader_pharm_mobile/features/common_features/deligate_orders_deta
 import 'package:hader_pharm_mobile/features/common_features/help_support/help_support.dart';
 import 'package:hader_pharm_mobile/features/common_features/invoice/invoice.dart';
 import 'package:hader_pharm_mobile/features/common_features/leagal_policies/leagal_policies.dart';
+import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/medicine_catalog_details_client.dart';
 import 'package:hader_pharm_mobile/features/common_features/notification/notification.dart';
 import 'package:hader_pharm_mobile/features/common_features/order_complaint_details/complaint.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/para_pharma_catalog_details_client.dart';
@@ -30,7 +31,6 @@ import '../../features/common_features/edit_profile/edit_profile.dart'
 import '../../features/common_features/favorites/favorites.dart';
 import '../../features/common_features/language/lang_screen.dart';
 import '../../features/common_features/login/login.dart';
-import '../../features/common_features/medicine_catalog_details/medicine_catalog_details.dart';
 import '../../features/common_features/onboarding/onboarding.dart';
 import '../../features/common_features/orders/orders.dart';
 import '../../features/common_features/orders_details/orders_details.dart';
@@ -115,7 +115,7 @@ class RoutingManager {
 
             final canOrder = params["canOrder"] as bool;
 
-            return MedicineCatalogDetailsScreen(
+            return MedicineCatalogDetailsClientScreen(
               medicineCatalogId: state.extra as String,
               canOrder: canOrder,
             );
@@ -360,9 +360,10 @@ class RoutingManager {
               final params = state.extra as Map<String, dynamic>;
 
               final canOrder = params["canOrder"] as bool;
+              final id = params["id"] as String;
 
-              return MedicineCatalogDetailsScreen(
-                medicineCatalogId: state.extra as String,
+              return MedicineCatalogDetailsClientScreen(
+                medicineCatalogId: id,
                 canOrder: canOrder,
               );
             }),

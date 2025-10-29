@@ -178,8 +178,7 @@ class MedicineWidget2 extends StatelessWidget {
                         TextSpan(
                           children: [
                             TextSpan(
-                              text: double.parse(medicineData.unitPriceHt)
-                                  .formatAsPrice(),
+                              text: medicineData.unitPriceHt.formatAsPrice(),
                               style: context
                                   .responsiveTextTheme.current.headLine3SemiBold
                                   .copyWith(color: AppColors.accent1Shade1),
