@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/end_of_load_result_widget.dart';
-import 'package:hader_pharm_mobile/features/common/widgets/medicine_widget_3.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/medicine_widget_2.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/home.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/market_place.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/medicine_products/widget/filters_bar.dart';
@@ -88,9 +88,11 @@ class _MedicineProductsPageState extends State<MedicineProductsPage>
                         itemBuilder: (context, index) {
                           if (index < medicines.length) {
                             final medicine = medicines[index];
-                            return MedicineWidget3(
+                            return MedicineWidget2(
                               medicineData: medicine,
-                              onFavoriteCallback: onLikeTapped,
+                              isLiked: medicine.isLiked,
+                              onLikeTapped: () => onLikeTapped(medicine),
+                              hideLikeButton: false,
                             );
                           } else {
                             if (isLoadingMore) {

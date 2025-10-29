@@ -93,20 +93,26 @@ class MedicineWidget2 extends StatelessWidget {
                   if (!hideLikeButton)
                     Row(children: [
                       if (medicineData.dci != null)
-                        Text(medicineData.dci,
-                            softWrap: true,
-                            style: context
-                                .responsiveTextTheme.current.headLine4SemiBold
-                                .copyWith(color: TextColors.primary.color)),
+                        Expanded(
+                          flex: 8,
+                          child: Text(medicineData.dci,
+                              softWrap: true,
+                              style: context
+                                  .responsiveTextTheme.current.headLine4SemiBold
+                                  .copyWith(color: TextColors.primary.color)),
+                        ),
                       const Spacer(),
-                      IconButton(
-                        onPressed: () {
-                          onLikeTapped?.call();
-                        },
-                        icon: Icon(
-                          isLiked ? Iconsax.heart5 : Iconsax.heart,
-                          color: isLiked ? Colors.red : Colors.black,
-                          size: AppSizesManager.iconSize25,
+                      Expanded(
+                        flex: 2,
+                        child: IconButton(
+                          onPressed: () {
+                            onLikeTapped?.call();
+                          },
+                          icon: Icon(
+                            isLiked ? Iconsax.heart5 : Iconsax.heart,
+                            color: isLiked ? Colors.red : Colors.black,
+                            size: AppSizesManager.iconSize25,
+                          ),
                         ),
                       )
                     ]),
@@ -131,7 +137,7 @@ class MedicineWidget2 extends StatelessWidget {
                         ),
                       )
                     ]),
-                  const ResponsiveGap.s8(),
+                  const Spacer(),
                   Row(children: [
                     Container(
                       height: 30,
