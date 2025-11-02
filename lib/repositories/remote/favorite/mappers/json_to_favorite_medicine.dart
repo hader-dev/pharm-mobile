@@ -9,9 +9,9 @@ BaseMedicineCatalogModel jsonToFavoriteBaseMedicine(Map<String, dynamic> base) {
   return BaseMedicineCatalogModel(
     packageSize: jsonMedicine["packageSize"] ?? 1,
     id: jsonMedicine["id"] ?? "",
-    unitPriceTtc: jsonMedicine["unitPriceTtc"] ?? "",
-    unitPriceHt: jsonMedicine["unitPriceHt"] ?? "",
-    tvaPercentage: jsonMedicine["tvaPercentage"] ?? "",
+    unitPriceHt: double.parse(jsonMedicine["unitPriceHt"] ?? "0"),
+    unitPriceTtc: double.parse(jsonMedicine["unitPriceTtc"] ?? "0"),
+    tvaPercentage: double.parse(jsonMedicine["tvaPercentage"] ?? "0"),
     thumbnailImage: jsonMedicine["thumbnailImage"],
     image: jsonMedicine["image"] != null
         ? ImageModel.fromJson(jsonMedicine["image"])

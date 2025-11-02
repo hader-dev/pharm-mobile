@@ -12,7 +12,7 @@ BaseParaPharmaCatalogModel jsonToFavoriteBaseParapharm(
     id: json['id'],
     tags: mapJsonDynamicListToTypedList(json['tags']),
     packageSize: json['packageSize'] ?? 1,
-    unitPriceHt: json['unitPriceHt'] ?? "0.0",
+    unitPriceHt: double.parse(json["unitPriceHt"] ?? "0"),
     thumbnailImage:
         json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
     image: json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
