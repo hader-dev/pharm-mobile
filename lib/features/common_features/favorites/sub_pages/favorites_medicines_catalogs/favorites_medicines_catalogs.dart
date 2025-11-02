@@ -46,16 +46,19 @@ class FavoritesMedicinesCatalog extends StatelessWidget {
                   shrinkWrap: true,
                   physics: const AlwaysScrollableScrollPhysics(),
                   itemCount: state.likedMedicinesCatalogs.length,
-                  itemBuilder: (context, index) => MedicineWidget2(
-                    hideLikeButton: false,
-                    onRemoveFromFavorites: () {
-                      final id = state.likedMedicinesCatalogs[index].id;
-                      cubit.unlikeMedicine(id);
-                      gCubit?.refreshMedicineCatalogFavorite(id, false);
-                      hCubit?.refreshMedicineCatalogFavorite(id, false);
-                    },
-                    medicineData: state.likedMedicinesCatalogs[index],
-                    isLiked: true,
+                  itemBuilder: (context, index) => SizedBox(
+                    height: 150,
+                    child: MedicineWidget2(
+                      hideLikeButton: false,
+                      onRemoveFromFavorites: () {
+                        final id = state.likedMedicinesCatalogs[index].id;
+                        cubit.unlikeMedicine(id);
+                        gCubit?.refreshMedicineCatalogFavorite(id, false);
+                        hCubit?.refreshMedicineCatalogFavorite(id, false);
+                      },
+                      medicineData: state.likedMedicinesCatalogs[index],
+                      isLiked: true,
+                    ),
                   ),
                 ),
               ),
