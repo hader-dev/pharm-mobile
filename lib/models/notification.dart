@@ -43,7 +43,7 @@ class NotificationModel {
   }
 }
 
-enum NotificationType { order, claim }
+enum NotificationType { order, claim, announcement }
 
 extension NotificationTypeExtension on NotificationType {
   static NotificationType fromString(String type) {
@@ -53,6 +53,8 @@ extension NotificationTypeExtension on NotificationType {
         return NotificationType.order;
       case 'claim':
         return NotificationType.claim;
+      case 'announcement':
+        return NotificationType.announcement;
       default:
         throw Exception('Unknown notification type: $type');
     }

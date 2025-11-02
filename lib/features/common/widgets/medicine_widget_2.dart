@@ -158,8 +158,9 @@ class MedicineWidget2 extends StatelessWidget {
                                   getItInstance
                                       .get<INetworkService>()
                                       .getFilesPath(
-                                        medicineData
-                                            .company!.thumbnailImage!.path,
+                                        medicineData.company?.thumbnailImage!
+                                                .path ??
+                                            "",
                                       ),
                                 ),
                         ),

@@ -27,10 +27,16 @@ void onNotificationResponseTap(NotificationResponse response) {
 void onNotificationTap(NotificationModel notification) {
   final parsedType = NotificationTypeExtension.fromString(notification.type);
   debugPrint("NotificationType: ${notification.actionPayload}");
+
   switch (parsedType) {
     case NotificationType.order:
       RoutingManager.router.pushNamed(RoutingManager.ordersDetailsScreen,
           extra: notification.actionPayload["orderId"] ?? "unkown");
+      break;
+
+    case NotificationType.announcement:
+      RoutingManager.router.pushNamed(RoutingManager.announcementDetailsScreen,
+          extra: notification.actionPayload["announcementId"] ?? "unkown");
       break;
 
     default:

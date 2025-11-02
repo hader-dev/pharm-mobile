@@ -46,15 +46,18 @@ class _MedicineProductsPageState extends State<MedicineProductsPage>
                       itemBuilder: (context, index) {
                         if (index < medicines.length) {
                           final medicine = medicines[index];
-                          return MedicineWidget2(
-                            hideLikeButton: false,
-                            medicineData: medicine,
-                            isLiked: medicine.isLiked,
-                            onLikeTapped: () {
-                              medicine.isLiked
-                                  ? cubit.unlikeMedicinesCatalog(medicine)
-                                  : cubit.likeMedicinesCatalog(medicine);
-                            },
+                          return SizedBox(
+                            height: 150,
+                            child: MedicineWidget2(
+                              hideLikeButton: false,
+                              medicineData: medicine,
+                              isLiked: medicine.isLiked,
+                              onLikeTapped: () {
+                                medicine.isLiked
+                                    ? cubit.unlikeMedicinesCatalog(medicine)
+                                    : cubit.likeMedicinesCatalog(medicine);
+                              },
+                            ),
                           );
                         } else {
                           if (isLoadingMore) {
