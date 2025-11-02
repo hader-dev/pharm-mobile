@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/features/common/image/cached_network_image_with_asset_fallback.dart';
@@ -36,21 +36,26 @@ class AnnouncementOverviewPage extends StatelessWidget {
               if (state.announcement.image != null) ...[
                 ClipRRect(
                   borderRadius: BorderRadius.circular(AppSizesManager.r8),
-                  child: AspectRatio(
-                    aspectRatio: 1.5,
-                    child: CachedNetworkImageWithAssetFallback(
-                      imageUrl: getItInstance
-                          .get<INetworkService>()
-                          .getFilesPath(state.announcement.image!.path),
-                      assetImage: DrawableAssetStrings.companyPlaceHolderImg,
-                      fit: BoxFit.cover,
-                    ),
+                  child: CachedNetworkImageWithAssetFallback(
+                    imageUrl: getItInstance
+                        .get<INetworkService>()
+                        .getFilesPath(state.announcement.image!.path),
+                    assetImage: DrawableAssetStrings.companyPlaceHolderImg,
+                    fit: BoxFit.fill,
                   ),
                 ),
                 const ResponsiveGap.s16(),
               ],
-              MarkdownBody(
+              Html(
                 data: state.announcement.content,
+                style: {
+                  "body": Style(
+                    fontSize: FontSize(
+                      MediaQuery.of(context).textScaler.scale(16),
+                    ),
+                    lineHeight: LineHeight(1.5),
+                  ),
+                },
               ),
             ],
           ),

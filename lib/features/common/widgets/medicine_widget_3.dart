@@ -66,6 +66,37 @@ class MedicineWidget3 extends StatelessWidget {
                           .copyWith(color: TextColors.primary.color)),
                 const ResponsiveGap.s4(),
                 Row(
+                  children: [
+                    Container(
+                      height: 30,
+                      width: 30,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border:
+                            Border.all(color: AppColors.bgDisabled, width: 1.5),
+                        image: DecorationImage(
+                          image: medicineData.company?.thumbnailImage?.path ==
+                                  null
+                              ? AssetImage(
+                                  DrawableAssetStrings.companyPlaceHolderImg)
+                              : NetworkImage(
+                                  getItInstance
+                                      .get<INetworkService>()
+                                      .getFilesPath(
+                                        medicineData
+                                            .company!.thumbnailImage!.path,
+                                      ),
+                                ),
+                        ),
+                      ),
+                    ),
+                    const ResponsiveGap.s4(),
+                    Text(medicineData.company!.name,
+                        style: context.responsiveTextTheme.current.body3Regular
+                            .copyWith()),
+                  ],
+                ),
+                Row(
                   crossAxisAlignment: CrossAxisAlignment.baseline,
                   textBaseline: TextBaseline.ideographic,
                   children: [
@@ -176,13 +207,9 @@ class _ImageSection extends StatelessWidget {
             bottom: 0,
             right: 0,
             child: IconButton(
-              icon: Container(
+              icon: SizedBox(
                 width: 50,
                 height: 50,
-                decoration: BoxDecoration(
-                  color: AppColors.accent1Shade1.withAlpha(150),
-                  shape: BoxShape.circle,
-                ),
                 child: Icon(
                   medicineData.isLiked ? Iconsax.heart5 : Iconsax.heart,
                   color: medicineData.isLiked ? Colors.red : Colors.black,

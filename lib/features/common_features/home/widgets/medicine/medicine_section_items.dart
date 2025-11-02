@@ -47,7 +47,7 @@ class MedicinesSectionItems extends StatelessWidget {
         }
 
         return SizedBox(
-          height: 240,
+          height: minSectionHeight,
           child: ListView.builder(
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
@@ -55,7 +55,7 @@ class MedicinesSectionItems extends StatelessWidget {
             itemCount: items.length,
             itemBuilder: (context, index) {
               return SizedBox(
-                width: screenWidth > 768 ? 300 : 240,
+                width: screenWidth > 768 ? 300 : minSectionHeight,
                 child: MedicineWidget3(
                   medicineData: items[index],
                   onFavoriteCallback: onFavoriteCallback,

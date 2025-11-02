@@ -92,15 +92,14 @@ class MedicineWidget2 extends StatelessWidget {
                 children: [
                   if (!hideLikeButton)
                     Row(children: [
-                      if (medicineData.dci != null)
-                        Expanded(
-                          flex: 8,
-                          child: Text(medicineData.dci,
-                              softWrap: true,
-                              style: context
-                                  .responsiveTextTheme.current.headLine4SemiBold
-                                  .copyWith(color: TextColors.primary.color)),
-                        ),
+                      Expanded(
+                        flex: 8,
+                        child: Text(medicineData.dci,
+                            softWrap: true,
+                            style: context
+                                .responsiveTextTheme.current.headLine4SemiBold
+                                .copyWith(color: TextColors.primary.color)),
+                      ),
                       const Spacer(),
                       Expanded(
                         flex: 2,

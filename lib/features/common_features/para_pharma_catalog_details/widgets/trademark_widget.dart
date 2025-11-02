@@ -11,6 +11,8 @@ import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
+import 'package:hader_pharm_mobile/utils/extensions/price_formatter.dart';
+import 'package:iconsax/iconsax.dart';
 
 class TrademarkWidget extends StatelessWidget {
   const TrademarkWidget({super.key});
@@ -73,6 +75,7 @@ class TrademarkWidgetAlternate extends StatelessWidget {
         BlocProvider.of<ParaPharmaDetailsCubit>(context)
             .state
             .paraPharmaCatalogData;
+    final translation = context.translation!;
 
     return GestureDetector(
       onTap: () {
@@ -82,13 +85,42 @@ class TrademarkWidgetAlternate extends StatelessWidget {
         );
       },
       child: Padding(
-        padding: const EdgeInsets.only(
-            left: AppSizesManager.s2, right: AppSizesManager.s2),
+        padding: const EdgeInsets.only(right: AppSizesManager.s2),
         child: Row(
           children: [
+            Container(
+              height: 35,
+              width: 35,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(color: AppColors.bgDisabled, width: 1.5),
+                image: DecorationImage(
+                  image: catalogData.company?.thumbnailImage?.path == null
+                      ? AssetImage(DrawableAssetStrings.companyPlaceHolderImg)
+                      : NetworkImage(
+                          getItInstance.get<INetworkService>().getFilesPath(
+                                catalogData.company!.thumbnailImage!.path,
+                              ),
+                        ),
+                ),
+              ),
+            ),
+            const ResponsiveGap.s4(),
             Text(catalogData.company!.name,
                 style: context.responsiveTextTheme.current.body3Regular
-                    .copyWith(fontWeight: FontWeight.bold)),
+                    .copyWith()),
+            const Spacer(),
+            Icon(
+              Iconsax.dollar_circle4,
+              color: AppColors.accent1Shade1,
+              size: AppSizesManager.iconSize30,
+            ),
+            const ResponsiveGap.s4(),
+            Text(
+              "${catalogData.unitPriceHt.formatAsPrice()} ${translation.currency}",
+              style: context.responsiveTextTheme.current.body1Regular.copyWith(
+                  fontWeight: FontWeight.bold, color: AppColors.accent1Shade1),
+            )
           ],
         ),
       ),

@@ -8,7 +8,7 @@ import 'package:hader_pharm_mobile/features/common_features/home/home.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/market_place.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/cubit/para_pharma_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/cubit/para_pharma_details_cubit.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
 class ParaPharmaCatalogAppBar extends StatelessWidget
@@ -20,11 +20,11 @@ class ParaPharmaCatalogAppBar extends StatelessWidget
     return CustomAppBarV2(
       bgColor: AppColors.accent1Shade2,
       leading: IconButton(
+        iconSize: context.responsiveAppSizeTheme.current.iconSize30,
         icon: Icon(
           Directionality.of(context) == TextDirection.rtl
               ? Iconsax.arrow_right_3
               : Iconsax.arrow_left_2,
-          size: AppSizesManager.iconSize25,
           color: AppColors.bgWhite,
         ),
         onPressed: RoutingManager.router.popOrGoHome,
@@ -42,6 +42,7 @@ class ParaPharmaCatalogAppBar extends StatelessWidget
             final isLiked = cubit.state.paraPharmaCatalogData.isLiked;
 
             return IconButton(
+              iconSize: context.responsiveAppSizeTheme.current.iconSize30,
               icon: Icon(
                 isLiked ? Iconsax.heart5 : Iconsax.heart,
                 color: isLiked ? Colors.red : Colors.white,
@@ -67,6 +68,7 @@ class ParaPharmaCatalogAppBar extends StatelessWidget
           },
         ),
         IconButton(
+          iconSize: context.responsiveAppSizeTheme.current.iconSize30,
           icon: const Icon(
             Iconsax.share,
             color: Colors.white,

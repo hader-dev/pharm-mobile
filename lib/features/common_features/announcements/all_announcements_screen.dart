@@ -113,7 +113,7 @@ class _AllAnnouncementsScreenState extends State<AllAnnouncementsScreen> {
                               context.deviceSize),
                           mainAxisSpacing: calculateMarketplaceMainAxisSpacing(
                               context.deviceSize),
-                          childAspectRatio: 1.25,
+                          childAspectRatio: 1.05,
                         ),
                         scrollDirection: Axis.vertical,
                         itemCount: state.announcements.length +

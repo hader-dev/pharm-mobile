@@ -92,13 +92,9 @@ class ParaPharmaWidget2 extends StatelessWidget {
                       bottom: 0,
                       right: 0,
                       child: IconButton(
-                        icon: Container(
+                        icon: SizedBox(
                           width: 50,
                           height: 50,
-                          decoration: BoxDecoration(
-                            color: AppColors.accent1Shade1.withAlpha(150),
-                            shape: BoxShape.circle,
-                          ),
                           child: Icon(
                             paraPharmData.isLiked
                                 ? Iconsax.heart5
@@ -129,6 +125,37 @@ class ParaPharmaWidget2 extends StatelessWidget {
                 const ResponsiveGap.s4(),
                 if (paraPharmData.tags.isNotEmpty && displayTags)
                   SilverTags(tags: paraPharmData.tags),
+                Row(
+                  children: [
+                    Container(
+                      height: 30,
+                      width: 30,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border:
+                            Border.all(color: AppColors.bgDisabled, width: 1.5),
+                        image: DecorationImage(
+                          image: paraPharmData.company?.thumbnailImage?.path ==
+                                  null
+                              ? AssetImage(
+                                  DrawableAssetStrings.companyPlaceHolderImg)
+                              : NetworkImage(
+                                  getItInstance
+                                      .get<INetworkService>()
+                                      .getFilesPath(
+                                        paraPharmData
+                                            .company!.thumbnailImage!.path,
+                                      ),
+                                ),
+                        ),
+                      ),
+                    ),
+                    const ResponsiveGap.s4(),
+                    Text(paraPharmData.company!.name,
+                        style: context.responsiveTextTheme.current.body3Regular
+                            .copyWith()),
+                  ],
+                ),
                 Row(
                   children: [
                     Icon(

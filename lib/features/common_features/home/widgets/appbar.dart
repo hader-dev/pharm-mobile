@@ -36,6 +36,8 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
                 BlocBuilder<NotificationsCubit, NotificationState>(
                   builder: (context, state) {
                     return IconButton(
+                      iconSize:
+                          context.responsiveAppSizeTheme.current.iconSize30,
                       onPressed: () => RoutingManager.router
                           .pushNamed(RoutingManager.notificationsScreen),
                       icon: Stack(
@@ -44,7 +46,6 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
                           const Icon(
                             Iconsax.notification,
                             color: Colors.white,
-                            size: 28,
                           ),
                           if (context.read<NotificationsCubit>().unreadCount >
                               0)

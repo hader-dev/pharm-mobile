@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_html/flutter_html.dart';
+import 'package:hader_pharm_mobile/config/responsive/device_size.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/setup_status_bar.dart';
+import 'package:hader_pharm_mobile/features/common/chips/custom_chip.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/info_row_column.dart';
@@ -9,6 +12,7 @@ import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/widgets/trademark_widget.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_date_helper.dart';
 
 import 'cubit/para_pharma_details_cubit.dart';
 import 'cubit/provider.dart';
@@ -93,6 +97,36 @@ class _BaseParaPharmaCatalogDetailsScreenState
                           left: AppSizesManager.p16,
                           right: AppSizesManager.p16,
                           bottom: AppSizesManager.p8),
+                      child: Row(
+                        children: [
+                          CustomChip(
+                            label: state.paraPharmaCatalogData.category.name,
+                            color: AppColors.bgDarken2,
+                          ),
+                          const Spacer(),
+                          Icon(
+                            Icons.calendar_month,
+                            color: Colors.grey[700],
+                            size: AppSizesManager.iconSize30,
+                          ),
+                          const ResponsiveGap.s4(),
+                          Text(
+                            state.paraPharmaCatalogData.createdAt
+                                .formatDMY(context.translation!),
+                            style: context
+                                .responsiveTextTheme.current.body3Regular
+                                .copyWith(
+                                    color: TextColors.ternary.color,
+                                    fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: AppSizesManager.p16,
+                          right: AppSizesManager.p16,
+                          bottom: AppSizesManager.p8),
                       child: Text(state.paraPharmaCatalogData.name,
                           style: context.responsiveTextTheme.current.headLine1),
                     ),
@@ -105,11 +139,23 @@ class _BaseParaPharmaCatalogDetailsScreenState
                     ),
                     Padding(
                       padding: const EdgeInsets.only(
-                          left: AppSizesManager.p16,
-                          right: AppSizesManager.p16),
-                      child: Text(state.paraPharmaCatalogData.description,
-                          style:
-                              context.responsiveTextTheme.current.body1Regular),
+                          left: AppSizesManager.p8, right: AppSizesManager.p8),
+                      child: Html(
+                        data: state.paraPharmaCatalogData.description,
+                        style: {
+                          "body": Style(
+                            fontSize: FontSize(
+                              MediaQuery.of(context).textScaler.scale(
+                                    context.deviceSize.width <=
+                                            DeviceSizes.largeMobile.width
+                                        ? 16
+                                        : 25,
+                                  ),
+                            ),
+                            lineHeight: LineHeight(1.5),
+                          ),
+                        },
+                      ),
                     ),
                     InfoRowColumn(
                       data: [

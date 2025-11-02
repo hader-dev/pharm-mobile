@@ -42,65 +42,71 @@ class PromotionItemWidget4 extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Card(
-            clipBehavior: Clip.hardEdge,
-            child: AspectRatio(
-              aspectRatio: 16 / 9,
-              child: CachedNetworkImageWithAssetFallback(
-                imageUrl: getItInstance
-                    .get<INetworkService>()
-                    .getFilesPath(announcement.thumbnailImage?.path ?? ""),
-                assetImage: DrawableAssetStrings.companyPlaceHolderImg,
-                fit: BoxFit.cover,
+          Expanded(
+            flex: 5,
+            child: Card(
+              clipBehavior: Clip.hardEdge,
+              child: AspectRatio(
+                aspectRatio: 16 / 9,
+                child: CachedNetworkImageWithAssetFallback(
+                  imageUrl: getItInstance
+                      .get<INetworkService>()
+                      .getFilesPath(announcement.thumbnailImage?.path ?? ""),
+                  assetImage: DrawableAssetStrings.companyPlaceHolderImg,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),
           const ResponsiveGap.s8(),
-          Row(
-            children: [
-              const ResponsiveGap.s4(),
-              Container(
-                height: 30,
-                width: 30,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(color: AppColors.bgDisabled, width: 1.5),
-                  image: DecorationImage(
-                    image: announcement.thumbnailImage != null
-                        ? AssetImage(DrawableAssetStrings.companyPlaceHolderImg)
-                        : NetworkImage(
-                            getItInstance.get<INetworkService>().getFilesPath(
-                                  announcement.thumbnailImage?.path ?? "",
-                                ),
-                          ),
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                  height: 30,
+                  width: 30,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: AppColors.bgDisabled, width: 1.5),
+                    image: DecorationImage(
+                      image: announcement.thumbnailImage != null
+                          ? AssetImage(
+                              DrawableAssetStrings.companyPlaceHolderImg)
+                          : NetworkImage(
+                              getItInstance.get<INetworkService>().getFilesPath(
+                                    announcement.thumbnailImage?.path ?? "",
+                                  ),
+                            ),
+                    ),
                   ),
                 ),
-              ),
-              const ResponsiveGap.s8(),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      announcement.title,
-                      style: context.responsiveTextTheme.current.headLine3Medium
-                          .copyWith(
-                        color: AppColors.accent1Shade1,
+                const ResponsiveGap.s8(),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        announcement.title,
+                        style: context
+                            .responsiveTextTheme.current.headLine3Medium
+                            .copyWith(
+                          color: AppColors.accent1Shade1,
+                        ),
+                        overflow: TextOverflow.clip,
                       ),
-                      overflow: TextOverflow.clip,
-                    ),
-                    const ResponsiveGap.s4(),
-                    Text(
-                      announcement.createdAt.formatYMD,
-                      style: context.responsiveTextTheme.current.body3Medium
-                          .copyWith(color: Colors.grey),
-                    ),
-                  ],
-                ),
-              )
-            ],
+                      const ResponsiveGap.s4(),
+                      Text(
+                        announcement.createdAt.formatYMD,
+                        style: context.responsiveTextTheme.current.body3Medium
+                            .copyWith(color: Colors.grey),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
-          const ResponsiveGap.s4(),
         ],
       ),
     );

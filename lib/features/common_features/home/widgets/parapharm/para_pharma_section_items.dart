@@ -49,7 +49,7 @@ class ParaPharmaSectionItems extends StatelessWidget {
         }
 
         return SizedBox(
-          height: 240,
+          height: minSectionHeight,
           child: ListView.builder(
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
@@ -57,7 +57,7 @@ class ParaPharmaSectionItems extends StatelessWidget {
             itemCount: items.length,
             itemBuilder: (context, index) {
               return SizedBox(
-                width: screenWidth > 768 ? 300 : 240,
+                width: screenWidth > 768 ? 300 : minSectionHeight,
                 child: ParaPharmaWidget2(
                     paraPharmData: items[index],
                     onFavoriteCallback: onFavoriteCallback),

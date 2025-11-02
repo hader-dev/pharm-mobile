@@ -10,7 +10,7 @@ class MedicineSection extends StatelessWidget {
   const MedicineSection({
     super.key,
     this.padding = const EdgeInsets.symmetric(horizontal: AppSizesManager.p16),
-    this.minSectionHeight = 250,
+    this.minSectionHeight = 280,
   });
   final EdgeInsets padding;
   final double minSectionHeight;

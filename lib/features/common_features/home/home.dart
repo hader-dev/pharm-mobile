@@ -43,6 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
             if (state is PromotionLoading) {
               return const Center(child: CircularProgressIndicator());
             }
+
             if (state is PromotionLoadingFailed) {
               return RefreshIndicator(
                 onRefresh: () => context.read<HomeCubit>().getPromotions(),
@@ -70,16 +71,21 @@ class _HomeScreenState extends State<HomeScreen> {
                       if (state.announcements.isNotEmpty)
                         PromotionSectionV5(
                             announcements: state.announcements,
-                            minSectionHeight: context.deviceSize.width <=
-                                    DeviceSizes.mediumMobile.width
-                                ? minSectionHeight * 1.4
-                                : minSectionHeight),
+                            minSectionHeight: minSectionHeight * 1.2),
                       const ResponsiveGap.s12(),
-                      ParapharmaSection(minSectionHeight: minSectionHeight),
+                      ParapharmaSection(
+                          minSectionHeight: context.deviceSize.width <=
+                                  DeviceSizes.largeMobile.width
+                              ? minSectionHeight * 2
+                              : minSectionHeight * 1.5),
                       const ResponsiveGap.s12(),
                       const VendorSection(),
                       const ResponsiveGap.s12(),
-                      MedicineSection(minSectionHeight: minSectionHeight),
+                      MedicineSection(
+                          minSectionHeight: context.deviceSize.width <=
+                                  DeviceSizes.largeMobile.width
+                              ? minSectionHeight * 2
+                              : minSectionHeight * 1.5),
                       const ResponsiveGap.s12(),
                     ],
                   )),

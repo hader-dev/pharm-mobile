@@ -19,8 +19,8 @@ double calculateMarketplaceAspectRatio(
   final deviceMax =
       min(DeviceSizes.largeTablet.width, DeviceSizes.largeTablet.height);
 
-  final minRatio = 2.5;
-  final maxRatio = orientation == Orientation.portrait ? 3.0 : 2.5;
+  final minRatio = 2.0;
+  final maxRatio = orientation == Orientation.portrait ? 3.0 : 2.0;
 
   if (current <= deviceMin) return minRatio;
   if (current >= deviceMax) return maxRatio;
@@ -45,8 +45,8 @@ double calculateVendorItemsAspectRatio(
   final deviceMax =
       min(DeviceSizes.largeTablet.width, DeviceSizes.largeTablet.height);
 
-  final minRatio = 2.5;
-  final maxRatio = orientation == Orientation.portrait ? 3.0 : 2.5;
+  final minRatio = 2.0;
+  final maxRatio = orientation == Orientation.portrait ? 3.0 : 2.0;
 
   if (current <= deviceMin) return minRatio;
   if (current >= deviceMax) return maxRatio;
@@ -57,7 +57,10 @@ double calculateVendorItemsAspectRatio(
 
 double calculateAllAnnouncementsAspectRatio(
     DeviceSizes deviceSize, Orientation orientation) {
-  return 0.85;
+  if (deviceSize.width <= DeviceSizes.largeMobile.width) {
+    return 0.85;
+  }
+  return 1.15;
 }
 
 double calculateFeaturesAnnouncementsAspectRatio(
