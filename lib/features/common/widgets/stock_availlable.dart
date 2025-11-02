@@ -1,7 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -21,10 +20,10 @@ class StockAvaillableWidget extends StatelessWidget {
         isAvaillable
             ? Icon(Iconsax.box_2,
                 color: SystemColors.green.primary,
-                size: AppSizesManager.iconSize16)
+                size: context.responsiveAppSizeTheme.current.iconSize16)
             : Icon(Iconsax.box_2,
                 color: SystemColors.red.primary,
-                size: AppSizesManager.iconSize16),
+                size: context.responsiveAppSizeTheme.current.iconSize16),
         const ResponsiveGap.s4(),
         Text(
             isAvaillable
@@ -53,11 +52,13 @@ class StockAvaillableContainerWidget extends StatelessWidget {
       alignment: Alignment.topLeft,
       scale: .8,
       child: Container(
-          padding: EdgeInsets.all(AppSizesManager.p4),
+          padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p4),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.only(
-                bottomRight: Radius.circular(AppSizesManager.r6),
-                topLeft: Radius.circular(AppSizesManager.r6)),
+                bottomRight:
+                    Radius.circular(context.responsiveAppSizeTheme.current.r6),
+                topLeft:
+                    Radius.circular(context.responsiveAppSizeTheme.current.r6)),
             color:
                 const Color.fromARGB(255, 195, 252, 222).withValues(alpha: 0.8),
           ),

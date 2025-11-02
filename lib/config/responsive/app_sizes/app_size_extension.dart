@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/responsive/app_sizes/app_size.dart';
+import 'package:hader_pharm_mobile/config/responsive/app_sizes/config/app_size_extra_large.dart';
 import 'package:hader_pharm_mobile/config/responsive/device_size.dart';
 
 class ResponsiveAppSizeTheme extends ThemeExtension<ResponsiveAppSizeTheme> {
@@ -57,7 +58,7 @@ class ResponsiveAppSizeTheme extends ThemeExtension<ResponsiveAppSizeTheme> {
       case DeviceSizes.smallTablet:
       case DeviceSizes.mediumTablet:
       case DeviceSizes.largeTablet:
-        return large;
+        return appSizesExtraLarge;
     }
   }
 }

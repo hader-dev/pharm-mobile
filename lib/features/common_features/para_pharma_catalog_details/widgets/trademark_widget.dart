@@ -9,7 +9,6 @@ import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/cubit/para_pharma_details_cubit.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/price_formatter.dart';
 import 'package:iconsax/iconsax.dart';
@@ -34,7 +33,7 @@ class TrademarkWidget extends StatelessWidget {
       child: ColoredBox(
         color: AppColors.accent1Shade2.withAlpha(200),
         child: Padding(
-          padding: const EdgeInsets.all(AppSizesManager.p4),
+          padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p4),
           child: Row(
             children: [
               Container(
@@ -85,7 +84,8 @@ class TrademarkWidgetAlternate extends StatelessWidget {
         );
       },
       child: Padding(
-        padding: const EdgeInsets.only(right: AppSizesManager.s2),
+        padding:
+            EdgeInsets.only(right: context.responsiveAppSizeTheme.current.s2),
         child: Row(
           children: [
             Container(
@@ -113,7 +113,7 @@ class TrademarkWidgetAlternate extends StatelessWidget {
             Icon(
               Iconsax.dollar_circle4,
               color: AppColors.accent1Shade1,
-              size: AppSizesManager.iconSize30,
+              size: context.responsiveAppSizeTheme.current.iconSize30,
             ),
             const ResponsiveGap.s4(),
             Text(

@@ -21,7 +21,7 @@ class FilterLabel extends StatelessWidget {
       onTap: () => onSelected?.call(label, !isSelected),
       child: Card(
         child: Padding(
-          padding: const EdgeInsets.all(12.0),
+          padding: EdgeInsets.all(12.0),
           child: Row(
             children: [
               Checkbox(

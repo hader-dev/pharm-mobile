@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_icon_button.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
@@ -38,7 +37,8 @@ class BaseQuantityController extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: AppSizesManager.p8),
+          padding: EdgeInsets.symmetric(
+              vertical: context.responsiveAppSizeTheme.current.p8),
           child: Row(
             children: [
               PrimaryIconButton(
@@ -54,7 +54,7 @@ class BaseQuantityController extends StatelessWidget {
               const ResponsiveGap.s12(),
               Flexible(
                 child: SizedBox(
-                  height: AppSizesManager.buttonHeight,
+                  height: context.responsiveAppSizeTheme.current.buttonHeight,
                   child: Form(
                     child: TextFormField(
                       cursorColor: AppColors.accentGreenShade1,
@@ -82,21 +82,28 @@ class BaseQuantityController extends StatelessWidget {
                           value == null || value.isEmpty ? '' : null,
                       style: context.responsiveTextTheme.current.body3Medium,
                       decoration: InputDecoration(
-                        contentPadding: EdgeInsets.all(AppSizesManager.p12),
+                        contentPadding: EdgeInsets.all(
+                            context.responsiveAppSizeTheme.current.p12),
                         enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(
-                              AppSizesManager.commonWidgetsRadius),
+                          borderRadius: BorderRadius.circular(context
+                              .responsiveAppSizeTheme
+                              .current
+                              .commonWidgetsRadius),
                           borderSide: BorderSide(
                               color: FieldState.normal.color.secondary),
                         ),
                         disabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(
-                              AppSizesManager.commonWidgetsRadius),
+                          borderRadius: BorderRadius.circular(context
+                              .responsiveAppSizeTheme
+                              .current
+                              .commonWidgetsRadius),
                           borderSide: BorderSide(color: AppColors.bgDisabled),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(
-                              AppSizesManager.commonWidgetsRadius),
+                          borderRadius: BorderRadius.circular(context
+                              .responsiveAppSizeTheme
+                              .current
+                              .commonWidgetsRadius),
                           borderSide:
                               BorderSide(color: StrokeColors.focused.color),
                         ),

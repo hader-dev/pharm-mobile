@@ -5,6 +5,7 @@ import 'package:hader_pharm_mobile/config/responsive/app_sizes/config/app_size_m
 import 'package:hader_pharm_mobile/config/responsive/app_sizes/config/app_size_small.dart';
 import 'package:hader_pharm_mobile/config/responsive/device_size.dart';
 import 'package:hader_pharm_mobile/config/responsive/typography/app_typography.dart';
+import 'package:hader_pharm_mobile/config/responsive/typography/config/font_extra_large.dart';
 import 'package:hader_pharm_mobile/config/responsive/typography/config/font_large.dart';
 import 'package:hader_pharm_mobile/config/responsive/typography/config/font_meduim.dart';
 import 'package:hader_pharm_mobile/config/responsive/typography/config/font_small.dart';
@@ -37,6 +38,7 @@ class LightTheme {
             small: AppTypography(appFont: appFontSmall),
             medium: AppTypography(appFont: appFontMeduim),
             large: AppTypography(appFont: appFontLarge),
+            extraLarge: AppTypography(appFont: appFontExtraLarge),
             deviceSize: deviceSize),
         ResponsiveAppSizeTheme(
             small: appSizesSmall,

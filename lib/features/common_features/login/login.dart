@@ -8,7 +8,6 @@ import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/forgot_password/forgot_password.dart';
 import 'package:hader_pharm_mobile/features/common_features/login/cubit/login_cubit.dart';
 import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import 'actions/setup_company_or_go_home.dart';
@@ -36,8 +35,8 @@ class LoginScreen extends StatelessWidget {
           child: Scaffold(
             backgroundColor: AppColors.bgWhite,
             body: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: AppSizesManager.p16),
+              padding: EdgeInsets.symmetric(
+                  horizontal: context.responsiveAppSizeTheme.current.p16),
               child: ListView(
                 shrinkWrap: true,
                 physics: const BouncingScrollPhysics(),

@@ -7,7 +7,6 @@ import 'package:hader_pharm_mobile/features/common_features/home/home.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/market_place.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/medicine_products/widget/filters_bar.dart';
 import 'package:hader_pharm_mobile/models/medicine_catalog.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/responsive/silver_grid_params.dart';
 
@@ -31,7 +30,7 @@ class _MedicineProductsPageState extends State<MedicineProductsPage>
       body: BlocBuilder<MedicineProductsCubit, MedicineProductsState>(
         builder: (context, state) {
           return Padding(
-            padding: const EdgeInsets.all(AppSizesManager.p8),
+            padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
             child: Column(
               children: [
                 const FiltersBar(),
@@ -74,8 +73,7 @@ class _MedicineProductsPageState extends State<MedicineProductsPage>
                         controller: cubit.scrollController,
                         physics: const AlwaysScrollableScrollPhysics(),
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: calculateMarketplaceCrossAxisCount(
-                              context.deviceSize),
+                          crossAxisCount: 1,
                           crossAxisSpacing: calculateMarketplaceGridSpacing(
                               context.deviceSize),
                           mainAxisSpacing: calculateMarketplaceMainAxisSpacing(
@@ -96,8 +94,9 @@ class _MedicineProductsPageState extends State<MedicineProductsPage>
                             );
                           } else {
                             if (isLoadingMore) {
-                              return const Padding(
-                                padding: EdgeInsets.all(AppSizesManager.s16),
+                              return Padding(
+                                padding: EdgeInsets.all(
+                                    context.responsiveAppSizeTheme.current.s16),
                                 child:
                                     Center(child: CircularProgressIndicator()),
                               );

@@ -7,7 +7,6 @@ import 'package:hader_pharm_mobile/features/common_features/deligate_marketplace
 import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/cubit/medicine_details_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/widgets/add_cart_bottom_sheet.dart';
 import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -33,7 +32,8 @@ class ButtonsSectionDeligate extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p4),
+          padding: EdgeInsets.symmetric(
+              horizontal: context.responsiveAppSizeTheme.current.p4),
           child: PrimaryTextButton(
             label: translation.add_cart,
             leadingIcon: Iconsax.add,

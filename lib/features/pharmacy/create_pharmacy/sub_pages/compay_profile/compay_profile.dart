@@ -8,7 +8,6 @@ import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field.dart';
 import 'package:hader_pharm_mobile/features/common_features/create_company_profile/cubit/create_company_profile_cubit.dart'
     show CreateCompanyProfileState, CreateCompanyProfileCubit;
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
@@ -27,11 +26,13 @@ class _PharmacyProfilePageState extends State<PharmacyProfilePage>
   Widget build(BuildContext context) {
     super.build(context);
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p8),
+      padding: EdgeInsets.symmetric(
+          horizontal: context.responsiveAppSizeTheme.current.p8),
       child: Scrollbar(
         controller: scrollController,
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p8),
+          padding: EdgeInsets.symmetric(
+              horizontal: context.responsiveAppSizeTheme.current.p8),
           child: SingleChildScrollView(
             controller: scrollController,
             physics: const BouncingScrollPhysics(),
@@ -47,8 +48,8 @@ class _PharmacyProfilePageState extends State<PharmacyProfilePage>
                                 .responsiveTextTheme.current.body3Medium
                                 .copyWith(color: TextColors.ternary.color))),
                     Padding(
-                      padding:
-                          EdgeInsets.symmetric(vertical: AppSizesManager.p24),
+                      padding: EdgeInsets.symmetric(
+                          vertical: context.responsiveAppSizeTheme.current.p24),
                       child: InkWell(
                         onTap: () {
                           BlocProvider.of<CreateCompanyProfileCubit>(context)
@@ -59,7 +60,8 @@ class _PharmacyProfilePageState extends State<PharmacyProfilePage>
                           children: [
                             Container(
                                 margin: EdgeInsets.symmetric(
-                                    vertical: AppSizesManager.p4),
+                                    vertical: context
+                                        .responsiveAppSizeTheme.current.p4),
                                 clipBehavior: Clip.antiAlias,
                                 height: MediaQuery.sizeOf(context).height * 0.2,
                                 width: MediaQuery.sizeOf(context).height * 0.2,
@@ -85,7 +87,7 @@ class _PharmacyProfilePageState extends State<PharmacyProfilePage>
                                     //     mainAxisAlignment: MainAxisAlignment.center,
                                     //     children: [
                                     //       const Icon(Iconsax.gallery_add,
-                                    //           color: AppColors.accent1Shade1, size: AppSizesManager.iconSize25),
+                                    //           color: AppColors.accent1Shade1, size: context.responsiveAppSizeTheme.current.iconSize25),
                                     //       ResponsiveGap.s4(),
                                     //       Transform.scale(
                                     //         scale: 0.8,
@@ -108,11 +110,15 @@ class _PharmacyProfilePageState extends State<PharmacyProfilePage>
                                     : Icon(
                                         Iconsax.gallery,
                                         color: AppColors.accent1Shade1,
-                                        size: AppSizesManager.iconSize25,
+                                        size: context.responsiveAppSizeTheme
+                                            .current.iconSize25,
                                       )),
                             Positioned(
-                                bottom: AppSizesManager.s4,
-                                right: AppSizesManager.s4 / 2,
+                                bottom:
+                                    context.responsiveAppSizeTheme.current.s4,
+                                right:
+                                    context.responsiveAppSizeTheme.current.s4 /
+                                        2,
                                 child: Transform.scale(
                                   scale: 0.7,
                                   child: PrimaryIconButton(
@@ -140,8 +146,10 @@ class _PharmacyProfilePageState extends State<PharmacyProfilePage>
                                     .pickedImage !=
                                 null)
                               Positioned(
-                                top: AppSizesManager.s4,
-                                right: AppSizesManager.s4 / 2,
+                                top: context.responsiveAppSizeTheme.current.s4,
+                                right:
+                                    context.responsiveAppSizeTheme.current.s4 /
+                                        2,
                                 child: Transform.scale(
                                   scale: 0.7,
                                   child: PrimaryIconButton(

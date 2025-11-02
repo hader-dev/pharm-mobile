@@ -6,12 +6,14 @@ class ResponsiveTextTheme extends ThemeExtension<ResponsiveTextTheme> {
   final AppTypography small;
   final AppTypography medium;
   final AppTypography large;
+  final AppTypography extraLarge;
   DeviceSizes deviceSize;
 
   ResponsiveTextTheme({
     required this.small,
     required this.medium,
     required this.large,
+    required this.extraLarge,
     this.deviceSize = DeviceSizes.mediumMobile,
   });
 
@@ -20,6 +22,7 @@ class ResponsiveTextTheme extends ThemeExtension<ResponsiveTextTheme> {
     AppTypography? small,
     AppTypography? medium,
     AppTypography? large,
+    AppTypography? extraLarge,
     DeviceSizes? deviceSize,
   }) {
     return ResponsiveTextTheme(
@@ -27,6 +30,7 @@ class ResponsiveTextTheme extends ThemeExtension<ResponsiveTextTheme> {
       medium: medium ?? this.medium,
       large: large ?? this.large,
       deviceSize: deviceSize ?? this.deviceSize,
+      extraLarge: extraLarge ?? this.extraLarge,
     );
   }
 
@@ -40,6 +44,7 @@ class ResponsiveTextTheme extends ThemeExtension<ResponsiveTextTheme> {
       small: AppTypography.lerp(small, other.small, t),
       medium: AppTypography.lerp(medium, other.medium, t),
       large: AppTypography.lerp(large, other.large, t),
+      extraLarge: AppTypography.lerp(extraLarge, other.extraLarge, t),
     );
   }
 
@@ -54,7 +59,7 @@ class ResponsiveTextTheme extends ThemeExtension<ResponsiveTextTheme> {
       case DeviceSizes.smallTablet:
       case DeviceSizes.mediumTablet:
       case DeviceSizes.largeTablet:
-        return large;
+        return extraLarge;
     }
   }
 }

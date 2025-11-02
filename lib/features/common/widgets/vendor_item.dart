@@ -8,7 +8,6 @@ import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/create_company_profile/sub_pages/review_and_sumbit/widgets/info_row.dart';
 import 'package:hader_pharm_mobile/models/company.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
@@ -44,11 +43,11 @@ class VendorItem extends StatelessWidget {
             .pushNamed(RoutingManager.vendorDetails, extra: companyData.id);
       },
       child: Container(
-        margin: const EdgeInsets.all(AppSizesManager.p12),
-        padding: EdgeInsets.all(AppSizesManager.p8),
+        margin: EdgeInsets.all(context.responsiveAppSizeTheme.current.p12),
+        padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
         decoration: BoxDecoration(
-          borderRadius:
-              BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+          borderRadius: BorderRadius.circular(
+              context.responsiveAppSizeTheme.current.commonWidgetsRadius),
           border: Border.all(color: StrokeColors.normal.color, width: 1),
         ),
         child: Column(
@@ -56,7 +55,8 @@ class VendorItem extends StatelessWidget {
           children: [
             if (!hideLikeButton)
               Padding(
-                padding: const EdgeInsets.only(bottom: AppSizesManager.p4),
+                padding: EdgeInsets.only(
+                    bottom: context.responsiveAppSizeTheme.current.p4),
                 child: Align(
                   alignment: Alignment.topRight,
                   child: InkWell(
@@ -71,16 +71,17 @@ class VendorItem extends StatelessWidget {
               ),
             if (!hideRemoveButton)
               Padding(
-                padding: const EdgeInsets.only(bottom: AppSizesManager.p4),
+                padding: EdgeInsets.only(
+                    bottom: context.responsiveAppSizeTheme.current.p4),
                 child: Align(
                   alignment: Alignment.topRight,
                   child: InkWell(
                     splashColor: Colors.transparent,
                     onTap: onRemoveFromFavorites,
-                    child: const Icon(
+                    child: Icon(
                       Icons.close,
                       color: Colors.red,
-                      size: AppSizesManager.iconSize16,
+                      size: context.responsiveAppSizeTheme.current.iconSize16,
                     ),
                   ),
                 ),

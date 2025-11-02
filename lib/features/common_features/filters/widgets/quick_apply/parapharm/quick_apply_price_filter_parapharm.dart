@@ -54,8 +54,7 @@ class QuickApplyPriceFilterParapharm extends StatelessWidget {
         const ResponsiveGap.s24(),
         SafeArea(
           child: Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12.0),
+            padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 12.0),
             child: Row(
               children: [
                 Expanded(

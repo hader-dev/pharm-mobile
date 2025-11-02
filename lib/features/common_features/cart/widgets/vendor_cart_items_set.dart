@@ -7,7 +7,6 @@ import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/cart/cubit/cart_cubit.dart';
 import 'package:hader_pharm_mobile/models/company.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import 'cart_item.dart';
@@ -31,8 +30,9 @@ class VendorCartSectionState extends State<VendorCartSection> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-          horizontal: AppSizesManager.p8, vertical: AppSizesManager.s8),
+      padding: EdgeInsets.symmetric(
+          horizontal: context.responsiveAppSizeTheme.current.p8,
+          vertical: context.responsiveAppSizeTheme.current.s8),
       child: ValueListenableBuilder(
         valueListenable: _isExpanded,
         builder: (context, value, child) => ExpansionTile(
@@ -43,16 +43,19 @@ class VendorCartSectionState extends State<VendorCartSection> {
               : Icons.keyboard_arrow_down_outlined),
           iconColor: AppColors.accent1Shade1,
           maintainState: true,
-          childrenPadding: const EdgeInsets.symmetric(
-              vertical: AppSizesManager.p8, horizontal: AppSizesManager.p8),
+          childrenPadding: EdgeInsets.symmetric(
+              vertical: context.responsiveAppSizeTheme.current.p8,
+              horizontal: context.responsiveAppSizeTheme.current.p8),
           expandedAlignment: Alignment.centerLeft,
-          tilePadding:
-              const EdgeInsets.symmetric(horizontal: AppSizesManager.p8),
+          tilePadding: EdgeInsets.symmetric(
+              horizontal: context.responsiveAppSizeTheme.current.p8),
           collapsedShape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(AppSizesManager.r8),
+              borderRadius: BorderRadius.circular(
+                  context.responsiveAppSizeTheme.current.r8),
               side: BorderSide(color: StrokeColors.normal.color)),
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(AppSizesManager.r8),
+              borderRadius: BorderRadius.circular(
+                  context.responsiveAppSizeTheme.current.r8),
               side: BorderSide(color: StrokeColors.focused.color)),
           title: Row(children: [
             Container(

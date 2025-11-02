@@ -91,7 +91,7 @@ class BaseButton extends StatelessWidget {
                       Icon(
                         leadingIcon,
                         color: onTap == null ? Colors.grey : labelColor,
-                        size: AppSizesManager.s16,
+                        size: context.responsiveAppSizeTheme.current.s16,
                       ),
                       const ResponsiveGap.s8(),
                     ],
@@ -116,7 +116,7 @@ class BaseButton extends StatelessWidget {
                       Icon(
                         trailingIcon,
                         color: onTap == null ? Colors.grey : labelColor,
-                        size: AppSizesManager.s16,
+                        size: context.responsiveAppSizeTheme.current.s16,
                       ),
                     ],
                   ),

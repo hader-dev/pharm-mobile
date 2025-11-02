@@ -5,7 +5,6 @@ import 'package:hader_pharm_mobile/features/common/widgets/quantity_section.dart
 import 'package:hader_pharm_mobile/features/common_features/cart/cubit/cart_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/create_company_profile/sub_pages/review_and_sumbit/widgets/info_row.dart';
 import 'package:hader_pharm_mobile/models/cart_item.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -19,14 +18,16 @@ class CartItemWidget extends StatelessWidget {
     final cartCubit = context.read<CartCubit>();
 
     return Container(
-      margin: const EdgeInsets.symmetric(
-          vertical: AppSizesManager.p8, horizontal: AppSizesManager.p4),
-      padding: const EdgeInsets.symmetric(
-          vertical: AppSizesManager.p10, horizontal: AppSizesManager.p10),
+      margin: EdgeInsets.symmetric(
+          vertical: context.responsiveAppSizeTheme.current.p8,
+          horizontal: context.responsiveAppSizeTheme.current.p4),
+      padding: EdgeInsets.symmetric(
+          vertical: context.responsiveAppSizeTheme.current.p10,
+          horizontal: context.responsiveAppSizeTheme.current.p10),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey.shade200),
-        borderRadius:
-            BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+        borderRadius: BorderRadius.circular(
+            context.responsiveAppSizeTheme.current.commonWidgetsRadius),
       ),
       child: Row(
         children: [
@@ -49,10 +50,10 @@ class CartItemWidget extends StatelessWidget {
                       onTap: () {
                         cartCubit.deleteCartItem(item);
                       },
-                      child: const Icon(
+                      child: Icon(
                         Iconsax.trash,
                         color: Colors.red,
-                        size: AppSizesManager.iconSize20,
+                        size: context.responsiveAppSizeTheme.current.iconSize20,
                       ),
                     )
                   ],

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../../config/theme/colors_manager.dart';
-import '../../../../utils/constants.dart';
 import '../base_button.dart';
 
 class SecondaryTextButton extends StatelessWidget {
@@ -24,9 +24,9 @@ class SecondaryTextButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BaseButton(
       color: fillColor,
-      radiusValue: AppSizesManager.r4,
+      radiusValue: context.responsiveAppSizeTheme.current.r4,
       onTap: onTap,
-      height: AppSizesManager.buttonHeight,
+      height: context.responsiveAppSizeTheme.current.buttonHeight,
       leadingIcon: leadingIcon,
       trailingIcon: trailingIcon,
       label: label,

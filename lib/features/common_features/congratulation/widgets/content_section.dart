@@ -7,7 +7,6 @@ import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../../config/theme/colors_manager.dart';
 import '../../../../utils/assets_strings.dart';
-import '../../../../utils/constants.dart';
 import '../../../common/buttons/solid/primary_text_button.dart';
 
 class ContentSection extends StatelessWidget {
@@ -18,16 +17,17 @@ class ContentSection extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: EdgeInsets.symmetric(vertical: AppSizesManager.p16),
+          padding: EdgeInsets.symmetric(
+              vertical: context.responsiveAppSizeTheme.current.p16),
           child: SvgPicture.asset(DrawableAssetStrings.congratsIllustrationImg,
               height: MediaQuery.sizeOf(context).height * 0.3,
               width: MediaQuery.sizeOf(context).height * 0.3),
         ),
         Padding(
-          padding: const EdgeInsets.only(
-              right: AppSizesManager.p8,
-              left: AppSizesManager.p8,
-              bottom: AppSizesManager.s16),
+          padding: EdgeInsets.only(
+              right: context.responsiveAppSizeTheme.current.p8,
+              left: context.responsiveAppSizeTheme.current.p8,
+              bottom: context.responsiveAppSizeTheme.current.s16),
           child: Text(
             context.translation!.create_company_description,
             textAlign: TextAlign.center,

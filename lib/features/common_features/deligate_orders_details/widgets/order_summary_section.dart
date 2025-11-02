@@ -5,7 +5,6 @@ import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/price_formatter.dart';
 
-import '../../../../utils/constants.dart';
 import '../cubit/order_details/orders_details_cubit.dart';
 
 class OrderSummarySection extends StatelessWidget {
@@ -17,13 +16,14 @@ class OrderSummarySection extends StatelessWidget {
     final state = cubit.state;
 
     return Container(
-      margin: const EdgeInsets.all(AppSizesManager.p4),
-      padding: const EdgeInsets.symmetric(
-          vertical: AppSizesManager.p8, horizontal: AppSizesManager.p8),
+      margin: EdgeInsets.all(context.responsiveAppSizeTheme.current.p4),
+      padding: EdgeInsets.symmetric(
+          vertical: context.responsiveAppSizeTheme.current.p8,
+          horizontal: context.responsiveAppSizeTheme.current.p8),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius:
-            BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+        borderRadius: BorderRadius.circular(
+            context.responsiveAppSizeTheme.current.commonWidgetsRadius),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,7 +85,7 @@ class SummaryRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4),
+      padding: EdgeInsets.symmetric(vertical: 4),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[

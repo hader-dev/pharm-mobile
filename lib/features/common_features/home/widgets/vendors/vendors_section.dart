@@ -10,7 +10,8 @@ class VendorSection extends StatelessWidget {
   const VendorSection({
     super.key,
     this.minSectionHeight = 250,
-    this.padding = const EdgeInsets.symmetric(horizontal: AppSizesManager.p16),
+    this.padding = const EdgeInsets.symmetric(
+        horizontal: AppSizesManager.p16),
   });
   final EdgeInsets padding;
   final double minSectionHeight;
@@ -30,7 +31,9 @@ class VendorSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Gap(screenWidth <= 414 ? 0 : AppSizesManager.s4),
+          Gap(screenWidth <= 414
+              ? 0
+              : context.responsiveAppSizeTheme.current.s4),
           SectionTitle(title: translation.vendors),
           VendorsSectionItems(
             maxItemsPerRow: maxItemsPerRow,

@@ -7,7 +7,6 @@ import 'package:hader_pharm_mobile/features/common_features/home/home.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/market_place.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/widget/filters_bar.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/responsive/silver_grid_params.dart';
 
@@ -30,7 +29,7 @@ class _ParaPharmaProductsPageState extends State<ParaPharmaProductsPage>
 
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(AppSizesManager.p8),
+        padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -80,9 +79,7 @@ class _ParaPharmaProductsPageState extends State<ParaPharmaProductsPage>
                             physics: const AlwaysScrollableScrollPhysics(),
                             gridDelegate:
                                 SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount:
-                                  calculateMarketplaceCrossAxisCount(
-                                      context.deviceSize),
+                              crossAxisCount: 1,
                               crossAxisSpacing: calculateMarketplaceGridSpacing(
                                   context.deviceSize),
                               mainAxisSpacing:

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 
 class CustomToastWidget extends StatefulWidget {
@@ -65,9 +65,10 @@ class _CustomToastWidgetState extends State<CustomToastWidget>
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: MediaQuery.of(context).padding.top + AppSizesManager.p10,
-      left: AppSizesManager.p16,
-      right: AppSizesManager.p16,
+      top: MediaQuery.of(context).padding.top +
+          context.responsiveAppSizeTheme.current.p10,
+      left: context.responsiveAppSizeTheme.current.p16,
+      right: context.responsiveAppSizeTheme.current.p16,
       child: AnimatedBuilder(
           animation: _controller,
           builder: (context, child) {
@@ -77,14 +78,17 @@ class _CustomToastWidgetState extends State<CustomToastWidget>
               child: Material(
                 color: Colors.transparent,
                 child: Container(
-                  margin: EdgeInsets.symmetric(vertical: AppSizesManager.p8),
-                  padding: const EdgeInsets.all(AppSizesManager.p16),
+                  margin: EdgeInsets.symmetric(
+                      vertical: context.responsiveAppSizeTheme.current.p8),
+                  padding: EdgeInsets.all(
+                      context.responsiveAppSizeTheme.current.p16),
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                         colors: widget.type.colors,
                         begin: Alignment.centerLeft,
                         end: Alignment.centerRight),
-                    borderRadius: BorderRadius.circular(AppSizesManager.r12),
+                    borderRadius: BorderRadius.circular(
+                        context.responsiveAppSizeTheme.current.r12),
                   ),
                   child: Row(
                     children: [

@@ -12,12 +12,12 @@ class OrdersScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: BlocProvider.value(
+    return Scaffold(
+      body: BlocProvider.value(
         value:
             AppLayout.appLayoutScaffoldKey.currentContext!.read<OrdersCubit>(),
-        child: Scaffold(
-          body: BlocBuilder<OrdersCubit, OrdersState>(
+        child: SafeArea(
+          child: BlocBuilder<OrdersCubit, OrdersState>(
             builder: (context, state) {
               if (state is OrdersLoading) {
                 return const Center(child: CircularProgressIndicator());

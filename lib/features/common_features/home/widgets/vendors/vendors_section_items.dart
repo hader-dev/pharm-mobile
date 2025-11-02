@@ -10,6 +10,7 @@ import 'package:hader_pharm_mobile/features/common/widgets/featured.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/vendors/cubit/vendors_cubit.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class VendorsSectionItems extends StatelessWidget {
   final int maxItemsPerRow;
@@ -27,7 +28,7 @@ class VendorsSectionItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final spacing = _horizontalSpacing();
+    final spacing = _horizontalSpacing(context);
     final itemWidth = _getItemWidth(context, spacing);
 
     return BlocBuilder<VendorsCubit, VendorsState>(
@@ -73,7 +74,8 @@ class VendorsSectionItems extends StatelessWidget {
     );
   }
 
-  double _horizontalSpacing() => AppSizesManager.p8;
+  double _horizontalSpacing(BuildContext context) =>
+      context.responsiveAppSizeTheme.current.p8;
 
   double _getItemWidth(BuildContext context, double spacing) {
     final screenWidth = MediaQuery.of(context).size.width;

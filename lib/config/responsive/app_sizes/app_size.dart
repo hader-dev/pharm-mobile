@@ -44,9 +44,14 @@ class AppSizes {
 
   final double buttonHeight;
   final double commonWidgetsRadius;
+  final double deafultQuantityNavbarHeightModifier;
+  final double expandedQuantityNavbarHeightModifier;
+
   late final Map<String, double> _map;
 
   AppSizes({
+    required this.deafultQuantityNavbarHeightModifier,
+    required this.expandedQuantityNavbarHeightModifier,
     required this.p4,
     required this.p6,
     required this.p8,
@@ -135,6 +140,16 @@ class AppSizes {
 
   static AppSizes lerp(AppSizes a, AppSizes b, double t) {
     return AppSizes(
+      deafultQuantityNavbarHeightModifier: lerpDouble(
+        a.deafultQuantityNavbarHeightModifier,
+        b.deafultQuantityNavbarHeightModifier,
+        t,
+      )!,
+      expandedQuantityNavbarHeightModifier: lerpDouble(
+        a.expandedQuantityNavbarHeightModifier,
+        b.expandedQuantityNavbarHeightModifier,
+        t,
+      )!,
       p4: lerpDouble(a.p4, b.p4, t)!,
       p6: lerpDouble(a.p6, b.p6, t)!,
       p8: lerpDouble(a.p8, b.p8, t)!,

@@ -88,8 +88,7 @@ class _MedicinesPageState extends State<MedicinesPage>
                       },
                       child: GridView.builder(
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: calculateMarketplaceCrossAxisCount(
-                              bContext.deviceSize),
+                          crossAxisCount: 1,
                           crossAxisSpacing: calculateMarketplaceGridSpacing(
                               bContext.deviceSize),
                           mainAxisSpacing: calculateMarketplaceMainAxisSpacing(

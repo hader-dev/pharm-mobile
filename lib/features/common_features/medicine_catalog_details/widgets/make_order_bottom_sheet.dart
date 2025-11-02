@@ -13,7 +13,6 @@ import 'package:hader_pharm_mobile/features/common/widgets/quantity_section.dart
 import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/cubit/medicine_details_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/medicine_catalog_details.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders/cubit/orders_cubit.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 import 'package:hader_pharm_mobile/utils/validators.dart';
@@ -91,7 +90,8 @@ class MakeOrderBottomSheet extends StatelessWidget {
                     bgColor: AppColors.bgWhite,
                     value: CustomTextField(
                       verticalPadding: 0,
-                      horizontalPadding: AppSizesManager.p6,
+                      horizontalPadding:
+                          context.responsiveAppSizeTheme.current.p6,
                       initValue: UserManager.instance.currentUser.address,
                       onChanged: (text) => context
                           .read<MedicineDetailsCubit>()
@@ -132,7 +132,8 @@ class MakeOrderBottomSheet extends StatelessWidget {
                     color: AppColors.bgDisabled, thickness: 1, height: 1),
                 const ResponsiveGap.s12(),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p4),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: context.responsiveAppSizeTheme.current.p4),
                   child: Row(
                     children: [
                       Expanded(
@@ -222,13 +223,14 @@ class InfoWidget extends StatelessWidget {
   @override
   StatelessWidget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(AppSizesManager.p12),
+      padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p12),
       width: double.maxFinite,
-      margin: const EdgeInsets.symmetric(vertical: AppSizesManager.p6),
+      margin: EdgeInsets.symmetric(
+          vertical: context.responsiveAppSizeTheme.current.p6),
       decoration: BoxDecoration(
         color: bgColor,
-        borderRadius:
-            BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+        borderRadius: BorderRadius.circular(
+            context.responsiveAppSizeTheme.current.commonWidgetsRadius),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

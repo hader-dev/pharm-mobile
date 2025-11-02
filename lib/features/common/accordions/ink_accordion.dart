@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class InkAccordion extends StatefulWidget {
@@ -33,8 +32,9 @@ class InkAccordionState extends State<InkAccordion> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-          horizontal: AppSizesManager.p8, vertical: AppSizesManager.s8),
+      padding:  EdgeInsets.symmetric(
+          horizontal: context.responsiveAppSizeTheme.current.p8,
+          vertical: context.responsiveAppSizeTheme.current.s8),
       child: ValueListenableBuilder(
         valueListenable: _isExpanded,
         builder: (context, value, child) => ExpansionTile(
@@ -45,16 +45,19 @@ class InkAccordionState extends State<InkAccordion> {
               : Icons.keyboard_arrow_down_outlined),
           iconColor: AppColors.accent1Shade1,
           maintainState: true,
-          childrenPadding: const EdgeInsets.symmetric(
-              vertical: AppSizesManager.p8, horizontal: AppSizesManager.p8),
+          childrenPadding:  EdgeInsets.symmetric(
+              vertical: context.responsiveAppSizeTheme.current.p8,
+              horizontal: context.responsiveAppSizeTheme.current.p8),
           expandedAlignment: Alignment.centerLeft,
-          tilePadding:
-              const EdgeInsets.symmetric(horizontal: AppSizesManager.p8),
+          tilePadding:  EdgeInsets.symmetric(
+              horizontal: context.responsiveAppSizeTheme.current.p8),
           collapsedShape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(AppSizesManager.r8),
+              borderRadius: BorderRadius.circular(
+                  context.responsiveAppSizeTheme.current.r8),
               side: BorderSide(color: StrokeColors.normal.color)),
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(AppSizesManager.r8),
+              borderRadius: BorderRadius.circular(
+                  context.responsiveAppSizeTheme.current.r8),
               side: BorderSide(color: StrokeColors.focused.color)),
           title: widget.title ??
               Text.rich(

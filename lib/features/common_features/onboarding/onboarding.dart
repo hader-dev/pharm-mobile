@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -75,13 +74,15 @@ class OnboardingScreen extends StatelessWidget {
                       children: pages),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: AppSizesManager.p16),
+                  padding: EdgeInsets.only(
+                      bottom: context.responsiveAppSizeTheme.current.p16),
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
                         Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: AppSizesManager.p8),
+                          padding: EdgeInsets.symmetric(
+                              vertical:
+                                  context.responsiveAppSizeTheme.current.p8),
                           child: SmoothPageIndicator(
                             controller: state.pageController,
                             effect: WormEffect(
@@ -94,15 +95,17 @@ class OnboardingScreen extends StatelessWidget {
                           ),
                         ),
                         Container(
-                          margin: const EdgeInsets.only(
-                            top: AppSizesManager.p12,
-                            left: AppSizesManager.p12,
-                            right: AppSizesManager.p12,
+                          margin: EdgeInsets.only(
+                            top: context.responsiveAppSizeTheme.current.p12,
+                            left: context.responsiveAppSizeTheme.current.p12,
+                            right: context.responsiveAppSizeTheme.current.p12,
                           ),
                           width: double.maxFinite,
-                          height: AppSizesManager.buttonHeight,
+                          height: context
+                              .responsiveAppSizeTheme.current.buttonHeight,
                           child: PrimaryTextButton(
-                            height: AppSizesManager.buttonHeight,
+                            height: context
+                                .responsiveAppSizeTheme.current.buttonHeight,
                             label: context
                                         .watch<OnboardingCubit>()
                                         .state

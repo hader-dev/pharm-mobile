@@ -7,7 +7,6 @@ import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common_features/anouncement_details/cubit/announcement_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/pdf_viewer/pdf_viewer_screen.dart';
 import 'package:hader_pharm_mobile/models/announcement.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -44,7 +43,7 @@ class AnnouncementDocumentsPage extends StatelessWidget {
 
         return SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
-          padding: const EdgeInsets.all(AppSizesManager.p16),
+          padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p16),
           child: Column(
             children: [
               if (hasApiPdf)
@@ -62,15 +61,15 @@ class AnnouncementDocumentsPage extends StatelessWidget {
     return Card(
       elevation: 2,
       shape: RoundedRectangleBorder(
-        borderRadius:
-            BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+        borderRadius: BorderRadius.circular(
+            context.responsiveAppSizeTheme.current.commonWidgetsRadius),
       ),
       child: InkWell(
         onTap: () => _openPdf(context, pdf),
-        borderRadius:
-            BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+        borderRadius: BorderRadius.circular(
+            context.responsiveAppSizeTheme.current.commonWidgetsRadius),
         child: Padding(
-          padding: const EdgeInsets.all(AppSizesManager.p16),
+          padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -89,7 +88,7 @@ class AnnouncementDocumentsPage extends StatelessWidget {
                       size: 24,
                     ),
                   ),
-                  const SizedBox(width: AppSizesManager.p12),
+                  SizedBox(width: context.responsiveAppSizeTheme.current.p12),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -101,7 +100,8 @@ class AnnouncementDocumentsPage extends StatelessWidget {
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                         ),
-                        const SizedBox(height: AppSizesManager.p4),
+                        SizedBox(
+                            height: context.responsiveAppSizeTheme.current.p4),
                         Text(
                           'PDF • $sizeInMB MB',
                           style: context.responsiveTextTheme.current.bodySmall
@@ -117,7 +117,7 @@ class AnnouncementDocumentsPage extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: AppSizesManager.p12),
+              SizedBox(height: context.responsiveAppSizeTheme.current.p12),
               Row(
                 children: [
                   Expanded(
@@ -128,9 +128,10 @@ class AnnouncementDocumentsPage extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.accent1Shade1,
                         foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: AppSizesManager.p16,
-                          vertical: AppSizesManager.p12,
+                        padding: EdgeInsets.symmetric(
+                          horizontal:
+                              context.responsiveAppSizeTheme.current.p16,
+                          vertical: context.responsiveAppSizeTheme.current.p12,
                         ),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),

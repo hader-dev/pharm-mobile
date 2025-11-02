@@ -5,7 +5,6 @@ import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../../config/theme/colors_manager.dart';
 import '../../../../utils/assets_strings.dart';
-import '../../../../utils/constants.dart';
 
 class CongratulationHeaderSection extends StatelessWidget {
   const CongratulationHeaderSection({super.key});
@@ -18,13 +17,14 @@ class CongratulationHeaderSection extends StatelessWidget {
         children: [
           const ResponsiveGap.s24(),
           SvgPicture.asset(DrawableAssetStrings.tickCircleIcon,
-              height: AppSizesManager.iconSize48,
-              width: AppSizesManager.iconSize48),
+              height: context.responsiveAppSizeTheme.current.iconSize48,
+              width: context.responsiveAppSizeTheme.current.iconSize48),
           const ResponsiveGap.s6(),
           Text(
             'Congratulations!',
             style: context.responsiveTextTheme.current.headLine1.copyWith(
-                fontSize: AppSizesManager.p24, color: AppColors.accent1Shade1),
+                fontSize: context.responsiveAppSizeTheme.current.p24,
+                color: AppColors.accent1Shade1),
           ),
           const ResponsiveGap.s6(),
           Text(

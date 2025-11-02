@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/config/responsive/device_size.dart';
 import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/config/services/notification/notification_service_port.dart';
@@ -19,6 +20,9 @@ class AppStateProvider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isExtraLargeScreen =
+        MediaQuery.of(context).size.width > DeviceSizes.largeMobile.width;
+
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -28,7 +32,8 @@ class AppStateProvider extends StatelessWidget {
           )..getUnreadNotificationsCount(),
         ),
         BlocProvider(
-          create: (context) => AppLayoutCubit(),
+          create: (context) =>
+              AppLayoutCubit(isExtraLargeScreen: isExtraLargeScreen),
         ),
         BlocProvider(
           create: (context) => CartCubit(
@@ -76,6 +81,8 @@ class AppStateDeligateProvider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isExtraLargeScreen =
+        MediaQuery.of(context).size.width > DeviceSizes.largeMobile.width;
     return MultiBlocProvider(providers: [
       BlocProvider(
         create: (context) => NotificationsCubit(
@@ -84,7 +91,8 @@ class AppStateDeligateProvider extends StatelessWidget {
         )..getUnreadNotificationsCount(),
       ),
       BlocProvider(
-        create: (context) => AppLayoutCubit(),
+        create: (context) =>
+            AppLayoutCubit(isExtraLargeScreen: isExtraLargeScreen),
       ),
       BlocProvider(
         create: (context) => OrdersCubit(

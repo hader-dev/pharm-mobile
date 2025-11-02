@@ -9,7 +9,6 @@ import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_icon_button.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/edit_company/cubit/edit_company_cubit.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -74,26 +73,28 @@ class CompanyLogoSection extends StatelessWidget {
                                   errorWidget: (context, url, error) =>
                                       Container(
                                     color: AppColors.bgDarken,
-                                    child: const Icon(
+                                    child:  Icon(
                                       Iconsax.building,
-                                      size: AppSizesManager.iconSize48,
+                                      size: context.responsiveAppSizeTheme
+                                          .current.iconSize48,
                                       color: AppColors.accent1Shade1,
                                     ),
                                   ),
                                 )
                               : Container(
                                   color: AppColors.bgDarken,
-                                  child: const Icon(
+                                  child:  Icon(
                                     Iconsax.building,
-                                    size: AppSizesManager.iconSize48,
+                                    size: context.responsiveAppSizeTheme.current
+                                        .iconSize48,
                                     color: AppColors.accent1Shade1,
                                   ),
                                 ),
                     ),
                   ),
                   Positioned(
-                    bottom: AppSizesManager.s4,
-                    right: AppSizesManager.s4 / 2,
+                    bottom: context.responsiveAppSizeTheme.current.s4,
+                    right: context.responsiveAppSizeTheme.current.s4 / 2,
                     child: Transform.scale(
                       scale: 0.7,
                       child: PrimaryIconButton(
@@ -113,8 +114,8 @@ class CompanyLogoSection extends StatelessWidget {
                   ),
                   if (state.pickedImage != null)
                     Positioned(
-                      top: AppSizesManager.s4,
-                      right: AppSizesManager.s4 / 2,
+                      top: context.responsiveAppSizeTheme.current.s4,
+                      right: context.responsiveAppSizeTheme.current.s4 / 2,
                       child: Transform.scale(
                         scale: 0.7,
                         child: PrimaryIconButton(

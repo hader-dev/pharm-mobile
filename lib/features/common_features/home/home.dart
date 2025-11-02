@@ -71,21 +71,16 @@ class _HomeScreenState extends State<HomeScreen> {
                       if (state.announcements.isNotEmpty)
                         PromotionSectionV5(
                             announcements: state.announcements,
-                            minSectionHeight: minSectionHeight * 1.2),
+                            minSectionHeight: context.deviceSize.width <=
+                                    DeviceSizes.largeMobile.width
+                                ? minSectionHeight * 1.2
+                                : minSectionHeight * 1.5),
                       const ResponsiveGap.s12(),
-                      ParapharmaSection(
-                          minSectionHeight: context.deviceSize.width <=
-                                  DeviceSizes.largeMobile.width
-                              ? minSectionHeight * 2
-                              : minSectionHeight * 1.5),
+                      ParapharmaSection(minSectionHeight: minSectionHeight * 2),
                       const ResponsiveGap.s12(),
                       const VendorSection(),
                       const ResponsiveGap.s12(),
-                      MedicineSection(
-                          minSectionHeight: context.deviceSize.width <=
-                                  DeviceSizes.largeMobile.width
-                              ? minSectionHeight * 2
-                              : minSectionHeight * 1.5),
+                      MedicineSection(minSectionHeight: minSectionHeight * 2),
                       const ResponsiveGap.s12(),
                     ],
                   )),

@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:hader_pharm_mobile/config/language_config/resources/app_localizations.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/validators.dart';
 
@@ -37,7 +36,7 @@ class CustomPriceFormField extends StatelessWidget {
         ),
         const ResponsiveGap.s4(),
         SizedBox(
-          height: AppSizesManager.s32,
+          height: context.responsiveAppSizeTheme.current.s32,
           child: TextFormField(
             enabled: enabled,
             controller: customPriceController,
@@ -49,21 +48,22 @@ class CustomPriceFormField extends StatelessWidget {
             decoration: InputDecoration(
               hintText: translation.custom_price,
               hintStyle: context.responsiveTextTheme.current.body3Medium,
-              contentPadding: const EdgeInsets.symmetric(
-                  horizontal: AppSizesManager.s8, vertical: 0),
+              contentPadding: EdgeInsets.symmetric(
+                  horizontal: context.responsiveAppSizeTheme.current.s8,
+                  vertical: 0),
               enabledBorder: OutlineInputBorder(
-                borderRadius:
-                    BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+                borderRadius: BorderRadius.circular(
+                    context.responsiveAppSizeTheme.current.commonWidgetsRadius),
                 borderSide: BorderSide(color: StrokeColors.normal.color),
               ),
               focusedBorder: OutlineInputBorder(
-                borderRadius:
-                    BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+                borderRadius: BorderRadius.circular(
+                    context.responsiveAppSizeTheme.current.commonWidgetsRadius),
                 borderSide: BorderSide(color: StrokeColors.focused.color),
               ),
               disabledBorder: OutlineInputBorder(
-                borderRadius:
-                    BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+                borderRadius: BorderRadius.circular(
+                    context.responsiveAppSizeTheme.current.commonWidgetsRadius),
                 borderSide: BorderSide(color: StrokeColors.normal.color),
               ),
             ),

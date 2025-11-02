@@ -1,7 +1,6 @@
 import 'package:cached_network_image_plus/flutter_cached_network_image_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class FeaturedEntity extends StatelessWidget {
@@ -32,17 +31,19 @@ class FeaturedEntity extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey.shade300),
-                borderRadius:
-                    BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+                borderRadius: BorderRadius.circular(
+                    context.responsiveAppSizeTheme.current.commonWidgetsRadius),
               ),
-              padding: const EdgeInsets.all(AppSizesManager.p8),
+              padding:
+                  EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
               child: ClipRRect(
-                borderRadius:
-                    BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+                borderRadius: BorderRadius.circular(
+                    context.responsiveAppSizeTheme.current.commonWidgetsRadius),
                 child: (imageUrl != null && imageUrl!.isNotEmpty)
                     ? CacheNetworkImagePlus(
                         width: size,
-                        height: (size * 0.6) - AppSizesManager.p8,
+                        height: (size * 0.6) -
+                            context.responsiveAppSizeTheme.current.p8,
                         boxFit: BoxFit.cover,
                         imageUrl: imageUrl!)
                     : Center(

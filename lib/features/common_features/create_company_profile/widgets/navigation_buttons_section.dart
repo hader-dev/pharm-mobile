@@ -5,7 +5,6 @@ import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_bu
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/create_company_profile/actions/previous_step_or_logout.dart';
 import 'package:hader_pharm_mobile/features/common_features/create_company_profile/cubit/create_company_profile_cubit.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class NavigationButtonsSection extends StatelessWidget {
@@ -14,7 +13,8 @@ class NavigationButtonsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p16),
+      padding: EdgeInsets.symmetric(
+          horizontal: context.responsiveAppSizeTheme.current.p16),
       child: Row(
         children: [
           Expanded(

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class InfoRow extends StatelessWidget {
@@ -21,7 +20,8 @@ class InfoRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return contentDirection == Axis.horizontal
         ? Padding(
-            padding: const EdgeInsets.only(bottom: AppSizesManager.p12),
+            padding: EdgeInsets.only(
+                bottom: context.responsiveAppSizeTheme.current.p12),
             child: Row(
               children: [
                 if (icon != null) Icon(icon, color: Colors.grey[700], size: 20),

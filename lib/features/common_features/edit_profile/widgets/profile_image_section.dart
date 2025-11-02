@@ -10,7 +10,7 @@ import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_icon_bu
 import 'package:hader_pharm_mobile/features/common/image/cached_network_image_with_asset_fallback.dart';
 import 'package:hader_pharm_mobile/features/common_features/edit_profile/cubit/edit_profile_cubit.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
 class ProfileImageSection extends StatelessWidget {
@@ -42,7 +42,8 @@ class ProfileImageSection extends StatelessWidget {
             child: Stack(
               children: [
                 Container(
-                    margin: EdgeInsets.symmetric(vertical: AppSizesManager.p4),
+                    margin: EdgeInsets.symmetric(
+                        vertical: context.responsiveAppSizeTheme.current.p4),
                     clipBehavior: Clip.antiAlias,
                     height: imageSize,
                     width: imageSize,
@@ -52,8 +53,8 @@ class ProfileImageSection extends StatelessWidget {
                         border: Border.all(color: AppColors.bgDarken2)),
                     child: _buildImageWidget(state, imageUrl)),
                 Positioned(
-                    bottom: AppSizesManager.s4,
-                    right: AppSizesManager.s4 / 2,
+                    bottom: context.responsiveAppSizeTheme.current.s4,
+                    right: context.responsiveAppSizeTheme.current.s4 / 2,
                     child: Transform.scale(
                       scale: 0.7,
                       child: PrimaryIconButton(
@@ -72,8 +73,8 @@ class ProfileImageSection extends StatelessWidget {
                     )),
                 if (state.pickedImage != null)
                   Positioned(
-                    top: AppSizesManager.s4,
-                    right: AppSizesManager.s4 / 2,
+                    top: context.responsiveAppSizeTheme.current.s4,
+                    right: context.responsiveAppSizeTheme.current.s4 / 2,
                     child: Transform.scale(
                       scale: 0.7,
                       child: PrimaryIconButton(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hader_pharm_mobile/config/responsive/device_size.dart';
 import 'package:hader_pharm_mobile/config/routes/go_router_extension.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
@@ -17,10 +18,14 @@ class ParaPharmaCatalogAppBar extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
+    final iconSize = context.deviceSize.width <= DeviceSizes.largeMobile.width
+        ? context.responsiveAppSizeTheme.current.iconSize30
+        : context.responsiveAppSizeTheme.current.iconSize18;
+
     return CustomAppBarV2(
       bgColor: AppColors.accent1Shade2,
       leading: IconButton(
-        iconSize: context.responsiveAppSizeTheme.current.iconSize30,
+        iconSize: iconSize,
         icon: Icon(
           Directionality.of(context) == TextDirection.rtl
               ? Iconsax.arrow_right_3
@@ -42,7 +47,7 @@ class ParaPharmaCatalogAppBar extends StatelessWidget
             final isLiked = cubit.state.paraPharmaCatalogData.isLiked;
 
             return IconButton(
-              iconSize: context.responsiveAppSizeTheme.current.iconSize30,
+              iconSize: iconSize,
               icon: Icon(
                 isLiked ? Iconsax.heart5 : Iconsax.heart,
                 color: isLiked ? Colors.red : Colors.white,
@@ -68,7 +73,7 @@ class ParaPharmaCatalogAppBar extends StatelessWidget
           },
         ),
         IconButton(
-          iconSize: context.responsiveAppSizeTheme.current.iconSize30,
+          iconSize: iconSize,
           icon: const Icon(
             Iconsax.share,
             color: Colors.white,

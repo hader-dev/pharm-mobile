@@ -8,7 +8,6 @@ import 'package:hader_pharm_mobile/features/common_features/cart/cubit/cart_cubi
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/cubit/para_pharma_details_cubit.dart';
 import 'package:hader_pharm_mobile/models/create_cart_item.dart';
 import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
@@ -73,7 +72,8 @@ class ButtonsSection extends StatelessWidget {
                   ),
                 ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p4),
+                padding: EdgeInsets.symmetric(
+                    horizontal: context.responsiveAppSizeTheme.current.p4),
                 child: Row(
                   children: [
                     Expanded(

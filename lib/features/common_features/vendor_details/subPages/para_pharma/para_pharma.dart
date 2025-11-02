@@ -11,7 +11,6 @@ import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pag
 import 'package:hader_pharm_mobile/features/common_features/vendor_details/cubit/providers.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/responsive/silver_grid_params.dart';
 
@@ -103,8 +102,7 @@ class _ParapharmaPageState extends State<ParapharmaPage>
                       },
                       child: GridView.builder(
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: calculateMarketplaceCrossAxisCount(
-                              bContext.deviceSize),
+                          crossAxisCount: 1,
                           crossAxisSpacing: calculateMarketplaceGridSpacing(
                               bContext.deviceSize),
                           mainAxisSpacing: calculateMarketplaceMainAxisSpacing(
@@ -127,8 +125,9 @@ class _ParapharmaPageState extends State<ParapharmaPage>
                             );
                           } else {
                             if (isLoadingMore) {
-                              return const Padding(
-                                padding: EdgeInsets.all(AppSizesManager.s16),
+                              return Padding(
+                                padding: EdgeInsets.all(
+                                    context.responsiveAppSizeTheme.current.s16),
                                 child:
                                     Center(child: CircularProgressIndicator()),
                               );

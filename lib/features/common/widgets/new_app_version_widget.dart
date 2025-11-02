@@ -4,7 +4,6 @@ import 'package:hader_pharm_mobile/features/app_layout/actions/show_new_app_vers
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/models/mobile_app_version.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class UpdateAvailableWidget extends StatelessWidget {
@@ -17,14 +16,15 @@ class UpdateAvailableWidget extends StatelessWidget {
 
     return Material(
       color: Colors.white,
-      borderRadius: BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+      borderRadius: BorderRadius.circular(
+          context.responsiveAppSizeTheme.current.commonWidgetsRadius),
       child: Padding(
-        padding: const EdgeInsets.all(AppSizesManager.p24),
+        padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p24),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(Icons.system_update_alt,
-                size: AppSizesManager.iconSize48,
+                size: context.responsiveAppSizeTheme.current.iconSize48,
                 color: AppColors.accent1Shade1),
             const ResponsiveGap.s12(),
             Text(

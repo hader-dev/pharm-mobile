@@ -17,7 +17,6 @@ import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/repositories/remote/favorite/favorite_repository_impl.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/order_repository_impl.dart';
 import 'package:hader_pharm_mobile/repositories/remote/parapharm_catalog/para_pharma_catalog_repository_impl.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/no_vsync.dart';
 import 'package:iconsax/iconsax.dart' show Iconsax;
@@ -113,8 +112,8 @@ class AddCartBottomSheetManual extends StatelessWidget {
             const Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
             const ResponsiveGap.s12(),
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: AppSizesManager.p4),
+              padding: EdgeInsets.symmetric(
+                  horizontal: context.responsiveAppSizeTheme.current.p4),
               child: Row(
                 children: [
                   Expanded(
@@ -191,13 +190,14 @@ class InfoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(AppSizesManager.p12),
+      padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p12),
       width: double.maxFinite,
-      margin: const EdgeInsets.symmetric(vertical: AppSizesManager.p6),
+      margin: EdgeInsets.symmetric(
+          vertical: context.responsiveAppSizeTheme.current.p6),
       decoration: BoxDecoration(
         color: bgColor,
-        borderRadius:
-            BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+        borderRadius: BorderRadius.circular(
+            context.responsiveAppSizeTheme.current.commonWidgetsRadius),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

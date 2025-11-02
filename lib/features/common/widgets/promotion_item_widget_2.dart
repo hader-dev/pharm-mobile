@@ -6,7 +6,7 @@ import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/image/cached_network_image_with_asset_fallback.dart';
 import 'package:hader_pharm_mobile/models/announcement.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 typedef OnTapCallback = void Function(AnnouncementModel announcement);
 
@@ -27,7 +27,8 @@ class PromotionItemWidget2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(AppSizesManager.s16),
+      borderRadius:
+          BorderRadius.circular(context.responsiveAppSizeTheme.current.s16),
       child: InkWell(
         onTap: () {
           RoutingManager.router.pushNamed(
@@ -41,7 +42,8 @@ class PromotionItemWidget2 extends StatelessWidget {
               color: AppColors.accent1Shade1,
               width: 1,
             ),
-            borderRadius: BorderRadius.circular(AppSizesManager.s16),
+            borderRadius: BorderRadius.circular(
+                context.responsiveAppSizeTheme.current.s16),
           ),
           child: CachedNetworkImageWithAssetFallback(
             width: double.infinity,

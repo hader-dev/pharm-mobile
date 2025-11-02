@@ -28,11 +28,11 @@ class _UserImageState extends State<UserImage> {
     final imageSize = isTablet ? 90.0 : 70.0;
 
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: EdgeInsets.all(8.0),
       child: Hero(
         tag: "avatar",
         child: Padding(
-          padding: const EdgeInsets.all(4.0),
+          padding: EdgeInsets.all(4.0),
           child: Container(
             clipBehavior: Clip.antiAlias,
             decoration: const BoxDecoration(

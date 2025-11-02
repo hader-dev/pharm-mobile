@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import 'para_cartegory.dart';
@@ -13,8 +12,8 @@ class CategoriesSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(
-            left: AppSizesManager.p8,
+          padding: EdgeInsets.only(
+            left: context.responsiveAppSizeTheme.current.p8,
           ),
           child: Text('Categories',
               style: context.responsiveTextTheme.current.headLine5SemiBold),

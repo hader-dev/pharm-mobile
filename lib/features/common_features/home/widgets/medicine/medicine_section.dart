@@ -25,7 +25,9 @@ class MedicineSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Gap(screenWidth <= 414 ? 0 : AppSizesManager.s4),
+          Gap(screenWidth <= 414
+              ? 0
+              : context.responsiveAppSizeTheme.current.s4),
           SectionTitle(title: translation.medicines),
           MedicinesSectionItems(minSectionHeight: minSectionHeight),
         ],

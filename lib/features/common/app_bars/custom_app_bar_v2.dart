@@ -14,6 +14,7 @@ class CustomAppBarV2 extends StatelessWidget implements PreferredSizeWidget {
   final double? titleWidthConstraiontRatio;
   final bool isExpanded;
   final bool useSpacer;
+  final double? customPreferedSize;
 
   final double? height;
   final double? width;
@@ -21,6 +22,7 @@ class CustomAppBarV2 extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBarV2({
     super.key,
     required this.title,
+    this.customPreferedSize,
     this.titleWidthConstraiontRatio = 0.5,
     this.leading,
     this.trailing,
@@ -49,6 +51,7 @@ class CustomAppBarV2 extends StatelessWidget implements PreferredSizeWidget {
     this.isExpanded = false,
     this.bgColor = Colors.white,
     this.height,
+    this.customPreferedSize,
     this.width,
   });
 
@@ -65,6 +68,7 @@ class CustomAppBarV2 extends StatelessWidget implements PreferredSizeWidget {
     required this.bgColor,
     this.height,
     this.width,
+    this.customPreferedSize,
   })  : titleWidthConstraiontRatio = null,
         isExpanded = true;
 
@@ -83,6 +87,7 @@ class CustomAppBarV2 extends StatelessWidget implements PreferredSizeWidget {
     this.bgColor = AppColors.accent1Shade2,
     this.height,
     this.width,
+    this.customPreferedSize,
   });
 
   @override
@@ -128,5 +133,6 @@ class CustomAppBarV2 extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize =>
+      Size.fromHeight(customPreferedSize ?? kToolbarHeight);
 }

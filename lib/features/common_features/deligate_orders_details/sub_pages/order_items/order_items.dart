@@ -5,7 +5,6 @@ import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_bu
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_orders_details/cubit/order_details/orders_details_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_orders_details/sub_pages/order_items/widgets/order_items_section.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
@@ -31,7 +30,8 @@ class OrderDetailsItemsPage extends StatelessWidget {
           final isEmpty = cubit.state.orderItems.isEmpty;
           final bottomNavigationWidget = state.didChange
               ? Padding(
-                  padding: const EdgeInsets.all(AppSizesManager.p8),
+                  padding:
+                      EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [

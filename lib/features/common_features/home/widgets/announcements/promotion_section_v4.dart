@@ -7,7 +7,6 @@ import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/promotion_item_widget_3.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/cubit/home_cubit.dart';
 import 'package:hader_pharm_mobile/models/announcement.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/responsive/silver_grid_params.dart';
 
@@ -37,9 +36,9 @@ class PromotionSectionV4 extends StatelessWidget {
         }
 
         return Padding(
-          padding: const EdgeInsets.only(
-            right: AppSizesManager.p8,
-            left: AppSizesManager.p8,
+          padding: EdgeInsets.only(
+            right: context.responsiveAppSizeTheme.current.p8,
+            left: context.responsiveAppSizeTheme.current.p8,
           ),
           child: SizedBox(
             height: minSectionHeight * 2.5,

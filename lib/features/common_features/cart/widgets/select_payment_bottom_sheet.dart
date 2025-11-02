@@ -14,7 +14,6 @@ import 'package:hader_pharm_mobile/features/common/widgets/invoice_input.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/payment_input.dart';
 import 'package:hader_pharm_mobile/features/common_features/cart/cubit/cart_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders/cubit/orders_cubit.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 import 'package:hader_pharm_mobile/utils/validators.dart';
@@ -78,7 +77,8 @@ class SelectPaymentMethodBottomSheet extends StatelessWidget {
                         bgColor: AppColors.bgWhite,
                         value: CustomTextField(
                           verticalPadding: 0,
-                          horizontalPadding: AppSizesManager.p6,
+                          horizontalPadding:
+                              context.responsiveAppSizeTheme.current.p6,
                           initValue: UserManager.instance.currentUser.address,
                           onChanged: (text) => context
                               .read<CartCubit>()
@@ -98,7 +98,8 @@ class SelectPaymentMethodBottomSheet extends StatelessWidget {
                         bgColor: AppColors.bgWhite,
                         value: CustomTextField(
                           verticalPadding: 0,
-                          horizontalPadding: AppSizesManager.p6,
+                          horizontalPadding:
+                              context.responsiveAppSizeTheme.current.p6,
                           initValue: state.orderNote,
                           onChanged: (text) => context
                               .read<CartCubit>()
@@ -138,8 +139,9 @@ class SelectPaymentMethodBottomSheet extends StatelessWidget {
                     const ResponsiveGap.s12(),
                     Padding(
                       padding: EdgeInsets.symmetric(
-                          vertical: AppSizesManager.p4,
-                          horizontal: AppSizesManager.p4),
+                          vertical: context.responsiveAppSizeTheme.current.p4,
+                          horizontal:
+                              context.responsiveAppSizeTheme.current.p4),
                       child: Row(
                         children: [
                           Expanded(

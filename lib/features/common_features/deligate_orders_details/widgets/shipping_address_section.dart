@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class ShippingAddressSection extends StatelessWidget {
@@ -16,16 +15,18 @@ class ShippingAddressSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(
-          vertical: AppSizesManager.p12, horizontal: AppSizesManager.p4),
+      margin: EdgeInsets.symmetric(
+          vertical: context.responsiveAppSizeTheme.current.p12,
+          horizontal: context.responsiveAppSizeTheme.current.p4),
       width: double.maxFinite,
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius:
-            BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+        borderRadius: BorderRadius.circular(
+            context.responsiveAppSizeTheme.current.commonWidgetsRadius),
       ),
-      padding: const EdgeInsets.symmetric(
-          vertical: AppSizesManager.p6, horizontal: AppSizesManager.p8),
+      padding: EdgeInsets.symmetric(
+          vertical: context.responsiveAppSizeTheme.current.p6,
+          horizontal: context.responsiveAppSizeTheme.current.p8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[

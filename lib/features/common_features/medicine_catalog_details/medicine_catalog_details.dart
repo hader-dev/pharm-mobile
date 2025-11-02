@@ -6,7 +6,7 @@ import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/cubit/provider.dart';
 import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/sub_pages/medcine_catalog_overview/medcine_catalog_overview.dart';
 import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/widgets/appbar.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import 'cubit/medicine_details_cubit.dart';
 import 'widgets/header_section.dart';
@@ -44,13 +44,16 @@ class _BaseMedicineCatalogDetailsScreenState
   @override
   void initState() {
     super.initState();
-    bottomNavbarHeightModifier = widget.disabledPackageQuanity
-        ? AppSizesManager.deafultQuantityNavbarHeightModifier
-        : AppSizesManager.expendedQuantityNavbarHeightModifier;
   }
 
   @override
   Widget build(BuildContext context) {
+    bottomNavbarHeightModifier = widget.disabledPackageQuanity
+        ? context
+            .responsiveAppSizeTheme.current.deafultQuantityNavbarHeightModifier
+        : context.responsiveAppSizeTheme.current
+            .expandedQuantityNavbarHeightModifier;
+
     return StateProvider(
       tabs: const [],
       vsync: this,

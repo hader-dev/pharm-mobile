@@ -8,7 +8,6 @@ import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -31,7 +30,7 @@ class LanguagesScreen extends StatelessWidget {
                     ? Iconsax.arrow_right_3
                     : Iconsax.arrow_left_2,
                 color: AppColors.bgWhite,
-                size: AppSizesManager.iconSize25,
+                size: context.responsiveAppSizeTheme.current.iconSize25,
               ),
               onPressed: () {
                 context.pop();
@@ -52,16 +51,16 @@ class LanguagesScreen extends StatelessWidget {
               child: BlocBuilder<LangCubit, LangState>(
                 builder: (BuildContext context, LangState state) {
                   return Padding(
-                    padding: const EdgeInsets.only(
-                      left: AppSizesManager.p8,
-                      right: AppSizesManager.p8,
-                      bottom: AppSizesManager.p8,
+                    padding: EdgeInsets.only(
+                      left: context.responsiveAppSizeTheme.current.p8,
+                      right: context.responsiveAppSizeTheme.current.p8,
+                      bottom: context.responsiveAppSizeTheme.current.p8,
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        const SizedBox(
-                          height: AppSizesManager.p10,
+                        SizedBox(
+                          height: context.responsiveAppSizeTheme.current.p10,
                         ),
                         Text(context.translation!.select_language_description,
                             style: context
@@ -69,8 +68,8 @@ class LanguagesScreen extends StatelessWidget {
                                 .copyWith(
                               color: TextColors.ternary.color,
                             )),
-                        const SizedBox(
-                          height: AppSizesManager.p10,
+                        SizedBox(
+                          height: context.responsiveAppSizeTheme.current.p10,
                         ),
                         const LangTile(
                           langName: 'العربية',
@@ -87,8 +86,9 @@ class LanguagesScreen extends StatelessWidget {
                           langImgPath: DrawableAssetStrings.franceFlagIcon,
                           langValue: 'fr',
                         ),
-                        const SizedBox(
-                          height: AppSizesManager.p10 * 2,
+                        SizedBox(
+                          height:
+                              context.responsiveAppSizeTheme.current.p10 * 2,
                         ),
                         const Spacer(),
                         PrimaryTextButton(

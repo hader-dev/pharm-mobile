@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/chips/custom_chip.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class SelectedFiltersDisplay extends StatelessWidget {
   final List<String> selectedFilters;
@@ -26,7 +26,7 @@ class SelectedFiltersDisplay extends StatelessWidget {
         const ResponsiveGap.s8(),
         Container(
           width: double.infinity,
-          padding: const EdgeInsets.all(AppSizesManager.p8),
+          padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
           decoration: BoxDecoration(
             color: AppColors.bgDarken.withValues(alpha: 0.3),
             borderRadius: BorderRadius.circular(8),

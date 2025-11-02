@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class CustomDatePickerWidget {
@@ -27,8 +26,8 @@ class CustomDatePickerWidget {
           color: Colors.grey.withAlpha(128),
           child: Builder(builder: (context) {
             return Container(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: AppSizesManager.p10),
+              padding: EdgeInsets.symmetric(
+                  horizontal: context.responsiveAppSizeTheme.current.p10),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -36,8 +35,8 @@ class CustomDatePickerWidget {
                   Container(
                     clipBehavior: Clip.antiAlias,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(
-                          AppSizesManager.commonWidgetsRadius),
+                      borderRadius: BorderRadius.circular(context
+                          .responsiveAppSizeTheme.current.commonWidgetsRadius),
                       color: Colors.white,
                     ),
                     child: Column(

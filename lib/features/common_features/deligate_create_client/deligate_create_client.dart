@@ -11,7 +11,6 @@ import 'package:hader_pharm_mobile/features/common_features/deligate_create_clie
 import 'package:hader_pharm_mobile/features/common_features/deligate_create_client/widgets/client_type_selector.dart';
 import 'package:hader_pharm_mobile/features/common_features/wilaya/town.dart';
 import 'package:hader_pharm_mobile/features/common_features/wilaya/wilaya.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/validators.dart';
@@ -27,7 +26,7 @@ class DeligateCreateClientScreen extends StatelessWidget {
       child: Scaffold(
         appBar: DeligateCreateClientAppbar(translation: translation),
         body: Padding(
-          padding: EdgeInsets.all(AppSizesManager.p8),
+          padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
           child: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             child: DeligateCreateClientStateProvider(

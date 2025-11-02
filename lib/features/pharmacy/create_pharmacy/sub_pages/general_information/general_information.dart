@@ -4,7 +4,6 @@ import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field
 import 'package:hader_pharm_mobile/features/common_features/create_company_profile/cubit/create_company_profile_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/wilaya/town.dart';
 import 'package:hader_pharm_mobile/features/common_features/wilaya/wilaya.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/validators.dart';
@@ -25,10 +24,12 @@ class _PharmacyGeneralInformationPageState
     super.build(context);
     final translation = context.translation!;
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p8),
+      padding: EdgeInsets.symmetric(
+          horizontal: context.responsiveAppSizeTheme.current.p8),
       child: Scrollbar(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p8),
+          padding: EdgeInsets.symmetric(
+              horizontal: context.responsiveAppSizeTheme.current.p8),
           child: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             child: BlocBuilder<CreateCompanyProfileCubit,

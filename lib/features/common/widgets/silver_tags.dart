@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class SilverTags extends StatelessWidget {
   const SilverTags(
@@ -13,10 +13,11 @@ class SilverTags extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Wrap(
-      spacing: AppSizesManager.s4,
+      spacing: context.responsiveAppSizeTheme.current.s4,
       children: tags
           .map((tag) => Badge(
-                padding: const EdgeInsets.all(AppSizesManager.p4),
+                padding:
+                    EdgeInsets.all(context.responsiveAppSizeTheme.current.p4),
                 backgroundColor: backgroundColor,
                 label: Text(tag),
               ))

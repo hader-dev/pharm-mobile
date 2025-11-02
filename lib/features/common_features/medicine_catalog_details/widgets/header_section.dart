@@ -10,7 +10,6 @@ import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/cubit/medicine_details_cubit.dart';
 import 'package:hader_pharm_mobile/models/medicine_catalog.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_date_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/price_formatter.dart';
@@ -26,8 +25,9 @@ class HeaderSection extends StatelessWidget {
             .state
             .medicineCatalogData;
     return Padding(
-      padding: const EdgeInsets.symmetric(
-          vertical: AppSizesManager.p16, horizontal: AppSizesManager.p12),
+      padding: EdgeInsets.symmetric(
+          vertical: context.responsiveAppSizeTheme.current.p16,
+          horizontal: context.responsiveAppSizeTheme.current.p12),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,7 +45,7 @@ class HeaderSection extends StatelessWidget {
               Icon(
                 Icons.calendar_month,
                 color: Colors.grey[700],
-                size: AppSizesManager.iconSize30,
+                size: context.responsiveAppSizeTheme.current.iconSize30,
               ),
               const ResponsiveGap.s4(),
               Text(
@@ -87,7 +87,8 @@ class TrademarkWidgetAlternate extends StatelessWidget {
         );
       },
       child: Padding(
-        padding: const EdgeInsets.only(right: AppSizesManager.s2),
+        padding:
+            EdgeInsets.only(right: context.responsiveAppSizeTheme.current.s2),
         child: Row(
           children: [
             Container(
@@ -115,7 +116,7 @@ class TrademarkWidgetAlternate extends StatelessWidget {
             Icon(
               Iconsax.dollar_circle4,
               color: AppColors.accent1Shade1,
-              size: AppSizesManager.iconSize30,
+              size: context.responsiveAppSizeTheme.current.iconSize30,
             ),
             const ResponsiveGap.s4(),
             Text(

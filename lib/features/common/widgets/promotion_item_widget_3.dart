@@ -7,7 +7,6 @@ import 'package:hader_pharm_mobile/features/common/image/cached_network_image_wi
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/models/announcement.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_date_helper.dart';
 
@@ -42,13 +41,14 @@ class PromotionItemWidget3 extends StatelessWidget {
           );
         },
         child: Padding(
-          padding: const EdgeInsets.all(AppSizesManager.p8),
+          padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(AppSizesManager.r8),
+                  borderRadius: BorderRadius.circular(
+                      context.responsiveAppSizeTheme.current.r8),
                   child: AspectRatio(
                     aspectRatio: 1.5,
                     child: CachedNetworkImageWithAssetFallback(
@@ -64,7 +64,7 @@ class PromotionItemWidget3 extends StatelessWidget {
               ),
               const ResponsiveGap.s4(),
               // Container(
-              //   padding: EdgeInsets.all(AppSizesManager.p4),
+              //   padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p4),
               //   decoration: BoxDecoration(
               //     color: AppColors.accent1Shade1,
               //   ),

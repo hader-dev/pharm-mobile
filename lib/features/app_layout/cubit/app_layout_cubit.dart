@@ -34,17 +34,32 @@ class AppLayoutCubit extends Cubit<AppLayoutState> {
   ];
 
   List<PreferredSizeWidget> navbars = [
-    const HomeAppbar(),
-    const MarketplaceAppbar(),
-    const CartAppbar(),
-    const OrdersAppbar(),
-    const ProfileAppbar(),
+    const HomeAppbar(
+      isExtraLargeScreen: false,
+    ),
+    const MarketplaceAppbar(
+      isExtraLargeScreen: false,
+    ),
+    const CartAppbar(
+      isExtraLargeScreen: false,
+    ),
+    const OrdersAppbar(
+      isExtraLargeScreen: false,
+    ),
+    const ProfileAppbar(
+      isExtraLargeScreen: false,
+    ),
   ];
 
-  AppLayoutCubit() : super(AppLayoutInitial()) {
+  AppLayoutCubit({required bool isExtraLargeScreen})
+      : super(AppLayoutInitial()) {
     UserManager.instance.currentUser.role.isDelegate
-        ? deligateAppScreens()
-        : clientAppScreens();
+        ? deligateAppScreens(
+            isExtraLargeScreen: isExtraLargeScreen,
+          )
+        : clientAppScreens(
+            isExtraLargeScreen: isExtraLargeScreen,
+          );
   }
 
   void changePage(int index) {
@@ -52,24 +67,34 @@ class AppLayoutCubit extends Cubit<AppLayoutState> {
     emit(PageChanged());
   }
 
-  void deligateAppScreens() {
+  void deligateAppScreens({required bool isExtraLargeScreen}) {
     screens = [
       ClientScreen(),
       DeligateOrdersScreen(),
       DeligateProductsScreen(),
-      ProfileScreen(openedFrom: "")
+      ProfileScreen(
+        openedFrom: "",
+      ),
     ];
 
     navbars = [
-      const DeligateClientsAppbar(),
-      const DeligateOrdersAppbar(),
-      const DeligateProductsAppbar(),
-      const ProfileAppbar(),
+      DeligateClientsAppbar(
+        isExtraLargeScreen: isExtraLargeScreen,
+      ),
+      DeligateOrdersAppbar(
+        isExtraLargeScreen: isExtraLargeScreen,
+      ),
+      DeligateProductsAppbar(
+        isExtraLargeScreen: isExtraLargeScreen,
+      ),
+      ProfileAppbar(
+        isExtraLargeScreen: isExtraLargeScreen,
+      ),
     ];
     emit(CurrentUserLoaded());
   }
 
-  void clientAppScreens() {
+  void clientAppScreens({required bool isExtraLargeScreen}) {
     screens = [
       HomeScreen(),
       MarketPlaceScreen(),
@@ -80,11 +105,11 @@ class AppLayoutCubit extends Cubit<AppLayoutState> {
       )
     ];
     navbars = [
-      const HomeAppbar(),
-      const MarketplaceAppbar(),
-      const CartAppbar(),
-      const OrdersAppbar(),
-      const ProfileAppbar(),
+      HomeAppbar(isExtraLargeScreen: isExtraLargeScreen),
+      MarketplaceAppbar(isExtraLargeScreen: isExtraLargeScreen),
+      CartAppbar(isExtraLargeScreen: isExtraLargeScreen),
+      OrdersAppbar(isExtraLargeScreen: isExtraLargeScreen),
+      ProfileAppbar(isExtraLargeScreen: isExtraLargeScreen),
     ];
     emit(CurrentUserLoaded());
   }

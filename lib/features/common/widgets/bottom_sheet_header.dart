@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class BottomSheetHeader extends StatelessWidget {
@@ -11,8 +10,8 @@ class BottomSheetHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        vertical: AppSizesManager.p12,
+      padding: EdgeInsets.symmetric(
+        vertical: context.responsiveAppSizeTheme.current.p12,
       ),
       child: Row(
         children: [
@@ -25,7 +24,7 @@ class BottomSheetHeader extends StatelessWidget {
             onTap: () => context.pop(),
             child: Icon(
               Icons.close,
-              size: AppSizesManager.iconSize20,
+              size: context.responsiveAppSizeTheme.current.iconSize20,
             ),
           )
         ],

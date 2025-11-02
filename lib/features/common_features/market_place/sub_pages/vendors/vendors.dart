@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/end_of_load_result_widget.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/vendor_item.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import 'cubit/vendors_cubit.dart';
 
@@ -21,7 +21,7 @@ class _VendorsPageState extends State<VendorsPage>
     super.build(context);
     return Material(
       child: Padding(
-        padding: const EdgeInsets.all(AppSizesManager.p8),
+        padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
         child: Column(
           children: [
             Expanded(

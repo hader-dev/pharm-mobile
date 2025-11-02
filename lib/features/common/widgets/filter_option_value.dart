@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../config/theme/colors_manager.dart';
@@ -20,7 +19,7 @@ class FilterOptionValueWidget extends StatelessWidget {
       splashColor: Colors.transparent,
       onTap: onSelected,
       child: Container(
-        padding: const EdgeInsets.all(AppSizesManager.p12),
+        padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p12),
         child: Row(
           children: [
             Text(

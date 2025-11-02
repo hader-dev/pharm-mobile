@@ -5,7 +5,6 @@ import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/help_support/actions/launch_developer_email.dart';
 import 'package:hader_pharm_mobile/features/common_features/help_support/actions/launch_developer_phone.dart';
 import 'package:hader_pharm_mobile/features/common_features/profile/widgets/settings_tile.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:lucide_icons/lucide_icons.dart';
@@ -20,26 +19,25 @@ class HelpAndSupportScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final translation = context.translation!;
 
-    return SafeArea(
-      child: Scaffold(
-        appBar: CustomAppBarV2.alternate(
-          leading: IconButton(
-            icon: const Icon(
-              Iconsax.arrow_left,
-              color: Colors.white,
-              size: AppSizesManager.iconSize25,
-            ),
-            onPressed: () => context.pop(),
+    return Scaffold(
+      appBar: CustomAppBarV2.alternate(
+        leading: IconButton(
+          icon: Icon(
+            Iconsax.arrow_left,
+            color: Colors.white,
+            size: context.responsiveAppSizeTheme.current.iconSize25,
           ),
-          title: Text(
-            translation.help_and_support,
-            style:
-                context.responsiveTextTheme.current.headLine3SemiBold.copyWith(
-              color: Colors.white,
-            ),
+          onPressed: () => context.pop(),
+        ),
+        title: Text(
+          translation.help_and_support,
+          style: context.responsiveTextTheme.current.headLine3SemiBold.copyWith(
+            color: Colors.white,
           ),
         ),
-        body: Column(
+      ),
+      body: SafeArea(
+        child: Column(
           children: [
             const ResponsiveGap.s24(),
             SettingsTile(

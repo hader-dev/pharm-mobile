@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
 class DeligateClientsAppbar extends StatelessWidget
     implements PreferredSizeWidget {
   const DeligateClientsAppbar({
-    super.key,
+    super.key, required bool isExtraLargeScreen,
   });
 
   @override
@@ -17,9 +16,9 @@ class DeligateClientsAppbar extends StatelessWidget
       topPadding: MediaQuery.of(context).padding.top,
       bottomPadding: MediaQuery.of(context).padding.bottom,
       leading: IconButton(
-        icon: const Icon(
+        icon: Icon(
           Iconsax.bag_2,
-          size: AppSizesManager.iconSize25,
+          size: context.responsiveAppSizeTheme.current.iconSize25,
           color: AppColors.bgWhite,
         ),
         onPressed: () {},

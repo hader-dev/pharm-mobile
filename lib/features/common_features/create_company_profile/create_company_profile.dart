@@ -30,23 +30,23 @@ class CreateCompanyProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (context) => CreateCompanyProfileCubit(
-                companyRepository: CompanyRepository(
-              client: getItInstance.get<INetworkService>(),
-              userManager: getItInstance.get<UserManager>(),
-            )),
-          ),
-          BlocProvider(
-            create: (context) =>
-                WilayaCubit(wilayaRepository: WilayaRepositoryImpl()),
-          ),
-        ],
-        child: Scaffold(
-          body: BlocListener<CreateCompanyProfileCubit,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => CreateCompanyProfileCubit(
+              companyRepository: CompanyRepository(
+            client: getItInstance.get<INetworkService>(),
+            userManager: getItInstance.get<UserManager>(),
+          )),
+        ),
+        BlocProvider(
+          create: (context) =>
+              WilayaCubit(wilayaRepository: WilayaRepositoryImpl()),
+        ),
+      ],
+      child: Scaffold(
+        body: SafeArea(
+          child: BlocListener<CreateCompanyProfileCubit,
               CreateCompanyProfileState>(
             listener: (context, state) {
               if (state is CompanyCreated) {

@@ -11,7 +11,8 @@ class DeligateMarketplaceNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final items = deligateMartketPlaceNavbarItems(context.translation!);
+    final items =
+        deligateMartketPlaceNavbarItems(context.translation!, context);
 
     return BlocBuilder<DeligateMarketplaceCubit, DeligateMarketplaceState>(
         builder: (context, state) {

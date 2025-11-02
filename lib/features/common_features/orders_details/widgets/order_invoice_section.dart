@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../../utils/enums.dart';
@@ -13,8 +12,9 @@ class OrderInvoiceSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-          vertical: AppSizesManager.p12, horizontal: AppSizesManager.p8),
+      padding: EdgeInsets.symmetric(
+          vertical: context.responsiveAppSizeTheme.current.p12,
+          horizontal: context.responsiveAppSizeTheme.current.p8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

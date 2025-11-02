@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/models/company.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
@@ -15,8 +14,9 @@ class VendorDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.symmetric(
-            vertical: AppSizesManager.p24, horizontal: AppSizesManager.p16),
+        padding: EdgeInsets.symmetric(
+            vertical: context.responsiveAppSizeTheme.current.p24,
+            horizontal: context.responsiveAppSizeTheme.current.p16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,

@@ -48,7 +48,7 @@ class AppSizesManager {
 
   static double deafultQuantityNavbarHeightModifier = 3.0;
 
-  static double expendedQuantityNavbarHeightModifier = 4.5;
+  static double expandedQuantityNavbarHeightModifier = 4.5;
 }
 
 class PaginationConstants {

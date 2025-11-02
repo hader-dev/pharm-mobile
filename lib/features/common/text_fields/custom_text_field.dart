@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/decorations/field.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
@@ -83,7 +82,8 @@ class CustomTextField extends StatelessWidget {
       children: [
         if (label.isNotEmpty)
           Padding(
-            padding: const EdgeInsets.only(left: AppSizesManager.p4),
+            padding: EdgeInsets.only(
+                left: context.responsiveAppSizeTheme.current.p4),
             child: Text(label,
                 style: context.responsiveTextTheme.current.body3Medium
                     .copyWith(color: TextColors.ternary.color)),
@@ -123,10 +123,11 @@ class CustomTextField extends StatelessWidget {
               filled: isFilled,
               suffixIcon: suffixIcon,
               prefixIcon: prefixIcon,
-              contentPadding: EdgeInsets.all(AppSizesManager.p12),
+              contentPadding:
+                  EdgeInsets.all(context.responsiveAppSizeTheme.current.p12),
               helper: Row(
                 children: [
-                  getSuffixIcon(state) ?? const SizedBox.shrink(),
+                  getSuffixIcon(state, context) ?? const SizedBox.shrink(),
                   const ResponsiveGap.s12(),
                   Text(
                     state.wordKey,
@@ -141,30 +142,30 @@ class CustomTextField extends StatelessWidget {
                       ? FieldState.error.color.ternary
                       : AppColors.bgWhite,
               enabledBorder: OutlineInputBorder(
-                borderRadius:
-                    BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+                borderRadius: BorderRadius.circular(
+                    context.responsiveAppSizeTheme.current.commonWidgetsRadius),
                 borderSide:
                     BorderSide(color: getEnabledBorderColor(context, state)),
               ),
               disabledBorder: OutlineInputBorder(
-                borderRadius:
-                    BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+                borderRadius: BorderRadius.circular(
+                    context.responsiveAppSizeTheme.current.commonWidgetsRadius),
                 borderSide: BorderSide(color: AppColors.bgDisabled),
               ),
               focusedBorder: OutlineInputBorder(
-                borderRadius:
-                    BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+                borderRadius: BorderRadius.circular(
+                    context.responsiveAppSizeTheme.current.commonWidgetsRadius),
                 borderSide:
                     BorderSide(color: getFocusedBorderColor(context, state)),
               ),
               errorBorder: OutlineInputBorder(
-                borderRadius:
-                    BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+                borderRadius: BorderRadius.circular(
+                    context.responsiveAppSizeTheme.current.commonWidgetsRadius),
                 borderSide: BorderSide(color: FieldState.error.color.primary),
               ),
               focusedErrorBorder: OutlineInputBorder(
-                borderRadius:
-                    BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+                borderRadius: BorderRadius.circular(
+                    context.responsiveAppSizeTheme.current.commonWidgetsRadius),
                 borderSide: BorderSide(color: FieldState.error.color.primary),
               )),
         ),

@@ -53,7 +53,7 @@ class ParaPharmaSectionItems extends StatelessWidget {
           child: ListView.builder(
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.only(left: 0),
+            padding: EdgeInsets.only(left: 0),
             itemCount: items.length,
             itemBuilder: (context, index) {
               return SizedBox(

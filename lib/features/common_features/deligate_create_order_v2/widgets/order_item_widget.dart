@@ -10,7 +10,6 @@ import 'package:hader_pharm_mobile/features/common/widgets/quantity_section.dart
 import 'package:hader_pharm_mobile/features/common_features/deligate_create_order/cubit/create_order_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_create_order/widgets/custom_price_input.dart';
 import 'package:hader_pharm_mobile/models/deligate_order.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -33,14 +32,16 @@ class _DeligateOrderItemWidgetState extends State<DeligateOrderItemWidget> {
     final totalPrice = unitPrice * widget.item.model.quantity;
 
     return Container(
-      margin: const EdgeInsets.symmetric(
-          vertical: AppSizesManager.p8, horizontal: AppSizesManager.p4),
-      padding: const EdgeInsets.symmetric(
-          vertical: AppSizesManager.p10, horizontal: AppSizesManager.p10),
+      margin: EdgeInsets.symmetric(
+          vertical: context.responsiveAppSizeTheme.current.p8,
+          horizontal: context.responsiveAppSizeTheme.current.p4),
+      padding: EdgeInsets.symmetric(
+          vertical: context.responsiveAppSizeTheme.current.p10,
+          horizontal: context.responsiveAppSizeTheme.current.p10),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey.shade200),
-        borderRadius:
-            BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+        borderRadius: BorderRadius.circular(
+            context.responsiveAppSizeTheme.current.commonWidgetsRadius),
       ),
       child: Column(
         children: [
@@ -60,7 +61,8 @@ class _DeligateOrderItemWidgetState extends State<DeligateOrderItemWidget> {
                     const Spacer(),
                     Icon(Iconsax.image,
                         color: Color.fromARGB(255, 197, 197, 197),
-                        size: AppSizesManager.iconSize30),
+                        size:
+                            context.responsiveAppSizeTheme.current.iconSize30),
                     const ResponsiveGap.s8(),
                     Text(
                       context.translation!.image_not_available,
@@ -91,10 +93,11 @@ class _DeligateOrderItemWidgetState extends State<DeligateOrderItemWidget> {
                           onTap: () {
                             cubit.removeOrderItem(widget.item);
                           },
-                          child: const Icon(
+                          child:  Icon(
                             Iconsax.trash,
                             color: Colors.red,
-                            size: AppSizesManager.iconSize20,
+                            size: context
+                                .responsiveAppSizeTheme.current.iconSize20,
                           ),
                         )
                       ],
@@ -132,7 +135,7 @@ class _DeligateOrderItemWidgetState extends State<DeligateOrderItemWidget> {
               item: widget.item,
             ),
           ),
-          const SizedBox(height: AppSizesManager.s12),
+          SizedBox(height: context.responsiveAppSizeTheme.current.s12),
           CustomPriceFormField(
             enabled: false,
             customPriceController: widget.item.customPriceController,

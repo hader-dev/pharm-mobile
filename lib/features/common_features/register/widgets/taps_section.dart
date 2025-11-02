@@ -17,11 +17,11 @@
 //   @override
 //   Widget build(BuildContext context) {
 //     return Container(
-//       padding: EdgeInsets.all(AppSizesManager.p8),
+//       padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
 //       decoration: BoxDecoration(
 //         color: AppColors.bgDarken,
 //         border: Border.all(color: StrokeColors.normal.color, width: 1),
-//         borderRadius: BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+//         borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.commonWidgetsRadius),
 //       ),
 //       child: Row(
 //         children: [

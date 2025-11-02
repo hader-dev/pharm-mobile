@@ -3,7 +3,6 @@ import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../config/theme/colors_manager.dart';
-import '../../../utils/constants.dart';
 import 'widgets/check_phone_header_section.dart';
 import 'widgets/check_phone_otp_input_section.dart';
 
@@ -16,7 +15,8 @@ class CheckPhoneScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: AppColors.bgWhite,
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AppSizesManager.p16),
+          padding: EdgeInsets.symmetric(
+              horizontal: context.responsiveAppSizeTheme.current.p16),
           child: Column(
             children: [
               CheckEmailHeaderSection(),

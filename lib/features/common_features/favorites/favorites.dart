@@ -7,7 +7,6 @@ import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
 import 'package:hader_pharm_mobile/features/common_features/favorites/cubit/favorites_cubit.dart';
 import 'package:hader_pharm_mobile/repositories/remote/favorite/favorite_repository_impl.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -33,7 +32,7 @@ class FavoritesScreen extends StatelessWidget {
                   Directionality.of(context) == TextDirection.rtl
                       ? Iconsax.arrow_right_3
                       : Iconsax.arrow_left_2,
-                  size: AppSizesManager.iconSize25,
+                  size: context.responsiveAppSizeTheme.current.iconSize25,
                   color: AppColors.bgWhite,
                 ),
                 onPressed: () {

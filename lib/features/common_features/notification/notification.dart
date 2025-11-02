@@ -6,7 +6,6 @@ import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_bu
 import 'package:hader_pharm_mobile/features/common_features/notification/cubit/notifications_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/notification/view/notification_list.dart';
 import 'package:hader_pharm_mobile/features/common_features/notification/widgets/notification_appbar.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class NotificaitonScreen extends StatelessWidget {
@@ -22,7 +21,7 @@ class NotificaitonScreen extends StatelessWidget {
       child: Scaffold(
         appBar: const NotificationAppbar(),
         body: Padding(
-          padding: const EdgeInsets.all(AppSizesManager.p8),
+          padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
           child: Column(
             children: [
               Expanded(child: NotificationList()),

@@ -9,7 +9,6 @@ import 'package:hader_pharm_mobile/features/common_features/deligate_orders_deta
 import 'package:hader_pharm_mobile/features/common_features/deligate_orders_details/widgets/order_item_note.dart';
 import 'package:hader_pharm_mobile/models/deligate_order.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class OrderItemWidget extends StatelessWidget {
@@ -57,8 +56,8 @@ class OrderItemWidget extends StatelessWidget {
                         child: Container(
                             clipBehavior: Clip.antiAlias,
                             decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.circular(AppSizesManager.p8),
+                              borderRadius: BorderRadius.circular(
+                                  context.responsiveAppSizeTheme.current.p8),
                               color: item.model.product.imageUrl == null
                                   ? const Color.fromARGB(255, 145, 106, 106)
                                   : null,

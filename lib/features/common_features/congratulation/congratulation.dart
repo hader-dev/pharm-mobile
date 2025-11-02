@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import 'widgets/congratulation_header_section.dart';
 import 'widgets/content_section.dart';
@@ -15,7 +15,8 @@ class CongratulationScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: AppColors.bgWhite,
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AppSizesManager.p16),
+          padding: EdgeInsets.symmetric(
+              horizontal: context.responsiveAppSizeTheme.current.p16),
           child: Column(
             children: [
               CongratulationHeaderSection(),

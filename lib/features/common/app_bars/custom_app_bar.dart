@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget title;
@@ -11,10 +10,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final double leftPadding;
   final double rightPadding;
   final Color bgColor;
+  final double? customPreferedSize;
 
   const CustomAppBar({
     super.key,
     required this.title,
+    this.customPreferedSize,
     this.leading,
     this.trailing,
     this.topPadding = 0,
@@ -42,9 +43,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         textBaseline: TextBaseline.alphabetic,
         children: [
-          leading ?? const SizedBox(),
-          const SizedBox(
-            width: AppSizesManager.s4,
+          leading ?? SizedBox(),
+          SizedBox(
+            width: context.responsiveAppSizeTheme.current.s4,
           ),
           ConstrainedBox(
               constraints: BoxConstraints(
@@ -61,5 +62,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize =>
+      Size.fromHeight(customPreferedSize ?? kToolbarHeight);
 }

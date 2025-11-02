@@ -5,7 +5,6 @@ import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/check_email/cubit/check_email_cubit.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class CheckEmailOtpInputSection extends StatefulWidget {
@@ -47,7 +46,7 @@ class _CheckEmailOtpInputSectionState extends State<CheckEmailOtpInputSection> {
         ),
         const ResponsiveGap.s12(),
         Padding(
-          padding: const EdgeInsets.all(AppSizesManager.p12),
+          padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p12),
           child: BlocBuilder<CheckEmailCubit, CheckEmailState>(
             builder: (context, state) {
               return InkWell(

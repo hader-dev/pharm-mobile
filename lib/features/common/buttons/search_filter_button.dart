@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
 class SearchFilterButton extends StatelessWidget {
@@ -20,14 +20,15 @@ class SearchFilterButton extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AppSizesManager.p12),
+          padding: EdgeInsets.symmetric(
+              horizontal: context.responsiveAppSizeTheme.current.p12),
           child: Stack(
             clipBehavior: Clip.none,
             alignment: Alignment.center,
             children: [
-              const Icon(
+              Icon(
                 Iconsax.filter,
-                size: AppSizesManager.iconSize25,
+                size: context.responsiveAppSizeTheme.current.iconSize25,
                 color: AppColors.accent1Shade1,
               ),
               if (hasActiveFilters)
@@ -35,7 +36,8 @@ class SearchFilterButton extends StatelessWidget {
                   top: 12,
                   right: 3,
                   child: CircleAvatar(
-                    radius: AppSizesManager.commonWidgetsRadius,
+                    radius: context
+                        .responsiveAppSizeTheme.current.commonWidgetsRadius,
                     backgroundColor: Colors.red,
                   ),
                 )

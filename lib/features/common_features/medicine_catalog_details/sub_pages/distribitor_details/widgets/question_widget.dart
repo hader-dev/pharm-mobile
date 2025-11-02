@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class QuestionWidget extends StatefulWidget {
@@ -20,7 +19,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: AppSizesManager.s16),
+      padding: EdgeInsets.only(top: context.responsiveAppSizeTheme.current.s16),
       child: ValueListenableBuilder(
         valueListenable: _isExpanded,
         builder: (context, value, child) => ExpansionTile(
@@ -29,18 +28,19 @@ class _QuestionWidgetState extends State<QuestionWidget> {
               color: AppColors.bgDarken2),
           iconColor: AppColors.accent1Shade1,
           maintainState: true,
-          childrenPadding: const EdgeInsets.symmetric(
-              vertical: AppSizesManager.p8, horizontal: AppSizesManager.p8),
+          childrenPadding: EdgeInsets.symmetric(
+              vertical: context.responsiveAppSizeTheme.current.p8,
+              horizontal: context.responsiveAppSizeTheme.current.p8),
           expandedAlignment: Alignment.centerLeft,
-          tilePadding:
-              const EdgeInsets.symmetric(horizontal: AppSizesManager.p8),
+          tilePadding: EdgeInsets.symmetric(
+              horizontal: context.responsiveAppSizeTheme.current.p8),
           collapsedShape: RoundedRectangleBorder(
-              borderRadius:
-                  BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+              borderRadius: BorderRadius.circular(
+                  context.responsiveAppSizeTheme.current.commonWidgetsRadius),
               side: BorderSide(color: StrokeColors.normal.color)),
           shape: RoundedRectangleBorder(
-              borderRadius:
-                  BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+              borderRadius: BorderRadius.circular(
+                  context.responsiveAppSizeTheme.current.commonWidgetsRadius),
               side: BorderSide(color: StrokeColors.focused.color)),
           title: Text(widget.question,
               style: context.responsiveTextTheme.current.body3Medium),

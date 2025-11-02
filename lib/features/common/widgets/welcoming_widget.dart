@@ -4,7 +4,6 @@ import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class WelcomingWidget extends StatelessWidget {
@@ -48,7 +47,8 @@ class WelcomingWidget extends StatelessWidget {
             ),
             const ResponsiveGap.s16(),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p8),
+              padding: EdgeInsets.symmetric(
+                  horizontal: context.responsiveAppSizeTheme.current.p8),
               child: Text(
                 context.translation!.we_wish_you_good_health_welcome,
                 style: context.responsiveTextTheme.current.body3Regular,

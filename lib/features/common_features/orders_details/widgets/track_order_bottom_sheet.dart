@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../../models/order_details.dart';
@@ -60,7 +59,8 @@ class OrderTrackingBottomSheet extends StatelessWidget {
               Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
               const ResponsiveGap.s12(),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p4),
+                padding: EdgeInsets.symmetric(
+                    horizontal: context.responsiveAppSizeTheme.current.p4),
                 child: Row(
                   children: [
                     Expanded(

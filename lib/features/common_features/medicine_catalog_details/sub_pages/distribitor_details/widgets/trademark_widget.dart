@@ -9,7 +9,6 @@ import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/cubit/medicine_details_cubit.dart';
 import 'package:hader_pharm_mobile/models/medicine_catalog.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class TrademarkWidget extends StatelessWidget {
@@ -32,7 +31,7 @@ class TrademarkWidget extends StatelessWidget {
       child: ColoredBox(
         color: AppColors.accent1Shade2.withAlpha(200),
         child: Padding(
-          padding: const EdgeInsets.all(AppSizesManager.p4),
+          padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p4),
           child: Row(
             children: [
               Container(

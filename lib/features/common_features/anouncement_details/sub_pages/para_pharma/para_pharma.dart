@@ -8,7 +8,7 @@ import 'package:hader_pharm_mobile/features/common_features/home/home.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/market_place.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/cubit/para_pharma_cubit.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class ParapharmaProductsPage extends StatefulWidget {
   const ParapharmaProductsPage({super.key});
@@ -81,8 +81,9 @@ class _ParapharmaProductsPageState extends State<ParapharmaProductsPage>
                                   onLikeTapped(v as ParaPharmaCatalogModel));
                         } else {
                           if (isLoadingMore) {
-                            return const Padding(
-                              padding: EdgeInsets.all(AppSizesManager.p16),
+                            return Padding(
+                              padding: EdgeInsets.all(
+                                  context.responsiveAppSizeTheme.current.p16),
                               child: Center(child: CircularProgressIndicator()),
                             );
                           } else if (hasReachedEnd) {

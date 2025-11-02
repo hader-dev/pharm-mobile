@@ -11,7 +11,6 @@ import 'package:hader_pharm_mobile/features/common_features/edit_company/cubit/e
 import 'package:hader_pharm_mobile/features/common_features/edit_company/view_company/widgets/company_info_display.dart';
 import 'package:hader_pharm_mobile/features/common_features/edit_company/view_company/widgets/company_logo_display.dart';
 import 'package:hader_pharm_mobile/repositories/remote/company/company_repository_impl.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart' show Iconsax;
 
@@ -37,7 +36,7 @@ class ViewCompanyScreen extends StatelessWidget {
                     ? Iconsax.arrow_right_3
                     : Iconsax.arrow_left_2,
                 color: AppColors.bgWhite,
-                size: AppSizesManager.iconSize25,
+                size: context.responsiveAppSizeTheme.current.iconSize25,
               ),
               onPressed: () {
                 context.pop();
@@ -50,8 +49,8 @@ class ViewCompanyScreen extends StatelessWidget {
             ),
           ),
           body: Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: AppSizesManager.p16),
+            padding: EdgeInsets.symmetric(
+                horizontal: context.responsiveAppSizeTheme.current.p16),
             child: BlocBuilder<EditCompanyCubit, EditCompanyState>(
               builder: (context, state) {
                 if (state is EditCompanyLoading) {

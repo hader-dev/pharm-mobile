@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/models/order_details.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import 'order_item_widget.dart';
@@ -14,14 +13,14 @@ class OrderItemsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final ScrollController scrollContoller = ScrollController();
     return Container(
-      padding: const EdgeInsets.symmetric(
-        vertical: AppSizesManager.p12,
-        horizontal: AppSizesManager.p6,
+      padding: EdgeInsets.symmetric(
+        vertical: context.responsiveAppSizeTheme.current.p12,
+        horizontal: context.responsiveAppSizeTheme.current.p6,
       ),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius:
-            BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+        borderRadius: BorderRadius.circular(
+            context.responsiveAppSizeTheme.current.commonWidgetsRadius),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,7 +45,8 @@ class OrderItemsSection extends StatelessWidget {
             child: Scrollbar(
               controller: scrollContoller,
               child: Padding(
-                padding: const EdgeInsets.only(right: AppSizesManager.p8),
+                padding: EdgeInsets.only(
+                    right: context.responsiveAppSizeTheme.current.p8),
                 child: ListView(
                   controller: scrollContoller,
                   shrinkWrap: true,

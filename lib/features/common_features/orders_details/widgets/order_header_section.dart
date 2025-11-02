@@ -16,12 +16,12 @@
 //     OrderDetailsCubit cubit = context.read<OrderDetailsCubit>();
 //     return Container(
 //       width: double.maxFinite,
-//       margin: const EdgeInsets.all(AppSizes.extraSmallPadding),
+//       margin: EdgeInsets.all(AppSizes.extraSmallPadding),
 //       decoration: BoxDecoration(
 //         color: Colors.white,
 //         borderRadius: BorderRadius.circular(AppSizes.extraSmallRadius / 2),
 //       ),
-//       padding: const EdgeInsets.all(AppSizes.mediumPadding),
+//       padding: EdgeInsets.all(AppSizes.mediumPadding),
 //       child: Column(
 //         crossAxisAlignment: CrossAxisAlignment.start,
 //         children: <Widget>[
@@ -32,7 +32,7 @@
 //               fontSize: AppTypography.appFontSize4,
 //             ),
 //           ),
-//           const SizedBox(height: AppSizes.smallSpacing),
+//           SizedBox(height: AppSizes.smallSpacing),
 //           Text(
 //             "# ${cubit.orderDetails!.ref ?? context.translation!.noReference}",
 //             softWrap: true,
@@ -46,7 +46,7 @@
 //             Column(
 //               crossAxisAlignment: CrossAxisAlignment.start,
 //               children: <Widget>[
-//                 const SizedBox(height: AppSizes.mediumSpacing),
+//                 SizedBox(height: AppSizes.mediumSpacing),
 //                 Text(
 //                   context.translation!.order_note,
 //                   style: context.theme.textTheme.bodySmall!.copyWith(
@@ -54,7 +54,7 @@
 //                     fontSize: AppTypography.appFontSize4,
 //                   ),
 //                 ),
-//                 const SizedBox(height: AppSizes.smallSpacing),
+//                 SizedBox(height: AppSizes.smallSpacing),
 //                 //TODO: extract to reusable widget
 //                 cubit.orderDetails!.note!.isNotEmpty
 //                     ? ValueListenableBuilder(

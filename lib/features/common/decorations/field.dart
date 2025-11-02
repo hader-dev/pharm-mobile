@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
-Widget? getSuffixIcon(FieldState state) {
+Widget? getSuffixIcon(FieldState state, BuildContext context) {
   switch (state) {
     case FieldState.loading:
-      return const Padding(
-        padding: EdgeInsets.symmetric(horizontal: AppSizesManager.s4),
+      return Padding(
+        padding: EdgeInsets.symmetric(
+            horizontal: context.responsiveAppSizeTheme.current.s4),
         child: SizedBox(
-          width: AppSizesManager.s12,
-          height: AppSizesManager.s12,
+          width: context.responsiveAppSizeTheme.current.s12,
+          height: context.responsiveAppSizeTheme.current.s12,
           child: CircularProgressIndicator(strokeWidth: 2),
         ),
       );
@@ -70,35 +70,36 @@ InputDecoration buildInputDecorationCustomFieldStyle(
           .copyWith(color: TextColors.ternary.color),
       isDense: true,
       filled: isFilled,
-      contentPadding: EdgeInsets.all(AppSizesManager.p12),
+      contentPadding:
+          EdgeInsets.all(context.responsiveAppSizeTheme.current.p12),
       fillColor: isDisabled
           ? AppColors.bgDisabled
           : state == FieldState.error
               ? FieldState.error.color.ternary
               : AppColors.bgWhite,
       enabledBorder: OutlineInputBorder(
-        borderRadius:
-            BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+        borderRadius: BorderRadius.circular(
+            context.responsiveAppSizeTheme.current.commonWidgetsRadius),
         borderSide: BorderSide(color: getEnabledBorderColor(context, state)),
       ),
       disabledBorder: OutlineInputBorder(
-        borderRadius:
-            BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+        borderRadius: BorderRadius.circular(
+            context.responsiveAppSizeTheme.current.commonWidgetsRadius),
         borderSide: BorderSide(color: AppColors.bgDisabled),
       ),
       focusedBorder: OutlineInputBorder(
-        borderRadius:
-            BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+        borderRadius: BorderRadius.circular(
+            context.responsiveAppSizeTheme.current.commonWidgetsRadius),
         borderSide: BorderSide(color: getFocusedBorderColor(context, state)),
       ),
       errorBorder: OutlineInputBorder(
-        borderRadius:
-            BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+        borderRadius: BorderRadius.circular(
+            context.responsiveAppSizeTheme.current.commonWidgetsRadius),
         borderSide: BorderSide(color: FieldState.error.color.primary),
       ),
       focusedErrorBorder: OutlineInputBorder(
-        borderRadius:
-            BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+        borderRadius: BorderRadius.circular(
+            context.responsiveAppSizeTheme.current.commonWidgetsRadius),
         borderSide: BorderSide(color: FieldState.error.color.primary),
       ));
 }

@@ -7,7 +7,6 @@ import 'package:hader_pharm_mobile/features/common/image/cached_network_image_wi
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/models/order_details.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/price_formatter.dart';
 
@@ -22,7 +21,8 @@ class OrderItemClaimWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: AppSizesManager.p6),
+      padding: EdgeInsets.symmetric(
+          vertical: context.responsiveAppSizeTheme.current.p6),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -33,7 +33,8 @@ class OrderItemClaimWidget extends StatelessWidget {
                 Container(
                   clipBehavior: Clip.antiAlias,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(AppSizesManager.p8),
+                    borderRadius: BorderRadius.circular(
+                        context.responsiveAppSizeTheme.current.p8),
                     color: item.imageUrl == null ? Colors.grey.shade100 : null,
                   ),
                   child: CachedNetworkImageWithAssetFallback(

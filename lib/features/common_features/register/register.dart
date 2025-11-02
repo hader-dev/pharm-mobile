@@ -9,7 +9,6 @@ import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/outlined/outlined_text_button.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/register/cubit/register_cubit.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import 'widgets/email_register_form_section.dart';
@@ -37,8 +36,8 @@ class RegisterScreen extends StatelessWidget {
           child: Scaffold(
             backgroundColor: AppColors.bgWhite,
             body: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: AppSizesManager.p16),
+              padding: EdgeInsets.symmetric(
+                  horizontal: context.responsiveAppSizeTheme.current.p16),
               child: BlocBuilder<RegisterCubit, RegisterState>(
                 builder: (context, state) {
                   return ListView(

@@ -6,7 +6,6 @@ import 'package:hader_pharm_mobile/config/services/network/network_interface.dar
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/edit_company/cubit/edit_company_cubit.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -61,18 +60,20 @@ class CompanyLogoDisplay extends StatelessWidget {
                         ),
                         errorWidget: (context, url, error) => Container(
                           color: AppColors.bgDarken,
-                          child: const Icon(
+                          child: Icon(
                             Iconsax.building,
-                            size: AppSizesManager.iconSize48,
+                            size: context
+                                .responsiveAppSizeTheme.current.iconSize48,
                             color: AppColors.accent1Shade1,
                           ),
                         ),
                       )
                     : Container(
                         color: AppColors.bgDarken,
-                        child: const Icon(
+                        child: Icon(
                           Iconsax.building,
-                          size: AppSizesManager.iconSize48,
+                          size:
+                              context.responsiveAppSizeTheme.current.iconSize48,
                           color: AppColors.accent1Shade1,
                         ),
                       ),

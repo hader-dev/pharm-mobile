@@ -1,6 +1,8 @@
 import 'package:hader_pharm_mobile/config/responsive/app_sizes/app_size.dart';
 
 final appSizesMedium = AppSizes(
+  deafultQuantityNavbarHeightModifier: 3.0,
+  expandedQuantityNavbarHeightModifier: 4.0,
   p4: 4,
   p6: 6,
   p8: 8,

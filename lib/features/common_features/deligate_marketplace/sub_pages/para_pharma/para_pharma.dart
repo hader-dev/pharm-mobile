@@ -10,7 +10,6 @@ import 'package:hader_pharm_mobile/features/common_features/deligate_marketplace
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/widgets/add_cart_bottom_sheet_manual.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/responsive/silver_grid_params.dart';
 
@@ -33,7 +32,7 @@ class _ParaPharmaProductsPageState extends State<ParaPharmaProductsPage>
 
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(AppSizesManager.p8),
+        padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

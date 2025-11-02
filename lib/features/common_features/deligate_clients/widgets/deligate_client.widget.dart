@@ -8,7 +8,6 @@ import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/create_company_profile/sub_pages/review_and_sumbit/widgets/info_row.dart';
 import 'package:hader_pharm_mobile/models/client.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class DeligateClientWidget extends StatelessWidget {
@@ -43,11 +42,11 @@ class DeligateClientWidget extends StatelessWidget {
             ),
           ),
           Container(
-            margin: const EdgeInsets.all(AppSizesManager.p12),
-            padding: EdgeInsets.all(AppSizesManager.p8),
+            margin: EdgeInsets.all(context.responsiveAppSizeTheme.current.p12),
+            padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
             decoration: BoxDecoration(
-              borderRadius:
-                  BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+              borderRadius: BorderRadius.circular(
+                  context.responsiveAppSizeTheme.current.commonWidgetsRadius),
               border: Border.all(color: StrokeColors.normal.color, width: 1),
             ),
             child: Column(

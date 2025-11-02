@@ -5,7 +5,6 @@ import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field
 import 'package:hader_pharm_mobile/features/common_features/deligate_marketplace/sub_pages/medicine_products/cubit/medicine_products_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_marketplace/sub_pages/medicine_products/widget/search_filter_bottom_sheet.dart';
 import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
@@ -19,7 +18,8 @@ class SearchWidget extends StatelessWidget {
       children: [
         Flexible(
           child: Padding(
-            padding: const EdgeInsets.only(left: AppSizesManager.p8),
+            padding: EdgeInsets.only(
+                left: context.responsiveAppSizeTheme.current.p8),
             child: CustomTextField(
               hintText: context.translation!.medicines_search_field_hint,
               controller:
@@ -55,8 +55,8 @@ class SearchWidget extends StatelessWidget {
         ),
         InkWell(
           child: Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: AppSizesManager.p12),
+            padding: EdgeInsets.symmetric(
+                horizontal: context.responsiveAppSizeTheme.current.p12),
             child: BlocBuilder<MedicineProductsCubit, MedicineProductsState>(
               builder: (context, state) {
                 return BlocBuilder<MedicineProductsCubit,
@@ -75,7 +75,8 @@ class SearchWidget extends StatelessWidget {
                             top: -4,
                             right: -4,
                             child: CircleAvatar(
-                              radius: AppSizesManager.commonWidgetsRadius,
+                              radius: context.responsiveAppSizeTheme.current
+                                  .commonWidgetsRadius,
                               backgroundColor: Colors.red,
                             ),
                           )

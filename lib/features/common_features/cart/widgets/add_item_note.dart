@@ -29,9 +29,9 @@
 //       child: Dialog(
 //         backgroundColor: Colors.white,
 //         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-//         insetPadding: const EdgeInsets.all(24),
+//         insetPadding: EdgeInsets.all(24),
 //         child: Padding(
-//           padding: const EdgeInsets.all(20.0),
+//           padding: EdgeInsets.all(20.0),
 //           child: Column(
 //             mainAxisSize: MainAxisSize.min,
 //             children: <Widget>[
@@ -76,7 +76,7 @@
 //                 ),
 //               ),
 
-//               const SizedBox(height: AppSizes.mediumSpacing),
+//               SizedBox(height: AppSizes.mediumSpacing),
 
 //               // Button (optional)
 //               BlocBuilder<CartCubit, CartState>(

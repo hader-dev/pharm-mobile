@@ -13,7 +13,6 @@ import 'package:hader_pharm_mobile/features/common_features/orders_details/widge
 import 'package:hader_pharm_mobile/features/common_features/orders_details/widgets/shipping_address_section.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders_details/widgets/track_order_bottom_sheet.dart';
 import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
@@ -27,10 +26,10 @@ class OrdersDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final buttonsPadding = const EdgeInsets.only(
-        left: AppSizesManager.p6,
-        right: AppSizesManager.p6,
-        bottom: AppSizesManager.p6);
+    final buttonsPadding = EdgeInsets.only(
+        left: context.responsiveAppSizeTheme.current.p6,
+        right: context.responsiveAppSizeTheme.current.p6,
+        bottom: context.responsiveAppSizeTheme.current.p6);
     final translation = context.translation!;
 
     return RefreshIndicator(
@@ -61,14 +60,14 @@ class OrdersDetailsPage extends StatelessWidget {
                   longitude: cubit.orderData!.longitude,
                 ),
                 Container(
-                  margin:
-                      const EdgeInsets.symmetric(vertical: AppSizesManager.p4),
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: AppSizesManager.p4),
+                  margin: EdgeInsets.symmetric(
+                      vertical: context.responsiveAppSizeTheme.current.p4),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: context.responsiveAppSizeTheme.current.p4),
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(
-                        AppSizesManager.commonWidgetsRadius),
+                    borderRadius: BorderRadius.circular(context
+                        .responsiveAppSizeTheme.current.commonWidgetsRadius),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

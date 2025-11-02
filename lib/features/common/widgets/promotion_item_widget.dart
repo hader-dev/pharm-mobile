@@ -5,7 +5,6 @@ import 'package:hader_pharm_mobile/config/services/network/network_interface.dar
 import 'package:hader_pharm_mobile/features/common/image/cached_network_image_with_asset_fallback.dart';
 import 'package:hader_pharm_mobile/models/announcement.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 typedef OnTapCallback = void Function(AnnouncementModel announcement);
@@ -52,7 +51,8 @@ class PromotionItemWidget extends StatelessWidget {
             Flexible(
               flex: 2,
               child: Padding(
-                padding: const EdgeInsets.all(AppSizesManager.p8),
+                padding:
+                    EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
                 child: Text(
                   announcement.title,
                   style: context.responsiveTextTheme.current.headLine3SemiBold

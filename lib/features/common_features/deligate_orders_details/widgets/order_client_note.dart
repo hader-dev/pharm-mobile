@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../../utils/helper_func.dart';
@@ -17,8 +16,9 @@ class ClientNoteSection extends StatelessWidget {
     final localization = context.translation!;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(
-          vertical: AppSizesManager.p12, horizontal: AppSizesManager.p8),
+      padding: EdgeInsets.symmetric(
+          vertical: context.responsiveAppSizeTheme.current.p12,
+          horizontal: context.responsiveAppSizeTheme.current.p8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

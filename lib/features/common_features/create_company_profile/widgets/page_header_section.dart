@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import 'custom_stepper.dart';
@@ -37,7 +36,8 @@ class PageHeaderSection extends StatelessWidget {
     ];
 
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p16),
+      padding: EdgeInsets.symmetric(
+          horizontal: context.responsiveAppSizeTheme.current.p16),
       child: Column(mainAxisSize: MainAxisSize.min, children: [
         CustomStepper(
           currentStep: currentStep,
@@ -48,10 +48,12 @@ class PageHeaderSection extends StatelessWidget {
             Container(
               height: 45,
               width: 45,
-              margin: EdgeInsets.only(right: AppSizesManager.s12),
+              margin: EdgeInsets.only(
+                  right: context.responsiveAppSizeTheme.current.s12),
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(AppSizesManager.r4),
+                borderRadius: BorderRadius.circular(
+                    context.responsiveAppSizeTheme.current.r4),
                 color: AppColors.accentGreenShade3,
               ),
               child: Text(

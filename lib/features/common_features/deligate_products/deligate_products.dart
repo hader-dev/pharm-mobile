@@ -11,7 +11,6 @@ import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pag
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/cubit/provider.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/widget/filters_bar.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/responsive/silver_grid_params.dart';
 
@@ -40,7 +39,7 @@ class _DeligateProductsPageState extends State<DeligateProductsPage>
     return Scaffold(
       key: MarketPlaceScreen.marketPlaceScaffoldKey,
       body: Padding(
-        padding: const EdgeInsets.all(AppSizesManager.p8),
+        padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -96,9 +95,9 @@ class _DeligateProductsPageState extends State<DeligateProductsPage>
                                     onFavoriteCallback: onLikeTapped);
                               } else {
                                 if (isLoadingMore) {
-                                  return const Padding(
-                                    padding:
-                                        EdgeInsets.all(AppSizesManager.s16),
+                                  return Padding(
+                                    padding: EdgeInsets.all(context
+                                        .responsiveAppSizeTheme.current.s16),
                                     child: Center(
                                         child: CircularProgressIndicator()),
                                   );

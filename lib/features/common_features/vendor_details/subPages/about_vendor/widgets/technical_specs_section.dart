@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'package:hader_pharm_mobile/features/common_features/create_company_profile/sub_pages/review_and_sumbit/widgets/info_row.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class SpecificationsWidget extends StatelessWidget {
   final Map<String, String> specifications;
@@ -15,8 +14,8 @@ class SpecificationsWidget extends StatelessWidget {
       children: [
         ...specifications.entries.map((entry) {
           return Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: AppSizesManager.s8,
+            padding: EdgeInsets.symmetric(
+              vertical: context.responsiveAppSizeTheme.current.s8,
             ),
             child: InfoRow(
                 label: entry.key,

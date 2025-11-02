@@ -22,7 +22,7 @@ class _ConfirmOrderButtonState extends State<ConfirmOrderButton> {
         child: ElevatedButton(
           onPressed: cubit.submitOrder,
           child: state is DeligateOrderLoading
-              ? const SizedBox(
+              ? SizedBox(
                   height: 16,
                   width: 16,
                   child: CircularProgressIndicator(strokeWidth: 2),

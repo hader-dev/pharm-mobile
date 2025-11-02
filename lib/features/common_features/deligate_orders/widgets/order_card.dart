@@ -5,7 +5,6 @@ import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/create_company_profile/sub_pages/review_and_sumbit/widgets/info_row.dart';
 import 'package:hader_pharm_mobile/models/order.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_date_helper.dart';
@@ -35,11 +34,11 @@ class OrderCard extends StatelessWidget {
             extra: orderData.id);
       },
       child: Container(
-        margin: const EdgeInsets.all(AppSizesManager.p12),
-        padding: EdgeInsets.all(AppSizesManager.p8),
+        margin: EdgeInsets.all(context.responsiveAppSizeTheme.current.p12),
+        padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
         decoration: BoxDecoration(
-          borderRadius:
-              BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+          borderRadius: BorderRadius.circular(
+              context.responsiveAppSizeTheme.current.commonWidgetsRadius),
           border: Border.all(color: StrokeColors.normal.color, width: 1),
         ),
         child: Column(
@@ -80,11 +79,14 @@ class OrderCard extends StatelessWidget {
                 const ResponsiveGap.s8(), // Small spacing
                 Expanded(
                   child: Container(
-                    padding: EdgeInsets.all(AppSizesManager.p6),
+                    padding: EdgeInsets.all(
+                        context.responsiveAppSizeTheme.current.p6),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
-                          bottomRight: Radius.circular(AppSizesManager.r6),
-                          topLeft: Radius.circular(AppSizesManager.r6)),
+                          bottomRight: Radius.circular(
+                              context.responsiveAppSizeTheme.current.r6),
+                          topLeft: Radius.circular(
+                              context.responsiveAppSizeTheme.current.r6)),
                       color: orderStatus.color.withAlpha(50),
                     ),
                     child: Text(OrderStatus.getTranslatedStatus(orderStatus),
@@ -119,7 +121,8 @@ class OrderCard extends StatelessWidget {
             ),
             const ResponsiveGap.s12(),
             Padding(
-              padding: const EdgeInsets.only(right: AppSizesManager.p8),
+              padding: EdgeInsets.only(
+                  right: context.responsiveAppSizeTheme.current.p8),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

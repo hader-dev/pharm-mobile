@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
 class ProfileAppbar extends StatelessWidget implements PreferredSizeWidget {
+  final bool isExtraLargeScreen;
   const ProfileAppbar({
     super.key,
+    required this.isExtraLargeScreen,
   });
 
   @override
@@ -16,9 +17,9 @@ class ProfileAppbar extends StatelessWidget implements PreferredSizeWidget {
       topPadding: MediaQuery.of(context).padding.top,
       bottomPadding: MediaQuery.of(context).padding.bottom,
       leading: IconButton(
-        icon: const Icon(
+        icon: Icon(
           Iconsax.profile_circle,
-          size: AppSizesManager.iconSize25,
+          size: context.responsiveAppSizeTheme.current.iconSize25,
           color: AppColors.bgWhite,
         ),
         onPressed: () {},
@@ -32,5 +33,6 @@ class ProfileAppbar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize =>
+      Size.fromHeight(isExtraLargeScreen ? kToolbarHeight * 2 : kToolbarHeight);
 }

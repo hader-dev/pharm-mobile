@@ -5,7 +5,6 @@ import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders_details/cubit/orders_details_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders_details/sub_pages/complaints/widgets/order_complaint_header_widget.dart';
 import 'package:hader_pharm_mobile/models/order_claim.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class OrderItemsComplaintPage extends StatelessWidget {
@@ -44,9 +43,9 @@ class OrderItemsComplaintPage extends StatelessWidget {
         child: ListView(
           physics: const AlwaysScrollableScrollPhysics(),
           controller: scrollContoller,
-          padding: const EdgeInsets.symmetric(
-            vertical: AppSizesManager.p12,
-            horizontal: AppSizesManager.p6,
+          padding: EdgeInsets.symmetric(
+            vertical: context.responsiveAppSizeTheme.current.p12,
+            horizontal: context.responsiveAppSizeTheme.current.p6,
           ),
           children: [
             Text(

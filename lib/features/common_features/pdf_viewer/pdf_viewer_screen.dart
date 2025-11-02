@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:http/http.dart' as http;
 import 'package:iconsax/iconsax.dart';
@@ -170,19 +169,19 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
   Widget _buildErrorWidget() {
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(AppSizesManager.p24),
+        padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p24),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Iconsax.document_cloud,
                 size: 64, color: TextColors.ternary.color),
-            const SizedBox(height: AppSizesManager.p16),
+            SizedBox(height: context.responsiveAppSizeTheme.current.p16),
             Text(
               context.translation!.feedback_loading_failed,
               style: context.responsiveTextTheme.current.headLine4SemiBold,
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: AppSizesManager.p8),
+            SizedBox(height: context.responsiveAppSizeTheme.current.p8),
             Text(
               context.translation!.feedback_pdf_load_error,
               style: context.responsiveTextTheme.current.body2Regular.copyWith(
@@ -190,7 +189,7 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
               ),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: AppSizesManager.p24),
+            SizedBox(height: context.responsiveAppSizeTheme.current.p24),
             ElevatedButton.icon(
               onPressed: () {
                 setState(() {
@@ -204,9 +203,9 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.accent1Shade1,
                 foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppSizesManager.p24,
-                  vertical: AppSizesManager.p12,
+                padding: EdgeInsets.symmetric(
+                  horizontal: context.responsiveAppSizeTheme.current.p24,
+                  vertical: context.responsiveAppSizeTheme.current.p12,
                 ),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),

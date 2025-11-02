@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class InkAccordionItem extends StatelessWidget {
@@ -22,14 +21,16 @@ class InkAccordionItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-          horizontal: AppSizesManager.p4, vertical: AppSizesManager.s4),
+      padding: EdgeInsets.symmetric(
+          horizontal: context.responsiveAppSizeTheme.current.p4,
+          vertical: context.responsiveAppSizeTheme.current.s4),
       child: ListTile(
         dense: true,
         trailing: Icon(Icons.keyboard_arrow_right_outlined),
         iconColor: AppColors.accent1Shade1,
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppSizesManager.r8),
+            borderRadius: BorderRadius.circular(
+                context.responsiveAppSizeTheme.current.r8),
             side: BorderSide(color: StrokeColors.focused.color)),
         title: title ??
             Text.rich(

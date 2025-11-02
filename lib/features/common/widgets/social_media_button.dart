@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../config/theme/colors_manager.dart';
-import '../../../utils/constants.dart';
 
 class SocialMediaButton extends StatelessWidget {
   final String iconPath;
@@ -18,12 +18,12 @@ class SocialMediaButton extends StatelessWidget {
         onTap: onTap,
         splashColor: Colors.transparent,
         child: Container(
-          padding: const EdgeInsets.all(AppSizesManager.p12),
+          padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p12),
           height: 48,
           decoration: BoxDecoration(
             border: Border.all(color: AppColors.bgDisabled, width: 1),
-            borderRadius:
-                BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+            borderRadius: BorderRadius.circular(
+                context.responsiveAppSizeTheme.current.commonWidgetsRadius),
           ),
           child: SvgPicture.asset(
             iconPath,

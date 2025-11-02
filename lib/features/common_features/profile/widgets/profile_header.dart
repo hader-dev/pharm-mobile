@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../../config/di/di.dart';
@@ -14,19 +13,20 @@ class ProfileHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     final currentUser = getItInstance.get<UserManager>().currentUser;
     return Container(
-      margin: const EdgeInsets.symmetric(
-        horizontal: AppSizesManager.p8,
+      margin: EdgeInsets.symmetric(
+        horizontal: context.responsiveAppSizeTheme.current.p8,
       ),
       decoration: BoxDecoration(
         color: AppColors.accent1Shade3,
-        borderRadius:
-            BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+        borderRadius: BorderRadius.circular(
+            context.responsiveAppSizeTheme.current.commonWidgetsRadius),
       ),
       child: Row(
         children: <Widget>[
           UserImage(),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: AppSizesManager.p6),
+            padding: EdgeInsets.symmetric(
+                horizontal: context.responsiveAppSizeTheme.current.p6),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[

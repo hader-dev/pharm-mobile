@@ -6,7 +6,6 @@ import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/decorations/field.dart';
 import 'package:hader_pharm_mobile/features/common/decorations/input.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
@@ -55,7 +54,8 @@ class ClientTypeSelector extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: AppSizesManager.p4),
+          padding:
+              EdgeInsets.only(left: context.responsiveAppSizeTheme.current.p4),
           child: Text(translation.company_type_title,
               style: context.responsiveTextTheme.current.body3Medium
                   .copyWith(color: TextColors.ternary.color)),

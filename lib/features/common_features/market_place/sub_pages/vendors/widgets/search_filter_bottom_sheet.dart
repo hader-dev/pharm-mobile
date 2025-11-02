@@ -9,7 +9,6 @@ import 'package:hader_pharm_mobile/features/common/widgets/filter_option_value.d
 import 'package:hader_pharm_mobile/features/common/widgets/info_widget.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/market_place.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/vendors/cubit/vendors_cubit.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart' show Iconsax;
@@ -64,7 +63,8 @@ class VandorsSearchFilterBottomSheet extends StatelessWidget {
                         .toList(),
                   )),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p4),
+                padding: EdgeInsets.symmetric(
+                    horizontal: context.responsiveAppSizeTheme.current.p4),
                 child: Row(
                   children: [
                     Expanded(

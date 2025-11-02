@@ -4,7 +4,6 @@ import 'package:hader_pharm_mobile/features/app_layout/app_layout.dart';
 import 'package:hader_pharm_mobile/features/app_layout/cubit/app_layout_cubit.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
 import 'package:hader_pharm_mobile/features/common_features/cart/cubit/cart_cubit.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -19,10 +18,10 @@ class MarketplaceAppbar extends StatelessWidget implements PreferredSizeWidget {
       topPadding: MediaQuery.of(context).padding.top,
       bottomPadding: MediaQuery.of(context).padding.bottom,
       leading: IconButton(
-        icon: const Icon(
+        icon: Icon(
           Iconsax.shop,
           color: Colors.white,
-          size: AppSizesManager.iconSize25,
+          size: context.responsiveAppSizeTheme.current.iconSize25,
         ),
         onPressed: () {},
       ),

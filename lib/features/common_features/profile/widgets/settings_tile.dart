@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hader_pharm_mobile/config/responsive/device_size.dart';
+import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
-
-import '../../../../config/theme/colors_manager.dart';
-import '../../../../utils/constants.dart';
 
 class SettingsTile extends StatelessWidget {
   final IconData icon;
@@ -23,21 +22,22 @@ class SettingsTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(
-          bottom: AppSizesManager.p10,
-          left: AppSizesManager.p8,
-          right: AppSizesManager.p8),
+      padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p10),
       child: Container(
         decoration: BoxDecoration(
           border: Border.all(
               color: AppColors.accentGreenShade1.withAlpha(40), width: 1),
-          borderRadius:
-              BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+          borderRadius: BorderRadius.circular(
+              context.responsiveAppSizeTheme.current.commonWidgetsRadius),
         ),
         child: ListTile(
+          contentPadding:
+              context.deviceSize.width <= DeviceSizes.largeMobile.width
+                  ? null
+                  : EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
           leading: Icon(
             icon,
-            size: AppSizesManager.iconSize20,
+            size: context.responsiveAppSizeTheme.current.iconSize20,
             color: const Color.fromARGB(179, 20, 112, 130),
           ),
           title: Text(
@@ -56,7 +56,7 @@ class SettingsTile extends StatelessWidget {
                 Directionality.of(context) == TextDirection.rtl
                     ? Iconsax.arrow_left_2
                     : Iconsax.arrow_right_3,
-                size: AppSizesManager.iconSize20,
+                size: context.responsiveAppSizeTheme.current.iconSize20,
               ),
           onTap: () {
             onTap?.call();

@@ -7,7 +7,6 @@ import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/formatted_price.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_create_order/cubit/create_order_cubit.dart';
 import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import 'select_payment_bottom_sheet.dart';
@@ -27,13 +26,15 @@ class DeligateItemsSummarySection extends StatelessWidget {
               isExpanded.value = !isExpanded.value;
             },
             child: Container(
-              margin: const EdgeInsets.all(AppSizesManager.p8),
-              padding: const EdgeInsets.all(AppSizesManager.p12),
+              margin: EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
+              padding:
+                  EdgeInsets.all(context.responsiveAppSizeTheme.current.p12),
               decoration: BoxDecoration(
                 color: Colors.white,
                 border: Border.all(color: Colors.grey[300]!),
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(AppSizesManager.commonWidgetsRadius),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(context
+                      .responsiveAppSizeTheme.current.commonWidgetsRadius),
                 ),
               ),
               child: !isExpanded.value
@@ -44,7 +45,8 @@ class DeligateItemsSummarySection extends StatelessWidget {
                       const Spacer(),
                       Icon(Icons.keyboard_arrow_up_sharp,
                           color: AppColors.accent1Shade1,
-                          size: AppSizesManager.iconSize20),
+                          size: context
+                              .responsiveAppSizeTheme.current.iconSize20),
                     ])
                   : Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
                       Container(
@@ -52,20 +54,23 @@ class DeligateItemsSummarySection extends StatelessWidget {
                         width: 50,
                         decoration: BoxDecoration(
                           color: Colors.grey[300],
-                          borderRadius: BorderRadius.circular(
-                              AppSizesManager.commonWidgetsRadius),
+                          borderRadius: BorderRadius.circular(context
+                              .responsiveAppSizeTheme
+                              .current
+                              .commonWidgetsRadius),
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(
-                            top: AppSizesManager.p10,
-                            bottom: AppSizesManager.p10),
+                        padding: EdgeInsets.only(
+                            top: context.responsiveAppSizeTheme.current.p10,
+                            bottom: context.responsiveAppSizeTheme.current.p10),
                         child: Row(
                           children: <Widget>[
                             const Spacer(),
                             Icon(Icons.close,
                                 color: AppColors.accent1Shade1,
-                                size: AppSizesManager.iconSize20),
+                                size: context
+                                    .responsiveAppSizeTheme.current.iconSize20),
                           ],
                         ),
                       ),
@@ -98,8 +103,8 @@ class DeligateItemsSummarySection extends StatelessWidget {
                           ),
                         ],
                       ),
-                      const Gap(
-                        AppSizesManager.p8,
+                      Gap(
+                        context.responsiveAppSizeTheme.current.p8,
                       ),
                       Row(
                         children: <Widget>[
@@ -130,11 +135,11 @@ class DeligateItemsSummarySection extends StatelessWidget {
                           ),
                         ],
                       ),
-                      const Gap(
-                        AppSizesManager.p8,
+                      Gap(
+                        context.responsiveAppSizeTheme.current.p8,
                       ),
-                      const Gap(
-                        AppSizesManager.p8,
+                      Gap(
+                        context.responsiveAppSizeTheme.current.p8,
                       ),
                       Row(
                         children: <Widget>[

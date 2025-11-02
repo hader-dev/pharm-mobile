@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
-
-import '../../../utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class BaseIconButton extends StatelessWidget {
   final Widget icon;
@@ -32,9 +31,10 @@ class BaseIconButton extends StatelessWidget {
       onPressed: onPressed,
       style: IconButton.styleFrom(
         backgroundColor: bgColor,
-        padding: EdgeInsets.all(AppSizesManager.p8),
+        padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppSizesManager.r4),
+          borderRadius:
+              BorderRadius.circular(context.responsiveAppSizeTheme.current.r4),
           side: isBordered ? BorderSide(color: borderColor) : BorderSide.none,
         ),
       ),

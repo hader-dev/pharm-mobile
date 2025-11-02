@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/responsive/device_size.dart';
 
@@ -13,20 +11,21 @@ double calculateMarketplaceAspectRatio(
     return 2.5;
   }
 
-  final current = min(deviceSize.width, deviceSize.height);
-  final deviceMin =
-      min(DeviceSizes.smallTablet.width, DeviceSizes.smallTablet.height);
-  final deviceMax =
-      min(DeviceSizes.largeTablet.width, DeviceSizes.largeTablet.height);
+  return 3.5;
+  // final current = min(deviceSize.width, deviceSize.height);
+  // final deviceMin =
+  //     min(DeviceSizes.smallTablet.width, DeviceSizes.smallTablet.height);
+  // final deviceMax =
+  //     min(DeviceSizes.largeTablet.width, DeviceSizes.largeTablet.height);
 
-  final minRatio = 2.0;
-  final maxRatio = orientation == Orientation.portrait ? 3.0 : 2.0;
+  // final minRatio = 2.0;
+  // final maxRatio = orientation == Orientation.portrait ? 3.5 : minRatio;
 
-  if (current <= deviceMin) return minRatio;
-  if (current >= deviceMax) return maxRatio;
+  // if (current <= deviceMin) return minRatio;
+  // if (current >= deviceMax) return maxRatio;
 
-  final t = (current - deviceMin) / (deviceMax - deviceMin);
-  return minRatio + (maxRatio - minRatio) * t;
+  // final t = (current - deviceMin) / (deviceMax - deviceMin);
+  // return minRatio + (maxRatio - minRatio) * t;
 }
 
 double calculateVendorItemsAspectRatio(
@@ -39,20 +38,22 @@ double calculateVendorItemsAspectRatio(
     return 2.5;
   }
 
-  final current = min(deviceSize.width, deviceSize.height);
-  final deviceMin =
-      min(DeviceSizes.smallTablet.width, DeviceSizes.smallTablet.height);
-  final deviceMax =
-      min(DeviceSizes.largeTablet.width, DeviceSizes.largeTablet.height);
+  return 3.5;
 
-  final minRatio = 2.0;
-  final maxRatio = orientation == Orientation.portrait ? 3.0 : 2.0;
+  // final current = min(deviceSize.width, deviceSize.height);
+  // final deviceMin =
+  //     min(DeviceSizes.smallTablet.width, DeviceSizes.smallTablet.height);
+  // final deviceMax =
+  //     min(DeviceSizes.largeTablet.width, DeviceSizes.largeTablet.height);
 
-  if (current <= deviceMin) return minRatio;
-  if (current >= deviceMax) return maxRatio;
+  // final minRatio = 2.0;
+  // final maxRatio = orientation == Orientation.portrait ? 3.0 : 2.0;
 
-  final t = (current - deviceMin) / (deviceMax - deviceMin);
-  return minRatio + (maxRatio - minRatio) * t;
+  // if (current <= deviceMin) return minRatio;
+  // if (current >= deviceMax) return maxRatio;
+
+  // final t = (current - deviceMin) / (deviceMax - deviceMin);
+  // return minRatio + (maxRatio - minRatio) * t;
 }
 
 double calculateAllAnnouncementsAspectRatio(

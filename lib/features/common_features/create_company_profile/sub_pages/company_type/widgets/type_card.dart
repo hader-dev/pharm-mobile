@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class TypeCard extends StatelessWidget {
@@ -29,14 +28,15 @@ class TypeCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: double.maxFinite,
-        padding: const EdgeInsets.all(AppSizesManager.p16),
-        margin: const EdgeInsets.only(bottom: AppSizesManager.p16),
+        padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p16),
+        margin:
+            EdgeInsets.only(bottom: context.responsiveAppSizeTheme.current.p16),
         decoration: BoxDecoration(
           color: selectedTypeIndex == index
               ? AppColors.accent1Shade3
               : AppColors.bgWhite,
-          borderRadius:
-              BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+          borderRadius: BorderRadius.circular(
+              context.responsiveAppSizeTheme.current.commonWidgetsRadius),
           border: Border.all(
               color: selectedTypeIndex == index
                   ? StrokeColors.focused.color

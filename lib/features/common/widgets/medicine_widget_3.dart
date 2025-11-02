@@ -14,7 +14,6 @@ import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_det
 import 'package:hader_pharm_mobile/models/medicine_catalog.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/price_formatter.dart';
 import 'package:iconsax/iconsax.dart';
@@ -34,8 +33,9 @@ class MedicineWidget3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(
-          horizontal: AppSizesManager.p6, vertical: AppSizesManager.p12),
+      padding: EdgeInsets.symmetric(
+          horizontal: context.responsiveAppSizeTheme.current.p6,
+          vertical: context.responsiveAppSizeTheme.current.p12),
       child: InkWell(
         splashColor: Colors.transparent,
         onTap: () {
@@ -100,10 +100,10 @@ class MedicineWidget3 extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.baseline,
                   textBaseline: TextBaseline.ideographic,
                   children: [
-                    const Icon(
+                    Icon(
                       Iconsax.wallet_money,
                       color: AppColors.accent1Shade1,
-                      size: AppSizesManager.iconSize18,
+                      size: context.responsiveAppSizeTheme.current.iconSize18,
                     ),
                     const ResponsiveGap.s4(),
                     Text.rich(
@@ -142,7 +142,8 @@ class MedicineWidget3 extends StatelessWidget {
                         icon: Icon(
                           Iconsax.add,
                           color: Colors.black,
-                          size: AppSizesManager.iconSize30,
+                          size:
+                              context.responsiveAppSizeTheme.current.iconSize30,
                         ),
                       ),
                     )
@@ -169,11 +170,12 @@ class _ImageSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(right: AppSizesManager.p8),
+      margin: EdgeInsets.only(right: context.responsiveAppSizeTheme.current.p8),
       clipBehavior: Clip.antiAlias,
       height: 120,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(AppSizesManager.r6),
+        borderRadius:
+            BorderRadius.circular(context.responsiveAppSizeTheme.current.r6),
         border: medicineData.image != null
             ? null
             : Border.all(
@@ -213,7 +215,7 @@ class _ImageSection extends StatelessWidget {
                 child: Icon(
                   medicineData.isLiked ? Iconsax.heart5 : Iconsax.heart,
                   color: medicineData.isLiked ? Colors.red : Colors.black,
-                  size: AppSizesManager.iconSize30,
+                  size: context.responsiveAppSizeTheme.current.iconSize30,
                 ),
               ),
               onPressed: () {

@@ -8,7 +8,6 @@ import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.da
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/toast_helper.dart';
@@ -37,7 +36,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               Directionality.of(context) == TextDirection.rtl
                   ? Iconsax.arrow_right_3
                   : Iconsax.arrow_left_2,
-              size: AppSizesManager.iconSize25,
+              size: context.responsiveAppSizeTheme.current.iconSize25,
               color: AppColors.bgWhite,
             ),
             onPressed: () {
@@ -54,8 +53,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           create: (ctx) => ChangePasswordCubit(),
           child: Form(
             child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: AppSizesManager.p16,
+              padding: EdgeInsets.symmetric(
+                horizontal: context.responsiveAppSizeTheme.current.p16,
               ),
               child: BlocListener<ChangePasswordCubit, ChangePasswordState>(
                 listener: (BuildContext context, ChangePasswordState state) {
@@ -80,14 +79,14 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          const Gap(
-                            AppSizesManager.s12,
+                          Gap(
+                            context.responsiveAppSizeTheme.current.s12,
                           ),
                           Text(context.translation!.change_password,
                               style: context
                                   .responsiveTextTheme.current.headLine2),
-                          const Gap(
-                            AppSizesManager.s12,
+                          Gap(
+                            context.responsiveAppSizeTheme.current.s12,
                           ),
                           Text(
                               context.translation!.set_new_password_description,
@@ -96,8 +95,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                   .copyWith(
                                 color: TextColors.ternary.color,
                               )),
-                          const Gap(
-                            AppSizesManager.s24,
+                          Gap(
+                            context.responsiveAppSizeTheme.current.s24,
                           ),
                           Column(
                             mainAxisSize: MainAxisSize.min,

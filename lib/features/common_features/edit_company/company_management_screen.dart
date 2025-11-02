@@ -10,7 +10,6 @@ import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.da
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/repositories/remote/company/company_repository_impl.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart' show Iconsax;
 
@@ -60,53 +59,52 @@ class _EditCompanyScreenState extends State<EditCompanyScreen> {
         userManager: getItInstance.get<UserManager>(),
       ))
         ..initCompanyData(),
-      child: SafeArea(
-        child: Scaffold(
-          backgroundColor: AppColors.bgWhite,
-          appBar: CustomAppBarV2.alternate(
-            leading: IconButton(
-              icon: Icon(
-                Directionality.of(context) == TextDirection.rtl
-                    ? Iconsax.arrow_right_3
-                    : Iconsax.arrow_left_2,
-                color: AppColors.bgWhite,
-                size: AppSizesManager.iconSize25,
-              ),
-              onPressed: () {
-                context.pop();
+      child: Scaffold(
+        backgroundColor: AppColors.bgWhite,
+        appBar: CustomAppBarV2.alternate(
+          leading: IconButton(
+            icon: Icon(
+              Directionality.of(context) == TextDirection.rtl
+                  ? Iconsax.arrow_right_3
+                  : Iconsax.arrow_left_2,
+              color: AppColors.bgWhite,
+              size: context.responsiveAppSizeTheme.current.iconSize25,
+            ),
+            onPressed: () {
+              context.pop();
+            },
+          ),
+          title: Text(
+            currentMode == CompanyScreenMode.edit
+                ? context.translation!.edit_company
+                : context.translation!.view_company,
+            style: context.responsiveTextTheme.current.headLine3SemiBold
+                .copyWith(color: AppColors.bgWhite),
+          ),
+          trailing: [
+            BlocBuilder<EditCompanyCubit, EditCompanyState>(
+              builder: (context, state) {
+                if (state is EditCompanySuccess || state is CompanyDataLoaded) {
+                  return IconButton(
+                    icon: Icon(
+                      currentMode == CompanyScreenMode.view
+                          ? Iconsax.edit
+                          : Iconsax.eye,
+                      color: AppColors.bgWhite,
+                      size: context.responsiveAppSizeTheme.current.iconSize25,
+                    ),
+                    onPressed: toggleMode,
+                  );
+                }
+                return const SizedBox.shrink();
               },
             ),
-            title: Text(
-              currentMode == CompanyScreenMode.edit
-                  ? context.translation!.edit_company
-                  : context.translation!.view_company,
-              style: context.responsiveTextTheme.current.headLine3SemiBold
-                  .copyWith(color: AppColors.bgWhite),
-            ),
-            trailing: [
-              BlocBuilder<EditCompanyCubit, EditCompanyState>(
-                builder: (context, state) {
-                  if (state is EditCompanySuccess ||
-                      state is CompanyDataLoaded) {
-                    return IconButton(
-                      icon: Icon(
-                        currentMode == CompanyScreenMode.view
-                            ? Iconsax.edit
-                            : Iconsax.eye,
-                        color: AppColors.bgWhite,
-                        size: AppSizesManager.iconSize25,
-                      ),
-                      onPressed: toggleMode,
-                    );
-                  }
-                  return const SizedBox.shrink();
-                },
-              ),
-            ],
-          ),
-          body: Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: AppSizesManager.p16),
+          ],
+        ),
+        body: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+                horizontal: context.responsiveAppSizeTheme.current.p16),
             child: BlocBuilder<EditCompanyCubit, EditCompanyState>(
               builder: (context, state) {
                 if (state is EditCompanyLoading) {
@@ -150,7 +148,9 @@ class _EditCompanyScreenState extends State<EditCompanyScreen> {
                               ),
                               child: Text(context.translation!.go_back),
                             ),
-                            const SizedBox(width: AppSizesManager.s16),
+                            SizedBox(
+                                width:
+                                    context.responsiveAppSizeTheme.current.s16),
                             ElevatedButton(
                               onPressed: () {
                                 context.pop();

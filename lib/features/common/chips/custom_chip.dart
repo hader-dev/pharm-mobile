@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 // ignore: must_be_immutable
@@ -26,12 +25,13 @@ class CustomChip extends StatelessWidget {
       onTap: onTap,
       child: Container(
         alignment: Alignment.center,
-        padding: const EdgeInsets.symmetric(
-            horizontal: AppSizesManager.p6, vertical: AppSizesManager.p4),
+        padding:  EdgeInsets.symmetric(
+            horizontal: context.responsiveAppSizeTheme.current.p6,
+            vertical: context.responsiveAppSizeTheme.current.p4),
         decoration: BoxDecoration(
           color: color,
-          borderRadius:
-              BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+          borderRadius: BorderRadius.circular(
+              context.responsiveAppSizeTheme.current.commonWidgetsRadius),
         ),
         child: Row(
           children: <Widget>[
@@ -39,7 +39,7 @@ class CustomChip extends StatelessWidget {
               Icon(
                 icon,
                 color: labelColor,
-                size: AppSizesManager.iconSize20,
+                size: context.responsiveAppSizeTheme.current.iconSize20,
               ),
               const ResponsiveGap.s4(),
             ],

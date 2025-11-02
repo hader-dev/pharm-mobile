@@ -4,7 +4,6 @@ import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_date_helper.dart';
 
 import '../../../../models/order_details.dart';
-import '../../../../utils/constants.dart';
 import '../../../../utils/enums.dart';
 
 class TrackingStepWidget extends StatelessWidget {
@@ -42,7 +41,8 @@ class TrackingStepWidget extends StatelessWidget {
                   CircleAvatar(
                     child: Icon(orderStatus.icon,
                         color: orderStatus.color,
-                        size: AppSizesManager.iconSize30),
+                        size:
+                            context.responsiveAppSizeTheme.current.iconSize30),
                   ),
                   if (!isLast)
                     Container(

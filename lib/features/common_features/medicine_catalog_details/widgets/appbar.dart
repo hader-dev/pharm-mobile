@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hader_pharm_mobile/config/responsive/device_size.dart';
 import 'package:hader_pharm_mobile/config/routes/go_router_extension.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
@@ -8,7 +9,7 @@ import 'package:hader_pharm_mobile/features/common_features/home/home.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/market_place.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/medicine_products/cubit/medicine_products_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/cubit/medicine_details_cubit.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
 class MedicineCatalogAppBar extends StatelessWidget
@@ -20,17 +21,22 @@ class MedicineCatalogAppBar extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
+    final iconSize = context.deviceSize.width <= DeviceSizes.largeMobile.width
+        ? context.responsiveAppSizeTheme.current.iconSize30
+        : context.responsiveAppSizeTheme.current.iconSize18;
+
     return CustomAppBarV2(
       height: height,
       width: width,
       bgColor: AppColors.accent1Shade2,
       leading: IconButton(
+        iconSize: iconSize,
         icon: Icon(
           Directionality.of(context) == TextDirection.rtl
               ? Iconsax.arrow_right_3
               : Iconsax.arrow_left_2,
           color: AppColors.bgWhite,
-          size: AppSizesManager.iconSize25,
+          size: context.responsiveAppSizeTheme.current.iconSize25,
         ),
         onPressed: RoutingManager.router.popOrGoHome,
       ),
@@ -46,6 +52,7 @@ class MedicineCatalogAppBar extends StatelessWidget
             final isLiked = cubit.state.medicineCatalogData.isLiked;
 
             return IconButton(
+              iconSize: iconSize,
               icon: Icon(
                 isLiked ? Iconsax.heart5 : Iconsax.heart,
                 color: isLiked ? Colors.red : Colors.white,
@@ -71,6 +78,7 @@ class MedicineCatalogAppBar extends StatelessWidget
           },
         ),
         IconButton(
+          iconSize: iconSize,
           icon: const Icon(
             Iconsax.share,
             color: Colors.white,

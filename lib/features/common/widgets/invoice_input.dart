@@ -37,7 +37,7 @@ class InvoiceRadioInput extends StatelessWidget {
             ),
             if (field.hasError)
               Padding(
-                padding: const EdgeInsets.only(top: 4, left: 12),
+                padding: EdgeInsets.only(top: 4, left: 12),
                 child: Text(
                   field.errorText ?? '',
                   style: Theme.of(context)

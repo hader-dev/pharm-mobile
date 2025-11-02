@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common_features/cart/widgets/quantity/quantity.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 typedef OnQuantityChanged = void Function(String quantity);
@@ -38,7 +37,8 @@ class QuantitySectionModified extends StatelessWidget {
     final translation = context.translation!;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: AppSizesManager.p8),
+      padding: EdgeInsets.symmetric(
+          vertical: context.responsiveAppSizeTheme.current.p8),
       child: Column(
         mainAxisAlignment: mainAxisAlignment,
         children: [

@@ -8,7 +8,6 @@ import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/check_email/cubit/check_email_cubit.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import 'widgets/check_email_header_section.dart';
@@ -46,8 +45,8 @@ class CheckEmailScreen extends StatelessWidget {
           child: Scaffold(
             backgroundColor: AppColors.bgWhite,
             body: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: AppSizesManager.p16),
+              padding: EdgeInsets.symmetric(
+                  horizontal: context.responsiveAppSizeTheme.current.p16),
               child: BlocBuilder<CheckEmailCubit, CheckEmailState>(
                 builder: (context, state) {
                   return Column(

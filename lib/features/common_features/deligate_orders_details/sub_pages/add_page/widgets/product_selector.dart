@@ -19,7 +19,6 @@ import 'package:hader_pharm_mobile/features/common_features/deligate_orders_deta
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/widgets/make_order_bottom_sheet.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
@@ -47,7 +46,7 @@ class OrderProductSelector extends StatelessWidget {
                   selectedItem?.thumbnailImage?.path ?? "",
                 ),
             assetImage: DrawableAssetStrings.paraPharmaPlaceHolderImg),
-        const SizedBox(width: AppSizesManager.s12),
+        SizedBox(width: context.responsiveAppSizeTheme.current.s12),
         Text(
           selectedItem?.name ?? context.translation!.select_product,
           style: context.responsiveTextTheme.current.body3Regular,
@@ -64,7 +63,7 @@ class OrderProductSelector extends StatelessWidget {
     final translation = context.translation!;
 
     return Container(
-      margin: const EdgeInsets.only(top: AppSizesManager.s8),
+      margin: EdgeInsets.only(top: context.responsiveAppSizeTheme.current.s8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -73,7 +72,7 @@ class OrderProductSelector extends StatelessWidget {
             displayTags: false,
             showQuickAddButton: false,
           ),
-          const SizedBox(height: AppSizesManager.s12),
+          SizedBox(height: context.responsiveAppSizeTheme.current.s12),
           QuantitySectionModified(
             quantityController: cubit.state.quantityController,
             packageQuantityController: cubit.state.packageQuantityController,
@@ -153,7 +152,8 @@ class OrderProductSelector extends StatelessWidget {
                   showSearchBox: true,
                   itemBuilder: (context, item, isDisabled, isSelected) =>
                       Padding(
-                    padding: EdgeInsets.all(AppSizesManager.p12),
+                    padding: EdgeInsets.all(
+                        context.responsiveAppSizeTheme.current.p12),
                     child: buildDisplayWidget(context, item),
                   ),
                   searchFieldProps: TextFieldProps(

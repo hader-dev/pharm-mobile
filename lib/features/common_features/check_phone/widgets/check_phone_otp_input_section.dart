@@ -4,7 +4,6 @@ import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../../config/theme/colors_manager.dart';
-import '../../../../utils/constants.dart';
 import '../../../common/buttons/solid/primary_text_button.dart';
 
 class CheckPhoneOtpInputSection extends StatelessWidget {
@@ -42,7 +41,7 @@ class CheckPhoneOtpInputSection extends StatelessWidget {
         ),
         const ResponsiveGap.s12(),
         Padding(
-          padding: const EdgeInsets.all(AppSizesManager.p12),
+          padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p12),
           child: Text(
             "Resend! (5s)",
             style: context.responsiveTextTheme.current.body3Regular.copyWith(

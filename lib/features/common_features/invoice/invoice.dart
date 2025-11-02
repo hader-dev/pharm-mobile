@@ -16,7 +16,9 @@ class InvoiceGenerator extends StatelessWidget {
 
   const InvoiceGenerator({super.key, required this.invoiceId});
 
-  Future<pw.Document> _buildPdf(IOrderRepository orderRepository) async {
+  Future<pw.Document> _buildPdf(
+    IOrderRepository orderRepository,
+  ) async {
     final invoice = (await orderRepository
             .invoiceDetails(ParamsGetInvoice(orderId: invoiceId)))
         .invoice;

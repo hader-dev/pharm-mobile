@@ -14,25 +14,25 @@ class OrdersDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: StateProvider(
-        orderId: orderId,
-        child: PopScope(
-          canPop: false,
-          onPopInvokedWithResult: (didPop, result) async {
-            if (!didPop) {
-              if (context.canPop()) {
-                context.pop(result);
-                return;
-              }
-              RoutingManager.router
-                  .pushReplacementNamed(RoutingManager.appLayout);
+    return StateProvider(
+      orderId: orderId,
+      child: PopScope(
+        canPop: false,
+        onPopInvokedWithResult: (didPop, result) async {
+          if (!didPop) {
+            if (context.canPop()) {
+              context.pop(result);
+              return;
             }
-          },
-          child: Scaffold(
-            key: ordersDetailsScaffoldKey,
-            appBar: OrderDetailsAppbar(),
-            body: OrderDetailsTabBarSection(orderId: orderId),
+            RoutingManager.router
+                .pushReplacementNamed(RoutingManager.appLayout);
+          }
+        },
+        child: Scaffold(
+          key: ordersDetailsScaffoldKey,
+          appBar: OrderDetailsAppbar(),
+          body: SafeArea(
+            child: OrderDetailsTabBarSection(orderId: orderId),
           ),
         ),
       ),

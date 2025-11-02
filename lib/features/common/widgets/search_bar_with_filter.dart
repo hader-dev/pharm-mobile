@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
 class SearchWithFilterBarWidget extends StatelessWidget {
@@ -22,7 +22,7 @@ class SearchWithFilterBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: AppSizesManager.p8),
+      padding: EdgeInsets.only(left: context.responsiveAppSizeTheme.current.p8),
       child: CustomTextField(
         hintText: hintText,
         controller: searchController,

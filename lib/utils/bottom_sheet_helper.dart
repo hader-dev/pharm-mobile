@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class BottomSheetHelper {
   static Future<void> showCommonBottomSheet({
@@ -30,7 +30,8 @@ class BottomSheetHelper {
             maxChildSize: maxHeight ?? 1,
             minChildSize: 0.3,
             builder: (_, controller) => Container(
-              padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p12),
+              padding: EdgeInsets.symmetric(
+                  horizontal: context.responsiveAppSizeTheme.current.p12),
               decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
@@ -42,11 +43,12 @@ class BottomSheetHelper {
                     Container(
                       height: 4,
                       width: 36,
-                      margin: const EdgeInsets.symmetric(
-                          vertical: AppSizesManager.p12),
+                      margin: EdgeInsets.symmetric(
+                          vertical: context.responsiveAppSizeTheme.current.p12),
                       decoration: BoxDecoration(
                         color: const Color.fromARGB(255, 165, 169, 181),
-                        borderRadius: BorderRadius.circular(AppSizesManager.r6),
+                        borderRadius: BorderRadius.circular(
+                            context.responsiveAppSizeTheme.current.r6),
                       ),
                     ),
                     child,

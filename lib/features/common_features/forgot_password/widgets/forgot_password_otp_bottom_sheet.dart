@@ -7,7 +7,6 @@ import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_bu
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field.dart';
 import 'package:hader_pharm_mobile/features/common_features/forgot_password/cubit/forgot_password_cubit.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
@@ -29,10 +28,10 @@ class PasswordResetOtpScreen extends StatelessWidget {
           Row(
             children: [
               IconButton(
-                icon: const Icon(
+                icon: Icon(
                   Iconsax.arrow_left,
                   color: Colors.black,
-                  size: AppSizesManager.iconSize25,
+                  size: context.responsiveAppSizeTheme.current.iconSize25,
                 ),
                 onPressed: () => cubit.navigateBack(),
               ),

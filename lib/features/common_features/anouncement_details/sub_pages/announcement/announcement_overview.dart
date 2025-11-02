@@ -9,7 +9,6 @@ import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common_features/anouncement_details/cubit/announcement_cubit.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class AnnouncementOverviewPage extends StatelessWidget {
@@ -31,13 +30,14 @@ class AnnouncementOverviewPage extends StatelessWidget {
         }
 
         return SingleChildScrollView(
-          padding: const EdgeInsets.all(AppSizesManager.p16),
+          padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               if (state.announcement.image != null) ...[
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(AppSizesManager.r8),
+                  borderRadius: BorderRadius.circular(
+                      context.responsiveAppSizeTheme.current.r8),
                   child: CachedNetworkImageWithAssetFallback(
                     imageUrl: getItInstance
                         .get<INetworkService>()

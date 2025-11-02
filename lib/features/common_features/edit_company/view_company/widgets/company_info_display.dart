@@ -4,7 +4,6 @@ import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/edit_company/cubit/edit_company_cubit.dart';
 import 'package:hader_pharm_mobile/models/company.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class CompanyInfoDisplay extends StatelessWidget {
@@ -114,11 +113,11 @@ class CompanyInfoDisplay extends StatelessWidget {
       {required String title, required List<Widget> children}) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(AppSizesManager.p16),
+      padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p16),
       decoration: BoxDecoration(
         color: AppColors.bgWhite,
-        borderRadius:
-            BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+        borderRadius: BorderRadius.circular(
+            context.responsiveAppSizeTheme.current.commonWidgetsRadius),
         border: Border.all(color: AppColors.bgDarken2),
         boxShadow: [
           BoxShadow(
@@ -145,7 +144,8 @@ class CompanyInfoDisplay extends StatelessWidget {
 
   Widget _buildInfoColumn(BuildContext context, String label, String value) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: AppSizesManager.s12),
+      padding:
+          EdgeInsets.only(bottom: context.responsiveAppSizeTheme.current.s12),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

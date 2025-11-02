@@ -5,7 +5,6 @@ import 'package:hader_pharm_mobile/config/language_config/cubit/lang_cubit.dart'
 import 'package:hader_pharm_mobile/config/language_config/cubit/lang_state.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class LangTile extends StatelessWidget {
@@ -28,19 +27,22 @@ class LangTile extends StatelessWidget {
             BlocProvider.of<LangCubit>(context).changeLang(langValue);
           },
           child: Container(
-            margin: const EdgeInsets.symmetric(vertical: AppSizesManager.p6),
-            padding: const EdgeInsets.all(AppSizesManager.p6),
+            margin: EdgeInsets.symmetric(
+                vertical: context.responsiveAppSizeTheme.current.p6),
+            padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p6),
             child: Row(children: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(
-                    right: AppSizesManager.p8,
-                    left: AppSizesManager.p6,
-                    top: AppSizesManager.p6,
-                    bottom: AppSizesManager.p6),
+                padding: EdgeInsets.only(
+                    right: context.responsiveAppSizeTheme.current.p8,
+                    left: context.responsiveAppSizeTheme.current.p6,
+                    top: context.responsiveAppSizeTheme.current.p6,
+                    bottom: context.responsiveAppSizeTheme.current.p6),
                 child: SvgPicture.asset(
                   langImgPath,
-                  height: AppSizesManager.iconSize20 * 2.3,
-                  width: AppSizesManager.iconSize20 * 2.3,
+                  height:
+                      context.responsiveAppSizeTheme.current.iconSize20 * 2.3,
+                  width:
+                      context.responsiveAppSizeTheme.current.iconSize20 * 2.3,
                 ),
               ),
               const ResponsiveGap.s12(),
@@ -51,11 +53,12 @@ class LangTile extends StatelessWidget {
               ),
               const Spacer(),
               if (context.read<LangCubit>().appLang == langValue)
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p6),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: context.responsiveAppSizeTheme.current.p6),
                   child: Icon(
                     Icons.check,
-                    size: AppSizesManager.iconSize20,
+                    size: context.responsiveAppSizeTheme.current.iconSize20,
                   ),
                 )
             ]),

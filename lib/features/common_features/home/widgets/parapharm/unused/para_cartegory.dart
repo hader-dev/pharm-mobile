@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class CategoryCircularWidget extends StatelessWidget {
@@ -18,7 +17,7 @@ class CategoryCircularWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(AppSizesManager.p6),
+      padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p6),
       child: Column(
         children: [
           GestureDetector(

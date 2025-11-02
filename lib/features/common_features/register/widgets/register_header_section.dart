@@ -6,7 +6,6 @@ import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_icon_button.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/register/cubit/register_cubit.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -25,7 +24,8 @@ class RegisterHeaderSection extends StatelessWidget {
           Text(
             context.translation!.create_account,
             style: context.responsiveTextTheme.current.headLine1.copyWith(
-                fontSize: AppSizesManager.p24, color: AppColors.accent1Shade1),
+                fontSize: context.responsiveAppSizeTheme.current.p24,
+                color: AppColors.accent1Shade1),
           ),
           const ResponsiveGap.s8(),
           Text(
@@ -42,7 +42,8 @@ class RegisterHeaderSection extends StatelessWidget {
             child: Stack(
               children: [
                 Container(
-                    margin: EdgeInsets.symmetric(vertical: AppSizesManager.p4),
+                    margin: EdgeInsets.symmetric(
+                        vertical: context.responsiveAppSizeTheme.current.p4),
                     clipBehavior: Clip.antiAlias,
                     height: MediaQuery.sizeOf(context).height * 0.2,
                     width: MediaQuery.sizeOf(context).height * 0.2,
@@ -58,11 +59,12 @@ class RegisterHeaderSection extends StatelessWidget {
                         : Icon(
                             Iconsax.gallery,
                             color: AppColors.accent1Shade1,
-                            size: AppSizesManager.iconSize25,
+                            size: context
+                                .responsiveAppSizeTheme.current.iconSize25,
                           )),
                 Positioned(
-                    bottom: AppSizesManager.s4,
-                    right: AppSizesManager.s4 / 2,
+                    bottom: context.responsiveAppSizeTheme.current.s4,
+                    right: context.responsiveAppSizeTheme.current.s4 / 2,
                     child: Transform.scale(
                       scale: 0.7,
                       child: PrimaryIconButton(
@@ -81,8 +83,8 @@ class RegisterHeaderSection extends StatelessWidget {
                     )),
                 if (state.pickedImage != null)
                   Positioned(
-                    top: AppSizesManager.s4,
-                    right: AppSizesManager.s4 / 2,
+                    top: context.responsiveAppSizeTheme.current.s4,
+                    right: context.responsiveAppSizeTheme.current.s4 / 2,
                     child: Transform.scale(
                       scale: 0.7,
                       child: PrimaryIconButton(

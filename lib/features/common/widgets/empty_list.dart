@@ -4,7 +4,6 @@ import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class EmptyListWidget extends StatelessWidget {
@@ -45,7 +44,7 @@ class EmptyListWidget extends StatelessWidget {
                 label: context.translation!.refresh,
                 labelColor: AppColors.accent1Shade1,
                 onTap: onRefresh,
-                height: AppSizesManager.buttonHeight,
+                height: context.responsiveAppSizeTheme.current.buttonHeight,
               )
             ]
           ],
@@ -62,7 +61,8 @@ class EmptyListWidget extends StatelessWidget {
             child: SizedBox(
               height: availableHeight,
               child: Padding(
-                padding: const EdgeInsets.all(AppSizesManager.p8),
+                padding:
+                    EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
                 child: SingleChildScrollView(
                   physics: const AlwaysScrollableScrollPhysics(),
                   child: mainWidget,
@@ -73,7 +73,7 @@ class EmptyListWidget extends StatelessWidget {
         }
 
         return Padding(
-          padding: const EdgeInsets.all(AppSizesManager.p8),
+          padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
           child: SizedBox(height: imageSize * 2, child: mainWidget),
         );
       },

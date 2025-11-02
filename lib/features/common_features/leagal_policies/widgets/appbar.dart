@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -23,7 +22,7 @@ class PolicyAppbar extends StatelessWidget implements PreferredSizeWidget {
               ? Iconsax.arrow_right_3
               : Iconsax.arrow_left_2,
           color: AppColors.bgWhite,
-          size: AppSizesManager.iconSize25,
+          size: context.responsiveAppSizeTheme.current.iconSize25,
         ),
         onPressed: () {
           context.pop();

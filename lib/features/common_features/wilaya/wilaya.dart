@@ -5,7 +5,6 @@ import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/wilaya/cubit/wilaya_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/wilaya/widgets/wilaya_dropdown.dart';
 import 'package:hader_pharm_mobile/models/wilaya.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class WilayaDropdown extends StatelessWidget {
@@ -28,7 +27,8 @@ class WilayaDropdown extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: AppSizesManager.p4),
+            padding: EdgeInsets.only(
+                left: context.responsiveAppSizeTheme.current.p4),
             child: Text(context.translation!.wilaya,
                 style: context.responsiveTextTheme.current.body3Medium
                     .copyWith(color: TextColors.ternary.color)),

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common_features/leagal_policies/state/cubit.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class PrivacyPolicyContent extends StatelessWidget {
   const PrivacyPolicyContent({super.key});
@@ -21,7 +21,8 @@ class PrivacyPolicyContent extends StatelessWidget {
         }
 
         return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: AppSizesManager.p4),
+            padding: EdgeInsets.symmetric(
+                horizontal: context.responsiveAppSizeTheme.current.p4),
             child: Markdown(
               data: state.legalPolicy,
             ));

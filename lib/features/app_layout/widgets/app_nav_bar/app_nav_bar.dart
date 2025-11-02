@@ -13,8 +13,8 @@ class AppNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final items = UserManager.instance.currentUser.role.isDelegate
-        ? deligateNavbarItems(context.translation!)
-        : clientNavbarItems(context.translation!);
+        ? deligateNavbarItems(context.translation!, context)
+        : clientNavbarItems(context.translation!, context);
 
     return Column(
       mainAxisSize: MainAxisSize.min,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/config/responsive/device_size.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/services/auth/token_manager.dart';
 import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
@@ -9,7 +10,6 @@ import 'package:hader_pharm_mobile/features/common/dialog/log_out_dialog.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/edit_company/edit_company.dart';
 import 'package:hader_pharm_mobile/models/jwt_decoded.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/env_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/login_jwt_decoder.dart';
@@ -52,22 +52,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
           children: <Widget>[
             const ResponsiveGap.s16(),
             Padding(
-              padding: EdgeInsets.only(left: AppSizesManager.p4),
+              padding: EdgeInsets.only(
+                  left: context.responsiveAppSizeTheme.current.p4),
               child: ProfileHeader(key: ValueKey(_profileUpdateKey)),
             ),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: AppSizesManager.p8,
-                    vertical: AppSizesManager.p4),
+                padding: EdgeInsets.symmetric(
+                    horizontal: context.responsiveAppSizeTheme.current.p8,
+                    vertical: context.responsiveAppSizeTheme.current.p4),
                 child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: AppSizesManager.p8,
-                            vertical: AppSizesManager.p10),
+                        padding: EdgeInsets.symmetric(
+                            horizontal:
+                                context.responsiveAppSizeTheme.current.p8,
+                            vertical:
+                                context.responsiveAppSizeTheme.current.p10),
                         child: SectionTitle(
                             title: context.translation!.account_settings),
                       ),
@@ -130,9 +133,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 .pushNamed(RoutingManager.changePasswordScreen);
                           }),
                       Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: AppSizesManager.p6,
-                            vertical: AppSizesManager.p8),
+                        padding: EdgeInsets.symmetric(
+                            horizontal:
+                                context.responsiveAppSizeTheme.current.p6,
+                            vertical:
+                                context.responsiveAppSizeTheme.current.p8),
                         child: SectionTitle(
                             title: context.translation!.preferences),
                       ),
@@ -152,9 +157,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         },
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: AppSizesManager.p6,
-                            vertical: AppSizesManager.p8),
+                        padding: EdgeInsets.symmetric(
+                            horizontal:
+                                context.responsiveAppSizeTheme.current.p6,
+                            vertical:
+                                context.responsiveAppSizeTheme.current.p8),
                         child: SectionTitle(
                           title: context.translation!.app_privacy,
                         ),
@@ -188,14 +195,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         },
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: AppSizesManager.p6,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: context.responsiveAppSizeTheme.current.p6,
                         ),
                         child: ListTile(
-                          leading:
-                              const Icon(LucideIcons.logOut, color: Colors.red),
+                          leading: Icon(LucideIcons.logOut,
+                              color: Colors.red,
+                              size: context.deviceSize.width <=
+                                      DeviceSizes.largeMobile.width
+                                  ? context
+                                      .responsiveAppSizeTheme.current.iconSize20
+                                  : context.responsiveAppSizeTheme.current
+                                      .iconSize16),
                           title: Text(context.translation!.logout,
-                              style: const TextStyle(color: Colors.red)),
+                              style: context
+                                  .responsiveTextTheme.current.body3Medium
+                                  .copyWith(color: Colors.red)),
                           onTap: () async {
                             await AppDialogs.showLogoutDialogLogout(context);
 

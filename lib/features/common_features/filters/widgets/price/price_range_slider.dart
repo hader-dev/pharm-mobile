@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class PriceRangeSlider extends StatelessWidget {
@@ -30,7 +29,7 @@ class PriceRangeSlider extends StatelessWidget {
           context.translation!.price_range_ht,
           style: Theme.of(context).textTheme.titleMedium,
         ),
-        const Gap(AppSizesManager.p8),
+        Gap(context.responsiveAppSizeTheme.current.p8),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

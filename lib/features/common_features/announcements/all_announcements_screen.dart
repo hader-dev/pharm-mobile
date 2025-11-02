@@ -9,7 +9,6 @@ import 'package:hader_pharm_mobile/features/common/widgets/promotion_item_widget
 import 'package:hader_pharm_mobile/features/common_features/announcements/cubit/all_announcements_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/announcements/widgets/announcements_search_widget.dart';
 import 'package:hader_pharm_mobile/repositories/remote/announcement/announcement_repository_impl.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/responsive/silver_grid_params.dart';
 import 'package:iconsax/iconsax.dart';
@@ -52,10 +51,10 @@ class _AllAnnouncementsScreenState extends State<AllAnnouncementsScreen> {
       child: Scaffold(
         appBar: CustomAppBarV2.alternate(
           leading: IconButton(
-            icon: const Icon(
+            icon: Icon(
               Iconsax.arrow_left,
               color: Colors.white,
-              size: AppSizesManager.iconSize25,
+              size: context.responsiveAppSizeTheme.current.iconSize25,
             ),
             onPressed: () => context.pop(),
           ),
@@ -102,7 +101,8 @@ class _AllAnnouncementsScreenState extends State<AllAnnouncementsScreen> {
                         .refreshAnnouncements();
                   },
                   child: Padding(
-                    padding: const EdgeInsets.all(AppSizesManager.p16),
+                    padding: EdgeInsets.all(
+                        context.responsiveAppSizeTheme.current.p16),
                     child: LayoutBuilder(builder: (context, constraints) {
                       return GridView.builder(
                         controller: _scrollController,
@@ -120,9 +120,10 @@ class _AllAnnouncementsScreenState extends State<AllAnnouncementsScreen> {
                             (state.hasReachedMax ? 0 : 1),
                         itemBuilder: (context, index) {
                           if (index >= state.announcements.length) {
-                            return const Center(
+                            return Center(
                               child: Padding(
-                                padding: EdgeInsets.all(AppSizesManager.p16),
+                                padding: EdgeInsets.all(
+                                    context.responsiveAppSizeTheme.current.p16),
                                 child: CircularProgressIndicator(),
                               ),
                             );

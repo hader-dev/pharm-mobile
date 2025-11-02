@@ -6,7 +6,7 @@ import 'package:hader_pharm_mobile/features/common_features/order_complaint_deta
 import 'package:hader_pharm_mobile/features/common_features/order_complaint_details/views/complaint_view.dart';
 import 'package:hader_pharm_mobile/features/common_features/order_complaint_details/widgets/order_item_claim_appbar.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/order_repository_impl.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class OrderItemComplaintScreen extends StatelessWidget {
   const OrderItemComplaintScreen(
@@ -33,7 +33,7 @@ class OrderItemComplaintScreen extends StatelessWidget {
           ),
         )..getItemComplaint(),
         child: Padding(
-          padding: const EdgeInsets.all(AppSizesManager.p8),
+          padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
           child: OrderComplaintContent(),
         ),
       ),

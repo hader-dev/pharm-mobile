@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/models/order_claim.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_date_helper.dart';
@@ -41,7 +40,8 @@ class TrackingClaimStepWidget extends StatelessWidget {
                   CircleAvatar(
                     child: Icon(orderStatus.icon,
                         color: orderStatus.color,
-                        size: AppSizesManager.iconSize30),
+                        size:
+                            context.responsiveAppSizeTheme.current.iconSize30),
                   ),
                   if (!isLast)
                     Container(
@@ -54,7 +54,7 @@ class TrackingClaimStepWidget extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(width: 10),
+        SizedBox(width: 10),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

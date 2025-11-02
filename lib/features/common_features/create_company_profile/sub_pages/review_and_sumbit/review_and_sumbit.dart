@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/create_company_profile/cubit/create_company_profile_cubit.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
@@ -19,11 +18,13 @@ class ReviewSubmitPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p8),
+      padding: EdgeInsets.symmetric(
+          horizontal: context.responsiveAppSizeTheme.current.p8),
       child: Scrollbar(
         controller: scrollController,
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p8),
+          padding: EdgeInsets.symmetric(
+              horizontal: context.responsiveAppSizeTheme.current.p8),
           child: SingleChildScrollView(
             controller: scrollController,
             physics: const BouncingScrollPhysics(),
@@ -115,7 +116,8 @@ class ReviewSubmitPage extends StatelessWidget {
                             .companyData
                             .website),
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: AppSizesManager.p16),
+                  padding: EdgeInsets.symmetric(
+                      vertical: context.responsiveAppSizeTheme.current.p16),
                   child: Divider(
                     color: StrokeColors.normal.color,
                   ),

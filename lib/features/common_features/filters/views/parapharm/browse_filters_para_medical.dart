@@ -13,7 +13,6 @@ import 'package:hader_pharm_mobile/features/common_features/filters/cubit/paraph
 import 'package:hader_pharm_mobile/features/common_features/filters/widgets/price/filter_price_section.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/cubit/para_pharma_cubit.dart';
 import 'package:hader_pharm_mobile/models/para_medical_filters.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -77,7 +76,8 @@ class FiltersParaMedicalBrowse extends StatelessWidget {
           const Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
           const ResponsiveGap.s12(),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: AppSizesManager.p4),
+            padding: EdgeInsets.symmetric(
+                horizontal: context.responsiveAppSizeTheme.current.p4),
             child: Row(
               children: [
                 Expanded(

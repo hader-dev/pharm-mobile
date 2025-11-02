@@ -14,7 +14,6 @@ import 'package:hader_pharm_mobile/features/common_features/deligate_create_orde
 import 'package:hader_pharm_mobile/features/common_features/deligate_create_order/widgets/custom_price_input.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/widgets/make_order_bottom_sheet.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
@@ -45,7 +44,7 @@ class OrderProductSelector extends StatelessWidget {
     final translation = context.translation!;
 
     return Container(
-      margin: const EdgeInsets.only(top: AppSizesManager.s8),
+      margin: EdgeInsets.only(top: context.responsiveAppSizeTheme.current.s8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -54,7 +53,7 @@ class OrderProductSelector extends StatelessWidget {
             displayTags: false,
             showQuickAddButton: false,
           ),
-          const SizedBox(height: AppSizesManager.s12),
+          SizedBox(height: context.responsiveAppSizeTheme.current.s12),
           QuantitySectionModified(
               quantityController: cubit.state.quantityController,
               packageQuantityController: cubit.state.packageQuantityController,

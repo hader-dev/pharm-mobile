@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/decorations/field.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
@@ -103,25 +102,26 @@ class CompactCustomTextField extends StatelessWidget {
         filled: isFilled,
         suffixIcon: suffixIcon,
         prefixIcon: prefixIcon,
-        contentPadding: EdgeInsets.all(AppSizesManager.p12),
+        contentPadding:
+            EdgeInsets.all(context.responsiveAppSizeTheme.current.p12),
         fillColor: isDisabled
             ? AppColors.bgDisabled
             : state == FieldState.error
                 ? FieldState.error.color.ternary
                 : AppColors.bgWhite,
         enabledBorder: OutlineInputBorder(
-          borderRadius:
-              BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+          borderRadius: BorderRadius.circular(
+              context.responsiveAppSizeTheme.current.commonWidgetsRadius),
           borderSide: BorderSide(color: getEnabledBorderColor(context, state)),
         ),
         disabledBorder: OutlineInputBorder(
-          borderRadius:
-              BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+          borderRadius: BorderRadius.circular(
+              context.responsiveAppSizeTheme.current.commonWidgetsRadius),
           borderSide: BorderSide(color: AppColors.bgDisabled),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius:
-              BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+          borderRadius: BorderRadius.circular(
+              context.responsiveAppSizeTheme.current.commonWidgetsRadius),
           borderSide: BorderSide(color: getFocusedBorderColor(context, state)),
         ),
       ),

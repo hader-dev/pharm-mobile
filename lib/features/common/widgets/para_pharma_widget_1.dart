@@ -12,7 +12,6 @@ import 'package:hader_pharm_mobile/features/common/widgets/blackened_background.
 import 'package:hader_pharm_mobile/features/common/widgets/stock_availlable.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/price_formatter.dart';
 import 'package:iconsax/iconsax.dart';
@@ -37,8 +36,9 @@ class ParaPharmaWidget1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-          horizontal: AppSizesManager.p8, vertical: AppSizesManager.p12),
+      padding: EdgeInsets.symmetric(
+          horizontal: context.responsiveAppSizeTheme.current.p8,
+          vertical: context.responsiveAppSizeTheme.current.p12),
       child: InkWell(
         onTap: () {
           final userRole = getItInstance.get<UserManager>().currentUser.role;
@@ -52,12 +52,14 @@ class ParaPharmaWidget1 extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              margin: const EdgeInsets.only(right: AppSizesManager.p8),
+              margin: EdgeInsets.only(
+                  right: context.responsiveAppSizeTheme.current.p8),
               clipBehavior: Clip.antiAlias,
               height: 130,
               width: 130,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(AppSizesManager.r6),
+                borderRadius: BorderRadius.circular(
+                    context.responsiveAppSizeTheme.current.r6),
                 border: paraPharmData.image != null
                     ? null
                     : Border.all(
@@ -112,7 +114,8 @@ class ParaPharmaWidget1 extends StatelessWidget {
                           icon: Icon(
                             isLiked ? Iconsax.heart5 : Iconsax.heart,
                             color: isLiked ? Colors.red : Colors.black,
-                            size: AppSizesManager.iconSize25,
+                            size: context
+                                .responsiveAppSizeTheme.current.iconSize25,
                           ),
                         )
                       else if (onQuickAddCallback != null)
@@ -123,7 +126,8 @@ class ParaPharmaWidget1 extends StatelessWidget {
                           icon: Icon(
                             Iconsax.add,
                             color: Colors.black,
-                            size: AppSizesManager.iconSize25,
+                            size: context
+                                .responsiveAppSizeTheme.current.iconSize25,
                           ),
                         )
                     ],
@@ -170,10 +174,10 @@ class ParaPharmaWidget1 extends StatelessWidget {
                   ]),
                   Row(
                     children: [
-                      const Icon(
+                      Icon(
                         Iconsax.wallet_money,
                         color: AppColors.accent1Shade1,
-                        size: AppSizesManager.iconSize18,
+                        size: context.responsiveAppSizeTheme.current.iconSize18,
                       ),
                       const ResponsiveGap.s4(),
                       Text.rich(

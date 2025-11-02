@@ -4,7 +4,6 @@ import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
-import '../../../utils/constants.dart';
 import '../../../utils/enums.dart';
 
 class ValidateActionDialog {
@@ -31,26 +30,28 @@ class ValidateActionDialog {
               elevation: 0,
               insetAnimationCurve: Curves.ease,
               shape: RoundedRectangleBorder(
-                borderRadius:
-                    BorderRadius.circular(AppSizesManager.commonWidgetsRadius),
+                borderRadius: BorderRadius.circular(
+                    context.responsiveAppSizeTheme.current.commonWidgetsRadius),
               ),
               alignment: Alignment.center,
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: AppSizesManager.p8),
+                padding: EdgeInsets.symmetric(
+                    horizontal: context.responsiveAppSizeTheme.current.p8),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(AppSizesManager.p16),
+                      padding: EdgeInsets.all(
+                          context.responsiveAppSizeTheme.current.p16),
                       child: CircleAvatar(
                         backgroundColor: dialogType.color.withAlpha(51),
-                        minRadius: AppSizesManager.r30,
+                        minRadius: context.responsiveAppSizeTheme.current.r30,
                         child: Icon(
                           dialogType.icon,
                           color: dialogType.color,
-                          size: AppSizesManager.iconSize25,
+                          size:
+                              context.responsiveAppSizeTheme.current.iconSize25,
                         ),
                       ),
                     ),
@@ -60,7 +61,8 @@ class ValidateActionDialog {
                     if (content != null)
                       Align(alignment: Alignment.center, child: content),
                     Padding(
-                      padding: const EdgeInsets.all(AppSizesManager.p16),
+                      padding: EdgeInsets.all(
+                          context.responsiveAppSizeTheme.current.p16),
                       child: Row(
                         children: [
                           const Spacer(),

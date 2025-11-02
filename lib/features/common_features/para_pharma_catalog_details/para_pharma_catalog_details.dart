@@ -10,7 +10,6 @@ import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/info_row_column.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/widgets/appbar.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/widgets/trademark_widget.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_date_helper.dart';
 
@@ -51,13 +50,15 @@ class _BaseParaPharmaCatalogDetailsScreenState
   void initState() {
     super.initState();
     setupStatusBar();
-    bottomNavbarHeightModifier = widget.disabledPackageQuanity
-        ? AppSizesManager.deafultQuantityNavbarHeightModifier
-        : AppSizesManager.expendedQuantityNavbarHeightModifier;
   }
 
   @override
   Widget build(BuildContext context) {
+    bottomNavbarHeightModifier = widget.disabledPackageQuanity
+        ? context
+            .responsiveAppSizeTheme.current.deafultQuantityNavbarHeightModifier
+        : context.responsiveAppSizeTheme.current
+            .expandedQuantityNavbarHeightModifier;
     return StateProvider(
       needCartCubit: widget.needCartCubit,
       tabs: const [],
@@ -89,14 +90,15 @@ class _BaseParaPharmaCatalogDetailsScreenState
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(AppSizesManager.p16),
+                      padding: EdgeInsets.all(
+                          context.responsiveAppSizeTheme.current.p16),
                       child: const ParaPharmaProductPhotoSection(),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(
-                          left: AppSizesManager.p16,
-                          right: AppSizesManager.p16,
-                          bottom: AppSizesManager.p8),
+                      padding: EdgeInsets.only(
+                          left: context.responsiveAppSizeTheme.current.p16,
+                          right: context.responsiveAppSizeTheme.current.p16,
+                          bottom: context.responsiveAppSizeTheme.current.p8),
                       child: Row(
                         children: [
                           CustomChip(
@@ -107,7 +109,8 @@ class _BaseParaPharmaCatalogDetailsScreenState
                           Icon(
                             Icons.calendar_month,
                             color: Colors.grey[700],
-                            size: AppSizesManager.iconSize30,
+                            size: context
+                                .responsiveAppSizeTheme.current.iconSize30,
                           ),
                           const ResponsiveGap.s4(),
                           Text(
@@ -123,23 +126,24 @@ class _BaseParaPharmaCatalogDetailsScreenState
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(
-                          left: AppSizesManager.p16,
-                          right: AppSizesManager.p16,
-                          bottom: AppSizesManager.p8),
+                      padding: EdgeInsets.only(
+                          left: context.responsiveAppSizeTheme.current.p16,
+                          right: context.responsiveAppSizeTheme.current.p16,
+                          bottom: context.responsiveAppSizeTheme.current.p8),
                       child: Text(state.paraPharmaCatalogData.name,
                           style: context.responsiveTextTheme.current.headLine1),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(
-                          left: AppSizesManager.p16,
-                          right: AppSizesManager.p16,
-                          bottom: AppSizesManager.p16),
+                      padding: EdgeInsets.only(
+                          left: context.responsiveAppSizeTheme.current.p16,
+                          right: context.responsiveAppSizeTheme.current.p16,
+                          bottom: context.responsiveAppSizeTheme.current.p16),
                       child: TrademarkWidgetAlternate(),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(
-                          left: AppSizesManager.p8, right: AppSizesManager.p8),
+                      padding: EdgeInsets.only(
+                          left: context.responsiveAppSizeTheme.current.p8,
+                          right: context.responsiveAppSizeTheme.current.p8),
                       child: Html(
                         data: state.paraPharmaCatalogData.description,
                         style: {

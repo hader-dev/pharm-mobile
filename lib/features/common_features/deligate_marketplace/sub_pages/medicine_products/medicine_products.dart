@@ -8,7 +8,6 @@ import 'package:hader_pharm_mobile/features/common_features/deligate_marketplace
 import 'package:hader_pharm_mobile/features/common_features/deligate_marketplace/sub_pages/medicine_products/widget/filters_bar.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/home.dart';
 import 'package:hader_pharm_mobile/models/medicine_catalog.dart';
-import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/responsive/silver_grid_params.dart';
 
@@ -32,7 +31,7 @@ class _MedicineProductsPageState extends State<MedicineProductsPage>
       body: BlocBuilder<MedicineProductsCubit, MedicineProductsState>(
         builder: (context, state) {
           return Padding(
-            padding: const EdgeInsets.all(AppSizesManager.p8),
+            padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
             child: Column(
               children: [
                 const FiltersBar(),
@@ -92,13 +91,14 @@ class _MedicineProductsPageState extends State<MedicineProductsPage>
                             return MedicineWidget3(
                               medicineData: medicine,
                               onFavoriteCallback: onLikeTapped,
-                                route: RoutingManager
-                                      .deligateMedicineDetailsScreen,
+                              route:
+                                  RoutingManager.deligateMedicineDetailsScreen,
                             );
                           } else {
                             if (isLoadingMore) {
-                              return const Padding(
-                                padding: EdgeInsets.all(AppSizesManager.s16),
+                              return Padding(
+                                padding: EdgeInsets.all(
+                                    context.responsiveAppSizeTheme.current.s16),
                                 child:
                                     Center(child: CircularProgressIndicator()),
                               );

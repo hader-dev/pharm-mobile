@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../../../../config/theme/colors_manager.dart';
-import '../../../../../../utils/constants.dart';
 import 'question_widget.dart';
 
 class FAQSection extends StatelessWidget {
@@ -11,7 +10,7 @@ class FAQSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.all(AppSizesManager.p16),
+        padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
