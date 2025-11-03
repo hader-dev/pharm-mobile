@@ -28,7 +28,7 @@ class TrackingStepWidget extends StatelessWidget {
         Column(
           children: <Widget>[
             Container(
-              width: 20,
+              width: context.responsiveAppSizeTheme.current.iconSize30 * 1.2,
               alignment: Alignment.center,
               child: Column(
                 children: <Widget>[
@@ -68,14 +68,6 @@ class TrackingStepWidget extends StatelessWidget {
                 historyStep.createdAt.toLocal().format,
                 style: context.responsiveTextTheme.current.body3Regular,
               ),
-              const ResponsiveGap.s4(),
-              // Text(
-              //   OrderStatus.translateDescription(context, orderStatus),
-              //   style: const TextStyle(
-              //     fontSize: AppTypography.appFontSize4,
-              //     color: Colors.black54,
-              //   ),
-              // ),
               const ResponsiveGap.s24(),
             ],
           ),
