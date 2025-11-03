@@ -53,9 +53,13 @@ class _LoginFormSectionState extends State<LoginFormSection> {
                 suffixIcon: InkWell(
                     onTap: () => cubit.showPassword(),
                     child: state.isObscured
-                        ? const Icon(Iconsax.eye,
+                        ? Icon(Iconsax.eye,
+                            size: context
+                                .responsiveAppSizeTheme.current.iconSize20,
                             color: AppColors.accent1Shade1)
-                        : const Icon(Iconsax.eye_slash,
+                        : Icon(Iconsax.eye_slash,
+                            size: context
+                                .responsiveAppSizeTheme.current.iconSize20,
                             color: AppColors.accent1Shade1)),
                 state: FieldState.normal,
                 validationFunc: (value) {

@@ -61,6 +61,7 @@ class ParaMedicalFiltersApply extends StatelessWidget {
           isEnabled: true,
           prefixIcon: Icon(
             Iconsax.search_normal,
+            size: context.responsiveAppSizeTheme.current.iconSize20,
             color: AppColors.accent1Shade1,
           ),
           suffixIcon: Icon(
@@ -152,8 +153,8 @@ class ParaMedicalFiltersApply extends StatelessWidget {
                 ),
                 bottomNavigationBar: SafeArea(
                   child: Padding(
-                    padding:  EdgeInsets.symmetric(
-                        horizontal: 8.0, vertical: 12.0),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 8.0, vertical: 12.0),
                     child: Row(
                       children: [
                         Expanded(

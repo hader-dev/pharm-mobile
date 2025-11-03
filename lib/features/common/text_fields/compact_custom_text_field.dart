@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hader_pharm_mobile/config/responsive/device_size.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/decorations/field.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
@@ -76,6 +77,9 @@ class CompactCustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDisabled = state == FieldState.disabled;
 
+    final fontSizeModifer =
+        context.deviceSize.width <= DeviceSizes.largeMobile.width ? 1 : 2;
+
     return TextFormField(
       key: fieldKey,
       initialValue: initValue,
@@ -94,10 +98,16 @@ class CompactCustomTextField extends StatelessWidget {
       minLines: minLines,
       maxLines: maxLines,
       obscuringCharacter: '*',
+      style: context.responsiveTextTheme.current.bodySmall.copyWith(
+        fontSize: (context.responsiveTextTheme.current.bodySmall.fontSize! *
+            fontSizeModifer),
+      ),
       decoration: InputDecoration(
         hintText: hintText,
-        hintStyle: context.responsiveTextTheme.current.body3Regular
-            .copyWith(color: TextColors.ternary.color),
+        hintStyle: context.responsiveTextTheme.current.body3Regular.copyWith(
+            color: TextColors.ternary.color,
+            fontSize: context.responsiveTextTheme.current.bodyXSmall.fontSize! *
+                fontSizeModifer),
         isDense: true,
         filled: isFilled,
         suffixIcon: suffixIcon,

@@ -93,9 +93,18 @@ class PasswordResetOtpScreen extends StatelessWidget {
               suffixIcon: InkWell(
                   onTap: () => cubit.showPassword(),
                   child: state.isObscured
-                      ? const Icon(Iconsax.eye, color: AppColors.accent1Shade1)
-                      : const Icon(Iconsax.eye_slash,
-                          color: AppColors.accent1Shade1)),
+                      ? Icon(
+                          Iconsax.eye,
+                          color: AppColors.accent1Shade1,
+                          size:
+                              context.responsiveAppSizeTheme.current.iconSize20,
+                        )
+                      : Icon(
+                          Iconsax.eye_slash,
+                          color: AppColors.accent1Shade1,
+                          size:
+                              context.responsiveAppSizeTheme.current.iconSize20,
+                        )),
             ),
           ),
           const ResponsiveGap.s24(),

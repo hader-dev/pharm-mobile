@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hader_pharm_mobile/config/responsive/device_size.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/decorations/field.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
@@ -77,6 +78,9 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDisabled = state == FieldState.disabled;
 
+    final fontSizeModifer =
+        context.deviceSize.width <= DeviceSizes.largeMobile.width ? 1 : 2;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -104,8 +108,11 @@ class CustomTextField extends StatelessWidget {
           errorBuilder: (context, errorText) {
             return Text(
               errorText,
-              style: context.responsiveTextTheme.current.bodyXSmall
-                  .copyWith(color: Colors.red),
+              style: context.responsiveTextTheme.current.bodyXSmall.copyWith(
+                  color: Colors.red,
+                  fontSize:
+                      context.responsiveTextTheme.current.bodyXSmall.fontSize! *
+                          fontSizeModifer),
             );
           },
           inputFormatters: formatters,
@@ -115,10 +122,19 @@ class CustomTextField extends StatelessWidget {
           maxLines: maxLines,
           textDirection: context.textDirection,
           obscuringCharacter: '*',
+          style: context.responsiveTextTheme.current.bodySmall.copyWith(
+            fontSize: (context.responsiveTextTheme.current.bodySmall.fontSize! *
+                fontSizeModifer),
+          ),
           decoration: InputDecoration(
               hintText: hintText,
-              hintStyle: context.responsiveTextTheme.current.body3Regular
-                  .copyWith(color: TextColors.ternary.color),
+              hintStyle:
+                  context.responsiveTextTheme.current.body3Regular.copyWith(
+                color: TextColors.ternary.color,
+                fontSize: MediaQuery.of(context).textScaler.scale(
+                    context.responsiveTextTheme.current.body3Regular.fontSize! *
+                        fontSizeModifer),
+              ),
               isDense: true,
               filled: isFilled,
               suffixIcon: suffixIcon,
@@ -132,7 +148,11 @@ class CustomTextField extends StatelessWidget {
                   Text(
                     state.wordKey,
                     style: context.responsiveTextTheme.current.bodyXSmall
-                        .copyWith(color: getEnabledBorderColor(context, state)),
+                        .copyWith(
+                            color: getEnabledBorderColor(context, state),
+                            fontSize: context.responsiveTextTheme.current
+                                    .bodyXSmall.fontSize! *
+                                fontSizeModifer),
                   ),
                 ],
               ),

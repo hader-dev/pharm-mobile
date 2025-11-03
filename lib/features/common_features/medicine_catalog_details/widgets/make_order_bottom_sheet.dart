@@ -120,8 +120,9 @@ class MakeOrderBottomSheet extends StatelessWidget {
                             .copyWith(color: AppColors.accent1Shade1),
                       ),
                       const Spacer(),
-                      const Icon(
+                      Icon(
                         Iconsax.wallet_money,
+                        size: context.responsiveAppSizeTheme.current.iconSize20,
                         color: AppColors.accent1Shade1,
                       ),
                     ],

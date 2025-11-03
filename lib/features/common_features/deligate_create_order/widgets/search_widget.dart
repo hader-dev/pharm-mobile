@@ -23,6 +23,7 @@ class CreateOrderSearchWidget extends StatelessWidget {
         isEnabled: true,
         prefixIcon: Icon(
           Iconsax.search_normal,
+          size: context.responsiveAppSizeTheme.current.iconSize20,
           color: AppColors.accent1Shade1,
         ),
         suffixIcon: InkWell(
@@ -35,6 +36,7 @@ class CreateOrderSearchWidget extends StatelessWidget {
           },
           child: Icon(
             Icons.clear,
+            size: context.responsiveAppSizeTheme.current.iconSize20,
             color: AppColors.accent1Shade1,
           ),
         ),

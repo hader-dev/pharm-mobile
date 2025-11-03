@@ -22,6 +22,7 @@ class ClientDeligateSearchWidget extends StatelessWidget {
         isEnabled: true,
         prefixIcon: Icon(
           Iconsax.search_normal,
+          size: context.responsiveAppSizeTheme.current.iconSize20,
           color: AppColors.accent1Shade1,
         ),
         suffixIcon: InkWell(
@@ -33,6 +34,7 @@ class ClientDeligateSearchWidget extends StatelessWidget {
           },
           child: Icon(
             Icons.clear,
+            size: context.responsiveAppSizeTheme.current.iconSize20,
             color: AppColors.accent1Shade1,
           ),
         ),
