@@ -19,22 +19,22 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: BlocProvider(
-        create: (context) => LoginCubit(),
-        child: BlocListener<LoginCubit, LoginState>(
-          listener: (BuildContext context, LoginState state) {
-            if (state is LoginSuccessful) {
-              setupCompanyOrSkipToHome();
-            }
-            if (state is ForgotPassword) {
-              BottomSheetHelper.showCommonBottomSheet(
-                  context: context, child: ForgotPasswordScreen());
-            }
-          },
-          child: Scaffold(
-            backgroundColor: AppColors.bgWhite,
-            body: Padding(
+    return BlocProvider(
+      create: (context) => LoginCubit(),
+      child: BlocListener<LoginCubit, LoginState>(
+        listener: (BuildContext context, LoginState state) {
+          if (state is LoginSuccessful) {
+            setupCompanyOrSkipToHome();
+          }
+          if (state is ForgotPassword) {
+            BottomSheetHelper.showCommonBottomSheet(
+                context: context, child: ForgotPasswordScreen());
+          }
+        },
+        child: Scaffold(
+          backgroundColor: AppColors.bgWhite,
+          body: SafeArea(
+            child: Padding(
               padding: EdgeInsets.symmetric(
                   horizontal: context.responsiveAppSizeTheme.current.p16),
               child: ListView(

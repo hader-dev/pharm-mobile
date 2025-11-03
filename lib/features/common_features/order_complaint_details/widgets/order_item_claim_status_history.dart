@@ -22,16 +22,19 @@ class OrderItemClaimStatusHistory extends StatelessWidget {
           shrinkWrap: true,
           itemCount: context
               .read<OrderComplaintsCubit>()
+              .state
               .complaintStatusHitsory
               .length,
           itemBuilder: (BuildContext context, int index) {
             final ClaimStatusHistoryModel step = context
                 .read<OrderComplaintsCubit>()
+                .state
                 .complaintStatusHitsory[index];
             final bool isFirst = index == 0;
             final bool isLast = index ==
                 context
                         .read<OrderComplaintsCubit>()
+                        .state
                         .complaintStatusHitsory
                         .length -
                     1;

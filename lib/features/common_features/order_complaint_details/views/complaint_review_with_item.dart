@@ -18,7 +18,7 @@ class ComplaintReviewView extends StatelessWidget {
   Widget build(BuildContext context) {
     final translation = context.translation!;
     final cubit = context.read<OrderComplaintsCubit>();
-    final item = cubit.orderItemData!;
+    final item = cubit.state.orderItemData;
 
     return SingleChildScrollView(
       child: Column(
@@ -45,14 +45,14 @@ class ComplaintReviewView extends StatelessWidget {
           InfoWidget(
             label: translation.item_complaint,
             value: Text(
-              "#${cubit.claimData!.id}",
+              "#${cubit.state.orderItemData.id}",
               style: context.responsiveTextTheme.current.body2Medium,
             ),
           ),
           InfoWidget(
             label: translation.subject,
             value: Text(
-              cubit.claimData!.subject,
+              cubit.state.claimData.subject,
               style: context.responsiveTextTheme.current.body2Medium,
             ),
           ),
@@ -73,7 +73,7 @@ class ComplaintReviewView extends StatelessWidget {
           InfoWidget(
             label: translation.description,
             value: Text(
-              cubit.claimData!.description,
+              cubit.state.claimData.description,
               style: context.responsiveTextTheme.current.body2Medium,
             ),
           ),

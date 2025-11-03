@@ -38,7 +38,6 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
     });
   }
   Future<bool> likeMedicine() async {
-    if (state.medicineCatalogData.id.isNotEmpty) return false;
     try {
       emit(state.loaded(
         state.medicineCatalogData.copyWith(isLiked: true),
@@ -54,22 +53,20 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
   }
 
   Future<bool> unlikeMedicine() async {
-    if (state.medicineCatalogData.id.isNotEmpty) {
-      try {
-        emit(state.loaded(state.medicineCatalogData.copyWith(isLiked: false)));
-        await favoriteRepository.unLikeMedicineCatalog(
-            medicineCatalogId: state.medicineCatalogData.id);
-        return false;
-      } catch (e) {
-        state.medicineCatalogData.isLiked = true;
-        emit(state.loaded(
-          state.medicineCatalogData.copyWith(isLiked: true),
-        ));
-        GlobalExceptionHandler.handle(exception: e);
-        return true;
-      }
+    try {
+      await favoriteRepository.unLikeMedicineCatalog(
+          medicineCatalogId: state.medicineCatalogData.id);
+      emit(state
+          .toToggleLiked(state.medicineCatalogData.copyWith(isLiked: false)));
+
+      return false;
+    } catch (e) {
+      emit(state.toToggleLiked(
+        state.medicineCatalogData.copyWith(isLiked: true),
+      ));
+      GlobalExceptionHandler.handle(exception: e);
+      return true;
     }
-    return true;
   }
 
   Future<void> getMedicineCatalogData(String id) async {
@@ -84,7 +81,7 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
   }
 
   void shareProduct() async {
-    if (state.medicineCatalogData.id.isEmpty) {
+    if (state.medicineCatalogData.id.isNotEmpty) {
       try {
         final product = state.medicineCatalogData;
 

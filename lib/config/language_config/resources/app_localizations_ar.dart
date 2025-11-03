@@ -63,6 +63,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get start => 'ابدا';
 
   @override
+  String get pharma => 'صيدلية';
+
+  @override
   String get onboarding_seamless_shopping_desc =>
       'ادارة سهلة للطلبات وحفظ خدمة عالية جدا للعملاء. استمتع بتجربة شراء سهلة مع واجهة المستخدم سهلة الاستخدام.';
 

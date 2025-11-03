@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hader_pharm_mobile/config/responsive/device_size.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/notification/cubit/notifications_cubit.dart';
+import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -29,8 +31,13 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
           children: [
             Row(
               children: [
+                SvgPicture.asset(
+                  DrawableAssetStrings.logoImgWhite,
+                  width: 30,
+                  height: 30,
+                ),
                 Text(
-                  context.translation!.app_name,
+                  context.translation!.pharma,
                   style: context.responsiveTextTheme.current.headLine3SemiBold
                       .copyWith(color: Colors.white),
                 ),

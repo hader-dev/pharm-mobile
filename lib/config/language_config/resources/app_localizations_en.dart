@@ -63,6 +63,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get start => 'Start';
 
   @override
+  String get pharma => 'Pharma';
+
+  @override
   String get onboarding_seamless_shopping_desc =>
       'Easily manage orders and maintain an organized, top-notch service for customers. Enjoy a seamless shopping experience with our user-friendly interface.';
 

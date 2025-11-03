@@ -31,7 +31,7 @@ class NotificationAppbar extends StatelessWidget
       ),
       title: Row(
         children: [
-          Icon(Iconsax.box_2,
+          Icon(Iconsax.notification,
               size: context.responsiveAppSizeTheme.current.iconSize25,
               color: AppColors.bgWhite),
           const ResponsiveGap.s12(),

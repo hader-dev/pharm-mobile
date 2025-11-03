@@ -14,7 +14,7 @@ class ComplaintStatusHistory extends StatelessWidget {
     final cubit = context.read<OrderComplaintsCubit>();
     final translation = context.translation!;
 
-    if (cubit.complaintStatusHitsory.isEmpty) {
+    if (cubit.state.complaintStatusHitsory.isEmpty) {
       return const Center(
         child: EmptyListWidget(),
       );
@@ -29,11 +29,11 @@ class ComplaintStatusHistory extends StatelessWidget {
           style: context.responsiveTextTheme.current.headLine3SemiBold
               .copyWith(color: AppColors.accent1Shade1),
         ),
-        ...cubit.complaintStatusHitsory.asMap().entries.map((entry) {
+        ...cubit.state.complaintStatusHitsory.asMap().entries.map((entry) {
           final index = entry.key;
           final step = entry.value;
           final isFirst = index == 0;
-          final isLast = index == cubit.complaintStatusHitsory.length - 1;
+          final isLast = index == cubit.state.complaintStatusHitsory.length - 1;
 
           return TrackingClaimStepWidget(
             historyStep: step,

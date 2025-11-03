@@ -58,6 +58,7 @@ class MedicineCatalogAppBar extends StatelessWidget
                 color: isLiked ? Colors.red : Colors.white,
               ),
               onPressed: () {
+                debugPrint("isLiked: $isLiked");
                 if (isLiked) {
                   cubit.unlikeMedicine().then((value) {
                     gCubit.refreshMedicineCatalogFavorite(

@@ -28,29 +28,29 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
     final passwordRegex =
         RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$');
 
-    return SafeArea(
-      child: Scaffold(
-        appBar: CustomAppBarV2.alternate(
-          leading: IconButton(
-            icon: Icon(
-              Directionality.of(context) == TextDirection.rtl
-                  ? Iconsax.arrow_right_3
-                  : Iconsax.arrow_left_2,
-              size: context.responsiveAppSizeTheme.current.iconSize25,
-              color: AppColors.bgWhite,
-            ),
-            onPressed: () {
-              context.pop();
-            },
+    return Scaffold(
+      appBar: CustomAppBarV2.alternate(
+        leading: IconButton(
+          icon: Icon(
+            Directionality.of(context) == TextDirection.rtl
+                ? Iconsax.arrow_right_3
+                : Iconsax.arrow_left_2,
+            size: context.responsiveAppSizeTheme.current.iconSize25,
+            color: AppColors.bgWhite,
           ),
-          title: Text(
-            context.translation!.password,
-            style: context.responsiveTextTheme.current.headLine3SemiBold
-                .copyWith(color: AppColors.bgWhite),
-          ),
+          onPressed: () {
+            context.pop();
+          },
         ),
-        body: BlocProvider(
-          create: (ctx) => ChangePasswordCubit(),
+        title: Text(
+          context.translation!.password,
+          style: context.responsiveTextTheme.current.headLine3SemiBold
+              .copyWith(color: AppColors.bgWhite),
+        ),
+      ),
+      body: BlocProvider(
+        create: (ctx) => ChangePasswordCubit(),
+        child: SafeArea(
           child: Form(
             child: Padding(
               padding: EdgeInsets.symmetric(

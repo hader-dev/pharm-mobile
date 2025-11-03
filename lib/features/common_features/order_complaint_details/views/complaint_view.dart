@@ -23,7 +23,7 @@ class OrderComplaintContent extends StatelessWidget {
         return MakeComplaintView();
       }
 
-      if (cubit.claimData != null) {
+      if (cubit.state.claimData.id.isNotEmpty) {
         return ComplaintReviewView();
       }
 

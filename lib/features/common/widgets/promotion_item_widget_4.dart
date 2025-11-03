@@ -53,7 +53,7 @@ class PromotionItemWidget4 extends StatelessWidget {
                       .get<INetworkService>()
                       .getFilesPath(announcement.thumbnailImage?.path ?? ""),
                   assetImage: DrawableAssetStrings.companyPlaceHolderImg,
-                  fit: BoxFit.cover,
+                  fit: BoxFit.contain,
                 ),
               ),
             ),

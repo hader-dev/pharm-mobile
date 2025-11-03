@@ -67,6 +67,12 @@ sealed class MedicineDetailsState {
   PassQuickOrderFailed quickOrderFailed() => PassQuickOrderFailed.fromState(
         state: this,
       );
+
+  MedicineLikeToggled toToggleLiked(MedicineCatalogModel medicineCatalogData) =>
+      MedicineLikeToggled.fromState(
+        state: this,
+        medicineCatalogData: medicineCatalogData,
+      );
 }
 
 // ------------------ States ------------------
@@ -177,6 +183,18 @@ final class PassQuickOrderFailed extends MedicineDetailsState {
     required MedicineDetailsState state,
   }) : super(
             medicineCatalogData: state.medicineCatalogData,
+            currentTapIndex: state.currentTapIndex,
+            shippingAddress: state.shippingAddress,
+            tabController: state.tabController,
+            packageQuantityController: state.packageQuantityController,
+            quantityController: state.quantityController);
+}
+
+final class MedicineLikeToggled extends MedicineDetailsState {
+  MedicineLikeToggled.fromState({
+    required MedicineDetailsState state,
+    required super.medicineCatalogData,
+  }) : super(
             currentTapIndex: state.currentTapIndex,
             shippingAddress: state.shippingAddress,
             tabController: state.tabController,

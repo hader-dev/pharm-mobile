@@ -70,8 +70,9 @@ class DeligateEditOrderCubit extends Cubit<DeligateEditOrderState> {
   }
 
   Future<void> refreshProducts() async {
-    emit(state.toInitial());
     await getProducts();
+
+    emit(state.toInitial());
   }
 
   @override
@@ -151,8 +152,9 @@ class DeligateEditOrderCubit extends Cubit<DeligateEditOrderState> {
   }
 
   void selectProduct(BaseParaPharmaCatalogModel product) {
-    emit(state.toUpdateSelectedProduct(product: product));
     state.customPriceController.text = product.unitPriceHt.toString();
+
+    emit(state.toUpdateSelectedProduct(product: product));
   }
 
   void updateCustomPrice(String? price) {

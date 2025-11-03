@@ -202,6 +202,12 @@ abstract class AppLocalizations {
   /// **'Start'**
   String get start;
 
+  /// No description provided for @pharma.
+  ///
+  /// In en, this message translates to:
+  /// **'Pharma'**
+  String get pharma;
+
   /// No description provided for @onboarding_seamless_shopping_desc.
   ///
   /// In en, this message translates to:

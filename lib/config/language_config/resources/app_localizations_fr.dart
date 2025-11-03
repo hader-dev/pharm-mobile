@@ -63,6 +63,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get start => 'Commencer';
 
   @override
+  String get pharma => 'Pharma';
+
+  @override
   String get onboarding_seamless_shopping_desc =>
       'Gestion facile des commandes et maintien d\'un service de haute qualité pour les clients. Profitez d\'une expérience d\'achat fluide avec notre interface utilisateur facile d\'utilisation.';
 

@@ -18,34 +18,33 @@ class FavoritesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: BlocProvider(
-        create: (context) => FavoritesCubit(
-            favoriteRepository: FavoriteRepository(
-                client: getItInstance.get<INetworkService>()))
-          ..fetchFavorites(),
-        child: Scaffold(
-            key: favoritesScaffoldKey,
-            appBar: CustomAppBarV2.alternate(
-              leading: IconButton(
-                icon: Icon(
-                  Directionality.of(context) == TextDirection.rtl
-                      ? Iconsax.arrow_right_3
-                      : Iconsax.arrow_left_2,
-                  size: context.responsiveAppSizeTheme.current.iconSize25,
-                  color: AppColors.bgWhite,
-                ),
-                onPressed: () {
-                  context.pop();
-                },
-              ),
-              title: Text(
-                context.translation!.favorites,
-                style: context.responsiveTextTheme.current.headLine3SemiBold
-                    .copyWith(color: AppColors.bgWhite),
-              ),
+    return BlocProvider(
+      create: (context) => FavoritesCubit(
+          favoriteRepository:
+              FavoriteRepository(client: getItInstance.get<INetworkService>()))
+        ..fetchFavorites(),
+      child: Scaffold(
+        key: favoritesScaffoldKey,
+        appBar: CustomAppBarV2.alternate(
+          leading: IconButton(
+            icon: Icon(
+              Directionality.of(context) == TextDirection.rtl
+                  ? Iconsax.arrow_right_3
+                  : Iconsax.arrow_left_2,
+              size: context.responsiveAppSizeTheme.current.iconSize25,
+              color: AppColors.bgWhite,
             ),
-            body: FavoritesTabBarSection()),
+            onPressed: () {
+              context.pop();
+            },
+          ),
+          title: Text(
+            context.translation!.favorites,
+            style: context.responsiveTextTheme.current.headLine3SemiBold
+                .copyWith(color: AppColors.bgWhite),
+          ),
+        ),
+        body: SafeArea(child: FavoritesTabBarSection()),
       ),
     );
   }

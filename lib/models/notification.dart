@@ -39,6 +39,7 @@ class NotificationModel {
       createdAt: createdAt ?? this.createdAt,
       clientId: clientId ?? this.clientId,
       redirectUrl: redirectUrl ?? this.redirectUrl,
+      actionPayload: actionPayload,
     );
   }
 }

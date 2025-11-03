@@ -28,6 +28,7 @@ class DrawableAssetStrings {
   static const String welcomingBg = 'assets/images/welcoming_bg.webp';
   static const String logoBg = 'assets/images/Logo.png';
   static const String logoImg = 'assets/images/Logo.svg';
+  static const String logoImgWhite = 'assets/images/LogoWhite.svg';
   static const String medicinesBg = 'assets/images/medicines_bg.webp';
   static const String paraPharmsBg = 'assets/images/paras_bg.webp';
 

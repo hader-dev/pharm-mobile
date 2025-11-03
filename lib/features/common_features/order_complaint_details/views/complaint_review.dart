@@ -23,21 +23,21 @@ class ComplaintReviewView extends StatelessWidget {
           InfoWidget(
             label: translation.item_complaint,
             value: Text(
-              "#${cubit.claimData!.id}",
+              "#${cubit.state.claimData.id}",
               style: context.responsiveTextTheme.current.body2Medium,
             ),
           ),
           InfoWidget(
             label: translation.subject,
             value: Text(
-              cubit.claimData!.subject,
+              cubit.state.claimData.subject,
               style: context.responsiveTextTheme.current.body2Medium,
             ),
           ),
           InfoWidget(
             label: translation.description,
             value: Text(
-              cubit.claimData!.description,
+              cubit.state.claimData.description,
               style: context.responsiveTextTheme.current.body2Medium,
             ),
           ),

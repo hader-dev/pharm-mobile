@@ -14,88 +14,90 @@ import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 part 'orders_complaint_details_state.dart';
 
 class OrderComplaintsCubit extends Cubit<OrdersComplaintState> {
-  OrderClaimModel? claimData;
-  OrderItem? orderItemData;
-
   final IOrderRepository orderRepository;
-  final String orderId;
-  final String? itemId;
-  final String complaintId;
-
-  String subject = '';
-  String description = '';
-
-  List<ClaimStatusHistoryModel> complaintStatusHitsory = [];
 
   OrderComplaintsCubit({
-    required this.orderId,
-    this.itemId,
-    required this.complaintId,
+    required String orderId,
+    required String itemId,
+    required String complaintId,
     required this.orderRepository,
-  }) : super(OrdersComplaintsInitial());
+  }) : super(OrdersComplaintsInitial(
+            orderId: orderId, itemId: itemId, complaintId: complaintId));
 
   Future<void> getItemComplaint() async {
     try {
-      emit(OrderComplaintsLoading());
-      final res = await orderRepository.findComplaint(
-          ParamsGetComplaint(orderId: orderId, complaintId: complaintId));
+      emit(state.toLoading());
+      final res = await orderRepository.findComplaint(ParamsGetComplaint(
+          orderId: state.orderId, complaintId: state.complaintId));
 
       if (res.orderClaimModel == null) {
-        emit(OrderComplaintsLoadingFailed());
+        emit(state.toLoadingFailed());
         return;
       }
 
-      claimData = res.orderClaimModel!;
-      orderItemData = res.orderItemModel;
-      complaintStatusHitsory = res.claimStatusHistory;
+      final claimData = res.orderClaimModel!;
+      final orderItemData = res.orderItemModel;
+      final complaintStatusHitsory = res.claimStatusHistory;
 
-      emit(OrderComplaintsLoaded());
+      emit(state.toLoaded(
+        claimData: claimData,
+        orderItemData: orderItemData ?? OrderItem.empty(),
+        complaintStatusHitsory: complaintStatusHitsory,
+      ));
     } catch (e, stacktrace) {
       debugPrint("$e");
       debugPrintStack(stackTrace: stacktrace);
 
-      emit(OrderComplaintsLoadingFailed());
+      emit(state.toLoadingFailed());
     }
   }
 
   Future<void> reloadComplaint() async {
     try {
-      emit(OrderComplaintsLoading());
+      emit(state.toLoading());
 
-      final res = await orderRepository.findComplaint(
-          ParamsGetComplaint(orderId: orderId, complaintId: complaintId));
+      final res = await orderRepository.findComplaint(ParamsGetComplaint(
+          orderId: state.orderId, complaintId: state.complaintId));
       if (res.orderClaimModel == null) {
-        emit(OrderComplaintsLoadingFailed());
+        emit(state.toLoadingFailed());
         return;
       }
-      claimData = res.orderClaimModel!;
-      orderItemData = res.orderItemModel;
-      complaintStatusHitsory = res.claimStatusHistory;
+      final claimData = res.orderClaimModel!;
+      final orderItemData = res.orderItemModel;
+      final complaintStatusHitsory = res.claimStatusHistory;
 
-      emit(OrderComplaintsLoaded());
+      emit(state.toLoaded(
+        claimData: claimData,
+        orderItemData: orderItemData ?? OrderItem.empty(),
+        complaintStatusHitsory: complaintStatusHitsory,
+      ));
     } catch (e, stacktrace) {
       debugPrint("$e");
       debugPrintStack(stackTrace: stacktrace);
 
-      emit(OrderComplaintsLoadingFailed());
+      emit(state.toLoadingFailed());
     }
   }
 
   Future<ResponseItemComplaintMake> makeComplaint(
       AppLocalizations translation) async {
-    if (subject.isEmpty || description.isEmpty) {
+    if (state.subject.isEmpty || state.description.isEmpty) {
       return ResponseItemComplaintMake();
     }
 
-    emit(OrderComplaintsLoading());
+    emit(state.toLoading());
     try {
       final res = await orderRepository.makeComplaint(ParamsMakeComplaint(
-        subject: subject,
-        orderId: orderId,
-        description: description,
+        subject: state.subjectController.text,
+        orderId: state.orderId,
+        description: state.descriptionController.text,
       ));
 
-      emit(OrderComplaintsLoaded());
+      emit(state.toLoaded(
+        claimData: res.orderClaimModel ?? OrderClaimModel.empty(),
+        orderItemData: res.orderItemModel ?? OrderItem.empty(),
+        complaintStatusHitsory: res.claimStatusHistory ?? [],
+      ));
 
       getItInstance.get<ToastManager>().showToast(
             message: translation.make_complaint_success,
@@ -105,16 +107,8 @@ class OrderComplaintsCubit extends Cubit<OrdersComplaintState> {
 
       return res;
     } catch (e) {
-      emit(OrderComplaintsLoadingFailed());
+      emit(state.toLoadingFailed());
       return ResponseItemComplaintMake();
     }
-  }
-
-  void updateClaimSubject(String? v) {
-    subject = v ?? '';
-  }
-
-  void updateClaimDescription(String? v) {
-    description = v ?? '';
   }
 }

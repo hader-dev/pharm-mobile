@@ -19,6 +19,18 @@ class OrderClaimModel {
       required this.claimStatusId,
       required this.subject,
       required this.description});
+
+  factory OrderClaimModel.empty() {
+    return OrderClaimModel(
+        id: "",
+        fromCompanyId: "",
+        toCompanyId: "",
+        orderId: "",
+        orderItemId: "",
+        claimStatusId: 0,
+        subject: "",
+        description: "");
+  }
 }
 
 class OrderClaimHeaderModel {

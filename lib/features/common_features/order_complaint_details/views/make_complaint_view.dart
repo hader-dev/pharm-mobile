@@ -16,38 +16,35 @@ class MakeComplaintView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final translation = context.translation!;
-    GlobalKey<FormState> formKey = GlobalKey<FormState>();
-    final subjectController = TextEditingController();
-    final descriptionController = TextEditingController();
+
     final cubit = context.read<OrderComplaintsCubit>();
 
     return Form(
-      key: formKey,
+      key: cubit.state.complaintFormKey,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.max,
         children: [
           CustomTextField(
             label: '${context.translation!.subject}*',
-            controller: subjectController,
+            controller: cubit.state.subjectController,
             state: FieldState.normal,
             validationFunc: (v) => requiredValidator(v, translation),
-            onChanged: (v) => cubit.updateClaimSubject(v),
           ),
           const ResponsiveGap.s4(),
           CustomTextField(
             label: '${context.translation!.description}*',
-            controller: descriptionController,
+            controller: cubit.state.descriptionController,
             state: FieldState.normal,
             maxLines: 5,
             validationFunc: (v) => requiredValidator(v, translation),
-            onChanged: (v) => cubit.updateClaimDescription(v),
           ),
           const ResponsiveGap.s8(),
           PrimaryTextButton(
             label: translation.confirm,
             color: AppColors.accent1Shade1,
-            onTap: () => makeComplaint(cubit, formKey, translation),
+            onTap: () =>
+                makeComplaint(cubit, cubit.state.complaintFormKey, translation),
           )
         ],
       ),
