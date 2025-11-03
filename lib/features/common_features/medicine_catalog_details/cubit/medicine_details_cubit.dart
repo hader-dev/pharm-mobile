@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
+import 'package:hader_pharm_mobile/config/services/deeplinks/deeplinks_service.dart';
 import 'package:hader_pharm_mobile/models/create_quick_order_model.dart';
 import 'package:hader_pharm_mobile/models/medicine_catalog.dart';
 import 'package:hader_pharm_mobile/repositories/remote/favorite/favorite_repository_impl.dart';
@@ -86,7 +87,7 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
         final product = state.medicineCatalogData;
 
         final deepLinkUrl =
-            'https://hader-pharm.com/product/medicine/${product.id}';
+            '${DeeplinksService.scheme}://${DeeplinksService.host}/product/medicine/${product.id}';
 
         await SharePlus.instance
             .share(ShareParams(uri: Uri.parse(deepLinkUrl)));

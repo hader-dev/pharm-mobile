@@ -43,7 +43,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="https"
-                      android:host="hader-pharm.com" />
+                      android:host="hader-pharm" />
             </intent-filter>
         </activity>
         

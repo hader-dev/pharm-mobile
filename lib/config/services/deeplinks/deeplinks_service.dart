@@ -1,10 +1,14 @@
 import 'dart:async';
+
 import 'package:app_links/app_links.dart';
 import 'package:flutter/rendering.dart';
 import 'package:hader_pharm_mobile/config/services/deeplinks/actions/handle_orders.dart';
 import 'package:hader_pharm_mobile/config/services/deeplinks/deeplinks_service_port.dart';
 
 class DeeplinksService implements DeeplinksServicePort {
+  static const scheme = "https";
+  static const host = "hader-pharm";
+
   StreamSubscription? _linksStream;
 
   @override
