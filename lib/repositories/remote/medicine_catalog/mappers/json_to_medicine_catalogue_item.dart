@@ -6,8 +6,8 @@ import 'package:hader_pharm_mobile/repositories/remote/company/mappers/json_to_c
 import 'package:hader_pharm_mobile/repositories/remote/medicine_catalog/mappers/json_to_medicine.dart';
 
 MedicineCatalogModel jsonToMedicineCatalogItem(Map<String, dynamic> json) {
-  final actualStock = json['actualStock'] ?? 0;
-  final reservedStock = json['reservedStock'] ?? 0;
+  final actualStock = json['actualQuantity'] ?? 0;
+  final reservedStock = json['reservedQuantity'] ?? 0;
   final stockQuantity = actualStock - reservedStock;
 
   return MedicineCatalogModel(

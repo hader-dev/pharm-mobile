@@ -3,8 +3,8 @@ import 'package:hader_pharm_mobile/models/image.dart';
 import 'package:hader_pharm_mobile/models/medicine_catalog.dart';
 
 BaseMedicineCatalogModel jsonToBaseMedicineCatalog(Map<String, dynamic> json) {
-  final actualStock = json['actualStock'] ?? 0;
-  final reservedStock = json['reservedStock'] ?? 0;
+  final actualStock = json['actualQuantity'] ?? 0;
+  final reservedStock = json['reservedQuantity'] ?? 0;
   final stockQuantity = actualStock - reservedStock;
 
   return BaseMedicineCatalogModel(
