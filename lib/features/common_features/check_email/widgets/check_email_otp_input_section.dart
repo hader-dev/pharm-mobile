@@ -43,6 +43,12 @@ class _CheckEmailOtpInputSectionState extends State<CheckEmailOtpInputSection> {
           handleControllers: (controllers) {
             controls = controllers;
           },
+          onCodeChanged: (value) {
+            final code = controls.map((e) => e!.text).join("");
+            if (code.length == 5) {
+              context.read<CheckEmailCubit>().checkEmail(code, translation);
+            }
+          },
         ),
         const ResponsiveGap.s12(),
         Padding(

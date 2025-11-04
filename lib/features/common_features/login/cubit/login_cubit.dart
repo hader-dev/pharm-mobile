@@ -31,11 +31,11 @@ class LoginCubit extends Cubit<LoginState> {
             );
       }
       if (e.errorCode == ApiErrorCodes.EMAIL_NOT_VERIFIED.name) {
-        RoutingManager.router.pushNamed(RoutingManager.checkEmailScreen,
-            extra: {
-              "email": state.emailController.text,
-              "redirectTo": RoutingManager.appLayout
-            });
+        RoutingManager.router
+            .pushNamed(RoutingManager.checkEmailScreen, extra: {
+          "email": state.emailController.text,
+          "redirectTo": RoutingManager.createCompanyProfile
+        });
       }
       GlobalExceptionHandler.handle(
         exception: e,
