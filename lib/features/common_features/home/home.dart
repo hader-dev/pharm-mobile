@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/config/responsive/device_size.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
+import 'package:hader_pharm_mobile/features/common_features/home/actions/refresh_home.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/cubit/home_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/cubit/provider.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/widgets/announcements/promotion_section_v5.dart';
@@ -46,13 +47,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
             if (state is PromotionLoadingFailed) {
               return RefreshIndicator(
-                onRefresh: () => context.read<HomeCubit>().getPromotions(),
+                onRefresh: () => refreshHome(context),
                 child: Center(
                   child: SingleChildScrollView(
                     physics: const AlwaysScrollableScrollPhysics(),
                     child: EmptyListWidget(
                       onRefresh: () {
-                        context.read<HomeCubit>().getPromotions();
+                        refreshHome(context);
                       },
                     ),
                   ),
@@ -61,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
             }
 
             return RefreshIndicator(
-              onRefresh: () => context.read<HomeCubit>().getPromotions(),
+              onRefresh: () => refreshHome(context),
               child: SingleChildScrollView(
                   physics: const AlwaysScrollableScrollPhysics(),
                   child: Column(
