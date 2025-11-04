@@ -30,74 +30,78 @@ class CreateCompanyProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => CreateCompanyProfileCubit(
-              companyRepository: CompanyRepository(
-            client: getItInstance.get<INetworkService>(),
-            userManager: getItInstance.get<UserManager>(),
-          )),
-        ),
-        BlocProvider(
-          create: (context) =>
-              WilayaCubit(wilayaRepository: WilayaRepositoryImpl()),
-        ),
-      ],
-      child: Scaffold(
-        body: SafeArea(
-          child: BlocListener<CreateCompanyProfileCubit,
-              CreateCompanyProfileState>(
-            listener: (context, state) {
-              if (state is CompanyCreated) {
-                getItInstance.get<ToastManager>().showToast(
-                    type: ToastType.success,
-                    message: context.translation!.feedback_company_created);
-                context.pushReplacementNamed(RoutingManager.appLayout);
-              }
-            },
-            child: BlocBuilder<CreateCompanyProfileCubit,
+    return PopScope(
+      canPop: false,
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => CreateCompanyProfileCubit(
+                companyRepository: CompanyRepository(
+              client: getItInstance.get<INetworkService>(),
+              userManager: getItInstance.get<UserManager>(),
+            )),
+          ),
+          BlocProvider(
+            create: (context) =>
+                WilayaCubit(wilayaRepository: WilayaRepositoryImpl()),
+          ),
+        ],
+        child: Scaffold(
+          body: SafeArea(
+            child: BlocListener<CreateCompanyProfileCubit,
                 CreateCompanyProfileState>(
-              builder: (context, state) {
-                return Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const ResponsiveGap.s24(),
-                    PageHeaderSection(
-                      currentStep:
-                          BlocProvider.of<CreateCompanyProfileCubit>(context)
-                              .currentStepIndex,
-                    ),
-                    const ResponsiveGap.s16(),
-                    Expanded(
-                        child: PageView(
-                      controller:
-                          BlocProvider.of<CreateCompanyProfileCubit>(context)
-                              .pageController,
-                      physics: NeverScrollableScrollPhysics(),
-                      children: [
-                        CompanyTypePage(),
-                        if (isCommercialOrPharmaType(context)) ...[
-                          PharmacyGeneralInformationPage(),
-                          PharmacyLegalInformationPage(),
-                          PharmacyProfilePage()
-                        ],
-                        if (BlocProvider.of<CreateCompanyProfileCubit>(context)
-                                .companyData
-                                .companyType ==
-                            CompanyType.Distributor.id) ...[
-                          DistributorGeneralInformationPage(),
-                          DistributorLegalInformationPage(),
-                          DistributorProfilePage()
-                        ],
-                        ReviewSubmitPage(),
-                      ],
-                    )),
-                    NavigationButtonsSection(),
-                    const ResponsiveGap.s12(),
-                  ],
-                );
+              listener: (context, state) {
+                if (state is CompanyCreated) {
+                  getItInstance.get<ToastManager>().showToast(
+                      type: ToastType.success,
+                      message: context.translation!.feedback_company_created);
+                  context.pushReplacementNamed(RoutingManager.appLayout);
+                }
               },
+              child: BlocBuilder<CreateCompanyProfileCubit,
+                  CreateCompanyProfileState>(
+                builder: (context, state) {
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const ResponsiveGap.s24(),
+                      PageHeaderSection(
+                        currentStep:
+                            BlocProvider.of<CreateCompanyProfileCubit>(context)
+                                .currentStepIndex,
+                      ),
+                      const ResponsiveGap.s16(),
+                      Expanded(
+                          child: PageView(
+                        controller:
+                            BlocProvider.of<CreateCompanyProfileCubit>(context)
+                                .pageController,
+                        physics: NeverScrollableScrollPhysics(),
+                        children: [
+                          CompanyTypePage(),
+                          if (isCommercialOrPharmaType(context)) ...[
+                            PharmacyGeneralInformationPage(),
+                            PharmacyLegalInformationPage(),
+                            PharmacyProfilePage()
+                          ],
+                          if (BlocProvider.of<CreateCompanyProfileCubit>(
+                                      context)
+                                  .companyData
+                                  .companyType ==
+                              CompanyType.Distributor.id) ...[
+                            DistributorGeneralInformationPage(),
+                            DistributorLegalInformationPage(),
+                            DistributorProfilePage()
+                          ],
+                          ReviewSubmitPage(),
+                        ],
+                      )),
+                      NavigationButtonsSection(),
+                      const ResponsiveGap.s12(),
+                    ],
+                  );
+                },
+              ),
             ),
           ),
         ),

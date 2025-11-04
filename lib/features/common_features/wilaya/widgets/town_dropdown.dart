@@ -47,6 +47,7 @@ class BaseTownDropdown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DropdownSearch<Town>(
+      enabled: towns.isNotEmpty,
       validator: validator,
       selectedItem: currentSelection,
       items: itemsWithSearch,

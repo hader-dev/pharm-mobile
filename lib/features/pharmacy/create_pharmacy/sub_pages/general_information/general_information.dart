@@ -65,6 +65,8 @@ class _PharmacyGeneralInformationPageState
                                 .companyData
                                 .email,
                         state: FieldState.normal,
+                        validationFunc: (value) =>
+                            validateIsEmail(value, translation, true),
                         onChanged: (newValue) {
                           BlocProvider.of<CreateCompanyProfileCubit>(context)
                               .changeCompanyData(
@@ -73,11 +75,9 @@ class _PharmacyGeneralInformationPageState
                                       .companyData
                                       .copyWith(email: newValue));
                         },
-                        validationFunc: (value) =>
-                            validateIsEmail(value, translation),
                       ),
                       CustomTextField(
-                        label: translation.phone_mobile,
+                        label: "${translation.phone}*",
                         value:
                             BlocProvider.of<CreateCompanyProfileCubit>(context)
                                 .companyData
@@ -93,7 +93,7 @@ class _PharmacyGeneralInformationPageState
                                       .copyWith(phone: newValue));
                         },
                         validationFunc: (value) =>
-                            validateIsMobileNumber(value, translation),
+                            validateIsMobileNumber(value, translation, true),
                       ),
                       CustomTextField(
                         label: translation.fax,
@@ -149,7 +149,11 @@ class _PharmacyGeneralInformationPageState
                                       .copyWith(website: newValue));
                         },
                       ),
-                      WilayaDropdown(),
+                      WilayaDropdown(
+                        isRequired: true,
+                        validator: (v) =>
+                            requiredValidator(v?.label, translation),
+                      ),
                       TownDropdown(
                           isRequired: true,
                           validator: (v) =>

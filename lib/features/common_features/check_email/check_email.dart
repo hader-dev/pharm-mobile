@@ -31,20 +31,20 @@ class CheckEmailScreen extends StatelessWidget {
       create: (context) =>
           CheckEmailCubit(userManager: getItInstance.get<UserManager>())
             ..initEmail(email),
-      child: SafeArea(
-        child: BlocListener<CheckEmailCubit, CheckEmailState>(
-          listener: (context, state) {
-            if (state is CheckEmailSuccess) {
-              if (popInsteadOfPushReplacement) {
-                GoRouter.of(context).safePop();
-              } else {
-                GoRouter.of(context).pushReplacementNamed(redirectTo);
-              }
+      child: BlocListener<CheckEmailCubit, CheckEmailState>(
+        listener: (context, state) {
+          if (state is CheckEmailSuccess) {
+            if (popInsteadOfPushReplacement) {
+              GoRouter.of(context).safePop();
+            } else {
+              GoRouter.of(context).pushReplacementNamed(redirectTo);
             }
-          },
-          child: Scaffold(
-            backgroundColor: AppColors.bgWhite,
-            body: Padding(
+          }
+        },
+        child: Scaffold(
+          backgroundColor: AppColors.bgWhite,
+          body: SafeArea(
+            child: Padding(
               padding: EdgeInsets.symmetric(
                   horizontal: context.responsiveAppSizeTheme.current.p16),
               child: BlocBuilder<CheckEmailCubit, CheckEmailState>(

@@ -22,20 +22,20 @@ class RegisterScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) =>
           RegisterCubit(userManager: getItInstance.get<UserManager>()),
-      child: SafeArea(
-        child: BlocListener<RegisterCubit, RegisterState>(
-          listener: (context, state) {
-            if (state is RegisterSuccess) {
-              GoRouter.of(context)
-                  .pushReplacement(RoutingManager.checkEmailScreen, extra: {
-                "email": state.email,
-                "redirectTo": RoutingManager.createCompanyProfile
-              });
-            }
-          },
-          child: Scaffold(
-            backgroundColor: AppColors.bgWhite,
-            body: Padding(
+      child: BlocListener<RegisterCubit, RegisterState>(
+        listener: (context, state) {
+          if (state is RegisterSuccess) {
+            GoRouter.of(context)
+                .pushReplacement(RoutingManager.checkEmailScreen, extra: {
+              "email": state.email,
+              "redirectTo": RoutingManager.createCompanyProfile
+            });
+          }
+        },
+        child: Scaffold(
+          backgroundColor: AppColors.bgWhite,
+          body: SafeArea(
+            child: Padding(
               padding: EdgeInsets.symmetric(
                   horizontal: context.responsiveAppSizeTheme.current.p16),
               child: BlocBuilder<RegisterCubit, RegisterState>(

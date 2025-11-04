@@ -8,9 +8,11 @@ import 'package:hader_pharm_mobile/models/wilaya.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class WilayaDropdown extends StatelessWidget {
-  const WilayaDropdown({super.key, this.onChanged, this.validator});
+  const WilayaDropdown(
+      {super.key, this.onChanged, this.validator, this.isRequired = false});
   final OnWilayaCallback? onChanged;
   final WilayaValidator? validator;
+  final bool isRequired;
 
   void handleSelectionChanged(Wilaya? selectedItem, WilayaCubit cubit) {
     cubit.updateSelectedWilaya(selectedItem);
@@ -29,12 +31,14 @@ class WilayaDropdown extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(
                 left: context.responsiveAppSizeTheme.current.p4),
-            child: Text(context.translation!.wilaya,
+            child: Text(
+                "${context.translation!.wilaya} ${isRequired ? "*" : ""}",
                 style: context.responsiveTextTheme.current.body3Medium
                     .copyWith(color: TextColors.ternary.color)),
           ),
           const ResponsiveGap.s6(),
           BaseWilayaDropdown(
+            isRequired: isRequired,
             validator: validator,
             wilayas: state.wilayas,
             currentSelection: state.selectedWilaya,

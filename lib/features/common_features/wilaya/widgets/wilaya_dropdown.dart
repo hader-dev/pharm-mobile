@@ -18,6 +18,7 @@ class BaseWilayaDropdown extends StatelessWidget {
       this.onChanged,
       this.currentSelection,
       this.labelTextStyle,
+      this.isRequired = false,
       this.validator});
 
   final List<Wilaya> wilayas;
@@ -25,6 +26,7 @@ class BaseWilayaDropdown extends StatelessWidget {
   final WilayaValidator? validator;
   final TextStyle? labelTextStyle;
   final Wilaya? currentSelection;
+  final bool isRequired;
 
   FutureOr<List<Wilaya>> itemsWithSearch(
       String filter, LoadProps? loadProps) async {
