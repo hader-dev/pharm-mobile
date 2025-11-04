@@ -27,7 +27,7 @@ class TrackingClaimStepWidget extends StatelessWidget {
         Column(
           children: <Widget>[
             Container(
-              width: 20,
+              width: context.responsiveAppSizeTheme.current.iconSize30,
               alignment: Alignment.center,
               child: Column(
                 children: <Widget>[
