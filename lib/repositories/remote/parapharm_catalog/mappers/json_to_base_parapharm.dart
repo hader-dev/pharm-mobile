@@ -4,6 +4,10 @@ import 'package:hader_pharm_mobile/repositories/remote/company/mappers/json_to_c
 import 'package:hader_pharm_mobile/repositories/remote/utility/mappers/dynamic_list_cast.dart';
 
 BaseParaPharmaCatalogModel jsonToBaseParapharm(Map<String, dynamic> json) {
+  final actualStock = json['actualStock'] ?? 0;
+  final reservedStock = json['reservedStock'] ?? 0;
+  final stockQuantity = actualStock - reservedStock;
+
   return BaseParaPharmaCatalogModel(
     id: json['id'] ?? "",
     tags: mapJsonDynamicListToTypedList(json['tags']),
@@ -13,7 +17,7 @@ BaseParaPharmaCatalogModel jsonToBaseParapharm(Map<String, dynamic> json) {
         json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
     image: json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
     name: json['name'] ?? "",
-    stockQuantity: json['stockQuantity'] ?? 0,
+    stockQuantity: stockQuantity,
     isActive: json['isActive'],
     isLiked: json["isFavorite"] ?? false,
     company: json['company'] != null ? jsonToCompany(json['company']) : null,

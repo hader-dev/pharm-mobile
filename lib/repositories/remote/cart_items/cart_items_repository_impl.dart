@@ -18,8 +18,6 @@ class CartItemRepository extends ICartItemsRepository {
             Urls.cartItems,
             queryParams: {
               "include[sellerCompany][fields][]": ["id", "name"],
-              "include[parapharmCatalog][fields][]": ["stockQuantity"],
-              "include[medicineCatalog][fields][]": ["stockQuantity"]
             },
           ));
 
