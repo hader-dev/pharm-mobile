@@ -7,10 +7,13 @@ class ResponsiveTextTheme extends ThemeExtension<ResponsiveTextTheme> {
   final AppTypography medium;
   final AppTypography large;
   final AppTypography extraLarge;
+  final AppTypography current;
+
   DeviceSizes deviceSize;
 
   ResponsiveTextTheme({
     required this.small,
+    required this.current,
     required this.medium,
     required this.large,
     required this.extraLarge,
@@ -23,6 +26,7 @@ class ResponsiveTextTheme extends ThemeExtension<ResponsiveTextTheme> {
     AppTypography? medium,
     AppTypography? large,
     AppTypography? extraLarge,
+    AppTypography? current,
     DeviceSizes? deviceSize,
   }) {
     return ResponsiveTextTheme(
@@ -31,6 +35,7 @@ class ResponsiveTextTheme extends ThemeExtension<ResponsiveTextTheme> {
       large: large ?? this.large,
       deviceSize: deviceSize ?? this.deviceSize,
       extraLarge: extraLarge ?? this.extraLarge,
+      current: current ?? this.current,
     );
   }
 
@@ -45,21 +50,24 @@ class ResponsiveTextTheme extends ThemeExtension<ResponsiveTextTheme> {
       medium: AppTypography.lerp(medium, other.medium, t),
       large: AppTypography.lerp(large, other.large, t),
       extraLarge: AppTypography.lerp(extraLarge, other.extraLarge, t),
+      current: AppTypography.lerp(current, other.current, t),
+      deviceSize: other.deviceSize,
     );
   }
+}
 
-  AppTypography get current {
-    switch (deviceSize) {
-      case DeviceSizes.smallMobile:
-        return small;
-      case DeviceSizes.mediumMobile:
-        return medium;
-      case DeviceSizes.largeMobile:
-        return large;
-      case DeviceSizes.smallTablet:
-      case DeviceSizes.mediumTablet:
-      case DeviceSizes.largeTablet:
-        return extraLarge;
-    }
+AppTypography decideTypography(DeviceSizes deviceSize, AppTypography small,
+    AppTypography medium, AppTypography large, AppTypography extraLarge) {
+  switch (deviceSize) {
+    case DeviceSizes.smallMobile:
+      return small;
+    case DeviceSizes.mediumMobile:
+      return medium;
+    case DeviceSizes.largeMobile:
+      return large;
+    case DeviceSizes.smallTablet:
+    case DeviceSizes.mediumTablet:
+    case DeviceSizes.largeTablet:
+      return extraLarge;
   }
 }

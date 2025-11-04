@@ -5,7 +5,6 @@ import 'package:hader_pharm_mobile/config/responsive/app_sizes/config/app_size_m
 import 'package:hader_pharm_mobile/config/responsive/app_sizes/config/app_size_small.dart';
 import 'package:hader_pharm_mobile/config/responsive/device_size.dart';
 import 'package:hader_pharm_mobile/config/responsive/typography/app_typography.dart';
-import 'package:hader_pharm_mobile/config/responsive/typography/config/font_extra_large.dart';
 import 'package:hader_pharm_mobile/config/responsive/typography/config/font_large.dart';
 import 'package:hader_pharm_mobile/config/responsive/typography/config/font_meduim.dart';
 import 'package:hader_pharm_mobile/config/responsive/typography/config/font_small.dart';
@@ -19,6 +18,11 @@ class LightTheme {
   late final ThemeData theme;
 
   LightTheme({required DeviceSizes deviceSize}) {
+    final small = AppTypography(appFont: appFontSmall);
+    final medium = AppTypography(appFont: appFontMeduim);
+    final large = AppTypography(appFont: appFontLarge);
+    final extraLarge = AppTypography(appFont: appFontLarge);
+
     theme = ThemeData(
       fontFamily: AppTypographySource.appFont,
       scaffoldBackgroundColor: AppColors.bgWhite,
@@ -35,10 +39,12 @@ class LightTheme {
       iconTheme: IconThemeData(size: AppSizesManager.iconSize20),
       extensions: <ThemeExtension<dynamic>>[
         ResponsiveTextTheme(
-            small: AppTypography(appFont: appFontSmall),
-            medium: AppTypography(appFont: appFontMeduim),
-            large: AppTypography(appFont: appFontLarge),
-            extraLarge: AppTypography(appFont: appFontExtraLarge),
+            small: small,
+            medium: medium,
+            large: large,
+            current:
+                decideTypography(deviceSize, small, medium, large, extraLarge),
+            extraLarge: extraLarge,
             deviceSize: deviceSize),
         ResponsiveAppSizeTheme(
             small: appSizesSmall,
