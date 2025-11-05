@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
-import 'package:hader_pharm_mobile/config/services/notification/notification_service_port.dart';
 import 'package:hader_pharm_mobile/features/common_features/register/hooks_data_model/register_email_form.dart';
 import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler.dart';
 import 'package:hader_pharm_mobile/utils/device_gallery_helper.dart';
@@ -27,15 +26,8 @@ class RegisterCubit extends Cubit<RegisterState> {
           userImagePath: state.pickedImage?.path);
       getItInstance.get<ToastManager>().showToast(
           message: RoutingManager.rootNavigatorKey.currentContext!.translation!
-              .registration_success,
+              .check_email_for_verification,
           type: ToastType.success);
-      await Future.delayed(const Duration(seconds: 1), () {
-        getItInstance.get<ToastManager>().showToast(
-            message: RoutingManager.rootNavigatorKey.currentContext!
-                .translation!.check_email_for_verification,
-            type: ToastType.success);
-      });
-      getItInstance.get<INotificationService>().registerUserDevice();
 
       emit(state.toSuccess(email: formData.email));
     } catch (e) {

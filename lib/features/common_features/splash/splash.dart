@@ -14,50 +14,51 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: BlocProvider(
-          create: (context) => SplashCubit()..init(),
-          child: BlocListener<SplashCubit, SplashState>(
-            listener: setupCompanyOrGoHome,
-            child: BlocBuilder<SplashCubit, SplashState>(
-              builder: (context, state) {
-                return Scaffold(
-                  body: SizedBox(
-                    width: double.maxFinite,
-                    child: Column(
-                      children: [
-                        Spacer(
-                          flex: 3,
-                        ),
-                        SvgPicture.asset(
-                          DrawableAssetStrings.logoImg,
-                          height: 145,
-                          width: 145,
-                        ),
-                        const ResponsiveGap.s32(),
-                        Text(
-                          context.translation!.hader_pharm,
-                          style: context.responsiveTextTheme.current.headLine1
-                              .copyWith(color: TextColors.primary.color),
-                        ),
-                        Spacer(
-                          flex: 2,
-                        ),
-                        CircularProgressIndicator(
-                          color: AppColors.accent1Shade1,
-                          constraints:
-                              BoxConstraints(minHeight: 30, minWidth: 30),
-                        ),
-                        Spacer(
-                          flex: 2,
-                        ),
-                      ],
-                    ),
+    return BlocProvider(
+      create: (context) => SplashCubit()..init(),
+      child: BlocListener<SplashCubit, SplashState>(
+        listener: setupCompanyOrGoHome,
+        child: BlocBuilder<SplashCubit, SplashState>(
+          builder: (context, state) {
+            return Scaffold(
+              body: SafeArea(
+                child: SizedBox(
+                  width: double.maxFinite,
+                  child: Column(
+                    children: [
+                      Spacer(
+                        flex: 3,
+                      ),
+                      SvgPicture.asset(
+                        DrawableAssetStrings.logoImg,
+                        height: 145,
+                        width: 145,
+                      ),
+                      const ResponsiveGap.s32(),
+                      Text(
+                        context.translation!.hader_pharm,
+                        style: context.responsiveTextTheme.current.headLine1
+                            .copyWith(color: TextColors.primary.color),
+                      ),
+                      Spacer(
+                        flex: 2,
+                      ),
+                      CircularProgressIndicator(
+                        color: AppColors.accent1Shade1,
+                        constraints:
+                            BoxConstraints(minHeight: 30, minWidth: 30),
+                      ),
+                      Spacer(
+                        flex: 2,
+                      ),
+                    ],
                   ),
-                );
-              },
-            ),
-          )),
+                ),
+              ),
+            );
+          },
+        ),
+      ),
     );
   }
 }

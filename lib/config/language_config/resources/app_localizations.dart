@@ -2050,6 +2050,12 @@ abstract class AppLocalizations {
   /// **'Hader Pharma'**
   String get app_name;
 
+  /// No description provided for @app_name_2.
+  ///
+  /// In en, this message translates to:
+  /// **'ader Pharma'**
+  String get app_name_2;
+
   /// No description provided for @no_items_found.
   ///
   /// In en, this message translates to:

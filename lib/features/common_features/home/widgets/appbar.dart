@@ -37,7 +37,7 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
                   height: 30,
                 ),
                 Text(
-                  context.translation!.pharma,
+                  context.translation!.app_name_2,
                   style: context.responsiveTextTheme.current.headLine3SemiBold
                       .copyWith(color: Colors.white),
                 ),

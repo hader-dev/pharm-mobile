@@ -1024,6 +1024,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get app_name => 'Hader Pharma';
 
   @override
+  String get app_name_2 => 'ader Pharma';
+
+  @override
   String get no_items_found => 'No items found';
 
   @override

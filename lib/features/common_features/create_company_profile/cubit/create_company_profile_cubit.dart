@@ -122,6 +122,8 @@ class CreateCompanyProfileCubit extends Cubit<CreateCompanyProfileState> {
 
   void removeImage() {
     pickedImage = null;
+    companyData = companyData.copyWith(resetLogoPath: true);
+
     emit(UserImagePicked());
   }
 }

@@ -5,6 +5,7 @@ import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/routes/go_router_extension.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
+import 'package:hader_pharm_mobile/config/services/notification/notification_service_port.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/check_email/cubit/check_email_cubit.dart';
@@ -37,6 +38,9 @@ class CheckEmailScreen extends StatelessWidget {
             if (popInsteadOfPushReplacement) {
               GoRouter.of(context).safePop();
             } else {
+              if (redirectTo == RoutingManager.createCompanyProfile) {
+                getItInstance.get<INotificationService>().registerUserDevice();
+              }
               GoRouter.of(context).pushReplacementNamed(redirectTo);
             }
           }

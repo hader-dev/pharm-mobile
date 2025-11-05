@@ -1021,6 +1021,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get app_name => 'حاضر صيدلية';
 
   @override
+  String get app_name_2 => 'ادر صيدلية';
+
+  @override
   String get no_items_found => 'لايوجد عناصر';
 
   @override

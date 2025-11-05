@@ -68,6 +68,7 @@ class CreateCompanyProfileFormDataModel {
       String? rc,
       String? fiscalId,
       int? distributorCategoryId,
+      bool resetLogoPath = false,
       String? bankAccount}) {
     return CreateCompanyProfileFormDataModel(
         companyType: companyType ?? this.companyType,
@@ -79,7 +80,7 @@ class CreateCompanyProfileFormDataModel {
         website: website ?? this.website,
         nis: nis ?? this.nis,
         ai: ai ?? this.ai,
-        logoPath: logoPath ?? this.logoPath,
+        logoPath: resetLogoPath ? null : logoPath ?? this.logoPath,
         description: description ?? this.description,
         rc: rc ?? this.rc,
         bankAccount: bankAccount ?? this.bankAccount,
