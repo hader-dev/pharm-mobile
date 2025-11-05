@@ -2056,6 +2056,24 @@ abstract class AppLocalizations {
   /// **'ader Pharma'**
   String get app_name_2;
 
+  /// No description provided for @filter_items_to.
+  ///
+  /// In en, this message translates to:
+  /// **'To'**
+  String get filter_items_to;
+
+  /// No description provided for @from.
+  ///
+  /// In en, this message translates to:
+  /// **'From'**
+  String get from;
+
+  /// No description provided for @filter_items_from.
+  ///
+  /// In en, this message translates to:
+  /// **'From'**
+  String get filter_items_from;
+
   /// No description provided for @no_items_found.
   ///
   /// In en, this message translates to:

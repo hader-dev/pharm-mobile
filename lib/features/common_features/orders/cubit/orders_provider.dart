@@ -11,13 +11,17 @@ class OrdersProviderState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-        create: (context) => OrdersCubit(
-            searchController: TextEditingController(),
-            orderRepository:
-                OrderRepository(client: getItInstance.get<INetworkService>()),
-            scrollController: ScrollController())
-          ..getOrders(),
-        child: child);
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+            create: (context) => OrdersCubit(
+                searchController: TextEditingController(),
+                orderRepository: OrderRepository(
+                    client: getItInstance.get<INetworkService>()),
+                scrollController: ScrollController())
+              ..getOrders()),
+      ],
+      child: child,
+    );
   }
 }

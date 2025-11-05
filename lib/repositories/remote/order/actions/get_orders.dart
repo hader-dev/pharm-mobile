@@ -3,6 +3,7 @@ import 'package:hader_pharm_mobile/config/services/network/network_interface.dar
 import 'package:hader_pharm_mobile/models/order.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/params/get_orders.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/response/order_response.dart';
+import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/urls.dart';
 
 Future<OrderResponse> getOrders(
@@ -13,6 +14,20 @@ Future<OrderResponse> getOrders(
     'sort[id]': params.sortDirection,
     if (params.searchQuery != null) 'search[displayId]': params.searchQuery!,
   };
+
+  if (params.filters.status.isNotEmpty) {
+    final status = OrderStatus.values.firstWhere((e) =>
+        e.name.toLowerCase() == params.filters.status.first.toLowerCase());
+    queryParams['filters[status]'] = status.id.toString();
+  }
+
+  if (params.filters.createdAtFrom.isNotEmpty) {
+    queryParams['date[createdAt][from]'] = params.filters.createdAtFrom.first;
+  }
+
+  if (params.filters.createdAtTo.isNotEmpty) {
+    queryParams['date[createdAt][to]'] = params.filters.createdAtTo.first;
+  }
 
   try {
     var decodedResponse = await client.sendRequest(

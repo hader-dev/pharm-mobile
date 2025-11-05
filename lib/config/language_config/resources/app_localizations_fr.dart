@@ -1039,6 +1039,15 @@ class AppLocalizationsFr extends AppLocalizations {
   String get app_name_2 => 'ader Pharma';
 
   @override
+  String get filter_items_to => 'A';
+
+  @override
+  String get from => 'From';
+
+  @override
+  String get filter_items_from => 'De';
+
+  @override
   String get no_items_found => 'Aucun élément trouvé';
 
   @override

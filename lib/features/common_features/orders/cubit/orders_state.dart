@@ -4,28 +4,27 @@ sealed class OrdersState {
   final int totalItemsCount;
   final int offSet;
   final List<BaseOrderModel> orders;
+  final bool displayFilters;
+  final bool hasActiveFilters;
+  final OrderFilters filters;
+  final int lastOffset;
 
   OrdersState(
       {required this.totalItemsCount,
       required this.offSet,
+      this.filters = const OrderFilters(),
+      this.displayFilters = true,
+      this.hasActiveFilters = false,
+      required this.lastOffset,
       required this.orders});
 
-  OrdersState copyWith({
-    int? totalItemsCount,
-    int? offSet,
-    List<BaseOrderModel>? orders,
-  }) {
-    return OrdersInitial(
-      totalItemsCount: totalItemsCount ?? this.totalItemsCount,
-      offSet: offSet ?? this.offSet,
-      orders: orders ?? this.orders,
-    );
-  }
-
-  OrdersInitial initial({
+  OrdersInitial toInitial({
     int totalItemsCount = 0,
     int offSet = 0,
+    int lastOffset = 0,
     List<BaseOrderModel> orders = const [],
+    OrderFilters filters = const OrderFilters(),
+    bool displayFilters = false,
   }) {
     return OrdersInitial(
       totalItemsCount: totalItemsCount,
@@ -34,23 +33,37 @@ sealed class OrdersState {
     );
   }
 
-  OrdersLoading loading({int? offset}) =>
-      OrdersLoading.fromState(copyWith(offSet: offset ?? offSet));
+  OrdersScroll toScroll({
+    required int offset,
+    required bool displayFilters,
+  }) =>
+      OrdersScroll.fromState(
+        lastOffset: offset,
+        state: this,
+        displayFilters: displayFilters,
+      );
 
-  OrdersLoaded loaded({
+  OrdersLoading toLoading({int? offset}) =>
+      OrdersLoading.fromState(state: this, offSet: offset ?? offSet);
+
+  OrdersLoadingFilterChanged toSearchFilterChanged({
+    required OrderFilters filters,
+  }) =>
+      OrdersLoadingFilterChanged.fromState(state: this, filters: filters);
+
+  OrdersLoaded toLoaded({
     List<BaseOrderModel>? orders,
     int? totalItemsCount,
   }) =>
       OrdersLoaded.fromState(
-        copyWith(
-          orders: orders ?? this.orders,
-          totalItemsCount: totalItemsCount ?? this.totalItemsCount,
-        ),
+        state: this,
+        orders: orders ?? this.orders,
+        totalItemsCount: totalItemsCount ?? this.totalItemsCount,
       );
-  LoadingMoreOrders loadingMore() => LoadingMoreOrders.fromState(this);
-  OrdersLoadLimitReached loadLimitReached() =>
+  LoadingMoreOrders toLoadingMore() => LoadingMoreOrders.fromState(this);
+  OrdersLoadLimitReached toLoadLimitReached() =>
       OrdersLoadLimitReached.fromState(this);
-  OrdersLoadingFailed loadingFailed() => OrdersLoadingFailed();
+  OrdersLoadingFailed toLoadingFailed() => OrdersLoadingFailed();
 }
 
 final class OrdersInitial extends OrdersState {
@@ -58,50 +71,95 @@ final class OrdersInitial extends OrdersState {
     super.totalItemsCount = 0,
     super.offSet = 0,
     super.orders = const [],
+    super.lastOffset = 0,
   });
 }
 
-final class OrdersLoading extends OrdersInitial {
-  OrdersLoading.fromState(OrdersState state)
+final class OrdersLoading extends OrdersState {
+  OrdersLoading.fromState({required OrdersState state, required super.offSet})
       : super(
           totalItemsCount: state.totalItemsCount,
-          offSet: state.offSet,
           orders: state.orders,
+          displayFilters: state.displayFilters,
+          hasActiveFilters: state.hasActiveFilters,
+          filters: state.filters,
+          lastOffset: state.lastOffset,
         );
 }
 
-final class LoadingMoreOrders extends OrdersInitial {
+final class OrdersLoadingFilterChanged extends OrdersState {
+  OrdersLoadingFilterChanged.fromState(
+      {required OrdersState state, required super.filters})
+      : super(
+          totalItemsCount: state.totalItemsCount,
+          orders: state.orders,
+          offSet: state.offSet,
+          displayFilters: state.displayFilters,
+          hasActiveFilters: state.hasActiveFilters,
+          lastOffset: state.lastOffset,
+        );
+}
+
+final class LoadingMoreOrders extends OrdersState {
   LoadingMoreOrders.fromState(OrdersState state)
       : super(
           totalItemsCount: state.totalItemsCount,
           offSet: state.offSet,
           orders: state.orders,
+          displayFilters: state.displayFilters,
+          hasActiveFilters: state.hasActiveFilters,
+          filters: state.filters,
+          lastOffset: state.lastOffset,
         );
 }
 
-final class OrdersLoaded extends OrdersInitial {
-  OrdersLoaded.fromState(OrdersState state)
+final class OrdersLoaded extends OrdersState {
+  OrdersLoaded.fromState(
+      {required OrdersState state,
+      required super.orders,
+      required super.totalItemsCount})
       : super(
-          totalItemsCount: state.totalItemsCount,
           offSet: state.offSet,
-          orders: state.orders,
+          displayFilters: state.displayFilters,
+          hasActiveFilters: state.hasActiveFilters,
+          filters: state.filters,
+          lastOffset: state.lastOffset,
         );
 }
 
-final class OrdersLoadingFailed extends OrdersInitial {
+final class OrdersLoadingFailed extends OrdersState {
   OrdersLoadingFailed()
       : super(
           totalItemsCount: 0,
           offSet: 0,
           orders: const [],
+          lastOffset: 0,
         );
 }
 
-final class OrdersLoadLimitReached extends OrdersInitial {
+final class OrdersLoadLimitReached extends OrdersState {
   OrdersLoadLimitReached.fromState(OrdersState state)
       : super(
           totalItemsCount: state.totalItemsCount,
           offSet: state.offSet,
           orders: state.orders,
+          displayFilters: state.displayFilters,
+          hasActiveFilters: state.hasActiveFilters,
+          filters: state.filters,
+          lastOffset: state.lastOffset,
+        );
+}
+
+final class OrdersScroll extends OrdersState {
+  OrdersScroll.fromState({
+    required OrdersState state,
+    required super.lastOffset,
+    required super.displayFilters,
+  }) : super(
+          offSet: state.offSet,
+          totalItemsCount: state.totalItemsCount,
+          filters: state.filters,
+          orders: state.orders,
+          hasActiveFilters: state.hasActiveFilters,
         );
 }
