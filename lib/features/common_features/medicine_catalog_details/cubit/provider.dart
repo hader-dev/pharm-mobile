@@ -34,7 +34,7 @@ class StateProvider extends StatelessWidget {
         create: (context) => MedicineDetailsCubit(
           shippingAddress: getItInstance.get<UserManager>().currentUser.address,
           packageQuantityController: TextEditingController(
-              text: existingCartItem?.model.quantity.toString() ?? '1'),
+              text: existingCartItem?.model.quantity.toString() ?? '0'),
           quantityController: TextEditingController(
               text: existingCartItem?.model.quantity.toString() ?? '1'),
           tabController: TabController(length: tabs.length, vsync: vsync),

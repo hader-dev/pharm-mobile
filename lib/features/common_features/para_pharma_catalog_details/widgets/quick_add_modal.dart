@@ -39,7 +39,7 @@ class _QuickCartAddModalState extends State<QuickCartAddModal>
 
     final detailsCubit = ParaPharmaDetailsCubit(
         packageQuantityController: TextEditingController(
-            text: existingCartItem?.model.packageQuantity.toString() ?? '1'),
+            text: existingCartItem?.model.packageQuantity.toString() ?? '0'),
         quantityController: TextEditingController(
             text: existingCartItem?.model.quantity.toString() ?? '1'),
         tabController: TabController(length: tabs.length, vsync: this),

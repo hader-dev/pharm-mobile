@@ -35,7 +35,7 @@ class FiltersButtonOrder extends StatelessWidget {
   }) =>
       FiltersButtonOrder(
           isActive: isActive,
-          icon: Iconsax.search_favorite,
+          icon: Iconsax.calendar_add,
           label: localization.from,
           onPressed: onPressed);
 
@@ -46,7 +46,7 @@ class FiltersButtonOrder extends StatelessWidget {
   }) =>
       FiltersButtonOrder(
           isActive: isActive,
-          icon: Iconsax.money4,
+          icon: Iconsax.status_up,
           label: localization.status,
           onPressed: onPressed);
 
@@ -57,7 +57,7 @@ class FiltersButtonOrder extends StatelessWidget {
   }) =>
       FiltersButtonOrder(
           isActive: isActive,
-          icon: Iconsax.money4,
+          icon: Iconsax.calendar_tick,
           label: localization.to,
           onPressed: onPressed);
 

@@ -28,32 +28,35 @@ class FeaturedEntity extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey.shade300),
-                borderRadius: BorderRadius.circular(
-                    context.responsiveAppSizeTheme.current.commonWidgetsRadius),
-              ),
-              padding:
-                  EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(
-                    context.responsiveAppSizeTheme.current.commonWidgetsRadius),
-                child: (imageUrl != null && imageUrl!.isNotEmpty)
-                    ? CacheNetworkImagePlus(
-                        width: size,
-                        height: (size * 0.6) -
-                            context.responsiveAppSizeTheme.current.p8,
-                        boxFit: BoxFit.cover,
-                        imageUrl: imageUrl!)
-                    : Center(
-                        child: Image(
-                          image: AssetImage(fallbackAssetImagePlaceholderPath),
-                          fit: BoxFit.cover,
-                          height: 80,
-                          width: 80,
+            Expanded(
+              flex: 2,
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey.shade300),
+                  borderRadius: BorderRadius.circular(
+                      context.responsiveAppSizeTheme.current.commonWidgetsRadius),
+                ),
+                padding:
+                    EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(
+                      context.responsiveAppSizeTheme.current.commonWidgetsRadius),
+                  child: (imageUrl != null && imageUrl!.isNotEmpty)
+                      ? CacheNetworkImagePlus(
+                          width: size,
+                          height: (size * 0.6) -
+                              context.responsiveAppSizeTheme.current.p8,
+                          boxFit: BoxFit.cover,
+                          imageUrl: imageUrl!)
+                      : Center(
+                          child: Image(
+                            image: AssetImage(fallbackAssetImagePlaceholderPath),
+                            fit: BoxFit.cover,
+                            height: 80,
+                            width: 80,
+                          ),
                         ),
-                      ),
+                ),
               ),
             ),
             const ResponsiveGap.s4(),

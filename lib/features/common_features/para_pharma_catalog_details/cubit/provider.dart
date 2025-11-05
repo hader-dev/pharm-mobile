@@ -35,7 +35,7 @@ class StateProvider extends StatelessWidget {
       BlocProvider(
         create: (context) => ParaPharmaDetailsCubit(
             packageQuantityController: TextEditingController(
-                text: existingCartItem?.model.quantity.toString() ?? '1'),
+                text: existingCartItem?.model.quantity.toString() ?? '0'),
             quantityController: TextEditingController(
                 text: existingCartItem?.model.quantity.toString() ?? '1'),
             tabController: TabController(length: tabs.length, vsync: vsync),

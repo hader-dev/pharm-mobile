@@ -47,7 +47,7 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
                   iconSize:
                       context.deviceSize.width <= DeviceSizes.largeMobile.width
                           ? context.responsiveAppSizeTheme.current.iconSize30
-                          : context.responsiveAppSizeTheme.current.iconSize20,
+                          : context.responsiveAppSizeTheme.current.iconSize18,
                   onPressed: () => RoutingManager.router
                       .pushNamed(RoutingManager.notificationsScreen),
                   icon: Stack(

@@ -59,8 +59,8 @@ class VendorCartSectionState extends State<VendorCartSection> {
               side: BorderSide(color: StrokeColors.focused.color)),
           title: Row(children: [
             Container(
-              height: 30,
-              width: 30,
+              height: context.responsiveAppSizeTheme.current.iconSize30,
+              width: context.responsiveAppSizeTheme.current.iconSize30,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(color: AppColors.bgDisabled, width: 1.5),
@@ -78,14 +78,14 @@ class VendorCartSectionState extends State<VendorCartSection> {
             Text.rich(
               TextSpan(
                 text: widget.vendorData.name,
-                style: context.responsiveTextTheme.current.bodySmall.copyWith(
+                style: context.responsiveTextTheme.current.body1Medium.copyWith(
                     fontWeight: context
                         .responsiveTextTheme.current.appFont.appFontSemiBold,
                     color: TextColors.primary.color),
                 children: [
                   TextSpan(
                       text: " (${widget.cartItems.length})",
-                      style: context.responsiveTextTheme.current.bodyXSmall
+                      style: context.responsiveTextTheme.current.bodySmall
                           .copyWith(color: TextColors.ternary.color)),
                 ],
               ),
