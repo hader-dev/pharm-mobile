@@ -22,7 +22,6 @@ class OrdersCubit extends Cubit<OrdersState> {
       required ScrollController scrollController})
       : super(OrdersInitial(scrollController: scrollController));
 
-
   ScrollController get scrollController {
     if (!_listenerAttached) {
       state.scrollController.addListener(_onScroll);
@@ -122,6 +121,8 @@ class OrdersCubit extends Cubit<OrdersState> {
       _debounceFunction(() => getOrders());
 
   void resetOrderFilters() {
+    getOrders(filters: OrderFilters());
+
     emit(state.toSearchFilterChanged(
       filters: OrderFilters(),
     ));

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
+import 'package:hader_pharm_mobile/features/common_features/orders_details/sub_pages/order_items/widgets/order_item_widget_v2.dart';
 import 'package:hader_pharm_mobile/models/order_details.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
-
-import 'order_item_widget.dart';
 
 class OrderItemsSection extends StatelessWidget {
   final List<OrderItem> orderItems;
@@ -52,7 +51,7 @@ class OrderItemsSection extends StatelessWidget {
                   shrinkWrap: true,
                   children: orderItems
                       .map(
-                        (OrderItem item) => OrderItemWidget(
+                        (OrderItem item) => OrderItemWidgetV2(
                           item: item,
                         ),
                       )

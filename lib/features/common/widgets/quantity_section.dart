@@ -18,6 +18,7 @@ class QuantitySectionModified extends StatelessWidget {
     required this.packageQuantityController,
     required this.onQuantityChanged,
     required this.onPackageQuantityChanged,
+    this.displayQuantityLabel = true,
     this.packageSize,
   });
   final MainAxisAlignment mainAxisAlignment;
@@ -31,6 +32,7 @@ class QuantitySectionModified extends StatelessWidget {
   final TextEditingController quantityController;
   final TextEditingController packageQuantityController;
   final int? packageSize;
+  final bool displayQuantityLabel;
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +50,7 @@ class QuantitySectionModified extends StatelessWidget {
             decrement: decrementQuantity,
             increment: incrementQuantity,
             onQuantityChanged: onQuantityChanged,
+            displayQuantityLabel: displayQuantityLabel,
           ),
           // if (!disabledPackageQuantity)
           //   BaseQuantityController(

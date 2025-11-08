@@ -17,6 +17,7 @@ class BaseQuantityController extends StatelessWidget {
       required this.increment,
       this.crossAxisAlignment = CrossAxisAlignment.center,
       this.onQuantityChanged,
+      this.displayQuantityLabel = true,
       required this.quantityController});
   final String label;
   final VoidCallback decrement;
@@ -24,18 +25,20 @@ class BaseQuantityController extends StatelessWidget {
   final VoidCallback increment;
   final CrossAxisAlignment crossAxisAlignment;
   final OnQuantityChanged? onQuantityChanged;
+  final bool displayQuantityLabel;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: crossAxisAlignment,
       children: [
-        Text(
-          label,
-          style: context.responsiveTextTheme.current.body3Medium.copyWith(
-            color: TextColors.ternary.color,
+        if (displayQuantityLabel)
+          Text(
+            label,
+            style: context.responsiveTextTheme.current.body3Medium.copyWith(
+              color: TextColors.ternary.color,
+            ),
           ),
-        ),
         Padding(
           padding: EdgeInsets.symmetric(
               vertical: context.responsiveAppSizeTheme.current.p8),

@@ -5,11 +5,10 @@ import 'package:hader_pharm_mobile/config/services/network/network_interface.dar
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/cart/cubit/cart_cubit.dart';
+import 'package:hader_pharm_mobile/features/common_features/cart/widgets/cart_item_v2.dart';
 import 'package:hader_pharm_mobile/models/company.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
-
-import 'cart_item.dart';
 
 // }
 
@@ -95,7 +94,7 @@ class VendorCartSectionState extends State<VendorCartSection> {
             _isExpanded.value = value;
           },
           children: widget.cartItems
-              .map((e) => CartItemWidget(
+              .map((e) => CartItemWidgetV2(
                   item: BlocProvider.of<CartCubit>(context)
                       .state
                       .cartItems
