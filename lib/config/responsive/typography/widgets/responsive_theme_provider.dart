@@ -12,7 +12,7 @@ class ResponsiveThemeProvider extends StatefulWidget {
 }
 
 class _ResponsiveThemeProviderState extends State<ResponsiveThemeProvider> {
-  late final DeviceSizes deviceSize;
+  late DeviceSizes deviceSize;
 
   @override
   void didChangeDependencies() {

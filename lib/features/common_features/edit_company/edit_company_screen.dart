@@ -117,13 +117,13 @@ class _CompanyEditScreenState extends State<CompanyEditScreen> {
                           size: 64,
                           color: Colors.grey,
                         ),
-                        ResponsiveGap.s16(),
+                        const ResponsiveGap.s16(),
                         Text(
                           context.translation!.no_company_found,
                           style: context
                               .responsiveTextTheme.current.headLine3SemiBold,
                         ),
-                        ResponsiveGap.s8(),
+                        const ResponsiveGap.s8(),
                         Text(
                           context.translation!.create_company_profile_required,
                           style: context.responsiveTextTheme.current.body1Medium
