@@ -10,6 +10,7 @@ import 'package:hader_pharm_mobile/models/company.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
+import 'package:iconsax/iconsax.dart';
 
 class VendorItem extends StatelessWidget {
   final bool hideLikeButton;
@@ -50,67 +51,56 @@ class VendorItem extends StatelessWidget {
               context.responsiveAppSizeTheme.current.commonWidgetsRadius),
           border: Border.all(color: StrokeColors.normal.color, width: 1),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            if (!hideLikeButton)
-              Padding(
-                padding: EdgeInsets.only(
-                    bottom: context.responsiveAppSizeTheme.current.p4),
-                child: Align(
-                  alignment: Alignment.topRight,
-                  child: InkWell(
-                    splashColor: Colors.transparent,
-                    onTap: onLike,
-                    child: !isLiked
-                        ? Icon(Icons.favorite_border_rounded,
-                            color: Colors.black54)
-                        : Icon(Icons.favorite, color: Colors.red),
-                  ),
-                ),
-              ),
-            if (!hideRemoveButton)
-              Padding(
-                padding: EdgeInsets.only(
-                    bottom: context.responsiveAppSizeTheme.current.p4),
-                child: Align(
-                  alignment: Alignment.topRight,
-                  child: InkWell(
-                    splashColor: Colors.transparent,
-                    onTap: onRemoveFromFavorites,
-                    child: Icon(
-                      Icons.close,
-                      color: Colors.red,
-                      size: context.responsiveAppSizeTheme.current.iconSize16,
+            Expanded(
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  final size = constraints.maxHeight.isFinite
+                      ? constraints.maxHeight
+                      : constraints.maxWidth;
+                  return Center(
+                    child: ClipOval(
+                      child: SizedBox(
+                        width: size,
+                        height: size,
+                        child: companyData.thumbnailImage?.path == null
+                            ? Image.asset(
+                                DrawableAssetStrings.companyPlaceHolderImg,
+                                fit: BoxFit.cover,
+                              )
+                            : Image.network(
+                                getItInstance
+                                    .get<INetworkService>()
+                                    .getFilesPath(
+                                        companyData.thumbnailImage!.path),
+                                fit: BoxFit.cover,
+                                loadingBuilder: (context, child, progress) {
+                                  if (progress == null) return child;
+                                  return const Center(
+                                      child: CircularProgressIndicator());
+                                },
+                                errorBuilder: (context, error, stackTrace) {
+                                  return Image.asset(
+                                    DrawableAssetStrings.companyPlaceHolderImg,
+                                    fit: BoxFit.cover,
+                                  );
+                                },
+                              ),
+                      ),
                     ),
-                  ),
-                ),
+                  );
+                },
               ),
-            Row(
-              children: [
-                Container(
-                  height: 45,
-                  width: 45,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border:
-                        Border.all(color: AppColors.accent1Shade2, width: 1.5),
-                    image: DecorationImage(
-                      image: companyData.thumbnailImage?.path == null
-                          ? AssetImage(
-                                  DrawableAssetStrings.companyPlaceHolderImg)
-                              as ImageProvider
-                          : NetworkImage(
-                              getItInstance.get<INetworkService>().getFilesPath(
-                                    companyData.thumbnailImage!.path,
-                                  ),
-                            ),
-                    ),
-                  ),
-                ),
-                const ResponsiveGap.s8(),
-                Expanded(
-                  child: Text(
+            ),
+            const ResponsiveGap.s12(),
+            Expanded(
+              flex: 3,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
                     companyData.name,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
@@ -118,25 +108,25 @@ class VendorItem extends StatelessWidget {
                     style:
                         context.responsiveTextTheme.current.headLine4SemiBold,
                   ),
-                ),
-              ],
-            ),
-            const ResponsiveGap.s8(),
-            InfoRow(
-              label: context.translation!.address,
-              dataValue: companyData.address ?? "",
-              contentDirection: Axis.vertical,
-            ),
-            InfoRow(
-              label: context.translation!.phone,
-              dataValue: companyData.phone ?? "",
-              contentDirection: Axis.vertical,
-            ),
-            InfoRow(
-              label: context.translation!.email,
-              dataValue: companyData.email ?? "",
-              contentDirection: Axis.vertical,
-            ),
+                  const ResponsiveGap.s12(),
+                  InfoRow(
+                    icon: Iconsax.location,
+                    dataValue: companyData.address ?? "",
+                    contentDirection: Axis.horizontal,
+                  ),
+                  InfoRow(
+                    icon: Icons.phone,
+                    dataValue: companyData.phone ?? "",
+                    contentDirection: Axis.horizontal,
+                  ),
+                  InfoRow(
+                    icon: Icons.email,
+                    dataValue: companyData.email ?? "",
+                    contentDirection: Axis.horizontal,
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       ),
