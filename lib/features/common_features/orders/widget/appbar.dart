@@ -35,7 +35,7 @@ class OrdersAppbar extends StatelessWidget implements PreferredSizeWidget {
                   .copyWith(color: AppColors.bgWhite),
               children: [
                 TextSpan(
-                    text: " (${state.orders.length})",
+                    text: " (${state.totalItemsCount})",
                     style: context.responsiveTextTheme.current.bodySmall
                         .copyWith(color: AppColors.accent1Shade2Deemphasized)),
               ],

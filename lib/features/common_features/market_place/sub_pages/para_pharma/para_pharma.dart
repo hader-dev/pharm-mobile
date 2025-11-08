@@ -75,7 +75,7 @@ class _ParaPharmaProductsPageState extends State<ParaPharmaProductsPage>
                             },
                           )
                         : GridView.builder(
-                            controller: state.scrollController,
+                            controller: cubit.scrollController,
                             physics: const AlwaysScrollableScrollPhysics(),
                             gridDelegate:
                                 SliverGridDelegateWithFixedCrossAxisCount(

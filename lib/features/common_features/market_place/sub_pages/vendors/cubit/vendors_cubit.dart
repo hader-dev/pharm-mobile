@@ -12,27 +12,49 @@ part 'vendors_state.dart';
 class VendorsCubit extends Cubit<VendorsState> {
   Timer? _debounce;
   CompanyRepository companyRepository;
-  final ScrollController scrollController;
-  final TextEditingController searchController;
+
+  bool _listenerAttached = false;
+
   VendorsCubit({
     required this.companyRepository,
-    required this.scrollController,
-    required this.searchController,
-  }) : super(VendorsInitial()) {
-    _onScroll();
+    required ScrollController scrollController,
+    required TextEditingController searchController,
+  }) : super(VendorsInitial(
+          scrollController: scrollController,
+          searchController: searchController,
+        ));
+
+  ScrollController get scrollController {
+    if (!_listenerAttached) {
+      state.scrollController.addListener(_onScroll);
+      _listenerAttached = true;
+    }
+    return state.scrollController;
   }
 
   void _onScroll() {
-    scrollController.addListener(() async {
-      if (scrollController.position.pixels >=
-          scrollController.position.maxScrollExtent) {
-        if (state.offSet < state.totalVendorsCount) {
-          await loadMoreVendors();
-        } else {
-          emit(state.toLoadLimitReached());
-        }
+    if (scrollController.position.pixels >=
+        scrollController.position.maxScrollExtent) {
+      if (state.offSet < state.totalVendorsCount) {
+        loadMoreVendors();
+      } else {
+        emit(state.toLoadLimitReached());
       }
-    });
+    }
+
+    final currentOffset = scrollController.offset;
+    bool newDisplayFilters = state.displayFilters;
+
+    if (currentOffset > state.lastOffset) {
+      newDisplayFilters = false;
+    } else if (currentOffset < state.lastOffset) {
+      newDisplayFilters = true;
+    }
+
+    if (newDisplayFilters != state.displayFilters) {
+      emit(state.toScroll(
+          offset: currentOffset, displayFilters: newDisplayFilters));
+    }
   }
 
   Future<void> fetchVendors({
@@ -69,7 +91,7 @@ class VendorsCubit extends Cubit<VendorsState> {
         offset: offSet,
         searchFilter: state.selectedVendorSearchFilter,
         distributorCategoryId: state.selectedDistributorTypeFilter?.id,
-        search: searchController.text,
+        search: state.searchController.text,
         companyType: CompanyType.Distributor,
       );
 

@@ -39,13 +39,15 @@ class OrdersScreen extends StatelessWidget {
               Expanded(
                 child: BlocBuilder<OrdersCubit, OrdersState>(
                   builder: (context, state) {
+                    final cubit = context.read<OrdersCubit>();
+
                     if (state is OrdersLoading) {
                       return const Center(child: CircularProgressIndicator());
                     }
                     if (state.orders.isEmpty) {
                       return EmptyListWidget(
                         onRefresh: () {
-                          BlocProvider.of<OrdersCubit>(context).getOrders(
+                          cubit.getOrders(
                             filters: state.filters,
                           );
                         },
@@ -54,13 +56,12 @@ class OrdersScreen extends StatelessWidget {
 
                     return RefreshIndicator(
                       onRefresh: () {
-                        return BlocProvider.of<OrdersCubit>(context).getOrders(
+                        return cubit.getOrders(
                           filters: state.filters,
                         );
                       },
                       child: ListView.builder(
-                        controller: BlocProvider.of<OrdersCubit>(context)
-                            .scrollController,
+                        controller: cubit.scrollController,
                         physics: const AlwaysScrollableScrollPhysics(),
                         itemCount: state.orders.length + 1,
                         itemBuilder: (context, index) {

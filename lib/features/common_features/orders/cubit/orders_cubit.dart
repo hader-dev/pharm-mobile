@@ -12,17 +12,25 @@ part 'orders_state.dart';
 
 class OrdersCubit extends Cubit<OrdersState> {
   final IOrderRepository orderRepository;
-  final ScrollController scrollController;
   final TextEditingController searchController;
   Timer? _debounce;
+  bool _listenerAttached = false;
 
   OrdersCubit(
       {required this.searchController,
       required this.orderRepository,
-      required this.scrollController})
-      : super(OrdersInitial()) {
-    _onScroll();
+      required ScrollController scrollController})
+      : super(OrdersInitial(scrollController: scrollController));
+
+
+  ScrollController get scrollController {
+    if (!_listenerAttached) {
+      state.scrollController.addListener(_onScroll);
+      _listenerAttached = true;
+    }
+    return state.scrollController;
   }
+
   Future<void> getOrders({
     int offset = 0,
     OrderFilters? filters,
@@ -55,48 +63,50 @@ class OrdersCubit extends Cubit<OrdersState> {
         limit: PaginationConstants.resultsPerPage,
         searchQuery: searchController.text.trim(),
       ));
+      final updated = state.orders.toList();
+      updated.addAll(ordersResponse.data);
       emit(state.toLoaded(
-          orders: ordersResponse.data,
-          totalItemsCount: ordersResponse.totalItems));
+          orders: updated, totalItemsCount: ordersResponse.totalItems));
     } catch (e) {
       emit(state.toLoadingFailed());
     }
   }
 
   void _onScroll() {
-    scrollController.addListener(() async {
-      if (scrollController.position.pixels >=
-          scrollController.position.maxScrollExtent) {
-        if (state.offSet < state.totalItemsCount) {
-          await loadMoreOrders();
-        } else {
-          emit(state.toLoadLimitReached());
-        }
-      }
+    final localScrollController = scrollController;
+    if (!localScrollController.hasClients) return;
 
-      final currentOffset = scrollController.offset;
-      final previousOffset = state.lastOffset;
-
-      bool displayFilters = state.displayFilters;
-
-      if (currentOffset > previousOffset && displayFilters) {
-        displayFilters = false;
-      } else if (currentOffset < previousOffset && !displayFilters) {
-        displayFilters = true;
-      }
-
-      if (displayFilters != state.displayFilters) {
-        emit(state.toScroll(
-          displayFilters: displayFilters,
-          offset: currentOffset as int,
-        ));
+    if (localScrollController.position.pixels >=
+        localScrollController.position.maxScrollExtent) {
+      if (state.offSet < state.totalItemsCount) {
+        loadMoreOrders();
       } else {
-        emit(state.toScroll(
-          displayFilters: state.displayFilters,
-          offset: currentOffset as int,
-        ));
+        emit(state.toLoadLimitReached());
       }
-    });
+    }
+
+    final currentOffset = localScrollController.offset;
+    final previousOffset = state.lastOffset;
+
+    bool displayFilters = state.displayFilters;
+
+    if (currentOffset > previousOffset && displayFilters) {
+      displayFilters = false;
+    } else if (currentOffset < previousOffset && !displayFilters) {
+      displayFilters = true;
+    }
+
+    if (displayFilters != state.displayFilters) {
+      emit(state.toScroll(
+        displayFilters: displayFilters,
+        offset: currentOffset,
+      ));
+    } else {
+      emit(state.toScroll(
+        displayFilters: state.displayFilters,
+        offset: currentOffset,
+      ));
+    }
   }
 
   Future<void> _debounceFunction(Future<void> Function() func,
@@ -121,5 +131,12 @@ class OrdersCubit extends Cubit<OrdersState> {
     emit(state.toSearchFilterChanged(
       filters: appliedFilters,
     ));
+  }
+
+  @override
+  Future<void> close() {
+    state.scrollController.removeListener(_onScroll);
+    state.scrollController.dispose();
+    return super.close();
   }
 }

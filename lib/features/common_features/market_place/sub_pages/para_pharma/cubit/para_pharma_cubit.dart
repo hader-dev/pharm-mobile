@@ -19,6 +19,7 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
   final FavoriteRepository favoriteRepository;
 
   final DebouncerManager debouncerManager = DebouncerManager();
+  bool _listenerAttached = false;
 
   ParaPharmaCubit(
       {required this.paraPharmaRepository,
@@ -28,8 +29,14 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
       : super(ParaPharmaInitial(
           scrollController: scrollController,
           searchController: searchController,
-        )) {
-    _onScroll();
+        ));
+
+  ScrollController get scrollController {
+    if (!_listenerAttached) {
+      state.scrollController.addListener(_onScroll);
+      _listenerAttached = true;
+    }
+    return state.scrollController;
   }
 
   Future<void> getParaPharmas(
@@ -131,39 +138,39 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
   }
 
   void _onScroll() {
-    state.scrollController.addListener(() async {
-      if (state.scrollController.position.pixels >=
-          state.scrollController.position.maxScrollExtent) {
-        if (state.offSet < state.totalItemsCount) {
-          await loadMoreParaPharmas();
-        } else {
-          emit(state.toLoadLimitReached());
-        }
-      }
+    final localScrollController = state.scrollController;
 
-      final currentOffset = state.scrollController.offset;
-      final previousOffset = state.lastOffset;
-
-      bool displayFilters = state.displayFilters;
-
-      if (currentOffset > previousOffset && displayFilters) {
-        displayFilters = false;
-      } else if (currentOffset < previousOffset && !displayFilters) {
-        displayFilters = true;
-      }
-
-      if (displayFilters != state.displayFilters) {
-        emit(state.toScroll(
-          displayFilters: displayFilters,
-          offset: currentOffset,
-        ));
+    if (localScrollController.position.pixels >=
+        localScrollController.position.maxScrollExtent) {
+      if (state.offSet < state.totalItemsCount) {
+        loadMoreParaPharmas();
       } else {
-        emit(state.toScroll(
-          displayFilters: state.displayFilters,
-          offset: currentOffset,
-        ));
+        emit(state.toLoadLimitReached());
       }
-    });
+    }
+
+    final currentOffset = localScrollController.offset;
+    final previousOffset = state.lastOffset;
+
+    bool displayFilters = state.displayFilters;
+
+    if (currentOffset > previousOffset && displayFilters) {
+      displayFilters = false;
+    } else if (currentOffset < previousOffset && !displayFilters) {
+      displayFilters = true;
+    }
+
+    if (displayFilters != state.displayFilters) {
+      emit(state.toScroll(
+        displayFilters: displayFilters,
+        offset: currentOffset,
+      ));
+    } else {
+      emit(state.toScroll(
+        displayFilters: state.displayFilters,
+        offset: currentOffset,
+      ));
+    }
   }
 
   void refreshParaPharmaCatalogFavorite(

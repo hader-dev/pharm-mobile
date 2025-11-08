@@ -10,11 +10,13 @@ sealed class MedicineProductsState {
   final double lastOffset;
   final bool displayFilters;
   final TextEditingController searchController;
+  final ScrollController scrollController;
 
   const MedicineProductsState({
     required this.lastOffset,
     required this.debounce,
     required this.totalItemsCount,
+    required this.scrollController,
     required this.offSet,
     required this.medicines,
     required this.displayFilters,
@@ -30,37 +32,14 @@ sealed class MedicineProductsState {
       (params.gteUnitPriceHt != null && params.gteUnitPriceHt != "0.0") ||
       (params.lteUnitPriceHt != null && params.lteUnitPriceHt != "100000.0");
 
-  MedicineProductsState copyWith({
-    double? lastOffset,
-    Timer? debounce,
-    int? totalItemsCount,
-    int? offSet,
-    List<BaseMedicineCatalogModel>? medicines,
-    bool? displayFilters,
-    MedicalFilters? params,
-    SearchMedicineFilters? selectedMedicineSearchFilter,
-  }) {
-    return MedicineProductsInitial(
-      lastOffset: lastOffset ?? this.lastOffset,
-      debounce: debounce ?? this.debounce,
-      totalItemsCount: totalItemsCount ?? this.totalItemsCount,
-      offSet: offSet ?? this.offSet,
-      medicines: medicines ?? this.medicines,
-      displayFilters: displayFilters ?? this.displayFilters,
-      params: params ?? this.params,
-      selectedMedicineSearchFilter:
-          selectedMedicineSearchFilter ?? this.selectedMedicineSearchFilter,
-      searchController: searchController,
-    );
-  }
-
-  MedicineProductsInitial initial({
+  MedicineProductsInitial toInitial({
     double lastOffset = 0.0,
     dynamic debounce,
     int totalItemsCount = 0,
     int offSet = 0,
     List<BaseMedicineCatalogModel> medicines = const [],
     bool displayFilters = false,
+    ScrollController? scrollController,
     MedicalFilters params = const MedicalFilters(),
     SearchMedicineFilters selectedMedicineSearchFilter =
         SearchMedicineFilters.dci,
@@ -74,19 +53,21 @@ sealed class MedicineProductsState {
       medicines: medicines,
       displayFilters: displayFilters,
       params: params,
+      scrollController: scrollController ?? ScrollController(),
       selectedMedicineSearchFilter: selectedMedicineSearchFilter,
     );
   }
 
-  MedicineProductsLoading loading({int? offset}) =>
+  MedicineProductsLoading toLoading({int? offset}) =>
       MedicineProductsLoading.fromState(
-        copyWith(offSet: offset ?? offSet),
+        state: this,
+        offSet: offset,
       );
 
-  MedicineLikeFailed likeFailed({required String medicineId}) =>
+  MedicineLikeFailed toLikeFailed({required String medicineId}) =>
       MedicineLikeFailed.fromState(this, medicineId: medicineId);
 
-  MedicineLiked liked({required String medicineId, required bool isLiked}) {
+  MedicineLiked toLiked({required String medicineId, required bool isLiked}) {
     final updated = medicines.map((element) {
       if (element.id == medicineId) {
         element.isLiked = isLiked;
@@ -96,55 +77,52 @@ sealed class MedicineProductsState {
     }).toList();
 
     return MedicineLiked.fromState(
-      copyWith(medicines: updated),
+      state: this,
+      medicines: updated,
       medicineId: medicineId,
       likedOrUnliked: isLiked,
     );
   }
 
-  MedicineProductsScroll scroll({
+  MedicineProductsScroll toScroll({
     required double offset,
     required bool displayFilters,
   }) =>
       MedicineProductsScroll.fromState(
-        copyWith(
-          lastOffset: offset,
-          displayFilters: displayFilters,
-        ),
+        state: this,
+        lastOffset: offset,
+        displayFilters: displayFilters,
       );
 
-  MedicineSearchFilterChanged searchFilterChanged({
+  MedicineSearchFilterChanged toSearchFilterChanged({
     SearchMedicineFilters? searchFilter,
     Timer? debounce,
     MedicalFilters? params,
   }) =>
       MedicineSearchFilterChanged.fromState(
-        copyWith(
-          params: params ?? params,
-          debounce: debounce ?? debounce,
-          selectedMedicineSearchFilter:
-              searchFilter ?? selectedMedicineSearchFilter,
-        ),
+        state: this,
+        params: params,
+        debounce: debounce,
+        selectedMedicineSearchFilter: searchFilter,
       );
 
-  MedicinesLoadLimitReached loadLimitReached() =>
+  MedicinesLoadLimitReached toLoadLimitReached() =>
       MedicinesLoadLimitReached.fromState(this);
 
-  MedicineProductsLoaded loaded({
-    List<BaseMedicineCatalogModel>? medicines,
-    int? totalItemsCount,
+  MedicineProductsLoaded toLoaded({
+    required List<BaseMedicineCatalogModel> medicines,
+    required int totalItemsCount,
   }) =>
       MedicineProductsLoaded.fromState(
-        copyWith(
-          medicines: medicines ?? medicines,
-          totalItemsCount: totalItemsCount ?? totalItemsCount,
-        ),
+        state: this,
+        medicines: medicines,
+        totalItemsCount: totalItemsCount,
       );
 
-  MedicineProductsLoadingFailed loadingFailed() =>
+  MedicineProductsLoadingFailed toLoadingFailed() =>
       MedicineProductsLoadingFailed.fromState(this);
 
-  LoadingMoreMedicine loadingMore() => LoadingMoreMedicine.fromState(this);
+  LoadingMoreMedicine toLoadingMore() => LoadingMoreMedicine.fromState(this);
 }
 
 final class MedicineProductsInitial extends MedicineProductsState {
@@ -152,27 +130,30 @@ final class MedicineProductsInitial extends MedicineProductsState {
     required super.searchController,
     super.lastOffset = 0.0,
     super.debounce,
+    ScrollController? scrollController,
     super.totalItemsCount = 0,
     super.offSet = 0,
     super.medicines = const [],
     super.displayFilters = true,
     super.params = const MedicalFilters(),
     super.selectedMedicineSearchFilter = SearchMedicineFilters.dci,
-  });
+  }) : super(scrollController: scrollController ?? ScrollController());
 }
 
 final class MedicineProductsLoading extends MedicineProductsState {
-  MedicineProductsLoading.fromState(MedicineProductsState state)
+  MedicineProductsLoading.fromState(
+      {required MedicineProductsState state, int? offSet})
       : super(
           lastOffset: state.lastOffset,
           debounce: state.debounce,
           totalItemsCount: state.totalItemsCount,
-          offSet: state.offSet,
+          offSet: offSet ?? state.offSet,
           medicines: state.medicines,
           displayFilters: state.displayFilters,
           params: state.params,
           selectedMedicineSearchFilter: state.selectedMedicineSearchFilter,
           searchController: state.searchController,
+          scrollController: state.scrollController,
         );
 }
 
@@ -188,21 +169,24 @@ final class LoadingMoreMedicine extends MedicineProductsState {
           params: state.params,
           selectedMedicineSearchFilter: state.selectedMedicineSearchFilter,
           searchController: state.searchController,
+          scrollController: state.scrollController,
         );
 }
 
 final class MedicineProductsLoaded extends MedicineProductsState {
-  MedicineProductsLoaded.fromState(MedicineProductsState state)
+  MedicineProductsLoaded.fromState(
+      {required MedicineProductsState state,
+      required super.medicines,
+      required super.totalItemsCount})
       : super(
           lastOffset: state.lastOffset,
           debounce: state.debounce,
-          totalItemsCount: state.totalItemsCount,
           offSet: state.offSet,
-          medicines: state.medicines,
           displayFilters: state.displayFilters,
           params: state.params,
           selectedMedicineSearchFilter: state.selectedMedicineSearchFilter,
           searchController: state.searchController,
+          scrollController: state.scrollController,
         );
 }
 
@@ -218,6 +202,7 @@ final class MedicineProductsLoadingFailed extends MedicineProductsState {
           params: state.params,
           selectedMedicineSearchFilter: state.selectedMedicineSearchFilter,
           searchController: state.searchController,
+          scrollController: state.scrollController,
         );
 }
 
@@ -233,47 +218,16 @@ final class MedicinesLoadLimitReached extends MedicineProductsState {
           params: state.params,
           selectedMedicineSearchFilter: state.selectedMedicineSearchFilter,
           searchController: state.searchController,
+          scrollController: state.scrollController,
         );
 }
 
 final class MedicineSearchFilterChanged extends MedicineProductsState {
-  MedicineSearchFilterChanged.fromState(MedicineProductsState state)
-      : super(
-          lastOffset: state.lastOffset,
-          debounce: state.debounce,
-          totalItemsCount: state.totalItemsCount,
-          offSet: state.offSet,
-          medicines: state.medicines,
-          displayFilters: state.displayFilters,
-          params: state.params,
-          selectedMedicineSearchFilter: state.selectedMedicineSearchFilter,
-          searchController: state.searchController,
-        );
-}
-
-final class MedicineProductsScroll extends MedicineProductsState {
-  MedicineProductsScroll.fromState(MedicineProductsState state)
-      : super(
-          lastOffset: state.lastOffset,
-          debounce: state.debounce,
-          totalItemsCount: state.totalItemsCount,
-          offSet: state.offSet,
-          medicines: state.medicines,
-          displayFilters: state.displayFilters,
-          params: state.params,
-          selectedMedicineSearchFilter: state.selectedMedicineSearchFilter,
-          searchController: state.searchController,
-        );
-}
-
-final class MedicineLiked extends MedicineProductsState {
-  final String medicineId;
-  final bool likedOrUnliked;
-
-  MedicineLiked.fromState(
-    MedicineProductsState state, {
-    required this.medicineId,
-    required this.likedOrUnliked,
+  MedicineSearchFilterChanged.fromState({
+    required MedicineProductsState state,
+    SearchMedicineFilters? selectedMedicineSearchFilter,
+    Timer? debounce,
+    MedicalFilters? params,
   }) : super(
           lastOffset: state.lastOffset,
           debounce: state.debounce,
@@ -282,8 +236,49 @@ final class MedicineLiked extends MedicineProductsState {
           medicines: state.medicines,
           displayFilters: state.displayFilters,
           params: state.params,
+          selectedMedicineSearchFilter: selectedMedicineSearchFilter ??
+              state.selectedMedicineSearchFilter,
+          searchController: state.searchController,
+          scrollController: state.scrollController,
+        );
+}
+
+final class MedicineProductsScroll extends MedicineProductsState {
+  MedicineProductsScroll.fromState({
+    required MedicineProductsState state,
+    required super.lastOffset,
+    required super.displayFilters,
+  }) : super(
+          debounce: state.debounce,
+          totalItemsCount: state.totalItemsCount,
+          offSet: state.offSet,
+          medicines: state.medicines,
+          params: state.params,
           selectedMedicineSearchFilter: state.selectedMedicineSearchFilter,
           searchController: state.searchController,
+          scrollController: state.scrollController,
+        );
+}
+
+final class MedicineLiked extends MedicineProductsState {
+  final String medicineId;
+  final bool likedOrUnliked;
+
+  MedicineLiked.fromState({
+    required MedicineProductsState state,
+    required super.medicines,
+    required this.medicineId,
+    required this.likedOrUnliked,
+  }) : super(
+          lastOffset: state.lastOffset,
+          debounce: state.debounce,
+          totalItemsCount: state.totalItemsCount,
+          offSet: state.offSet,
+          displayFilters: state.displayFilters,
+          params: state.params,
+          selectedMedicineSearchFilter: state.selectedMedicineSearchFilter,
+          searchController: state.searchController,
+          scrollController: state.scrollController,
         );
 }
 
@@ -303,5 +298,6 @@ final class MedicineLikeFailed extends MedicineProductsState {
           params: state.params,
           selectedMedicineSearchFilter: state.selectedMedicineSearchFilter,
           searchController: state.searchController,
+          scrollController: state.scrollController,
         );
 }
