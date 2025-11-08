@@ -10,7 +10,8 @@ import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/validators.dart';
 
 class CompanyFormSection extends StatefulWidget {
-  const CompanyFormSection({super.key});
+  const CompanyFormSection({super.key, required this.isEditable});
+  final bool isEditable;
 
   @override
   State<CompanyFormSection> createState() => _CompanyFormSectionState();

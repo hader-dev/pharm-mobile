@@ -8,7 +8,7 @@ import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/features/app_layout/actions/show_new_app_version_dialog.dart';
 import 'package:hader_pharm_mobile/features/common/dialog/log_out_dialog.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
-import 'package:hader_pharm_mobile/features/common_features/edit_company/edit_company.dart';
+import 'package:hader_pharm_mobile/features/common_features/edit_company/edit_company_screen.dart';
 import 'package:hader_pharm_mobile/models/jwt_decoded.dart';
 import 'package:hader_pharm_mobile/utils/env_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
@@ -87,43 +87,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             });
                           }),
                       if (_userHasCompany)
-                        _isPharmacyManager
-                            ? SettingsTile(
-                                icon: LucideIcons.edit,
-                                title: context.translation!.edit_company,
-                                onTap: () async {
-                                  try {
-                                    await GoRouter.of(context).pushNamed(
-                                        RoutingManager.editCompanyScreen,
-                                        extra: CompanyScreenMode.edit);
-                                    setState(() {});
-                                  } catch (e) {
-                                    debugPrint(
-                                        "Error navigating to edit company: $e");
-                                  }
-                                })
-                            : SettingsTile(
-                                icon: LucideIcons.building,
-                                title: context.translation!.view_company,
-                                onTap: () async {
-                                  try {
-                                    await GoRouter.of(context).pushNamed(
-                                        RoutingManager.editCompanyScreen,
-                                        extra: CompanyScreenMode.view);
-                                    setState(() {});
-                                  } catch (e) {
-                                    debugPrint(
-                                        "Error navigating to view company: $e");
-                                  }
-                                })
-                      else if (_isPharmacyManager)
                         SettingsTile(
-                            icon: LucideIcons.plus,
-                            title: context.translation!.create_company_action,
+                            icon: _isPharmacyManager
+                                ? LucideIcons.edit
+                                : LucideIcons.building,
+                            title: _isPharmacyManager
+                                ? context.translation!.edit_company
+                                : context.translation!.view_company,
                             onTap: () async {
                               await GoRouter.of(context).pushNamed(
-                                  RoutingManager.createCompanyProfile);
-                              setState(() {});
+                                  RoutingManager.editCompanyScreen,
+                                  extra: _isPharmacyManager
+                                      ? CompanyScreenMode.edit
+                                      : CompanyScreenMode.view);
                             }),
                       SettingsTile(
                           icon: LucideIcons.lock,

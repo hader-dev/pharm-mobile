@@ -8,32 +8,28 @@ import 'package:hader_pharm_mobile/config/services/network/network_interface.dar
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
-import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
+import 'package:hader_pharm_mobile/features/common_features/edit_company/cubit/edit_company_cubit.dart';
+import 'package:hader_pharm_mobile/features/common_features/edit_company/widgets/company_form_section.dart';
+import 'package:hader_pharm_mobile/features/common_features/edit_company/widgets/company_logo_section.dart';
 import 'package:hader_pharm_mobile/repositories/remote/company/company_repository_impl.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart' show Iconsax;
 
-import 'cubit/edit_company_cubit.dart';
-import 'view_company/widgets/company_info_display.dart';
-import 'view_company/widgets/company_logo_display.dart';
-import 'widgets/company_form_section.dart';
-import 'widgets/company_logo_section.dart';
-
 enum CompanyScreenMode { view, edit }
 
-class EditCompanyScreen extends StatefulWidget {
+class CompanyEditScreen extends StatefulWidget {
   final CompanyScreenMode? initialMode;
 
-  const EditCompanyScreen({
+  const CompanyEditScreen({
     super.key,
     this.initialMode = CompanyScreenMode.view,
   });
 
   @override
-  State<EditCompanyScreen> createState() => _EditCompanyScreenState();
+  State<CompanyEditScreen> createState() => _CompanyEditScreenState();
 }
 
-class _EditCompanyScreenState extends State<EditCompanyScreen> {
+class _CompanyEditScreenState extends State<CompanyEditScreen> {
   late CompanyScreenMode currentMode;
 
   @override
@@ -171,24 +167,26 @@ class _EditCompanyScreenState extends State<EditCompanyScreen> {
                   );
                 }
 
-                if (state is EditCompanyFailed) {
-                  return Center(
-                    child: EmptyListWidget(
-                      onRefresh: () {
-                        context.read<EditCompanyCubit>().initCompanyData();
-                      },
-                    ),
-                  );
-                }
-
                 return ListView(
                   shrinkWrap: true,
                   physics: const BouncingScrollPhysics(),
                   children: [
                     const ResponsiveGap.s16(),
-                    _buildDescriptionText(context),
+                    Text(
+                      currentMode == CompanyScreenMode.edit
+                          ? context.translation!.update_company_description
+                          : context.translation!.view_company_description,
+                      style: context.responsiveTextTheme.current.body1Medium
+                          .copyWith(
+                        color: TextColors.ternary.color,
+                      ),
+                    ),
                     const ResponsiveGap.s24(),
-                    _buildCompanyContent(),
+                    const CompanyLogoSection(),
+                    const ResponsiveGap.s24(),
+                    CompanyFormSection(
+                      isEditable: currentMode == CompanyScreenMode.edit,
+                    ),
                     const ResponsiveGap.s16(),
                   ],
                 );
@@ -198,36 +196,5 @@ class _EditCompanyScreenState extends State<EditCompanyScreen> {
         ),
       ),
     );
-  }
-
-  Widget _buildDescriptionText(BuildContext context) {
-    return Text(
-      currentMode == CompanyScreenMode.edit
-          ? context.translation!.update_company_description
-          : context.translation!.view_company_description,
-      style: context.responsiveTextTheme.current.body1Medium.copyWith(
-        color: TextColors.ternary.color,
-      ),
-    );
-  }
-
-  Widget _buildCompanyContent() {
-    if (currentMode == CompanyScreenMode.edit) {
-      return Column(
-        children: [
-          const CompanyLogoSection(),
-          const ResponsiveGap.s24(),
-          const CompanyFormSection(),
-        ],
-      );
-    } else {
-      return Column(
-        children: [
-          const CompanyLogoDisplay(),
-          const ResponsiveGap.s24(),
-          const CompanyInfoDisplay(),
-        ],
-      );
-    }
   }
 }

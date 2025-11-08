@@ -1,42 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/routes/deeplinks_routes.dart';
+import 'package:hader_pharm_mobile/features/app_componants/app_componants.dart';
+import 'package:hader_pharm_mobile/features/app_layout/app_layout.dart';
 import 'package:hader_pharm_mobile/features/common_features/announcements/all_announcements_screen.dart';
 import 'package:hader_pharm_mobile/features/common_features/anouncement_details/announcement_details.dart';
+import 'package:hader_pharm_mobile/features/common_features/change_password/change_password.dart';
+import 'package:hader_pharm_mobile/features/common_features/check_email/check_email.dart';
+import 'package:hader_pharm_mobile/features/common_features/check_phone/check_phone.dart';
+import 'package:hader_pharm_mobile/features/common_features/congratulation/congratulation.dart';
+import 'package:hader_pharm_mobile/features/common_features/create_company_profile/create_company_profile.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_create_client/deligate_create_client.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_create_order/deligate_create_order.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_marketplace/market_place.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_orders_details/orders_details.dart';
+import 'package:hader_pharm_mobile/features/common_features/edit_company/edit_company_screen.dart';
+import 'package:hader_pharm_mobile/features/common_features/edit_profile/edit_profile.dart';
+import 'package:hader_pharm_mobile/features/common_features/favorites/favorites.dart';
 import 'package:hader_pharm_mobile/features/common_features/help_support/help_support.dart';
 import 'package:hader_pharm_mobile/features/common_features/invoice/invoice.dart';
+import 'package:hader_pharm_mobile/features/common_features/language/lang_screen.dart';
 import 'package:hader_pharm_mobile/features/common_features/leagal_policies/leagal_policies.dart';
+import 'package:hader_pharm_mobile/features/common_features/login/login.dart';
 import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/medicine_catalog_details_client.dart';
 import 'package:hader_pharm_mobile/features/common_features/notification/notification.dart';
+import 'package:hader_pharm_mobile/features/common_features/onboarding/onboarding.dart'
+    show OnboardingScreen;
 import 'package:hader_pharm_mobile/features/common_features/order_complaint_details/complaint.dart';
+import 'package:hader_pharm_mobile/features/common_features/orders/orders.dart';
+import 'package:hader_pharm_mobile/features/common_features/orders_details/orders_details.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/para_pharma_catalog_details_client.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/para_pharma_catalog_details_deligate.dart';
 import 'package:hader_pharm_mobile/features/common_features/profile/profile.dart';
-
-import '../../features/app_componants/app_componants.dart';
-import '../../features/app_layout/app_layout.dart';
-import '../../features/common_features/change_password/change_password.dart';
-import '../../features/common_features/check_email/check_email.dart';
-import '../../features/common_features/check_phone/check_phone.dart';
-import '../../features/common_features/congratulation/congratulation.dart';
-import '../../features/common_features/create_company_profile/create_company_profile.dart';
-import '../../features/common_features/edit_company/edit_company.dart'
-    show EditCompanyScreen, CompanyScreenMode;
-import '../../features/common_features/edit_profile/edit_profile.dart'
-    show EditProfileScreen;
-import '../../features/common_features/favorites/favorites.dart';
-import '../../features/common_features/language/lang_screen.dart';
-import '../../features/common_features/login/login.dart';
-import '../../features/common_features/onboarding/onboarding.dart';
-import '../../features/common_features/orders/orders.dart';
-import '../../features/common_features/orders_details/orders_details.dart';
-import '../../features/common_features/register/register.dart';
-import '../../features/common_features/splash/splash.dart';
-import '../../features/common_features/vendor_details/vendor_details.dart';
+import 'package:hader_pharm_mobile/features/common_features/register/register.dart';
+import 'package:hader_pharm_mobile/features/common_features/splash/splash.dart';
+import 'package:hader_pharm_mobile/features/common_features/vendor_details/vendor_details.dart';
 
 class RoutingManager {
   static List<String> screenStack = [];
@@ -229,7 +227,7 @@ class RoutingManager {
           builder: (BuildContext context, GoRouterState state) {
             // Check if mode is passed as extra parameter
             final mode = state.extra as CompanyScreenMode?;
-            return EditCompanyScreen(initialMode: mode);
+            return CompanyEditScreen(initialMode: mode);
           },
         ),
         GoRoute(
