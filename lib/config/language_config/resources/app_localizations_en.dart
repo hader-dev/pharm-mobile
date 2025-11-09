@@ -1033,6 +1033,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get from => 'From';
 
   @override
+  String get package => 'Package';
+
+  @override
   String get filter_items_from => 'From';
 
   @override

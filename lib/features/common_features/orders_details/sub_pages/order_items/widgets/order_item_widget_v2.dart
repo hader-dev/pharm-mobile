@@ -31,10 +31,8 @@ class OrderItemWidgetV2 extends StatelessWidget {
         ),
       ),
       child: IntrinsicHeight(
-        // 👈 ensures equal height between image + text
         child: Row(
-          crossAxisAlignment:
-              CrossAxisAlignment.stretch, // fills available height
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(
@@ -52,13 +50,12 @@ class OrderItemWidgetV2 extends StatelessWidget {
               ),
             ),
             const ResponsiveGap.s8(),
-            // 🧠 Do not use Expanded inside Column here
             Flexible(
               flex: 3,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min, // prevents unbounded height
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Text.rich(
                     softWrap: true,

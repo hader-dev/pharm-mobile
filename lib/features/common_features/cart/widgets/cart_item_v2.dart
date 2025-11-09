@@ -36,7 +36,7 @@ class CartItemWidgetV2 extends StatelessWidget {
         borderRadius: BorderRadius.circular(
             context.responsiveAppSizeTheme.current.commonWidgetsRadius),
       ),
-      height: 170,
+      height: 190,
       child: Row(
         children: [
           Expanded(
@@ -80,7 +80,12 @@ class CartItemWidgetV2 extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "${num.parse(item.model.unitPriceHt).toStringAsFixed(2)} ${context.translation!.currency}",
+                      "${context.translation!.package} ${item.packageQuantityController.text}",
+                      style: context.responsiveTextTheme.current.headLine4Medium
+                          .copyWith(color: Colors.grey),
+                    ),
+                    Text(
+                      "${(num.parse(item.model.unitPriceHt) * num.parse(item.quantityController.text)).toStringAsFixed(2)} ${context.translation!.currency}",
                       style: context.responsiveTextTheme.current.headLine4Medium
                           .copyWith(color: AppColors.accent1Shade1),
                     ),

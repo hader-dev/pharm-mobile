@@ -2068,6 +2068,12 @@ abstract class AppLocalizations {
   /// **'From'**
   String get from;
 
+  /// No description provided for @package.
+  ///
+  /// In en, this message translates to:
+  /// **'Package'**
+  String get package;
+
   /// No description provided for @filter_items_from.
   ///
   /// In en, this message translates to:

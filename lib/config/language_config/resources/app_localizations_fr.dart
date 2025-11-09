@@ -1045,6 +1045,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get from => 'From';
 
   @override
+  String get package => 'Collisage';
+
+  @override
   String get filter_items_from => 'De';
 
   @override

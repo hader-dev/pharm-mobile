@@ -327,6 +327,7 @@
   "app_name_2": "ader Pharma",
   "filter_items_to": "To",
   "from": "From",
+  "package": "Package",
   "filter_items_from": "From",
   "no_items_found": "No items found",
   "refresh": "Refresh",

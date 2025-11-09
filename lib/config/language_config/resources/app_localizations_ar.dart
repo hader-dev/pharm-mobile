@@ -1030,6 +1030,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get from => 'من';
 
   @override
+  String get package => 'الباقات';
+
+  @override
   String get filter_items_from => 'من';
 
   @override

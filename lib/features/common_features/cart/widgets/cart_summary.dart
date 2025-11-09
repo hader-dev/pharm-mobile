@@ -95,6 +95,7 @@ class CartSummarySection extends StatelessWidget {
                           const Spacer(),
                           BlocBuilder<CartCubit, CartState>(
                             builder: (context, state) {
+                             
                               return FormattedPrice(
                                 price: num.parse(
                                     state.totalHtAmount.toStringAsFixed(2)),

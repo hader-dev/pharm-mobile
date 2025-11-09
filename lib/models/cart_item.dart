@@ -173,8 +173,8 @@ class CartItemModel {
   }
 
   Map<String, num> getTotalPrice() {
-    num totalHtPrice = num.parse(totalAmountHt) * quantity;
-    num totalTTCPrice = num.parse(totalAmountTtc) * quantity;
+    num totalHtPrice = num.parse(unitPriceHt) * quantity;
+    num totalTTCPrice = num.parse(unitPriceTtc) * quantity;
     return <String, num>{
       "totalHtPrice": totalHtPrice,
       "totalTTCPrice": totalTTCPrice
