@@ -43,29 +43,29 @@ class PromotionItemWidget4 extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-            flex: 5,
+            flex: 3,
             child: Card(
               clipBehavior: Clip.hardEdge,
-              child: AspectRatio(
-                aspectRatio: 16 / 9,
-                child: CachedNetworkImageWithAssetFallback(
-                  imageUrl: getItInstance
-                      .get<INetworkService>()
-                      .getFilesPath(announcement.thumbnailImage?.path ?? ""),
-                  assetImage: DrawableAssetStrings.companyPlaceHolderImg,
-                  fit: BoxFit.contain,
-                ),
+              child: CachedNetworkImageWithAssetFallback(
+                width: double.infinity,
+                imageUrl: getItInstance
+                    .get<INetworkService>()
+                    .getFilesPath(announcement.thumbnailImage?.path ?? ""),
+                assetImage: DrawableAssetStrings.companyPlaceHolderImg,
+                fit: BoxFit.contain,
               ),
             ),
           ),
           const ResponsiveGap.s8(),
           Expanded(
+            flex: 2,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  height: 30,
-                  width: 30,
+                  height: context.responsiveAppSizeTheme.current.iconSize30,
+                  width: context.responsiveAppSizeTheme.current.iconSize30,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(color: AppColors.bgDisabled, width: 1.5),

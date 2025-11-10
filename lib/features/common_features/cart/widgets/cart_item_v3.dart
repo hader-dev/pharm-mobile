@@ -42,66 +42,68 @@ class CartItemWidgetV3 extends StatelessWidget {
       packageQuantityController: item.packageQuantityController,
     );
 
-    return Container(
-      margin: EdgeInsets.symmetric(
-          vertical: context.responsiveAppSizeTheme.current.p8,
-          horizontal: context.responsiveAppSizeTheme.current.p4),
-      padding: EdgeInsets.symmetric(
-          vertical: context.responsiveAppSizeTheme.current.p10,
-          horizontal: context.responsiveAppSizeTheme.current.p10),
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey.shade200),
-        borderRadius: BorderRadius.circular(
-            context.responsiveAppSizeTheme.current.commonWidgetsRadius),
-      ),
-      height: 200,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            flex: 2,
-            child: CachedNetworkImageWithAssetFallback(
-                fit: BoxFit.fill,
-                height: double.infinity,
-                imageUrl: imageItem,
-                assetImage: DrawableAssetStrings.medicinePlaceHolderImg),
-          ),
-          const ResponsiveGap.s8(),
-          Expanded(
-            flex: 4,
-            child: Padding(
-              padding:
-                  EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text(
-                    item.model.designation,
-                    softWrap: true,
-                    overflow: TextOverflow.ellipsis,
-                    style:
-                        context.responsiveTextTheme.current.headLine5SemiBold,
-                  ),
-                  Text(
-                    "${context.translation!.package} ${item.packageQuantityController.text}",
-                    style: context.responsiveTextTheme.current.headLine4Medium
-                        .copyWith(color: Colors.grey),
-                  ),
-                  Text(
-                    "${(num.parse(item.model.unitPriceHt) * num.parse(item.quantityController.text)).toStringAsFixed(2)} ${context.translation!.currency}",
-                    style: context.responsiveTextTheme.current.headLine4Medium
-                        .copyWith(color: AppColors.accent1Shade1),
-                  ),
-                  removeButton(cartCubit, context),
-                ],
+    return AspectRatio(
+      aspectRatio: context.isTabelet ? 2.5 : 16 / 9,
+      child: Container(
+        margin: EdgeInsets.symmetric(
+            vertical: context.responsiveAppSizeTheme.current.p8,
+            horizontal: context.responsiveAppSizeTheme.current.p4),
+        padding: EdgeInsets.symmetric(
+            vertical: context.responsiveAppSizeTheme.current.p10,
+            horizontal: context.responsiveAppSizeTheme.current.p10),
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey.shade200),
+          borderRadius: BorderRadius.circular(
+              context.responsiveAppSizeTheme.current.commonWidgetsRadius),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              flex: 2,
+              child: CachedNetworkImageWithAssetFallback(
+                  fit: BoxFit.fill,
+                  height: double.infinity,
+                  imageUrl: imageItem,
+                  assetImage: DrawableAssetStrings.medicinePlaceHolderImg),
+            ),
+            const ResponsiveGap.s8(),
+            Expanded(
+              flex: 4,
+              child: Padding(
+                padding:
+                    EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      item.model.designation,
+                      softWrap: true,
+                      overflow: TextOverflow.ellipsis,
+                      style:
+                          context.responsiveTextTheme.current.headLine5SemiBold,
+                    ),
+                    Text(
+                      "${context.translation!.package} ${item.packageQuantityController.text}",
+                      style: context.responsiveTextTheme.current.headLine4Medium
+                          .copyWith(color: Colors.grey),
+                    ),
+                    Text(
+                      "${(num.parse(item.model.unitPriceHt) * num.parse(item.quantityController.text)).toStringAsFixed(2)} ${context.translation!.currency}",
+                      style: context.responsiveTextTheme.current.headLine4Medium
+                          .copyWith(color: AppColors.accent1Shade1),
+                    ),
+                    removeButton(cartCubit, context),
+                  ],
+                ),
               ),
             ),
-          ),
-          Expanded(
-            child: quantitySectionModified,
-          )
-        ],
+            Expanded(
+              child: quantitySectionModified,
+            )
+          ],
+        ),
       ),
     );
   }

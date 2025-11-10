@@ -6,6 +6,7 @@ import 'package:hader_pharm_mobile/features/common_features/home/home.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/market_place.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/medicine_products/cubit/medicine_products_cubit.dart';
 import 'package:hader_pharm_mobile/models/medicine_catalog.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class MedicinesSectionItems extends StatelessWidget {
   const MedicinesSectionItems({super.key, required this.minSectionHeight});
@@ -46,8 +47,8 @@ class MedicinesSectionItems extends StatelessWidget {
           hCubit.refreshMedicineCatalogFavorite(medicine.id, !medicine.isLiked);
         }
 
-        return SizedBox(
-          height: minSectionHeight,
+        return AspectRatio(
+          aspectRatio: context.isTabelet ? 2 : 1.2,
           child: ListView.builder(
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,

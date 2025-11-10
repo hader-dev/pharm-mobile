@@ -12,7 +12,6 @@ import 'package:hader_pharm_mobile/features/common_features/vendor_details/cubit
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
-import 'package:hader_pharm_mobile/utils/responsive/silver_grid_params.dart';
 
 class ParapharmaPage extends StatefulWidget {
   const ParapharmaPage({super.key});
@@ -100,16 +99,7 @@ class _ParapharmaPageState extends State<ParapharmaPage>
                       onRefresh: () {
                         return parapharmCubit.getParaPharmas();
                       },
-                      child: GridView.builder(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 1,
-                          crossAxisSpacing: calculateMarketplaceGridSpacing(
-                              bContext.deviceSize),
-                          mainAxisSpacing: calculateMarketplaceMainAxisSpacing(
-                              bContext.deviceSize),
-                          childAspectRatio: calculateVendorItemsAspectRatio(
-                              bContext.deviceSize, bContext.orientation),
-                        ),
+                      child: ListView.builder(
                         controller: state.scrollController,
                         shrinkWrap: true,
                         physics: const AlwaysScrollableScrollPhysics(),

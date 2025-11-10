@@ -10,7 +10,6 @@ import 'package:hader_pharm_mobile/features/common_features/home/widgets/announc
 import 'package:hader_pharm_mobile/features/common_features/home/widgets/medicine/medicine_section.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/widgets/parapharm/para_pharma_section.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/widgets/vendors/vendors_section.dart';
-import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -34,7 +33,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final minSectionHeight = MediaQuery.of(context).size.height * 0.15;
+    final screenSize = MediaQuery.of(context).size;
+    final minSectionHeight = screenSize.height * 0.15;
+    // debugPrint("screenSize: $screenSize");
+    final sectionHeightModifier =
+        screenSize.width <= DeviceSizes.mediumMobile.width ? 2 : 2.2;
 
     return StateProvider(
       child: Scaffold(
@@ -72,16 +75,17 @@ class _HomeScreenState extends State<HomeScreen> {
                       if (state.announcements.isNotEmpty)
                         PromotionSectionV5(
                             announcements: state.announcements,
-                            minSectionHeight: context.deviceSize.width <=
-                                    DeviceSizes.largeMobile.width
-                                ? minSectionHeight * 1.2
-                                : minSectionHeight * 1.5),
+                            minSectionHeight: minSectionHeight),
                       const ResponsiveGap.s12(),
-                      ParapharmaSection(minSectionHeight: minSectionHeight * 2),
+                      ParapharmaSection(
+                          minSectionHeight:
+                              minSectionHeight * sectionHeightModifier),
                       const ResponsiveGap.s12(),
                       const VendorSection(),
                       const ResponsiveGap.s12(),
-                      MedicineSection(minSectionHeight: minSectionHeight * 2),
+                      MedicineSection(
+                          minSectionHeight:
+                              minSectionHeight * sectionHeightModifier),
                       const ResponsiveGap.s12(),
                     ],
                   )),

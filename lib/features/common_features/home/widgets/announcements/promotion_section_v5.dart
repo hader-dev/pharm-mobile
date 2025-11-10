@@ -39,8 +39,8 @@ class PromotionSectionV5 extends StatelessWidget {
             right: context.responsiveAppSizeTheme.current.p8,
             left: context.responsiveAppSizeTheme.current.p8,
           ),
-          child: SizedBox(
-            height: minSectionHeight * 2.5,
+          child: AspectRatio(
+            aspectRatio: context.isTabelet ? 2 : 1.2,
             child: Column(
               children: [
                 Row(

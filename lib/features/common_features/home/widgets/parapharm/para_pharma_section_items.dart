@@ -6,6 +6,7 @@ import 'package:hader_pharm_mobile/features/common_features/home/home.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/market_place.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/cubit/para_pharma_cubit.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class ParaPharmaSectionItems extends StatelessWidget {
   const ParaPharmaSectionItems({super.key, required this.minSectionHeight});
@@ -48,8 +49,8 @@ class ParaPharmaSectionItems extends StatelessWidget {
               medicine.id, !medicine.isLiked);
         }
 
-        return SizedBox(
-          height: minSectionHeight,
+        return AspectRatio(
+          aspectRatio: context.isTabelet ? 2 : 1.2,
           child: ListView.builder(
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,

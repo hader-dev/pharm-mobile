@@ -8,7 +8,6 @@ import 'package:hader_pharm_mobile/features/common_features/market_place/market_
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/widget/filters_bar.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
-import 'package:hader_pharm_mobile/utils/responsive/silver_grid_params.dart';
 
 import 'cubit/para_pharma_cubit.dart';
 
@@ -74,20 +73,9 @@ class _ParaPharmaProductsPageState extends State<ParaPharmaProductsPage>
                               );
                             },
                           )
-                        : GridView.builder(
+                        : ListView.builder(
                             controller: cubit.scrollController,
                             physics: const AlwaysScrollableScrollPhysics(),
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 1,
-                              crossAxisSpacing: calculateMarketplaceGridSpacing(
-                                  context.deviceSize),
-                              mainAxisSpacing:
-                                  calculateMarketplaceMainAxisSpacing(
-                                      context.deviceSize),
-                              childAspectRatio: calculateMarketplaceAspectRatio(
-                                  context.deviceSize, context.orientation),
-                            ),
                             itemCount: products.length +
                                 (isLoadingMore || hasReachedEnd ? 1 : 0),
                             itemBuilder: (context, index) {

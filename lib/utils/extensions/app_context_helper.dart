@@ -28,6 +28,9 @@ extension BuildContextHelper on BuildContext {
 
   Orientation get orientation => MediaQuery.of(this).orientation;
 
+  bool get isTabelet =>
+      MediaQuery.of(this).size.width >= DeviceSizes.smallTablet.width;
+
   DeviceSizes get deviceSize {
     final width = MediaQuery.of(this).size.width;
 
