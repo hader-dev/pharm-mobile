@@ -22,6 +22,8 @@ class BaseIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       icon: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           icon,
           if (label != null) const ResponsiveGap.s4(),
