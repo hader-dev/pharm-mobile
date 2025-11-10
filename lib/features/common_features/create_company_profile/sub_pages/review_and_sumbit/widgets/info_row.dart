@@ -36,19 +36,22 @@ class InfoRow extends StatelessWidget {
                           .copyWith(color: TextColors.ternary.color)),
                   const Spacer(),
                 ],
-                Tooltip(
-                  message: dataValue.isEmpty
-                      ? context.translation!.feedback_not_provided
-                      : dataValue,
-                  triggerMode: TooltipTriggerMode.tap,
-                  child: Text(
-                      dataValue.isEmpty
-                          ? context.translation!.feedback_not_provided
-                          : dataValue,
-                      textAlign: TextAlign.end,
-                      softWrap: true,
-                      overflow: TextOverflow.ellipsis,
-                      style: context.responsiveTextTheme.current.body3Medium),
+                Expanded(
+                  child: Tooltip(
+                    message: dataValue.isEmpty
+                        ? context.translation!.feedback_not_provided
+                        : dataValue,
+                    triggerMode: TooltipTriggerMode.tap,
+                    child: Text(
+                        dataValue.isEmpty
+                            ? context.translation!.feedback_not_provided
+                            : dataValue,
+                        textAlign: TextAlign.start,
+                        maxLines: 1,
+                        softWrap: true,
+                        overflow: TextOverflow.ellipsis,
+                        style: context.responsiveTextTheme.current.body3Medium),
+                  ),
                 ),
               ],
             ),

@@ -99,6 +99,9 @@ class CartItemModel {
   }
 
   factory CartItemModel.fromJson(Map<String, dynamic> json) {
+    final thumbnailImage =
+        json['medicineCatalog']?['image'] ?? json['parapharmCatalog']?['image'];
+
     return CartItemModel(
       packageSize: json['packageSize'] ?? 1,
       id: json['id'],
@@ -122,7 +125,8 @@ class CartItemModel {
       medicineCatalogStockQty: json['medicineCatalog']?['stockQuantity'] ?? 0,
       parapharmCatalogStockQty: json['parapharmCatalog']?['stockQuantity'] ?? 0,
       sellerCompany: BaseCompany.fromJson(json['sellerCompany']),
-      image: json['image'] != null ? ImageModel.fromJson(json['image']) : null,
+      image:
+          thumbnailImage != null ? ImageModel.fromJson(thumbnailImage) : null,
     );
   }
   CartItemModel copyWith(
