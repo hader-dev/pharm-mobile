@@ -25,10 +25,12 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
       {required this.paraPharmaRepository,
       required ScrollController scrollController,
       required TextEditingController searchController,
+      ParaMedicalFilters? filters,
       required this.favoriteRepository})
       : super(ParaPharmaInitial(
           scrollController: scrollController,
           searchController: searchController,
+          filters: filters ?? const ParaMedicalFilters(),
         ));
 
   ScrollController get scrollController {

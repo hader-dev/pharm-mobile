@@ -10,6 +10,8 @@ import 'package:hader_pharm_mobile/features/common_features/filters/cubit/paraph
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/medicine_products/cubit/medicine_products_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/cubit/para_pharma_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/vendor_details/cubit/vendor_details_cubit.dart';
+import 'package:hader_pharm_mobile/models/medical_filters.dart';
+import 'package:hader_pharm_mobile/models/para_medical_filters.dart';
 import 'package:hader_pharm_mobile/repositories/remote/announcement/announcement_repository_impl.dart';
 import 'package:hader_pharm_mobile/repositories/remote/company/company_repository_impl.dart';
 import 'package:hader_pharm_mobile/repositories/remote/favorite/favorite_repository_impl.dart';
@@ -93,6 +95,9 @@ class VendorDetailsProvider extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => MedicineProductsCubit(
+              filters: MedicalFilters(
+                vendors: [companyId],
+              ),
               scrollController: ScrollController(),
               favoriteRepository: FavoriteRepository(
                   client: getItInstance.get<INetworkService>()),
@@ -103,6 +108,9 @@ class VendorDetailsProvider extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => ParaPharmaCubit(
+              filters: ParaMedicalFilters(
+                vendors: [companyId],
+              ),
               scrollController: ScrollController(),
               favoriteRepository: FavoriteRepository(
                   client: getItInstance.get<INetworkService>()),

@@ -2,8 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/models/medical_filters.dart';
 import 'package:hader_pharm_mobile/models/medicine_catalog.dart';
-import 'package:hader_pharm_mobile/repositories/remote/medicine_catalog/response/medicine_catalog_response.dart';
 import 'package:hader_pharm_mobile/repositories/remote/medicine_catalog/mappers/json_to_medicine_catalogue_item.dart';
+import 'package:hader_pharm_mobile/repositories/remote/medicine_catalog/response/medicine_catalog_response.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/urls.dart';
 
@@ -82,8 +82,9 @@ class MedicineCatalogRepository extends IMedicineCatalogRepository {
       queryParams['lte[unitPriceHt]'] = filters.lteUnitPriceHt!;
     }
 
-    if (companyId != null && companyId.isNotEmpty) {
-      queryParams['filter[companyId]'] = companyId;
+
+    if (filters.vendors.isNotEmpty) {
+      queryParams['filters[companyId]'] = filters.vendors.first;
     }
 
     try {

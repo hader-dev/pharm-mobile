@@ -8,6 +8,7 @@ enum ParaMedicalFiltersKeys {
   status,
   country,
   patent,
+  vendors,
   brand,
   condition,
   type,
@@ -22,6 +23,7 @@ class ParaMedicalFilters extends Equatable {
   final List<String> name;
   final List<String> description;
   final List<String> sku;
+  final List<String> vendors;
 
   final List<String> status;
   final List<String> registrationDate;
@@ -42,6 +44,7 @@ class ParaMedicalFilters extends Equatable {
 
   const ParaMedicalFilters({
     this.name = const [],
+    this.vendors = const [],
     this.description = const [],
     this.sku = const [],
     this.dosage = const [],
@@ -68,6 +71,7 @@ class ParaMedicalFilters extends Equatable {
     List<String>? country,
     List<String>? patent,
     List<String>? brand,
+    List<String>? vendors,
     List<String>? condition,
     List<String>? type,
     List<String>? stabilityDuration,
@@ -87,6 +91,7 @@ class ParaMedicalFilters extends Equatable {
       country: country ?? this.country,
       patent: patent ?? this.patent,
       brand: brand ?? this.brand,
+      vendors: vendors ?? this.vendors,
       condition: condition ?? this.condition,
       type: type ?? this.type,
       stabilityDuration: stabilityDuration ?? this.stabilityDuration,
@@ -117,6 +122,7 @@ class ParaMedicalFilters extends Equatable {
         reimbursement,
         gteUnitPriceHt,
         lteUnitPriceHt,
+        vendors
       ];
 
   bool get isNotEmpty =>
@@ -141,6 +147,8 @@ class ParaMedicalFilters extends Equatable {
         .toList();
 
     switch (key) {
+      case ParaMedicalFiltersKeys.vendors:
+        return copyWith(vendors: matchList(vendors));
       case ParaMedicalFiltersKeys.name:
         return copyWith(name: matchList(name));
 
@@ -177,6 +185,8 @@ class ParaMedicalFilters extends Equatable {
 
   List<String> getFilterBykey(ParaMedicalFiltersKeys currentkey) {
     switch (currentkey) {
+      case ParaMedicalFiltersKeys.vendors:
+        return vendors;
       case ParaMedicalFiltersKeys.name:
         return name;
       case ParaMedicalFiltersKeys.description:
@@ -212,6 +222,8 @@ class ParaMedicalFilters extends Equatable {
   ParaMedicalFilters updateFilterList(
       ParaMedicalFiltersKeys key, List<String> updatedFilters) {
     switch (key) {
+      case ParaMedicalFiltersKeys.vendors:
+        return copyWith(vendors: updatedFilters);
       case ParaMedicalFiltersKeys.name:
         return copyWith(name: updatedFilters);
       case ParaMedicalFiltersKeys.description:

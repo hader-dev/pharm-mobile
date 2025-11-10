@@ -20,6 +20,7 @@ class MedicalFilters extends Equatable {
 
   final List<String> code;
   final List<String> reimbursement;
+  final List<String> vendors;
   final String? gteUnitPriceHt;
   final String? lteUnitPriceHt;
 
@@ -27,6 +28,7 @@ class MedicalFilters extends Equatable {
     this.gteUnitPriceHt,
     this.lteUnitPriceHt,
     this.dci = const [],
+    this.vendors = const [],
     this.dosage = const [],
     this.form = const [],
     this.status = const [],
@@ -59,12 +61,14 @@ class MedicalFilters extends Equatable {
     List<String>? packagingFormat,
     List<String>? code,
     List<String>? reimbursement,
+    List<String>? vendors,
     String? gteUnitPriceHt,
     String? lteUnitPriceHt,
     bool resetGteUnitPriceHt = false,
     bool resetLteUnitPriceHt = false,
   }) {
     return MedicalFilters(
+      vendors: vendors ?? this.vendors,
       gteUnitPriceHt:
           resetGteUnitPriceHt ? null : (gteUnitPriceHt ?? this.gteUnitPriceHt),
       lteUnitPriceHt:
@@ -112,6 +116,7 @@ class MedicalFilters extends Equatable {
         packagingFormat,
         code,
         reimbursement,
+        vendors
       ];
 
   MedicalFilters updateSearchFilter(MedicalFiltersKeys key, String text) {
@@ -119,6 +124,8 @@ class MedicalFilters extends Equatable {
         list.where((el) => el.contains(text)).toList();
 
     switch (key) {
+      case MedicalFiltersKeys.vendors:
+        return copyWith(vendors: matchList(vendors));
       case MedicalFiltersKeys.distributorSku:
         return copyWith(sku: matchList(sku));
       case MedicalFiltersKeys.dci:
@@ -148,6 +155,8 @@ class MedicalFilters extends Equatable {
 
   List<String> getFilterBykey(MedicalFiltersKeys currentkey) {
     switch (currentkey) {
+      case MedicalFiltersKeys.vendors:
+        return vendors;
       case MedicalFiltersKeys.distributorSku:
         return sku;
       case MedicalFiltersKeys.dci:
@@ -178,6 +187,8 @@ class MedicalFilters extends Equatable {
   MedicalFilters updateFilterList(
       MedicalFiltersKeys key, List<String> updatedFilters) {
     switch (key) {
+      case MedicalFiltersKeys.vendors:
+        return copyWith(vendors: updatedFilters);
       case MedicalFiltersKeys.distributorSku:
         return copyWith(sku: updatedFilters);
       case MedicalFiltersKeys.dci:
@@ -220,4 +231,5 @@ enum MedicalFiltersKeys {
   p1,
   distributorSku,
   unitPriceHt,
+  vendors
 }

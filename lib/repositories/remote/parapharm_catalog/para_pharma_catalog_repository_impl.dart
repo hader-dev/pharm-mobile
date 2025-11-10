@@ -68,6 +68,10 @@ class ParaPharmaRepository extends IParaPharmaRepository {
       queryParams['search[name]'] = params.filters.name.first;
     }
 
+    if (params.filters.vendors.isNotEmpty) {
+      queryParams['filters[companyId]'] = params.filters.vendors.first;
+    }
+
     if (params.searchQuery != null && params.searchQuery!.isNotEmpty) {
       queryParams['search[name]'] = params.searchQuery!;
     }
@@ -79,10 +83,6 @@ class ParaPharmaRepository extends IParaPharmaRepository {
     if (params.filters.lteUnitPriceHt != null &&
         params.filters.lteUnitPriceHt!.isNotEmpty) {
       queryParams['lte[unitPriceHt]'] = params.filters.lteUnitPriceHt!;
-    }
-
-    if (params.companyId != null && params.companyId!.isNotEmpty) {
-      queryParams['filter[companyId]'] = params.companyId!;
     }
 
     try {

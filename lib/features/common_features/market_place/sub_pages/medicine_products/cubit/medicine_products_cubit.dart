@@ -22,8 +22,10 @@ class MedicineProductsCubit extends Cubit<MedicineProductsState> {
       {required this.medicineRepository,
       required this.favoriteRepository,
       required ScrollController scrollController,
-      required TextEditingController searchController})
+      required TextEditingController searchController,
+      MedicalFilters? filters})
       : super(MedicineProductsInitial(
+            params: filters ?? const MedicalFilters(),
             searchController: searchController,
             scrollController: scrollController));
 
