@@ -8,7 +8,7 @@ import 'package:hader_pharm_mobile/utils/urls.dart';
 
 Future<OrderResponse> getOrders(
     ParamsGetOrder params, INetworkService client) async {
-  final Map<String, String> queryParams = {
+  final Map<String, Object> queryParams = {
     'limit': params.limit.toString(),
     'offset': params.offset.toString(),
     'sort[id]': params.sortDirection,
@@ -16,9 +16,19 @@ Future<OrderResponse> getOrders(
   };
 
   if (params.filters.status.isNotEmpty) {
-    final status = OrderStatus.values.firstWhere((e) =>
-        e.name.toLowerCase() == params.filters.status.first.toLowerCase());
-    queryParams['filters[status]'] = status.id.toString();
+    final statusIds = params.filters.status
+        .map(
+          (s) => OrderStatus.values
+              .firstWhere(
+                (e) => e.name.toLowerCase() == s.toLowerCase(),
+                orElse: () => OrderStatus.created,
+              )
+              .id
+              .toString(),
+        )
+        .toList();
+
+    queryParams['filters[status]'] = statusIds;
   }
 
   if (params.filters.createdAtFrom.isNotEmpty) {
