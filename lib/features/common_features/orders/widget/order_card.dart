@@ -66,7 +66,7 @@ class OrderCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "${context.translation!.order}-${orderData.id.split("-").first}",
+                      orderData.displayId,
                       style: context
                           .responsiveTextTheme.current.headLine4SemiBold
                           .copyWith(color: Colors.black),

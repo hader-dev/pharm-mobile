@@ -11,6 +11,7 @@ OrderDetailsModel jsonToOrderDetails(Map<String, dynamic> json) {
     discount: json['discount'] != null ? double.parse(json['discount']) : 0.0,
     invoiceType: json['invoiceType'],
     paymentMethod: json['paymentMethod'],
+    displayId: json['displayId'],
     createdAt: DateTime.parse(json['createdAt']),
     updatedAt:
         json['updatedAt'] != null ? DateTime.parse(json['updatedAt']) : null,

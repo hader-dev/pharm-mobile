@@ -12,10 +12,12 @@ class BaseOrderModel {
   final double discount;
   final String? sellerCompanyName;
   final String? clientCompanyName;
+  final String displayId;
 
   const BaseOrderModel({
     required this.id,
     this.clientCompanyName,
+    required this.displayId,
     required this.status,
     required this.totalAmountExclTax,
     required this.totalAmountInclTax,
@@ -30,6 +32,7 @@ class BaseOrderModel {
 
   factory BaseOrderModel.fromJson(Map<String, dynamic> json) {
     return BaseOrderModel(
+      displayId: json['displayId'],
       id: json['id'],
       status: json['status'],
       discount: json['discount'] != null ? double.parse(json['discount']) : 0.0,
@@ -45,8 +48,8 @@ class BaseOrderModel {
       createdAt: DateTime.parse(json['createdAt']),
       updatedAt:
           json['updatedAt'] != null ? DateTime.parse(json['updatedAt']) : null,
-      sellerCompanyName: json['companyInfo']['name'],
-      clientCompanyName: json['clientCompany']['name'],
+      // sellerCompanyName: json['companyInfo']['name'],
+      // clientCompanyName: json['clientCompany']['name'],
     );
   }
 
@@ -54,6 +57,7 @@ class BaseOrderModel {
     return BaseOrderModel(
       id: '',
       status: 0,
+      displayId: '',
       totalAmountExclTax: 0.0,
       totalAmountInclTax: 0.0,
       paymentMethod: null,
@@ -70,6 +74,7 @@ class BaseOrderModel {
     return BaseOrderModel(
       id: 'order_001',
       status: 1,
+      displayId: 'order_001',
       totalAmountExclTax: 1200.50,
       totalAmountInclTax: 1320.55,
       paymentMethod: 2,

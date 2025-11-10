@@ -79,7 +79,7 @@ class CustomTextField extends StatelessWidget {
     final isDisabled = state == FieldState.disabled;
 
     final fontSizeModifer =
-        context.deviceSize.width <= DeviceSizes.largeMobile.width ? 1 : 2;
+        context.deviceSize.width <= DeviceSizes.largeMobile.width ? 1.3 : 2;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
