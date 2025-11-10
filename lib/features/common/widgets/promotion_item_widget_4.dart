@@ -70,14 +70,16 @@ class PromotionItemWidget4 extends StatelessWidget {
                     shape: BoxShape.circle,
                     border: Border.all(color: AppColors.bgDisabled, width: 1.5),
                     image: DecorationImage(
-                      image: announcement.thumbnailImage != null
-                          ? AssetImage(
-                              DrawableAssetStrings.companyPlaceHolderImg)
-                          : NetworkImage(
+                      image: announcement.company?.thumbnailImage != null
+                          ? NetworkImage(
                               getItInstance.get<INetworkService>().getFilesPath(
-                                    announcement.thumbnailImage?.path ?? "",
+                                    announcement
+                                            .company?.thumbnailImage?.path ??
+                                        "",
                                   ),
-                            ),
+                            )
+                          : AssetImage(
+                              DrawableAssetStrings.companyPlaceHolderImg),
                     ),
                   ),
                 ),

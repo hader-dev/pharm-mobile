@@ -1,3 +1,4 @@
+import 'package:hader_pharm_mobile/models/company.dart';
 import 'package:hader_pharm_mobile/models/image.dart';
 
 class PdfDocument {
@@ -32,6 +33,7 @@ class AnnouncementModel {
   final DateTime? updatedAt;
   final ImageModel? thumbnailImage;
   final PdfDocument? pdf;
+  final Company? company;
 
   AnnouncementModel({
     required this.id,
@@ -39,6 +41,7 @@ class AnnouncementModel {
     this.updatedAt,
     required this.title,
     required this.content,
+    this.company,
     this.image,
     this.thumbnailImage,
     this.pdf,
@@ -47,6 +50,7 @@ class AnnouncementModel {
   factory AnnouncementModel.empty() {
     return AnnouncementModel(
       id: "",
+      
       createdAt: DateTime(1970),
       updatedAt: null,
       title: "",
