@@ -9,6 +9,7 @@ class CartState {
   final String shippingAddress;
   final List<CartItemModelUi> cartItems;
   final Map<String, List<String>> cartItemsByVendor;
+  final bool isCartSummaryExpanded;
 
   CartState(
       {required this.totalHtAmount,
@@ -18,6 +19,7 @@ class CartState {
       required this.orderNote,
       required this.shippingAddress,
       required this.cartItems,
+      required this.isCartSummaryExpanded,
       required this.cartItemsByVendor});
 
   static num calculateTotalAmountTtc(List<CartItemModelUi> items) {
@@ -36,31 +38,23 @@ class CartState {
     return totalAmount;
   }
 
-  CartState copyWith({
-    num? totalHtAmount,
-    num? totalTTCAmount,
-    PaymentMethods? selectedPaymentMethod,
-    InvoiceTypes? selectedInvoiceType,
-    String? orderNote,
-    String? shippingAddress,
-    List<CartItemModelUi>? cartItems,
-    Map<String, List<String>>? cartItemsByVendor,
-  }) {
-    return CartState(
-      totalHtAmount: totalHtAmount ?? this.totalHtAmount,
-      totalTTCAmount: totalTTCAmount ?? this.totalTTCAmount,
-      selectedPaymentMethod:
-          selectedPaymentMethod ?? this.selectedPaymentMethod,
-      selectedInvoiceType: selectedInvoiceType ?? this.selectedInvoiceType,
-      orderNote: orderNote ?? this.orderNote,
-      shippingAddress: shippingAddress ?? this.shippingAddress,
-      cartItems: cartItems ?? this.cartItems,
-      cartItemsByVendor: cartItemsByVendor ?? this.cartItemsByVendor,
-    );
-  }
-
   CartInitial toInitial({required CartState state}) =>
       CartInitial.fromState(state: state);
+  ToggleCartSummary toToggleCartSummary(
+          {required bool isCartSummaryExpanded}) =>
+      ToggleCartSummary.fromState(
+          state: this, isCartSummaryExpanded: isCartSummaryExpanded);
+  CartOrderInfosUpdated toOrderInfosUpdated(
+          {String? orderNote,
+          String? shippingAddress,
+          PaymentMethods? selectedPaymentMethod,
+          InvoiceTypes? selectedInvoiceType}) =>
+      CartOrderInfosUpdated.fromState(
+          state: this,
+          orderNote: orderNote,
+          shippingAddress: shippingAddress,
+          selectedPaymentMethod: selectedPaymentMethod,
+          selectedInvoiceType: selectedInvoiceType);
 
   CartLoading toLoading() => CartLoading.fromState(state: this);
 
@@ -136,6 +130,7 @@ final class CartInitial extends CartState {
       super.selectedInvoiceType = InvoiceTypes.facture,
       super.orderNote = '',
       super.shippingAddress = '',
+      super.isCartSummaryExpanded = true,
       super.cartItems = const [],
       super.cartItemsByVendor = const {}});
 
@@ -149,6 +144,7 @@ final class CartInitial extends CartState {
           shippingAddress: state.shippingAddress,
           cartItems: state.cartItems,
           cartItemsByVendor: state.cartItemsByVendor,
+          isCartSummaryExpanded: state.isCartSummaryExpanded,
         );
 }
 
@@ -163,6 +159,43 @@ final class CartLoading extends CartState {
           shippingAddress: state.shippingAddress,
           cartItems: state.cartItems,
           cartItemsByVendor: state.cartItemsByVendor,
+          isCartSummaryExpanded: state.isCartSummaryExpanded,
+        );
+}
+
+final class ToggleCartSummary extends CartState {
+  ToggleCartSummary.fromState(
+      {required CartState state, required super.isCartSummaryExpanded})
+      : super(
+          totalHtAmount: state.totalHtAmount,
+          totalTTCAmount: state.totalTTCAmount,
+          selectedPaymentMethod: state.selectedPaymentMethod,
+          selectedInvoiceType: state.selectedInvoiceType,
+          orderNote: state.orderNote,
+          shippingAddress: state.shippingAddress,
+          cartItems: state.cartItems,
+          cartItemsByVendor: state.cartItemsByVendor,
+        );
+}
+
+final class CartOrderInfosUpdated extends CartState {
+  CartOrderInfosUpdated.fromState(
+      {required CartState state,
+      String? orderNote,
+      String? shippingAddress,
+      PaymentMethods? selectedPaymentMethod,
+      InvoiceTypes? selectedInvoiceType})
+      : super(
+          totalHtAmount: state.totalHtAmount,
+          totalTTCAmount: state.totalTTCAmount,
+          selectedPaymentMethod:
+              selectedPaymentMethod ?? state.selectedPaymentMethod,
+          selectedInvoiceType: selectedInvoiceType ?? state.selectedInvoiceType,
+          orderNote: orderNote ?? state.orderNote,
+          shippingAddress: shippingAddress ?? state.shippingAddress,
+          cartItems: state.cartItems,
+          cartItemsByVendor: state.cartItemsByVendor,
+          isCartSummaryExpanded: state.isCartSummaryExpanded,
         );
 }
 
@@ -177,6 +210,7 @@ final class CartLoadingUpdate extends CartState {
           shippingAddress: state.shippingAddress,
           cartItems: state.cartItems,
           cartItemsByVendor: state.cartItemsByVendor,
+          isCartSummaryExpanded: state.isCartSummaryExpanded,
         );
 }
 
@@ -192,6 +226,7 @@ final class CartLoadingSuccess extends CartState {
           selectedInvoiceType: state.selectedInvoiceType,
           orderNote: state.orderNote,
           shippingAddress: state.shippingAddress,
+          isCartSummaryExpanded: state.isCartSummaryExpanded,
         );
 }
 
@@ -207,6 +242,7 @@ final class CartItemUpdated extends CartState {
             selectedInvoiceType: state.selectedInvoiceType,
             orderNote: state.orderNote,
             shippingAddress: state.shippingAddress,
+            isCartSummaryExpanded: state.isCartSummaryExpanded,
             cartItemsByVendor: cartItemsByVendor ?? state.cartItemsByVendor);
 }
 
@@ -221,6 +257,7 @@ final class CartItemsUpdated extends CartState {
           shippingAddress: state.shippingAddress,
           cartItems: state.cartItems,
           cartItemsByVendor: state.cartItemsByVendor,
+          isCartSummaryExpanded: state.isCartSummaryExpanded,
         );
 }
 
@@ -235,6 +272,7 @@ final class AddCartItemLoading extends CartState {
           shippingAddress: state.shippingAddress,
           cartItems: state.cartItems,
           cartItemsByVendor: state.cartItemsByVendor,
+          isCartSummaryExpanded: state.isCartSummaryExpanded,
         );
 }
 
@@ -249,6 +287,7 @@ final class CartLoadLimitReached extends CartState {
           shippingAddress: state.shippingAddress,
           cartItems: state.cartItems,
           cartItemsByVendor: state.cartItemsByVendor,
+          isCartSummaryExpanded: state.isCartSummaryExpanded,
         );
 }
 
@@ -263,6 +302,7 @@ final class InvoiceTypeChanged extends CartState {
           shippingAddress: state.shippingAddress,
           cartItems: state.cartItems,
           cartItemsByVendor: state.cartItemsByVendor,
+          isCartSummaryExpanded: state.isCartSummaryExpanded,
         );
 }
 
@@ -277,6 +317,7 @@ final class PaymentMethodChanged extends CartState {
           shippingAddress: state.shippingAddress,
           cartItems: state.cartItems,
           cartItemsByVendor: state.cartItemsByVendor,
+          isCartSummaryExpanded: state.isCartSummaryExpanded,
         );
 }
 
@@ -291,6 +332,7 @@ final class PassOrderLoading extends CartState {
           shippingAddress: state.shippingAddress,
           cartItems: state.cartItems,
           cartItemsByVendor: state.cartItemsByVendor,
+          isCartSummaryExpanded: state.isCartSummaryExpanded,
         );
 }
 
@@ -305,6 +347,7 @@ final class PassOrderLoaded extends CartState {
           shippingAddress: state.shippingAddress,
           cartItems: state.cartItems,
           cartItemsByVendor: state.cartItemsByVendor,
+          isCartSummaryExpanded: state.isCartSummaryExpanded,
         );
 }
 
@@ -319,6 +362,7 @@ final class PassOrderLoadingFailed extends CartState {
           shippingAddress: state.shippingAddress,
           cartItems: state.cartItems,
           cartItemsByVendor: state.cartItemsByVendor,
+          isCartSummaryExpanded: state.isCartSummaryExpanded,
         );
 }
 
@@ -333,6 +377,7 @@ final class CartItemAdded extends CartState {
           shippingAddress: state.shippingAddress,
           cartItems: state.cartItems,
           cartItemsByVendor: state.cartItemsByVendor,
+          isCartSummaryExpanded: state.isCartSummaryExpanded,
         );
 }
 
@@ -349,5 +394,6 @@ final class CartError extends CartState {
           shippingAddress: state.shippingAddress,
           cartItems: state.cartItems,
           cartItemsByVendor: state.cartItemsByVendor,
+          isCartSummaryExpanded: state.isCartSummaryExpanded,
         );
 }

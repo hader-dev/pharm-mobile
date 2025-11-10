@@ -289,13 +289,13 @@ class CartCubit extends Cubit<CartState> {
   }
 
   void changeInvoiceType(InvoiceTypes invoiceType) {
-    emit(state.toInitial(
-        state: state.copyWith(selectedInvoiceType: invoiceType)));
+    emit(state.toOrderInfosUpdated(selectedInvoiceType: invoiceType));
   }
 
   void changePaymentMethod(PaymentMethods paymentMethod) {
-    emit(state.toInitial(
-        state: state.copyWith(selectedPaymentMethod: paymentMethod)));
+    emit(state.toOrderInfosUpdated(
+      selectedPaymentMethod: paymentMethod,
+    ));
   }
 
   Future<bool> passOrder() async {
@@ -327,7 +327,7 @@ class CartCubit extends Cubit<CartState> {
 
   void changeOrderNote(String text) {
     emit(
-      state.toInitial(state: state.copyWith(orderNote: text)),
+      state.toOrderInfosUpdated(orderNote: text),
     );
   }
 
@@ -355,7 +355,7 @@ class CartCubit extends Cubit<CartState> {
   }
 
   void updateShippingAddress(String value) {
-    emit(state.toInitial(state: state.copyWith(shippingAddress: value)));
+    emit(state.toOrderInfosUpdated(shippingAddress: value));
   }
 
   void updateItemPackageQuantity(CartItemModelUi item) {
@@ -377,5 +377,10 @@ class CartCubit extends Cubit<CartState> {
         (quantity ~/ updatedItem.model.packageSize).toString();
 
     emit(state.toItemUpdated(updatedItem: updatedItem));
+  }
+
+  void toggleCartSummary() {
+    emit(state.toToggleCartSummary(
+        isCartSummaryExpanded: !state.isCartSummaryExpanded));
   }
 }

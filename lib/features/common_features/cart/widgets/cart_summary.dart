@@ -12,18 +12,19 @@ import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'select_payment_bottom_sheet.dart';
 
 class CartSummarySection extends StatelessWidget {
-  final ValueNotifier<bool> isExpanded = ValueNotifier(true);
-  CartSummarySection({super.key});
+  const CartSummarySection({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-        valueListenable: isExpanded,
-        builder: (BuildContext context, bool value, Widget? child) {
+    final cubit = context.read<CartCubit>();
+    return BlocBuilder<CartCubit, CartState>(
+        buildWhen: (prev, curr) =>
+            prev.isCartSummaryExpanded != curr.isCartSummaryExpanded,
+        builder: (BuildContext context, CartState state) {
           return InkWell(
             splashColor: Colors.transparent,
             onTap: () {
-              isExpanded.value = !isExpanded.value;
+              cubit.toggleCartSummary();
             },
             child: Container(
               margin: EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
@@ -37,7 +38,7 @@ class CartSummarySection extends StatelessWidget {
                       .responsiveAppSizeTheme.current.commonWidgetsRadius),
                 ),
               ),
-              child: !isExpanded.value
+              child: !state.isCartSummaryExpanded
                   ? Row(children: <Widget>[
                       Text(
                         context.translation!.summary,
@@ -95,7 +96,6 @@ class CartSummarySection extends StatelessWidget {
                           const Spacer(),
                           BlocBuilder<CartCubit, CartState>(
                             builder: (context, state) {
-                             
                               return FormattedPrice(
                                 price: num.parse(
                                     state.totalHtAmount.toStringAsFixed(2)),
