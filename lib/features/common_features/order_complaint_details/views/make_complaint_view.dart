@@ -38,6 +38,7 @@ class MakeComplaintView extends StatelessWidget {
             state: FieldState.normal,
             maxLines: 5,
             validationFunc: (v) => requiredValidator(v, translation),
+            
           ),
           const ResponsiveGap.s8(),
           PrimaryTextButton(

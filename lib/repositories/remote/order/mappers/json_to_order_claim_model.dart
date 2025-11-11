@@ -1,11 +1,13 @@
+import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/models/order_claim.dart';
 
 OrderClaimModel jsonToOrderClaimModel(Map<String, dynamic> json) {
+  debugPrint("claim: $json");
   return OrderClaimModel(
-    id: json['id'],
-    fromCompanyId: json['fromCompanyId'],
-    toCompanyId: json['toCompanyId'],
-    orderId: json['orderId'],
+    id: json['id'] ?? "",
+    fromCompanyId: json['fromCompanyId'] ?? "",
+    toCompanyId: json['toCompanyId'] ?? "",
+    orderId: json['orderId'] ?? "",
     orderItemId: json['orderItemId'] ?? "",
     claimStatusId: json['complaintStatus'] ?? 1,
     subject: json['subject'] ?? "unkown",

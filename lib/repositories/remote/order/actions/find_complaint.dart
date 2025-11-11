@@ -10,6 +10,9 @@ import 'package:hader_pharm_mobile/utils/urls.dart';
 Future<ResponseItemComplaintFind> findComplaint(
     ParamsGetComplaint params, INetworkService client) async {
   try {
+    if (params.complaintId.isEmpty) {
+      return ResponseItemComplaintFind();
+    }
     var decodedResponse = await client.sendRequest(() => client.get(
           Urls.itemComplaint(params.complaintId),
         ));
@@ -17,7 +20,7 @@ Future<ResponseItemComplaintFind> findComplaint(
     return ResponseItemComplaintFind(
         orderClaimModel: jsonToOrderClaimModel(decodedResponse),
         claimStatusHistory: jsonToOrderClaimStatusHistoryList(
-            decodedResponse["complaintStatusHistory"]));
+            decodedResponse["complaintStatusHistory"] ?? []));
   } catch (e, stackTrace) {
     debugPrint("$e");
     debugPrintStack(stackTrace: stackTrace);

@@ -81,7 +81,9 @@ class OrderComplaintsCubit extends Cubit<OrdersComplaintState> {
 
   Future<ResponseItemComplaintMake> makeComplaint(
       AppLocalizations translation) async {
-    if (state.subject.isEmpty || state.description.isEmpty) {
+
+    if (state.subjectController.text.isEmpty ||
+        state.descriptionController.text.isEmpty) {
       return ResponseItemComplaintMake();
     }
 
