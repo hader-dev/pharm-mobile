@@ -139,18 +139,21 @@ class BaseQuantityController extends StatelessWidget {
       );
     }
 
-    return Column(
-      crossAxisAlignment: crossAxisAlignment,
-      children: [
-        if (displayQuantityLabel)
+    if (displayQuantityLabel) {
+      return Column(
+        crossAxisAlignment: crossAxisAlignment,
+        children: [
           Text(
             label,
             style: context.responsiveTextTheme.current.body3Medium.copyWith(
               color: TextColors.ternary.color,
             ),
           ),
-        Expanded(child: controlLayout),
-      ],
-    );
+          controlLayout,
+        ],
+      );
+    }
+
+    return controlLayout;
   }
 }

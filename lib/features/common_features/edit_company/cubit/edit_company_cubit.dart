@@ -16,6 +16,7 @@ part 'edit_company_state.dart';
 
 class EditCompanyCubit extends Cubit<EditCompanyState> {
   final ICompanyRepository companyRepository;
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   EditCompanyCubit({required this.companyRepository})
       : super(EditCompanyInitial());
@@ -64,14 +65,16 @@ class EditCompanyCubit extends Cubit<EditCompanyState> {
   Future<void> updateCompany(EditCompanyFormDataModel updatedFormData,
       AppLocalizations translation) async {
     try {
-      emit(state.toLoading());
+      if (!formKey.currentState!.validate()) {
+        return;
+      }
 
       if (!hasChangesComparedTo(updatedFormData)) {
         debugPrint("Company update: No changes detected, skipping API call");
 
         getItInstance.get<ToastManager>().showToast(
               message: translation.feedback_no_changes_to_update,
-              type: ToastType.info,
+              type: ToastType.error,
             );
 
         emit(state.toEditSuccess(
@@ -128,30 +131,26 @@ class EditCompanyCubit extends Cubit<EditCompanyState> {
   }
 
   void changeFormData({required EditCompanyFormDataModel modifiedData}) {
-    debugPrint(modifiedData.toString());
     emit(state.toEditSuccess(formData: modifiedData));
   }
 
   bool hasChangesComparedTo(EditCompanyFormDataModel newFormData) {
-    debugPrint("no original state: ${state.originalFormData == null}");
-    if (state.originalFormData == null) return false;
-
     bool imageChanged = state.pickedImage != null || state.shouldRemoveImage;
 
     bool formDataChanged =
-        state.originalFormData!.companyName != newFormData.companyName ||
-            state.originalFormData!.email != newFormData.email ||
-            state.originalFormData!.phone != newFormData.phone ||
-            state.originalFormData!.phone2 != newFormData.phone2 ||
-            state.originalFormData!.fax != newFormData.fax ||
-            state.originalFormData!.address != newFormData.address ||
-            state.originalFormData!.website != newFormData.website ||
-            state.originalFormData!.description != newFormData.description ||
-            state.originalFormData!.rcNumber != newFormData.rcNumber ||
-            state.originalFormData!.nisNumber != newFormData.nisNumber ||
-            state.originalFormData!.aiNumber != newFormData.aiNumber ||
-            state.originalFormData!.fiscalId != newFormData.fiscalId ||
-            state.originalFormData!.bankAccount != newFormData.bankAccount;
+        state.originalFormData.companyName != newFormData.companyName ||
+            state.originalFormData.email != newFormData.email ||
+            state.originalFormData.phone != newFormData.phone ||
+            state.originalFormData.phone2 != newFormData.phone2 ||
+            state.originalFormData.fax != newFormData.fax ||
+            state.originalFormData.address != newFormData.address ||
+            state.originalFormData.website != newFormData.website ||
+            state.originalFormData.description != newFormData.description ||
+            state.originalFormData.rcNumber != newFormData.rcNumber ||
+            state.originalFormData.nisNumber != newFormData.nisNumber ||
+            state.originalFormData.aiNumber != newFormData.aiNumber ||
+            state.originalFormData.fiscalId != newFormData.fiscalId ||
+            state.originalFormData.bankAccount != newFormData.bankAccount;
 
     return imageChanged || formDataChanged;
   }

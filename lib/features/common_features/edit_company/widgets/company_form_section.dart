@@ -27,6 +27,7 @@ class _CompanyFormSectionState extends State<CompanyFormSection> {
     return BlocBuilder<EditCompanyCubit, EditCompanyState>(
       builder: (context, state) {
         return Form(
+          key: cubit.formKey,
           child: Builder(builder: (context) {
             return Column(
               children: [
@@ -46,7 +47,7 @@ class _CompanyFormSectionState extends State<CompanyFormSection> {
                   label: '${context.translation!.email}*',
                   initValue: state.formData.email,
                   state: FieldState.normal,
-                  validationFunc: (v) => validateIsEmail(v, translation),
+                  validationFunc: (v) => validateIsEmail(v, translation, true),
                   onChanged: (newValue) {
                     cubit.changeFormData(
                         modifiedData: state.formData.copyWith(
@@ -73,7 +74,8 @@ class _CompanyFormSectionState extends State<CompanyFormSection> {
                   state: FieldState.normal,
                   initValue: state.formData.phone,
                   keyBoadType: TextInputType.phone,
-                  validationFunc: (v) => validateIsMobileNumber(v, translation),
+                  validationFunc: (v) =>
+                      validateIsMobileNumber(v, translation, true),
                   onChanged: (newValue) {
                     cubit.changeFormData(
                         modifiedData: state.formData.copyWith(
@@ -150,10 +152,6 @@ class _CompanyFormSectionState extends State<CompanyFormSection> {
                   isLoading: context.watch<EditCompanyCubit>().state
                       is EditCompanyLoading,
                   onTap: () {
-                    if (!Form.of(context).validate()) {
-                      return;
-                    }
-
                     BlocProvider.of<EditCompanyCubit>(context)
                         .updateCompany(state.formData, context.translation!);
                   },

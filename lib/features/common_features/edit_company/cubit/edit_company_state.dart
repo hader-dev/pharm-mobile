@@ -2,7 +2,7 @@ part of 'edit_company_cubit.dart';
 
 sealed class EditCompanyState {
   final Company companyData;
-  final EditCompanyFormDataModel? originalFormData;
+  final EditCompanyFormDataModel originalFormData;
   final EditCompanyFormDataModel formData;
   final File? pickedImage;
   final bool shouldRemoveImage;
@@ -54,11 +54,12 @@ sealed class EditCompanyState {
 final class EditCompanyInitial extends EditCompanyState {
   EditCompanyInitial(
       {Company? company,
-      super.originalFormData,
+      EditCompanyFormDataModel? originalFormData,
       EditCompanyFormDataModel? formData,
       super.pickedImage,
       super.shouldRemoveImage = false})
       : super(
+            originalFormData: originalFormData ?? EditCompanyFormDataModel(),
             companyData: company ?? Company.empty(),
             formData: formData ?? EditCompanyFormDataModel());
 }
@@ -81,7 +82,7 @@ final class EditCompanySuccess extends EditCompanyInitial {
     bool resetPickedImage = false,
   }) : super(
             company: state.companyData,
-            originalFormData: formData,
+            originalFormData: state.originalFormData,
             pickedImage: resetPickedImage ? null : state.pickedImage,
             shouldRemoveImage: shouldRemoveImage ?? state.shouldRemoveImage);
 }

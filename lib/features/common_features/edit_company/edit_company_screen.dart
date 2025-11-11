@@ -17,34 +17,13 @@ import 'package:iconsax/iconsax.dart' show Iconsax;
 
 enum CompanyScreenMode { view, edit }
 
-class CompanyEditScreen extends StatefulWidget {
+class CompanyEditScreen extends StatelessWidget {
   final CompanyScreenMode? initialMode;
 
   const CompanyEditScreen({
     super.key,
     this.initialMode = CompanyScreenMode.view,
   });
-
-  @override
-  State<CompanyEditScreen> createState() => _CompanyEditScreenState();
-}
-
-class _CompanyEditScreenState extends State<CompanyEditScreen> {
-  late CompanyScreenMode currentMode;
-
-  @override
-  void initState() {
-    super.initState();
-    currentMode = widget.initialMode ?? CompanyScreenMode.view;
-  }
-
-  void toggleMode() {
-    setState(() {
-      currentMode = currentMode == CompanyScreenMode.view
-          ? CompanyScreenMode.edit
-          : CompanyScreenMode.view;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,31 +50,12 @@ class _CompanyEditScreenState extends State<CompanyEditScreen> {
             },
           ),
           title: Text(
-            currentMode == CompanyScreenMode.edit
+            initialMode == CompanyScreenMode.edit
                 ? context.translation!.edit_company
                 : context.translation!.view_company,
             style: context.responsiveTextTheme.current.headLine3SemiBold
                 .copyWith(color: AppColors.bgWhite),
           ),
-          trailing: [
-            BlocBuilder<EditCompanyCubit, EditCompanyState>(
-              builder: (context, state) {
-                if (state is EditCompanySuccess || state is CompanyDataLoaded) {
-                  return IconButton(
-                    icon: Icon(
-                      currentMode == CompanyScreenMode.view
-                          ? Iconsax.edit
-                          : Iconsax.eye,
-                      color: AppColors.bgWhite,
-                      size: context.responsiveAppSizeTheme.current.iconSize25,
-                    ),
-                    onPressed: toggleMode,
-                  );
-                }
-                return const SizedBox.shrink();
-              },
-            ),
-          ],
         ),
         body: SafeArea(
           child: Padding(
@@ -103,6 +63,7 @@ class _CompanyEditScreenState extends State<CompanyEditScreen> {
                 horizontal: context.responsiveAppSizeTheme.current.p16),
             child: BlocBuilder<EditCompanyCubit, EditCompanyState>(
               builder: (context, state) {
+                
                 if (state is EditCompanyLoading) {
                   return const Center(child: CircularProgressIndicator());
                 }
@@ -173,7 +134,7 @@ class _CompanyEditScreenState extends State<CompanyEditScreen> {
                   children: [
                     const ResponsiveGap.s16(),
                     Text(
-                      currentMode == CompanyScreenMode.edit
+                      initialMode == CompanyScreenMode.edit
                           ? context.translation!.update_company_description
                           : context.translation!.view_company_description,
                       style: context.responsiveTextTheme.current.body1Medium
@@ -185,7 +146,7 @@ class _CompanyEditScreenState extends State<CompanyEditScreen> {
                     const CompanyLogoSection(),
                     const ResponsiveGap.s24(),
                     CompanyFormSection(
-                      isEditable: currentMode == CompanyScreenMode.edit,
+                      isEditable: initialMode == CompanyScreenMode.edit,
                     ),
                     const ResponsiveGap.s16(),
                   ],

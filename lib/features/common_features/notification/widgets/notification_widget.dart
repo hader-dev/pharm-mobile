@@ -43,7 +43,7 @@ class NotificationWidget extends StatelessWidget {
             children: [
               Icon(
                 icon,
-                color: AppColors.accent1Shade1,
+                color: onSurfaceColor,
                 size: context.responsiveAppSizeTheme.current.iconSize25,
               ),
               const ResponsiveGap.s8(),
