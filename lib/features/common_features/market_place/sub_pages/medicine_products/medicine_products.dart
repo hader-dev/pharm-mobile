@@ -6,7 +6,9 @@ import 'package:hader_pharm_mobile/features/common/widgets/medicine_widget_2.dar
 import 'package:hader_pharm_mobile/features/common_features/home/home.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/market_place.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/medicine_products/widget/filters_bar.dart';
+import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/widgets/quick_add_modal.dart';
 import 'package:hader_pharm_mobile/models/medicine_catalog.dart';
+import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/responsive/silver_grid_params.dart';
 
@@ -67,6 +69,16 @@ class _MedicineProductsPageState extends State<MedicineProductsPage>
                           id, !medicine.isLiked);
                     }
 
+                    void onQuickAddCallback(
+                      BaseMedicineCatalogModel medicineProduct) {
+                    BottomSheetHelper.showCommonBottomSheet(
+                        initialChildSize: .5,
+                        context: context,
+                        child: QuickCartAddModal(
+                          medicineCatalogId: medicineProduct.id,
+                        ));
+                  }
+
                     return RefreshIndicator(
                       onRefresh: () => cubit.getMedicines(),
                       child: GridView.builder(
@@ -90,6 +102,7 @@ class _MedicineProductsPageState extends State<MedicineProductsPage>
                               medicineData: medicine,
                               isLiked: medicine.isLiked,
                               onLikeTapped: () => onLikeTapped(medicine),
+                              onQuickAddCallback: onQuickAddCallback,
                               hideLikeButton: false,
                             );
                           } else {

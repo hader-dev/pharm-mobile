@@ -6,6 +6,7 @@ import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_icon_button.dart';
 import 'package:hader_pharm_mobile/features/common/chips/custom_chip.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/blackened_background.dart';
@@ -88,6 +89,22 @@ class ParaPharmaWidget1 extends StatelessWidget {
                   if (paraPharmData.image != null) BlackenedBackground(),
                   StockAvaillableContainerWidget(
                       isAvaillable: paraPharmData.stockQuantity > 0),
+                  if (onFavoriteCallback != null)
+                    Positioned(
+                      right: 0,
+                      bottom: 0,
+                      child: IconButton(
+                        onPressed: () {
+                          onFavoriteCallback?.call(paraPharmData);
+                        },
+                        icon: Icon(
+                          isLiked ? Iconsax.heart5 : Iconsax.heart,
+                          color: isLiked ? Colors.red : Colors.black,
+                          size:
+                              context.responsiveAppSizeTheme.current.iconSize25,
+                        ),
+                      ),
+                    )
                 ],
               ),
             ),
@@ -106,30 +123,19 @@ class ParaPharmaWidget1 extends StatelessWidget {
                             paraPharmData.category?.name ?? paraPharmData.name,
                         color: AppColors.bgDarken,
                       ),
-                      if (onFavoriteCallback != null)
-                        IconButton(
-                          onPressed: () {
-                            onFavoriteCallback?.call(paraPharmData);
-                          },
-                          icon: Icon(
-                            isLiked ? Iconsax.heart5 : Iconsax.heart,
-                            color: isLiked ? Colors.red : Colors.black,
-                            size: context
-                                .responsiveAppSizeTheme.current.iconSize25,
-                          ),
-                        )
-                      else if (onQuickAddCallback != null)
-                        IconButton(
+                      if (onQuickAddCallback != null)
+                        PrimaryIconButton(
+                          isBordered: true,
+                          borderColor: AppColors.accent1Shade1,
+                          bgColor: Colors.transparent,
                           onPressed: () {
                             onQuickAddCallback?.call(paraPharmData);
                           },
-                          icon: Icon(
-                            Iconsax.add,
-                            color: Colors.black,
-                            size: context
-                                .responsiveAppSizeTheme.current.iconSize25,
-                          ),
-                        )
+                          icon: Icon(Iconsax.add,
+                              color: Colors.black,
+                              size: context
+                                  .responsiveAppSizeTheme.current.iconSize20),
+                        ),
                     ],
                   ),
                   Text(
