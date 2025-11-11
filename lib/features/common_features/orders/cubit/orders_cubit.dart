@@ -60,6 +60,7 @@ class OrdersCubit extends Cubit<OrdersState> {
         offset: offSet,
         sortDirection: 'DESC',
         limit: PaginationConstants.resultsPerPage,
+        filters: state.filters,
         searchQuery: searchController.text.trim(),
       ));
       final updated = state.orders.toList();
