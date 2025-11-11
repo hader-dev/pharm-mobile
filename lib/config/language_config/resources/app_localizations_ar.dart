@@ -60,6 +60,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get skip => 'تخطي';
 
   @override
+  String get feedback_share_pdf => 'مشاركة PDF';
+
+  @override
   String get start => 'ابدا';
 
   @override

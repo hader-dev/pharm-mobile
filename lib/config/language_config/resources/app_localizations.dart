@@ -196,6 +196,12 @@ abstract class AppLocalizations {
   /// **'Skip'**
   String get skip;
 
+  /// No description provided for @feedback_share_pdf.
+  ///
+  /// In en, this message translates to:
+  /// **'Share PDF'**
+  String get feedback_share_pdf;
+
   /// No description provided for @start.
   ///
   /// In en, this message translates to:

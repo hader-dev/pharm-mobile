@@ -2,12 +2,16 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
+import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/config/language_config/resources/app_localizations.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
+import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 import 'package:http/http.dart' as http;
 import 'package:iconsax/iconsax.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:share_plus/share_plus.dart';
 
 class PdfViewerScreen extends StatefulWidget {
   final String pdfUrl;
@@ -31,6 +35,7 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
   int currentPage = 0;
   bool isReady = false;
   late PDFViewController pdfViewController;
+  late AppLocalizations translation;
 
   @override
   void initState() {
@@ -43,7 +48,7 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
       final response = await http.get(Uri.parse(widget.pdfUrl));
       if (response.statusCode == 200) {
         final dir = await getTemporaryDirectory();
-        final file = File('${dir.path}/temp.pdf');
+        final file = File('${dir.path}/${widget.title}');
         await file.writeAsBytes(response.bodyBytes);
         setState(() {
           localPath = file.path;
@@ -62,39 +67,33 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
 
   Future<void> _saveToDownloads() async {
     try {
-      final downloadsDir = await getDownloadsDirectory();
-      if (downloadsDir == null) {
-        throw Exception('Downloads directory not found');
+      final sourceFile = XFile(localPath!, name: widget.title);
+
+      final shareResult = await SharePlus.instance.share(
+        ShareParams(
+          files: [sourceFile],
+          text: context.translation?.feedback_share_pdf ?? 'Share PDF',
+        ),
+      );
+
+      if (shareResult.status == ShareResultStatus.success) {
+        getItInstance.get<ToastManager>().showToast(
+              message: translation.feedback_file_saved_successfully,
+              type: ToastType.success,
+            );
       }
-
-      final fileName = widget.pdfUrl.split('/').last;
-      final destinationFile = File('${downloadsDir.path}/$fileName');
-
-      final sourceFile = File(localPath!);
-      await sourceFile.copy(destinationFile.path);
-
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(context.translation?.feedback_file_saved_successfully ??
-              'File downloaded to Downloads'),
-          backgroundColor: Colors.green,
-        ),
-      );
     } catch (e) {
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(context.translation?.feedback_file_save_failed ??
-              'Failed to download file'),
-          backgroundColor: Colors.red,
-        ),
-      );
+      debugPrint('Error saving/sharing PDF: $e');
+      getItInstance.get<ToastManager>().showToast(
+            message: translation.feedback_file_save_failed,
+            type: ToastType.error,
+          );
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    translation = context.translation!;
     return Scaffold(
       appBar: CustomAppBarV2.alternate(
         title: Text(

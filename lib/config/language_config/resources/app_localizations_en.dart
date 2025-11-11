@@ -60,6 +60,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get skip => 'Skip';
 
   @override
+  String get feedback_share_pdf => 'Share PDF';
+
+  @override
   String get start => 'Start';
 
   @override
