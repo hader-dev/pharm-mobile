@@ -18,53 +18,40 @@ sealed class MedicineDetailsState {
     required this.quantityController,
   });
 
-  // Factory constructors for transitions
-  MedicineDetailsInitial initial({
-    MedicineCatalogModel? medicineCatalogData,
-    int? currentTapIndex,
-    String? shippingAddress,
-  }) =>
-      MedicineDetailsInitial(
-        medicineCatalogData: medicineCatalogData ?? this.medicineCatalogData,
-        currentTapIndex: currentTapIndex ?? this.currentTapIndex,
-        shippingAddress: shippingAddress ?? this.shippingAddress,
-        tabController: tabController,
-      );
-
-  MedicineDetailsLoading loading() => MedicineDetailsLoading.fromState(
+  MedicineDetailsLoading toLoading() => MedicineDetailsLoading.fromState(
         state: this,
       );
 
-  MedicineDetailsLoadError loadError() => MedicineDetailsLoadError.fromState(
+  MedicineDetailsLoadError toLoadError() => MedicineDetailsLoadError.fromState(
         state: this,
       );
 
-  MedicineDetailsLoaded loaded(MedicineCatalogModel medicineCatalogData) =>
+  MedicineDetailsLoaded toLoaded(MedicineCatalogModel medicineCatalogData) =>
       MedicineDetailsLoaded.fromState(
         state: this,
         medicineCatalogData: medicineCatalogData,
       );
 
-  MedicineDetailsTapIndexChanged tapIndexChanged(int index) =>
+  MedicineDetailsTapIndexChanged toTapIndexChanged(int index) =>
       MedicineDetailsTapIndexChanged.fromState(
         state: this,
         currentTapIndex: index,
       );
 
-  MedicineQuantityChanged quantityChanged() =>
+  MedicineQuantityChanged toQuantityChanged() =>
       MedicineQuantityChanged.fromState(
         state: this,
       );
 
-  PassingQuickOrder passingQuickOrder() => PassingQuickOrder.fromState(
+  PassingQuickOrder toPassingQuickOrder() => PassingQuickOrder.fromState(
         state: this,
       );
 
-  QuickOrderPassed quickOrderPassed() => QuickOrderPassed.fromState(
+  QuickOrderPassed toQuickOrderPassed() => QuickOrderPassed.fromState(
         state: this,
       );
 
-  PassQuickOrderFailed quickOrderFailed() => PassQuickOrderFailed.fromState(
+  PassQuickOrderFailed toQuickOrderFailed() => PassQuickOrderFailed.fromState(
         state: this,
       );
 
@@ -73,6 +60,10 @@ sealed class MedicineDetailsState {
         state: this,
         medicineCatalogData: medicineCatalogData,
       );
+
+  UpdateShippingAddress toUpdateShippingAddress(String shippingAddress) =>
+      UpdateShippingAddress.fromState(
+          state: this, shippingAddress: shippingAddress);
 }
 
 // ------------------ States ------------------
@@ -173,6 +164,18 @@ final class QuickOrderPassed extends MedicineDetailsState {
             medicineCatalogData: state.medicineCatalogData,
             currentTapIndex: state.currentTapIndex,
             shippingAddress: state.shippingAddress,
+            tabController: state.tabController,
+            packageQuantityController: state.packageQuantityController,
+            quantityController: state.quantityController);
+}
+
+final class UpdateShippingAddress extends MedicineDetailsState {
+  UpdateShippingAddress.fromState({
+    required MedicineDetailsState state,
+    required super.shippingAddress,
+  }) : super(
+            medicineCatalogData: state.medicineCatalogData,
+            currentTapIndex: state.currentTapIndex,
             tabController: state.tabController,
             packageQuantityController: state.packageQuantityController,
             quantityController: state.quantityController);

@@ -40,14 +40,14 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
   }
   Future<bool> likeMedicine() async {
     try {
-      emit(state.loaded(
+      emit(state.toLoaded(
         state.medicineCatalogData.copyWith(isLiked: true),
       ));
       await favoriteRepository.likeMedicineCatalog(
           medicineCatalogId: state.medicineCatalogData.id);
       return true;
     } catch (e) {
-      emit(state.loaded(state.medicineCatalogData.copyWith(isLiked: false)));
+      emit(state.toLoaded(state.medicineCatalogData.copyWith(isLiked: false)));
       GlobalExceptionHandler.handle(exception: e);
       return false;
     }
@@ -72,12 +72,12 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
 
   Future<void> getMedicineCatalogData(String id) async {
     try {
-      emit(state.loading());
+      emit(state.toLoading());
       final medicineCatalogData =
           await medicineCatalogRepository.getMedicineCatalogById(id);
-      emit(state.loaded(medicineCatalogData));
+      emit(state.toLoaded(medicineCatalogData));
     } catch (e) {
-      emit(state.loadError());
+      emit(state.toLoadError());
     }
   }
 
@@ -98,7 +98,7 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
   }
 
   void changeTapIndex(int index) {
-    emit(state.tapIndexChanged(index));
+    emit(state.toTapIndexChanged(index));
   }
 
   void incrementQuantity() {
@@ -107,7 +107,7 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
 
     state.packageQuantityController.text =
         (updatedQuantity ~/ (state.medicineCatalogData.packageSize)).toString();
-    emit(state.quantityChanged());
+    emit(state.toQuantityChanged());
   }
 
   void decrementQuantity() {
@@ -119,7 +119,7 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
           (updatedQuantity ~/ (state.medicineCatalogData.packageSize))
               .toString();
     }
-    emit(state.quantityChanged());
+    emit(state.toQuantityChanged());
   }
 
   void incrementPackageQuantity() {
@@ -130,7 +130,7 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
     state.quantityController.text =
         (currPackageQuantity * (state.medicineCatalogData.packageSize))
             .toString();
-    emit(state.quantityChanged());
+    emit(state.toQuantityChanged());
   }
 
   void decrementPackageQuantity() {
@@ -145,14 +145,14 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
 
     state.quantityController.text =
         (updatedItemQuantity < 1 ? 1 : updatedItemQuantity).toString();
-    emit(state.quantityChanged());
+    emit(state.toQuantityChanged());
   }
 
   Future<bool> passQuickOrder() async {
     if (formKey.currentState?.validate() == false) return false;
 
     try {
-      emit(state.passingQuickOrder());
+      emit(state.toPassingQuickOrder());
       await ordersRepository.createQuickOrder(
           orderDetails: CreateQuickOrderModel(
         deliveryAddress: state.shippingAddress,
@@ -160,17 +160,17 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
         medicineCatalogId: state.medicineCatalogData.id,
         qty: int.parse(state.quantityController.text),
       ));
-      emit(state.quickOrderPassed());
+      emit(state.toQuickOrderPassed());
       return true;
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
-      emit(state.loadError());
+      emit(state.toLoadError());
       return false;
     }
   }
 
   void updateShippingAddress(String value) {
-    emit(state.initial(shippingAddress: value));
+    emit(state.toUpdateShippingAddress(value));
   }
 
   void updateQuantity(String v) {
@@ -182,7 +182,7 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
           (updatedQuantity ~/ (state.medicineCatalogData.packageSize))
               .toString();
     }
-    emit(state.quantityChanged());
+    emit(state.toQuantityChanged());
   }
 
   void updateQuantityPackage(String v) {
@@ -196,6 +196,6 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
 
     state.quantityController.text =
         (updatedItemQuantity < 1 ? 1 : updatedItemQuantity).toString();
-    emit(state.quantityChanged());
+    emit(state.toQuantityChanged());
   }
 }
