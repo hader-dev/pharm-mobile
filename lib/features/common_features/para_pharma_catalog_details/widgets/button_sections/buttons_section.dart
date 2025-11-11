@@ -20,6 +20,8 @@ class ButtonsSection extends StatelessWidget {
     this.onAction,
     this.quantitySectionAlignment = MainAxisAlignment.end,
     this.disabledPackageQuanity = true,
+    this.minOrderQuantity = 1,
+    this.maxOrderQuantity = 9999,
     this.price,
   });
 
@@ -27,6 +29,8 @@ class ButtonsSection extends StatelessWidget {
   final MainAxisAlignment quantitySectionAlignment;
   final bool disabledPackageQuanity;
   final double? price;
+  final int minOrderQuantity;
+  final int maxOrderQuantity;
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +43,8 @@ class ButtonsSection extends StatelessWidget {
           child: Column(
             children: [
               QuantitySectionModified(
+                  minQuantity: minOrderQuantity,
+                  maxQuantity: maxOrderQuantity,
                   packageSize: cubit.state.paraPharmaCatalogData.packageSize,
                   mainAxisAlignment: quantitySectionAlignment,
                   disabledPackageQuantity: disabledPackageQuanity,

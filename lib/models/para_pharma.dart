@@ -18,6 +18,8 @@ class BaseParaPharmaCatalogModel {
   final Brand? brand;
   final double unitPriceTtc;
   final double tvaPercentage;
+  final int maxOrderQuantity;
+  final int minOrderQuantity;
 
   BaseParaPharmaCatalogModel copyWith(
       {String? id,
@@ -64,6 +66,8 @@ class BaseParaPharmaCatalogModel {
       required this.isActive,
       required this.unitPriceTtc,
       required this.tvaPercentage,
+      this.maxOrderQuantity = 9999,
+      this.minOrderQuantity = 1,
       this.category,
       this.brand,
       this.company,
@@ -121,10 +125,7 @@ class ParaPharmaCatalogModel extends BaseParaPharmaCatalogModel {
   final String sku;
   final String description;
   final Map<String, dynamic>? metaData;
-  final int minOrderQuantity;
-  final int maxOrderQuantity;
-  final Brand brand;
-  final Category category;
+
 
   ParaPharmaCatalogModel({
     required super.id,
@@ -149,10 +150,10 @@ class ParaPharmaCatalogModel extends BaseParaPharmaCatalogModel {
     required this.sku,
     required this.description,
     required this.metaData,
-    required this.minOrderQuantity,
-    required this.maxOrderQuantity,
-    required this.brand,
-    required this.category,
+    required super.minOrderQuantity,
+    required super.maxOrderQuantity,
+    required super.brand,
+    required super.category,
   });
 
   factory ParaPharmaCatalogModel.empty() {

@@ -112,12 +112,16 @@ class CartCubit extends Cubit<CartState> {
     }
   }
 
+  bool _canIncreaseQuantity(CartItemModelUi item) {
+    return (item.model.medicinesCatalogId != null &&
+            item.model.quantity >= item.model.maxOrderQuantity - 1) ||
+        (item.model.parapharmCatalogId != null &&
+            item.model.quantity >= item.model.maxOrderQuantity - 1);
+  }
+
   void increaseCartPackageQuantity(CartItemModelUi item) {
     try {
-      if ((item.model.medicinesCatalogId != null &&
-              item.model.quantity == item.model.medicineCatalogStockQty) ||
-          (item.model.parapharmCatalogId != null &&
-              item.model.quantity == item.model.parapharmCatalogStockQty)) {
+      if (_canIncreaseQuantity(item)) {
         throw TemplateException(message: "you reached the limit of the stock.");
       }
 
@@ -187,10 +191,7 @@ class CartCubit extends Cubit<CartState> {
 
   void increaseCartItemQuantity(CartItemModelUi item) {
     try {
-      if ((item.model.medicinesCatalogId != null &&
-              item.model.quantity == item.model.medicineCatalogStockQty) ||
-          (item.model.parapharmCatalogId != null &&
-              item.model.quantity == item.model.parapharmCatalogStockQty)) {
+      if (_canIncreaseQuantity(item)) {
         throw TemplateException(message: "you reached the limit of the stock.");
       }
 
@@ -239,10 +240,7 @@ class CartCubit extends Cubit<CartState> {
 
   void increaseCartItemPackageQuantity(CartItemModelUi item) {
     try {
-      if ((item.model.medicinesCatalogId != null &&
-              item.model.quantity == item.model.medicineCatalogStockQty) ||
-          (item.model.parapharmCatalogId != null &&
-              item.model.quantity == item.model.parapharmCatalogStockQty)) {
+      if (_canIncreaseQuantity(item)) {
         throw TemplateException(message: "you reached the limit of the stock.");
       }
 

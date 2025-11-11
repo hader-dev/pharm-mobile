@@ -79,6 +79,8 @@ class CartItemWidget extends StatelessWidget {
                     QuantitySectionModified(
                       disabledPackageQuantity: true,
                       packageSize: item.model.packageSize,
+                      maxQuantity: item.model.maxOrderQuantity,
+                      minQuantity: item.model.minOrderQuantity,
                       decrementQuantity: () =>
                           cartCubit.decreaseCartItemQuantity(item),
                       incrementQuantity: () =>

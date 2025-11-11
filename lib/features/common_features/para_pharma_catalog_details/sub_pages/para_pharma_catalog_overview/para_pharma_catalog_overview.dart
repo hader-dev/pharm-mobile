@@ -26,8 +26,8 @@ ${paraPharmaCatalogData.description}
 
 ## ${translations.specifications}
 
-- **${translations.brand}:** ${paraPharmaCatalogData.brand.name}
-- **${translations.category}:** ${paraPharmaCatalogData.category.name}
+- **${translations.brand}:** ${paraPharmaCatalogData.brand?.name}
+- **${translations.category}:** ${paraPharmaCatalogData.category?.name}
 - **${translations.packaging}:** ${paraPharmaCatalogData.packaging}
 """,
       styleSheet: MarkdownStyleSheet(

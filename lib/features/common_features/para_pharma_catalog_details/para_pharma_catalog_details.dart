@@ -102,7 +102,7 @@ class _BaseParaPharmaCatalogDetailsScreenState
                       child: Row(
                         children: [
                           CustomChip(
-                            label: state.paraPharmaCatalogData.category.name,
+                            label: state.paraPharmaCatalogData.category!.name,
                             color: AppColors.bgDarken2,
                           ),
                           const Spacer(),
@@ -165,10 +165,10 @@ class _BaseParaPharmaCatalogDetailsScreenState
                       data: [
                         RowColumnDataHolders(
                             title: context.translation!.brand,
-                            value: state.paraPharmaCatalogData.brand.name),
+                            value: state.paraPharmaCatalogData.brand!.name),
                         RowColumnDataHolders(
                             title: context.translation!.category,
-                            value: state.paraPharmaCatalogData.category.name),
+                            value: state.paraPharmaCatalogData.category!.name),
                         RowColumnDataHolders(
                             title: context.translation!.packaging,
                             value: state.paraPharmaCatalogData.packaging),

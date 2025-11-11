@@ -17,6 +17,8 @@ class QuantitySectionModified extends StatelessWidget {
       required this.packageQuantityController,
       required this.onQuantityChanged,
       required this.onPackageQuantityChanged,
+      this.maxQuantity = 9999,
+      this.minQuantity = 1,
       this.displayQuantityLabel = true,
       this.packageSize,
       this.axis = Axis.horizontal});
@@ -33,6 +35,8 @@ class QuantitySectionModified extends StatelessWidget {
   final int? packageSize;
   final bool displayQuantityLabel;
   final Axis axis;
+  final int maxQuantity;
+  final int minQuantity;
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +48,8 @@ class QuantitySectionModified extends StatelessWidget {
       quantityController: quantityController,
       decrement: decrementQuantity,
       increment: incrementQuantity,
+      maxQuantity: maxQuantity,
+      minQuantity: minQuantity,
       onQuantityChanged: onQuantityChanged,
       mainAxisAlignment: mainAxisAlignment,
       displayQuantityLabel: displayQuantityLabel,

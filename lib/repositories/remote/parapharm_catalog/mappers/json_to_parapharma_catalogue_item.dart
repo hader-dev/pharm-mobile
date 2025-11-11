@@ -36,8 +36,8 @@ ParaPharmaCatalogModel jsonToParapharmaCatalogueItem(
     sku: json['sku'] ?? "",
     description: json['description'] ?? "",
     metaData: json['metaData'] ?? {},
-    minOrderQuantity: json['minOrderQuantity'] ?? 0,
-    maxOrderQuantity: json['maxOrderQuantity'] ?? 0,
+    minOrderQuantity: json['minOrderQuantity'] ?? 1,
+    maxOrderQuantity: json['maxOrderQuantity'] ?? 9999,
     brand:
         json['brand'] == null ? Brand.empty() : Brand.fromJson(json['brand']),
     category: json['category'] == null

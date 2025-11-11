@@ -15,11 +15,15 @@ import 'package:hader_pharm_mobile/repositories/remote/parapharm_catalog/para_ph
 class QuickCartAddModal extends StatefulWidget {
   const QuickCartAddModal(
       {super.key,
+      this.minOrderQuantity = 1,
+      this.maxOrderQuantity = 9999,
       required this.paraPharmaCatalogId,
       this.disabledPackageQuanity = false});
   final String paraPharmaCatalogId;
 
   final bool disabledPackageQuanity;
+  final int minOrderQuantity;
+  final int maxOrderQuantity;
 
   @override
   State<QuickCartAddModal> createState() => _QuickCartAddModalState();
@@ -41,7 +45,7 @@ class _QuickCartAddModalState extends State<QuickCartAddModal>
         packageQuantityController: TextEditingController(
             text: existingCartItem?.model.packageQuantity.toString() ?? '0'),
         quantityController: TextEditingController(
-            text: existingCartItem?.model.quantity.toString() ?? '1'),
+            text: existingCartItem?.model.quantity.toString() ?? widget.minOrderQuantity.toString()),
         tabController: TabController(length: tabs.length, vsync: this),
         ordersRepository:
             OrderRepository(client: getItInstance.get<INetworkService>()),
@@ -63,6 +67,8 @@ class _QuickCartAddModalState extends State<QuickCartAddModal>
         return ButtonsSection(
           price: state.paraPharmaCatalogData.unitPriceHt,
           onAction: () => context.pop(),
+          minOrderQuantity: widget.minOrderQuantity,
+          maxOrderQuantity: widget.maxOrderQuantity,
           quantitySectionAlignment: MainAxisAlignment.center,
           disabledPackageQuanity: widget.disabledPackageQuanity,
         );

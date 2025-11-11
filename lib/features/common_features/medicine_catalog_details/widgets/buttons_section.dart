@@ -20,6 +20,8 @@ class ButtonsSection extends StatelessWidget {
       this.medicineDetailsCubit,
       this.onAction,
       this.price,
+      required this.minOrderQuantity,
+      required this.maxOrderQuantity,
       this.quantitySectionAlignment = MainAxisAlignment.center,
       this.disabledPackageQuanity = false});
 
@@ -28,6 +30,9 @@ class ButtonsSection extends StatelessWidget {
   final MedicineDetailsCubit? medicineDetailsCubit;
   final bool disabledPackageQuanity;
   final double? price;
+  final int minOrderQuantity;
+  final int maxOrderQuantity;
+
   @override
   Widget build(BuildContext context) {
     final translation = context.translation!;
@@ -38,6 +43,8 @@ class ButtonsSection extends StatelessWidget {
         return Column(
           children: [
             QuantitySectionModified(
+              minQuantity: minOrderQuantity,
+              maxQuantity: maxOrderQuantity,
               packageSize:
                   medicineDetailsCubit?.state.medicineCatalogData.packageSize,
               mainAxisAlignment: quantitySectionAlignment,

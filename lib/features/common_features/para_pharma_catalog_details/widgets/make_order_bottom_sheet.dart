@@ -68,6 +68,10 @@ class MakeOrderBottomSheet extends StatelessWidget {
                 ),
                 const ResponsiveGap.s12(),
                 QuantitySectionModified(
+                  maxQuantity:
+                      cubit.state.paraPharmaCatalogData.maxOrderQuantity,
+                  minQuantity:
+                      cubit.state.paraPharmaCatalogData.minOrderQuantity,
                   quantityController: cubit.state.quantityController,
                   packageQuantityController:
                       cubit.state.packageQuantityController,

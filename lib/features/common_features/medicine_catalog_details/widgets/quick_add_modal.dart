@@ -16,10 +16,14 @@ import 'package:hader_pharm_mobile/repositories/remote/order/order_repository_im
 class QuickCartAddModal extends StatefulWidget {
   const QuickCartAddModal(
       {super.key,
+      this.minOrderQuantity = 1,
+      this.maxOrderQuantity = 9999,
       required this.medicineCatalogId,
       this.disabledPackageQuanity = false});
   final String medicineCatalogId;
   final bool disabledPackageQuanity;
+  final int minOrderQuantity;
+  final int maxOrderQuantity;
 
   @override
   State<QuickCartAddModal> createState() => _QuickCartAddModalState();
@@ -40,7 +44,8 @@ class _QuickCartAddModalState extends State<QuickCartAddModal>
         packageQuantityController: TextEditingController(
             text: existingCartItem?.model.quantity.toString() ?? '0'),
         quantityController: TextEditingController(
-            text: existingCartItem?.model.quantity.toString() ?? '1'),
+            text: existingCartItem?.model.quantity.toString() ??
+                widget.minOrderQuantity.toString()),
         tabController: TabController(length: tabs.length, vsync: this),
         shippingAddress: getItInstance.get<UserManager>().currentUser.address,
         ordersRepository:
@@ -60,6 +65,8 @@ class _QuickCartAddModalState extends State<QuickCartAddModal>
       ],
       child: ButtonsSection(
         onAction: () => context.pop(),
+        minOrderQuantity: widget.minOrderQuantity,
+        maxOrderQuantity: widget.maxOrderQuantity,
         price: medicineDetailsCubit.state.medicineCatalogData.unitPriceHt,
         quantitySectionAlignment: MainAxisAlignment.center,
         medicineDetailsCubit: medicineDetailsCubit,

@@ -29,6 +29,7 @@ class BaseMedicineCatalogModel {
   final int displayOrder;
   final BaseCompany? company;
   bool isLiked;
+  
 
   BaseMedicineCatalogModel({
     required this.packageSize,

@@ -65,10 +65,14 @@ class CartItemModel {
   final int parapharmCatalogStockQty;
   final BaseCompany sellerCompany;
   final ImageModel? image;
+  final int maxOrderQuantity;
+  final int minOrderQuantity;
 
   CartItemModel({
     this.image,
     required this.id,
+    required this.maxOrderQuantity,
+    required this.minOrderQuantity,
     required this.totalAmountTtc,
     required this.totalAmountHt,
     required this.tvaPercentage,
@@ -101,10 +105,17 @@ class CartItemModel {
   factory CartItemModel.fromJson(Map<String, dynamic> json) {
     final thumbnailImage =
         json['medicineCatalog']?['image'] ?? json['parapharmCatalog']?['image'];
+    final minOrderQuantity = json['medicineCatalog']?['minOrderQuantity'] ??
+        json['parapharmCatalog']?['minOrderQuantity'];
+
+    final maxOrderQuantity = json['medicineCatalog']?['maxOrderQuantity'] ??
+        json['parapharmCatalog']?['maxOrderQuantity'];
 
     return CartItemModel(
       packageSize: json['packageSize'] ?? 1,
       id: json['id'],
+      maxOrderQuantity: maxOrderQuantity,
+      minOrderQuantity: minOrderQuantity,
       totalAmountTtc: json['totalAmountTtc'],
       totalAmountHt: json['totalAmountHt'],
       tvaPercentage: json['tvaPercentage'],
@@ -173,6 +184,8 @@ class CartItemModel {
         buyerCompanyId: buyerCompanyId ?? this.buyerCompanyId,
         sellerCompanyId: sellerCompanyId ?? this.sellerCompanyId,
         sellerCompany: sellerCompany ?? this.sellerCompany,
+        maxOrderQuantity: maxOrderQuantity,
+        minOrderQuantity: minOrderQuantity,
         image: image);
   }
 

@@ -15,6 +15,8 @@ class BaseQuantityController extends StatelessWidget {
     required this.label,
     required this.decrement,
     required this.increment,
+    this.maxQuantity = 9999,
+    this.minQuantity = 1,
     this.crossAxisAlignment = CrossAxisAlignment.center,
     this.onQuantityChanged,
     this.mainAxisAlignment = MainAxisAlignment.center,
@@ -22,13 +24,14 @@ class BaseQuantityController extends StatelessWidget {
     this.displayQuantityLabel = true,
     required this.quantityController,
   });
-
   const BaseQuantityController.vertical({
     super.key,
     required this.label,
     required this.decrement,
     required this.increment,
     required this.quantityController,
+    this.maxQuantity = 9999,
+    this.minQuantity = 1,
     this.mainAxisAlignment = MainAxisAlignment.center,
     this.crossAxisAlignment = CrossAxisAlignment.center,
     this.onQuantityChanged,
@@ -44,6 +47,8 @@ class BaseQuantityController extends StatelessWidget {
   final bool displayQuantityLabel;
   final Axis axisDirection;
   final MainAxisAlignment mainAxisAlignment;
+  final int maxQuantity;
+  final int minQuantity;
 
   @override
   Widget build(BuildContext context) {
@@ -59,12 +64,18 @@ class BaseQuantityController extends StatelessWidget {
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
             onChanged: (value) {
               final parsed = int.tryParse(value);
-              if (value.isEmpty || parsed == null || parsed < 1) {
-                quantityController.text = '1';
+              if (value.isEmpty || parsed == null || parsed < minQuantity) {
+                quantityController.text = minQuantity.toString();
                 quantityController.selection = TextSelection.fromPosition(
                   TextPosition(offset: quantityController.text.length),
                 );
-                onQuantityChanged?.call('1');
+                onQuantityChanged?.call(minQuantity.toString());
+              } else if (parsed > maxQuantity) {
+                quantityController.text = maxQuantity.toString();
+                quantityController.selection = TextSelection.fromPosition(
+                  TextPosition(offset: quantityController.text.length),
+                );
+                onQuantityChanged?.call(maxQuantity.toString());
               } else {
                 onQuantityChanged?.call(value);
               }
