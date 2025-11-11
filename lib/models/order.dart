@@ -48,8 +48,8 @@ class BaseOrderModel {
       createdAt: DateTime.parse(json['createdAt']),
       updatedAt:
           json['updatedAt'] != null ? DateTime.parse(json['updatedAt']) : null,
-      // sellerCompanyName: json['companyInfo']['name'],
-      // clientCompanyName: json['clientCompany']['name'],
+      sellerCompanyName: json['sellerCompany']['name'],
+      clientCompanyName: json['clientCompany']['name'],
     );
   }
 

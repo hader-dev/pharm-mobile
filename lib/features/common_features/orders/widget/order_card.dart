@@ -80,10 +80,7 @@ class OrderCard extends StatelessWidget {
                     ),
                     InfoRow(
                       icon: Iconsax.shop,
-                      dataValue: (displayClientCompanyOrVendor
-                              ? orderData.clientCompanyName
-                              : orderData.sellerCompanyName) ??
-                          "N/A",
+                      dataValue: orderData.sellerCompanyName ?? "N/A",
                       iconColor: AppColors.accent1Shade1,
                       contentDirection: Axis.horizontal,
                     ),
