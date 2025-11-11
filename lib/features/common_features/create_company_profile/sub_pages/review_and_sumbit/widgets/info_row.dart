@@ -41,7 +41,7 @@ class InfoRow extends StatelessWidget {
                     message: dataValue.isEmpty
                         ? context.translation!.feedback_not_provided
                         : dataValue,
-                    triggerMode: TooltipTriggerMode.tap,
+                    triggerMode: TooltipTriggerMode.longPress,
                     child: Text(
                         dataValue.isEmpty
                             ? context.translation!.feedback_not_provided
