@@ -4,7 +4,7 @@ import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/widgets/make_order_bottom_sheet.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
-class FilterPriceSection extends StatelessWidget {
+class FilterPriceSection extends StatefulWidget {
   final double? minPrice;
   final double? maxPrice;
   final Function(double min, double max) onChanged;
@@ -17,16 +17,27 @@ class FilterPriceSection extends StatelessWidget {
     this.maxPrice,
     required this.onChanged,
     this.minLimit = 0,
-    this.maxLimit = 1000,
+    this.maxLimit = 10000,
   });
 
   @override
-  Widget build(BuildContext context) {
-    RangeValues currentRangeValues = RangeValues(
-      minPrice ?? minLimit,
-      maxPrice ?? maxLimit,
-    );
+  _FilterPriceSectionState createState() => _FilterPriceSectionState();
+}
 
+class _FilterPriceSectionState extends State<FilterPriceSection> {
+  late RangeValues currentRangeValues;
+
+  @override
+  void initState() {
+    super.initState();
+    currentRangeValues = RangeValues(
+      widget.minPrice ?? widget.minLimit,
+      widget.maxPrice ?? widget.maxLimit,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return InfoWidget(
       label: "${context.translation!.price}: ",
       bgColor: AppColors.bgWhite,
@@ -47,14 +58,18 @@ class FilterPriceSection extends StatelessWidget {
           const ResponsiveGap.s12(),
           RangeSlider(
             values: currentRangeValues,
-            min: minLimit,
-            max: maxLimit,
-            onChanged: (RangeValues values) {},
-            onChangeEnd: (RangeValues values) {
-              onChanged(values.start, values.end);
-            },
+            min: widget.minLimit,
+            max: widget.maxLimit,
             activeColor: AppColors.accent1Shade1,
             inactiveColor: Colors.grey[300],
+            onChanged: (values) {
+              setState(() {
+                currentRangeValues = values;
+              });
+            },
+            onChangeEnd: (values) {
+              widget.onChanged(values.start, values.end);
+            },
           ),
         ],
       ),

@@ -15,7 +15,7 @@ class PriceRangeSlider extends StatelessWidget {
     this.maxPrice,
     required this.onChanged,
     this.minLimit = 0,
-    this.maxLimit = 100000,
+    this.maxLimit = 10000,
   });
 
   @override

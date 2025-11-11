@@ -43,11 +43,11 @@ class QuickApplyPriceFilterParapharm extends StatelessWidget {
                       state.appliedFilters.gteUnitPriceHt ?? "0.0") ??
                   0,
               maxPrice: double.tryParse(
-                      state.appliedFilters.lteUnitPriceHt ?? "100000") ??
-                  100000,
+                      state.appliedFilters.lteUnitPriceHt ?? "10000") ??
+                  10000,
               onChanged: (min, max) => cubit.updatePriceRange(min, max),
               minLimit: 0,
-              maxLimit: 100000,
+              maxLimit: 10000,
             );
           },
         ),

@@ -61,7 +61,7 @@ class _QuickApplyPriceFilterMedicalState
               maxPrice: maxPrice,
               onChanged: (min, max) => cubit.updatePriceRange(min, max),
               minLimit: 0,
-              maxLimit: 100000,
+              maxLimit: 10000,
             );
           },
         ),
