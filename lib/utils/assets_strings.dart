@@ -7,20 +7,13 @@ class DrawableAssetStrings {
 
 // //app images
 
-  static const String congratsIllustrationImg =
-      'assets/images/congrats_illustration.svg';
-  static const String companyIllustration1 =
-      'assets/images/company_illustration_1.svg';
-  static const String companyIllustration2 =
-      'assets/images/company_illustration_2.svg';
-  static const String companyIllustration3 =
-      'assets/images/company_illustration_3.svg';
-  static const String companyPlaceHolderImg =
-      'assets/images/company_place_holder.webp';
-  static const String medicinePlaceHolderImg =
-      'assets/images/medicine_place_holder.webp';
-  static const String paraPharmaPlaceHolderImg =
-      'assets/images/para_pharm_place_holder.webp';
+  static const String congratsIllustrationImg = 'assets/images/congrats_illustration.svg';
+  static const String companyIllustration1 = 'assets/images/company_illustration_1.svg';
+  static const String companyIllustration2 = 'assets/images/company_illustration_2.svg';
+  static const String companyIllustration3 = 'assets/images/company_illustration_3.svg';
+  static const String companyPlaceHolderImg = 'assets/images/company_place_holder.webp';
+  static const String medicinePlaceHolderImg = 'assets/images/medicine_place_holder.webp';
+  static const String paraPharmaPlaceHolderImg = 'assets/images/para_pharm_place_holder.webp';
   static const String board1Img = 'assets/images/board_1.webp';
   static const String board2Img = 'assets/images/board_2.webp';
   static const String board3Img = 'assets/images/board_3.webp';
@@ -31,6 +24,7 @@ class DrawableAssetStrings {
   static const String logoImgWhite = 'assets/images/LogoWhite.svg';
   static const String medicinesBg = 'assets/images/medicines_bg.webp';
   static const String paraPharmsBg = 'assets/images/paras_bg.webp';
+  static const String announcementSeeMoreBg = 'assets/images/announcement_see_more_bg.webp';
 
   //app icons
   static const String appleIcon = 'assets/icons/apple.svg';
@@ -45,6 +39,7 @@ class DrawableAssetStrings {
   static const String saudiFlagIcon = 'assets/icons/saudi_flag.svg';
   static const String franceFlagIcon = 'assets/icons/france_flag.svg';
   static const String usaFlagIcon = 'assets/icons/usa_flag.svg';
+  static const String glassIcon = 'assets/icons/glass.svg';
 }
 
 class JsonAssetStrings {
