@@ -8,19 +8,17 @@ import 'package:hader_pharm_mobile/features/common_features/cart/cubit/cart_cubi
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
-class MarketplaceAppbar extends StatelessWidget implements PreferredSizeWidget {
+class MarketplaceAppBar extends StatelessWidget {
   final bool isExtraLargeScreen;
 
-  const MarketplaceAppbar({
+  const MarketplaceAppBar({
     super.key,
     required this.isExtraLargeScreen,
   });
 
   @override
   Widget build(BuildContext context) {
-    final offset = context.deviceSize.width <= DeviceSizes.largeMobile.width
-        ? Offset(7, -9)
-        : Offset(-15, 5);
+    final offset = context.deviceSize.width <= DeviceSizes.largeMobile.width ? Offset(7, -9) : Offset(-15, 5);
 
     return CustomAppBarV2.alternate(
       topPadding: MediaQuery.of(context).padding.top,
@@ -55,16 +53,10 @@ class MarketplaceAppbar extends StatelessWidget implements PreferredSizeWidget {
             },
           ),
           onPressed: () {
-            AppLayout.appLayoutScaffoldKey.currentContext!
-                .read<AppLayoutCubit>()
-                .changePage(2);
+            AppLayout.appLayoutScaffoldKey.currentContext!.read<AppLayoutCubit>().changePage(2);
           },
         ),
       ],
     );
   }
-
-  @override
-  Size get preferredSize =>
-      Size.fromHeight(isExtraLargeScreen ? kToolbarHeight * 2 : kToolbarHeight);
 }

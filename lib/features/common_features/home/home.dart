@@ -39,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     final minSectionHeight = screenSize.height * 0.15;
-    // debugPrint("screenSize: $screenSize");
+
     final sectionHeightModifier = screenSize.width <= DeviceSizes.mediumMobile.width ? 2 : 2.2;
 
     return StateProvider(
@@ -74,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const ResponsiveGap.s24(),
+                      const ResponsiveGap.s12(),
                       if (state.announcements.isNotEmpty)
                         PromotionSectionV6(
                             announcements: state.announcements.length > 4

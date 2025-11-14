@@ -6,9 +6,9 @@ import 'package:hader_pharm_mobile/features/common_features/cart/cubit/cart_cubi
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
-class CartAppbar extends StatelessWidget implements PreferredSizeWidget {
+class CartAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool isExtraLargeScreen;
-  const CartAppbar({
+  const CartAppBar({
     super.key,
     required this.isExtraLargeScreen,
   });
@@ -31,8 +31,7 @@ class CartAppbar extends StatelessWidget implements PreferredSizeWidget {
           return Text.rich(
             TextSpan(
               text: context.translation!.cart,
-              style: context.responsiveTextTheme.current.headLine3SemiBold
-                  .copyWith(color: AppColors.bgWhite),
+              style: context.responsiveTextTheme.current.headLine3SemiBold.copyWith(color: AppColors.bgWhite),
               children: [
                 TextSpan(
                     text: " (${state.cartItems.length})",
@@ -47,6 +46,5 @@ class CartAppbar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize =>
-      Size.fromHeight(isExtraLargeScreen ? kToolbarHeight * 2 : kToolbarHeight);
+  Size get preferredSize => Size.fromHeight(isExtraLargeScreen ? kToolbarHeight * 2 : kToolbarHeight);
 }

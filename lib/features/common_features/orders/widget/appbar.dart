@@ -6,9 +6,9 @@ import 'package:hader_pharm_mobile/features/common_features/orders/cubit/orders_
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
-class OrdersAppbar extends StatelessWidget implements PreferredSizeWidget {
+class OrdersAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool isExtraLargeScreen;
-  const OrdersAppbar({
+  const OrdersAppBar({
     super.key,
     required this.isExtraLargeScreen,
   });
@@ -31,8 +31,7 @@ class OrdersAppbar extends StatelessWidget implements PreferredSizeWidget {
           return RichText(
             text: TextSpan(
               text: context.translation!.orders,
-              style: context.responsiveTextTheme.current.headLine3SemiBold
-                  .copyWith(color: AppColors.bgWhite),
+              style: context.responsiveTextTheme.current.headLine3SemiBold.copyWith(color: AppColors.bgWhite),
               children: [
                 TextSpan(
                     text: " (${state.totalItemsCount})",
@@ -47,6 +46,5 @@ class OrdersAppbar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize =>
-      Size.fromHeight(isExtraLargeScreen ? kToolbarHeight * 2 : kToolbarHeight);
+  Size get preferredSize => Size.fromHeight(isExtraLargeScreen ? kToolbarHeight * 2 : kToolbarHeight);
 }

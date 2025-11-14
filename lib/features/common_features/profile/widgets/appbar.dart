@@ -4,9 +4,9 @@ import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.da
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
-class ProfileAppbar extends StatelessWidget implements PreferredSizeWidget {
+class ProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool isExtraLargeScreen;
-  const ProfileAppbar({
+  const ProfileAppBar({
     super.key,
     required this.isExtraLargeScreen,
   });
@@ -26,13 +26,11 @@ class ProfileAppbar extends StatelessWidget implements PreferredSizeWidget {
       ),
       title: Text(
         context.translation!.account,
-        style: context.responsiveTextTheme.current.headLine3SemiBold
-            .copyWith(color: AppColors.bgWhite),
+        style: context.responsiveTextTheme.current.headLine3SemiBold.copyWith(color: AppColors.bgWhite),
       ),
     );
   }
 
   @override
-  Size get preferredSize =>
-      Size.fromHeight(isExtraLargeScreen ? kToolbarHeight * 2 : kToolbarHeight);
+  Size get preferredSize => Size.fromHeight(isExtraLargeScreen ? kToolbarHeight * 2 : kToolbarHeight);
 }

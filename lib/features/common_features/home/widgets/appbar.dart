@@ -5,75 +5,65 @@ import 'package:hader_pharm_mobile/config/responsive/device_size.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/notification/cubit/notifications_cubit.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
-class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
+class HomeAppBar extends StatelessWidget {
   final bool isExtraLargeScreen;
-  const HomeAppbar({super.key, required this.isExtraLargeScreen});
-
-  @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  const HomeAppBar({super.key, required this.isExtraLargeScreen});
 
   @override
   Widget build(BuildContext context) {
-    return ColoredBox(
-      color: AppColors.accent1Shade2,
-      child: Padding(
-        padding: EdgeInsets.only(
-            left: context.responsiveAppSizeTheme.current.p8,
-            right: context.responsiveAppSizeTheme.current.p8,
-            bottom: context.responsiveAppSizeTheme.current.p8,
-            top: context.responsiveAppSizeTheme.current.p24),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SvgPicture.asset(
-              DrawableAssetStrings.logoImgWhite,
-              width: 30,
-              height: 30,
-            ),
-            Text(
-              context.translation!.app_name_2,
-              style: context.responsiveTextTheme.current.headLine3SemiBold
-                  .copyWith(color: Colors.white),
-            ),
-            const Spacer(),
-            BlocBuilder<NotificationsCubit, NotificationState>(
-              builder: (context, state) {
-                return IconButton(
-                  iconSize:
-                      context.deviceSize.width <= DeviceSizes.largeMobile.width
-                          ? context.responsiveAppSizeTheme.current.iconSize30
-                          : context.responsiveAppSizeTheme.current.iconSize18,
-                  onPressed: () => RoutingManager.router
-                      .pushNamed(RoutingManager.notificationsScreen),
-                  icon: Stack(
-                    clipBehavior: Clip.none,
-                    children: [
-                      const Icon(
-                        Iconsax.notification,
-                        color: Colors.white,
-                      ),
-                      if (context.read<NotificationsCubit>().unreadCount > 0)
-                        Positioned(
-                          top: -4,
-                          right: -4,
-                          child: CircleAvatar(
-                            radius: context.responsiveAppSizeTheme.current
-                                .commonWidgetsRadius,
-                            backgroundColor: Colors.red,
-                          ),
-                        )
-                    ],
-                  ),
-                );
-              },
-            ),
-          ],
-        ),
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: context.responsiveAppSizeTheme.current.p8),
+      color: Colors.white,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SvgPicture.asset(
+            DrawableAssetStrings.logoImg,
+            width: 35,
+            height: 35,
+          ),
+          ResponsiveGap.s4(),
+          Text(
+            context.translation!.app_name_2,
+            style: context.responsiveTextTheme.current.headLine3SemiBold.copyWith(color: AppColors.accent1Shade1),
+          ),
+
+          // BlocBuilder<NotificationsCubit, NotificationState>(
+          //   builder: (context, state) {
+          //     return IconButton(
+          //       iconSize: context.deviceSize.width <= DeviceSizes.largeMobile.width
+          //           ? context.responsiveAppSizeTheme.current.iconSize30
+          //           : context.responsiveAppSizeTheme.current.iconSize18,
+          //       onPressed: () => RoutingManager.router.pushNamed(RoutingManager.notificationsScreen),
+          //       icon: Stack(
+          //         clipBehavior: Clip.none,
+          //         children: [
+          //           const Icon(
+          //             Iconsax.notification,
+          //             color: Colors.white,
+          //           ),
+          //           if (context.read<NotificationsCubit>().unreadCount > 0)
+          //             Positioned(
+          //               top: -4,
+          //               right: -4,
+          //               child: CircleAvatar(
+          //                 radius: context.responsiveAppSizeTheme.current.commonWidgetsRadius,
+          //                 backgroundColor: Colors.red,
+          //               ),
+          //             )
+          //         ],
+          //       ),
+          //     );
+          //   },
+          // ),
+        ],
       ),
     );
   }
