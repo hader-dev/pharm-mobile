@@ -9,8 +9,8 @@ import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class ParaPharmaSectionItems extends StatelessWidget {
-  const ParaPharmaSectionItems({super.key, required this.minSectionHeight});
   final double minSectionHeight;
+  const ParaPharmaSectionItems({super.key, required this.minSectionHeight});
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +18,7 @@ class ParaPharmaSectionItems extends StatelessWidget {
 
     return BlocBuilder<ParaPharmaCubit, ParaPharmaState>(
       builder: (context, state) {
-        ParaPharmaCubit paraPharmaProductsCubit =
-            context.read<ParaPharmaCubit>();
+        ParaPharmaCubit paraPharmaProductsCubit = context.read<ParaPharmaCubit>();
         final items = state.paraPharmaProducts;
 
         if (state is ParaPharmaProductsLoading) {
@@ -34,19 +33,14 @@ class ParaPharmaSectionItems extends StatelessWidget {
           );
         }
         void onFavoriteCallback(BaseParaPharmaCatalogModel medicine) {
-          final gCubit = MarketPlaceScreen
-              .marketPlaceScaffoldKey.currentContext!
-              .read<ParaPharmaCubit>();
-          final hCubit =
-              HomeScreen.scaffoldKey.currentContext?.read<ParaPharmaCubit>();
+          final gCubit = MarketPlaceScreen.marketPlaceScaffoldKey.currentContext!.read<ParaPharmaCubit>();
+          final hCubit = HomeScreen.scaffoldKey.currentContext?.read<ParaPharmaCubit>();
           medicine.isLiked
               ? paraPharmaProductsCubit.unlikeParaPharmaCatalog(medicine.id)
               : paraPharmaProductsCubit.likeParaPharmaCatalog(medicine.id);
 
-          gCubit.refreshParaPharmaCatalogFavorite(
-              medicine.id, !medicine.isLiked);
-          hCubit?.refreshParaPharmaCatalogFavorite(
-              medicine.id, !medicine.isLiked);
+          gCubit.refreshParaPharmaCatalogFavorite(medicine.id, !medicine.isLiked);
+          hCubit?.refreshParaPharmaCatalogFavorite(medicine.id, !medicine.isLiked);
         }
 
         return AspectRatio(
@@ -58,10 +52,8 @@ class ParaPharmaSectionItems extends StatelessWidget {
             itemCount: items.length,
             itemBuilder: (context, index) {
               return SizedBox(
-                width: screenWidth > 768 ? 300 : minSectionHeight,
-                child: ParaPharmaWidget2(
-                    paraPharmData: items[index],
-                    onFavoriteCallback: onFavoriteCallback),
+                width: screenWidth > 768 ? 300 : 250,
+                child: ParaPharmaWidget2(paraPharmData: items[index], onFavoriteCallback: onFavoriteCallback),
               );
             },
           ),

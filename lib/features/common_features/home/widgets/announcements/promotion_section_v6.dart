@@ -38,9 +38,8 @@ class PromotionSectionV6 extends StatelessWidget {
         }
 
         return Padding(
-          padding: EdgeInsets.only(
-            right: context.responsiveAppSizeTheme.current.p8,
-            left: context.responsiveAppSizeTheme.current.p8,
+          padding: EdgeInsets.symmetric(
+            horizontal: context.responsiveAppSizeTheme.current.p8,
           ),
           child: SizedBox(
             height: minSectionHeight * 1.2,

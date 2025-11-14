@@ -10,10 +10,10 @@ extension PriceFormatter on double {
     return priceFormat.format(this);
   }
 
-  String formatAsPriceForPrint() {
+  String formatAsPriceForPrint({int decimalDigits = 2}) {
     final NumberFormat priceFormat = NumberFormat.currency(
       locale: 'en',
-      decimalDigits: 2,
+      decimalDigits: decimalDigits,
       symbol: '',
     );
 

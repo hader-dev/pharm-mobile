@@ -38,29 +38,24 @@ class ParaPharmaWidget1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
-          horizontal: context.responsiveAppSizeTheme.current.p8,
-          vertical: context.responsiveAppSizeTheme.current.p12),
+          horizontal: context.responsiveAppSizeTheme.current.p8, vertical: context.responsiveAppSizeTheme.current.p12),
       child: InkWell(
         onTap: () {
           final userRole = getItInstance.get<UserManager>().currentUser.role;
           final canOrderBasedOnRole = !userRole.isDelegate;
 
-          GoRouter.of(context).pushNamed(route, extra: {
-            "id": paraPharmData.id,
-            "canOrder": canOrder || canOrderBasedOnRole
-          });
+          GoRouter.of(context)
+              .pushNamed(route, extra: {"id": paraPharmData.id, "canOrder": canOrder || canOrderBasedOnRole});
         },
         child: Row(
           children: [
             Container(
-              margin: EdgeInsets.only(
-                  right: context.responsiveAppSizeTheme.current.p8),
+              margin: EdgeInsets.only(right: context.responsiveAppSizeTheme.current.p8),
               clipBehavior: Clip.antiAlias,
               height: 130,
               width: 130,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(
-                    context.responsiveAppSizeTheme.current.r6),
+                borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.r6),
                 border: paraPharmData.image != null
                     ? null
                     : Border.all(
@@ -74,21 +69,17 @@ class ParaPharmaWidget1 extends StatelessWidget {
                       boxFit: BoxFit.cover,
                       width: double.maxFinite,
                       height: double.maxFinite,
-                      imageUrl: getItInstance
-                          .get<INetworkService>()
-                          .getFilesPath(paraPharmData.image?.path ?? ''),
+                      imageUrl: getItInstance.get<INetworkService>().getFilesPath(paraPharmData.image?.path ?? ''),
                     )
                   else
                     Image(
-                      image: AssetImage(
-                          DrawableAssetStrings.paraPharmaPlaceHolderImg),
+                      image: AssetImage(DrawableAssetStrings.paraPharmaPlaceHolderImg),
                       fit: BoxFit.cover,
                       height: double.maxFinite,
                       width: double.maxFinite,
                     ),
                   if (paraPharmData.image != null) BlackenedBackground(),
-                  StockAvaillableContainerWidget(
-                      isAvaillable: paraPharmData.stockQuantity > 0),
+                  StockAvailableContainerWidget(isAvailable: paraPharmData.stockQuantity > 0),
                   if (onFavoriteCallback != null)
                     Positioned(
                       right: 0,
@@ -100,8 +91,7 @@ class ParaPharmaWidget1 extends StatelessWidget {
                         icon: Icon(
                           isLiked ? Iconsax.heart5 : Iconsax.heart,
                           color: isLiked ? Colors.red : Colors.black,
-                          size:
-                              context.responsiveAppSizeTheme.current.iconSize25,
+                          size: context.responsiveAppSizeTheme.current.iconSize25,
                         ),
                       ),
                     )
@@ -119,8 +109,7 @@ class ParaPharmaWidget1 extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       CustomChip(
-                        label:
-                            paraPharmData.category?.name ?? paraPharmData.name,
+                        label: paraPharmData.category?.name ?? paraPharmData.name,
                         color: AppColors.bgDarken,
                       ),
                       if (onQuickAddCallback != null)
@@ -132,9 +121,7 @@ class ParaPharmaWidget1 extends StatelessWidget {
                             onQuickAddCallback?.call(paraPharmData);
                           },
                           icon: Icon(Iconsax.add,
-                              color: Colors.black,
-                              size: context
-                                  .responsiveAppSizeTheme.current.iconSize20),
+                              color: Colors.black, size: context.responsiveAppSizeTheme.current.iconSize20),
                         ),
                     ],
                   ),
@@ -143,8 +130,8 @@ class ParaPharmaWidget1 extends StatelessWidget {
                     maxLines: 1,
                     softWrap: true,
                     overflow: TextOverflow.ellipsis,
-                    style: context.responsiveTextTheme.current.headLine4SemiBold
-                        .copyWith(color: TextColors.primary.color),
+                    style:
+                        context.responsiveTextTheme.current.headLine4SemiBold.copyWith(color: TextColors.primary.color),
                   ),
                   Row(children: [
                     Container(
@@ -152,19 +139,13 @@ class ParaPharmaWidget1 extends StatelessWidget {
                       width: 30,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        border:
-                            Border.all(color: AppColors.bgDisabled, width: 1.5),
+                        border: Border.all(color: AppColors.bgDisabled, width: 1.5),
                         image: DecorationImage(
-                          image: paraPharmData.company?.thumbnailImage?.path ==
-                                  null
-                              ? AssetImage(
-                                  DrawableAssetStrings.companyPlaceHolderImg)
+                          image: paraPharmData.company?.thumbnailImage?.path == null
+                              ? AssetImage(DrawableAssetStrings.companyPlaceHolderImg)
                               : NetworkImage(
-                                  getItInstance
-                                      .get<INetworkService>()
-                                      .getFilesPath(
-                                        paraPharmData
-                                            .company!.thumbnailImage!.path,
+                                  getItInstance.get<INetworkService>().getFilesPath(
+                                        paraPharmData.company!.thumbnailImage!.path,
                                       ),
                                 ),
                         ),
@@ -172,11 +153,9 @@ class ParaPharmaWidget1 extends StatelessWidget {
                     ),
                     const ResponsiveGap.s4(),
                     Text(paraPharmData.company?.name ?? "",
-                        style: context.responsiveTextTheme.current.bodyXSmall
-                            .copyWith(
-                                fontWeight: context.responsiveTextTheme.current
-                                    .appFont.appFontSemiBold,
-                                color: TextColors.ternary.color)),
+                        style: context.responsiveTextTheme.current.bodyXSmall.copyWith(
+                            fontWeight: context.responsiveTextTheme.current.appFont.appFontSemiBold,
+                            color: TextColors.ternary.color)),
                   ]),
                   Row(
                     children: [
@@ -191,14 +170,12 @@ class ParaPharmaWidget1 extends StatelessWidget {
                           children: [
                             TextSpan(
                               text: paraPharmData.unitPriceHt.formatAsPrice(),
-                              style: context
-                                  .responsiveTextTheme.current.headLine3SemiBold
+                              style: context.responsiveTextTheme.current.headLine3SemiBold
                                   .copyWith(color: AppColors.accent1Shade1),
                             ),
                             TextSpan(
                               text: " ${context.translation!.currency}",
-                              style: context
-                                  .responsiveTextTheme.current.bodyXSmall
+                              style: context.responsiveTextTheme.current.bodyXSmall
                                   .copyWith(color: AppColors.accent1Shade1),
                             ),
                           ],

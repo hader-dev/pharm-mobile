@@ -4,65 +4,54 @@ import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
-class StockAvaillableWidget extends StatelessWidget {
-  const StockAvaillableWidget({
+class StockAvailableWidget extends StatelessWidget {
+  const StockAvailableWidget({
     super.key,
-    required this.isAvaillable,
+    required this.isAvailable,
   });
 
-  final bool isAvaillable;
+  final bool isAvailable;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        isAvaillable
-            ? Icon(Iconsax.box_2,
-                color: SystemColors.green.primary,
-                size: context.responsiveAppSizeTheme.current.iconSize16)
-            : Icon(Iconsax.box_2,
-                color: SystemColors.red.primary,
-                size: context.responsiveAppSizeTheme.current.iconSize16),
+        Icon(isAvailable ? Iconsax.box_1 : Iconsax.box_2,
+            color: isAvailable ? SystemColors.green.primary : SystemColors.red.primary,
+            size: context.responsiveAppSizeTheme.current.iconSize16),
         const ResponsiveGap.s4(),
-        Text(
-            isAvaillable
-                ? context.translation!.in_stock
-                : context.translation!.out_stock,
+        Text(isAvailable ? context.translation!.in_stock : context.translation!.out_stock,
             style: context.responsiveTextTheme.current.bodySmall.copyWith(
-                color: SystemColors.green.primary,
-                fontWeight: context
-                    .responsiveTextTheme.current.appFont.appFontSemiBold)),
+                color: isAvailable ? SystemColors.green.primary : SystemColors.red.primary,
+                fontWeight: context.responsiveTextTheme.current.appFont.appFontSemiBold)),
       ],
     );
   }
 }
 
-class StockAvaillableContainerWidget extends StatelessWidget {
-  const StockAvaillableContainerWidget({
+class StockAvailableContainerWidget extends StatelessWidget {
+  const StockAvailableContainerWidget({
     super.key,
-    required this.isAvaillable,
+    required this.isAvailable,
   });
 
-  final bool isAvaillable;
+  final bool isAvailable;
 
   @override
   Widget build(BuildContext context) {
     return Transform.scale(
       alignment: Alignment.topLeft,
-      scale: .8,
+      scale: .9,
       child: Container(
           padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p4),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.only(
-                bottomRight:
-                    Radius.circular(context.responsiveAppSizeTheme.current.r6),
-                topLeft:
-                    Radius.circular(context.responsiveAppSizeTheme.current.r6)),
-            color:
-                const Color.fromARGB(255, 195, 252, 222).withValues(alpha: 0.8),
+                bottomRight: Radius.circular(context.responsiveAppSizeTheme.current.r6),
+                topLeft: Radius.circular(context.responsiveAppSizeTheme.current.r6)),
+            color: isAvailable ? SystemColors.green.secondary.withAlpha(55) : SystemColors.red.secondary.withAlpha(55),
           ),
-          child: StockAvaillableWidget(isAvaillable: isAvaillable)),
+          child: StockAvailableWidget(isAvailable: isAvailable)),
     );
   }
 }

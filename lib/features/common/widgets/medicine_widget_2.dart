@@ -40,8 +40,7 @@ class MedicineWidget2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
-          horizontal: context.responsiveAppSizeTheme.current.p8,
-          vertical: context.responsiveAppSizeTheme.current.p12),
+          horizontal: context.responsiveAppSizeTheme.current.p8, vertical: context.responsiveAppSizeTheme.current.p12),
       child: InkWell(
         onTap: () {
           final userRole = getItInstance.get<UserManager>().currentUser.role;
@@ -53,14 +52,12 @@ class MedicineWidget2 extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              margin: EdgeInsets.only(
-                  right: context.responsiveAppSizeTheme.current.p8),
+              margin: EdgeInsets.only(right: context.responsiveAppSizeTheme.current.p8),
               clipBehavior: Clip.antiAlias,
               height: 130,
               width: 130,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(
-                    context.responsiveAppSizeTheme.current.r6),
+                borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.r6),
                 border: medicineData.image != null
                     ? null
                     : Border.all(
@@ -74,20 +71,16 @@ class MedicineWidget2 extends StatelessWidget {
                           boxFit: BoxFit.cover,
                           height: double.maxFinite,
                           width: double.maxFinite,
-                          imageUrl: getItInstance
-                              .get<INetworkService>()
-                              .getFilesPath(medicineData.image?.path ?? ''),
+                          imageUrl: getItInstance.get<INetworkService>().getFilesPath(medicineData.image?.path ?? ''),
                         )
                       : Image(
-                          image: AssetImage(
-                              DrawableAssetStrings.medicinePlaceHolderImg),
+                          image: AssetImage(DrawableAssetStrings.medicinePlaceHolderImg),
                           fit: BoxFit.cover,
                           height: double.maxFinite,
                           width: double.maxFinite,
                         ),
                   if (medicineData.image != null) BlackenedBackground(),
-                  StockAvaillableContainerWidget(
-                      isAvaillable: medicineData.stockQuantity > 0),
+                  StockAvailableContainerWidget(isAvailable: medicineData.stockQuantity > 0),
                   if (!hideLikeButton)
                     Positioned(
                       bottom: 0,
@@ -99,8 +92,7 @@ class MedicineWidget2 extends StatelessWidget {
                         icon: Icon(
                           isLiked ? Iconsax.heart5 : Iconsax.heart,
                           color: isLiked ? Colors.red : Colors.black,
-                          size:
-                              context.responsiveAppSizeTheme.current.iconSize25,
+                          size: context.responsiveAppSizeTheme.current.iconSize25,
                         ),
                       ),
                     )
@@ -117,8 +109,7 @@ class MedicineWidget2 extends StatelessWidget {
                       flex: 8,
                       child: Text(medicineData.dci,
                           softWrap: true,
-                          style: context
-                              .responsiveTextTheme.current.headLine4SemiBold
+                          style: context.responsiveTextTheme.current.headLine4SemiBold
                               .copyWith(color: TextColors.primary.color)),
                     ),
                     const Spacer(),
@@ -131,9 +122,7 @@ class MedicineWidget2 extends StatelessWidget {
                           onQuickAddCallback?.call(medicineData);
                         },
                         icon: Icon(Iconsax.add,
-                            color: Colors.black,
-                            size: context
-                                .responsiveAppSizeTheme.current.iconSize20),
+                            color: Colors.black, size: context.responsiveAppSizeTheme.current.iconSize20),
                       ),
                   ]),
                   const Spacer(),
@@ -143,34 +132,23 @@ class MedicineWidget2 extends StatelessWidget {
                       width: 30,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        border:
-                            Border.all(color: AppColors.bgDisabled, width: 1.5),
+                        border: Border.all(color: AppColors.bgDisabled, width: 1.5),
                         image: DecorationImage(
-                          image: medicineData.company?.thumbnailImage?.path ==
-                                  null
-                              ? AssetImage(
-                                  DrawableAssetStrings.companyPlaceHolderImg)
+                          image: medicineData.company?.thumbnailImage?.path == null
+                              ? AssetImage(DrawableAssetStrings.companyPlaceHolderImg)
                               : NetworkImage(
-                                  getItInstance
-                                      .get<INetworkService>()
-                                      .getFilesPath(
-                                        medicineData.company?.thumbnailImage!
-                                                .path ??
-                                            "",
+                                  getItInstance.get<INetworkService>().getFilesPath(
+                                        medicineData.company?.thumbnailImage!.path ?? "",
                                       ),
                                 ),
                         ),
                       ),
                     ),
                     ResponsiveGap.s4(),
-                    Text(
-                        medicineData.company?.name ??
-                            context.translation!.unknown,
-                        style: context.responsiveTextTheme.current.bodyXSmall
-                            .copyWith(
-                                fontWeight: context.responsiveTextTheme.current
-                                    .appFont.appFontSemiBold,
-                                color: TextColors.primary.color)),
+                    Text(medicineData.company?.name ?? context.translation!.unknown,
+                        style: context.responsiveTextTheme.current.bodyXSmall.copyWith(
+                            fontWeight: context.responsiveTextTheme.current.appFont.appFontSemiBold,
+                            color: TextColors.primary.color)),
                   ]),
                   Row(
                     children: [
@@ -185,14 +163,12 @@ class MedicineWidget2 extends StatelessWidget {
                           children: [
                             TextSpan(
                               text: medicineData.unitPriceHt.formatAsPrice(),
-                              style: context
-                                  .responsiveTextTheme.current.headLine3SemiBold
+                              style: context.responsiveTextTheme.current.headLine3SemiBold
                                   .copyWith(color: AppColors.accent1Shade1),
                             ),
                             TextSpan(
                               text: " ${context.translation!.currency}",
-                              style: context
-                                  .responsiveTextTheme.current.bodyXSmall
+                              style: context.responsiveTextTheme.current.bodyXSmall
                                   .copyWith(color: AppColors.accent1Shade1),
                             ),
                           ],

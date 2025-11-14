@@ -34,23 +34,19 @@ class MedicineWidget3 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(
-          horizontal: context.responsiveAppSizeTheme.current.p6,
-          vertical: context.responsiveAppSizeTheme.current.p12),
+          horizontal: context.responsiveAppSizeTheme.current.p6, vertical: context.responsiveAppSizeTheme.current.p12),
       child: InkWell(
         splashColor: Colors.transparent,
         onTap: () {
           final userRole = getItInstance.get<UserManager>().currentUser.role;
           final canOrderBasedOnRole = !userRole.isDelegate;
-          GoRouter.of(context).pushNamed(route,
-              extra: {"id": medicineData.id, "canOrder": canOrderBasedOnRole});
+          GoRouter.of(context).pushNamed(route, extra: {"id": medicineData.id, "canOrder": canOrderBasedOnRole});
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            _ImageSection(
-                medicineData: medicineData,
-                onFavoriteCallback: onFavoriteCallback),
+            _ImageSection(medicineData: medicineData, onFavoriteCallback: onFavoriteCallback),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -61,8 +57,7 @@ class MedicineWidget3 extends StatelessWidget {
                       maxLines: 1,
                       softWrap: true,
                       overflow: TextOverflow.ellipsis,
-                      style: context
-                          .responsiveTextTheme.current.headLine4SemiBold
+                      style: context.responsiveTextTheme.current.headLine4SemiBold
                           .copyWith(color: TextColors.primary.color)),
                 const ResponsiveGap.s4(),
                 Row(
@@ -72,19 +67,13 @@ class MedicineWidget3 extends StatelessWidget {
                       width: 30,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        border:
-                            Border.all(color: AppColors.bgDisabled, width: 1.5),
+                        border: Border.all(color: AppColors.bgDisabled, width: 1.5),
                         image: DecorationImage(
-                          image: medicineData.company?.thumbnailImage?.path ==
-                                  null
-                              ? AssetImage(
-                                  DrawableAssetStrings.companyPlaceHolderImg)
+                          image: medicineData.company?.thumbnailImage?.path == null
+                              ? AssetImage(DrawableAssetStrings.companyPlaceHolderImg)
                               : NetworkImage(
-                                  getItInstance
-                                      .get<INetworkService>()
-                                      .getFilesPath(
-                                        medicineData
-                                            .company!.thumbnailImage!.path,
+                                  getItInstance.get<INetworkService>().getFilesPath(
+                                        medicineData.company!.thumbnailImage!.path,
                                       ),
                                 ),
                         ),
@@ -92,8 +81,7 @@ class MedicineWidget3 extends StatelessWidget {
                     ),
                     const ResponsiveGap.s4(),
                     Text(medicineData.company!.name,
-                        style: context.responsiveTextTheme.current.body3Regular
-                            .copyWith()),
+                        style: context.responsiveTextTheme.current.body3Regular.copyWith()),
                   ],
                 ),
                 Row(
@@ -111,15 +99,13 @@ class MedicineWidget3 extends StatelessWidget {
                         children: [
                           TextSpan(
                             text: medicineData.unitPriceHt.formatAsPrice(),
-                            style: context
-                                .responsiveTextTheme.current.headLine3SemiBold
+                            style: context.responsiveTextTheme.current.headLine3SemiBold
                                 .copyWith(color: AppColors.accent1Shade1),
                           ),
                           TextSpan(
                             text: " ${context.translation!.currency}",
-                            style: context
-                                .responsiveTextTheme.current.bodyXSmall
-                                .copyWith(color: AppColors.accent1Shade1),
+                            style:
+                                context.responsiveTextTheme.current.bodyXSmall.copyWith(color: AppColors.accent1Shade1),
                           ),
                         ],
                       ),
@@ -142,8 +128,7 @@ class MedicineWidget3 extends StatelessWidget {
                         icon: Icon(
                           Iconsax.add,
                           color: Colors.black,
-                          size:
-                              context.responsiveAppSizeTheme.current.iconSize30,
+                          size: context.responsiveAppSizeTheme.current.iconSize30,
                         ),
                       ),
                     )
@@ -174,8 +159,7 @@ class _ImageSection extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       height: 120,
       decoration: BoxDecoration(
-        borderRadius:
-            BorderRadius.circular(context.responsiveAppSizeTheme.current.r6),
+        borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.r6),
         border: medicineData.image != null
             ? null
             : Border.all(
@@ -188,22 +172,18 @@ class _ImageSection extends StatelessWidget {
                 boxFit: BoxFit.contain,
                 width: double.maxFinite,
                 height: double.maxFinite,
-                imageUrl: getItInstance
-                    .get<INetworkService>()
-                    .getFilesPath(medicineData.image?.path ?? ''),
+                imageUrl: getItInstance.get<INetworkService>().getFilesPath(medicineData.image?.path ?? ''),
               )
             : Center(
                 child: Image(
-                  image:
-                      AssetImage(DrawableAssetStrings.medicinePlaceHolderImg),
+                  image: AssetImage(DrawableAssetStrings.medicinePlaceHolderImg),
                   fit: BoxFit.cover,
                   height: 120,
                   width: 80,
                 ),
               ),
         if (medicineData.image != null) BlackenedBackground(),
-        StockAvaillableContainerWidget(
-            isAvaillable: medicineData.stockQuantity > 0),
+        StockAvailableContainerWidget(isAvailable: medicineData.stockQuantity > 0),
         if (onFavoriteCallback != null)
           Positioned(
             bottom: 0,

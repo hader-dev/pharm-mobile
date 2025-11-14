@@ -81,11 +81,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ? state.announcements.sublist(0, 4)
                                 : state.announcements,
                             minSectionHeight: minSectionHeight),
-                      const ResponsiveGap.s12(),
-                      ParapharmaSection(minSectionHeight: minSectionHeight * sectionHeightModifier),
-                      const ResponsiveGap.s12(),
+                      ParaPharmaSection(minSectionHeight: minSectionHeight * sectionHeightModifier),
                       const VendorSection(),
-                      const ResponsiveGap.s12(),
                       MedicineSection(minSectionHeight: minSectionHeight * sectionHeightModifier),
                       const ResponsiveGap.s12(),
                     ],
