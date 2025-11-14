@@ -33,15 +33,10 @@ class MedicinesSectionItems extends StatelessWidget {
         }
         void onFavoriteCallback(BaseMedicineCatalogModel medicine) {
           final cubit = context.read<MedicineProductsCubit>();
-          final gCubit = MarketPlaceScreen
-              .marketPlaceScaffoldKey.currentContext!
-              .read<MedicineProductsCubit>();
-          final hCubit = HomeScreen.scaffoldKey.currentContext!
-              .read<MedicineProductsCubit>();
+          final gCubit = MarketPlaceScreen.marketPlaceScaffoldKey.currentContext!.read<MedicineProductsCubit>();
+          final hCubit = HomeScreen.scaffoldKey.currentContext!.read<MedicineProductsCubit>();
 
-          medicine.isLiked
-              ? cubit.unlikeMedicinesCatalog(medicine.id)
-              : cubit.likeMedicinesCatalog(medicine.id);
+          medicine.isLiked ? cubit.unlikeMedicinesCatalog(medicine.id) : cubit.likeMedicinesCatalog(medicine.id);
 
           gCubit.refreshMedicineCatalogFavorite(medicine.id, !medicine.isLiked);
           hCubit.refreshMedicineCatalogFavorite(medicine.id, !medicine.isLiked);
@@ -56,7 +51,7 @@ class MedicinesSectionItems extends StatelessWidget {
             itemCount: items.length,
             itemBuilder: (context, index) {
               return SizedBox(
-                width: screenWidth > 768 ? 300 : minSectionHeight,
+                width: screenWidth > 768 ? 300 : 250,
                 child: MedicineWidget3(
                   medicineData: items[index],
                   onFavoriteCallback: onFavoriteCallback,
