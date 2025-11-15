@@ -9,9 +9,8 @@ import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 class VendorSection extends StatelessWidget {
   const VendorSection({
     super.key,
-    this.minSectionHeight = 250,
-    this.padding = const EdgeInsets.symmetric(
-        horizontal: AppSizesManager.p16),
+    this.minSectionHeight = 90,
+    this.padding = const EdgeInsets.symmetric(horizontal: AppSizesManager.p16),
   });
   final EdgeInsets padding;
   final double minSectionHeight;
@@ -21,19 +20,15 @@ class VendorSection extends StatelessWidget {
     final translation = context.translation!;
     final screenWidth = MediaQuery.of(context).size.width;
 
-    final maxItemsCount =
-        context.deviceSize.width <= DeviceSizes.largeMobile.width ? 3 : 6;
-    final maxItemsPerRow =
-        context.deviceSize.width <= DeviceSizes.largeMobile.width ? 3 : 4;
+    final maxItemsCount = context.deviceSize.width <= DeviceSizes.largeMobile.width ? 3 : 6;
+    final maxItemsPerRow = context.deviceSize.width <= DeviceSizes.largeMobile.width ? 3 : 4;
 
     Widget content = Padding(
       padding: padding,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Gap(screenWidth <= 414
-              ? 0
-              : context.responsiveAppSizeTheme.current.s4),
+          Gap(screenWidth <= 414 ? 0 : context.responsiveAppSizeTheme.current.s4),
           SectionTitle(title: translation.vendors),
           VendorsSectionItems(
             maxItemsPerRow: maxItemsPerRow,
@@ -46,7 +41,7 @@ class VendorSection extends StatelessWidget {
 
     if (screenWidth < 360) {
       return SizedBox(
-        height: 90,
+        height: context.deviceSize.width <= DeviceSizes.largeMobile.width ? 120 : 90,
         child: ClipRect(child: content),
       );
     }
