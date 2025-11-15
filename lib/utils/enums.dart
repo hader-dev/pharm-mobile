@@ -120,6 +120,15 @@ enum OrderStatus {
     required this.icon,
   });
 
+  static String getTranslatedStatusFromString(String rawValue) {
+    final parsedValue = rawValue.toLowerCase();
+    final status = OrderStatus.values.firstWhere(
+        (element) => element.name == parsedValue,
+        orElse: () => OrderStatus.created);
+
+    return getTranslatedStatus(status);
+  }
+
   static String getTranslatedStatus(OrderStatus status) {
     final context = RoutingManager.rootNavigatorKey.currentContext!;
     final t = context.translation!;
