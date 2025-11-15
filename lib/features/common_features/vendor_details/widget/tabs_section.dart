@@ -18,22 +18,15 @@ import '../subPages/medicines/medicines.dart';
 import '../subPages/para_pharma/para_pharma.dart';
 
 class VandorDetailsTabBarSection extends StatefulWidget {
-  final List<String> tabs = [
-    "About",
-    "Medicine",
-    "Para-Pharma",
-    "Announcement"
-  ];
+  final List<String> tabs = ["About", "Medicine", "Para-Pharma", "Announcement"];
   VandorDetailsTabBarSection({super.key, required this.companyId});
   final String companyId;
 
   @override
-  State<VandorDetailsTabBarSection> createState() =>
-      _VandorDetailsTabBarSectionState();
+  State<VandorDetailsTabBarSection> createState() => _VandorDetailsTabBarSectionState();
 }
 
-class _VandorDetailsTabBarSectionState extends State<VandorDetailsTabBarSection>
-    with TickerProviderStateMixin {
+class _VandorDetailsTabBarSectionState extends State<VandorDetailsTabBarSection> with TickerProviderStateMixin {
   late final TabController tabsController;
   @override
   void initState() {
@@ -48,16 +41,15 @@ class _VandorDetailsTabBarSectionState extends State<VandorDetailsTabBarSection>
     return Column(
       children: [
         ColoredBox(
-          color: AppColors.accent1Shade2,
+          color: AppColors.bgWhite,
           child: TabBar(
-              indicatorColor: AppColors.bgWhite,
+              indicatorColor: AppColors.accent1Shade1,
+              labelColor: AppColors.accent1Shade1,
               indicatorSize: TabBarIndicatorSize.tab,
               isScrollable: true,
               labelStyle: tabTextStyle,
               overlayColor: WidgetStatePropertyAll(Colors.transparent),
               tabAlignment: TabAlignment.start,
-              labelColor: AppColors.bgWhite,
-              unselectedLabelColor: AppColors.accent1Shade2Deemphasized,
               controller: tabsController,
               tabs: widget.tabs
                   .map(
@@ -76,30 +68,24 @@ class _VandorDetailsTabBarSectionState extends State<VandorDetailsTabBarSection>
               BlocProvider(
                 create: (context) => MedicineProductsCubit(
                     scrollController: ScrollController(),
-                    favoriteRepository: FavoriteRepository(
-                        client: getItInstance.get<INetworkService>()),
+                    favoriteRepository: FavoriteRepository(client: getItInstance.get<INetworkService>()),
                     searchController: TextEditingController(text: ""),
-                    medicineRepository: MedicineCatalogRepository(
-                        client: getItInstance.get<INetworkService>()))
+                    medicineRepository: MedicineCatalogRepository(client: getItInstance.get<INetworkService>()))
                   ..getMedicines(companyIdFilter: widget.companyId),
               ),
               BlocProvider(
                 create: (context) => ParaPharmaCubit(
-                    favoriteRepository: FavoriteRepository(
-                        client: getItInstance.get<INetworkService>()),
+                    favoriteRepository: FavoriteRepository(client: getItInstance.get<INetworkService>()),
                     scrollController: ScrollController(),
                     searchController: TextEditingController(text: ""),
-                    paraPharmaRepository: ParaPharmaRepository(
-                        client: getItInstance.get<INetworkService>()))
+                    paraPharmaRepository: ParaPharmaRepository(client: getItInstance.get<INetworkService>()))
                   ..getParaPharmas(companyIdFilter: widget.companyId),
               ),
             ],
             child: TabBarView(
               controller: tabsController,
               children: [
-                VendorDetailsPage(
-                    vendorData:
-                        context.read<VendorDetailsCubit>().state.vendor),
+                VendorDetailsPage(vendorData: context.read<VendorDetailsCubit>().state.vendor),
                 MedicinesPage(),
                 ParapharmaPage(),
                 AnnouncementsPage()

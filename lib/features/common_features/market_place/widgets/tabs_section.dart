@@ -9,12 +9,10 @@ class MarketPlaceTabBarSection extends StatefulWidget {
   const MarketPlaceTabBarSection({super.key});
 
   @override
-  State<MarketPlaceTabBarSection> createState() =>
-      _MarketPlaceTabBarSectionState();
+  State<MarketPlaceTabBarSection> createState() => _MarketPlaceTabBarSectionState();
 }
 
-class _MarketPlaceTabBarSectionState extends State<MarketPlaceTabBarSection>
-    with TickerProviderStateMixin {
+class _MarketPlaceTabBarSectionState extends State<MarketPlaceTabBarSection> with TickerProviderStateMixin {
   late final TabController tabsController;
   @override
   void initState() {
@@ -25,26 +23,22 @@ class _MarketPlaceTabBarSectionState extends State<MarketPlaceTabBarSection>
   @override
   Widget build(BuildContext context) {
     final translation = context.translation!;
-    final List<String> tabs = [
-      translation.para_pharma,
-      translation.medicines,
-      translation.vendors
-    ];
+    final List<String> tabs = [translation.para_pharma, translation.medicines, translation.vendors];
     TextStyle tabTextStyle = context.responsiveTextTheme.current.body3Medium;
 
     return Column(
       children: [
         ColoredBox(
-          color: AppColors.accent1Shade2,
+          color: Colors.white,
           child: TabBar(
-              indicatorColor: AppColors.bgWhite,
               indicatorSize: TabBarIndicatorSize.tab,
               isScrollable: true,
               labelStyle: tabTextStyle,
               overlayColor: WidgetStatePropertyAll(Colors.transparent),
               tabAlignment: TabAlignment.start,
-              labelColor: AppColors.bgWhite,
-              unselectedLabelColor: AppColors.accent1Shade2Deemphasized,
+              indicatorColor: AppColors.accent1Shade1,
+              labelColor: AppColors.accent1Shade1,
+              unselectedLabelColor: Colors.grey,
               controller: tabsController,
               onTap: (index) {},
               tabs: tabs
@@ -58,11 +52,7 @@ class _MarketPlaceTabBarSectionState extends State<MarketPlaceTabBarSection>
         Expanded(
           child: TabBarView(
             controller: tabsController,
-            children: [
-              ParaPharmaProductsPage(),
-              MedicineProductsPage(),
-              VendorsPage()
-            ],
+            children: [ParaPharmaProductsPage(), MedicineProductsPage(), VendorsPage()],
           ),
         ),
       ],

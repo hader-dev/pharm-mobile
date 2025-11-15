@@ -10,12 +10,10 @@ class AnnouncementDetailsTabBarSection extends StatefulWidget {
   const AnnouncementDetailsTabBarSection({super.key});
 
   @override
-  State<AnnouncementDetailsTabBarSection> createState() =>
-      _AnnouncementDetailsTabBarSectionState();
+  State<AnnouncementDetailsTabBarSection> createState() => _AnnouncementDetailsTabBarSectionState();
 }
 
-class _AnnouncementDetailsTabBarSectionState
-    extends State<AnnouncementDetailsTabBarSection>
+class _AnnouncementDetailsTabBarSectionState extends State<AnnouncementDetailsTabBarSection>
     with TickerProviderStateMixin {
   late final TabController tabsController;
   @override
@@ -39,16 +37,16 @@ class _AnnouncementDetailsTabBarSectionState
     return Column(
       children: [
         ColoredBox(
-          color: AppColors.accent1Shade2,
+          color: Colors.white,
           child: TabBar(
-              indicatorColor: AppColors.bgWhite,
+              indicatorColor: AppColors.accent1Shade1,
+              labelColor: AppColors.accent1Shade1,
+              unselectedLabelColor: Colors.grey,
               indicatorSize: TabBarIndicatorSize.tab,
               isScrollable: true,
               labelStyle: tabTextStyle,
               overlayColor: WidgetStatePropertyAll(Colors.transparent),
               tabAlignment: TabAlignment.start,
-              labelColor: AppColors.bgWhite,
-              unselectedLabelColor: AppColors.accent1Shade2Deemphasized,
               controller: tabsController,
               onTap: (index) {},
               tabs: tabs
