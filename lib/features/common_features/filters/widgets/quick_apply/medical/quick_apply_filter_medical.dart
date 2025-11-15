@@ -115,6 +115,7 @@ class QuickApplyFilterMedical extends StatelessWidget {
                                           .contains(filter);
                                       return FilterLabel(
                                         label: filter,
+                                        value: filter,
                                         isSelected: isSelected,
                                         onSelected: (v, s) =>
                                             onFilterSelected(v, s, cubit),

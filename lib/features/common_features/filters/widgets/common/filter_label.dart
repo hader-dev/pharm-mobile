@@ -9,16 +9,18 @@ class FilterLabel extends StatelessWidget {
   const FilterLabel(
       {super.key,
       required this.label,
+      required this.value,
       this.isSelected = false,
       this.onSelected});
   final String label;
+  final String value;
   final bool isSelected;
   final OnSelectedCallback? onSelected;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => onSelected?.call(label, !isSelected),
+      onTap: () => onSelected?.call(value, !isSelected),
       child: Card(
         child: Padding(
           padding: EdgeInsets.all(12.0),
@@ -26,7 +28,7 @@ class FilterLabel extends StatelessWidget {
             children: [
               Checkbox(
                 value: isSelected,
-                onChanged: (v) => onSelected?.call(label, v!),
+                onChanged: (v) => onSelected?.call(value, v!),
               ),
               const ResponsiveGap.s8(),
               Expanded(

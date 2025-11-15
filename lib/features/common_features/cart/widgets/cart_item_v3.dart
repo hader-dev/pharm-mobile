@@ -114,6 +114,7 @@ class CartItemWidgetV3 extends StatelessWidget {
                 child: cartItemProductInfos,
               ),
               Expanded(
+                flex: 2,
                 child: quantitySectionModified,
               )
             ],
