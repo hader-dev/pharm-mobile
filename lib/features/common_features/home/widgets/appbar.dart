@@ -70,35 +70,3 @@ class HomeAppBar extends StatelessWidget {
     );
   }
 }
-
-class HomeAppbarOld extends StatelessWidget {
-  const HomeAppbarOld({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final translation = context.translation!;
-
-    return CustomAppBar(
-      bgColor: AppColors.bgWhite,
-      topPadding: MediaQuery.of(context).padding.top,
-      bottomPadding: MediaQuery.of(context).padding.bottom,
-      leading: IconButton(
-        icon: Icon(
-          Iconsax.home,
-          size: context.responsiveAppSizeTheme.current.iconSize18,
-        ),
-        onPressed: () {},
-      ),
-      title: Text(
-        translation.home,
-        style: context.responsiveTextTheme.current.headLine3SemiBold,
-      ),
-      trailing: [
-        IconButton(
-          icon: const Icon(Iconsax.notification),
-          onPressed: () {},
-        ),
-      ],
-    );
-  }
-}
