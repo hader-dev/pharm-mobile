@@ -116,6 +116,9 @@ dependencies:
   flutter_pdfview: ^1.4.3
   flutter_html: ^3.0.0
   carousel_slider: ^5.1.1
+  flutter_thermal_printer: ^1.2.4
+  open_filex: ^4.7.0
+
 
 dev_dependencies:
   flutter_test:
@@ -143,6 +146,7 @@ flutter:
     - assets/fonts/Satoshi_Complete/
     - assets/images/
     - assets/icons/
+    - assets/icons/new_icons/
     - assets/json/
     - assets/json/town/
     - assets/json/wilaya/

@@ -39,7 +39,19 @@ class DrawableAssetStrings {
   static const String saudiFlagIcon = 'assets/icons/saudi_flag.svg';
   static const String franceFlagIcon = 'assets/icons/france_flag.svg';
   static const String usaFlagIcon = 'assets/icons/usa_flag.svg';
+
   static const String glassIcon = 'assets/icons/glass.svg';
+
+  static const String newNotificationIcon = 'assets/icons/new_icons/notification.svg';
+  static const String newEmptyCartIcon = 'assets/icons/new_icons/empty_cart.svg';
+  static const String newFilledCartIcon = 'assets/icons/new_icons/filled_cart.svg';
+  static const String newHomeIcon = 'assets/icons/new_icons/home.svg';
+  static const String newMarketIcon = 'assets/icons/new_icons/market.svg';
+  static const String newOrderBoxIcon = 'assets/icons/new_icons/order_box.svg';
+  static const String newProfileIcon = 'assets/icons/new_icons/profile.svg';
+  static const String newClientsIcon = 'assets/icons/new_icons/clients.svg';
+  static const String newMoneyIcon = 'assets/icons/new_icons/money.svg';
+  static const String newAddToCartIcon = 'assets/icons/new_icons/add_to_cart.svg';
 }
 
 class JsonAssetStrings {
