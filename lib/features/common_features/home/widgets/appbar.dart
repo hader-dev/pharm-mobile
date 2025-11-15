@@ -18,11 +18,13 @@ class HomeAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: context.responsiveAppSizeTheme.current.p8),
-      color: Colors.white,
+      padding: EdgeInsets.symmetric(
+          vertical: context.responsiveAppSizeTheme.current.p8, horizontal: context.responsiveAppSizeTheme.current.p8),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border(bottom: BorderSide(color: StrokeColors.normal.color, width: .5)),
+      ),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SvgPicture.asset(
             DrawableAssetStrings.logoImg,
@@ -34,35 +36,35 @@ class HomeAppBar extends StatelessWidget {
             context.translation!.app_name_2,
             style: context.responsiveTextTheme.current.headLine3SemiBold.copyWith(color: AppColors.accent1Shade1),
           ),
-
-          // BlocBuilder<NotificationsCubit, NotificationState>(
-          //   builder: (context, state) {
-          //     return IconButton(
-          //       iconSize: context.deviceSize.width <= DeviceSizes.largeMobile.width
-          //           ? context.responsiveAppSizeTheme.current.iconSize30
-          //           : context.responsiveAppSizeTheme.current.iconSize18,
-          //       onPressed: () => RoutingManager.router.pushNamed(RoutingManager.notificationsScreen),
-          //       icon: Stack(
-          //         clipBehavior: Clip.none,
-          //         children: [
-          //           const Icon(
-          //             Iconsax.notification,
-          //             color: Colors.white,
-          //           ),
-          //           if (context.read<NotificationsCubit>().unreadCount > 0)
-          //             Positioned(
-          //               top: -4,
-          //               right: -4,
-          //               child: CircleAvatar(
-          //                 radius: context.responsiveAppSizeTheme.current.commonWidgetsRadius,
-          //                 backgroundColor: Colors.red,
-          //               ),
-          //             )
-          //         ],
-          //       ),
-          //     );
-          //   },
-          // ),
+          Spacer(),
+          BlocBuilder<NotificationsCubit, NotificationState>(
+            builder: (context, state) {
+              return context.read<NotificationsCubit>().unreadCount == 0
+                  ? InkWell(
+                      onTap: () => RoutingManager.router.pushNamed(RoutingManager.notificationsScreen),
+                      child: Icon(
+                        Iconsax.notification,
+                        color: AppColors.accent1Shade1,
+                        size: context.deviceSize.width <= DeviceSizes.largeMobile.width
+                            ? context.responsiveAppSizeTheme.current.iconSize30
+                            : context.responsiveAppSizeTheme.current.iconSize18,
+                      ),
+                    )
+                  : Badge.count(
+                      count: context.read<NotificationsCubit>().unreadCount,
+                      child: InkWell(
+                        onTap: () => RoutingManager.router.pushNamed(RoutingManager.notificationsScreen),
+                        child: Icon(
+                          Iconsax.notification,
+                          color: AppColors.accent1Shade1,
+                          size: context.deviceSize.width <= DeviceSizes.largeMobile.width
+                              ? context.responsiveAppSizeTheme.current.iconSize30
+                              : context.responsiveAppSizeTheme.current.iconSize18,
+                        ),
+                      ),
+                    );
+            },
+          ),
         ],
       ),
     );
