@@ -10,9 +10,9 @@ import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
-class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
+class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool isExtraLargeScreen;
-  const HomeAppbar({super.key, required this.isExtraLargeScreen});
+  const HomeAppBar({super.key, required this.isExtraLargeScreen});
 
   @override
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
@@ -31,39 +31,38 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SvgPicture.asset(
-              DrawableAssetStrings.logoImgWhite,
+              DrawableAssetStrings.logoImg,
               width: 30,
               height: 30,
             ),
             Text(
               context.translation!.app_name_2,
-              style: context.responsiveTextTheme.current.headLine3SemiBold
-                  .copyWith(color: Colors.white),
+              style: context.responsiveTextTheme.current.headLine3SemiBold.copyWith(color: Colors.white),
             ),
             const Spacer(),
             BlocBuilder<NotificationsCubit, NotificationState>(
               builder: (context, state) {
                 return IconButton(
-                  iconSize:
-                      context.deviceSize.width <= DeviceSizes.largeMobile.width
-                          ? context.responsiveAppSizeTheme.current.iconSize30
-                          : context.responsiveAppSizeTheme.current.iconSize18,
-                  onPressed: () => RoutingManager.router
-                      .pushNamed(RoutingManager.notificationsScreen),
+                  iconSize: context.deviceSize.width <= DeviceSizes.largeMobile.width
+                      ? context.responsiveAppSizeTheme.current.iconSize30
+                      : context.responsiveAppSizeTheme.current.iconSize18,
+                  onPressed: () => RoutingManager.router.pushNamed(RoutingManager.notificationsScreen),
                   icon: Stack(
                     clipBehavior: Clip.none,
                     children: [
-                      const Icon(
-                        Iconsax.notification,
-                        color: Colors.white,
-                      ),
+                      SvgPicture.asset(DrawableAssetStrings.newNotificationIcon,
+                          height: context.responsiveAppSizeTheme.current.iconSize20,
+                          width: context.responsiveAppSizeTheme.current.iconSize20,
+                          colorFilter: ColorFilter.mode(
+                            Colors.white,
+                            BlendMode.srcIn,
+                          )),
                       if (context.read<NotificationsCubit>().unreadCount > 0)
                         Positioned(
                           top: -4,
                           right: -4,
                           child: CircleAvatar(
-                            radius: context.responsiveAppSizeTheme.current
-                                .commonWidgetsRadius,
+                            radius: context.responsiveAppSizeTheme.current.commonWidgetsRadius,
                             backgroundColor: Colors.red,
                           ),
                         )
