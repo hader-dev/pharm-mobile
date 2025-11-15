@@ -7,6 +7,8 @@ class EnvHelper {
   static const String fileUrl = 'FILE_URL';
   static const String appVersion = 'APP_VERSION';
   static const String featureFlagUpdatePopup = 'FEATURE_FLAG_UPDATE_POPUP';
+  static const String sentryDsnKey = 'SENTRY_DSN';
+  static const String envModeKey = 'MODE';
 
   static Future<void> loadAppEnvVars() async {
     await dotenv.load();

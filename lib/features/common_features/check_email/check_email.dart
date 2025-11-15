@@ -9,6 +9,7 @@ import 'package:hader_pharm_mobile/config/services/notification/notification_ser
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/check_email/cubit/check_email_cubit.dart';
+import 'package:hader_pharm_mobile/features/common_features/login/actions/setup_company_or_go_home.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import 'widgets/check_email_header_section.dart';
@@ -18,8 +19,10 @@ class CheckEmailScreen extends StatelessWidget {
   final String email;
   final String redirectTo;
   final bool popInsteadOfPushReplacement;
+  final bool autoRedirect;
   const CheckEmailScreen(
       {super.key,
+      this.autoRedirect = true,
       required this.email,
       this.popInsteadOfPushReplacement = false,
       this.redirectTo = RoutingManager.congratulationScreen});
@@ -35,7 +38,14 @@ class CheckEmailScreen extends StatelessWidget {
       child: BlocListener<CheckEmailCubit, CheckEmailState>(
         listener: (context, state) {
           if (state is CheckEmailSuccess) {
-            if (popInsteadOfPushReplacement) {
+            if (autoRedirect) {
+              final redirectScreenTarget = doesUserBelongsToCompany()
+                  ? RoutingManager.appLayout
+                  : RoutingManager.createCompanyProfile;
+
+              GoRouter.of(context).pushReplacementNamed(redirectScreenTarget,
+                  extra: {"autoRedirect": true});
+            } else if (popInsteadOfPushReplacement) {
               GoRouter.of(context).safePop();
             } else {
               if (redirectTo == RoutingManager.createCompanyProfile) {

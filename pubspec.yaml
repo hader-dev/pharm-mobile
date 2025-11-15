@@ -118,6 +118,9 @@ dependencies:
   carousel_slider: ^5.1.1
   flutter_thermal_printer: ^1.2.4
   open_filex: ^4.7.0
+  sentry_flutter: ^9.8.0
+  sentry_dart_plugin: ^3.2.0
+  
 
 
 dev_dependencies:

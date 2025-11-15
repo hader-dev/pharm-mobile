@@ -111,6 +111,7 @@ class UserManager {
   }) async {
     String token =
         await userRepo.sendUserEmailCheckOtpCode(email: email, otp: otp);
+    tokenManagerInstance.optimisticUpdate(token);
     await tokenManagerInstance.storeAccessToken(token);
     (getItInstance.get<INetworkService>() as DioNetworkManager)
         .initDefaultHeaders(token);

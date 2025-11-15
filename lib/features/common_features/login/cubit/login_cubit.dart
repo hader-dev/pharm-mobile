@@ -34,7 +34,7 @@ class LoginCubit extends Cubit<LoginState> {
         RoutingManager.router
             .pushNamed(RoutingManager.checkEmailScreen, extra: {
           "email": state.emailController.text,
-          "redirectTo": RoutingManager.createCompanyProfile
+          "autoRedirect": true,
         });
       }
       GlobalExceptionHandler.handle(
