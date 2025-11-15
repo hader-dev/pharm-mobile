@@ -7,20 +7,13 @@ class DrawableAssetStrings {
 
 // //app images
 
-  static const String congratsIllustrationImg =
-      'assets/images/congrats_illustration.svg';
-  static const String companyIllustration1 =
-      'assets/images/company_illustration_1.svg';
-  static const String companyIllustration2 =
-      'assets/images/company_illustration_2.svg';
-  static const String companyIllustration3 =
-      'assets/images/company_illustration_3.svg';
-  static const String companyPlaceHolderImg =
-      'assets/images/company_place_holder.webp';
-  static const String medicinePlaceHolderImg =
-      'assets/images/medicine_place_holder.webp';
-  static const String paraPharmaPlaceHolderImg =
-      'assets/images/para_pharm_place_holder.webp';
+  static const String congratsIllustrationImg = 'assets/images/congrats_illustration.svg';
+  static const String companyIllustration1 = 'assets/images/company_illustration_1.svg';
+  static const String companyIllustration2 = 'assets/images/company_illustration_2.svg';
+  static const String companyIllustration3 = 'assets/images/company_illustration_3.svg';
+  static const String companyPlaceHolderImg = 'assets/images/company_place_holder.webp';
+  static const String medicinePlaceHolderImg = 'assets/images/medicine_place_holder.webp';
+  static const String paraPharmaPlaceHolderImg = 'assets/images/para_pharm_place_holder.webp';
   static const String board1Img = 'assets/images/board_1.webp';
   static const String board2Img = 'assets/images/board_2.webp';
   static const String board3Img = 'assets/images/board_3.webp';
@@ -45,6 +38,16 @@ class DrawableAssetStrings {
   static const String saudiFlagIcon = 'assets/icons/saudi_flag.svg';
   static const String franceFlagIcon = 'assets/icons/france_flag.svg';
   static const String usaFlagIcon = 'assets/icons/usa_flag.svg';
+  static const String newNotificationIcon = 'assets/icons/new_icons/notification.svg';
+  static const String newEmptyCartIcon = 'assets/icons/new_icons/empty_cart.svg';
+  static const String newFilledCartIcon = 'assets/icons/new_icons/filled_cart.svg';
+  static const String newHomeIcon = 'assets/icons/new_icons/home.svg';
+  static const String newMarketIcon = 'assets/icons/new_icons/market.svg';
+  static const String newOrderBoxIcon = 'assets/icons/new_icons/order_box.svg';
+  static const String newProfileIcon = 'assets/icons/new_icons/profile.svg';
+  static const String newClientsIcon = 'assets/icons/new_icons/clients.svg';
+  static const String newMoneyIcon = 'assets/icons/new_icons/money.svg';
+  static const String newAddToCartIcon = 'assets/icons/new_icons/add_to_cart.svg';
 }
 
 class JsonAssetStrings {
