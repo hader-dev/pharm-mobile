@@ -1,5 +1,6 @@
 import 'package:cached_network_image_plus/flutter_cached_network_image_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart' show SvgPicture;
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
@@ -114,14 +115,18 @@ class ParaPharmaWidget1 extends StatelessWidget {
                       ),
                       if (onQuickAddCallback != null)
                         PrimaryIconButton(
-                          isBordered: true,
-                          borderColor: AppColors.accent1Shade1,
-                          bgColor: Colors.transparent,
+                          isBordered: false,
+                          bgColor: AppColors.accent1Shade3.withAlpha(30),
                           onPressed: () {
                             onQuickAddCallback?.call(paraPharmData);
                           },
-                          icon: Icon(Iconsax.add,
-                              color: Colors.black, size: context.responsiveAppSizeTheme.current.iconSize20),
+                          icon: SvgPicture.asset(DrawableAssetStrings.newAddToCartIcon,
+                              height: context.responsiveAppSizeTheme.current.iconSize25,
+                              width: context.responsiveAppSizeTheme.current.iconSize25,
+                              colorFilter: ColorFilter.mode(
+                                AppColors.accent1Shade1,
+                                BlendMode.srcIn,
+                              )),
                         ),
                     ],
                   ),
@@ -159,11 +164,15 @@ class ParaPharmaWidget1 extends StatelessWidget {
                   ]),
                   Row(
                     children: [
-                      Icon(
-                        Iconsax.wallet_money,
-                        color: AppColors.accent1Shade1,
-                        size: context.responsiveAppSizeTheme.current.iconSize18,
-                      ),
+                      Padding(
+                          padding: EdgeInsets.only(right: context.responsiveAppSizeTheme.current.p6),
+                          child: SvgPicture.asset(DrawableAssetStrings.newMoneyIcon,
+                              height: context.responsiveAppSizeTheme.current.iconSize16,
+                              width: context.responsiveAppSizeTheme.current.iconSize16,
+                              colorFilter: ColorFilter.mode(
+                                AppColors.accent1Shade1,
+                                BlendMode.srcIn,
+                              ))),
                       const ResponsiveGap.s4(),
                       Text.rich(
                         TextSpan(
