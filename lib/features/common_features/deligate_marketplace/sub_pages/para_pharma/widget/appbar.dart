@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart' show SvgPicture;
 import 'package:hader_pharm_mobile/config/responsive/device_size.dart';
+import 'package:hader_pharm_mobile/config/theme/colors_manager.dart' show AppColors;
 import 'package:hader_pharm_mobile/features/app_layout/app_layout.dart';
 import 'package:hader_pharm_mobile/features/app_layout/cubit/app_layout_cubit.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
@@ -22,22 +23,24 @@ class MarketplaceAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final offset = context.deviceSize.width <= DeviceSizes.largeMobile.width ? Offset(7, -9) : Offset(-15, 5);
 
-    return CustomAppBarV2.alternate(
-      topPadding: MediaQuery.of(context).padding.top,
-      bottomPadding: MediaQuery.of(context).padding.bottom,
+    return CustomAppBarV2.normal(
+      topPadding: context.responsiveAppSizeTheme.current.p8,
+      bottomPadding: context.responsiveAppSizeTheme.current.p8,
+      rightPadding: context.responsiveAppSizeTheme.current.p8,
+      leftPadding: context.responsiveAppSizeTheme.current.p8,
       leading: Padding(
           padding: EdgeInsets.symmetric(horizontal: context.responsiveAppSizeTheme.current.p8),
           child: SvgPicture.asset(DrawableAssetStrings.newMarketIcon,
-              height: context.responsiveAppSizeTheme.current.iconSize20,
-              width: context.responsiveAppSizeTheme.current.iconSize20,
+              height: context.responsiveAppSizeTheme.current.iconSize25,
+              width: context.responsiveAppSizeTheme.current.iconSize25,
               colorFilter: ColorFilter.mode(
-                Colors.white,
+                AppColors.accent1Shade1,
                 BlendMode.srcIn,
               ))),
       title: Text(
         context.translation!.market_place,
-        style: context.responsiveTextTheme.current.headLine3SemiBold.copyWith(
-          color: Colors.white,
+        style: context.responsiveTextTheme.current.headLine2.copyWith(
+          color: AppColors.accent1Shade1,
         ),
       ),
       trailing: [
@@ -50,7 +53,7 @@ class MarketplaceAppBar extends StatelessWidget {
                   offset: offset,
                   child: Icon(
                     Iconsax.bag_2,
-                    color: Colors.white,
+                    color: AppColors.accent1Shade1,
                     size: context.responsiveAppSizeTheme.current.iconSize25,
                   ));
             },

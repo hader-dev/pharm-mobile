@@ -6,9 +6,8 @@ import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.da
 import 'package:hader_pharm_mobile/features/common_features/orders/cubit/orders_cubit.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart' show DrawableAssetStrings;
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
-import 'package:iconsax/iconsax.dart';
 
-class OrdersAppBar extends StatelessWidget implements PreferredSizeWidget {
+class OrdersAppBar extends StatelessWidget {
   final bool isExtraLargeScreen;
   const OrdersAppBar({
     super.key,
@@ -17,16 +16,18 @@ class OrdersAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomAppBarV2.alternate(
-      topPadding: MediaQuery.of(context).padding.top,
-      bottomPadding: MediaQuery.of(context).padding.bottom,
+    return CustomAppBarV2.normal(
+      topPadding: context.responsiveAppSizeTheme.current.p16,
+      bottomPadding: context.responsiveAppSizeTheme.current.p16,
+      rightPadding: context.responsiveAppSizeTheme.current.p8,
+      leftPadding: context.responsiveAppSizeTheme.current.p8,
       leading: Padding(
           padding: EdgeInsets.symmetric(horizontal: context.responsiveAppSizeTheme.current.p8),
           child: SvgPicture.asset(DrawableAssetStrings.newOrderBoxIcon,
-              height: context.responsiveAppSizeTheme.current.iconSize20,
-              width: context.responsiveAppSizeTheme.current.iconSize20,
+              height: context.responsiveAppSizeTheme.current.iconSize25,
+              width: context.responsiveAppSizeTheme.current.iconSize25,
               colorFilter: ColorFilter.mode(
-                Colors.white,
+                AppColors.accent1Shade1,
                 BlendMode.srcIn,
               ))),
       title: BlocBuilder<OrdersCubit, OrdersState>(
@@ -34,7 +35,7 @@ class OrdersAppBar extends StatelessWidget implements PreferredSizeWidget {
           return RichText(
             text: TextSpan(
               text: context.translation!.orders,
-              style: context.responsiveTextTheme.current.headLine3SemiBold.copyWith(color: AppColors.bgWhite),
+              style: context.responsiveTextTheme.current.headLine2.copyWith(color: AppColors.accent1Shade1),
               children: [
                 TextSpan(
                     text: " (${state.totalItemsCount})",
@@ -47,7 +48,4 @@ class OrdersAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
     );
   }
-
-  @override
-  Size get preferredSize => Size.fromHeight(isExtraLargeScreen ? kToolbarHeight * 2 : kToolbarHeight);
 }
