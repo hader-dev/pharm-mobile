@@ -112,8 +112,17 @@ class QuickApplyFilterOrder extends StatelessWidget {
                                           cubit.getCurrentWorkAppliedFilters();
                                       var isSelected = appliedWorkingFilters
                                           .contains(filter);
+
+                                      var filterLabel = filterKey ==
+                                              OrderFiltersKeys.status
+                                          ? OrderStatus
+                                              .getTranslatedStatusFromString(
+                                                  filter)
+                                          : filter;
+
                                       return FilterLabel(
-                                        label: filter,
+                                        label: filterLabel,
+                                        value: filter,
                                         isSelected: isSelected,
                                         onSelected: (v, s) =>
                                             onFilterSelected(v, s, cubit),
@@ -121,7 +130,7 @@ class QuickApplyFilterOrder extends StatelessWidget {
                                     },
                                   ),
                                 ),
-                                Divider(
+                                const Divider(
                                     color: AppColors.bgDisabled,
                                     thickness: 1,
                                     height: 1),
