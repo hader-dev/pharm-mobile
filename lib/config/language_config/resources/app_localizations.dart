@@ -2511,6 +2511,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Seller'**
   String get seller;
+
+  /// No description provided for @last_update.
+  ///
+  /// In en, this message translates to:
+  /// **'Last updated'**
+  String get last_update;
 }
 
 class _AppLocalizationsDelegate

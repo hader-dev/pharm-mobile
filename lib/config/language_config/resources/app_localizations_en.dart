@@ -1265,4 +1265,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get seller => 'Seller';
+
+  @override
+  String get last_update => 'Last updated';
 }

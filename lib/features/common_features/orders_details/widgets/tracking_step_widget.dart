@@ -3,6 +3,7 @@ import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_date_helper.dart';
 
+import '../../../../config/theme/colors_manager.dart' show TextColors;
 import '../../../../models/order_details.dart';
 import '../../../../utils/enums.dart';
 
@@ -20,15 +21,15 @@ class TrackingStepWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    OrderStatus orderStatus = OrderStatus.values.firstWhere(
-        (OrderStatus element) => element.id == historyStep.orderStatusId);
+    OrderStatus orderStatus =
+        OrderStatus.values.firstWhere((OrderStatus element) => element.id == historyStep.orderStatusId);
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Column(
           children: <Widget>[
             Container(
-              width: context.responsiveAppSizeTheme.current.iconSize30 * 1.2,
+              width: context.responsiveAppSizeTheme.current.iconSize25,
               alignment: Alignment.center,
               child: Column(
                 children: <Widget>[
@@ -39,10 +40,9 @@ class TrackingStepWidget extends StatelessWidget {
                       color: Colors.grey.shade300,
                     ),
                   CircleAvatar(
+                    backgroundColor: orderStatus.color.withAlpha(50),
                     child: Icon(orderStatus.icon,
-                        color: orderStatus.color,
-                        size:
-                            context.responsiveAppSizeTheme.current.iconSize30),
+                        color: orderStatus.color, size: context.responsiveAppSizeTheme.current.iconSize20),
                   ),
                   if (!isLast)
                     Container(
@@ -65,8 +65,8 @@ class TrackingStepWidget extends StatelessWidget {
                 style: context.responsiveTextTheme.current.body3Medium,
               ),
               Text(
-                historyStep.createdAt.toLocal().format,
-                style: context.responsiveTextTheme.current.body3Regular,
+                historyStep.createdAt.format,
+                style: context.responsiveTextTheme.current.bodyXSmall.copyWith(color: TextColors.ternary.color),
               ),
               const ResponsiveGap.s24(),
             ],

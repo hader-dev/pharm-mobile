@@ -400,5 +400,6 @@
   "feedback_value_too_short": "La valeur est trop courte, elle doit contenir au moins {length} caractères",
   "order_placed_failed": "Échec de la commande",
   "last_week": "Dernière semaine",
-  "seller":"Vendeur"
+  "seller":"Vendeur",
+  "last_update": "Dernière mise à jour"
 }

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
+import '../../../../config/theme/colors_manager.dart' show TextColors;
+
 class ShippingAddressSection extends StatelessWidget {
   final String address;
   final double latitude;
@@ -25,7 +27,8 @@ class ShippingAddressSection extends StatelessWidget {
         children: <Widget>[
           Text(context.translation!.shipping_address, style: context.responsiveTextTheme.current.headLine4SemiBold),
           const ResponsiveGap.s12(),
-          Text(address, style: context.responsiveTextTheme.current.body3Medium),
+          Text(address,
+              style: context.responsiveTextTheme.current.body2Medium.copyWith(color: TextColors.ternary.color)),
         ],
       ),
     );

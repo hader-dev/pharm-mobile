@@ -1263,4 +1263,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get seller => 'البائع';
+
+  @override
+  String get last_update => 'آخر تحديث';
 }

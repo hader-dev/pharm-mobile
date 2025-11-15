@@ -400,5 +400,7 @@
   "loading_text": "Loading...",
   "feedback_profile_updated": "Profile updated successfully",
   "vendor_added_to_favorites": "Vendor added to your favorites list",
-  "seller":"Seller"
+  "seller":"Seller",
+  "last_update":"Last updated"
+  
 }

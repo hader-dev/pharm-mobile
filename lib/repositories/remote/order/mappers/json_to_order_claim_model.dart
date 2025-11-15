@@ -5,6 +5,9 @@ OrderClaimModel jsonToOrderClaimModel(Map<String, dynamic> json) {
   debugPrint("claim: $json");
   return OrderClaimModel(
     id: json['id'] ?? "",
+    createdAt: DateTime.parse(json['createdAt'] ?? ""),
+    updatedAt: DateTime.parse(json['updatedAt'] ?? ""),
+    displayId: json['displayId'] ?? "",
     fromCompanyId: json['fromCompanyId'] ?? "",
     toCompanyId: json['toCompanyId'] ?? "",
     orderId: json['orderId'] ?? "",
@@ -19,8 +22,7 @@ List<OrderClaimModel> jsonToOrderClaimModelList(List<dynamic> json) {
   return json.map((claim) => jsonToOrderClaimModel(claim)).toList();
 }
 
-ClaimStatusHistoryModel jsonToOrderClaimStatusHistory(
-    Map<String, dynamic> json) {
+ClaimStatusHistoryModel jsonToOrderClaimStatusHistory(Map<String, dynamic> json) {
   return ClaimStatusHistoryModel(
     id: json['id'],
     createdAt: DateTime.parse(json['createdAt']),
@@ -31,7 +33,6 @@ ClaimStatusHistoryModel jsonToOrderClaimStatusHistory(
   );
 }
 
-List<ClaimStatusHistoryModel> jsonToOrderClaimStatusHistoryList(
-    List<dynamic> json) {
+List<ClaimStatusHistoryModel> jsonToOrderClaimStatusHistoryList(List<dynamic> json) {
   return json.map((claim) => jsonToOrderClaimStatusHistory(claim)).toList();
 }

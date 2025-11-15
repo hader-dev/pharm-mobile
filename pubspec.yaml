@@ -68,7 +68,6 @@ dependencies:
   device_info_plus: ^12.1.0
   intl: any
   decimal: any
-  # sentry_flutter: ^8.14.0
 
   win32: ^5.10.1
   smooth_page_indicator: ^1.2.1
@@ -120,8 +119,6 @@ dependencies:
   open_filex: ^4.7.0
   sentry_flutter: ^9.8.0
   sentry_dart_plugin: ^3.2.0
-  
-
 
 dev_dependencies:
   flutter_test:

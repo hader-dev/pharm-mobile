@@ -5,6 +5,8 @@ import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_date_helper.dart';
 
+import '../../../../config/theme/colors_manager.dart' show TextColors;
+
 class TrackingClaimStepWidget extends StatelessWidget {
   final ClaimStatusHistoryModel historyStep;
   final bool isFirst;
@@ -19,15 +21,15 @@ class TrackingClaimStepWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    OrderClaimStatus orderStatus = OrderClaimStatus.values.firstWhere(
-        (OrderClaimStatus element) => element.id == historyStep.claimStatusId);
+    OrderClaimStatus orderClaimStatus =
+        OrderClaimStatus.values.firstWhere((OrderClaimStatus element) => element.id == historyStep.claimStatusId);
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Column(
           children: <Widget>[
             Container(
-              width: context.responsiveAppSizeTheme.current.iconSize30,
+              width: context.responsiveAppSizeTheme.current.iconSize25,
               alignment: Alignment.center,
               child: Column(
                 children: <Widget>[
@@ -38,10 +40,9 @@ class TrackingClaimStepWidget extends StatelessWidget {
                       color: Colors.grey.shade300,
                     ),
                   CircleAvatar(
-                    child: Icon(orderStatus.icon,
-                        color: orderStatus.color,
-                        size:
-                            context.responsiveAppSizeTheme.current.iconSize30),
+                    backgroundColor: orderClaimStatus.color.withAlpha(50),
+                    child: Icon(orderClaimStatus.icon,
+                        color: orderClaimStatus.color, size: context.responsiveAppSizeTheme.current.iconSize20),
                   ),
                   if (!isLast)
                     Container(
@@ -54,27 +55,19 @@ class TrackingClaimStepWidget extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(width: 10),
+        const ResponsiveGap.s12(),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                orderStatus.name,
+                OrderClaimStatus.getTranslatedStatus(orderClaimStatus),
                 style: context.responsiveTextTheme.current.body3Medium,
               ),
               Text(
-                historyStep.createdAt.toLocal().format,
-                style: context.responsiveTextTheme.current.body3Regular,
+                historyStep.createdAt.format,
+                style: context.responsiveTextTheme.current.bodyXSmall.copyWith(color: TextColors.ternary.color),
               ),
-              const ResponsiveGap.s4(),
-              // Text(
-              //   OrderStatus.translateDescription(context, orderStatus),
-              //   style: const TextStyle(
-              //     fontSize: AppTypography.appFontSize4,
-              //     color: Colors.black54,
-              //   ),
-              // ),
               const ResponsiveGap.s24(),
             ],
           ),

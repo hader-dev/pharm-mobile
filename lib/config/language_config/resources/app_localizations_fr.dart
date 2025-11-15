@@ -1283,4 +1283,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get seller => 'Vendeur';
+
+  @override
+  String get last_update => 'Dernière mise à jour';
 }

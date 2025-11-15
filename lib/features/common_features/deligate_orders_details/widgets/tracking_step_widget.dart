@@ -20,8 +20,8 @@ class TrackingStepWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    OrderStatus orderStatus = OrderStatus.values.firstWhere(
-        (OrderStatus element) => element.id == historyStep.orderStatusId);
+    OrderStatus orderStatus =
+        OrderStatus.values.firstWhere((OrderStatus element) => element.id == historyStep.orderStatusId);
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -40,9 +40,7 @@ class TrackingStepWidget extends StatelessWidget {
                     ),
                   CircleAvatar(
                     child: Icon(orderStatus.icon,
-                        color: orderStatus.color,
-                        size:
-                            context.responsiveAppSizeTheme.current.iconSize30),
+                        color: orderStatus.color, size: context.responsiveAppSizeTheme.current.iconSize30),
                   ),
                   if (!isLast)
                     Container(
@@ -65,7 +63,7 @@ class TrackingStepWidget extends StatelessWidget {
                 style: context.responsiveTextTheme.current.body3Medium,
               ),
               Text(
-                historyStep.createdAt.toLocal().format,
+                historyStep.createdAt.format,
                 style: context.responsiveTextTheme.current.body3Regular,
               ),
               const ResponsiveGap.s4(),

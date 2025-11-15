@@ -400,5 +400,6 @@
   "make_complaint_success": "تم تقديم الشكوى بنجاح",
   "package_size": "حجم العبوة",
   "pacakge_quantity": "كمية العبوة",
-  "seller":"البائع"
+  "seller":"البائع",
+  "last_update": "آخر تحديث"
 }

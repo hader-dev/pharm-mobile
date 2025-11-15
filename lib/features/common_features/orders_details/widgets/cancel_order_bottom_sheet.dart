@@ -15,35 +15,33 @@ class CancelOrderBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final translation = context.translation!;
-    final theme = Theme.of(context);
-    final cubit = OrdersDetailsScreen.ordersDetailsScaffoldKey.currentContext!
-        .read<OrderDetailsCubit>();
+    final cubit = OrdersDetailsScreen.ordersDetailsScaffoldKey.currentContext!.read<OrderDetailsCubit>();
 
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(translation.are_you_sure_cancel_order,
-            style: context.responsiveTextTheme.current.body1Medium),
+        Text(translation.are_you_sure_cancel_order, style: context.responsiveTextTheme.current.body1Medium),
         const ResponsiveGap.s16(),
         Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: context.responsiveAppSizeTheme.current.p4),
+          padding: EdgeInsets.symmetric(horizontal: context.responsiveAppSizeTheme.current.p4),
           child: PrimaryTextButton(
             label: context.translation!.confirm,
             onTap: () => cancelOrder(context, cubit),
-            color: theme.colorScheme.error,
+            color: SystemColors.red.primary,
           ),
         ),
         const ResponsiveGap.s12(),
         Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: context.responsiveAppSizeTheme.current.p4),
+          padding: EdgeInsets.symmetric(horizontal: context.responsiveAppSizeTheme.current.p4),
           child: PrimaryTextButton(
-            label: translation.close,
+            label: translation.cancel,
+            labelColor: AppColors.accent1Shade1,
+            borderColor: AppColors.accent1Shade1,
+            isOutLined: true,
             onTap: () {
               context.pop();
             },
-            color: AppColors.accent1Shade1,
+            color: Colors.transparent,
           ),
         ),
       ],

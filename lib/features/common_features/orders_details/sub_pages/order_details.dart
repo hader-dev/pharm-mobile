@@ -79,6 +79,52 @@ class OrdersDetailsPage extends StatelessWidget {
                   endIndent: context.responsiveAppSizeTheme.current.s8,
                   indent: context.responsiveAppSizeTheme.current.s8,
                 ),
+                if (cubit.orderData!.invoiceType != null)
+                  OrderInvoiceSection(
+                    invoiceType:
+                        InvoiceTypes.values.firstWhere((element) => cubit.orderData!.invoiceType == element.id),
+                  ),
+                if (cubit.orderData!.clientNote.isNotEmpty) ...[
+                  AppDivider(
+                    height: context.responsiveAppSizeTheme.current.p12,
+                    color: Colors.grey.shade100,
+                    endIndent: context.responsiveAppSizeTheme.current.s8,
+                    indent: context.responsiveAppSizeTheme.current.s8,
+                  ),
+                  ClientNoteSection()
+                ],
+                AppDivider(
+                  height: context.responsiveAppSizeTheme.current.p12,
+                  color: Colors.grey.shade100,
+                  endIndent: context.responsiveAppSizeTheme.current.s8,
+                  indent: context.responsiveAppSizeTheme.current.s8,
+                ),
+                const OrderSummarySection(),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                      vertical: context.responsiveAppSizeTheme.current.p8,
+                      horizontal: context.responsiveAppSizeTheme.current.p8),
+                  child: Row(
+                    children: [
+                      Spacer(),
+                      InkWell(
+                        onTap: () {
+                          RoutingManager.router.pushNamed(RoutingManager.orderComplaint, extra: {
+                            "orderId": item.id,
+                            "itemId": item.id
+                          }).then((value) => {
+                                if (value == true) {cubit.getOrderComplaints()}
+                              });
+                        },
+                        child: Text(
+                          "${translation.order_complaint} !",
+                          style: context.responsiveTextTheme.current.bodySmall.copyWith(color: AppColors.accent1Shade2),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                ResponsiveGap.s16(),
                 Container(
                   margin: EdgeInsets.symmetric(vertical: context.responsiveAppSizeTheme.current.p4),
                   padding: EdgeInsets.symmetric(horizontal: context.responsiveAppSizeTheme.current.p4),
@@ -89,27 +135,6 @@ class OrdersDetailsPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      if (cubit.orderData!.invoiceType != null)
-                        OrderInvoiceSection(
-                          invoiceType:
-                              InvoiceTypes.values.firstWhere((element) => cubit.orderData!.invoiceType == element.id),
-                        ),
-                      if (cubit.orderData!.clientNote.isNotEmpty) ...[
-                        AppDivider(
-                          height: context.responsiveAppSizeTheme.current.p12,
-                          color: Colors.grey.shade100,
-                          endIndent: context.responsiveAppSizeTheme.current.s8,
-                          indent: context.responsiveAppSizeTheme.current.s8,
-                        ),
-                        ClientNoteSection()
-                      ],
-                      AppDivider(
-                        height: context.responsiveAppSizeTheme.current.p12,
-                        color: Colors.grey.shade100,
-                        endIndent: context.responsiveAppSizeTheme.current.s8,
-                        indent: context.responsiveAppSizeTheme.current.s8,
-                      ),
-                      const OrderSummarySection(),
                       Padding(
                         padding: buttonsPadding,
                         child: PrimaryTextButton(
@@ -117,21 +142,6 @@ class OrdersDetailsPage extends StatelessWidget {
                           onTap: () {
                             BottomSheetHelper.showCommonBottomSheet(
                                 context: context, child: OrderTrackingBottomSheet());
-                          },
-                          color: AppColors.accent1Shade1,
-                        ),
-                      ),
-                      Padding(
-                        padding: buttonsPadding,
-                        child: PrimaryTextButton(
-                          label: translation.item_complaint,
-                          onTap: () {
-                            RoutingManager.router.pushNamed(RoutingManager.orderComplaint, extra: {
-                              "orderId": item.id,
-                              "itemId": item.id
-                            }).then((value) => {
-                                  if (value == true) {cubit.getOrderComplaints()}
-                                });
                           },
                           color: AppColors.accent1Shade1,
                         ),
@@ -156,7 +166,7 @@ class OrdersDetailsPage extends StatelessWidget {
                               BottomSheetHelper.showCommonBottomSheet(
                                   initialChildSize: 0.3, context: context, child: CancelOrderBottomSheet());
                             },
-                            color: theme.colorScheme.error,
+                            color: SystemColors.red.primary,
                           ),
                         ),
                     ],

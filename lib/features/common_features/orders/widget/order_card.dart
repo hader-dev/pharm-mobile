@@ -78,7 +78,7 @@ class OrderCard extends StatelessWidget {
                                     context.responsiveTextTheme.current.headLine4SemiBold.copyWith(color: Colors.black),
                               ),
                               const ResponsiveGap.s2(),
-                              Text(orderData.createdAt.toLocal().format,
+                              Text(orderData.createdAt.format,
                                   style: context.responsiveTextTheme.current.bodyXSmall
                                       .copyWith(color: TextColors.secondary.color)),
                               const ResponsiveGap.s8(),
