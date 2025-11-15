@@ -1260,4 +1260,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get vendor_added_to_favorites => 'تم إضافة المورد إلى قائمة المفضلة';
+
+  @override
+  String get seller => 'البائع';
 }

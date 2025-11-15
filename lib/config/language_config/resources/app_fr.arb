@@ -399,5 +399,6 @@
   "filter_items_type": "Type",
   "feedback_value_too_short": "La valeur est trop courte, elle doit contenir au moins {length} caractères",
   "order_placed_failed": "Échec de la commande",
-  "last_week": "Dernière semaine"
+  "last_week": "Dernière semaine",
+  "seller":"Vendeur"
 }

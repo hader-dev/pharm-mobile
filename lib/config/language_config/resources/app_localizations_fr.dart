@@ -1280,4 +1280,7 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get vendor_added_to_favorites =>
       'Fournisseur ajouté à votre liste de favoris';
+
+  @override
+  String get seller => 'Vendeur';
 }

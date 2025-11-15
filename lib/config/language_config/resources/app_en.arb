@@ -399,5 +399,6 @@
   "create_company_action": "Create Company",
   "loading_text": "Loading...",
   "feedback_profile_updated": "Profile updated successfully",
-  "vendor_added_to_favorites": "Vendor added to your favorites list"
+  "vendor_added_to_favorites": "Vendor added to your favorites list",
+  "seller":"Seller"
 }

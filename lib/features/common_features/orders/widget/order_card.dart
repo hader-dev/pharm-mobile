@@ -93,7 +93,7 @@ class OrderCard extends StatelessWidget {
                       InfoRowColumn(
                         data: [
                           RowColumnDataHolders(
-                            title: 'Seller',
+                            title: context.translation!.seller,
                             value: orderData.sellerCompanyName ?? "N/A",
                             titleStyle: context.responsiveTextTheme.current.body2Medium.copyWith(color: Colors.grey),
                             valueStyle: context.responsiveTextTheme.current.body2Medium,

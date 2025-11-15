@@ -2505,6 +2505,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Vendor added to your favorites list'**
   String get vendor_added_to_favorites;
+
+  /// No description provided for @seller.
+  ///
+  /// In en, this message translates to:
+  /// **'Seller'**
+  String get seller;
 }
 
 class _AppLocalizationsDelegate
