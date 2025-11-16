@@ -21,6 +21,7 @@ class BaseIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
+      splashColor: borderColor.withAlpha(40),
       icon: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
