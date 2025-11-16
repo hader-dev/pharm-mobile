@@ -210,24 +210,19 @@ class _ImageSection extends StatelessWidget {
                 isAvailable: medicineData.stockQuantity > 0),
             Spacer(),
             if (onFavoriteCallback != null)
-              Positioned(
-                bottom: context.responsiveAppSizeTheme.current.s4,
-                right: context.responsiveAppSizeTheme.current.s4,
-                child: InkWell(
-                  child: SizedBox(
-                    width: 30,
-                    height: 30,
-                    child: Icon(
-                      medicineData.isLiked ? Iconsax.heart5 : Iconsax.heart,
-                      color:
-                          medicineData.isLiked ? Colors.red : Colors.grey[400],
-                      size: context.responsiveAppSizeTheme.current.iconSize20,
-                    ),
+              InkWell(
+                child: SizedBox(
+                  width: 30,
+                  height: 30,
+                  child: Icon(
+                    medicineData.isLiked ? Iconsax.heart5 : Iconsax.heart,
+                    color: medicineData.isLiked ? Colors.red : Colors.grey[400],
+                    size: context.responsiveAppSizeTheme.current.iconSize20,
                   ),
-                  onTap: () {
-                    onFavoriteCallback?.call(medicineData);
-                  },
                 ),
+                onTap: () {
+                  onFavoriteCallback?.call(medicineData);
+                },
               )
           ],
         ),
