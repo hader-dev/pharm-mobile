@@ -1,5 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
+import 'package:hader_pharm_mobile/features/common_features/orders_details/orders_details.dart'
+    show OrdersDetailsScreen;
+import 'package:hader_pharm_mobile/features/common_features/orders_details/widgets/track_order_bottom_sheet.dart'
+    show OrderTrackingBottomSheet;
 import 'package:hader_pharm_mobile/models/order_claim.dart';
 import 'package:hader_pharm_mobile/models/order_details.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/order_repository.dart';
@@ -7,6 +13,9 @@ import 'package:hader_pharm_mobile/repositories/remote/order/params/cancel_order
 import 'package:hader_pharm_mobile/repositories/remote/order/params/order_complaint.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/response/response_order_cancel.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/response/response_order_complaints.dart';
+
+import '../../../../utils/bottom_sheet_helper.dart' show BottomSheetHelper;
+import '../widgets/raise_order_claim_bottom_sheet.dart' show RaiseOrderClaimBottomSheet;
 
 part 'orders_details_state.dart';
 
@@ -26,8 +35,7 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
 
       var results = await Future.wait([
         orderRepository.getMorderById(orderId),
-        orderRepository
-            .getOrderClaims(ParamsGetOrderComplaints(orderId: orderId))
+        orderRepository.getOrderClaims(ParamsGetOrderComplaints(orderId: orderId))
       ]);
 
       final orderData = results[0] as OrderDetailsModel;
@@ -68,8 +76,7 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
     try {
       emit(OrderDetailsLoading());
 
-      var res = await orderRepository
-          .getOrderClaims(ParamsGetOrderComplaints(orderId: orderData!.id));
+      var res = await orderRepository.getOrderClaims(ParamsGetOrderComplaints(orderId: orderData!.id));
       orderClaims = res.claims;
 
       emit(OrderDetailsLoaded());
@@ -78,6 +85,25 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
       debugPrintStack(stackTrace: stacktrace);
 
       emit(OrderDetailsLoadingFailed());
+    }
+  }
+
+  void onMenuOptionSelected(String option, [OrderDetailsModel? order]) async {
+    switch (option) {
+      case 'orderTracking':
+        BottomSheetHelper.showCommonBottomSheet(
+            context: OrdersDetailsScreen.ordersDetailsScaffoldKey.currentContext!, child: OrderTrackingBottomSheet());
+        break;
+
+      case 'raiseComplaint':
+        BottomSheetHelper.showCommonBottomSheet(
+            initialChildSize: 0.5,
+            context: OrdersDetailsScreen.ordersDetailsScaffoldKey.currentContext!,
+            child: RaiseOrderClaimBottomSheet(
+              orderId: order!.id,
+            ));
+
+        break;
     }
   }
 }

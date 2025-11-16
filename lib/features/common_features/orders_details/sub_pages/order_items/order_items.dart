@@ -4,15 +4,14 @@ import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders_details/cubit/orders_details_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders_details/sub_pages/order_items/widgets/order_items_section.dart';
 
-class OrderDetailsItemsPage extends StatelessWidget {
-  const OrderDetailsItemsPage({super.key});
+class OrderDetailsItemsSection extends StatelessWidget {
+  const OrderDetailsItemsSection({super.key});
 
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
       onRefresh: () => context.read<OrderDetailsCubit>().reloadOrderData(),
-      child: BlocBuilder<OrderDetailsCubit, OrdersDetailsState>(
-          builder: (context, state) {
+      child: BlocBuilder<OrderDetailsCubit, OrdersDetailsState>(builder: (context, state) {
         final cubit = context.read<OrderDetailsCubit>();
 
         if (state is OrderDetailsLoading) {
@@ -25,9 +24,7 @@ class OrderDetailsItemsPage extends StatelessWidget {
         if (state is OrderDetailsLoadingFailed || isEmpty) {
           return Center(child: const EmptyListWidget());
         }
-        return SingleChildScrollView(
-            physics: const AlwaysScrollableScrollPhysics(),
-            child: OrderItemsSection(orderItems: cubit.orderData!.orderItems));
+        return OrderItemsSection(orderItems: cubit.orderData!.orderItems);
       }),
     );
   }

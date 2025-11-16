@@ -8,6 +8,9 @@ import 'package:hader_pharm_mobile/features/common_features/orders_details/cubit
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:lucide_icons/lucide_icons.dart' show LucideIcons;
+
+import '../../../common/chips/custom_chip.dart' show CustomChip;
 
 class OrderDetailsAppbar extends StatelessWidget implements PreferredSizeWidget {
   const OrderDetailsAppbar({
@@ -19,6 +22,7 @@ class OrderDetailsAppbar extends StatelessWidget implements PreferredSizeWidget 
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<PopupMenuButtonState<String>> menuKey = GlobalKey<PopupMenuButtonState<String>>();
     return CustomAppBarV2.alternate(
       topPadding: MediaQuery.of(context).padding.top,
       bottomPadding: MediaQuery.of(context).padding.bottom,
@@ -44,38 +48,73 @@ class OrderDetailsAppbar extends StatelessWidget implements PreferredSizeWidget 
         BlocBuilder<OrderDetailsCubit, OrdersDetailsState>(
           builder: (context, state) {
             if (state is OrderDetailsLoading) {
-              return Container(
-                  padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p6),
-                  height: 30,
-                  width: 30,
-                  child: CircularProgressIndicator(
-                    strokeWidth: 1.1,
-                  ));
+              return SizedBox.shrink();
             }
-            OrderStatus orderStatus = OrderStatus.values.firstWhere(
-              (statusItem) => statusItem.id == (context.read<OrderDetailsCubit>().orderData?.status ?? 1),
-            );
-            return Container(
-              margin: EdgeInsets.only(right: context.responsiveAppSizeTheme.current.p12),
-              padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p6),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(context.responsiveAppSizeTheme.current.r6),
-                    topLeft: Radius.circular(context.responsiveAppSizeTheme.current.r6)),
-                color: Colors.white,
+            return PopupMenuButton<String>(
+              key: menuKey,
+              offset: const Offset(0, 40),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.commonWidgetsRadius),
               ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(OrderStatus.getTranslatedStatus(orderStatus),
-                      style: context.responsiveTextTheme.current.bodySmall.copyWith(
-                          color: orderStatus.color,
-                          fontWeight: context.responsiveTextTheme.current.appFont.appFontSemiBold)),
-                ],
+              onSelected: (value) {
+                if (value == "raiseComplaint") {
+                  menuKey.currentState?.showButtonMenu();
+                }
+                context.read<OrderDetailsCubit>().onMenuOptionSelected(
+                      value,
+                      context.read<OrderDetailsCubit>().orderData,
+                    );
+              },
+              itemBuilder: (context) => [
+                PopupMenuItem(
+                  value: "orderTracking",
+                  child: Row(
+                    children: [
+                      Icon(
+                        LucideIcons.history,
+                        size: context.responsiveAppSizeTheme.current.iconSize20,
+                        color: AppColors.accent1Shade1,
+                      ),
+                      ResponsiveGap.s8(),
+                      Text(
+                        context.translation!.order_tracking,
+                      ),
+                    ],
+                  ),
+                ),
+                PopupMenuItem(
+                  value: "raiseComplaint",
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.warning_amber_rounded,
+                        size: context.responsiveAppSizeTheme.current.iconSize20,
+                        color: SystemColors.red.primary,
+                      ),
+                      ResponsiveGap.s8(),
+                      Text(
+                        context.translation!.order_complaint,
+                        style:
+                            context.responsiveTextTheme.current.body3Medium.copyWith(color: SystemColors.red.primary),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+              child: InkWell(
+                onTap: () => menuKey.currentState?.showButtonMenu(),
+                child: Padding(
+                  padding: EdgeInsets.only(right: context.responsiveAppSizeTheme.current.p16),
+                  child: Icon(
+                    LucideIcons.moreVertical,
+                    color: Colors.white,
+                    size: context.responsiveAppSizeTheme.current.iconSize20,
+                  ),
+                ),
               ),
             );
           },
-        )
+        ),
       ],
     );
   }

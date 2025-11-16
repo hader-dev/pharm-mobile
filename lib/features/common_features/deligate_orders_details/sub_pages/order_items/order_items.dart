@@ -30,8 +30,7 @@ class OrderDetailsItemsPage extends StatelessWidget {
           final isEmpty = cubit.state.orderItems.isEmpty;
           final bottomNavigationWidget = state.didChange
               ? Padding(
-                  padding:
-                      EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
+                  padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -65,9 +64,7 @@ class OrderDetailsItemsPage extends StatelessWidget {
             body: SingleChildScrollView(
               physics: const AlwaysScrollableScrollPhysics(),
               child: OrderItemsSection(
-                  orderItems: cubit.state.orderItems,
-                  canEdit:
-                      cubit.state.orderData.status == OrderStatus.created.id),
+                  orderItems: cubit.state.orderItems, canEdit: cubit.state.orderData.status == OrderStatus.created.id),
             ),
             bottomNavigationBar: bottomNavigationWidget,
           );

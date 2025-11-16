@@ -44,20 +44,16 @@ enum OrderClaimStatus {
   static String getTranslatedStatus(OrderClaimStatus expression) {
     switch (expression) {
       case OrderClaimStatus.pending:
-        return RoutingManager
-            .rootNavigatorKey.currentContext!.translation!.pending;
+        return RoutingManager.rootNavigatorKey.currentContext!.translation!.pending;
 
       case OrderClaimStatus.processing:
-        return RoutingManager
-            .rootNavigatorKey.currentContext!.translation!.processing;
+        return RoutingManager.rootNavigatorKey.currentContext!.translation!.processing;
 
       case OrderClaimStatus.rejected:
-        return RoutingManager
-            .rootNavigatorKey.currentContext!.translation!.rejected;
+        return RoutingManager.rootNavigatorKey.currentContext!.translation!.rejected;
 
       case OrderClaimStatus.resolved:
-        return RoutingManager
-            .rootNavigatorKey.currentContext!.translation!.resolved;
+        return RoutingManager.rootNavigatorKey.currentContext!.translation!.resolved;
     }
   }
 }
@@ -65,7 +61,7 @@ enum OrderClaimStatus {
 enum OrderStatus {
   created(
     id: 1,
-    color: Color.fromARGB(255, 106, 106, 106), // gray
+    color: Colors.lightBlueAccent, // gray
     icon: Icons.new_releases, // "new"
   ),
   approved(
@@ -80,7 +76,7 @@ enum OrderStatus {
   ),
   cancelled(
     id: 4,
-    color: Colors.grey,
+    color: Colors.redAccent,
     icon: Icons.remove_circle,
   ),
   processing(
@@ -90,7 +86,7 @@ enum OrderStatus {
   ),
   ready(
     id: 6,
-    color: Colors.blue,
+    color: Colors.blueAccent,
     icon: Icons.shopping_bag,
   ),
   delivered(
@@ -105,7 +101,7 @@ enum OrderStatus {
   ),
   failed(
     id: 9,
-    color: Colors.black,
+    color: Colors.deepOrange,
     icon: Icons.error,
   );
 
@@ -122,9 +118,8 @@ enum OrderStatus {
 
   static String getTranslatedStatusFromString(String rawValue) {
     final parsedValue = rawValue.toLowerCase();
-    final status = OrderStatus.values.firstWhere(
-        (element) => element.name == parsedValue,
-        orElse: () => OrderStatus.created);
+    final status =
+        OrderStatus.values.firstWhere((element) => element.name == parsedValue, orElse: () => OrderStatus.created);
 
     return getTranslatedStatus(status);
   }
@@ -292,12 +287,8 @@ enum FieldState {
   normal(color: SystemColors.defaultState),
   loading(wordKey: "Loading", color: SystemColors.defaultState),
   disabled(color: SystemColors.defaultState),
-  success(
-      wordKey: "Success", color: SystemColors.green, icon: Icons.check_circle),
-  warning(
-      wordKey: "Warning",
-      color: SystemColors.orange,
-      icon: Icons.warning_amber_rounded),
+  success(wordKey: "Success", color: SystemColors.green, icon: Icons.check_circle),
+  warning(wordKey: "Warning", color: SystemColors.orange, icon: Icons.warning_amber_rounded),
   error(wordKey: "Error", color: SystemColors.red, icon: Icons.error);
 
   final SystemColors color;
@@ -311,8 +302,7 @@ enum ApiErrorCodes {
   // Auth
   NO_TOKEN('NO_TOKEN', 'No token provided'),
   TOKEN_EXPIRED('TOKEN_EXPIRED', 'Token has expired'),
-  UNAUTHORIZED_DISTRIBUTOR_LOGIN(
-      'UNAUTHORIZED_DISTRIBUTOR_LOGIN', 'Unauthorized distributor login'),
+  UNAUTHORIZED_DISTRIBUTOR_LOGIN('UNAUTHORIZED_DISTRIBUTOR_LOGIN', 'Unauthorized distributor login'),
   TOKEN_REUSED('TOKEN_REUSED', 'Token has been reused'),
   REFRESH_TOKEN_REUSED('REFRESH_TOKEN_REUSED', 'Refresh token has been reused'),
   REFRESH_TOKEN_EXPIRED('REFRESH_TOKEN_EXPIRED', 'Refresh token has expired'),
@@ -321,8 +311,7 @@ enum ApiErrorCodes {
   INVALID_CREDENTIALS('INVALID_CREDENTIALS', 'Email or password is incorrect'),
   INVALID_PASSWORD('INVALID_PASSWORD', 'Invalid password'),
   INVALID_OTP('INVALID_OTP', 'Invalid OTP'),
-  INVALID_PASSWORD_RESET_TOKEN(
-      'INVALID_PASSWORD_RESET_TOKEN', 'Invalid password reset token'),
+  INVALID_PASSWORD_RESET_TOKEN('INVALID_PASSWORD_RESET_TOKEN', 'Invalid password reset token'),
   EMAIL_NOT_VERIFIED('EMAIL_NOT_VERIFIED', 'Email not verified'),
   INCORRECT_PASSWORD('INCORRECT_PASSWORD', 'Incorrect password');
 

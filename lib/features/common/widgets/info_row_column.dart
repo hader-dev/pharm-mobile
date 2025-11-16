@@ -36,22 +36,27 @@ class InfoRowColumn extends StatelessWidget {
               if (i < data.length - 1) const ResponsiveGap.s8(),
             ]
           ]),
-          Spacer(),
-          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            for (int i = 0; i < data.length; i++) ...[
-              Text(
-                data[i].value,
-                softWrap: true,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 1,
-                style: data[i].valueStyle ??
-                    context.responsiveTextTheme.current.body2Medium.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
-              ),
-              if (i < data.length - 1) const ResponsiveGap.s8(),
-            ]
-          ])
+          ResponsiveGap.s32(),
+          Expanded(
+            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              for (int i = 0; i < data.length; i++) ...[
+                Tooltip(
+                  message: data[i].value,
+                  child: Text(
+                    data[i].value,
+                    softWrap: true,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                    style: data[i].valueStyle ??
+                        context.responsiveTextTheme.current.body2Medium.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
+                ),
+                if (i < data.length - 1) const ResponsiveGap.s8(),
+              ]
+            ]),
+          )
         ],
       ),
     );

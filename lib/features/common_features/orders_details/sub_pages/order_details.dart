@@ -8,6 +8,8 @@ import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders_details/actions/can_cancel_order.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders_details/cubit/orders_details_cubit.dart';
+import 'package:hader_pharm_mobile/features/common_features/orders_details/sub_pages/order_items/order_items.dart'
+    show OrderDetailsItemsSection;
 import 'package:hader_pharm_mobile/features/common_features/orders_details/widgets/cancel_order_bottom_sheet.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders_details/widgets/order_client_note.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders_details/widgets/order_infos_section.dart'
@@ -20,6 +22,8 @@ import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_date_helper.dart';
+
+import '../../../common/chips/custom_chip.dart' show CustomChip;
 
 class OrdersDetailsPage extends StatelessWidget {
   final String orderId;
@@ -49,8 +53,9 @@ class OrdersDetailsPage extends StatelessWidget {
             return Center(child: const EmptyListWidget());
           }
           final cubit = context.read<OrderDetailsCubit>();
-
           final item = cubit.orderData!;
+          final orderStatus =
+              OrderStatus.values.firstWhere((OrderStatus element) => element.id == cubit.orderData!.status);
 
           return SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),
@@ -58,6 +63,22 @@ class OrdersDetailsPage extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
+                Padding(
+                  padding: EdgeInsetsGeometry.symmetric(
+                    horizontal: context.responsiveAppSizeTheme.current.p8,
+                    vertical: context.responsiveAppSizeTheme.current.p4,
+                  ),
+                  child: Row(children: <Widget>[
+                    Spacer(),
+                    CustomChip(
+                        label: OrderStatus.getTranslatedStatus(orderStatus),
+                        labelColor: orderStatus.color,
+                        labelStyle: context.responsiveTextTheme.current.bodyXSmall.copyWith(
+                            fontWeight: context.responsiveTextTheme.current.appFont.appFontBold,
+                            color: orderStatus.color),
+                        color: orderStatus.color.withAlpha(50))
+                  ]),
+                ),
                 OrderInfosSection(
                   orderRef: cubit.orderData!.displayId,
                   createdAt: cubit.orderData!.createdAt.format,
@@ -99,31 +120,14 @@ class OrdersDetailsPage extends StatelessWidget {
                   endIndent: context.responsiveAppSizeTheme.current.s8,
                   indent: context.responsiveAppSizeTheme.current.s8,
                 ),
-                const OrderSummarySection(),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                      vertical: context.responsiveAppSizeTheme.current.p8,
-                      horizontal: context.responsiveAppSizeTheme.current.p8),
-                  child: Row(
-                    children: [
-                      Spacer(),
-                      InkWell(
-                        onTap: () {
-                          RoutingManager.router.pushNamed(RoutingManager.orderComplaint, extra: {
-                            "orderId": item.id,
-                            "itemId": item.id
-                          }).then((value) => {
-                                if (value == true) {cubit.getOrderComplaints()}
-                              });
-                        },
-                        child: Text(
-                          "${translation.order_complaint} !",
-                          style: context.responsiveTextTheme.current.bodySmall.copyWith(color: AppColors.accent1Shade2),
-                        ),
-                      )
-                    ],
-                  ),
+                ConstrainedBox(constraints: BoxConstraints(maxHeight: 300), child: OrderDetailsItemsSection()),
+                AppDivider(
+                  height: context.responsiveAppSizeTheme.current.p12,
+                  color: Colors.grey.shade100,
+                  endIndent: context.responsiveAppSizeTheme.current.s8,
+                  indent: context.responsiveAppSizeTheme.current.s8,
                 ),
+                const OrderSummarySection(),
                 ResponsiveGap.s16(),
                 Container(
                   margin: EdgeInsets.symmetric(vertical: context.responsiveAppSizeTheme.current.p4),
@@ -135,17 +139,6 @@ class OrdersDetailsPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Padding(
-                        padding: buttonsPadding,
-                        child: PrimaryTextButton(
-                          label: translation.order_tracking,
-                          onTap: () {
-                            BottomSheetHelper.showCommonBottomSheet(
-                                context: context, child: OrderTrackingBottomSheet());
-                          },
-                          color: AppColors.accent1Shade1,
-                        ),
-                      ),
                       if (!isInvoiceWorkInProgress)
                         Padding(
                           padding: buttonsPadding,
@@ -162,11 +155,14 @@ class OrdersDetailsPage extends StatelessWidget {
                           padding: buttonsPadding,
                           child: PrimaryTextButton(
                             label: translation.cancel,
+                            labelColor: SystemColors.red.primary,
+                            isOutLined: true,
+                            borderColor: SystemColors.red.primary,
                             onTap: () {
                               BottomSheetHelper.showCommonBottomSheet(
                                   initialChildSize: 0.3, context: context, child: CancelOrderBottomSheet());
                             },
-                            color: SystemColors.red.primary,
+                            color: Colors.transparent,
                           ),
                         ),
                     ],
