@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
+import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
+import 'package:hader_pharm_mobile/features/common/buttons/outlined/outlined_icon_button.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/outlined/outlined_text_button.dart';
+import 'package:hader_pharm_mobile/features/common/spacers/dividers.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/forgot_password/forgot_password.dart';
 import 'package:hader_pharm_mobile/features/common_features/login/cubit/login_cubit.dart';
+import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
@@ -19,6 +25,8 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userManager = getItInstance.get<UserManager>();
+
     return BlocProvider(
       create: (context) => LoginCubit(),
       child: BlocListener<LoginCubit, LoginState>(
@@ -54,7 +62,28 @@ class LoginScreen extends StatelessWidget {
                     },
                     borderColor: AppColors.accent1Shade1,
                   ),
-                  const ResponsiveGap.s16(),
+                  const AppDivider(
+                    color: AppColors.accent1Shade1,
+                  ),
+                  if (userManager.isGoogleSiginInSupported())
+                    OutlinedIconButton(
+                      borderColor: AppColors.accent1Shade1,
+                      label: Text(
+                        context.translation!.login_with_google,
+                        style: context.responsiveTextTheme.current.body1Regular
+                            .copyWith(color: AppColors.accent1Shade1),
+                      ),
+                      icon: SvgPicture.asset(
+                        DrawableAssetStrings.googleIcon,
+                        height:
+                            context.responsiveAppSizeTheme.current.iconSize20,
+                        width:
+                            context.responsiveAppSizeTheme.current.iconSize20,
+                      ),
+                      onPressed: () async {
+                        await userManager.googleSignIn();
+                      },
+                    ),
                 ],
               ),
             ),

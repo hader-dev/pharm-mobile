@@ -9,6 +9,7 @@ class EnvHelper {
   static const String featureFlagUpdatePopup = 'FEATURE_FLAG_UPDATE_POPUP';
   static const String sentryDsnKey = 'SENTRY_DSN';
   static const String envModeKey = 'MODE';
+  static const String envGoogleServerClientIdKey = 'GOOGLE_SERVER_CLIENT_ID';
 
   static Future<void> loadAppEnvVars() async {
     await dotenv.load();
@@ -20,5 +21,9 @@ class EnvHelper {
 
   static bool getFeatureFlag(String key) {
     return dotenv.getBool(key);
+  }
+
+  static String getGoogleClientServerId() {
+    return dotenv.get(envGoogleServerClientIdKey);
   }
 }

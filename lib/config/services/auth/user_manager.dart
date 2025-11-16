@@ -1,15 +1,16 @@
+import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/config/services/auth/google_manager.dart';
+import 'package:hader_pharm_mobile/config/services/network/dio/dio_network_manager.dart';
+import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/config/services/notification/notification_service_port.dart';
 import 'package:hader_pharm_mobile/features/common_features/edit_profile/hooks_data_model/edit_profile_form.dart';
 import 'package:hader_pharm_mobile/models/jwt_decoded.dart';
+import 'package:hader_pharm_mobile/models/user.dart';
+import 'package:hader_pharm_mobile/repositories/remote/user/user_repository_impl.dart';
 import 'package:hader_pharm_mobile/utils/app_exceptions/exceptions.dart';
 import 'package:hader_pharm_mobile/utils/login_jwt_decoder.dart';
 import 'package:hader_pharm_mobile/utils/urls.dart';
 
-import '../../../models/user.dart';
-import '../../../repositories/remote/user/user_repository_impl.dart';
-import '../../di/di.dart';
-import '../network/dio/dio_network_manager.dart';
-import '../network/network_interface.dart';
 import 'token_manager.dart';
 
 class UserManager {
@@ -18,6 +19,7 @@ class UserManager {
   static late TokenManager tokenManagerInstance;
   static final UserManager _instance = UserManager._internal();
   static UserManager get instance => _instance;
+  final GoogleManager _googleSignIn = GoogleManager();
 
   UserManager._internal();
   static UserManager init(
@@ -185,5 +187,34 @@ class UserManager {
       required String newPassword}) {
     return userRepo.forgotPassword(
         email: email, otp: otp, newPassword: newPassword);
+  }
+
+  Future<bool> googleSignIn() async {
+    final acc = await _googleSignIn.signIn();
+
+    if (acc != null) {
+      final authRes =
+          await (getItInstance.get<INetworkService>() as DioNetworkManager)
+              .post(
+        Urls.googleLogin,
+        payload: {
+          "idToken": acc.authentication.idToken,
+        },
+      );
+
+      final token = authRes.data["accessToken"];
+
+      tokenManagerInstance.optimisticUpdate(token);
+      (getItInstance.get<INetworkService>() as DioNetworkManager)
+          .initDefaultHeaders(token);
+      await getMe();
+      return true;
+    }
+
+    return acc != null;
+  }
+
+  bool isGoogleSiginInSupported() {
+    return _googleSignIn.isSupported();
   }
 }
