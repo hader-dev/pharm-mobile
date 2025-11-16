@@ -28,13 +28,15 @@ class InfoRowColumn extends StatelessWidget {
             for (int i = 0; i < data.length; i++) ...[
               Text(
                 data[i].title,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
                 style:
                     data[i].titleStyle ?? context.responsiveTextTheme.current.body1Medium.copyWith(color: Colors.grey),
               ),
               if (i < data.length - 1) const ResponsiveGap.s8(),
             ]
           ]),
-          const ResponsiveGap.s32(),
+          Spacer(),
           Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             for (int i = 0; i < data.length; i++) ...[
               Text(
