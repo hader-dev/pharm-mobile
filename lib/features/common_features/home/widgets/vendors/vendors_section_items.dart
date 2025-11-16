@@ -7,10 +7,14 @@ import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/featured.dart';
+import 'package:hader_pharm_mobile/features/common_features/home/widgets/vendors/vendor_home_widget.dart'
+    show VendorHomeWidget;
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/vendors/cubit/vendors_cubit.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
+
+import '../../../../../config/responsive/device_size.dart' show DeviceSizes, DeviceSizesExtension;
 
 class VendorsSectionItems extends StatelessWidget {
   final int maxItemsPerRow;
@@ -29,6 +33,7 @@ class VendorsSectionItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final spacing = _horizontalSpacing(context);
+    final screenWidth = MediaQuery.of(context).size.width;
     final itemWidth = _getItemWidth(context, spacing);
 
     return BlocBuilder<VendorsCubit, VendorsState>(
@@ -48,34 +53,52 @@ class VendorsSectionItems extends StatelessWidget {
         }
 
         return Material(
-          child: Wrap(
-            spacing: spacing,
-            runSpacing: spacing,
-            children:
-                List.generate(min(maxVisibleItems, items.length), (index) {
-              final entity = items[index];
-              return FeaturedEntity(
-                size: itemWidth,
-                title: entity.name,
-                fallbackAssetImagePlaceholderPath:
-                    DrawableAssetStrings.companyPlaceHolderImg,
-                onPress: () => RoutingManager.router.pushNamed(
-                  RoutingManager.vendorDetails,
-                  extra: entity.id,
+          child: screenWidth <= DeviceSizes.largeMobile.width
+              ? SizedBox(
+                  height: minSectionHeight,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: List.generate(min(maxVisibleItems, items.length), (index) {
+                      final entity = items[index];
+                      return VendorHomeWidget(
+                        title: entity.name,
+                        fallbackAssetImagePlaceholderPath: DrawableAssetStrings.companyPlaceHolderImg,
+                        onPress: () => RoutingManager.router.pushNamed(
+                          RoutingManager.vendorDetails,
+                          extra: entity.id,
+                        ),
+                        imageUrl: getItInstance.get<INetworkService>().getFilesPath(
+                              entity.thumbnailImage?.path ?? "",
+                            ),
+                      );
+                    }),
+                  ),
+                )
+              : Wrap(
+                  spacing: spacing,
+                  runSpacing: spacing,
+                  children: List.generate(min(maxVisibleItems, items.length), (index) {
+                    final entity = items[index];
+                    return FeaturedEntity(
+                      size: itemWidth,
+                      title: entity.name,
+                      fallbackAssetImagePlaceholderPath: DrawableAssetStrings.companyPlaceHolderImg,
+                      onPress: () => RoutingManager.router.pushNamed(
+                        RoutingManager.vendorDetails,
+                        extra: entity.id,
+                      ),
+                      imageUrl: getItInstance.get<INetworkService>().getFilesPath(
+                            entity.thumbnailImage?.path ?? "",
+                          ),
+                    );
+                  }),
                 ),
-                imageUrl: getItInstance.get<INetworkService>().getFilesPath(
-                      entity.thumbnailImage?.path ?? "",
-                    ),
-              );
-            }),
-          ),
         );
       },
     );
   }
 
-  double _horizontalSpacing(BuildContext context) =>
-      context.responsiveAppSizeTheme.current.p8;
+  double _horizontalSpacing(BuildContext context) => context.responsiveAppSizeTheme.current.p8;
 
   double _getItemWidth(BuildContext context, double spacing) {
     final screenWidth = MediaQuery.of(context).size.width;

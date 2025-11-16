@@ -14,11 +14,17 @@ class DeligateMarketPlaceScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return DeligateMarketPlaceStateProvider(
       client: GoRouterState.of(context).extra as DeligateClient,
-      child: Scaffold(
-        key: marketPlaceScaffoldKey,
-        appBar: const DeligateMarketplaceAppbar(),
-        body: const DeligateMarketPlaceBody(),
-        bottomNavigationBar: const DeligateMarketplaceNavBar(),
+      child: SafeArea(
+        child: Scaffold(
+          key: marketPlaceScaffoldKey,
+          body: Column(
+            children: [
+              DeligateMarketplaceAppbar(),
+              const DeligateMarketPlaceBody(),
+            ],
+          ),
+          bottomNavigationBar: const DeligateMarketplaceNavBar(),
+        ),
       ),
     );
   }

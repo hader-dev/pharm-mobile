@@ -1,5 +1,6 @@
 class OrderClaimModel {
   final String id;
+  final String displayId;
   final String fromCompanyId;
   final String toCompanyId;
   final String orderId;
@@ -10,31 +11,41 @@ class OrderClaimModel {
   final String subject;
   final String description;
 
+  final DateTime createdAt;
+  final DateTime updatedAt;
+
   OrderClaimModel(
       {required this.id,
+      required this.displayId,
       required this.fromCompanyId,
       required this.toCompanyId,
       required this.orderId,
       required this.orderItemId,
       required this.claimStatusId,
       required this.subject,
-      required this.description});
+      required this.description,
+      required this.createdAt,
+      required this.updatedAt});
 
   factory OrderClaimModel.empty() {
     return OrderClaimModel(
         id: "",
+        displayId: "",
         fromCompanyId: "",
         toCompanyId: "",
         orderId: "",
         orderItemId: "",
         claimStatusId: 0,
         subject: "",
-        description: "");
+        description: "",
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now());
   }
 }
 
 class OrderClaimHeaderModel {
   final String id;
+  final String displayId;
   final String fromCompanyId;
   final String toCompanyId;
   final String orderId;
@@ -43,16 +54,19 @@ class OrderClaimHeaderModel {
   final int claimStatusId;
   final String subject;
   final DateTime createdAt;
+  final DateTime updatedAt;
 
   OrderClaimHeaderModel(
       {required this.id,
+      required this.displayId,
       required this.createdAt,
       required this.subject,
       required this.fromCompanyId,
       required this.toCompanyId,
       required this.orderId,
       required this.orderItemId,
-      required this.claimStatusId});
+      required this.claimStatusId,
+      required this.updatedAt});
 }
 
 class ClaimStatusHistoryModel {

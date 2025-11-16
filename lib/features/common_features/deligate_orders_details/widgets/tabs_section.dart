@@ -6,24 +6,20 @@ import 'package:hader_pharm_mobile/features/common_features/deligate_orders_deta
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class OrderDetailsTabBarSection extends StatefulWidget {
-  const OrderDetailsTabBarSection(
-      {super.key, required this.orderId, this.isEditable = false});
+  const OrderDetailsTabBarSection({super.key, required this.orderId, this.isEditable = false});
   final String orderId;
   final bool isEditable;
 
   @override
-  State<OrderDetailsTabBarSection> createState() =>
-      _OrderDetailsTabBarSectionState();
+  State<OrderDetailsTabBarSection> createState() => _OrderDetailsTabBarSectionState();
 }
 
-class _OrderDetailsTabBarSectionState extends State<OrderDetailsTabBarSection>
-    with TickerProviderStateMixin {
+class _OrderDetailsTabBarSectionState extends State<OrderDetailsTabBarSection> with TickerProviderStateMixin {
   late final TabController tabsController;
   @override
   void initState() {
     super.initState();
-    tabsController =
-        TabController(length: widget.isEditable ? 3 : 2, vsync: this);
+    tabsController = TabController(length: widget.isEditable ? 3 : 2, vsync: this);
   }
 
   @override
@@ -40,16 +36,16 @@ class _OrderDetailsTabBarSectionState extends State<OrderDetailsTabBarSection>
     return Column(
       children: [
         ColoredBox(
-          color: AppColors.accent1Shade2,
+          color: AppColors.bgWhite,
           child: TabBar(
-              indicatorColor: AppColors.bgWhite,
+              indicatorColor: AppColors.accent1Shade1,
+              labelColor: AppColors.accent1Shade1,
+              unselectedLabelColor: Colors.grey,
               indicatorSize: TabBarIndicatorSize.tab,
               isScrollable: true,
               labelStyle: tabTextStyle,
               overlayColor: WidgetStatePropertyAll(Colors.transparent),
               tabAlignment: TabAlignment.start,
-              labelColor: AppColors.bgWhite,
-              unselectedLabelColor: AppColors.accent1Shade2Deemphasized,
               controller: tabsController,
               onTap: (index) {},
               tabs: tabs

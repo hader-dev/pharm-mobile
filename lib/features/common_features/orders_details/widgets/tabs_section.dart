@@ -10,12 +10,10 @@ class OrderDetailsTabBarSection extends StatefulWidget {
   final String orderId;
 
   @override
-  State<OrderDetailsTabBarSection> createState() =>
-      _OrderDetailsTabBarSectionState();
+  State<OrderDetailsTabBarSection> createState() => _OrderDetailsTabBarSectionState();
 }
 
-class _OrderDetailsTabBarSectionState extends State<OrderDetailsTabBarSection>
-    with TickerProviderStateMixin {
+class _OrderDetailsTabBarSectionState extends State<OrderDetailsTabBarSection> with TickerProviderStateMixin {
   late final TabController tabsController;
   @override
   void initState() {
@@ -26,27 +24,23 @@ class _OrderDetailsTabBarSectionState extends State<OrderDetailsTabBarSection>
   @override
   Widget build(BuildContext context) {
     final translation = context.translation!;
-    final List<String> tabs = [
-      translation.overview,
-      translation.order_items,
-      translation.order_complaint
-    ];
+    final List<String> tabs = [translation.overview, translation.order_items, translation.order_complaint];
 
     TextStyle tabTextStyle = context.responsiveTextTheme.current.body3Medium;
 
     return Column(
       children: [
         ColoredBox(
-          color: AppColors.accent1Shade2,
+          color: AppColors.bgWhite,
           child: TabBar(
-              indicatorColor: AppColors.bgWhite,
+              indicatorColor: AppColors.accent1Shade1,
+              labelColor: AppColors.accent1Shade1,
+              unselectedLabelColor: Colors.grey,
               indicatorSize: TabBarIndicatorSize.tab,
               isScrollable: true,
               labelStyle: tabTextStyle,
               overlayColor: WidgetStatePropertyAll(Colors.transparent),
               tabAlignment: TabAlignment.start,
-              labelColor: AppColors.bgWhite,
-              unselectedLabelColor: AppColors.accent1Shade2Deemphasized,
               controller: tabsController,
               onTap: (index) {},
               tabs: tabs

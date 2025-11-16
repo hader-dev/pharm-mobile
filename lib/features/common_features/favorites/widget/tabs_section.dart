@@ -13,8 +13,7 @@ class FavoritesTabBarSection extends StatefulWidget {
   State<FavoritesTabBarSection> createState() => _FavoritesTabBarSectionState();
 }
 
-class _FavoritesTabBarSectionState extends State<FavoritesTabBarSection>
-    with TickerProviderStateMixin {
+class _FavoritesTabBarSectionState extends State<FavoritesTabBarSection> with TickerProviderStateMixin {
   late final TabController tabsController;
   @override
   void initState() {
@@ -29,16 +28,16 @@ class _FavoritesTabBarSectionState extends State<FavoritesTabBarSection>
     return Column(
       children: [
         ColoredBox(
-          color: AppColors.accent1Shade2,
+          color: AppColors.bgWhite,
           child: TabBar(
-              indicatorColor: AppColors.bgWhite,
+              indicatorColor: AppColors.accent1Shade1,
+              labelColor: AppColors.accent1Shade1,
+              unselectedLabelColor: Colors.grey,
               indicatorSize: TabBarIndicatorSize.tab,
               isScrollable: true,
               labelStyle: tabTextStyle,
               overlayColor: WidgetStatePropertyAll(Colors.transparent),
               tabAlignment: TabAlignment.start,
-              unselectedLabelColor: AppColors.accent1Shade2Deemphasized,
-              labelColor: AppColors.bgWhite,
               controller: tabsController,
               onTap: (index) {},
               tabs: widget.tabs
@@ -54,11 +53,7 @@ class _FavoritesTabBarSectionState extends State<FavoritesTabBarSection>
         Expanded(
           child: TabBarView(
             controller: tabsController,
-            children: [
-              FavoritesMedicinesCatalog(),
-              FavoritesParaPharmaCatalogs(),
-              FavoritesVendors()
-            ],
+            children: [FavoritesMedicinesCatalog(), FavoritesParaPharmaCatalogs(), FavoritesVendors()],
           ),
         ),
       ],

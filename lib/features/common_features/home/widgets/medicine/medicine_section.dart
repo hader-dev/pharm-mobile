@@ -18,16 +18,12 @@ class MedicineSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final translation = context.translation!;
-    final screenWidth = MediaQuery.of(context).size.width;
 
     return Padding(
       padding: padding,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Gap(screenWidth <= 414
-              ? 0
-              : context.responsiveAppSizeTheme.current.s4),
           SectionTitle(title: translation.medicines),
           MedicinesSectionItems(minSectionHeight: minSectionHeight),
         ],

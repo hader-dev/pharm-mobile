@@ -8,12 +8,10 @@ class OrderDeligateTabBarSection extends StatefulWidget {
   const OrderDeligateTabBarSection({super.key});
 
   @override
-  State<OrderDeligateTabBarSection> createState() =>
-      _OrderDeligateTabBarSectionState();
+  State<OrderDeligateTabBarSection> createState() => _OrderDeligateTabBarSectionState();
 }
 
-class _OrderDeligateTabBarSectionState extends State<OrderDeligateTabBarSection>
-    with TickerProviderStateMixin {
+class _OrderDeligateTabBarSectionState extends State<OrderDeligateTabBarSection> with TickerProviderStateMixin {
   late final TabController tabsController;
   @override
   void initState() {
@@ -33,16 +31,16 @@ class _OrderDeligateTabBarSectionState extends State<OrderDeligateTabBarSection>
     return Column(
       children: [
         ColoredBox(
-          color: AppColors.accent1Shade2,
+          color: AppColors.bgWhite,
           child: TabBar(
-              indicatorColor: AppColors.bgWhite,
+              indicatorColor: AppColors.accent1Shade1,
+              labelColor: AppColors.accent1Shade1,
+              unselectedLabelColor: Colors.grey,
               indicatorSize: TabBarIndicatorSize.tab,
               isScrollable: true,
               labelStyle: tabTextStyle,
               overlayColor: WidgetStatePropertyAll(Colors.transparent),
               tabAlignment: TabAlignment.start,
-              labelColor: AppColors.bgWhite,
-              unselectedLabelColor: AppColors.accent1Shade2Deemphasized,
               controller: tabsController,
               onTap: (index) {},
               tabs: tabs

@@ -5,6 +5,7 @@ import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 // ignore: must_be_immutable
 class CustomChip extends StatelessWidget {
   final String label;
+  final TextStyle? labelStyle;
   final Color labelColor;
   final Color color;
   IconData? icon;
@@ -17,6 +18,7 @@ class CustomChip extends StatelessWidget {
       this.labelColor = Colors.black,
       this.icon,
       this.onTap,
+      this.labelStyle,
       this.isSelected = false});
 
   @override
@@ -25,13 +27,11 @@ class CustomChip extends StatelessWidget {
       onTap: onTap,
       child: Container(
         alignment: Alignment.center,
-        padding:  EdgeInsets.symmetric(
-            horizontal: context.responsiveAppSizeTheme.current.p6,
-            vertical: context.responsiveAppSizeTheme.current.p4),
+        padding: EdgeInsets.symmetric(
+            horizontal: context.responsiveAppSizeTheme.current.p6, vertical: context.responsiveAppSizeTheme.current.p4),
         decoration: BoxDecoration(
           color: color,
-          borderRadius: BorderRadius.circular(
-              context.responsiveAppSizeTheme.current.commonWidgetsRadius),
+          borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.commonWidgetsRadius),
         ),
         child: Row(
           children: <Widget>[
@@ -44,14 +44,13 @@ class CustomChip extends StatelessWidget {
               const ResponsiveGap.s4(),
             ],
             Container(
-              constraints: BoxConstraints(
-                  maxWidth: MediaQuery.sizeOf(context).width / 2),
+              constraints: BoxConstraints(maxWidth: MediaQuery.sizeOf(context).width / 2),
               child: Text(label,
                   softWrap: true,
                   textWidthBasis: TextWidthBasis.parent,
                   overflow: TextOverflow.ellipsis,
-                  style: context.responsiveTextTheme.current.body3Medium
-                      .copyWith(color: labelColor)),
+                  style: labelStyle?.copyWith(color: labelColor) ??
+                      context.responsiveTextTheme.current.body3Medium.copyWith(color: labelColor)),
             ),
           ],
         ),

@@ -9,12 +9,10 @@ class ProductDetailsTabBarSection extends StatefulWidget {
   const ProductDetailsTabBarSection({super.key});
 
   @override
-  State<ProductDetailsTabBarSection> createState() =>
-      _ProductDetailsTabBarSectionState();
+  State<ProductDetailsTabBarSection> createState() => _ProductDetailsTabBarSectionState();
 }
 
-class _ProductDetailsTabBarSectionState
-    extends State<ProductDetailsTabBarSection> with TickerProviderStateMixin {
+class _ProductDetailsTabBarSectionState extends State<ProductDetailsTabBarSection> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
@@ -27,19 +25,17 @@ class _ProductDetailsTabBarSectionState
     TextStyle tabTextStyle = context.responsiveTextTheme.current.body3Medium;
 
     return TabBar(
-        indicatorColor: AppColors.accent1Shade2,
+        indicatorColor: AppColors.accent1Shade1,
+        labelColor: AppColors.accent1Shade1,
+        unselectedLabelColor: Colors.grey,
         indicatorSize: TabBarIndicatorSize.tab,
         isScrollable: true,
         labelStyle: tabTextStyle,
         overlayColor: WidgetStatePropertyAll(Colors.transparent),
         tabAlignment: TabAlignment.start,
-        labelColor: AppColors.accent1Shade1,
-        controller: BlocProvider.of<ParaPharmaDetailsCubit>(context)
-            .state
-            .tabController,
+        controller: BlocProvider.of<ParaPharmaDetailsCubit>(context).state.tabController,
         onTap: (index) {
-          BlocProvider.of<ParaPharmaDetailsCubit>(context, listen: false)
-              .changeTapIndex(index);
+          BlocProvider.of<ParaPharmaDetailsCubit>(context, listen: false).changeTapIndex(index);
         },
         tabs: tabs
             .map(

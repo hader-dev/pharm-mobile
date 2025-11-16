@@ -33,26 +33,25 @@ class AppLayoutCubit extends Cubit<AppLayoutState> {
     )
   ];
 
-  List<PreferredSizeWidget> navbars = [
-    const HomeAppbar(
+  List<Widget> appTopBars = [
+    const HomeAppBar(
       isExtraLargeScreen: false,
     ),
-    const MarketplaceAppbar(
+    const MarketplaceAppBar(
       isExtraLargeScreen: false,
     ),
-    const CartAppbar(
+    const CartAppBar(
       isExtraLargeScreen: false,
     ),
-    const OrdersAppbar(
+    const OrdersAppBar(
       isExtraLargeScreen: false,
     ),
-    const ProfileAppbar(
+    const ProfileAppBar(
       isExtraLargeScreen: false,
     ),
   ];
 
-  AppLayoutCubit({required bool isExtraLargeScreen})
-      : super(AppLayoutInitial()) {
+  AppLayoutCubit({required bool isExtraLargeScreen}) : super(AppLayoutInitial()) {
     UserManager.instance.currentUser.role.isDelegate
         ? deligateAppScreens(
             isExtraLargeScreen: isExtraLargeScreen,
@@ -77,7 +76,7 @@ class AppLayoutCubit extends Cubit<AppLayoutState> {
       ),
     ];
 
-    navbars = [
+    appTopBars = [
       DeligateClientsAppbar(
         isExtraLargeScreen: isExtraLargeScreen,
       ),
@@ -87,7 +86,7 @@ class AppLayoutCubit extends Cubit<AppLayoutState> {
       DeligateProductsAppbar(
         isExtraLargeScreen: isExtraLargeScreen,
       ),
-      ProfileAppbar(
+      ProfileAppBar(
         isExtraLargeScreen: isExtraLargeScreen,
       ),
     ];
@@ -104,12 +103,12 @@ class AppLayoutCubit extends Cubit<AppLayoutState> {
         openedFrom: "",
       )
     ];
-    navbars = [
-      HomeAppbar(isExtraLargeScreen: isExtraLargeScreen),
-      MarketplaceAppbar(isExtraLargeScreen: isExtraLargeScreen),
-      CartAppbar(isExtraLargeScreen: isExtraLargeScreen),
-      OrdersAppbar(isExtraLargeScreen: isExtraLargeScreen),
-      ProfileAppbar(isExtraLargeScreen: isExtraLargeScreen),
+    appTopBars = [
+      HomeAppBar(isExtraLargeScreen: isExtraLargeScreen),
+      MarketplaceAppBar(isExtraLargeScreen: isExtraLargeScreen),
+      CartAppBar(isExtraLargeScreen: isExtraLargeScreen),
+      OrdersAppBar(isExtraLargeScreen: isExtraLargeScreen),
+      ProfileAppBar(isExtraLargeScreen: isExtraLargeScreen),
     ];
     emit(CurrentUserLoaded());
   }

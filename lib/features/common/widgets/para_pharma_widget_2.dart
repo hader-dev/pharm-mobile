@@ -2,11 +2,13 @@ import 'package:cached_network_image_plus/flutter_cached_network_image_plus.dart
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/config/responsive/typography/app_typography.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_icon_button.dart';
+import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/blackened_background.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/silver_tags.dart';
@@ -37,9 +39,15 @@ class ParaPharmaWidget2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(
-          horizontal: context.responsiveAppSizeTheme.current.p6,
-          vertical: context.responsiveAppSizeTheme.current.p12),
+      margin: EdgeInsets.symmetric(
+        horizontal: context.responsiveAppSizeTheme.current.p8,
+      ),
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: const Color.fromARGB(186, 245, 245, 245),
+        ),
+        borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.r6),
+      ),
       child: InkWell(
         onTap: () {
           final userRole = getItInstance.get<UserManager>().currentUser.role;
@@ -52,164 +60,146 @@ class ParaPharmaWidget2 extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Container(
-              margin: EdgeInsets.only(
-                  right: context.responsiveAppSizeTheme.current.p8),
-              clipBehavior: Clip.antiAlias,
-              height: 120,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(
-                    context.responsiveAppSizeTheme.current.r6),
-                border: paraPharmData.image != null
-                    ? null
-                    : Border.all(
-                        color: AppColors.bgDisabled,
-                      ),
-              ),
-              child: Stack(
-                children: [
-                  paraPharmData.image != null
-                      ? CacheNetworkImagePlus(
-                          boxFit: BoxFit.contain,
-                          width: double.maxFinite,
-                          height: double.maxFinite,
-                          imageUrl: getItInstance
-                              .get<INetworkService>()
-                              .getFilesPath(paraPharmData.image?.path ?? ''),
-                        )
-                      : Center(
-                          child: Image(
-                            image: AssetImage(
-                                DrawableAssetStrings.paraPharmaPlaceHolderImg),
-                            fit: BoxFit.cover,
-                            height: 80,
-                            width: 80,
-                          ),
+            Expanded(
+              child: Container(
+                margin: EdgeInsets.symmetric(
+                    horizontal: context.responsiveAppSizeTheme.current.p6,
+                    vertical: context.responsiveAppSizeTheme.current.p6),
+                clipBehavior: Clip.antiAlias,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.r6),
+                  border: paraPharmData.image != null
+                      ? null
+                      : Border.all(
+                          color: const Color.fromARGB(197, 245, 245, 245),
                         ),
-                  if (paraPharmData.image != null) BlackenedBackground(),
-                  StockAvaillableContainerWidget(
-                      isAvaillable: paraPharmData.stockQuantity > 0),
-                  if (onFavoriteCallback != null)
-                    Positioned(
-                      bottom: 0,
-                      right: 0,
-                      child: IconButton(
-                        icon: SizedBox(
-                          width: 50,
-                          height: 50,
-                          child: Icon(
-                            paraPharmData.isLiked
-                                ? Iconsax.heart5
-                                : Iconsax.heart,
-                            color: paraPharmData.isLiked
-                                ? Colors.red
-                                : Colors.black,
-                            size: context
-                                .responsiveAppSizeTheme.current.iconSize30,
+                ),
+                child: Stack(
+                  children: [
+                    paraPharmData.image != null
+                        ? CacheNetworkImagePlus(
+                            boxFit: BoxFit.contain,
+                            width: double.maxFinite,
+                            height: double.maxFinite,
+                            imageUrl:
+                                getItInstance.get<INetworkService>().getFilesPath(paraPharmData.image?.path ?? ''),
+                          )
+                        : Center(
+                            child: Image(
+                              image: AssetImage(DrawableAssetStrings.paraPharmaPlaceHolderImg),
+                              fit: BoxFit.cover,
+                              height: 80,
+                              width: 80,
+                            ),
                           ),
-                        ),
-                        onPressed: () {
-                          onFavoriteCallback?.call(paraPharmData);
-                        },
-                      ),
-                    )
-                ],
+                    Row(
+                      children: [
+                        StockAvailableContainerWidget(isAvailable: paraPharmData.stockQuantity > 0),
+                        Spacer(),
+                        if (onFavoriteCallback != null)
+                          Positioned(
+                            bottom: context.responsiveAppSizeTheme.current.s4,
+                            right: context.responsiveAppSizeTheme.current.s4,
+                            child: InkWell(
+                              child: SizedBox(
+                                width: 30,
+                                height: 30,
+                                child: Icon(
+                                  paraPharmData.isLiked ? Iconsax.heart5 : Iconsax.heart,
+                                  color: paraPharmData.isLiked ? Colors.red : Colors.grey[400],
+                                  size: context.responsiveAppSizeTheme.current.iconSize20,
+                                ),
+                              ),
+                              onTap: () {
+                                onFavoriteCallback?.call(paraPharmData);
+                              },
+                            ),
+                          )
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                const ResponsiveGap.s8(),
-                Text(paraPharmData.name,
-                    softWrap: true,
-                    style: context.responsiveTextTheme.current.headLine4SemiBold
-                        .copyWith(color: TextColors.primary.color)),
-                const ResponsiveGap.s4(),
-                if (paraPharmData.tags.isNotEmpty && displayTags)
-                  SilverTags(tags: paraPharmData.tags),
-                Row(
-                  children: [
-                    Container(
-                      height: 30,
-                      width: 30,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border:
-                            Border.all(color: AppColors.bgDisabled, width: 1.5),
-                        image: DecorationImage(
-                          image: paraPharmData.company?.thumbnailImage?.path ==
-                                  null
-                              ? AssetImage(
-                                  DrawableAssetStrings.companyPlaceHolderImg)
-                              : NetworkImage(
-                                  getItInstance
-                                      .get<INetworkService>()
-                                      .getFilesPath(
-                                        paraPharmData
-                                            .company!.thumbnailImage!.path,
-                                      ),
-                                ),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                  vertical: context.responsiveAppSizeTheme.current.p8,
+                  horizontal: context.responsiveAppSizeTheme.current.p8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        height: 27,
+                        width: 27,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(color: AppColors.bgDisabled, width: 1.2),
+                          image: DecorationImage(
+                            image: paraPharmData.company?.thumbnailImage?.path == null
+                                ? AssetImage(DrawableAssetStrings.companyPlaceHolderImg)
+                                : NetworkImage(
+                                    getItInstance.get<INetworkService>().getFilesPath(
+                                          paraPharmData.company!.thumbnailImage!.path,
+                                        ),
+                                  ),
+                          ),
                         ),
                       ),
-                    ),
-                    const ResponsiveGap.s4(),
-                    Text(paraPharmData.company!.name,
-                        style: context.responsiveTextTheme.current.body3Regular
-                            .copyWith()),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Icon(
-                      Iconsax.wallet_money,
-                      color: AppColors.accent1Shade1,
-                      size: context.responsiveAppSizeTheme.current.iconSize18,
-                    ),
-                    const ResponsiveGap.s4(),
-                    Text.rich(
-                      TextSpan(
-                        children: [
-                          TextSpan(
-                            text: paraPharmData.unitPriceHt.formatAsPrice(),
-                            style: context
-                                .responsiveTextTheme.current.headLine3SemiBold
-                                .copyWith(color: AppColors.accent1Shade1),
-                          ),
-                          TextSpan(
-                            text: " ${context.translation!.currency}",
-                            style: context
-                                .responsiveTextTheme.current.bodyXSmall
-                                .copyWith(color: AppColors.accent1Shade1),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const Spacer(),
-                    if (showQuickAddButton)
-                      Transform.scale(
-                        scale: .6,
-                        child: PrimaryIconButton(
-                          isBordered: true,
-                          borderColor: AppColors.accent1Shade1,
-                          bgColor: Colors.transparent,
-                          onPressed: () {
-                            BottomSheetHelper.showCommonBottomSheet(
-                                initialChildSize: .5,
-                                context: context,
-                                child: QuickCartAddModal(
-                                  paraPharmaCatalogId: paraPharmData.id,
-                                ));
-                          },
-                          icon: Icon(Iconsax.add,
-                              color: Colors.black,
-                              size: context
-                                  .responsiveAppSizeTheme.current.iconSize30),
+                      const ResponsiveGap.s4(),
+                      Text(paraPharmData.company!.name,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                          style: context.responsiveTextTheme.current.body3Regular),
+                    ],
+                  ),
+                  const ResponsiveGap.s4(),
+                  Tooltip(
+                    message: paraPharmData.name,
+                    triggerMode: TooltipTriggerMode.longPress,
+                    child: Text(paraPharmData.name,
+                        softWrap: true,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                        style: context.responsiveTextTheme.current.headLine3SemiBold
+                            .copyWith(color: TextColors.primary.color)),
+                  ),
+                  const ResponsiveGap.s6(),
+                  if (paraPharmData.tags.isNotEmpty && displayTags) SilverTags(tags: paraPharmData.tags),
+                  Text.rich(
+                    TextSpan(
+                      children: [
+                        TextSpan(
+                          text: paraPharmData.unitPriceHt.formatAsPriceForPrint(decimalDigits: 1),
+                          style: context.responsiveTextTheme.current.headLine4SemiBold
+                              .copyWith(color: AppColors.accent1Shade1),
                         ),
-                      )
-                  ],
-                ),
-              ],
+                        TextSpan(
+                          text: " ${context.translation!.currency}",
+                          style: context.responsiveTextTheme.current.bodyXSmall
+                              .copyWith(color: AppColors.accent1Shade1, fontSize: 10),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const ResponsiveGap.s4(),
+                  PrimaryTextButton(
+                      label: context.translation!.add_cart,
+                      leadingIcon: Iconsax.add,
+                      labelTextStyle: context.responsiveTextTheme.current.body3Regular.copyWith(color: Colors.white),
+                      onTap: () {
+                        BottomSheetHelper.showCommonBottomSheet(
+                            initialChildSize: .5,
+                            context: context,
+                            child: QuickCartAddModal(
+                              paraPharmaCatalogId: paraPharmData.id,
+                            ));
+                      },
+                      color: AppColors.accent1Shade1),
+                ],
+              ),
             )
           ],
         ),

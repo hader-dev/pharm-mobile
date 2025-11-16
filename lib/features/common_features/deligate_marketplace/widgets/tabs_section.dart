@@ -8,12 +8,10 @@ class DeligateMarketPlaceTabBarSection extends StatefulWidget {
   const DeligateMarketPlaceTabBarSection({super.key});
 
   @override
-  State<DeligateMarketPlaceTabBarSection> createState() =>
-      _DeligateMarketPlaceTabBarSectionState();
+  State<DeligateMarketPlaceTabBarSection> createState() => _DeligateMarketPlaceTabBarSectionState();
 }
 
-class _DeligateMarketPlaceTabBarSectionState
-    extends State<DeligateMarketPlaceTabBarSection>
+class _DeligateMarketPlaceTabBarSectionState extends State<DeligateMarketPlaceTabBarSection>
     with TickerProviderStateMixin {
   late final TabController tabsController;
   @override
@@ -34,16 +32,16 @@ class _DeligateMarketPlaceTabBarSectionState
     return Column(
       children: [
         ColoredBox(
-          color: AppColors.accent1Shade2,
+          color: AppColors.bgWhite,
           child: TabBar(
-              indicatorColor: AppColors.bgWhite,
+              indicatorColor: AppColors.accent1Shade1,
+              labelColor: AppColors.accent1Shade1,
+              unselectedLabelColor: Colors.grey,
               indicatorSize: TabBarIndicatorSize.tab,
               isScrollable: true,
               labelStyle: tabTextStyle,
               overlayColor: WidgetStatePropertyAll(Colors.transparent),
               tabAlignment: TabAlignment.start,
-              labelColor: AppColors.bgWhite,
-              unselectedLabelColor: AppColors.accent1Shade2Deemphasized,
               controller: tabsController,
               onTap: (index) {},
               tabs: tabs

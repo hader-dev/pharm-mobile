@@ -7,6 +7,7 @@ import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_icon_button.dart';
+import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart' show PrimaryTextButton;
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/blackened_background.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/stock_availlable.dart';
@@ -33,105 +34,94 @@ class MedicineWidget3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(
-          horizontal: context.responsiveAppSizeTheme.current.p6,
-          vertical: context.responsiveAppSizeTheme.current.p12),
+      margin: EdgeInsets.symmetric(
+        horizontal: context.responsiveAppSizeTheme.current.p8,
+      ),
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: const Color.fromARGB(186, 245, 245, 245),
+        ),
+        borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.r6),
+      ),
       child: InkWell(
         splashColor: Colors.transparent,
         onTap: () {
           final userRole = getItInstance.get<UserManager>().currentUser.role;
           final canOrderBasedOnRole = !userRole.isDelegate;
-          GoRouter.of(context).pushNamed(route,
-              extra: {"id": medicineData.id, "canOrder": canOrderBasedOnRole});
+          GoRouter.of(context).pushNamed(route, extra: {"id": medicineData.id, "canOrder": canOrderBasedOnRole});
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            _ImageSection(
-                medicineData: medicineData,
-                onFavoriteCallback: onFavoriteCallback),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                const ResponsiveGap.s8(),
-                if (medicineData.dci != null)
-                  Text(medicineData.dci,
-                      maxLines: 1,
-                      softWrap: true,
-                      overflow: TextOverflow.ellipsis,
-                      style: context
-                          .responsiveTextTheme.current.headLine4SemiBold
-                          .copyWith(color: TextColors.primary.color)),
-                const ResponsiveGap.s4(),
-                Row(
+            _ImageSection(medicineData: medicineData, onFavoriteCallback: onFavoriteCallback),
+            Padding(
+                padding: EdgeInsets.symmetric(
+                    vertical: context.responsiveAppSizeTheme.current.p8,
+                    horizontal: context.responsiveAppSizeTheme.current.p8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Container(
-                      height: 30,
-                      width: 30,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border:
-                            Border.all(color: AppColors.bgDisabled, width: 1.5),
-                        image: DecorationImage(
-                          image: medicineData.company?.thumbnailImage?.path ==
-                                  null
-                              ? AssetImage(
-                                  DrawableAssetStrings.companyPlaceHolderImg)
-                              : NetworkImage(
-                                  getItInstance
-                                      .get<INetworkService>()
-                                      .getFilesPath(
-                                        medicineData
-                                            .company!.thumbnailImage!.path,
-                                      ),
-                                ),
+                    Row(
+                      children: [
+                        Container(
+                          height: 27,
+                          width: 27,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(color: AppColors.bgDisabled, width: 1.5),
+                            image: DecorationImage(
+                              image: medicineData.company?.thumbnailImage?.path == null
+                                  ? AssetImage(DrawableAssetStrings.companyPlaceHolderImg)
+                                  : NetworkImage(
+                                      getItInstance.get<INetworkService>().getFilesPath(
+                                            medicineData.company!.thumbnailImage!.path,
+                                          ),
+                                    ),
+                            ),
+                          ),
                         ),
-                      ),
+                        const ResponsiveGap.s4(),
+                        Text(medicineData.company!.name,
+                            style: context.responsiveTextTheme.current.body3Regular.copyWith()),
+                      ],
                     ),
                     const ResponsiveGap.s4(),
-                    Text(medicineData.company!.name,
-                        style: context.responsiveTextTheme.current.body3Regular
-                            .copyWith()),
-                  ],
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.baseline,
-                  textBaseline: TextBaseline.ideographic,
-                  children: [
-                    Icon(
-                      Iconsax.wallet_money,
-                      color: AppColors.accent1Shade1,
-                      size: context.responsiveAppSizeTheme.current.iconSize18,
-                    ),
+                    if (medicineData.dci != null)
+                      Tooltip(
+                        message: medicineData.dci,
+                        triggerMode: TooltipTriggerMode.longPress,
+                        child: Text(medicineData.dci,
+                            softWrap: true,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                            style: context.responsiveTextTheme.current.headLine3SemiBold
+                                .copyWith(color: TextColors.primary.color)),
+                      ),
                     const ResponsiveGap.s4(),
                     Text.rich(
                       TextSpan(
                         children: [
                           TextSpan(
-                            text: medicineData.unitPriceHt.formatAsPrice(),
-                            style: context
-                                .responsiveTextTheme.current.headLine3SemiBold
+                            text: medicineData.unitPriceHt.formatAsPriceForPrint(decimalDigits: 1),
+                            style: context.responsiveTextTheme.current.headLine4SemiBold
                                 .copyWith(color: AppColors.accent1Shade1),
                           ),
                           TextSpan(
                             text: " ${context.translation!.currency}",
-                            style: context
-                                .responsiveTextTheme.current.bodyXSmall
-                                .copyWith(color: AppColors.accent1Shade1),
+                            style: context.responsiveTextTheme.current.bodyXSmall
+                                .copyWith(color: AppColors.accent1Shade1, fontSize: 10),
                           ),
                         ],
                       ),
                     ),
-                    const Spacer(),
-                    Transform.scale(
-                      scale: .55,
-                      child: PrimaryIconButton(
-                        isBordered: true,
-                        borderColor: AppColors.accent1Shade1,
-                        bgColor: Colors.transparent,
-                        onPressed: () {
+                    const ResponsiveGap.s4(),
+                    PrimaryTextButton(
+                        label: context.translation!.add_cart,
+                        leadingIcon: Iconsax.add,
+                        labelTextStyle: context.responsiveTextTheme.current.body3Regular.copyWith(color: Colors.white),
+                        onTap: () {
                           BottomSheetHelper.showCommonBottomSheet(
                               initialChildSize: .5,
                               context: context,
@@ -139,18 +129,9 @@ class MedicineWidget3 extends StatelessWidget {
                                 medicineCatalogId: medicineData.id,
                               ));
                         },
-                        icon: Icon(
-                          Iconsax.add,
-                          color: Colors.black,
-                          size:
-                              context.responsiveAppSizeTheme.current.iconSize30,
-                        ),
-                      ),
-                    )
+                        color: AppColors.accent1Shade1),
                   ],
-                ),
-              ],
-            )
+                ))
           ],
         ),
       ),
@@ -169,17 +150,17 @@ class _ImageSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(right: context.responsiveAppSizeTheme.current.p8),
+    return Expanded(
+        child: Container(
+      margin: EdgeInsets.symmetric(
+          horizontal: context.responsiveAppSizeTheme.current.p6, vertical: context.responsiveAppSizeTheme.current.p6),
       clipBehavior: Clip.antiAlias,
-      height: 120,
       decoration: BoxDecoration(
-        borderRadius:
-            BorderRadius.circular(context.responsiveAppSizeTheme.current.r6),
+        borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.r6),
         border: medicineData.image != null
             ? null
             : Border.all(
-                color: AppColors.bgDisabled,
+                color: const Color.fromARGB(197, 245, 245, 245),
               ),
       ),
       child: Stack(children: [
@@ -188,42 +169,42 @@ class _ImageSection extends StatelessWidget {
                 boxFit: BoxFit.contain,
                 width: double.maxFinite,
                 height: double.maxFinite,
-                imageUrl: getItInstance
-                    .get<INetworkService>()
-                    .getFilesPath(medicineData.image?.path ?? ''),
+                imageUrl: getItInstance.get<INetworkService>().getFilesPath(medicineData.image?.path ?? ''),
               )
             : Center(
                 child: Image(
-                  image:
-                      AssetImage(DrawableAssetStrings.medicinePlaceHolderImg),
+                  image: AssetImage(DrawableAssetStrings.medicinePlaceHolderImg),
                   fit: BoxFit.cover,
                   height: 120,
                   width: 80,
                 ),
               ),
-        if (medicineData.image != null) BlackenedBackground(),
-        StockAvaillableContainerWidget(
-            isAvaillable: medicineData.stockQuantity > 0),
-        if (onFavoriteCallback != null)
-          Positioned(
-            bottom: 0,
-            right: 0,
-            child: IconButton(
-              icon: SizedBox(
-                width: 50,
-                height: 50,
-                child: Icon(
-                  medicineData.isLiked ? Iconsax.heart5 : Iconsax.heart,
-                  color: medicineData.isLiked ? Colors.red : Colors.black,
-                  size: context.responsiveAppSizeTheme.current.iconSize30,
+        Row(
+          children: [
+            StockAvailableContainerWidget(isAvailable: medicineData.stockQuantity > 0),
+            Spacer(),
+            if (onFavoriteCallback != null)
+              Positioned(
+                bottom: context.responsiveAppSizeTheme.current.s4,
+                right: context.responsiveAppSizeTheme.current.s4,
+                child: InkWell(
+                  child: SizedBox(
+                    width: 30,
+                    height: 30,
+                    child: Icon(
+                      medicineData.isLiked ? Iconsax.heart5 : Iconsax.heart,
+                      color: medicineData.isLiked ? Colors.red : Colors.grey[400],
+                      size: context.responsiveAppSizeTheme.current.iconSize20,
+                    ),
+                  ),
+                  onTap: () {
+                    onFavoriteCallback?.call(medicineData);
+                  },
                 ),
-              ),
-              onPressed: () {
-                onFavoriteCallback?.call(medicineData);
-              },
-            ),
-          )
+              )
+          ],
+        ),
       ]),
-    );
+    ));
   }
 }

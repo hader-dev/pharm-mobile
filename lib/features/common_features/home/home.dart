@@ -6,15 +6,19 @@ import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/actions/refresh_home.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/cubit/home_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/cubit/provider.dart';
+import 'package:hader_pharm_mobile/features/common_features/home/widgets/announcements/promotion_section_v3.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/widgets/announcements/promotion_section_v5.dart';
+import 'package:hader_pharm_mobile/features/common_features/home/widgets/announcements/promotion_section_v6.dart'
+    show PromotionSectionV6;
 import 'package:hader_pharm_mobile/features/common_features/home/widgets/medicine/medicine_section.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/widgets/parapharm/para_pharma_section.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/widgets/vendors/vendors_section.dart';
 
+import 'widgets/announcements/promotion_section_v4.dart' show PromotionSectionV4;
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
-  static final GlobalKey<ScaffoldState> scaffoldKey =
-      GlobalKey<ScaffoldState>();
+  static final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -35,9 +39,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     final minSectionHeight = screenSize.height * 0.15;
-    // debugPrint("screenSize: $screenSize");
-    final sectionHeightModifier =
-        screenSize.width <= DeviceSizes.mediumMobile.width ? 2 : 2.2;
+
+    final sectionHeightModifier = screenSize.width <= DeviceSizes.mediumMobile.width ? 2 : 2.2;
 
     return StateProvider(
       child: Scaffold(
@@ -71,21 +74,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const ResponsiveGap.s24(),
+                      const ResponsiveGap.s12(),
                       if (state.announcements.isNotEmpty)
-                        PromotionSectionV5(
-                            announcements: state.announcements,
+                        PromotionSectionV6(
+                            announcements: state.announcements.length > 4
+                                ? state.announcements.sublist(0, 4)
+                                : state.announcements,
                             minSectionHeight: minSectionHeight),
-                      const ResponsiveGap.s12(),
-                      ParapharmaSection(
-                          minSectionHeight:
-                              minSectionHeight * sectionHeightModifier),
-                      const ResponsiveGap.s12(),
+                      ParaPharmaSection(minSectionHeight: minSectionHeight * sectionHeightModifier),
                       const VendorSection(),
-                      const ResponsiveGap.s12(),
-                      MedicineSection(
-                          minSectionHeight:
-                              minSectionHeight * sectionHeightModifier),
+                      MedicineSection(minSectionHeight: minSectionHeight * sectionHeightModifier),
                       const ResponsiveGap.s12(),
                     ],
                   )),
