@@ -1,7 +1,6 @@
-import 'package:flutter/foundation.dart' show kDebugMode, kReleaseMode;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:sentry_flutter/sentry_flutter.dart' show SentryFlutter, SentryWidget;
+import 'package:sentry_flutter/sentry_flutter.dart' show SentryFlutter;
 
 import 'config/di/di.dart';
 import 'features/app/hader_pharm.dart';

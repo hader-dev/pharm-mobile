@@ -1517,7 +1517,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.28.0"
-
   screenshot:
     dependency: transitive
     description:
@@ -1526,7 +1525,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.0"
-
   sentry:
     dependency: transitive
     description:
@@ -1551,7 +1549,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "9.8.0"
-
   share_plus:
     dependency: "direct main"
     description:

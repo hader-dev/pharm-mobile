@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart' show SvgPicture;
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
-import 'package:hader_pharm_mobile/utils/assets_strings.dart' show DrawableAssetStrings;
+import 'package:hader_pharm_mobile/utils/assets_strings.dart'
+    show DrawableAssetStrings;
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
-import 'package:iconsax/iconsax.dart';
 
 class ProfileAppBar extends StatelessWidget {
   final bool isExtraLargeScreen;
@@ -21,7 +21,8 @@ class ProfileAppBar extends StatelessWidget {
       rightPadding: context.responsiveAppSizeTheme.current.p8,
       leftPadding: context.responsiveAppSizeTheme.current.p8,
       leading: Padding(
-          padding: EdgeInsets.symmetric(horizontal: context.responsiveAppSizeTheme.current.p8),
+          padding: EdgeInsets.symmetric(
+              horizontal: context.responsiveAppSizeTheme.current.p8),
           child: SvgPicture.asset(DrawableAssetStrings.newProfileIcon,
               height: context.responsiveAppSizeTheme.current.iconSize25,
               width: context.responsiveAppSizeTheme.current.iconSize25,
@@ -31,7 +32,8 @@ class ProfileAppBar extends StatelessWidget {
               ))),
       title: Text(
         context.translation!.account,
-        style: context.responsiveTextTheme.current.headLine2.copyWith(color: AppColors.accent1Shade1),
+        style: context.responsiveTextTheme.current.headLine2
+            .copyWith(color: AppColors.accent1Shade1),
       ),
     );
   }

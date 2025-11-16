@@ -1,12 +1,12 @@
-import 'package:cached_network_image_plus/flutter_cached_network_image_plus.dart' show CacheNetworkImagePlus;
-import 'package:flutter/material.dart' show CircleAvatar, Colors, InkWell, TextButton, Icons;
+import 'package:cached_network_image_plus/flutter_cached_network_image_plus.dart'
+    show CacheNetworkImagePlus;
+import 'package:flutter/material.dart' show Colors, InkWell, Icons;
 import 'package:flutter/widgets.dart';
-import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart' show ResponsiveGap;
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart'
+    show ResponsiveGap;
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
-import 'package:iconsax/iconsax.dart' show Iconsax;
 
 import '../../../../../config/theme/colors_manager.dart' show AppColors;
-import '../../../../common/buttons/solid/primary_text_button.dart' show PrimaryTextButton;
 
 class VendorHomeWidget extends StatelessWidget {
   final String title;
@@ -31,14 +31,16 @@ class VendorHomeWidget extends StatelessWidget {
       splashColor: Colors.transparent,
       overlayColor: WidgetStateProperty.all(Colors.transparent),
       child: Container(
-        margin: EdgeInsets.only(right: context.responsiveAppSizeTheme.current.p12),
+        margin:
+            EdgeInsets.only(right: context.responsiveAppSizeTheme.current.p12),
         width: 250,
         decoration: BoxDecoration(
           color: AppColors.bgWhite,
           border: Border.all(
             color: const Color.fromARGB(186, 245, 245, 245),
           ),
-          borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.commonWidgetsRadius),
+          borderRadius: BorderRadius.circular(
+              context.responsiveAppSizeTheme.current.commonWidgetsRadius),
         ),
         child: Row(
           children: [
@@ -46,7 +48,8 @@ class VendorHomeWidget extends StatelessWidget {
               margin: EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
               height: 50,
               width: 50,
-              padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
+              padding:
+                  EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
               clipBehavior: Clip.antiAlias,
               decoration: BoxDecoration(
                 color: AppColors.bgDarken2,
@@ -56,14 +59,16 @@ class VendorHomeWidget extends StatelessWidget {
                 ),
               ),
               child: (imageUrl != null && imageUrl!.isNotEmpty)
-                  ? CacheNetworkImagePlus(boxFit: BoxFit.fill, imageUrl: imageUrl!)
+                  ? CacheNetworkImagePlus(
+                      boxFit: BoxFit.fill, imageUrl: imageUrl!)
                   : Image(
                       image: AssetImage(fallbackAssetImagePlaceholderPath),
                       fit: BoxFit.fill,
                     ),
             ),
             Padding(
-              padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
+              padding:
+                  EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,7 +76,8 @@ class VendorHomeWidget extends StatelessWidget {
                     Text(
                       title,
                       textAlign: TextAlign.center,
-                      style: context.responsiveTextTheme.current.headLine3SemiBold,
+                      style:
+                          context.responsiveTextTheme.current.headLine3SemiBold,
                     ),
                     const ResponsiveGap.s8(),
                     InkWell(
@@ -80,7 +86,9 @@ class VendorHomeWidget extends StatelessWidget {
                         children: [
                           Text(
                             'View',
-                            style: context.responsiveTextTheme.current.body3Medium.copyWith(
+                            style: context
+                                .responsiveTextTheme.current.body3Medium
+                                .copyWith(
                               color: AppColors.accent1Shade1,
                               fontWeight: FontWeight.w500,
                             ),
@@ -88,7 +96,8 @@ class VendorHomeWidget extends StatelessWidget {
                           Icon(
                             Icons.keyboard_arrow_right_sharp,
                             color: AppColors.accent1Shade1,
-                            size: context.responsiveAppSizeTheme.current.iconSize20,
+                            size: context
+                                .responsiveAppSizeTheme.current.iconSize20,
                           ),
                         ],
                       ),
