@@ -39,58 +39,56 @@ class CustomTextField extends StatelessWidget {
   final String? initValue;
   final int? minLines;
   final int maxLines;
+  final int? maxLength;
 
-  const CustomTextField({
-    super.key,
-    this.fillColor,
-    this.fieldKey,
-    this.label = '',
-    this.value = '',
-    this.state = FieldState.normal,
-    this.onChanged,
-    this.onTap,
-    this.onSub,
-    this.suffixIcon,
-    this.prefixIcon,
-    this.validationFunc,
-    this.hintText,
-    this.hintTextStyle,
-    this.labelTextStyle,
-    this.controller,
-    this.horizontalPadding = 0,
-    this.verticalPadding = 0,
-    this.isObscure = false,
-    this.isEnabled = true,
-    this.isReadOnly = false,
-    this.isBorderEnabled = true,
-    this.formatters,
-    this.keyBoadType,
-    this.fieldFocusNode,
-    this.isFilled = false,
-    this.width,
-    this.textAlign = TextAlign.start,
-    this.initValue,
-    this.minLines,
-    this.maxLines = 1,
-  });
+  const CustomTextField(
+      {super.key,
+      this.fillColor,
+      this.fieldKey,
+      this.label = '',
+      this.value = '',
+      this.state = FieldState.normal,
+      this.onChanged,
+      this.onTap,
+      this.onSub,
+      this.suffixIcon,
+      this.prefixIcon,
+      this.validationFunc,
+      this.hintText,
+      this.hintTextStyle,
+      this.labelTextStyle,
+      this.controller,
+      this.horizontalPadding = 0,
+      this.verticalPadding = 0,
+      this.isObscure = false,
+      this.isEnabled = true,
+      this.isReadOnly = false,
+      this.isBorderEnabled = true,
+      this.formatters,
+      this.keyBoadType,
+      this.fieldFocusNode,
+      this.isFilled = false,
+      this.width,
+      this.textAlign = TextAlign.start,
+      this.initValue,
+      this.minLines,
+      this.maxLines = 1,
+      this.maxLength});
 
   @override
   Widget build(BuildContext context) {
     final isDisabled = state == FieldState.disabled;
 
-    final fontSizeModifer =
-        context.deviceSize.width <= DeviceSizes.largeMobile.width ? 1.3 : 2;
+    final fontSizeModifer = context.deviceSize.width <= DeviceSizes.largeMobile.width ? 1.3 : 2;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (label.isNotEmpty)
           Padding(
-            padding: EdgeInsets.only(
-                left: context.responsiveAppSizeTheme.current.p4),
+            padding: EdgeInsets.only(left: context.responsiveAppSizeTheme.current.p4),
             child: Text(label,
-                style: context.responsiveTextTheme.current.body3Medium
-                    .copyWith(color: TextColors.ternary.color)),
+                style: context.responsiveTextTheme.current.body3Medium.copyWith(color: TextColors.ternary.color)),
           ),
         if (label.isNotEmpty) const ResponsiveGap.s6(),
         TextFormField(
@@ -105,54 +103,40 @@ class CustomTextField extends StatelessWidget {
           readOnly: isReadOnly,
           onTap: onTap,
           enabled: isEnabled,
-          errorBuilder: (context, errorText) {
-            return Text(
-              errorText,
-              style: context.responsiveTextTheme.current.bodyXSmall.copyWith(
-                  color: Colors.red,
-                  fontSize:
-                      context.responsiveTextTheme.current.bodyXSmall.fontSize! *
-                          fontSizeModifer),
-            );
-          },
           inputFormatters: formatters,
           controller: controller,
           obscureText: isObscure,
           minLines: minLines,
           maxLines: maxLines,
+          maxLength: maxLength,
           textDirection: context.textDirection,
           obscuringCharacter: '*',
           style: context.responsiveTextTheme.current.bodySmall.copyWith(
-            fontSize: (context.responsiveTextTheme.current.bodySmall.fontSize! *
-                fontSizeModifer),
+            fontSize: (context.responsiveTextTheme.current.bodySmall.fontSize! * fontSizeModifer),
           ),
           decoration: InputDecoration(
               hintText: hintText,
-              hintStyle:
-                  context.responsiveTextTheme.current.body3Regular.copyWith(
+              hintStyle: context.responsiveTextTheme.current.body3Regular.copyWith(
                 color: TextColors.ternary.color,
-                fontSize: MediaQuery.of(context).textScaler.scale(
-                    context.responsiveTextTheme.current.body3Regular.fontSize! *
-                        fontSizeModifer),
+                fontSize: MediaQuery.of(context)
+                    .textScaler
+                    .scale(context.responsiveTextTheme.current.body3Regular.fontSize! * fontSizeModifer),
               ),
               isDense: true,
               filled: isFilled,
               suffixIcon: suffixIcon,
               prefixIcon: prefixIcon,
-              contentPadding:
-                  EdgeInsets.all(context.responsiveAppSizeTheme.current.p12),
+              errorMaxLines: 255,
+              contentPadding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p12),
               helper: Row(
                 children: [
                   getSuffixIcon(state, context) ?? const SizedBox.shrink(),
                   const ResponsiveGap.s12(),
                   Text(
                     state.wordKey,
-                    style: context.responsiveTextTheme.current.bodyXSmall
-                        .copyWith(
-                            color: getEnabledBorderColor(context, state),
-                            fontSize: context.responsiveTextTheme.current
-                                    .bodyXSmall.fontSize! *
-                                fontSizeModifer),
+                    style: context.responsiveTextTheme.current.bodyXSmall.copyWith(
+                        color: getEnabledBorderColor(context, state),
+                        fontSize: context.responsiveTextTheme.current.bodyXSmall.fontSize! * fontSizeModifer),
                   ),
                 ],
               ),
@@ -162,30 +146,23 @@ class CustomTextField extends StatelessWidget {
                       ? FieldState.error.color.ternary
                       : AppColors.bgWhite,
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(
-                    context.responsiveAppSizeTheme.current.commonWidgetsRadius),
-                borderSide:
-                    BorderSide(color: getEnabledBorderColor(context, state)),
+                borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.commonWidgetsRadius),
+                borderSide: BorderSide(color: getEnabledBorderColor(context, state)),
               ),
               disabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(
-                    context.responsiveAppSizeTheme.current.commonWidgetsRadius),
+                borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.commonWidgetsRadius),
                 borderSide: BorderSide(color: AppColors.bgDisabled),
               ),
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(
-                    context.responsiveAppSizeTheme.current.commonWidgetsRadius),
-                borderSide:
-                    BorderSide(color: getFocusedBorderColor(context, state)),
+                borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.commonWidgetsRadius),
+                borderSide: BorderSide(color: getFocusedBorderColor(context, state)),
               ),
               errorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(
-                    context.responsiveAppSizeTheme.current.commonWidgetsRadius),
+                borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.commonWidgetsRadius),
                 borderSide: BorderSide(color: FieldState.error.color.primary),
               ),
               focusedErrorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(
-                    context.responsiveAppSizeTheme.current.commonWidgetsRadius),
+                borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.commonWidgetsRadius),
                 borderSide: BorderSide(color: FieldState.error.color.primary),
               )),
         ),

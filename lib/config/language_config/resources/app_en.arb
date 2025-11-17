@@ -337,6 +337,7 @@
   "announcements": "Announcements",
   "see_all": "See All",
   "feedback_value_too_short": "Value is too short , must be at least {length} characters",
+  "feedback_value_too_large": "Value is too large , must be at most {length} characters",
   "all_announcements": "All Announcements",
   "search_announcements": "Search announcements",
   "main_features": "Main Features",
