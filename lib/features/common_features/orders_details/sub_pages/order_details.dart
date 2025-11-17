@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart' show BlocBuilder, ReadContext;
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
-import 'package:hader_pharm_mobile/features/common/spacers/dividers.dart' show AppDivider;
+import 'package:hader_pharm_mobile/features/common/spacers/dividers.dart'
+    show AppDivider;
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders_details/actions/can_cancel_order.dart';
@@ -17,7 +18,6 @@ import 'package:hader_pharm_mobile/features/common_features/orders_details/widge
 import 'package:hader_pharm_mobile/features/common_features/orders_details/widgets/order_invoice_section.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders_details/widgets/order_summary_section.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders_details/widgets/shipping_address_section.dart';
-import 'package:hader_pharm_mobile/features/common_features/orders_details/widgets/track_order_bottom_sheet.dart';
 import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
@@ -27,7 +27,8 @@ import '../../../common/chips/custom_chip.dart' show CustomChip;
 
 class OrdersDetailsPage extends StatelessWidget {
   final String orderId;
-  static final GlobalKey<ScaffoldState> ordersDetailsScaffoldKey = GlobalKey<ScaffoldState>();
+  static final GlobalKey<ScaffoldState> ordersDetailsScaffoldKey =
+      GlobalKey<ScaffoldState>();
   const OrdersDetailsPage({super.key, required this.orderId});
   final bool isInvoiceWorkInProgress = true;
 
@@ -53,8 +54,8 @@ class OrdersDetailsPage extends StatelessWidget {
           }
           final cubit = context.read<OrderDetailsCubit>();
           final item = cubit.orderData!;
-          final orderStatus =
-              OrderStatus.values.firstWhere((OrderStatus element) => element.id == cubit.orderData!.status);
+          final orderStatus = OrderStatus.values.firstWhere(
+              (OrderStatus element) => element.id == cubit.orderData!.status);
 
           return SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),
@@ -72,9 +73,12 @@ class OrdersDetailsPage extends StatelessWidget {
                     CustomChip(
                         label: OrderStatus.getTranslatedStatus(orderStatus),
                         labelColor: orderStatus.color,
-                        labelStyle: context.responsiveTextTheme.current.bodyXSmall.copyWith(
-                            fontWeight: context.responsiveTextTheme.current.appFont.appFontBold,
-                            color: orderStatus.color),
+                        labelStyle: context
+                            .responsiveTextTheme.current.bodyXSmall
+                            .copyWith(
+                                fontWeight: context.responsiveTextTheme.current
+                                    .appFont.appFontBold,
+                                color: orderStatus.color),
                         color: orderStatus.color.withAlpha(50))
                   ]),
                 ),
@@ -101,8 +105,8 @@ class OrdersDetailsPage extends StatelessWidget {
                 ),
                 if (cubit.orderData!.invoiceType != null)
                   OrderInvoiceSection(
-                    invoiceType:
-                        InvoiceTypes.values.firstWhere((element) => cubit.orderData!.invoiceType == element.id),
+                    invoiceType: InvoiceTypes.values.firstWhere((element) =>
+                        cubit.orderData!.invoiceType == element.id),
                   ),
                 if (cubit.orderData!.clientNote.isNotEmpty) ...[
                   AppDivider(
@@ -119,7 +123,9 @@ class OrdersDetailsPage extends StatelessWidget {
                   endIndent: context.responsiveAppSizeTheme.current.s8,
                   indent: context.responsiveAppSizeTheme.current.s8,
                 ),
-                ConstrainedBox(constraints: BoxConstraints(maxHeight: 300), child: OrderDetailsItemsSection()),
+                ConstrainedBox(
+                    constraints: BoxConstraints(maxHeight: 300),
+                    child: OrderDetailsItemsSection()),
                 AppDivider(
                   height: context.responsiveAppSizeTheme.current.p12,
                   color: Colors.grey.shade100,
@@ -129,11 +135,14 @@ class OrdersDetailsPage extends StatelessWidget {
                 const OrderSummarySection(),
                 ResponsiveGap.s16(),
                 Container(
-                  margin: EdgeInsets.symmetric(vertical: context.responsiveAppSizeTheme.current.p4),
-                  padding: EdgeInsets.symmetric(horizontal: context.responsiveAppSizeTheme.current.p4),
+                  margin: EdgeInsets.symmetric(
+                      vertical: context.responsiveAppSizeTheme.current.p4),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: context.responsiveAppSizeTheme.current.p4),
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.commonWidgetsRadius),
+                    borderRadius: BorderRadius.circular(context
+                        .responsiveAppSizeTheme.current.commonWidgetsRadius),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -144,7 +153,9 @@ class OrdersDetailsPage extends StatelessWidget {
                           child: PrimaryTextButton(
                             label: translation.invoice,
                             onTap: () {
-                              RoutingManager.router.pushNamed(RoutingManager.invoiceScreen, extra: orderId);
+                              RoutingManager.router.pushNamed(
+                                  RoutingManager.invoiceScreen,
+                                  extra: orderId);
                             },
                             color: AppColors.accent1Shade1,
                           ),
@@ -159,7 +170,9 @@ class OrdersDetailsPage extends StatelessWidget {
                             borderColor: SystemColors.red.primary,
                             onTap: () {
                               BottomSheetHelper.showCommonBottomSheet(
-                                  initialChildSize: 0.3, context: context, child: CancelOrderBottomSheet());
+                                  initialChildSize: 0.3,
+                                  context: context,
+                                  child: CancelOrderBottomSheet());
                             },
                             color: Colors.transparent,
                           ),

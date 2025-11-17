@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hader_pharm_mobile/features/common/widgets/filter_option_value.dart';
-import 'package:hader_pharm_mobile/features/common/widgets/payment_input.dart' show buildCustomRadio;
+import 'package:hader_pharm_mobile/features/common/widgets/payment_input.dart'
+    show buildCustomRadio;
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
@@ -11,7 +11,11 @@ class InvoiceRadioInput extends StatelessWidget {
   final OnInvoiceTypeChanged onInvoiceTypeChanged;
   final InvoiceTypes initialValue;
 
-  const InvoiceRadioInput({super.key, this.validator, required this.onInvoiceTypeChanged, required this.initialValue});
+  const InvoiceRadioInput(
+      {super.key,
+      this.validator,
+      required this.onInvoiceTypeChanged,
+      required this.initialValue});
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +41,10 @@ class InvoiceRadioInput extends StatelessWidget {
                 padding: EdgeInsets.only(top: 4, left: 12),
                 child: Text(
                   field.errorText ?? '',
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.red),
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodySmall
+                      ?.copyWith(color: Colors.red),
                 ),
               ),
           ],
