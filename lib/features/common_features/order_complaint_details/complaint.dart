@@ -9,11 +9,7 @@ import 'package:hader_pharm_mobile/repositories/remote/order/order_repository_im
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class OrderItemComplaintScreen extends StatelessWidget {
-  const OrderItemComplaintScreen(
-      {super.key,
-      required this.orderId,
-      required this.itemId,
-      required this.complaintId});
+  const OrderItemComplaintScreen({super.key, required this.orderId, required this.itemId, required this.complaintId});
 
   final String orderId;
   final String itemId;
@@ -34,7 +30,11 @@ class OrderItemComplaintScreen extends StatelessWidget {
         )..getItemComplaint(),
         child: Padding(
           padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
-          child: OrderComplaintContent(),
+          child: OrderComplaintContent(
+            orderId: orderId,
+            itemId: itemId,
+            complaintId: complaintId,
+          ),
         ),
       ),
     );

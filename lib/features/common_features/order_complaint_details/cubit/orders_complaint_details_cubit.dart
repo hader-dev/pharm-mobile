@@ -21,14 +21,13 @@ class OrderComplaintsCubit extends Cubit<OrdersComplaintState> {
     required String itemId,
     required String complaintId,
     required this.orderRepository,
-  }) : super(OrdersComplaintsInitial(
-            orderId: orderId, itemId: itemId, complaintId: complaintId));
+  }) : super(OrdersComplaintsInitial(orderId: orderId, itemId: itemId, complaintId: complaintId));
 
   Future<void> getItemComplaint() async {
     try {
       emit(state.toLoading());
-      final res = await orderRepository.findComplaint(ParamsGetComplaint(
-          orderId: state.orderId, complaintId: state.complaintId));
+      final res = await orderRepository
+          .findComplaint(ParamsGetComplaint(orderId: state.orderId, complaintId: state.complaintId));
 
       if (res.orderClaimModel == null) {
         emit(state.toLoadingFailed());
@@ -56,8 +55,8 @@ class OrderComplaintsCubit extends Cubit<OrdersComplaintState> {
     try {
       emit(state.toLoading());
 
-      final res = await orderRepository.findComplaint(ParamsGetComplaint(
-          orderId: state.orderId, complaintId: state.complaintId));
+      final res = await orderRepository
+          .findComplaint(ParamsGetComplaint(orderId: state.orderId, complaintId: state.complaintId));
       if (res.orderClaimModel == null) {
         emit(state.toLoadingFailed());
         return;
@@ -79,11 +78,8 @@ class OrderComplaintsCubit extends Cubit<OrdersComplaintState> {
     }
   }
 
-  Future<ResponseItemComplaintMake> makeComplaint(
-      AppLocalizations translation) async {
-
-    if (state.subjectController.text.isEmpty ||
-        state.descriptionController.text.isEmpty) {
+  Future<ResponseItemComplaintMake> makeComplaint(AppLocalizations translation) async {
+    if (state.subjectController.text.isEmpty || state.descriptionController.text.isEmpty) {
       return ResponseItemComplaintMake();
     }
 

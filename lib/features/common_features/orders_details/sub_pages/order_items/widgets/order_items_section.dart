@@ -10,7 +10,7 @@ class OrderItemsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ScrollController scrollContoller = ScrollController();
+    final ScrollController scrollController = ScrollController();
     return Container(
       padding: EdgeInsets.symmetric(
         vertical: context.responsiveAppSizeTheme.current.p12,
@@ -18,8 +18,7 @@ class OrderItemsSection extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(
-            context.responsiveAppSizeTheme.current.commonWidgetsRadius),
+        borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.commonWidgetsRadius),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -30,34 +29,24 @@ class OrderItemsSection extends StatelessWidget {
               children: <InlineSpan>[
                 TextSpan(
                   text: ' (${orderItems.length})',
-                  style: context.responsiveTextTheme.current.headLine5Medium
-                      .copyWith(
+                  style: context.responsiveTextTheme.current.headLine5Medium.copyWith(
                     color: Colors.grey.shade600,
                   ),
                 )
               ])),
           const ResponsiveGap.s12(),
-          Container(
-            constraints: const BoxConstraints(
-              maxHeight: 450,
-            ),
-            child: Scrollbar(
-              controller: scrollContoller,
-              child: Padding(
-                padding: EdgeInsets.only(
-                    right: context.responsiveAppSizeTheme.current.p8),
-                child: ListView(
-                  controller: scrollContoller,
-                  shrinkWrap: true,
-                  children: orderItems
-                      .map(
-                        (OrderItem item) => OrderItemWidgetV2(
-                          item: item,
-                        ),
-                      )
-                      .toList(),
-                ),
-              ),
+          Padding(
+            padding: EdgeInsets.only(right: context.responsiveAppSizeTheme.current.p8),
+            child: ListView(
+              controller: scrollController,
+              shrinkWrap: true,
+              children: orderItems
+                  .map(
+                    (OrderItem item) => OrderItemWidgetV2(
+                      item: item,
+                    ),
+                  )
+                  .toList(),
             ),
           )
         ],

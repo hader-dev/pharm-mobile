@@ -15,8 +15,7 @@ class OrderItemsComplaintPage extends StatelessWidget {
     final scrollContoller = ScrollController();
     final translation = context.translation!;
 
-    return BlocBuilder<OrderDetailsCubit, OrdersDetailsState>(
-        builder: (context, state) {
+    return BlocBuilder<OrderDetailsCubit, OrdersDetailsState>(builder: (context, state) {
       final cubit = context.read<OrderDetailsCubit>();
 
       if (state is OrderDetailsLoading) {
@@ -40,25 +39,28 @@ class OrderItemsComplaintPage extends StatelessWidget {
 
       return RefreshIndicator(
         onRefresh: () async => cubit.getOrderComplaints(),
-        child: ListView(
-          physics: const AlwaysScrollableScrollPhysics(),
-          controller: scrollContoller,
-          padding: EdgeInsets.symmetric(
-            vertical: context.responsiveAppSizeTheme.current.p12,
-            horizontal: context.responsiveAppSizeTheme.current.p6,
-          ),
-          children: [
-            Text(
-              translation.order_complaint,
-              style: context.responsiveTextTheme.current.headLine4SemiBold,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: context.responsiveAppSizeTheme.current.p6),
+          child: ListView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            controller: scrollContoller,
+            padding: EdgeInsets.symmetric(
+              vertical: context.responsiveAppSizeTheme.current.p12,
+              horizontal: context.responsiveAppSizeTheme.current.p6,
             ),
-            const ResponsiveGap.s12(),
-            ...cubit.orderClaims.map(
-              (OrderClaimHeaderModel item) => OrderComplaintHeaderWidget(
-                claim: item,
+            children: [
+              Text(
+                translation.order_complaint,
+                style: context.responsiveTextTheme.current.headLine4SemiBold,
               ),
-            ),
-          ],
+              const ResponsiveGap.s12(),
+              ...cubit.orderClaims.map(
+                (OrderClaimHeaderModel item) => OrderComplaintHeaderWidget(
+                  claim: item,
+                ),
+              ),
+            ],
+          ),
         ),
       );
     });

@@ -18,13 +18,13 @@ class _OrderDetailsTabBarSectionState extends State<OrderDetailsTabBarSection> w
   @override
   void initState() {
     super.initState();
-    tabsController = TabController(length: 3, vsync: this);
+    tabsController = TabController(length: 2, vsync: this);
   }
 
   @override
   Widget build(BuildContext context) {
     final translation = context.translation!;
-    final List<String> tabs = [translation.overview, translation.order_items, translation.order_complaint];
+    final List<String> tabs = [translation.overview, translation.order_complaint];
 
     TextStyle tabTextStyle = context.responsiveTextTheme.current.body3Medium;
 
@@ -60,7 +60,6 @@ class _OrderDetailsTabBarSectionState extends State<OrderDetailsTabBarSection> w
               OrdersDetailsPage(
                 orderId: widget.orderId,
               ),
-              OrderDetailsItemsPage(),
               OrderItemsComplaintPage()
             ],
           ),
@@ -73,8 +72,7 @@ class _OrderDetailsTabBarSectionState extends State<OrderDetailsTabBarSection> w
     switch (label) {
       case "Overview":
         return context.translation!.overview;
-      case "Order Items":
-        return context.translation!.order_items;
+
       case "Order Complaint":
         return context.translation!.order_complaint;
       default:

@@ -45,12 +45,10 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
               isParapharm: element.parapharmCatalogId != null,
               suggestedPrice: element.unitPriceHt,
             ),
-            quantityController:
-                TextEditingController(text: element.quantity.toString()),
-            packageQuantityController: TextEditingController(
-                text: (element.quantity ~/ element.packageSize).toString()),
-            customPriceController:
-                TextEditingController(text: element.unitPriceHt.toString()),
+            quantityController: TextEditingController(text: element.quantity.toString()),
+            packageQuantityController:
+                TextEditingController(text: (element.quantity ~/ element.packageSize).toString()),
+            customPriceController: TextEditingController(text: element.unitPriceHt.toString()),
           ),
         );
       }
@@ -83,20 +81,15 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
               isParapharm: element.parapharmCatalogId != null,
               suggestedPrice: element.unitPriceHt,
             ),
-            quantityController:
-                TextEditingController(text: element.quantity.toString()),
-            packageQuantityController: TextEditingController(
-                text: (element.quantity ~/ element.packageSize).toString()),
-            customPriceController:
-                TextEditingController(text: element.unitPriceHt.toString()),
+            quantityController: TextEditingController(text: element.quantity.toString()),
+            packageQuantityController:
+                TextEditingController(text: (element.quantity ~/ element.packageSize).toString()),
+            customPriceController: TextEditingController(text: element.unitPriceHt.toString()),
           ),
         );
       }
 
-      emit(state.loaded(
-          orderData: orderData,
-          orderItems: orderItems,
-          originalOrderItems: orderItems));
+      emit(state.loaded(orderData: orderData, orderItems: orderItems, originalOrderItems: orderItems));
     } catch (e, stacktrace) {
       debugPrint("$e");
       debugPrintStack(stackTrace: stacktrace);
@@ -107,14 +100,11 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
 
   Future<ResponseOrderCancel> cancelOrder() async {
     if (state.orderData.id == "empty") return ResponseOrderCancel.error();
-    return orderRepository
-        .cancelOrder(ParamsCancelOrder(id: state.orderData.id));
+    return orderRepository.cancelOrder(ParamsCancelOrder(id: state.orderData.id));
   }
 
   void removeOrderItem(DeligateOrderItemUi item) {
-    final orderItems = state.orderItems
-        .where((el) => el.model.product.id != item.model.product.id)
-        .toList();
+    final orderItems = state.orderItems.where((el) => el.model.product.id != item.model.product.id).toList();
 
     orderChangeModel.removeOrderItem(item.model);
 
@@ -129,13 +119,10 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
 
     item.quantityController.text = updatedQuantity.toString();
 
-    final updatedItem =
-        item.copyWith(model: item.model.copyWith(quantity: updatedQuantity));
+    final updatedItem = item.copyWith(model: item.model.copyWith(quantity: updatedQuantity));
 
-    final orderItems = state.orderItems
-        .map((el) =>
-            el.model.product.id == item.model.product.id ? updatedItem : el)
-        .toList();
+    final orderItems =
+        state.orderItems.map((el) => el.model.product.id == item.model.product.id ? updatedItem : el).toList();
 
     orderChangeModel.updateOrderItem(updatedItem.model);
 
@@ -154,14 +141,11 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
 
     item.quantityController.text = updatedQuantity.toString();
 
-    final updatedItem =
-        item.copyWith(model: item.model.copyWith(quantity: updatedQuantity));
+    final updatedItem = item.copyWith(model: item.model.copyWith(quantity: updatedQuantity));
     orderChangeModel.updateOrderItem(updatedItem.model);
 
-    final orderItems = state.orderItems
-        .map((el) =>
-            el.model.product.id == item.model.product.id ? updatedItem : el)
-        .toList();
+    final orderItems =
+        state.orderItems.map((el) => el.model.product.id == item.model.product.id ? updatedItem : el).toList();
 
     emit(state.toInitial(
       orderItems: orderItems,
@@ -175,13 +159,9 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
         duration: const Duration(milliseconds: 1000),
         action: () {
           final priceValue = double.tryParse(value);
-          final updatedItem = item.copyWith(
-              model: item.model.copyWith(suggestedPrice: priceValue));
-          final orderItems = state.orderItems
-              .map((el) => el.model.product.id == item.model.product.id
-                  ? updatedItem
-                  : el)
-              .toList();
+          final updatedItem = item.copyWith(model: item.model.copyWith(suggestedPrice: priceValue));
+          final orderItems =
+              state.orderItems.map((el) => el.model.product.id == item.model.product.id ? updatedItem : el).toList();
 
           orderChangeModel.updateOrderItem(updatedItem.model);
           emit(state.toInitial(
@@ -197,13 +177,9 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
         duration: const Duration(milliseconds: 1000),
         action: () {
           final quantityValue = int.tryParse(value);
-          final updatedItem = item.copyWith(
-              model: item.model.copyWith(quantity: quantityValue));
-          final orderItems = state.orderItems
-              .map((el) => el.model.product.id == item.model.product.id
-                  ? updatedItem
-                  : el)
-              .toList();
+          final updatedItem = item.copyWith(model: item.model.copyWith(quantity: quantityValue));
+          final orderItems =
+              state.orderItems.map((el) => el.model.product.id == item.model.product.id ? updatedItem : el).toList();
 
           orderChangeModel.updateOrderItem(updatedItem.model);
 
@@ -234,9 +210,7 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
         .then((res) {
       final toastManager = getItInstance.get<ToastManager>();
       toastManager.showToast(
-        message: res.affectedRows > 0
-            ? translation.feedback_action_success
-            : translation.feedback_action_failed,
+        message: res.affectedRows > 0 ? translation.feedback_action_success : translation.feedback_action_failed,
         type: res.affectedRows > 0 ? ToastType.success : ToastType.error,
       );
 
@@ -274,10 +248,8 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
           quantity: quantity,
           suggestedPrice: customPrice),
       quantityController: TextEditingController(text: quantity.toString()),
-      customPriceController:
-          TextEditingController(text: customPrice.toString()),
-      packageQuantityController: TextEditingController(
-          text: (quantity ~/ (selectedProduct.packageSize)).toString()),
+      customPriceController: TextEditingController(text: customPrice.toString()),
+      packageQuantityController: TextEditingController(text: (quantity ~/ (selectedProduct.packageSize)).toString()),
     );
 
     orderChangeModel.addOrderItem(newOrderItem.model);
@@ -298,14 +270,11 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
 
     item.quantityController.text = updatedQuantity.toString();
 
-    final updatedItem =
-        item.copyWith(model: item.model.copyWith(quantity: updatedQuantity));
+    final updatedItem = item.copyWith(model: item.model.copyWith(quantity: updatedQuantity));
     orderChangeModel.updateOrderItem(updatedItem.model);
 
-    final orderItems = state.orderItems
-        .map((el) =>
-            el.model.product.id == item.model.product.id ? updatedItem : el)
-        .toList();
+    final orderItems =
+        state.orderItems.map((el) => el.model.product.id == item.model.product.id ? updatedItem : el).toList();
 
     emit(state.toInitial(
       orderItems: orderItems,
@@ -320,14 +289,11 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
 
     item.quantityController.text = updatedQuantity.toString();
 
-    final updatedItem =
-        item.copyWith(model: item.model.copyWith(quantity: updatedQuantity));
+    final updatedItem = item.copyWith(model: item.model.copyWith(quantity: updatedQuantity));
     orderChangeModel.updateOrderItem(updatedItem.model);
 
-    final orderItems = state.orderItems
-        .map((el) =>
-            el.model.product.id == item.model.product.id ? updatedItem : el)
-        .toList();
+    final orderItems =
+        state.orderItems.map((el) => el.model.product.id == item.model.product.id ? updatedItem : el).toList();
 
     emit(state.toInitial(
       orderItems: orderItems,
@@ -340,17 +306,13 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
   }) {
     final updatedQuantity = int.parse(item.quantityController.text);
 
-    final updatedItem =
-        item.copyWith(model: item.model.copyWith(quantity: updatedQuantity));
+    final updatedItem = item.copyWith(model: item.model.copyWith(quantity: updatedQuantity));
     orderChangeModel.updateOrderItem(updatedItem.model);
 
-    item.packageQuantityController.text =
-        (updatedQuantity ~/ (item.model.product.packageSize)).toString();
+    item.packageQuantityController.text = (updatedQuantity ~/ (item.model.product.packageSize)).toString();
 
-    final orderItems = state.orderItems
-        .map((el) =>
-            el.model.product.id == item.model.product.id ? updatedItem : el)
-        .toList();
+    final orderItems =
+        state.orderItems.map((el) => el.model.product.id == item.model.product.id ? updatedItem : el).toList();
 
     emit(state.toInitial(
       orderItems: orderItems,
@@ -363,17 +325,13 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
   }) {
     final updatedQuantity = int.parse(item.packageQuantityController.text);
 
-    item.quantityController.text =
-        (updatedQuantity * (item.model.product.packageSize)).toString();
+    item.quantityController.text = (updatedQuantity * (item.model.product.packageSize)).toString();
 
-    final updatedItem =
-        item.copyWith(model: item.model.copyWith(quantity: updatedQuantity));
+    final updatedItem = item.copyWith(model: item.model.copyWith(quantity: updatedQuantity));
     orderChangeModel.updateOrderItem(updatedItem.model);
 
-    final orderItems = state.orderItems
-        .map((el) =>
-            el.model.product.id == item.model.product.id ? updatedItem : el)
-        .toList();
+    final orderItems =
+        state.orderItems.map((el) => el.model.product.id == item.model.product.id ? updatedItem : el).toList();
 
     emit(state.toInitial(
       orderItems: orderItems,

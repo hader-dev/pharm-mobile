@@ -19,14 +19,12 @@ class InfoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p12),
+      margin: EdgeInsets.symmetric(vertical: context.responsiveAppSizeTheme.current.p4),
+      padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p4),
       width: double.maxFinite,
-      margin: EdgeInsets.symmetric(
-          vertical: context.responsiveAppSizeTheme.current.p6),
       decoration: BoxDecoration(
         color: bgColor,
-        borderRadius: BorderRadius.circular(
-            context.responsiveAppSizeTheme.current.commonWidgetsRadius),
+        borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.commonWidgetsRadius),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
