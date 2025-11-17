@@ -31,8 +31,7 @@ class CartCubit extends Cubit<CartState> {
           shippingAddress: shippingAddress,
         ));
 
-  Future<bool> addToCart(CreateCartItemModel cartItem,
-      [bool isParapharma = false]) async {
+  Future<bool> addToCart(CreateCartItemModel cartItem, [bool isParapharma = false]) async {
     try {
       emit(state.toLoading());
 
@@ -56,8 +55,7 @@ class CartCubit extends Cubit<CartState> {
     }
   }
 
-  Future<Map<String, List<String>>> prepareOrderCartitemsByVendor(
-      List<CartItemModel> cartItems) async {
+  Future<Map<String, List<String>>> prepareOrderCartitemsByVendor(List<CartItemModel> cartItems) async {
     var reslutMap = <String, List<String>>{};
     await Future.forEach(
       cartItems,
@@ -78,8 +76,7 @@ class CartCubit extends Cubit<CartState> {
 
       CartItemsResponse response = await cartItemRepository.getCartItem();
       final cartItems = cartItemModelDataToUi(response.data);
-      final cartItemsByVendor =
-          await prepareOrderCartitemsByVendor(response.data);
+      final cartItemsByVendor = await prepareOrderCartitemsByVendor(response.data);
 
       emit(state.toLoadingSuccess(
         cartItems: cartItems,
@@ -96,8 +93,7 @@ class CartCubit extends Cubit<CartState> {
   void decreaseCartPackageQuantity(CartItemModelUi item) {
     try {
       if (item.model.quantity <= 1) {
-        throw TemplateException(
-            message: "quantity should be greater than or equal 1.");
+        throw TemplateException(message: "quantity should be greater than or equal 1.");
       }
 
       final updatedItem = item.copyWith(quantity: item.model.quantity - 1);
@@ -113,10 +109,8 @@ class CartCubit extends Cubit<CartState> {
   }
 
   bool _canIncreaseQuantity(CartItemModelUi item) {
-    return (item.model.medicinesCatalogId != null &&
-            item.model.quantity >= item.model.maxOrderQuantity - 1) ||
-        (item.model.parapharmCatalogId != null &&
-            item.model.quantity >= item.model.maxOrderQuantity - 1);
+    return (item.model.medicinesCatalogId != null && item.model.quantity >= item.model.maxOrderQuantity - 1) ||
+        (item.model.parapharmCatalogId != null && item.model.quantity >= item.model.maxOrderQuantity - 1);
   }
 
   void increaseCartPackageQuantity(CartItemModelUi item) {
@@ -125,8 +119,7 @@ class CartCubit extends Cubit<CartState> {
         throw TemplateException(message: "you reached the limit of the stock.");
       }
 
-      final updatedQuantity =
-          int.parse(item.packageQuantityController.text) + 1;
+      final updatedQuantity = int.parse(item.packageQuantityController.text) + 1;
       final updatedPackageQuantity = updatedQuantity ~/ item.model.packageSize;
 
       final updatedItem = item.copyWith(quantity: updatedQuantity);
@@ -137,8 +130,7 @@ class CartCubit extends Cubit<CartState> {
       debouncerManager.debounce(
           tag: "updateQuantity",
           action: () async {
-            applyUpdateItemQuantity(
-                updatedItem.model.id, updatedItem.model.quantity);
+            applyUpdateItemQuantity(updatedItem.model.id, updatedItem.model.quantity);
           });
 
       emit(state.toItemUpdated(updatedItem: updatedItem));
@@ -151,8 +143,7 @@ class CartCubit extends Cubit<CartState> {
   void decreaseCartItemQuantity(CartItemModelUi item) {
     try {
       if (item.model.quantity == 1) {
-        throw TemplateException(
-            message: "quantity should be greater than or equal 1.");
+        throw TemplateException(message: "quantity should be greater than or equal 1.");
       }
 
       final updatedQuantity = int.parse(item.quantityController.text) - 1;
@@ -206,8 +197,7 @@ class CartCubit extends Cubit<CartState> {
       debouncerManager.debounce(
           tag: "updateQuantity",
           action: () async {
-            applyUpdateItemQuantity(
-                updatedItem.model.id, updatedItem.model.quantity);
+            applyUpdateItemQuantity(updatedItem.model.id, updatedItem.model.quantity);
           });
 
       emit(state.toItemUpdated(updatedItem: updatedItem));
@@ -220,8 +210,7 @@ class CartCubit extends Cubit<CartState> {
   void decreaseCartItemPackageQuantity(CartItemModelUi item) {
     final cartItem = item.model;
 
-    final updatedPackageQuantity =
-        cartItem.packageQuantity > 1 ? cartItem.packageQuantity - 1 : 1;
+    final updatedPackageQuantity = cartItem.packageQuantity > 1 ? cartItem.packageQuantity - 1 : 1;
     final updatedQuantity = updatedPackageQuantity * cartItem.packageSize;
 
     final updatedItem = item.copyWith(quantity: updatedQuantity);
@@ -232,8 +221,7 @@ class CartCubit extends Cubit<CartState> {
     debouncerManager.debounce(
         tag: "updateQuantity",
         action: () async {
-          applyUpdateItemQuantity(
-              updatedItem.model.id, updatedItem.model.quantity);
+          applyUpdateItemQuantity(updatedItem.model.id, updatedItem.model.quantity);
         });
     emit(state.toItemUpdated(updatedItem: updatedItem));
   }
@@ -244,8 +232,7 @@ class CartCubit extends Cubit<CartState> {
         throw TemplateException(message: "you reached the limit of the stock.");
       }
 
-      final updatedPackageQuantity =
-          int.parse(item.packageQuantityController.text) + 1;
+      final updatedPackageQuantity = int.parse(item.packageQuantityController.text) + 1;
 
       final updatedQuantity = updatedPackageQuantity * item.model.packageSize;
 
@@ -301,7 +288,7 @@ class CartCubit extends Cubit<CartState> {
 
     try {
       emit(state.toLoading());
-
+      debugPrint("RRRRRRRRRRR${state.shippingAddress}");
       await Future.wait(state.cartItemsByVendor.keys.map((sellerId) async {
         return ordersRepository.createOrder(
             orderDetails: CreateOrderModel(
@@ -344,9 +331,8 @@ class CartCubit extends Cubit<CartState> {
 
   CartItemModelUi? getItemIfExists(String id, [bool isParapharma = false]) {
     final existingItem = state.cartItems
-        .where((element) => isParapharma
-            ? element.model.parapharmCatalogId == id
-            : element.model.medicinesCatalogId == id)
+        .where(
+            (element) => isParapharma ? element.model.parapharmCatalogId == id : element.model.medicinesCatalogId == id)
         .firstOrNull;
 
     return existingItem;
@@ -357,8 +343,7 @@ class CartCubit extends Cubit<CartState> {
   }
 
   void updateItemPackageQuantity(CartItemModelUi item) {
-    final updatedQuantity =
-        int.parse(item.packageQuantityController.text) * item.model.packageSize;
+    final updatedQuantity = int.parse(item.packageQuantityController.text) * item.model.packageSize;
 
     item.quantityController.text = updatedQuantity.toString();
 
@@ -371,14 +356,12 @@ class CartCubit extends Cubit<CartState> {
     final quantity = int.parse(item.quantityController.text);
     final updatedItem = item.copyWith(quantity: quantity);
 
-    updatedItem.packageQuantityController.text =
-        (quantity ~/ updatedItem.model.packageSize).toString();
+    updatedItem.packageQuantityController.text = (quantity ~/ updatedItem.model.packageSize).toString();
 
     emit(state.toItemUpdated(updatedItem: updatedItem));
   }
 
   void toggleCartSummary() {
-    emit(state.toToggleCartSummary(
-        isCartSummaryExpanded: !state.isCartSummaryExpanded));
+    emit(state.toToggleCartSummary(isCartSummaryExpanded: !state.isCartSummaryExpanded));
   }
 }

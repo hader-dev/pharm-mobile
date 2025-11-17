@@ -31,16 +31,13 @@ class SelectPaymentMethodBottomSheet extends StatelessWidget {
         listener: (context, state) {
           if (state is PassOrderLoaded) {
             context.read<CartCubit>().clearCart(context.translation!);
-            AppLayout.appLayoutScaffoldKey.currentContext!
-                .read<OrdersCubit>()
-                .getOrders();
+            AppLayout.appLayoutScaffoldKey.currentContext!.read<OrdersCubit>().getOrders();
             context.pop();
           }
         },
         child: BlocBuilder<CartCubit, CartState>(
           builder: (context, state) {
-            if (state is! InvoiceTypeChanged &&
-                state is! PaymentMethodChanged) {}
+            if (state is! InvoiceTypeChanged && state is! PaymentMethodChanged) {}
             final cubit = context.read<CartCubit>();
             return Form(
               key: cubit.formKey,
@@ -48,11 +45,9 @@ class SelectPaymentMethodBottomSheet extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    BottomSheetHeader(
-                        title: context.translation!.checkout_process),
+                    BottomSheetHeader(title: context.translation!.checkout_process),
                     const ResponsiveGap.s12(),
-                    Divider(
-                        color: AppColors.bgDisabled, thickness: 1, height: 1),
+                    Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
                     const ResponsiveGap.s12(),
                     InfoWidget(
                         label: context.translation!.payment_methods,
@@ -60,8 +55,7 @@ class SelectPaymentMethodBottomSheet extends StatelessWidget {
                         value: PaymentRadioInput(
                           initialValue: state.selectedPaymentMethod,
                           onPaymentMethodChanged: cubit.changePaymentMethod,
-                          validator: (v) =>
-                              requiredValidator(v?.name, translation),
+                          validator: (v) => requiredValidator(v?.name, translation),
                         )),
                     InfoWidget(
                         label: context.translation!.invoice_types,
@@ -69,51 +63,38 @@ class SelectPaymentMethodBottomSheet extends StatelessWidget {
                         value: InvoiceRadioInput(
                           initialValue: state.selectedInvoiceType,
                           onInvoiceTypeChanged: cubit.changeInvoiceType,
-                          validator: (v) =>
-                              requiredValidator(v?.name, translation),
+                          validator: (v) => requiredValidator(v?.name, translation),
                         )),
                     InfoWidget(
-                        label: context.translation!.shipping_address,
+                        label: "${context.translation!.shipping_address}*",
                         bgColor: AppColors.bgWhite,
                         value: CustomTextField(
                           verticalPadding: 0,
-                          horizontalPadding:
-                              context.responsiveAppSizeTheme.current.p6,
+                          horizontalPadding: context.responsiveAppSizeTheme.current.p6,
                           initValue: UserManager.instance.currentUser.address,
-                          onChanged: (text) => context
-                              .read<CartCubit>()
-                              .updateShippingAddress(text ?? ''),
+                          onChanged: (text) => context.read<CartCubit>().updateShippingAddress(text ?? ''),
                           maxLines: 3,
-                          validationFunc: (value) =>
-                              requiredValidator(value, translation),
+                          validationFunc: (value) => requiredValidator(value, translation),
                           isFilled: false,
                           isBorderEnabled: true,
-                          hintText: context.translation!.shipping_address,
-                          hintTextStyle: context
-                              .responsiveTextTheme.current.bodySmall
-                              .copyWith(color: Colors.grey),
+                          hintText: "${context.translation!.shipping_address}*",
+                          hintTextStyle: context.responsiveTextTheme.current.bodySmall.copyWith(color: Colors.grey),
                         )),
                     InfoWidget(
                         label: context.translation!.order_note,
                         bgColor: AppColors.bgWhite,
                         value: CustomTextField(
                           verticalPadding: 0,
-                          horizontalPadding:
-                              context.responsiveAppSizeTheme.current.p6,
+                          horizontalPadding: context.responsiveAppSizeTheme.current.p6,
                           initValue: state.orderNote,
-                          onChanged: (text) => context
-                              .read<CartCubit>()
-                              .changeOrderNote(text ?? ''),
+                          onChanged: (text) => context.read<CartCubit>().changeOrderNote(text ?? ''),
                           maxLines: 3,
                           validationFunc: (String? value) {},
                           isFilled: false,
                           isBorderEnabled: true,
                           hintText: context.translation!.type_note_hint,
-                          hintTextStyle: context
-                              .responsiveTextTheme.current.bodySmall
-                              .copyWith(color: Colors.grey),
+                          hintTextStyle: context.responsiveTextTheme.current.bodySmall.copyWith(color: Colors.grey),
                         )),
-                    const ResponsiveGap.s12(),
                     InfoWidget(
                       label: context.translation!.total_amount,
                       bgColor: AppColors.accentGreenShade3,
@@ -121,8 +102,7 @@ class SelectPaymentMethodBottomSheet extends StatelessWidget {
                         children: [
                           Text(
                             "${state.totalTTCAmount.toStringAsFixed(2)} ${context.translation!.currency}",
-                            style: context
-                                .responsiveTextTheme.current.body2Medium
+                            style: context.responsiveTextTheme.current.body2Medium
                                 .copyWith(color: AppColors.accent1Shade1),
                           ),
                           Spacer(),
@@ -134,14 +114,12 @@ class SelectPaymentMethodBottomSheet extends StatelessWidget {
                       ),
                     ),
                     const ResponsiveGap.s12(),
-                    Divider(
-                        color: AppColors.bgDisabled, thickness: 1, height: 1),
+                    Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
                     const ResponsiveGap.s12(),
                     Padding(
                       padding: EdgeInsets.symmetric(
                           vertical: context.responsiveAppSizeTheme.current.p4,
-                          horizontal:
-                              context.responsiveAppSizeTheme.current.p4),
+                          horizontal: context.responsiveAppSizeTheme.current.p4),
                       child: Row(
                         children: [
                           Expanded(
@@ -163,17 +141,14 @@ class SelectPaymentMethodBottomSheet extends StatelessWidget {
                               label: context.translation!.confirm_order,
                               leadingIcon: Iconsax.money4,
                               onTap: () {
-                                context.read<CartCubit>().passOrder().then(
-                                    (sucess) => getItInstance
-                                        .get<ToastManager>()
-                                        .showToast(
+                                context
+                                    .read<CartCubit>()
+                                    .passOrder()
+                                    .then((sucess) => getItInstance.get<ToastManager>().showToast(
                                           message: sucess
-                                              ? translation
-                                                  .order_placed_successfully
+                                              ? translation.order_placed_successfully
                                               : translation.order_placed_failed,
-                                          type: sucess
-                                              ? ToastType.success
-                                              : ToastType.error,
+                                          type: sucess ? ToastType.success : ToastType.error,
                                         ));
                               },
                               color: AppColors.accent1Shade1,
