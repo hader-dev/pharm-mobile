@@ -60,6 +60,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get skip => 'Passer';
 
   @override
+  String get login_with_google => 'Se connecter avec Google';
+
+  @override
   String get feedback_share_pdf => 'Partager le PDF';
 
   @override

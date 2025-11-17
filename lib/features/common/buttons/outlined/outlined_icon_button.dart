@@ -10,6 +10,7 @@ class OutlinedIconButton extends BaseIconButton {
     super.bgColor = Colors.transparent,
     super.isBordered = true,
     super.onPressed,
+    super.label,
     super.borderColor = AppColors.accent1Shade2,
   });
 }

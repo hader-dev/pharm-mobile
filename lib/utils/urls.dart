@@ -90,4 +90,6 @@ class Urls {
   static String get registerUserDevice => "/firebase/register";
 
   static String get invoice => "/invoices";
+
+  static String get googleLogin => "/auth/firebase";
 }

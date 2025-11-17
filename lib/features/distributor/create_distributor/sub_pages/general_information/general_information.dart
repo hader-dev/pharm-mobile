@@ -217,9 +217,7 @@ class _DistributorGeneralInformationPageState
                                         .copyWith(website: newValue));
                           },
                         ),
-                        WilayaDropdown(
-                          
-                        ),
+                        WilayaDropdown(),
                         TownDropdown(
                             isRequired: true,
                             validator: (v) =>

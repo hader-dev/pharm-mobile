@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
+import 'package:hader_pharm_mobile/config/services/auth/google_manager.dart';
 import 'package:hader_pharm_mobile/config/services/deeplinks/deeplinks_service.dart';
 import 'package:hader_pharm_mobile/config/services/deeplinks/deeplinks_service_port.dart';
 import 'package:hader_pharm_mobile/config/services/notification/notification_service.dart';
@@ -81,4 +82,6 @@ Future<void> initAppDependencies() async {
       ConfigRepository(client: dioNetworkManager);
   getItInstance
       .registerLazySingleton<IConfigRepository>(() => configRepository);
+
+  await GoogleManager.setup();
 }

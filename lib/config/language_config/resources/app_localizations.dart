@@ -196,6 +196,12 @@ abstract class AppLocalizations {
   /// **'Skip'**
   String get skip;
 
+  /// No description provided for @login_with_google.
+  ///
+  /// In en, this message translates to:
+  /// **'Login with Google'**
+  String get login_with_google;
+
   /// No description provided for @feedback_share_pdf.
   ///
   /// In en, this message translates to:

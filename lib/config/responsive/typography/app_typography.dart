@@ -131,24 +131,24 @@ class AppTypography {
     required this.bodyXXSmall,
   });
 
-  AppTypography copyWith({
-    TextStyle? headLine1,
-    TextStyle? headLine2,
-    TextStyle? headLine3SemiBold,
-    TextStyle? headLine3Medium,
-    TextStyle? headLine4SemiBold,
-    TextStyle? headLine4Medium,
-    TextStyle? headLine5SemiBold,
-    TextStyle? headLine5Medium,
-    TextStyle? body1Medium,
-    TextStyle? body1Regular,
-    TextStyle? body2Medium,
-    TextStyle? body2Regular,
-    TextStyle? body3Medium,
-    TextStyle? body3Regular,
-    TextStyle? bodySmall,
-    TextStyle? bodyXSmall,
-  }) {
+  AppTypography copyWith(
+      {TextStyle? headLine1,
+      TextStyle? headLine2,
+      TextStyle? headLine3SemiBold,
+      TextStyle? headLine3Medium,
+      TextStyle? headLine4SemiBold,
+      TextStyle? headLine4Medium,
+      TextStyle? headLine5SemiBold,
+      TextStyle? headLine5Medium,
+      TextStyle? body1Medium,
+      TextStyle? body1Regular,
+      TextStyle? body2Medium,
+      TextStyle? body2Regular,
+      TextStyle? body3Medium,
+      TextStyle? body3Regular,
+      TextStyle? bodySmall,
+      TextStyle? bodyXSmall,
+      TextStyle? bodyXXSmall}) {
     return AppTypography._(
       appFont: appFont,
       headLine1: headLine1 ?? this.headLine1,
@@ -167,7 +167,7 @@ class AppTypography {
       body3Regular: body3Regular ?? this.body3Regular,
       bodySmall: bodySmall ?? this.bodySmall,
       bodyXSmall: bodyXSmall ?? this.bodyXSmall,
-      bodyXXSmall: bodyXXSmall ?? bodyXXSmall,
+      bodyXXSmall: bodyXXSmall ?? this.bodyXXSmall,
     );
   }
 
@@ -176,11 +176,14 @@ class AppTypography {
       appFont: a.appFont,
       headLine1: TextStyle.lerp(a.headLine1, b.headLine1, t)!,
       headLine2: TextStyle.lerp(a.headLine2, b.headLine2, t)!,
-      headLine3SemiBold: TextStyle.lerp(a.headLine3SemiBold, b.headLine3SemiBold, t)!,
+      headLine3SemiBold:
+          TextStyle.lerp(a.headLine3SemiBold, b.headLine3SemiBold, t)!,
       headLine3Medium: TextStyle.lerp(a.headLine3Medium, b.headLine3Medium, t)!,
-      headLine4SemiBold: TextStyle.lerp(a.headLine4SemiBold, b.headLine4SemiBold, t)!,
+      headLine4SemiBold:
+          TextStyle.lerp(a.headLine4SemiBold, b.headLine4SemiBold, t)!,
       headLine4Medium: TextStyle.lerp(a.headLine4Medium, b.headLine4Medium, t)!,
-      headLine5SemiBold: TextStyle.lerp(a.headLine5SemiBold, b.headLine5SemiBold, t)!,
+      headLine5SemiBold:
+          TextStyle.lerp(a.headLine5SemiBold, b.headLine5SemiBold, t)!,
       headLine5Medium: TextStyle.lerp(a.headLine5Medium, b.headLine5Medium, t)!,
       body1Medium: TextStyle.lerp(a.body1Medium, b.body1Medium, t)!,
       body1Regular: TextStyle.lerp(a.body1Regular, b.body1Regular, t)!,

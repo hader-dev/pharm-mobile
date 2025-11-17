@@ -21,10 +21,10 @@ class FilterPriceSection extends StatefulWidget {
   });
 
   @override
-  _FilterPriceSectionState createState() => _FilterPriceSectionState();
+  FilterPriceSectionState createState() => FilterPriceSectionState();
 }
 
-class _FilterPriceSectionState extends State<FilterPriceSection> {
+class FilterPriceSectionState extends State<FilterPriceSection> {
   late RangeValues currentRangeValues;
 
   @override

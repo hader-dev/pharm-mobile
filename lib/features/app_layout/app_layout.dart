@@ -5,14 +5,14 @@ import 'package:hader_pharm_mobile/config/theme/setup_status_bar.dart';
 import 'package:hader_pharm_mobile/features/app_layout/actions/show_new_app_version_dialog.dart';
 import 'package:hader_pharm_mobile/features/app_layout/actions/show_welcome_dialog.dart';
 import 'package:hader_pharm_mobile/features/app_layout/cubit/app_state_provider.dart';
-import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/utils/env_helper.dart';
 
 import 'cubit/app_layout_cubit.dart';
 import 'widgets/app_nav_bar/app_nav_bar.dart';
 
 class AppLayout extends StatelessWidget {
-  static final GlobalKey<ScaffoldState> appLayoutScaffoldKey = GlobalKey<ScaffoldState>();
+  static final GlobalKey<ScaffoldState> appLayoutScaffoldKey =
+      GlobalKey<ScaffoldState>();
 
   const AppLayout({super.key});
 
@@ -34,7 +34,8 @@ class AppLayout extends StatelessWidget {
             bottomNavigationBar: AppNavBar(),
             body: Column(
               children: [
-                BlocProvider.of<AppLayoutCubit>(context).appTopBars[BlocProvider.of<AppLayoutCubit>(context).pageIndex],
+                BlocProvider.of<AppLayoutCubit>(context).appTopBars[
+                    BlocProvider.of<AppLayoutCubit>(context).pageIndex],
                 Expanded(
                   child: IndexedStack(
                     index: BlocProvider.of<AppLayoutCubit>(context).pageIndex,

@@ -33,7 +33,6 @@ class OrdersDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final buttonsPadding = EdgeInsets.only(
         left: context.responsiveAppSizeTheme.current.p6,
         right: context.responsiveAppSizeTheme.current.p6,

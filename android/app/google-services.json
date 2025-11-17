@@ -12,7 +12,28 @@
           "package_name": "com.hader.pharma"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "97099770049-egbsl0n4kfrah4tc9jc82v945s5hvka3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hader.pharma",
+            "certificate_hash": "1f28d6ca26c43c65bb4015cbee0b1537be214650"
+          }
+        },
+        {
+          "client_id": "97099770049-en7j3dciqrmvt3hqb520mtacl282vosm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hader.pharma",
+            "certificate_hash": "f982543f725099c4100c30dd15a1c25c544384d7"
+          }
+        },
+        {
+          "client_id": "97099770049-o4o7jd5eju93j7mcd0l7hubcubce1bl7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCbPAs79EVCbxWhdqAuAtoH_KtkAqPieoc"
@@ -20,7 +41,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "97099770049-o4o7jd5eju93j7mcd0l7hubcubce1bl7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "97099770049-ldece15nrsc8rca2ns065iorsn9rlglg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.hader.pharma"
+              }
+            }
+          ]
         }
       }
     }
