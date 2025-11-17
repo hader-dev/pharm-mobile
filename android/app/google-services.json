@@ -14,19 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "97099770049-egbsl0n4kfrah4tc9jc82v945s5hvka3.apps.googleusercontent.com",
+          "client_id": "97099770049-16qf6j0kf3tgf3ne6j9bh0nh84a95er8.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.hader.pharma",
-            "certificate_hash": "1f28d6ca26c43c65bb4015cbee0b1537be214650"
-          }
-        },
-        {
-          "client_id": "97099770049-en7j3dciqrmvt3hqb520mtacl282vosm.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.hader.pharma",
-            "certificate_hash": "f982543f725099c4100c30dd15a1c25c544384d7"
+            "certificate_hash": "4a1ce4eb2519db2e61343ca02e46ff7574f62b43"
           }
         },
         {

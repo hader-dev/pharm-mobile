@@ -189,7 +189,7 @@ class UserManager {
         email: email, otp: otp, newPassword: newPassword);
   }
 
-  Future<bool> googleSignIn() async {
+  Future<String?> googleSignIn() async {
     final acc = await _googleSignIn.signIn();
 
     if (acc != null) {
@@ -198,7 +198,7 @@ class UserManager {
               .post(
         Urls.googleLogin,
         payload: {
-          "idToken": acc.authentication.idToken,
+          "idToken": acc,
         },
       );
 
@@ -207,11 +207,15 @@ class UserManager {
       tokenManagerInstance.optimisticUpdate(token);
       (getItInstance.get<INetworkService>() as DioNetworkManager)
           .initDefaultHeaders(token);
+
       await getMe();
-      return true;
+
+      
+
+      return token;
     }
 
-    return acc != null;
+    return null;
   }
 
   bool isGoogleSiginInSupported() {
