@@ -1062,6 +1062,11 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
+  String feedback_value_too_large(Object length) {
+    return 'القيمة قصيرة جدًا، يجب أن تحتوي على $length أحرف على الاكثر';
+  }
+
+  @override
   String get all_announcements => 'جميع الإعلانات';
 
   @override

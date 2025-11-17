@@ -32,16 +32,6 @@ class CartScreen extends StatelessWidget {
               );
             }
 
-            // final widgets = [
-            //   ...state.cartItemsByVendor.keys.map((vendor) => VendorCartSection(
-            //         vendorData: state.cartItems
-            //             .firstWhere((element) =>
-            //                 element.model.sellerCompanyId == vendor)
-            //             .model
-            //             .sellerCompany,
-            //         cartItems: state.cartItemsByVendor[vendor] ?? [],
-            //       )),
-            // ];
             return RefreshIndicator(
               onRefresh: () {
                 return cubit.getCartItem();

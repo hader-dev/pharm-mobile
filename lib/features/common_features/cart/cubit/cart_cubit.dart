@@ -284,11 +284,10 @@ class CartCubit extends Cubit<CartState> {
   }
 
   Future<bool> passOrder() async {
-    if (formKey.currentState?.validate() == false) return false;
-
     try {
+      if (formKey.currentState?.validate() == false) return false;
       emit(state.toLoading());
-      debugPrint("RRRRRRRRRRR${state.shippingAddress}");
+
       await Future.wait(state.cartItemsByVendor.keys.map((sellerId) async {
         return ordersRepository.createOrder(
             orderDetails: CreateOrderModel(
