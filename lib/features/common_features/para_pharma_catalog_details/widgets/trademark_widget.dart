@@ -18,10 +18,7 @@ class TrademarkWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ParaPharmaCatalogModel catalogData =
-        BlocProvider.of<ParaPharmaDetailsCubit>(context)
-            .state
-            .paraPharmaCatalogData;
+    ParaPharmaCatalogModel catalogData = BlocProvider.of<ParaPharmaDetailsCubit>(context).state.paraPharmaCatalogData;
 
     return GestureDetector(
       onTap: () {
@@ -55,8 +52,7 @@ class TrademarkWidget extends StatelessWidget {
               ),
               const ResponsiveGap.s4(),
               Text(catalogData.company!.name,
-                  style: context.responsiveTextTheme.current.body3Regular
-                      .copyWith(color: Colors.white)),
+                  style: context.responsiveTextTheme.current.body3Regular.copyWith(color: Colors.white)),
             ],
           ),
         ),
@@ -70,10 +66,7 @@ class TrademarkWidgetAlternate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ParaPharmaCatalogModel catalogData =
-        BlocProvider.of<ParaPharmaDetailsCubit>(context)
-            .state
-            .paraPharmaCatalogData;
+    ParaPharmaCatalogModel catalogData = BlocProvider.of<ParaPharmaDetailsCubit>(context).state.paraPharmaCatalogData;
     final translation = context.translation!;
 
     return GestureDetector(
@@ -84,43 +77,46 @@ class TrademarkWidgetAlternate extends StatelessWidget {
         );
       },
       child: Padding(
-        padding:
-            EdgeInsets.only(right: context.responsiveAppSizeTheme.current.s2),
-        child: Row(
+        padding: EdgeInsets.only(right: context.responsiveAppSizeTheme.current.s2),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              height: 35,
-              width: 35,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(color: AppColors.bgDisabled, width: 1.5),
-                image: DecorationImage(
-                  image: catalogData.company?.thumbnailImage?.path == null
-                      ? AssetImage(DrawableAssetStrings.companyPlaceHolderImg)
-                      : NetworkImage(
-                          getItInstance.get<INetworkService>().getFilesPath(
-                                catalogData.company!.thumbnailImage!.path,
-                              ),
-                        ),
+            Text.rich(TextSpan(
+                text: catalogData.unitPriceHt.formatAsPrice(),
+                style: context.responsiveTextTheme.current.headLine2
+                    .copyWith(fontWeight: FontWeight.bold, color: AppColors.accent1Shade1),
+                children: [
+                  TextSpan(
+                    text: " ${context.translation!.currency}",
+                    style: context.responsiveTextTheme.current.bodyXXSmall.copyWith(
+                      color: Colors.grey.shade400,
+                    ),
+                  ),
+                ])),
+            const ResponsiveGap.s16(),
+            Row(
+              children: [
+                Container(
+                  height: 35,
+                  width: 35,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: AppColors.bgDisabled, width: 1.5),
+                    image: DecorationImage(
+                      image: catalogData.company?.thumbnailImage?.path == null
+                          ? AssetImage(DrawableAssetStrings.companyPlaceHolderImg)
+                          : NetworkImage(
+                              getItInstance.get<INetworkService>().getFilesPath(
+                                    catalogData.company!.thumbnailImage!.path,
+                                  ),
+                            ),
+                    ),
+                  ),
                 ),
-              ),
+                const ResponsiveGap.s8(),
+                Text(catalogData.company!.name, style: context.responsiveTextTheme.current.body3Regular.copyWith()),
+              ],
             ),
-            const ResponsiveGap.s4(),
-            Text(catalogData.company!.name,
-                style: context.responsiveTextTheme.current.body3Regular
-                    .copyWith()),
-            const Spacer(),
-            Icon(
-              Iconsax.dollar_circle4,
-              color: AppColors.accent1Shade1,
-              size: context.responsiveAppSizeTheme.current.iconSize30,
-            ),
-            const ResponsiveGap.s4(),
-            Text(
-              "${catalogData.unitPriceHt.formatAsPrice()} ${translation.currency}",
-              style: context.responsiveTextTheme.current.body1Regular.copyWith(
-                  fontWeight: FontWeight.bold, color: AppColors.accent1Shade1),
-            )
           ],
         ),
       ),

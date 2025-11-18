@@ -20,46 +20,24 @@ class HeaderSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    MedicineCatalogModel medicineCatalogData =
-        BlocProvider.of<MedicineDetailsCubit>(context)
-            .state
-            .medicineCatalogData;
+    MedicineCatalogModel medicineCatalogData = BlocProvider.of<MedicineDetailsCubit>(context).state.medicineCatalogData;
     return Padding(
       padding: EdgeInsets.symmetric(
-          vertical: context.responsiveAppSizeTheme.current.p16,
-          horizontal: context.responsiveAppSizeTheme.current.p12),
+          vertical: context.responsiveAppSizeTheme.current.p16, horizontal: context.responsiveAppSizeTheme.current.p12),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              IntrinsicWidth(
-                child: CustomChip(
-                  label: medicineCatalogData.medicine.brandName,
-                  color: AppColors.bgDarken2,
-                  onTap: () {},
-                ),
-              ),
-              const Spacer(),
-              Icon(
-                Icons.calendar_month,
-                color: Colors.grey[700],
-                size: context.responsiveAppSizeTheme.current.iconSize30,
-              ),
-              const ResponsiveGap.s4(),
-              Text(
-                medicineCatalogData.createdAt.formatDMY(context.translation!),
-                style: context.responsiveTextTheme.current.body3Regular
-                    .copyWith(
-                        color: TextColors.ternary.color,
-                        fontWeight: FontWeight.bold),
-              ),
-            ],
+          IntrinsicWidth(
+            child: CustomChip(
+              label: medicineCatalogData.medicine.brandName,
+              color: AppColors.bgDarken2,
+              onTap: () {},
+            ),
           ),
           const ResponsiveGap.s12(),
-          Text(medicineCatalogData.dci ?? "No dci Available",
-              style: context.responsiveTextTheme.current.headLine2),
+          Text(medicineCatalogData.medicine.dci,
+              style: context.responsiveTextTheme.current.headLine2.copyWith(fontSize: 23, fontWeight: FontWeight.w600)),
           const ResponsiveGap.s12(),
           TrademarkWidgetAlternate(),
         ],
@@ -73,10 +51,7 @@ class TrademarkWidgetAlternate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    MedicineCatalogModel catalogData =
-        BlocProvider.of<MedicineDetailsCubit>(context)
-            .state
-            .medicineCatalogData;
+    MedicineCatalogModel catalogData = BlocProvider.of<MedicineDetailsCubit>(context).state.medicineCatalogData;
     final translation = context.translation!;
 
     return GestureDetector(
@@ -87,43 +62,46 @@ class TrademarkWidgetAlternate extends StatelessWidget {
         );
       },
       child: Padding(
-        padding:
-            EdgeInsets.only(right: context.responsiveAppSizeTheme.current.s2),
-        child: Row(
+        padding: EdgeInsets.only(right: context.responsiveAppSizeTheme.current.s2),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              height: 35,
-              width: 35,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(color: AppColors.bgDisabled, width: 1.5),
-                image: DecorationImage(
-                  image: catalogData.company.thumbnailImage?.path == null
-                      ? AssetImage(DrawableAssetStrings.companyPlaceHolderImg)
-                      : NetworkImage(
-                          getItInstance.get<INetworkService>().getFilesPath(
-                                catalogData.company.thumbnailImage!.path,
-                              ),
-                        ),
+            Text.rich(TextSpan(
+                text: catalogData.unitPriceHt.formatAsPrice(),
+                style: context.responsiveTextTheme.current.headLine2
+                    .copyWith(fontWeight: FontWeight.bold, color: AppColors.accent1Shade1),
+                children: [
+                  TextSpan(
+                    text: " ${context.translation!.currency}",
+                    style: context.responsiveTextTheme.current.bodyXXSmall.copyWith(
+                      color: Colors.grey.shade400,
+                    ),
+                  ),
+                ])),
+            const ResponsiveGap.s16(),
+            Row(
+              children: [
+                Container(
+                  height: 35,
+                  width: 35,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: AppColors.bgDisabled, width: 1.5),
+                    image: DecorationImage(
+                      image: catalogData.company.thumbnailImage?.path == null
+                          ? AssetImage(DrawableAssetStrings.companyPlaceHolderImg)
+                          : NetworkImage(
+                              getItInstance.get<INetworkService>().getFilesPath(
+                                    catalogData.company.thumbnailImage!.path,
+                                  ),
+                            ),
+                    ),
+                  ),
                 ),
-              ),
+                const ResponsiveGap.s8(),
+                Text(catalogData.company.name, style: context.responsiveTextTheme.current.body3Regular.copyWith()),
+              ],
             ),
-            const ResponsiveGap.s4(),
-            Text(catalogData.company.name,
-                style: context.responsiveTextTheme.current.body3Regular
-                    .copyWith()),
-            const Spacer(),
-            Icon(
-              Iconsax.dollar_circle4,
-              color: AppColors.accent1Shade1,
-              size: context.responsiveAppSizeTheme.current.iconSize30,
-            ),
-            const ResponsiveGap.s4(),
-            Text(
-              "${catalogData.unitPriceHt.formatAsPrice()} ${translation.currency}",
-              style: context.responsiveTextTheme.current.body1Regular.copyWith(
-                  fontWeight: FontWeight.bold, color: AppColors.accent1Shade1),
-            )
           ],
         ),
       ),

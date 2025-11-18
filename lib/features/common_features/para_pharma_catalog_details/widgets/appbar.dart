@@ -11,9 +11,9 @@ import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pag
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/cubit/para_pharma_details_cubit.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:lucide_icons/lucide_icons.dart';
 
-class ParaPharmaCatalogAppBar extends StatelessWidget
-    implements PreferredSizeWidget {
+class ParaPharmaCatalogAppBar extends StatelessWidget implements PreferredSizeWidget {
   const ParaPharmaCatalogAppBar({super.key});
 
   @override
@@ -22,15 +22,13 @@ class ParaPharmaCatalogAppBar extends StatelessWidget
         ? context.responsiveAppSizeTheme.current.iconSize30
         : context.responsiveAppSizeTheme.current.iconSize18;
 
-    return CustomAppBarV2(
-      bgColor: AppColors.accent1Shade2,
+    return CustomAppBarV2.normal(
       leading: IconButton(
         iconSize: iconSize,
         icon: Icon(
-          Directionality.of(context) == TextDirection.rtl
-              ? Iconsax.arrow_right_3
-              : Iconsax.arrow_left_2,
-          color: AppColors.bgWhite,
+          Directionality.of(context) == TextDirection.rtl ? Iconsax.arrow_right_3 : Iconsax.arrow_left_2,
+          color: AppColors.accent1Shade1,
+          size: iconSize,
         ),
         onPressed: RoutingManager.router.popOrGoHome,
       ),
@@ -38,34 +36,27 @@ class ParaPharmaCatalogAppBar extends StatelessWidget
         BlocBuilder<ParaPharmaDetailsCubit, ParaPharmaDetailsState>(
           builder: (context, state) {
             final cubit = BlocProvider.of<ParaPharmaDetailsCubit>(context);
-            final gCubit = MarketPlaceScreen
-                .marketPlaceScaffoldKey.currentContext!
-                .read<ParaPharmaCubit>();
-            final hCubit =
-                HomeScreen.scaffoldKey.currentContext?.read<ParaPharmaCubit>();
+            final gCubit = MarketPlaceScreen.marketPlaceScaffoldKey.currentContext!.read<ParaPharmaCubit>();
+            final hCubit = HomeScreen.scaffoldKey.currentContext?.read<ParaPharmaCubit>();
 
             final isLiked = cubit.state.paraPharmaCatalogData.isLiked;
 
             return IconButton(
-              iconSize: iconSize,
               icon: Icon(
                 isLiked ? Iconsax.heart5 : Iconsax.heart,
-                color: isLiked ? Colors.red : Colors.white,
+                color: isLiked ? Colors.red : Colors.grey,
+                size: context.responsiveAppSizeTheme.current.iconSize25,
               ),
               onPressed: () {
                 if (isLiked) {
                   cubit.unlikeParaPharma().then((liked) {
-                    gCubit.refreshParaPharmaCatalogFavorite(
-                        cubit.state.paraPharmaCatalogData.id, liked);
-                    hCubit?.refreshParaPharmaCatalogFavorite(
-                        cubit.state.paraPharmaCatalogData.id, liked);
+                    gCubit.refreshParaPharmaCatalogFavorite(cubit.state.paraPharmaCatalogData.id, liked);
+                    hCubit?.refreshParaPharmaCatalogFavorite(cubit.state.paraPharmaCatalogData.id, liked);
                   });
                 } else {
                   cubit.likeParaPharma().then((liked) {
-                    gCubit.refreshParaPharmaCatalogFavorite(
-                        cubit.state.paraPharmaCatalogData.id, liked);
-                    hCubit?.refreshParaPharmaCatalogFavorite(
-                        cubit.state.paraPharmaCatalogData.id, liked);
+                    gCubit.refreshParaPharmaCatalogFavorite(cubit.state.paraPharmaCatalogData.id, liked);
+                    hCubit?.refreshParaPharmaCatalogFavorite(cubit.state.paraPharmaCatalogData.id, liked);
                   });
                 }
               },
@@ -73,10 +64,10 @@ class ParaPharmaCatalogAppBar extends StatelessWidget
           },
         ),
         IconButton(
-          iconSize: iconSize,
-          icon: const Icon(
-            Iconsax.share,
-            color: Colors.white,
+          icon: Icon(
+            LucideIcons.share2,
+            color: AppColors.accent1Shade1,
+            size: context.responsiveAppSizeTheme.current.iconSize25,
           ),
           onPressed: () {
             final cubit = BlocProvider.of<ParaPharmaDetailsCubit>(context);

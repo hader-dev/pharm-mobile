@@ -245,6 +245,19 @@ enum DistributorCategory {
   });
 }
 
+extension DistributorCategoryDisplayNameExtension on DistributorCategory {
+  String displayName(AppLocalizations translation) {
+    switch (this) {
+      case DistributorCategory.Pharmacy:
+        return translation.pharma;
+      case DistributorCategory.ParaPharmacy:
+        return translation.para_pharma;
+      case DistributorCategory.Both:
+        return translation.other_activity;
+    }
+  }
+}
+
 enum DialogType {
   info(
     color: Colors.blue,
