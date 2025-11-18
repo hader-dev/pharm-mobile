@@ -42,7 +42,6 @@ class DrawableAssetStrings {
 
   static const String glassIcon = 'assets/icons/glass.svg';
 
-  static const String newNotificationIcon = 'assets/icons/new_icons/notification.svg';
   static const String newEmptyCartIcon = 'assets/icons/new_icons/empty_cart.svg';
   static const String newFilledCartIcon = 'assets/icons/new_icons/filled_cart.svg';
   static const String newHomeIcon = 'assets/icons/new_icons/home.svg';
@@ -55,6 +54,7 @@ class DrawableAssetStrings {
   static const String newParaPharmsIcon = 'assets/icons/new_icons/para_pharm.svg';
   static const String newMedicinesIcon = 'assets/icons/new_icons/medicines.svg';
   static const String newSellerIcon = 'assets/icons/new_icons/seller.svg';
+  static const String newNotificationIcon = 'assets/icons/new_icons/notification.svg';
 }
 
 class JsonAssetStrings {

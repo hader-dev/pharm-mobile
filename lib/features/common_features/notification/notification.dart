@@ -13,13 +13,12 @@ class NotificaitonScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = AppLayout.appLayoutScaffoldKey.currentContext!
-        .read<NotificationsCubit>();
+    final cubit = AppLayout.appLayoutScaffoldKey.currentContext!.read<NotificationsCubit>();
 
     return BlocProvider.value(
       value: cubit..getNotifications(),
       child: Scaffold(
-        appBar: const NotificationAppbar(),
+        appBar: const NotificationAppBar(),
         body: Padding(
           padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
           child: Column(
