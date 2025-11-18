@@ -1,5 +1,6 @@
 import 'package:cached_network_image_plus/flutter_cached_network_image_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart' show SvgPicture;
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
@@ -83,22 +84,27 @@ class MedicineWidget2 extends StatelessWidget {
                   StockAvailableContainerWidget(isAvailable: medicineData.stockQuantity > 0),
                   if (!hideLikeButton)
                     Positioned(
-                      bottom: 0,
                       right: 0,
-                      child: IconButton(
-                        onPressed: () {
+                      bottom: 0,
+                      child: InkWell(
+                        child: SizedBox(
+                          width: 30,
+                          height: 30,
+                          child: Icon(
+                            isLiked ? Iconsax.heart5 : Iconsax.heart,
+                            color: isLiked ? Colors.red : Colors.grey[400],
+                            size: context.responsiveAppSizeTheme.current.iconSize20,
+                          ),
+                        ),
+                        onTap: () {
                           onLikeTapped?.call();
                         },
-                        icon: Icon(
-                          isLiked ? Iconsax.heart5 : Iconsax.heart,
-                          color: isLiked ? Colors.red : Colors.black,
-                          size: context.responsiveAppSizeTheme.current.iconSize25,
-                        ),
                       ),
                     )
                 ],
               ),
             ),
+            const ResponsiveGap.s4(),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -114,67 +120,66 @@ class MedicineWidget2 extends StatelessWidget {
                     ),
                     const Spacer(),
                     if (onQuickAddCallback != null)
-                      PrimaryIconButton(
-                        isBordered: true,
-                        borderColor: AppColors.accent1Shade1,
-                        bgColor: Colors.transparent,
-                        onPressed: () {
-                          onQuickAddCallback?.call(medicineData);
-                        },
-                        icon: Icon(Iconsax.add,
-                            color: Colors.black, size: context.responsiveAppSizeTheme.current.iconSize20),
-                      ),
-                  ]),
-                  const Spacer(),
-                  Row(children: [
-                    Container(
-                      height: 30,
-                      width: 30,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(color: AppColors.bgDisabled, width: 1.5),
-                        image: DecorationImage(
-                          image: medicineData.company?.thumbnailImage?.path == null
-                              ? AssetImage(DrawableAssetStrings.companyPlaceHolderImg)
-                              : NetworkImage(
-                                  getItInstance.get<INetworkService>().getFilesPath(
-                                        medicineData.company?.thumbnailImage!.path ?? "",
-                                      ),
-                                ),
+                      Transform.scale(
+                        scale: .88,
+                        child: PrimaryIconButton(
+                          isBordered: false,
+                          bgColor: AppColors.accent1Shade1.withAlpha(20),
+                          onPressed: () {
+                            onQuickAddCallback?.call(medicineData);
+                          },
+                          icon: SvgPicture.asset(DrawableAssetStrings.newAddToCartIcon,
+                              height: context.responsiveAppSizeTheme.current.iconSize25,
+                              width: context.responsiveAppSizeTheme.current.iconSize25,
+                              colorFilter: ColorFilter.mode(
+                                AppColors.accent1Shade1,
+                                BlendMode.srcIn,
+                              )),
                         ),
                       ),
-                    ),
-                    ResponsiveGap.s4(),
-                    Text(medicineData.company?.name ?? context.translation!.unknown,
-                        style: context.responsiveTextTheme.current.bodyXSmall.copyWith(
-                            fontWeight: context.responsiveTextTheme.current.appFont.appFontSemiBold,
-                            color: TextColors.primary.color)),
                   ]),
                   Row(
                     children: [
-                      Icon(
-                        Iconsax.wallet_money,
-                        color: AppColors.accent1Shade1,
-                        size: context.responsiveAppSizeTheme.current.iconSize18,
-                      ),
-                      ResponsiveGap.s4(),
-                      Text.rich(
-                        TextSpan(
-                          children: [
-                            TextSpan(
-                              text: medicineData.unitPriceHt.formatAsPrice(),
-                              style: context.responsiveTextTheme.current.headLine3SemiBold
-                                  .copyWith(color: AppColors.accent1Shade1),
-                            ),
-                            TextSpan(
-                              text: " ${context.translation!.currency}",
-                              style: context.responsiveTextTheme.current.bodyXSmall
-                                  .copyWith(color: AppColors.accent1Shade1),
-                            ),
-                          ],
+                      Container(
+                        height: 25,
+                        width: 25,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(color: AppColors.bgDisabled, width: 1.2),
+                          image: DecorationImage(
+                            image: medicineData.company?.thumbnailImage?.path == null
+                                ? AssetImage(DrawableAssetStrings.companyPlaceHolderImg)
+                                : NetworkImage(
+                                    getItInstance.get<INetworkService>().getFilesPath(
+                                          medicineData.company!.thumbnailImage!.path,
+                                        ),
+                                  ),
+                          ),
                         ),
                       ),
+                      const ResponsiveGap.s4(),
+                      Text(medicineData.company!.name,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                          style: context.responsiveTextTheme.current.bodyXSmall),
                     ],
+                  ),
+                  ResponsiveGap.s6(),
+                  Text.rich(
+                    TextSpan(
+                      children: [
+                        TextSpan(
+                          text: medicineData.unitPriceHt.formatAsPriceForPrint(decimalDigits: 1),
+                          style: context.responsiveTextTheme.current.headLine4SemiBold
+                              .copyWith(color: AppColors.accent1Shade1),
+                        ),
+                        TextSpan(
+                          text: " ${context.translation!.currency}",
+                          style: context.responsiveTextTheme.current.bodyXSmall
+                              .copyWith(color: AppColors.accent1Shade1, fontSize: 10),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),

@@ -116,38 +116,13 @@ class ParaPharmaWidget1 extends StatelessWidget {
             const ResponsiveGap.s4(),
             Expanded(
               child: Column(
+                spacing: context.responsiveAppSizeTheme.current.s6,
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      CustomChip(
-                        label: paraPharmData.category?.name ?? paraPharmData.name,
-                        color: AppColors.bgDarken,
-                      ),
-                      if (onQuickAddCallback != null)
-                        Transform.scale(
-                          scale: .88,
-                          child: PrimaryIconButton(
-                            isBordered: false,
-                            bgColor: AppColors.accent1Shade1.withAlpha(20),
-                            onPressed: () {
-                              onQuickAddCallback?.call(paraPharmData);
-                            },
-                            icon: SvgPicture.asset(DrawableAssetStrings.newAddToCartIcon,
-                                height: context.responsiveAppSizeTheme.current.iconSize25,
-                                width: context.responsiveAppSizeTheme.current.iconSize25,
-                                colorFilter: ColorFilter.mode(
-                                  AppColors.accent1Shade1,
-                                  BlendMode.srcIn,
-                                )),
-                          ),
-                        ),
-                    ],
-                  ),
-                  Row(
+                    spacing: context.responsiveAppSizeTheme.current.s6,
                     children: [
                       Container(
                         height: 25,
@@ -171,9 +146,28 @@ class ParaPharmaWidget1 extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                           style: context.responsiveTextTheme.current.bodyXSmall),
+                      const Spacer(),
+                      if (onQuickAddCallback != null)
+                        Transform.scale(
+                          alignment: Alignment.center,
+                          scale: .88,
+                          child: PrimaryIconButton(
+                            isBordered: false,
+                            bgColor: AppColors.accent1Shade1.withAlpha(20),
+                            onPressed: () {
+                              onQuickAddCallback?.call(paraPharmData);
+                            },
+                            icon: SvgPicture.asset(DrawableAssetStrings.newAddToCartIcon,
+                                height: context.responsiveAppSizeTheme.current.iconSize25,
+                                width: context.responsiveAppSizeTheme.current.iconSize25,
+                                colorFilter: ColorFilter.mode(
+                                  AppColors.accent1Shade1,
+                                  BlendMode.srcIn,
+                                )),
+                          ),
+                        ),
                     ],
                   ),
-                  ResponsiveGap.s6(),
                   Tooltip(
                     message: paraPharmData.name,
                     triggerMode: TooltipTriggerMode.longPress,
@@ -184,7 +178,6 @@ class ParaPharmaWidget1 extends StatelessWidget {
                         style: context.responsiveTextTheme.current.headLine3SemiBold
                             .copyWith(color: TextColors.primary.color)),
                   ),
-                  ResponsiveGap.s6(),
                   Text.rich(
                     TextSpan(
                       children: [
@@ -201,6 +194,20 @@ class ParaPharmaWidget1 extends StatelessWidget {
                       ],
                     ),
                   ),
+                  ResponsiveGap.s4(),
+                  if (paraPharmData.category != null || paraPharmData.brand != null)
+                    Row(spacing: context.responsiveAppSizeTheme.current.s4, children: [
+                      if (paraPharmData.category != null)
+                        CustomChip(
+                          label: paraPharmData.category!.name,
+                          color: AppColors.bgDarken,
+                        ),
+                      if (paraPharmData.brand != null)
+                        CustomChip(
+                          label: paraPharmData.brand!.name,
+                          color: AppColors.bgDarken,
+                        ),
+                    ]),
                 ],
               ),
             ),
