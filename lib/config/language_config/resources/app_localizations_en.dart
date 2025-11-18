@@ -1065,6 +1065,11 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String feedback_value_too_large(Object length) {
+    return 'Value is too large , must be at most $length characters';
+  }
+
+  @override
   String get all_announcements => 'All Announcements';
 
   @override

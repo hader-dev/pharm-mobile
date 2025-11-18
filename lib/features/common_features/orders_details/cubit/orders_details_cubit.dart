@@ -1,7 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders_details/orders_details.dart'
     show OrdersDetailsScreen;
 import 'package:hader_pharm_mobile/features/common_features/orders_details/widgets/track_order_bottom_sheet.dart'
@@ -15,7 +13,8 @@ import 'package:hader_pharm_mobile/repositories/remote/order/response/response_o
 import 'package:hader_pharm_mobile/repositories/remote/order/response/response_order_complaints.dart';
 
 import '../../../../utils/bottom_sheet_helper.dart' show BottomSheetHelper;
-import '../widgets/raise_order_claim_bottom_sheet.dart' show RaiseOrderClaimBottomSheet;
+import '../widgets/raise_order_claim_bottom_sheet.dart'
+    show RaiseOrderClaimBottomSheet;
 
 part 'orders_details_state.dart';
 
@@ -35,7 +34,8 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
 
       var results = await Future.wait([
         orderRepository.getMorderById(orderId),
-        orderRepository.getOrderClaims(ParamsGetOrderComplaints(orderId: orderId))
+        orderRepository
+            .getOrderClaims(ParamsGetOrderComplaints(orderId: orderId))
       ]);
 
       final orderData = results[0] as OrderDetailsModel;
@@ -76,7 +76,8 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
     try {
       emit(OrderDetailsLoading());
 
-      var res = await orderRepository.getOrderClaims(ParamsGetOrderComplaints(orderId: orderData!.id));
+      var res = await orderRepository
+          .getOrderClaims(ParamsGetOrderComplaints(orderId: orderData!.id));
       orderClaims = res.claims;
 
       emit(OrderDetailsLoaded());
@@ -92,13 +93,16 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
     switch (option) {
       case 'orderTracking':
         BottomSheetHelper.showCommonBottomSheet(
-            context: OrdersDetailsScreen.ordersDetailsScaffoldKey.currentContext!, child: OrderTrackingBottomSheet());
+            context:
+                OrdersDetailsScreen.ordersDetailsScaffoldKey.currentContext!,
+            child: OrderTrackingBottomSheet());
         break;
 
       case 'raiseComplaint':
         BottomSheetHelper.showCommonBottomSheet(
             initialChildSize: 0.5,
-            context: OrdersDetailsScreen.ordersDetailsScaffoldKey.currentContext!,
+            context:
+                OrdersDetailsScreen.ordersDetailsScaffoldKey.currentContext!,
             child: RaiseOrderClaimBottomSheet(
               orderId: order!.id,
             ));

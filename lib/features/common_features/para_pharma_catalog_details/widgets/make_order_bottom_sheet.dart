@@ -31,20 +31,15 @@ class MakeOrderBottomSheet extends StatelessWidget {
       providers: [
         BlocProvider.value(
           value: cubit ??
-              BaseParaPharmaCatalogDetailsScreen
-                  .paraPharmaDetailsScaffoldKey.currentContext!
+              BaseParaPharmaCatalogDetailsScreen.paraPharmaDetailsScaffoldKey.currentContext!
                   .read<ParaPharmaDetailsCubit>(),
         ),
-        BlocProvider.value(
-            value: AppLayout.appLayoutScaffoldKey.currentContext!
-                .read<OrdersCubit>()),
+        BlocProvider.value(value: AppLayout.appLayoutScaffoldKey.currentContext!.read<OrdersCubit>()),
       ],
       child: BlocListener<ParaPharmaDetailsCubit, ParaPharmaDetailsState>(
         listener: (context, state) {
           if (state is QuickOrderPassed) {
-            AppLayout.appLayoutScaffoldKey.currentContext!
-                .read<OrdersCubit>()
-                .getOrders();
+            AppLayout.appLayoutScaffoldKey.currentContext!.read<OrdersCubit>().getOrders();
             context.pop();
           }
         },
@@ -68,13 +63,10 @@ class MakeOrderBottomSheet extends StatelessWidget {
                 ),
                 const ResponsiveGap.s12(),
                 QuantitySectionModified(
-                  maxQuantity:
-                      cubit.state.paraPharmaCatalogData.maxOrderQuantity,
-                  minQuantity:
-                      cubit.state.paraPharmaCatalogData.minOrderQuantity,
+                  maxQuantity: cubit.state.paraPharmaCatalogData.maxOrderQuantity,
+                  minQuantity: cubit.state.paraPharmaCatalogData.minOrderQuantity,
                   quantityController: cubit.state.quantityController,
-                  packageQuantityController:
-                      cubit.state.packageQuantityController,
+                  packageQuantityController: cubit.state.packageQuantityController,
                   packageSize: cubit.state.paraPharmaCatalogData.packageSize,
                   disabledPackageQuantity: true,
                   decrementPackageQuantity: cubit.decrementPackageQuantity,
@@ -91,18 +83,14 @@ class MakeOrderBottomSheet extends StatelessWidget {
                     value: CustomTextField(
                       verticalPadding: 0,
                       fieldKey: cubit.shippingAddressKey,
-                      horizontalPadding:
-                          context.responsiveAppSizeTheme.current.p6,
+                      horizontalPadding: context.responsiveAppSizeTheme.current.p6,
                       initValue: UserManager.instance.currentUser.address,
                       maxLines: 3,
-                      validationFunc: (value) =>
-                          requiredValidator(value, translation, 2),
+                      validationFunc: (value) => requiredValidator(value, translation, minLength: 2),
                       isFilled: false,
                       isBorderEnabled: true,
                       hintText: context.translation!.shipping_address,
-                      hintTextStyle: context
-                          .responsiveTextTheme.current.bodySmall
-                          .copyWith(color: Colors.grey),
+                      hintTextStyle: context.responsiveTextTheme.current.bodySmall.copyWith(color: Colors.grey),
                     )),
                 const ResponsiveGap.s12(),
                 Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
@@ -114,8 +102,7 @@ class MakeOrderBottomSheet extends StatelessWidget {
                     children: [
                       Text(
                         "${(num.parse(cubit.state.quantityController.text) * cubit.state.paraPharmaCatalogData.unitPriceHt).toStringAsFixed(2)} ${translation.currency}",
-                        style: context.responsiveTextTheme.current.body2Medium
-                            .copyWith(color: AppColors.accent1Shade1),
+                        style: context.responsiveTextTheme.current.body2Medium.copyWith(color: AppColors.accent1Shade1),
                       ),
                       Spacer(),
                       Icon(
@@ -126,12 +113,10 @@ class MakeOrderBottomSheet extends StatelessWidget {
                   ),
                 ),
                 const ResponsiveGap.s12(),
-                const Divider(
-                    color: AppColors.bgDisabled, thickness: 1, height: 1),
+                const Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
                 const ResponsiveGap.s12(),
                 Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: context.responsiveAppSizeTheme.current.p4),
+                  padding: EdgeInsets.symmetric(horizontal: context.responsiveAppSizeTheme.current.p4),
                   child: Row(
                     children: [
                       Expanded(
@@ -158,16 +143,12 @@ class MakeOrderBottomSheet extends StatelessWidget {
                             context
                                 .read<ParaPharmaDetailsCubit>()
                                 .passQuickOrder()
-                                .then((sucess) =>
-                                    getItInstance.get<ToastManager>().showToast(
-                                          message: sucess
-                                              ? translation
-                                                  .order_placed_successfully
-                                              : translation.order_placed_failed,
-                                          type: sucess
-                                              ? ToastType.success
-                                              : ToastType.error,
-                                        ));
+                                .then((sucess) => getItInstance.get<ToastManager>().showToast(
+                                      message: sucess
+                                          ? translation.order_placed_successfully
+                                          : translation.order_placed_failed,
+                                      type: sucess ? ToastType.success : ToastType.error,
+                                    ));
                           },
                           color: AppColors.accent1Shade1,
                         ),
@@ -223,12 +204,10 @@ class InfoWidget extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p12),
       width: double.maxFinite,
-      margin: EdgeInsets.symmetric(
-          vertical: context.responsiveAppSizeTheme.current.p6),
+      margin: EdgeInsets.symmetric(vertical: context.responsiveAppSizeTheme.current.p6),
       decoration: BoxDecoration(
         color: bgColor,
-        borderRadius: BorderRadius.circular(
-            context.responsiveAppSizeTheme.current.commonWidgetsRadius),
+        borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.commonWidgetsRadius),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

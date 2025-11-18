@@ -82,6 +82,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                       onPressed: () async {
                         await userManager.googleSignIn();
+                        setupCompanyOrSkipToHome();
                       },
                     ),
                 ],

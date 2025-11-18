@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders_details/sub_pages/complaints/order_complaints_page.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders_details/sub_pages/order_details.dart';
-import 'package:hader_pharm_mobile/features/common_features/orders_details/sub_pages/order_items/order_items.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class OrderDetailsTabBarSection extends StatefulWidget {
@@ -10,10 +9,12 @@ class OrderDetailsTabBarSection extends StatefulWidget {
   final String orderId;
 
   @override
-  State<OrderDetailsTabBarSection> createState() => _OrderDetailsTabBarSectionState();
+  State<OrderDetailsTabBarSection> createState() =>
+      _OrderDetailsTabBarSectionState();
 }
 
-class _OrderDetailsTabBarSectionState extends State<OrderDetailsTabBarSection> with TickerProviderStateMixin {
+class _OrderDetailsTabBarSectionState extends State<OrderDetailsTabBarSection>
+    with TickerProviderStateMixin {
   late final TabController tabsController;
   @override
   void initState() {
@@ -24,7 +25,10 @@ class _OrderDetailsTabBarSectionState extends State<OrderDetailsTabBarSection> w
   @override
   Widget build(BuildContext context) {
     final translation = context.translation!;
-    final List<String> tabs = [translation.overview, translation.order_complaint];
+    final List<String> tabs = [
+      translation.overview,
+      translation.order_complaint
+    ];
 
     TextStyle tabTextStyle = context.responsiveTextTheme.current.body3Medium;
 

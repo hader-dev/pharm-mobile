@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/features/app_layout/app_layout.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
-import 'package:hader_pharm_mobile/features/common_features/cart/widgets/cart_item_v4.dart' show CartItemWidgetV4;
-import 'package:hader_pharm_mobile/features/common_features/cart/widgets/cart_summary.dart';
+import 'package:hader_pharm_mobile/features/common_features/cart/widgets/cart_item_v4.dart'
+    show CartItemWidgetV4;
 import 'package:hader_pharm_mobile/features/common_features/cart/widgets/cart_summary_v1.dart';
 
 import 'cubit/cart_cubit.dart';
-import 'widgets/vendor_cart_items_set.dart';
 
 class CartScreen extends StatelessWidget {
   final bool isInHome;
@@ -33,16 +32,6 @@ class CartScreen extends StatelessWidget {
               );
             }
 
-            // final widgets = [
-            //   ...state.cartItemsByVendor.keys.map((vendor) => VendorCartSection(
-            //         vendorData: state.cartItems
-            //             .firstWhere((element) =>
-            //                 element.model.sellerCompanyId == vendor)
-            //             .model
-            //             .sellerCompany,
-            //         cartItems: state.cartItemsByVendor[vendor] ?? [],
-            //       )),
-            // ];
             return RefreshIndicator(
               onRefresh: () {
                 return cubit.getCartItem();

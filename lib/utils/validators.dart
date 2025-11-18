@@ -5,7 +5,7 @@ String? emptyValidator(String? value, AppLocalizations translation) {
 }
 
 String? requiredValidator(String? value, AppLocalizations translation,
-    [int minLength = 0]) {
+    {int minLength = 0, int maxLength = 0}) {
   final trimmed = value?.trim() ?? '';
   if (trimmed.isEmpty) {
     return translation.feedback_field_required;

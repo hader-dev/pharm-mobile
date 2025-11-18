@@ -398,6 +398,7 @@
   "last_week": "اخر الاسبوع",
   "order_placed_failed": "فشل في إتمام الطلب",
   "feedback_value_too_short": "القيمة قصيرة جدًا، يجب أن تحتوي على {length} أحرف على الأقل",
+  "feedback_value_too_large": "القيمة قصيرة جدًا، يجب أن تحتوي على {length} أحرف على الاكثر",
   "make_complaint_success": "تم تقديم الشكوى بنجاح",
   "package_size": "حجم العبوة",
   "pacakge_quantity": "كمية العبوة",
