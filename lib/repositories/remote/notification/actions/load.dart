@@ -5,8 +5,7 @@ import 'package:hader_pharm_mobile/repositories/remote/notification/params/param
 import 'package:hader_pharm_mobile/repositories/remote/notification/responses/response_load_notifications.dart';
 import 'package:hader_pharm_mobile/utils/urls.dart';
 
-Future<ResponseLoadNotifications> loadNotifications(
-    ParamsLoadNotifications params, INetworkService client) async {
+Future<ResponseLoadNotifications> loadNotifications(ParamsLoadNotifications params, INetworkService client) async {
   var decodedResponse = await client.sendRequest(() => client.get(
         Urls.notifications,
       ));
@@ -14,15 +13,14 @@ Future<ResponseLoadNotifications> loadNotifications(
   return jsonToNotificationsResponse(decodedResponse);
 }
 
-Future<ResponseLoadNotifications> mockResponse(
-    ParamsLoadNotifications params, INetworkService client) async {
+Future<ResponseLoadNotifications> mockResponse(ParamsLoadNotifications params, INetworkService client) async {
   return ResponseLoadNotifications(data: [
     NotificationModel(
       id: "1",
       title: 'Welcome!',
       body: 'Thanks for joining our app 🎉',
       isRead: false,
-      type: 'info',
+      type: 'announcement.created',
       createdAt: DateTime.now().subtract(Duration(minutes: 5)),
       clientId: "1",
       redirectUrl: '/welcome',
@@ -32,7 +30,7 @@ Future<ResponseLoadNotifications> mockResponse(
       title: 'New Feature',
       body: 'Check out our brand new dark mode!',
       isRead: false,
-      type: 'update',
+      type: 'announcement.created',
       clientId: "2",
       createdAt: DateTime.now().subtract(Duration(hours: 2)),
       redirectUrl: '/features/dark-mode',
@@ -42,7 +40,7 @@ Future<ResponseLoadNotifications> mockResponse(
       title: 'Reminder',
       body: 'Your subscription is about to expire.',
       isRead: true,
-      type: 'alert',
+      type: 'announcement.created',
       createdAt: DateTime.now().subtract(Duration(days: 1)),
       clientId: "3",
       redirectUrl: '/billing',
@@ -53,7 +51,7 @@ Future<ResponseLoadNotifications> mockResponse(
       body: 'Get 50% off your next purchase for 24 hours only!',
       isRead: true,
       clientId: "4",
-      type: 'promo',
+      type: 'announcement.created',
       createdAt: DateTime.now().subtract(Duration(days: 3)),
       redirectUrl: '/offers',
     ),
