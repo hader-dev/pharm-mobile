@@ -25,6 +25,7 @@ class SelectPaymentMethodBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final translation = context.translation!;
+    final maxInputLength = 250;
     return BlocProvider.value(
       value: AppLayout.appLayoutScaffoldKey.currentContext!.read<CartCubit>(),
       child: BlocListener<CartCubit, CartState>(
@@ -74,7 +75,8 @@ class SelectPaymentMethodBottomSheet extends StatelessWidget {
                           initValue: UserManager.instance.currentUser.address,
                           onChanged: (text) => context.read<CartCubit>().updateShippingAddress(text ?? ''),
                           maxLines: 3,
-                          validationFunc: (value) => requiredValidator(value, translation),
+                          maxLength: maxInputLength,
+                          validationFunc: (value) => requiredValidator(value, translation, maxLength: maxInputLength),
                           isFilled: false,
                           isBorderEnabled: true,
                           hintText: "${context.translation!.shipping_address}*",
@@ -89,7 +91,8 @@ class SelectPaymentMethodBottomSheet extends StatelessWidget {
                           initValue: state.orderNote,
                           onChanged: (text) => context.read<CartCubit>().changeOrderNote(text ?? ''),
                           maxLines: 3,
-                          validationFunc: (String? value) {},
+                          maxLength: maxInputLength,
+                          validationFunc: (value) => requiredValidator(value, translation, maxLength: maxInputLength),
                           isFilled: false,
                           isBorderEnabled: true,
                           hintText: context.translation!.type_note_hint,

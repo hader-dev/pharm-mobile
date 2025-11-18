@@ -2128,6 +2128,12 @@ abstract class AppLocalizations {
   /// **'Value is too short , must be at least {length} characters'**
   String feedback_value_too_short(Object length);
 
+  /// No description provided for @feedback_value_too_large.
+  ///
+  /// In en, this message translates to:
+  /// **'Value is too large , must be at most {length} characters'**
+  String feedback_value_too_large(Object length);
+
   /// No description provided for @all_announcements.
   ///
   /// In en, this message translates to:

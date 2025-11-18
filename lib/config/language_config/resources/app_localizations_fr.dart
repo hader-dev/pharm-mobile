@@ -1077,6 +1077,11 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
+  String feedback_value_too_large(Object length) {
+    return 'La valeur est trop large, elle doit contenir au max $length caractères';
+  }
+
+  @override
   String get all_announcements => 'Toutes les Annonces';
 
   @override
