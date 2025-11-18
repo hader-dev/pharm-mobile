@@ -62,6 +62,7 @@ class VendorsSectionItems extends StatelessWidget {
                       final entity = items[index];
                       return VendorHomeWidget(
                         title: entity.name,
+                        distributorCategory: entity.distributorCategory,
                         fallbackAssetImagePlaceholderPath: DrawableAssetStrings.companyPlaceHolderImg,
                         onPress: () => RoutingManager.router.pushNamed(
                           RoutingManager.vendorDetails,

@@ -14,8 +14,7 @@ import 'package:hader_pharm_mobile/features/common_features/home/widgets/vendors
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
-  static final GlobalKey<ScaffoldState> scaffoldKey =
-      GlobalKey<ScaffoldState>();
+  static final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -37,8 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final screenSize = MediaQuery.of(context).size;
     final minSectionHeight = screenSize.height * 0.15;
 
-    final sectionHeightModifier =
-        screenSize.width <= DeviceSizes.mediumMobile.width ? 2 : 2.2;
+    final sectionHeightModifier = screenSize.width <= DeviceSizes.mediumMobile.width ? 2 : 2.2;
 
     return StateProvider(
       child: Scaffold(
@@ -79,13 +77,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ? state.announcements.sublist(0, 4)
                                 : state.announcements,
                             minSectionHeight: minSectionHeight),
-                      ParaPharmaSection(
-                          minSectionHeight:
-                              minSectionHeight * sectionHeightModifier),
+                      const ResponsiveGap.s16(),
+                      ParaPharmaSection(minSectionHeight: minSectionHeight * sectionHeightModifier),
+                      const ResponsiveGap.s24(),
                       const VendorSection(),
-                      MedicineSection(
-                          minSectionHeight:
-                              minSectionHeight * sectionHeightModifier),
+                      const ResponsiveGap.s24(),
+                      MedicineSection(minSectionHeight: minSectionHeight * sectionHeightModifier),
                       const ResponsiveGap.s12(),
                     ],
                   )),

@@ -5,7 +5,7 @@ import 'package:hader_pharm_mobile/models/image.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 
 class BaseCompany with EquatableMixin {
-  static final baseCompanyFields = ["id", "name", "address", "phone", "email"];
+  static final baseCompanyFields = ["id", "name", "address", "phone", "email", "distributorCategory"];
   final String id;
   final ImageModel? thumbnailImage;
   final ImageModel? image;
@@ -13,6 +13,7 @@ class BaseCompany with EquatableMixin {
   final String? address;
   final String? phone;
   final String? email;
+  final String? distrubitionCategory;
   const BaseCompany({
     required this.id,
     required this.thumbnailImage,
@@ -21,17 +22,18 @@ class BaseCompany with EquatableMixin {
     this.address,
     this.phone,
     this.email,
+    this.distrubitionCategory,
   });
   factory BaseCompany.fromJson(Map<String, dynamic> json) {
     return BaseCompany(
       id: json["id"] ?? "",
-      thumbnailImage:
-          json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
+      thumbnailImage: json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
       image: json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
       name: json["name"] ?? "",
       address: json["address"],
       phone: json["phone"],
       email: json["email"],
+      distrubitionCategory: json["distributorCategory"],
     );
   }
 

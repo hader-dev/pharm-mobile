@@ -6,10 +6,12 @@ import 'package:hader_pharm_mobile/features/common_features/profile/widgets/sect
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
+import '../../../../../utils/assets_strings.dart' show DrawableAssetStrings;
+
 class VendorSection extends StatelessWidget {
   const VendorSection({
     super.key,
-    this.minSectionHeight = 90,
+    this.minSectionHeight = 110,
     this.padding = const EdgeInsets.symmetric(horizontal: AppSizesManager.p16),
   });
   final EdgeInsets padding;
@@ -29,7 +31,7 @@ class VendorSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Gap(screenWidth <= 414 ? 0 : context.responsiveAppSizeTheme.current.s4),
-          SectionTitle(title: translation.vendors),
+          SectionTitle(title: translation.vendors, iconPath: DrawableAssetStrings.newSellerIcon),
           VendorsSectionItems(
             maxItemsPerRow: maxItemsPerRow,
             maxVisibleItems: maxItemsCount,
