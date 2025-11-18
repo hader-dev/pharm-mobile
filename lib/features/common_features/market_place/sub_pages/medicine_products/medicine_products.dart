@@ -21,8 +21,7 @@ class MedicineProductsPage extends StatefulWidget {
   State<MedicineProductsPage> createState() => _MedicineProductsPageState();
 }
 
-class _MedicineProductsPageState extends State<MedicineProductsPage>
-    with AutomaticKeepAliveClientMixin {
+class _MedicineProductsPageState extends State<MedicineProductsPage> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     final cubit = BlocProvider.of<MedicineProductsCubit>(context);
@@ -43,41 +42,32 @@ class _MedicineProductsPageState extends State<MedicineProductsPage>
                       return const Center(child: CircularProgressIndicator());
                     }
 
-                    if (state is MedicineProductsLoadingFailed ||
-                        medicines.isEmpty) {
+                    if (state is MedicineProductsLoadingFailed || medicines.isEmpty) {
                       return const Center(child: EmptyListWidget());
                     }
 
                     final bool isLoadingMore = state is MedicineProductsLoading;
-                    final bool hasReachedEnd =
-                        state is MedicinesLoadLimitReached;
+                    final bool hasReachedEnd = state is MedicinesLoadLimitReached;
 
                     void onLikeTapped(BaseMedicineCatalogModel medicine) {
                       final id = medicine.id;
-                      final gCubit = MarketPlaceScreen
-                          .marketPlaceScaffoldKey.currentContext!
-                          .read<MedicineProductsCubit>();
-                      final hCubit = HomeScreen.scaffoldKey.currentContext!
-                          .read<MedicineProductsCubit>();
-                      medicine.isLiked
-                          ? cubit.unlikeMedicinesCatalog(id)
-                          : cubit.likeMedicinesCatalog(id);
+                      final gCubit =
+                          MarketPlaceScreen.marketPlaceScaffoldKey.currentContext!.read<MedicineProductsCubit>();
+                      final hCubit = HomeScreen.scaffoldKey.currentContext!.read<MedicineProductsCubit>();
+                      medicine.isLiked ? cubit.unlikeMedicinesCatalog(id) : cubit.likeMedicinesCatalog(id);
 
-                      gCubit.refreshMedicineCatalogFavorite(
-                          id, !medicine.isLiked);
-                      hCubit.refreshMedicineCatalogFavorite(
-                          id, !medicine.isLiked);
+                      gCubit.refreshMedicineCatalogFavorite(id, !medicine.isLiked);
+                      hCubit.refreshMedicineCatalogFavorite(id, !medicine.isLiked);
                     }
 
-                    void onQuickAddCallback(
-                      BaseMedicineCatalogModel medicineProduct) {
-                    BottomSheetHelper.showCommonBottomSheet(
-                        initialChildSize: .5,
-                        context: context,
-                        child: QuickCartAddModal(
-                          medicineCatalogId: medicineProduct.id,
-                        ));
-                  }
+                    void onQuickAddCallback(BaseMedicineCatalogModel medicineProduct) {
+                      BottomSheetHelper.showCommonBottomSheet(
+                          initialChildSize: .5,
+                          context: context,
+                          child: QuickCartAddModal(
+                            medicineCatalogId: medicineProduct.id,
+                          ));
+                    }
 
                     return RefreshIndicator(
                       onRefresh: () => cubit.getMedicines(),
@@ -86,15 +76,11 @@ class _MedicineProductsPageState extends State<MedicineProductsPage>
                         physics: const AlwaysScrollableScrollPhysics(),
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 1,
-                          crossAxisSpacing: calculateMarketplaceGridSpacing(
-                              context.deviceSize),
-                          mainAxisSpacing: calculateMarketplaceMainAxisSpacing(
-                              context.deviceSize),
-                          childAspectRatio: calculateMarketplaceAspectRatio(
-                              context.deviceSize, context.orientation),
+                          crossAxisSpacing: calculateMarketplaceGridSpacing(context.deviceSize),
+                          mainAxisSpacing: calculateMarketplaceMainAxisSpacing(context.deviceSize),
+                          childAspectRatio: calculateMarketplaceAspectRatio(context.deviceSize, context.orientation),
                         ),
-                        itemCount: medicines.length +
-                            (isLoadingMore || hasReachedEnd ? 1 : 0),
+                        itemCount: medicines.length + (isLoadingMore || hasReachedEnd ? 1 : 0),
                         itemBuilder: (context, index) {
                           if (index < medicines.length) {
                             final medicine = medicines[index];
@@ -108,10 +94,8 @@ class _MedicineProductsPageState extends State<MedicineProductsPage>
                           } else {
                             if (isLoadingMore) {
                               return Padding(
-                                padding: EdgeInsets.all(
-                                    context.responsiveAppSizeTheme.current.s16),
-                                child:
-                                    Center(child: CircularProgressIndicator()),
+                                padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.s16),
+                                child: Center(child: CircularProgressIndicator()),
                               );
                             } else if (hasReachedEnd) {
                               return const EndOfLoadResultWidget();

@@ -34,6 +34,7 @@ class CustomChip extends StatelessWidget {
           borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.commonWidgetsRadius),
         ),
         child: Row(
+          mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             if (icon != null) ...[
               Icon(
@@ -44,13 +45,15 @@ class CustomChip extends StatelessWidget {
               const ResponsiveGap.s4(),
             ],
             Container(
-              constraints: BoxConstraints(maxWidth: MediaQuery.sizeOf(context).width / 2),
-              child: Text(label,
-                  softWrap: true,
-                  textWidthBasis: TextWidthBasis.parent,
-                  overflow: TextOverflow.ellipsis,
-                  style: labelStyle?.copyWith(color: labelColor) ??
-                      context.responsiveTextTheme.current.body3Medium.copyWith(color: labelColor)),
+              constraints: BoxConstraints(maxWidth: 90),
+              child: Tooltip(
+                  message: label,
+                  child: Text(label,
+                      softWrap: true,
+                      textWidthBasis: TextWidthBasis.parent,
+                      overflow: TextOverflow.ellipsis,
+                      style: labelStyle?.copyWith(color: labelColor) ??
+                          context.responsiveTextTheme.current.body3Medium.copyWith(color: labelColor))),
             ),
           ],
         ),

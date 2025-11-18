@@ -49,7 +49,7 @@ class StockAvailableContainerWidget extends StatelessWidget {
             borderRadius: BorderRadius.only(
                 bottomRight: Radius.circular(context.responsiveAppSizeTheme.current.r6),
                 topLeft: Radius.circular(context.responsiveAppSizeTheme.current.r6)),
-            color: isAvailable ? SystemColors.green.secondary.withAlpha(55) : SystemColors.red.secondary.withAlpha(55),
+            color: isAvailable ? SystemColors.green.secondary.withAlpha(80) : SystemColors.red.secondary.withAlpha(80),
           ),
           child: StockAvailableWidget(isAvailable: isAvailable)),
     );

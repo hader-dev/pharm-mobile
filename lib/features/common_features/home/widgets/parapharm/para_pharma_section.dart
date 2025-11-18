@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/widgets/parapharm/para_pharma_section_items.dart';
 import 'package:hader_pharm_mobile/features/common_features/profile/widgets/section_title.dart';
+import 'package:hader_pharm_mobile/utils/assets_strings.dart' show DrawableAssetStrings;
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
@@ -22,7 +23,7 @@ class ParaPharmaSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SectionTitle(title: translation.para_pharma),
+          SectionTitle(title: translation.para_pharma, iconPath: DrawableAssetStrings.newParaPharmsIcon),
           ParaPharmaSectionItems(
             minSectionHeight: minSectionHeight,
           ),
