@@ -9,6 +9,7 @@ import 'package:hader_pharm_mobile/repositories/remote/favorite/favorite_reposit
 import 'package:hader_pharm_mobile/repositories/remote/order/order_repository_impl.dart';
 import 'package:hader_pharm_mobile/repositories/remote/parapharm_catalog/para_pharma_catalog_repository_impl.dart';
 import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler.dart';
+import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 import 'package:share_plus/share_plus.dart';
 
 part 'para_pharma_details_state.dart';
@@ -37,8 +38,8 @@ class ParaPharmaDetailsCubit extends Cubit<ParaPharmaDetailsState> {
   Future<void> getParaPharmaCatalogData(String id) async {
     try {
       emit(state.toLoading());
-      final paraPharmaCatalogData =
-          await paraPharmaCatalogRepository.getParaPharmaCatalogById(id);
+      final paraPharmaCatalogData = await paraPharmaCatalogRepository.getParaPharmaCatalogById(id);
+      state.quantityController.text = paraPharmaCatalogData.minOrderQuantity.toString();
       emit(state.toLoaded(data: paraPharmaCatalogData));
     } catch (e) {
       debugPrint(e.toString());
@@ -53,8 +54,7 @@ class ParaPharmaDetailsCubit extends Cubit<ParaPharmaDetailsState> {
   Future<bool> likeParaPharma() async {
     if (state.paraPharmaCatalogData.id.isNotEmpty) {
       try {
-        await favoriteRepository.likeParaPharmaCatalog(
-            paraPharmaCatalogId: state.paraPharmaCatalogData.id);
+        await favoriteRepository.likeParaPharmaCatalog(paraPharmaCatalogId: state.paraPharmaCatalogData.id);
 
         emit(state.toLoaded(
             data: state.paraPharmaCatalogData.copyWith(
@@ -74,8 +74,7 @@ class ParaPharmaDetailsCubit extends Cubit<ParaPharmaDetailsState> {
   Future<bool> unlikeParaPharma() async {
     if (state.paraPharmaCatalogData.id.isNotEmpty) {
       try {
-        await favoriteRepository.unLikeParaPharmaCatalog(
-            paraPharmaCatalogId: state.paraPharmaCatalogData.id);
+        await favoriteRepository.unLikeParaPharmaCatalog(paraPharmaCatalogId: state.paraPharmaCatalogData.id);
 
         emit(state.toLoaded(
             data: state.paraPharmaCatalogData.copyWith(
@@ -96,11 +95,9 @@ class ParaPharmaDetailsCubit extends Cubit<ParaPharmaDetailsState> {
       try {
         final product = state.paraPharmaCatalogData;
 
-        final deepLinkUrl =
-            '${DeeplinksService.scheme}://${DeeplinksService.host}/product/parapharma/${product.id}';
+        final deepLinkUrl = '${DeeplinksService.scheme}://${DeeplinksService.host}/product/parapharma/${product.id}';
 
-        await SharePlus.instance
-            .share(ShareParams(uri: Uri.parse(deepLinkUrl)));
+        await SharePlus.instance.share(ShareParams(uri: Uri.parse(deepLinkUrl)));
       } catch (e) {
         GlobalExceptionHandler.handle(exception: e);
       }
@@ -112,50 +109,48 @@ class ParaPharmaDetailsCubit extends Cubit<ParaPharmaDetailsState> {
   }
 
   void incrementQuantity() {
-    final updatedQuantity = int.parse(state.quantityController.text) + 1;
-    state.quantityController.text = (updatedQuantity).toString();
+    try {
+      final updatedQuantity = int.parse(state.quantityController.text) + 1;
+      state.quantityController.text = (updatedQuantity).toString();
 
-    state.packageQuantityController.text =
-        (updatedQuantity ~/ (state.paraPharmaCatalogData.packageSize))
-            .toString();
-    emit(state.toQuantityChanged());
+      state.packageQuantityController.text = (updatedQuantity ~/ (state.paraPharmaCatalogData.packageSize)).toString();
+      emit(state.toQuantityChanged());
+    } catch (e) {
+      GlobalExceptionHandler.handle(exception: e);
+    }
   }
 
   void decrementQuantity() {
-    final updatedQuantity = int.parse(state.quantityController.text) - 1;
-    if (updatedQuantity > 0) {
-      state.quantityController.text = (updatedQuantity).toString();
+    try {
+      final updatedQuantity = int.parse(state.quantityController.text) - 1;
+      if (updatedQuantity > 0) {
+        state.quantityController.text = (updatedQuantity).toString();
 
-      state.packageQuantityController.text =
-          (updatedQuantity ~/ (state.paraPharmaCatalogData.packageSize))
-              .toString();
+        state.packageQuantityController.text =
+            (updatedQuantity ~/ (state.paraPharmaCatalogData.packageSize)).toString();
+      }
+      emit(state.toQuantityChanged());
+    } catch (e) {
+      GlobalExceptionHandler.handle(exception: e);
     }
-    emit(state.toQuantityChanged());
   }
 
   void incrementPackageQuantity() {
-    final currPackageQuantity =
-        int.parse(state.packageQuantityController.text) + 1;
+    final currPackageQuantity = int.parse(state.packageQuantityController.text) + 1;
 
     state.packageQuantityController.text = currPackageQuantity.toString();
-    state.quantityController.text =
-        (currPackageQuantity * (state.paraPharmaCatalogData.packageSize))
-            .toString();
+    state.quantityController.text = (currPackageQuantity * (state.paraPharmaCatalogData.packageSize)).toString();
     emit(state.toQuantityChanged());
   }
 
   void decrementPackageQuantity() {
-    final currPackageQuantity =
-        int.parse(state.packageQuantityController.text) - 1;
+    final currPackageQuantity = int.parse(state.packageQuantityController.text) - 1;
 
-    final updatedItemQuantity =
-        (currPackageQuantity * (state.paraPharmaCatalogData.packageSize));
+    final updatedItemQuantity = (currPackageQuantity * (state.paraPharmaCatalogData.packageSize));
 
-    state.packageQuantityController.text =
-        (currPackageQuantity < 1 ? 1 : currPackageQuantity).toString();
+    state.packageQuantityController.text = (currPackageQuantity < 1 ? 1 : currPackageQuantity).toString();
 
-    state.quantityController.text =
-        (updatedItemQuantity < 1 ? 1 : updatedItemQuantity).toString();
+    state.quantityController.text = (updatedItemQuantity < 1 ? 1 : updatedItemQuantity).toString();
     emit(state.toQuantityChanged());
   }
 
@@ -188,14 +183,11 @@ class ParaPharmaDetailsCubit extends Cubit<ParaPharmaDetailsState> {
   void updateQuantityPackage(String v) {
     final currPackageQuantity = int.parse(v);
 
-    final updatedItemQuantity =
-        (currPackageQuantity * (state.paraPharmaCatalogData.packageSize));
+    final updatedItemQuantity = (currPackageQuantity * (state.paraPharmaCatalogData.packageSize));
 
-    state.packageQuantityController.text =
-        (currPackageQuantity < 1 ? 1 : currPackageQuantity).toString();
+    state.packageQuantityController.text = (currPackageQuantity < 1 ? 1 : currPackageQuantity).toString();
 
-    state.quantityController.text =
-        (updatedItemQuantity < 1 ? 1 : updatedItemQuantity).toString();
+    state.quantityController.text = (updatedItemQuantity < 1 ? 1 : updatedItemQuantity).toString();
     emit(state.toQuantityChanged());
   }
 
@@ -204,9 +196,7 @@ class ParaPharmaDetailsCubit extends Cubit<ParaPharmaDetailsState> {
     if (updatedQuantity > 0) {
       state.quantityController.text = (updatedQuantity).toString();
 
-      state.packageQuantityController.text =
-          (updatedQuantity ~/ (state.paraPharmaCatalogData.packageSize))
-              .toString();
+      state.packageQuantityController.text = (updatedQuantity ~/ (state.paraPharmaCatalogData.packageSize)).toString();
     }
     emit(state.toQuantityChanged());
   }

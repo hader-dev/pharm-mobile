@@ -26,25 +26,18 @@ class StateProvider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cartCubit = needCartCubit
-        ? AppLayout.appLayoutScaffoldKey.currentContext?.read<CartCubit>()
-        : null;
+    final cartCubit = needCartCubit ? AppLayout.appLayoutScaffoldKey.currentContext?.read<CartCubit>() : null;
     final existingCartItem = cartCubit?.getItemIfExists(catalogId);
 
     return MultiBlocProvider(providers: [
       BlocProvider(
         create: (context) => ParaPharmaDetailsCubit(
-            packageQuantityController: TextEditingController(
-                text: existingCartItem?.model.quantity.toString() ?? '0'),
-            quantityController: TextEditingController(
-                text: existingCartItem?.model.quantity.toString() ?? '1'),
+            packageQuantityController: TextEditingController(text: existingCartItem?.model.quantity.toString() ?? '0'),
+            quantityController: TextEditingController(text: existingCartItem?.model.quantity.toString() ?? '1'),
             tabController: TabController(length: tabs.length, vsync: vsync),
-            ordersRepository:
-                OrderRepository(client: getItInstance.get<INetworkService>()),
-            paraPharmaCatalogRepository: ParaPharmaRepository(
-                client: getItInstance.get<INetworkService>()),
-            favoriteRepository: FavoriteRepository(
-                client: getItInstance.get<INetworkService>()))
+            ordersRepository: OrderRepository(client: getItInstance.get<INetworkService>()),
+            paraPharmaCatalogRepository: ParaPharmaRepository(client: getItInstance.get<INetworkService>()),
+            favoriteRepository: FavoriteRepository(client: getItInstance.get<INetworkService>()))
           ..getParaPharmaCatalogData(catalogId),
       ),
       if (cartCubit != null) BlocProvider.value(value: cartCubit),

@@ -31,22 +31,16 @@ class MakeOrderBottomSheet extends StatelessWidget {
       providers: [
         BlocProvider.value(
           value: cubit ??
-              BaseMedicineCatalogDetailsScreen
-                  .medicineDetailsScaffoldKey.currentContext!
-                  .read<MedicineDetailsCubit>(),
+              BaseMedicineCatalogDetailsScreen.medicineDetailsScaffoldKey.currentContext!.read<MedicineDetailsCubit>(),
         ),
-        BlocProvider.value(
-            value: AppLayout.appLayoutScaffoldKey.currentContext!
-                .read<OrdersCubit>()),
+        BlocProvider.value(value: AppLayout.appLayoutScaffoldKey.currentContext!.read<OrdersCubit>()),
       ],
       child: BlocBuilder<MedicineDetailsCubit, MedicineDetailsState>(
         builder: (context, state) {
           final cubit = context.read<MedicineDetailsCubit>();
 
           if (state is QuickOrderPassed) {
-            AppLayout.appLayoutScaffoldKey.currentContext!
-                .read<OrdersCubit>()
-                .getOrders();
+            AppLayout.appLayoutScaffoldKey.currentContext!.read<OrdersCubit>().getOrders();
             context.pop();
           }
 
@@ -59,17 +53,31 @@ class MakeOrderBottomSheet extends StatelessWidget {
                 const ResponsiveGap.s12(),
                 LabeledInfoWidget(
                   label: translation.product,
-                  value: context
-                      .read<MedicineDetailsCubit>()
-                      .state
-                      .medicineCatalogData
-                      .medicine
-                      .dci,
+                  value: context.read<MedicineDetailsCubit>().state.medicineCatalogData.medicine.dci,
                 ),
                 LabeledInfoWidget(
                   label: translation.unit_total_price,
-                  value:
-                      "${(state.medicineCatalogData.unitPriceHt).toStringAsFixed(2)} ${translation.currency}",
+                  value: "${(state.medicineCatalogData.unitPriceHt).toStringAsFixed(2)} ${translation.currency}",
+                ),
+                const ResponsiveGap.s12(),
+                Row(
+                  children: [
+                    Flexible(
+                        child: InfoWidget(
+                            label: "Min qty to order",
+                            value: Text(
+                              "${cubit.state.medicineCatalogData.minOrderQuantity}",
+                              style: context.responsiveTextTheme.current.body2Medium,
+                            ))),
+                    ResponsiveGap.s8(),
+                    Flexible(
+                        child: InfoWidget(
+                            label: "Max qty to order",
+                            value: Text(
+                              "${cubit.state.medicineCatalogData.maxOrderQuantity}",
+                              style: context.responsiveTextTheme.current.body2Medium,
+                            ))),
+                  ],
                 ),
                 const ResponsiveGap.s12(),
                 QuantitySectionModified(
@@ -92,24 +100,18 @@ class MakeOrderBottomSheet extends StatelessWidget {
                     bgColor: AppColors.bgWhite,
                     value: CustomTextField(
                       verticalPadding: 0,
-                      horizontalPadding:
-                          context.responsiveAppSizeTheme.current.p6,
+                      horizontalPadding: context.responsiveAppSizeTheme.current.p6,
                       initValue: UserManager.instance.currentUser.address,
-                      onChanged: (text) => context
-                          .read<MedicineDetailsCubit>()
-                          .updateShippingAddress(text ?? ''),
+                      onChanged: (text) => context.read<MedicineDetailsCubit>().updateShippingAddress(text ?? ''),
                       maxLines: 3,
                       validationFunc: (v) => requiredValidator(v, translation),
                       isFilled: false,
                       isBorderEnabled: true,
                       hintText: context.translation!.shipping_address,
-                      hintTextStyle: context
-                          .responsiveTextTheme.current.bodySmall
-                          .copyWith(color: Colors.grey),
+                      hintTextStyle: context.responsiveTextTheme.current.bodySmall.copyWith(color: Colors.grey),
                     )),
                 const ResponsiveGap.s12(),
-                const Divider(
-                    color: AppColors.bgDisabled, thickness: 1, height: 1),
+                const Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
                 const ResponsiveGap.s12(),
                 InfoWidget(
                   label: translation.total_price,
@@ -118,8 +120,7 @@ class MakeOrderBottomSheet extends StatelessWidget {
                     children: [
                       Text(
                         "${(num.parse(state.quantityController.text) * state.medicineCatalogData.unitPriceHt).toStringAsFixed(2)} ${translation.currency}",
-                        style: context.responsiveTextTheme.current.body2Medium
-                            .copyWith(color: AppColors.accent1Shade1),
+                        style: context.responsiveTextTheme.current.body2Medium.copyWith(color: AppColors.accent1Shade1),
                       ),
                       const Spacer(),
                       Icon(
@@ -131,12 +132,10 @@ class MakeOrderBottomSheet extends StatelessWidget {
                   ),
                 ),
                 const ResponsiveGap.s12(),
-                const Divider(
-                    color: AppColors.bgDisabled, thickness: 1, height: 1),
+                const Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
                 const ResponsiveGap.s12(),
                 Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: context.responsiveAppSizeTheme.current.p4),
+                  padding: EdgeInsets.symmetric(horizontal: context.responsiveAppSizeTheme.current.p4),
                   child: Row(
                     children: [
                       Expanded(
@@ -163,16 +162,12 @@ class MakeOrderBottomSheet extends StatelessWidget {
                             context
                                 .read<MedicineDetailsCubit>()
                                 .passQuickOrder()
-                                .then((sucess) =>
-                                    getItInstance.get<ToastManager>().showToast(
-                                          message: sucess
-                                              ? translation
-                                                  .order_placed_successfully
-                                              : translation.order_placed_failed,
-                                          type: sucess
-                                              ? ToastType.success
-                                              : ToastType.error,
-                                        ));
+                                .then((sucess) => getItInstance.get<ToastManager>().showToast(
+                                      message: sucess
+                                          ? translation.order_placed_successfully
+                                          : translation.order_placed_failed,
+                                      type: sucess ? ToastType.success : ToastType.error,
+                                    ));
                           },
                           color: AppColors.accent1Shade1,
                         ),
@@ -228,12 +223,10 @@ class InfoWidget extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p12),
       width: double.maxFinite,
-      margin: EdgeInsets.symmetric(
-          vertical: context.responsiveAppSizeTheme.current.p6),
+      margin: EdgeInsets.symmetric(vertical: context.responsiveAppSizeTheme.current.p6),
       decoration: BoxDecoration(
         color: bgColor,
-        borderRadius: BorderRadius.circular(
-            context.responsiveAppSizeTheme.current.commonWidgetsRadius),
+        borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.commonWidgetsRadius),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

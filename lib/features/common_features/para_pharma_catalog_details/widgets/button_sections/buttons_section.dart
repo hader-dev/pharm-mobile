@@ -42,6 +42,25 @@ class ButtonsSection extends StatelessWidget {
         return SingleChildScrollView(
           child: Column(
             children: [
+              Row(
+                children: [
+                  Flexible(
+                      child: InfoWidget(
+                          label: "Min qty to order",
+                          value: Text(
+                            "${cubit.state.paraPharmaCatalogData.minOrderQuantity}",
+                            style: context.responsiveTextTheme.current.body2Medium,
+                          ))),
+                  ResponsiveGap.s8(),
+                  Flexible(
+                      child: InfoWidget(
+                          label: "Max qty to order",
+                          value: Text(
+                            "${cubit.state.paraPharmaCatalogData.maxOrderQuantity}",
+                            style: context.responsiveTextTheme.current.body2Medium,
+                          ))),
+                ],
+              ),
               QuantitySectionModified(
                   minQuantity: minOrderQuantity,
                   maxQuantity: maxOrderQuantity,
@@ -54,10 +73,8 @@ class ButtonsSection extends StatelessWidget {
                   incrementPackageQuantity: cubit.incrementPackageQuantity,
                   quantityController: cubit.state.quantityController,
                   onQuantityChanged: (v) => cubit.updateQuantity(v),
-                  onPackageQuantityChanged: (v) =>
-                      cubit.updateQuantityPackage(v),
-                  packageQuantityController:
-                      cubit.state.packageQuantityController),
+                  onPackageQuantityChanged: (v) => cubit.updateQuantityPackage(v),
+                  packageQuantityController: cubit.state.packageQuantityController),
               if (price != null)
                 InfoWidget(
                   label: translation.total_price,
@@ -66,8 +83,7 @@ class ButtonsSection extends StatelessWidget {
                     children: [
                       Text(
                         "${(num.parse(cubit.state.quantityController.text) * cubit.state.paraPharmaCatalogData.unitPriceHt).toStringAsFixed(2)} ${translation.currency}",
-                        style: context.responsiveTextTheme.current.body2Medium
-                            .copyWith(color: AppColors.accent1Shade1),
+                        style: context.responsiveTextTheme.current.body2Medium.copyWith(color: AppColors.accent1Shade1),
                       ),
                       const Spacer(),
                       const Icon(
@@ -78,8 +94,7 @@ class ButtonsSection extends StatelessWidget {
                   ),
                 ),
               Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: context.responsiveAppSizeTheme.current.p4),
+                padding: EdgeInsets.symmetric(horizontal: context.responsiveAppSizeTheme.current.p4),
                 child: Row(
                   children: [
                     Expanded(
@@ -91,12 +106,13 @@ class ButtonsSection extends StatelessWidget {
                         borderColor: AppColors.accent1Shade1,
                         maxWidth: MediaQuery.of(context).size.width * 0.25,
                         leadingIcon: Iconsax.money4,
-                        onTap: () {
-                          BottomSheetHelper.showCommonBottomSheet(
-                                  context: context,
-                                  child: MakeOrderBottomSheet(cubit: cubit))
-                              .then((res) => onAction?.call());
-                        },
+                        onTap: int.parse(cubit.state.quantityController.text) <= maxOrderQuantity
+                            ? () {
+                                BottomSheetHelper.showCommonBottomSheet(
+                                        context: context, child: MakeOrderBottomSheet(cubit: cubit))
+                                    .then((res) => onAction?.call());
+                              }
+                            : null,
                       ),
                     ),
                     const ResponsiveGap.s8(),
@@ -105,17 +121,17 @@ class ButtonsSection extends StatelessWidget {
                         label: translation.add_cart,
                         leadingIcon: Iconsax.add,
                         color: AppColors.accent1Shade1,
-                        onTap: () {
-                          BlocProvider.of<CartCubit>(context).addToCart(
-                              CreateCartItemModel(
-                                  productId:
-                                      cubit.state.paraPharmaCatalogData.id,
-                                  quantity: int.parse(
-                                      cubit.state.quantityController.text),
-                                  productType: ProductTypes.para_pharmacy),
-                              true);
-                          onAction?.call();
-                        },
+                        onTap: int.parse(cubit.state.quantityController.text) <= maxOrderQuantity
+                            ? () {
+                                BlocProvider.of<CartCubit>(context).addToCart(
+                                    CreateCartItemModel(
+                                        productId: cubit.state.paraPharmaCatalogData.id,
+                                        quantity: int.parse(cubit.state.quantityController.text),
+                                        productType: ProductTypes.para_pharmacy),
+                                    true);
+                                onAction?.call();
+                              }
+                            : null,
                       ),
                     ),
                   ],

@@ -41,7 +41,6 @@ class QuantitySectionModified extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final translation = context.translation!;
-
     return BaseQuantityController(
       axisDirection: axis,
       label: translation.quantity,

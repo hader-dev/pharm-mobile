@@ -39,28 +39,18 @@ class AddCartBottomSheet extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         if (needCartCubit)
-          BlocProvider.value(
-              value: cartCubit ??
-                  AppLayout.appLayoutScaffoldKey.currentContext!
-                      .read<CartCubit>()),
-        if (deligateCreateOrderCubit != null)
-          BlocProvider.value(value: deligateCreateOrderCubit!),
+          BlocProvider.value(value: cartCubit ?? AppLayout.appLayoutScaffoldKey.currentContext!.read<CartCubit>()),
+        if (deligateCreateOrderCubit != null) BlocProvider.value(value: deligateCreateOrderCubit!),
         BlocProvider.value(
           value: cubit ??
-              BaseMedicineCatalogDetailsScreen
-                  .medicineDetailsScaffoldKey.currentContext!
-                  .read<MedicineDetailsCubit>(),
+              BaseMedicineCatalogDetailsScreen.medicineDetailsScaffoldKey.currentContext!.read<MedicineDetailsCubit>(),
         ),
-        BlocProvider.value(
-            value: AppLayout.appLayoutScaffoldKey.currentContext!
-                .read<OrdersCubit>()),
+        BlocProvider.value(value: AppLayout.appLayoutScaffoldKey.currentContext!.read<OrdersCubit>()),
       ],
       child: BlocListener<MedicineDetailsCubit, MedicineDetailsState>(
         listener: (context, state) {
           if (state is QuickOrderPassed) {
-            AppLayout.appLayoutScaffoldKey.currentContext!
-                .read<OrdersCubit>()
-                .getOrders();
+            AppLayout.appLayoutScaffoldKey.currentContext!.read<OrdersCubit>().getOrders();
             context.pop();
           }
         },
@@ -79,14 +69,32 @@ class AddCartBottomSheet extends StatelessWidget {
                 ),
                 LabeledInfoWidget(
                   label: translation.unit_total_price,
-                  value:
-                      "${(cubit.state.medicineCatalogData.unitPriceHt.toStringAsFixed(2))} ${translation.currency}",
+                  value: "${(cubit.state.medicineCatalogData.unitPriceHt.toStringAsFixed(2))} ${translation.currency}",
+                ),
+                const ResponsiveGap.s12(),
+                Row(
+                  children: [
+                    Flexible(
+                        child: InfoWidget(
+                            label: "Min qty to order",
+                            value: Text(
+                              "${cubit.state.medicineCatalogData.minOrderQuantity}",
+                              style: context.responsiveTextTheme.current.body2Medium,
+                            ))),
+                    ResponsiveGap.s8(),
+                    Flexible(
+                        child: InfoWidget(
+                            label: "Max qty to order",
+                            value: Text(
+                              "${cubit.state.medicineCatalogData.maxOrderQuantity}",
+                              style: context.responsiveTextTheme.current.body2Medium,
+                            ))),
+                  ],
                 ),
                 const ResponsiveGap.s12(),
                 QuantitySectionModified(
                   quantityController: cubit.state.quantityController,
-                  packageQuantityController:
-                      cubit.state.packageQuantityController,
+                  packageQuantityController: cubit.state.packageQuantityController,
                   packageSize: cubit.state.medicineCatalogData.packageSize,
                   disabledPackageQuantity: true,
                   decrementPackageQuantity: cubit.decrementPackageQuantity,
@@ -95,6 +103,8 @@ class AddCartBottomSheet extends StatelessWidget {
                   decrementQuantity: cubit.decrementQuantity,
                   onQuantityChanged: cubit.updateQuantity,
                   onPackageQuantityChanged: cubit.updateQuantityPackage,
+                  maxQuantity: cubit.state.medicineCatalogData.maxOrderQuantity,
+                  minQuantity: cubit.state.medicineCatalogData.minOrderQuantity,
                 ),
                 const ResponsiveGap.s12(),
                 Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
@@ -106,8 +116,7 @@ class AddCartBottomSheet extends StatelessWidget {
                     children: [
                       Text(
                         "${(num.parse(cubit.state.quantityController.text) * cubit.state.medicineCatalogData.unitPriceHt).toStringAsFixed(2)} ${translation.currency}",
-                        style: context.responsiveTextTheme.current.body2Medium
-                            .copyWith(color: AppColors.accent1Shade1),
+                        style: context.responsiveTextTheme.current.body2Medium.copyWith(color: AppColors.accent1Shade1),
                       ),
                       const Spacer(),
                       const Icon(
@@ -118,12 +127,10 @@ class AddCartBottomSheet extends StatelessWidget {
                   ),
                 ),
                 const ResponsiveGap.s12(),
-                const Divider(
-                    color: AppColors.bgDisabled, thickness: 1, height: 1),
+                const Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
                 const ResponsiveGap.s12(),
                 Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: context.responsiveAppSizeTheme.current.p4),
+                  padding: EdgeInsets.symmetric(horizontal: context.responsiveAppSizeTheme.current.p4),
                   child: Row(
                     children: [
                       Expanded(
@@ -149,8 +156,7 @@ class AddCartBottomSheet extends StatelessWidget {
                           onTap: () => addToCartOrDeligateItems(
                               cubit: cubit,
                               context: context,
-                              deligateCreateOrderCubit:
-                                  deligateCreateOrderCubit,
+                              deligateCreateOrderCubit: deligateCreateOrderCubit,
                               onAction: onAction,
                               needCartCubit: needCartCubit),
                           color: AppColors.accent1Shade1,
@@ -207,12 +213,10 @@ class InfoWidget extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p12),
       width: double.maxFinite,
-      margin: EdgeInsets.symmetric(
-          vertical: context.responsiveAppSizeTheme.current.p6),
+      margin: EdgeInsets.symmetric(vertical: context.responsiveAppSizeTheme.current.p6),
       decoration: BoxDecoration(
         color: bgColor,
-        borderRadius: BorderRadius.circular(
-            context.responsiveAppSizeTheme.current.commonWidgetsRadius),
+        borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.commonWidgetsRadius),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

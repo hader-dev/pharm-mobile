@@ -22,8 +22,7 @@ class ParaPharmaProductsPage extends StatefulWidget {
   State<ParaPharmaProductsPage> createState() => _ParaPharmaProductsPageState();
 }
 
-class _ParaPharmaProductsPageState extends State<ParaPharmaProductsPage>
-    with AutomaticKeepAliveClientMixin {
+class _ParaPharmaProductsPageState extends State<ParaPharmaProductsPage> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     final cubit = BlocProvider.of<ParaPharmaCubit>(context);
@@ -43,15 +42,13 @@ class _ParaPharmaProductsPageState extends State<ParaPharmaProductsPage>
                   final products = state.paraPharmaProducts;
 
                   final bool isLoadingMore = state is LoadingMoreParaPharma;
-                  final bool hasReachedEnd =
-                      state is ParaPharmasLoadLimitReached;
+                  final bool hasReachedEnd = state is ParaPharmasLoadLimitReached;
 
                   void onQuickAddTapped(BaseParaPharmaCatalogModel product) {
                     BottomSheetHelper.showCommonBottomSheet(
                       context: context,
                       child: AddCartBottomSheetManual(
-                        deligateCreateOrderCubit: DeligateMarketPlaceScreen
-                            .marketPlaceScaffoldKey.currentContext
+                        deligateCreateOrderCubit: DeligateMarketPlaceScreen.marketPlaceScaffoldKey.currentContext
                             ?.read<DeligateCreateOrderCubit>(),
                         product: product,
                       ),
@@ -60,8 +57,7 @@ class _ParaPharmaProductsPageState extends State<ParaPharmaProductsPage>
 
                   return RefreshIndicator(
                     onRefresh: () => cubit.getParaPharmas(),
-                    child: (state is ParaPharmaProductsLoadingFailed ||
-                            products.isEmpty)
+                    child: (state is ParaPharmaProductsLoadingFailed || products.isEmpty)
                         ? LayoutBuilder(
                             builder: (context, constraints) {
                               return SingleChildScrollView(
@@ -76,21 +72,14 @@ class _ParaPharmaProductsPageState extends State<ParaPharmaProductsPage>
                         : GridView.builder(
                             controller: state.scrollController,
                             physics: const AlwaysScrollableScrollPhysics(),
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount:
-                                  calculateMarketplaceCrossAxisCount(
-                                      context.deviceSize),
-                              crossAxisSpacing: calculateMarketplaceGridSpacing(
-                                  context.deviceSize),
-                              mainAxisSpacing:
-                                  calculateMarketplaceMainAxisSpacing(
-                                      context.deviceSize),
-                              childAspectRatio: calculateMarketplaceAspectRatio(
-                                  context.deviceSize, context.orientation),
+                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: calculateMarketplaceCrossAxisCount(context.deviceSize),
+                              crossAxisSpacing: calculateMarketplaceGridSpacing(context.deviceSize),
+                              mainAxisSpacing: calculateMarketplaceMainAxisSpacing(context.deviceSize),
+                              childAspectRatio:
+                                  calculateMarketplaceAspectRatio(context.deviceSize, context.orientation),
                             ),
-                            itemCount: products.length +
-                                (isLoadingMore || hasReachedEnd ? 1 : 0),
+                            itemCount: products.length + (isLoadingMore || hasReachedEnd ? 1 : 0),
                             itemBuilder: (context, index) {
                               if (index < products.length) {
                                 final paraPharma = products[index];
@@ -98,16 +87,14 @@ class _ParaPharmaProductsPageState extends State<ParaPharmaProductsPage>
                                   paraPharmData: paraPharma,
                                   onQuickAddCallback: onQuickAddTapped,
                                   isLiked: paraPharma.isLiked,
-                                  route: RoutingManager
-                                      .deligateParapharmDetailsScreen,
+                                  route: RoutingManager.deligateParapharmDetailsScreen,
                                   canOrder: true,
                                 );
                               } else {
                                 if (isLoadingMore) {
                                   return const Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Center(
-                                        child: CircularProgressIndicator()),
+                                    child: Center(child: CircularProgressIndicator()),
                                   );
                                 } else if (hasReachedEnd) {
                                   return const EndOfLoadResultWidget();
