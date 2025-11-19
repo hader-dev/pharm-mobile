@@ -109,8 +109,8 @@ class CartCubit extends Cubit<CartState> {
   }
 
   bool _canIncreaseQuantity(CartItemModelUi item) {
-    return (item.model.medicinesCatalogId != null && item.model.quantity >= item.model.maxOrderQuantity - 1) ||
-        (item.model.parapharmCatalogId != null && item.model.quantity >= item.model.maxOrderQuantity - 1);
+    return (item.model.medicinesCatalogId != null && item.model.quantity >= item.model.maxOrderQuantity) ||
+        (item.model.parapharmCatalogId != null && item.model.quantity >= item.model.maxOrderQuantity);
   }
 
   void increaseCartPackageQuantity(CartItemModelUi item) {
@@ -142,8 +142,8 @@ class CartCubit extends Cubit<CartState> {
 
   void decreaseCartItemQuantity(CartItemModelUi item) {
     try {
-      if (item.model.quantity == 1) {
-        throw TemplateException(message: "quantity should be greater than or equal 1.");
+      if (item.model.quantity == item.model.minOrderQuantity) {
+        throw TemplateException(message: "quantity should be greater than or equal ${item.model.minOrderQuantity}.");
       }
 
       final updatedQuantity = int.parse(item.quantityController.text) - 1;

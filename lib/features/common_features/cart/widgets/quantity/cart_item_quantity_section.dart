@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hader_pharm_mobile/config/theme/colors_manager.dart'
-    show AppColors, TextColors;
-import 'package:hader_pharm_mobile/features/common_features/cart/cubit/cart_cubit.dart'
-    show CartCubit, CartState;
+import 'package:hader_pharm_mobile/config/theme/colors_manager.dart' show AppColors, TextColors;
+import 'package:hader_pharm_mobile/features/common_features/cart/cubit/cart_cubit.dart' show CartCubit, CartState;
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 typedef OnQuantityChanged = void Function(String quantity);
@@ -48,20 +46,19 @@ class CartQuantitySection extends StatelessWidget {
               onTap: decrement,
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade200,
-                  borderRadius: BorderRadius.circular(context
-                      .responsiveAppSizeTheme.current.commonWidgetsRadius),
+                  color: int.parse(quantityController.text) == minQuantity
+                      ? Colors.grey.shade200
+                      : AppColors.accentGreenShade1.withAlpha(30),
+                  borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.commonWidgetsRadius),
                 ),
-                padding:
-                    EdgeInsets.all(context.responsiveAppSizeTheme.current.s2),
+                padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.s2),
                 child: Icon(
                   Icons.remove,
                 ),
               ),
             ),
             Container(
-              margin: EdgeInsets.symmetric(
-                  horizontal: context.responsiveAppSizeTheme.current.s2),
+              margin: EdgeInsets.symmetric(horizontal: context.responsiveAppSizeTheme.current.s2),
               width: context.responsiveAppSizeTheme.current.p24 * 1.9,
               height: context.responsiveAppSizeTheme.current.p32,
               child: Form(
@@ -73,9 +70,7 @@ class CartQuantitySection extends StatelessWidget {
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   onChanged: (value) {
                     final parsed = int.tryParse(value);
-                    if (value.isEmpty ||
-                        parsed == null ||
-                        parsed < minQuantity) {
+                    if (value.isEmpty || parsed == null || parsed < minQuantity) {
                       quantityController.text = minQuantity.toString();
                       quantityController.selection = TextSelection.fromPosition(
                         TextPosition(offset: quantityController.text.length),
@@ -91,31 +86,26 @@ class CartQuantitySection extends StatelessWidget {
                       onQuantityChanged?.call(value);
                     }
                   },
-                  validator: (value) =>
-                      value == null || value.isEmpty ? '' : null,
-                  style: context.responsiveTextTheme.current.body3Medium
-                      .copyWith(color: TextColors.primary.color),
+                  validator: (value) => value == null || value.isEmpty ? '' : null,
+                  style: context.responsiveTextTheme.current.body3Medium.copyWith(color: TextColors.primary.color),
                   decoration: InputDecoration(
                     hintText: quantityController.text,
                     contentPadding: EdgeInsets.zero,
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(
-                        context
-                            .responsiveAppSizeTheme.current.commonWidgetsRadius,
+                        context.responsiveAppSizeTheme.current.commonWidgetsRadius,
                       ),
                       borderSide: BorderSide(color: Colors.transparent),
                     ),
                     disabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(
-                        context
-                            .responsiveAppSizeTheme.current.commonWidgetsRadius,
+                        context.responsiveAppSizeTheme.current.commonWidgetsRadius,
                       ),
                       borderSide: BorderSide(color: Colors.transparent),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(
-                        context
-                            .responsiveAppSizeTheme.current.commonWidgetsRadius,
+                        context.responsiveAppSizeTheme.current.commonWidgetsRadius,
                       ),
                       borderSide: BorderSide(color: Colors.transparent),
                     ),
@@ -127,12 +117,12 @@ class CartQuantitySection extends StatelessWidget {
               onTap: increment,
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade200,
-                  borderRadius: BorderRadius.circular(context
-                      .responsiveAppSizeTheme.current.commonWidgetsRadius),
+                  color: int.parse(quantityController.text) == maxQuantity
+                      ? Colors.grey.shade200
+                      : AppColors.accentGreenShade1.withAlpha(30),
+                  borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.commonWidgetsRadius),
                 ),
-                padding:
-                    EdgeInsets.all(context.responsiveAppSizeTheme.current.s2),
+                padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.s2),
                 child: Icon(
                   Icons.add,
                 ),
