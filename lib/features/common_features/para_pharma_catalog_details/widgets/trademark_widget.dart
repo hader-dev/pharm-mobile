@@ -11,14 +11,16 @@ import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/price_formatter.dart';
-import 'package:iconsax/iconsax.dart';
 
 class TrademarkWidget extends StatelessWidget {
   const TrademarkWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    ParaPharmaCatalogModel catalogData = BlocProvider.of<ParaPharmaDetailsCubit>(context).state.paraPharmaCatalogData;
+    ParaPharmaCatalogModel catalogData =
+        BlocProvider.of<ParaPharmaDetailsCubit>(context)
+            .state
+            .paraPharmaCatalogData;
 
     return GestureDetector(
       onTap: () {
@@ -52,7 +54,8 @@ class TrademarkWidget extends StatelessWidget {
               ),
               const ResponsiveGap.s4(),
               Text(catalogData.company!.name,
-                  style: context.responsiveTextTheme.current.body3Regular.copyWith(color: Colors.white)),
+                  style: context.responsiveTextTheme.current.body3Regular
+                      .copyWith(color: Colors.white)),
             ],
           ),
         ),
@@ -66,8 +69,10 @@ class TrademarkWidgetAlternate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ParaPharmaCatalogModel catalogData = BlocProvider.of<ParaPharmaDetailsCubit>(context).state.paraPharmaCatalogData;
-    final translation = context.translation!;
+    ParaPharmaCatalogModel catalogData =
+        BlocProvider.of<ParaPharmaDetailsCubit>(context)
+            .state
+            .paraPharmaCatalogData;
 
     return GestureDetector(
       onTap: () {
@@ -77,18 +82,21 @@ class TrademarkWidgetAlternate extends StatelessWidget {
         );
       },
       child: Padding(
-        padding: EdgeInsets.only(right: context.responsiveAppSizeTheme.current.s2),
+        padding:
+            EdgeInsets.only(right: context.responsiveAppSizeTheme.current.s2),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text.rich(TextSpan(
                 text: catalogData.unitPriceHt.formatAsPrice(),
-                style: context.responsiveTextTheme.current.headLine2
-                    .copyWith(fontWeight: FontWeight.bold, color: AppColors.accent1Shade1),
+                style: context.responsiveTextTheme.current.headLine2.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.accent1Shade1),
                 children: [
                   TextSpan(
                     text: " ${context.translation!.currency}",
-                    style: context.responsiveTextTheme.current.bodyXXSmall.copyWith(
+                    style: context.responsiveTextTheme.current.bodyXXSmall
+                        .copyWith(
                       color: Colors.grey.shade400,
                     ),
                   ),
@@ -104,7 +112,8 @@ class TrademarkWidgetAlternate extends StatelessWidget {
                     border: Border.all(color: AppColors.bgDisabled, width: 1.5),
                     image: DecorationImage(
                       image: catalogData.company?.thumbnailImage?.path == null
-                          ? AssetImage(DrawableAssetStrings.companyPlaceHolderImg)
+                          ? AssetImage(
+                              DrawableAssetStrings.companyPlaceHolderImg)
                           : NetworkImage(
                               getItInstance.get<INetworkService>().getFilesPath(
                                     catalogData.company!.thumbnailImage!.path,
@@ -114,7 +123,9 @@ class TrademarkWidgetAlternate extends StatelessWidget {
                   ),
                 ),
                 const ResponsiveGap.s8(),
-                Text(catalogData.company!.name, style: context.responsiveTextTheme.current.body3Regular.copyWith()),
+                Text(catalogData.company!.name,
+                    style: context.responsiveTextTheme.current.body3Regular
+                        .copyWith()),
               ],
             ),
           ],

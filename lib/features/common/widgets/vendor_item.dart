@@ -6,7 +6,6 @@ import 'package:hader_pharm_mobile/config/services/network/network_interface.dar
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/chips/custom_chip.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
-import 'package:hader_pharm_mobile/features/common_features/create_company_profile/sub_pages/review_and_sumbit/widgets/info_row.dart';
 import 'package:hader_pharm_mobile/models/company.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
@@ -33,8 +32,9 @@ class VendorItem extends StatelessWidget {
     this.hideRemoveButton = true,
     this.onRemoveFromFavorites,
   }) {
-    distributorCategory = DistributorCategory.values
-        .firstWhere((element) => element.id == companyData.distributorCategory, orElse: () => DistributorCategory.Both);
+    distributorCategory = DistributorCategory.values.firstWhere(
+        (element) => element.id == companyData.distributorCategory,
+        orElse: () => DistributorCategory.Both);
   }
 
   Future<void> _makePhoneCall(String phoneNumber) async {
@@ -58,13 +58,15 @@ class VendorItem extends StatelessWidget {
     return InkWell(
       splashColor: Colors.transparent,
       onTap: () {
-        GoRouter.of(context).pushNamed(RoutingManager.vendorDetails, extra: companyData.id);
+        GoRouter.of(context)
+            .pushNamed(RoutingManager.vendorDetails, extra: companyData.id);
       },
       child: Container(
         margin: EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
         padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p12),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.commonWidgetsRadius),
+          borderRadius: BorderRadius.circular(
+              context.responsiveAppSizeTheme.current.commonWidgetsRadius),
           border: Border.all(color: StrokeColors.normal.color, width: 1),
         ),
         child: Row(
@@ -73,7 +75,9 @@ class VendorItem extends StatelessWidget {
             Expanded(
               child: LayoutBuilder(
                 builder: (context, constraints) {
-                  final size = constraints.maxHeight.isFinite ? constraints.maxHeight : constraints.maxWidth;
+                  final size = constraints.maxHeight.isFinite
+                      ? constraints.maxHeight
+                      : constraints.maxWidth;
                   return Center(
                     child: ClipOval(
                       child: SizedBox(
@@ -85,11 +89,15 @@ class VendorItem extends StatelessWidget {
                                 fit: BoxFit.cover,
                               )
                             : Image.network(
-                                getItInstance.get<INetworkService>().getFilesPath(companyData.thumbnailImage!.path),
+                                getItInstance
+                                    .get<INetworkService>()
+                                    .getFilesPath(
+                                        companyData.thumbnailImage!.path),
                                 fit: BoxFit.cover,
                                 loadingBuilder: (context, child, progress) {
                                   if (progress == null) return child;
-                                  return const Center(child: CircularProgressIndicator());
+                                  return const Center(
+                                      child: CircularProgressIndicator());
                                 },
                                 errorBuilder: (context, error, stackTrace) {
                                   return Image.asset(
@@ -115,7 +123,8 @@ class VendorItem extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
                     softWrap: true,
-                    style: context.responsiveTextTheme.current.headLine3SemiBold,
+                    style:
+                        context.responsiveTextTheme.current.headLine3SemiBold,
                   ),
                   if (companyData.phone != null || companyData.email != null)
                     Padding(
@@ -130,10 +139,12 @@ class VendorItem extends StatelessWidget {
                               _makePhoneCall(companyData.phone!);
                             },
                             child: Padding(
-                              padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p4),
+                              padding: EdgeInsets.all(
+                                  context.responsiveAppSizeTheme.current.p4),
                               child: Icon(
                                 Iconsax.call,
-                                size: context.responsiveAppSizeTheme.current.iconSize20,
+                                size: context
+                                    .responsiveAppSizeTheme.current.iconSize20,
                                 color: AppColors.accent1Shade1.withAlpha(130),
                               ),
                             ),
@@ -146,10 +157,12 @@ class VendorItem extends StatelessWidget {
                               _sendMail(companyData.email!);
                             },
                             child: Padding(
-                              padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p4),
+                              padding: EdgeInsets.all(
+                                  context.responsiveAppSizeTheme.current.p4),
                               child: Icon(
                                 LucideIcons.mailOpen,
-                                size: context.responsiveAppSizeTheme.current.iconSize20,
+                                size: context
+                                    .responsiveAppSizeTheme.current.iconSize20,
                                 color: AppColors.accent1Shade1.withAlpha(130),
                               ),
                             ),
@@ -165,7 +178,8 @@ class VendorItem extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       maxLines: 3,
                       softWrap: true,
-                      style: context.responsiveTextTheme.current.bodySmall.copyWith(color: TextColors.ternary.color),
+                      style: context.responsiveTextTheme.current.bodySmall
+                          .copyWith(color: TextColors.ternary.color),
                     ),
                   ],
                   const ResponsiveGap.s12(),
@@ -173,11 +187,15 @@ class VendorItem extends StatelessWidget {
                       ? Row(
                           children: [
                             CustomChip(
-                                label: distributorCategory.displayName(context.translation!),
+                                label: distributorCategory
+                                    .displayName(context.translation!),
                                 labelColor: distributorCategory.color,
-                                labelStyle: context.responsiveTextTheme.current.bodyXSmall.copyWith(
-                                    fontWeight: context.responsiveTextTheme.current.appFont.appFontBold,
-                                    color: distributorCategory.color),
+                                labelStyle: context
+                                    .responsiveTextTheme.current.bodyXSmall
+                                    .copyWith(
+                                        fontWeight: context.responsiveTextTheme
+                                            .current.appFont.appFontBold,
+                                        color: distributorCategory.color),
                                 color: distributorCategory.color.withAlpha(50)),
                             Spacer()
                           ],
@@ -185,19 +203,27 @@ class VendorItem extends StatelessWidget {
                       : Row(
                           children: [
                             CustomChip(
-                                label: DistributorCategory.Pharmacy.displayName(context.translation!),
+                                label: DistributorCategory.Pharmacy.displayName(
+                                    context.translation!),
                                 labelColor: distributorCategory.color,
-                                labelStyle: context.responsiveTextTheme.current.bodyXSmall.copyWith(
-                                    fontWeight: context.responsiveTextTheme.current.appFont.appFontBold,
-                                    color: distributorCategory.color),
+                                labelStyle: context
+                                    .responsiveTextTheme.current.bodyXSmall
+                                    .copyWith(
+                                        fontWeight: context.responsiveTextTheme
+                                            .current.appFont.appFontBold,
+                                        color: distributorCategory.color),
                                 color: distributorCategory.color.withAlpha(50)),
                             ResponsiveGap.s6(),
                             CustomChip(
-                                label: DistributorCategory.ParaPharmacy.displayName(context.translation!),
+                                label: DistributorCategory.ParaPharmacy
+                                    .displayName(context.translation!),
                                 labelColor: distributorCategory.color,
-                                labelStyle: context.responsiveTextTheme.current.bodyXSmall.copyWith(
-                                    fontWeight: context.responsiveTextTheme.current.appFont.appFontBold,
-                                    color: distributorCategory.color),
+                                labelStyle: context
+                                    .responsiveTextTheme.current.bodyXSmall
+                                    .copyWith(
+                                        fontWeight: context.responsiveTextTheme
+                                            .current.appFont.appFontBold,
+                                        color: distributorCategory.color),
                                 color: distributorCategory.color.withAlpha(50)),
                             Spacer()
                           ],
@@ -210,15 +236,18 @@ class VendorItem extends StatelessWidget {
                         Spacer(),
                         Text(
                           'Explore',
-                          style: context.responsiveTextTheme.current.body3Medium.copyWith(
+                          style: context.responsiveTextTheme.current.body3Medium
+                              .copyWith(
                             color: AppColors.accent1Shade1,
-                            fontWeight: context.responsiveTextTheme.current.appFont.appFontBold,
+                            fontWeight: context.responsiveTextTheme.current
+                                .appFont.appFontBold,
                           ),
                         ),
                         Icon(
                           Icons.keyboard_arrow_right_sharp,
                           color: AppColors.accent1Shade1,
-                          size: context.responsiveAppSizeTheme.current.iconSize20,
+                          size:
+                              context.responsiveAppSizeTheme.current.iconSize20,
                         ),
                       ],
                     ),

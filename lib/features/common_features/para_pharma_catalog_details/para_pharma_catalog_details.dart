@@ -11,7 +11,6 @@ import 'package:hader_pharm_mobile/features/common/widgets/info_row_column.dart'
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/widgets/appbar.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/widgets/trademark_widget.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
-import 'package:hader_pharm_mobile/utils/extensions/app_date_helper.dart';
 
 import 'cubit/para_pharma_details_cubit.dart';
 import 'cubit/provider.dart';
@@ -25,7 +24,8 @@ class BaseParaPharmaCatalogDetailsScreen extends StatefulWidget {
   final bool disabledPackageQuanity;
   final bool needCartCubit;
   final QuantitySectionBuilder quantitySectionBuilder;
-  static final GlobalKey<ScaffoldState> paraPharmaDetailsScaffoldKey = GlobalKey<ScaffoldState>();
+  static final GlobalKey<ScaffoldState> paraPharmaDetailsScaffoldKey =
+      GlobalKey<ScaffoldState>();
 
   const BaseParaPharmaCatalogDetailsScreen(
       {super.key,
@@ -36,10 +36,12 @@ class BaseParaPharmaCatalogDetailsScreen extends StatefulWidget {
       this.disabledPackageQuanity = false});
 
   @override
-  State<BaseParaPharmaCatalogDetailsScreen> createState() => _BaseParaPharmaCatalogDetailsScreenState();
+  State<BaseParaPharmaCatalogDetailsScreen> createState() =>
+      _BaseParaPharmaCatalogDetailsScreenState();
 }
 
-class _BaseParaPharmaCatalogDetailsScreenState extends State<BaseParaPharmaCatalogDetailsScreen>
+class _BaseParaPharmaCatalogDetailsScreenState
+    extends State<BaseParaPharmaCatalogDetailsScreen>
     with TickerProviderStateMixin {
   double bottomNavbarHeightModifier = 1;
 
@@ -52,8 +54,10 @@ class _BaseParaPharmaCatalogDetailsScreenState extends State<BaseParaPharmaCatal
   @override
   Widget build(BuildContext context) {
     bottomNavbarHeightModifier = widget.disabledPackageQuanity
-        ? context.responsiveAppSizeTheme.current.deafultQuantityNavbarHeightModifier
-        : context.responsiveAppSizeTheme.current.expandedQuantityNavbarHeightModifier;
+        ? context
+            .responsiveAppSizeTheme.current.deafultQuantityNavbarHeightModifier
+        : context.responsiveAppSizeTheme.current
+            .expandedQuantityNavbarHeightModifier;
     return StateProvider(
       needCartCubit: widget.needCartCubit,
       tabs: const [],
@@ -77,14 +81,16 @@ class _BaseParaPharmaCatalogDetailsScreenState extends State<BaseParaPharmaCatal
           }
           return Scaffold(
             appBar: ParaPharmaCatalogAppBar(),
-            key: BaseParaPharmaCatalogDetailsScreen.paraPharmaDetailsScaffoldKey,
+            key:
+                BaseParaPharmaCatalogDetailsScreen.paraPharmaDetailsScaffoldKey,
             body: SafeArea(
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p16),
+                      padding: EdgeInsets.all(
+                          context.responsiveAppSizeTheme.current.p16),
                       child: const ParaPharmaProductPhotoSection(),
                     ),
                     Padding(
@@ -115,7 +121,8 @@ class _BaseParaPharmaCatalogDetailsScreenState extends State<BaseParaPharmaCatal
                           bottom: context.responsiveAppSizeTheme.current.p8),
                       child: Text(state.paraPharmaCatalogData.name,
                           style: context.responsiveTextTheme.current.headLine2
-                              .copyWith(fontSize: 23, fontWeight: FontWeight.w600)),
+                              .copyWith(
+                                  fontSize: 23, fontWeight: FontWeight.w600)),
                     ),
                     Padding(
                       padding: EdgeInsets.only(
@@ -134,7 +141,10 @@ class _BaseParaPharmaCatalogDetailsScreenState extends State<BaseParaPharmaCatal
                           "body": Style(
                             fontSize: FontSize(
                               MediaQuery.of(context).textScaler.scale(
-                                    context.deviceSize.width <= DeviceSizes.largeMobile.width ? 16 : 25,
+                                    context.deviceSize.width <=
+                                            DeviceSizes.largeMobile.width
+                                        ? 16
+                                        : 25,
                                   ),
                             ),
                             lineHeight: LineHeight(1.5),
@@ -145,11 +155,14 @@ class _BaseParaPharmaCatalogDetailsScreenState extends State<BaseParaPharmaCatal
                     InfoRowColumn(
                       data: [
                         RowColumnDataHolders(
-                            title: context.translation!.brand, value: state.paraPharmaCatalogData.brand!.name),
+                            title: context.translation!.brand,
+                            value: state.paraPharmaCatalogData.brand!.name),
                         RowColumnDataHolders(
-                            title: context.translation!.category, value: state.paraPharmaCatalogData.category!.name),
+                            title: context.translation!.category,
+                            value: state.paraPharmaCatalogData.category!.name),
                         RowColumnDataHolders(
-                            title: context.translation!.packaging, value: state.paraPharmaCatalogData.packaging),
+                            title: context.translation!.packaging,
+                            value: state.paraPharmaCatalogData.packaging),
                       ],
                     ),
                     const ResponsiveGap.s24(),
@@ -161,7 +174,8 @@ class _BaseParaPharmaCatalogDetailsScreenState extends State<BaseParaPharmaCatal
             bottomNavigationBar: SizedBox(
               height: kBottomNavigationBarHeight,
               child: widget.canOrder
-                  ? widget.quantitySectionBuilder(state.paraPharmaCatalogData.unitPriceHt)
+                  ? widget.quantitySectionBuilder(
+                      state.paraPharmaCatalogData.unitPriceHt)
                   : const SizedBox.shrink(),
             ),
           );
