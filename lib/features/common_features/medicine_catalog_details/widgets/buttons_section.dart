@@ -38,96 +38,111 @@ class ButtonsSection extends StatelessWidget {
     final translation = context.translation!;
     final cubit = context.read<MedicineDetailsCubit>();
 
-    return BlocBuilder<CartCubit, CartState>(
+    return BlocBuilder<MedicineDetailsCubit, MedicineDetailsState>(
       builder: (context, state) {
-        return Column(
-          children: [
-            QuantitySectionModified(
-              minQuantity: minOrderQuantity,
-              maxQuantity: maxOrderQuantity,
-              packageSize:
-                  medicineDetailsCubit?.state.medicineCatalogData.packageSize,
-              mainAxisAlignment: quantitySectionAlignment,
-              disabledPackageQuantity: disabledPackageQuanity,
-              decrementQuantity: cubit.decrementQuantity,
-              incrementQuantity: cubit.incrementQuantity,
-              decrementPackageQuantity: cubit.decrementPackageQuantity,
-              incrementPackageQuantity: cubit.incrementPackageQuantity,
-              quantityController: cubit.state.quantityController,
-              packageQuantityController: cubit.state.packageQuantityController,
-              onQuantityChanged: (v) => cubit.updateQuantity(v),
-              onPackageQuantityChanged: (v) => cubit.updateQuantityPackage(v),
-            ),
-            if (price != null)
-              InfoWidget(
-                label: translation.total_price,
-                bgColor: AppColors.accentGreenShade3,
-                value: Row(
+        return BlocBuilder<CartCubit, CartState>(
+          builder: (context, state) {
+            return Column(
+              children: [
+                Row(
                   children: [
-                    Text(
-                      "${(price! * int.parse(cubit.state.quantityController.text)).toStringAsFixed(2)} ${translation.currency}",
-                      style: context.textTheme.bodyLarge?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.accent1Shade1,
-                      ),
-                    ),
+                    Flexible(
+                        child: InfoWidget(
+                            label: "Min qty to order",
+                            value: Text(
+                              "${cubit.state.medicineCatalogData.minOrderQuantity}",
+                              style: context.responsiveTextTheme.current.body2Medium,
+                            ))),
+                    ResponsiveGap.s8(),
+                    Flexible(
+                        child: InfoWidget(
+                            label: "Max qty to order",
+                            value: Text(
+                              "${cubit.state.medicineCatalogData.maxOrderQuantity}",
+                              style: context.responsiveTextTheme.current.body2Medium,
+                            ))),
                   ],
                 ),
-              ),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: context.responsiveAppSizeTheme.current.p4),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: PrimaryTextButton(
-                      isOutLined: true,
-                      textOverflow: TextOverflow.ellipsis,
-                      label: translation.buy_now,
-                      maxWidth: MediaQuery.of(context).size.width * 0.25,
-                      leadingIcon: Iconsax.money4,
-                      spalshColor: AppColors.accent1Shade1.withAlpha(50),
-                      labelColor: AppColors.accent1Shade1,
-                      borderColor: AppColors.accent1Shade1,
-                      onTap: () {
-                        BottomSheetHelper.showCommonBottomSheet(
-                            context: context,
-                            child: MakeOrderBottomSheet(
-                              cubit: medicineDetailsCubit,
-                            )).then((res) => onAction?.call());
-                      },
+                QuantitySectionModified(
+                  minQuantity: minOrderQuantity,
+                  maxQuantity: maxOrderQuantity,
+                  packageSize: medicineDetailsCubit?.state.medicineCatalogData.packageSize,
+                  mainAxisAlignment: quantitySectionAlignment,
+                  disabledPackageQuantity: disabledPackageQuanity,
+                  decrementQuantity: cubit.decrementQuantity,
+                  incrementQuantity: cubit.incrementQuantity,
+                  decrementPackageQuantity: cubit.decrementPackageQuantity,
+                  incrementPackageQuantity: cubit.incrementPackageQuantity,
+                  quantityController: cubit.state.quantityController,
+                  packageQuantityController: cubit.state.packageQuantityController,
+                  onQuantityChanged: (v) => cubit.updateQuantity(v),
+                  onPackageQuantityChanged: (v) => cubit.updateQuantityPackage(v),
+                ),
+                if (price != null)
+                  InfoWidget(
+                    label: translation.total_price,
+                    bgColor: AppColors.accentGreenShade3,
+                    value: Row(
+                      children: [
+                        Text(
+                          "${(price! * int.parse(cubit.state.quantityController.text)).toStringAsFixed(2)} ${translation.currency}",
+                          style: context.textTheme.bodyLarge?.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.accent1Shade1,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  const ResponsiveGap.s8(),
-                  Expanded(
-                    child: PrimaryTextButton(
-                      textOverflow: TextOverflow.ellipsis,
-                      label: translation.add_cart,
-                      leadingIcon: Iconsax.add,
-                      color: AppColors.accent1Shade1,
-                      onTap: () {
-                        BlocProvider.of<CartCubit>(context).addToCart(
-                          CreateCartItemModel(
-                              productId:
-                                  BlocProvider.of<MedicineDetailsCubit>(context)
-                                      .state
-                                      .medicineCatalogData
-                                      .id,
-                              quantity: int.parse(
-                                  BlocProvider.of<MedicineDetailsCubit>(context)
-                                      .state
-                                      .quantityController
-                                      .text),
-                              productType: ProductTypes.medicine),
-                        );
-                        onAction?.call();
-                      },
-                    ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: context.responsiveAppSizeTheme.current.p4),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: PrimaryTextButton(
+                          isOutLined: true,
+                          textOverflow: TextOverflow.ellipsis,
+                          label: translation.buy_now,
+                          maxWidth: MediaQuery.of(context).size.width * 0.25,
+                          leadingIcon: Iconsax.money4,
+                          spalshColor: AppColors.accent1Shade1.withAlpha(50),
+                          labelColor: AppColors.accent1Shade1,
+                          borderColor: AppColors.accent1Shade1,
+                          onTap: () {
+                            BottomSheetHelper.showCommonBottomSheet(
+                                context: context,
+                                child: MakeOrderBottomSheet(
+                                  cubit: medicineDetailsCubit,
+                                )).then((res) => onAction?.call());
+                          },
+                        ),
+                      ),
+                      const ResponsiveGap.s8(),
+                      Expanded(
+                        child: PrimaryTextButton(
+                          textOverflow: TextOverflow.ellipsis,
+                          label: translation.add_cart,
+                          leadingIcon: Iconsax.add,
+                          color: AppColors.accent1Shade1,
+                          onTap: () {
+                            BlocProvider.of<CartCubit>(context).addToCart(
+                              CreateCartItemModel(
+                                  productId:
+                                      BlocProvider.of<MedicineDetailsCubit>(context).state.medicineCatalogData.id,
+                                  quantity: int.parse(
+                                      BlocProvider.of<MedicineDetailsCubit>(context).state.quantityController.text),
+                                  productType: ProductTypes.medicine),
+                            );
+                            onAction?.call();
+                          },
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ),
-          ],
+                ),
+              ],
+            );
+          },
         );
       },
     );

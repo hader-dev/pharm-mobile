@@ -11,7 +11,6 @@ import 'package:hader_pharm_mobile/features/common/widgets/info_row_column.dart'
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/widgets/appbar.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/widgets/trademark_widget.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
-import 'package:hader_pharm_mobile/utils/extensions/app_date_helper.dart';
 
 import 'cubit/para_pharma_details_cubit.dart';
 import 'cubit/provider.dart';

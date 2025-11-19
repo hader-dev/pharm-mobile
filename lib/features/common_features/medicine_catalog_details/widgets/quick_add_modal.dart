@@ -29,37 +29,27 @@ class QuickCartAddModal extends StatefulWidget {
   State<QuickCartAddModal> createState() => _QuickCartAddModalState();
 }
 
-class _QuickCartAddModalState extends State<QuickCartAddModal>
-    with TickerProviderStateMixin {
+class _QuickCartAddModalState extends State<QuickCartAddModal> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    final cartCubit =
-        AppLayout.appLayoutScaffoldKey.currentContext!.read<CartCubit>();
-    final existingCartItem =
-        cartCubit.getItemIfExists(widget.medicineCatalogId);
+    final cartCubit = AppLayout.appLayoutScaffoldKey.currentContext!.read<CartCubit>();
+    final existingCartItem = cartCubit.getItemIfExists(widget.medicineCatalogId);
 
     final tabs = medicineCatalogDetailsTabData(context);
 
     final medicineDetailsCubit = MedicineDetailsCubit(
-        packageQuantityController: TextEditingController(
-            text: existingCartItem?.model.quantity.toString() ?? '0'),
-        quantityController: TextEditingController(
-            text: existingCartItem?.model.quantity.toString() ??
-                widget.minOrderQuantity.toString()),
+        packageQuantityController: TextEditingController(text: existingCartItem?.model.quantity.toString() ?? '0'),
+        quantityController: TextEditingController(text: existingCartItem?.model.quantity.toString() ?? '1'),
         tabController: TabController(length: tabs.length, vsync: this),
         shippingAddress: getItInstance.get<UserManager>().currentUser.address,
-        ordersRepository:
-            OrderRepository(client: getItInstance.get<INetworkService>()),
-        medicineCatalogRepository: MedicineCatalogRepository(
-            client: getItInstance.get<INetworkService>()),
-        favoriteRepository:
-            FavoriteRepository(client: getItInstance.get<INetworkService>()));
+        ordersRepository: OrderRepository(client: getItInstance.get<INetworkService>()),
+        medicineCatalogRepository: MedicineCatalogRepository(client: getItInstance.get<INetworkService>()),
+        favoriteRepository: FavoriteRepository(client: getItInstance.get<INetworkService>()));
 
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => medicineDetailsCubit
-            ..getMedicineCatalogData(widget.medicineCatalogId),
+          create: (context) => medicineDetailsCubit..getMedicineCatalogData(widget.medicineCatalogId),
         ),
         BlocProvider.value(value: cartCubit),
       ],

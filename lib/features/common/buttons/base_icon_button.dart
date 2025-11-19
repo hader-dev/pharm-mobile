@@ -34,10 +34,10 @@ class BaseIconButton extends StatelessWidget {
       onPressed: onPressed,
       style: IconButton.styleFrom(
         backgroundColor: bgColor,
+        disabledBackgroundColor: Colors.grey[300],
         padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
         shape: RoundedRectangleBorder(
-          borderRadius:
-              BorderRadius.circular(context.responsiveAppSizeTheme.current.r4),
+          borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.r4),
           side: isBordered ? BorderSide(color: borderColor) : BorderSide.none,
         ),
       ),

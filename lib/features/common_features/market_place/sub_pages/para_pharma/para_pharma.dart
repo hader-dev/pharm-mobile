@@ -20,8 +20,7 @@ class ParaPharmaProductsPage extends StatefulWidget {
   State<ParaPharmaProductsPage> createState() => _ParaPharmaProductsPageState();
 }
 
-class _ParaPharmaProductsPageState extends State<ParaPharmaProductsPage>
-    with AutomaticKeepAliveClientMixin {
+class _ParaPharmaProductsPageState extends State<ParaPharmaProductsPage> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     final cubit = BlocProvider.of<ParaPharmaCubit>(context);
@@ -39,42 +38,33 @@ class _ParaPharmaProductsPageState extends State<ParaPharmaProductsPage>
               child: BlocBuilder<ParaPharmaCubit, ParaPharmaState>(
                 builder: (context, state) {
                   final products = state.paraPharmaProducts;
-                  final gCubit = MarketPlaceScreen
-                      .marketPlaceScaffoldKey.currentContext!
-                      .read<ParaPharmaCubit>();
-                  final hCubit = HomeScreen.scaffoldKey.currentContext
-                      ?.read<ParaPharmaCubit>();
+                  final gCubit = MarketPlaceScreen.marketPlaceScaffoldKey.currentContext!.read<ParaPharmaCubit>();
+                  final hCubit = HomeScreen.scaffoldKey.currentContext?.read<ParaPharmaCubit>();
 
                   final bool isLoadingMore = state is LoadingMoreParaPharma;
-                  final bool hasReachedEnd =
-                      state is ParaPharmasLoadLimitReached;
+                  final bool hasReachedEnd = state is ParaPharmasLoadLimitReached;
 
-                  void onLikeTapped(
-                      BaseParaPharmaCatalogModel parapharmProduct) {
+                  void onLikeTapped(BaseParaPharmaCatalogModel parapharmProduct) {
                     final id = parapharmProduct.id;
-                    parapharmProduct.isLiked
-                        ? cubit.unlikeParaPharmaCatalog(id)
-                        : cubit.likeParaPharmaCatalog(id);
-                    gCubit.refreshParaPharmaCatalogFavorite(
-                        id, !parapharmProduct.isLiked);
-                    hCubit?.refreshParaPharmaCatalogFavorite(
-                        id, !parapharmProduct.isLiked);
+                    parapharmProduct.isLiked ? cubit.unlikeParaPharmaCatalog(id) : cubit.likeParaPharmaCatalog(id);
+                    gCubit.refreshParaPharmaCatalogFavorite(id, !parapharmProduct.isLiked);
+                    hCubit?.refreshParaPharmaCatalogFavorite(id, !parapharmProduct.isLiked);
                   }
 
-                  void onQuickAddCallback(
-                      BaseParaPharmaCatalogModel parapharmProduct) {
+                  void onQuickAddCallback(BaseParaPharmaCatalogModel parapharmProduct) {
                     BottomSheetHelper.showCommonBottomSheet(
                         initialChildSize: .5,
                         context: context,
                         child: QuickCartAddModal(
                           paraPharmaCatalogId: parapharmProduct.id,
+                          maxOrderQuantity: parapharmProduct.maxOrderQuantity,
+                          minOrderQuantity: parapharmProduct.minOrderQuantity,
                         ));
                   }
 
                   return RefreshIndicator(
                     onRefresh: () => cubit.getParaPharmas(),
-                    child: (state is ParaPharmaProductsLoadingFailed ||
-                            products.isEmpty)
+                    child: (state is ParaPharmaProductsLoadingFailed || products.isEmpty)
                         ? LayoutBuilder(
                             builder: (context, constraints) {
                               return SingleChildScrollView(
@@ -89,8 +79,7 @@ class _ParaPharmaProductsPageState extends State<ParaPharmaProductsPage>
                         : ListView.builder(
                             controller: cubit.scrollController,
                             physics: const AlwaysScrollableScrollPhysics(),
-                            itemCount: products.length +
-                                (isLoadingMore || hasReachedEnd ? 1 : 0),
+                            itemCount: products.length + (isLoadingMore || hasReachedEnd ? 1 : 0),
                             itemBuilder: (context, index) {
                               if (index < products.length) {
                                 final paraPharma = products[index];
@@ -104,8 +93,7 @@ class _ParaPharmaProductsPageState extends State<ParaPharmaProductsPage>
                                 if (isLoadingMore) {
                                   return const Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: Center(
-                                        child: CircularProgressIndicator()),
+                                    child: Center(child: CircularProgressIndicator()),
                                   );
                                 } else if (hasReachedEnd) {
                                   return const EndOfLoadResultWidget();

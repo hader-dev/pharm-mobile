@@ -13,7 +13,7 @@ class BaseCompany with EquatableMixin {
   final String? address;
   final String? phone;
   final String? email;
-  final String? distrubitionCategory;
+  final int? distrubitionCategory;
   const BaseCompany({
     required this.id,
     required this.thumbnailImage,

@@ -9,24 +9,23 @@ BaseParaPharmaCatalogModel jsonToBaseParapharm(Map<String, dynamic> json) {
   final stockQuantity = actualStock - reservedStock;
 
   return BaseParaPharmaCatalogModel(
-    id: json['id'] ?? "",
-    tags: mapJsonDynamicListToTypedList(json['tags']),
-    packageSize: json['packageSize'] ?? 1,
-    unitPriceHt: double.parse(json['unitPriceHt'] ?? "0"),
-    minOrderQuantity: json["minOrderQuantity"] ?? 1,
-    maxOrderQuantity: json["maxOrderQuantity"] ?? 9999,
-    thumbnailImage:
-        json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
-    image: json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
-    name: json['name'] ?? "",
-    stockQuantity: stockQuantity,
-    isActive: json['isActive'],
-    isLiked: json["isFavorite"] ?? false,
-    company: json['company'] != null ? jsonToCompany(json['company']) : null,
-    category:
-        json['category'] != null ? Category.fromJson(json['category']) : null,
-    brand: json['brand'] != null ? Brand.fromJson(json['brand']) : null,
-    tvaPercentage: double.parse(json['tvaPercentage'] ?? "0"),
-    unitPriceTtc: double.parse(json['unitPriceTtc'] ?? "0"),
-  );
+      id: json['id'] ?? "",
+      tags: mapJsonDynamicListToTypedList(json['tags']),
+      packageSize: json['packageSize'] ?? 1,
+      unitPriceHt: double.parse(json['unitPriceHt'] ?? "0"),
+      minOrderQuantity: json["minOrderQuantity"] ?? 1,
+      maxOrderQuantity: json["maxOrderQuantity"] ?? 9999,
+      thumbnailImage: json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
+      image: json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
+      name: json['name'] ?? "",
+      stockQuantity: stockQuantity,
+      isActive: json['isActive'],
+      isLiked: json["isFavorite"] ?? false,
+      company: json['company'] != null ? jsonToCompany(json['company']) : null,
+      category: json['category'] != null ? Category.fromJson(json['category']) : null,
+      brand: json['brand'] != null ? Brand.fromJson(json['brand']) : null,
+      tvaPercentage: double.parse(json['tvaPercentage'] ?? "0"),
+      unitPriceTtc: double.parse(json['unitPriceTtc'] ?? "0"),
+      actualQty: json["actualQuantity"],
+      reservedQty: json["reservedQuantity"]);
 }
