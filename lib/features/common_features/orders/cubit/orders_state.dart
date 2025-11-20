@@ -46,8 +46,7 @@ sealed class OrdersState {
         displayFilters: displayFilters,
       );
 
-  OrdersLoading toLoading({int? offset}) =>
-      OrdersLoading.fromState(state: this, offSet: offset ?? offSet);
+  OrdersLoading toLoading({int? offset}) => OrdersLoading.fromState(state: this, offSet: offset ?? offSet);
 
   OrdersLoadingFilterChanged toSearchFilterChanged({
     required OrderFilters filters,
@@ -63,9 +62,8 @@ sealed class OrdersState {
         orders: orders ?? this.orders,
         totalItemsCount: totalItemsCount ?? this.totalItemsCount,
       );
-  LoadingMoreOrders toLoadingMore() => LoadingMoreOrders.fromState(this);
-  OrdersLoadLimitReached toLoadLimitReached() =>
-      OrdersLoadLimitReached.fromState(this);
+  LoadingMoreOrders toLoadingMore(int offSet) => LoadingMoreOrders.fromState(offSet, this);
+  OrdersLoadLimitReached toLoadLimitReached() => OrdersLoadLimitReached.fromState(this);
   OrdersLoadingFailed toLoadingFailed() => OrdersLoadingFailed.fromState(
         state: this,
       );
@@ -97,8 +95,7 @@ final class OrdersLoading extends OrdersState {
 }
 
 final class OrdersLoadingFilterChanged extends OrdersState {
-  OrdersLoadingFilterChanged.fromState(
-      {required OrdersState state, required super.filters})
+  OrdersLoadingFilterChanged.fromState({required OrdersState state, required super.filters})
       : super(
           totalItemsCount: state.totalItemsCount,
           orders: state.orders,
@@ -111,10 +108,10 @@ final class OrdersLoadingFilterChanged extends OrdersState {
 }
 
 final class LoadingMoreOrders extends OrdersState {
-  LoadingMoreOrders.fromState(OrdersState state)
+  LoadingMoreOrders.fromState(int offSet, OrdersState state)
       : super(
           totalItemsCount: state.totalItemsCount,
-          offSet: state.offSet,
+          offSet: offSet,
           scrollController: state.scrollController,
           orders: state.orders,
           displayFilters: state.displayFilters,
@@ -125,10 +122,7 @@ final class LoadingMoreOrders extends OrdersState {
 }
 
 final class OrdersLoaded extends OrdersState {
-  OrdersLoaded.fromState(
-      {required OrdersState state,
-      required super.orders,
-      required super.totalItemsCount})
+  OrdersLoaded.fromState({required OrdersState state, required super.orders, required super.totalItemsCount})
       : super(
           offSet: state.offSet,
           scrollController: state.scrollController,

@@ -15,11 +15,9 @@ class OrdersProviderState extends StatelessWidget {
       providers: [
         BlocProvider(
             create: (context) => OrdersCubit(
-                searchController: TextEditingController(),
-                orderRepository: OrderRepository(
-                    client: getItInstance.get<INetworkService>()),
-                scrollController: ScrollController())
-              ..getOrders()),
+                  searchController: TextEditingController(),
+                  orderRepository: OrderRepository(client: getItInstance.get<INetworkService>()),
+                )..getOrders()),
       ],
       child: child,
     );

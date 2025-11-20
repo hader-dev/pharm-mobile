@@ -27,6 +27,7 @@ class OrderCard extends StatelessWidget {
     return InkWell(
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
+      hoverColor: Colors.transparent,
       onTap: () {
         GoRouter.of(context).pushNamed(RoutingManager.ordersDetailsScreen, extra: orderData.id);
       },

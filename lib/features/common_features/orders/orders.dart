@@ -21,8 +21,7 @@ class OrdersScreen extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider.value(
-          value: AppLayout.appLayoutScaffoldKey.currentContext!
-              .read<OrdersCubit>(),
+          value: AppLayout.appLayoutScaffoldKey.currentContext!.read<OrdersCubit>(),
         ),
         BlocProvider(
           create: (_) => OrdersFiltersCubit(
@@ -60,27 +59,23 @@ class OrdersScreen extends StatelessWidget {
                           filters: state.filters,
                         );
                       },
-                      child: ListView.builder(
-                        controller: cubit.scrollController,
-                        physics: const AlwaysScrollableScrollPhysics(),
-                        itemCount: state.orders.length + 1,
-                        itemBuilder: (context, index) {
-                          if (index < state.orders.length) {
-                            return OrderCard(orderData: state.orders[index]);
-                          } else {
-                            if (state is LoadingMoreOrders) {
-                              return const Padding(
+                      child: Scrollbar(
+                        controller: state.scrollController,
+                        child: ListView(
+                          controller: state.scrollController,
+                          children: [
+                            ...state.orders.map((order) => OrderCard(
+                                  orderData: order,
+                                )),
+                            if (state is LoadingMoreOrders)
+                              const Padding(
                                 padding: EdgeInsets.all(16.0),
                                 child:
-                                    Center(child: CircularProgressIndicator()),
-                              );
-                            } else if (state is OrdersLoadLimitReached) {
-                              return const EndOfLoadResultWidget();
-                            } else {
-                              return const SizedBox.shrink();
-                            }
-                          }
-                        },
+                                    Center(child: SizedBox(height: 20, width: 20, child: CircularProgressIndicator())),
+                              ),
+                            if (state is OrdersLoadLimitReached) const EndOfLoadResultWidget()
+                          ],
+                        ),
                       ),
                     );
                   },

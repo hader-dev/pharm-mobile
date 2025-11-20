@@ -403,6 +403,6 @@
   "feedback_profile_updated": "Profile updated successfully",
   "vendor_added_to_favorites": "Vendor added to your favorites list",
   "seller":"Seller",
-  "last_update":"Last updated"
-  
+  "last_update":"Last updated",
+  "dateRangeError": "'From' date cannot be after 'To' date."
 }

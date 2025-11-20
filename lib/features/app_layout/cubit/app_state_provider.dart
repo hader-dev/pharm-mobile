@@ -20,8 +20,7 @@ class AppStateProvider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isExtraLargeScreen =
-        MediaQuery.of(context).size.width > DeviceSizes.largeMobile.width;
+    final isExtraLargeScreen = MediaQuery.of(context).size.width > DeviceSizes.largeMobile.width;
 
     return MultiBlocProvider(
       providers: [
@@ -32,8 +31,7 @@ class AppStateProvider extends StatelessWidget {
           )..getUnreadNotificationsCount(),
         ),
         BlocProvider(
-          create: (context) =>
-              AppLayoutCubit(isExtraLargeScreen: isExtraLargeScreen),
+          create: (context) => AppLayoutCubit(isExtraLargeScreen: isExtraLargeScreen),
         ),
         BlocProvider(
           create: (context) => CartCubit(
@@ -50,7 +48,6 @@ class AppStateProvider extends StatelessWidget {
         BlocProvider(
           create: (context) => OrdersCubit(
             searchController: TextEditingController(),
-            scrollController: ScrollController(),
             orderRepository: OrderRepository(
               client: getItInstance.get<INetworkService>(),
             ),
@@ -60,9 +57,9 @@ class AppStateProvider extends StatelessWidget {
       child: BlocListener<CartCubit, CartState>(
         listener: (context, state) {
           if (state is CartItemAdded) {
-            getItInstance.get<ToastManager>().showToast(
-                type: ToastType.success,
-                message: context.translation!.cart_item_added_successfully);
+            getItInstance
+                .get<ToastManager>()
+                .showToast(type: ToastType.success, message: context.translation!.cart_item_added_successfully);
           }
         },
         child: BlocBuilder<CartCubit, CartState>(
@@ -81,8 +78,7 @@ class AppStateDeligateProvider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isExtraLargeScreen =
-        MediaQuery.of(context).size.width > DeviceSizes.largeMobile.width;
+    final isExtraLargeScreen = MediaQuery.of(context).size.width > DeviceSizes.largeMobile.width;
     return MultiBlocProvider(providers: [
       BlocProvider(
         create: (context) => NotificationsCubit(
@@ -91,13 +87,11 @@ class AppStateDeligateProvider extends StatelessWidget {
         )..getUnreadNotificationsCount(),
       ),
       BlocProvider(
-        create: (context) =>
-            AppLayoutCubit(isExtraLargeScreen: isExtraLargeScreen),
+        create: (context) => AppLayoutCubit(isExtraLargeScreen: isExtraLargeScreen),
       ),
       BlocProvider(
         create: (context) => OrdersCubit(
           searchController: TextEditingController(),
-          scrollController: ScrollController(),
           orderRepository: OrderRepository(
             client: getItInstance.get<INetworkService>(),
           ),
