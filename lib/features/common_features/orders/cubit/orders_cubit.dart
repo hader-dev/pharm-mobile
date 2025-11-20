@@ -14,20 +14,16 @@ class OrdersCubit extends Cubit<OrdersState> {
   final IOrderRepository orderRepository;
   final TextEditingController searchController;
   Timer? _debounce;
-  bool _listenerAttached = false;
 
-  OrdersCubit(
-      {required this.searchController,
-      required this.orderRepository,
-      required ScrollController scrollController})
-      : super(OrdersInitial(scrollController: scrollController));
-
-  ScrollController get scrollController {
-    if (!_listenerAttached) {
-      state.scrollController.addListener(_onScroll);
-      _listenerAttached = true;
-    }
-    return state.scrollController;
+  OrdersCubit({
+    required this.searchController,
+    required this.orderRepository,
+  }) : super(OrdersInitial()) {
+    state.scrollController.addListener(() {
+      if (state.scrollController.position.pixels >= state.scrollController.position.maxScrollExtent) {
+        loadMoreOrders();
+      }
+    });
   }
 
   Future<void> getOrders({
@@ -42,9 +38,8 @@ class OrdersCubit extends Cubit<OrdersState> {
           searchQuery: searchController.text.trim(),
           filters: filters ?? state.filters),
     );
-    emit(state.toLoaded(
-        orders: ordersResponse.data,
-        totalItemsCount: ordersResponse.totalItems));
+
+    emit(state.toLoaded(orders: ordersResponse.data, totalItemsCount: ordersResponse.totalItems));
   }
 
   Future<void> loadMoreOrders() async {
@@ -55,7 +50,8 @@ class OrdersCubit extends Cubit<OrdersState> {
       }
 
       final offSet = state.offSet + PaginationConstants.resultsPerPage;
-      emit(state.toLoading(offset: offSet));
+
+      emit(state.toLoadingMore(offSet));
       var ordersResponse = await orderRepository.getOrders(ParamsGetOrder(
         offset: offSet,
         sortDirection: 'DESC',
@@ -65,52 +61,13 @@ class OrdersCubit extends Cubit<OrdersState> {
       ));
       final updated = state.orders.toList();
       updated.addAll(ordersResponse.data);
-      emit(state.toLoaded(
-          orders: updated, totalItemsCount: ordersResponse.totalItems));
+      emit(state.toLoaded(orders: updated, totalItemsCount: ordersResponse.totalItems));
     } catch (e) {
       emit(state.toLoadingFailed());
     }
   }
 
-  void _onScroll() {
-    final localScrollController = scrollController;
-    if (!localScrollController.hasClients) return;
-
-    if (localScrollController.position.pixels >=
-        localScrollController.position.maxScrollExtent) {
-      if (state.offSet < state.totalItemsCount) {
-        loadMoreOrders();
-      } else {
-        emit(state.toLoadLimitReached());
-      }
-    }
-
-    final currentOffset = localScrollController.offset;
-    final previousOffset = state.lastOffset;
-
-    bool displayFilters = state.displayFilters;
-
-    if (currentOffset > previousOffset && displayFilters) {
-      displayFilters = false;
-    } else if (currentOffset < previousOffset && !displayFilters) {
-      displayFilters = true;
-    }
-
-    if (displayFilters != state.displayFilters) {
-      emit(state.toScroll(
-        displayFilters: displayFilters,
-        offset: currentOffset,
-      ));
-    } else {
-      emit(state.toScroll(
-        displayFilters: state.displayFilters,
-        offset: currentOffset,
-      ));
-    }
-  }
-
-  Future<void> _debounceFunction(Future<void> Function() func,
-      [int milliseconds = 500]) async {
+  Future<void> _debounceFunction(Future<void> Function() func, [int milliseconds = 500]) async {
     if (_debounce?.isActive ?? false) _debounce?.cancel();
     _debounce = Timer(Duration(milliseconds: milliseconds), () async {
       await func();
@@ -118,8 +75,7 @@ class OrdersCubit extends Cubit<OrdersState> {
     });
   }
 
-  void searchOrders([String? searchValue]) =>
-      _debounceFunction(() => getOrders());
+  void searchOrders([String? searchValue]) => _debounceFunction(() => getOrders());
 
   void resetOrderFilters() {
     getOrders(filters: OrderFilters());
@@ -137,7 +93,6 @@ class OrdersCubit extends Cubit<OrdersState> {
 
   @override
   Future<void> close() {
-    state.scrollController.removeListener(_onScroll);
     state.scrollController.dispose();
     return super.close();
   }

@@ -1274,4 +1274,14 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get last_update => 'آخر تحديث';
+
+  @override
+  String get hide_filters => 'إخفاء الفلاتر';
+
+  @override
+  String get show_filters => 'إظهار الفلاتر';
+
+  @override
+  String get dateRangeError =>
+      'لا يمكن أن يكون تاريخ \'من\' بعد تاريخ \'إلى\'.';
 }
