@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hader_pharm_mobile/config/responsive/device_size.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/dividers.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
-import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field.dart' show CustomTextField;
-import 'package:hader_pharm_mobile/features/common_features/filters/cubit/orders/orders_filters_cubit.dart';
-import 'package:hader_pharm_mobile/features/common_features/filters/cubit/orders/provider.dart';
-import 'package:hader_pharm_mobile/features/common_features/filters/widgets/common/filters_button_order.dart';
-import 'package:hader_pharm_mobile/features/common_features/filters/widgets/quick_apply/orders/quick_apply_date_filter.dart';
-import 'package:hader_pharm_mobile/features/common_features/filters/widgets/quick_apply/orders/quick_apply_filter.dart';
+import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field.dart'
+    show CustomTextField;
 import 'package:hader_pharm_mobile/features/common_features/orders/cubit/orders_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders/widget/filter_bottom_sheet.dart';
-import 'package:hader_pharm_mobile/models/order_filters.dart';
 import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:lucide_icons/lucide_icons.dart';
@@ -25,10 +19,10 @@ class FiltersBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final translation = context.translation!;
     final cubit = context.read<OrdersCubit>();
-    final filtersCubit = context.read<OrdersFiltersCubit>();
     final isFiltersVisible = ValueNotifier<bool>(true);
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: context.responsiveAppSizeTheme.current.p8),
+      padding: EdgeInsets.symmetric(
+          horizontal: context.responsiveAppSizeTheme.current.p8),
       child: BlocBuilder<OrdersCubit, OrdersState>(
         builder: (context, state) {
           return ValueListenableBuilder(
@@ -44,11 +38,14 @@ class FiltersBar extends StatelessWidget {
                       child: Transform.scale(
                         scale: 0.95,
                         child: CustomTextField(
-                          verticalPadding: context.responsiveAppSizeTheme.current.s2,
+                          verticalPadding:
+                              context.responsiveAppSizeTheme.current.s2,
                           controller: cubit.searchController,
                           suffixIcon: cubit.searchController.text.isNotEmpty
                               ? IconButton(
-                                  icon: Icon(Icons.clear, color: context.theme.colorScheme.onSurfaceVariant),
+                                  icon: Icon(Icons.clear,
+                                      color: context
+                                          .theme.colorScheme.onSurfaceVariant),
                                   onPressed: () {
                                     cubit.searchController.clear();
                                     cubit.searchOrders("");
@@ -59,25 +56,36 @@ class FiltersBar extends StatelessWidget {
                             cubit.searchOrders(value);
                           },
                           hintText: "Search by order reference ...",
-                          prefixIcon: Icon(Icons.search, color: context.theme.colorScheme.onSurfaceVariant),
+                          prefixIcon: Icon(Icons.search,
+                              color:
+                                  context.theme.colorScheme.onSurfaceVariant),
                         ),
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: context.responsiveAppSizeTheme.current.p8),
+                      padding: EdgeInsets.symmetric(
+                          horizontal:
+                              context.responsiveAppSizeTheme.current.p8),
                       child: InkWell(
                         onTap: () => BottomSheetHelper.showCommonBottomSheet(
-                            context: context, child: FiltersBottomSheet(), initialChildSize: 0.6, maxHeight: 0.65),
+                            context: context,
+                            child: FiltersBottomSheet(),
+                            initialChildSize: 0.6,
+                            maxHeight: 0.65),
                         child: SizedBox(
-                          width: context.responsiveAppSizeTheme.current.iconSize25,
-                          height: context.responsiveAppSizeTheme.current.iconSize25,
+                          width:
+                              context.responsiveAppSizeTheme.current.iconSize25,
+                          height:
+                              context.responsiveAppSizeTheme.current.iconSize25,
                           child: Stack(
                             clipBehavior: Clip.none,
                             children: [
                               Icon(
                                 LucideIcons.filter,
-                                color: context.theme.colorScheme.onSurfaceVariant,
-                                size: context.responsiveAppSizeTheme.current.iconSize20,
+                                color:
+                                    context.theme.colorScheme.onSurfaceVariant,
+                                size: context
+                                    .responsiveAppSizeTheme.current.iconSize20,
                               ),
                               if (state.filters.createdAtFrom.isNotEmpty ||
                                   state.filters.createdAtTo.isNotEmpty ||

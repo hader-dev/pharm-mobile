@@ -7,6 +7,8 @@ import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/medicine_products/cubit/medicine_products_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/cubit/para_pharma_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/vendor_details/cubit/vendor_details_cubit.dart';
+import 'package:hader_pharm_mobile/models/medical_filters.dart';
+import 'package:hader_pharm_mobile/models/para_medical_filters.dart';
 import 'package:hader_pharm_mobile/repositories/remote/favorite/favorite_repository_impl.dart';
 import 'package:hader_pharm_mobile/repositories/remote/medicine_catalog/medicine_catalog_repository_impl.dart';
 import 'package:hader_pharm_mobile/repositories/remote/parapharm_catalog/para_pharma_catalog_repository_impl.dart';
@@ -18,15 +20,22 @@ import '../subPages/medicines/medicines.dart';
 import '../subPages/para_pharma/para_pharma.dart';
 
 class VandorDetailsTabBarSection extends StatefulWidget {
-  final List<String> tabs = ["About", "Medicine", "Para-Pharma", "Announcement"];
+  final List<String> tabs = [
+    "About",
+    "Medicine",
+    "Para-Pharma",
+    "Announcement"
+  ];
   VandorDetailsTabBarSection({super.key, required this.companyId});
   final String companyId;
 
   @override
-  State<VandorDetailsTabBarSection> createState() => _VandorDetailsTabBarSectionState();
+  State<VandorDetailsTabBarSection> createState() =>
+      _VandorDetailsTabBarSectionState();
 }
 
-class _VandorDetailsTabBarSectionState extends State<VandorDetailsTabBarSection> with TickerProviderStateMixin {
+class _VandorDetailsTabBarSectionState extends State<VandorDetailsTabBarSection>
+    with TickerProviderStateMixin {
   late final TabController tabsController;
   @override
   void initState() {
@@ -68,24 +77,32 @@ class _VandorDetailsTabBarSectionState extends State<VandorDetailsTabBarSection>
               BlocProvider(
                 create: (context) => MedicineProductsCubit(
                     scrollController: ScrollController(),
-                    favoriteRepository: FavoriteRepository(client: getItInstance.get<INetworkService>()),
+                    favoriteRepository: FavoriteRepository(
+                        client: getItInstance.get<INetworkService>()),
                     searchController: TextEditingController(text: ""),
-                    medicineRepository: MedicineCatalogRepository(client: getItInstance.get<INetworkService>()))
-                  ..getMedicines(companyIdFilter: widget.companyId),
+                    medicineRepository: MedicineCatalogRepository(
+                        client: getItInstance.get<INetworkService>()))
+                  ..getMedicines(
+                      filters: MedicalFilters(vendors: [widget.companyId])),
               ),
               BlocProvider(
                 create: (context) => ParaPharmaCubit(
-                    favoriteRepository: FavoriteRepository(client: getItInstance.get<INetworkService>()),
+                    favoriteRepository: FavoriteRepository(
+                        client: getItInstance.get<INetworkService>()),
                     scrollController: ScrollController(),
                     searchController: TextEditingController(text: ""),
-                    paraPharmaRepository: ParaPharmaRepository(client: getItInstance.get<INetworkService>()))
-                  ..getParaPharmas(companyIdFilter: widget.companyId),
+                    paraPharmaRepository: ParaPharmaRepository(
+                        client: getItInstance.get<INetworkService>()))
+                  ..getParaPharmas(
+                      filters: ParaMedicalFilters(vendors: [widget.companyId])),
               ),
             ],
             child: TabBarView(
               controller: tabsController,
               children: [
-                VendorDetailsPage(vendorData: context.read<VendorDetailsCubit>().state.vendor),
+                VendorDetailsPage(
+                    vendorData:
+                        context.read<VendorDetailsCubit>().state.vendor),
                 MedicinesPage(),
                 ParapharmaPage(),
                 AnnouncementsPage()

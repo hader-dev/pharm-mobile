@@ -75,11 +75,17 @@ class VendorDetailsProvider extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => ParaMedicalFiltersCubit(
+            appliedFilters: ParaMedicalFilters(
+              vendors: [companyId],
+            ),
             filtersRepository: getItInstance.get<IFiltersRepository>(),
           ),
         ),
         BlocProvider(
           create: (context) => MedicalFiltersCubit(
+            appliedFilters: MedicalFilters(
+              vendors: [companyId],
+            ),
             filtersRepository: getItInstance.get<IFiltersRepository>(),
           ),
         ),
@@ -104,7 +110,9 @@ class VendorDetailsProvider extends StatelessWidget {
               searchController: TextEditingController(text: ""),
               medicineRepository: MedicineCatalogRepository(
                   client: getItInstance.get<INetworkService>()))
-            ..getMedicines(),
+            ..getMedicines(
+              filters: MedicalFilters(vendors: [companyId]),
+            ),
         ),
         BlocProvider(
           create: (context) => ParaPharmaCubit(
@@ -117,7 +125,9 @@ class VendorDetailsProvider extends StatelessWidget {
               searchController: TextEditingController(text: ""),
               paraPharmaRepository: ParaPharmaRepository(
                   client: getItInstance.get<INetworkService>()))
-            ..getParaPharmas(),
+            ..getParaPharmas(
+              filters: ParaMedicalFilters(vendors: [companyId]),
+            ),
         ),
       ],
       child: child,

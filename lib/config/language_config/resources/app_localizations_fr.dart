@@ -1296,12 +1296,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get last_update => 'Dernière mise à jour';
 
   @override
-  String get hide_filters => 'Masquer filtres';
-
-  @override
-  String get show_filters => 'Afficher filtres';
-
-  @override
   String get dateRangeError =>
       'La date \'De\' ne peut pas être postérieure à la date \'À\'';
 }

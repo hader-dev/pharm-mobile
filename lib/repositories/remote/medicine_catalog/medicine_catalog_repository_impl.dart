@@ -82,7 +82,6 @@ class MedicineCatalogRepository extends IMedicineCatalogRepository {
       queryParams['lte[unitPriceHt]'] = filters.lteUnitPriceHt!;
     }
 
-
     if (filters.vendors.isNotEmpty) {
       queryParams['filters[companyId]'] = filters.vendors.first;
     }
