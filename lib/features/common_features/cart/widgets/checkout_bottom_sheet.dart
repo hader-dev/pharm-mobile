@@ -19,8 +19,8 @@ import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 import 'package:hader_pharm_mobile/utils/validators.dart';
 import 'package:iconsax/iconsax.dart' show Iconsax;
 
-class SelectPaymentMethodBottomSheet extends StatelessWidget {
-  const SelectPaymentMethodBottomSheet({super.key});
+class CheckOutBottomSheet extends StatelessWidget {
+  const CheckOutBottomSheet({super.key});
 
   @override
   Widget build(BuildContext context) {
