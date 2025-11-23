@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hader_pharm_mobile/config/responsive/device_size.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/widgets/vendors/vendors_section_items.dart';
-import 'package:hader_pharm_mobile/features/common_features/profile/widgets/section_title.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/section_title.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
@@ -31,7 +31,11 @@ class VendorSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Gap(screenWidth <= 414 ? 0 : context.responsiveAppSizeTheme.current.s4),
-          SectionTitle(title: translation.vendors, iconPath: DrawableAssetStrings.newSellerIcon),
+          SectionTitle(
+            title: translation.vendors,
+            iconPath: DrawableAssetStrings.newSellerIcon,
+            isSeeAllEnabled: true,
+          ),
           VendorsSectionItems(
             maxItemsPerRow: maxItemsPerRow,
             maxVisibleItems: maxItemsCount,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hader_pharm_mobile/features/common_features/profile/widgets/section_title.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/section_title.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
@@ -27,6 +27,7 @@ class MedicineSection extends StatelessWidget {
           SectionTitle(
             title: translation.medicines,
             iconPath: DrawableAssetStrings.newMedicinesIcon,
+            isSeeAllEnabled: true,
           ),
           MedicinesSectionItems(minSectionHeight: minSectionHeight),
         ],
