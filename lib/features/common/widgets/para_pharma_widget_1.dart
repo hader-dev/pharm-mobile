@@ -10,11 +10,11 @@ import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_icon_button.dart';
 import 'package:hader_pharm_mobile/features/common/chips/custom_chip.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/price_widget.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/stock_availlable.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
-import 'package:hader_pharm_mobile/utils/extensions/price_formatter.dart';
 import 'package:iconsax/iconsax.dart';
 
 class ParaPharmaWidget1 extends StatelessWidget {
@@ -41,12 +41,14 @@ class ParaPharmaWidget1 extends StatelessWidget {
         vertical: context.responsiveAppSizeTheme.current.p4,
       ),
       padding: EdgeInsets.symmetric(
-          horizontal: context.responsiveAppSizeTheme.current.p8, vertical: context.responsiveAppSizeTheme.current.p12),
+          horizontal: context.responsiveAppSizeTheme.current.p8,
+          vertical: context.responsiveAppSizeTheme.current.p12),
       decoration: BoxDecoration(
         border: Border.all(
           color: const Color.fromARGB(186, 245, 245, 245),
         ),
-        borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.r6),
+        borderRadius:
+            BorderRadius.circular(context.responsiveAppSizeTheme.current.r6),
       ),
       child: InkWell(
         splashColor: Colors.transparent,
@@ -56,18 +58,22 @@ class ParaPharmaWidget1 extends StatelessWidget {
           final userRole = getItInstance.get<UserManager>().currentUser.role;
           final canOrderBasedOnRole = !userRole.isDelegate;
 
-          GoRouter.of(context)
-              .pushNamed(route, extra: {"id": paraPharmData.id, "canOrder": canOrder || canOrderBasedOnRole});
+          GoRouter.of(context).pushNamed(route, extra: {
+            "id": paraPharmData.id,
+            "canOrder": canOrder || canOrderBasedOnRole
+          });
         },
         child: Row(
           children: [
             Container(
-              margin: EdgeInsets.only(right: context.responsiveAppSizeTheme.current.p8),
+              margin: EdgeInsets.only(
+                  right: context.responsiveAppSizeTheme.current.p8),
               clipBehavior: Clip.antiAlias,
               height: 130,
               width: 130,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.r6),
+                borderRadius: BorderRadius.circular(
+                    context.responsiveAppSizeTheme.current.r6),
                 border: paraPharmData.image != null
                     ? null
                     : Border.all(
@@ -81,16 +87,20 @@ class ParaPharmaWidget1 extends StatelessWidget {
                       boxFit: BoxFit.cover,
                       width: double.maxFinite,
                       height: double.maxFinite,
-                      imageUrl: getItInstance.get<INetworkService>().getFilesPath(paraPharmData.image?.path ?? ''),
+                      imageUrl: getItInstance
+                          .get<INetworkService>()
+                          .getFilesPath(paraPharmData.image?.path ?? ''),
                     )
                   else
                     Image(
-                      image: AssetImage(DrawableAssetStrings.paraPharmaPlaceHolderImg),
+                      image: AssetImage(
+                          DrawableAssetStrings.paraPharmaPlaceHolderImg),
                       fit: BoxFit.cover,
                       height: double.maxFinite,
                       width: double.maxFinite,
                     ),
-                  StockAvailableContainerWidget(isAvailable: paraPharmData.stockQuantity > 0),
+                  StockAvailableContainerWidget(
+                      isAvailable: paraPharmData.stockQuantity > 0),
                   if (onFavoriteCallback != null)
                     Positioned(
                       right: 0,
@@ -100,9 +110,14 @@ class ParaPharmaWidget1 extends StatelessWidget {
                           width: 30,
                           height: 30,
                           child: Icon(
-                            paraPharmData.isLiked ? Iconsax.heart5 : Iconsax.heart,
-                            color: paraPharmData.isLiked ? Colors.red : Colors.grey[400],
-                            size: context.responsiveAppSizeTheme.current.iconSize20,
+                            paraPharmData.isLiked
+                                ? Iconsax.heart5
+                                : Iconsax.heart,
+                            color: paraPharmData.isLiked
+                                ? Colors.red
+                                : Colors.grey[400],
+                            size: context
+                                .responsiveAppSizeTheme.current.iconSize20,
                           ),
                         ),
                         onTap: () {
@@ -129,13 +144,20 @@ class ParaPharmaWidget1 extends StatelessWidget {
                         width: 25,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          border: Border.all(color: AppColors.bgDisabled, width: 1.2),
+                          border: Border.all(
+                              color: AppColors.bgDisabled, width: 1.2),
                           image: DecorationImage(
-                            image: paraPharmData.company?.thumbnailImage?.path == null
-                                ? AssetImage(DrawableAssetStrings.companyPlaceHolderImg)
+                            image: paraPharmData
+                                        .company?.thumbnailImage?.path ==
+                                    null
+                                ? AssetImage(
+                                    DrawableAssetStrings.companyPlaceHolderImg)
                                 : NetworkImage(
-                                    getItInstance.get<INetworkService>().getFilesPath(
-                                          paraPharmData.company!.thumbnailImage!.path,
+                                    getItInstance
+                                        .get<INetworkService>()
+                                        .getFilesPath(
+                                          paraPharmData
+                                              .company!.thumbnailImage!.path,
                                         ),
                                   ),
                           ),
@@ -145,7 +167,8 @@ class ParaPharmaWidget1 extends StatelessWidget {
                       Text(paraPharmData.company!.name,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
-                          style: context.responsiveTextTheme.current.bodyXSmall),
+                          style:
+                              context.responsiveTextTheme.current.bodyXSmall),
                       const Spacer(),
                       if (onQuickAddCallback != null)
                         Transform.scale(
@@ -157,9 +180,12 @@ class ParaPharmaWidget1 extends StatelessWidget {
                             onPressed: () {
                               onQuickAddCallback?.call(paraPharmData);
                             },
-                            icon: SvgPicture.asset(DrawableAssetStrings.newAddToCartIcon,
-                                height: context.responsiveAppSizeTheme.current.iconSize25,
-                                width: context.responsiveAppSizeTheme.current.iconSize25,
+                            icon: SvgPicture.asset(
+                                DrawableAssetStrings.newAddToCartIcon,
+                                height: context
+                                    .responsiveAppSizeTheme.current.iconSize25,
+                                width: context
+                                    .responsiveAppSizeTheme.current.iconSize25,
                                 colorFilter: ColorFilter.mode(
                                   AppColors.accent1Shade1,
                                   BlendMode.srcIn,
@@ -175,39 +201,37 @@ class ParaPharmaWidget1 extends StatelessWidget {
                         softWrap: true,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
-                        style: context.responsiveTextTheme.current.headLine3SemiBold
+                        style: context
+                            .responsiveTextTheme.current.headLine3SemiBold
                             .copyWith(color: TextColors.primary.color)),
                   ),
-                  Text.rich(
-                    TextSpan(
-                      children: [
-                        TextSpan(
-                          text: paraPharmData.unitPriceHt.formatAsPriceForPrint(decimalDigits: 1),
-                          style: context.responsiveTextTheme.current.headLine4SemiBold
-                              .copyWith(color: AppColors.accent1Shade1),
-                        ),
-                        TextSpan(
-                          text: " ${context.translation!.currency}",
-                          style: context.responsiveTextTheme.current.bodyXSmall
-                              .copyWith(color: AppColors.accent1Shade1, fontSize: 10),
-                        ),
-                      ],
-                    ),
+                  PriceWidget(
+                    price: paraPharmData.unitPriceHt,
+                    overridePrice: paraPharmData.computedPrice,
+                    mainStyle: context
+                        .responsiveTextTheme.current.headLine4SemiBold
+                        .copyWith(color: AppColors.accent1Shade1),
+                    currencyStyle: context
+                        .responsiveTextTheme.current.bodyXSmall
+                        .copyWith(color: AppColors.accent1Shade1, fontSize: 10),
                   ),
                   ResponsiveGap.s4(),
-                  if (paraPharmData.category != null || paraPharmData.brand != null)
-                    Row(spacing: context.responsiveAppSizeTheme.current.s4, children: [
-                      if (paraPharmData.category != null)
-                        CustomChip(
-                          label: paraPharmData.category!.name,
-                          color: AppColors.bgDarken,
-                        ),
-                      if (paraPharmData.brand != null)
-                        CustomChip(
-                          label: paraPharmData.brand!.name,
-                          color: AppColors.bgDarken,
-                        ),
-                    ]),
+                  if (paraPharmData.category != null ||
+                      paraPharmData.brand != null)
+                    Row(
+                        spacing: context.responsiveAppSizeTheme.current.s4,
+                        children: [
+                          if (paraPharmData.category != null)
+                            CustomChip(
+                              label: paraPharmData.category!.name,
+                              color: AppColors.bgDarken,
+                            ),
+                          if (paraPharmData.brand != null)
+                            CustomChip(
+                              label: paraPharmData.brand!.name,
+                              color: AppColors.bgDarken,
+                            ),
+                        ]),
                 ],
               ),
             ),
