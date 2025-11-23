@@ -2,17 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart' show getItInstance;
-import 'package:hader_pharm_mobile/config/services/network/network_interface.dart' show INetworkService;
+import 'package:hader_pharm_mobile/config/services/network/network_interface.dart'
+    show INetworkService;
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
-import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart' show ResponsiveGap;
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart'
+    show ResponsiveGap;
 import 'package:hader_pharm_mobile/features/common_features/vendor_details/cubit/vendor_details_cubit.dart';
-import 'package:hader_pharm_mobile/models/company.dart' show Company;
-import 'package:hader_pharm_mobile/utils/assets_strings.dart' show DrawableAssetStrings;
+import 'package:hader_pharm_mobile/utils/assets_strings.dart'
+    show DrawableAssetStrings;
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
-class VendorDetailsAppbar extends StatelessWidget implements PreferredSizeWidget {
+class VendorDetailsAppbar extends StatelessWidget
+    implements PreferredSizeWidget {
   const VendorDetailsAppbar({
     super.key,
   });
@@ -25,7 +28,9 @@ class VendorDetailsAppbar extends StatelessWidget implements PreferredSizeWidget
         return CustomAppBarV2.normal(
           leading: IconButton(
             icon: Icon(
-              Directionality.of(context) == TextDirection.rtl ? Iconsax.arrow_right_3 : Iconsax.arrow_left_2,
+              Directionality.of(context) == TextDirection.rtl
+                  ? Iconsax.arrow_right_3
+                  : Iconsax.arrow_left_2,
               color: AppColors.accent1Shade1,
               size: context.responsiveAppSizeTheme.current.iconSize25,
             ),
@@ -43,7 +48,9 @@ class VendorDetailsAppbar extends StatelessWidget implements PreferredSizeWidget
                 image: DecorationImage(
                   image: vendorData.image?.path == null
                       ? AssetImage(DrawableAssetStrings.companyPlaceHolderImg)
-                      : NetworkImage(getItInstance.get<INetworkService>().getFilesPath(vendorData.image?.path ?? ''))
+                      : NetworkImage(getItInstance
+                              .get<INetworkService>()
+                              .getFilesPath(vendorData.image?.path ?? ''))
                           as ImageProvider,
                 ),
               ),
@@ -51,7 +58,9 @@ class VendorDetailsAppbar extends StatelessWidget implements PreferredSizeWidget
             const ResponsiveGap.s8(),
             Text(vendorData.name,
                 style: context.responsiveTextTheme.current.headLine4SemiBold
-                    .copyWith(color: AppColors.accent1Shade1, overflow: TextOverflow.ellipsis))
+                    .copyWith(
+                        color: AppColors.accent1Shade1,
+                        overflow: TextOverflow.ellipsis))
           ]),
         );
       },

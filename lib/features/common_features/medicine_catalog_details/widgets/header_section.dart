@@ -7,11 +7,11 @@ import 'package:hader_pharm_mobile/config/services/network/network_interface.dar
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/chips/custom_chip.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/price_widget.dart';
 import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/cubit/medicine_details_cubit.dart';
 import 'package:hader_pharm_mobile/models/medicine_catalog.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
-import 'package:hader_pharm_mobile/utils/extensions/price_formatter.dart';
 
 class HeaderSection extends StatelessWidget {
   const HeaderSection({super.key});
@@ -72,20 +72,16 @@ class TrademarkWidgetAlternate extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text.rich(TextSpan(
-                text: catalogData.unitPriceHt.formatAsPrice(),
-                style: context.responsiveTextTheme.current.headLine2.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.accent1Shade1),
-                children: [
-                  TextSpan(
-                    text: " ${context.translation!.currency}",
-                    style: context.responsiveTextTheme.current.bodyXXSmall
-                        .copyWith(
-                      color: Colors.grey.shade400,
-                    ),
-                  ),
-                ])),
+            PriceWidget(
+              price: catalogData.unitPriceHt,
+              overridePrice: catalogData.computedPrice,
+              mainStyle: context.responsiveTextTheme.current.headLine2.copyWith(
+                  fontWeight: FontWeight.bold, color: AppColors.accent1Shade1),
+              currencyStyle:
+                  context.responsiveTextTheme.current.bodyXXSmall.copyWith(
+                color: AppColors.accent1Shade1,
+              ),
+            ),
             const ResponsiveGap.s16(),
             Row(
               children: [

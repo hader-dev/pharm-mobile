@@ -29,10 +29,11 @@ class BaseMedicineCatalogModel {
   final int displayOrder;
   final BaseCompany? company;
   bool isLiked;
-  
+  final double? computedPrice;
 
   BaseMedicineCatalogModel({
     required this.packageSize,
+    this.computedPrice,
     required this.id,
     required this.unitPriceTtc,
     required this.unitPriceHt,
