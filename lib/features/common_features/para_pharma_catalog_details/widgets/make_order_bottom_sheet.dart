@@ -107,6 +107,7 @@ class MakeOrderBottomSheet extends StatelessWidget {
                         horizontalPadding: context.responsiveAppSizeTheme.current.p6,
                         initValue: UserManager.instance.currentUser.address,
                         maxLines: 3,
+                        maxLength: 255,
                         validationFunc: (value) => requiredValidator(value, translation, minLength: 2),
                         isFilled: false,
                         isBorderEnabled: true,

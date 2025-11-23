@@ -61,8 +61,8 @@ enum OrderClaimStatus {
 enum OrderStatus {
   created(
     id: 1,
-    color: Colors.lightBlueAccent, // gray
-    icon: Icons.new_releases, // "new"
+    color: Colors.lightBlueAccent,
+    icon: Icons.new_releases,
   ),
   approved(
     id: 2,

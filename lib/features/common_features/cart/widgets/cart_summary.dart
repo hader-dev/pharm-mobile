@@ -9,7 +9,7 @@ import 'package:hader_pharm_mobile/features/common_features/cart/cubit/cart_cubi
 import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
-import 'select_payment_bottom_sheet.dart';
+import 'checkout_bottom_sheet.dart';
 
 class CartSummarySection extends StatelessWidget {
   const CartSummarySection({super.key});
@@ -18,8 +18,7 @@ class CartSummarySection extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<CartCubit>();
     return BlocBuilder<CartCubit, CartState>(
-        buildWhen: (prev, curr) =>
-            prev.isCartSummaryExpanded != curr.isCartSummaryExpanded,
+        buildWhen: (prev, curr) => prev.isCartSummaryExpanded != curr.isCartSummaryExpanded,
         builder: (BuildContext context, CartState state) {
           return InkWell(
             splashColor: Colors.transparent,
@@ -28,32 +27,26 @@ class CartSummarySection extends StatelessWidget {
             },
             child: Container(
               margin: EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
-              padding:
-                  EdgeInsets.all(context.responsiveAppSizeTheme.current.p12),
+              padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p12),
               decoration: BoxDecoration(
                 color: Colors.white,
                 border: Border.all(color: Colors.grey[300]!),
                 borderRadius: BorderRadius.all(
-                  Radius.circular(context
-                      .responsiveAppSizeTheme.current.commonWidgetsRadius),
+                  Radius.circular(context.responsiveAppSizeTheme.current.commonWidgetsRadius),
                 ),
               ),
               child: !state.isCartSummaryExpanded
                   ? Row(children: <Widget>[
                       Text(
                         context.translation!.summary,
-                        style: context.responsiveTextTheme.current.body3Medium
-                            .copyWith(
-                          fontWeight: context
-                              .responsiveTextTheme.current.appFont.appFontBold,
+                        style: context.responsiveTextTheme.current.body3Medium.copyWith(
+                          fontWeight: context.responsiveTextTheme.current.appFont.appFontBold,
                           color: Colors.grey[600],
                         ),
                       ),
                       const Spacer(),
                       Icon(Icons.keyboard_arrow_up_sharp,
-                          color: AppColors.accent1Shade1,
-                          size: context
-                              .responsiveAppSizeTheme.current.iconSize20),
+                          color: AppColors.accent1Shade1, size: context.responsiveAppSizeTheme.current.iconSize20),
                     ])
                   : Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
                       Container(
@@ -61,10 +54,8 @@ class CartSummarySection extends StatelessWidget {
                         width: 50,
                         decoration: BoxDecoration(
                           color: Colors.grey[300],
-                          borderRadius: BorderRadius.circular(context
-                              .responsiveAppSizeTheme
-                              .current
-                              .commonWidgetsRadius),
+                          borderRadius:
+                              BorderRadius.circular(context.responsiveAppSizeTheme.current.commonWidgetsRadius),
                         ),
                       ),
                       Padding(
@@ -76,8 +67,7 @@ class CartSummarySection extends StatelessWidget {
                             const Spacer(),
                             Icon(Icons.close,
                                 color: AppColors.accent1Shade1,
-                                size: context
-                                    .responsiveAppSizeTheme.current.iconSize20),
+                                size: context.responsiveAppSizeTheme.current.iconSize20),
                           ],
                         ),
                       ),
@@ -85,11 +75,8 @@ class CartSummarySection extends StatelessWidget {
                         children: <Widget>[
                           Text(
                             context.translation!.total_ht_amount,
-                            style: context
-                                .responsiveTextTheme.current.body3Medium
-                                .copyWith(
-                              fontWeight: context.responsiveTextTheme.current
-                                  .appFont.appFontBold,
+                            style: context.responsiveTextTheme.current.body3Medium.copyWith(
+                              fontWeight: context.responsiveTextTheme.current.appFont.appFontBold,
                               color: Colors.grey[600],
                             ),
                           ),
@@ -97,18 +84,12 @@ class CartSummarySection extends StatelessWidget {
                           BlocBuilder<CartCubit, CartState>(
                             builder: (context, state) {
                               return FormattedPrice(
-                                price: num.parse(
-                                    state.totalHtAmount.toStringAsFixed(2)),
-                                valueStyle: context
-                                    .responsiveTextTheme.current.body3Medium
-                                    .copyWith(
-                                  fontWeight: context.responsiveTextTheme
-                                      .current.appFont.appFontBold,
+                                price: num.parse(state.totalHtAmount.toStringAsFixed(2)),
+                                valueStyle: context.responsiveTextTheme.current.body3Medium.copyWith(
+                                  fontWeight: context.responsiveTextTheme.current.appFont.appFontBold,
                                   color: Colors.grey[600],
                                 ),
-                                unitStyle: context
-                                    .responsiveTextTheme.current.bodyXSmall
-                                    .copyWith(
+                                unitStyle: context.responsiveTextTheme.current.bodyXSmall.copyWith(
                                   color: Colors.grey,
                                 ),
                               );
@@ -123,11 +104,8 @@ class CartSummarySection extends StatelessWidget {
                         children: <Widget>[
                           Text(
                             context.translation!.total_ttc_amount,
-                            style: context
-                                .responsiveTextTheme.current.body3Medium
-                                .copyWith(
-                              fontWeight: context.responsiveTextTheme.current
-                                  .appFont.appFontBold,
+                            style: context.responsiveTextTheme.current.body3Medium.copyWith(
+                              fontWeight: context.responsiveTextTheme.current.appFont.appFontBold,
                               color: Colors.grey[600],
                             ),
                           ),
@@ -135,18 +113,12 @@ class CartSummarySection extends StatelessWidget {
                           BlocBuilder<CartCubit, CartState>(
                             builder: (context, state) {
                               return FormattedPrice(
-                                price: num.parse(
-                                    state.totalTTCAmount.toStringAsFixed(2)),
-                                valueStyle: context
-                                    .responsiveTextTheme.current.body3Medium
-                                    .copyWith(
-                                  fontWeight: context.responsiveTextTheme
-                                      .current.appFont.appFontBold,
+                                price: num.parse(state.totalTTCAmount.toStringAsFixed(2)),
+                                valueStyle: context.responsiveTextTheme.current.body3Medium.copyWith(
+                                  fontWeight: context.responsiveTextTheme.current.appFont.appFontBold,
                                   color: Colors.grey[600],
                                 ),
-                                unitStyle: context
-                                    .responsiveTextTheme.current.bodyXSmall
-                                    .copyWith(
+                                unitStyle: context.responsiveTextTheme.current.bodyXSmall.copyWith(
                                   color: Colors.grey,
                                 ),
                               );
@@ -164,11 +136,8 @@ class CartSummarySection extends StatelessWidget {
                         children: <Widget>[
                           Text(
                             '${context.translation!.tva} (%)',
-                            style: context
-                                .responsiveTextTheme.current.body3Medium
-                                .copyWith(
-                              fontWeight: context.responsiveTextTheme.current
-                                  .appFont.appFontBold,
+                            style: context.responsiveTextTheme.current.body3Medium.copyWith(
+                              fontWeight: context.responsiveTextTheme.current.appFont.appFontBold,
                               color: Colors.grey[600],
                             ),
                           ),
@@ -177,11 +146,8 @@ class CartSummarySection extends StatelessWidget {
                             builder: (context, state) {
                               return Text(
                                   "${((num.parse(state.totalTTCAmount.toStringAsFixed(2)) - num.parse(state.totalHtAmount.toStringAsFixed(2))) / 100).toStringAsFixed(2)} %",
-                                  style: context
-                                      .responsiveTextTheme.current.body3Medium
-                                      .copyWith(
-                                    fontWeight: context.responsiveTextTheme
-                                        .current.appFont.appFontBold,
+                                  style: context.responsiveTextTheme.current.body3Medium.copyWith(
+                                    fontWeight: context.responsiveTextTheme.current.appFont.appFontBold,
                                     color: Colors.grey[600],
                                   ));
                             },
@@ -189,8 +155,7 @@ class CartSummarySection extends StatelessWidget {
                         ],
                       ),
                       const ResponsiveGap.s8(),
-                      BlocBuilder<CartCubit, CartState>(
-                          builder: (context, state) {
+                      BlocBuilder<CartCubit, CartState>(builder: (context, state) {
                         return ConstrainedBox(
                           constraints: BoxConstraints(
                             maxWidth: MediaQuery.of(context).size.width - 32,
@@ -201,9 +166,7 @@ class CartSummarySection extends StatelessWidget {
                                 ? null
                                 : () {
                                     BottomSheetHelper.showCommonBottomSheet(
-                                        context: context,
-                                        child:
-                                            SelectPaymentMethodBottomSheet());
+                                        context: context, child: CheckOutBottomSheet());
                                   },
                             color: AppColors.accent1Shade1,
                           ),

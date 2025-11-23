@@ -104,6 +104,7 @@ class MakeOrderBottomSheet extends StatelessWidget {
                       initValue: UserManager.instance.currentUser.address,
                       onChanged: (text) => context.read<MedicineDetailsCubit>().updateShippingAddress(text ?? ''),
                       maxLines: 3,
+                      maxLength: 255,
                       validationFunc: (v) => requiredValidator(v, translation),
                       isFilled: false,
                       isBorderEnabled: true,
