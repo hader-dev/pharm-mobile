@@ -12,15 +12,20 @@ class MarketPlaceTabBarSection extends StatefulWidget {
   const MarketPlaceTabBarSection({super.key});
 
   @override
-  State<MarketPlaceTabBarSection> createState() => _MarketPlaceTabBarSectionState();
+  State<MarketPlaceTabBarSection> createState() => MarketPlaceTabBarSectionState();
 }
 
-class _MarketPlaceTabBarSectionState extends State<MarketPlaceTabBarSection> with TickerProviderStateMixin {
+class MarketPlaceTabBarSectionState extends State<MarketPlaceTabBarSection> with TickerProviderStateMixin {
+  late final Animation animation;
   late final TabController tabsController;
+  static late final AnimationController animationController;
   @override
   void initState() {
     super.initState();
     tabsController = TabController(length: 3, vsync: this);
+    animationController = AnimationController(vsync: this, duration: const Duration(milliseconds: 5));
+    animation =
+        Tween<double>(begin: 0, end: 1).animate(animationController.drive(CurveTween(curve: Curves.easeInCubic)));
   }
 
   @override
@@ -37,46 +42,53 @@ class _MarketPlaceTabBarSectionState extends State<MarketPlaceTabBarSection> wit
 
     return Column(
       children: [
-        ColoredBox(
-            color: Colors.white,
-            child: ValueListenableBuilder<int>(
-                valueListenable: tabIndex,
-                builder: (context, index, child) {
-                  return TabBar(
-                      indicatorSize: TabBarIndicatorSize.tab,
-                      isScrollable: true,
-                      labelStyle: tabTextStyle,
-                      overlayColor: WidgetStatePropertyAll(Colors.transparent),
-                      tabAlignment: TabAlignment.start,
-                      indicatorColor: AppColors.accent1Shade1,
-                      labelColor: AppColors.accent1Shade1,
-                      unselectedLabelColor: Colors.grey,
-                      controller: tabsController,
-                      onTap: (index) {
-                        tabIndex.value = index;
-                      },
-                      tabs: tabs
-                          .map(
-                            (tabInfos) => Tab(
-                              child: Row(
-                                children: [
-                                  SvgPicture.asset(
-                                    tabInfos[tasMapKeys[1]]!,
-                                    height: context.responsiveAppSizeTheme.current.iconSize20,
-                                    width: context.responsiveAppSizeTheme.current.iconSize20,
-                                    colorFilter: ColorFilter.mode(
-                                      tabIndex.value == tabs.indexOf(tabInfos) ? AppColors.accent1Shade1 : Colors.grey,
-                                      BlendMode.srcIn,
-                                    ),
+        AnimatedBuilder(
+            animation: animationController,
+            builder: (context, child) {
+              return SizedBox(height: 55 * (1 - animation.value).toDouble(), child: child);
+            },
+            child: ColoredBox(
+                color: Colors.white,
+                child: ValueListenableBuilder<int>(
+                    valueListenable: tabIndex,
+                    builder: (context, index, child) {
+                      return TabBar(
+                          indicatorSize: TabBarIndicatorSize.tab,
+                          isScrollable: true,
+                          labelStyle: tabTextStyle,
+                          overlayColor: WidgetStatePropertyAll(Colors.transparent),
+                          tabAlignment: TabAlignment.start,
+                          indicatorColor: AppColors.accent1Shade1,
+                          labelColor: AppColors.accent1Shade1,
+                          unselectedLabelColor: Colors.grey,
+                          controller: tabsController,
+                          onTap: (index) {
+                            tabIndex.value = index;
+                          },
+                          tabs: tabs
+                              .map(
+                                (tabInfos) => Tab(
+                                  child: Row(
+                                    children: [
+                                      SvgPicture.asset(
+                                        tabInfos[tasMapKeys[1]]!,
+                                        height: context.responsiveAppSizeTheme.current.iconSize20,
+                                        width: context.responsiveAppSizeTheme.current.iconSize20,
+                                        colorFilter: ColorFilter.mode(
+                                          tabIndex.value == tabs.indexOf(tabInfos)
+                                              ? AppColors.accent1Shade1
+                                              : Colors.grey,
+                                          BlendMode.srcIn,
+                                        ),
+                                      ),
+                                      ResponsiveGap.s4(),
+                                      Text(tabInfos[tasMapKeys[0]]!, style: tabTextStyle),
+                                    ],
                                   ),
-                                  ResponsiveGap.s4(),
-                                  Text(tabInfos[tasMapKeys[0]]!, style: tabTextStyle),
-                                ],
-                              ),
-                            ),
-                          )
-                          .toList());
-                })),
+                                ),
+                              )
+                              .toList());
+                    }))),
         Expanded(
           child: TabBarView(
             controller: tabsController,

@@ -8,21 +8,12 @@ class SearchMedicineFilterBottomSheet extends StatefulWidget {
   const SearchMedicineFilterBottomSheet({super.key});
 
   @override
-  State<SearchMedicineFilterBottomSheet> createState() =>
-      _SearchMedicineFilterBottomSheetState();
+  State<SearchMedicineFilterBottomSheet> createState() => _SearchMedicineFilterBottomSheetState();
 }
 
-class _SearchMedicineFilterBottomSheetState
-    extends State<SearchMedicineFilterBottomSheet> {
+class _SearchMedicineFilterBottomSheetState extends State<SearchMedicineFilterBottomSheet> {
   @override
   Widget build(BuildContext context) {
-    return MedicalFilterProvider(
-      child: BlocBuilder<MedicineProductsCubit, MedicineProductsState>(
-        builder: (context, state) {
-          if (state is! MedicineSearchFilterChanged) {}
-          return MedicalFiltersView();
-        },
-      ),
-    );
+    return MedicalFilterProvider(child: MedicalFiltersView());
   }
 }

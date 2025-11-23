@@ -26,20 +26,15 @@ class VendorsState {
   });
 
   VendorsLoading toLoading() => VendorsLoading.fromState(state: this);
-  VendorsLoadingMore toLoadingMore() =>
-      VendorsLoadingMore.fromState(state: this);
+  VendorsLoadingMore toLoadingMore(int offSet) => VendorsLoadingMore.fromState(offSet: offSet, state: this);
   VendorsLoaded toLoaded({required List<Company> vendors}) =>
       VendorsLoaded.fromState(state: this, vendorsList: vendors);
-  VendorsLoadingFailed toLoadingFailed() =>
-      VendorsLoadingFailed.fromState(state: this);
+  VendorsLoadingFailed toLoadingFailed() => VendorsLoadingFailed.fromState(state: this);
 
-  VendorsLoadLimitReached toLoadLimitReached() =>
-      VendorsLoadLimitReached.fromState(state: this);
+  VendorsLoadLimitReached toLoadLimitReached() => VendorsLoadLimitReached.fromState(state: this);
 
-  VendorsScrollChanged toScroll(
-          {required double offset, required bool displayFilters}) =>
-      VendorsScrollChanged.fromState(
-          state: this, lastOffset: offset, displayFilters: displayFilters);
+  VendorsScrollChanged toScroll({required double offset, required bool displayFilters}) =>
+      VendorsScrollChanged.fromState(state: this, lastOffset: offset, displayFilters: displayFilters);
 
   VendorSearchFilterChanged toFiltersChanged(
           {SearchVendorFilters? selectedVendorSearchFilter,
@@ -83,10 +78,8 @@ final class VendorsInitial extends VendorsState {
             lastOffset: state.lastOffset,
             totalVendorsCount: totalVendorsCount ?? state.totalVendorsCount,
             vendorsList: vendorsList ?? state.vendorsList,
-            selectedVendorSearchFilter:
-                selectedVendorSearchFilter ?? state.selectedVendorSearchFilter,
-            selectedDistributorTypeFilter: selectedDistributorTypeFilter ??
-                state.selectedDistributorTypeFilter,
+            selectedVendorSearchFilter: selectedVendorSearchFilter ?? state.selectedVendorSearchFilter,
+            selectedDistributorTypeFilter: selectedDistributorTypeFilter ?? state.selectedDistributorTypeFilter,
             offSet: offSet ?? state.offSet,
             scrollController: scrollController ?? state.scrollController,
             searchController: searchController ?? state.searchController);
@@ -107,13 +100,12 @@ final class VendorsLoading extends VendorsState {
 }
 
 final class VendorsLoadingMore extends VendorsState {
-  VendorsLoadingMore.fromState({required VendorsState state})
+  VendorsLoadingMore.fromState({required super.offSet, required VendorsState state})
       : super(
             totalVendorsCount: state.totalVendorsCount,
             vendorsList: state.vendorsList,
             selectedVendorSearchFilter: state.selectedVendorSearchFilter,
             selectedDistributorTypeFilter: state.selectedDistributorTypeFilter,
-            offSet: state.offSet,
             scrollController: state.scrollController,
             searchController: state.searchController,
             displayFilters: state.displayFilters,
@@ -121,8 +113,7 @@ final class VendorsLoadingMore extends VendorsState {
 }
 
 final class VendorsLoaded extends VendorsState {
-  VendorsLoaded.fromState(
-      {required VendorsState state, required super.vendorsList})
+  VendorsLoaded.fromState({required VendorsState state, required super.vendorsList})
       : super(
             totalVendorsCount: vendorsList.length,
             selectedVendorSearchFilter: state.selectedVendorSearchFilter,
@@ -150,9 +141,7 @@ final class VendorsLoadingFailed extends VendorsState {
 
 final class VendorsScrollChanged extends VendorsState {
   VendorsScrollChanged.fromState(
-      {required VendorsState state,
-      required super.lastOffset,
-      required super.displayFilters})
+      {required VendorsState state, required super.lastOffset, required super.displayFilters})
       : super(
             totalVendorsCount: state.totalVendorsCount,
             vendorsList: state.vendorsList,
@@ -188,13 +177,11 @@ final class VendorSearchFilterChanged extends VendorsState {
             totalVendorsCount: state.totalVendorsCount,
             vendorsList: state.vendorsList,
             selectedVendorSearchFilter: resetSearchFilter
-                ? null
-                : selectedVendorSearchFilter ??
-                    state.selectedVendorSearchFilter,
+                ? SearchVendorFilters.name
+                : selectedVendorSearchFilter ?? state.selectedVendorSearchFilter,
             selectedDistributorTypeFilter: resetDistributorTypeFilter
-                ? null
-                : selectedDistributorTypeFilter ??
-                    state.selectedDistributorTypeFilter,
+                ? DistributorCategory.Both
+                : selectedDistributorTypeFilter ?? state.selectedDistributorTypeFilter,
             offSet: state.offSet,
             scrollController: state.scrollController,
             searchController: state.searchController,

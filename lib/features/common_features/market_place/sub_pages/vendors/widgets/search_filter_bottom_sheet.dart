@@ -13,18 +13,17 @@ import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart' show Iconsax;
 
-class VandorsSearchFilterBottomSheet extends StatelessWidget {
-  const VandorsSearchFilterBottomSheet({super.key});
+class VendorsSearchFilterBottomSheet extends StatelessWidget {
+  const VendorsSearchFilterBottomSheet({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
-      value: MarketPlaceScreen.marketPlaceScaffoldKey.currentContext!
-          .read<VendorsCubit>(),
+      value: MarketPlaceScreen.marketPlaceScaffoldKey.currentContext!.read<VendorsCubit>(),
       child: BlocBuilder<VendorsCubit, VendorsState>(
         builder: (context, state) {
-          if (state is! VendorsLoading) {}
           final cubit = BlocProvider.of<VendorsCubit>(context);
+          if (state is! VendorsLoading) {}
 
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,10 +39,8 @@ class VandorsSearchFilterBottomSheet extends StatelessWidget {
                     children: SearchVendorFilters.values
                         .map((seachFilter) => FilterOptionValueWidget(
                             title: seachFilter.name,
-                            onSelected: () =>
-                                cubit.changeVendorsSearchFilter(seachFilter),
-                            isSelected: state.selectedVendorSearchFilter ==
-                                seachFilter))
+                            onSelected: () => cubit.changeVendorsSearchFilter(seachFilter),
+                            isSelected: state.selectedVendorSearchFilter == seachFilter))
                         .toList(),
                   )),
               const ResponsiveGap.s12(),
@@ -56,15 +53,12 @@ class VandorsSearchFilterBottomSheet extends StatelessWidget {
                     children: DistributorCategory.values
                         .map((seachFilter) => FilterOptionValueWidget(
                             title: seachFilter.name,
-                            onSelected: () => cubit
-                                .changeDistributorsCategoryFilter(seachFilter),
-                            isSelected: state.selectedDistributorTypeFilter ==
-                                seachFilter))
+                            onSelected: () => cubit.changeDistributorsCategoryFilter(seachFilter),
+                            isSelected: state.selectedDistributorTypeFilter == seachFilter))
                         .toList(),
                   )),
               Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: context.responsiveAppSizeTheme.current.p4),
+                padding: EdgeInsets.symmetric(horizontal: context.responsiveAppSizeTheme.current.p4),
                 child: Row(
                   children: [
                     Expanded(

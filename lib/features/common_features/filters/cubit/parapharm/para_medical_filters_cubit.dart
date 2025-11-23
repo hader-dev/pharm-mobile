@@ -16,24 +16,19 @@ class ParaMedicalFiltersCubit extends Cubit<ParaMedicalFiltersState> {
   final searchController = TextEditingController();
   final ParaMedicalFilters defaultFilters;
 
-  ParaMedicalFiltersCubit(
-      {required IFiltersRepository filtersRepository,
-      ParaMedicalFilters? appliedFilters})
+  ParaMedicalFiltersCubit({required IFiltersRepository filtersRepository, ParaMedicalFilters? appliedFilters})
       : defaultFilters = appliedFilters ?? const ParaMedicalFilters(),
-        super(ParaMedicalFiltersStateInitial(
-            appliedFilters: appliedFilters ?? const ParaMedicalFilters())) {
+        super(ParaMedicalFiltersStateInitial(appliedFilters: appliedFilters ?? const ParaMedicalFilters())) {
     _filtersRepository = filtersRepository;
   }
 
   void loadParaMedicalFilters([ParamsLoadFiltersParaMedical? params]) async {
     try {
       emit(state.loading());
-      final data = await _filtersRepository.getParaMedicalFilter(
-          ParamLoadParaMedicalFilter(
-              key: state.currentKey, query: searchController.text));
+      final data = await _filtersRepository
+          .getParaMedicalFilter(ParamLoadParaMedicalFilter(key: state.currentKey, query: searchController.text));
 
-      final updatedstate =
-          state.filtersSource.updateFilterList(state.currentKey, data.data);
+      final updatedstate = state.filtersSource.updateFilterList(state.currentKey, data.data);
 
       emit(state.loaded(updatedFiltersSource: updatedstate));
     } catch (e) {
@@ -67,17 +62,14 @@ class ParaMedicalFiltersCubit extends Cubit<ParaMedicalFiltersState> {
   }
 
   void updatedAppliedFilters(String value, bool isSelected) {
-    final vFilters = [
-      ...(state.appliedFilters.getFilterBykey(state.currentKey))
-    ];
+    final vFilters = [...(state.appliedFilters.getFilterBykey(state.currentKey))];
     if (isSelected) {
       vFilters.add(value);
     } else {
       vFilters.remove(value);
     }
 
-    final updatedAppliedFilters =
-        state.appliedFilters.updateFilterList(state.currentKey, vFilters);
+    final updatedAppliedFilters = state.appliedFilters.updateFilterList(state.currentKey, vFilters);
 
     emit(state.updated(updatedAppliedFilters: updatedAppliedFilters));
   }
@@ -103,11 +95,14 @@ class ParaMedicalFiltersCubit extends Cubit<ParaMedicalFiltersState> {
     emit(state.updated(updatedAppliedFilters: updatedAppliedFilters));
   }
 
-  void updatePriceRange(double minPrice, double maxPrice) {
-    final updatedAppliedFilters = state.appliedFilters.copyWith(
-      gteUnitPriceHt: minPrice.toString(),
-      lteUnitPriceHt: maxPrice.toString(),
-    );
+  void updatePriceRange(String tag, double price) {
+    final updatedAppliedFilters = tag == "min"
+        ? state.appliedFilters.copyWith(
+            gteUnitPriceHt: price.toString(),
+          )
+        : state.appliedFilters.copyWith(
+            lteUnitPriceHt: price.toString(),
+          );
     emit(state.updated(updatedAppliedFilters: updatedAppliedFilters));
   }
 
@@ -128,8 +123,7 @@ class ParaMedicalFiltersCubit extends Cubit<ParaMedicalFiltersState> {
       );
       emit(state.updated(updatedAppliedFilters: updatedAppliedFilters));
     } else {
-      final updatedAppliedFilters =
-          state.appliedFilters.updateFilterList(state.currentKey, []);
+      final updatedAppliedFilters = state.appliedFilters.updateFilterList(state.currentKey, []);
       searchController.clear();
       emit(state.updated(updatedAppliedFilters: updatedAppliedFilters));
     }

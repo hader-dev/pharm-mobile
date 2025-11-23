@@ -22,8 +22,7 @@ class FiltersMedicalBrowse extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MedicalFiltersCubit, MedicalFiltersState>(
-        builder: (context, state) {
+    return BlocBuilder<MedicalFiltersCubit, MedicalFiltersState>(builder: (context, state) {
       return Column(
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,17 +51,13 @@ class FiltersMedicalBrowse extends StatelessWidget {
                 maxPrice: state.appliedFilters.lteUnitPriceHt != null
                     ? double.tryParse(state.appliedFilters.lteUnitPriceHt!)
                     : null,
-                onChanged: (min, max) => cubit.updatePriceRange(min, max),
-                minLimit: 0,
-                maxLimit: 10000,
               );
             },
           ),
           Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
           const ResponsiveGap.s12(),
           Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: context.responsiveAppSizeTheme.current.p4),
+            padding: EdgeInsets.symmetric(horizontal: context.responsiveAppSizeTheme.current.p4),
             child: Row(
               children: [
                 Expanded(
@@ -74,9 +69,7 @@ class FiltersMedicalBrowse extends StatelessWidget {
                     onTap: () {
                       context.read<MedicalFiltersCubit>().resetAllFilters();
 
-                      context
-                          .read<MedicineProductsCubit>()
-                          .resetMedicinesSearchFilter();
+                      context.read<MedicineProductsCubit>().resetMedicinesSearchFilter();
 
                       applyFiltersMedical(context);
 
