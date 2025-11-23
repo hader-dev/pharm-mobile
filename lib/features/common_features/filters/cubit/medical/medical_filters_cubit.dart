@@ -13,9 +13,14 @@ class MedicalFiltersCubit extends Cubit<MedicalFiltersState> {
   late final IFiltersRepository _filtersRepository;
 
   final searchController = TextEditingController();
+  final MedicalFilters defaultFilters;
 
-  MedicalFiltersCubit({required IFiltersRepository filtersRepository})
-      : super(const MedicalFiltersStateInitial()) {
+  MedicalFiltersCubit(
+      {required IFiltersRepository filtersRepository,
+      MedicalFilters? appliedFilters})
+      : defaultFilters = appliedFilters ?? MedicalFilters(),
+        super(MedicalFiltersStateInitial(
+            appliedFilters: appliedFilters ?? MedicalFilters())) {
     _filtersRepository = filtersRepository;
   }
 
@@ -130,7 +135,7 @@ class MedicalFiltersCubit extends Cubit<MedicalFiltersState> {
   }
 
   void resetAllFilters() {
-    const newAppliedFilters = MedicalFilters();
+    final newAppliedFilters = defaultFilters;
     searchController.clear();
 
     emit(state.updated(updatedAppliedFilters: newAppliedFilters));

@@ -2529,6 +2529,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Last updated'**
   String get last_update;
+
+  /// No description provided for @dateRangeError.
+  ///
+  /// In en, this message translates to:
+  /// **'\'From\' date cannot be after \'To\' date.'**
+  String get dateRangeError;
 }
 
 class _AppLocalizationsDelegate

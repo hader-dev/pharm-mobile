@@ -17,6 +17,7 @@ part 'para_pharma_state.dart';
 class ParaPharmaCubit extends Cubit<ParaPharmaState> {
   final ParaPharmaRepository paraPharmaRepository;
   final FavoriteRepository favoriteRepository;
+  final ParaMedicalFilters defaultFilters;
 
   final DebouncerManager debouncerManager = DebouncerManager();
   bool _listenerAttached = false;
@@ -27,7 +28,8 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
       required TextEditingController searchController,
       ParaMedicalFilters? filters,
       required this.favoriteRepository})
-      : super(ParaPharmaInitial(
+      : defaultFilters = filters ?? const ParaMedicalFilters(),
+        super(ParaPharmaInitial(
           scrollController: scrollController,
           searchController: searchController,
           filters: filters ?? const ParaMedicalFilters(),
@@ -48,12 +50,17 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
       ParaMedicalFilters? filters}) async {
     try {
       emit(state.toLoading(filters: filters));
+
+      debugPrint(
+          'Loading ParaPharma Catalog with filters: $filters and offset: $companyIdFilter');
       var paraPharmaCatalogResponse =
           await paraPharmaRepository.getParaPharmaCatalog(ParamsLoadParapharma(
         offset: offset,
         filters: filters ?? state.filters,
         searchQuery: searchValue ?? state.searchController.text,
-        companyId: companyIdFilter,
+        companyId: state.filters.vendors.isEmpty
+            ? companyIdFilter
+            : state.filters.vendors.first,
       ));
 
       emit(state.toLoaded(
@@ -79,6 +86,9 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
           ParamsLoadParapharma(
               offset: state.offSet,
               filters: state.filters,
+              companyId: state.filters.vendors.isEmpty
+                  ? null
+                  : state.filters.vendors.first,
               searchQuery: state.searchController.text));
 
       final updatedProducts =
@@ -102,11 +112,11 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
       tag: "search", action: () => getParaPharmas(searchValue: text));
 
   void resetParaPharmaFilters() {
-    getParaPharmas(filters: const ParaMedicalFilters(), searchValue: null);
+    getParaPharmas(filters: defaultFilters, searchValue: null);
 
     emit(state.toSearchFilterChanged(
       searchFilter: null,
-      filters: const ParaMedicalFilters(),
+      filters: defaultFilters,
     ));
   }
 

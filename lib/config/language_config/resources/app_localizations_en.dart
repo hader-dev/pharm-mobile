@@ -1276,4 +1276,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get last_update => 'Last updated';
+
+  @override
+  String get dateRangeError => '\'From\' date cannot be after \'To\' date.';
 }

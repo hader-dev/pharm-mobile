@@ -17,6 +17,7 @@ class MedicineProductsCubit extends Cubit<MedicineProductsState> {
   final MedicineCatalogRepository medicineRepository;
   final FavoriteRepository favoriteRepository;
   bool _listenerAttached = false;
+  final MedicalFilters defaultFilters;
 
   MedicineProductsCubit(
       {required this.medicineRepository,
@@ -24,7 +25,8 @@ class MedicineProductsCubit extends Cubit<MedicineProductsState> {
       required ScrollController scrollController,
       required TextEditingController searchController,
       MedicalFilters? filters})
-      : super(MedicineProductsInitial(
+      : defaultFilters = filters ?? const MedicalFilters(),
+        super(MedicineProductsInitial(
             params: filters ?? const MedicalFilters(),
             searchController: searchController,
             scrollController: scrollController));
@@ -79,12 +81,12 @@ class MedicineProductsCubit extends Cubit<MedicineProductsState> {
   }
 
   void resetMedicinesSearchFilter() {
-    getMedicines(filters: const MedicalFilters());
+    getMedicines(filters: defaultFilters);
 
     emit(
       state.toSearchFilterChanged(
         searchFilter: SearchMedicineFilters.dci,
-        params: const MedicalFilters(),
+        params: defaultFilters,
       ),
     );
   }

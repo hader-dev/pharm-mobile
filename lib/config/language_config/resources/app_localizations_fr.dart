@@ -1048,7 +1048,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get filter_items_to => 'A';
 
   @override
-  String get from => 'From';
+  String get from => 'De';
 
   @override
   String get package => 'Collisage';
@@ -1294,4 +1294,8 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get last_update => 'Dernière mise à jour';
+
+  @override
+  String get dateRangeError =>
+      'La date \'De\' ne peut pas être postérieure à la date \'À\'';
 }

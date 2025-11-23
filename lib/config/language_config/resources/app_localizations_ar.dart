@@ -1274,4 +1274,8 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get last_update => 'آخر تحديث';
+
+  @override
+  String get dateRangeError =>
+      'لا يمكن أن يكون تاريخ \'من\' بعد تاريخ \'إلى\'.';
 }
