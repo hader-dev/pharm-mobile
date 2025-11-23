@@ -403,5 +403,6 @@
   "package_size": "حجم العبوة",
   "pacakge_quantity": "كمية العبوة",
   "seller":"البائع",
-  "last_update": "آخر تحديث"
+  "last_update": "آخر تحديث",
+  "dateRangeError":"لا يمكن أن يكون تاريخ 'من' بعد تاريخ 'إلى'."
 }

@@ -9,7 +9,7 @@
   "summary": "Résumé",
   "delete": "Supprimer",
   "tva": "TVA",
-  "from": "From",
+  "from": "De",
   "app_name_2": "ader Pharma",
   "filter_items_from": "De",
   "filter_items_to": "A",
@@ -403,5 +403,8 @@
   "order_placed_failed": "Échec de la commande",
   "last_week": "Dernière semaine",
   "seller": "Vendeur",
-  "last_update": "Dernière mise à jour"
+  "last_update": "Dernière mise à jour",
+  "hide_filters":"Masquer filtres",
+  "show_filters":"Afficher filtres",
+  "dateRangeError": "La date 'De' ne peut pas être postérieure à la date 'À'"
 }

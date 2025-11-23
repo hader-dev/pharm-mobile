@@ -14,9 +14,14 @@ class ParaMedicalFiltersCubit extends Cubit<ParaMedicalFiltersState> {
   late final IFiltersRepository _filtersRepository;
 
   final searchController = TextEditingController();
+  final ParaMedicalFilters defaultFilters;
 
-  ParaMedicalFiltersCubit({required IFiltersRepository filtersRepository})
-      : super(const ParaMedicalFiltersStateInitial()) {
+  ParaMedicalFiltersCubit(
+      {required IFiltersRepository filtersRepository,
+      ParaMedicalFilters? appliedFilters})
+      : defaultFilters = appliedFilters ?? const ParaMedicalFilters(),
+        super(ParaMedicalFiltersStateInitial(
+            appliedFilters: appliedFilters ?? const ParaMedicalFilters())) {
     _filtersRepository = filtersRepository;
   }
 
@@ -131,7 +136,7 @@ class ParaMedicalFiltersCubit extends Cubit<ParaMedicalFiltersState> {
   }
 
   void resetAllFilters() {
-    const newAppliedFilters = ParaMedicalFilters();
+    final newAppliedFilters = defaultFilters;
     searchController.clear();
 
     emit(state.updated(updatedAppliedFilters: newAppliedFilters));

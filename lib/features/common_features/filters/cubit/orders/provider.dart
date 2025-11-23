@@ -15,11 +15,9 @@ class OrderFilterProvider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final orderCubit =
-        AppLayout.appLayoutScaffoldKey.currentContext!.read<OrdersCubit>();
+    final orderCubit = AppLayout.appLayoutScaffoldKey.currentContext!.read<OrdersCubit>();
 
-    final filterCubit =
-        OrdersScreen.scaffoldKey.currentContext!.read<OrdersFiltersCubit>();
+    final filterCubit = OrdersScreen.scaffoldKey.currentContext!.read<OrdersFiltersCubit>();
 
     return MultiBlocProvider(
       providers: [
@@ -29,11 +27,6 @@ class OrderFilterProvider extends StatelessWidget {
         BlocProvider.value(
           value: filterCubit,
         ),
-        // BlocProvider(
-        //   create: (_) => OrdersFiltersCubit(
-        //     filtersRepository: getItInstance.get<IFiltersRepository>(),
-        //   ),
-        // ),
       ],
       child: BlocBuilder<OrdersCubit, OrdersState>(
         builder: (context, state) {
