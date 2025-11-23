@@ -8,6 +8,7 @@ class PriceWidget extends StatelessWidget {
   final double? overridePrice;
   final TextStyle? mainStyle;
   final TextStyle? currencyStyle;
+  final TextStyle? linedStyle;
 
   const PriceWidget({
     super.key,
@@ -15,6 +16,7 @@ class PriceWidget extends StatelessWidget {
     this.overridePrice,
     this.mainStyle,
     this.currencyStyle,
+    this.linedStyle,
   });
 
   @override
@@ -23,11 +25,18 @@ class PriceWidget extends StatelessWidget {
         .responsiveTextTheme.current.headLine4SemiBold
         .copyWith(color: AppColors.accent1Shade1);
 
+    final defaultLinedStyle =
+        context.responsiveTextTheme.current.body3Medium.copyWith(
+      decoration: TextDecoration.lineThrough,
+      color: Colors.grey,
+    );
+
     final defaultCurrencyStyle =
         context.responsiveTextTheme.current.bodyXSmall.copyWith(
       color: AppColors.accent1Shade1,
     );
 
+    final line = linedStyle ?? defaultLinedStyle;
     final main = mainStyle ?? defaultMainStyle;
     final currency = currencyStyle ?? defaultCurrencyStyle;
 
@@ -56,7 +65,7 @@ class PriceWidget extends StatelessWidget {
             children: [
               TextSpan(
                 text: price.formatAsPriceForPrint(decimalDigits: 1),
-                style: main.copyWith(
+                style: line.copyWith(
                   decoration: TextDecoration.lineThrough,
                   color: Colors.grey,
                 ),

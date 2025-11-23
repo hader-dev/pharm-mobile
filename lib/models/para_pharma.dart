@@ -137,6 +137,7 @@ class ParaPharmaCatalogModel extends BaseParaPharmaCatalogModel {
     required super.id,
     required super.isLiked,
     required super.packageSize,
+    super.computedPrice,
     required super.unitPriceHt,
     required super.thumbnailImage,
     required super.image,

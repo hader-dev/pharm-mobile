@@ -11,41 +11,43 @@ ParaPharmaCatalogModel jsonToParapharmaCatalogueItem(
   final stockQuantity = actualStock - reservedStock;
 
   return ParaPharmaCatalogModel(
-    id: json['id'] ?? "",
-    tags: mapJsonDynamicListToTypedList(json['tags']),
-    packageSize: json['packageSize'] ?? 1,
-    unitPriceTtc: double.parse(json["unitPriceTtc"] ?? "0"),
-    tvaPercentage: double.parse(json["tvaPercentage"] ?? "0"),
-    unitPriceHt: double.parse(json['unitPriceHt'] ?? "0.0"),
-    thumbnailImage:
-        json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
-    image: json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
-    name: json['name'] ?? "",
-    stockQuantity: stockQuantity,
-    isActive: json['isActive'] ?? false,
-    createdAt: json['createdAt'] != null
-        ? DateTime.tryParse(json['createdAt']) ?? DateTime(1970)
-        : DateTime(1970),
-    updatedAt: json['updatedAt'] != null
-        ? DateTime.tryParse(json['updatedAt']) ?? DateTime(1970)
-        : DateTime(1970),
-    companyId: json['companyId'] ?? "",
-    categoryId: json['categoryId'] ?? "",
-    brandId: json['brandId'] ?? "",
-    packaging: json['packaging'] ?? "",
-    sku: json['sku'] ?? "",
-    description: json['description'] ?? "",
-    metaData: json['metaData'] ?? {},
-    minOrderQuantity: json['minOrderQuantity'] ?? 1,
-    maxOrderQuantity: json['maxOrderQuantity'] ?? 9999,
-    brand:
-        json['brand'] == null ? Brand.empty() : Brand.fromJson(json['brand']),
-    category: json['category'] == null
-        ? Category.empty()
-        : Category.fromJson(json['category']),
-    isLiked: json["isFavorite"] ?? false,
-    company: json['company'] == null
-        ? Company.empty()
-        : jsonToCompany(json['company']),
-  );
+      id: json['id'] ?? "",
+      tags: mapJsonDynamicListToTypedList(json['tags']),
+      packageSize: json['packageSize'] ?? 1,
+      unitPriceTtc: double.parse(json["unitPriceTtc"] ?? "0"),
+      tvaPercentage: double.parse(json["tvaPercentage"] ?? "0"),
+      unitPriceHt: double.parse(json['unitPriceHt'] ?? "0.0"),
+      thumbnailImage:
+          json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
+      image: json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
+      name: json['name'] ?? "",
+      stockQuantity: stockQuantity,
+      isActive: json['isActive'] ?? false,
+      createdAt: json['createdAt'] != null
+          ? DateTime.tryParse(json['createdAt']) ?? DateTime(1970)
+          : DateTime(1970),
+      updatedAt: json['updatedAt'] != null
+          ? DateTime.tryParse(json['updatedAt']) ?? DateTime(1970)
+          : DateTime(1970),
+      companyId: json['companyId'] ?? "",
+      categoryId: json['categoryId'] ?? "",
+      brandId: json['brandId'] ?? "",
+      packaging: json['packaging'] ?? "",
+      sku: json['sku'] ?? "",
+      description: json['description'] ?? "",
+      metaData: json['metaData'] ?? {},
+      minOrderQuantity: json['minOrderQuantity'] ?? 1,
+      maxOrderQuantity: json['maxOrderQuantity'] ?? 9999,
+      brand:
+          json['brand'] == null ? Brand.empty() : Brand.fromJson(json['brand']),
+      category: json['category'] == null
+          ? Category.empty()
+          : Category.fromJson(json['category']),
+      isLiked: json["isFavorite"] ?? false,
+      company: json['company'] == null
+          ? Company.empty()
+          : jsonToCompany(json['company']),
+      computedPrice: json['computedPrice'] != null
+          ? double.tryParse(json['computedPrice'])
+          : null);
 }

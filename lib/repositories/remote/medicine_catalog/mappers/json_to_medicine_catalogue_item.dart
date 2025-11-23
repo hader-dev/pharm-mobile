@@ -42,5 +42,8 @@ MedicineCatalogModel jsonToMedicineCatalogItem(Map<String, dynamic> json) {
     medicine: (json["medicine"] != null)
         ? jsonToMedicine(json["medicine"])
         : Medicine.empty(),
+    computedPrice: json['computedPrice'] != null
+        ? double.tryParse(json['computedPrice'])
+        : null
   );
 }

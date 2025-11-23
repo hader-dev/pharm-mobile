@@ -71,6 +71,7 @@ class MedicineCatalogModel extends BaseMedicineCatalogModel {
 
   MedicineCatalogModel({
     required super.id,
+    super.computedPrice,
     required super.unitPriceTtc,
     required super.unitPriceHt,
     required super.tvaPercentage,
