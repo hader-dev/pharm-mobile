@@ -2335,7 +2335,7 @@ abstract class AppLocalizations {
   /// No description provided for @order_placed_successfully.
   ///
   /// In en, this message translates to:
-  /// **'Order placed successfully'**
+  /// **'Order Placed Successfully!'**
   String get order_placed_successfully;
 
   /// No description provided for @password_reset_success.
@@ -2535,6 +2535,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'\'From\' date cannot be after \'To\' date.'**
   String get dateRangeError;
+
+  /// No description provided for @thank_you_purchase.
+  ///
+  /// In en, this message translates to:
+  /// **'Thank you for your purchase. Your order has been placed successfully.'**
+  String get thank_you_purchase;
+
+  /// No description provided for @view_order.
+  ///
+  /// In en, this message translates to:
+  /// **'View Order'**
+  String get view_order;
+
+  /// No description provided for @continue_shopping.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue Shopping'**
+  String get continue_shopping;
 }
 
 class _AppLocalizationsDelegate

@@ -1168,7 +1168,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get pacakge_quantity => 'كمية العبوة';
 
   @override
-  String get order_placed_successfully => 'تم تقديم الطلب بنجاح';
+  String get order_placed_successfully => 'تم تقديم الطلب بنجاح!';
 
   @override
   String get password_reset_success => 'تم تغيير كلمة المرور بنجاح';
@@ -1278,4 +1278,13 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get dateRangeError =>
       'لا يمكن أن يكون تاريخ \'من\' بعد تاريخ \'إلى\'.';
+
+  @override
+  String get thank_you_purchase => 'شكرًا لشرائك. تم تقديم طلبك بنجاح.';
+
+  @override
+  String get view_order => 'عرض الطلب';
+
+  @override
+  String get continue_shopping => 'متابعة التسوق';
 }

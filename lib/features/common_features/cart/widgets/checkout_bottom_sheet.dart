@@ -13,6 +13,8 @@ import 'package:hader_pharm_mobile/features/common/widgets/info_widget.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/invoice_input.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/payment_input.dart';
 import 'package:hader_pharm_mobile/features/common_features/cart/cubit/cart_cubit.dart';
+import 'package:hader_pharm_mobile/features/common_features/cart/widgets/order_placed_successfully.dart'
+    show OrderPlacedSuccessfullyDialog;
 import 'package:hader_pharm_mobile/features/common_features/orders/cubit/orders_cubit.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/toast_helper.dart';
@@ -29,11 +31,22 @@ class CheckOutBottomSheet extends StatelessWidget {
     return BlocProvider.value(
       value: AppLayout.appLayoutScaffoldKey.currentContext!.read<CartCubit>(),
       child: BlocListener<CartCubit, CartState>(
-        listener: (context, state) {
+        listener: (context, state) async {
           if (state is PassOrderLoaded) {
             context.read<CartCubit>().clearCart(context.translation!);
             AppLayout.appLayoutScaffoldKey.currentContext!.read<OrdersCubit>().getOrders();
             context.pop();
+            await showDialog(
+                context: AppLayout.appLayoutScaffoldKey.currentContext!,
+                barrierDismissible: false,
+                builder: (context) => Dialog(
+                      constraints: BoxConstraints(maxHeight: 500),
+                      shape: RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.circular(context.responsiveAppSizeTheme.current.commonWidgetsRadius)),
+                      backgroundColor: AppColors.bgWhite,
+                      child: OrderPlacedSuccessfullyDialog(),
+                    ));
           }
         },
         child: BlocBuilder<CartCubit, CartState>(
@@ -92,7 +105,7 @@ class CheckOutBottomSheet extends StatelessWidget {
                           onChanged: (text) => context.read<CartCubit>().changeOrderNote(text ?? ''),
                           maxLines: 3,
                           maxLength: maxInputLength,
-                          validationFunc: (value) => requiredValidator(value, translation, maxLength: maxInputLength),
+                          validationFunc: (value) {},
                           isFilled: false,
                           isBorderEnabled: true,
                           hintText: context.translation!.type_note_hint,
@@ -144,15 +157,7 @@ class CheckOutBottomSheet extends StatelessWidget {
                               label: context.translation!.confirm_order,
                               leadingIcon: Iconsax.money4,
                               onTap: () {
-                                context
-                                    .read<CartCubit>()
-                                    .passOrder()
-                                    .then((sucess) => getItInstance.get<ToastManager>().showToast(
-                                          message: sucess
-                                              ? translation.order_placed_successfully
-                                              : translation.order_placed_failed,
-                                          type: sucess ? ToastType.success : ToastType.error,
-                                        ));
+                                context.read<CartCubit>().passOrder();
                               },
                               color: AppColors.accent1Shade1,
                             ),

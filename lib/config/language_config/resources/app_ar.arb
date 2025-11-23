@@ -404,5 +404,9 @@
   "pacakge_quantity": "كمية العبوة",
   "seller":"البائع",
   "last_update": "آخر تحديث",
-  "dateRangeError":"لا يمكن أن يكون تاريخ 'من' بعد تاريخ 'إلى'."
+  "dateRangeError":"لا يمكن أن يكون تاريخ 'من' بعد تاريخ 'إلى'.",
+  "order_placed_successfully": "تم تقديم الطلب بنجاح!",
+  "thank_you_purchase": "شكرًا لشرائك. تم تقديم طلبك بنجاح.",
+  "view_order": "عرض الطلب",
+  "continue_shopping": "متابعة التسوق"
 }
