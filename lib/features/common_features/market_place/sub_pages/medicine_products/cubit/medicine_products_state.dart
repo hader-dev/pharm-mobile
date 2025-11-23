@@ -25,8 +25,7 @@ sealed class MedicineProductsState {
     required this.selectedMedicineSearchFilter,
   });
 
-  bool get hasActiveFilters =>
-      params.isNotEmpty || hasPriceFilters || searchController.text.isNotEmpty;
+  bool get hasActiveFilters => params.isNotEmpty || hasPriceFilters || searchController.text.isNotEmpty;
 
   bool get hasPriceFilters =>
       (params.gteUnitPriceHt != null && params.gteUnitPriceHt != "0.0") ||
@@ -41,8 +40,7 @@ sealed class MedicineProductsState {
     bool displayFilters = false,
     ScrollController? scrollController,
     MedicalFilters params = const MedicalFilters(),
-    SearchMedicineFilters selectedMedicineSearchFilter =
-        SearchMedicineFilters.dci,
+    SearchMedicineFilters selectedMedicineSearchFilter = SearchMedicineFilters.dci,
   }) {
     return MedicineProductsInitial(
       lastOffset: lastOffset,
@@ -58,8 +56,7 @@ sealed class MedicineProductsState {
     );
   }
 
-  MedicineProductsLoading toLoading({int? offset}) =>
-      MedicineProductsLoading.fromState(
+  MedicineProductsLoading toLoading({int? offset}) => MedicineProductsLoading.fromState(
         state: this,
         offSet: offset,
       );
@@ -106,8 +103,7 @@ sealed class MedicineProductsState {
         selectedMedicineSearchFilter: searchFilter,
       );
 
-  MedicinesLoadLimitReached toLoadLimitReached() =>
-      MedicinesLoadLimitReached.fromState(this);
+  MedicinesLoadLimitReached toLoadLimitReached() => MedicinesLoadLimitReached.fromState(this);
 
   MedicineProductsLoaded toLoaded({
     required List<BaseMedicineCatalogModel> medicines,
@@ -119,10 +115,9 @@ sealed class MedicineProductsState {
         totalItemsCount: totalItemsCount,
       );
 
-  MedicineProductsLoadingFailed toLoadingFailed() =>
-      MedicineProductsLoadingFailed.fromState(this);
+  MedicineProductsLoadingFailed toLoadingFailed() => MedicineProductsLoadingFailed.fromState(this);
 
-  LoadingMoreMedicine toLoadingMore() => LoadingMoreMedicine.fromState(this);
+  LoadingMoreMedicine toLoadingMore(int offSet) => LoadingMoreMedicine.fromState(offSet, this);
 }
 
 final class MedicineProductsInitial extends MedicineProductsState {
@@ -141,8 +136,7 @@ final class MedicineProductsInitial extends MedicineProductsState {
 }
 
 final class MedicineProductsLoading extends MedicineProductsState {
-  MedicineProductsLoading.fromState(
-      {required MedicineProductsState state, int? offSet})
+  MedicineProductsLoading.fromState({required MedicineProductsState state, int? offSet})
       : super(
           lastOffset: state.lastOffset,
           debounce: state.debounce,
@@ -158,12 +152,12 @@ final class MedicineProductsLoading extends MedicineProductsState {
 }
 
 final class LoadingMoreMedicine extends MedicineProductsState {
-  LoadingMoreMedicine.fromState(MedicineProductsState state)
+  LoadingMoreMedicine.fromState(int offSet, MedicineProductsState state)
       : super(
           lastOffset: state.lastOffset,
           debounce: state.debounce,
           totalItemsCount: state.totalItemsCount,
-          offSet: state.offSet,
+          offSet: offSet,
           medicines: state.medicines,
           displayFilters: state.displayFilters,
           params: state.params,
@@ -175,9 +169,7 @@ final class LoadingMoreMedicine extends MedicineProductsState {
 
 final class MedicineProductsLoaded extends MedicineProductsState {
   MedicineProductsLoaded.fromState(
-      {required MedicineProductsState state,
-      required super.medicines,
-      required super.totalItemsCount})
+      {required MedicineProductsState state, required super.medicines, required super.totalItemsCount})
       : super(
           lastOffset: state.lastOffset,
           debounce: state.debounce,
@@ -236,8 +228,7 @@ final class MedicineSearchFilterChanged extends MedicineProductsState {
           medicines: state.medicines,
           displayFilters: state.displayFilters,
           params: state.params,
-          selectedMedicineSearchFilter: selectedMedicineSearchFilter ??
-              state.selectedMedicineSearchFilter,
+          selectedMedicineSearchFilter: selectedMedicineSearchFilter ?? state.selectedMedicineSearchFilter,
           searchController: state.searchController,
           scrollController: state.scrollController,
         );

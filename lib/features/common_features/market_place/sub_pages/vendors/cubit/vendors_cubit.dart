@@ -22,6 +22,7 @@ class VendorsCubit extends Cubit<VendorsState> {
   }) : super(VendorsInitial(
           scrollController: scrollController,
           searchController: searchController,
+          selectedVendorSearchFilter: SearchVendorFilters.name,
         ));
 
   ScrollController get scrollController {
@@ -33,8 +34,7 @@ class VendorsCubit extends Cubit<VendorsState> {
   }
 
   void _onScroll() {
-    if (scrollController.position.pixels >=
-        scrollController.position.maxScrollExtent) {
+    if (scrollController.position.pixels >= scrollController.position.maxScrollExtent) {
       if (state.offSet < state.totalVendorsCount) {
         loadMoreVendors();
       } else {
@@ -52,26 +52,24 @@ class VendorsCubit extends Cubit<VendorsState> {
     }
 
     if (newDisplayFilters != state.displayFilters) {
-      emit(state.toScroll(
-          offset: currentOffset, displayFilters: newDisplayFilters));
+      emit(state.toScroll(offset: currentOffset, displayFilters: newDisplayFilters));
     }
   }
 
   Future<void> fetchVendors({
-    int offset = 0,
+    int offSet = 0,
     String searchValue = '',
   }) async {
     try {
       emit(state.toLoading());
       final vendorsList = await companyRepository.getCompanies(
           limit: PaginationConstants.resultsPerPage,
-          offset: state.offSet,
+          offset: offSet,
           searchFilter: state.selectedVendorSearchFilter,
           fields: BaseCompany.baseCompanyFields,
-          distributorCategoryId:
-              state.selectedDistributorTypeFilter == DistributorCategory.Both
-                  ? null
-                  : state.selectedDistributorTypeFilter?.id,
+          distributorCategoryId: state.selectedDistributorTypeFilter == DistributorCategory.Both
+              ? null
+              : state.selectedDistributorTypeFilter?.id,
           companyType: CompanyType.Distributor,
           search: searchValue);
       emit(state.toLoaded(vendors: vendorsList));
@@ -85,7 +83,7 @@ class VendorsCubit extends Cubit<VendorsState> {
   Future<void> loadMoreVendors() async {
     try {
       final offSet = state.offSet + PaginationConstants.resultsPerPage;
-      emit(state.toLoadingMore());
+      emit(state.toLoadingMore(offSet));
       List<Company> moreCompanies = await companyRepository.getCompanies(
         limit: PaginationConstants.resultsPerPage,
         offset: offSet,
@@ -113,6 +111,7 @@ class VendorsCubit extends Cubit<VendorsState> {
   void resetSearchFilters() {
     fetchVendors();
     emit(state.toFiltersChanged(
+      selectedVendorSearchFilter: SearchVendorFilters.name,
       resetSearchFilter: true,
       resetDistributorTypeFilter: true,
     ));
@@ -130,11 +129,9 @@ class VendorsCubit extends Cubit<VendorsState> {
     ));
   }
 
-  void searchVendor(String? text) =>
-      _debounceFunction(() => fetchVendors(searchValue: text ?? ''));
+  void searchVendor(String? text) => _debounceFunction(() => fetchVendors(searchValue: text ?? ''));
 
-  Future<void> _debounceFunction(Future<void> Function() func,
-      [int milliseconds = 500]) async {
+  Future<void> _debounceFunction(Future<void> Function() func, [int milliseconds = 500]) async {
     if (_debounce?.isActive ?? false) _debounce?.cancel();
     _debounce = Timer(Duration(milliseconds: milliseconds), () async {
       await func();

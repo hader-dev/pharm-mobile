@@ -19,12 +19,14 @@ class MedicineCatalogRepository extends IMedicineCatalogRepository {
       int offset = 0,
       String sortDirection = 'DESC',
       String? companyId,
+      String? searchValue,
       MedicalFilters filters = const MedicalFilters()}) async {
     final queryParams = {
       'limit': limit.toString(),
       'offset': offset.toString(),
       'sort[id]': sortDirection,
-      'computed[isFavorite]': 'true',
+      if (searchValue != null && searchValue.isNotEmpty) 'search[dci]': searchValue,
+      // 'computed[isFavorite]': 'true',
       'include[company][fields][]': [
         'id',
         'name',
@@ -63,8 +65,7 @@ class MedicineCatalogRepository extends IMedicineCatalogRepository {
       queryParams['search[type]'] = filters.type.first;
     }
     if (filters.stabilityDuration.isNotEmpty) {
-      queryParams['search[stabilityDuration]'] =
-          filters.stabilityDuration.first;
+      queryParams['search[stabilityDuration]'] = filters.stabilityDuration.first;
     }
     if (filters.packagingFormat.isNotEmpty) {
       queryParams['search[packagingFormat]'] = filters.packagingFormat.first;
@@ -104,10 +105,9 @@ class MedicineCatalogRepository extends IMedicineCatalogRepository {
   @override
   Future<MedicineCatalogModel> getMedicineCatalogById(String id) async {
     try {
-      var decodedResponse = await client.sendRequest(
-          () => client.get("${Urls.medicinesCatalog}/$id", queryParams: {
-                'computed[isFavorite]': 'true',
-              }));
+      var decodedResponse = await client.sendRequest(() => client.get("${Urls.medicinesCatalog}/$id", queryParams: {
+            'computed[isFavorite]': 'true',
+          }));
       return jsonToMedicineCatalogItem(decodedResponse);
     } catch (e) {
       return MedicineCatalogModel.empty();

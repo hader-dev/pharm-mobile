@@ -21,8 +21,7 @@ class FiltersParaMedicalBrowse extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ParaMedicalFiltersCubit, ParaMedicalFiltersState>(
-        builder: (context, state) {
+    return BlocBuilder<ParaMedicalFiltersCubit, ParaMedicalFiltersState>(builder: (context, state) {
       return Column(
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,25 +33,9 @@ class FiltersParaMedicalBrowse extends StatelessWidget {
           Column(
             children: [
               InkAccordionItem(
-                rawTitle: context.translation!.filter_items_name,
-                onTap: () => navigateToParaFiltersApplyView(
-                    context, ParaMedicalFiltersKeys.name),
-                rawSubtitle: getDisplayedParaFiltersAsRawString(
-                    context, ParaMedicalFiltersKeys.name),
-              ),
-              InkAccordionItem(
-                rawTitle: context.translation!.filter_items_description,
-                onTap: () => navigateToParaFiltersApplyView(
-                    context, ParaMedicalFiltersKeys.description),
-                rawSubtitle: getDisplayedParaFiltersAsRawString(
-                    context, ParaMedicalFiltersKeys.description),
-              ),
-              InkAccordionItem(
                 rawTitle: context.translation!.filter_items_sku,
-                onTap: () => navigateToParaFiltersApplyView(
-                    context, ParaMedicalFiltersKeys.sku),
-                rawSubtitle: getDisplayedParaFiltersAsRawString(
-                    context, ParaMedicalFiltersKeys.sku),
+                onTap: () => navigateToParaFiltersApplyView(context, ParaMedicalFiltersKeys.sku),
+                rawSubtitle: getDisplayedParaFiltersAsRawString(context, ParaMedicalFiltersKeys.sku),
               ),
             ],
           ),
@@ -67,17 +50,13 @@ class FiltersParaMedicalBrowse extends StatelessWidget {
                 maxPrice: state.appliedFilters.lteUnitPriceHt != null
                     ? double.tryParse(state.appliedFilters.lteUnitPriceHt!)
                     : null,
-                onChanged: (min, max) => cubit.updatePriceRange(min, max),
-                minLimit: 0,
-                maxLimit: 10000,
               );
             },
           ),
           const Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
           const ResponsiveGap.s12(),
           Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: context.responsiveAppSizeTheme.current.p4),
+            padding: EdgeInsets.symmetric(horizontal: context.responsiveAppSizeTheme.current.p4),
             child: Row(
               children: [
                 Expanded(

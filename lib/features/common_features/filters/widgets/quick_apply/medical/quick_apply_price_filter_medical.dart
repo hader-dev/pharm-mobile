@@ -17,12 +17,10 @@ class QuickApplyPriceFilterMedical extends StatefulWidget {
   final String title;
 
   @override
-  State<QuickApplyPriceFilterMedical> createState() =>
-      _QuickApplyPriceFilterMedicalState();
+  State<QuickApplyPriceFilterMedical> createState() => _QuickApplyPriceFilterMedicalState();
 }
 
-class _QuickApplyPriceFilterMedicalState
-    extends State<QuickApplyPriceFilterMedical> {
+class _QuickApplyPriceFilterMedicalState extends State<QuickApplyPriceFilterMedical> {
   @override
   void initState() {
     super.initState();
@@ -55,13 +53,9 @@ class _QuickApplyPriceFilterMedicalState
                 : null;
 
             return FilterPriceSection(
-              key: ValueKey(
-                  '${cubit.appliedFilters.gteUnitPriceHt}_${cubit.appliedFilters.lteUnitPriceHt}'),
+              key: ValueKey('${cubit.appliedFilters.gteUnitPriceHt}_${cubit.appliedFilters.lteUnitPriceHt}'),
               minPrice: minPrice,
               maxPrice: maxPrice,
-              onChanged: (min, max) => cubit.updatePriceRange(min, max),
-              minLimit: 0,
-              maxLimit: 10000,
             );
           },
         ),

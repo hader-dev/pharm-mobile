@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show FilteringTextInputFormatter;
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
+import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/widgets/make_order_bottom_sheet.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
+
+import '../../cubit/parapharm/para_medical_filters_cubit.dart' show ParaMedicalFiltersCubit, ParaMedicalFiltersState;
 
 class FilterPriceSection extends StatefulWidget {
   final double? minPrice;
   final double? maxPrice;
-  final Function(double min, double max) onChanged;
-  final double minLimit;
-  final double maxLimit;
 
   const FilterPriceSection({
     super.key,
-    this.minPrice,
-    this.maxPrice,
-    required this.onChanged,
-    this.minLimit = 0,
-    this.maxLimit = 10000,
+    this.minPrice = 0,
+    this.maxPrice = 0,
   });
 
   @override
@@ -25,59 +24,43 @@ class FilterPriceSection extends StatefulWidget {
 }
 
 class FilterPriceSectionState extends State<FilterPriceSection> {
-  late RangeValues currentRangeValues;
-
-  @override
-  void initState() {
-    super.initState();
-    currentRangeValues = RangeValues(
-      widget.minPrice ?? widget.minLimit,
-      widget.maxPrice ?? widget.maxLimit,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    return InfoWidget(
-      label: "${context.translation!.price}: ",
-      bgColor: AppColors.bgWhite,
-      value: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return BlocBuilder<ParaMedicalFiltersCubit, ParaMedicalFiltersState>(
+      builder: (context, state) {
+        return InfoWidget(
+          label: "${context.translation!.price}: ",
+          bgColor: AppColors.bgWhite,
+          value: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              PriceTag(
-                  label: context.translation!.min,
-                  value: currentRangeValues.start),
-              PriceTag(
-                  label: context.translation!.max,
-                  value: currentRangeValues.end),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Flexible(child: PriceTag(tag: 'min', label: context.translation!.min, value: widget.minPrice ?? 0)),
+                  const ResponsiveGap.s12(),
+                  Flexible(child: PriceTag(tag: 'max', label: context.translation!.max, value: widget.maxPrice ?? 0)),
+                ],
+              ),
+              ResponsiveGap.s2(),
+              if (state.appliedFilters.gteUnitPriceHt != null &&
+                  state.appliedFilters.lteUnitPriceHt != null &&
+                  double.parse(state.appliedFilters.gteUnitPriceHt!) >
+                      double.parse(state.appliedFilters.lteUnitPriceHt!))
+                Text(
+                  "min price should be less than max",
+                  style: context.responsiveTextTheme.current.body3Medium.copyWith(color: SystemColors.red.primary),
+                ),
             ],
           ),
-          const ResponsiveGap.s12(),
-          RangeSlider(
-            values: currentRangeValues,
-            min: widget.minLimit,
-            max: widget.maxLimit,
-            activeColor: AppColors.accent1Shade1,
-            inactiveColor: Colors.grey[300],
-            onChanged: (values) {
-              setState(() {
-                currentRangeValues = values;
-              });
-            },
-            onChangeEnd: (values) {
-              widget.onChanged(values.start, values.end);
-            },
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
 
 class PriceTag extends StatelessWidget {
+  final String tag;
   final String label;
   final double value;
 
@@ -85,6 +68,7 @@ class PriceTag extends StatelessWidget {
     super.key,
     required this.label,
     required this.value,
+    required this.tag,
   });
 
   @override
@@ -92,16 +76,16 @@ class PriceTag extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          label,
-          style: Theme.of(context).textTheme.bodySmall,
-        ),
-        Text(
-          '${value.toStringAsFixed(0)} ${context.translation!.currency}',
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
-        ),
+        Text(label, style: context.responsiveTextTheme.current.body3Medium),
+        const ResponsiveGap.s4(),
+        CustomTextField(
+          initValue: value.toString(),
+          keyBoadType: TextInputType.number,
+          formatters: [FilteringTextInputFormatter.digitsOnly],
+          onChanged: (value) {
+            context.read<ParaMedicalFiltersCubit>().updatePriceRange(tag, double.parse(value!));
+          },
+        )
       ],
     );
   }

@@ -6,6 +6,7 @@ import 'package:hader_pharm_mobile/features/common/widgets/vendor_item.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import 'cubit/vendors_cubit.dart';
+import 'widgets/filters_bar.dart' show FiltersBar;
 
 class VendorsPage extends StatefulWidget {
   const VendorsPage({super.key});
@@ -14,8 +15,7 @@ class VendorsPage extends StatefulWidget {
   State<VendorsPage> createState() => _VendorsPageState();
 }
 
-class _VendorsPageState extends State<VendorsPage>
-    with AutomaticKeepAliveClientMixin {
+class _VendorsPageState extends State<VendorsPage> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -24,6 +24,7 @@ class _VendorsPageState extends State<VendorsPage>
         padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
         child: Column(
           children: [
+            FiltersBar(),
             Expanded(
               child: BlocBuilder<VendorsCubit, VendorsState>(
                 builder: (context, state) {
@@ -34,10 +35,10 @@ class _VendorsPageState extends State<VendorsPage>
                     return const Center(child: CircularProgressIndicator());
                   }
 
-                  if (state is VendorsLoadingFailed || vendors.isEmpty) {
+                  if (state is VendorsLoaded && vendors.isEmpty) {
                     return Center(
                         child: EmptyListWidget(
-                      onRefresh: () => cubit.fetchVendors(offset: 0),
+                      onRefresh: () => cubit.fetchVendors(searchValue: state.searchController.text),
                     ));
                   }
 
@@ -45,12 +46,11 @@ class _VendorsPageState extends State<VendorsPage>
                   final bool hasReachedEnd = state is VendorsLoadLimitReached;
 
                   return RefreshIndicator(
-                    onRefresh: () => cubit.fetchVendors(offset: 0),
+                    onRefresh: () => cubit.fetchVendors(searchValue: state.searchController.text),
                     child: ListView.builder(
                       controller: cubit.scrollController,
                       physics: const AlwaysScrollableScrollPhysics(),
-                      itemCount: vendors.length +
-                          (isLoadingMore || hasReachedEnd ? 1 : 0),
+                      itemCount: vendors.length + (isLoadingMore || hasReachedEnd ? 1 : 0),
                       itemBuilder: (context, index) {
                         if (index < vendors.length) {
                           return VendorItem(companyData: vendors[index]);

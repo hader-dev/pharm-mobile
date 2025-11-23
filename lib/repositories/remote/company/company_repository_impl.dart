@@ -21,11 +21,9 @@ class CompanyRepository extends ICompanyRepository {
 
   CompanyRepository({required this.client, required this.userManager});
   @override
-  Future<void> createCompany(
-      CreateCompanyProfileFormDataModel companyData) async {
+  Future<void> createCompany(CreateCompanyProfileFormDataModel companyData) async {
     Map<String, dynamic> dataAsMap = companyData.toJson();
-    dataAsMap.removeWhere(
-        (key, value) => value == null || (value is String && value.isEmpty));
+    dataAsMap.removeWhere((key, value) => value == null || (value is String && value.isEmpty));
 
     late MultipartFile file;
     final String? userImagePath = companyData.logoPath;
@@ -49,8 +47,7 @@ class CompanyRepository extends ICompanyRepository {
       if (companyData.logoPath != null) 'image': file,
     });
 
-    await client
-        .sendRequest(() => client.post(Urls.company, payload: formData));
+    await client.sendRequest(() => client.post(Urls.company, payload: formData));
   }
 
   @override
@@ -67,30 +64,24 @@ class CompanyRepository extends ICompanyRepository {
       'limit': limit.toString(),
       'offset': offset.toString(),
       'sort[id]': sortDirection,
-      if (distributorCategoryId != null)
-        'filters[distributorCategory]': distributorCategoryId.toString(),
-      if (searchFilter != null) 'search[${searchFilter.name}]': search,
+      if (distributorCategoryId != null) 'filters[distributorCategory]': distributorCategoryId.toString(),
+      if (searchFilter != null && search.isNotEmpty) 'search[${searchFilter.name}]': search,
       if (fields != null) ...{'fields[]': fields},
       'filters[type]': companyType.id.toString(),
     };
 
-    var decodedResponse = await client
-        .sendRequest(() => client.get(Urls.company, queryParams: queryParams));
-    return (decodedResponse["data"] as List)
-        .map((json) => jsonToCompany(json))
-        .toList();
+    var decodedResponse = await client.sendRequest(() => client.get(Urls.company, queryParams: queryParams));
+    return (decodedResponse["data"] as List).map((json) => jsonToCompany(json)).toList();
   }
 
   @override
   Future<void> joinCompanyAsCLient({required String companyId}) {
-    return client.sendRequest(() => client.post(Urls.clientsCompaniesJoin,
-        payload: {'sellerCompanyId': companyId}));
+    return client.sendRequest(() => client.post(Urls.clientsCompaniesJoin, payload: {'sellerCompanyId': companyId}));
   }
 
   @override
   Future<void> addCompanyToFavorites({required String companyId}) {
-    return client.sendRequest(() => client.post(Urls.favoritesCompany,
-        payload: {'favoriteCompanyId': companyId}));
+    return client.sendRequest(() => client.post(Urls.favoritesCompany, payload: {'favoriteCompanyId': companyId}));
   }
 
   @override
@@ -99,9 +90,7 @@ class CompanyRepository extends ICompanyRepository {
           Urls.parapharmBrands,
         ));
 
-    return (decodedResponse["data"] as List)
-        .map((brandItem) => Brand.fromJson(brandItem))
-        .toList();
+    return (decodedResponse["data"] as List).map((brandItem) => Brand.fromJson(brandItem)).toList();
   }
 
   @override
@@ -112,8 +101,7 @@ class CompanyRepository extends ICompanyRepository {
 
   @override
   Future<Company> getCompanyById({required String companyId}) async {
-    var decodedResponse = await client
-        .sendRequest(() => client.get('${Urls.company}/$companyId'));
+    var decodedResponse = await client.sendRequest(() => client.get('${Urls.company}/$companyId'));
 
     return jsonToCompany(decodedResponse);
   }
@@ -142,9 +130,7 @@ class CompanyRepository extends ICompanyRepository {
   }
 
   @override
-  Future<void> updateMyCompany(
-      {required EditCompanyFormDataModel companyData,
-      bool shouldRemoveImage = false}) async {
+  Future<void> updateMyCompany({required EditCompanyFormDataModel companyData, bool shouldRemoveImage = false}) async {
     try {
       if (companyData.logoPath != null && !shouldRemoveImage) {
         await _updateCompanyWithImage(companyData);
@@ -157,8 +143,7 @@ class CompanyRepository extends ICompanyRepository {
     }
   }
 
-  Future<void> _updateCompanyWithImage(
-      EditCompanyFormDataModel companyData) async {
+  Future<void> _updateCompanyWithImage(EditCompanyFormDataModel companyData) async {
     try {
       String? companyId = await userManager.getCompanyId();
 
@@ -200,8 +185,7 @@ class CompanyRepository extends ICompanyRepository {
     }
   }
 
-  Future<void> _updateCompanyWithoutImage(
-      EditCompanyFormDataModel companyData, bool shouldRemoveImage) async {
+  Future<void> _updateCompanyWithoutImage(EditCompanyFormDataModel companyData, bool shouldRemoveImage) async {
     try {
       String? companyId = await userManager.getCompanyId();
       if (companyId?.isEmpty ?? true) {

@@ -6,6 +6,8 @@ import 'package:hader_pharm_mobile/features/common/widgets/medicine_widget_2.dar
 import 'package:hader_pharm_mobile/features/common_features/home/home.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/market_place.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/medicine_products/widget/filters_bar.dart';
+import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/medicine_products/widget/filters_bar_v2.dart'
+    show FiltersBarV2;
 import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/widgets/quick_add_modal.dart';
 import 'package:hader_pharm_mobile/models/medicine_catalog.dart';
 import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
@@ -34,7 +36,7 @@ class _MedicineProductsPageState extends State<MedicineProductsPage> with Automa
             padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
             child: Column(
               children: [
-                const FiltersBar(),
+                FiltersBarV2(),
                 Expanded(
                   child: Builder(builder: (context) {
                     final medicines = state.medicines;
@@ -69,40 +71,37 @@ class _MedicineProductsPageState extends State<MedicineProductsPage> with Automa
                           ));
                     }
 
+                    if (state is MedicineProductsLoading) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                    if (state is MedicineProductsLoaded && state.medicines.isEmpty) {
+                      return const Center(child: EmptyListWidget());
+                    }
+
                     return RefreshIndicator(
                       onRefresh: () => cubit.getMedicines(),
-                      child: GridView.builder(
-                        controller: cubit.scrollController,
-                        physics: const AlwaysScrollableScrollPhysics(),
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 1,
-                          crossAxisSpacing: calculateMarketplaceGridSpacing(context.deviceSize),
-                          mainAxisSpacing: calculateMarketplaceMainAxisSpacing(context.deviceSize),
-                          childAspectRatio: calculateMarketplaceAspectRatio(context.deviceSize, context.orientation),
+                      child: Scrollbar(
+                        controller: state.scrollController,
+                        child: ListView(
+                          physics: AlwaysScrollableScrollPhysics(),
+                          controller: state.scrollController,
+                          children: [
+                            ...state.medicines.map((medicine) => MedicineWidget2(
+                                  medicineData: medicine,
+                                  isLiked: medicine.isLiked,
+                                  onLikeTapped: () => onLikeTapped(medicine),
+                                  onQuickAddCallback: onQuickAddCallback,
+                                  hideLikeButton: false,
+                                )),
+                            if (isLoadingMore)
+                              const Padding(
+                                padding: EdgeInsets.all(16.0),
+                                child:
+                                    Center(child: SizedBox(height: 20, width: 20, child: CircularProgressIndicator())),
+                              ),
+                            if (hasReachedEnd) const EndOfLoadResultWidget()
+                          ],
                         ),
-                        itemCount: medicines.length + (isLoadingMore || hasReachedEnd ? 1 : 0),
-                        itemBuilder: (context, index) {
-                          if (index < medicines.length) {
-                            final medicine = medicines[index];
-                            return MedicineWidget2(
-                              medicineData: medicine,
-                              isLiked: medicine.isLiked,
-                              onLikeTapped: () => onLikeTapped(medicine),
-                              onQuickAddCallback: onQuickAddCallback,
-                              hideLikeButton: false,
-                            );
-                          } else {
-                            if (isLoadingMore) {
-                              return Padding(
-                                padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.s16),
-                                child: Center(child: CircularProgressIndicator()),
-                              );
-                            } else if (hasReachedEnd) {
-                              return const EndOfLoadResultWidget();
-                            }
-                          }
-                          return const SizedBox.shrink();
-                        },
                       ),
                     );
                   }),

@@ -39,15 +39,6 @@ class QuickApplyPriceFilterParapharm extends StatelessWidget {
                 '${state.appliedFilters.gteUnitPriceHt ?? 'null'}_${state.appliedFilters.lteUnitPriceHt ?? 'null'}');
             return FilterPriceSection(
               key: valueKey,
-              minPrice: double.tryParse(
-                      state.appliedFilters.gteUnitPriceHt ?? "0.0") ??
-                  0,
-              maxPrice: double.tryParse(
-                      state.appliedFilters.lteUnitPriceHt ?? "10000") ??
-                  10000,
-              onChanged: (min, max) => cubit.updatePriceRange(min, max),
-              minLimit: 0,
-              maxLimit: 10000,
             );
           },
         ),
@@ -65,9 +56,7 @@ class QuickApplyPriceFilterParapharm extends StatelessWidget {
                     spalshColor: AppColors.accent1Shade1.withAlpha(50),
                     labelColor: AppColors.accent1Shade1,
                     onTap: () {
-                      context
-                          .read<ParaMedicalFiltersCubit>()
-                          .resetPriceFilter();
+                      context.read<ParaMedicalFiltersCubit>().resetPriceFilter();
                       context.pop();
                     },
                     borderColor: AppColors.accent1Shade1,

@@ -7,6 +7,7 @@ abstract class IMedicineCatalogRepository {
       {int limit = 8,
       int offset = 0,
       String sortDirection = 'DESC',
+      String? searchValue,
       MedicalFilters filters = const MedicalFilters()});
   Future<MedicineCatalogModel> getMedicineCatalogById(String id);
 }
