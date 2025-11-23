@@ -404,5 +404,9 @@
   "vendor_added_to_favorites": "Vendor added to your favorites list",
   "seller":"Seller",
   "last_update":"Last updated",
-  "dateRangeError": "'From' date cannot be after 'To' date."
+  "dateRangeError": "'From' date cannot be after 'To' date.",
+  "order_placed_successfully": "Order Placed Successfully!",
+  "thank_you_purchase": "Thank you for your purchase. Your order has been placed successfully.",
+  "view_order": "View Order",
+  "continue_shopping": "Continue Shopping"
 }

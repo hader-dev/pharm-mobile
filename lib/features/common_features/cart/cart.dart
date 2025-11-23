@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/features/app_layout/app_layout.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
-import 'package:hader_pharm_mobile/features/common_features/cart/widgets/cart_item_v4.dart'
-    show CartItemWidgetV4;
+import 'package:hader_pharm_mobile/features/common_features/cart/widgets/cart_item_v4.dart' show CartItemWidgetV4;
 import 'package:hader_pharm_mobile/features/common_features/cart/widgets/cart_summary_v1.dart';
 
 import 'cubit/cart_cubit.dart';
 
 class CartScreen extends StatelessWidget {
   final bool isInHome;
+
   const CartScreen({super.key, this.isInHome = false});
 
   @override
@@ -53,8 +53,6 @@ class CartScreen extends StatelessWidget {
                 ],
               ),
             );
-            // if (state is LoadingMoreOrders) const Center(child: CircularProgressIndicator()),
-            // if (state is OrdersLoadLimitReached) EndOfLoadResultWidget(),
           }),
         ),
       ),

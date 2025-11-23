@@ -1183,7 +1183,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get pacakge_quantity => 'Quantité de colisage';
 
   @override
-  String get order_placed_successfully => 'Commande placée avec successe';
+  String get order_placed_successfully => 'Commande passée avec succès !';
 
   @override
   String get password_reset_success =>
@@ -1298,4 +1298,14 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get dateRangeError =>
       'La date \'De\' ne peut pas être postérieure à la date \'À\'';
+
+  @override
+  String get thank_you_purchase =>
+      'Merci pour votre achat. Votre commande a été passée avec succès.';
+
+  @override
+  String get view_order => 'Voir la commande';
+
+  @override
+  String get continue_shopping => 'Continuer vos achats';
 }
