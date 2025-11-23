@@ -22,6 +22,7 @@ class BaseParaPharmaCatalogModel {
   final int minOrderQuantity;
   final int actualQty;
   final int reservedQty;
+  final double? computedPrice;
 
   BaseParaPharmaCatalogModel copyWith(
       {String? id,
@@ -53,12 +54,14 @@ class BaseParaPharmaCatalogModel {
       isLiked: isLiked ?? this.isLiked,
       brand: brand,
       category: category,
+      computedPrice: computedPrice,
     );
   }
 
   BaseParaPharmaCatalogModel(
       {required this.id,
       required this.tags,
+      this.computedPrice,
       required this.packageSize,
       required this.unitPriceHt,
       required this.thumbnailImage,
@@ -134,6 +137,7 @@ class ParaPharmaCatalogModel extends BaseParaPharmaCatalogModel {
     required super.id,
     required super.isLiked,
     required super.packageSize,
+    super.computedPrice,
     required super.unitPriceHt,
     required super.thumbnailImage,
     required super.image,

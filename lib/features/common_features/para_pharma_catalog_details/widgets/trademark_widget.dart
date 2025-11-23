@@ -6,18 +6,21 @@ import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/price_widget.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/cubit/para_pharma_details_cubit.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
-import 'package:hader_pharm_mobile/utils/extensions/price_formatter.dart';
 
 class TrademarkWidget extends StatelessWidget {
   const TrademarkWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    ParaPharmaCatalogModel catalogData = BlocProvider.of<ParaPharmaDetailsCubit>(context).state.paraPharmaCatalogData;
+    ParaPharmaCatalogModel catalogData =
+        BlocProvider.of<ParaPharmaDetailsCubit>(context)
+            .state
+            .paraPharmaCatalogData;
 
     return GestureDetector(
       onTap: () {
@@ -51,7 +54,8 @@ class TrademarkWidget extends StatelessWidget {
               ),
               const ResponsiveGap.s4(),
               Text(catalogData.company!.name,
-                  style: context.responsiveTextTheme.current.body3Regular.copyWith(color: Colors.white)),
+                  style: context.responsiveTextTheme.current.body3Regular
+                      .copyWith(color: Colors.white)),
             ],
           ),
         ),
@@ -65,25 +69,27 @@ class TrademarkWidgetAlternate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ParaPharmaCatalogModel catalogData = BlocProvider.of<ParaPharmaDetailsCubit>(context).state.paraPharmaCatalogData;
+    ParaPharmaCatalogModel catalogData =
+        BlocProvider.of<ParaPharmaDetailsCubit>(context)
+            .state
+            .paraPharmaCatalogData;
 
     return Padding(
-      padding: EdgeInsets.only(right: context.responsiveAppSizeTheme.current.s2),
+      padding:
+          EdgeInsets.only(right: context.responsiveAppSizeTheme.current.s2),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text.rich(TextSpan(
-              text: catalogData.unitPriceHt.formatAsPrice(),
-              style: context.responsiveTextTheme.current.headLine2
-                  .copyWith(fontWeight: FontWeight.bold, color: AppColors.accent1Shade1),
-              children: [
-                TextSpan(
-                  text: " ${context.translation!.currency}",
-                  style: context.responsiveTextTheme.current.bodyXXSmall.copyWith(
-                    color: Colors.grey.shade400,
-                  ),
-                ),
-              ])),
+          PriceWidget(
+            price: catalogData.unitPriceHt,
+            overridePrice: catalogData.computedPrice,
+            mainStyle: context.responsiveTextTheme.current.headLine2.copyWith(
+                fontWeight: FontWeight.bold, color: AppColors.accent1Shade1),
+            currencyStyle:
+                context.responsiveTextTheme.current.bodyXXSmall.copyWith(
+              color: AppColors.accent1Shade1,
+            ),
+          ),
           const ResponsiveGap.s16(),
           GestureDetector(
               onTap: () {
@@ -99,12 +105,16 @@ class TrademarkWidgetAlternate extends StatelessWidget {
                     width: 35,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      border: Border.all(color: AppColors.bgDisabled, width: 1.5),
+                      border:
+                          Border.all(color: AppColors.bgDisabled, width: 1.5),
                       image: DecorationImage(
                         image: catalogData.company?.thumbnailImage?.path == null
-                            ? AssetImage(DrawableAssetStrings.companyPlaceHolderImg)
+                            ? AssetImage(
+                                DrawableAssetStrings.companyPlaceHolderImg)
                             : NetworkImage(
-                                getItInstance.get<INetworkService>().getFilesPath(
+                                getItInstance
+                                    .get<INetworkService>()
+                                    .getFilesPath(
                                       catalogData.company!.thumbnailImage!.path,
                                     ),
                               ),
@@ -112,7 +122,9 @@ class TrademarkWidgetAlternate extends StatelessWidget {
                     ),
                   ),
                   const ResponsiveGap.s8(),
-                  Text(catalogData.company!.name, style: context.responsiveTextTheme.current.body3Regular.copyWith()),
+                  Text(catalogData.company!.name,
+                      style: context.responsiveTextTheme.current.body3Regular
+                          .copyWith()),
                 ],
               )),
         ],
