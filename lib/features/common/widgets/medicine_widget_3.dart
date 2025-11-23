@@ -6,15 +6,16 @@ import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart' show PrimaryTextButton;
+import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart'
+    show PrimaryTextButton;
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/price_widget.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/stock_availlable.dart';
 import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/widgets/quick_add_modal.dart';
 import 'package:hader_pharm_mobile/models/medicine_catalog.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
-import 'package:hader_pharm_mobile/utils/extensions/price_formatter.dart';
 import 'package:iconsax/iconsax.dart';
 
 typedef OnFavoriteCallback = void Function(BaseMedicineCatalogModel medicine);
@@ -39,20 +40,24 @@ class MedicineWidget3 extends StatelessWidget {
         border: Border.all(
           color: const Color.fromARGB(186, 245, 245, 245),
         ),
-        borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.r6),
+        borderRadius:
+            BorderRadius.circular(context.responsiveAppSizeTheme.current.r6),
       ),
       child: InkWell(
         splashColor: Colors.transparent,
         onTap: () {
           final userRole = getItInstance.get<UserManager>().currentUser.role;
           final canOrderBasedOnRole = !userRole.isDelegate;
-          GoRouter.of(context).pushNamed(route, extra: {"id": medicineData.id, "canOrder": canOrderBasedOnRole});
+          GoRouter.of(context).pushNamed(route,
+              extra: {"id": medicineData.id, "canOrder": canOrderBasedOnRole});
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            _ImageSection(medicineData: medicineData, onFavoriteCallback: onFavoriteCallback),
+            _ImageSection(
+                medicineData: medicineData,
+                onFavoriteCallback: onFavoriteCallback),
             Padding(
                 padding: EdgeInsets.symmetric(
                     vertical: context.responsiveAppSizeTheme.current.p8,
@@ -68,21 +73,30 @@ class MedicineWidget3 extends StatelessWidget {
                           width: 27,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            border: Border.all(color: AppColors.bgDisabled, width: 1.5),
+                            border: Border.all(
+                                color: AppColors.bgDisabled, width: 1.5),
                             image: DecorationImage(
-                              image: medicineData.company?.thumbnailImage?.path == null
-                                  ? AssetImage(DrawableAssetStrings.companyPlaceHolderImg)
-                                  : NetworkImage(
-                                      getItInstance.get<INetworkService>().getFilesPath(
-                                            medicineData.company!.thumbnailImage!.path,
-                                          ),
-                                    ),
+                              image:
+                                  medicineData.company?.thumbnailImage?.path ==
+                                          null
+                                      ? AssetImage(DrawableAssetStrings
+                                          .companyPlaceHolderImg)
+                                      : NetworkImage(
+                                          getItInstance
+                                              .get<INetworkService>()
+                                              .getFilesPath(
+                                                medicineData.company!
+                                                    .thumbnailImage!.path,
+                                              ),
+                                        ),
                             ),
                           ),
                         ),
                         const ResponsiveGap.s4(),
                         Text(medicineData.company!.name,
-                            style: context.responsiveTextTheme.current.body3Regular.copyWith()),
+                            style: context
+                                .responsiveTextTheme.current.body3Regular
+                                .copyWith()),
                       ],
                     ),
                     const ResponsiveGap.s4(),
@@ -94,31 +108,29 @@ class MedicineWidget3 extends StatelessWidget {
                             softWrap: true,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
-                            style: context.responsiveTextTheme.current.headLine3SemiBold
+                            style: context
+                                .responsiveTextTheme.current.headLine3SemiBold
                                 .copyWith(color: TextColors.primary.color)),
                       ),
                     const ResponsiveGap.s4(),
-                    Text.rich(
-                      TextSpan(
-                        children: [
-                          TextSpan(
-                            text: medicineData.unitPriceHt.formatAsPriceForPrint(decimalDigits: 1),
-                            style: context.responsiveTextTheme.current.headLine4SemiBold
-                                .copyWith(color: AppColors.accent1Shade1),
-                          ),
-                          TextSpan(
-                            text: " ${context.translation!.currency}",
-                            style: context.responsiveTextTheme.current.bodyXSmall
-                                .copyWith(color: AppColors.accent1Shade1, fontSize: 10),
-                          ),
-                        ],
-                      ),
+                    PriceWidget(
+                      price: medicineData.unitPriceHt,
+                      overridePrice: medicineData.computedPrice,
+                      mainStyle: context
+                          .responsiveTextTheme.current.headLine4SemiBold
+                          .copyWith(color: AppColors.accent1Shade1),
+                      currencyStyle: context
+                          .responsiveTextTheme.current.bodyXSmall
+                          .copyWith(
+                              color: AppColors.accent1Shade1, fontSize: 10),
                     ),
                     const ResponsiveGap.s4(),
                     PrimaryTextButton(
                         label: context.translation!.add_cart,
                         leadingIcon: Iconsax.add,
-                        labelTextStyle: context.responsiveTextTheme.current.body3Regular.copyWith(color: Colors.white),
+                        labelTextStyle: context
+                            .responsiveTextTheme.current.body3Regular
+                            .copyWith(color: Colors.white),
                         onTap: () {
                           BottomSheetHelper.showCommonBottomSheet(
                               initialChildSize: .5,
@@ -153,10 +165,12 @@ class _ImageSection extends StatelessWidget {
     return Expanded(
         child: Container(
       margin: EdgeInsets.symmetric(
-          horizontal: context.responsiveAppSizeTheme.current.p6, vertical: context.responsiveAppSizeTheme.current.p6),
+          horizontal: context.responsiveAppSizeTheme.current.p6,
+          vertical: context.responsiveAppSizeTheme.current.p6),
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.r6),
+        borderRadius:
+            BorderRadius.circular(context.responsiveAppSizeTheme.current.r6),
         border: medicineData.image != null
             ? null
             : Border.all(
@@ -169,11 +183,14 @@ class _ImageSection extends StatelessWidget {
                 boxFit: BoxFit.contain,
                 width: double.maxFinite,
                 height: double.maxFinite,
-                imageUrl: getItInstance.get<INetworkService>().getFilesPath(medicineData.image?.path ?? ''),
+                imageUrl: getItInstance
+                    .get<INetworkService>()
+                    .getFilesPath(medicineData.image?.path ?? ''),
               )
             : Center(
                 child: Image(
-                  image: AssetImage(DrawableAssetStrings.medicinePlaceHolderImg),
+                  image:
+                      AssetImage(DrawableAssetStrings.medicinePlaceHolderImg),
                   fit: BoxFit.cover,
                   height: 120,
                   width: 80,
@@ -181,7 +198,8 @@ class _ImageSection extends StatelessWidget {
               ),
         Row(
           children: [
-            StockAvailableContainerWidget(isAvailable: medicineData.stockQuantity > 0),
+            StockAvailableContainerWidget(
+                isAvailable: medicineData.stockQuantity > 0),
             Spacer(),
             if (onFavoriteCallback != null)
               InkWell(

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/app_layout/app_layout.dart';
 import 'package:hader_pharm_mobile/features/app_layout/cubit/app_layout_cubit.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
-import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart' show ResponsiveGap;
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart'
+    show ResponsiveGap;
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class OrderPlacedSuccessfullyDialog extends StatelessWidget {
@@ -40,11 +40,14 @@ class OrderPlacedSuccessfullyDialog extends StatelessWidget {
                       labelColor: AppColors.accent1Shade1,
                       isOutLined: true,
                       borderColor: AppColors.bgDisabled,
-                      labelTextStyle:
-                          context.responsiveTextTheme.current.body3Medium.copyWith(color: AppColors.accent1Shade1),
+                      labelTextStyle: context
+                          .responsiveTextTheme.current.body3Medium
+                          .copyWith(color: AppColors.accent1Shade1),
                       onTap: () {
                         context.pop();
-                        AppLayout.appLayoutScaffoldKey.currentContext!.read<AppLayoutCubit>().changePage(3);
+                        AppLayout.appLayoutScaffoldKey.currentContext!
+                            .read<AppLayoutCubit>()
+                            .changePage(3);
                       })),
               ResponsiveGap.s12(),
               Flexible(
@@ -52,11 +55,14 @@ class OrderPlacedSuccessfullyDialog extends StatelessWidget {
                       label: translation.continue_shopping,
                       labelColor: AppColors.bgWhite,
                       color: AppColors.accent1Shade1,
-                      labelTextStyle:
-                          context.responsiveTextTheme.current.body3Medium.copyWith(color: AppColors.bgWhite),
+                      labelTextStyle: context
+                          .responsiveTextTheme.current.body3Medium
+                          .copyWith(color: AppColors.bgWhite),
                       onTap: () async {
                         context.pop();
-                        AppLayout.appLayoutScaffoldKey.currentContext!.read<AppLayoutCubit>().changePage(1);
+                        AppLayout.appLayoutScaffoldKey.currentContext!
+                            .read<AppLayoutCubit>()
+                            .changePage(1);
                       })),
             ],
           ),

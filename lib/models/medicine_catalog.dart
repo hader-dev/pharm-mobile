@@ -29,10 +29,11 @@ class BaseMedicineCatalogModel {
   final int displayOrder;
   final BaseCompany? company;
   bool isLiked;
-  
+  final double? computedPrice;
 
   BaseMedicineCatalogModel({
     required this.packageSize,
+    this.computedPrice,
     required this.id,
     required this.unitPriceTtc,
     required this.unitPriceHt,
@@ -70,6 +71,7 @@ class MedicineCatalogModel extends BaseMedicineCatalogModel {
 
   MedicineCatalogModel({
     required super.id,
+    super.computedPrice,
     required super.unitPriceTtc,
     required super.unitPriceHt,
     required super.tvaPercentage,
