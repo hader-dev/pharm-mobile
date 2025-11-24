@@ -5,14 +5,12 @@ import 'package:hader_pharm_mobile/features/common/widgets/end_of_load_result_wi
 import 'package:hader_pharm_mobile/features/common/widgets/medicine_widget_2.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/home.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/market_place.dart';
-import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/medicine_products/widget/filters_bar.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/medicine_products/widget/filters_bar_v2.dart'
     show FiltersBarV2;
 import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/widgets/quick_add_modal.dart';
 import 'package:hader_pharm_mobile/models/medicine_catalog.dart';
 import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
-import 'package:hader_pharm_mobile/utils/responsive/silver_grid_params.dart';
 
 import 'cubit/medicine_products_cubit.dart';
 
@@ -23,7 +21,8 @@ class MedicineProductsPage extends StatefulWidget {
   State<MedicineProductsPage> createState() => _MedicineProductsPageState();
 }
 
-class _MedicineProductsPageState extends State<MedicineProductsPage> with AutomaticKeepAliveClientMixin {
+class _MedicineProductsPageState extends State<MedicineProductsPage>
+    with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     final cubit = BlocProvider.of<MedicineProductsCubit>(context);
@@ -44,25 +43,34 @@ class _MedicineProductsPageState extends State<MedicineProductsPage> with Automa
                       return const Center(child: CircularProgressIndicator());
                     }
 
-                    if (state is MedicineProductsLoadingFailed || medicines.isEmpty) {
+                    if (state is MedicineProductsLoadingFailed ||
+                        medicines.isEmpty) {
                       return const Center(child: EmptyListWidget());
                     }
 
                     final bool isLoadingMore = state is MedicineProductsLoading;
-                    final bool hasReachedEnd = state is MedicinesLoadLimitReached;
+                    final bool hasReachedEnd =
+                        state is MedicinesLoadLimitReached;
 
                     void onLikeTapped(BaseMedicineCatalogModel medicine) {
                       final id = medicine.id;
-                      final gCubit =
-                          MarketPlaceScreen.marketPlaceScaffoldKey.currentContext!.read<MedicineProductsCubit>();
-                      final hCubit = HomeScreen.scaffoldKey.currentContext!.read<MedicineProductsCubit>();
-                      medicine.isLiked ? cubit.unlikeMedicinesCatalog(id) : cubit.likeMedicinesCatalog(id);
+                      final gCubit = MarketPlaceScreen
+                          .marketPlaceScaffoldKey.currentContext!
+                          .read<MedicineProductsCubit>();
+                      final hCubit = HomeScreen.scaffoldKey.currentContext!
+                          .read<MedicineProductsCubit>();
+                      medicine.isLiked
+                          ? cubit.unlikeMedicinesCatalog(id)
+                          : cubit.likeMedicinesCatalog(id);
 
-                      gCubit.refreshMedicineCatalogFavorite(id, !medicine.isLiked);
-                      hCubit.refreshMedicineCatalogFavorite(id, !medicine.isLiked);
+                      gCubit.refreshMedicineCatalogFavorite(
+                          id, !medicine.isLiked);
+                      hCubit.refreshMedicineCatalogFavorite(
+                          id, !medicine.isLiked);
                     }
 
-                    void onQuickAddCallback(BaseMedicineCatalogModel medicineProduct) {
+                    void onQuickAddCallback(
+                        BaseMedicineCatalogModel medicineProduct) {
                       BottomSheetHelper.showCommonBottomSheet(
                           initialChildSize: .5,
                           context: context,
@@ -74,7 +82,8 @@ class _MedicineProductsPageState extends State<MedicineProductsPage> with Automa
                     if (state is MedicineProductsLoading) {
                       return const Center(child: CircularProgressIndicator());
                     }
-                    if (state is MedicineProductsLoaded && state.medicines.isEmpty) {
+                    if (state is MedicineProductsLoaded &&
+                        state.medicines.isEmpty) {
                       return const Center(child: EmptyListWidget());
                     }
 
@@ -86,18 +95,23 @@ class _MedicineProductsPageState extends State<MedicineProductsPage> with Automa
                           physics: AlwaysScrollableScrollPhysics(),
                           controller: state.scrollController,
                           children: [
-                            ...state.medicines.map((medicine) => MedicineWidget2(
-                                  medicineData: medicine,
-                                  isLiked: medicine.isLiked,
-                                  onLikeTapped: () => onLikeTapped(medicine),
-                                  onQuickAddCallback: onQuickAddCallback,
-                                  hideLikeButton: false,
-                                )),
+                            ...state.medicines
+                                .map((medicine) => MedicineWidget2(
+                                      medicineData: medicine,
+                                      isLiked: medicine.isLiked,
+                                      onLikeTapped: () =>
+                                          onLikeTapped(medicine),
+                                      onQuickAddCallback: onQuickAddCallback,
+                                      hideLikeButton: false,
+                                    )),
                             if (isLoadingMore)
                               const Padding(
                                 padding: EdgeInsets.all(16.0),
-                                child:
-                                    Center(child: SizedBox(height: 20, width: 20, child: CircularProgressIndicator())),
+                                child: Center(
+                                    child: SizedBox(
+                                        height: 20,
+                                        width: 20,
+                                        child: CircularProgressIndicator())),
                               ),
                             if (hasReachedEnd) const EndOfLoadResultWidget()
                           ],

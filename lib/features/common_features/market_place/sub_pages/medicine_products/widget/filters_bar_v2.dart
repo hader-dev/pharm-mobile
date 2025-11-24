@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/dividers.dart';
-import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field.dart' show CustomTextField;
+import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field.dart'
+    show CustomTextField;
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/medicine_products/cubit/medicine_products_cubit.dart'
     show MedicineProductsCubit, MedicineProductsState;
-import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
-import 'package:lucide_icons/lucide_icons.dart';
-
-import '../../../../deligate_marketplace/sub_pages/medicine_products/widget/search_filter_bottom_sheet.dart';
-import '../../../../deligate_marketplace/sub_pages/para_pharma/widget/search_filter_bottom_sheet.dart'
-    show SearchParaPharmFilterBottomSheet;
 
 class FiltersBarV2 extends StatelessWidget {
   const FiltersBarV2({super.key});
@@ -38,7 +33,9 @@ class FiltersBarV2 extends StatelessWidget {
                       controller: state.searchController,
                       suffixIcon: state.searchController.text.isNotEmpty
                           ? IconButton(
-                              icon: Icon(Icons.clear, color: context.theme.colorScheme.onSurfaceVariant),
+                              icon: Icon(Icons.clear,
+                                  color: context
+                                      .theme.colorScheme.onSurfaceVariant),
                               onPressed: () {
                                 state.searchController.clear();
                                 cubit.searchMedicineCatalog("");
@@ -49,8 +46,11 @@ class FiltersBarV2 extends StatelessWidget {
                         cubit.searchMedicineCatalog(value);
                       },
                       hintText: "Search ${translation.medicines} ...",
-                      hintTextStyle: context.responsiveTextTheme.current.body1Regular.copyWith(color: Colors.grey),
-                      prefixIcon: Icon(Icons.search, color: context.theme.colorScheme.onSurfaceVariant),
+                      hintTextStyle: context
+                          .responsiveTextTheme.current.body1Regular
+                          .copyWith(color: Colors.grey),
+                      prefixIcon: Icon(Icons.search,
+                          color: context.theme.colorScheme.onSurfaceVariant),
                     ),
                   ),
                 ),

@@ -21,7 +21,8 @@ class FiltersParaMedicalBrowse extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ParaMedicalFiltersCubit, ParaMedicalFiltersState>(builder: (context, state) {
+    return BlocBuilder<ParaMedicalFiltersCubit, ParaMedicalFiltersState>(
+        builder: (context, state) {
       return Column(
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,15 +35,16 @@ class FiltersParaMedicalBrowse extends StatelessWidget {
             children: [
               InkAccordionItem(
                 rawTitle: context.translation!.filter_items_sku,
-                onTap: () => navigateToParaFiltersApplyView(context, ParaMedicalFiltersKeys.sku),
-                rawSubtitle: getDisplayedParaFiltersAsRawString(context, ParaMedicalFiltersKeys.sku),
+                onTap: () => navigateToParaFiltersApplyView(
+                    context, ParaMedicalFiltersKeys.sku),
+                rawSubtitle: getDisplayedParaFiltersAsRawString(
+                    context, ParaMedicalFiltersKeys.sku),
               ),
             ],
           ),
           const ResponsiveGap.s12(),
           BlocBuilder<ParaMedicalFiltersCubit, ParaMedicalFiltersState>(
             builder: (context, state) {
-              final cubit = context.read<ParaMedicalFiltersCubit>();
               return FilterPriceSection(
                 minPrice: state.appliedFilters.gteUnitPriceHt != null
                     ? double.tryParse(state.appliedFilters.gteUnitPriceHt!)
@@ -56,7 +58,8 @@ class FiltersParaMedicalBrowse extends StatelessWidget {
           const Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
           const ResponsiveGap.s12(),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: context.responsiveAppSizeTheme.current.p4),
+            padding: EdgeInsets.symmetric(
+                horizontal: context.responsiveAppSizeTheme.current.p4),
             child: Row(
               children: [
                 Expanded(
