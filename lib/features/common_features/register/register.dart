@@ -28,6 +28,7 @@ class RegisterScreen extends StatelessWidget {
             GoRouter.of(context)
                 .pushReplacement(RoutingManager.checkEmailScreen, extra: {
               "email": state.email,
+              "autoRedirect": false,
               "redirectTo": RoutingManager.createCompanyProfile
             });
           }
