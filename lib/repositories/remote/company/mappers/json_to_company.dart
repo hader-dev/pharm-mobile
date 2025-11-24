@@ -4,16 +4,13 @@ import 'package:hader_pharm_mobile/models/image.dart';
 Company jsonToCompany(Map<String, dynamic> json) {
   return Company(
     id: json["id"] ?? "",
-    thumbnailImage:
-        json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
+    thumbnailImage: json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
     image: json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
     name: json["name"] ?? "",
     latitude: json["latitude"],
     longitude: json["longitude"],
-    createdAt:
-        json["createdAt"] != null ? DateTime.tryParse(json["createdAt"]) : null,
-    updatedAt:
-        json["updatedAt"] != null ? DateTime.tryParse(json["updatedAt"]) : null,
+    createdAt: json["createdAt"] != null ? DateTime.tryParse(json["createdAt"]) : null,
+    updatedAt: json["updatedAt"] != null ? DateTime.tryParse(json["updatedAt"]) : null,
     managerUserId: json["managerUserId"],
     type: json["type"],
     distributorCategory: json["distributorCategory"],
@@ -31,6 +28,6 @@ Company jsonToCompany(Map<String, dynamic> json) {
     nisNumber: json["nisNumber"],
     contactInfo: json["contactInfo"],
     isActive: json["isActive"],
-    isLiked: json["isLiked"] ?? false,
+    isLiked: json["isFavorite"] ?? false,
   );
 }

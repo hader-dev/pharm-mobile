@@ -5,6 +5,7 @@ import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/features/common_features/filters/cubit/medical/medical_filters_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/filters/cubit/parapharm/para_medical_filters_cubit.dart';
+import 'package:hader_pharm_mobile/features/common_features/market_place/cubit/market_place_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/cubit/para_pharma_cubit.dart';
 import 'package:hader_pharm_mobile/repositories/remote/company/company_repository_impl.dart';
 import 'package:hader_pharm_mobile/repositories/remote/favorite/favorite_repository_impl.dart';
@@ -37,21 +38,17 @@ class MarketPlaceScreen extends StatelessWidget {
         BlocProvider(
           create: (context) => MedicineProductsCubit(
               scrollController: ScrollController(),
-              favoriteRepository: FavoriteRepository(
-                  client: getItInstance.get<INetworkService>()),
+              favoriteRepository: FavoriteRepository(client: getItInstance.get<INetworkService>()),
               searchController: TextEditingController(text: ""),
-              medicineRepository: MedicineCatalogRepository(
-                  client: getItInstance.get<INetworkService>()))
+              medicineRepository: MedicineCatalogRepository(client: getItInstance.get<INetworkService>()))
             ..getMedicines(),
         ),
         BlocProvider(
           create: (context) => ParaPharmaCubit(
               scrollController: ScrollController(),
-              favoriteRepository: FavoriteRepository(
-                  client: getItInstance.get<INetworkService>()),
+              favoriteRepository: FavoriteRepository(client: getItInstance.get<INetworkService>()),
               searchController: TextEditingController(text: ""),
-              paraPharmaRepository: ParaPharmaRepository(
-                  client: getItInstance.get<INetworkService>()))
+              paraPharmaRepository: ParaPharmaRepository(client: getItInstance.get<INetworkService>()))
             ..getParaPharmas(),
         ),
         BlocProvider(
@@ -64,6 +61,7 @@ class MarketPlaceScreen extends StatelessWidget {
             searchController: TextEditingController(text: ""),
           )..fetchVendors(),
         ),
+        BlocProvider(create: (context) => MarketPlaceCubit()),
       ],
       child: Scaffold(
         key: marketPlaceScaffoldKey,

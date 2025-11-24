@@ -47,6 +47,24 @@ class VendorsState {
           selectedDistributorTypeFilter: selectedDistributorTypeFilter,
           resetSearchFilter: resetSearchFilter,
           resetDistributorTypeFilter: resetDistributorTypeFilter);
+  VendorLikeFailed tolikeFailed({required String vendroId}) =>
+      VendorLikeFailed.fromState(state: this, vendorId: vendroId);
+
+  VendorLiked toLiked({required String vendorId, required bool isLiked}) {
+    final updated = vendorsList.map((element) {
+      if (element.id == vendorId) {
+        return element.copyWith(isLiked: isLiked);
+      }
+      return element;
+    }).toList();
+
+    return VendorLiked.fromState(
+      state: this,
+      vendorsList: updated,
+      vendorId: vendorId,
+      likedOrUnliked: isLiked,
+    );
+  }
 }
 
 final class VendorsInitial extends VendorsState {
@@ -187,4 +205,42 @@ final class VendorSearchFilterChanged extends VendorsState {
             searchController: state.searchController,
             displayFilters: state.displayFilters,
             lastOffset: state.lastOffset);
+}
+
+final class VendorLiked extends VendorsState {
+  final String vendorId;
+  final bool likedOrUnliked;
+
+  VendorLiked.fromState({
+    required VendorsState state,
+    required super.vendorsList,
+    required this.vendorId,
+    required this.likedOrUnliked,
+  }) : super(
+          lastOffset: state.lastOffset,
+          totalVendorsCount: state.totalVendorsCount,
+          offSet: state.offSet,
+          displayFilters: state.displayFilters,
+          selectedVendorSearchFilter: state.selectedVendorSearchFilter,
+          searchController: state.searchController,
+          scrollController: state.scrollController,
+        );
+}
+
+final class VendorLikeFailed extends VendorsState {
+  final String vendorId;
+
+  VendorLikeFailed.fromState({
+    required VendorsState state,
+    required this.vendorId,
+  }) : super(
+          vendorsList: state.vendorsList,
+          lastOffset: state.lastOffset,
+          totalVendorsCount: state.totalVendorsCount,
+          offSet: state.offSet,
+          displayFilters: state.displayFilters,
+          selectedVendorSearchFilter: state.selectedVendorSearchFilter,
+          searchController: state.searchController,
+          scrollController: state.scrollController,
+        );
 }

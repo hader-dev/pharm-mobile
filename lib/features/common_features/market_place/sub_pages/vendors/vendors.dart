@@ -53,7 +53,12 @@ class _VendorsPageState extends State<VendorsPage> with AutomaticKeepAliveClient
                       itemCount: vendors.length + (isLoadingMore || hasReachedEnd ? 1 : 0),
                       itemBuilder: (context, index) {
                         if (index < vendors.length) {
-                          return VendorItem(companyData: vendors[index]);
+                          return VendorItem(
+                              companyData: vendors[index],
+                              onLike: () => cubit.likeVendor(vendors[index].id),
+                              onRemoveFromFavorites: () => cubit.unlikeVendor(
+                                    vendors[index].id,
+                                  ));
                         } else {
                           if (isLoadingMore) {
                             return const Padding(

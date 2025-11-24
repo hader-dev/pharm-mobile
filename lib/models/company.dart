@@ -5,7 +5,14 @@ import 'package:hader_pharm_mobile/models/image.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 
 class BaseCompany with EquatableMixin {
-  static final baseCompanyFields = ["id", "name", "address", "phone", "email", "distributorCategory"];
+  static final baseCompanyFields = [
+    "id",
+    "name",
+    "address",
+    "phone",
+    "email",
+    "distributorCategory",
+  ];
   final String id;
   final ImageModel? thumbnailImage;
   final ImageModel? image;
@@ -13,6 +20,7 @@ class BaseCompany with EquatableMixin {
   final String? address;
   final String? phone;
   final String? email;
+  final bool? isLiked;
   final int? distrubitionCategory;
   const BaseCompany({
     required this.id,
@@ -22,6 +30,7 @@ class BaseCompany with EquatableMixin {
     this.address,
     this.phone,
     this.email,
+    this.isLiked = false,
     this.distrubitionCategory,
   });
   factory BaseCompany.fromJson(Map<String, dynamic> json) {
@@ -33,6 +42,7 @@ class BaseCompany with EquatableMixin {
       address: json["address"],
       phone: json["phone"],
       email: json["email"],
+      isLiked: json["isFavorite"] ?? false,
       distrubitionCategory: json["distributorCategory"],
     );
   }
@@ -64,7 +74,7 @@ class Company extends BaseCompany {
   final String? nisNumber;
   final dynamic contactInfo;
   final bool? isActive;
-  final bool? isLiked;
+
   final bool? isFollowing;
 
   final String? willaya;
@@ -82,7 +92,7 @@ class Company extends BaseCompany {
     this.town,
     this.regionId,
     this.isFollowing,
-    this.isLiked,
+    super.isLiked,
     this.latitude,
     this.longitude,
     this.createdAt,
@@ -131,6 +141,72 @@ class Company extends BaseCompany {
       nisNumber: null,
       contactInfo: null,
       isActive: null,
+    );
+  }
+
+  Company copyWith({
+    String? id,
+    ImageModel? thumbnailImage,
+    ImageModel? image,
+    String? name,
+    String? address,
+    String? phone,
+    String? willaya,
+    String? town,
+    int? regionId,
+    bool? isFollowing,
+    bool? isLiked,
+    double? latitude,
+    double? longitude,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    String? managerUserId,
+    String? type,
+    String? distributorCategory,
+    String? phone2,
+    String? fax,
+    String? website,
+    String? email,
+    String? description,
+    String? bankAccount,
+    String? fiscalId,
+    String? rcNumber,
+    String? aiNumber,
+    String? nisNumber,
+    String? contactInfo,
+    bool? isActive,
+  }) {
+    return Company(
+      id: id ?? this.id,
+      thumbnailImage: thumbnailImage ?? this.thumbnailImage,
+      image: image ?? this.image,
+      name: name ?? this.name,
+      address: address ?? this.address,
+      phone: phone ?? this.phone,
+      willaya: willaya ?? this.willaya,
+      town: town ?? this.town,
+      regionId: this.regionId,
+      isFollowing: isFollowing ?? this.isFollowing,
+      isLiked: isLiked ?? this.isLiked,
+      latitude: this.latitude,
+      longitude: this.longitude,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      managerUserId: managerUserId ?? this.managerUserId,
+      type: this.type,
+      distributorCategory: distributorCategory ?? this.distributorCategory,
+      phone2: phone2 ?? this.phone2,
+      fax: fax ?? this.fax,
+      website: website ?? this.website,
+      email: email ?? this.email,
+      description: description ?? this.description,
+      bankAccount: bankAccount ?? this.bankAccount,
+      fiscalId: fiscalId ?? this.fiscalId,
+      rcNumber: rcNumber ?? this.rcNumber,
+      aiNumber: aiNumber ?? this.aiNumber,
+      nisNumber: nisNumber ?? this.nisNumber,
+      contactInfo: contactInfo ?? this.contactInfo,
+      isActive: isActive ?? this.isActive,
     );
   }
 

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
@@ -56,6 +58,7 @@ class BaseQuantityController extends StatelessWidget {
       child: SizedBox(
         height: context.responsiveAppSizeTheme.current.buttonHeight,
         child: Form(
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           child: TextFormField(
             cursorColor: AppColors.accentGreenShade1,
             controller: quantityController,
@@ -63,24 +66,11 @@ class BaseQuantityController extends StatelessWidget {
             keyboardType: TextInputType.number,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
             onChanged: (value) {
-              final parsed = int.tryParse(value);
-              if (value.isEmpty || parsed == null || parsed < minQuantity) {
-                quantityController.text = minQuantity.toString();
-                quantityController.selection = TextSelection.fromPosition(
-                  TextPosition(offset: quantityController.text.length),
-                );
-                onQuantityChanged?.call(minQuantity.toString());
-              } else if (parsed > maxQuantity) {
-                quantityController.text = maxQuantity.toString();
-                quantityController.selection = TextSelection.fromPosition(
-                  TextPosition(offset: quantityController.text.length),
-                );
-                onQuantityChanged?.call(maxQuantity.toString());
-              } else {
-                onQuantityChanged?.call(value);
-              }
+              onQuantityChanged?.call(value);
             },
-            validator: (value) => value == null || value.isEmpty ? '' : null,
+            validator: (value) {
+              return null;
+            },
             style: context.responsiveTextTheme.current.body3Medium,
             decoration: InputDecoration(
               contentPadding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p12),
@@ -102,6 +92,18 @@ class BaseQuantityController extends StatelessWidget {
                 ),
                 borderSide: BorderSide(color: StrokeColors.focused.color),
               ),
+              errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(
+                  context.responsiveAppSizeTheme.current.commonWidgetsRadius,
+                ),
+                borderSide: BorderSide(color: SystemColors.red.primary),
+              ),
+              focusedErrorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(
+                  context.responsiveAppSizeTheme.current.commonWidgetsRadius,
+                ),
+                borderSide: BorderSide(color: SystemColors.red.primary),
+              ),
             ),
           ),
         ),
@@ -112,6 +114,7 @@ class BaseQuantityController extends StatelessWidget {
       borderColor: StrokeColors.normal.color,
       isBordered: true,
       bgColor: Colors.transparent,
+      onLongPressed: int.parse(quantityController.text) == minQuantity ? null : decrement,
       onPressed: int.parse(quantityController.text) == minQuantity ? null : decrement,
       icon: const Icon(Iconsax.minus, color: Colors.black),
     );
@@ -121,6 +124,7 @@ class BaseQuantityController extends StatelessWidget {
       isBordered: true,
       bgColor: Colors.transparent,
       onPressed: int.parse(quantityController.text) == maxQuantity ? null : increment,
+      onLongPressed: int.parse(quantityController.text) == maxQuantity ? null : increment,
       icon: Icon(Iconsax.add, color: Colors.black),
     );
 

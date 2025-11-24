@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart' show BlocBuilder;
 import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
@@ -6,6 +7,7 @@ import 'package:hader_pharm_mobile/config/services/network/network_interface.dar
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/chips/custom_chip.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
+import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/vendors/cubit/vendors_cubit.dart';
 import 'package:hader_pharm_mobile/models/company.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
@@ -109,12 +111,36 @@ class VendorItem extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    companyData.name,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
-                    softWrap: true,
-                    style: context.responsiveTextTheme.current.headLine3SemiBold,
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          companyData.name,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          softWrap: true,
+                          style: context.responsiveTextTheme.current.headLine3SemiBold,
+                        ),
+                      ),
+                      BlocBuilder<VendorsCubit, VendorsState>(
+                        builder: (context, state) {
+                          return InkWell(
+                            child: SizedBox(
+                              width: 30,
+                              height: 30,
+                              child: Icon(
+                                companyData.isLiked ?? false ? Iconsax.heart5 : Iconsax.heart,
+                                color: companyData.isLiked ?? false ? Colors.red : Colors.grey[400],
+                                size: context.responsiveAppSizeTheme.current.iconSize20,
+                              ),
+                            ),
+                            onTap: () {
+                              companyData.isLiked ?? false ? onRemoveFromFavorites?.call() : onLike?.call();
+                            },
+                          );
+                        },
+                      )
+                    ],
                   ),
                   if (companyData.phone != null || companyData.email != null)
                     Padding(

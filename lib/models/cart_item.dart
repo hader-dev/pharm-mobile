@@ -51,6 +51,7 @@ class CartItemModel {
   final DateTime createdAt;
   final DateTime updatedAt;
   final String? medicinesCatalogId;
+  final String? unitPriceFinalTtc;
   final String? parapharmCatalogId;
   final int quantity;
   final int packageSize;
@@ -77,6 +78,7 @@ class CartItemModel {
     required this.totalAmountHt,
     required this.tvaPercentage,
     required this.unitPriceHt,
+    this.unitPriceFinalTtc,
     required this.unitPriceTtc,
     required this.createdAt,
     required this.updatedAt,
@@ -132,6 +134,7 @@ class CartItemModel {
       discountAmount: json['discountAmount'],
       buyerCompanyId: json['buyerCompanyId'],
       sellerCompanyId: json['sellerCompanyId'],
+      unitPriceFinalTtc: json['unitPriceFinalTtc'] ?? "100",
       medicineCatalogStockQty: json['medicineCatalog']?['stockQuantity'] ?? 0,
       parapharmCatalogStockQty: json['parapharmCatalog']?['stockQuantity'] ?? 0,
       sellerCompany: BaseCompany.fromJson(json['sellerCompany']),
@@ -160,6 +163,7 @@ class CartItemModel {
       MedicinesCatalog? medicinesCatalog,
       dynamic parapharmCatalog,
       BaseCompany? sellerCompany,
+      String? unitPriceFinalTtc,
       int? packageSize}) {
     return CartItemModel(
         packageSize: packageSize ?? this.packageSize,
@@ -184,6 +188,7 @@ class CartItemModel {
         sellerCompany: sellerCompany ?? this.sellerCompany,
         maxOrderQuantity: maxOrderQuantity,
         minOrderQuantity: minOrderQuantity,
+        unitPriceFinalTtc: unitPriceFinalTtc ?? this.unitPriceFinalTtc,
         image: image);
   }
 

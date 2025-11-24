@@ -6,10 +6,10 @@ Company? jsonToBaseCompany(Map<String, dynamic> json) {
 
   result = Company(
       id: json["id"],
-      thumbnailImage:
-          json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
+      thumbnailImage: json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
       image: json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
-      name: json["name"]);
+      name: json["name"],
+      isLiked: json["isFavorite"] ?? false);
 
   return result;
 }

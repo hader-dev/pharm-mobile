@@ -28,6 +28,7 @@ class MakeComplaintView extends StatelessWidget {
           CustomTextField(
             label: '${context.translation!.subject}*',
             controller: cubit.state.subjectController,
+            maxLength: 35,
             state: FieldState.normal,
             validationFunc: (v) => requiredValidator(v, translation),
           ),
@@ -38,14 +39,12 @@ class MakeComplaintView extends StatelessWidget {
             state: FieldState.normal,
             maxLines: 5,
             validationFunc: (v) => requiredValidator(v, translation),
-            
           ),
           const ResponsiveGap.s8(),
           PrimaryTextButton(
             label: translation.confirm,
             color: AppColors.accent1Shade1,
-            onTap: () =>
-                makeComplaint(cubit, cubit.state.complaintFormKey, translation),
+            onTap: () => makeComplaint(cubit, cubit.state.complaintFormKey, translation),
           )
         ],
       ),

@@ -106,7 +106,8 @@ class ButtonsSection extends StatelessWidget {
                         borderColor: AppColors.accent1Shade1,
                         maxWidth: MediaQuery.of(context).size.width * 0.25,
                         leadingIcon: Iconsax.money4,
-                        onTap: int.parse(cubit.state.quantityController.text) <= maxOrderQuantity
+                        onTap: int.parse(cubit.state.quantityController.text) <= maxOrderQuantity &&
+                                int.parse(cubit.state.quantityController.text) >= minOrderQuantity
                             ? () {
                                 BottomSheetHelper.showCommonBottomSheet(
                                         context: context, child: MakeOrderBottomSheet(cubit: cubit))
@@ -121,7 +122,8 @@ class ButtonsSection extends StatelessWidget {
                         label: translation.add_cart,
                         leadingIcon: Iconsax.add,
                         color: AppColors.accent1Shade1,
-                        onTap: int.parse(cubit.state.quantityController.text) <= maxOrderQuantity
+                        onTap: int.parse(cubit.state.quantityController.text) <= maxOrderQuantity &&
+                                int.parse(cubit.state.quantityController.text) >= minOrderQuantity
                             ? () {
                                 BlocProvider.of<CartCubit>(context).addToCart(
                                     CreateCartItemModel(

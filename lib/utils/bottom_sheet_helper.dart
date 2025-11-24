@@ -29,30 +29,29 @@ class BottomSheetHelper {
             initialChildSize: initialChildSize,
             maxChildSize: maxHeight ?? 1,
             minChildSize: 0.3,
-            builder: (_, controller) => Container(
-              padding: EdgeInsets.symmetric(
-                  horizontal: context.responsiveAppSizeTheme.current.p12),
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-              ),
-              child: SingleChildScrollView(
-                controller: controller,
-                child: Column(
-                  children: [
-                    Container(
-                      height: 4,
-                      width: 36,
-                      margin: EdgeInsets.symmetric(
-                          vertical: context.responsiveAppSizeTheme.current.p12),
-                      decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 165, 169, 181),
-                        borderRadius: BorderRadius.circular(
-                            context.responsiveAppSizeTheme.current.r6),
+            builder: (_, controller) => SafeArea(
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: context.responsiveAppSizeTheme.current.p12),
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                ),
+                child: SingleChildScrollView(
+                  controller: controller,
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 4,
+                        width: 36,
+                        margin: EdgeInsets.symmetric(vertical: context.responsiveAppSizeTheme.current.p12),
+                        decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 165, 169, 181),
+                          borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.r6),
+                        ),
                       ),
-                    ),
-                    child,
-                  ],
+                      child,
+                    ],
+                  ),
                 ),
               ),
             ),
