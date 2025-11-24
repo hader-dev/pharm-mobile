@@ -34,7 +34,6 @@ class QuickApplyPriceFilterParapharm extends StatelessWidget {
         const ResponsiveGap.s24(),
         BlocBuilder<ParaMedicalFiltersCubit, ParaMedicalFiltersState>(
           builder: (context, state) {
-            final cubit = context.read<ParaMedicalFiltersCubit>();
             final valueKey = ValueKey(
                 '${state.appliedFilters.gteUnitPriceHt ?? 'null'}_${state.appliedFilters.lteUnitPriceHt ?? 'null'}');
             return FilterPriceSection(
@@ -56,7 +55,9 @@ class QuickApplyPriceFilterParapharm extends StatelessWidget {
                     spalshColor: AppColors.accent1Shade1.withAlpha(50),
                     labelColor: AppColors.accent1Shade1,
                     onTap: () {
-                      context.read<ParaMedicalFiltersCubit>().resetPriceFilter();
+                      context
+                          .read<ParaMedicalFiltersCubit>()
+                          .resetPriceFilter();
                       context.pop();
                     },
                     borderColor: AppColors.accent1Shade1,
