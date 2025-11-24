@@ -74,6 +74,7 @@ class _CompanyFormSectionState extends State<CompanyFormSection> {
                   state: FieldState.normal,
                   initValue: state.formData.phone,
                   keyBoadType: TextInputType.phone,
+                  maxLength: 10,
                   validationFunc: (v) =>
                       validateIsMobileNumber(v, translation, true),
                   onChanged: (newValue) {
@@ -89,15 +90,15 @@ class _CompanyFormSectionState extends State<CompanyFormSection> {
                   state: FieldState.normal,
                   initValue: state.formData.phone2,
                   keyBoadType: TextInputType.phone,
+                  maxLength: 10,
                   onChanged: (newValue) {
                     cubit.changeFormData(
                         modifiedData: state.formData.copyWith(
                       phone2: newValue,
                     ));
                   },
-                  validationFunc: (value) {
-                    return null;
-                  },
+                  validationFunc: (value) =>
+                      validateIsMobileNumber(value, translation),
                 ),
                 const ResponsiveGap.s4(),
                 CustomTextField(
@@ -105,15 +106,15 @@ class _CompanyFormSectionState extends State<CompanyFormSection> {
                   state: FieldState.normal,
                   initValue: state.formData.fax,
                   keyBoadType: TextInputType.phone,
+                  maxLength: 10,
                   onChanged: (newValue) {
                     cubit.changeFormData(
                         modifiedData: state.formData.copyWith(
                       fax: newValue,
                     ));
                   },
-                  validationFunc: (value) {
-                    return null;
-                  },
+                  validationFunc: (value) =>
+                      validateIsFaxNumber(value, translation),
                 ),
                 const ResponsiveGap.s4(),
                 CustomTextField(

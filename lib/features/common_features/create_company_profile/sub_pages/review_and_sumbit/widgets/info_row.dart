@@ -75,7 +75,7 @@ class InfoRow extends StatelessWidget {
                     dataValue.isEmpty
                         ? context.translation!.feedback_not_provided
                         : dataValue,
-                    textAlign: TextAlign.start, // Changed from end to start
+                    textAlign: TextAlign.start,
                     softWrap: true,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
