@@ -63,7 +63,6 @@ class CompanyEditScreen extends StatelessWidget {
                 horizontal: context.responsiveAppSizeTheme.current.p16),
             child: BlocBuilder<EditCompanyCubit, EditCompanyState>(
               builder: (context, state) {
-                
                 if (state is EditCompanyLoading) {
                   return const Center(child: CircularProgressIndicator());
                 }
@@ -91,7 +90,7 @@ class CompanyEditScreen extends StatelessWidget {
                               .copyWith(color: TextColors.ternary.color),
                           textAlign: TextAlign.center,
                         ),
-                        ResponsiveGap.s24(),
+                        const ResponsiveGap.s24(),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [

@@ -137,7 +137,7 @@ String? validateIsFaxNumber(String? value, AppLocalizations appLocalizations,
     return appLocalizations.feedback_field_required;
   }
 
-  final regex = RegExp(r'^035\d{8}$');
+  final regex = RegExp(r'^0\d{9}$');
   if (!regex.hasMatch(trimmed)) {
     return appLocalizations.feedback_invalid_fax_number;
   }
