@@ -13,36 +13,34 @@ class AnnouncementsSearchWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p16),
-      child: CustomTextField(
-        hintText: context.translation!.search_announcements,
-        controller:
-            BlocProvider.of<AllAnnouncementsCubit>(context).searchController,
-        state: FieldState.normal,
-        isEnabled: true,
-        prefixIcon: Icon(
-          Iconsax.search_normal,
-          size: context.responsiveAppSizeTheme.current.iconSize20,
-          color: AppColors.accent1Shade1,
-        ),
-        suffixIcon: InkWell(
-          onTap: () {
-            BlocProvider.of<AllAnnouncementsCubit>(context)
-                .searchController
-                .clear();
-            BlocProvider.of<AllAnnouncementsCubit>(context)
-                .searchAnnouncements(null);
-          },
-          child: Icon(
-            Icons.clear,
+      padding: EdgeInsets.symmetric(horizontal: context.responsiveAppSizeTheme.current.p8),
+      child: Transform.scale(
+        scale: 0.95,
+        child: CustomTextField(
+          hintText: context.translation!.search_announcements,
+          controller: BlocProvider.of<AllAnnouncementsCubit>(context).searchController,
+          state: FieldState.normal,
+          isEnabled: true,
+          prefixIcon: Icon(
+            Iconsax.search_normal,
+            size: context.responsiveAppSizeTheme.current.iconSize20,
             color: AppColors.accent1Shade1,
           ),
+          suffixIcon: InkWell(
+            onTap: () {
+              BlocProvider.of<AllAnnouncementsCubit>(context).searchController.clear();
+              BlocProvider.of<AllAnnouncementsCubit>(context).searchAnnouncements(null);
+            },
+            child: Icon(
+              Icons.clear,
+              color: AppColors.accent1Shade1,
+            ),
+          ),
+          onChanged: (searchValue) {
+            BlocProvider.of<AllAnnouncementsCubit>(context).searchAnnouncements(searchValue);
+          },
+          validationFunc: (value) {},
         ),
-        onChanged: (searchValue) {
-          BlocProvider.of<AllAnnouncementsCubit>(context)
-              .searchAnnouncements(searchValue);
-        },
-        validationFunc: (value) {},
       ),
     );
   }

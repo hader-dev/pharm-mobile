@@ -33,7 +33,9 @@ class OrderItemsComplaintPage extends StatelessWidget {
         return RefreshIndicator(
             onRefresh: () => cubit.getOrderComplaints(),
             child: Center(
-              child: EmptyListWidget(),
+              child: EmptyListWidget(
+                onRefresh: () => cubit.getOrderComplaints(),
+              ),
             ));
       }
 

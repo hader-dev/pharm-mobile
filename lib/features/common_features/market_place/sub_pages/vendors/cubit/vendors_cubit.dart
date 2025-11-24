@@ -2,8 +2,12 @@ import 'dart:async' show Timer;
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart' show ScrollDirection;
+import 'package:hader_pharm_mobile/features/common_features/market_place/widgets/tabs_section.dart'
+    show MarketPlaceTabBarSectionState;
 import 'package:hader_pharm_mobile/models/company.dart';
 import 'package:hader_pharm_mobile/repositories/remote/company/company_repository_impl.dart';
+import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler.dart' show GlobalExceptionHandler;
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 
@@ -34,6 +38,14 @@ class VendorsCubit extends Cubit<VendorsState> {
   }
 
   void _onScroll() {
+    if (state.scrollController.position.pixels > 5 &&
+        state.scrollController.position.userScrollDirection == ScrollDirection.reverse) {
+      MarketPlaceTabBarSectionState.animationController.forward();
+    }
+    if (state.scrollController.position.pixels > 5 &&
+        state.scrollController.position.userScrollDirection == ScrollDirection.forward) {
+      MarketPlaceTabBarSectionState.animationController.reverse();
+    }
     if (scrollController.position.pixels >= scrollController.position.maxScrollExtent) {
       if (state.offSet < state.totalVendorsCount) {
         loadMoreVendors();
@@ -71,6 +83,7 @@ class VendorsCubit extends Cubit<VendorsState> {
               ? null
               : state.selectedDistributorTypeFilter?.id,
           companyType: CompanyType.Distributor,
+          computeFavorite: true,
           search: searchValue);
       emit(state.toLoaded(vendors: vendorsList));
     } catch (e, stack) {
@@ -137,5 +150,26 @@ class VendorsCubit extends Cubit<VendorsState> {
       await func();
       _debounce = null;
     });
+  }
+
+  Future<void> likeVendor(String vendorId) async {
+    try {
+      await companyRepository.addCompanyToFavorites(companyId: vendorId);
+
+      emit(state.toLiked(vendorId: vendorId, isLiked: true));
+    } catch (e) {
+      GlobalExceptionHandler.handle(exception: e);
+      emit(state.tolikeFailed(vendroId: vendorId));
+    }
+  }
+
+  Future<void> unlikeVendor(String vendorId) async {
+    try {
+      await companyRepository.removeCompanyFromFavorites(companyId: vendorId);
+      emit(state.toLiked(vendorId: vendorId, isLiked: false));
+    } catch (e) {
+      GlobalExceptionHandler.handle(exception: e);
+      emit(state.tolikeFailed(vendroId: vendorId));
+    }
   }
 }

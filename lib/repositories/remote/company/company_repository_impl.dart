@@ -59,6 +59,7 @@ class CompanyRepository extends ICompanyRepository {
       SearchVendorFilters? searchFilter,
       int? distributorCategoryId,
       List<String>? fields,
+      bool computeFavorite = false,
       required CompanyType companyType}) async {
     final queryParams = {
       'limit': limit.toString(),
@@ -67,6 +68,7 @@ class CompanyRepository extends ICompanyRepository {
       if (distributorCategoryId != null) 'filters[distributorCategory]': distributorCategoryId.toString(),
       if (searchFilter != null && search.isNotEmpty) 'search[${searchFilter.name}]': search,
       if (fields != null) ...{'fields[]': fields},
+      if (computeFavorite) ...{'computed[isFavorite]': true.toString()},
       'filters[type]': companyType.id.toString(),
     };
 
@@ -94,8 +96,7 @@ class CompanyRepository extends ICompanyRepository {
   }
 
   @override
-  Future<List<Brand>> getCompanyCategories({required String companyId}) {
-    // TODO: implement getCompanyCategories
+  Future<List<Brand>> getCompanyCategories({required String companyId}) async {
     throw UnimplementedError();
   }
 
@@ -107,9 +108,10 @@ class CompanyRepository extends ICompanyRepository {
   }
 
   @override
-  Future<void> removeCompanyFromFavorites({required String companyId}) {
-    // TODO: implement removeCompanyFromFavorites
-    throw UnimplementedError();
+  Future<void> removeCompanyFromFavorites({required String companyId}) async {
+    return await client.sendRequest(() => client.delete(
+          '${Urls.favoritesCompany}/$companyId',
+        ));
   }
 
   @override

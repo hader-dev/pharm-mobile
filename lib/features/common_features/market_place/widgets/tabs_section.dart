@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart' show BlocBuilder, ReadContext;
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
@@ -7,6 +8,8 @@ import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pag
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/vendors/vendors.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
+
+import '../cubit/market_place_cubit.dart';
 
 class MarketPlaceTabBarSection extends StatefulWidget {
   const MarketPlaceTabBarSection({super.key});
@@ -17,7 +20,7 @@ class MarketPlaceTabBarSection extends StatefulWidget {
 
 class MarketPlaceTabBarSectionState extends State<MarketPlaceTabBarSection> with TickerProviderStateMixin {
   late final Animation animation;
-  late final TabController tabsController;
+  static late final TabController tabsController;
   static late final AnimationController animationController;
   @override
   void initState() {
@@ -30,7 +33,6 @@ class MarketPlaceTabBarSectionState extends State<MarketPlaceTabBarSection> with
 
   @override
   Widget build(BuildContext context) {
-    ValueNotifier<int> tabIndex = ValueNotifier(0);
     final translation = context.translation!;
     final List<String> tasMapKeys = ['label', 'icon'];
     final List<Map<String, String>> tabs = [
@@ -49,46 +51,46 @@ class MarketPlaceTabBarSectionState extends State<MarketPlaceTabBarSection> with
             },
             child: ColoredBox(
                 color: Colors.white,
-                child: ValueListenableBuilder<int>(
-                    valueListenable: tabIndex,
-                    builder: (context, index, child) {
-                      return TabBar(
-                          indicatorSize: TabBarIndicatorSize.tab,
-                          isScrollable: true,
-                          labelStyle: tabTextStyle,
-                          overlayColor: WidgetStatePropertyAll(Colors.transparent),
-                          tabAlignment: TabAlignment.start,
-                          indicatorColor: AppColors.accent1Shade1,
-                          labelColor: AppColors.accent1Shade1,
-                          unselectedLabelColor: Colors.grey,
-                          controller: tabsController,
-                          onTap: (index) {
-                            tabIndex.value = index;
-                          },
-                          tabs: tabs
-                              .map(
-                                (tabInfos) => Tab(
-                                  child: Row(
-                                    children: [
-                                      SvgPicture.asset(
-                                        tabInfos[tasMapKeys[1]]!,
-                                        height: context.responsiveAppSizeTheme.current.iconSize20,
-                                        width: context.responsiveAppSizeTheme.current.iconSize20,
-                                        colorFilter: ColorFilter.mode(
-                                          tabIndex.value == tabs.indexOf(tabInfos)
-                                              ? AppColors.accent1Shade1
-                                              : Colors.grey,
-                                          BlendMode.srcIn,
-                                        ),
+                child: BlocBuilder<MarketPlaceCubit, MarketPlaceState>(
+                  builder: (context, state) {
+                    return TabBar(
+                        indicatorSize: TabBarIndicatorSize.tab,
+                        isScrollable: true,
+                        labelStyle: tabTextStyle,
+                        overlayColor: WidgetStatePropertyAll(Colors.transparent),
+                        tabAlignment: TabAlignment.start,
+                        indicatorColor: AppColors.accent1Shade1,
+                        labelColor: AppColors.accent1Shade1,
+                        unselectedLabelColor: Colors.grey,
+                        controller: tabsController,
+                        onTap: (index) {
+                          context.read<MarketPlaceCubit>().changeTab(index, tabsController);
+                        },
+                        tabs: tabs
+                            .map(
+                              (tabInfos) => Tab(
+                                child: Row(
+                                  children: [
+                                    SvgPicture.asset(
+                                      tabInfos[tasMapKeys[1]]!,
+                                      height: context.responsiveAppSizeTheme.current.iconSize20,
+                                      width: context.responsiveAppSizeTheme.current.iconSize20,
+                                      colorFilter: ColorFilter.mode(
+                                        state.pageIndex == tabs.indexOf(tabInfos)
+                                            ? AppColors.accent1Shade1
+                                            : Colors.grey,
+                                        BlendMode.srcIn,
                                       ),
-                                      ResponsiveGap.s4(),
-                                      Text(tabInfos[tasMapKeys[0]]!, style: tabTextStyle),
-                                    ],
-                                  ),
+                                    ),
+                                    ResponsiveGap.s4(),
+                                    Text(tabInfos[tasMapKeys[0]]!, style: tabTextStyle),
+                                  ],
                                 ),
-                              )
-                              .toList());
-                    }))),
+                              ),
+                            )
+                            .toList());
+                  },
+                ))),
         Expanded(
           child: TabBarView(
             controller: tabsController,
@@ -97,6 +99,13 @@ class MarketPlaceTabBarSectionState extends State<MarketPlaceTabBarSection> with
         ),
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    animationController.dispose();
+    tabsController.dispose();
+    super.dispose();
   }
 
   String getTabTranslation(String label) {

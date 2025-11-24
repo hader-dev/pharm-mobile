@@ -3,15 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
-import 'package:hader_pharm_mobile/models/order_details.dart';
+import 'package:hader_pharm_mobile/models/cart_item.dart';
+
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/price_formatter.dart';
 
-class OrderItemWidgetV2 extends StatelessWidget {
-  final OrderItem item;
+class CheckOutItemWidget extends StatelessWidget {
+  final CartItemModel item;
 
-  const OrderItemWidgetV2({
+  const CheckOutItemWidget({
     super.key,
     required this.item,
   });
@@ -42,21 +43,21 @@ class OrderItemWidgetV2 extends StatelessWidget {
             clipBehavior: Clip.antiAlias,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.r6),
-              border: item.imageUrl != null
+              border: item.image != null
                   ? null
                   : Border.all(
                       color: const Color.fromARGB(197, 245, 245, 245),
                     ),
             ),
-            child: item.imageUrl != null
+            child: item.image != null
                 ? CacheNetworkImagePlus(
                     boxFit: BoxFit.contain,
-                    imageUrl: getItInstance.get<INetworkService>().getFilesPath(item.imageUrl ?? ''),
+                    imageUrl: getItInstance.get<INetworkService>().getFilesPath(item.image?.path ?? ''),
                   )
                 : Center(
                     child: Image(
                       image: AssetImage(
-                        item.medicineCatalogId != null
+                        item.medicinesCatalogId != null
                             ? DrawableAssetStrings.medicinePlaceHolderImg
                             : DrawableAssetStrings.paraPharmaPlaceHolderImg,
                       ),
@@ -74,15 +75,15 @@ class OrderItemWidgetV2 extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  item.designation ?? context.translation!.unknown,
+                  item.designation,
                   softWrap: true,
                   overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
+                  maxLines: 3,
                   style: context.responsiveTextTheme.current.headLine4SemiBold,
                 ),
                 const ResponsiveGap.s8(),
                 Text.rich(TextSpan(
-                  text: item.unitPriceHt.formatAsPrice(),
+                  text: double.parse(item.unitPriceHt).formatAsPrice(),
                   style: context.responsiveTextTheme.current.body3Medium.copyWith(),
                   children: <InlineSpan>[
                     TextSpan(
@@ -113,7 +114,7 @@ class OrderItemWidgetV2 extends StatelessWidget {
                         style: context.responsiveTextTheme.current.bodyXSmall.copyWith(color: Colors.grey[500]),
                         children: <InlineSpan>[
                           TextSpan(
-                            text: ' ${item.totalAmountHt.formatAsPriceForPrint()}',
+                            text: ' ${double.parse(item.totalAmountHt).formatAsPriceForPrint()}',
                             style: context.responsiveTextTheme.current.body2Medium
                                 .copyWith(color: Colors.black, fontWeight: FontWeight.bold),
                           ),

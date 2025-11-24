@@ -116,13 +116,7 @@ class CustomTextField extends StatelessWidget {
           ),
           decoration: InputDecoration(
               hintText: hintText,
-              hintStyle: hintTextStyle ??
-                  context.responsiveTextTheme.current.body3Regular.copyWith(
-                    color: TextColors.ternary.color,
-                    fontSize: MediaQuery.of(context)
-                        .textScaler
-                        .scale(context.responsiveTextTheme.current.body3Regular.fontSize! * fontSizeModifer),
-                  ),
+              hintStyle: hintTextStyle ?? context.responsiveTextTheme.current.body1Regular.copyWith(color: Colors.grey),
               isDense: true,
               filled: isFilled,
               suffixIcon: suffixIcon,

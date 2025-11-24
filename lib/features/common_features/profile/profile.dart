@@ -16,7 +16,7 @@ import 'package:hader_pharm_mobile/utils/login_jwt_decoder.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
 import 'widgets/profile_header.dart';
-import 'widgets/section_title.dart';
+import '../../common/widgets/section_title.dart';
 import 'widgets/settings_tile.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -52,8 +52,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           children: <Widget>[
             const ResponsiveGap.s16(),
             Padding(
-              padding: EdgeInsets.only(
-                  left: context.responsiveAppSizeTheme.current.p4),
+              padding: EdgeInsets.only(left: context.responsiveAppSizeTheme.current.p4),
               child: ProfileHeader(key: ValueKey(_profileUpdateKey)),
             ),
             Expanded(
@@ -67,77 +66,58 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     children: <Widget>[
                       Padding(
                         padding: EdgeInsets.symmetric(
-                            horizontal:
-                                context.responsiveAppSizeTheme.current.p8,
-                            vertical:
-                                context.responsiveAppSizeTheme.current.p10),
-                        child: SectionTitle(
-                            title: context.translation!.account_settings),
+                            horizontal: context.responsiveAppSizeTheme.current.p8,
+                            vertical: context.responsiveAppSizeTheme.current.p10),
+                        child: SectionTitle(title: context.translation!.account_settings),
                       ),
                       SettingsTile(
                           icon: LucideIcons.userCog,
                           title: context.translation!.edit_profile,
                           onTap: () async {
-                            await GoRouter.of(context)
-                                .pushNamed(RoutingManager.editProfileScreen);
+                            await GoRouter.of(context).pushNamed(RoutingManager.editProfileScreen);
                             setState(() {
-                              _profileUpdateKey = DateTime.now()
-                                  .millisecondsSinceEpoch
-                                  .toString();
+                              _profileUpdateKey = DateTime.now().millisecondsSinceEpoch.toString();
                             });
                           }),
                       if (_userHasCompany)
                         SettingsTile(
-                            icon: _isPharmacyManager
-                                ? LucideIcons.edit
-                                : LucideIcons.building,
+                            icon: _isPharmacyManager ? LucideIcons.edit : LucideIcons.building,
                             title: _isPharmacyManager
                                 ? context.translation!.edit_company
                                 : context.translation!.view_company,
                             onTap: () async {
-                              await GoRouter.of(context).pushNamed(
-                                  RoutingManager.editCompanyScreen,
-                                  extra: _isPharmacyManager
-                                      ? CompanyScreenMode.edit
-                                      : CompanyScreenMode.view);
+                              await GoRouter.of(context).pushNamed(RoutingManager.editCompanyScreen,
+                                  extra: _isPharmacyManager ? CompanyScreenMode.edit : CompanyScreenMode.view);
                             }),
                       SettingsTile(
                           icon: LucideIcons.lock,
                           title: context.translation!.change_password,
                           onTap: () {
-                            GoRouter.of(context)
-                                .pushNamed(RoutingManager.changePasswordScreen);
+                            GoRouter.of(context).pushNamed(RoutingManager.changePasswordScreen);
                           }),
                       Padding(
                         padding: EdgeInsets.symmetric(
-                            horizontal:
-                                context.responsiveAppSizeTheme.current.p6,
-                            vertical:
-                                context.responsiveAppSizeTheme.current.p8),
-                        child: SectionTitle(
-                            title: context.translation!.preferences),
+                            horizontal: context.responsiveAppSizeTheme.current.p6,
+                            vertical: context.responsiveAppSizeTheme.current.p8),
+                        child: SectionTitle(title: context.translation!.preferences),
                       ),
                       SettingsTile(
                           icon: LucideIcons.heart,
                           title: context.translation!.favorites,
                           onTap: () {
-                            GoRouter.of(context)
-                                .pushNamed(RoutingManager.favoritesScreen);
+                            GoRouter.of(context).pushNamed(RoutingManager.favoritesScreen);
                           }),
                       SettingsTile(
                         icon: LucideIcons.globe,
                         title: context.translation!.language,
                         onTap: () {
-                          GoRouter.of(context)
-                              .pushNamed(RoutingManager.languagesScreen);
+                          GoRouter.of(context).pushNamed(RoutingManager.languagesScreen);
                         },
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(
-                            horizontal:
-                                context.responsiveAppSizeTheme.current.p6,
-                            vertical:
-                                context.responsiveAppSizeTheme.current.p8),
+                            horizontal: context.responsiveAppSizeTheme.current.p6,
+                            vertical: context.responsiveAppSizeTheme.current.p8),
                         child: SectionTitle(
                           title: context.translation!.app_privacy,
                         ),
@@ -146,26 +126,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           icon: LucideIcons.fileText,
                           title: context.translation!.legal_policies,
                           onTap: () {
-                            GoRouter.of(context)
-                                .pushNamed(RoutingManager.legalPoliciesScreen);
+                            GoRouter.of(context).pushNamed(RoutingManager.legalPoliciesScreen);
                           }),
                       SettingsTile(
                         icon: LucideIcons.helpCircle,
                         title: context.translation!.help_support,
                         onTap: () {
-                          GoRouter.of(context)
-                              .pushNamed(RoutingManager.helpSupportScreen);
+                          GoRouter.of(context).pushNamed(RoutingManager.helpSupportScreen);
                         },
                       ),
                       SettingsTile(
                         icon: LucideIcons.upload,
                         title: context.translation!.app_version,
-                        subtitle:
-                            EnvHelper.getStoredEnvValue(EnvHelper.appVersion),
+                        subtitle: EnvHelper.getStoredEnvValue(EnvHelper.appVersion),
                         onTap: () {
-                          if (EnvHelper.getFeatureFlag(
-                                  EnvHelper.featureFlagUpdatePopup) ==
-                              true) {
+                          if (EnvHelper.getFeatureFlag(EnvHelper.featureFlagUpdatePopup) == true) {
                             showNewAppVersionDialog(triggerdManually: true);
                           }
                         },
@@ -177,22 +152,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         child: ListTile(
                           leading: Icon(LucideIcons.logOut,
                               color: Colors.red,
-                              size: context.deviceSize.width <=
-                                      DeviceSizes.largeMobile.width
-                                  ? context
-                                      .responsiveAppSizeTheme.current.iconSize20
-                                  : context.responsiveAppSizeTheme.current
-                                      .iconSize16),
+                              size: context.deviceSize.width <= DeviceSizes.largeMobile.width
+                                  ? context.responsiveAppSizeTheme.current.iconSize20
+                                  : context.responsiveAppSizeTheme.current.iconSize16),
                           title: Text(context.translation!.logout,
-                              style: context
-                                  .responsiveTextTheme.current.body3Medium
-                                  .copyWith(color: Colors.red)),
+                              style: context.responsiveTextTheme.current.body3Medium.copyWith(color: Colors.red)),
                           onTap: () async {
                             await AppDialogs.showLogoutDialogLogout(context);
 
                             if (context.mounted) {
-                              GoRouter.of(context).pushReplacementNamed(
-                                  RoutingManager.loginScreen);
+                              GoRouter.of(context).pushReplacementNamed(RoutingManager.loginScreen);
                             }
                           },
                         ),
