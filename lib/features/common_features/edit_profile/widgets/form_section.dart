@@ -58,12 +58,13 @@ class _FormSectionState extends State<FormSection> {
                     ));
                   },
                 ),
-                ResponsiveGap.s4(),
+                const ResponsiveGap.s4(),
                 CustomTextField(
                   label: context.translation!.phone_mobile,
                   state: FieldState.normal,
                   initValue: state.profileData.phone,
                   keyBoadType: TextInputType.phone,
+                  maxLength: 10,
                   onChanged: (newValue) {
                     cubit.changeProfileData(
                         modifiedData: state.profileData.copyWith(

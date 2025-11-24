@@ -92,6 +92,7 @@ class _PharmacyGeneralInformationPageState
                                       .companyData
                                       .copyWith(phone: newValue));
                         },
+                        maxLength: 10,
                         validationFunc: (value) =>
                             validateIsMobileNumber(value, translation, true),
                       ),
@@ -102,6 +103,7 @@ class _PharmacyGeneralInformationPageState
                                 .companyData
                                 .fax,
                         state: FieldState.normal,
+                        keyBoadType: TextInputType.phone,
                         onChanged: (newValue) {
                           BlocProvider.of<CreateCompanyProfileCubit>(context)
                               .changeCompanyData(
@@ -110,6 +112,7 @@ class _PharmacyGeneralInformationPageState
                                       .companyData
                                       .copyWith(fax: newValue));
                         },
+                        maxLength: 10,
                         validationFunc: (value) =>
                             validateIsFaxNumber(value, translation),
                       ),
