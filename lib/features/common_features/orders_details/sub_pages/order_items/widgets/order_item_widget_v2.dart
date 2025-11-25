@@ -1,8 +1,10 @@
-import 'package:cached_network_image_plus/flutter_cached_network_image_plus.dart' show CacheNetworkImagePlus;
+import 'package:cached_network_image_plus/flutter_cached_network_image_plus.dart'
+    show CacheNetworkImagePlus;
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/price_widget.dart';
 import 'package:hader_pharm_mobile/models/order_details.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
@@ -41,7 +43,8 @@ class OrderItemWidgetV2 extends StatelessWidget {
                 vertical: context.responsiveAppSizeTheme.current.p6),
             clipBehavior: Clip.antiAlias,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.r6),
+              borderRadius: BorderRadius.circular(
+                  context.responsiveAppSizeTheme.current.r6),
               border: item.imageUrl != null
                   ? null
                   : Border.all(
@@ -51,7 +54,9 @@ class OrderItemWidgetV2 extends StatelessWidget {
             child: item.imageUrl != null
                 ? CacheNetworkImagePlus(
                     boxFit: BoxFit.contain,
-                    imageUrl: getItInstance.get<INetworkService>().getFilesPath(item.imageUrl ?? ''),
+                    imageUrl: getItInstance
+                        .get<INetworkService>()
+                        .getFilesPath(item.imageUrl ?? ''),
                   )
                 : Center(
                     child: Image(
@@ -81,45 +86,36 @@ class OrderItemWidgetV2 extends StatelessWidget {
                   style: context.responsiveTextTheme.current.headLine4SemiBold,
                 ),
                 const ResponsiveGap.s8(),
-                Text.rich(TextSpan(
-                  text: item.unitPriceHt.formatAsPrice(),
-                  style: context.responsiveTextTheme.current.body3Medium.copyWith(),
-                  children: <InlineSpan>[
-                    TextSpan(
-                      text: ' ${context.translation!.currency}',
-                      style:
-                          context.responsiveTextTheme.current.bodyXSmall.copyWith(fontSize: 8, color: Colors.grey[500]),
-                    ),
-                    TextSpan(
-                      text: ' x ${item.quantity}',
-                      style: context.responsiveTextTheme.current.bodySmall.copyWith(color: Colors.grey[500]),
-                    ),
-                    TextSpan(
-                      text: ' qty',
-                      style:
-                          context.responsiveTextTheme.current.bodyXSmall.copyWith(fontSize: 8, color: Colors.grey[500]),
-                    ),
-                  ],
-                )),
-                Spacer(),
+                PriceWidget(
+                  price: item.unitPriceTtc,
+                  overridePrice: item.unitPriceApplied,
+                  quantity: item.quantity,
+                ),
+                const Spacer(),
                 Row(
                   children: [
-                    Spacer(),
+                    const Spacer(),
                     Text.rich(
                       softWrap: true,
                       overflow: TextOverflow.ellipsis,
                       TextSpan(
                         text: "= ",
-                        style: context.responsiveTextTheme.current.bodyXSmall.copyWith(color: Colors.grey[500]),
+                        style: context.responsiveTextTheme.current.bodyXSmall
+                            .copyWith(color: Colors.grey[500]),
                         children: <InlineSpan>[
                           TextSpan(
-                            text: ' ${item.totalAmountHt.formatAsPriceForPrint()}',
-                            style: context.responsiveTextTheme.current.body2Medium
-                                .copyWith(color: Colors.black, fontWeight: FontWeight.bold),
+                            text:
+                                ' ${(item.totalAppliedAmount ?? item.totalAmountTtc).formatAsPriceForPrint()}',
+                            style: context
+                                .responsiveTextTheme.current.body2Medium
+                                .copyWith(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
                           ),
                           TextSpan(
                             text: ' ${context.translation!.currency}',
-                            style: context.responsiveTextTheme.current.bodyXSmall
+                            style: context
+                                .responsiveTextTheme.current.bodyXSmall
                                 .copyWith(fontSize: 8, color: Colors.grey[500]),
                           ),
                         ],

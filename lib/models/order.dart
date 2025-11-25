@@ -13,11 +13,13 @@ class BaseOrderModel {
   final String? sellerCompanyName;
   final String? clientCompanyName;
   final String displayId;
+  final double totalAppliedAmount;
 
   const BaseOrderModel({
     required this.id,
     this.clientCompanyName,
     required this.displayId,
+    this.totalAppliedAmount = 0.0,
     required this.status,
     required this.totalAmountExclTax,
     required this.totalAmountInclTax,

@@ -14,7 +14,8 @@ class GoogleManager {
         idToken: res.authentication.idToken,
       );
 
-      final userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
+      final userCredential =
+          await FirebaseAuth.instance.signInWithCredential(credential);
 
       final firebaseToken = await userCredential.user!.getIdToken(true);
 
