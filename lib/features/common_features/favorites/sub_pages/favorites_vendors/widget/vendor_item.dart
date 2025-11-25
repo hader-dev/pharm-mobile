@@ -7,6 +7,7 @@ import 'package:hader_pharm_mobile/config/services/network/network_interface.dar
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/chips/custom_chip.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
+import 'package:hader_pharm_mobile/features/common_features/favorites/cubit/favorites_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/vendors/cubit/vendors_cubit.dart';
 import 'package:hader_pharm_mobile/models/company.dart';
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
@@ -61,7 +62,7 @@ class VendorItem extends StatelessWidget {
       onTap: () {
         GoRouter.of(context).pushNamed(RoutingManager.vendorDetails, extra: companyData.id);
       },
-      child: BlocBuilder<VendorsCubit, VendorsState>(
+      child: BlocBuilder<FavoritesCubit, FavoritesState>(
         builder: (context, state) {
           return Container(
             margin: EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
@@ -129,8 +130,8 @@ class VendorItem extends StatelessWidget {
                               width: 30,
                               height: 30,
                               child: Icon(
-                                companyData.isLiked ?? false ? Iconsax.heart5 : Iconsax.heart,
-                                color: companyData.isLiked ?? false ? Colors.red : Colors.grey[400],
+                                Icons.close,
+                                color: Colors.red,
                                 size: context.responsiveAppSizeTheme.current.iconSize20,
                               ),
                             ),

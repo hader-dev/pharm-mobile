@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
-import 'package:hader_pharm_mobile/features/common/widgets/vendor_item.dart';
+
 import 'package:hader_pharm_mobile/features/common_features/favorites/cubit/favorites_cubit.dart';
+import 'package:hader_pharm_mobile/features/common_features/favorites/sub_pages/favorites_vendors/widget/vendor_item.dart'
+    show VendorItem;
 
 class FavoritesVendors extends StatelessWidget {
   const FavoritesVendors({super.key});
@@ -46,10 +48,7 @@ class FavoritesVendors extends StatelessWidget {
                       hideLikeButton: true,
                       hideRemoveButton: false,
                       isLiked: true,
-                      onRemoveFromFavorites: () {
-                        final id = state.likedVendors[index].id;
-                        cubit.unlikeVendor(id);
-                      },
+                      onRemoveFromFavorites: () => cubit.unlikeVendor(state.likedVendors[index].id),
                     );
                   },
                 ),
