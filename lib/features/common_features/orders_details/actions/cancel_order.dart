@@ -8,26 +8,22 @@ import 'package:hader_pharm_mobile/features/common_features/orders_details/cubit
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 
-Future<void> cancelOrder(
-    BuildContext context, OrderDetailsCubit orderDetailsCubit) async {
+Future<void> cancelOrder(BuildContext context, OrderDetailsCubit orderDetailsCubit, String? reason) async {
   final appLocalizations = context.translation!;
 
-  await orderDetailsCubit.cancelOrder().then((v) {
+  await orderDetailsCubit.cancelOrder(reason).then((v) {
     if (context.mounted) {
       context.pop();
     }
 
     if (v.success && context.mounted) {
       orderDetailsCubit.reloadOrderData();
-      final ordersCubit =
-          AppLayout.appLayoutScaffoldKey.currentContext!.read<OrdersCubit>();
+      final ordersCubit = AppLayout.appLayoutScaffoldKey.currentContext!.read<OrdersCubit>();
       ordersCubit.getOrders();
     }
 
     final toastType = v.success ? ToastType.success : ToastType.error;
-    final message = v.success
-        ? appLocalizations.order_cancelled
-        : appLocalizations.feedback_server_error;
+    final message = v.success ? appLocalizations.order_cancelled : appLocalizations.feedback_server_error;
 
     ToastManager toastManager = getItInstance.get<ToastManager>();
 
