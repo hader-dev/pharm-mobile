@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/language_config/resources/app_localizations.dart';
 import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
+
 import 'package:hader_pharm_mobile/features/common_features/edit_company/hooks_data_model/edit_company_form.dart';
 import 'package:hader_pharm_mobile/models/company.dart';
 import 'package:hader_pharm_mobile/repositories/remote/company/company_repository.dart';
@@ -18,8 +19,7 @@ class EditCompanyCubit extends Cubit<EditCompanyState> {
   final ICompanyRepository companyRepository;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  EditCompanyCubit({required this.companyRepository})
-      : super(EditCompanyInitial());
+  EditCompanyCubit({required this.companyRepository}) : super(EditCompanyInitial());
 
   Future<void> initCompanyData() async {
     try {
@@ -30,7 +30,6 @@ class EditCompanyCubit extends Cubit<EditCompanyState> {
       try {
         companyData = await companyRepository.getMyCompany();
       } catch (e) {
-        debugPrint("No company found for user: $e");
         emit(state.toCompanyNotFound());
         return;
       }
@@ -51,27 +50,20 @@ class EditCompanyCubit extends Cubit<EditCompanyState> {
         bankAccount: companyData.bankAccount,
       );
 
-      emit(state.toInitial(
-          formData: formData,
-          originalFormData: formData,
-          company: companyData));
+      emit(state.toInitial(formData: formData, originalFormData: formData, company: companyData));
     } catch (e) {
-      debugPrint("Error loading company data: $e");
       GlobalExceptionHandler.handle(exception: e);
       emit(state.toEditFailed());
     }
   }
 
-  Future<void> updateCompany(EditCompanyFormDataModel updatedFormData,
-      AppLocalizations translation) async {
+  Future<void> updateCompany(EditCompanyFormDataModel updatedFormData, AppLocalizations translation) async {
     try {
       if (!formKey.currentState!.validate()) {
         return;
       }
 
       if (!hasChangesComparedTo(updatedFormData)) {
-        debugPrint("Company update: No changes detected, skipping API call");
-
         getItInstance.get<ToastManager>().showToast(
               message: translation.feedback_no_changes_to_update,
               type: ToastType.error,
@@ -85,11 +77,8 @@ class EditCompanyCubit extends Cubit<EditCompanyState> {
       }
 
       if (state.pickedImage != null) {
-        updatedFormData =
-            updatedFormData.copyWith(logoPath: state.pickedImage?.path);
-      } else {
-        debugPrint("Company update: No image selected");
-      }
+        updatedFormData = updatedFormData.copyWith(logoPath: state.pickedImage?.path);
+      } else {}
 
       await companyRepository.updateMyCompany(
         companyData: updatedFormData,
@@ -100,9 +89,9 @@ class EditCompanyCubit extends Cubit<EditCompanyState> {
 
       await _refreshCompanyData();
 
-      getItInstance.get<ToastManager>().showToast(
-          message: translation.feedback_company_updated,
-          type: ToastType.success);
+      getItInstance
+          .get<ToastManager>()
+          .showToast(message: translation.feedback_company_updated, type: ToastType.success);
 
       emit(state.toEditSuccess(
           formData: updatedFormData,
@@ -110,7 +99,6 @@ class EditCompanyCubit extends Cubit<EditCompanyState> {
           shouldRemoveImage: false,
           resetPickedImage: true));
     } catch (e) {
-      debugPrint("Company update error: $e");
       GlobalExceptionHandler.handle(exception: e);
       emit(state.toEditFailed());
     }
@@ -126,7 +114,7 @@ class EditCompanyCubit extends Cubit<EditCompanyState> {
         ));
       }
     } catch (e) {
-      debugPrint("Error picking image: $e");
+      GlobalExceptionHandler.handle(exception: e);
     }
   }
 
@@ -137,20 +125,19 @@ class EditCompanyCubit extends Cubit<EditCompanyState> {
   bool hasChangesComparedTo(EditCompanyFormDataModel newFormData) {
     bool imageChanged = state.pickedImage != null || state.shouldRemoveImage;
 
-    bool formDataChanged =
-        state.originalFormData.companyName != newFormData.companyName ||
-            state.originalFormData.email != newFormData.email ||
-            state.originalFormData.phone != newFormData.phone ||
-            state.originalFormData.phone2 != newFormData.phone2 ||
-            state.originalFormData.fax != newFormData.fax ||
-            state.originalFormData.address != newFormData.address ||
-            state.originalFormData.website != newFormData.website ||
-            state.originalFormData.description != newFormData.description ||
-            state.originalFormData.rcNumber != newFormData.rcNumber ||
-            state.originalFormData.nisNumber != newFormData.nisNumber ||
-            state.originalFormData.aiNumber != newFormData.aiNumber ||
-            state.originalFormData.fiscalId != newFormData.fiscalId ||
-            state.originalFormData.bankAccount != newFormData.bankAccount;
+    bool formDataChanged = state.originalFormData.companyName != newFormData.companyName ||
+        state.originalFormData.email != newFormData.email ||
+        state.originalFormData.phone != newFormData.phone ||
+        state.originalFormData.phone2 != newFormData.phone2 ||
+        state.originalFormData.fax != newFormData.fax ||
+        state.originalFormData.address != newFormData.address ||
+        state.originalFormData.website != newFormData.website ||
+        state.originalFormData.description != newFormData.description ||
+        state.originalFormData.rcNumber != newFormData.rcNumber ||
+        state.originalFormData.nisNumber != newFormData.nisNumber ||
+        state.originalFormData.aiNumber != newFormData.aiNumber ||
+        state.originalFormData.fiscalId != newFormData.fiscalId ||
+        state.originalFormData.bankAccount != newFormData.bankAccount;
 
     return imageChanged || formDataChanged;
   }
@@ -164,32 +151,27 @@ class EditCompanyCubit extends Cubit<EditCompanyState> {
 
   Future<void> _refreshCompanyData() async {
     try {
-      final companyData = await companyRepository.getMyCompany();
+      final refreshedCompanyData = await companyRepository.getMyCompany();
 
       final formData = state.formData.copyWith(
-        companyName: companyData.name,
-        email: companyData.email,
-        phone: companyData.phone,
-        phone2: companyData.phone2,
-        fax: companyData.fax,
-        address: companyData.address,
-        website: companyData.website,
-        description: companyData.description,
-        rcNumber: companyData.rcNumber,
-        nisNumber: companyData.nisNumber,
-        aiNumber: companyData.aiNumber,
-        fiscalId: companyData.fiscalId,
-        bankAccount: companyData.bankAccount,
+        companyName: refreshedCompanyData.name,
+        email: refreshedCompanyData.email,
+        phone: refreshedCompanyData.phone,
+        phone2: refreshedCompanyData.phone2,
+        fax: refreshedCompanyData.fax,
+        address: refreshedCompanyData.address,
+        website: refreshedCompanyData.website,
+        description: refreshedCompanyData.description,
+        rcNumber: refreshedCompanyData.rcNumber,
+        nisNumber: refreshedCompanyData.nisNumber,
+        aiNumber: refreshedCompanyData.aiNumber,
+        fiscalId: refreshedCompanyData.fiscalId,
+        bankAccount: refreshedCompanyData.bankAccount,
       );
 
       final originalFormData = formData;
 
-      emit(state.toInitial(
-          formData: formData,
-          originalFormData: originalFormData,
-          company: companyData));
-    } catch (e) {
-      debugPrint("Error refreshing company data: $e");
-    }
+      emit(state.toInitial(formData: formData, originalFormData: originalFormData, company: refreshedCompanyData));
+    } catch (e) {}
   }
 }

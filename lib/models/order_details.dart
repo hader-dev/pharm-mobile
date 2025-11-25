@@ -29,6 +29,7 @@ class OrderDetailsModel extends BaseOrderModel {
     required super.updatedAt,
     required super.deliveryAddress,
     required super.status,
+    super.totalAppliedAmount,
     required super.totalAmountExclTax,
     required super.totalAmountInclTax,
     required this.latitude,
@@ -98,6 +99,8 @@ class OrderItem {
   final double discountAmount;
   final int packageSize;
   final String orderId;
+  final double? unitPriceApplied;
+  final double? totalAppliedAmount;
 
   final String? imageUrl;
 
@@ -106,7 +109,9 @@ class OrderItem {
   OrderItem({
     required this.id,
     this.note,
+    this.unitPriceApplied,
     required this.totalAmountTtc,
+    required this.totalAppliedAmount,
     required this.totalAmountHt,
     required this.tvaPercentage,
     required this.unitPriceHt,
@@ -139,6 +144,7 @@ class OrderItem {
       medicineCatalogId: null,
       parapharmCatalogId: null,
       quantity: 0,
+      totalAppliedAmount: 0.0,
       packageSize: 0,
       designation: null,
       lotNumber: null,
@@ -158,6 +164,7 @@ class OrderItem {
       totalAmountHt: 120.00,
       tvaPercentage: 10.0,
       unitPriceHt: 12.00,
+      totalAppliedAmount: 13.20,
       packageSize: 10,
       unitPriceTtc: 13.20,
       createdAt: DateTime.now().subtract(Duration(days: 10)),
@@ -199,27 +206,27 @@ class OrderItem {
     String? note,
   }) {
     return OrderItem(
-      id: id ?? this.id,
-      packageSize: packageSize ?? this.packageSize,
-      totalAmountTtc: totalAmountTtc ?? this.totalAmountTtc,
-      totalAmountHt: totalAmountHt ?? this.totalAmountHt,
-      tvaPercentage: tvaPercentage ?? this.tvaPercentage,
-      unitPriceHt: unitPriceHt ?? this.unitPriceHt,
-      unitPriceTtc: unitPriceTtc ?? this.unitPriceTtc,
-      createdAt: createdAt ?? this.createdAt,
-      updatedAt: updatedAt ?? this.updatedAt,
-      medicineCatalogId: medicineCatalogId ?? this.medicineCatalogId,
-      parapharmCatalogId: parapharmCatalogId ?? this.parapharmCatalogId,
-      quantity: quantity ?? this.quantity,
-      designation: designation ?? this.designation,
-      lotNumber: lotNumber ?? this.lotNumber,
-      expirationDate: expirationDate ?? this.expirationDate,
-      margin: margin ?? this.margin,
-      discountAmount: discountAmount ?? this.discountAmount,
-      orderId: orderId ?? this.orderId,
-      imageUrl: imageUrl ?? this.imageUrl,
-      note: note ?? this.note,
-    );
+        id: id ?? this.id,
+        packageSize: packageSize ?? this.packageSize,
+        totalAmountTtc: totalAmountTtc ?? this.totalAmountTtc,
+        totalAmountHt: totalAmountHt ?? this.totalAmountHt,
+        tvaPercentage: tvaPercentage ?? this.tvaPercentage,
+        unitPriceHt: unitPriceHt ?? this.unitPriceHt,
+        unitPriceTtc: unitPriceTtc ?? this.unitPriceTtc,
+        createdAt: createdAt ?? this.createdAt,
+        updatedAt: updatedAt ?? this.updatedAt,
+        medicineCatalogId: medicineCatalogId ?? this.medicineCatalogId,
+        parapharmCatalogId: parapharmCatalogId ?? this.parapharmCatalogId,
+        quantity: quantity ?? this.quantity,
+        designation: designation ?? this.designation,
+        lotNumber: lotNumber ?? this.lotNumber,
+        expirationDate: expirationDate ?? this.expirationDate,
+        margin: margin ?? this.margin,
+        discountAmount: discountAmount ?? this.discountAmount,
+        orderId: orderId ?? this.orderId,
+        imageUrl: imageUrl ?? this.imageUrl,
+        note: note ?? this.note,
+        totalAppliedAmount: totalAppliedAmount);
   }
 }
 

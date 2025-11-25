@@ -18,6 +18,20 @@ class ImageModel {
         size: json["size"] ?? "0",
       );
 
+  ImageModel copyWith({
+    String? path,
+    String? filename,
+    String? mimetype,
+    String? size,
+  }) {
+    return ImageModel(
+      path: path ?? this.path,
+      filename: filename ?? this.filename,
+      mimetype: mimetype ?? this.mimetype,
+      size: size ?? this.size,
+    );
+  }
+
   factory ImageModel.empty() {
     return ImageModel(
       path: '',

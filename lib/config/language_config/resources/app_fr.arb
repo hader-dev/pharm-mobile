@@ -404,11 +404,11 @@
   "last_week": "Dernière semaine",
   "seller": "Vendeur",
   "last_update": "Dernière mise à jour",
-  "hide_filters":"Masquer filtres",
-  "show_filters":"Afficher filtres",
+  "hide_filters": "Masquer filtres",
+  "show_filters": "Afficher filtres",
   "dateRangeError": "La date 'De' ne peut pas être postérieure à la date 'À'",
-  "order_placed_successfully": "Commande passée avec succès !",
   "thank_you_purchase": "Merci pour votre achat. Votre commande a été passée avec succès.",
   "view_order": "Voir la commande",
-  "continue_shopping": "Continuer vos achats"
+  "continue_shopping": "Continuer vos achats",
+  "total_applied_amount": "Montant total appliqué"
 }

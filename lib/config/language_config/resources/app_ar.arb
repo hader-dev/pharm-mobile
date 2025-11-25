@@ -402,11 +402,11 @@
   "make_complaint_success": "تم تقديم الشكوى بنجاح",
   "package_size": "حجم العبوة",
   "pacakge_quantity": "كمية العبوة",
-  "seller":"البائع",
+  "seller": "البائع",
   "last_update": "آخر تحديث",
-  "dateRangeError":"لا يمكن أن يكون تاريخ 'من' بعد تاريخ 'إلى'.",
-  "order_placed_successfully": "تم تقديم الطلب بنجاح!",
+  "dateRangeError": "لا يمكن أن يكون تاريخ 'من' بعد تاريخ 'إلى'.",
   "thank_you_purchase": "شكرًا لشرائك. تم تقديم طلبك بنجاح.",
   "view_order": "عرض الطلب",
-  "continue_shopping": "متابعة التسوق"
+  "continue_shopping": "متابعة التسوق",
+  "total_applied_amount": "المبلغ الإجمالي المطبق"
 }
