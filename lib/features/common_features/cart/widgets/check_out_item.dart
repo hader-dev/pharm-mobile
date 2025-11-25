@@ -78,7 +78,6 @@ class CheckOutItemWidget extends StatelessWidget {
                   item.designation,
                   softWrap: true,
                   overflow: TextOverflow.ellipsis,
-                  maxLines: 3,
                   style: context.responsiveTextTheme.current.headLine4SemiBold,
                 ),
                 const ResponsiveGap.s8(),
