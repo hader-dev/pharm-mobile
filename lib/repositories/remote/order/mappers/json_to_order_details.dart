@@ -20,6 +20,9 @@ OrderDetailsModel jsonToOrderDetails(Map<String, dynamic> json) {
     totalAmountExclTax: json['totalAmountHt'] != null
         ? double.parse(json['totalAmountHt'])
         : 0.0,
+    totalAppliedAmount: json['totalAppliedAmount'] != null
+        ? double.parse(json['totalAppliedAmount'])
+        : 0.0,
     totalAmountInclTax: json['totalAmountTtc'] != null
         ? double.parse(json['totalAmountTtc'])
         : 0.0,

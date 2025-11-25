@@ -47,6 +47,10 @@ class OrderSummarySection extends StatelessWidget {
           // SummaryRow(label: context.translation!.discount, value: cubit.orderData!.discount.formatAsPercentage()),
           //   const SummaryRow(label: 'Shipping (Standard)', value: '10.00 context.translation!.currencyAbbreviation'),
           SummaryRow(
+              label: context.translation!.total_applied_amount,
+              value:
+                  cubit.orderData!.totalAppliedAmount.formatAsPriceForPrint()),
+          SummaryRow(
               label: context.translation!.total_ht,
               value:
                   cubit.orderData!.totalAmountExclTax.formatAsPriceForPrint()),
