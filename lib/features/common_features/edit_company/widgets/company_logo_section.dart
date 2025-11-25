@@ -17,19 +17,18 @@ class CompanyLogoSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = BlocProvider.of<EditCompanyCubit>(context);
-    final state = cubit.state;
-    final companyImage = state.companyData.image;
-    final imageUrl = companyImage != null
-        ? getItInstance.get<INetworkService>().getFilesPath(companyImage.path)
-        : null;
-
     final imageSize = MediaQuery.of(context).size.width > 600
         ? MediaQuery.of(context).size.height * 0.18
         : MediaQuery.of(context).size.height * 0.14;
 
     return BlocBuilder<EditCompanyCubit, EditCompanyState>(
       builder: (context, state) {
+        final cubit = BlocProvider.of<EditCompanyCubit>(context);
+        final state = cubit.state;
+        final companyImage = state.companyData.image;
+        final imageUrl =
+            companyImage != null ? getItInstance.get<INetworkService>().getFilesPath(companyImage.path) : null;
+
         return MaterialButton(
           onPressed: cubit.pickCompanyLogo,
           child: Column(
@@ -70,23 +69,20 @@ class CompanyLogoSection extends StatelessWidget {
                                       child: CircularProgressIndicator(),
                                     ),
                                   ),
-                                  errorWidget: (context, url, error) =>
-                                      Container(
+                                  errorWidget: (context, url, error) => Container(
                                     color: AppColors.bgDarken,
-                                    child:  Icon(
+                                    child: Icon(
                                       Iconsax.building,
-                                      size: context.responsiveAppSizeTheme
-                                          .current.iconSize48,
+                                      size: context.responsiveAppSizeTheme.current.iconSize48,
                                       color: AppColors.accent1Shade1,
                                     ),
                                   ),
                                 )
                               : Container(
                                   color: AppColors.bgDarken,
-                                  child:  Icon(
+                                  child: Icon(
                                     Iconsax.building,
-                                    size: context.responsiveAppSizeTheme.current
-                                        .iconSize48,
+                                    size: context.responsiveAppSizeTheme.current.iconSize48,
                                     color: AppColors.accent1Shade1,
                                   ),
                                 ),
@@ -99,9 +95,7 @@ class CompanyLogoSection extends StatelessWidget {
                       scale: 0.7,
                       child: PrimaryIconButton(
                         icon: Icon(
-                          state.pickedImage != null
-                              ? Iconsax.edit_2
-                              : Iconsax.add,
+                          state.pickedImage != null ? Iconsax.edit_2 : Iconsax.add,
                           color: Colors.white,
                         ),
                         isBordered: true,

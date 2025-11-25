@@ -21,7 +21,7 @@ class GoogleManager {
 
       return firebaseToken;
     } catch (e) {
-      throw "Failed to sign in with Google: $e";
+      throw "Failed to sign in with Google";
     }
   }
 
