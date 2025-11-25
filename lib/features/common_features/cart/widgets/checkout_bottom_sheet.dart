@@ -21,8 +21,6 @@ import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/validators.dart';
 import 'package:iconsax/iconsax.dart' show Iconsax;
 
-import '../../orders_details/sub_pages/order_items/widgets/order_items_section.dart' show OrderItemsSection;
-
 class CheckOutBottomSheet extends StatelessWidget {
   const CheckOutBottomSheet({super.key});
 
@@ -36,7 +34,9 @@ class CheckOutBottomSheet extends StatelessWidget {
         listener: (context, state) async {
           if (state is PassOrderLoaded) {
             context.read<CartCubit>().clearCart(context.translation!);
-            AppLayout.appLayoutScaffoldKey.currentContext!.read<OrdersCubit>().getOrders();
+            AppLayout.appLayoutScaffoldKey.currentContext!
+                .read<OrdersCubit>()
+                .getOrders();
             context.pop();
             await showDialog(
                 context: AppLayout.appLayoutScaffoldKey.currentContext!,
@@ -44,8 +44,10 @@ class CheckOutBottomSheet extends StatelessWidget {
                 builder: (context) => Dialog(
                       constraints: BoxConstraints(maxHeight: 500),
                       shape: RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.circular(context.responsiveAppSizeTheme.current.commonWidgetsRadius)),
+                          borderRadius: BorderRadius.circular(context
+                              .responsiveAppSizeTheme
+                              .current
+                              .commonWidgetsRadius)),
                       backgroundColor: AppColors.bgWhite,
                       child: OrderPlacedSuccessfullyDialog(),
                     ));
@@ -53,7 +55,8 @@ class CheckOutBottomSheet extends StatelessWidget {
         },
         child: BlocBuilder<CartCubit, CartState>(
           builder: (context, state) {
-            if (state is! InvoiceTypeChanged && state is! PaymentMethodChanged) {}
+            if (state is! InvoiceTypeChanged &&
+                state is! PaymentMethodChanged) {}
             final cubit = context.read<CartCubit>();
             return Form(
               key: cubit.formKey,
@@ -61,9 +64,11 @@ class CheckOutBottomSheet extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    BottomSheetHeader(title: context.translation!.checkout_process),
+                    BottomSheetHeader(
+                        title: context.translation!.checkout_process),
                     const ResponsiveGap.s12(),
-                    Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
+                    Divider(
+                        color: AppColors.bgDisabled, thickness: 1, height: 1),
                     const ResponsiveGap.s12(),
                     InfoWidget(
                         label: context.translation!.payment_methods,
@@ -71,7 +76,8 @@ class CheckOutBottomSheet extends StatelessWidget {
                         value: PaymentRadioInput(
                           initialValue: state.selectedPaymentMethod,
                           onPaymentMethodChanged: cubit.changePaymentMethod,
-                          validator: (v) => requiredValidator(v?.name, translation),
+                          validator: (v) =>
+                              requiredValidator(v?.name, translation),
                         )),
                     InfoWidget(
                         label: context.translation!.invoice_types,
@@ -79,42 +85,56 @@ class CheckOutBottomSheet extends StatelessWidget {
                         value: InvoiceRadioInput(
                           initialValue: state.selectedInvoiceType,
                           onInvoiceTypeChanged: cubit.changeInvoiceType,
-                          validator: (v) => requiredValidator(v?.name, translation),
+                          validator: (v) =>
+                              requiredValidator(v?.name, translation),
                         )),
                     InfoWidget(
                         label: "${context.translation!.shipping_address}*",
                         bgColor: AppColors.bgWhite,
                         value: CustomTextField(
                           verticalPadding: 0,
-                          horizontalPadding: context.responsiveAppSizeTheme.current.p6,
+                          horizontalPadding:
+                              context.responsiveAppSizeTheme.current.p6,
                           initValue: UserManager.instance.currentUser.address,
-                          onChanged: (text) => context.read<CartCubit>().updateShippingAddress(text ?? ''),
+                          onChanged: (text) => context
+                              .read<CartCubit>()
+                              .updateShippingAddress(text ?? ''),
                           maxLines: 3,
                           maxLength: maxInputLength,
-                          validationFunc: (value) => requiredValidator(value, translation, maxLength: maxInputLength),
+                          validationFunc: (value) => requiredValidator(
+                              value, translation,
+                              maxLength: maxInputLength),
                           isFilled: false,
                           isBorderEnabled: true,
                           hintText: "${context.translation!.shipping_address}*",
-                          hintTextStyle: context.responsiveTextTheme.current.bodySmall.copyWith(color: Colors.grey),
+                          hintTextStyle: context
+                              .responsiveTextTheme.current.bodySmall
+                              .copyWith(color: Colors.grey),
                         )),
                     InfoWidget(
                         label: context.translation!.order_note,
                         bgColor: AppColors.bgWhite,
                         value: CustomTextField(
                           verticalPadding: 0,
-                          horizontalPadding: context.responsiveAppSizeTheme.current.p6,
+                          horizontalPadding:
+                              context.responsiveAppSizeTheme.current.p6,
                           initValue: state.orderNote,
-                          onChanged: (text) => context.read<CartCubit>().changeOrderNote(text ?? ''),
+                          onChanged: (text) => context
+                              .read<CartCubit>()
+                              .changeOrderNote(text ?? ''),
                           maxLines: 3,
                           maxLength: maxInputLength,
                           validationFunc: (value) {},
                           isFilled: false,
                           isBorderEnabled: true,
                           hintText: context.translation!.type_note_hint,
-                          hintTextStyle: context.responsiveTextTheme.current.bodySmall.copyWith(color: Colors.grey),
+                          hintTextStyle: context
+                              .responsiveTextTheme.current.bodySmall
+                              .copyWith(color: Colors.grey),
                         )),
                     InfoWidget(
-                        label: '${context.translation!.order_items} (${state.cartItems.length})',
+                        label:
+                            '${context.translation!.order_items} (${state.cartItems.length})',
                         bgColor: AppColors.bgWhite,
                         value: CheckOutItemsSection(
                           items: state.cartItems.map((x) => x.model).toList(),
@@ -123,12 +143,14 @@ class CheckOutBottomSheet extends StatelessWidget {
                       label: context.translation!.total_amount,
                       bgColor: AppColors.accentGreenShade3,
                       value: Padding(
-                        padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p4),
+                        padding: EdgeInsets.all(
+                            context.responsiveAppSizeTheme.current.p4),
                         child: Row(
                           children: [
                             Text(
                               "${state.totalTTCAmount.toStringAsFixed(2)} ${context.translation!.currency}",
-                              style: context.responsiveTextTheme.current.body2Medium
+                              style: context
+                                  .responsiveTextTheme.current.body2Medium
                                   .copyWith(color: AppColors.accent1Shade1),
                             ),
                             Spacer(),
@@ -141,12 +163,14 @@ class CheckOutBottomSheet extends StatelessWidget {
                       ),
                     ),
                     const ResponsiveGap.s12(),
-                    Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
+                    Divider(
+                        color: AppColors.bgDisabled, thickness: 1, height: 1),
                     const ResponsiveGap.s12(),
                     Padding(
                       padding: EdgeInsets.symmetric(
                           vertical: context.responsiveAppSizeTheme.current.p4,
-                          horizontal: context.responsiveAppSizeTheme.current.p4),
+                          horizontal:
+                              context.responsiveAppSizeTheme.current.p4),
                       child: Row(
                         children: [
                           Expanded(
