@@ -9,6 +9,7 @@ class PriceWidget extends StatelessWidget {
   final TextStyle? mainStyle;
   final TextStyle? currencyStyle;
   final TextStyle? linedStyle;
+  final int? quantity;
 
   const PriceWidget({
     super.key,
@@ -17,6 +18,7 @@ class PriceWidget extends StatelessWidget {
     this.mainStyle,
     this.currencyStyle,
     this.linedStyle,
+    this.quantity,
   });
 
   @override
@@ -52,6 +54,18 @@ class PriceWidget extends StatelessWidget {
               text: " ${context.translation!.currency}",
               style: currency,
             ),
+            if (quantity != null) ...[
+              TextSpan(
+                text: ' x $quantity',
+                style: context.responsiveTextTheme.current.bodySmall
+                    .copyWith(color: Colors.grey[500]),
+              ),
+              TextSpan(
+                text: ' qty',
+                style: context.responsiveTextTheme.current.bodyXSmall
+                    .copyWith(fontSize: 8, color: Colors.grey[500]),
+              ),
+            ],
           ],
         ),
       );
@@ -92,6 +106,18 @@ class PriceWidget extends StatelessWidget {
                 text: " ${context.translation!.currency}",
                 style: currency,
               ),
+              if (quantity != null) ...[
+                TextSpan(
+                  text: ' x $quantity',
+                  style: context.responsiveTextTheme.current.bodySmall
+                      .copyWith(color: Colors.grey[500]),
+                ),
+                TextSpan(
+                  text: ' qty',
+                  style: context.responsiveTextTheme.current.bodyXSmall
+                      .copyWith(fontSize: 8, color: Colors.grey[500]),
+                ),
+              ]
             ],
           ),
         ),

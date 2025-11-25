@@ -1171,9 +1171,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get pacakge_quantity => 'Packing Quantity';
 
   @override
-  String get order_placed_successfully => 'Order Placed Successfully!';
-
-  @override
   String get password_reset_success => 'Password reset success';
 
   @override
@@ -1281,6 +1278,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dateRangeError => '\'From\' date cannot be after \'To\' date.';
 
   @override
+  String get order_placed_successfully => 'Order Placed Successfully!';
+
+  @override
   String get thank_you_purchase =>
       'Thank you for your purchase. Your order has been placed successfully.';
 
@@ -1289,4 +1289,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get continue_shopping => 'Continue Shopping';
+
+  @override
+  String get total_applied_amount => 'Total Applied Amount';
 }

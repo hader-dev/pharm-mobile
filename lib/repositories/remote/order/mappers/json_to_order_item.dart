@@ -18,6 +18,12 @@ OrderItem jsonToOrderItem(Map<String, dynamic> json) {
     tvaPercentage: json['tvaPercentage'] != null
         ? double.parse(json['tvaPercentage'])
         : 0.0,
+    totalAppliedAmount: json['totalAppliedAmount'] != null
+        ? double.parse(json['totalAppliedAmount'])
+        : 0.0,
+    unitPriceApplied: json['unitAppliedAmount'] != null
+        ? double.parse(json['unitAppliedAmount'])
+        : null,
     unitPriceHt:
         json['unitPriceHt'] != null ? double.parse(json['unitPriceHt']) : 0.0,
     unitPriceTtc:
@@ -49,6 +55,7 @@ OrderStatusHistory jsonToOrderStatusHistory(Map<String, dynamic> json) {
     orderStatusId: json['orderStatusId'],
     changedByUserId: json['changedByUserId'],
     note: json['note'],
+ 
   );
 }
 
