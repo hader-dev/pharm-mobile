@@ -24,18 +24,15 @@ class VandorDetailsTabBarSection extends StatefulWidget {
     "About",
     "Medicine",
     "Para-Pharma",
-    "Announcement"
   ];
   VandorDetailsTabBarSection({super.key, required this.companyId});
   final String companyId;
 
   @override
-  State<VandorDetailsTabBarSection> createState() =>
-      _VandorDetailsTabBarSectionState();
+  State<VandorDetailsTabBarSection> createState() => _VandorDetailsTabBarSectionState();
 }
 
-class _VandorDetailsTabBarSectionState extends State<VandorDetailsTabBarSection>
-    with TickerProviderStateMixin {
+class _VandorDetailsTabBarSectionState extends State<VandorDetailsTabBarSection> with TickerProviderStateMixin {
   late final TabController tabsController;
   @override
   void initState() {
@@ -77,35 +74,26 @@ class _VandorDetailsTabBarSectionState extends State<VandorDetailsTabBarSection>
               BlocProvider(
                 create: (context) => MedicineProductsCubit(
                     scrollController: ScrollController(),
-                    favoriteRepository: FavoriteRepository(
-                        client: getItInstance.get<INetworkService>()),
+                    favoriteRepository: FavoriteRepository(client: getItInstance.get<INetworkService>()),
                     searchController: TextEditingController(text: ""),
-                    medicineRepository: MedicineCatalogRepository(
-                        client: getItInstance.get<INetworkService>()))
-                  ..getMedicines(
-                      filters: MedicalFilters(vendors: [widget.companyId])),
+                    medicineRepository: MedicineCatalogRepository(client: getItInstance.get<INetworkService>()))
+                  ..getMedicines(filters: MedicalFilters(vendors: [widget.companyId])),
               ),
               BlocProvider(
                 create: (context) => ParaPharmaCubit(
-                    favoriteRepository: FavoriteRepository(
-                        client: getItInstance.get<INetworkService>()),
+                    favoriteRepository: FavoriteRepository(client: getItInstance.get<INetworkService>()),
                     scrollController: ScrollController(),
                     searchController: TextEditingController(text: ""),
-                    paraPharmaRepository: ParaPharmaRepository(
-                        client: getItInstance.get<INetworkService>()))
-                  ..getParaPharmas(
-                      filters: ParaMedicalFilters(vendors: [widget.companyId])),
+                    paraPharmaRepository: ParaPharmaRepository(client: getItInstance.get<INetworkService>()))
+                  ..getParaPharmas(filters: ParaMedicalFilters(vendors: [widget.companyId])),
               ),
             ],
             child: TabBarView(
               controller: tabsController,
               children: [
-                VendorDetailsPage(
-                    vendorData:
-                        context.read<VendorDetailsCubit>().state.vendor),
                 MedicinesPage(),
                 ParapharmaPage(),
-                AnnouncementsPage()
+                VendorDetailsPage(vendorData: context.read<VendorDetailsCubit>().state.vendor),
               ],
             ),
           ),
