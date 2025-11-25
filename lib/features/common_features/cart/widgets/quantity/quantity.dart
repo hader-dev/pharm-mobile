@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
@@ -73,12 +71,14 @@ class BaseQuantityController extends StatelessWidget {
             },
             style: context.responsiveTextTheme.current.body3Medium,
             decoration: InputDecoration(
-              contentPadding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p12),
+              contentPadding:
+                  EdgeInsets.all(context.responsiveAppSizeTheme.current.p12),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(
                   context.responsiveAppSizeTheme.current.commonWidgetsRadius,
                 ),
-                borderSide: BorderSide(color: FieldState.normal.color.secondary),
+                borderSide:
+                    BorderSide(color: FieldState.normal.color.secondary),
               ),
               disabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(
@@ -114,8 +114,10 @@ class BaseQuantityController extends StatelessWidget {
       borderColor: StrokeColors.normal.color,
       isBordered: true,
       bgColor: Colors.transparent,
-      onLongPressed: int.parse(quantityController.text) == minQuantity ? null : decrement,
-      onPressed: int.parse(quantityController.text) == minQuantity ? null : decrement,
+      onLongPressed:
+          int.parse(quantityController.text) == minQuantity ? null : decrement,
+      onPressed:
+          int.parse(quantityController.text) == minQuantity ? null : decrement,
       icon: const Icon(Iconsax.minus, color: Colors.black),
     );
 
@@ -123,8 +125,10 @@ class BaseQuantityController extends StatelessWidget {
       borderColor: StrokeColors.normal.color,
       isBordered: true,
       bgColor: Colors.transparent,
-      onPressed: int.parse(quantityController.text) == maxQuantity ? null : increment,
-      onLongPressed: int.parse(quantityController.text) == maxQuantity ? null : increment,
+      onPressed:
+          int.parse(quantityController.text) == maxQuantity ? null : increment,
+      onLongPressed:
+          int.parse(quantityController.text) == maxQuantity ? null : increment,
       icon: Icon(Iconsax.add, color: Colors.black),
     );
 
