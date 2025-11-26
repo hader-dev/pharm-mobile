@@ -136,7 +136,7 @@ class CartItemModel {
       discountAmount: json['discountAmount'],
       buyerCompanyId: json['buyerCompanyId'],
       sellerCompanyId: json['sellerCompanyId'],
-      unitPriceFinal: json['unitPriceFinal,'] ?? "100",
+      unitPriceFinal: json['unitPriceFinalTtc'] ?? "100",
       medicineCatalogStockQty: json['medicineCatalog']?['stockQuantity'] ?? 0,
       parapharmCatalogStockQty: json['parapharmCatalog']?['stockQuantity'] ?? 0,
       sellerCompany: BaseCompany.fromJson(json['sellerCompany']),

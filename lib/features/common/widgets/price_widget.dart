@@ -42,12 +42,18 @@ class PriceWidget extends StatelessWidget {
     final main = mainStyle ?? defaultMainStyle;
     final currency = currencyStyle ?? defaultCurrencyStyle;
 
-    if (overridePrice == null) {
+    final dOverridePrice = overridePrice ?? 0;
+    final shouldOverrideWithoutLineThrough = (dOverridePrice) >= price;
+
+    final baseDisplayPrice =
+        shouldOverrideWithoutLineThrough ? dOverridePrice : price;
+
+    if (shouldOverrideWithoutLineThrough) {
       return Text.rich(
         TextSpan(
           children: [
             TextSpan(
-              text: price.formatAsPriceForPrint(decimalDigits: 1),
+              text: baseDisplayPrice.formatAsPriceForPrint(decimalDigits: 1),
               style: main,
             ),
             TextSpan(
@@ -61,7 +67,7 @@ class PriceWidget extends StatelessWidget {
                     .copyWith(color: Colors.grey[500]),
               ),
               TextSpan(
-                text: ' qty',
+                text: ' ${context.translation!.qty}',
                 style: context.responsiveTextTheme.current.bodyXSmall
                     .copyWith(fontSize: 8, color: Colors.grey[500]),
               ),
@@ -113,7 +119,7 @@ class PriceWidget extends StatelessWidget {
                       .copyWith(color: Colors.grey[500]),
                 ),
                 TextSpan(
-                  text: ' qty',
+                  text: ' ${context.translation!.qty}',
                   style: context.responsiveTextTheme.current.bodyXSmall
                       .copyWith(fontSize: 8, color: Colors.grey[500]),
                 ),
