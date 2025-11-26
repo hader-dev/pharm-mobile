@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:hader_pharm_mobile/config/di/di.dart' show getItInstance;
 import 'package:hader_pharm_mobile/config/language_config/resources/app_localizations.dart';
 import 'package:hader_pharm_mobile/models/cart_item.dart';
 import 'package:hader_pharm_mobile/models/create_cart_item.dart';
@@ -11,6 +12,8 @@ import 'package:hader_pharm_mobile/utils/app_exceptions/exceptions.dart';
 import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler.dart';
 import 'package:hader_pharm_mobile/utils/debounce.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
+
+import '../../../../config/services/auth/user_manager.dart' show UserManager;
 
 part 'cart_state.dart';
 
@@ -292,7 +295,9 @@ class CartCubit extends Cubit<CartState> {
         return ordersRepository.createOrder(
             orderDetails: CreateOrderModel(
           deliveryAddress: state.shippingAddress,
-          deliveryTownId: 10,
+          paymentMethod: state.selectedPaymentMethod,
+          invoiceType: state.selectedInvoiceType,
+          deliveryTownId: getItInstance.get<UserManager>().currentUser.townId,
           sellerCompanyId: sellerId,
           cartItemsIds: state.cartItemsByVendor[sellerId] ?? [],
           clientNote: state.orderNote,
