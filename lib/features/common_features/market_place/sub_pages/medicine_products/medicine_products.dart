@@ -13,7 +13,7 @@ import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../../common/shimmers/horizontal_product_widget_shimmer.dart'
-    show HorizentalProductWidgetShimmer, HorizontalProductWidgetShimmer;
+    show HorizontalProductWidgetShimmer;
 import 'cubit/medicine_products_cubit.dart';
 
 class MedicineProductsPage extends StatefulWidget {
@@ -23,7 +23,8 @@ class MedicineProductsPage extends StatefulWidget {
   State<MedicineProductsPage> createState() => _MedicineProductsPageState();
 }
 
-class _MedicineProductsPageState extends State<MedicineProductsPage> with AutomaticKeepAliveClientMixin {
+class _MedicineProductsPageState extends State<MedicineProductsPage>
+    with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     final cubit = BlocProvider.of<MedicineProductsCubit>(context);
@@ -42,20 +43,28 @@ class _MedicineProductsPageState extends State<MedicineProductsPage> with Automa
                     final medicines = state.medicines;
 
                     final bool isLoadingMore = state is MedicineProductsLoading;
-                    final bool hasReachedEnd = state is MedicinesLoadLimitReached;
+                    final bool hasReachedEnd =
+                        state is MedicinesLoadLimitReached;
 
                     void onLikeTapped(BaseMedicineCatalogModel medicine) {
                       final id = medicine.id;
-                      final gCubit =
-                          MarketPlaceScreen.marketPlaceScaffoldKey.currentContext!.read<MedicineProductsCubit>();
-                      final hCubit = HomeScreen.scaffoldKey.currentContext!.read<MedicineProductsCubit>();
-                      medicine.isLiked ? cubit.unlikeMedicinesCatalog(id) : cubit.likeMedicinesCatalog(id);
+                      final gCubit = MarketPlaceScreen
+                          .marketPlaceScaffoldKey.currentContext!
+                          .read<MedicineProductsCubit>();
+                      final hCubit = HomeScreen.scaffoldKey.currentContext!
+                          .read<MedicineProductsCubit>();
+                      medicine.isLiked
+                          ? cubit.unlikeMedicinesCatalog(id)
+                          : cubit.likeMedicinesCatalog(id);
 
-                      gCubit.refreshMedicineCatalogFavorite(id, !medicine.isLiked);
-                      hCubit.refreshMedicineCatalogFavorite(id, !medicine.isLiked);
+                      gCubit.refreshMedicineCatalogFavorite(
+                          id, !medicine.isLiked);
+                      hCubit.refreshMedicineCatalogFavorite(
+                          id, !medicine.isLiked);
                     }
 
-                    void onQuickAddCallback(BaseMedicineCatalogModel medicineProduct) {
+                    void onQuickAddCallback(
+                        BaseMedicineCatalogModel medicineProduct) {
                       BottomSheetHelper.showCommonBottomSheet(
                           initialChildSize: .5,
                           context: context,
@@ -88,18 +97,23 @@ class _MedicineProductsPageState extends State<MedicineProductsPage> with Automa
                           physics: AlwaysScrollableScrollPhysics(),
                           controller: state.scrollController,
                           children: [
-                            ...state.medicines.map((medicine) => MedicineWidget2(
-                                  medicineData: medicine,
-                                  isLiked: medicine.isLiked,
-                                  onLikeTapped: () => onLikeTapped(medicine),
-                                  onQuickAddCallback: onQuickAddCallback,
-                                  hideLikeButton: false,
-                                )),
+                            ...state.medicines
+                                .map((medicine) => MedicineWidget2(
+                                      medicineData: medicine,
+                                      isLiked: medicine.isLiked,
+                                      onLikeTapped: () =>
+                                          onLikeTapped(medicine),
+                                      onQuickAddCallback: onQuickAddCallback,
+                                      hideLikeButton: false,
+                                    )),
                             if (isLoadingMore)
                               const Padding(
                                 padding: EdgeInsets.all(16.0),
-                                child:
-                                    Center(child: SizedBox(height: 20, width: 20, child: CircularProgressIndicator())),
+                                child: Center(
+                                    child: SizedBox(
+                                        height: 20,
+                                        width: 20,
+                                        child: CircularProgressIndicator())),
                               ),
                             if (hasReachedEnd) const EndOfLoadResultWidget()
                           ],

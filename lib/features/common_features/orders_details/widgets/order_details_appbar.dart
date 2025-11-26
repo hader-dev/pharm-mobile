@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
@@ -10,7 +9,8 @@ import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:lucide_icons/lucide_icons.dart' show LucideIcons;
 
-class OrderDetailsAppBar extends StatelessWidget implements PreferredSizeWidget {
+class OrderDetailsAppBar extends StatelessWidget
+    implements PreferredSizeWidget {
   const OrderDetailsAppBar({
     super.key,
   });
@@ -20,23 +20,31 @@ class OrderDetailsAppBar extends StatelessWidget implements PreferredSizeWidget 
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<PopupMenuButtonState<String>> menuKey = GlobalKey<PopupMenuButtonState<String>>();
+    final GlobalKey<PopupMenuButtonState<String>> menuKey =
+        GlobalKey<PopupMenuButtonState<String>>();
     return CustomAppBarV2.normal(
       topPadding: MediaQuery.of(context).padding.top,
       bottomPadding: MediaQuery.of(context).padding.bottom,
       leading: IconButton(
-        icon: Icon(Directionality.of(context) == TextDirection.rtl ? Iconsax.arrow_right_3 : Iconsax.arrow_left_2,
-            size: context.responsiveAppSizeTheme.current.iconSize25, color: AppColors.accent1Shade1),
+        icon: Icon(
+            Directionality.of(context) == TextDirection.rtl
+                ? Iconsax.arrow_right_3
+                : Iconsax.arrow_left_2,
+            size: context.responsiveAppSizeTheme.current.iconSize25,
+            color: AppColors.accent1Shade1),
         onPressed: () => handleNavigateBack(context),
       ),
       title: Row(
         children: [
-          Icon(Iconsax.box_2, size: context.responsiveAppSizeTheme.current.iconSize25, color: AppColors.accent1Shade1),
+          Icon(Iconsax.box_2,
+              size: context.responsiveAppSizeTheme.current.iconSize25,
+              color: AppColors.accent1Shade1),
           const ResponsiveGap.s12(),
           Expanded(
             child: Text(
               context.translation!.order_details,
-              style: context.responsiveTextTheme.current.headLine3SemiBold.copyWith(color: AppColors.accent1Shade1),
+              style: context.responsiveTextTheme.current.headLine3SemiBold
+                  .copyWith(color: AppColors.accent1Shade1),
               overflow: TextOverflow.ellipsis,
             ),
           ),
@@ -52,7 +60,8 @@ class OrderDetailsAppBar extends StatelessWidget implements PreferredSizeWidget 
               key: menuKey,
               offset: const Offset(0, 40),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.commonWidgetsRadius),
+                borderRadius: BorderRadius.circular(
+                    context.responsiveAppSizeTheme.current.commonWidgetsRadius),
               ),
               onSelected: (value) {
                 context.read<OrderDetailsCubit>().onMenuOptionSelected(
@@ -89,8 +98,8 @@ class OrderDetailsAppBar extends StatelessWidget implements PreferredSizeWidget 
                       ResponsiveGap.s8(),
                       Text(
                         context.translation!.order_complaint,
-                        style:
-                            context.responsiveTextTheme.current.body3Medium.copyWith(color: SystemColors.red.primary),
+                        style: context.responsiveTextTheme.current.body3Medium
+                            .copyWith(color: SystemColors.red.primary),
                       ),
                     ],
                   ),
@@ -99,7 +108,8 @@ class OrderDetailsAppBar extends StatelessWidget implements PreferredSizeWidget 
               child: InkWell(
                 onTap: () => menuKey.currentState?.showButtonMenu(),
                 child: Padding(
-                  padding: EdgeInsets.only(right: context.responsiveAppSizeTheme.current.p16),
+                  padding: EdgeInsets.only(
+                      right: context.responsiveAppSizeTheme.current.p16),
                   child: Icon(
                     LucideIcons.moreVertical,
                     color: AppColors.accent1Shade1,

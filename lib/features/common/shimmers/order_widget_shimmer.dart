@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
-import 'package:hader_pharm_mobile/utils/shimmer_helper.dart' show ShimmerHelper;
+import 'package:hader_pharm_mobile/utils/shimmer_helper.dart'
+    show ShimmerHelper;
 
-import '../spacers/responsive_gap.dart' show ResponsiveGap, s6;
+import '../spacers/responsive_gap.dart' show ResponsiveGap;
 
 class OrderWidgetShimmer extends StatelessWidget {
   const OrderWidgetShimmer({super.key});
@@ -17,7 +18,10 @@ class OrderWidgetShimmer extends StatelessWidget {
       ),
       child: Row(
         children: [
-          ShimmerHelper.generateShimmer(width: 28, height: 140, radius: context.responsiveAppSizeTheme.current.r6),
+          ShimmerHelper.generateShimmer(
+              width: 28,
+              height: 140,
+              radius: context.responsiveAppSizeTheme.current.r6),
           ResponsiveGap.s8(),
           Expanded(
             child: Column(
@@ -26,7 +30,8 @@ class OrderWidgetShimmer extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    ShimmerHelper.generateShimmer(width: 120, height: 16, radius: 4),
+                    ShimmerHelper.generateShimmer(
+                        width: 120, height: 16, radius: 4),
                     Icon(
                       Icons.keyboard_arrow_right_outlined,
                       color: Colors.grey.shade400,
@@ -39,25 +44,31 @@ class OrderWidgetShimmer extends StatelessWidget {
                 const SizedBox(height: 20),
                 Row(
                   children: [
-                    ShimmerHelper.generateShimmer(width: 60, height: 14, radius: 4),
+                    ShimmerHelper.generateShimmer(
+                        width: 60, height: 14, radius: 4),
                     ResponsiveGap.s12(),
-                    ShimmerHelper.generateShimmer(width: 80, height: 14, radius: 4),
+                    ShimmerHelper.generateShimmer(
+                        width: 80, height: 14, radius: 4),
                   ],
                 ),
                 const SizedBox(height: 12),
                 Row(
                   children: [
-                    ShimmerHelper.generateShimmer(width: 60, height: 14, radius: 4),
+                    ShimmerHelper.generateShimmer(
+                        width: 60, height: 14, radius: 4),
                     ResponsiveGap.s12(),
-                    ShimmerHelper.generateShimmer(width: 90, height: 14, radius: 4),
+                    ShimmerHelper.generateShimmer(
+                        width: 90, height: 14, radius: 4),
                   ],
                 ),
                 const SizedBox(height: 12),
                 Row(
                   children: [
-                    ShimmerHelper.generateShimmer(width: 90, height: 14, radius: 4),
+                    ShimmerHelper.generateShimmer(
+                        width: 90, height: 14, radius: 4),
                     ResponsiveGap.s12(),
-                    ShimmerHelper.generateShimmer(width: 100, height: 14, radius: 4),
+                    ShimmerHelper.generateShimmer(
+                        width: 100, height: 14, radius: 4),
                   ],
                 ),
               ],

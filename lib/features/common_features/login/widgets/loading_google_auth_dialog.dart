@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/features/app_layout/app_layout.dart';
-import 'package:hader_pharm_mobile/features/app_layout/cubit/app_layout_cubit.dart';
-import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
-import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart' show ResponsiveGap;
+import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart'
+    show ResponsiveGap;
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class GoogleAuthLoadingDialog extends StatelessWidget {
@@ -18,7 +13,8 @@ class GoogleAuthLoadingDialog extends StatelessWidget {
       padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p12),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.commonWidgetsRadius),
+        borderRadius: BorderRadius.circular(
+            context.responsiveAppSizeTheme.current.commonWidgetsRadius),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
