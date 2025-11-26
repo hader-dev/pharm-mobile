@@ -1292,4 +1292,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get total_applied_amount => 'Total Applied Amount';
+
+  @override
+  String get failed_google_signin => 'Failed to sign in with Google';
+
+  @override
+  String get getting_info_google => 'Getting information from Google';
 }

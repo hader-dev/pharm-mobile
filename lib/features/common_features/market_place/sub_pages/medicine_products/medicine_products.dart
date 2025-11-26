@@ -12,6 +12,8 @@ import 'package:hader_pharm_mobile/models/medicine_catalog.dart';
 import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
+import '../../../../common/shimmers/horizontal_product_widget_shimmer.dart'
+    show HorizentalProductWidgetShimmer, HorizontalProductWidgetShimmer;
 import 'cubit/medicine_products_cubit.dart';
 
 class MedicineProductsPage extends StatefulWidget {
@@ -21,8 +23,7 @@ class MedicineProductsPage extends StatefulWidget {
   State<MedicineProductsPage> createState() => _MedicineProductsPageState();
 }
 
-class _MedicineProductsPageState extends State<MedicineProductsPage>
-    with AutomaticKeepAliveClientMixin {
+class _MedicineProductsPageState extends State<MedicineProductsPage> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     final cubit = BlocProvider.of<MedicineProductsCubit>(context);
@@ -39,38 +40,22 @@ class _MedicineProductsPageState extends State<MedicineProductsPage>
                 Expanded(
                   child: Builder(builder: (context) {
                     final medicines = state.medicines;
-                    if (state is MedicineProductsLoading) {
-                      return const Center(child: CircularProgressIndicator());
-                    }
-
-                    if (state is MedicineProductsLoadingFailed ||
-                        medicines.isEmpty) {
-                      return const Center(child: EmptyListWidget());
-                    }
 
                     final bool isLoadingMore = state is MedicineProductsLoading;
-                    final bool hasReachedEnd =
-                        state is MedicinesLoadLimitReached;
+                    final bool hasReachedEnd = state is MedicinesLoadLimitReached;
 
                     void onLikeTapped(BaseMedicineCatalogModel medicine) {
                       final id = medicine.id;
-                      final gCubit = MarketPlaceScreen
-                          .marketPlaceScaffoldKey.currentContext!
-                          .read<MedicineProductsCubit>();
-                      final hCubit = HomeScreen.scaffoldKey.currentContext!
-                          .read<MedicineProductsCubit>();
-                      medicine.isLiked
-                          ? cubit.unlikeMedicinesCatalog(id)
-                          : cubit.likeMedicinesCatalog(id);
+                      final gCubit =
+                          MarketPlaceScreen.marketPlaceScaffoldKey.currentContext!.read<MedicineProductsCubit>();
+                      final hCubit = HomeScreen.scaffoldKey.currentContext!.read<MedicineProductsCubit>();
+                      medicine.isLiked ? cubit.unlikeMedicinesCatalog(id) : cubit.likeMedicinesCatalog(id);
 
-                      gCubit.refreshMedicineCatalogFavorite(
-                          id, !medicine.isLiked);
-                      hCubit.refreshMedicineCatalogFavorite(
-                          id, !medicine.isLiked);
+                      gCubit.refreshMedicineCatalogFavorite(id, !medicine.isLiked);
+                      hCubit.refreshMedicineCatalogFavorite(id, !medicine.isLiked);
                     }
 
-                    void onQuickAddCallback(
-                        BaseMedicineCatalogModel medicineProduct) {
+                    void onQuickAddCallback(BaseMedicineCatalogModel medicineProduct) {
                       BottomSheetHelper.showCommonBottomSheet(
                           initialChildSize: .5,
                           context: context,
@@ -80,11 +65,19 @@ class _MedicineProductsPageState extends State<MedicineProductsPage>
                     }
 
                     if (state is MedicineProductsLoading) {
-                      return const Center(child: CircularProgressIndicator());
+                      return ListView(
+                          shrinkWrap: true,
+                          children: List.generate(
+                            4,
+                            (_) => HorizontalProductWidgetShimmer(),
+                          ));
                     }
-                    if (state is MedicineProductsLoaded &&
-                        state.medicines.isEmpty) {
-                      return const Center(child: EmptyListWidget());
+
+                    if (state is MedicineProductsLoaded && medicines.isEmpty) {
+                      return Center(
+                          child: EmptyListWidget(
+                        onRefresh: () => cubit.getMedicines(),
+                      ));
                     }
 
                     return RefreshIndicator(
@@ -95,23 +88,18 @@ class _MedicineProductsPageState extends State<MedicineProductsPage>
                           physics: AlwaysScrollableScrollPhysics(),
                           controller: state.scrollController,
                           children: [
-                            ...state.medicines
-                                .map((medicine) => MedicineWidget2(
-                                      medicineData: medicine,
-                                      isLiked: medicine.isLiked,
-                                      onLikeTapped: () =>
-                                          onLikeTapped(medicine),
-                                      onQuickAddCallback: onQuickAddCallback,
-                                      hideLikeButton: false,
-                                    )),
+                            ...state.medicines.map((medicine) => MedicineWidget2(
+                                  medicineData: medicine,
+                                  isLiked: medicine.isLiked,
+                                  onLikeTapped: () => onLikeTapped(medicine),
+                                  onQuickAddCallback: onQuickAddCallback,
+                                  hideLikeButton: false,
+                                )),
                             if (isLoadingMore)
                               const Padding(
                                 padding: EdgeInsets.all(16.0),
-                                child: Center(
-                                    child: SizedBox(
-                                        height: 20,
-                                        width: 20,
-                                        child: CircularProgressIndicator())),
+                                child:
+                                    Center(child: SizedBox(height: 20, width: 20, child: CircularProgressIndicator())),
                               ),
                             if (hasReachedEnd) const EndOfLoadResultWidget()
                           ],

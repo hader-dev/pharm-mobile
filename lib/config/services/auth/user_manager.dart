@@ -22,9 +22,7 @@ class UserManager {
   final GoogleManager _googleSignIn = GoogleManager();
 
   UserManager._internal();
-  static UserManager init(
-      {required UserRepository userRepository,
-      required TokenManager tokenManager}) {
+  static UserManager init({required UserRepository userRepository, required TokenManager tokenManager}) {
     userRepo = userRepository;
     tokenManagerInstance = tokenManager;
     return _instance;
@@ -37,8 +35,7 @@ class UserManager {
     required String password,
     String? userImagePath,
   }) async {
-    await userRepo.emailSignUp(email, fullName, password,
-        userImagePath: userImagePath);
+    await userRepo.emailSignUp(email, fullName, password, userImagePath: userImagePath);
   }
 
   /// Resends the OTP code for the given email.
@@ -66,8 +63,7 @@ class UserManager {
   }) async {
     final String token = await userRepo.login(userName, password);
     tokenManagerInstance.optimisticUpdate(token);
-    (getItInstance.get<INetworkService>() as DioNetworkManager)
-        .initDefaultHeaders(token);
+    (getItInstance.get<INetworkService>() as DioNetworkManager).initDefaultHeaders(token);
 
     final user = await getMe();
 
@@ -79,10 +75,8 @@ class UserManager {
     getItInstance.get<INotificationService>().registerUserDevice();
 
     if (user.role.isDistributor) {
-      await Future.wait([
-        tokenManagerInstance.removeToken(),
-        getItInstance.get<INetworkService>().deletePersistantCookiesJar()
-      ]);
+      await Future.wait(
+          [tokenManagerInstance.removeToken(), getItInstance.get<INetworkService>().deletePersistantCookiesJar()]);
       throw DistributorLoginException.base();
     }
 
@@ -111,12 +105,10 @@ class UserManager {
     required String email,
     required String otp,
   }) async {
-    String token =
-        await userRepo.sendUserEmailCheckOtpCode(email: email, otp: otp);
+    String token = await userRepo.sendUserEmailCheckOtpCode(email: email, otp: otp);
     tokenManagerInstance.optimisticUpdate(token);
     await tokenManagerInstance.storeAccessToken(token);
-    (getItInstance.get<INetworkService>() as DioNetworkManager)
-        .initDefaultHeaders(token);
+    (getItInstance.get<INetworkService>() as DioNetworkManager).initDefaultHeaders(token);
     await getMe();
   }
 
@@ -181,12 +173,8 @@ class UserManager {
     return getItInstance.get<INetworkService>().post(Urls.logout);
   }
 
-  Future<void> forgotPassword(
-      {required String email,
-      required String otp,
-      required String newPassword}) {
-    return userRepo.forgotPassword(
-        email: email, otp: otp, newPassword: newPassword);
+  Future<void> forgotPassword({required String email, required String otp, required String newPassword}) {
+    return userRepo.forgotPassword(email: email, otp: otp, newPassword: newPassword);
   }
 
   Future<String?> googleSignIn() async {
@@ -194,9 +182,7 @@ class UserManager {
       final acc = await _googleSignIn.signIn();
 
       if (acc != null) {
-        final authRes =
-            await (getItInstance.get<INetworkService>() as DioNetworkManager)
-                .post(
+        final authRes = await (getItInstance.get<INetworkService>() as DioNetworkManager).post(
           Urls.googleLogin,
           payload: {
             "idToken": acc,
@@ -206,8 +192,7 @@ class UserManager {
         final token = authRes.data["accessToken"];
 
         tokenManagerInstance.optimisticUpdate(token);
-        (getItInstance.get<INetworkService>() as DioNetworkManager)
-            .initDefaultHeaders(token);
+        (getItInstance.get<INetworkService>() as DioNetworkManager).initDefaultHeaders(token);
 
         await Future.value([
           getItInstance.get<INotificationService>().registerUserDevice(),

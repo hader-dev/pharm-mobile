@@ -43,10 +43,6 @@ class _HomeScreenState extends State<HomeScreen> {
         key: HomeScreen.scaffoldKey,
         body: BlocBuilder<HomeCubit, HomeState>(
           builder: (context, state) {
-            if (state is PromotionLoading) {
-              return const Center(child: CircularProgressIndicator());
-            }
-
             if (state is PromotionLoadingFailed) {
               return RefreshIndicator(
                 onRefresh: () => refreshHome(context),

@@ -9,25 +9,13 @@ List<OrderItem> jsonToOrderItemModelList(
 OrderItem jsonToOrderItem(Map<String, dynamic> json) {
   return OrderItem(
     id: json['id'],
-    totalAmountTtc: json['totalAmountTtc'] != null
-        ? double.parse(json['totalAmountTtc'])
-        : 0.0,
-    totalAmountHt: json['totalAmountHt'] != null
-        ? double.parse(json['totalAmountHt'])
-        : 0.0,
-    tvaPercentage: json['tvaPercentage'] != null
-        ? double.parse(json['tvaPercentage'])
-        : 0.0,
-    totalAppliedAmount: json['totalAppliedAmount'] != null
-        ? double.parse(json['totalAppliedAmount'])
-        : 0.0,
-    unitPriceApplied: json['unitAppliedAmount'] != null
-        ? double.parse(json['unitAppliedAmount'])
-        : null,
-    unitPriceHt:
-        json['unitPriceHt'] != null ? double.parse(json['unitPriceHt']) : 0.0,
-    unitPriceTtc:
-        json['unitPriceTtc'] != null ? double.parse(json['unitPriceTtc']) : 0.0,
+    totalAmountTtc: json['totalAmountTtc'] != null ? double.parse(json['totalAmountTtc']) : 0.0,
+    totalAmountHt: json['totalAmountHt'] != null ? double.parse(json['totalAmountHt']) : 0.0,
+    tvaPercentage: json['tvaPercentage'] != null ? double.parse(json['tvaPercentage']) : 0.0,
+    totalAppliedAmount: json['totalAppliedAmount'],
+    unitPriceApplied: json['unitAppliedAmount'] != null ? double.parse(json['unitAppliedAmount']) : null,
+    unitPriceHt: json['unitPriceHt'] != null ? double.parse(json['unitPriceHt']) : 0.0,
+    unitPriceTtc: json['unitPriceTtc'] != null ? double.parse(json['unitPriceTtc']) : 0.0,
     createdAt: DateTime.parse(json['createdAt']),
     updatedAt: DateTime.parse(json['updatedAt']),
     medicineCatalogId: json['medicineCatalogId'],
@@ -39,9 +27,7 @@ OrderItem jsonToOrderItem(Map<String, dynamic> json) {
     packageSize: json['packageSize'] ?? 1,
     expirationDate: json['expirationDate'],
     margin: json['margin'] != null ? double.parse(json['margin']) : 0.0,
-    discountAmount: json['discountAmount'] != null
-        ? double.parse(json['discountAmount'])
-        : 0.0,
+    discountAmount: json['discountAmount'] != null ? double.parse(json['discountAmount']) : 0.0,
     orderId: json['orderId'],
   );
 }
@@ -55,11 +41,9 @@ OrderStatusHistory jsonToOrderStatusHistory(Map<String, dynamic> json) {
     orderStatusId: json['orderStatusId'],
     changedByUserId: json['changedByUserId'],
     note: json['note'],
- 
   );
 }
 
 List<OrderStatusHistory> jsonToOrderStatusHistoryList(List<dynamic> json) {
-  return List<OrderStatusHistory>.from(
-      json.map((x) => jsonToOrderStatusHistory(x)));
+  return List<OrderStatusHistory>.from(json.map((x) => jsonToOrderStatusHistory(x)));
 }

@@ -21,11 +21,10 @@ class CreateOrderModel {
       this.clientNote,
       this.latitude,
       this.longitude});
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toMap() {
     return {
       "sellerCompanyId": sellerCompanyId,
-      if (clientNote != null && clientNote!.isNotEmpty)
-        'clientNote': clientNote,
+      if (clientNote != null && clientNote!.isNotEmpty) 'clientNote': clientNote,
       'deliveryAddress': deliveryAddress,
       'deliveryTownId': deliveryTownId,
       if (cartItemsIds.isNotEmpty) 'cartItemsIds': cartItemsIds,

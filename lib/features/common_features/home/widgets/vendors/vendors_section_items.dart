@@ -15,6 +15,8 @@ import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../../../config/responsive/device_size.dart' show DeviceSizes, DeviceSizesExtension;
+import '../../../../../config/theme/colors_manager.dart' show TextColors;
+import '../../../../common/shimmers/vendor_widget_shimmer_1.dart' show VendorWidgetShimmer1;
 
 class VendorsSectionItems extends StatelessWidget {
   final int maxItemsPerRow;
@@ -41,15 +43,24 @@ class VendorsSectionItems extends StatelessWidget {
         final items = state.vendorsList;
 
         if (state is VendorsLoading) {
-          return Center(
-            child: CircularProgressIndicator(),
+          return SizedBox(
+            height: minSectionHeight,
+            child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: List.generate(
+                  4,
+                  (_) => VendorWidgetShimmer1(),
+                )),
           );
         }
 
         if (state is VendorsLoadingFailed || items.isEmpty) {
           return Center(
-            child: EmptyListWidget(),
-          );
+              child: Text(context.translation!.no_items_found,
+                  textAlign: TextAlign.center,
+                  style: context.responsiveTextTheme.current.body3Regular.copyWith(
+                    color: TextColors.ternary.color,
+                  )));
         }
 
         return Material(
@@ -60,6 +71,7 @@ class VendorsSectionItems extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     children: List.generate(min(maxVisibleItems, items.length), (index) {
                       final entity = items[index];
+
                       return VendorHomeWidget(
                         title: entity.name,
                         distributorCategory: entity.distributorCategory,

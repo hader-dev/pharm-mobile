@@ -8,15 +8,15 @@ import 'package:hader_pharm_mobile/features/common_features/market_place/market_
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/cubit/para_pharma_cubit.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
 
+import '../../../../common/shimmers/horizontal_product_widget_shimmer.dart' show HorizontalProductWidgetShimmer;
+
 class FavoritesParaPharmaCatalogs extends StatelessWidget {
   const FavoritesParaPharmaCatalogs({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final gCubit = MarketPlaceScreen.marketPlaceScaffoldKey.currentContext
-        ?.read<ParaPharmaCubit>();
-    final hCubit =
-        HomeScreen.scaffoldKey.currentContext?.read<ParaPharmaCubit>();
+    final gCubit = MarketPlaceScreen.marketPlaceScaffoldKey.currentContext?.read<ParaPharmaCubit>();
+    final hCubit = HomeScreen.scaffoldKey.currentContext?.read<ParaPharmaCubit>();
     final cubit = context.read<FavoritesCubit>();
 
     return BlocBuilder<FavoritesCubit, FavoritesState>(
@@ -30,7 +30,12 @@ class FavoritesParaPharmaCatalogs extends StatelessWidget {
       },
       builder: (context, state) {
         if (state is FavoritesParaPharmaLoading) {
-          return const Center(child: CircularProgressIndicator());
+          return ListView(
+              shrinkWrap: true,
+              children: List.generate(
+                4,
+                (_) => HorizontalProductWidgetShimmer(),
+              ));
         }
         if (state.likedParaPharmaCatalogs.isEmpty) {
           return EmptyListWidget(

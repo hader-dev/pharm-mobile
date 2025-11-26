@@ -7,15 +7,15 @@ import 'package:hader_pharm_mobile/features/common_features/home/home.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/market_place.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/medicine_products/cubit/medicine_products_cubit.dart';
 
+import '../../../../common/shimmers/horizontal_product_widget_shimmer.dart' show HorizontalProductWidgetShimmer;
+
 class FavoritesMedicinesCatalog extends StatelessWidget {
   const FavoritesMedicinesCatalog({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final gCubit = MarketPlaceScreen.marketPlaceScaffoldKey.currentContext
-        ?.read<MedicineProductsCubit?>();
-    final hCubit =
-        HomeScreen.scaffoldKey.currentContext?.read<MedicineProductsCubit?>();
+    final gCubit = MarketPlaceScreen.marketPlaceScaffoldKey.currentContext?.read<MedicineProductsCubit?>();
+    final hCubit = HomeScreen.scaffoldKey.currentContext?.read<MedicineProductsCubit?>();
     final cubit = context.read<FavoritesCubit>();
 
     return BlocBuilder<FavoritesCubit, FavoritesState>(
@@ -29,7 +29,12 @@ class FavoritesMedicinesCatalog extends StatelessWidget {
       },
       builder: (context, state) {
         if (state is FavoritesMedicinesLoading) {
-          return const Center(child: CircularProgressIndicator());
+          return ListView(
+              shrinkWrap: true,
+              children: List.generate(
+                4,
+                (_) => HorizontalProductWidgetShimmer(),
+              ));
         }
         if (state.likedMedicinesCatalogs.isEmpty) {
           return EmptyListWidget(

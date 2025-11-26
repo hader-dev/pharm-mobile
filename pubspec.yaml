@@ -123,6 +123,7 @@ dependencies:
   dotted_border: ^3.1.0
 
   firebase_auth: ^6.1.2
+  shimmer_animation: ^2.2.2
 
 
 dev_dependencies:

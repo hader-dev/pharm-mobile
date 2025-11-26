@@ -410,5 +410,7 @@
   "thank_you_purchase": "Merci pour votre achat. Votre commande a été passée avec succès.",
   "view_order": "Voir la commande",
   "continue_shopping": "Continuer vos achats",
-  "total_applied_amount": "Montant total appliqué"
+  "total_applied_amount": "Montant total appliqué",
+  "failed_google_signin": "Échec de la connexion avec Google",
+  "getting_info_google": "Récupération des informations depuis Google"
 }

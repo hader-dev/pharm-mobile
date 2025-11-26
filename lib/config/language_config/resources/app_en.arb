@@ -408,5 +408,8 @@
   "thank_you_purchase": "Thank you for your purchase. Your order has been placed successfully.",
   "view_order": "View Order",
   "continue_shopping": "Continue Shopping",
-  "total_applied_amount": "Total Applied Amount"
+  "total_applied_amount": "Total Applied Amount", 
+  "failed_google_signin": "Failed to sign in with Google",
+  "getting_info_google": "Getting information from Google"
+
 }

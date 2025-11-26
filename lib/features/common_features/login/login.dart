@@ -12,6 +12,8 @@ import 'package:hader_pharm_mobile/features/common/spacers/dividers.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/forgot_password/forgot_password.dart';
 import 'package:hader_pharm_mobile/features/common_features/login/cubit/login_cubit.dart';
+import 'package:hader_pharm_mobile/features/common_features/login/widgets/loading_google_auth_dialog.dart'
+    show GoogleAuthLoadingDialog;
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
@@ -30,9 +32,23 @@ class LoginScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => LoginCubit(),
       child: BlocListener<LoginCubit, LoginState>(
-        listener: (BuildContext context, LoginState state) {
+        listener: (BuildContext context, LoginState state) async {
           if (state is LoginSuccessful) {
             setupCompanyOrSkipToHome();
+          }
+
+          if (state is GoogleLoginLoading) {
+            await showDialog(
+                context: context,
+                barrierDismissible: false,
+                builder: (context) => Dialog(
+                      // constraints: BoxConstraints(maxHeight: 500),
+                      shape: RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.circular(context.responsiveAppSizeTheme.current.commonWidgetsRadius)),
+                      backgroundColor: AppColors.bgWhite,
+                      child: GoogleAuthLoadingDialog(),
+                    ));
           }
           if (state is ForgotPassword) {
             BottomSheetHelper.showCommonBottomSheet(context: context, child: ForgotPasswordScreen());
@@ -48,7 +64,7 @@ class LoginScreen extends StatelessWidget {
                 physics: const BouncingScrollPhysics(),
                 children: [
                   LoginHeaderSection(),
-                  const ResponsiveGap.s32(),
+                  const ResponsiveGap.s24(),
                   LoginFormSection(),
                   const ResponsiveGap.s16(),
                   OutLinedTextButton(

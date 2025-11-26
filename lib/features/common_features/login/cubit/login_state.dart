@@ -19,17 +19,15 @@ sealed class LoginState {
   LoginSuccessful toLoginSuccessful() => LoginSuccessful.fromState(state: this);
   LoginFailed toLoginFailed() => LoginFailed.fromState(state: this);
   LoginLoading toLoginLoading() => LoginLoading.fromState(state: this);
-  LoadingUsersDone toLoadingUsersDone() =>
-      LoadingUsersDone.fromState(state: this);
+  LoadingUsersDone toLoadingUsersDone() => LoadingUsersDone.fromState(state: this);
   LoadingUsers toLoadingUsers() => LoadingUsers.fromState(state: this);
-  LoadingUsersFailed toLoadingUsersFailed() =>
-      LoadingUsersFailed.fromState(state: this);
-  PasswordVisibilityChanged toPasswordVisibilityChanged(
-          {required bool isObscured}) =>
+  LoadingUsersFailed toLoadingUsersFailed() => LoadingUsersFailed.fromState(state: this);
+  PasswordVisibilityChanged toPasswordVisibilityChanged({required bool isObscured}) =>
       PasswordVisibilityChanged.fromState(state: this, isObscured: isObscured);
   LoggedOut toLoggedOut() => LoggedOut.fromState(state: this);
 
   ForgotPassword toForgotPassword() => ForgotPassword.fromState(state: this);
+  GoogleLoginLoading toGoogleLoginLoading() => GoogleLoginLoading.fromState(state: this);
   EmailOtpResentSuccessfully toEmailOtpResentSuccessfully({
     required String email,
   }) =>
@@ -77,6 +75,18 @@ final class LoginFailed extends LoginState {
 
 final class LoginLoading extends LoginState {
   LoginLoading.fromState({
+    required LoginState state,
+  }) : super(
+          isObscured: state.isObscured,
+          emailController: state.emailController,
+          passwordController: state.passwordController,
+          formKey: state.formKey,
+          emailFieldKey: state.emailFieldKey,
+        );
+}
+
+final class GoogleLoginLoading extends LoginState {
+  GoogleLoginLoading.fromState({
     required LoginState state,
   }) : super(
           isObscured: state.isObscured,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hader_pharm_mobile/features/common/shimmers/vendor_widget_shimmer_2.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 
 import 'package:hader_pharm_mobile/features/common_features/favorites/cubit/favorites_cubit.dart';
@@ -24,7 +25,12 @@ class FavoritesVendors extends StatelessWidget {
       },
       builder: (context, state) {
         if (state is FavoritesVendorsLoading) {
-          return const Center(child: CircularProgressIndicator());
+          return ListView(
+              shrinkWrap: true,
+              children: List.generate(
+                4,
+                (_) => VendorWidgetShimmer2(),
+              ));
         }
 
         if (state.likedVendors.isEmpty) {

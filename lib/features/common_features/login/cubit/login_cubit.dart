@@ -69,6 +69,7 @@ class LoginCubit extends Cubit<LoginState> {
 
   Future<void> loginWithGoogle() async {
     try {
+      emit(state.toGoogleLoginLoading());
       await getItInstance.get<UserManager>().googleSignIn();
 
       setupCompanyOrSkipToHome();

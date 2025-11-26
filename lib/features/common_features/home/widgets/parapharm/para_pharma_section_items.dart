@@ -8,6 +8,9 @@ import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pag
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
+import '../../../../../config/theme/colors_manager.dart' show TextColors;
+import '../../../../common/shimmers/vertical_product_widget_shimmer.dart' show VerticalProductWidgetShimmer;
+
 class ParaPharmaSectionItems extends StatelessWidget {
   final double minSectionHeight;
   const ParaPharmaSectionItems({super.key, required this.minSectionHeight});
@@ -22,15 +25,29 @@ class ParaPharmaSectionItems extends StatelessWidget {
         final items = state.paraPharmaProducts;
 
         if (state is ParaPharmaProductsLoading) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
+          return AspectRatio(
+              aspectRatio: context.isTabelet ? 2 : 1.2,
+              child: ListView(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  padding: EdgeInsets.only(left: 0),
+                  children: List.generate(
+                    4,
+                    (_) => SizedBox(
+                      width: screenWidth > 768 ? 300 : 250,
+                      height: minSectionHeight,
+                      child: VerticalProductWidgetShimmer(),
+                    ),
+                  )));
         }
 
         if (state is ParaPharmaProductsLoadingFailed || items.isEmpty) {
           return Center(
-            child: EmptyListWidget(),
-          );
+              child: Text(context.translation!.no_items_found,
+                  textAlign: TextAlign.center,
+                  style: context.responsiveTextTheme.current.body3Regular.copyWith(
+                    color: TextColors.ternary.color,
+                  )));
         }
         void onFavoriteCallback(BaseParaPharmaCatalogModel medicine) {
           final gCubit = MarketPlaceScreen.marketPlaceScaffoldKey.currentContext!.read<ParaPharmaCubit>();
