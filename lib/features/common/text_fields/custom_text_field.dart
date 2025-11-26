@@ -84,13 +84,14 @@ class CustomTextField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (label.isNotEmpty)
+        if (label.isNotEmpty) ...[
           Padding(
             padding: EdgeInsets.only(left: context.responsiveAppSizeTheme.current.p4),
             child: Text(label,
                 style: context.responsiveTextTheme.current.body3Medium.copyWith(color: TextColors.ternary.color)),
           ),
-        if (label.isNotEmpty) const ResponsiveGap.s6(),
+          const ResponsiveGap.s6(),
+        ],
         TextFormField(
           key: fieldKey,
           initialValue: initValue,

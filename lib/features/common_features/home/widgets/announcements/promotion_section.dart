@@ -15,10 +15,7 @@ class PromotionSection extends StatelessWidget {
   final PageController pageController = PageController(initialPage: 0);
   final double minSectionHeight;
 
-  PromotionSection(
-      {super.key,
-      this.announcements = const <AnnouncementModel>[],
-      required this.minSectionHeight});
+  PromotionSection({super.key, this.announcements = const <AnnouncementModel>[], required this.minSectionHeight});
 
   @override
   Widget build(BuildContext context) {
@@ -49,8 +46,7 @@ class PromotionSection extends StatelessWidget {
                   children: [
                     Text(
                       context.translation!.announcements,
-                      style: context.responsiveTextTheme.current.headLine2
-                          .copyWith(
+                      style: context.responsiveTextTheme.current.headLine2.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -62,8 +58,7 @@ class PromotionSection extends StatelessWidget {
                       },
                       child: Text(
                         context.translation!.see_all,
-                        style: context.responsiveTextTheme.current.body3Regular
-                            .copyWith(
+                        style: context.responsiveTextTheme.current.body3Regular.copyWith(
                           color: AppColors.accent1Shade1,
                         ),
                       ),
@@ -76,10 +71,8 @@ class PromotionSection extends StatelessWidget {
                     Container(
                       clipBehavior: Clip.antiAlias,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(context
-                              .responsiveAppSizeTheme
-                              .current
-                              .commonWidgetsRadius)),
+                          borderRadius:
+                              BorderRadius.circular(context.responsiveAppSizeTheme.current.commonWidgetsRadius)),
                       height: minSectionHeight * 1.75,
                       width: MediaQuery.of(context).size.width * 0.95,
                       child: LayoutBuilder(builder: (context, constraints) {
@@ -87,14 +80,10 @@ class PromotionSection extends StatelessWidget {
                           controller: pageController,
                           scrollDirection: Axis.horizontal,
                           children: announcements
-                              .map((AnnouncementModel announcement) =>
-                                  PromotionItemWidget3(
+                              .map((AnnouncementModel announcement) => PromotionItemWidget3(
                                     announcement: announcement,
-                                    onTap: (announcement) =>
-                                        RoutingManager.router.pushNamed(
-                                            RoutingManager
-                                                .announcementDetailsScreen,
-                                            extra: announcement.id),
+                                    onTap: (announcement) => RoutingManager.router
+                                        .pushNamed(RoutingManager.announcementDetailsScreen, extra: announcement.id),
                                   ))
                               .toList(),
                         );
@@ -103,15 +92,10 @@ class PromotionSection extends StatelessWidget {
                     Container(
                       decoration: BoxDecoration(
                         color: Colors.black45,
-                        borderRadius: BorderRadius.circular(context
-                            .responsiveAppSizeTheme
-                            .current
-                            .commonWidgetsRadius),
+                        borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.commonWidgetsRadius),
                       ),
-                      padding: EdgeInsets.all(
-                          context.responsiveAppSizeTheme.current.p4),
-                      margin: EdgeInsets.all(
-                          context.responsiveAppSizeTheme.current.p4),
+                      padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p4),
+                      margin: EdgeInsets.all(context.responsiveAppSizeTheme.current.p4),
                       child: SmoothPageIndicator(
                         controller: pageController,
                         effect: const ExpandingDotsEffect(

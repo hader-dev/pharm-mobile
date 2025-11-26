@@ -15,7 +15,6 @@ import 'package:hader_pharm_mobile/repositories/remote/parapharm_catalog/para_ph
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../subPages/about_vendor/about_vendor.dart';
-import '../subPages/announcements/announcements.dart';
 import '../subPages/medicines/medicines.dart';
 import '../subPages/para_pharma/para_pharma.dart';
 

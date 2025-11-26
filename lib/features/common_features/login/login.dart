@@ -48,7 +48,7 @@ class LoginScreen extends StatelessWidget {
                 physics: const BouncingScrollPhysics(),
                 children: [
                   LoginHeaderSection(),
-                  const ResponsiveGap.s32(),
+                  const ResponsiveGap.s24(),
                   LoginFormSection(),
                   const ResponsiveGap.s16(),
                   OutLinedTextButton(

@@ -8,6 +8,7 @@ import 'package:hader_pharm_mobile/features/common_features/filters/cubit/orders
 import 'package:hader_pharm_mobile/features/common_features/orders/widget/filters_bar.dart';
 import 'package:hader_pharm_mobile/repositories/remote/filters/filters_repository.dart';
 
+import '../../common/shimmers/order_widget_shimmer.dart' show OrderWidgetShimmer;
 import 'cubit/orders_cubit.dart';
 import 'widget/order_card.dart';
 
@@ -41,7 +42,7 @@ class OrdersScreen extends StatelessWidget {
                     final cubit = context.read<OrdersCubit>();
 
                     if (state is OrdersLoading) {
-                      return const Center(child: CircularProgressIndicator());
+                      return ListView(shrinkWrap: true, children: List.generate(4, (_) => OrderWidgetShimmer()));
                     }
                     if (state.orders.isEmpty) {
                       return EmptyListWidget(
@@ -54,14 +55,14 @@ class OrdersScreen extends StatelessWidget {
                     }
 
                     return RefreshIndicator(
-                      onRefresh: () {
-                        return cubit.getOrders(
-                          filters: state.filters,
-                        );
-                      },
+                      onRefresh: () => cubit.getOrders(
+                        filters: state.filters,
+                      ),
                       child: Scrollbar(
                         controller: state.scrollController,
                         child: ListView(
+                          physics: const AlwaysScrollableScrollPhysics(),
+                          shrinkWrap: true,
                           controller: state.scrollController,
                           children: [
                             ...state.orders.map((order) => OrderCard(

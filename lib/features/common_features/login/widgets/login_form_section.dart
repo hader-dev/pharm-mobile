@@ -33,15 +33,14 @@ class _LoginFormSectionState extends State<LoginFormSection> {
                 fieldKey: state.emailFieldKey,
                 label: '${context.translation!.email}*',
                 controller: state.emailController,
+                verticalPadding: context.responsiveAppSizeTheme.current.p6,
                 state: FieldState.normal,
                 formatters: [
                   FilteringTextInputFormatter.deny(RegExp(r'\s')),
                 ],
                 keyBoadType: TextInputType.emailAddress,
-                validationFunc: (value) =>
-                    validateIsEmail(value?.trim(), context.translation!),
+                validationFunc: (value) => validateIsEmail(value?.trim(), context.translation!),
               ),
-              const ResponsiveGap.s4(),
               CustomTextField(
                 label: '${context.translation!.password}*',
                 controller: state.passwordController,
@@ -54,18 +53,14 @@ class _LoginFormSectionState extends State<LoginFormSection> {
                     onTap: () => cubit.showPassword(),
                     child: state.isObscured
                         ? Icon(Iconsax.eye,
-                            size: context
-                                .responsiveAppSizeTheme.current.iconSize20,
-                            color: AppColors.accent1Shade1)
+                            size: context.responsiveAppSizeTheme.current.iconSize20, color: AppColors.accent1Shade1)
                         : Icon(Iconsax.eye_slash,
-                            size: context
-                                .responsiveAppSizeTheme.current.iconSize20,
-                            color: AppColors.accent1Shade1)),
+                            size: context.responsiveAppSizeTheme.current.iconSize20, color: AppColors.accent1Shade1)),
                 state: FieldState.normal,
+                verticalPadding: context.responsiveAppSizeTheme.current.p6,
                 validationFunc: (value) {
                   final trimmedValue = value?.trim();
-                  if ((trimmedValue == null || trimmedValue.isEmpty) &&
-                      state.emailController.text.isNotEmpty) {
+                  if ((trimmedValue == null || trimmedValue.isEmpty) && state.emailController.text.isNotEmpty) {
                     return context.translation!.feedback_field_required;
                   }
                   if (trimmedValue != null && trimmedValue.length < 6) {
@@ -73,35 +68,42 @@ class _LoginFormSectionState extends State<LoginFormSection> {
                   }
                 },
               ),
-              const ResponsiveGap.s12(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Spacer(),
-                  PrimaryTextButton(
-                    label: context.translation!.forgot_password,
+                  InkWell(
                     onTap: () {
                       cubit.forgetPassword();
                     },
-                    labelColor: AppColors.accent1Shade1,
+                    child: Text(
+                      context.translation!.forgot_password,
+                      style: context.responsiveTextTheme.current.body3Medium.copyWith(color: AppColors.accent1Shade1),
+                    ),
                   ),
                 ],
               ),
-              const ResponsiveGap.s24(),
-              PrimaryTextButton(
-                label: context.translation!.login,
-                isLoading: state is LoginLoading,
-                onTap: () {
-                  FocusScope.of(context).unfocus();
-                  if (!state.formKey.currentState!.validate()) {
-                    return;
-                  }
-                  cubit.login(
-                    state.emailController.text.trim(),
-                    state.passwordController.text.trim(),
+              const ResponsiveGap.s32(),
+              BlocBuilder<LoginCubit, LoginState>(
+                buildWhen: (previous, current) =>
+                    current is LoginLoading || current is LoginSuccessful || current is LoginFailed,
+                builder: (context, state) {
+                  return PrimaryTextButton(
+                    label: context.translation!.login,
+                    isLoading: state is LoginLoading,
+                    onTap: () {
+                      FocusScope.of(context).unfocus();
+                      if (!state.formKey.currentState!.validate()) {
+                        return;
+                      }
+                      cubit.login(
+                        state.emailController.text.trim(),
+                        state.passwordController.text.trim(),
+                      );
+                    },
+                    color: AppColors.accent1Shade1,
                   );
                 },
-                color: AppColors.accent1Shade1,
               ),
             ],
           ),
