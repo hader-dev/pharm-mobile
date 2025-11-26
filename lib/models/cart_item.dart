@@ -72,13 +72,13 @@ class CartItemModel {
   CartItemModel({
     this.image,
     required this.id,
+    this.unitPriceFinal,
     required this.maxOrderQuantity,
     required this.minOrderQuantity,
     required this.totalAmountTtc,
     required this.totalAmountHt,
     required this.tvaPercentage,
     required this.unitPriceHt,
-    this.unitPriceFinal,
     required this.unitPriceTtc,
     required this.createdAt,
     required this.updatedAt,
@@ -166,7 +166,7 @@ class CartItemModel {
       MedicinesCatalog? medicinesCatalog,
       dynamic parapharmCatalog,
       BaseCompany? sellerCompany,
-      String? unitPriceFinalTtc,
+      String? unitPriceFinal,
       int? packageSize}) {
     return CartItemModel(
         packageSize: packageSize ?? this.packageSize,
@@ -191,7 +191,7 @@ class CartItemModel {
         sellerCompany: sellerCompany ?? this.sellerCompany,
         maxOrderQuantity: maxOrderQuantity,
         minOrderQuantity: minOrderQuantity,
-        unitPriceFinal: unitPriceFinalTtc ?? this.unitPriceFinal,
+        unitPriceFinal: unitPriceFinal ?? this.unitPriceFinal,
         image: image);
   }
 
