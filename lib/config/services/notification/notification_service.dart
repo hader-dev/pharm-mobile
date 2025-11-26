@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:hader_pharm_mobile/config/services/firebase/firebase_service.dart';
 import 'package:hader_pharm_mobile/config/services/firebase/firebase_service_port.dart';
+import 'package:hader_pharm_mobile/config/services/notification/actions/handle_remote_message.dart'
+    show forGroundRemoteMessage;
 import 'package:hader_pharm_mobile/config/services/notification/notification_service_port.dart';
 import 'package:hader_pharm_mobile/repositories/remote/notification/notification_repository.dart';
 import 'package:hader_pharm_mobile/repositories/remote/notification/params/params_load_notifications.dart';
@@ -21,19 +23,37 @@ class NotificationService implements INotificationService {
   final FirebaseServicePort firebaseService;
   final INotificationRepository notificationRepository;
 
-  const NotificationService(
-      {required this.firebaseService, required this.notificationRepository});
+  const NotificationService({required this.firebaseService, required this.notificationRepository});
 
   @override
   Future<void> init() async {
     final FirebaseMessaging messaging = firebaseService.messagingService();
 
     await messaging.requestPermission();
+    messaging.setAutoInitEnabled(true);
+    messaging.setForegroundNotificationPresentationOptions(
+      alert: true,
+      badge: true,
+      sound: true,
+    );
+    await _initNotifications();
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
-    FirebaseMessaging.onMessage.listen(handleRemoteMessage);
+    FirebaseMessaging.onMessageOpenedApp.listen((event) {
+      actions.backGroundRemoteMessage(event);
+    });
 
-    await _initNotifications();
+    // messaging.getInitialMessage().then((value) {
+    //   if (value != null) {
+    //     actions.terminatedAppRemoteMessage(value);
+    //   }
+    // });
+
+    FirebaseMessaging.onMessage.listen(
+      (event) {
+        actions.forGroundRemoteMessage(event);
+      },
+    );
 
     String? token = await messaging.getToken();
 
@@ -52,15 +72,12 @@ class NotificationService implements INotificationService {
 
   Future<void> _initNotifications() async {
     await flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin>()
+        .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
         ?.requestNotificationsPermission();
 
-    const initializationSettingsAndroid =
-        AndroidInitializationSettings('@mipmap/ic_launcher');
+    const initializationSettingsAndroid = AndroidInitializationSettings('@mipmap/ic_launcher');
 
-    final initializationSettings =
-        InitializationSettings(android: initializationSettingsAndroid);
+    final initializationSettings = InitializationSettings(android: initializationSettingsAndroid);
 
     await flutterLocalNotificationsPlugin.initialize(
       initializationSettings,
@@ -71,23 +88,22 @@ class NotificationService implements INotificationService {
       NotificationChannel.id,
       NotificationChannel.name,
       description: NotificationChannel.description,
-      importance: Importance.high,
+      importance: Importance.max,
     );
 
     await flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin>()
+        .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
         ?.createNotificationChannel(channel);
   }
 
   @override
-  Future<void> handleRemoteMessage(RemoteMessage message) async {
-    actions.handleRemoteMessage(message);
+  Future<void> handleForegroundRemoteMessage(RemoteMessage message) async {
+    debugPrint('FOREGROUND: ${message.notification?.title}');
+    actions.handleRemoteMessageShowNotification(message);
   }
 
   @override
-  Future<ResponseLoadNotifications> getNotifications(
-      ParamsLoadNotifications paramsLoadNotifications) async {
+  Future<ResponseLoadNotifications> getNotifications(ParamsLoadNotifications paramsLoadNotifications) async {
     return notificationRepository.getNotifications(paramsLoadNotifications);
   }
 
@@ -109,6 +125,5 @@ class NotificationService implements INotificationService {
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await FirebaseService().init();
-
-  actions.handleRemoteMessage(message);
+  actions.handleRemoteMessageShowNotification(message);
 }

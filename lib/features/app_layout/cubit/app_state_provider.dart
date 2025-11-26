@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
@@ -28,7 +30,10 @@ class AppStateProvider extends StatelessWidget {
           create: (context) => NotificationsCubit(
             notificationService: getItInstance.get<INotificationService>(),
             scrollController: ScrollController(),
-          )..getUnreadNotificationsCount(),
+            fcmNotificationsStream: getItInstance.get<StreamController>(),
+          )
+            ..getUnreadNotificationsCount()
+            ..getNotifications(offset: 0),
         ),
         BlocProvider(
           create: (context) => AppLayoutCubit(isExtraLargeScreen: isExtraLargeScreen),
@@ -84,6 +89,7 @@ class AppStateDeligateProvider extends StatelessWidget {
         create: (context) => NotificationsCubit(
           notificationService: getItInstance.get<INotificationService>(),
           scrollController: ScrollController(),
+          fcmNotificationsStream: getItInstance.get<StreamController>(),
         )..getUnreadNotificationsCount(),
       ),
       BlocProvider(

@@ -1,4 +1,4 @@
-import 'dart:async' show Timer;
+import 'dart:async' show Timer, StreamController;
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/widgets.dart';
@@ -8,22 +8,34 @@ import 'package:hader_pharm_mobile/repositories/remote/notification/params/param
 import 'package:hader_pharm_mobile/repositories/remote/notification/params/params_mark_read.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 
+import '../../../../config/services/notification/mappers/json_to_notification_model.dart' show jsonToNotificationModel;
+
 part 'notifications_state.dart';
 
 class NotificationsCubit extends Cubit<NotificationState> {
   int totalItemsCount = 0;
   int offSet = 0;
   Timer? _debounce;
-  List<NotificationModel> notifications = [];
+  List<NotificationModel> notifications = List.empty(growable: true);
   int unreadCount = 0;
 
   final INotificationService notificationService;
   final ScrollController scrollController;
+  StreamController fcmNotificationsStream;
 
   NotificationsCubit(
-      {required this.notificationService, required this.scrollController})
+      {required this.notificationService, required this.scrollController, required this.fcmNotificationsStream})
       : super(NotificationsInitial()) {
     _onScroll();
+    fcmNotificationsStream.stream.listen((event) {
+      addReceivedFcmNotification(event);
+    });
+  }
+  void addReceivedFcmNotification(Map<String, dynamic> notificationObject) {
+    unreadCount = unreadCount + 1;
+    NotificationModel notificationModel = jsonToNotificationModel(notificationObject);
+    notifications.insert(0, notificationModel);
+    emit(NotificationsLoaded());
   }
 
   Future<void> getUnreadNotificationsCount() async {
@@ -44,8 +56,7 @@ class NotificationsCubit extends Cubit<NotificationState> {
   }) async {
     try {
       emit(NotificationsLoading());
-      var response =
-          await notificationService.getNotifications(ParamsLoadNotifications(
+      var response = await notificationService.getNotifications(ParamsLoadNotifications(
         offset: offSet,
       ));
 
@@ -69,8 +80,7 @@ class NotificationsCubit extends Cubit<NotificationState> {
 
       offSet = offSet + PaginationConstants.resultsPerPage;
       emit(NotificationsLoading());
-      var response =
-          await notificationService.getNotifications(ParamsLoadNotifications(
+      var response = await notificationService.getNotifications(ParamsLoadNotifications(
         offset: offSet,
       ));
       totalItemsCount = response.totalItems;
@@ -82,11 +92,9 @@ class NotificationsCubit extends Cubit<NotificationState> {
     }
   }
 
-  void searchMedicineCatalog(String? text) =>
-      _debounceFunction(() => getNotifications());
+  void searchMedicineCatalog(String? text) => _debounceFunction(() => getNotifications());
 
-  Future<void> _debounceFunction(Future<void> Function() func,
-      [int milliseconds = 500]) async {
+  Future<void> _debounceFunction(Future<void> Function() func, [int milliseconds = 500]) async {
     if (_debounce?.isActive ?? false) _debounce?.cancel();
     _debounce = Timer(Duration(milliseconds: milliseconds), () async {
       await func();
@@ -96,8 +104,7 @@ class NotificationsCubit extends Cubit<NotificationState> {
 
   void _onScroll() {
     scrollController.addListener(() async {
-      if (scrollController.position.pixels >=
-          scrollController.position.maxScrollExtent) {
+      if (scrollController.position.pixels >= scrollController.position.maxScrollExtent) {
         if (offSet < totalItemsCount) {
           await loadMoreNotifications();
         } else {
@@ -116,17 +123,21 @@ class NotificationsCubit extends Cubit<NotificationState> {
     }).toList();
     unreadCount = unreadCount - 1;
     notifications = updatedNotifications;
-    notificationService
-        .markReadNotification(ParamsMarkRead(id: notification.id));
+    notificationService.markReadNotification(ParamsMarkRead(id: notification.id));
     emit(NotificationsLoaded());
   }
 
   void markAllNotificationRead() {
-    notifications = notifications
-        .map((item) => item.copyWith(isRead: true))
-        .toList(growable: false);
+    notifications = notifications.map((item) => item.copyWith(isRead: true)).toList(growable: false);
     unreadCount = 0;
     notificationService.markReadAllNotifications();
     emit(NotificationsLoaded());
+  }
+
+  @override
+  Future<void> close() {
+    scrollController.dispose();
+    fcmNotificationsStream.close();
+    return super.close();
   }
 }

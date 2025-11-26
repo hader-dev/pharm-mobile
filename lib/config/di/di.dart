@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
@@ -35,11 +37,9 @@ Future<void> initAppDependencies() async {
   final ValidateActionDialog dialogManager = ValidateActionDialog();
   //final HiveDbManager hiveStorage = HiveDbManager.getInstance;
   getItInstance.registerLazySingleton<SharedPreferences>(() => storage);
-  getItInstance
-      .registerLazySingleton<FlutterSecureStorage>(() => securedStorage);
+  getItInstance.registerLazySingleton<FlutterSecureStorage>(() => securedStorage);
   //getItInstance.registerLazySingleton<HiveDbManager>(() => hiveStorage);
-  getItInstance
-      .registerLazySingleton<ValidateActionDialog>(() => dialogManager);
+  getItInstance.registerLazySingleton<ValidateActionDialog>(() => dialogManager);
   final TokenManager tokenManager = TokenManager.instance;
   tokenManager.init(getItInstance());
   getItInstance.registerLazySingleton<TokenManager>(() => tokenManager);
@@ -47,14 +47,11 @@ Future<void> initAppDependencies() async {
   final DioNetworkManager dioNetworkManager = DioNetworkManager.instance;
   await dioNetworkManager.init(
       '''${EnvHelper.getStoredEnvValue(EnvHelper.schemaEnvKey)}://${EnvHelper.getStoredEnvValue(EnvHelper.baseUrlEnvKey)}
-      /${EnvHelper.getStoredEnvValue(EnvHelper.apiVersionEnvKey)}''',
-      Dio(),
-      tokenManager);
+      /${EnvHelper.getStoredEnvValue(EnvHelper.apiVersionEnvKey)}''', Dio(), tokenManager);
 
   getItInstance.registerLazySingleton<INetworkService>(() => dioNetworkManager);
-  getItInstance.registerLazySingleton<UserManager>(() => UserManager.init(
-      userRepository: UserRepository(client: getItInstance()),
-      tokenManager: getItInstance()));
+  getItInstance.registerLazySingleton<UserManager>(
+      () => UserManager.init(userRepository: UserRepository(client: getItInstance()), tokenManager: getItInstance()));
 
   final firebaseService = FirebaseService();
   await firebaseService.init();
@@ -65,23 +62,21 @@ Future<void> initAppDependencies() async {
       ));
   await notificationService.init();
 
-  getItInstance
-      .registerLazySingleton<INotificationService>(() => notificationService);
+  getItInstance.registerLazySingleton<INotificationService>(() => notificationService);
 
   // Initialize DeeplinksService
   final deeplinksService = DeeplinksService();
   await deeplinksService.init();
-  getItInstance
-      .registerLazySingleton<DeeplinksServicePort>(() => deeplinksService);
+  getItInstance.registerLazySingleton<DeeplinksServicePort>(() => deeplinksService);
 
   final filtersRepository = FiltersRepositoryImpl(client: dioNetworkManager);
-  getItInstance
-      .registerLazySingleton<IFiltersRepository>(() => filtersRepository);
+  getItInstance.registerLazySingleton<IFiltersRepository>(() => filtersRepository);
 
-  final ConfigRepository configRepository =
-      ConfigRepository(client: dioNetworkManager);
-  getItInstance
-      .registerLazySingleton<IConfigRepository>(() => configRepository);
+  final ConfigRepository configRepository = ConfigRepository(client: dioNetworkManager);
+  getItInstance.registerLazySingleton<IConfigRepository>(() => configRepository);
 
   await GoogleManager.setup();
+
+  StreamController<dynamic> notificationsStream = StreamController();
+  getItInstance.registerLazySingleton<StreamController<dynamic>>(() => notificationsStream);
 }

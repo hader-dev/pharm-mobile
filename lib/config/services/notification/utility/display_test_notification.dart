@@ -5,11 +5,9 @@ import '../notification_channels.dart';
 import 'mock_remote_message.dart';
 
 Future<void> showTestNotificationManually() async {
-  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-      FlutterLocalNotificationsPlugin();
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
-  const AndroidNotificationDetails androidPlatformChannelSpecifics =
-      AndroidNotificationDetails(
+  const AndroidNotificationDetails androidPlatformChannelSpecifics = AndroidNotificationDetails(
     NotificationChannel.id,
     NotificationChannel.name,
     channelDescription: NotificationChannel.description,
@@ -18,8 +16,7 @@ Future<void> showTestNotificationManually() async {
     ticker: 'ticker',
   );
 
-  const NotificationDetails platformChannelSpecifics =
-      NotificationDetails(android: androidPlatformChannelSpecifics);
+  const NotificationDetails platformChannelSpecifics = NotificationDetails(android: androidPlatformChannelSpecifics);
 
   await flutterLocalNotificationsPlugin.show(
     0, // notification id
@@ -32,5 +29,5 @@ Future<void> showTestNotificationManually() async {
 
 Future<void> showTestNotificationAsIfRemoteMessage() async {
   final mockMessage = mockRemoteMessage();
-  await handleRemoteMessage(mockMessage);
+  await handleRemoteMessageShowNotification(mockMessage);
 }

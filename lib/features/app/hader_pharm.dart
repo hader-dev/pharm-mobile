@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:hader_pharm_mobile/config/language_config/cubit/lang_cubit.dart';
@@ -13,6 +14,10 @@ class HaderPharmApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    //   statusBarColor: Colors.transparent, // Makes the status bar transparent
+    //   statusBarIconBrightness: Brightness.light, // Sets icons to light color (for dark backgrounds)
+    // ));
     return BlocProvider(
       create: (context) => LangCubit()..initLanguage(),
       child: BlocBuilder<LangCubit, LangState>(
