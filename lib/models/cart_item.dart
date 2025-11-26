@@ -51,7 +51,7 @@ class CartItemModel {
   final DateTime createdAt;
   final DateTime updatedAt;
   final String? medicinesCatalogId;
-  final String? unitPriceFinalTtc;
+  final String? unitPriceFinal;
   final String? parapharmCatalogId;
   final int quantity;
   final int packageSize;
@@ -78,7 +78,7 @@ class CartItemModel {
     required this.totalAmountHt,
     required this.tvaPercentage,
     required this.unitPriceHt,
-    this.unitPriceFinalTtc,
+    this.unitPriceFinal,
     required this.unitPriceTtc,
     required this.createdAt,
     required this.updatedAt,
@@ -105,12 +105,14 @@ class CartItemModel {
   }
 
   factory CartItemModel.fromJson(Map<String, dynamic> json) {
-    final thumbnailImage = json['medicineCatalog']?['image'] ?? json['parapharmCatalog']?['image'];
-    final minOrderQuantity =
-        json['medicineCatalog']?['minOrderQuantity'] ?? json['parapharmCatalog']?['minOrderQuantity'];
+    final thumbnailImage =
+        json['medicineCatalog']?['image'] ?? json['parapharmCatalog']?['image'];
+    final minOrderQuantity = json['medicineCatalog']?['minOrderQuantity'] ??
+        json['parapharmCatalog']?['minOrderQuantity'];
 
-    final maxOrderQuantity =
-        (json['medicineCatalog']?['maxOrderQuantity'] ?? json['parapharmCatalog']?['maxOrderQuantity']) ?? 9999;
+    final maxOrderQuantity = (json['medicineCatalog']?['maxOrderQuantity'] ??
+            json['parapharmCatalog']?['maxOrderQuantity']) ??
+        9999;
 
     return CartItemModel(
       packageSize: json['packageSize'] ?? 1,
@@ -134,11 +136,12 @@ class CartItemModel {
       discountAmount: json['discountAmount'],
       buyerCompanyId: json['buyerCompanyId'],
       sellerCompanyId: json['sellerCompanyId'],
-      unitPriceFinalTtc: json['unitPriceFinalTtc'] ?? "100",
+      unitPriceFinal: json['unitPriceFinalTtc'] ?? "100",
       medicineCatalogStockQty: json['medicineCatalog']?['stockQuantity'] ?? 0,
       parapharmCatalogStockQty: json['parapharmCatalog']?['stockQuantity'] ?? 0,
       sellerCompany: BaseCompany.fromJson(json['sellerCompany']),
-      image: thumbnailImage != null ? ImageModel.fromJson(thumbnailImage) : null,
+      image:
+          thumbnailImage != null ? ImageModel.fromJson(thumbnailImage) : null,
     );
   }
   CartItemModel copyWith(
@@ -188,14 +191,17 @@ class CartItemModel {
         sellerCompany: sellerCompany ?? this.sellerCompany,
         maxOrderQuantity: maxOrderQuantity,
         minOrderQuantity: minOrderQuantity,
-        unitPriceFinalTtc: unitPriceFinalTtc ?? this.unitPriceFinalTtc,
+        unitPriceFinal: unitPriceFinalTtc ?? this.unitPriceFinal,
         image: image);
   }
 
   Map<String, num> getTotalPrice() {
     num totalHtPrice = num.parse(unitPriceHt) * quantity;
     num totalTTCPrice = num.parse(unitPriceTtc) * quantity;
-    return <String, num>{"totalHtPrice": totalHtPrice, "totalTTCPrice": totalTTCPrice};
+    return <String, num>{
+      "totalHtPrice": totalHtPrice,
+      "totalTTCPrice": totalTTCPrice
+    };
   }
 }
 
