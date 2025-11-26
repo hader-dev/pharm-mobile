@@ -20,17 +20,21 @@ class LoginCubit extends Cubit<LoginState> {
     try {
       emit(state.toLoginLoading());
       // ignore: unused_local_variable
-      var token = await getItInstance.get<UserManager>().login(userName: userName, password: password);
+      var token = await getItInstance
+          .get<UserManager>()
+          .login(userName: userName, password: password);
       emit(state.toLoginSuccessful());
     } on UnAuthorizedException catch (e) {
       if (e.errorCode == ApiErrorCodes.UNAUTHORIZED_DISTRIBUTOR_LOGIN.name) {
         getItInstance.get<ToastManager>().showToast(
               type: ToastType.warning,
-              message: RoutingManager.rootNavigatorKey.currentContext!.translation!.unauthorized_distributor_login,
+              message: RoutingManager.rootNavigatorKey.currentContext!
+                  .translation!.unauthorized_distributor_login,
             );
       }
       if (e.errorCode == ApiErrorCodes.EMAIL_NOT_VERIFIED.name) {
-        RoutingManager.router.pushNamed(RoutingManager.checkEmailScreen, extra: {
+        RoutingManager.router
+            .pushNamed(RoutingManager.checkEmailScreen, extra: {
           "email": state.emailController.text,
           "autoRedirect": true,
         });
@@ -41,7 +45,8 @@ class LoginCubit extends Cubit<LoginState> {
 
       emit(state.toLoginFailed());
     } catch (e, stackTrace) {
-      GlobalExceptionHandler.handle(exception: e, exceptionStackTrace: stackTrace);
+      GlobalExceptionHandler.handle(
+          exception: e, exceptionStackTrace: stackTrace);
 
       emit(state.toLoginFailed());
     }
@@ -66,6 +71,7 @@ class LoginCubit extends Cubit<LoginState> {
     try {
       emit(state.toGoogleLoginLoading());
       await getItInstance.get<UserManager>().googleSignIn();
+
       setupCompanyOrSkipToHome();
     } catch (e) {
       GlobalExceptionHandler.handle(

@@ -28,10 +28,12 @@ class VandorDetailsTabBarSection extends StatefulWidget {
   final String companyId;
 
   @override
-  State<VandorDetailsTabBarSection> createState() => _VandorDetailsTabBarSectionState();
+  State<VandorDetailsTabBarSection> createState() =>
+      _VandorDetailsTabBarSectionState();
 }
 
-class _VandorDetailsTabBarSectionState extends State<VandorDetailsTabBarSection> with TickerProviderStateMixin {
+class _VandorDetailsTabBarSectionState extends State<VandorDetailsTabBarSection>
+    with TickerProviderStateMixin {
   late final TabController tabsController;
   @override
   void initState() {
@@ -73,18 +75,24 @@ class _VandorDetailsTabBarSectionState extends State<VandorDetailsTabBarSection>
               BlocProvider(
                 create: (context) => MedicineProductsCubit(
                     scrollController: ScrollController(),
-                    favoriteRepository: FavoriteRepository(client: getItInstance.get<INetworkService>()),
+                    favoriteRepository: FavoriteRepository(
+                        client: getItInstance.get<INetworkService>()),
                     searchController: TextEditingController(text: ""),
-                    medicineRepository: MedicineCatalogRepository(client: getItInstance.get<INetworkService>()))
-                  ..getMedicines(filters: MedicalFilters(vendors: [widget.companyId])),
+                    medicineRepository: MedicineCatalogRepository(
+                        client: getItInstance.get<INetworkService>()))
+                  ..getMedicines(
+                      filters: MedicalFilters(vendors: [widget.companyId])),
               ),
               BlocProvider(
                 create: (context) => ParaPharmaCubit(
-                    favoriteRepository: FavoriteRepository(client: getItInstance.get<INetworkService>()),
+                    favoriteRepository: FavoriteRepository(
+                        client: getItInstance.get<INetworkService>()),
                     scrollController: ScrollController(),
                     searchController: TextEditingController(text: ""),
-                    paraPharmaRepository: ParaPharmaRepository(client: getItInstance.get<INetworkService>()))
-                  ..getParaPharmas(filters: ParaMedicalFilters(vendors: [widget.companyId])),
+                    paraPharmaRepository: ParaPharmaRepository(
+                        client: getItInstance.get<INetworkService>()))
+                  ..getParaPharmas(
+                      filters: ParaMedicalFilters(vendors: [widget.companyId])),
               ),
             ],
             child: TabBarView(
@@ -92,7 +100,9 @@ class _VandorDetailsTabBarSectionState extends State<VandorDetailsTabBarSection>
               children: [
                 MedicinesPage(),
                 ParapharmaPage(),
-                VendorDetailsPage(vendorData: context.read<VendorDetailsCubit>().state.vendor),
+                VendorDetailsPage(
+                    vendorData:
+                        context.read<VendorDetailsCubit>().state.vendor),
               ],
             ),
           ),

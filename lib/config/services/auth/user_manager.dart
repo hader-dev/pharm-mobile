@@ -194,7 +194,10 @@ class UserManager {
         tokenManagerInstance.optimisticUpdate(token);
         (getItInstance.get<INetworkService>() as DioNetworkManager).initDefaultHeaders(token);
 
-        await getMe();
+        await Future.value([
+          getItInstance.get<INotificationService>().registerUserDevice(),
+          getMe(),
+        ]);
 
         return token;
       }
