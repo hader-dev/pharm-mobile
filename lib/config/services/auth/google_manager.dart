@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class GoogleManager {
   final GoogleSignIn _googleSignIn = GoogleSignIn.instance;
@@ -14,14 +16,13 @@ class GoogleManager {
         idToken: res.authentication.idToken,
       );
 
-      final userCredential =
-          await FirebaseAuth.instance.signInWithCredential(credential);
+      final userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
 
       final firebaseToken = await userCredential.user!.getIdToken(true);
 
       return firebaseToken;
     } catch (e) {
-      throw "Failed to sign in with Google";
+      throw RoutingManager.rootNavigatorKey.currentContext!.translation!.failed_google_signin;
     }
   }
 

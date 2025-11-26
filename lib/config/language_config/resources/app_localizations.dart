@@ -2559,6 +2559,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Total Applied Amount'**
   String get total_applied_amount;
+
+  /// No description provided for @failed_google_signin.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to sign in with Google'**
+  String get failed_google_signin;
+
+  /// No description provided for @getting_info_google.
+  ///
+  /// In en, this message translates to:
+  /// **'Getting information from Google'**
+  String get getting_info_google;
 }
 
 class _AppLocalizationsDelegate

@@ -1311,4 +1311,11 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get total_applied_amount => 'Montant total appliqué';
+
+  @override
+  String get failed_google_signin => 'Échec de la connexion avec Google';
+
+  @override
+  String get getting_info_google =>
+      'Récupération des informations depuis Google';
 }

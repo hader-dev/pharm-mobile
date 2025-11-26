@@ -1290,4 +1290,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get total_applied_amount => 'المبلغ الإجمالي المطبق';
+
+  @override
+  String get failed_google_signin => 'فشل تسجيل الدخول باستخدام جوجل';
+
+  @override
+  String get getting_info_google => 'جارٍ جلب المعلومات من جوجل';
 }

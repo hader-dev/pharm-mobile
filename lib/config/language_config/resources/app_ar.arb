@@ -408,5 +408,7 @@
   "thank_you_purchase": "شكرًا لشرائك. تم تقديم طلبك بنجاح.",
   "view_order": "عرض الطلب",
   "continue_shopping": "متابعة التسوق",
-  "total_applied_amount": "المبلغ الإجمالي المطبق"
+  "total_applied_amount": "المبلغ الإجمالي المطبق",
+  "failed_google_signin": "فشل تسجيل الدخول باستخدام جوجل",
+  "getting_info_google": "جارٍ جلب المعلومات من جوجل"
 }
