@@ -12,11 +12,11 @@ import 'package:hader_pharm_mobile/features/common_features/orders_details/order
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class CancelOrderBottomSheet extends StatelessWidget {
-  const CancelOrderBottomSheet({super.key});
+  final TextEditingController _reasonController = TextEditingController();
+  CancelOrderBottomSheet({super.key});
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController reasonController = TextEditingController();
     final translation = context.translation!;
     final cubit = OrdersDetailsScreen.ordersDetailsScaffoldKey.currentContext!.read<OrderDetailsCubit>();
 
@@ -31,7 +31,7 @@ class CancelOrderBottomSheet extends StatelessWidget {
             value: CustomTextField(
               verticalPadding: 0,
               horizontalPadding: context.responsiveAppSizeTheme.current.p6,
-              controller: reasonController,
+              controller: _reasonController,
               maxLines: 2,
               maxLength: 10,
               validationFunc: (value) {},
@@ -45,7 +45,7 @@ class CancelOrderBottomSheet extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: context.responsiveAppSizeTheme.current.p4),
           child: PrimaryTextButton(
             label: context.translation!.confirm,
-            onTap: () => cancelOrder(context, cubit, reasonController.text),
+            onTap: () => cancelOrder(context, cubit, _reasonController.text),
             color: SystemColors.red.primary,
           ),
         ),

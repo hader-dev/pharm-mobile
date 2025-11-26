@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
@@ -9,8 +10,8 @@ import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:lucide_icons/lucide_icons.dart' show LucideIcons;
 
-class OrderDetailsAppbar extends StatelessWidget implements PreferredSizeWidget {
-  const OrderDetailsAppbar({
+class OrderDetailsAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const OrderDetailsAppBar({
     super.key,
   });
 
@@ -54,9 +55,6 @@ class OrderDetailsAppbar extends StatelessWidget implements PreferredSizeWidget 
                 borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.commonWidgetsRadius),
               ),
               onSelected: (value) {
-                if (value == "raiseComplaint") {
-                  menuKey.currentState?.showButtonMenu();
-                }
                 context.read<OrderDetailsCubit>().onMenuOptionSelected(
                       value,
                       context.read<OrderDetailsCubit>().orderData,

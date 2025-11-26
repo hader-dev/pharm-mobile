@@ -7,6 +7,8 @@ import 'package:hader_pharm_mobile/features/common_features/orders_details/sub_p
 import 'package:hader_pharm_mobile/models/order_claim.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
+import 'widgets/complaint_shimmer.dart' show ComplaintShimmer;
+
 class OrderItemsComplaintPage extends StatelessWidget {
   const OrderItemsComplaintPage({super.key});
 
@@ -19,14 +21,12 @@ class OrderItemsComplaintPage extends StatelessWidget {
       final cubit = context.read<OrderDetailsCubit>();
 
       if (state is OrderDetailsLoading) {
-        return Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            const Center(
-              child: CircularProgressIndicator(),
-            ),
-          ],
-        );
+        return ListView(
+            shrinkWrap: true,
+            children: List.generate(
+              15,
+              (_) => ComplaintShimmer(),
+            ));
       }
 
       if (cubit.orderClaims.isEmpty || state is OrderDetailsLoadingFailed) {
@@ -57,7 +57,7 @@ class OrderItemsComplaintPage extends StatelessWidget {
               ),
               const ResponsiveGap.s12(),
               ...cubit.orderClaims.map(
-                (OrderClaimHeaderModel item) => OrderComplaintHeaderWidget(
+                (OrderClaimHeaderModel item) => OrderComplaintHeaderWidget.OrderComplaintWidget(
                   claim: item,
                 ),
               ),

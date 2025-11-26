@@ -16,12 +16,10 @@ class OrderSummarySection extends StatelessWidget {
     return Container(
       margin: EdgeInsets.all(context.responsiveAppSizeTheme.current.p4),
       padding: EdgeInsets.symmetric(
-          vertical: context.responsiveAppSizeTheme.current.p8,
-          horizontal: context.responsiveAppSizeTheme.current.p8),
+          vertical: context.responsiveAppSizeTheme.current.p8, horizontal: context.responsiveAppSizeTheme.current.p8),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(
-            context.responsiveAppSizeTheme.current.commonWidgetsRadius),
+        borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.commonWidgetsRadius),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,13 +32,7 @@ class OrderSummarySection extends StatelessWidget {
           SummaryRow(
             label: context.translation!.payment_method,
             value: PaymentMethods.values
-                .firstWhere(
-                    (element) =>
-                        element.id ==
-                        context
-                            .read<OrderDetailsCubit>()
-                            .orderData!
-                            .paymentMethod,
+                .firstWhere((element) => element.id == context.read<OrderDetailsCubit>().orderData!.paymentMethod,
                     orElse: () => PaymentMethods.cash)
                 .translation(context.translation!),
           ),
@@ -49,15 +41,12 @@ class OrderSummarySection extends StatelessWidget {
           SummaryRow(
               label: context.translation!.total_applied_amount,
               value:
-                  cubit.orderData!.totalAppliedAmount.formatAsPriceForPrint()),
+                  (cubit.orderData!.totalAppliedAmount ?? cubit.orderData!.totalAmountInclTax).formatAsPriceForPrint()),
           SummaryRow(
-              label: context.translation!.total_ht,
-              value:
-                  cubit.orderData!.totalAmountExclTax.formatAsPriceForPrint()),
+              label: context.translation!.total_ht, value: cubit.orderData!.totalAmountExclTax.formatAsPriceForPrint()),
           SummaryRow(
               label: context.translation!.total_ttc,
-              value:
-                  cubit.orderData!.totalAmountInclTax.formatAsPriceForPrint()),
+              value: cubit.orderData!.totalAmountInclTax.formatAsPriceForPrint()),
           // const Divider(height: 24, thickness: 1),
           // SummaryRow(
           //   label: context.translation!.total_ht_amount,

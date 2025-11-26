@@ -99,7 +99,7 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
             context: OrdersDetailsScreen.ordersDetailsScaffoldKey.currentContext!,
             child: RaiseOrderClaimBottomSheet(
               orderId: order!.id,
-            ));
+            )).then((value) => getOrderComplaints());
 
         break;
     }

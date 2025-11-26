@@ -8,8 +8,7 @@ import 'widgets/order_details_appbar.dart';
 
 class OrdersDetailsScreen extends StatelessWidget {
   final String orderId;
-  static final GlobalKey<ScaffoldState> ordersDetailsScaffoldKey =
-      GlobalKey<ScaffoldState>();
+  static final GlobalKey<ScaffoldState> ordersDetailsScaffoldKey = GlobalKey<ScaffoldState>();
   const OrdersDetailsScreen({super.key, required this.orderId});
 
   @override
@@ -24,13 +23,13 @@ class OrdersDetailsScreen extends StatelessWidget {
               context.pop(result);
               return;
             }
-            RoutingManager.router
-                .pushReplacementNamed(RoutingManager.appLayout);
+            RoutingManager.router.pushReplacementNamed(RoutingManager.appLayout);
           }
         },
         child: Scaffold(
+          resizeToAvoidBottomInset: false,
           key: ordersDetailsScaffoldKey,
-          appBar: OrderDetailsAppbar(),
+          appBar: OrderDetailsAppBar(),
           body: SafeArea(
             child: OrderDetailsTabBarSection(orderId: orderId),
           ),
