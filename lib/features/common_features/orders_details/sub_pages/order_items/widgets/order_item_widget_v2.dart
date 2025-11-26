@@ -83,7 +83,7 @@ class OrderItemWidgetV2 extends StatelessWidget {
                 ),
                 const ResponsiveGap.s8(),
                 PriceWidget(
-                  price: item.unitPriceTtc,
+                  price: item.unitPriceHt,
                   overridePrice: item.unitPriceApplied,
                   quantity: item.quantity,
                 ),
