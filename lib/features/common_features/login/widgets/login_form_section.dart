@@ -76,6 +76,8 @@ class _LoginFormSectionState extends State<LoginFormSection> {
                     onTap: () {
                       cubit.forgetPassword();
                     },
+                    splashColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
                     child: Text(
                       context.translation!.forgot_password,
                       style: context.responsiveTextTheme.current.body3Medium.copyWith(color: AppColors.accent1Shade1),
