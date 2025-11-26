@@ -15,6 +15,7 @@ import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../../../config/responsive/device_size.dart' show DeviceSizes, DeviceSizesExtension;
+import '../../../../../config/theme/colors_manager.dart' show TextColors;
 import '../../../../common/shimmers/vendor_widget_shimmer_1.dart' show VendorWidgetShimmer1;
 
 class VendorsSectionItems extends StatelessWidget {
@@ -55,8 +56,11 @@ class VendorsSectionItems extends StatelessWidget {
 
         if (state is VendorsLoadingFailed || items.isEmpty) {
           return Center(
-            child: EmptyListWidget(),
-          );
+              child: Text(context.translation!.no_items_found,
+                  textAlign: TextAlign.center,
+                  style: context.responsiveTextTheme.current.body3Regular.copyWith(
+                    color: TextColors.ternary.color,
+                  )));
         }
 
         return Material(

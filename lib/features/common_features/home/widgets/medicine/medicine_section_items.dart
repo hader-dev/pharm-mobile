@@ -10,6 +10,8 @@ import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pag
 import 'package:hader_pharm_mobile/models/medicine_catalog.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
+import '../../../../../config/theme/colors_manager.dart' show TextColors;
+
 class MedicinesSectionItems extends StatelessWidget {
   const MedicinesSectionItems({super.key, required this.minSectionHeight});
   final double minSectionHeight;
@@ -41,8 +43,11 @@ class MedicinesSectionItems extends StatelessWidget {
 
         if (state is MedicineProductsLoadingFailed || items.isEmpty) {
           return Center(
-            child: EmptyListWidget(),
-          );
+              child: Text(context.translation!.no_items_found,
+                  textAlign: TextAlign.center,
+                  style: context.responsiveTextTheme.current.body3Regular.copyWith(
+                    color: TextColors.ternary.color,
+                  )));
         }
         void onFavoriteCallback(BaseMedicineCatalogModel medicine) {
           final cubit = context.read<MedicineProductsCubit>();

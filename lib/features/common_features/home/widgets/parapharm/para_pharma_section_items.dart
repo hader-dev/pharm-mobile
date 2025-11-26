@@ -8,6 +8,7 @@ import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pag
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
+import '../../../../../config/theme/colors_manager.dart' show TextColors;
 import '../../../../common/shimmers/vertical_product_widget_shimmer.dart' show VerticalProductWidgetShimmer;
 
 class ParaPharmaSectionItems extends StatelessWidget {
@@ -42,8 +43,11 @@ class ParaPharmaSectionItems extends StatelessWidget {
 
         if (state is ParaPharmaProductsLoadingFailed || items.isEmpty) {
           return Center(
-            child: EmptyListWidget(),
-          );
+              child: Text(context.translation!.no_items_found,
+                  textAlign: TextAlign.center,
+                  style: context.responsiveTextTheme.current.body3Regular.copyWith(
+                    color: TextColors.ternary.color,
+                  )));
         }
         void onFavoriteCallback(BaseParaPharmaCatalogModel medicine) {
           final gCubit = MarketPlaceScreen.marketPlaceScaffoldKey.currentContext!.read<ParaPharmaCubit>();
