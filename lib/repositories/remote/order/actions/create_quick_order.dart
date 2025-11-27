@@ -5,6 +5,6 @@ import 'package:hader_pharm_mobile/utils/urls.dart';
 void createQuickOrder(CreateQuickOrderModel orderDetails, INetworkService client) async {
   await client.sendRequest(() => client.post(
         Urls.buyNow,
-        payload: orderDetails,
+        payload: orderDetails.toMap(),
       ));
 }

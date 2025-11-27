@@ -4,6 +4,8 @@ import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common_features/notification/cubit/notifications_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/notification/widgets/notification_widget.dart';
 
+import '../../../common/shimmers/notification.dart' show NotificationWidgetShimmer;
+
 class NotificationList extends StatelessWidget {
   const NotificationList({super.key});
 
@@ -11,10 +13,9 @@ class NotificationList extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<NotificationsCubit>();
 
-    return BlocBuilder<NotificationsCubit, NotificationState>(
-        builder: (context, state) {
+    return BlocBuilder<NotificationsCubit, NotificationState>(builder: (context, state) {
       if (state is NotificationsLoading) {
-        return const Center(child: CircularProgressIndicator());
+        return ListView(children: List.generate(10, (index) => NotificationWidgetShimmer()));
       }
 
       if (cubit.notifications.isEmpty) {

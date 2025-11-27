@@ -78,6 +78,6 @@ Future<void> initAppDependencies() async {
 
   await GoogleManager.setup();
 
-  StreamController<dynamic> notificationsStream = StreamController();
+  StreamController<dynamic> notificationsStream = StreamController.broadcast();
   getItInstance.registerSingleton<StreamController<dynamic>>(notificationsStream);
 }

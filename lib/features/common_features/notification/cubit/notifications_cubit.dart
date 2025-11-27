@@ -32,10 +32,14 @@ class NotificationsCubit extends Cubit<NotificationState> {
       {required this.notificationService, required this.scrollController, required this.fcmNotificationsStream})
       : super(NotificationsInitial()) {
     _onScroll();
-    fcmNotificationsStream.stream.listen((event) {
-      addReceivedFcmNotification(event);
-    });
+    if (!fcmNotificationsStream.hasListener) {
+      debugPrint("Listening to fcmNotificationsStream");
+      fcmNotificationsStream.stream.listen((event) {
+        addReceivedFcmNotification(event);
+      });
+    }
   }
+
   void addReceivedFcmNotification(RemoteMessage notificationObject) async {
     var decodedNotificationPayload = jsonDecode(notificationObject.data["notification"]);
     NotificationModel notificationModel = jsonToNotificationModel({
@@ -148,10 +152,10 @@ class NotificationsCubit extends Cubit<NotificationState> {
   }
 
   @override
-  Future<void> close() {
+  Future<void> close() async {
     scrollController.dispose();
-    fcmNotificationsStream.close();
-    player.dispose();
+    await Future.wait([fcmNotificationsStream.close(), player.dispose()]);
+
     return super.close();
   }
 }
