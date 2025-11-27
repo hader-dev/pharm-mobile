@@ -105,14 +105,12 @@ class CartItemModel {
   }
 
   factory CartItemModel.fromJson(Map<String, dynamic> json) {
-    final thumbnailImage =
-        json['medicineCatalog']?['image'] ?? json['parapharmCatalog']?['image'];
-    final minOrderQuantity = json['medicineCatalog']?['minOrderQuantity'] ??
-        json['parapharmCatalog']?['minOrderQuantity'];
+    final thumbnailImage = json['medicineCatalog']?['image'] ?? json['parapharmCatalog']?['image'];
+    final minOrderQuantity =
+        json['medicineCatalog']?['minOrderQuantity'] ?? json['parapharmCatalog']?['minOrderQuantity'];
 
-    final maxOrderQuantity = (json['medicineCatalog']?['maxOrderQuantity'] ??
-            json['parapharmCatalog']?['maxOrderQuantity']) ??
-        9999;
+    final maxOrderQuantity =
+        (json['medicineCatalog']?['maxOrderQuantity'] ?? json['parapharmCatalog']?['maxOrderQuantity']) ?? 9999;
 
     return CartItemModel(
       packageSize: json['packageSize'] ?? 1,
@@ -137,11 +135,10 @@ class CartItemModel {
       buyerCompanyId: json['buyerCompanyId'],
       sellerCompanyId: json['sellerCompanyId'],
       unitPriceFinal: json['unitPriceFinalTtc'] ?? "100",
-      medicineCatalogStockQty: json['medicineCatalog']?['stockQuantity'] ?? 0,
-      parapharmCatalogStockQty: json['parapharmCatalog']?['stockQuantity'] ?? 0,
+      medicineCatalogStockQty: json['medicineCatalog']?['actualQuantity'] ?? 0,
+      parapharmCatalogStockQty: json['parapharmCatalog']?['actualQuantity'] ?? 0,
       sellerCompany: BaseCompany.fromJson(json['sellerCompany']),
-      image:
-          thumbnailImage != null ? ImageModel.fromJson(thumbnailImage) : null,
+      image: thumbnailImage != null ? ImageModel.fromJson(thumbnailImage) : null,
     );
   }
   CartItemModel copyWith(
@@ -196,12 +193,10 @@ class CartItemModel {
   }
 
   Map<String, num> getTotalPrice() {
-    num totalHtPrice = num.parse(unitPriceHt) * quantity;
-    num totalTTCPrice = num.parse(unitPriceTtc) * quantity;
-    return <String, num>{
-      "totalHtPrice": totalHtPrice,
-      "totalTTCPrice": totalTTCPrice
-    };
+    num totalHtPrice = num.parse(unitPriceFinal ?? unitPriceHt) * quantity;
+    num totalTTCPrice = num.parse(unitPriceFinal ?? unitPriceHt) * quantity +
+        (num.parse(unitPriceFinal ?? unitPriceHt) * num.parse(tvaPercentage) / 100);
+    return <String, num>{"totalHtPrice": totalHtPrice, "totalTTCPrice": totalTTCPrice};
   }
 }
 
@@ -226,7 +221,7 @@ class MedicinesCatalog {
       unitPriceHt: json['unitPriceHt'],
       tvaPercentage: json['tvaPercentage'],
       dci: json['dci'],
-      stockQuantity: json['stockQuantity'] ?? 0,
+      stockQuantity: json['actualQuantity'] ?? 0,
     );
   }
 }

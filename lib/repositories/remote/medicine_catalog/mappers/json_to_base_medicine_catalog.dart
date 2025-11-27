@@ -1,12 +1,9 @@
 import 'package:hader_pharm_mobile/models/company.dart';
 import 'package:hader_pharm_mobile/models/image.dart';
 import 'package:hader_pharm_mobile/models/medicine_catalog.dart';
+import 'package:hader_pharm_mobile/utils/helper_func.dart' show calculateProductStockQty;
 
 BaseMedicineCatalogModel jsonToBaseMedicineCatalog(Map<String, dynamic> json) {
-  final actualStock = json['actualQuantity'] ?? 0;
-  final reservedStock = json['reservedQuantity'] ?? 0;
-  final stockQuantity = actualStock - reservedStock;
-
   return BaseMedicineCatalogModel(
       packageSize: json["packageSize"] ?? 1,
       id: json["id"] ?? "",
@@ -23,7 +20,7 @@ BaseMedicineCatalogModel jsonToBaseMedicineCatalog(Map<String, dynamic> json) {
       sku: json["sku"] ?? "",
       isPrivate: json["isPrivate"] ?? false,
       margin: json["margin"] ?? "",
-      stockQuantity: stockQuantity,
+      stockQuantity: calculateProductStockQty(json['actualQuantity'] ?? 0, json['reservedQuantity'] ?? 0),
       minOrderQuantity: json["minOrderQuantity"] ?? 0,
       maxOrderQuantity: json["maxOrderQuantity"] ?? 0,
       isPsychoactive: json["isPsychoactive"] ?? false,
@@ -33,10 +30,6 @@ BaseMedicineCatalogModel jsonToBaseMedicineCatalog(Map<String, dynamic> json) {
       isFeatured: json["isFeatured"] ?? false,
       displayOrder: json["displayOrder"] ?? 0,
       isLiked: json["isFavorite"] ?? false,
-      company: json["company"] != null
-          ? BaseCompany.fromJson(json["company"])
-          : null,
-      computedPrice: json['computedPrice'] != null
-          ? double.tryParse(json['computedPrice'])
-          : null);
+      company: json["company"] != null ? BaseCompany.fromJson(json["company"]) : null,
+      computedPrice: json['computedPrice'] != null ? double.tryParse(json['computedPrice']) : null);
 }

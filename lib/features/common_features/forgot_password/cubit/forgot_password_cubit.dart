@@ -23,12 +23,9 @@ class ForgotPasswordCubit extends Cubit<ForgotPaswordState> {
 
   void forgetPassword() async {
     try {
-      await getItInstance
-          .get<UserManager>()
-          .sendResetPasswordMail(email: state.emailController.text.trim());
+      await getItInstance.get<UserManager>().sendResetPasswordMail(email: state.emailController.text.trim());
       emit(state.toResetLinkSent());
     } catch (e) {
-      debugPrint("$e");
       GlobalExceptionHandler.handle(
         exception: e,
       );
@@ -48,8 +45,7 @@ class ForgotPasswordCubit extends Cubit<ForgotPaswordState> {
           timer.cancel();
           isResendActive = true;
         }
-        emit(state.toCounterTicked(
-            count: counter, isResendActive: isResendActive));
+        emit(state.toCounterTicked(count: counter, isResendActive: isResendActive));
       });
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
@@ -62,13 +58,11 @@ class ForgotPasswordCubit extends Cubit<ForgotPaswordState> {
       if (state.formKey.currentState!.validate()) {
         emit(state.toResetPasswordLoading());
         await userManager.forgotPassword(
-            email: state.emailController.text.trim(),
-            otp: otp,
-            newPassword: state.newPasswordController.text.trim());
+            email: state.emailController.text.trim(), otp: otp, newPassword: state.newPasswordController.text.trim());
 
-        final success = await getItInstance.get<UserManager>().login(
-            userName: state.emailController.text.trim(),
-            password: state.newPasswordController.text.trim());
+        final success = await getItInstance
+            .get<UserManager>()
+            .login(userName: state.emailController.text.trim(), password: state.newPasswordController.text.trim());
 
         if (success) {
           setupCompanyOrSkipToHome();

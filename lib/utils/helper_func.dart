@@ -15,6 +15,10 @@ int calculateNumberOfLines(String text, TextStyle style, double maxWidth) {
   return textLength;
 }
 
+int calculateProductStockQty(int actualQty, int reservedQty) {
+  return actualQty - reservedQty;
+}
+
 // List<UserPrivilege> getRolesUnderCurrentPrivilege(int roleId) {
 //   UserPrivilege selectedUserPrivilege = UserPrivilege.values.where((element) => element.id == roleId).first;
 //   List<UserPrivilege> options = [];
