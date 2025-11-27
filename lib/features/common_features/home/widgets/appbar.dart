@@ -17,12 +17,10 @@ class HomeAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(
-          vertical: context.responsiveAppSizeTheme.current.p8,
-          horizontal: context.responsiveAppSizeTheme.current.p16),
+          vertical: context.responsiveAppSizeTheme.current.p8, horizontal: context.responsiveAppSizeTheme.current.p16),
       decoration: BoxDecoration(
         color: Colors.white,
-        border: Border(
-            bottom: BorderSide(color: StrokeColors.normal.color, width: .5)),
+        border: Border(bottom: BorderSide(color: StrokeColors.normal.color, width: .5)),
       ),
       child: Row(
         children: [
@@ -34,22 +32,18 @@ class HomeAppBar extends StatelessWidget {
           ResponsiveGap.s4(),
           Text(
             context.translation!.app_name_2,
-            style: context.responsiveTextTheme.current.headLine3SemiBold
-                .copyWith(color: AppColors.accent1Shade1),
+            style: context.responsiveTextTheme.current.headLine3SemiBold.copyWith(color: AppColors.accent1Shade1),
           ),
           Spacer(),
           BlocBuilder<NotificationsCubit, NotificationState>(
             builder: (context, state) {
-              return context.read<NotificationsCubit>().unreadCount == 0
+              return context.read<NotificationsCubit>().unreadCount <= 0
                   ? InkWell(
-                      onTap: () => RoutingManager.router
-                          .pushNamed(RoutingManager.notificationsScreen),
+                      onTap: () => RoutingManager.router.pushNamed(RoutingManager.notificationsScreen),
                       child: SvgPicture.asset(
                         DrawableAssetStrings.newNotificationIcon,
-                        colorFilter: ColorFilter.mode(
-                            AppColors.accent1Shade1, BlendMode.srcIn),
-                        height: context.deviceSize.width <=
-                                DeviceSizes.largeMobile.width
+                        colorFilter: ColorFilter.mode(AppColors.accent1Shade1, BlendMode.srcIn),
+                        height: context.deviceSize.width <= DeviceSizes.largeMobile.width
                             ? context.responsiveAppSizeTheme.current.iconSize25
                             : context.responsiveAppSizeTheme.current.iconSize18,
                       ),
@@ -57,18 +51,13 @@ class HomeAppBar extends StatelessWidget {
                   : Badge.count(
                       count: context.read<NotificationsCubit>().unreadCount,
                       child: InkWell(
-                        onTap: () => RoutingManager.router
-                            .pushNamed(RoutingManager.notificationsScreen),
+                        onTap: () => RoutingManager.router.pushNamed(RoutingManager.notificationsScreen),
                         child: SvgPicture.asset(
                           DrawableAssetStrings.newNotificationIcon,
-                          colorFilter: ColorFilter.mode(
-                              AppColors.accent1Shade1, BlendMode.srcIn),
-                          height: context.deviceSize.width <=
-                                  DeviceSizes.largeMobile.width
-                              ? context
-                                  .responsiveAppSizeTheme.current.iconSize25
-                              : context
-                                  .responsiveAppSizeTheme.current.iconSize18,
+                          colorFilter: ColorFilter.mode(AppColors.accent1Shade1, BlendMode.srcIn),
+                          height: context.deviceSize.width <= DeviceSizes.largeMobile.width
+                              ? context.responsiveAppSizeTheme.current.iconSize25
+                              : context.responsiveAppSizeTheme.current.iconSize18,
                         ),
                       ),
                     );

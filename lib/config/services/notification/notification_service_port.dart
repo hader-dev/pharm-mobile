@@ -11,10 +11,9 @@ abstract class INotificationService {
 
   Future<void> registerUserDevice();
 
-  Future<void> handleRemoteMessage(RemoteMessage message);
+  Future<void> handleForegroundRemoteMessage(RemoteMessage message);
 
-  Future<ResponseLoadNotifications> getNotifications(
-      ParamsLoadNotifications paramsLoadNotifications);
+  Future<ResponseLoadNotifications> getNotifications(ParamsLoadNotifications paramsLoadNotifications);
 
   Future<ResponseUnreadCount> getUnreadNotificationsCount();
 

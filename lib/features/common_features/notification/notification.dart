@@ -16,7 +16,7 @@ class NotificaitonScreen extends StatelessWidget {
     final cubit = AppLayout.appLayoutScaffoldKey.currentContext!.read<NotificationsCubit>();
 
     return BlocProvider.value(
-      value: cubit..getNotifications(),
+      value: cubit,
       child: Scaffold(
         appBar: const NotificationAppBar(),
         body: Padding(

@@ -6,6 +6,7 @@ import 'package:hader_pharm_mobile/features/common/spacers/dividers.dart';
 import 'package:hader_pharm_mobile/features/common_features/notification/actions/handle_notifciation.dart';
 import 'package:hader_pharm_mobile/features/common_features/notification/cubit/notifications_cubit.dart';
 import 'package:hader_pharm_mobile/models/notification.dart';
+import 'package:hader_pharm_mobile/utils/assets_strings.dart' show DrawableAssetStrings;
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_date_helper.dart';
 import 'package:iconsax/iconsax.dart';
@@ -54,9 +55,11 @@ class NotificationWidget extends StatelessWidget {
                       children: [
                         CircleAvatar(
                             radius: 30,
-                            backgroundColor: AppColors.accent1Shade1,
+                            backgroundColor: Colors.grey.shade200,
                             backgroundImage: notification.actionPayload["publisherImagePath"] == null
-                                ? null
+                                ? AssetImage(
+                                    DrawableAssetStrings.newNotificationIcon,
+                                  )
                                 : CachedNetworkImageProvider(
                                     getItInstance
                                         .get<INetworkService>()

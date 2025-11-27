@@ -24,8 +24,7 @@ import 'package:hader_pharm_mobile/features/common_features/leagal_policies/leag
 import 'package:hader_pharm_mobile/features/common_features/login/login.dart';
 import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/medicine_catalog_details_client.dart';
 import 'package:hader_pharm_mobile/features/common_features/notification/notification.dart';
-import 'package:hader_pharm_mobile/features/common_features/onboarding/onboarding.dart'
-    show OnboardingScreen;
+import 'package:hader_pharm_mobile/features/common_features/onboarding/onboarding.dart' show OnboardingScreen;
 import 'package:hader_pharm_mobile/features/common_features/order_complaint_details/complaint.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders/orders.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders_details/orders_details.dart';
@@ -55,8 +54,7 @@ class RoutingManager {
   static const String medicineDetailsScreen = '/MedicineDetailsScreen';
   static const String paraPharmaDetailsScreen = '/ParaPharmaDetailsScreen';
   static const String ordersScreen = '/OrdersScreen';
-  static const String deligateOrderDetailsScreen =
-      '/DeligateOrderDetailsScreen';
+  static const String deligateOrderDetailsScreen = '/DeligateOrderDetailsScreen';
   static const String onboardingScreen = '/OnboardingScreen';
   static const String profileScreen = '/ProfileScreen';
   static const String changePasswordScreen = 'ChangePasswordScreen';
@@ -74,22 +72,17 @@ class RoutingManager {
   static const String deligateCreateOrderScreen = '/Deligate/CreateOrder';
   static const String deligateCreateClientScreen = '/Deligate/CreateClient';
   static const String deligateMartketPlaceScreen = '/Deligate/MarketPlace';
-  static const String deligateParapharmDetailsScreen =
-      '/Deligate/ParaPharmaDetailsScreen';
-  static const String deligateMedicineDetailsScreen =
-      '/Deligate/MedicineDetailsScreen';
+  static const String deligateParapharmDetailsScreen = '/Deligate/ParaPharmaDetailsScreen';
+  static const String deligateMedicineDetailsScreen = '/Deligate/MedicineDetailsScreen';
 
   static const String languagesScreen = '/LanguagesScreen';
 
-  static final GlobalKey<NavigatorState> rootNavigatorKey =
-      GlobalKey<NavigatorState>();
+  static final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
 
   static final GoRouter router = GoRouter(
       navigatorKey: rootNavigatorKey,
       initialLocation: splashScreen,
       redirect: (context, state) {
-        debugPrint(
-            "redirect ---------> ${state.fullPath}${state.pathParameters}");
         return null;
       },
       debugLogDiagnostics: true,
@@ -101,8 +94,7 @@ class RoutingManager {
             final params = state.extra as Map<String, dynamic>;
             final id = params["id"] as String;
             final canOrder = params["canOrder"] as bool;
-            return DeligateParaPharmaCatalogDetailsScreen(
-                paraPharmaCatalogId: id, canOrder: canOrder);
+            return DeligateParaPharmaCatalogDetailsScreen(paraPharmaCatalogId: id, canOrder: canOrder);
           },
         ),
         GoRoute(
@@ -324,10 +316,8 @@ class RoutingManager {
               return CheckEmailScreen(
                 email: prams["email"],
                 autoRedirect: prams["autoRedirect"] ?? false,
-                redirectTo:
-                    prams["redirectTo"] ?? RoutingManager.congratulationScreen,
-                popInsteadOfPushReplacement:
-                    prams["popInsteadOfPushReplacement"] ?? false,
+                redirectTo: prams["redirectTo"] ?? RoutingManager.congratulationScreen,
+                popInsteadOfPushReplacement: prams["popInsteadOfPushReplacement"] ?? false,
               );
             }),
         GoRoute(
@@ -347,9 +337,8 @@ class RoutingManager {
           path: createCompanyProfile,
           pageBuilder: (context, state) => CustomTransitionPage(
             child: const CreateCompanyProfile(),
-            transitionsBuilder:
-                (context, animation, secondaryAnimation, child) =>
-                    FadeTransition(opacity: animation, child: child),
+            transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+                FadeTransition(opacity: animation, child: child),
           ),
         ),
         GoRoute(
@@ -373,8 +362,7 @@ class RoutingManager {
               final params = state.extra as Map<String, dynamic>;
               final id = params["id"] as String;
               final canOrder = params["canOrder"] as bool;
-              return ClientParaPharmaCatalogDetailsScreen(
-                  paraPharmaCatalogId: id, canOrder: canOrder);
+              return ClientParaPharmaCatalogDetailsScreen(paraPharmaCatalogId: id, canOrder: canOrder);
             }),
         GoRoute(
             name: ordersScreen,
@@ -385,21 +373,9 @@ class RoutingManager {
         ...DeeplinksRoutes.deppLinkRoutes
       ]);
 
-  static Future<void> popUntilPath(
-      BuildContext context, String routePath) async {
-    while (GoRouter.of(context)
-            .routerDelegate
-            .currentConfiguration
-            .matches
-            .last
-            .matchedLocation !=
-        routePath) {
-      debugPrint(GoRouter.of(context)
-          .routerDelegate
-          .currentConfiguration
-          .matches
-          .last
-          .matchedLocation);
+  static Future<void> popUntilPath(BuildContext context, String routePath) async {
+    while (GoRouter.of(context).routerDelegate.currentConfiguration.matches.last.matchedLocation != routePath) {
+      debugPrint(GoRouter.of(context).routerDelegate.currentConfiguration.matches.last.matchedLocation);
       if (!context.canPop()) {
         break;
       }

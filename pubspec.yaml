@@ -124,6 +124,7 @@ dependencies:
 
   firebase_auth: ^6.1.2
   shimmer_animation: ^2.2.2
+  audioplayers: ^6.5.1
 
 
 dev_dependencies:
@@ -143,7 +144,7 @@ dev_dependencies:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-
+ 
 # The following section is specific to Flutter packages.
 flutter:
   uses-material-design: true
@@ -151,6 +152,7 @@ flutter:
   assets:
     - assets/fonts/Satoshi_Complete/
     - assets/images/
+    - assets/sounds/
     - assets/icons/
     - assets/icons/new_icons/
     - assets/json/
