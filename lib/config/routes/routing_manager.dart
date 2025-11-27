@@ -83,10 +83,6 @@ class RoutingManager {
       navigatorKey: rootNavigatorKey,
       initialLocation: splashScreen,
       redirect: (context, state) {
-        if (state.pathParameters.isNotEmpty && state.pathParameters["fromNotification"] == "true") {
-          debugPrint(" fromNotification  ---------> ${state.fullPath}");
-        }
-
         return null;
       },
       debugLogDiagnostics: true,

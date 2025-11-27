@@ -90,7 +90,7 @@ enum OrderStatus {
     icon: Icons.shopping_bag,
   ),
   delivered(
-    id: 7,
+    id: 10,
     color: Colors.teal,
     icon: Icons.local_shipping,
   ),

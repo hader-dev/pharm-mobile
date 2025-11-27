@@ -63,3 +63,7 @@ class JsonAssetStrings {
   static const String wilayasJson = 'assets/json/wilaya.json';
   static const String townsJson = 'assets/json/town.json';
 }
+
+class SoundAssetStrings {
+  static const String notificationSound = 'sounds/notif_sound.mp3';
+}

@@ -124,6 +124,7 @@ dependencies:
 
   firebase_auth: ^6.1.2
   shimmer_animation: ^2.2.2
+  audioplayers: ^6.5.1
 
 
 dev_dependencies:
@@ -151,6 +152,7 @@ flutter:
   assets:
     - assets/fonts/Satoshi_Complete/
     - assets/images/
+    - assets/sounds/
     - assets/icons/
     - assets/icons/new_icons/
     - assets/json/

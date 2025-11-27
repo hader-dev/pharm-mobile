@@ -60,6 +60,7 @@ Future<void> initAppDependencies() async {
       notificationRepository: NotificationRepository(
         client: getItInstance(),
       ));
+
   await notificationService.init();
 
   getItInstance.registerLazySingleton<INotificationService>(() => notificationService);
@@ -78,5 +79,5 @@ Future<void> initAppDependencies() async {
   await GoogleManager.setup();
 
   StreamController<dynamic> notificationsStream = StreamController();
-  getItInstance.registerLazySingleton<StreamController<dynamic>>(() => notificationsStream);
+  getItInstance.registerSingleton<StreamController<dynamic>>(notificationsStream);
 }

@@ -4,7 +4,8 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:hader_pharm_mobile/config/services/firebase/firebase_service.dart';
 import 'package:hader_pharm_mobile/config/services/firebase/firebase_service_port.dart';
 import 'package:hader_pharm_mobile/config/services/notification/actions/handle_remote_message.dart'
-    show forGroundRemoteMessage;
+    show terminatedAppRemoteMessage;
+
 import 'package:hader_pharm_mobile/config/services/notification/notification_service_port.dart';
 import 'package:hader_pharm_mobile/repositories/remote/notification/notification_repository.dart';
 import 'package:hader_pharm_mobile/repositories/remote/notification/params/params_load_notifications.dart';
@@ -30,7 +31,7 @@ class NotificationService implements INotificationService {
     final FirebaseMessaging messaging = firebaseService.messagingService();
 
     await messaging.requestPermission();
-    messaging.setAutoInitEnabled(true);
+
     messaging.setForegroundNotificationPresentationOptions(
       alert: true,
       badge: true,
@@ -42,13 +43,6 @@ class NotificationService implements INotificationService {
     FirebaseMessaging.onMessageOpenedApp.listen((event) {
       actions.backGroundRemoteMessage(event);
     });
-
-    // messaging.getInitialMessage().then((value) {
-    //   if (value != null) {
-    //     actions.terminatedAppRemoteMessage(value);
-    //   }
-    // });
-
     FirebaseMessaging.onMessage.listen(
       (event) {
         actions.forGroundRemoteMessage(event);
@@ -98,7 +92,6 @@ class NotificationService implements INotificationService {
 
   @override
   Future<void> handleForegroundRemoteMessage(RemoteMessage message) async {
-    debugPrint('FOREGROUND: ${message.notification?.title}');
     actions.handleRemoteMessageShowNotification(message);
   }
 

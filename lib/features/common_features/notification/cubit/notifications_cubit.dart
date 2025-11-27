@@ -1,12 +1,16 @@
 import 'dart:async' show Timer, StreamController;
+import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
+import 'package:firebase_messaging/firebase_messaging.dart' show RemoteMessage;
 import 'package:flutter/widgets.dart';
 import 'package:hader_pharm_mobile/config/services/notification/notification_service_port.dart';
 import 'package:hader_pharm_mobile/models/notification.dart';
 import 'package:hader_pharm_mobile/repositories/remote/notification/params/params_load_notifications.dart';
 import 'package:hader_pharm_mobile/repositories/remote/notification/params/params_mark_read.dart';
+import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 import '../../../../config/services/notification/mappers/json_to_notification_model.dart' show jsonToNotificationModel;
 
@@ -21,8 +25,9 @@ class NotificationsCubit extends Cubit<NotificationState> {
 
   final INotificationService notificationService;
   final ScrollController scrollController;
-  StreamController fcmNotificationsStream;
+  final StreamController fcmNotificationsStream;
 
+  final AudioPlayer player = AudioPlayer();
   NotificationsCubit(
       {required this.notificationService, required this.scrollController, required this.fcmNotificationsStream})
       : super(NotificationsInitial()) {
@@ -31,9 +36,16 @@ class NotificationsCubit extends Cubit<NotificationState> {
       addReceivedFcmNotification(event);
     });
   }
-  void addReceivedFcmNotification(Map<String, dynamic> notificationObject) {
+  void addReceivedFcmNotification(RemoteMessage notificationObject) async {
+    var decodedNotificationPayload = jsonDecode(notificationObject.data["notification"]);
+    NotificationModel notificationModel = jsonToNotificationModel({
+      "title": notificationObject.notification?.title,
+      "body": notificationObject.notification?.body,
+      ...decodedNotificationPayload
+    });
     unreadCount = unreadCount + 1;
-    NotificationModel notificationModel = jsonToNotificationModel(notificationObject);
+    player.play(AssetSource(SoundAssetStrings.notificationSound));
+
     notifications.insert(0, notificationModel);
     emit(NotificationsLoaded());
   }
@@ -42,6 +54,7 @@ class NotificationsCubit extends Cubit<NotificationState> {
     try {
       emit(NotificationsLoading());
       var response = await notificationService.getUnreadNotificationsCount();
+
       unreadCount = response.unreadCount;
       emit(NotificationsLoaded());
     } catch (e, stack) {
@@ -116,12 +129,12 @@ class NotificationsCubit extends Cubit<NotificationState> {
 
   void markReadNotification(NotificationModel notification) {
     final updatedNotifications = notifications.map((item) {
-      if (item.id == notification.id) {
+      if (item.id == notification.id && !item.isRead) {
+        unreadCount = unreadCount - 1;
         return item.copyWith(isRead: true);
       }
       return item;
     }).toList();
-    unreadCount = unreadCount - 1;
     notifications = updatedNotifications;
     notificationService.markReadNotification(ParamsMarkRead(id: notification.id));
     emit(NotificationsLoaded());
@@ -138,6 +151,7 @@ class NotificationsCubit extends Cubit<NotificationState> {
   Future<void> close() {
     scrollController.dispose();
     fcmNotificationsStream.close();
+    player.dispose();
     return super.close();
   }
 }
