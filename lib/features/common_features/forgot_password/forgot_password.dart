@@ -25,8 +25,7 @@ class ForgotPasswordScreen extends StatelessWidget {
               state is TimerCountChanged ||
               state is ResetpasswordIsLoading ||
               state is ResetLinkSent ||
-              state is ResendOtpLoading ||
-              state is ResetPasswordFailed) {
+              state is ResendOtpLoading) {
             return const PasswordResetOtpScreen();
           }
 

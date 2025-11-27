@@ -30,19 +30,16 @@ class RequestForgotPasswordScreen extends StatelessWidget {
           width: 150,
         ),
         Text(context.translation!.enter_email_for_password_reset,
-            textAlign: TextAlign.center,
-            style: context.responsiveTextTheme.current.body1Regular),
+            textAlign: TextAlign.center, style: context.responsiveTextTheme.current.body1Regular),
         const ResponsiveGap.s24(),
         Form(
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           key: state.forgotFormKey,
           child: CustomTextField(
               fieldKey: state.emailFieldKey,
               label: '${context.translation!.email}*',
               controller: state.emailController,
               state: FieldState.normal,
-              formatters: [
-                FilteringTextInputFormatter.deny(RegExp(r'\s')),
-              ],
               keyBoadType: TextInputType.emailAddress,
               validationFunc: (value) => validateIsEmail(value?.trim(), translation)),
         ),
@@ -50,7 +47,9 @@ class RequestForgotPasswordScreen extends StatelessWidget {
         PrimaryTextButton(
             label: context.translation!.confirm,
             onTap: () {
-              cubit.forgetPassword();
+              if (state.forgotFormKey.currentState!.validate()) {
+                cubit.forgetPassword();
+              }
             },
             color: AppColors.accent1Shade1),
       ],
