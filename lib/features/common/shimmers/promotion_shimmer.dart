@@ -2,9 +2,8 @@ import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart' show CarouselSlider;
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
-import 'package:hader_pharm_mobile/utils/shimmer_helper.dart' show ShimmerHelper;
-import 'package:shimmer_animation/shimmer_animation.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart' show SmoothPageIndicator, ExpandingDotsEffect;
+import 'package:hader_pharm_mobile/utils/shimmer_helper.dart'
+    show ShimmerHelper;
 
 class PromotionsShimmer extends StatelessWidget {
   final PageController pageController = PageController();
@@ -17,7 +16,9 @@ class PromotionsShimmer extends StatelessWidget {
     List<Widget> shimmerList = List.generate(
         4,
         (index) => ShimmerHelper.generateShimmer(
-            height: 100, width: double.maxFinite, radius: context.responsiveAppSizeTheme.current.r4));
+            height: 100,
+            width: double.maxFinite,
+            radius: context.responsiveAppSizeTheme.current.r4));
 
     return Padding(
       padding: EdgeInsets.symmetric(
@@ -30,7 +31,8 @@ class PromotionsShimmer extends StatelessWidget {
             Container(
               clipBehavior: Clip.antiAlias,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.commonWidgetsRadius)),
+                  borderRadius: BorderRadius.circular(context
+                      .responsiveAppSizeTheme.current.commonWidgetsRadius)),
               height: minSectionHeight * 1.2,
               width: MediaQuery.of(context).size.width,
               child: LayoutBuilder(builder: (context, constraints) {
@@ -43,7 +45,9 @@ class PromotionsShimmer extends StatelessWidget {
                     pageSnapping: true,
                     disableCenter: true,
                   ),
-                  items: shimmerList.map((Widget shimmerItem) => shimmerItem).toList(),
+                  items: shimmerList
+                      .map((Widget shimmerItem) => shimmerItem)
+                      .toList(),
                 );
               }),
             ),
