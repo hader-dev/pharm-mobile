@@ -47,49 +47,29 @@ class PromotionItemWidget3 extends StatelessWidget {
             children: [
               Expanded(
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(
-                      context.responsiveAppSizeTheme.current.r8),
+                  borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.r8),
                   child: AspectRatio(
                     aspectRatio: 1.5,
-                    child: CachedNetworkImageWithAssetFallback(
-                      imageUrl: getItInstance
-                          .get<INetworkService>()
-                          .getFilesPath(
-                              announcement.thumbnailImage?.path ?? ""),
-                      assetImage: DrawableAssetStrings.companyPlaceHolderImg,
+                    child: CachedNetworkImageWithDrawableFallback.withErrorAssetImage(
+                      imageUrl:
+                          getItInstance.get<INetworkService>().getFilesPath(announcement.thumbnailImage?.path ?? ""),
+                      errorAssetImagePath: DrawableAssetStrings.companyPlaceHolderImg,
                       fit: BoxFit.cover,
                     ),
                   ),
                 ),
               ),
               const ResponsiveGap.s4(),
-              // Container(
-              //   padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p4),
-              //   decoration: BoxDecoration(
-              //     color: AppColors.accent1Shade1,
-              //   ),
-              //   child: Text(
-              //     announcement.createdAt.formatYMD,
-              //     style:
-              //         context.responsiveTextTheme.current.body3Medium.copyWith(
-              //       color: Colors.white,
-              //     ),
-              //   ),
-              // ),
-
               Text(
                 announcement.title,
-                style: context.responsiveTextTheme.current.headLine3Medium
-                    .copyWith(
+                style: context.responsiveTextTheme.current.headLine3Medium.copyWith(
                   color: AppColors.accent1Shade1,
                 ),
               ),
               const ResponsiveGap.s4(),
-
               Text(
                 announcement.createdAt.formatYMD,
-                style: context.responsiveTextTheme.current.body3Medium
-                    .copyWith(color: Colors.grey),
+                style: context.responsiveTextTheme.current.body3Medium.copyWith(color: Colors.grey),
               ),
               const ResponsiveGap.s4(),
             ],

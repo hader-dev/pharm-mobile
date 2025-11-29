@@ -14,8 +14,8 @@ class MedicineProductPhotoSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = BlocProvider.of<MedicineDetailsCubit>(context);
 
-    return CachedNetworkImageWithAssetFallback(
-      assetImage: DrawableAssetStrings.medicinePlaceHolderImg,
+    return CachedNetworkImageWithDrawableFallback.withErrorAssetImage(
+      errorAssetImagePath: DrawableAssetStrings.medicinePlaceHolderImg,
       imageUrl: cubit.state.medicineCatalogData.image != null
           ? getItInstance.get<INetworkService>().getFilesPath(
                 cubit.state.medicineCatalogData.image!.path,

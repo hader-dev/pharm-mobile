@@ -18,8 +18,7 @@ import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
-import '../../../common/buttons/solid/primary_icon_button.dart'
-    show PrimaryIconButton;
+import '../../../common/buttons/solid/primary_icon_button.dart' show PrimaryIconButton;
 
 class CartItemWidgetV4 extends StatelessWidget {
   final CartItemModelUi item;
@@ -29,9 +28,7 @@ class CartItemWidgetV4 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cartCubit = context.read<CartCubit>();
-    final imageItem = getItInstance
-        .get<INetworkService>()
-        .getFilesPath(item.model.image?.path ?? "");
+    final imageItem = getItInstance.get<INetworkService>().getFilesPath(item.model.image?.path ?? "");
 
     return BlocBuilder<CartCubit, CartState>(
       builder: (context, state) {
@@ -43,8 +40,7 @@ class CartItemWidgetV4 extends StatelessWidget {
           child: Transform.scale(
             scale: .95,
             child: Padding(
-              padding: EdgeInsets.symmetric(
-                  vertical: context.responsiveAppSizeTheme.current.p8),
+              padding: EdgeInsets.symmetric(vertical: context.responsiveAppSizeTheme.current.p8),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -52,9 +48,7 @@ class CartItemWidgetV4 extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        margin: EdgeInsets.symmetric(
-                            horizontal:
-                                context.responsiveAppSizeTheme.current.p8),
+                        margin: EdgeInsets.symmetric(horizontal: context.responsiveAppSizeTheme.current.p8),
                         clipBehavior: Clip.antiAlias,
                         height: 90,
                         width: 90,
@@ -63,15 +57,13 @@ class CartItemWidgetV4 extends StatelessWidget {
                           border: Border.all(
                             color: const Color.fromARGB(186, 245, 245, 245),
                           ),
-                          borderRadius: BorderRadius.circular(
-                              context.responsiveAppSizeTheme.current.r6),
+                          borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.r6),
                         ),
-                        child: CachedNetworkImageWithAssetFallback(
+                        child: CachedNetworkImageWithDrawableFallback.withErrorAssetImage(
                             fit: BoxFit.fill,
                             height: double.infinity,
                             imageUrl: imageItem,
-                            assetImage:
-                                DrawableAssetStrings.medicinePlaceHolderImg),
+                            errorAssetImagePath: DrawableAssetStrings.medicinePlaceHolderImg),
                       ),
                       Expanded(
                         child: Column(
@@ -81,15 +73,12 @@ class CartItemWidgetV4 extends StatelessWidget {
                               children: [
                                 Expanded(
                                   child: Padding(
-                                    padding: EdgeInsets.only(
-                                        right: context.responsiveAppSizeTheme
-                                            .current.s16),
+                                    padding: EdgeInsets.only(right: context.responsiveAppSizeTheme.current.s16),
                                     child: Text(
                                       item.model.designation,
                                       softWrap: true,
                                       overflow: TextOverflow.ellipsis,
-                                      style: context.responsiveTextTheme.current
-                                          .headLine5Medium,
+                                      style: context.responsiveTextTheme.current.headLine5Medium,
                                     ),
                                   ),
                                 ),
@@ -98,22 +87,19 @@ class CartItemWidgetV4 extends StatelessWidget {
                                   scale: .75,
                                   child: PrimaryIconButton(
                                     isBordered: false,
-                                    bgColor:
-                                        SystemColors.red.primary.withAlpha(20),
+                                    bgColor: SystemColors.red.primary.withAlpha(20),
                                     onPressed: () {
                                       cartCubit.deleteCartItem(item);
                                     },
                                     icon: Icon(LucideIcons.trash,
-                                        size: context.responsiveAppSizeTheme
-                                            .current.iconSize20,
+                                        size: context.responsiveAppSizeTheme.current.iconSize20,
                                         color: SystemColors.red.primary),
                                   ),
                                 )
                               ],
                             ),
                             SizedBox(
-                              height:
-                                  context.responsiveAppSizeTheme.current.p12,
+                              height: context.responsiveAppSizeTheme.current.p12,
                             ),
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.baseline,
@@ -121,8 +107,7 @@ class CartItemWidgetV4 extends StatelessWidget {
                               children: [
                                 PriceWidget(
                                   price: double.parse(item.model.unitPriceHt),
-                                  overridePrice: item.model.unitPriceFinal !=
-                                          null
+                                  overridePrice: item.model.unitPriceFinal != null
                                       ? double.parse(item.model.unitPriceFinal!)
                                       : null,
                                 ),
@@ -131,16 +116,11 @@ class CartItemWidgetV4 extends StatelessWidget {
                                   builder: (context, state) {
                                     return CartQuantitySection(
                                       displayQuantityLabel: false,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      decrement: () => cartCubit
-                                          .decreaseCartItemQuantity(item),
-                                      increment: () => cartCubit
-                                          .increaseCartItemQuantity(item),
-                                      quantityController:
-                                          item.quantityController,
-                                      onQuantityChanged: (value) =>
-                                          cartCubit.updateItemQuantity(item),
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      decrement: () => cartCubit.decreaseCartItemQuantity(item),
+                                      increment: () => cartCubit.increaseCartItemQuantity(item),
+                                      quantityController: item.quantityController,
+                                      onQuantityChanged: (value) => cartCubit.updateItemQuantity(item),
                                       maxQuantity: item.model.maxOrderQuantity,
                                       minQuantity: item.model.minOrderQuantity,
                                     );
@@ -149,25 +129,18 @@ class CartItemWidgetV4 extends StatelessWidget {
                               ],
                             ),
                             SizedBox(
-                              height:
-                                  context.responsiveAppSizeTheme.current.p10,
+                              height: context.responsiveAppSizeTheme.current.p10,
                             ),
-                            if (double.parse(
-                                    item.packageQuantityController.text) >
-                                0)
+                            if (double.parse(item.packageQuantityController.text) > 0)
                               Row(
                                 children: [
                                   CustomChip(
-                                    labelStyle: context.responsiveTextTheme
-                                        .current.bodyXXSmall,
-                                    labelColor:
-                                        Color.fromARGB(255, 26, 152, 161),
+                                    labelStyle: context.responsiveTextTheme.current.bodyXXSmall,
+                                    labelColor: Color.fromARGB(255, 26, 152, 161),
                                     icon: Iconsax.box_1,
                                     label:
                                         "${context.translation!.package}${" (${item.packageQuantityController.text})"}",
-                                    color:
-                                        const Color.fromARGB(255, 26, 152, 161)
-                                            .withAlpha(50),
+                                    color: const Color.fromARGB(255, 26, 152, 161).withAlpha(50),
                                   ),
                                   Spacer()
                                 ],
@@ -175,9 +148,8 @@ class CartItemWidgetV4 extends StatelessWidget {
                             ...[
                               ResponsiveGap.s4(),
                               InkWell(
-                                onTap: () => RoutingManager.router.pushNamed(
-                                    RoutingManager.vendorDetails,
-                                    extra: item.model.sellerCompany.id),
+                                onTap: () => RoutingManager.router
+                                    .pushNamed(RoutingManager.vendorDetails, extra: item.model.sellerCompany.id),
                                 splashColor: Colors.transparent,
                                 highlightColor: Colors.transparent,
                                 focusColor: Colors.transparent,
@@ -186,13 +158,11 @@ class CartItemWidgetV4 extends StatelessWidget {
                                   children: [
                                     Text(
                                       item.model.sellerCompany.name,
-                                      style: context.responsiveTextTheme.current
-                                          .bodySmall,
+                                      style: context.responsiveTextTheme.current.bodySmall,
                                     ),
                                     Icon(
                                       Icons.keyboard_arrow_right_rounded,
-                                      size: context.responsiveAppSizeTheme
-                                          .current.iconSize16,
+                                      size: context.responsiveAppSizeTheme.current.iconSize16,
                                     )
                                   ],
                                 ),

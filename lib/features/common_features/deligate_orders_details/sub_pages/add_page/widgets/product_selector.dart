@@ -30,22 +30,20 @@ class OrderProductSelector extends StatelessWidget {
       String filter, List<BaseParaPharmaCatalogModel> values) async {
     return values
         .where((element) =>
-            element.name.toLowerCase().contains(filter.toLowerCase()) ||
-            element.name.toString().contains(filter))
+            element.name.toLowerCase().contains(filter.toLowerCase()) || element.name.toString().contains(filter))
         .toList();
   }
 
-  Widget buildDisplayWidget(
-      BuildContext context, BaseParaPharmaCatalogModel? selectedItem) {
+  Widget buildDisplayWidget(BuildContext context, BaseParaPharmaCatalogModel? selectedItem) {
     return Row(
       children: [
-        CachedNetworkImageWithAssetFallback(
+        CachedNetworkImageWithDrawableFallback.withErrorAssetImage(
             height: 50,
             width: 50,
             imageUrl: getItInstance.get<INetworkService>().getFilesPath(
                   selectedItem?.thumbnailImage?.path ?? "",
                 ),
-            assetImage: DrawableAssetStrings.paraPharmaPlaceHolderImg),
+            errorAssetImagePath: DrawableAssetStrings.paraPharmaPlaceHolderImg),
         SizedBox(width: context.responsiveAppSizeTheme.current.s12),
         Text(
           selectedItem?.name ?? context.translation!.select_product,
@@ -55,8 +53,7 @@ class OrderProductSelector extends StatelessWidget {
     );
   }
 
-  Widget buildProductCard(
-      BuildContext context, BaseParaPharmaCatalogModel product) {
+  Widget buildProductCard(BuildContext context, BaseParaPharmaCatalogModel product) {
     final cubit = context.read<DeligateEditOrderCubit>();
     final gCubit = context.read<OrderDetailsCubit>();
 
@@ -99,8 +96,7 @@ class OrderProductSelector extends StatelessWidget {
               children: [
                 Text(
                   "${cubit.state.totalPrice.toStringAsFixed(2)} ${context.translation!.currency}",
-                  style: context.responsiveTextTheme.current.body2Medium
-                      .copyWith(color: AppColors.accent1Shade1),
+                  style: context.responsiveTextTheme.current.body2Medium.copyWith(color: AppColors.accent1Shade1),
                 ),
                 const Spacer(),
                 Icon(
@@ -130,8 +126,7 @@ class OrderProductSelector extends StatelessWidget {
     );
   }
 
-  bool compareFn(BaseParaPharmaCatalogModel a, BaseParaPharmaCatalogModel b) =>
-      a.id == b.id;
+  bool compareFn(BaseParaPharmaCatalogModel a, BaseParaPharmaCatalogModel b) => a.id == b.id;
 
   @override
   Widget build(BuildContext context) {
@@ -150,33 +145,27 @@ class OrderProductSelector extends StatelessWidget {
                 compareFn: compareFn,
                 popupProps: PopupProps.modalBottomSheet(
                   showSearchBox: true,
-                  itemBuilder: (context, item, isDisabled, isSelected) =>
-                      Padding(
-                    padding: EdgeInsets.all(
-                        context.responsiveAppSizeTheme.current.p12),
+                  itemBuilder: (context, item, isDisabled, isSelected) => Padding(
+                    padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p12),
                     child: buildDisplayWidget(context, item),
                   ),
                   searchFieldProps: TextFieldProps(
-                    decoration: buildInputDecorationCustomFieldStyle(
-                        translation.select_product, FieldState.normal, context),
+                    decoration:
+                        buildInputDecorationCustomFieldStyle(translation.select_product, FieldState.normal, context),
                   ),
                 ),
                 itemAsString: (item) => item.name,
                 dropdownBuilder: buildDisplayWidget,
                 onChanged: (selectedProduct) {
                   if (selectedProduct != null) {
-                    context
-                        .read<DeligateEditOrderCubit>()
-                        .selectProduct(selectedProduct);
+                    context.read<DeligateEditOrderCubit>().selectProduct(selectedProduct);
                   }
                 },
                 decoratorProps: DropDownDecoratorProps(
-                  decoration: buildDropdownInputDecoration(
-                      context.translation!.select_product, context),
+                  decoration: buildDropdownInputDecoration(context.translation!.select_product, context),
                 ),
               ),
-              if (state.selectedProduct != null)
-                buildProductCard(context, state.selectedProduct!),
+              if (state.selectedProduct != null) buildProductCard(context, state.selectedProduct!),
             ],
           ),
         );
