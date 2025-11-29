@@ -31,13 +31,7 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
             tabController: tabController,
             shippingAddress: shippingAddress,
             quantityController: quantityController,
-            packageQuantityController: packageQuantityController)) {
-    state.quantityController.addListener(() {
-      if (int.parse(state.quantityController.text) <= 0) {
-        state.quantityController.text = '1';
-      }
-    });
-  }
+            packageQuantityController: packageQuantityController));
   Future<bool> likeMedicine() async {
     try {
       emit(state.toLoaded(
@@ -159,7 +153,7 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
   }
 
   void updateQuantity(String v) {
-    final updatedQuantity = int.parse(v);
+    final updatedQuantity = int.parse(v.isEmpty ? '0' : v);
     if (updatedQuantity > 0) {
       state.quantityController.text = (updatedQuantity).toString();
 

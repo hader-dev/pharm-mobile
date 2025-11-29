@@ -129,6 +129,7 @@ class MakeOrderBottomSheet extends StatelessWidget {
                         initValue: UserManager.instance.currentUser.address,
                         maxLines: 3,
                         maxLength: 255,
+                        onChanged: (value) => cubit.updateQuantity(value ?? ""),
                         validationFunc: (value) => requiredValidator(
                           value,
                           translation,
