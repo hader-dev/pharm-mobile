@@ -3,9 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:hader_pharm_mobile/config/services/firebase/firebase_service.dart';
 import 'package:hader_pharm_mobile/config/services/firebase/firebase_service_port.dart';
-import 'package:hader_pharm_mobile/config/services/notification/actions/handle_remote_message.dart'
-    show terminatedAppRemoteMessage;
-
 import 'package:hader_pharm_mobile/config/services/notification/notification_service_port.dart';
 import 'package:hader_pharm_mobile/repositories/remote/notification/notification_repository.dart';
 import 'package:hader_pharm_mobile/repositories/remote/notification/params/params_load_notifications.dart';
@@ -24,7 +21,8 @@ class NotificationService implements INotificationService {
   final FirebaseServicePort firebaseService;
   final INotificationRepository notificationRepository;
 
-  const NotificationService({required this.firebaseService, required this.notificationRepository});
+  const NotificationService(
+      {required this.firebaseService, required this.notificationRepository});
 
   @override
   Future<void> init() async {
@@ -66,12 +64,15 @@ class NotificationService implements INotificationService {
 
   Future<void> _initNotifications() async {
     await flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()
         ?.requestNotificationsPermission();
 
-    const initializationSettingsAndroid = AndroidInitializationSettings('@mipmap/ic_launcher');
+    const initializationSettingsAndroid =
+        AndroidInitializationSettings('@mipmap/ic_launcher');
 
-    final initializationSettings = InitializationSettings(android: initializationSettingsAndroid);
+    final initializationSettings =
+        InitializationSettings(android: initializationSettingsAndroid);
 
     await flutterLocalNotificationsPlugin.initialize(
       initializationSettings,
@@ -86,7 +87,8 @@ class NotificationService implements INotificationService {
     );
 
     await flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()
         ?.createNotificationChannel(channel);
   }
 
@@ -96,7 +98,8 @@ class NotificationService implements INotificationService {
   }
 
   @override
-  Future<ResponseLoadNotifications> getNotifications(ParamsLoadNotifications paramsLoadNotifications) async {
+  Future<ResponseLoadNotifications> getNotifications(
+      ParamsLoadNotifications paramsLoadNotifications) async {
     return notificationRepository.getNotifications(paramsLoadNotifications);
   }
 

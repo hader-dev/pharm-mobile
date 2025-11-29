@@ -2,10 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
-import 'package:hader_pharm_mobile/config/routes/routing_manager.dart' show RoutingManager;
 import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler.dart';
 
 import '../notification_channels.dart';
@@ -19,7 +17,8 @@ Future<void> handleRemoteMessageShowNotification(RemoteMessage message) async {
       priority: Priority.max,
       sound: RawResourceAndroidNotificationSound('notif_sound'));
 
-  const NotificationDetails platformDetails = NotificationDetails(android: androidDetails);
+  const NotificationDetails platformDetails =
+      NotificationDetails(android: androidDetails);
 
   final String? title = message.notification?.title ?? message.data['title'];
   final String? body = message.notification?.body ?? message.data['body'];

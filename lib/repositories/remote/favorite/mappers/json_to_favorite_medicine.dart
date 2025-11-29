@@ -33,7 +33,7 @@ BaseMedicineCatalogModel jsonToFavoriteBaseMedicine(Map<String, dynamic> base) {
     isQuota: jsonMedicine["isQuota"] ?? false,
     isFeatured: jsonMedicine["isFeatured"] ?? false,
     displayOrder: jsonMedicine["displayOrder"] ?? 0,
-    isLiked: jsonMedicine["isFavorite"] ?? false,
+    isLiked: true,
     company: jsonCompany != null ? BaseCompany.fromJson(jsonCompany) : null,
   );
 }

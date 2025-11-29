@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
@@ -30,7 +29,8 @@ class RequestForgotPasswordScreen extends StatelessWidget {
           width: 150,
         ),
         Text(context.translation!.enter_email_for_password_reset,
-            textAlign: TextAlign.center, style: context.responsiveTextTheme.current.body1Regular),
+            textAlign: TextAlign.center,
+            style: context.responsiveTextTheme.current.body1Regular),
         const ResponsiveGap.s24(),
         Form(
           autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -41,7 +41,8 @@ class RequestForgotPasswordScreen extends StatelessWidget {
               controller: state.emailController,
               state: FieldState.normal,
               keyBoadType: TextInputType.emailAddress,
-              validationFunc: (value) => validateIsEmail(value?.trim(), translation)),
+              validationFunc: (value) =>
+                  validateIsEmail(value?.trim(), translation)),
         ),
         const ResponsiveGap.s24(),
         PrimaryTextButton(
