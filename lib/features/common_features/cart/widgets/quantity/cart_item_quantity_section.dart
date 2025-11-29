@@ -66,26 +66,9 @@ class CartQuantitySection extends StatelessWidget {
                   cursorColor: AppColors.accentGreenShade1,
                   controller: quantityController,
                   textAlign: TextAlign.center,
+                  readOnly: true,
                   keyboardType: TextInputType.number,
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                  onChanged: (value) {
-                    final parsed = int.tryParse(value);
-                    if (value.isEmpty || parsed == null || parsed < minQuantity) {
-                      quantityController.text = minQuantity.toString();
-                      quantityController.selection = TextSelection.fromPosition(
-                        TextPosition(offset: quantityController.text.length),
-                      );
-                      onQuantityChanged?.call(minQuantity.toString());
-                    } else if (parsed > maxQuantity) {
-                      quantityController.text = maxQuantity.toString();
-                      quantityController.selection = TextSelection.fromPosition(
-                        TextPosition(offset: quantityController.text.length),
-                      );
-                      onQuantityChanged?.call(maxQuantity.toString());
-                    } else {
-                      onQuantityChanged?.call(value);
-                    }
-                  },
                   validator: (value) => value == null || value.isEmpty ? '' : null,
                   style: context.responsiveTextTheme.current.body3Medium.copyWith(color: TextColors.primary.color),
                   decoration: InputDecoration(

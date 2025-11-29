@@ -8,24 +8,20 @@ import '../../../config/services/auth/user_manager.dart';
 import '../../../utils/enums.dart';
 
 class AppDialogs {
-  static Future<void> showLogoutDialogLogout(BuildContext context) async {
+  static Future<void> showLogoutDialogLogout(
+    BuildContext context,
+    Function? onValidate,
+    Function? onCancel,
+  ) async {
     await getItInstance.get<ValidateActionDialog>().showValidateActionDialog(
-        agreeText:
-            RoutingManager.rootNavigatorKey.currentContext!.translation!.logout,
-        cancelText:
-            RoutingManager.rootNavigatorKey.currentContext!.translation!.cancel,
+        agreeText: RoutingManager.rootNavigatorKey.currentContext!.translation!.logout,
+        cancelText: RoutingManager.rootNavigatorKey.currentContext!.translation!.cancel,
         dialogType: DialogType.warning,
-        title: Text(
-            RoutingManager.rootNavigatorKey.currentContext!.translation!
-                .logout_confirmation,
+        title: Text(RoutingManager.rootNavigatorKey.currentContext!.translation!.logout_confirmation,
             style: context.responsiveTextTheme.current.headLine3SemiBold),
-        content: Text(
-            RoutingManager.rootNavigatorKey.currentContext!.translation!
-                .logout_confirmation_message,
+        content: Text(RoutingManager.rootNavigatorKey.currentContext!.translation!.logout_confirmation_message,
             style: context.responsiveTextTheme.current.body3Medium),
-        onCancel: () {},
-        onValidate: () async {
-          getItInstance.get<UserManager>().logout();
-        });
+        onCancel: onCancel,
+        onValidate: onValidate);
   }
 }
