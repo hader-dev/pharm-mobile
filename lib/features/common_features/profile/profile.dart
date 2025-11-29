@@ -158,15 +158,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           title: Text(context.translation!.logout,
                               style: context.responsiveTextTheme.current.body3Medium.copyWith(color: Colors.red)),
                           onTap: () async {
-                            await AppDialogs.showLogoutDialogLogout(context, () {
-                              context.pop();
-                            }, () async {
-                              getItInstance.get<UserManager>().logout().then((value) {
-                                if (context.mounted) {
-                                  GoRouter.of(context).pushReplacementNamed(RoutingManager.loginScreen);
-                                }
-                              });
-                            });
+                            await AppDialogs.showLogoutDialogLogout(
+                              context,
+                              () async {
+                                getItInstance.get<UserManager>().logout().then((value) {
+                                  if (context.mounted) {
+                                    GoRouter.of(context).pushReplacementNamed(RoutingManager.loginScreen);
+                                  }
+                                });
+                              },
+                              () {},
+                            );
                           },
                         ),
                       ),

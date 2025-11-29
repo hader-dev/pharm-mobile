@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
@@ -7,7 +8,6 @@ import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import '../../../utils/enums.dart';
 
 class ValidateActionDialog {
-  bool result = false;
   Future<void> showValidateActionDialog({
     Function? onValidate,
     Function? onCancel,
@@ -20,7 +20,7 @@ class ValidateActionDialog {
     String agreeText = "Ok",
     String cancelText = "Cancel",
   }) async {
-    await showDialog<void>(
+    showDialog<bool>(
       context: RoutingManager.rootNavigatorKey.currentContext!,
       barrierDismissible: isDismissible,
       builder: (BuildContext ctx) {
@@ -62,7 +62,7 @@ class ValidateActionDialog {
                           if (canceledEnabled)
                             TextButton(
                               onPressed: () async {
-                                Navigator.of(context).pop();
+                                context.pop(false);
                               },
                               child: Text(
                                 cancelText,
@@ -73,8 +73,7 @@ class ValidateActionDialog {
                           if (okEnabled)
                             TextButton(
                               onPressed: () {
-                                result = true;
-                                Navigator.of(context).pop();
+                                context.pop(true);
                               },
                               child: Text(
                                 agreeText,
@@ -92,8 +91,6 @@ class ValidateActionDialog {
           },
         );
       },
-    ).then((_) {
-      onValidate!();
-    });
+    ).then((value) => value == true ? onValidate?.call() : onCancel?.call());
   }
 }
