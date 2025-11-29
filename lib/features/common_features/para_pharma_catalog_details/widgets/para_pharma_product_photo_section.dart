@@ -1,13 +1,8 @@
-import 'package:cached_network_image_plus/flutter_cached_network_image_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
-import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/cubit/para_pharma_details_cubit.dart';
-import 'package:hader_pharm_mobile/utils/assets_strings.dart';
-import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
-import 'package:iconsax/iconsax.dart';
 
 import '../../../common/image/cached_network_image_with_asset_fallback.dart'
     show CachedNetworkImageWithDrawableFallback;
@@ -21,9 +16,12 @@ class ParaPharmaProductPhotoSection extends StatelessWidget {
     return CachedNetworkImageWithDrawableFallback.withErrorSvgImage(
       width: double.maxFinite,
       height: MediaQuery.of(context).size.width > 768 ? 400 : 320,
-      imageUrl: getItInstance.get<INetworkService>().getFilesPath(cubit.state.paraPharmaCatalogData.image?.path ?? ""),
+      imageUrl: getItInstance
+          .get<INetworkService>()
+          .getFilesPath(cubit.state.paraPharmaCatalogData.image?.path ?? ""),
       fit: BoxFit.cover,
-      errorImgSize: MediaQuery.of(context).size.width > 768 ? 400 * .4 : 320 * .4,
+      errorImgSize:
+          MediaQuery.of(context).size.width > 768 ? 400 * .4 : 320 * .4,
       errorMsg: "No Image Available",
     );
     // ? CacheNetworkImagePlus(

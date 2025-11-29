@@ -16,9 +16,12 @@ class MedicineProductPhotoSection extends StatelessWidget {
     return CachedNetworkImageWithDrawableFallback.withErrorSvgImage(
       width: double.maxFinite,
       height: MediaQuery.of(context).size.width > 768 ? 400 : 320,
-      imageUrl: getItInstance.get<INetworkService>().getFilesPath(cubit.state.medicineCatalogData.image?.path ?? ""),
+      imageUrl: getItInstance
+          .get<INetworkService>()
+          .getFilesPath(cubit.state.medicineCatalogData.image?.path ?? ""),
       fit: BoxFit.cover,
-      errorImgSize: MediaQuery.of(context).size.width > 768 ? 400 * .4 : 320 * .4,
+      errorImgSize:
+          MediaQuery.of(context).size.width > 768 ? 400 * .4 : 320 * .4,
       errorMsg: "No Image Available",
     );
   }
