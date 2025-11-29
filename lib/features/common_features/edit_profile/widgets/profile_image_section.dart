@@ -21,14 +21,11 @@ class ProfileImageSection extends StatelessWidget {
     final cubit = BlocProvider.of<EditProfileCubit>(context);
     final state = cubit.state;
     final userImage = getItInstance.get<UserManager>().currentUser.image;
-    final imageUrl = userImage != null
-        ? getItInstance.get<INetworkService>().getFilesPath(userImage.path)
-        : null;
+    final imageUrl = userImage != null ? getItInstance.get<INetworkService>().getFilesPath(userImage.path) : null;
 
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 768;
-    final imageSize =
-        isTablet ? 120.0 : MediaQuery.sizeOf(context).height * 0.2;
+    final imageSize = isTablet ? 120.0 : MediaQuery.sizeOf(context).height * 0.2;
 
     return SizedBox(
       width: double.maxFinite,
@@ -42,8 +39,7 @@ class ProfileImageSection extends StatelessWidget {
             child: Stack(
               children: [
                 Container(
-                    margin: EdgeInsets.symmetric(
-                        vertical: context.responsiveAppSizeTheme.current.p4),
+                    margin: EdgeInsets.symmetric(vertical: context.responsiveAppSizeTheme.current.p4),
                     clipBehavior: Clip.antiAlias,
                     height: imageSize,
                     width: imageSize,
@@ -59,9 +55,7 @@ class ProfileImageSection extends StatelessWidget {
                       scale: 0.7,
                       child: PrimaryIconButton(
                         icon: Icon(
-                          state.pickedImage != null
-                              ? Iconsax.edit_2
-                              : Iconsax.add,
+                          state.pickedImage != null ? Iconsax.edit_2 : Iconsax.add,
                           color: Colors.white,
                         ),
                         isBordered: true,
@@ -107,10 +101,10 @@ class ProfileImageSection extends StatelessWidget {
       );
     }
 
-    return CachedNetworkImageWithAssetFallback(
+    return CachedNetworkImageWithDrawableFallback.withErrorAssetImage(
       imageUrl: imageUrl ?? "",
       fit: BoxFit.cover,
-      assetImage: DrawableAssetStrings.defaultProfileImgIcon,
+      errorAssetImagePath: DrawableAssetStrings.defaultProfileImgIcon,
     );
   }
 }

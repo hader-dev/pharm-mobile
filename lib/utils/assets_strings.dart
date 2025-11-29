@@ -55,6 +55,8 @@ class DrawableAssetStrings {
   static const String newMedicinesIcon = 'assets/icons/new_icons/medicines.svg';
   static const String newSellerIcon = 'assets/icons/new_icons/seller.svg';
   static const String newNotificationIcon = 'assets/icons/new_icons/notification.svg';
+  static const String noImgPlaceHolderIcon = 'assets/icons/new_icons/no_Img_place_holder.svg';
+  static const String announcementIcon = 'assets/icons/new_icons/announcement.svg';
 }
 
 class JsonAssetStrings {

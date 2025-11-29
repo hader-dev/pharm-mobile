@@ -56,19 +56,14 @@ class OrderItemWidget extends StatelessWidget {
                         child: Container(
                             clipBehavior: Clip.antiAlias,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(
-                                  context.responsiveAppSizeTheme.current.p8),
-                              color: item.model.product.imageUrl == null
-                                  ? const Color.fromARGB(255, 145, 106, 106)
-                                  : null,
+                              borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.p8),
+                              color:
+                                  item.model.product.imageUrl == null ? const Color.fromARGB(255, 145, 106, 106) : null,
                             ),
-                            child: CachedNetworkImageWithAssetFallback(
-                              assetImage:
-                                  DrawableAssetStrings.medicinePlaceHolderImg,
+                            child: CachedNetworkImageWithDrawableFallback.withErrorAssetImage(
+                              errorAssetImagePath: DrawableAssetStrings.medicinePlaceHolderImg,
                               imageUrl: item.model.product.imageUrl != null
-                                  ? getItInstance
-                                      .get<INetworkService>()
-                                      .getFilesPath(
+                                  ? getItInstance.get<INetworkService>().getFilesPath(
                                         item.model.product.imageUrl!,
                                       )
                                   : "",
@@ -81,13 +76,11 @@ class OrderItemWidget extends StatelessWidget {
                       Expanded(
                         flex: 6,
                         child: Text(
-                          item.model.product.designation ??
-                              context.translation!.unknown,
+                          item.model.product.designation ?? context.translation!.unknown,
                           softWrap: true,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
-                          style: context
-                              .responsiveTextTheme.current.headLine4Medium,
+                          style: context.responsiveTextTheme.current.headLine4Medium,
                         ),
                       ),
                     ],
@@ -101,8 +94,7 @@ class OrderItemWidget extends StatelessWidget {
                   child: ItemContent(
                     itemId: item.model.product.id,
                     quantity: item.model.quantity,
-                    price: item.model.suggestedPrice?.toString() ??
-                        item.model.product.unitPriceHt.toString(),
+                    price: item.model.suggestedPrice?.toString() ?? item.model.product.unitPriceHt.toString(),
                     orderId: item.model.product.orderId,
                   ),
                 )

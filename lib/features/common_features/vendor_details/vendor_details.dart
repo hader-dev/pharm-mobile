@@ -16,7 +16,7 @@ class VendorDetails extends StatelessWidget {
     return VendorDetailsProvider(
       companyId: companyId,
       child: Scaffold(
-        appBar: VendorDetailsAppbar(),
+        appBar: VendorDetailsAppBar(),
         key: vendorDetailsScaffoldKey,
         body: SafeArea(
           child: BlocBuilder<VendorDetailsCubit, VendorDetailsState>(
@@ -24,7 +24,7 @@ class VendorDetails extends StatelessWidget {
               if (state is VendorDetailsLoading) {
                 return Center(child: CircularProgressIndicator());
               }
-              return VandorDetailsTabBarSection(
+              return VendorDetailsTabBarSection(
                 companyId: companyId,
               );
             },

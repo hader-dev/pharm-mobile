@@ -8,6 +8,7 @@ import 'package:hader_pharm_mobile/config/services/network/network_interface.dar
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/image_load_error_widget.dart' show ImageLoadErrorWidget;
 import 'package:hader_pharm_mobile/features/common/widgets/price_widget.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/silver_tags.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/stock_availlable.dart';
@@ -43,8 +44,7 @@ class ParaPharmaWidget2 extends StatelessWidget {
         border: Border.all(
           color: const Color.fromARGB(186, 245, 245, 245),
         ),
-        borderRadius:
-            BorderRadius.circular(context.responsiveAppSizeTheme.current.r6),
+        borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.r6),
       ),
       child: InkWell(
         onTap: () {
@@ -65,8 +65,7 @@ class ParaPharmaWidget2 extends StatelessWidget {
                     vertical: context.responsiveAppSizeTheme.current.p6),
                 clipBehavior: Clip.antiAlias,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(
-                      context.responsiveAppSizeTheme.current.r6),
+                  borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.r6),
                   border: paraPharmData.image != null
                       ? null
                       : Border.all(
@@ -77,26 +76,20 @@ class ParaPharmaWidget2 extends StatelessWidget {
                   children: [
                     paraPharmData.image != null
                         ? CacheNetworkImagePlus(
-                            boxFit: BoxFit.contain,
+                            boxFit: BoxFit.fitHeight,
                             width: double.maxFinite,
                             height: double.maxFinite,
-                            imageUrl: getItInstance
-                                .get<INetworkService>()
-                                .getFilesPath(paraPharmData.image?.path ?? ''),
+                            imageUrl:
+                                getItInstance.get<INetworkService>().getFilesPath(paraPharmData.image?.path ?? ''),
                           )
-                        : Center(
-                            child: Image(
-                              image: AssetImage(DrawableAssetStrings
-                                  .paraPharmaPlaceHolderImg),
-                              fit: BoxFit.cover,
-                              height: 80,
-                              width: 80,
-                            ),
-                          ),
+                        : SizedBox.expand(
+                            child: ImageLoadErrorWidget(
+                            iconSize: context.responsiveAppSizeTheme.current.iconSize48,
+                            errorMsg: 'No image available',
+                          )),
                     Row(
                       children: [
-                        StockAvailableContainerWidget(
-                            isAvailable: paraPharmData.stockQuantity > 0),
+                        StockAvailableContainerWidget(isAvailable: paraPharmData.stockQuantity > 0),
                         const Spacer(),
                         if (onFavoriteCallback != null)
                           InkWell(
@@ -104,14 +97,9 @@ class ParaPharmaWidget2 extends StatelessWidget {
                               width: 30,
                               height: 30,
                               child: Icon(
-                                paraPharmData.isLiked
-                                    ? Iconsax.heart5
-                                    : Iconsax.heart,
-                                color: paraPharmData.isLiked
-                                    ? Colors.red
-                                    : Colors.grey[400],
-                                size: context
-                                    .responsiveAppSizeTheme.current.iconSize20,
+                                paraPharmData.isLiked ? Iconsax.heart5 : Iconsax.heart,
+                                color: paraPharmData.isLiked ? Colors.red : Colors.grey[400],
+                                size: context.responsiveAppSizeTheme.current.iconSize20,
                               ),
                             ),
                             onTap: () {
@@ -139,20 +127,13 @@ class ParaPharmaWidget2 extends StatelessWidget {
                         width: 27,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          border: Border.all(
-                              color: AppColors.bgDisabled, width: 1.2),
+                          border: Border.all(color: AppColors.bgDisabled, width: 1.2),
                           image: DecorationImage(
-                            image: paraPharmData
-                                        .company?.thumbnailImage?.path ==
-                                    null
-                                ? AssetImage(
-                                    DrawableAssetStrings.companyPlaceHolderImg)
+                            image: paraPharmData.company?.thumbnailImage?.path == null
+                                ? AssetImage(DrawableAssetStrings.companyPlaceHolderImg)
                                 : NetworkImage(
-                                    getItInstance
-                                        .get<INetworkService>()
-                                        .getFilesPath(
-                                          paraPharmData
-                                              .company!.thumbnailImage!.path,
+                                    getItInstance.get<INetworkService>().getFilesPath(
+                                          paraPharmData.company!.thumbnailImage!.path,
                                         ),
                                   ),
                           ),
@@ -162,8 +143,7 @@ class ParaPharmaWidget2 extends StatelessWidget {
                       Text(paraPharmData.company!.name,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
-                          style:
-                              context.responsiveTextTheme.current.body3Regular),
+                          style: context.responsiveTextTheme.current.body3Regular),
                     ],
                   ),
                   const ResponsiveGap.s4(),
@@ -173,31 +153,25 @@ class ParaPharmaWidget2 extends StatelessWidget {
                     child: Text(paraPharmData.name,
                         softWrap: true,
                         overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                        style: context
-                            .responsiveTextTheme.current.headLine3SemiBold
+                        maxLines: 1,
+                        style: context.responsiveTextTheme.current.headLine3SemiBold
                             .copyWith(color: TextColors.primary.color)),
                   ),
                   const ResponsiveGap.s6(),
-                  if (paraPharmData.tags.isNotEmpty && displayTags)
-                    SilverTags(tags: paraPharmData.tags),
+                  if (paraPharmData.tags.isNotEmpty && displayTags) SilverTags(tags: paraPharmData.tags),
                   PriceWidget(
                     price: paraPharmData.unitPriceHt,
                     overridePrice: paraPharmData.computedPrice,
-                    mainStyle: context
-                        .responsiveTextTheme.current.headLine4SemiBold
-                        .copyWith(color: AppColors.accent1Shade1),
-                    currencyStyle: context
-                        .responsiveTextTheme.current.bodyXSmall
+                    mainStyle:
+                        context.responsiveTextTheme.current.headLine4SemiBold.copyWith(color: AppColors.accent1Shade1),
+                    currencyStyle: context.responsiveTextTheme.current.bodyXSmall
                         .copyWith(color: AppColors.accent1Shade1, fontSize: 10),
                   ),
                   const ResponsiveGap.s4(),
                   PrimaryTextButton(
                       label: context.translation!.add_cart,
                       leadingIcon: Iconsax.add,
-                      labelTextStyle: context
-                          .responsiveTextTheme.current.body3Regular
-                          .copyWith(color: Colors.white),
+                      labelTextStyle: context.responsiveTextTheme.current.body3Regular.copyWith(color: Colors.white),
                       onTap: () {
                         BottomSheetHelper.showCommonBottomSheet(
                             initialChildSize: .5,

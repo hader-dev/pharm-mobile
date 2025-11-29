@@ -1,6 +1,7 @@
 import 'package:cached_network_image_plus/flutter_cached_network_image_plus.dart' show CacheNetworkImagePlus;
 import 'package:flutter/material.dart' show Colors, InkWell, Icons;
 import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/flutter_svg.dart' show SvgPicture;
 import 'package:hader_pharm_mobile/features/common/chips/custom_chip.dart' show CustomChip;
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart' show ResponsiveGap;
 import 'package:hader_pharm_mobile/utils/enums.dart' show DistributorCategory, DistributorCategoryDisplayNameExtension;
@@ -48,10 +49,9 @@ class VendorHomeWidget extends StatelessWidget {
             children: [
               Container(
                 margin: EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
+                clipBehavior: Clip.antiAlias,
                 height: 50,
                 width: 50,
-                padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
-                clipBehavior: Clip.antiAlias,
                 decoration: BoxDecoration(
                   color: AppColors.bgDarken2,
                   shape: BoxShape.circle,
@@ -60,9 +60,12 @@ class VendorHomeWidget extends StatelessWidget {
                   ),
                 ),
                 child: (imageUrl != null && imageUrl!.isNotEmpty)
-                    ? CacheNetworkImagePlus(boxFit: BoxFit.fill, imageUrl: imageUrl!)
-                    : Image(
-                        image: AssetImage(fallbackAssetImagePlaceholderPath),
+                    ? CacheNetworkImagePlus(
+                        imageUrl: imageUrl!,
+                        boxFit: BoxFit.fill,
+                      )
+                    : SvgPicture.asset(
+                        fallbackAssetImagePlaceholderPath,
                         fit: BoxFit.fill,
                       ),
               ),

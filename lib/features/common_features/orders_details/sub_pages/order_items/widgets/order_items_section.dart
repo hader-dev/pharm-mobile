@@ -39,7 +39,6 @@ class OrderItemsSection extends StatelessWidget {
             padding: EdgeInsets.only(right: context.responsiveAppSizeTheme.current.p8),
             child: ListView(
               controller: scrollController,
-              shrinkWrap: true,
               children: orderItems
                   .map(
                     (OrderItem item) => OrderItemWidgetV2(

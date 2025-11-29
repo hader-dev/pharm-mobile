@@ -47,11 +47,11 @@ class _AppLayoutState extends State<AppLayout> {
 
     final app = BlocBuilder<AppLayoutCubit, AppLayoutState>(
       builder: (context, state) {
-        return SafeArea(
-          child: Scaffold(
-            key: AppLayout.appLayoutScaffoldKey,
-            bottomNavigationBar: AppNavBar(),
-            body: Column(
+        return Scaffold(
+          key: AppLayout.appLayoutScaffoldKey,
+          bottomNavigationBar: AppNavBar(),
+          body: SafeArea(
+            child: Column(
               children: [
                 BlocProvider.of<AppLayoutCubit>(context).appTopBars[BlocProvider.of<AppLayoutCubit>(context).pageIndex],
                 Expanded(

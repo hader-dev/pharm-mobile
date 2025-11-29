@@ -19,20 +19,17 @@ class FavoritesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => FavoritesCubit(
-          favoriteRepository:
-              FavoriteRepository(client: getItInstance.get<INetworkService>()))
-        ..fetchFavorites(),
+      create: (context) =>
+          FavoritesCubit(favoriteRepository: FavoriteRepository(client: getItInstance.get<INetworkService>()))
+            ..fetchFavorites(),
       child: Scaffold(
         key: favoritesScaffoldKey,
-        appBar: CustomAppBarV2.alternate(
+        appBar: CustomAppBarV2.normal(
           leading: IconButton(
             icon: Icon(
-              Directionality.of(context) == TextDirection.rtl
-                  ? Iconsax.arrow_right_3
-                  : Iconsax.arrow_left_2,
+              Directionality.of(context) == TextDirection.rtl ? Iconsax.arrow_right_3 : Iconsax.arrow_left_2,
               size: context.responsiveAppSizeTheme.current.iconSize25,
-              color: AppColors.bgWhite,
+              color: AppColors.accent1Shade1,
             ),
             onPressed: () {
               context.pop();
@@ -40,8 +37,7 @@ class FavoritesScreen extends StatelessWidget {
           ),
           title: Text(
             context.translation!.favorites,
-            style: context.responsiveTextTheme.current.headLine3SemiBold
-                .copyWith(color: AppColors.bgWhite),
+            style: context.responsiveTextTheme.current.headLine3SemiBold.copyWith(color: AppColors.accent1Shade1),
           ),
         ),
         body: SafeArea(child: FavoritesTabBarSection()),

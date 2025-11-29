@@ -20,32 +20,27 @@ class CartItemWidgetV2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cartCubit = context.read<CartCubit>();
-    final imageItem = getItInstance
-        .get<INetworkService>()
-        .getFilesPath(item.model.image?.path ?? "");
+    final imageItem = getItInstance.get<INetworkService>().getFilesPath(item.model.image?.path ?? "");
 
     return Container(
       margin: EdgeInsets.symmetric(
-          vertical: context.responsiveAppSizeTheme.current.p8,
-          horizontal: context.responsiveAppSizeTheme.current.p4),
+          vertical: context.responsiveAppSizeTheme.current.p8, horizontal: context.responsiveAppSizeTheme.current.p4),
       padding: EdgeInsets.symmetric(
-          vertical: context.responsiveAppSizeTheme.current.p10,
-          horizontal: context.responsiveAppSizeTheme.current.p10),
+          vertical: context.responsiveAppSizeTheme.current.p10, horizontal: context.responsiveAppSizeTheme.current.p10),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey.shade200),
-        borderRadius: BorderRadius.circular(
-            context.responsiveAppSizeTheme.current.commonWidgetsRadius),
+        borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.commonWidgetsRadius),
       ),
       height: 190,
       child: Row(
         children: [
           Expanded(
             flex: 2,
-            child: CachedNetworkImageWithAssetFallback(
+            child: CachedNetworkImageWithDrawableFallback.withErrorAssetImage(
                 fit: BoxFit.fill,
                 height: double.infinity,
                 imageUrl: imageItem,
-                assetImage: DrawableAssetStrings.medicinePlaceHolderImg),
+                errorAssetImagePath: DrawableAssetStrings.medicinePlaceHolderImg),
           ),
           const ResponsiveGap.s8(),
           Expanded(
@@ -59,8 +54,7 @@ class CartItemWidgetV2 extends StatelessWidget {
                       item.model.designation,
                       softWrap: true,
                       overflow: TextOverflow.ellipsis,
-                      style:
-                          context.responsiveTextTheme.current.headLine5SemiBold,
+                      style: context.responsiveTextTheme.current.headLine5SemiBold,
                     ),
                     const Spacer(),
                     InkWell(
@@ -81,31 +75,24 @@ class CartItemWidgetV2 extends StatelessWidget {
                   children: [
                     Text(
                       "${context.translation!.package} ${item.packageQuantityController.text}",
-                      style: context.responsiveTextTheme.current.headLine4Medium
-                          .copyWith(color: Colors.grey),
+                      style: context.responsiveTextTheme.current.headLine4Medium.copyWith(color: Colors.grey),
                     ),
                     Text(
                       "${(num.parse(item.model.unitPriceHt) * num.parse(item.quantityController.text)).toStringAsFixed(2)} ${context.translation!.currency}",
-                      style: context.responsiveTextTheme.current.headLine4Medium
-                          .copyWith(color: AppColors.accent1Shade1),
+                      style:
+                          context.responsiveTextTheme.current.headLine4Medium.copyWith(color: AppColors.accent1Shade1),
                     ),
                     QuantitySectionModified(
                       disabledPackageQuantity: true,
                       displayQuantityLabel: false,
                       // packageSize: item.model.packageSize,
-                      decrementQuantity: () =>
-                          cartCubit.decreaseCartItemQuantity(item),
-                      incrementQuantity: () =>
-                          cartCubit.increaseCartItemQuantity(item),
-                      decrementPackageQuantity: () =>
-                          cartCubit.decreaseCartItemPackageQuantity(item),
-                      incrementPackageQuantity: () =>
-                          cartCubit.increaseCartItemPackageQuantity(item),
+                      decrementQuantity: () => cartCubit.decreaseCartItemQuantity(item),
+                      incrementQuantity: () => cartCubit.increaseCartItemQuantity(item),
+                      decrementPackageQuantity: () => cartCubit.decreaseCartItemPackageQuantity(item),
+                      incrementPackageQuantity: () => cartCubit.increaseCartItemPackageQuantity(item),
                       quantityController: item.quantityController,
-                      onQuantityChanged: (value) =>
-                          cartCubit.updateItemQuantity(item),
-                      onPackageQuantityChanged: (value) =>
-                          cartCubit.updateItemPackageQuantity(item),
+                      onQuantityChanged: (value) => cartCubit.updateItemQuantity(item),
+                      onPackageQuantityChanged: (value) => cartCubit.updateItemPackageQuantity(item),
                       packageQuantityController: item.packageQuantityController,
                     ),
                   ],

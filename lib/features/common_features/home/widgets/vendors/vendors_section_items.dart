@@ -13,11 +13,9 @@ import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
-import '../../../../../config/responsive/device_size.dart'
-    show DeviceSizes, DeviceSizesExtension;
+import '../../../../../config/responsive/device_size.dart' show DeviceSizes, DeviceSizesExtension;
 import '../../../../../config/theme/colors_manager.dart' show TextColors;
-import '../../../../common/shimmers/vendor_widget_shimmer_1.dart'
-    show VendorWidgetShimmer1;
+import '../../../../common/shimmers/vendor_widget_shimmer_1.dart' show VendorWidgetShimmer1;
 
 class VendorsSectionItems extends StatelessWidget {
   final int maxItemsPerRow;
@@ -59,8 +57,7 @@ class VendorsSectionItems extends StatelessWidget {
           return Center(
               child: Text(context.translation!.no_items_found,
                   textAlign: TextAlign.center,
-                  style:
-                      context.responsiveTextTheme.current.body3Regular.copyWith(
+                  style: context.responsiveTextTheme.current.body3Regular.copyWith(
                     color: TextColors.ternary.color,
                   )));
         }
@@ -71,23 +68,20 @@ class VendorsSectionItems extends StatelessWidget {
                   height: minSectionHeight,
                   child: ListView(
                     scrollDirection: Axis.horizontal,
-                    children: List.generate(min(maxVisibleItems, items.length),
-                        (index) {
+                    children: List.generate(min(maxVisibleItems, items.length), (index) {
                       final entity = items[index];
 
                       return VendorHomeWidget(
                         title: entity.name,
                         distributorCategory: entity.distributorCategory,
-                        fallbackAssetImagePlaceholderPath:
-                            DrawableAssetStrings.companyPlaceHolderImg,
+                        fallbackAssetImagePlaceholderPath: DrawableAssetStrings.noImgPlaceHolderIcon,
                         onPress: () => RoutingManager.router.pushNamed(
                           RoutingManager.vendorDetails,
                           extra: entity.id,
                         ),
-                        imageUrl:
-                            getItInstance.get<INetworkService>().getFilesPath(
-                                  entity.thumbnailImage?.path ?? "",
-                                ),
+                        imageUrl: getItInstance.get<INetworkService>().getFilesPath(
+                              entity.thumbnailImage?.path ?? "",
+                            ),
                       );
                     }),
                   ),
@@ -95,22 +89,19 @@ class VendorsSectionItems extends StatelessWidget {
               : Wrap(
                   spacing: spacing,
                   runSpacing: spacing,
-                  children: List.generate(min(maxVisibleItems, items.length),
-                      (index) {
+                  children: List.generate(min(maxVisibleItems, items.length), (index) {
                     final entity = items[index];
                     return FeaturedEntity(
                       size: itemWidth,
                       title: entity.name,
-                      fallbackAssetImagePlaceholderPath:
-                          DrawableAssetStrings.companyPlaceHolderImg,
+                      fallbackAssetImagePlaceholderPath: DrawableAssetStrings.companyPlaceHolderImg,
                       onPress: () => RoutingManager.router.pushNamed(
                         RoutingManager.vendorDetails,
                         extra: entity.id,
                       ),
-                      imageUrl:
-                          getItInstance.get<INetworkService>().getFilesPath(
-                                entity.thumbnailImage?.path ?? "",
-                              ),
+                      imageUrl: getItInstance.get<INetworkService>().getFilesPath(
+                            entity.thumbnailImage?.path ?? "",
+                          ),
                     );
                   }),
                 ),
@@ -119,8 +110,7 @@ class VendorsSectionItems extends StatelessWidget {
     );
   }
 
-  double _horizontalSpacing(BuildContext context) =>
-      context.responsiveAppSizeTheme.current.p8;
+  double _horizontalSpacing(BuildContext context) => context.responsiveAppSizeTheme.current.p8;
 
   double _getItemWidth(BuildContext context, double spacing) {
     final screenWidth = MediaQuery.of(context).size.width;

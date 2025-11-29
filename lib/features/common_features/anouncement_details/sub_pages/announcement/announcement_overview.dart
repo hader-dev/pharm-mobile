@@ -18,14 +18,12 @@ class AnnouncementOverviewPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return RefreshIndicator(
       onRefresh: () => context.read<AnnouncementCubit>().loadAnnouncement(),
-      child: BlocBuilder<AnnouncementCubit, AnnouncementState>(
-          builder: (context, state) {
+      child: BlocBuilder<AnnouncementCubit, AnnouncementState>(builder: (context, state) {
         if (state is AnnouncementIsLoading) {
           return const Center(child: CircularProgressIndicator());
         }
 
-        if (state.announcement.id.isEmpty ||
-            state.announcement.content.isEmpty) {
+        if (state.announcement.id.isEmpty || state.announcement.content.isEmpty) {
           return const Center(child: EmptyListWidget());
         }
 
@@ -36,13 +34,10 @@ class AnnouncementOverviewPage extends StatelessWidget {
             children: [
               if (state.announcement.image != null) ...[
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(
-                      context.responsiveAppSizeTheme.current.r8),
-                  child: CachedNetworkImageWithAssetFallback(
-                    imageUrl: getItInstance
-                        .get<INetworkService>()
-                        .getFilesPath(state.announcement.image!.path),
-                    assetImage: DrawableAssetStrings.companyPlaceHolderImg,
+                  borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.r8),
+                  child: CachedNetworkImageWithDrawableFallback.withErrorAssetImage(
+                    imageUrl: getItInstance.get<INetworkService>().getFilesPath(state.announcement.image!.path),
+                    errorAssetImagePath: DrawableAssetStrings.companyPlaceHolderImg,
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -53,11 +48,9 @@ class AnnouncementOverviewPage extends StatelessWidget {
                 style: {
                   "body": Style(
                     fontSize: FontSize(
-                      MediaQuery.of(context).textScaler.scale(
-                          context.deviceSize.width <=
-                                  DeviceSizes.largeMobile.width
-                              ? 16
-                              : 25),
+                      MediaQuery.of(context)
+                          .textScaler
+                          .scale(context.deviceSize.width <= DeviceSizes.largeMobile.width ? 16 : 25),
                     ),
                     lineHeight: LineHeight(1.5),
                   ),

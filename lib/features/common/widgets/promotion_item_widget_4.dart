@@ -46,12 +46,10 @@ class PromotionItemWidget4 extends StatelessWidget {
             flex: 3,
             child: Card(
               clipBehavior: Clip.hardEdge,
-              child: CachedNetworkImageWithAssetFallback(
+              child: CachedNetworkImageWithDrawableFallback.withErrorAssetImage(
                 width: double.infinity,
-                imageUrl: getItInstance
-                    .get<INetworkService>()
-                    .getFilesPath(announcement.thumbnailImage?.path ?? ""),
-                assetImage: DrawableAssetStrings.companyPlaceHolderImg,
+                imageUrl: getItInstance.get<INetworkService>().getFilesPath(announcement.thumbnailImage?.path ?? ""),
+                errorAssetImagePath: DrawableAssetStrings.companyPlaceHolderImg,
                 fit: BoxFit.contain,
               ),
             ),
@@ -73,13 +71,10 @@ class PromotionItemWidget4 extends StatelessWidget {
                       image: announcement.company?.thumbnailImage != null
                           ? NetworkImage(
                               getItInstance.get<INetworkService>().getFilesPath(
-                                    announcement
-                                            .company?.thumbnailImage?.path ??
-                                        "",
+                                    announcement.company?.thumbnailImage?.path ?? "",
                                   ),
                             )
-                          : AssetImage(
-                              DrawableAssetStrings.companyPlaceHolderImg),
+                          : AssetImage(DrawableAssetStrings.companyPlaceHolderImg),
                     ),
                   ),
                 ),
@@ -90,9 +85,7 @@ class PromotionItemWidget4 extends StatelessWidget {
                     children: [
                       Text(
                         announcement.title,
-                        style: context
-                            .responsiveTextTheme.current.headLine3Medium
-                            .copyWith(
+                        style: context.responsiveTextTheme.current.headLine3Medium.copyWith(
                           color: AppColors.accent1Shade1,
                         ),
                         overflow: TextOverflow.clip,
@@ -100,8 +93,7 @@ class PromotionItemWidget4 extends StatelessWidget {
                       const ResponsiveGap.s4(),
                       Text(
                         announcement.createdAt.formatYMD,
-                        style: context.responsiveTextTheme.current.body3Medium
-                            .copyWith(color: Colors.grey),
+                        style: context.responsiveTextTheme.current.body3Medium.copyWith(color: Colors.grey),
                       ),
                     ],
                   ),
