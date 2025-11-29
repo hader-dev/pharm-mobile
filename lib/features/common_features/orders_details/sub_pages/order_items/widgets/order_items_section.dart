@@ -10,7 +10,6 @@ class OrderItemsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ScrollController scrollController = ScrollController();
     return Container(
       padding: EdgeInsets.symmetric(
         vertical: context.responsiveAppSizeTheme.current.p12,
@@ -37,8 +36,7 @@ class OrderItemsSection extends StatelessWidget {
           const ResponsiveGap.s12(),
           Padding(
             padding: EdgeInsets.only(right: context.responsiveAppSizeTheme.current.p8),
-            child: ListView(
-              controller: scrollController,
+            child: Column(
               children: orderItems
                   .map(
                     (OrderItem item) => OrderItemWidgetV2(
