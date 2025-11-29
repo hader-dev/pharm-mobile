@@ -44,21 +44,25 @@ class LoginScreen extends StatelessWidget {
                 builder: (context) => Dialog(
                       // constraints: BoxConstraints(maxHeight: 500),
                       shape: RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.circular(context.responsiveAppSizeTheme.current.commonWidgetsRadius)),
+                          borderRadius: BorderRadius.circular(context
+                              .responsiveAppSizeTheme
+                              .current
+                              .commonWidgetsRadius)),
                       backgroundColor: AppColors.bgWhite,
                       child: GoogleAuthLoadingDialog(),
                     ));
           }
-          if (state is ForgotPassword) {
-            BottomSheetHelper.showCommonBottomSheet(context: context, child: ForgotPasswordScreen());
+          if (state is ForgotPassword && context.mounted) {
+            BottomSheetHelper.showCommonBottomSheet(
+                context: context, child: ForgotPasswordScreen());
           }
         },
         child: Scaffold(
           backgroundColor: AppColors.bgWhite,
           body: SafeArea(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: context.responsiveAppSizeTheme.current.p16),
+              padding: EdgeInsets.symmetric(
+                  horizontal: context.responsiveAppSizeTheme.current.p16),
               child: ListView(
                 shrinkWrap: true,
                 physics: const BouncingScrollPhysics(),
@@ -86,13 +90,16 @@ class LoginScreen extends StatelessWidget {
                           borderColor: AppColors.accent1Shade1,
                           label: Text(
                             context.translation!.login_with_google,
-                            style: context.responsiveTextTheme.current.body1Regular
+                            style: context
+                                .responsiveTextTheme.current.body1Regular
                                 .copyWith(color: AppColors.accent1Shade1),
                           ),
                           icon: SvgPicture.asset(
                             DrawableAssetStrings.googleIcon,
-                            height: context.responsiveAppSizeTheme.current.iconSize20,
-                            width: context.responsiveAppSizeTheme.current.iconSize20,
+                            height: context
+                                .responsiveAppSizeTheme.current.iconSize20,
+                            width: context
+                                .responsiveAppSizeTheme.current.iconSize20,
                           ),
                           onPressed: () {
                             context.read<LoginCubit>().loginWithGoogle();
