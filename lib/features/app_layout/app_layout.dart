@@ -1,15 +1,8 @@
-import 'dart:convert';
-
-import 'package:firebase_messaging/firebase_messaging.dart' show FirebaseMessaging;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
-import 'package:hader_pharm_mobile/config/services/notification/actions/background_notification_tap.dart'
-    show onNotificationTapped;
 import 'package:hader_pharm_mobile/config/services/notification/actions/handle_terminated_app_notification_tab.dart'
     show handleTerminatedAppNotificationTab;
-import 'package:hader_pharm_mobile/config/services/notification/mappers/json_to_notification_model.dart';
 import 'package:hader_pharm_mobile/config/theme/setup_status_bar.dart';
 import 'package:hader_pharm_mobile/features/app_layout/actions/show_new_app_version_dialog.dart';
 import 'package:hader_pharm_mobile/features/app_layout/actions/show_welcome_dialog.dart';
@@ -20,7 +13,8 @@ import 'cubit/app_layout_cubit.dart';
 import 'widgets/app_nav_bar/app_nav_bar.dart';
 
 class AppLayout extends StatefulWidget {
-  static final GlobalKey<ScaffoldState> appLayoutScaffoldKey = GlobalKey<ScaffoldState>();
+  static final GlobalKey<ScaffoldState> appLayoutScaffoldKey =
+      GlobalKey<ScaffoldState>();
 
   const AppLayout({super.key});
 
@@ -53,7 +47,8 @@ class _AppLayoutState extends State<AppLayout> {
             bottomNavigationBar: AppNavBar(),
             body: Column(
               children: [
-                BlocProvider.of<AppLayoutCubit>(context).appTopBars[BlocProvider.of<AppLayoutCubit>(context).pageIndex],
+                BlocProvider.of<AppLayoutCubit>(context).appTopBars[
+                    BlocProvider.of<AppLayoutCubit>(context).pageIndex],
                 Expanded(
                   child: IndexedStack(
                     index: BlocProvider.of<AppLayoutCubit>(context).pageIndex,

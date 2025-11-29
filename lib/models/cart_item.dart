@@ -15,7 +15,8 @@ List<CartItemModelUi> cartItemModelDataToUi(List<CartItemModel> cartItems) {
             text: e.quantity.toString(),
           ),
           packageQuantityController: TextEditingController(
-            text: (e.quantity ~/ e.packageSize).toString(),
+            text: (e.quantity ~/ (e.packageSize > 0 ? e.packageSize : 1))
+                .toString(),
           )))
       .toList();
 }
@@ -105,15 +106,20 @@ class CartItemModel {
   }
 
   factory CartItemModel.fromJson(Map<String, dynamic> json) {
-    final thumbnailImage = json['medicineCatalog']?['image'] ?? json['parapharmCatalog']?['image'];
-    final minOrderQuantity =
-        json['medicineCatalog']?['minOrderQuantity'] ?? json['parapharmCatalog']?['minOrderQuantity'];
+    final thumbnailImage =
+        json['medicineCatalog']?['image'] ?? json['parapharmCatalog']?['image'];
+    final minOrderQuantity = json['medicineCatalog']?['minOrderQuantity'] ??
+        json['parapharmCatalog']?['minOrderQuantity'];
 
-    final maxOrderQuantity =
-        (json['medicineCatalog']?['maxOrderQuantity'] ?? json['parapharmCatalog']?['maxOrderQuantity']) ?? 9999;
+    final maxOrderQuantity = (json['medicineCatalog']?['maxOrderQuantity'] ??
+            json['parapharmCatalog']?['maxOrderQuantity']) ??
+        9999;
+
+    int packageSize = json['packageSize'] ?? 1;
+    packageSize = packageSize == 0 ? 1 : packageSize;
 
     return CartItemModel(
-      packageSize: json['packageSize'] ?? 1,
+      packageSize: packageSize,
       id: json['id'],
       maxOrderQuantity: maxOrderQuantity,
       minOrderQuantity: minOrderQuantity,
@@ -136,9 +142,11 @@ class CartItemModel {
       sellerCompanyId: json['sellerCompanyId'],
       unitPriceFinal: json['unitPriceFinalTtc'] ?? "100",
       medicineCatalogStockQty: json['medicineCatalog']?['actualQuantity'] ?? 0,
-      parapharmCatalogStockQty: json['parapharmCatalog']?['actualQuantity'] ?? 0,
+      parapharmCatalogStockQty:
+          json['parapharmCatalog']?['actualQuantity'] ?? 0,
       sellerCompany: BaseCompany.fromJson(json['sellerCompany']),
-      image: thumbnailImage != null ? ImageModel.fromJson(thumbnailImage) : null,
+      image:
+          thumbnailImage != null ? ImageModel.fromJson(thumbnailImage) : null,
     );
   }
   CartItemModel copyWith(
@@ -195,8 +203,13 @@ class CartItemModel {
   Map<String, num> getTotalPrice() {
     num totalHtPrice = num.parse(unitPriceFinal ?? unitPriceHt) * quantity;
     num totalTTCPrice = num.parse(unitPriceFinal ?? unitPriceHt) * quantity +
-        (num.parse(unitPriceFinal ?? unitPriceHt) * num.parse(tvaPercentage) / 100);
-    return <String, num>{"totalHtPrice": totalHtPrice, "totalTTCPrice": totalTTCPrice};
+        (num.parse(unitPriceFinal ?? unitPriceHt) *
+            num.parse(tvaPercentage) /
+            100);
+    return <String, num>{
+      "totalHtPrice": totalHtPrice,
+      "totalTTCPrice": totalTTCPrice
+    };
   }
 }
 

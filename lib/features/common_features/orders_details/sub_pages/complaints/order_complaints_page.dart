@@ -57,7 +57,7 @@ class OrderItemsComplaintPage extends StatelessWidget {
               ),
               const ResponsiveGap.s12(),
               ...cubit.orderClaims.map(
-                (OrderClaimHeaderModel item) => OrderComplaintHeaderWidget.OrderComplaintWidget(
+                (OrderClaimHeaderModel item) => OrderComplaintHeaderWidget.orderComplaintWidget(
                   claim: item,
                 ),
               ),
