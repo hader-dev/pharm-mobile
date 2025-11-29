@@ -15,7 +15,8 @@ List<CartItemModelUi> cartItemModelDataToUi(List<CartItemModel> cartItems) {
             text: e.quantity.toString(),
           ),
           packageQuantityController: TextEditingController(
-            text: (e.quantity ~/ (e.packageSize > 0 ? e.packageSize : 1)).toString(),
+            text: (e.quantity ~/ (e.packageSize > 0 ? e.packageSize : 1))
+                .toString(),
           )))
       .toList();
 }
@@ -51,7 +52,8 @@ class CartItemModel {
   final DateTime createdAt;
   final DateTime updatedAt;
   final String? medicinesCatalogId;
-  final String? unitPriceFinal;
+  final String appliedAmount;
+  final String totalAppliedAmount;
   final String? parapharmCatalogId;
   final int quantity;
   final int packageSize;
@@ -72,7 +74,8 @@ class CartItemModel {
   CartItemModel({
     this.image,
     required this.id,
-    this.unitPriceFinal,
+    required this.totalAppliedAmount,
+    required this.appliedAmount,
     required this.maxOrderQuantity,
     required this.minOrderQuantity,
     required this.totalAmountTtc,
@@ -105,9 +108,12 @@ class CartItemModel {
   }
 
   factory CartItemModel.fromJson(Map<String, dynamic> json) {
-    final thumbnailImage = json['medicineCatalog']?['image'] ?? json['parapharmCatalog']?['image'];
-    final minOrderQuantity =
-        json['medicineCatalog']?['minOrderQuantity'] ?? 1 ?? json['parapharmCatalog']?['minOrderQuantity'] ?? 1;
+    final thumbnailImage =
+        json['medicineCatalog']?['image'] ?? json['parapharmCatalog']?['image'];
+    final minOrderQuantity = json['medicineCatalog']?['minOrderQuantity'] ??
+        1 ??
+        json['parapharmCatalog']?['minOrderQuantity'] ??
+        1;
 
     final maxOrderQuantity = (json['medicineCatalog']?['maxOrderQuantity'] ??
             9999 ??
@@ -122,6 +128,7 @@ class CartItemModel {
       packageSize: packageSize,
       id: json['id'],
       maxOrderQuantity: maxOrderQuantity,
+      totalAppliedAmount: json['totalAppliedAmount'] ?? "0",
       minOrderQuantity: minOrderQuantity,
       totalAmountTtc: json['totalAmountTtc'],
       totalAmountHt: json['totalAmountHt'],
@@ -140,11 +147,13 @@ class CartItemModel {
       discountAmount: json['discountAmount'],
       buyerCompanyId: json['buyerCompanyId'],
       sellerCompanyId: json['sellerCompanyId'],
-      unitPriceFinal: json['unitPriceFinalTtc'] ?? "100",
+      appliedAmount: json['appliedAmount'] ?? "0",
       medicineCatalogStockQty: json['medicineCatalog']?['actualQuantity'] ?? 0,
-      parapharmCatalogStockQty: json['parapharmCatalog']?['actualQuantity'] ?? 0,
+      parapharmCatalogStockQty:
+          json['parapharmCatalog']?['actualQuantity'] ?? 0,
       sellerCompany: BaseCompany.fromJson(json['sellerCompany']),
-      image: thumbnailImage != null ? ImageModel.fromJson(thumbnailImage) : null,
+      image:
+          thumbnailImage != null ? ImageModel.fromJson(thumbnailImage) : null,
     );
   }
   CartItemModel copyWith(
@@ -169,7 +178,7 @@ class CartItemModel {
       MedicinesCatalog? medicinesCatalog,
       dynamic parapharmCatalog,
       BaseCompany? sellerCompany,
-      String? unitPriceFinal,
+      String? appliedAmount,
       int? packageSize}) {
     return CartItemModel(
         packageSize: packageSize ?? this.packageSize,
@@ -194,15 +203,28 @@ class CartItemModel {
         sellerCompany: sellerCompany ?? this.sellerCompany,
         maxOrderQuantity: maxOrderQuantity,
         minOrderQuantity: minOrderQuantity,
-        unitPriceFinal: unitPriceFinal ?? this.unitPriceFinal,
+        appliedAmount: appliedAmount ?? this.appliedAmount,
+        totalAppliedAmount: totalAppliedAmount,
         image: image);
   }
 
   Map<String, num> getTotalPrice() {
-    num totalHtPrice = num.parse(unitPriceFinal ?? unitPriceHt) * quantity;
-    num totalTTCPrice = num.parse(unitPriceFinal ?? unitPriceHt) * quantity +
-        (num.parse(unitPriceFinal ?? unitPriceHt) * num.parse(tvaPercentage) / 100);
-    return <String, num>{"totalHtPrice": totalHtPrice, "totalTTCPrice": totalTTCPrice};
+    num tAppliedAmount = num.parse(appliedAmount);
+    num tHtPrice = num.parse(unitPriceHt);
+
+    num totalHtPrice = num.parse(unitPriceHt);
+    totalHtPrice = (tAppliedAmount > 0 ? tAppliedAmount : tHtPrice) * quantity;
+
+    num totalTTCPrice = tAppliedAmount > 0
+        ? tAppliedAmount
+        : tHtPrice * quantity +
+            (tAppliedAmount > 0
+                ? tAppliedAmount
+                : tHtPrice * num.parse(tvaPercentage) / 100);
+    return <String, num>{
+      "totalHtPrice": totalHtPrice,
+      "totalTTCPrice": totalTTCPrice
+    };
   }
 }
 
