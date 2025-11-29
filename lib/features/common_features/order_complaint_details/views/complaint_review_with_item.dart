@@ -27,18 +27,15 @@ class ComplaintReviewView extends StatelessWidget {
           Container(
             clipBehavior: Clip.antiAlias,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(
-                  context.responsiveAppSizeTheme.current.p8),
+              borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.p8),
               color: item.imageUrl == null ? Colors.grey.shade100 : null,
             ),
-            child: CachedNetworkImageWithAssetFallback(
-              imageUrl: getItInstance
-                  .get<INetworkService>()
-                  .getFilesPath(item.imageUrl ?? ""),
+            child: CachedNetworkImageWithDrawableFallback.withErrorAssetImage(
+              imageUrl: getItInstance.get<INetworkService>().getFilesPath(item.imageUrl ?? ""),
               fit: BoxFit.cover,
               width: double.infinity,
               height: MediaQuery.of(context).size.height * 0.15,
-              assetImage: DrawableAssetStrings.medicinePlaceHolderImg,
+              errorAssetImagePath: DrawableAssetStrings.medicinePlaceHolderImg,
             ),
           ),
           const ResponsiveGap.s12(),

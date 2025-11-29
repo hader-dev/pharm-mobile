@@ -5,8 +5,7 @@ import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.da
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
-class DeligateClientsAppbar extends StatelessWidget
-    implements PreferredSizeWidget {
+class DeligateClientsAppbar extends StatelessWidget implements PreferredSizeWidget {
   const DeligateClientsAppbar({
     super.key,
     required bool isExtraLargeScreen,
@@ -14,12 +13,11 @@ class DeligateClientsAppbar extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
-    return CustomAppBarV2.alternate(
+    return CustomAppBarV2.normal(
       topPadding: MediaQuery.of(context).padding.top,
       bottomPadding: MediaQuery.of(context).padding.bottom,
       leading: Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: context.responsiveAppSizeTheme.current.p8),
+          padding: EdgeInsets.symmetric(horizontal: context.responsiveAppSizeTheme.current.p8),
           child: SvgPicture.asset(DrawableAssetStrings.newClientsIcon,
               height: context.responsiveAppSizeTheme.current.iconSize20,
               width: context.responsiveAppSizeTheme.current.iconSize20,
@@ -29,8 +27,7 @@ class DeligateClientsAppbar extends StatelessWidget
               ))),
       title: Text(
         context.translation!.client,
-        style: context.responsiveTextTheme.current.headLine3SemiBold
-            .copyWith(color: AppColors.bgWhite),
+        style: context.responsiveTextTheme.current.headLine3SemiBold.copyWith(color: AppColors.bgWhite),
       ),
     );
   }

@@ -19,8 +19,7 @@ class MedicinesPage extends StatefulWidget {
   State<MedicinesPage> createState() => _MedicinesPageState();
 }
 
-class _MedicinesPageState extends State<MedicinesPage>
-    with AutomaticKeepAliveClientMixin {
+class _MedicinesPageState extends State<MedicinesPage> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -45,14 +44,11 @@ class _MedicinesPageState extends State<MedicinesPage>
                 searchController: cubit.state.searchController,
               ),
             ),
-            BlocBuilder<MedicineProductsCubit, MedicineProductsState>(
-                builder: (context, state) {
+            BlocBuilder<MedicineProductsCubit, MedicineProductsState>(builder: (context, state) {
               return SearchFilterButton(
                 hasActiveFilters: state.hasActiveFilters,
                 onTap: () {
-                  BottomSheetHelper.showCommonBottomSheet(
-                      context: context,
-                      child: SearchMedicineFilterBottomSheet());
+                  BottomSheetHelper.showCommonBottomSheet(context: context, child: SearchMedicineFilterBottomSheet());
                 },
               );
             }),
@@ -66,16 +62,18 @@ class _MedicinesPageState extends State<MedicinesPage>
                 return const Center(child: CircularProgressIndicator());
               }
               if (state.medicines.isEmpty) {
-                return EmptyListWidget();
+                return EmptyListWidget(
+                  onRefresh: () {
+                    cubit.getMedicines();
+                  },
+                );
               }
 
               void onLikeTapped(BaseMedicineCatalogModel paraPharma) {
                 final id = paraPharma.id;
                 paraPharma.isLiked
-                    ? BlocProvider.of<MedicineProductsCubit>(bContext)
-                        .unlikeMedicinesCatalog(id)
-                    : BlocProvider.of<MedicineProductsCubit>(bContext)
-                        .likeMedicinesCatalog(id);
+                    ? BlocProvider.of<MedicineProductsCubit>(bContext).unlikeMedicinesCatalog(id)
+                    : BlocProvider.of<MedicineProductsCubit>(bContext).likeMedicinesCatalog(id);
               }
 
               return Column(
@@ -89,12 +87,9 @@ class _MedicinesPageState extends State<MedicinesPage>
                       child: GridView.builder(
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 1,
-                          crossAxisSpacing: calculateMarketplaceGridSpacing(
-                              bContext.deviceSize),
-                          mainAxisSpacing: calculateMarketplaceMainAxisSpacing(
-                              bContext.deviceSize),
-                          childAspectRatio: calculateVendorItemsAspectRatio(
-                              bContext.deviceSize, bContext.orientation),
+                          crossAxisSpacing: calculateMarketplaceGridSpacing(bContext.deviceSize),
+                          mainAxisSpacing: calculateMarketplaceMainAxisSpacing(bContext.deviceSize),
+                          childAspectRatio: calculateVendorItemsAspectRatio(bContext.deviceSize, bContext.orientation),
                         ),
                         controller: cubit.scrollController,
                         shrinkWrap: true,
@@ -104,16 +99,13 @@ class _MedicinesPageState extends State<MedicinesPage>
                           medicineData: state.medicines[index],
                           isLiked: state.medicines[index].isLiked,
                           hideLikeButton: false,
-                          onLikeTapped: () =>
-                              onLikeTapped(state.medicines[index]),
+                          onLikeTapped: () => onLikeTapped(state.medicines[index]),
                         ),
                       ),
                     ),
                   ),
-                  if (state is LoadingMoreMedicine)
-                    const Center(child: CircularProgressIndicator()),
-                  if (state is MedicinesLoadLimitReached)
-                    EndOfLoadResultWidget(),
+                  if (state is LoadingMoreMedicine) const Center(child: CircularProgressIndicator()),
+                  if (state is MedicinesLoadLimitReached) EndOfLoadResultWidget(),
                 ],
               );
             },

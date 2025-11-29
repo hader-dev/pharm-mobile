@@ -62,7 +62,6 @@ class OrdersScreen extends StatelessWidget {
                         controller: state.scrollController,
                         child: ListView(
                           physics: const AlwaysScrollableScrollPhysics(),
-                          shrinkWrap: true,
                           controller: state.scrollController,
                           children: [
                             ...state.orders.map((order) => OrderCard(

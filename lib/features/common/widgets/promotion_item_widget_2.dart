@@ -27,8 +27,7 @@ class PromotionItemWidget2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius:
-          BorderRadius.circular(context.responsiveAppSizeTheme.current.s16),
+      borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.s16),
       child: InkWell(
         onTap: () {
           RoutingManager.router.pushNamed(
@@ -42,17 +41,14 @@ class PromotionItemWidget2 extends StatelessWidget {
               color: AppColors.accent1Shade1,
               width: 1,
             ),
-            borderRadius: BorderRadius.circular(
-                context.responsiveAppSizeTheme.current.s16),
+            borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.s16),
           ),
-          child: CachedNetworkImageWithAssetFallback(
+          child: CachedNetworkImageWithDrawableFallback.withErrorAssetImage(
             width: double.infinity,
             height: double.infinity,
             fit: BoxFit.cover,
-            imageUrl: getItInstance
-                .get<INetworkService>()
-                .getFilesPath(announcement.thumbnailImage?.path ?? ""),
-            assetImage: DrawableAssetStrings.medicinePlaceHolderImg,
+            imageUrl: getItInstance.get<INetworkService>().getFilesPath(announcement.thumbnailImage?.path ?? ""),
+            errorAssetImagePath: DrawableAssetStrings.medicinePlaceHolderImg,
           ),
         ),
       ),

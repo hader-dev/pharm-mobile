@@ -44,12 +44,13 @@ class PromotionItemWidget extends StatelessWidget {
         child: Stack(
           alignment: Alignment.bottomCenter,
           children: [
-            CachedNetworkImageWithAssetFallback(
+            CachedNetworkImageWithDrawableFallback.withErrorSvgImage(
+              imageUrl: getItInstance.get<INetworkService>().getFilesPath(announcement.thumbnailImage?.path ?? ""),
               width: double.infinity,
               height: double.infinity,
-              imageUrl: getItInstance.get<INetworkService>().getFilesPath(announcement.thumbnailImage?.path ?? ""),
+              errorStyle: context.responsiveTextTheme.current.bodyXSmall.copyWith(color: Colors.grey.shade400),
+              errorMsg: "No Image Available",
               fit: BoxFit.cover,
-              assetImage: DrawableAssetStrings.medicinePlaceHolderImg,
             ),
             Container(
               padding: EdgeInsets.symmetric(

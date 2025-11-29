@@ -15,13 +15,11 @@ class PolicyAppbar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final translation = context.translation!;
 
-    return CustomAppBarV2.alternate(
+    return CustomAppBarV2.normal(
       leading: IconButton(
         icon: Icon(
-          Directionality.of(context) == TextDirection.rtl
-              ? Iconsax.arrow_right_3
-              : Iconsax.arrow_left_2,
-          color: AppColors.bgWhite,
+          Directionality.of(context) == TextDirection.rtl ? Iconsax.arrow_right_3 : Iconsax.arrow_left_2,
+          color: AppColors.accent1Shade1,
           size: context.responsiveAppSizeTheme.current.iconSize25,
         ),
         onPressed: () {
@@ -30,8 +28,7 @@ class PolicyAppbar extends StatelessWidget implements PreferredSizeWidget {
       ),
       title: Text(
         translation.policy,
-        style: context.responsiveTextTheme.current.headLine3SemiBold
-            .copyWith(color: AppColors.bgWhite),
+        style: context.responsiveTextTheme.current.headLine3SemiBold.copyWith(color: AppColors.accent1Shade1),
       ),
     );
   }

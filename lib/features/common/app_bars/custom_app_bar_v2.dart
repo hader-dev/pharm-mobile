@@ -98,9 +98,7 @@ class CustomAppBarV2 extends StatelessWidget implements PreferredSizeWidget {
       alignment: Alignment.center,
       padding: EdgeInsets.only(
         top: topPadding == 0 ? MediaQuery.of(context).padding.top : topPadding,
-        bottom: bottomPadding == 0
-            ? MediaQuery.of(context).padding.bottom
-            : bottomPadding,
+        bottom: bottomPadding == 0 ? MediaQuery.of(context).padding.bottom : bottomPadding,
         left: leftPadding,
         right: rightPadding,
       ),
@@ -116,8 +114,7 @@ class CustomAppBarV2 extends StatelessWidget implements PreferredSizeWidget {
           else
             ConstrainedBox(
               constraints: BoxConstraints(
-                maxWidth: MediaQuery.sizeOf(context).width *
-                    (titleWidthConstraiontRatio ?? 0.5),
+                maxWidth: MediaQuery.sizeOf(context).width * (titleWidthConstraiontRatio ?? 0.5),
               ),
               child: title,
             ),
@@ -133,6 +130,5 @@ class CustomAppBarV2 extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize =>
-      Size.fromHeight(customPreferedSize ?? kToolbarHeight);
+  Size get preferredSize => Size.fromHeight(customPreferedSize ?? kToolbarHeight);
 }

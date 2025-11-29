@@ -19,18 +19,14 @@ class EditProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          EditProfileCubit(userManager: getItInstance.get<UserManager>())
-            ..initProfileData(),
+      create: (context) => EditProfileCubit(userManager: getItInstance.get<UserManager>())..initProfileData(),
       child: Scaffold(
         backgroundColor: AppColors.bgWhite,
-        appBar: CustomAppBarV2.alternate(
+        appBar: CustomAppBarV2.normal(
           leading: IconButton(
             icon: Icon(
-              Directionality.of(context) == TextDirection.rtl
-                  ? Iconsax.arrow_right_3
-                  : Iconsax.arrow_left_2,
-              color: AppColors.bgWhite,
+              Directionality.of(context) == TextDirection.rtl ? Iconsax.arrow_right_3 : Iconsax.arrow_left_2,
+              color: AppColors.accent1Shade1,
               size: context.responsiveAppSizeTheme.current.iconSize25,
             ),
             onPressed: () {
@@ -39,14 +35,12 @@ class EditProfileScreen extends StatelessWidget {
           ),
           title: Text(
             context.translation!.update_profile,
-            style: context.responsiveTextTheme.current.headLine3SemiBold
-                .copyWith(color: AppColors.bgWhite),
+            style: context.responsiveTextTheme.current.headLine3SemiBold.copyWith(color: AppColors.accent1Shade1),
           ),
         ),
         body: SafeArea(
           child: Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: context.responsiveAppSizeTheme.current.p16),
+            padding: EdgeInsets.symmetric(horizontal: context.responsiveAppSizeTheme.current.p16),
             child: BlocBuilder<EditProfileCubit, EditProfileState>(
               builder: (context, state) {
                 if (state is EditProfileLoading) {
@@ -59,8 +53,7 @@ class EditProfileScreen extends StatelessWidget {
                   children: [
                     const ResponsiveGap.s16(),
                     Text(context.translation!.update_profile_description,
-                        style: context.responsiveTextTheme.current.body1Medium
-                            .copyWith(
+                        style: context.responsiveTextTheme.current.body1Medium.copyWith(
                           color: TextColors.ternary.color,
                         )),
                     const ResponsiveGap.s24(),

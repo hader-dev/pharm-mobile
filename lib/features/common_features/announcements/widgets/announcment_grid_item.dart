@@ -43,12 +43,12 @@ class PromotionItemWidget extends StatelessWidget {
         child: Stack(
           alignment: Alignment.bottomCenter,
           children: [
-            CachedNetworkImageWithAssetFallback(
+            CachedNetworkImageWithDrawableFallback.withErrorSvgImage(
               width: double.infinity,
               height: double.infinity,
               imageUrl: getItInstance.get<INetworkService>().getFilesPath(announcement.thumbnailImage?.path ?? ""),
               fit: BoxFit.cover,
-              assetImage: DrawableAssetStrings.medicinePlaceHolderImg,
+              errorMsg: "No Image Available",
             ),
             Container(
               padding: EdgeInsets.symmetric(

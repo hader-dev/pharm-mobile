@@ -14,16 +14,13 @@ class MedicineProductPhotoSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = BlocProvider.of<MedicineDetailsCubit>(context);
 
-    return CachedNetworkImageWithAssetFallback(
-      assetImage: DrawableAssetStrings.medicinePlaceHolderImg,
-      imageUrl: cubit.state.medicineCatalogData.image != null
-          ? getItInstance.get<INetworkService>().getFilesPath(
-                cubit.state.medicineCatalogData.image!.path,
-              )
-          : "",
-      height: MediaQuery.of(context).size.width > 768 ? 400 : 320,
+    return CachedNetworkImageWithDrawableFallback.withErrorSvgImage(
       width: double.maxFinite,
-      fit: BoxFit.contain,
+      height: MediaQuery.of(context).size.width > 768 ? 400 : 320,
+      imageUrl: getItInstance.get<INetworkService>().getFilesPath(cubit.state.medicineCatalogData.image?.path ?? ""),
+      fit: BoxFit.cover,
+      errorImgSize: MediaQuery.of(context).size.width > 768 ? 400 * .4 : 320 * .4,
+      errorMsg: "No Image Available",
     );
   }
 }

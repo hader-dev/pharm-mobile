@@ -38,10 +38,6 @@ class SplashCubit extends Cubit<SplashState> {
   }
 
   Future<void> checkAppNewGooglePlayUpdate() async {
-    try {
-      await AppUpdater.checkForUpdates();
-    } catch (e) {
-      GlobalExceptionHandler.handle(exception: 'Failed to update app');
-    }
+    await AppUpdater.checkForUpdates();
   }
 }

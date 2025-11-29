@@ -21,9 +21,7 @@ class CartItemWidgetV3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cartCubit = context.read<CartCubit>();
-    final imageItem = getItInstance
-        .get<INetworkService>()
-        .getFilesPath(item.model.image?.path ?? "");
+    final imageItem = getItInstance.get<INetworkService>().getFilesPath(item.model.image?.path ?? "");
 
     final quantitySectionModified = QuantitySectionModified(
       disabledPackageQuantity: true,
@@ -32,14 +30,11 @@ class CartItemWidgetV3 extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       decrementQuantity: () => cartCubit.decreaseCartItemQuantity(item),
       incrementQuantity: () => cartCubit.increaseCartItemQuantity(item),
-      decrementPackageQuantity: () =>
-          cartCubit.decreaseCartItemPackageQuantity(item),
-      incrementPackageQuantity: () =>
-          cartCubit.increaseCartItemPackageQuantity(item),
+      decrementPackageQuantity: () => cartCubit.decreaseCartItemPackageQuantity(item),
+      incrementPackageQuantity: () => cartCubit.increaseCartItemPackageQuantity(item),
       quantityController: item.quantityController,
       onQuantityChanged: (value) => cartCubit.updateItemQuantity(item),
-      onPackageQuantityChanged: (value) =>
-          cartCubit.updateItemPackageQuantity(item),
+      onPackageQuantityChanged: (value) => cartCubit.updateItemPackageQuantity(item),
       packageQuantityController: item.packageQuantityController,
     );
 
@@ -57,13 +52,11 @@ class CartItemWidgetV3 extends StatelessWidget {
           ),
           Text(
             "${context.translation!.package} ${item.packageQuantityController.text}",
-            style: context.responsiveTextTheme.current.headLine4Medium
-                .copyWith(color: Colors.grey),
+            style: context.responsiveTextTheme.current.headLine4Medium.copyWith(color: Colors.grey),
           ),
           Text(
             "${(num.parse(item.model.unitPriceHt) * num.parse(item.quantityController.text)).toStringAsFixed(2)} ${context.translation!.currency}",
-            style: context.responsiveTextTheme.current.headLine4Medium
-                .copyWith(color: AppColors.accent1Shade1),
+            style: context.responsiveTextTheme.current.headLine4Medium.copyWith(color: AppColors.accent1Shade1),
           ),
         ],
       ),
@@ -94,19 +87,18 @@ class CartItemWidgetV3 extends StatelessWidget {
               horizontal: context.responsiveAppSizeTheme.current.p10),
           decoration: BoxDecoration(
             border: Border.all(color: Colors.grey.shade200),
-            borderRadius: BorderRadius.circular(
-                context.responsiveAppSizeTheme.current.commonWidgetsRadius),
+            borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.commonWidgetsRadius),
           ),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
                 flex: 2,
-                child: CachedNetworkImageWithAssetFallback(
+                child: CachedNetworkImageWithDrawableFallback.withErrorAssetImage(
                     fit: BoxFit.fill,
                     height: double.infinity,
                     imageUrl: imageItem,
-                    assetImage: DrawableAssetStrings.medicinePlaceHolderImg),
+                    errorAssetImagePath: DrawableAssetStrings.medicinePlaceHolderImg),
               ),
               const ResponsiveGap.s8(),
               Expanded(

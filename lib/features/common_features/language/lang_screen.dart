@@ -20,16 +20,13 @@ class LanguagesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Builder(builder: (context) {
       return BlocProvider.value(
-        value: BlocProvider.of<LangCubit>(
-            RoutingManager.rootNavigatorKey.currentContext!),
+        value: BlocProvider.of<LangCubit>(RoutingManager.rootNavigatorKey.currentContext!),
         child: Scaffold(
-          appBar: CustomAppBarV2.alternate(
+          appBar: CustomAppBarV2.normal(
             leading: IconButton(
               icon: Icon(
-                Directionality.of(context) == TextDirection.rtl
-                    ? Iconsax.arrow_right_3
-                    : Iconsax.arrow_left_2,
-                color: AppColors.bgWhite,
+                Directionality.of(context) == TextDirection.rtl ? Iconsax.arrow_right_3 : Iconsax.arrow_left_2,
+                color: AppColors.accent1Shade1,
                 size: context.responsiveAppSizeTheme.current.iconSize25,
               ),
               onPressed: () {
@@ -38,7 +35,7 @@ class LanguagesScreen extends StatelessWidget {
             ),
             title: Text(context.translation!.language,
                 style: context.responsiveTextTheme.current.body1Medium.copyWith(
-                  color: AppColors.bgWhite,
+                  color: AppColors.accent1Shade1,
                 )),
           ),
           body: SafeArea(
@@ -63,9 +60,7 @@ class LanguagesScreen extends StatelessWidget {
                           height: context.responsiveAppSizeTheme.current.p10,
                         ),
                         Text(context.translation!.select_language_description,
-                            style: context
-                                .responsiveTextTheme.current.body1Medium
-                                .copyWith(
+                            style: context.responsiveTextTheme.current.body1Medium.copyWith(
                               color: TextColors.ternary.color,
                             )),
                         SizedBox(
@@ -87,16 +82,14 @@ class LanguagesScreen extends StatelessWidget {
                           langValue: 'fr',
                         ),
                         SizedBox(
-                          height:
-                              context.responsiveAppSizeTheme.current.p10 * 2,
+                          height: context.responsiveAppSizeTheme.current.p10 * 2,
                         ),
                         const Spacer(),
                         PrimaryTextButton(
                           label: context.translation!.save,
                           labelColor: AppColors.bgWhite,
                           onTap: () {
-                            BlocProvider.of<LangCubit>(context)
-                                .saveLangSettings();
+                            BlocProvider.of<LangCubit>(context).saveLangSettings();
                           },
                           color: AppColors.accent1Shade1,
                         ),

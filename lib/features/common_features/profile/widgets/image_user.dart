@@ -19,9 +19,7 @@ class _UserImageState extends State<UserImage> {
   @override
   Widget build(BuildContext context) {
     final userImage = getItInstance.get<UserManager>().currentUser.image;
-    final imageUrl = userImage != null
-        ? getItInstance.get<INetworkService>().getFilesPath(userImage.path)
-        : null;
+    final imageUrl = userImage != null ? getItInstance.get<INetworkService>().getFilesPath(userImage.path) : null;
 
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 768;
@@ -40,14 +38,12 @@ class _UserImageState extends State<UserImage> {
             ),
             height: imageSize,
             width: imageSize,
-            child: CachedNetworkImageWithAssetFallback(
-              imageUrl: imageUrl != null
-                  ? '$imageUrl?v=${DateTime.now().millisecondsSinceEpoch}'
-                  : "",
+            child: CachedNetworkImageWithDrawableFallback.withErrorAssetImage(
+              imageUrl: imageUrl != null ? '$imageUrl?v=${DateTime.now().millisecondsSinceEpoch}' : "",
               fit: BoxFit.cover,
               width: double.infinity,
               height: double.infinity,
-              assetImage: DrawableAssetStrings.defaultProfileImgIcon,
+              errorAssetImagePath: DrawableAssetStrings.defaultProfileImgIcon,
             ),
           ),
         ),

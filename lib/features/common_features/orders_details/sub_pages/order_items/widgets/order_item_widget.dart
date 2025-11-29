@@ -56,19 +56,13 @@ class OrderItemWidget extends StatelessWidget {
                         child: Container(
                             clipBehavior: Clip.antiAlias,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(
-                                  context.responsiveAppSizeTheme.current.p8),
-                              color: item.imageUrl == null
-                                  ? const Color.fromARGB(255, 145, 106, 106)
-                                  : null,
+                              borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.p8),
+                              color: item.imageUrl == null ? const Color.fromARGB(255, 145, 106, 106) : null,
                             ),
-                            child: CachedNetworkImageWithAssetFallback(
-                              assetImage:
-                                  DrawableAssetStrings.medicinePlaceHolderImg,
+                            child: CachedNetworkImageWithDrawableFallback.withErrorAssetImage(
+                              errorAssetImagePath: DrawableAssetStrings.medicinePlaceHolderImg,
                               imageUrl: item.imageUrl != null
-                                  ? getItInstance
-                                      .get<INetworkService>()
-                                      .getFilesPath(
+                                  ? getItInstance.get<INetworkService>().getFilesPath(
                                         item.imageUrl!,
                                       )
                                   : "",
@@ -85,8 +79,7 @@ class OrderItemWidget extends StatelessWidget {
                           softWrap: true,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
-                          style: context
-                              .responsiveTextTheme.current.headLine4Medium,
+                          style: context.responsiveTextTheme.current.headLine4Medium,
                         ),
                       ),
                     ],
