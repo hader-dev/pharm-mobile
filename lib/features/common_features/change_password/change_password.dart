@@ -25,18 +25,15 @@ class ChangePasswordScreen extends StatefulWidget {
 class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   @override
   Widget build(BuildContext context) {
-    final passwordRegex =
-        RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$');
+    final passwordRegex = RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$');
 
     return Scaffold(
-      appBar: CustomAppBarV2.alternate(
+      appBar: CustomAppBarV2.normal(
         leading: IconButton(
           icon: Icon(
-            Directionality.of(context) == TextDirection.rtl
-                ? Iconsax.arrow_right_3
-                : Iconsax.arrow_left_2,
+            Directionality.of(context) == TextDirection.rtl ? Iconsax.arrow_right_3 : Iconsax.arrow_left_2,
             size: context.responsiveAppSizeTheme.current.iconSize25,
-            color: AppColors.bgWhite,
+            color: AppColors.accent1Shade1,
           ),
           onPressed: () {
             context.pop();
@@ -44,8 +41,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
         ),
         title: Text(
           context.translation!.password,
-          style: context.responsiveTextTheme.current.headLine3SemiBold
-              .copyWith(color: AppColors.bgWhite),
+          style: context.responsiveTextTheme.current.headLine3SemiBold.copyWith(color: AppColors.accent1Shade1),
         ),
       ),
       body: BlocProvider(
@@ -60,8 +56,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 listener: (BuildContext context, ChangePasswordState state) {
                   if (state is ChangePasswordSuccessful) {
                     getItInstance.get<ToastManager>().showToast(
-                          message: context
-                              .translation!.password_changed_successfully,
+                          message: context.translation!.password_changed_successfully,
                           type: ToastType.success,
                         );
                   }
@@ -83,16 +78,12 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                             context.responsiveAppSizeTheme.current.s12,
                           ),
                           Text(context.translation!.change_password,
-                              style: context
-                                  .responsiveTextTheme.current.headLine2),
+                              style: context.responsiveTextTheme.current.headLine2),
                           Gap(
                             context.responsiveAppSizeTheme.current.s12,
                           ),
-                          Text(
-                              context.translation!.set_new_password_description,
-                              style: context
-                                  .responsiveTextTheme.current.body1Medium
-                                  .copyWith(
+                          Text(context.translation!.set_new_password_description,
+                              style: context.responsiveTextTheme.current.body1Medium.copyWith(
                                 color: TextColors.ternary.color,
                               )),
                           Gap(
@@ -104,26 +95,22 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               CustomTextField(
-                                label:
-                                    '${context.translation!.current_password}*',
+                                label: '${context.translation!.current_password}*',
                                 controller: state.currentPasswordController,
                                 isObscure: state.isObscured,
                                 suffixIcon: InkWell(
                                     onTap: () => cubit.showPassword(),
                                     child: state.isObscured
                                         ? Icon(Iconsax.eye,
-                                            size: context.responsiveAppSizeTheme
-                                                .current.iconSize20,
+                                            size: context.responsiveAppSizeTheme.current.iconSize20,
                                             color: AppColors.accent1Shade1)
                                         : Icon(Iconsax.eye_slash,
-                                            size: context.responsiveAppSizeTheme
-                                                .current.iconSize20,
+                                            size: context.responsiveAppSizeTheme.current.iconSize20,
                                             color: AppColors.accent1Shade1)),
                                 state: FieldState.normal,
                                 validationFunc: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return context
-                                        .translation!.feedback_field_required;
+                                    return context.translation!.feedback_field_required;
                                   }
                                 },
                               ),
@@ -135,59 +122,47 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                     onTap: () => cubit.showPassword(),
                                     child: state.isObscured
                                         ? Icon(Iconsax.eye,
-                                            size: context.responsiveAppSizeTheme
-                                                .current.iconSize20,
+                                            size: context.responsiveAppSizeTheme.current.iconSize20,
                                             color: AppColors.accent1Shade1)
                                         : Icon(Iconsax.eye_slash,
-                                            size: context.responsiveAppSizeTheme
-                                                .current.iconSize20,
+                                            size: context.responsiveAppSizeTheme.current.iconSize20,
                                             color: AppColors.accent1Shade1)),
                                 state: FieldState.normal,
                                 validationFunc: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return context
-                                        .translation!.feedback_field_required;
+                                    return context.translation!.feedback_field_required;
                                   }
                                   if (value.length < 6) {
-                                    return context
-                                        .translation!.passwor_min_length;
+                                    return context.translation!.passwor_min_length;
                                   }
                                   if (!passwordRegex.hasMatch(value)) {
-                                    return context
-                                        .translation!.password_requirements;
+                                    return context.translation!.password_requirements;
                                   }
                                 },
                               ),
                               CustomTextField(
-                                label:
-                                    '${context.translation!.confirm_password}*',
+                                label: '${context.translation!.confirm_password}*',
                                 controller: state.confirmPasswordController,
                                 isObscure: state.isObscured,
                                 suffixIcon: InkWell(
                                     onTap: () => cubit.showPassword(),
                                     child: state.isObscured
                                         ? Icon(Iconsax.eye,
-                                            size: context.responsiveAppSizeTheme
-                                                .current.iconSize20,
+                                            size: context.responsiveAppSizeTheme.current.iconSize20,
                                             color: AppColors.accent1Shade1)
                                         : Icon(Iconsax.eye_slash,
-                                            size: context.responsiveAppSizeTheme
-                                                .current.iconSize20,
+                                            size: context.responsiveAppSizeTheme.current.iconSize20,
                                             color: AppColors.accent1Shade1)),
                                 state: FieldState.normal,
                                 validationFunc: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return context
-                                        .translation!.feedback_field_required;
+                                    return context.translation!.feedback_field_required;
                                   }
                                   if (value.length < 6) {
-                                    return context
-                                        .translation!.passwor_min_length;
+                                    return context.translation!.passwor_min_length;
                                   }
-                                  if (value !=
-                                      state.newPasswordController.text) {
-                                    return context.translation!
-                                        .feedback_passwords_do_not_match;
+                                  if (value != state.newPasswordController.text) {
+                                    return context.translation!.feedback_passwords_do_not_match;
                                   }
                                 },
                               ),
@@ -201,8 +176,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                               if (!Form.of(ctx).validate()) {
                                 return;
                               }
-                              BlocProvider.of<ChangePasswordCubit>(ctx)
-                                  .changePassword();
+                              BlocProvider.of<ChangePasswordCubit>(ctx).changePassword();
                             },
                             color: AppColors.accent1Shade1,
                           ),

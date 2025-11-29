@@ -14,7 +14,7 @@ class MarketplaceAppbar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomAppBarV2.alternate(
+    return CustomAppBarV2.normal(
       topPadding: MediaQuery.of(context).padding.top,
       bottomPadding: MediaQuery.of(context).padding.bottom,
       leading: IconButton(
@@ -46,9 +46,7 @@ class MarketplaceAppbar extends StatelessWidget implements PreferredSizeWidget {
             },
           ),
           onPressed: () {
-            AppLayout.appLayoutScaffoldKey.currentContext!
-                .read<AppLayoutCubit>()
-                .changePage(2);
+            AppLayout.appLayoutScaffoldKey.currentContext!.read<AppLayoutCubit>().changePage(2);
           },
         ),
       ],

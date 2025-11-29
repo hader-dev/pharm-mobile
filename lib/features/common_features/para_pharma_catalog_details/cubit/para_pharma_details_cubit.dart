@@ -205,7 +205,7 @@ class ParaPharmaDetailsCubit extends Cubit<ParaPharmaDetailsState> {
   }
 
   void updateQuantity(String v) {
-    final updatedQuantity = int.parse(v);
+    final updatedQuantity = int.parse(v.isEmpty ? '0' : v);
     if (updatedQuantity > 0) {
       state.quantityController.text = (updatedQuantity).toString();
 

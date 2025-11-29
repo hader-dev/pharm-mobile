@@ -52,6 +52,7 @@ class ParaPharmaWidget1 extends StatelessWidget {
       child: InkWell(
         splashColor: Colors.transparent,
         focusColor: Colors.transparent,
+        hoverColor: Colors.transparent,
         highlightColor: Colors.transparent,
         onTap: () {
           final userRole = getItInstance.get<UserManager>().currentUser.role;

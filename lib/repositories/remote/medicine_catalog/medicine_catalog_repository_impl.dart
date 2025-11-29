@@ -26,7 +26,7 @@ class MedicineCatalogRepository extends IMedicineCatalogRepository {
       'offset': offset.toString(),
       'sort[id]': sortDirection,
       if (searchValue != null && searchValue.isNotEmpty) 'search[dci]': searchValue,
-      // 'computed[isFavorite]': 'true',
+      'computed[isFavorite]': 'true',
       'include[company][fields][]': [
         'id',
         'name',

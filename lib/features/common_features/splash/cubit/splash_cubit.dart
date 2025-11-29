@@ -8,7 +8,8 @@ import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 
 import '../../../../config/di/di.dart' show getItInstance;
-import '../../../../config/services/in_app_google_play_updates/app_updater.dart' show AppUpdater;
+import '../../../../config/services/in_app_google_play_updates/app_updater.dart'
+    show AppUpdater;
 
 part 'splash_state.dart';
 
@@ -19,12 +20,14 @@ class SplashCubit extends Cubit<SplashState> {
       checkAppNewGooglePlayUpdate();
       UserManager userManager = getItInstance.get<UserManager>();
       // ignore: unused_local_variable
-      String? userAccessToken = await getItInstance.get<TokenManager>().getAccessToken();
+      String? userAccessToken =
+          await getItInstance.get<TokenManager>().getAccessToken();
       await userManager.getMe();
       if (!userManager.currentUser.isActive) {
         getItInstance.get<ToastManager>().showToast(
             type: ToastType.error,
-            message: RoutingManager.rootNavigatorKey.currentContext!.translation!.account_not_active);
+            message: RoutingManager.rootNavigatorKey.currentContext!
+                .translation!.account_not_active);
         emit(UserNotLoggedInYet());
         return;
       }

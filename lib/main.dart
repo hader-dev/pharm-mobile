@@ -19,7 +19,8 @@ void main() async {
     options.dsn = EnvHelper.getStoredEnvValue(EnvHelper.sentryDsnKey);
     options.tracesSampleRate = 1.0;
     options.profilesSampleRate = 1.0;
-    options.attachScreenshot = true;
+    options.attachScreenshot = false;
+
     options.environment = EnvHelper.getStoredEnvValue(EnvHelper.envModeKey);
   },
       appRunner: () => runApp(

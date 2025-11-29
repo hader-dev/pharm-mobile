@@ -20,7 +20,7 @@ class HelpAndSupportScreen extends StatelessWidget {
     final translation = context.translation!;
 
     return Scaffold(
-      appBar: CustomAppBarV2.alternate(
+      appBar: CustomAppBarV2.normal(
         leading: IconButton(
           icon: Icon(
             Iconsax.arrow_left,

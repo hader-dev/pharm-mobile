@@ -15,7 +15,7 @@ List<CartItemModelUi> cartItemModelDataToUi(List<CartItemModel> cartItems) {
             text: e.quantity.toString(),
           ),
           packageQuantityController: TextEditingController(
-            text: (e.quantity ~/ e.packageSize).toString(),
+            text: (e.quantity ~/ (e.packageSize > 0 ? e.packageSize : 1)).toString(),
           )))
       .toList();
 }
@@ -107,13 +107,19 @@ class CartItemModel {
   factory CartItemModel.fromJson(Map<String, dynamic> json) {
     final thumbnailImage = json['medicineCatalog']?['image'] ?? json['parapharmCatalog']?['image'];
     final minOrderQuantity =
-        json['medicineCatalog']?['minOrderQuantity'] ?? json['parapharmCatalog']?['minOrderQuantity'];
+        json['medicineCatalog']?['minOrderQuantity'] ?? 1 ?? json['parapharmCatalog']?['minOrderQuantity'] ?? 1;
 
-    final maxOrderQuantity =
-        (json['medicineCatalog']?['maxOrderQuantity'] ?? json['parapharmCatalog']?['maxOrderQuantity']) ?? 9999;
+    final maxOrderQuantity = (json['medicineCatalog']?['maxOrderQuantity'] ??
+            9999 ??
+            json['parapharmCatalog']?['maxOrderQuantity'] ??
+            9999) ??
+        9999;
+
+    int packageSize = json['packageSize'] ?? 1;
+    packageSize = packageSize == 0 ? 1 : packageSize;
 
     return CartItemModel(
-      packageSize: json['packageSize'] ?? 1,
+      packageSize: packageSize,
       id: json['id'],
       maxOrderQuantity: maxOrderQuantity,
       minOrderQuantity: minOrderQuantity,

@@ -153,7 +153,7 @@ class ParaPharmaWidget2 extends StatelessWidget {
                     child: Text(paraPharmData.name,
                         softWrap: true,
                         overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
+                        maxLines: 1,
                         style: context.responsiveTextTheme.current.headLine3SemiBold
                             .copyWith(color: TextColors.primary.color)),
                   ),

@@ -55,118 +55,120 @@ class OrdersDetailsPage extends StatelessWidget {
           final orderStatus =
               OrderStatus.values.firstWhere((OrderStatus element) => element.id == cubit.orderData!.status);
 
-          return SingleChildScrollView(
-            physics: const AlwaysScrollableScrollPhysics(),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsetsGeometry.symmetric(
-                    horizontal: context.responsiveAppSizeTheme.current.p8,
-                    vertical: context.responsiveAppSizeTheme.current.p4,
+          return Scrollbar(
+            child: SingleChildScrollView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsetsGeometry.symmetric(
+                      horizontal: context.responsiveAppSizeTheme.current.p8,
+                      vertical: context.responsiveAppSizeTheme.current.p4,
+                    ),
+                    child: Row(children: <Widget>[
+                      Spacer(),
+                      CustomChip(
+                          label: OrderStatus.getTranslatedStatus(orderStatus),
+                          labelColor: orderStatus.color,
+                          labelStyle: context.responsiveTextTheme.current.bodyXSmall.copyWith(
+                              fontWeight: context.responsiveTextTheme.current.appFont.appFontBold,
+                              color: orderStatus.color),
+                          color: orderStatus.color.withAlpha(50))
+                    ]),
                   ),
-                  child: Row(children: <Widget>[
-                    Spacer(),
-                    CustomChip(
-                        label: OrderStatus.getTranslatedStatus(orderStatus),
-                        labelColor: orderStatus.color,
-                        labelStyle: context.responsiveTextTheme.current.bodyXSmall.copyWith(
-                            fontWeight: context.responsiveTextTheme.current.appFont.appFontBold,
-                            color: orderStatus.color),
-                        color: orderStatus.color.withAlpha(50))
-                  ]),
-                ),
-                OrderInfosSection(
-                  orderRef: cubit.orderData!.displayId,
-                  createdAt: cubit.orderData!.createdAt.format,
-                ),
-                AppDivider(
-                  height: context.responsiveAppSizeTheme.current.p12,
-                  color: Colors.grey.shade100,
-                  endIndent: context.responsiveAppSizeTheme.current.s8,
-                  indent: context.responsiveAppSizeTheme.current.s8,
-                ),
-                ShippingAddressSection(
-                  address: cubit.orderData!.deliveryAddress,
-                  latitude: cubit.orderData!.latitude,
-                  longitude: cubit.orderData!.longitude,
-                ),
-                AppDivider(
-                  height: context.responsiveAppSizeTheme.current.p12,
-                  color: Colors.grey.shade100,
-                  endIndent: context.responsiveAppSizeTheme.current.s8,
-                  indent: context.responsiveAppSizeTheme.current.s8,
-                ),
-                if (cubit.orderData!.invoiceType != null)
-                  OrderInvoiceSection(
-                    invoiceType:
-                        InvoiceTypes.values.firstWhere((element) => cubit.orderData!.invoiceType == element.id),
+                  OrderInfosSection(
+                    orderRef: cubit.orderData!.displayId,
+                    createdAt: cubit.orderData!.createdAt.format,
                   ),
-                if (cubit.orderData!.clientNote.isNotEmpty) ...[
                   AppDivider(
                     height: context.responsiveAppSizeTheme.current.p12,
                     color: Colors.grey.shade100,
                     endIndent: context.responsiveAppSizeTheme.current.s8,
                     indent: context.responsiveAppSizeTheme.current.s8,
                   ),
-                  ClientNoteSection()
+                  ShippingAddressSection(
+                    address: cubit.orderData!.deliveryAddress,
+                    latitude: cubit.orderData!.latitude,
+                    longitude: cubit.orderData!.longitude,
+                  ),
+                  AppDivider(
+                    height: context.responsiveAppSizeTheme.current.p12,
+                    color: Colors.grey.shade100,
+                    endIndent: context.responsiveAppSizeTheme.current.s8,
+                    indent: context.responsiveAppSizeTheme.current.s8,
+                  ),
+                  if (cubit.orderData!.invoiceType != null)
+                    OrderInvoiceSection(
+                      invoiceType:
+                          InvoiceTypes.values.firstWhere((element) => cubit.orderData!.invoiceType == element.id),
+                    ),
+                  if (cubit.orderData!.clientNote.isNotEmpty) ...[
+                    AppDivider(
+                      height: context.responsiveAppSizeTheme.current.p12,
+                      color: Colors.grey.shade100,
+                      endIndent: context.responsiveAppSizeTheme.current.s8,
+                      indent: context.responsiveAppSizeTheme.current.s8,
+                    ),
+                    ClientNoteSection()
+                  ],
+                  AppDivider(
+                    height: context.responsiveAppSizeTheme.current.p12,
+                    color: Colors.grey.shade100,
+                    endIndent: context.responsiveAppSizeTheme.current.s8,
+                    indent: context.responsiveAppSizeTheme.current.s8,
+                  ),
+                  OrderDetailsItemsSection(),
+                  AppDivider(
+                    height: context.responsiveAppSizeTheme.current.p12,
+                    color: Colors.grey.shade100,
+                    endIndent: context.responsiveAppSizeTheme.current.s8,
+                    indent: context.responsiveAppSizeTheme.current.s8,
+                  ),
+                  const OrderSummarySection(),
+                  ResponsiveGap.s16(),
+                  Container(
+                    margin: EdgeInsets.symmetric(vertical: context.responsiveAppSizeTheme.current.p4),
+                    padding: EdgeInsets.symmetric(horizontal: context.responsiveAppSizeTheme.current.p4),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.commonWidgetsRadius),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        if (!isInvoiceWorkInProgress)
+                          Padding(
+                            padding: buttonsPadding,
+                            child: PrimaryTextButton(
+                              label: translation.invoice,
+                              onTap: () {
+                                RoutingManager.router.pushNamed(RoutingManager.invoiceScreen, extra: orderId);
+                              },
+                              color: AppColors.accent1Shade1,
+                            ),
+                          ),
+                        if (canCancelOrderByStatusId(item.status))
+                          Padding(
+                            padding: buttonsPadding,
+                            child: PrimaryTextButton(
+                              label: translation.cancel,
+                              labelColor: SystemColors.red.primary,
+                              isOutLined: true,
+                              borderColor: SystemColors.red.primary,
+                              onTap: () {
+                                BottomSheetHelper.showCommonBottomSheet(
+                                    initialChildSize: 0.5, context: context, child: CancelOrderBottomSheet());
+                              },
+                              color: Colors.transparent,
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
                 ],
-                AppDivider(
-                  height: context.responsiveAppSizeTheme.current.p12,
-                  color: Colors.grey.shade100,
-                  endIndent: context.responsiveAppSizeTheme.current.s8,
-                  indent: context.responsiveAppSizeTheme.current.s8,
-                ),
-                ConstrainedBox(constraints: BoxConstraints(maxHeight: 300), child: OrderDetailsItemsSection()),
-                AppDivider(
-                  height: context.responsiveAppSizeTheme.current.p12,
-                  color: Colors.grey.shade100,
-                  endIndent: context.responsiveAppSizeTheme.current.s8,
-                  indent: context.responsiveAppSizeTheme.current.s8,
-                ),
-                const OrderSummarySection(),
-                ResponsiveGap.s16(),
-                Container(
-                  margin: EdgeInsets.symmetric(vertical: context.responsiveAppSizeTheme.current.p4),
-                  padding: EdgeInsets.symmetric(horizontal: context.responsiveAppSizeTheme.current.p4),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.commonWidgetsRadius),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      if (!isInvoiceWorkInProgress)
-                        Padding(
-                          padding: buttonsPadding,
-                          child: PrimaryTextButton(
-                            label: translation.invoice,
-                            onTap: () {
-                              RoutingManager.router.pushNamed(RoutingManager.invoiceScreen, extra: orderId);
-                            },
-                            color: AppColors.accent1Shade1,
-                          ),
-                        ),
-                      if (canCancelOrderByStatusId(item.status))
-                        Padding(
-                          padding: buttonsPadding,
-                          child: PrimaryTextButton(
-                            label: translation.cancel,
-                            labelColor: SystemColors.red.primary,
-                            isOutLined: true,
-                            borderColor: SystemColors.red.primary,
-                            onTap: () {
-                              BottomSheetHelper.showCommonBottomSheet(
-                                  initialChildSize: 0.5, context: context, child: CancelOrderBottomSheet());
-                            },
-                            color: Colors.transparent,
-                          ),
-                        ),
-                    ],
-                  ),
-                ),
-              ],
+              ),
             ),
           );
         },

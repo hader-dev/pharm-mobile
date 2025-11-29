@@ -18,20 +18,20 @@ import '../subPages/about_vendor/about_vendor.dart';
 import '../subPages/medicines/medicines.dart';
 import '../subPages/para_pharma/para_pharma.dart';
 
-class VandorDetailsTabBarSection extends StatefulWidget {
+class VendorDetailsTabBarSection extends StatefulWidget {
   final List<String> tabs = [
     "About",
     "Medicine",
     "Para-Pharma",
   ];
-  VandorDetailsTabBarSection({super.key, required this.companyId});
+  VendorDetailsTabBarSection({super.key, required this.companyId});
   final String companyId;
 
   @override
-  State<VandorDetailsTabBarSection> createState() => _VandorDetailsTabBarSectionState();
+  State<VendorDetailsTabBarSection> createState() => _VendorDetailsTabBarSectionState();
 }
 
-class _VandorDetailsTabBarSectionState extends State<VandorDetailsTabBarSection> with TickerProviderStateMixin {
+class _VendorDetailsTabBarSectionState extends State<VendorDetailsTabBarSection> with TickerProviderStateMixin {
   late final TabController tabsController;
   @override
   void initState() {

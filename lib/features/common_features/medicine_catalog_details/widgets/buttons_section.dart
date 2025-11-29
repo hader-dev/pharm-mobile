@@ -85,7 +85,7 @@ class ButtonsSection extends StatelessWidget {
                     value: Row(
                       children: [
                         Text(
-                          "${(price! * int.parse(cubit.state.quantityController.text)).toStringAsFixed(2)} ${translation.currency}",
+                          "${(price! * int.parse(cubit.state.quantityController.text.isEmpty ? "0" : cubit.state.quantityController.text)).toStringAsFixed(2)} ${translation.currency}",
                           style: context.textTheme.bodyLarge?.copyWith(
                             fontWeight: FontWeight.bold,
                             color: AppColors.accent1Shade1,
@@ -101,21 +101,24 @@ class ButtonsSection extends StatelessWidget {
                       Expanded(
                         child: PrimaryTextButton(
                           isOutLined: true,
-                          textOverflow: TextOverflow.ellipsis,
                           label: translation.buy_now,
-                          maxWidth: MediaQuery.of(context).size.width * 0.25,
-                          leadingIcon: Iconsax.money4,
                           spalshColor: AppColors.accent1Shade1.withAlpha(50),
                           labelColor: AppColors.accent1Shade1,
                           borderColor: AppColors.accent1Shade1,
-                          onTap: int.parse(cubit.state.quantityController.text) <= maxOrderQuantity &&
-                                  int.parse(cubit.state.quantityController.text) >= minOrderQuantity
+                          maxWidth: MediaQuery.of(context).size.width * 0.25,
+                          leadingIcon: Iconsax.money4,
+                          onTap: int.parse(cubit.state.quantityController.text.isEmpty
+                                          ? "0"
+                                          : cubit.state.quantityController.text) <=
+                                      maxOrderQuantity &&
+                                  int.parse(cubit.state.quantityController.text.isEmpty
+                                          ? "0"
+                                          : cubit.state.quantityController.text) >=
+                                      minOrderQuantity
                               ? () {
                                   BottomSheetHelper.showCommonBottomSheet(
-                                      context: context,
-                                      child: MakeOrderBottomSheet(
-                                        cubit: medicineDetailsCubit,
-                                      )).then((res) => onAction?.call());
+                                          context: context, child: MakeOrderBottomSheet(cubit: cubit))
+                                      .then((res) => onAction?.call());
                                 }
                               : null,
                         ),
@@ -123,23 +126,26 @@ class ButtonsSection extends StatelessWidget {
                       const ResponsiveGap.s8(),
                       Expanded(
                         child: PrimaryTextButton(
-                          textOverflow: TextOverflow.ellipsis,
                           label: translation.add_cart,
                           leadingIcon: Iconsax.add,
                           color: AppColors.accent1Shade1,
-                          onTap: int.parse(cubit.state.quantityController.text) <= maxOrderQuantity &&
-                                  int.parse(cubit.state.quantityController.text) >= minOrderQuantity
+                          onTap: int.parse(cubit.state.quantityController.text.isEmpty
+                                          ? "0"
+                                          : cubit.state.quantityController.text) <=
+                                      maxOrderQuantity &&
+                                  int.parse(cubit.state.quantityController.text.isEmpty
+                                          ? "0"
+                                          : cubit.state.quantityController.text) >=
+                                      minOrderQuantity
                               ? () {
                                   BlocProvider.of<CartCubit>(context).addToCart(
-                                    CreateCartItemModel(
-                                        productId:
-                                            BlocProvider.of<MedicineDetailsCubit>(context).state.medicineCatalogData.id,
-                                        quantity: int.parse(BlocProvider.of<MedicineDetailsCubit>(context)
-                                            .state
-                                            .quantityController
-                                            .text),
-                                        productType: ProductTypes.medicine),
-                                  );
+                                      CreateCartItemModel(
+                                          productId: cubit.state.medicineCatalogData.id,
+                                          quantity: int.parse(cubit.state.quantityController.text.isEmpty
+                                              ? "0"
+                                              : cubit.state.quantityController.text),
+                                          productType: ProductTypes.medicine),
+                                      true);
                                   onAction?.call();
                                 }
                               : null,

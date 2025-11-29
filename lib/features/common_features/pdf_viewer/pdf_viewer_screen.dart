@@ -95,7 +95,7 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
   Widget build(BuildContext context) {
     translation = context.translation!;
     return Scaffold(
-      appBar: CustomAppBarV2.alternate(
+      appBar: CustomAppBarV2.normal(
         title: Text(
           widget.title,
           style: context.responsiveTextTheme.current.headLine4SemiBold.copyWith(
@@ -158,8 +158,7 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
                         });
                       },
                     ),
-                    if (!isReady)
-                      const Center(child: CircularProgressIndicator()),
+                    if (!isReady) const Center(child: CircularProgressIndicator()),
                   ],
                 ),
     );
@@ -172,8 +171,7 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Iconsax.document_cloud,
-                size: 64, color: TextColors.ternary.color),
+            Icon(Iconsax.document_cloud, size: 64, color: TextColors.ternary.color),
             SizedBox(height: context.responsiveAppSizeTheme.current.p16),
             Text(
               context.translation!.feedback_loading_failed,

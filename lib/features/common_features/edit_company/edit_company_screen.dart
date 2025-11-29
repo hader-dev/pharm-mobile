@@ -36,13 +36,11 @@ class CompanyEditScreen extends StatelessWidget {
         ..initCompanyData(),
       child: Scaffold(
         backgroundColor: AppColors.bgWhite,
-        appBar: CustomAppBarV2.alternate(
+        appBar: CustomAppBarV2.normal(
           leading: IconButton(
             icon: Icon(
-              Directionality.of(context) == TextDirection.rtl
-                  ? Iconsax.arrow_right_3
-                  : Iconsax.arrow_left_2,
-              color: AppColors.bgWhite,
+              Directionality.of(context) == TextDirection.rtl ? Iconsax.arrow_right_3 : Iconsax.arrow_left_2,
+              color: AppColors.accent1Shade1,
               size: context.responsiveAppSizeTheme.current.iconSize25,
             ),
             onPressed: () {
@@ -53,14 +51,12 @@ class CompanyEditScreen extends StatelessWidget {
             initialMode == CompanyScreenMode.edit
                 ? context.translation!.edit_company
                 : context.translation!.view_company,
-            style: context.responsiveTextTheme.current.headLine3SemiBold
-                .copyWith(color: AppColors.bgWhite),
+            style: context.responsiveTextTheme.current.headLine3SemiBold.copyWith(color: AppColors.accent1Shade1),
           ),
         ),
         body: SafeArea(
           child: Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: context.responsiveAppSizeTheme.current.p16),
+            padding: EdgeInsets.symmetric(horizontal: context.responsiveAppSizeTheme.current.p16),
             child: BlocBuilder<EditCompanyCubit, EditCompanyState>(
               builder: (context, state) {
                 if (state is EditCompanyLoading) {
@@ -80,14 +76,13 @@ class CompanyEditScreen extends StatelessWidget {
                         const ResponsiveGap.s16(),
                         Text(
                           context.translation!.no_company_found,
-                          style: context
-                              .responsiveTextTheme.current.headLine3SemiBold,
+                          style: context.responsiveTextTheme.current.headLine3SemiBold,
                         ),
                         const ResponsiveGap.s8(),
                         Text(
                           context.translation!.create_company_profile_required,
-                          style: context.responsiveTextTheme.current.body1Medium
-                              .copyWith(color: TextColors.ternary.color),
+                          style:
+                              context.responsiveTextTheme.current.body1Medium.copyWith(color: TextColors.ternary.color),
                           textAlign: TextAlign.center,
                         ),
                         const ResponsiveGap.s24(),
@@ -104,20 +99,15 @@ class CompanyEditScreen extends StatelessWidget {
                               ),
                               child: Text(context.translation!.go_back),
                             ),
-                            SizedBox(
-                                width:
-                                    context.responsiveAppSizeTheme.current.s16),
+                            SizedBox(width: context.responsiveAppSizeTheme.current.s16),
                             ElevatedButton(
                               onPressed: () {
                                 context.pop();
-                                context.pushNamed(
-                                    RoutingManager.createCompanyProfile);
+                                context.pushNamed(RoutingManager.createCompanyProfile);
                               },
                               child: Text(
                                 context.translation!.create_company,
-                                style: context
-                                    .responsiveTextTheme.current.body1Medium
-                                    .copyWith(color: Colors.white),
+                                style: context.responsiveTextTheme.current.body1Medium.copyWith(color: Colors.white),
                               ),
                             ),
                           ],
@@ -136,8 +126,7 @@ class CompanyEditScreen extends StatelessWidget {
                       initialMode == CompanyScreenMode.edit
                           ? context.translation!.update_company_description
                           : context.translation!.view_company_description,
-                      style: context.responsiveTextTheme.current.body1Medium
-                          .copyWith(
+                      style: context.responsiveTextTheme.current.body1Medium.copyWith(
                         color: TextColors.ternary.color,
                       ),
                     ),

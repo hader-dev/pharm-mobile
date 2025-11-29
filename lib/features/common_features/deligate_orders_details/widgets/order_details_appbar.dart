@@ -19,7 +19,7 @@ class OrderDetailsAppbar extends StatelessWidget implements PreferredSizeWidget 
 
   @override
   Widget build(BuildContext context) {
-    return CustomAppBarV2.alternate(
+    return CustomAppBarV2.normal(
       topPadding: MediaQuery.of(context).padding.top,
       bottomPadding: MediaQuery.of(context).padding.bottom,
       leading: IconButton(

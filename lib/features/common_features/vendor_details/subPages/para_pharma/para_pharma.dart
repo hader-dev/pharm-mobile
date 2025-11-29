@@ -20,8 +20,7 @@ class ParapharmaPage extends StatefulWidget {
   State<ParapharmaPage> createState() => _ParapharmaPageState();
 }
 
-class _ParapharmaPageState extends State<ParapharmaPage>
-    with AutomaticKeepAliveClientMixin {
+class _ParapharmaPageState extends State<ParapharmaPage> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -49,8 +48,7 @@ class _ParapharmaPageState extends State<ParapharmaPage>
                 searchController: state.searchController,
               ),
             ),
-            BlocBuilder<ParaPharmaCubit, ParaPharmaState>(
-                builder: (context, state) {
+            BlocBuilder<ParaPharmaCubit, ParaPharmaState>(builder: (context, state) {
               return SearchFilterButton(
                   hasActiveFilters: state.hasActiveFilters,
                   onTap: () {
@@ -76,7 +74,11 @@ class _ParapharmaPageState extends State<ParapharmaPage>
               final paraPharmaProducts = state.paraPharmaProducts;
 
               if (paraPharmaProducts.isEmpty) {
-                return EmptyListWidget();
+                return EmptyListWidget(
+                  onRefresh: () {
+                    parapharmCubit.getParaPharmas();
+                  },
+                );
               }
 
               final bool isLoadingMore = state is LoadingMoreParaPharma;
@@ -85,10 +87,8 @@ class _ParapharmaPageState extends State<ParapharmaPage>
               void onLikeTapped(BaseParaPharmaCatalogModel paraPharma) {
                 final id = paraPharma.id;
                 paraPharma.isLiked
-                    ? BlocProvider.of<ParaPharmaCubit>(bContext)
-                        .unlikeParaPharmaCatalog(id)
-                    : BlocProvider.of<ParaPharmaCubit>(bContext)
-                        .likeParaPharmaCatalog(id);
+                    ? BlocProvider.of<ParaPharmaCubit>(bContext).unlikeParaPharmaCatalog(id)
+                    : BlocProvider.of<ParaPharmaCubit>(bContext).likeParaPharmaCatalog(id);
               }
 
               return Column(
@@ -103,8 +103,7 @@ class _ParapharmaPageState extends State<ParapharmaPage>
                         controller: state.scrollController,
                         shrinkWrap: true,
                         physics: const AlwaysScrollableScrollPhysics(),
-                        itemCount: paraPharmaProducts.length +
-                            (isLoadingMore || hasReachedEnd ? 1 : 0),
+                        itemCount: paraPharmaProducts.length + (isLoadingMore || hasReachedEnd ? 1 : 0),
                         itemBuilder: (context, index) {
                           if (index < paraPharmaProducts.length) {
                             final paraPharma = paraPharmaProducts[index];
@@ -116,10 +115,8 @@ class _ParapharmaPageState extends State<ParapharmaPage>
                           } else {
                             if (isLoadingMore) {
                               return Padding(
-                                padding: EdgeInsets.all(
-                                    context.responsiveAppSizeTheme.current.s16),
-                                child:
-                                    Center(child: CircularProgressIndicator()),
+                                padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.s16),
+                                child: Center(child: CircularProgressIndicator()),
                               );
                             } else if (hasReachedEnd) {
                               return const EndOfLoadResultWidget();
@@ -130,10 +127,8 @@ class _ParapharmaPageState extends State<ParapharmaPage>
                       ),
                     ),
                   ),
-                  if (state is LoadingMoreParaPharma)
-                    const Center(child: CircularProgressIndicator()),
-                  if (state is ParaPharmasLoadLimitReached)
-                    const EndOfLoadResultWidget(),
+                  if (state is LoadingMoreParaPharma) const Center(child: CircularProgressIndicator()),
+                  if (state is ParaPharmasLoadLimitReached) const EndOfLoadResultWidget(),
                 ],
               );
             },

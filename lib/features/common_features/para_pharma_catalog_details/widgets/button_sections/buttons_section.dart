@@ -82,7 +82,7 @@ class ButtonsSection extends StatelessWidget {
                   value: Row(
                     children: [
                       Text(
-                        "${(num.parse(cubit.state.quantityController.text) * cubit.state.paraPharmaCatalogData.unitPriceHt).toStringAsFixed(2)} ${translation.currency}",
+                        "${(num.parse(cubit.state.quantityController.text.isEmpty ? "0" : cubit.state.quantityController.text) * cubit.state.paraPharmaCatalogData.unitPriceHt).toStringAsFixed(2)} ${translation.currency}",
                         style: context.responsiveTextTheme.current.body2Medium.copyWith(color: AppColors.accent1Shade1),
                       ),
                       const Spacer(),
@@ -106,8 +106,14 @@ class ButtonsSection extends StatelessWidget {
                         borderColor: AppColors.accent1Shade1,
                         maxWidth: MediaQuery.of(context).size.width * 0.25,
                         leadingIcon: Iconsax.money4,
-                        onTap: int.parse(cubit.state.quantityController.text) <= maxOrderQuantity &&
-                                int.parse(cubit.state.quantityController.text) >= minOrderQuantity
+                        onTap: int.parse(cubit.state.quantityController.text.isEmpty
+                                        ? "0"
+                                        : cubit.state.quantityController.text) <=
+                                    maxOrderQuantity &&
+                                int.parse(cubit.state.quantityController.text.isEmpty
+                                        ? "0"
+                                        : cubit.state.quantityController.text) >=
+                                    minOrderQuantity
                             ? () {
                                 BottomSheetHelper.showCommonBottomSheet(
                                         context: context, child: MakeOrderBottomSheet(cubit: cubit))
@@ -122,13 +128,21 @@ class ButtonsSection extends StatelessWidget {
                         label: translation.add_cart,
                         leadingIcon: Iconsax.add,
                         color: AppColors.accent1Shade1,
-                        onTap: int.parse(cubit.state.quantityController.text) <= maxOrderQuantity &&
-                                int.parse(cubit.state.quantityController.text) >= minOrderQuantity
+                        onTap: int.parse(cubit.state.quantityController.text.isEmpty
+                                        ? "0"
+                                        : cubit.state.quantityController.text) <=
+                                    maxOrderQuantity &&
+                                int.parse(cubit.state.quantityController.text.isEmpty
+                                        ? "0"
+                                        : cubit.state.quantityController.text) >=
+                                    minOrderQuantity
                             ? () {
                                 BlocProvider.of<CartCubit>(context).addToCart(
                                     CreateCartItemModel(
                                         productId: cubit.state.paraPharmaCatalogData.id,
-                                        quantity: int.parse(cubit.state.quantityController.text),
+                                        quantity: int.parse(cubit.state.quantityController.text.isEmpty
+                                            ? "0"
+                                            : cubit.state.quantityController.text),
                                         productType: ProductTypes.para_pharmacy),
                                     true);
                                 onAction?.call();

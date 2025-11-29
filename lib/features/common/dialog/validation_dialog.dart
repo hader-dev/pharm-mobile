@@ -30,39 +30,32 @@ class ValidateActionDialog {
               elevation: 0,
               insetAnimationCurve: Curves.ease,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(
-                    context.responsiveAppSizeTheme.current.commonWidgetsRadius),
+                borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.commonWidgetsRadius),
               ),
               alignment: Alignment.center,
               child: Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: context.responsiveAppSizeTheme.current.p8),
+                padding: EdgeInsets.symmetric(horizontal: context.responsiveAppSizeTheme.current.p8),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Padding(
-                      padding: EdgeInsets.all(
-                          context.responsiveAppSizeTheme.current.p16),
+                      padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p16),
                       child: CircleAvatar(
                         backgroundColor: dialogType.color.withAlpha(51),
                         minRadius: context.responsiveAppSizeTheme.current.r30,
                         child: Icon(
                           dialogType.icon,
                           color: dialogType.color,
-                          size:
-                              context.responsiveAppSizeTheme.current.iconSize25,
+                          size: context.responsiveAppSizeTheme.current.iconSize25,
                         ),
                       ),
                     ),
-                    if (title != null)
-                      Align(alignment: Alignment.center, child: title),
+                    if (title != null) Align(alignment: Alignment.center, child: title),
                     const ResponsiveGap.s12(),
-                    if (content != null)
-                      Align(alignment: Alignment.center, child: content),
+                    if (content != null) Align(alignment: Alignment.center, child: content),
                     Padding(
-                      padding: EdgeInsets.all(
-                          context.responsiveAppSizeTheme.current.p16),
+                      padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p16),
                       child: Row(
                         children: [
                           const Spacer(),
@@ -73,11 +66,8 @@ class ValidateActionDialog {
                               },
                               child: Text(
                                 cancelText,
-                                style: context
-                                    .responsiveTextTheme.current.body3Medium
-                                    .copyWith(
-                                        color: AppColors.accentGreenShade2
-                                            .withAlpha(200)),
+                                style: context.responsiveTextTheme.current.body3Medium
+                                    .copyWith(color: AppColors.accentGreenShade2.withAlpha(200)),
                               ),
                             ),
                           if (okEnabled)
@@ -88,10 +78,8 @@ class ValidateActionDialog {
                               },
                               child: Text(
                                 agreeText,
-                                style: context
-                                    .responsiveTextTheme.current.body3Medium
-                                    .copyWith(
-                                        color: AppColors.accentGreenShade2),
+                                style: context.responsiveTextTheme.current.body3Medium
+                                    .copyWith(color: AppColors.accentGreenShade2),
                               ),
                             ),
                         ],
@@ -105,11 +93,7 @@ class ValidateActionDialog {
         );
       },
     ).then((_) {
-      if (result) {
-        onValidate!();
-      } else {
-        onCancel!();
-      }
+      onValidate!();
     });
   }
 }
