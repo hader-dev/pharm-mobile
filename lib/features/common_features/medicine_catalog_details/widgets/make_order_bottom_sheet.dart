@@ -120,7 +120,7 @@ class MakeOrderBottomSheet extends StatelessWidget {
                   value: Row(
                     children: [
                       Text(
-                        "${(num.parse(state.quantityController.text) * state.medicineCatalogData.unitPriceHt).toStringAsFixed(2)} ${translation.currency}",
+                        "${(num.parse(state.quantityController.text.isEmpty ? "0" : state.quantityController.text) * state.medicineCatalogData.unitPriceHt).toStringAsFixed(2)} ${translation.currency}",
                         style: context.responsiveTextTheme.current.body2Medium.copyWith(color: AppColors.accent1Shade1),
                       ),
                       const Spacer(),
@@ -159,17 +159,24 @@ class MakeOrderBottomSheet extends StatelessWidget {
                           label: translation.buy_now,
                           leadingIcon: Iconsax.money4,
                           isLoading: state is PassingQuickOrder,
-                          onTap: () {
-                            context
-                                .read<MedicineDetailsCubit>()
-                                .passQuickOrder()
-                                .then((sucess) => getItInstance.get<ToastManager>().showToast(
-                                      message: sucess
-                                          ? translation.order_placed_successfully
-                                          : translation.order_placed_failed,
-                                      type: sucess ? ToastType.success : ToastType.error,
-                                    ));
-                          },
+                          onTap: (int.parse(
+                                          state.quantityController.text.isEmpty ? "0" : state.quantityController.text) <
+                                      state.medicineCatalogData.minOrderQuantity ||
+                                  state.medicineCatalogData.maxOrderQuantity <
+                                      int.parse(
+                                          state.quantityController.text.isEmpty ? "0" : state.quantityController.text))
+                              ? null
+                              : () {
+                                  context
+                                      .read<MedicineDetailsCubit>()
+                                      .passQuickOrder()
+                                      .then((sucess) => getItInstance.get<ToastManager>().showToast(
+                                            message: sucess
+                                                ? translation.order_placed_successfully
+                                                : translation.order_placed_failed,
+                                            type: sucess ? ToastType.success : ToastType.error,
+                                          ));
+                                },
                           color: AppColors.accent1Shade1,
                         ),
                       ),

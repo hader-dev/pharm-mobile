@@ -117,7 +117,7 @@ class AddCartBottomSheet extends StatelessWidget {
                   value: Row(
                     children: [
                       Text(
-                        "${(num.parse(cubit.state.quantityController.text) * cubit.state.paraPharmaCatalogData.unitPriceHt).toStringAsFixed(2)} ${translation.currency}",
+                        "${(num.parse(cubit.state.quantityController.text.isEmpty ? "0" : cubit.state.quantityController.text) * cubit.state.paraPharmaCatalogData.unitPriceHt).toStringAsFixed(2)} ${translation.currency}",
                         style: context.responsiveTextTheme.current.body2Medium.copyWith(color: AppColors.accent1Shade1),
                       ),
                       const Spacer(),
@@ -155,12 +155,19 @@ class AddCartBottomSheet extends StatelessWidget {
                           label: translation.add_cart,
                           leadingIcon: Iconsax.money4,
                           isLoading: state is PassingQuickOrder,
-                          onTap: () => addToCartOrDeligateItems(
-                              cubit: cubit,
-                              context: context,
-                              deligateCreateOrderCubit: deligateCreateOrderCubit,
-                              onAction: onAction,
-                              needCartCubit: needCartCubit),
+                          onTap: (int.parse(
+                                          state.quantityController.text.isEmpty ? "0" : state.quantityController.text) <
+                                      state.paraPharmaCatalogData.minOrderQuantity ||
+                                  state.paraPharmaCatalogData.maxOrderQuantity <
+                                      int.parse(
+                                          state.quantityController.text.isEmpty ? "0" : state.quantityController.text))
+                              ? null
+                              : () => addToCartOrDeligateItems(
+                                  cubit: cubit,
+                                  context: context,
+                                  deligateCreateOrderCubit: deligateCreateOrderCubit,
+                                  onAction: onAction,
+                                  needCartCubit: needCartCubit),
                           color: AppColors.accent1Shade1,
                         ),
                       ),

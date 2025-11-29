@@ -112,8 +112,8 @@ class CartCubit extends Cubit<CartState> {
   }
 
   bool _canIncreaseQuantity(CartItemModelUi item) {
-    return (item.model.medicinesCatalogId != null && item.model.quantity >= item.model.maxOrderQuantity) ||
-        (item.model.parapharmCatalogId != null && item.model.quantity >= item.model.maxOrderQuantity);
+    return (item.model.medicinesCatalogId != null && item.model.quantity == item.model.maxOrderQuantity) ||
+        (item.model.parapharmCatalogId != null && item.model.quantity == item.model.maxOrderQuantity);
   }
 
   void increaseCartPackageQuantity(CartItemModelUi item) {

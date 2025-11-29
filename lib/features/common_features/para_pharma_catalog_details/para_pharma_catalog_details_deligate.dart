@@ -6,14 +6,10 @@ class DeligateParaPharmaCatalogDetailsScreen extends StatelessWidget {
   final String paraPharmaCatalogId;
   final bool canOrder;
   final bool disabledPackageQuanity;
-  static final GlobalKey<ScaffoldState> paraPharmaDetailsScaffoldKey =
-      GlobalKey<ScaffoldState>();
+  static final GlobalKey<ScaffoldState> paraPharmaDetailsScaffoldKey = GlobalKey<ScaffoldState>();
 
   const DeligateParaPharmaCatalogDetailsScreen(
-      {super.key,
-      required this.paraPharmaCatalogId,
-      required this.canOrder,
-      this.disabledPackageQuanity = false});
+      {super.key, required this.paraPharmaCatalogId, required this.canOrder, this.disabledPackageQuanity = false});
 
   @override
   Widget build(BuildContext context) {
