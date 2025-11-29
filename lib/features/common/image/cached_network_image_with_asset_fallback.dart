@@ -1,7 +1,7 @@
 import 'package:cached_network_image_plus/flutter_cached_network_image_plus.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:hader_pharm_mobile/features/common/widgets/image_load_error_widget.dart' show ImageLoadErrorWidget;
+import 'package:hader_pharm_mobile/features/common/widgets/image_load_error_widget.dart'
+    show ImageLoadErrorWidget;
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class CachedNetworkImageWithDrawableFallback extends StatelessWidget {
@@ -54,7 +54,8 @@ class CachedNetworkImageWithDrawableFallback extends StatelessWidget {
                 fit: fit,
               )
             : ImageLoadErrorWidget(
-                iconSize: errorImgSize ?? context.responsiveAppSizeTheme.current.iconSize48,
+                iconSize: errorImgSize ??
+                    context.responsiveAppSizeTheme.current.iconSize48,
                 errorMsg: errorMsg,
                 errorStyle: errorStyle,
                 iconPath: errorSvgImgPath,
