@@ -26,20 +26,17 @@ sealed class MedicineDetailsState {
         state: this,
       );
 
-  MedicineDetailsLoaded toLoaded(MedicineCatalogModel medicineCatalogData) =>
-      MedicineDetailsLoaded.fromState(
+  MedicineDetailsLoaded toLoaded(MedicineCatalogModel medicineCatalogData) => MedicineDetailsLoaded.fromState(
         state: this,
         medicineCatalogData: medicineCatalogData,
       );
 
-  MedicineDetailsTapIndexChanged toTapIndexChanged(int index) =>
-      MedicineDetailsTapIndexChanged.fromState(
+  MedicineDetailsTapIndexChanged toTapIndexChanged(int index) => MedicineDetailsTapIndexChanged.fromState(
         state: this,
         currentTapIndex: index,
       );
 
-  MedicineQuantityChanged toQuantityChanged() =>
-      MedicineQuantityChanged.fromState(
+  MedicineQuantityChanged toQuantityChanged() => MedicineQuantityChanged.fromState(
         state: this,
       );
 
@@ -55,15 +52,13 @@ sealed class MedicineDetailsState {
         state: this,
       );
 
-  MedicineLikeToggled toToggleLiked(MedicineCatalogModel medicineCatalogData) =>
-      MedicineLikeToggled.fromState(
+  MedicineLikeToggled toToggleLiked(MedicineCatalogModel medicineCatalogData) => MedicineLikeToggled.fromState(
         state: this,
         medicineCatalogData: medicineCatalogData,
       );
 
   UpdateShippingAddress toUpdateShippingAddress(String shippingAddress) =>
-      UpdateShippingAddress.fromState(
-          state: this, shippingAddress: shippingAddress);
+      UpdateShippingAddress.fromState(state: this, shippingAddress: shippingAddress);
 }
 
 // ------------------ States ------------------
@@ -77,10 +72,8 @@ final class MedicineDetailsInitial extends MedicineDetailsState {
     TextEditingController? packageQuantityController,
     TextEditingController? quantityController,
   }) : super(
-          medicineCatalogData:
-              medicineCatalogData ?? MedicineCatalogModel.empty(),
-          packageQuantityController:
-              packageQuantityController ?? TextEditingController(),
+          medicineCatalogData: medicineCatalogData ?? MedicineCatalogModel.empty(),
+          packageQuantityController: packageQuantityController ?? TextEditingController(),
           quantityController: quantityController ?? TextEditingController(),
         );
 }

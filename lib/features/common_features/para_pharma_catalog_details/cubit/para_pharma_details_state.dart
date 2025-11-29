@@ -4,6 +4,8 @@ sealed class ParaPharmaDetailsState {
   final ParaPharmaCatalogModel paraPharmaCatalogData;
   final int currentTapIndex;
   final TabController tabController;
+  PaymentMethods? selectedPaymentMethod;
+  InvoiceTypes? selectedInvoiceType;
 
   final TextEditingController quantityController;
   final TextEditingController packageQuantityController;
@@ -13,7 +15,9 @@ sealed class ParaPharmaDetailsState {
       required this.currentTapIndex,
       required this.tabController,
       required this.quantityController,
-      required this.packageQuantityController});
+      required this.packageQuantityController,
+      this.selectedPaymentMethod = PaymentMethods.cash,
+      this.selectedInvoiceType = InvoiceTypes.facture});
 
   ParaPharmaDetailsLoading toLoading() {
     return ParaPharmaDetailsLoading.fromState(state: this);
@@ -32,16 +36,19 @@ sealed class ParaPharmaDetailsState {
   ParaPharmaDetailsTapIndexChanged toTapIndexChanged({
     required int index,
   }) {
-    return ParaPharmaDetailsTapIndexChanged.fromState(
-        state: this, index: index);
+    return ParaPharmaDetailsTapIndexChanged.fromState(state: this, index: index);
   }
 
   ParaPharmaQuantityChanged toQuantityChanged() {
     return ParaPharmaQuantityChanged.fromState(state: this);
   }
 
-  PassingQuickOrder toPassingQuickOrder() {
-    return PassingQuickOrder.fromState(state: this);
+  PassingQuickOrder toPassingQuickOrder(PaymentMethods? selectedPayment, InvoiceTypes? selectedInvoice) {
+    return PassingQuickOrder.fromState(state: this, selectedInvoice: selectedInvoice, selectedPayment: selectedPayment);
+  }
+
+  OrderPramsChanged toOrderPramsChanged(PaymentMethods? selectedPayment, InvoiceTypes? selectedInvoice) {
+    return OrderPramsChanged.fromState(state: this, selectedInvoice: selectedInvoice, selectedPayment: selectedPayment);
   }
 
   QuickOrderPassed toQuickOrderPassed() {
@@ -61,13 +68,10 @@ final class ParaPharmaDetailsInitial extends ParaPharmaDetailsState {
       TextEditingController? quantityController,
       TextEditingController? packageQuantityController})
       : super(
-          paraPharmaCatalogData:
-              paraPharmaCatalogData ?? ParaPharmaCatalogModel.empty(),
+          paraPharmaCatalogData: paraPharmaCatalogData ?? ParaPharmaCatalogModel.empty(),
           currentTapIndex: currentTapIndex ?? 0,
-          quantityController:
-              quantityController ?? TextEditingController(text: '1'),
-          packageQuantityController:
-              packageQuantityController ?? TextEditingController(text: '1'),
+          quantityController: quantityController ?? TextEditingController(text: '1'),
+          packageQuantityController: packageQuantityController ?? TextEditingController(text: '1'),
         );
 }
 
@@ -83,9 +87,7 @@ final class ParaPharmaDetailsLoading extends ParaPharmaDetailsState {
 }
 
 final class ParaPharmaDetailsLoaded extends ParaPharmaDetailsState {
-  ParaPharmaDetailsLoaded.fromState(
-      {required ParaPharmaDetailsState state,
-      required ParaPharmaCatalogModel data})
+  ParaPharmaDetailsLoaded.fromState({required ParaPharmaDetailsState state, required ParaPharmaCatalogModel data})
       : super(
           paraPharmaCatalogData: data,
           currentTapIndex: state.currentTapIndex,
@@ -107,8 +109,7 @@ final class ParaPharmaDetailsLoadError extends ParaPharmaDetailsState {
 }
 
 final class ParaPharmaDetailsTapIndexChanged extends ParaPharmaDetailsState {
-  ParaPharmaDetailsTapIndexChanged.fromState(
-      {required ParaPharmaDetailsState state, required int index})
+  ParaPharmaDetailsTapIndexChanged.fromState({required ParaPharmaDetailsState state, required int index})
       : super(
           paraPharmaCatalogData: state.paraPharmaCatalogData,
           currentTapIndex: index,
@@ -130,14 +131,29 @@ final class ParaPharmaQuantityChanged extends ParaPharmaDetailsState {
 }
 
 final class PassingQuickOrder extends ParaPharmaDetailsState {
-  PassingQuickOrder.fromState({required ParaPharmaDetailsState state})
+  PassingQuickOrder.fromState(
+      {required ParaPharmaDetailsState state, PaymentMethods? selectedPayment, InvoiceTypes? selectedInvoice})
       : super(
-          paraPharmaCatalogData: state.paraPharmaCatalogData,
-          currentTapIndex: state.currentTapIndex,
-          tabController: state.tabController,
-          quantityController: state.quantityController,
-          packageQuantityController: state.packageQuantityController,
-        );
+            paraPharmaCatalogData: state.paraPharmaCatalogData,
+            currentTapIndex: state.currentTapIndex,
+            tabController: state.tabController,
+            quantityController: state.quantityController,
+            packageQuantityController: state.packageQuantityController,
+            selectedInvoiceType: selectedInvoice,
+            selectedPaymentMethod: selectedPayment);
+}
+
+final class OrderPramsChanged extends ParaPharmaDetailsState {
+  OrderPramsChanged.fromState(
+      {required ParaPharmaDetailsState state, PaymentMethods? selectedPayment, InvoiceTypes? selectedInvoice})
+      : super(
+            paraPharmaCatalogData: state.paraPharmaCatalogData,
+            currentTapIndex: state.currentTapIndex,
+            tabController: state.tabController,
+            quantityController: state.quantityController,
+            packageQuantityController: state.packageQuantityController,
+            selectedInvoiceType: selectedInvoice,
+            selectedPaymentMethod: selectedPayment);
 }
 
 final class QuickOrderPassed extends ParaPharmaDetailsState {

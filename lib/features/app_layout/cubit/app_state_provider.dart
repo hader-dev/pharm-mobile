@@ -16,10 +16,20 @@ import 'package:hader_pharm_mobile/repositories/remote/order/order_repository_im
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 
-class AppStateProvider extends StatelessWidget {
+class AppStateProvider extends StatefulWidget {
   final Widget child;
   const AppStateProvider({super.key, required this.child});
 
+  @override
+  State<AppStateProvider> createState() => _AppStateProviderState();
+}
+
+class _AppStateProviderState extends State<AppStateProvider> {
+  NotificationsCubit notificationCubit = NotificationsCubit(
+    notificationService: getItInstance.get<INotificationService>(),
+    scrollController: ScrollController(),
+    fcmNotificationsStream: getItInstance.get<StreamController>(),
+  );
   @override
   Widget build(BuildContext context) {
     final isExtraLargeScreen = MediaQuery.of(context).size.width > DeviceSizes.largeMobile.width;
@@ -27,11 +37,7 @@ class AppStateProvider extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => NotificationsCubit(
-            notificationService: getItInstance.get<INotificationService>(),
-            scrollController: ScrollController(),
-            fcmNotificationsStream: getItInstance.get<StreamController>(),
-          )
+          create: (context) => notificationCubit
             ..getUnreadNotificationsCount()
             ..getNotifications(offset: 0),
         ),
@@ -69,11 +75,17 @@ class AppStateProvider extends StatelessWidget {
         },
         child: BlocBuilder<CartCubit, CartState>(
           builder: (context, state) {
-            return child;
+            return widget.child;
           },
         ),
       ),
     );
+  }
+
+  @override
+  dispose() {
+    notificationCubit.close();
+    super.dispose();
   }
 }
 

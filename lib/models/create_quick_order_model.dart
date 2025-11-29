@@ -24,13 +24,11 @@ class CreateQuickOrderModel {
       this.medicineCatalogId,
       this.latitude,
       this.longitude});
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toMap() {
     return {
-      if (paraPharmaCatalogId != null)
-        'parapharmCatalogId': paraPharmaCatalogId,
+      if (paraPharmaCatalogId != null) 'parapharmCatalogId': paraPharmaCatalogId,
       if (medicineCatalogId != null) 'medicineCatalogId': medicineCatalogId,
-      if (clientNote != null && clientNote!.isNotEmpty)
-        'clientNote': clientNote,
+      if (clientNote != null && clientNote!.isNotEmpty) 'clientNote': clientNote,
       'deliveryAddress': deliveryAddress,
       'deliveryTownId': deliveryTownId,
       'quantity': qty,

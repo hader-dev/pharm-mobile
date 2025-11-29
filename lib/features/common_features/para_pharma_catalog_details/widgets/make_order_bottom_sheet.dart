@@ -9,10 +9,13 @@ import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_bu
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/bottom_sheet_header.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/invoice_input.dart' show InvoiceRadioInput;
+import 'package:hader_pharm_mobile/features/common/widgets/payment_input.dart' show PaymentRadioInput;
 import 'package:hader_pharm_mobile/features/common/widgets/quantity_section.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders/cubit/orders_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/cubit/para_pharma_details_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/para_pharma_catalog_details.dart';
+import 'package:hader_pharm_mobile/utils/enums.dart' show InvoiceTypes, PaymentMethods;
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 import 'package:hader_pharm_mobile/utils/validators.dart';
@@ -99,7 +102,25 @@ class MakeOrderBottomSheet extends StatelessWidget {
                   ),
                   const ResponsiveGap.s12(),
                   InfoWidget(
-                      label: context.translation!.shipping_address,
+                      label: context.translation!.payment_methods,
+                      bgColor: AppColors.bgWhite,
+                      value: PaymentRadioInput(
+                        initialValue: PaymentMethods.cash,
+                        onPaymentMethodChanged: (PaymentMethods paymentMethod) =>
+                            cubit.changePaymentMethod(paymentMethod),
+                        validator: (v) => requiredValidator(v?.name, translation),
+                      )),
+                  InfoWidget(
+                      label: context.translation!.invoice_types,
+                      bgColor: AppColors.bgWhite,
+                      value: InvoiceRadioInput(
+                        initialValue: InvoiceTypes.facture,
+                        onInvoiceTypeChanged: (InvoiceTypes invoiceType) => cubit.changeInvoiceMethod(invoiceType),
+                        validator: (v) => requiredValidator(v?.name, translation),
+                      )),
+                  const ResponsiveGap.s12(),
+                  InfoWidget(
+                      label: "${context.translation!.shipping_address}*",
                       bgColor: AppColors.bgWhite,
                       value: CustomTextField(
                         verticalPadding: 0,
@@ -108,7 +129,10 @@ class MakeOrderBottomSheet extends StatelessWidget {
                         initValue: UserManager.instance.currentUser.address,
                         maxLines: 3,
                         maxLength: 255,
-                        validationFunc: (value) => requiredValidator(value, translation, minLength: 2),
+                        validationFunc: (value) => requiredValidator(
+                          value,
+                          translation,
+                        ),
                         isFilled: false,
                         isBorderEnabled: true,
                         hintText: context.translation!.shipping_address,

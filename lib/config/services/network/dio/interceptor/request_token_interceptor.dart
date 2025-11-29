@@ -16,7 +16,7 @@ class TokenCheckerInterceptor extends Interceptor {
     String errorCode = "";
 
     try {
-      err.response?.data['code'] ?? "";
+      errorCode = err.response?.data['code'] ?? "";
     } catch (e) {
       errorCode = "";
     }
@@ -26,19 +26,13 @@ class TokenCheckerInterceptor extends Interceptor {
     ];
 
     try {
-      if (err.response?.statusCode == 401 &&
-          !reachedMaxRetries &&
-          !refreshTokenErrorExcludeList.contains(errorCode)) {
+      if (err.response?.statusCode == 401 && !reachedMaxRetries && !refreshTokenErrorExcludeList.contains(errorCode)) {
         retryCount += 1;
-        await getItInstance
-            .get<TokenManager>()
-            .refreshToken(getItInstance.get<INetworkService>());
-        err.requestOptions.headers[TokenManager.tokenHeaderKey] =
-            'Bearer ${getItInstance.get<TokenManager>().token}';
+        await getItInstance.get<TokenManager>().refreshToken(getItInstance.get<INetworkService>());
+        err.requestOptions.headers[TokenManager.tokenHeaderKey] = 'Bearer ${getItInstance.get<TokenManager>().token}';
 
         var client = getItInstance.get<INetworkService>().getClientInstance();
-        final Response response =
-            await (client as Dio).fetch(err.requestOptions);
+        final Response response = await (client as Dio).fetch(err.requestOptions);
         return handler.resolve(response);
       }
       retryCount = 0;
@@ -46,8 +40,7 @@ class TokenCheckerInterceptor extends Interceptor {
     } catch (e) {
       retryCount = 0;
       await getItInstance.get<TokenManager>().removeToken();
-      RoutingManager.rootNavigatorKey.currentContext!
-          .pushReplacementNamed(RoutingManager.loginScreen);
+      RoutingManager.rootNavigatorKey.currentContext!.pushReplacementNamed(RoutingManager.loginScreen);
 
       return handler.reject(err);
     }
