@@ -22,7 +22,7 @@ import 'package:hader_pharm_mobile/repositories/remote/order/response/update_ord
 
 abstract class IOrderRepository {
   Future<OrderResponse> getOrders(ParamsGetOrder params);
-  Future<OrderDetailsModel> getMorderById(String id);
+  Future<OrderDetailsModel> getOrderById(String id);
   Future<void> createOrder({required CreateOrderModel orderDetails});
   Future<void> createQuickOrder({required CreateQuickOrderModel orderDetails});
 
@@ -32,8 +32,7 @@ abstract class IOrderRepository {
 
   Future<ResponseItemComplaintFind> findComplaint(ParamsGetComplaint params);
 
-  Future<ResponseOrderComplaints> getOrderClaims(
-      ParamsGetOrderComplaints params);
+  Future<ResponseOrderComplaints> getOrderClaims(ParamsGetOrderComplaints params);
 
   Future<ResponseInvoice> invoiceDetails(ParamsGetInvoice params);
   Future<ResponseDeleteOrderItem> deleteOrderItem(ParamsDeleteOrderItem params);

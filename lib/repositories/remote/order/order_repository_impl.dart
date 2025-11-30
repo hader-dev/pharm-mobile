@@ -45,7 +45,7 @@ class OrderRepository extends IOrderRepository {
   }
 
   @override
-  Future<OrderDetailsModel> getMorderById(String id) async {
+  Future<OrderDetailsModel> getOrderById(String id) async {
     return actions.getMoreOrderById(id, client);
   }
 
@@ -55,8 +55,7 @@ class OrderRepository extends IOrderRepository {
   }
 
   @override
-  Future<void> createQuickOrder(
-      {required CreateQuickOrderModel orderDetails}) async {
+  Future<void> createQuickOrder({required CreateQuickOrderModel orderDetails}) async {
     return actions.createQuickOrder(orderDetails, client);
   }
 
@@ -76,8 +75,7 @@ class OrderRepository extends IOrderRepository {
   }
 
   @override
-  Future<ResponseOrderComplaints> getOrderClaims(
-      ParamsGetOrderComplaints params) {
+  Future<ResponseOrderComplaints> getOrderClaims(ParamsGetOrderComplaints params) {
     return order_complaint_action.getOrderComplaints(params, client);
   }
 
@@ -93,15 +91,13 @@ class OrderRepository extends IOrderRepository {
       'deliveryTownId': params.deliveryTownId,
       'clientUserId': params.clientId,
       'clientCompanyId': params.clientCompanyId,
-      if (params.clientNote != null && params.clientNote!.isNotEmpty)
-        'clientNote': params.clientNote,
+      if (params.clientNote != null && params.clientNote!.isNotEmpty) 'clientNote': params.clientNote,
       'orderItems': params.orderItems
           .map((item) => {
                 'isParapharm': item.isParapharm,
                 'itemId': item.product.id,
                 'quantity': item.quantity,
-                if (item.suggestedPrice != null)
-                  'suggestedPrice': item.suggestedPrice,
+                if (item.suggestedPrice != null) 'suggestedPrice': item.suggestedPrice,
               })
           .toList(),
     };
@@ -110,14 +106,12 @@ class OrderRepository extends IOrderRepository {
   }
 
   @override
-  Future<ResponseDeleteOrderItem> deleteOrderItem(
-      ParamsDeleteOrderItem params) {
+  Future<ResponseDeleteOrderItem> deleteOrderItem(ParamsDeleteOrderItem params) {
     return actions.deleteOrderItem(params, client);
   }
 
   @override
-  Future<ResponseUpdateOrderItem> updateOrderItem(
-      ParamsUpdateOrderItem params) {
+  Future<ResponseUpdateOrderItem> updateOrderItem(ParamsUpdateOrderItem params) {
     return actions.updateOrderItem(params, client);
   }
 

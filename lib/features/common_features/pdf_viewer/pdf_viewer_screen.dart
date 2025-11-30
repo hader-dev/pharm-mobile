@@ -10,6 +10,7 @@ import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 import 'package:http/http.dart' as http;
 import 'package:iconsax/iconsax.dart';
+import 'package:lucide_icons/lucide_icons.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -103,20 +104,26 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
           ),
         ),
         leading: IconButton(
-          icon: const Icon(Iconsax.arrow_left, color: Colors.white),
+          icon: Icon(
+            Directionality.of(context) == TextDirection.rtl ? Iconsax.arrow_right_3 : Iconsax.arrow_left_2,
+            color: AppColors.accent1Shade1,
+            size: context.responsiveAppSizeTheme.current.iconSize25,
+          ),
           onPressed: () => Navigator.of(context).pop(),
         ),
         trailing: [
           if (localPath != null && isReady)
             IconButton(
-              icon: const Icon(Iconsax.refresh, color: Colors.white),
+              icon: Icon(Iconsax.refresh,
+                  size: context.responsiveAppSizeTheme.current.iconSize25, color: AppColors.accent1Shade1),
               onPressed: () {
                 pdfViewController.setPage(0);
               },
             ),
           if (localPath != null && isReady)
             IconButton(
-              icon: const Icon(Iconsax.direct_down, color: Colors.white),
+              icon: Icon(LucideIcons.share2,
+                  size: context.responsiveAppSizeTheme.current.iconSize25, color: AppColors.accent1Shade1),
               onPressed: _saveToDownloads,
             ),
         ],

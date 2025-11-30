@@ -29,7 +29,7 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
       emit(state.loading());
 
       var results = await Future.wait([
-        orderRepository.getMorderById(orderId),
+        orderRepository.getOrderById(orderId),
       ]);
 
       final orderData = results[0];
@@ -69,7 +69,7 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
   Future<void> reloadOrderData() async {
     try {
       emit(state.loading());
-      final orderData = await orderRepository.getMorderById(state.orderData.id);
+      final orderData = await orderRepository.getOrderById(state.orderData.id);
       final orderItems = <DeligateOrderItemUi>[];
 
       for (var element in orderData.orderItems) {
