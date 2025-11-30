@@ -17,10 +17,7 @@ class OrderItemChange {
     int? quantity,
     double? price,
   }) {
-    return OrderItemChange(
-        id: id,
-        quantity: quantity ?? this.quantity,
-        price: price ?? this.price);
+    return OrderItemChange(id: id, quantity: quantity ?? this.quantity, price: price ?? this.price);
   }
 
   Map<String, dynamic> toJson() {
@@ -38,11 +35,7 @@ class OrderItemAdd {
   final bool isParapharm;
   final double price;
 
-  OrderItemAdd(
-      {required this.productId,
-      required this.quantity,
-      required this.price,
-      this.isParapharm = true});
+  OrderItemAdd({required this.productId, required this.quantity, required this.price, this.isParapharm = true});
 
   OrderItemAdd copyWith({
     int? quantity,
@@ -77,15 +70,11 @@ class OrderChangeModel {
     };
   }
 
-  bool get isDirty =>
-      deleteOrderItems.isNotEmpty ||
-      updateOrderItems.isNotEmpty ||
-      addOrderItems.isNotEmpty;
+  bool get isDirty => deleteOrderItems.isNotEmpty || updateOrderItems.isNotEmpty || addOrderItems.isNotEmpty;
 
   void removeOrderItem(DeligateOrderItem item) {
     final isNewItem = addOrderItems.indexWhere((el) =>
-            el.productId == item.product.parapharmCatalogId ||
-            el.productId == item.product.medicineCatalogId) ==
+            el.productId == item.product.paraPharmCatalogId || el.productId == item.product.medicineCatalogId) ==
         -1;
 
     if (isNewItem) {
@@ -97,20 +86,16 @@ class OrderChangeModel {
   }
 
   void updateOrderItem(DeligateOrderItem item) {
-    final existsIndex =
-        updateOrderItems.indexWhere((el) => el.id == item.product.id);
+    final existsIndex = updateOrderItems.indexWhere((el) => el.id == item.product.id);
 
     if (existsIndex != -1) {
-      updateOrderItems[existsIndex] = OrderItemChange(
-          id: item.product.id,
-          quantity: item.quantity,
-          price: item.suggestedPrice);
+      updateOrderItems[existsIndex] =
+          OrderItemChange(id: item.product.id, quantity: item.quantity, price: item.suggestedPrice);
       return;
     }
 
-    final isNewItemIndex = addOrderItems.indexWhere((el) =>
-        el.productId == item.product.parapharmCatalogId ||
-        el.productId == item.product.medicineCatalogId);
+    final isNewItemIndex = addOrderItems.indexWhere(
+        (el) => el.productId == item.product.paraPharmCatalogId || el.productId == item.product.medicineCatalogId);
 
     if (isNewItemIndex != -1) {
       addOrderItems[isNewItemIndex] = addOrderItems[isNewItemIndex].copyWith(
@@ -120,10 +105,7 @@ class OrderChangeModel {
       return;
     }
 
-    updateOrderItems.add(OrderItemChange(
-        id: item.product.id,
-        quantity: item.quantity,
-        price: item.suggestedPrice));
+    updateOrderItems.add(OrderItemChange(id: item.product.id, quantity: item.quantity, price: item.suggestedPrice));
   }
 
   void reset() {
@@ -136,10 +118,9 @@ class OrderChangeModel {
     addOrderItems.add(
       OrderItemAdd(
           productId: newOrderItem.isParapharm
-              ? newOrderItem.product.parapharmCatalogId!
+              ? newOrderItem.product.paraPharmCatalogId!
               : newOrderItem.product.medicineCatalogId!,
-          price:
-              newOrderItem.suggestedPrice ?? newOrderItem.product.unitPriceHt,
+          price: newOrderItem.suggestedPrice ?? newOrderItem.product.unitPriceHt,
           quantity: newOrderItem.quantity),
     );
   }

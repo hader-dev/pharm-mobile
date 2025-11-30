@@ -87,10 +87,11 @@ class OrderItem {
   final double tvaPercentage;
   final double unitPriceHt;
   final double unitPriceTtc;
+  final double customPrice;
   final DateTime createdAt;
   final DateTime updatedAt;
   final String? medicineCatalogId;
-  final String? parapharmCatalogId;
+  final String? paraPharmCatalogId;
   final int quantity;
   final dynamic designation;
   final dynamic lotNumber;
@@ -119,7 +120,7 @@ class OrderItem {
     required this.createdAt,
     required this.updatedAt,
     required this.medicineCatalogId,
-    required this.parapharmCatalogId,
+    required this.paraPharmCatalogId,
     required this.quantity,
     required this.designation,
     required this.packageSize,
@@ -129,6 +130,7 @@ class OrderItem {
     required this.discountAmount,
     required this.orderId,
     this.imageUrl,
+    this.customPrice = 0.0,
   });
 
   factory OrderItem.empty() {
@@ -142,7 +144,7 @@ class OrderItem {
       createdAt: DateTime.fromMillisecondsSinceEpoch(0),
       updatedAt: DateTime.fromMillisecondsSinceEpoch(0),
       medicineCatalogId: null,
-      parapharmCatalogId: null,
+      paraPharmCatalogId: null,
       quantity: 0,
       totalAppliedAmount: 0.0,
       packageSize: 0,
@@ -170,7 +172,7 @@ class OrderItem {
       createdAt: DateTime.now().subtract(Duration(days: 10)),
       updatedAt: DateTime.now(),
       medicineCatalogId: 'med_123',
-      parapharmCatalogId: null,
+      paraPharmCatalogId: null,
       quantity: 10,
       designation: 'Mock Medicine',
       lotNumber: 'LOT2025A',
@@ -216,7 +218,7 @@ class OrderItem {
         createdAt: createdAt ?? this.createdAt,
         updatedAt: updatedAt ?? this.updatedAt,
         medicineCatalogId: medicineCatalogId ?? this.medicineCatalogId,
-        parapharmCatalogId: parapharmCatalogId ?? this.parapharmCatalogId,
+        paraPharmCatalogId: parapharmCatalogId ?? paraPharmCatalogId,
         quantity: quantity ?? this.quantity,
         designation: designation ?? this.designation,
         lotNumber: lotNumber ?? this.lotNumber,

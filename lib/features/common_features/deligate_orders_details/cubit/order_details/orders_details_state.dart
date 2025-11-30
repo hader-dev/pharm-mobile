@@ -7,10 +7,7 @@ class OrdersDetailsState {
   final bool didChange;
 
   const OrdersDetailsState(
-      {required this.orderData,
-      required this.orderItems,
-      required this.originalOrderItems,
-      required this.didChange});
+      {required this.orderData, required this.orderItems, required this.originalOrderItems, required this.didChange});
 
   OrdersInitial toInitial({
     OrderDetailsModel? orderData,
@@ -68,21 +65,16 @@ class OrdersDetailsState {
     );
   }
 
-  OrderItemsUpdated toItemsUpdated(
-      {required DeligateOrderItemUi item, bool removed = false}) {
+  OrderItemsUpdated toItemsUpdated({required DeligateOrderItemUi item, bool removed = false}) {
     bool updatedExisting = false;
 
     List<DeligateOrderItemUi> updatedOrderItems = orderItems.map((el) {
-      final exists = !removed &&
-          (el.model.product.parapharmCatalogId ==
-              item.model.product.parapharmCatalogId);
+      final exists = !removed && (el.model.product.paraPharmCatalogId == item.model.product.paraPharmCatalogId);
 
       if (exists) {
         updatedExisting = true;
         return el.copyWith(
-            model: (el.model.copyWith(
-                quantity: item.model.quantity,
-                suggestedPrice: item.model.suggestedPrice)));
+            model: (el.model.copyWith(quantity: item.model.quantity, suggestedPrice: item.model.suggestedPrice)));
       }
 
       return exists ? item : el;
