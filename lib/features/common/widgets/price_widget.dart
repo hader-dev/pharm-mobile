@@ -40,7 +40,7 @@ class PriceWidget extends StatelessWidget {
     final currency = currencyStyle ?? defaultCurrencyStyle;
 
     final dOverridePrice = overridePrice ?? 0;
-    final shouldOverrideWithoutLineThrough = dOverridePrice <= price;
+    final shouldOverrideWithoutLineThrough = dOverridePrice == price;
 
     final baseDisplayPrice = !shouldOverrideWithoutLineThrough ? dOverridePrice : price;
 

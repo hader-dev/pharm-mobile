@@ -205,15 +205,12 @@ class CartItemModel {
   }
 
   Map<String, num> getTotalPrice() {
-    num tAppliedAmount = num.parse(appliedAmount);
-    num tHtPrice = num.parse(unitPriceHt);
+    num tAppliedAmount = num.parse(totalAppliedAmount);
+    num tHtPrice = num.parse(appliedAmount);
 
-    num totalHtPrice = num.parse(unitPriceHt);
-    totalHtPrice = (tAppliedAmount > 0 ? tAppliedAmount : tHtPrice) * quantity;
+    num totalHtPrice = (tHtPrice > 0 ? tHtPrice : num.parse(unitPriceHt)) * quantity;
 
-    num totalTTCPrice = tAppliedAmount > 0
-        ? tAppliedAmount
-        : tHtPrice * quantity + (tAppliedAmount > 0 ? tAppliedAmount : tHtPrice * num.parse(tvaPercentage) / 100);
+    num totalTTCPrice = tAppliedAmount;
     return <String, num>{"totalHtPrice": totalHtPrice, "totalTTCPrice": totalTTCPrice};
   }
 }

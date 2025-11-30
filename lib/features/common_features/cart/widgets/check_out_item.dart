@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/price_widget.dart' show PriceWidget;
 import 'package:hader_pharm_mobile/models/cart_item.dart';
 
 import 'package:hader_pharm_mobile/utils/assets_strings.dart';
@@ -81,26 +82,27 @@ class CheckOutItemWidget extends StatelessWidget {
                   style: context.responsiveTextTheme.current.headLine4SemiBold,
                 ),
                 const ResponsiveGap.s8(),
-                Text.rich(TextSpan(
-                  text: double.parse(item.unitPriceHt).formatAsPrice(),
-                  style: context.responsiveTextTheme.current.body3Medium.copyWith(),
-                  children: <InlineSpan>[
-                    TextSpan(
-                      text: ' ${context.translation!.currency}',
-                      style:
-                          context.responsiveTextTheme.current.bodyXSmall.copyWith(fontSize: 8, color: Colors.grey[500]),
-                    ),
-                    TextSpan(
-                      text: ' x ${item.quantity}',
-                      style: context.responsiveTextTheme.current.bodySmall.copyWith(color: Colors.grey[500]),
-                    ),
-                    TextSpan(
-                      text: ' qty',
-                      style:
-                          context.responsiveTextTheme.current.bodyXSmall.copyWith(fontSize: 8, color: Colors.grey[500]),
-                    ),
-                  ],
-                )),
+                PriceWidget(price: double.parse(item.unitPriceHt), overridePrice: double.parse(item.customPrice)),
+                // Text.rich(TextSpan(
+                //   text: double.parse(item.unitPriceHt).formatAsPrice(),
+                //   style: context.responsiveTextTheme.current.body3Medium.copyWith(),
+                //   children: <InlineSpan>[
+                //     TextSpan(
+                //       text: ' ${context.translation!.currency}',
+                //       style:
+                //           context.responsiveTextTheme.current.bodyXSmall.copyWith(fontSize: 8, color: Colors.grey[500]),
+                //     ),
+                //     TextSpan(
+                //       text: ' x ${item.quantity}',
+                //       style: context.responsiveTextTheme.current.bodySmall.copyWith(color: Colors.grey[500]),
+                //     ),
+                //     TextSpan(
+                //       text: ' qty',
+                //       style:
+                //           context.responsiveTextTheme.current.bodyXSmall.copyWith(fontSize: 8, color: Colors.grey[500]),
+                //     ),
+                //   ],
+                // )),
                 Spacer(),
                 Row(
                   children: [
@@ -113,7 +115,7 @@ class CheckOutItemWidget extends StatelessWidget {
                         style: context.responsiveTextTheme.current.bodyXSmall.copyWith(color: Colors.grey[500]),
                         children: <InlineSpan>[
                           TextSpan(
-                            text: ' ${double.parse(item.totalAmountHt).formatAsPriceForPrint()}',
+                            text: ' ${double.parse(item.totalAppliedAmount).formatAsPriceForPrint()}',
                             style: context.responsiveTextTheme.current.body2Medium
                                 .copyWith(color: Colors.black, fontWeight: FontWeight.bold),
                           ),

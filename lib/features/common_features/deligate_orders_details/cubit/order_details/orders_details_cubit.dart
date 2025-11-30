@@ -42,7 +42,7 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
             model: DeligateOrderItem(
               product: element,
               quantity: element.quantity,
-              isParapharm: element.parapharmCatalogId != null,
+              isParapharm: element.paraPharmCatalogId != null,
               suggestedPrice: element.unitPriceHt,
             ),
             quantityController: TextEditingController(text: element.quantity.toString()),
@@ -78,7 +78,7 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
             model: DeligateOrderItem(
               product: element,
               quantity: element.quantity,
-              isParapharm: element.parapharmCatalogId != null,
+              isParapharm: element.paraPharmCatalogId != null,
               suggestedPrice: element.unitPriceHt,
             ),
             quantityController: TextEditingController(text: element.quantity.toString()),
