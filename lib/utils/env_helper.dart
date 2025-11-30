@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class EnvHelper {
@@ -12,7 +13,7 @@ class EnvHelper {
   static const String envGoogleServerClientIdKey = 'GOOGLE_SERVER_CLIENT_ID';
 
   static Future<void> loadAppEnvVars() async {
-    await dotenv.load();
+    await dotenv.load(fileName: kDebugMode ? '.env' : '.env.production');
   }
 
   static String getStoredEnvValue<T>(String key) {

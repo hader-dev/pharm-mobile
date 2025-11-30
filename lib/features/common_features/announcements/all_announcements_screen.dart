@@ -77,19 +77,17 @@ class _AllAnnouncementsScreenState extends State<AllAnnouncementsScreen> {
                 if (state is AllAnnouncementsLoading) {
                   return Padding(
                       padding: EdgeInsets.symmetric(horizontal: context.responsiveAppSizeTheme.current.p8),
-                      child: Expanded(
-                        child: GridView.builder(
-                          physics: const AlwaysScrollableScrollPhysics(),
-                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            crossAxisSpacing: context.responsiveAppSizeTheme.current.s16,
-                            mainAxisSpacing: context.responsiveAppSizeTheme.current.s16,
-                            childAspectRatio: .8,
-                          ),
-                          scrollDirection: Axis.vertical,
-                          itemCount: 12,
-                          itemBuilder: (_, __) => const AnnouncementGridItemWidgetShimmer(),
+                      child: GridView.builder(
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: context.responsiveAppSizeTheme.current.s16,
+                          mainAxisSpacing: context.responsiveAppSizeTheme.current.s16,
+                          childAspectRatio: .8,
                         ),
+                        scrollDirection: Axis.vertical,
+                        itemCount: 12,
+                        itemBuilder: (_, __) => const AnnouncementGridItemWidgetShimmer(),
                       ));
                 }
 
@@ -121,15 +119,6 @@ class _AllAnnouncementsScreenState extends State<AllAnnouncementsScreen> {
                         scrollDirection: Axis.vertical,
                         itemCount: state.announcements.length + (state.hasReachedMax ? 0 : 1),
                         itemBuilder: (context, index) {
-                          if (index >= state.announcements.length) {
-                            return Center(
-                              child: Padding(
-                                padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p16),
-                                child: CircularProgressIndicator(),
-                              ),
-                            );
-                          }
-
                           final announcement = state.announcements[index];
                           return PromotionItemWidget(
                             announcement: announcement,

@@ -32,7 +32,7 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
       emit(OrderDetailsLoading());
 
       var results = await Future.wait([
-        orderRepository.getMorderById(orderId),
+        orderRepository.getOrderById(orderId),
         orderRepository.getOrderClaims(ParamsGetOrderComplaints(orderId: orderId))
       ]);
 
@@ -55,7 +55,7 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
     try {
       emit(OrderDetailsLoading());
 
-      orderData = await orderRepository.getMorderById(orderData!.id);
+      orderData = await orderRepository.getOrderById(orderData!.id);
       emit(OrderDetailsLoaded());
     } catch (e, stacktrace) {
       debugPrint("$e");

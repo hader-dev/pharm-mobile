@@ -12,7 +12,7 @@ OrderItem jsonToOrderItem(Map<String, dynamic> json) {
     totalAmountTtc: json['totalAmountTtc'] != null ? double.parse(json['totalAmountTtc']) : 0.0,
     totalAmountHt: json['totalAmountHt'] != null ? double.parse(json['totalAmountHt']) : 0.0,
     tvaPercentage: json['tvaPercentage'] != null ? double.parse(json['tvaPercentage']) : 0.0,
-    totalAppliedAmount: json['totalAppliedAmount'],
+    totalAppliedAmount: json['totalAppliedAmount'] != null ? double.parse(json['totalAppliedAmount']) : null,
     unitPriceApplied: json['appliedAmount'] != null ? double.parse(json['appliedAmount']) : null,
     unitPriceHt: json['unitPriceHt'] != null ? double.parse(json['unitPriceHt']) : 0.0,
     unitPriceTtc: json['unitPriceTtc'] != null ? double.parse(json['unitPriceTtc']) : 0.0,

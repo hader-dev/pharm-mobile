@@ -17,8 +17,7 @@ class AnnouncementDocumentsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return RefreshIndicator(
       onRefresh: () => context.read<AnnouncementCubit>().loadAnnouncement(),
-      child: BlocBuilder<AnnouncementCubit, AnnouncementState>(
-          builder: (context, state) {
+      child: BlocBuilder<AnnouncementCubit, AnnouncementState>(builder: (context, state) {
         if (state is AnnouncementIsLoading) {
           return const Center(child: CircularProgressIndicator());
         }
@@ -27,8 +26,7 @@ class AnnouncementDocumentsPage extends StatelessWidget {
 
         if (!hasApiPdf) {
           return RefreshIndicator(
-            onRefresh: () =>
-                context.read<AnnouncementCubit>().loadAnnouncement(),
+            onRefresh: () => context.read<AnnouncementCubit>().loadAnnouncement(),
             child: SingleChildScrollView(
               physics: const AlwaysScrollableScrollPhysics(),
               child: SizedBox(
@@ -46,8 +44,7 @@ class AnnouncementDocumentsPage extends StatelessWidget {
           padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p16),
           child: Column(
             children: [
-              if (hasApiPdf)
-                _buildDocumentCard(context, state.announcement.pdf!),
+              if (hasApiPdf) _buildDocumentCard(context, state.announcement.pdf!),
             ],
           ),
         );
@@ -61,13 +58,11 @@ class AnnouncementDocumentsPage extends StatelessWidget {
     return Card(
       elevation: 2,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(
-            context.responsiveAppSizeTheme.current.commonWidgetsRadius),
+        borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.commonWidgetsRadius),
       ),
       child: InkWell(
         onTap: () => _openPdf(context, pdf),
-        borderRadius: BorderRadius.circular(
-            context.responsiveAppSizeTheme.current.commonWidgetsRadius),
+        borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.commonWidgetsRadius),
         child: Padding(
           padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p16),
           child: Column(
@@ -95,17 +90,15 @@ class AnnouncementDocumentsPage extends StatelessWidget {
                       children: [
                         Text(
                           pdf.filename,
-                          style:
-                              context.responsiveTextTheme.current.body2Medium,
+                          style: context.responsiveTextTheme.current.body2Medium,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                         ),
-                        SizedBox(
-                            height: context.responsiveAppSizeTheme.current.p4),
+                        SizedBox(height: context.responsiveAppSizeTheme.current.p4),
                         Text(
                           'PDF • $sizeInMB MB',
-                          style: context.responsiveTextTheme.current.bodySmall
-                              .copyWith(color: TextColors.ternary.color),
+                          style:
+                              context.responsiveTextTheme.current.bodySmall.copyWith(color: TextColors.ternary.color),
                         ),
                       ],
                     ),
@@ -129,8 +122,7 @@ class AnnouncementDocumentsPage extends StatelessWidget {
                         backgroundColor: AppColors.accent1Shade1,
                         foregroundColor: Colors.white,
                         padding: EdgeInsets.symmetric(
-                          horizontal:
-                              context.responsiveAppSizeTheme.current.p16,
+                          horizontal: context.responsiveAppSizeTheme.current.p16,
                           vertical: context.responsiveAppSizeTheme.current.p12,
                         ),
                         shape: RoundedRectangleBorder(

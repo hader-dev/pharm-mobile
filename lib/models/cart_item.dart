@@ -48,12 +48,13 @@ class CartItemModel {
   final String tvaPercentage;
   final String unitPriceHt;
   final String unitPriceTtc;
+  final String customPrice;
   final DateTime createdAt;
   final DateTime updatedAt;
   final String? medicinesCatalogId;
   final String appliedAmount;
   final String totalAppliedAmount;
-  final String? parapharmCatalogId;
+  final String? paraPharmCatalogId;
   final int quantity;
   final int packageSize;
   final String designation;
@@ -85,7 +86,7 @@ class CartItemModel {
     required this.createdAt,
     required this.updatedAt,
     required this.medicinesCatalogId,
-    required this.parapharmCatalogId,
+    required this.paraPharmCatalogId,
     required this.quantity,
     required this.designation,
     required this.lotNumber,
@@ -98,6 +99,7 @@ class CartItemModel {
     this.medicineCatalogStockQty = 0,
     this.parapharmCatalogStockQty = 0,
     required this.sellerCompany,
+    this.customPrice = '0',
   });
 
   int get packageQuantity {
@@ -133,7 +135,7 @@ class CartItemModel {
       createdAt: DateTime.parse(json['createdAt']),
       updatedAt: DateTime.parse(json['updatedAt']),
       medicinesCatalogId: json['medicineCatalogId'],
-      parapharmCatalogId: json['parapharmCatalogId'],
+      paraPharmCatalogId: json['parapharmCatalogId'],
       quantity: json['quantity'],
       designation: json['designation'],
       lotNumber: json['lotNumber'],
@@ -147,6 +149,7 @@ class CartItemModel {
       parapharmCatalogStockQty: json['parapharmCatalog']?['actualQuantity'] ?? 0,
       sellerCompany: BaseCompany.fromJson(json['sellerCompany']),
       image: thumbnailImage != null ? ImageModel.fromJson(thumbnailImage) : null,
+      customPrice: json['customPrice'] ?? '0',
     );
   }
   CartItemModel copyWith(
@@ -184,7 +187,7 @@ class CartItemModel {
         createdAt: createdAt ?? this.createdAt,
         updatedAt: updatedAt ?? this.updatedAt,
         medicinesCatalogId: medicinesCatalogId ?? this.medicinesCatalogId,
-        parapharmCatalogId: parapharmCatalogId ?? this.parapharmCatalogId,
+        paraPharmCatalogId: parapharmCatalogId ?? paraPharmCatalogId,
         quantity: quantity ?? this.quantity,
         designation: designation ?? this.designation,
         lotNumber: lotNumber ?? this.lotNumber,

@@ -38,12 +38,9 @@ class CartState {
     return totalAmount;
   }
 
-  CartInitial toInitial({required CartState state}) =>
-      CartInitial.fromState(state: state);
-  ToggleCartSummary toToggleCartSummary(
-          {required bool isCartSummaryExpanded}) =>
-      ToggleCartSummary.fromState(
-          state: this, isCartSummaryExpanded: isCartSummaryExpanded);
+  CartInitial toInitial({required CartState state}) => CartInitial.fromState(state: state);
+  ToggleCartSummary toToggleCartSummary({required bool isCartSummaryExpanded}) =>
+      ToggleCartSummary.fromState(state: this, isCartSummaryExpanded: isCartSummaryExpanded);
   CartOrderInfosUpdated toOrderInfosUpdated(
           {String? orderNote,
           String? shippingAddress,
@@ -58,8 +55,7 @@ class CartState {
 
   CartLoading toLoading() => CartLoading.fromState(state: this);
 
-  CartLoadingUpdate toLoadingUpdate() =>
-      CartLoadingUpdate.fromState(state: this);
+  CartLoadingUpdate toLoadingUpdate() => CartLoadingUpdate.fromState(state: this);
 
   CartLoadingSuccess toLoadingSuccess({
     required List<CartItemModelUi> cartItems,
@@ -73,15 +69,11 @@ class CartState {
         totalTTCAmount: calculateTotalAmountTtc(cartItems),
       );
 
-  CartError toError({required String error}) =>
-      CartError.fromState(state: this, error: error);
+  CartError toError({required String error}) => CartError.fromState(state: this, error: error);
 
-  CartItemUpdated toItemUpdated(
-      {required CartItemModelUi updatedItem, bool removed = false}) {
+  CartItemUpdated toItemUpdated({required CartItemModelUi updatedItem, bool removed = false}) {
     if (removed) {
-      final updatedItems = cartItems
-          .where((item) => item.model.id != updatedItem.model.id)
-          .toList();
+      final updatedItems = cartItems.where((item) => item.model.id != updatedItem.model.id).toList();
 
       final updatedItemsByVendor = cartItemsByVendor.map((key, value) {
         return MapEntry(
@@ -90,19 +82,15 @@ class CartState {
         );
       });
 
-      return CartItemUpdated.fromState(
-          state: this,
-          cartItems: updatedItems,
-          cartItemsByVendor: updatedItemsByVendor);
+      return CartItemUpdated.fromState(state: this, cartItems: updatedItems, cartItemsByVendor: updatedItemsByVendor);
     }
 
-    final updatedItems = cartItems.map((item) {
+    final List<CartItemModelUi> updatedItems = cartItems.map((item) {
       if (item.model.id == updatedItem.model.id) {
-        return updatedItem;
+        item = updatedItem;
       }
       return item;
     }).toList();
-
     return CartItemUpdated.fromState(
       state: this,
       cartItems: updatedItems,
@@ -164,8 +152,7 @@ final class CartLoading extends CartState {
 }
 
 final class ToggleCartSummary extends CartState {
-  ToggleCartSummary.fromState(
-      {required CartState state, required super.isCartSummaryExpanded})
+  ToggleCartSummary.fromState({required CartState state, required super.isCartSummaryExpanded})
       : super(
           totalHtAmount: state.totalHtAmount,
           totalTTCAmount: state.totalTTCAmount,
@@ -188,8 +175,7 @@ final class CartOrderInfosUpdated extends CartState {
       : super(
           totalHtAmount: state.totalHtAmount,
           totalTTCAmount: state.totalTTCAmount,
-          selectedPaymentMethod:
-              selectedPaymentMethod ?? state.selectedPaymentMethod,
+          selectedPaymentMethod: selectedPaymentMethod ?? state.selectedPaymentMethod,
           selectedInvoiceType: selectedInvoiceType ?? state.selectedInvoiceType,
           orderNote: orderNote ?? state.orderNote,
           shippingAddress: shippingAddress ?? state.shippingAddress,
@@ -232,9 +218,7 @@ final class CartLoadingSuccess extends CartState {
 
 final class CartItemUpdated extends CartState {
   CartItemUpdated.fromState(
-      {required CartState state,
-      required super.cartItems,
-      Map<String, List<String>>? cartItemsByVendor})
+      {required CartState state, required super.cartItems, Map<String, List<String>>? cartItemsByVendor})
       : super(
             totalHtAmount: CartState.calculateTotalAmountHt(cartItems),
             totalTTCAmount: CartState.calculateTotalAmountTtc(cartItems),

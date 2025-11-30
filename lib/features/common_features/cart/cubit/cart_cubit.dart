@@ -21,7 +21,7 @@ class CartCubit extends Cubit<CartState> {
   final CartItemRepository cartItemRepository;
   final OrderRepository ordersRepository;
   final ScrollController scrollController;
-  final DebouncerManager debouncerManager = DebouncerManager();
+  final DebouncerManager debounceManager = DebouncerManager();
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -100,7 +100,7 @@ class CartCubit extends Cubit<CartState> {
       }
 
       final updatedItem = item.copyWith(quantity: item.model.quantity - 1);
-      debouncerManager.debounce(
+      debounceManager.debounce(
           tag: "updateQuantity",
           action: () async {
             applyUpdateItemQuantity(item.model.id, updatedItem.model.quantity);
@@ -113,7 +113,7 @@ class CartCubit extends Cubit<CartState> {
 
   bool _canIncreaseQuantity(CartItemModelUi item) {
     return (item.model.medicinesCatalogId != null && item.model.quantity == item.model.maxOrderQuantity) ||
-        (item.model.parapharmCatalogId != null && item.model.quantity == item.model.maxOrderQuantity);
+        (item.model.paraPharmCatalogId != null && item.model.quantity == item.model.maxOrderQuantity);
   }
 
   void increaseCartPackageQuantity(CartItemModelUi item) {
@@ -130,7 +130,7 @@ class CartCubit extends Cubit<CartState> {
       item.packageQuantityController.text = updatedPackageQuantity.toString();
       item.quantityController.text = updatedQuantity.toString();
 
-      debouncerManager.debounce(
+      debounceManager.debounce(
           tag: "updateQuantity",
           action: () async {
             applyUpdateItemQuantity(updatedItem.model.id, updatedItem.model.quantity);
@@ -157,7 +157,7 @@ class CartCubit extends Cubit<CartState> {
       item.packageQuantityController.text = updatedPackageQuantity.toString();
       item.quantityController.text = updatedQuantity.toString();
 
-      debouncerManager.debounce(
+      debounceManager.debounce(
           tag: "updateQuantity",
           action: () async {
             applyUpdateItemQuantity(item.model.id, updatedItem.model.quantity);
@@ -169,7 +169,7 @@ class CartCubit extends Cubit<CartState> {
   }
 
   void updateCartItemInputQuantity(CartItemModelUi item, int quantity) {
-    debouncerManager.debounce(
+    debounceManager.debounce(
       tag: "updateQuantity",
       action: () async {
         try {
@@ -197,7 +197,7 @@ class CartCubit extends Cubit<CartState> {
       item.packageQuantityController.text = updatedPackageQuantity.toString();
       item.quantityController.text = updatedQuantity.toString();
 
-      debouncerManager.debounce(
+      debounceManager.debounce(
           tag: "updateQuantity",
           action: () async {
             applyUpdateItemQuantity(updatedItem.model.id, updatedItem.model.quantity);
@@ -221,7 +221,7 @@ class CartCubit extends Cubit<CartState> {
     item.packageQuantityController.text = updatedPackageQuantity.toString();
     item.quantityController.text = updatedQuantity.toString();
 
-    debouncerManager.debounce(
+    debounceManager.debounce(
         tag: "updateQuantity",
         action: () async {
           applyUpdateItemQuantity(updatedItem.model.id, updatedItem.model.quantity);
@@ -244,7 +244,7 @@ class CartCubit extends Cubit<CartState> {
 
       final updatedItem = item.copyWith(quantity: updatedQuantity);
 
-      debouncerManager.debounce(
+      debounceManager.debounce(
           tag: "updateQuantity",
           action: () async {
             applyUpdateItemQuantity(item.model.id, updatedItem.model.quantity);
@@ -336,7 +336,7 @@ class CartCubit extends Cubit<CartState> {
   CartItemModelUi? getItemIfExists(String id, [bool isParapharma = false]) {
     final existingItem = state.cartItems
         .where(
-            (element) => isParapharma ? element.model.parapharmCatalogId == id : element.model.medicinesCatalogId == id)
+            (element) => isParapharma ? element.model.paraPharmCatalogId == id : element.model.medicinesCatalogId == id)
         .firstOrNull;
 
     return existingItem;
