@@ -12,10 +12,25 @@ import '../../common/shimmers/order_widget_shimmer.dart' show OrderWidgetShimmer
 import 'cubit/orders_cubit.dart';
 import 'widget/order_card.dart';
 
-class OrdersScreen extends StatelessWidget {
+class OrdersScreen extends StatefulWidget {
   static final scaffoldKey = GlobalKey<ScaffoldState>();
 
   const OrdersScreen({super.key});
+
+  @override
+  State<OrdersScreen> createState() => OrdersScreenState();
+}
+
+class OrdersScreenState extends State<OrdersScreen> with SingleTickerProviderStateMixin {
+  late final Animation animation;
+  static late AnimationController animationController;
+  @override
+  initState() {
+    super.initState();
+    animationController = AnimationController(vsync: this, duration: const Duration(milliseconds: 5));
+    animation =
+        Tween<double>(begin: 1, end: 0).animate(animationController.drive(CurveTween(curve: Curves.easeInCubic)));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,11 +46,19 @@ class OrdersScreen extends StatelessWidget {
         ),
       ],
       child: Scaffold(
-        key: scaffoldKey,
+        key: OrdersScreen.scaffoldKey,
         body: SafeArea(
           child: Column(
             children: [
-              const FiltersBar(),
+              AnimatedBuilder(
+                  animation: animationController,
+                  builder: (context, child) {
+                    return AnimatedOpacity(
+                        opacity: (animation.value == 1) ? 1.0 : 0.0,
+                        duration: const Duration(milliseconds: 200),
+                        child: (animation.value == 0) ? SizedBox.shrink() : child!);
+                  },
+                  child: FiltersBar()),
               Expanded(
                 child: BlocBuilder<OrdersCubit, OrdersState>(
                   builder: (context, state) {

@@ -1,12 +1,16 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:flutter/rendering.dart' show ScrollDirection;
 import 'package:flutter/widgets.dart';
 import 'package:hader_pharm_mobile/models/order.dart';
 import 'package:hader_pharm_mobile/models/order_filters.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/order_repository.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/params/get_orders.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
+
+import '../../../../config/routes/routing_manager.dart' show RoutingManager;
+import '../orders.dart' show OrdersScreenState;
 
 part 'orders_state.dart';
 
@@ -20,6 +24,17 @@ class OrdersCubit extends Cubit<OrdersState> {
     required this.orderRepository,
   }) : super(OrdersInitial()) {
     state.scrollController.addListener(() {
+      if (state.scrollController.position.maxScrollExtent >=
+          MediaQuery.sizeOf(RoutingManager.rootNavigatorKey.currentContext!).height * .9) {
+        if (state.scrollController.position.pixels > 5 &&
+            state.scrollController.position.userScrollDirection == ScrollDirection.reverse) {
+          OrdersScreenState.animationController.forward();
+        }
+        if (state.scrollController.position.pixels > 5 &&
+            state.scrollController.position.userScrollDirection == ScrollDirection.forward) {
+          OrdersScreenState.animationController.reverse();
+        }
+      }
       if (state.scrollController.position.pixels >= state.scrollController.position.maxScrollExtent) {
         loadMoreOrders();
       }

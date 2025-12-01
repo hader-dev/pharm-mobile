@@ -38,29 +38,21 @@ class FavoritesVendors extends StatelessWidget {
             onRefresh: cubit.fetchLikedVendors,
           );
         }
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Expanded(
-              child: RefreshIndicator(
-                onRefresh: cubit.fetchLikedVendors,
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  itemCount: state.likedVendors.length,
-                  itemBuilder: (_, index) {
-                    return VendorItem(
-                      companyData: state.likedVendors[index],
-                      hideLikeButton: true,
-                      hideRemoveButton: false,
-                      isLiked: true,
-                      onRemoveFromFavorites: () => cubit.unlikeVendor(state.likedVendors[index].id),
-                    );
-                  },
-                ),
-              ),
-            ),
-          ],
+        return RefreshIndicator(
+          onRefresh: cubit.fetchLikedVendors,
+          child: ListView.builder(
+            physics: const AlwaysScrollableScrollPhysics(),
+            itemCount: state.likedVendors.length,
+            itemBuilder: (_, index) {
+              return VendorItem(
+                companyData: state.likedVendors[index],
+                hideLikeButton: true,
+                hideRemoveButton: false,
+                isLiked: true,
+                onRemoveFromFavorites: () => cubit.unlikeVendor(state.likedVendors[index].id),
+              );
+            },
+          ),
         );
       },
     );

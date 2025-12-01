@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hader_pharm_mobile/features/common/spacers/dividers.dart'
-    show AppDivider;
+import 'package:hader_pharm_mobile/features/common/spacers/dividers.dart' show AppDivider;
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/info_widget.dart';
 import 'package:hader_pharm_mobile/features/common_features/order_complaint_details/cubit/orders_complaint_details_cubit.dart';
@@ -29,6 +28,7 @@ class ComplaintReviewView extends StatelessWidget {
               style: context.responsiveTextTheme.current.body3Medium,
             ),
           ),
+          ResponsiveGap.s8(),
           Row(
             children: [
               Flexible(
@@ -51,6 +51,7 @@ class ComplaintReviewView extends StatelessWidget {
               ),
             ],
           ),
+          ResponsiveGap.s8(),
           InfoWidget(
             label: translation.subject,
             value: Text(
@@ -58,6 +59,7 @@ class ComplaintReviewView extends StatelessWidget {
               style: context.responsiveTextTheme.current.body3Medium,
             ),
           ),
+          ResponsiveGap.s8(),
           InfoWidget(
             label: translation.description,
             value: Text(
@@ -65,12 +67,14 @@ class ComplaintReviewView extends StatelessWidget {
               style: context.responsiveTextTheme.current.body3Medium,
             ),
           ),
+          ResponsiveGap.s8(),
           AppDivider(
             height: context.responsiveAppSizeTheme.current.p12,
             color: Colors.grey.shade100,
             endIndent: context.responsiveAppSizeTheme.current.s8,
             indent: context.responsiveAppSizeTheme.current.s8,
           ),
+          ResponsiveGap.s8(),
           ComplaintStatusHistory(),
         ],
       ),

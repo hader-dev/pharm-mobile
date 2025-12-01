@@ -13,10 +13,20 @@ class VendorsPage extends StatefulWidget {
   const VendorsPage({super.key});
 
   @override
-  State<VendorsPage> createState() => _VendorsPageState();
+  State<VendorsPage> createState() => VendorsPageState();
 }
 
-class _VendorsPageState extends State<VendorsPage> with AutomaticKeepAliveClientMixin {
+class VendorsPageState extends State<VendorsPage> with AutomaticKeepAliveClientMixin, SingleTickerProviderStateMixin {
+  late final Animation animation;
+  static late AnimationController animationController;
+  @override
+  initState() {
+    super.initState();
+    animationController = AnimationController(vsync: this, duration: const Duration(milliseconds: 5));
+    animation =
+        Tween<double>(begin: 1, end: 0).animate(animationController.drive(CurveTween(curve: Curves.easeInCubic)));
+  }
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -25,7 +35,15 @@ class _VendorsPageState extends State<VendorsPage> with AutomaticKeepAliveClient
         padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
         child: Column(
           children: [
-            FiltersBar(),
+            AnimatedBuilder(
+                animation: animationController,
+                builder: (context, child) {
+                  return AnimatedOpacity(
+                      opacity: (animation.value == 1) ? 1.0 : 0.0,
+                      duration: const Duration(milliseconds: 200),
+                      child: (animation.value == 0) ? SizedBox.shrink() : child!);
+                },
+                child: FiltersBar()),
             Expanded(
               child: BlocBuilder<VendorsCubit, VendorsState>(
                 builder: (context, state) {

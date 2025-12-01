@@ -2571,6 +2571,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Getting information from Google'**
   String get getting_info_google;
+
+  /// No description provided for @min_qty_to_order.
+  ///
+  /// In en, this message translates to:
+  /// **'Min qty to order'**
+  String get min_qty_to_order;
+
+  /// No description provided for @max_qty_to_order.
+  ///
+  /// In en, this message translates to:
+  /// **'Max qty to order'**
+  String get max_qty_to_order;
 }
 
 class _AppLocalizationsDelegate

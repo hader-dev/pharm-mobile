@@ -6,6 +6,11 @@ import 'package:hader_pharm_mobile/repositories/remote/utility/mappers/dynamic_l
 import 'package:hader_pharm_mobile/utils/helper_func.dart' show calculateProductStockQty;
 
 ParaPharmaCatalogModel jsonToParapharmaCatalogueItem(Map<String, dynamic> json) {
+  int minOrderQty = json["minOrderQuantity"] ?? 1;
+  minOrderQty = minOrderQty == 0 ? 1 : minOrderQty;
+
+  int maxOrderQty = json["maxOrderQuantity"] ?? 9999;
+  maxOrderQty = maxOrderQty == 0 ? 9999 : maxOrderQty;
   return ParaPharmaCatalogModel(
       id: json['id'] ?? "",
       tags: mapJsonDynamicListToTypedList(json['tags']),
@@ -27,8 +32,8 @@ ParaPharmaCatalogModel jsonToParapharmaCatalogueItem(Map<String, dynamic> json) 
       sku: json['sku'] ?? "",
       description: json['description'] ?? "",
       metaData: json['metaData'] ?? {},
-      minOrderQuantity: json['minOrderQuantity'] ?? 1,
-      maxOrderQuantity: json['maxOrderQuantity'] ?? 9999,
+      minOrderQuantity: minOrderQty,
+      maxOrderQuantity: maxOrderQty,
       brand: json['brand'] == null ? Brand.empty() : Brand.fromJson(json['brand']),
       category: json['category'] == null ? Category.empty() : Category.fromJson(json['category']),
       isLiked: json["isFavorite"] ?? false,

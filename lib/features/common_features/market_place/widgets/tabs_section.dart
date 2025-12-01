@@ -15,24 +15,16 @@ class MarketPlaceTabBarSection extends StatefulWidget {
   const MarketPlaceTabBarSection({super.key});
 
   @override
-  State<MarketPlaceTabBarSection> createState() =>
-      MarketPlaceTabBarSectionState();
+  State<MarketPlaceTabBarSection> createState() => MarketPlaceTabBarSectionState();
 }
 
-class MarketPlaceTabBarSectionState extends State<MarketPlaceTabBarSection>
-    with TickerProviderStateMixin {
-  late final Animation animation;
+class MarketPlaceTabBarSectionState extends State<MarketPlaceTabBarSection> with TickerProviderStateMixin {
   static late TabController tabsController;
-  static late AnimationController animationController;
 
   @override
   void initState() {
     super.initState();
     tabsController = TabController(length: 3, vsync: this);
-    animationController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 5));
-    animation = Tween<double>(begin: 0, end: 1).animate(
-        animationController.drive(CurveTween(curve: Curves.easeInCubic)));
   }
 
   @override
@@ -40,86 +32,58 @@ class MarketPlaceTabBarSectionState extends State<MarketPlaceTabBarSection>
     final translation = context.translation!;
     final List<String> tasMapKeys = ['label', 'icon'];
     final List<Map<String, String>> tabs = [
-      {
-        tasMapKeys[0]: translation.para_pharma,
-        tasMapKeys[1]: DrawableAssetStrings.newParaPharmsIcon
-      },
-      {
-        tasMapKeys[0]: translation.medicines,
-        tasMapKeys[1]: DrawableAssetStrings.newMedicinesIcon
-      },
-      {
-        tasMapKeys[0]: translation.vendors,
-        tasMapKeys[1]: DrawableAssetStrings.newSellerIcon
-      }
+      {tasMapKeys[0]: translation.para_pharma, tasMapKeys[1]: DrawableAssetStrings.newParaPharmsIcon},
+      {tasMapKeys[0]: translation.medicines, tasMapKeys[1]: DrawableAssetStrings.newMedicinesIcon},
+      {tasMapKeys[0]: translation.vendors, tasMapKeys[1]: DrawableAssetStrings.newSellerIcon}
     ];
     TextStyle tabTextStyle = context.responsiveTextTheme.current.body3Medium;
 
     return Column(
       children: [
-        AnimatedBuilder(
-            animation: animationController,
-            builder: (context, child) {
-              return SizedBox(
-                  height: 55 * (1 - animation.value).toDouble(), child: child);
-            },
-            child: ColoredBox(
-                color: Colors.white,
-                child: BlocBuilder<MarketPlaceCubit, MarketPlaceState>(
-                  builder: (context, state) {
-                    return TabBar(
-                        indicatorSize: TabBarIndicatorSize.tab,
-                        isScrollable: true,
-                        labelStyle: tabTextStyle,
-                        overlayColor:
-                            WidgetStatePropertyAll(Colors.transparent),
-                        tabAlignment: TabAlignment.start,
-                        indicatorColor: AppColors.accent1Shade1,
-                        labelColor: AppColors.accent1Shade1,
-                        unselectedLabelColor: Colors.grey,
-                        controller: tabsController,
-                        onTap: (index) {
-                          context
-                              .read<MarketPlaceCubit>()
-                              .changeTab(index, tabsController);
-                        },
-                        tabs: tabs
-                            .map(
-                              (tabInfos) => Tab(
-                                child: Row(
-                                  children: [
-                                    SvgPicture.asset(
-                                      tabInfos[tasMapKeys[1]]!,
-                                      height: context.responsiveAppSizeTheme
-                                          .current.iconSize20,
-                                      width: context.responsiveAppSizeTheme
-                                          .current.iconSize20,
-                                      colorFilter: ColorFilter.mode(
-                                        state.pageIndex ==
-                                                tabs.indexOf(tabInfos)
-                                            ? AppColors.accent1Shade1
-                                            : Colors.grey,
-                                        BlendMode.srcIn,
-                                      ),
-                                    ),
-                                    ResponsiveGap.s4(),
-                                    Text(tabInfos[tasMapKeys[0]]!,
-                                        style: tabTextStyle),
-                                  ],
+        ColoredBox(
+            color: Colors.white,
+            child: BlocBuilder<MarketPlaceCubit, MarketPlaceState>(
+              builder: (context, state) {
+                return TabBar(
+                    indicatorSize: TabBarIndicatorSize.tab,
+                    isScrollable: true,
+                    labelStyle: tabTextStyle,
+                    overlayColor: WidgetStatePropertyAll(Colors.transparent),
+                    tabAlignment: TabAlignment.start,
+                    indicatorColor: AppColors.accent1Shade1,
+                    labelColor: AppColors.accent1Shade1,
+                    unselectedLabelColor: Colors.grey,
+                    controller: tabsController,
+                    onTap: (index) {
+                      context.read<MarketPlaceCubit>().changeTab(index, tabsController);
+                    },
+                    tabs: tabs
+                        .map(
+                          (tabInfos) => Tab(
+                            child: Row(
+                              children: [
+                                SvgPicture.asset(
+                                  tabInfos[tasMapKeys[1]]!,
+                                  height: context.responsiveAppSizeTheme.current.iconSize20,
+                                  width: context.responsiveAppSizeTheme.current.iconSize20,
+                                  colorFilter: ColorFilter.mode(
+                                    state.pageIndex == tabs.indexOf(tabInfos) ? AppColors.accent1Shade1 : Colors.grey,
+                                    BlendMode.srcIn,
+                                  ),
                                 ),
-                              ),
-                            )
-                            .toList());
-                  },
-                ))),
+                                ResponsiveGap.s4(),
+                                Text(tabInfos[tasMapKeys[0]]!, style: tabTextStyle),
+                              ],
+                            ),
+                          ),
+                        )
+                        .toList());
+              },
+            )),
         Expanded(
           child: TabBarView(
             controller: tabsController,
-            children: [
-              ParaPharmaProductsPage(),
-              MedicineProductsPage(),
-              VendorsPage()
-            ],
+            children: [ParaPharmaProductsPage(), MedicineProductsPage(), VendorsPage()],
           ),
         ),
       ],
@@ -128,7 +92,6 @@ class MarketPlaceTabBarSectionState extends State<MarketPlaceTabBarSection>
 
   @override
   void dispose() {
-    animationController.dispose();
     tabsController.dispose();
     super.dispose();
   }

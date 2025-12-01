@@ -3,6 +3,9 @@ import 'dart:async' show Timer;
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart' show ScrollDirection;
+import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
+import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/vendors/vendors.dart'
+    show VendorsPageState;
 import 'package:hader_pharm_mobile/features/common_features/market_place/widgets/tabs_section.dart'
     show MarketPlaceTabBarSectionState;
 import 'package:hader_pharm_mobile/models/company.dart';
@@ -38,13 +41,16 @@ class VendorsCubit extends Cubit<VendorsState> {
   }
 
   void _onScroll() {
-    if (state.scrollController.position.pixels > 5 &&
-        state.scrollController.position.userScrollDirection == ScrollDirection.reverse) {
-      MarketPlaceTabBarSectionState.animationController.forward();
-    }
-    if (state.scrollController.position.pixels > 5 &&
-        state.scrollController.position.userScrollDirection == ScrollDirection.forward) {
-      MarketPlaceTabBarSectionState.animationController.reverse();
+    if (state.scrollController.position.maxScrollExtent >=
+        MediaQuery.sizeOf(RoutingManager.rootNavigatorKey.currentContext!).height * .6) {
+      if (state.scrollController.position.pixels > 5 &&
+          state.scrollController.position.userScrollDirection == ScrollDirection.reverse) {
+        VendorsPageState.animationController.forward();
+      }
+      if (state.scrollController.position.pixels > 5 &&
+          state.scrollController.position.userScrollDirection == ScrollDirection.forward) {
+        VendorsPageState.animationController.reverse();
+      }
     }
     if (scrollController.position.pixels >= scrollController.position.maxScrollExtent) {
       if (state.offSet < state.totalVendorsCount) {

@@ -44,21 +44,37 @@ class MarketplaceAppBar extends StatelessWidget {
         ),
       ),
       trailing: [
-        IconButton(
-          icon: BlocBuilder<CartCubit, CartState>(
+        InkWell(
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+          hoverColor: Colors.transparent,
+          child: BlocBuilder<CartCubit, CartState>(
             builder: (context, state) {
-              return Badge.count(
-                  count: state.cartItems.length,
-                  textStyle: context.responsiveTextTheme.current.body3Medium,
-                  offset: offset,
-                  child: Icon(
-                    Iconsax.bag_2,
-                    color: AppColors.accent1Shade1,
-                    size: context.responsiveAppSizeTheme.current.iconSize25,
-                  ));
+              return Padding(
+                padding: EdgeInsets.symmetric(horizontal: context.responsiveAppSizeTheme.current.p8),
+                child: state.cartItems.isEmpty
+                    ? SvgPicture.asset(DrawableAssetStrings.newEmptyCartIcon,
+                        height: context.responsiveAppSizeTheme.current.iconSize20,
+                        width: context.responsiveAppSizeTheme.current.iconSize20,
+                        colorFilter: ColorFilter.mode(
+                          AppColors.accent1Shade1,
+                          BlendMode.srcIn,
+                        ))
+                    : Badge.count(
+                        count: state.cartItems.length,
+                        textStyle: context.responsiveTextTheme.current.body3Medium,
+                        offset: offset,
+                        child: SvgPicture.asset(DrawableAssetStrings.newFilledCartIcon,
+                            height: context.responsiveAppSizeTheme.current.iconSize20,
+                            width: context.responsiveAppSizeTheme.current.iconSize20,
+                            colorFilter: ColorFilter.mode(
+                              AppColors.accent1Shade1,
+                              BlendMode.srcIn,
+                            ))),
+              );
             },
           ),
-          onPressed: () {
+          onTap: () {
             AppLayout.appLayoutScaffoldKey.currentContext!.read<AppLayoutCubit>().changePage(2);
           },
         ),

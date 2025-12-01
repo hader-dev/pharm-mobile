@@ -1318,4 +1318,10 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get getting_info_google =>
       'Récupération des informations depuis Google';
+
+  @override
+  String get min_qty_to_order => 'Quantité min à commander';
+
+  @override
+  String get max_qty_to_order => 'Quantité max à commander';
 }

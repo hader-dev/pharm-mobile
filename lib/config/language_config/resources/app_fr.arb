@@ -412,5 +412,7 @@
   "continue_shopping": "Continuer vos achats",
   "total_applied_amount": "Montant total appliqué",
   "failed_google_signin": "Échec de la connexion avec Google",
-  "getting_info_google": "Récupération des informations depuis Google"
+  "getting_info_google": "Récupération des informations depuis Google",
+  "min_qty_to_order": "Quantité min à commander",
+  "max_qty_to_order": "Quantité max à commander"
 }

@@ -43,33 +43,25 @@ class FavoritesParaPharmaCatalogs extends StatelessWidget {
           );
         }
 
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Expanded(
-              child: RefreshIndicator(
-                onRefresh: cubit.fetchLikedParaPharma,
-                child: ListView.builder(
-                    shrinkWrap: true,
-                    physics: const AlwaysScrollableScrollPhysics(),
-                    itemCount: state.likedParaPharmaCatalogs.length,
-                    itemBuilder: (context, index) {
-                      void onLikeTapped(BaseParaPharmaCatalogModel medicine) {
-                        final id = medicine.id;
-                        cubit.unlikeParaPharma(id);
-                        gCubit?.refreshParaPharmaCatalogFavorite(id, false);
-                        hCubit?.refreshParaPharmaCatalogFavorite(id, false);
-                      }
+        return RefreshIndicator(
+          onRefresh: cubit.fetchLikedParaPharma,
+          child: ListView.builder(
+              physics: const AlwaysScrollableScrollPhysics(),
+              itemCount: state.likedParaPharmaCatalogs.length,
+              itemBuilder: (context, index) {
+                void onLikeTapped(BaseParaPharmaCatalogModel medicine) {
+                  final id = medicine.id;
+                  cubit.unlikeParaPharma(id);
+                  gCubit?.refreshParaPharmaCatalogFavorite(id, false);
+                  hCubit?.refreshParaPharmaCatalogFavorite(id, false);
+                }
 
-                      return ParaPharmaWidget1(
-                        isLiked: true,
-                        onFavoriteCallback: onLikeTapped,
-                        paraPharmData: state.likedParaPharmaCatalogs[index],
-                      );
-                    }),
-              ),
-            ),
-          ],
+                return ParaPharmaWidget1(
+                  isLiked: true,
+                  onFavoriteCallback: onLikeTapped,
+                  paraPharmData: state.likedParaPharmaCatalogs[index],
+                );
+              }),
         );
       },
     );

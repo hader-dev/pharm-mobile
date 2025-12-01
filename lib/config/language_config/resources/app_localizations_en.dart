@@ -1298,4 +1298,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get getting_info_google => 'Getting information from Google';
+
+  @override
+  String get min_qty_to_order => 'Min qty to order';
+
+  @override
+  String get max_qty_to_order => 'Max qty to order';
 }
