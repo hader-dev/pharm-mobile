@@ -9,20 +9,17 @@ part 'favorites_state.dart';
 
 class FavoritesCubit extends Cubit<FavoritesState> {
   FavoriteRepository favoriteRepository;
-  FavoritesCubit({required this.favoriteRepository})
-      : super(FavoritesInitial());
+  FavoritesCubit({required this.favoriteRepository}) : super(FavoritesInitial());
 
   void fetchFavorites() async {
-    await Future.wait(
-        [fetchLikedMedicines(), fetchLikedParaPharma(), fetchLikedVendors()]);
+    await Future.wait([fetchLikedMedicines(), fetchLikedParaPharma(), fetchLikedVendors()]);
   }
 
   Future<void> fetchLikedMedicines() async {
     try {
       emit(state.toLoadingMedicines());
 
-      final likedMedicinesCatalogs =
-          await favoriteRepository.getFavoritesMedicinesCatalogs();
+      final likedMedicinesCatalogs = await favoriteRepository.getFavoritesMedicinesCatalogs();
       emit(state.toLoadedMedicines(
         medicines: likedMedicinesCatalogs,
       ));
@@ -77,8 +74,7 @@ class FavoritesCubit extends Cubit<FavoritesState> {
   Future<void> fetchLikedParaPharma() async {
     try {
       emit(state.toLoadingParaPharma());
-      final likedParaPharmaCatalogs =
-          await favoriteRepository.getFavoritesParaPharmasCatalogs();
+      final likedParaPharmaCatalogs = await favoriteRepository.getFavoritesParaPharmasCatalogs();
       emit(state.toLoadedParaPharma(
         paraPharmas: likedParaPharmaCatalogs,
       ));
@@ -118,14 +114,12 @@ class FavoritesCubit extends Cubit<FavoritesState> {
   void unlikeParaPharma(String paraPharmaId) {
     final parapharmas = state.likedParaPharmaCatalogs.toList();
     parapharmas.removeWhere((paraPharma) => paraPharma.id == paraPharmaId);
-    favoriteRepository.unLikeParaPharmaCatalog(
-        paraPharmaCatalogId: paraPharmaId);
+    favoriteRepository.unLikeParaPharmaCatalog(paraPharmaCatalogId: paraPharmaId);
     emit(state.toLoadedParaPharma(paraPharmas: parapharmas));
   }
 
   Future<void> likeParaPharmaCatalog(String paraPharmaCatalogId) async {
-    favoriteRepository.likeParaPharmaCatalog(
-        paraPharmaCatalogId: paraPharmaCatalogId);
+    favoriteRepository.likeParaPharmaCatalog(paraPharmaCatalogId: paraPharmaCatalogId);
   }
 
   void unlikeVendor(String vendorId) {

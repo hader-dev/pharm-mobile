@@ -42,11 +42,11 @@ class OrderSummarySection extends StatelessWidget {
               label: context.translation!.total_applied_amount,
               value:
                   (cubit.orderData!.totalAppliedAmount ?? cubit.orderData!.totalAmountInclTax).formatAsPriceForPrint()),
-          SummaryRow(
-              label: context.translation!.total_ht, value: cubit.orderData!.totalAmountExclTax.formatAsPriceForPrint()),
-          SummaryRow(
-              label: context.translation!.total_ttc,
-              value: cubit.orderData!.totalAmountInclTax.formatAsPriceForPrint()),
+          // SummaryRow(
+          //     label: context.translation!.total_ht, value: cubit.orderData!.totalAmountExclTax.formatAsPriceForPrint()),
+          // SummaryRow(
+          //     label: context.translation!.total_ttc,
+          //     value: cubit.orderData!.totalAppliedAmount!.formatAsPriceForPrint()),
           // const Divider(height: 24, thickness: 1),
           // SummaryRow(
           //   label: context.translation!.total_ht_amount,

@@ -82,7 +82,7 @@ class CompanyRepository extends ICompanyRepository {
   }
 
   @override
-  Future<void> addCompanyToFavorites({required String companyId}) {
+  Future<void> likeVendor({required String companyId}) {
     return client.sendRequest(() => client.post(Urls.favoritesCompany, payload: {'favoriteCompanyId': companyId}));
   }
 
@@ -108,9 +108,9 @@ class CompanyRepository extends ICompanyRepository {
   }
 
   @override
-  Future<void> removeCompanyFromFavorites({required String companyId}) async {
+  Future<void> unlikeVendor({required String companyId}) async {
     return await client.sendRequest(() => client.delete(
-          '${Urls.favoritesCompany}/$companyId',
+          '${Urls.favoritesCompany}/by-company-id/$companyId',
         ));
   }
 

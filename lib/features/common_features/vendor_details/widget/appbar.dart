@@ -22,6 +22,8 @@ class VendorDetailsAppBar extends StatelessWidget implements PreferredSizeWidget
       builder: (context, state) {
         final vendorData = state.vendor;
         return CustomAppBarV2.normal(
+          useSpacer: false,
+          isExpanded: true,
           leading: IconButton(
             icon: Icon(
               Directionality.of(context) == TextDirection.rtl ? Iconsax.arrow_right_3 : Iconsax.arrow_left_2,

@@ -18,17 +18,15 @@ abstract class ICompanyRepository {
       int? distributorCategoryId});
   Future<Company> getCompanyById({required String companyId});
   Future<void> joinCompanyAsCLient({required String companyId});
-  Future<void> addCompanyToFavorites({required String companyId});
+  Future<void> likeVendor({required String companyId});
   Future<List<Brand>> getCompanyBrands({required String companyId});
   Future<List<Brand>> getCompanyCategories({required String companyId});
 
-  Future<void> removeCompanyFromFavorites({required String companyId});
+  Future<void> unlikeVendor({required String companyId});
 
   Future<void> unJoinCompanyAsCLient({required String companyId});
 
   // Company management for current user
   Future<Company> getMyCompany();
-  Future<void> updateMyCompany(
-      {required EditCompanyFormDataModel companyData,
-      bool shouldRemoveImage = false});
+  Future<void> updateMyCompany({required EditCompanyFormDataModel companyData, bool shouldRemoveImage = false});
 }

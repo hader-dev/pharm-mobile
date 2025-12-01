@@ -7,8 +7,7 @@ part 'vendor_details_state.dart';
 
 class VendorDetailsCubit extends Cubit<VendorDetailsState> {
   final ICompanyRepository companyRepo;
-  VendorDetailsCubit({required this.companyRepo})
-      : super(VendorDetailsInitial());
+  VendorDetailsCubit({required this.companyRepo}) : super(VendorDetailsInitial());
 
   void getVendorDetails(String companyId) async {
     try {
@@ -34,7 +33,7 @@ class VendorDetailsCubit extends Cubit<VendorDetailsState> {
 
   Future<void> likeVendor(String vendorId) async {
     try {
-      await companyRepo.addCompanyToFavorites(companyId: vendorId);
+      await companyRepo.likeVendor(companyId: vendorId);
       emit(state.toVendorLiked());
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
@@ -44,7 +43,7 @@ class VendorDetailsCubit extends Cubit<VendorDetailsState> {
 
   void unlikeVendor(String id) {
     try {
-      companyRepo.removeCompanyFromFavorites(companyId: id);
+      companyRepo.unlikeVendor(companyId: id);
       emit(state.toVendorLiked());
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
