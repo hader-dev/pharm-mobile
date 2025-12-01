@@ -41,34 +41,26 @@ class FavoritesMedicinesCatalog extends StatelessWidget {
             onRefresh: cubit.fetchLikedMedicines,
           );
         }
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Expanded(
-              child: RefreshIndicator(
-                onRefresh: cubit.fetchLikedMedicines,
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  itemCount: state.likedMedicinesCatalogs.length,
-                  itemBuilder: (context, index) => SizedBox(
-                    height: 150,
-                    child: MedicineWidget2(
-                      hideLikeButton: false,
-                      onRemoveFromFavorites: () {
-                        final id = state.likedMedicinesCatalogs[index].id;
-                        cubit.unlikeMedicine(id);
-                        gCubit?.refreshMedicineCatalogFavorite(id, false);
-                        hCubit?.refreshMedicineCatalogFavorite(id, false);
-                      },
-                      medicineData: state.likedMedicinesCatalogs[index],
-                      isLiked: true,
-                    ),
-                  ),
-                ),
+        return RefreshIndicator(
+          onRefresh: cubit.fetchLikedMedicines,
+          child: ListView.builder(
+            physics: const AlwaysScrollableScrollPhysics(),
+            itemCount: state.likedMedicinesCatalogs.length,
+            itemBuilder: (context, index) => SizedBox(
+              height: 150,
+              child: MedicineWidget2(
+                hideLikeButton: false,
+                onRemoveFromFavorites: () {
+                  final id = state.likedMedicinesCatalogs[index].id;
+                  cubit.unlikeMedicine(id);
+                  gCubit?.refreshMedicineCatalogFavorite(id, false);
+                  hCubit?.refreshMedicineCatalogFavorite(id, false);
+                },
+                medicineData: state.likedMedicinesCatalogs[index],
+                isLiked: true,
               ),
             ),
-          ],
+          ),
         );
       },
     );

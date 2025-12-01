@@ -5,13 +5,18 @@ import 'package:hader_pharm_mobile/repositories/remote/utility/mappers/dynamic_l
 import 'package:hader_pharm_mobile/utils/helper_func.dart' show calculateProductStockQty;
 
 BaseParaPharmaCatalogModel jsonToBaseParapharm(Map<String, dynamic> json) {
+  int minOrderQty = json["minOrderQuantity"] ?? 1;
+  minOrderQty = minOrderQty == 0 ? 1 : minOrderQty;
+
+  int maxOrderQty = json["maxOrderQuantity"] ?? 9999;
+  maxOrderQty = maxOrderQty == 0 ? 9999 : maxOrderQty;
   return BaseParaPharmaCatalogModel(
       id: json['id'] ?? "",
       tags: mapJsonDynamicListToTypedList(json['tags']),
       packageSize: json['packageSize'] ?? 1,
       unitPriceHt: double.parse(json['unitPriceHt'] ?? "0"),
-      minOrderQuantity: json["minOrderQuantity"] ?? 1,
-      maxOrderQuantity: json["maxOrderQuantity"] ?? 9999,
+      minOrderQuantity: minOrderQty,
+      maxOrderQuantity: maxOrderQty,
       thumbnailImage: json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
       image: json["image"] != null ? ImageModel.fromJson(json["image"]) : null,
       name: json['name'] ?? "",

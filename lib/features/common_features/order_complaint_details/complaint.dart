@@ -18,7 +18,7 @@ class OrderItemComplaintScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: OrderItemComplaintAppbar(),
+      appBar: OrderItemComplaintAppBar(),
       body: BlocProvider(
         create: (context) => OrderComplaintsCubit(
           orderId: orderId,

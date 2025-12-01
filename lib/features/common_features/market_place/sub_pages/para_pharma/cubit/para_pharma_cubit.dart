@@ -3,6 +3,9 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart' show ScrollDirection;
+import 'package:hader_pharm_mobile/config/routes/routing_manager.dart' show RoutingManager;
+import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/para_pharma.dart'
+    show ParaPharmaProductsPageState;
 import 'package:hader_pharm_mobile/features/common_features/market_place/widgets/tabs_section.dart'
     show MarketPlaceTabBarSectionState;
 import 'package:hader_pharm_mobile/models/para_medical_filters.dart';
@@ -38,13 +41,16 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
           filters: filters ?? const ParaMedicalFilters(),
         )) {
     state.scrollController.addListener(() {
-      if (state.scrollController.position.pixels > 5 &&
-          state.scrollController.position.userScrollDirection == ScrollDirection.reverse) {
-        MarketPlaceTabBarSectionState.animationController.forward();
-      }
-      if (state.scrollController.position.pixels > 5 &&
-          state.scrollController.position.userScrollDirection == ScrollDirection.forward) {
-        MarketPlaceTabBarSectionState.animationController.reverse();
+      if (state.scrollController.position.maxScrollExtent >=
+          MediaQuery.sizeOf(RoutingManager.rootNavigatorKey.currentContext!).height * .6) {
+        if (state.scrollController.position.pixels > 5 &&
+            state.scrollController.position.userScrollDirection == ScrollDirection.reverse) {
+          ParaPharmaProductsPageState.animationController.forward();
+        }
+        if (state.scrollController.position.pixels > 5 &&
+            state.scrollController.position.userScrollDirection == ScrollDirection.forward) {
+          ParaPharmaProductsPageState.animationController.reverse();
+        }
       }
       if (state.scrollController.position.pixels >= state.scrollController.position.maxScrollExtent) {
         loadMoreParaPharmas();

@@ -6,6 +6,7 @@ import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/chips/custom_chip.dart';
+import 'package:hader_pharm_mobile/features/common/image/cached_network_image_with_asset_fallback.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/favorites/cubit/favorites_cubit.dart';
 import 'package:hader_pharm_mobile/models/company.dart';
@@ -80,28 +81,13 @@ class VendorItem extends StatelessWidget {
                       return Center(
                         child: ClipOval(
                           child: SizedBox(
-                            width: size,
-                            height: size,
-                            child: companyData.thumbnailImage?.path == null
-                                ? Image.asset(
-                                    DrawableAssetStrings.companyPlaceHolderImg,
-                                    fit: BoxFit.cover,
-                                  )
-                                : Image.network(
-                                    getItInstance.get<INetworkService>().getFilesPath(companyData.thumbnailImage!.path),
-                                    fit: BoxFit.cover,
-                                    loadingBuilder: (context, child, progress) {
-                                      if (progress == null) return child;
-                                      return const Center(child: CircularProgressIndicator());
-                                    },
-                                    errorBuilder: (context, error, stackTrace) {
-                                      return Image.asset(
-                                        DrawableAssetStrings.companyPlaceHolderImg,
-                                        fit: BoxFit.cover,
-                                      );
-                                    },
-                                  ),
-                          ),
+                              width: size,
+                              height: size,
+                              child: CachedNetworkImageWithDrawableFallback.withErrorSvgImage(
+                                imageUrl: getItInstance
+                                    .get<INetworkService>()
+                                    .getFilesPath(companyData.thumbnailImage?.path ?? ''),
+                              )),
                         ),
                       );
                     },

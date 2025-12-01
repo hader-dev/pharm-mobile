@@ -16,6 +16,8 @@ import 'package:iconsax/iconsax.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../image/cached_network_image_with_asset_fallback.dart' show CachedNetworkImageWithDrawableFallback;
+
 class VendorItem extends StatelessWidget {
   final bool hideLikeButton;
   final VoidCallback? onLike;
@@ -80,28 +82,13 @@ class VendorItem extends StatelessWidget {
                       return Center(
                         child: ClipOval(
                           child: SizedBox(
-                            width: size,
-                            height: size,
-                            child: companyData.thumbnailImage?.path == null
-                                ? Image.asset(
-                                    DrawableAssetStrings.companyPlaceHolderImg,
-                                    fit: BoxFit.cover,
-                                  )
-                                : Image.network(
-                                    getItInstance.get<INetworkService>().getFilesPath(companyData.thumbnailImage!.path),
-                                    fit: BoxFit.cover,
-                                    loadingBuilder: (context, child, progress) {
-                                      if (progress == null) return child;
-                                      return const Center(child: CircularProgressIndicator());
-                                    },
-                                    errorBuilder: (context, error, stackTrace) {
-                                      return Image.asset(
-                                        DrawableAssetStrings.companyPlaceHolderImg,
-                                        fit: BoxFit.cover,
-                                      );
-                                    },
-                                  ),
-                          ),
+                              width: size,
+                              height: size,
+                              child: CachedNetworkImageWithDrawableFallback.withErrorSvgImage(
+                                imageUrl: getItInstance
+                                    .get<INetworkService>()
+                                    .getFilesPath(companyData.thumbnailImage?.path ?? ''),
+                              )),
                         ),
                       );
                     },

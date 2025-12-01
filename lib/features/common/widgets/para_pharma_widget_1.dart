@@ -124,6 +124,7 @@ class ParaPharmaWidget1 extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     spacing: context.responsiveAppSizeTheme.current.s6,
                     children: [
                       Container(
@@ -143,11 +144,12 @@ class ParaPharmaWidget1 extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const ResponsiveGap.s4(),
-                      Text(paraPharmData.company!.name,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                          style: context.responsiveTextTheme.current.bodyXSmall),
+                      Flexible(
+                        child: Text(paraPharmData.company!.name,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                            style: context.responsiveTextTheme.current.bodyXSmall),
+                      ),
                       const Spacer(),
                       if (onQuickAddCallback != null)
                         Transform.scale(

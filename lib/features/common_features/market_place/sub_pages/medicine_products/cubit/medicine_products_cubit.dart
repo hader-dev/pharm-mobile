@@ -4,9 +4,13 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart' show ScrollDirection;
 import 'package:flutter/widgets.dart';
+import 'package:hader_pharm_mobile/config/routes/routing_manager.dart' show RoutingManager;
+import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/medicine_products/medicine_products.dart'
+    show MedicineProductsPageState;
 import 'package:hader_pharm_mobile/features/common_features/market_place/widgets/tabs_section.dart'
     show MarketPlaceTabBarSectionState;
 import 'package:hader_pharm_mobile/models/medical_filters.dart';
+import 'package:hader_pharm_mobile/models/medicine.dart';
 import 'package:hader_pharm_mobile/models/medicine_catalog.dart';
 import 'package:hader_pharm_mobile/repositories/remote/favorite/favorite_repository_impl.dart';
 import 'package:hader_pharm_mobile/repositories/remote/medicine_catalog/medicine_catalog_repository_impl.dart';
@@ -124,13 +128,16 @@ class MedicineProductsCubit extends Cubit<MedicineProductsState> {
   }
 
   void _onScroll() {
-    if (state.scrollController.position.pixels > 5 &&
-        state.scrollController.position.userScrollDirection == ScrollDirection.reverse) {
-      MarketPlaceTabBarSectionState.animationController.forward();
-    }
-    if (state.scrollController.position.pixels > 5 &&
-        state.scrollController.position.userScrollDirection == ScrollDirection.forward) {
-      MarketPlaceTabBarSectionState.animationController.reverse();
+    if (state.scrollController.position.maxScrollExtent >=
+        MediaQuery.sizeOf(RoutingManager.rootNavigatorKey.currentContext!).height * .9) {
+      if (state.scrollController.position.pixels > 5 &&
+          state.scrollController.position.userScrollDirection == ScrollDirection.reverse) {
+        MedicineProductsPageState.animationController.forward();
+      }
+      if (state.scrollController.position.pixels > 5 &&
+          state.scrollController.position.userScrollDirection == ScrollDirection.forward) {
+        MedicineProductsPageState.animationController.reverse();
+      }
     }
     if (scrollController.position.pixels >= scrollController.position.maxScrollExtent) {
       if (state.offSet < state.totalItemsCount) {

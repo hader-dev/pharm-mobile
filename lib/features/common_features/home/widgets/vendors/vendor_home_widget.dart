@@ -53,10 +53,10 @@ class VendorHomeWidget extends StatelessWidget {
                 height: 50,
                 width: 50,
                 decoration: BoxDecoration(
-                  color: AppColors.bgDarken2,
+                  color: AppColors.bgWhite,
                   shape: BoxShape.circle,
                   border: Border.all(
-                    color: AppColors.accent1Shade1.withAlpha(50),
+                    color: AppColors.accent1Shade1.withAlpha(30),
                   ),
                 ),
                 child: (imageUrl != null && imageUrl!.isNotEmpty)
@@ -66,7 +66,8 @@ class VendorHomeWidget extends StatelessWidget {
                       )
                     : SvgPicture.asset(
                         fallbackAssetImagePlaceholderPath,
-                        fit: BoxFit.fill,
+                        fit: BoxFit.fitWidth,
+                        colorFilter: ColorFilter.mode(Colors.grey.shade200, BlendMode.srcIn),
                       ),
               ),
               Padding(

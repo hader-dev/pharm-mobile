@@ -12,19 +12,28 @@ import 'package:hader_pharm_mobile/models/medicine_catalog.dart';
 import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
-import '../../../../common/shimmers/horizontal_product_widget_shimmer.dart'
-    show HorizontalProductWidgetShimmer;
+import '../../../../common/shimmers/horizontal_product_widget_shimmer.dart' show HorizontalProductWidgetShimmer;
 import 'cubit/medicine_products_cubit.dart';
 
 class MedicineProductsPage extends StatefulWidget {
   const MedicineProductsPage({super.key});
 
   @override
-  State<MedicineProductsPage> createState() => _MedicineProductsPageState();
+  State<MedicineProductsPage> createState() => MedicineProductsPageState();
 }
 
-class _MedicineProductsPageState extends State<MedicineProductsPage>
-    with AutomaticKeepAliveClientMixin {
+class MedicineProductsPageState extends State<MedicineProductsPage>
+    with AutomaticKeepAliveClientMixin, SingleTickerProviderStateMixin {
+  late final Animation animation;
+  static late AnimationController animationController;
+  @override
+  initState() {
+    super.initState();
+    animationController = AnimationController(vsync: this, duration: const Duration(milliseconds: 5));
+    animation =
+        Tween<double>(begin: 1, end: 0).animate(animationController.drive(CurveTween(curve: Curves.easeInCubic)));
+  }
+
   @override
   Widget build(BuildContext context) {
     final cubit = BlocProvider.of<MedicineProductsCubit>(context);
@@ -37,39 +46,41 @@ class _MedicineProductsPageState extends State<MedicineProductsPage>
             padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
             child: Column(
               children: [
-                FiltersBarV2(),
+                AnimatedBuilder(
+                    animation: animationController,
+                    builder: (context, child) {
+                      return AnimatedOpacity(
+                          opacity: (animation.value == 1) ? 1.0 : 0.0,
+                          duration: const Duration(milliseconds: 200),
+                          child: (animation.value == 0) ? SizedBox.shrink() : child!);
+                    },
+                    child: FiltersBarV2()),
                 Expanded(
                   child: Builder(builder: (context) {
                     final medicines = state.medicines;
 
                     final bool isLoadingMore = state is MedicineProductsLoading;
-                    final bool hasReachedEnd =
-                        state is MedicinesLoadLimitReached;
+                    final bool hasReachedEnd = state is MedicinesLoadLimitReached;
 
                     void onLikeTapped(BaseMedicineCatalogModel medicine) {
                       final id = medicine.id;
-                      final gCubit = MarketPlaceScreen
-                          .marketPlaceScaffoldKey.currentContext!
-                          .read<MedicineProductsCubit>();
-                      final hCubit = HomeScreen.scaffoldKey.currentContext!
-                          .read<MedicineProductsCubit>();
-                      medicine.isLiked
-                          ? cubit.unlikeMedicinesCatalog(id)
-                          : cubit.likeMedicinesCatalog(id);
+                      final gCubit =
+                          MarketPlaceScreen.marketPlaceScaffoldKey.currentContext!.read<MedicineProductsCubit>();
+                      final hCubit = HomeScreen.scaffoldKey.currentContext!.read<MedicineProductsCubit>();
+                      medicine.isLiked ? cubit.unlikeMedicinesCatalog(id) : cubit.likeMedicinesCatalog(id);
 
-                      gCubit.refreshMedicineCatalogFavorite(
-                          id, !medicine.isLiked);
-                      hCubit.refreshMedicineCatalogFavorite(
-                          id, !medicine.isLiked);
+                      gCubit.refreshMedicineCatalogFavorite(id, !medicine.isLiked);
+                      hCubit.refreshMedicineCatalogFavorite(id, !medicine.isLiked);
                     }
 
-                    void onQuickAddCallback(
-                        BaseMedicineCatalogModel medicineProduct) {
+                    void onQuickAddCallback(BaseMedicineCatalogModel medicineProduct) {
                       BottomSheetHelper.showCommonBottomSheet(
                           initialChildSize: .5,
                           context: context,
                           child: QuickCartAddModal(
                             medicineCatalogId: medicineProduct.id,
+                            minOrderQuantity: medicineProduct.minOrderQuantity,
+                            maxOrderQuantity: medicineProduct.maxOrderQuantity,
                           ));
                     }
 
@@ -97,23 +108,18 @@ class _MedicineProductsPageState extends State<MedicineProductsPage>
                           physics: AlwaysScrollableScrollPhysics(),
                           controller: state.scrollController,
                           children: [
-                            ...state.medicines
-                                .map((medicine) => MedicineWidget2(
-                                      medicineData: medicine,
-                                      isLiked: medicine.isLiked,
-                                      onLikeTapped: () =>
-                                          onLikeTapped(medicine),
-                                      onQuickAddCallback: onQuickAddCallback,
-                                      hideLikeButton: false,
-                                    )),
+                            ...state.medicines.map((medicine) => MedicineWidget2(
+                                  medicineData: medicine,
+                                  isLiked: medicine.isLiked,
+                                  onLikeTapped: () => onLikeTapped(medicine),
+                                  onQuickAddCallback: onQuickAddCallback,
+                                  hideLikeButton: false,
+                                )),
                             if (isLoadingMore)
                               const Padding(
                                 padding: EdgeInsets.all(16.0),
-                                child: Center(
-                                    child: SizedBox(
-                                        height: 20,
-                                        width: 20,
-                                        child: CircularProgressIndicator())),
+                                child:
+                                    Center(child: SizedBox(height: 20, width: 20, child: CircularProgressIndicator())),
                               ),
                             if (hasReachedEnd) const EndOfLoadResultWidget()
                           ],

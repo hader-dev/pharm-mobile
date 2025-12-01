@@ -78,7 +78,7 @@ class AddCartBottomSheet extends StatelessWidget {
                   children: [
                     Flexible(
                         child: InfoWidget(
-                            label: "Min qty to order",
+                            label: translation.min_qty_to_order,
                             value: Text(
                               "${cubit.state.paraPharmaCatalogData.minOrderQuantity}",
                               style: context.responsiveTextTheme.current.body2Medium,
@@ -86,7 +86,7 @@ class AddCartBottomSheet extends StatelessWidget {
                     ResponsiveGap.s8(),
                     Flexible(
                         child: InfoWidget(
-                            label: "Max qty to order",
+                            label: translation.max_qty_to_order,
                             value: Text(
                               "${cubit.state.paraPharmaCatalogData.maxOrderQuantity}",
                               style: context.responsiveTextTheme.current.body2Medium,

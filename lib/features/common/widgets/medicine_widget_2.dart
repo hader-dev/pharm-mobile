@@ -76,7 +76,6 @@ class MedicineWidget2 extends StatelessWidget {
                     errorMsg: "No Image Available",
                     fit: BoxFit.cover,
                   ),
-                  if (medicineData.image != null) BlackenedBackground(),
                   StockAvailableContainerWidget(isAvailable: medicineData.stockQuantity > 0),
                   if (!hideLikeButton)
                     Positioned(
@@ -154,10 +153,12 @@ class MedicineWidget2 extends StatelessWidget {
                         ),
                       ),
                       const ResponsiveGap.s4(),
-                      Text(medicineData.company!.name,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                          style: context.responsiveTextTheme.current.bodyXSmall),
+                      Flexible(
+                        child: Text(medicineData.company!.name,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                            style: context.responsiveTextTheme.current.bodyXSmall),
+                      ),
                     ],
                   ),
                   ResponsiveGap.s6(),

@@ -1296,4 +1296,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get getting_info_google => 'جارٍ جلب المعلومات من جوجل';
+
+  @override
+  String get min_qty_to_order => 'الحد الأدنى للطلب';
+
+  @override
+  String get max_qty_to_order => 'الحد الأقصى للطلب';
 }

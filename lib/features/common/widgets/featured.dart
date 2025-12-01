@@ -33,19 +33,15 @@ class FeaturedEntity extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.grey.shade300),
-                  borderRadius: BorderRadius.circular(
-                      context.responsiveAppSizeTheme.current.commonWidgetsRadius),
+                  borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.commonWidgetsRadius),
                 ),
-                padding:
-                    EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
+                padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(
-                      context.responsiveAppSizeTheme.current.commonWidgetsRadius),
+                  borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.commonWidgetsRadius),
                   child: (imageUrl != null && imageUrl!.isNotEmpty)
                       ? CacheNetworkImagePlus(
                           width: size,
-                          height: (size * 0.6) -
-                              context.responsiveAppSizeTheme.current.p8,
+                          height: (size * 0.6) - context.responsiveAppSizeTheme.current.p8,
                           boxFit: BoxFit.cover,
                           imageUrl: imageUrl!)
                       : Center(
