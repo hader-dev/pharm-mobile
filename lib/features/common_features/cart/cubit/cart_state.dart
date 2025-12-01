@@ -75,14 +75,10 @@ class CartState {
     if (removed) {
       final updatedItems = cartItems.where((item) => item.model.id != updatedItem.model.id).toList();
 
-      final updatedItemsByVendor = cartItemsByVendor.map((key, value) {
-        return MapEntry(
-          key,
-          value.where((id) => id != updatedItem.model.id).toList(),
-        );
-      });
-
-      return CartItemUpdated.fromState(state: this, cartItems: updatedItems, cartItemsByVendor: updatedItemsByVendor);
+      return CartItemUpdated.fromState(
+        state: this,
+        cartItems: updatedItems,
+      );
     }
 
     final List<CartItemModelUi> updatedItems = cartItems.map((item) {

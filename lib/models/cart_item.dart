@@ -175,6 +175,7 @@ class CartItemModel {
       dynamic parapharmCatalog,
       BaseCompany? sellerCompany,
       String? appliedAmount,
+      String? customPrice,
       int? packageSize}) {
     return CartItemModel(
         packageSize: packageSize ?? this.packageSize,
@@ -201,6 +202,7 @@ class CartItemModel {
         minOrderQuantity: minOrderQuantity,
         appliedAmount: appliedAmount ?? this.appliedAmount,
         totalAppliedAmount: totalAppliedAmount,
+        customPrice: customPrice ?? this.customPrice,
         image: image);
   }
 

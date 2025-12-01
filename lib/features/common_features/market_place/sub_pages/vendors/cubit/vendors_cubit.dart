@@ -154,7 +154,7 @@ class VendorsCubit extends Cubit<VendorsState> {
 
   Future<void> likeVendor(String vendorId) async {
     try {
-      await companyRepository.addCompanyToFavorites(companyId: vendorId);
+      await companyRepository.likeVendor(companyId: vendorId);
 
       emit(state.toLiked(vendorId: vendorId, isLiked: true));
     } catch (e) {
@@ -165,7 +165,7 @@ class VendorsCubit extends Cubit<VendorsState> {
 
   Future<void> unlikeVendor(String vendorId) async {
     try {
-      await companyRepository.removeCompanyFromFavorites(companyId: vendorId);
+      await companyRepository.unlikeVendor(companyId: vendorId);
       emit(state.toLiked(vendorId: vendorId, isLiked: false));
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
