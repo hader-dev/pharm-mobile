@@ -1,4 +1,5 @@
 import 'package:hader_pharm_mobile/models/company.dart';
+import 'package:hader_pharm_mobile/models/gallery.dart' show Gallery;
 
 import 'image.dart';
 
@@ -132,6 +133,7 @@ class ParaPharmaCatalogModel extends BaseParaPharmaCatalogModel {
   final String sku;
   final String description;
   final Map<String, dynamic>? metaData;
+  final Gallery? gallery;
 
   ParaPharmaCatalogModel({
     required super.id,
@@ -161,6 +163,7 @@ class ParaPharmaCatalogModel extends BaseParaPharmaCatalogModel {
     required super.maxOrderQuantity,
     required super.brand,
     required super.category,
+    required this.gallery,
     super.actualQty = 0,
     super.reservedQty = 0,
   });
@@ -191,6 +194,7 @@ class ParaPharmaCatalogModel extends BaseParaPharmaCatalogModel {
         sku: '',
         description: '',
         metaData: {},
+        gallery: null,
         minOrderQuantity: 0,
         maxOrderQuantity: 0);
   }
@@ -250,6 +254,7 @@ class ParaPharmaCatalogModel extends BaseParaPharmaCatalogModel {
         minOrderQuantity: minOrderQuantity ?? this.minOrderQuantity,
         maxOrderQuantity: maxOrderQuantity ?? this.maxOrderQuantity,
         brand: brand ?? this.brand,
+        gallery: gallery,
         category: category ?? this.category);
   }
 }
