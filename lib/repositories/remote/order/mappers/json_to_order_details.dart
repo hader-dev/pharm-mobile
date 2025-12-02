@@ -13,22 +13,14 @@ OrderDetailsModel jsonToOrderDetails(Map<String, dynamic> json) {
     paymentMethod: json['paymentMethod'],
     displayId: json['displayId'],
     createdAt: DateTime.parse(json['createdAt']),
-    updatedAt:
-        json['updatedAt'] != null ? DateTime.parse(json['updatedAt']) : null,
+    updatedAt: json['updatedAt'] != null ? DateTime.parse(json['updatedAt']) : null,
     deliveryAddress: json['deliveryAddress'] ?? '',
     status: json['status'] ?? 1,
-    totalAmountExclTax: json['totalAmountHt'] != null
-        ? double.parse(json['totalAmountHt'])
-        : 0.0,
-    totalAppliedAmount: json['totalAppliedAmount'] != null
-        ? double.parse(json['totalAppliedAmount'])
-        : 0.0,
-    totalAmountInclTax: json['totalAmountTtc'] != null
-        ? double.parse(json['totalAmountTtc'])
-        : 0.0,
+    totalAmountExclTax: json['totalAmountHt'] != null ? double.parse(json['totalAmountHt']) : 0.0,
+    totalAppliedAmount: json['totalAppliedAmount'] != null ? double.parse(json['totalAppliedAmount']) : 0.0,
+    totalAmountInclTax: json['totalAmountTtc'] != null ? double.parse(json['totalAmountTtc']) : 0.0,
     latitude: json['latitude'] != null ? double.parse(json['latitude']) : 0.0,
-    longitude:
-        json['longitude'] != null ? double.parse(json['longitude']) : 0.0,
+    longitude: json['longitude'] != null ? double.parse(json['longitude']) : 0.0,
     clientCompanyId: sellerCompany.id,
     sellerCompanyId: sellerCompany.id,
     delegateUserId: json['delegateUserId'],
@@ -37,9 +29,10 @@ OrderDetailsModel jsonToOrderDetails(Map<String, dynamic> json) {
     deliveryTownId: json['deliveryTownId'],
     clientNote: json['clientNote'] ?? "",
     privateNote: json['privateNote'] ?? "",
+    totalAppliedAmountHt: json['totalAppliedAmountHt'] != null ? double.parse(json['totalAppliedAmountHt']) : 0.0,
+    totalAppliedAmountTtc: json['totalAppliedAmountHt'] != null ? double.parse(json['totalAppliedAmountHt']) : 0.0,
     orderItems: jsonToOrderItemModelList(json['orderItems']),
-    orderStatusHistories:
-        jsonToOrderStatusHistoryList(json['orderStatusHistories']),
+    orderStatusHistories: jsonToOrderStatusHistoryList(json['orderStatusHistories']),
     clientCompany: clientCompany,
     sellerCompany: sellerCompany,
   );

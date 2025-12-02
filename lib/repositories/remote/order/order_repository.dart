@@ -34,7 +34,6 @@ abstract class IOrderRepository {
 
   Future<ResponseOrderComplaints> getOrderClaims(ParamsGetOrderComplaints params);
 
-  Future<ResponseInvoice> invoiceDetails(ParamsGetInvoice params);
   Future<ResponseDeleteOrderItem> deleteOrderItem(ParamsDeleteOrderItem params);
   Future<void> createDeligateOrder(ParamsCreateDeligateOrder params);
 

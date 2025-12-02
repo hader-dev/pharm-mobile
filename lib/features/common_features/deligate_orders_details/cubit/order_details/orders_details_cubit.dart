@@ -240,7 +240,7 @@ class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
       model: DeligateOrderItem(
           isParapharm: true,
           product: OrderItem.empty().copyWith(
-            parapharmCatalogId: selectedProduct.id,
+            paraPharmCatalogId: selectedProduct.id,
             designation: selectedProduct.name,
             imageUrl: selectedProduct.image?.path,
             packageSize: selectedProduct.packageSize,

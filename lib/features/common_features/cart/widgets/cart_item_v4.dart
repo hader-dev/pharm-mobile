@@ -107,7 +107,7 @@ class CartItemWidgetV4 extends StatelessWidget {
                               children: [
                                 PriceWidget(
                                     price: double.parse(item.model.unitPriceHt),
-                                    overridePrice: double.parse(item.model.customPrice)),
+                                    overridePrice: double.parse(item.model.appliedAmountHt)),
                                 const Spacer(),
                                 BlocBuilder<CartCubit, CartState>(
                                   builder: (context, state) {

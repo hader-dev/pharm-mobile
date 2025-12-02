@@ -80,11 +80,6 @@ class OrderRepository extends IOrderRepository {
   }
 
   @override
-  Future<ResponseInvoice> invoiceDetails(ParamsGetInvoice params) {
-    return invoice_action.getMockInvoiceDetaills(params, client);
-  }
-
-  @override
   Future<void> createDeligateOrder(ParamsCreateDeligateOrder params) async {
     final orderData = {
       'deliveryAddress': params.deliveryAddress,
