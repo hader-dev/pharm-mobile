@@ -1,4 +1,7 @@
 {
   "dart.flutterSdkPath": ".fvm/versions/3.32.0",
-  "cmake.sourceDirectory": "E:/Projects/hader-pharm-mobile/linux"
+  "cmake.sourceDirectory": "E:/Projects/hader-pharm-mobile/linux",
+  "cSpell.words": [
+    "Pharma"
+  ]
 }

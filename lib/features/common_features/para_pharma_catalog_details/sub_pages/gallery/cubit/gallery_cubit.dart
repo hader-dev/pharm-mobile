@@ -1,0 +1,19 @@
+import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart' show PageController, Curves;
+
+part 'gallery_state.dart';
+
+class GalleryCubit extends Cubit<GalleryState> {
+  int selectedGalleryIndex = 0;
+  final PageController pageController = PageController(initialPage: 0);
+  GalleryCubit() : super(GalleryInitial());
+
+  void changeSelectedGallery(int index) {
+    selectedGalleryIndex = index;
+    pageController.jumpToPage(
+      index,
+    );
+    emit(SelectedGalleryChanged(selectedGalleryIndex: selectedGalleryIndex));
+  }
+}
