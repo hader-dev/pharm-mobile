@@ -30,7 +30,7 @@ OrderDetailsModel jsonToOrderDetails(Map<String, dynamic> json) {
     clientNote: json['clientNote'] ?? "",
     privateNote: json['privateNote'] ?? "",
     totalAppliedAmountHt: json['totalAppliedAmountHt'] != null ? double.parse(json['totalAppliedAmountHt']) : 0.0,
-    totalAppliedAmountTtc: json['totalAppliedAmountHt'] != null ? double.parse(json['totalAppliedAmountHt']) : 0.0,
+    totalAppliedAmountTtc: json['totalAppliedAmountTtc'] != null ? double.parse(json['totalAppliedAmountTtc']) : 0.0,
     orderItems: jsonToOrderItemModelList(json['orderItems']),
     orderStatusHistories: jsonToOrderStatusHistoryList(json['orderStatusHistories']),
     clientCompany: clientCompany,

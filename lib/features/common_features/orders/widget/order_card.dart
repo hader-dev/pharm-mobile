@@ -108,7 +108,7 @@ class OrderCard extends StatelessWidget {
                           RowColumnDataHolders(
                             title: context.translation!.total_amount,
                             value:
-                                "${orderData.totalAmountInclTax.formatAsPriceForPrint()} ${context.translation!.currency}",
+                                "${orderData.totalAppliedAmountTtc.formatAsPriceForPrint()} ${context.translation!.currency}",
                             titleStyle: context.responsiveTextTheme.current.body2Medium.copyWith(color: Colors.grey),
                             valueStyle: context.responsiveTextTheme.current.body2Medium,
                           ),
