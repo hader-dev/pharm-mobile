@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:hader_pharm_mobile/models/cart_item.dart' show CartItemModel;
 
 import '../../../config/services/network/network_interface.dart';
 import '../../../models/create_cart_item.dart';
@@ -11,8 +12,7 @@ class CartItemRepository extends ICartItemsRepository {
   CartItemRepository({required this.client});
 
   @override
-  Future<CartItemsResponse> getCartItem(
-      {int offset = 0, int limit = 10}) async {
+  Future<CartItemsResponse> getCartItem({int offset = 0, int limit = 10}) async {
     try {
       var decodedResponse = await client.sendRequest(() => client.get(
             Urls.cartItems,
@@ -37,11 +37,12 @@ class CartItemRepository extends ICartItemsRepository {
   }
 
   @override
-  Future<void> updateItem(String id, Map<String, dynamic> cartItem) {
-    return client.sendRequest(() => client.patch(
+  Future<CartItemModel> updateItem(String id, Map<String, dynamic> cartItem) async {
+    var decodedResponse = await client.sendRequest(() => client.patch(
           "${Urls.cartItems}/$id",
           payload: cartItem,
         ));
+    return CartItemModel.fromJson(decodedResponse);
   }
 
   @override

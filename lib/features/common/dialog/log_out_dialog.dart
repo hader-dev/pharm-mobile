@@ -18,9 +18,9 @@ class AppDialogs {
         cancelText: RoutingManager.rootNavigatorKey.currentContext!.translation!.cancel,
         dialogType: DialogType.warning,
         title: Text(RoutingManager.rootNavigatorKey.currentContext!.translation!.logout_confirmation,
-            style: context.responsiveTextTheme.current.headLine3SemiBold),
+            textAlign: TextAlign.center, style: context.responsiveTextTheme.current.headLine3SemiBold),
         content: Text(RoutingManager.rootNavigatorKey.currentContext!.translation!.logout_confirmation_message,
-            style: context.responsiveTextTheme.current.body3Medium),
+            textAlign: TextAlign.center, style: context.responsiveTextTheme.current.body3Medium),
         onCancel: onCancel,
         onValidate: onValidate);
   }

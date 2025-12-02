@@ -82,7 +82,7 @@ class CheckOutItemWidget extends StatelessWidget {
                   style: context.responsiveTextTheme.current.headLine4SemiBold,
                 ),
                 const ResponsiveGap.s8(),
-                PriceWidget(price: double.parse(item.unitPriceHt), overridePrice: double.parse(item.customPrice)),
+                PriceWidget(price: double.parse(item.unitPriceHt), overridePrice: double.parse(item.customPriceHt)),
                 // Text.rich(TextSpan(
                 //   text: double.parse(item.unitPriceHt).formatAsPrice(),
                 //   style: context.responsiveTextTheme.current.body3Medium.copyWith(),
@@ -115,7 +115,7 @@ class CheckOutItemWidget extends StatelessWidget {
                         style: context.responsiveTextTheme.current.bodyXSmall.copyWith(color: Colors.grey[500]),
                         children: <InlineSpan>[
                           TextSpan(
-                            text: ' ${double.parse(item.totalAppliedAmount).formatAsPriceForPrint()}',
+                            text: ' ${double.parse(item.totalAppliedAmountHt).formatAsPriceForPrint()}',
                             style: context.responsiveTextTheme.current.body2Medium
                                 .copyWith(color: Colors.black, fontWeight: FontWeight.bold),
                           ),

@@ -81,7 +81,7 @@ class OrderRepository extends IOrderRepository {
 
   @override
   Future<ResponseInvoice> invoiceDetails(ParamsGetInvoice params) {
-    return invoice_action.getMockInvoiceDetaills(params, client);
+    return invoice_action.getInvoiceDetails(params, client);
   }
 
   @override

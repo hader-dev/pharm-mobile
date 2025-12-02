@@ -30,17 +30,19 @@ class _LoginFormSectionState extends State<LoginFormSection> {
           child: Column(
             children: [
               CustomTextField(
-                fieldKey: state.emailFieldKey,
-                label: '${context.translation!.email}*',
-                controller: state.emailController,
-                verticalPadding: context.responsiveAppSizeTheme.current.p6,
-                state: FieldState.normal,
-                formatters: [
-                  FilteringTextInputFormatter.deny(RegExp(r'\s')),
-                ],
-                keyBoadType: TextInputType.emailAddress,
-                validationFunc: (value) => validateIsEmail(value?.trim(), context.translation!),
-              ),
+                  fieldKey: state.emailFieldKey,
+                  label: '${context.translation!.email}*',
+                  controller: state.emailController,
+                  verticalPadding: context.responsiveAppSizeTheme.current.p6,
+                  state: FieldState.normal,
+                  formatters: [
+                    FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                  ],
+                  keyBoadType: TextInputType.emailAddress,
+                  validationFunc: (value) {
+                    if (value == null || value.isEmpty) return context.translation!.feedback_field_required;
+                    if (value != null && value.isNotEmpty) return validateIsEmail(value?.trim(), context.translation!);
+                  }),
               CustomTextField(
                 label: '${context.translation!.password}*',
                 controller: state.passwordController,
@@ -59,6 +61,7 @@ class _LoginFormSectionState extends State<LoginFormSection> {
                 state: FieldState.normal,
                 verticalPadding: context.responsiveAppSizeTheme.current.p6,
                 validationFunc: (value) {
+                  if (value == null || value.isEmpty) return context.translation!.feedback_field_required;
                   final trimmedValue = value?.trim();
                   if ((trimmedValue == null || trimmedValue.isEmpty) && state.emailController.text.isNotEmpty) {
                     return context.translation!.feedback_field_required;

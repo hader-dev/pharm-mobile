@@ -32,6 +32,8 @@ class OrderDetailsModel extends BaseOrderModel {
     super.totalAppliedAmount,
     required super.totalAmountExclTax,
     required super.totalAmountInclTax,
+    required super.totalAppliedAmountHt,
+    required super.totalAppliedAmountTtc,
     required this.latitude,
     required this.longitude,
     required this.clientCompanyId,
@@ -76,6 +78,8 @@ class OrderDetailsModel extends BaseOrderModel {
       orderStatusHistories: [],
       clientCompany: Company.empty(),
       sellerCompany: Company.empty(),
+      totalAppliedAmountHt: 0.0,
+      totalAppliedAmountTtc: 0.0,
     );
   }
 }
@@ -84,10 +88,12 @@ class OrderItem {
   final String id;
   final double totalAmountTtc;
   final double totalAmountHt;
+  final double appliedAmountTtc;
+  final double appliedAmountHt;
   final double tvaPercentage;
   final double unitPriceHt;
   final double unitPriceTtc;
-  final double customPrice;
+  final double customPriceHt;
   final DateTime createdAt;
   final DateTime updatedAt;
   final String? medicineCatalogId;
@@ -97,11 +103,12 @@ class OrderItem {
   final dynamic lotNumber;
   final dynamic expirationDate;
   final double margin;
-  final double discountAmount;
+  final double discountAmountHt;
   final int packageSize;
   final String orderId;
   final double? unitPriceApplied;
-  final double? totalAppliedAmount;
+  final double? totalAppliedAmountHt;
+  final double? totalAppliedAmountTtc;
 
   final String? imageUrl;
 
@@ -112,10 +119,13 @@ class OrderItem {
     this.note,
     this.unitPriceApplied,
     required this.totalAmountTtc,
-    required this.totalAppliedAmount,
+    required this.totalAppliedAmountHt,
+    required this.totalAppliedAmountTtc,
     required this.totalAmountHt,
     required this.tvaPercentage,
     required this.unitPriceHt,
+    required this.appliedAmountHt,
+    required this.appliedAmountTtc,
     required this.unitPriceTtc,
     required this.createdAt,
     required this.updatedAt,
@@ -127,10 +137,10 @@ class OrderItem {
     required this.lotNumber,
     required this.expirationDate,
     required this.margin,
-    required this.discountAmount,
+    required this.discountAmountHt,
     required this.orderId,
     this.imageUrl,
-    this.customPrice = 0.0,
+    this.customPriceHt = 0.0,
   });
 
   factory OrderItem.empty() {
@@ -146,89 +156,80 @@ class OrderItem {
       medicineCatalogId: null,
       paraPharmCatalogId: null,
       quantity: 0,
-      totalAppliedAmount: 0.0,
+      totalAppliedAmountHt: 0.0,
       packageSize: 0,
       designation: null,
       lotNumber: null,
       expirationDate: null,
       margin: 0.0,
-      discountAmount: 0.0,
+      discountAmountHt: 0.0,
       orderId: '',
       imageUrl: null,
       note: null,
-    );
-  }
-
-  factory OrderItem.mock() {
-    return OrderItem(
-      id: 'item_001',
-      totalAmountTtc: 132.00,
-      totalAmountHt: 120.00,
-      tvaPercentage: 10.0,
-      unitPriceHt: 12.00,
-      totalAppliedAmount: 13.20,
-      packageSize: 10,
-      unitPriceTtc: 13.20,
-      createdAt: DateTime.now().subtract(Duration(days: 10)),
-      updatedAt: DateTime.now(),
-      medicineCatalogId: 'med_123',
-      paraPharmCatalogId: null,
-      quantity: 10,
-      designation: 'Mock Medicine',
-      lotNumber: 'LOT2025A',
-      expirationDate: DateTime.now().add(Duration(days: 365)),
-      margin: 5.0,
-      discountAmount: 10.0,
-      orderId: 'order_001',
-      imageUrl: 'https://example.com/product.jpg',
-      note: 'Urgent delivery',
+      appliedAmountHt: 0.0,
+      appliedAmountTtc: 0.0,
+      totalAppliedAmountTtc: 0.0,
+      unitPriceApplied: 0.0,
+      customPriceHt: 0.0,
     );
   }
 
   OrderItem copyWith({
     String? id,
+    String? note,
+    double? unitPriceApplied,
     double? totalAmountTtc,
+    double? totalAppliedAmountHt,
+    double? totalAppliedAmountTtc,
     double? totalAmountHt,
     double? tvaPercentage,
     double? unitPriceHt,
+    double? appliedAmountHt,
+    double? appliedAmountTtc,
     double? unitPriceTtc,
     DateTime? createdAt,
     DateTime? updatedAt,
     String? medicineCatalogId,
-    String? parapharmCatalogId,
+    String? paraPharmCatalogId,
     int? quantity,
-    dynamic designation,
+    String? designation,
+    int? packageSize,
     dynamic lotNumber,
     dynamic expirationDate,
     double? margin,
-    double? discountAmount,
+    double? discountAmountHt,
     String? orderId,
     String? imageUrl,
-    int? packageSize,
-    String? note,
+    double? customPriceHt = 0.0,
   }) {
     return OrderItem(
-        id: id ?? this.id,
-        packageSize: packageSize ?? this.packageSize,
-        totalAmountTtc: totalAmountTtc ?? this.totalAmountTtc,
-        totalAmountHt: totalAmountHt ?? this.totalAmountHt,
-        tvaPercentage: tvaPercentage ?? this.tvaPercentage,
-        unitPriceHt: unitPriceHt ?? this.unitPriceHt,
-        unitPriceTtc: unitPriceTtc ?? this.unitPriceTtc,
-        createdAt: createdAt ?? this.createdAt,
-        updatedAt: updatedAt ?? this.updatedAt,
-        medicineCatalogId: medicineCatalogId ?? this.medicineCatalogId,
-        paraPharmCatalogId: parapharmCatalogId ?? paraPharmCatalogId,
-        quantity: quantity ?? this.quantity,
-        designation: designation ?? this.designation,
-        lotNumber: lotNumber ?? this.lotNumber,
-        expirationDate: expirationDate ?? this.expirationDate,
-        margin: margin ?? this.margin,
-        discountAmount: discountAmount ?? this.discountAmount,
-        orderId: orderId ?? this.orderId,
-        imageUrl: imageUrl ?? this.imageUrl,
-        note: note ?? this.note,
-        totalAppliedAmount: totalAppliedAmount);
+      id: id ?? this.id,
+      note: note ?? this.note,
+      unitPriceApplied: unitPriceApplied ?? this.unitPriceApplied,
+      totalAmountTtc: totalAmountTtc ?? this.totalAmountTtc,
+      totalAppliedAmountHt: totalAppliedAmountHt ?? this.totalAppliedAmountHt,
+      totalAppliedAmountTtc: totalAppliedAmountTtc ?? this.totalAppliedAmountTtc,
+      totalAmountHt: totalAmountHt ?? this.totalAmountHt,
+      tvaPercentage: tvaPercentage ?? this.tvaPercentage,
+      unitPriceHt: unitPriceHt ?? this.unitPriceHt,
+      appliedAmountHt: appliedAmountHt ?? this.appliedAmountHt,
+      appliedAmountTtc: appliedAmountTtc ?? this.appliedAmountTtc,
+      unitPriceTtc: unitPriceTtc ?? this.unitPriceTtc,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      medicineCatalogId: medicineCatalogId ?? this.medicineCatalogId,
+      paraPharmCatalogId: paraPharmCatalogId ?? this.paraPharmCatalogId,
+      quantity: quantity ?? this.quantity,
+      designation: designation ?? this.designation,
+      packageSize: packageSize ?? this.packageSize,
+      lotNumber: lotNumber ?? this.lotNumber,
+      expirationDate: expirationDate ?? this.expirationDate,
+      margin: margin ?? this.margin,
+      discountAmountHt: discountAmountHt ?? this.discountAmountHt,
+      orderId: orderId ?? this.orderId,
+      imageUrl: imageUrl ?? this.imageUrl,
+      customPriceHt: customPriceHt ?? this.customPriceHt,
+    );
   }
 }
 

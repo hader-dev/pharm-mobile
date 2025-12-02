@@ -76,10 +76,14 @@ class VendorHomeWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        title,
-                        textAlign: TextAlign.center,
-                        style: context.responsiveTextTheme.current.headLine3SemiBold,
+                      ConstrainedBox(
+                        constraints: const BoxConstraints(maxWidth: 200),
+                        child: Text(
+                          title,
+                          textAlign: TextAlign.center,
+                          overflow: TextOverflow.ellipsis,
+                          style: context.responsiveTextTheme.current.headLine3SemiBold,
+                        ),
                       ),
                       const ResponsiveGap.s8(),
                       IntrinsicWidth(

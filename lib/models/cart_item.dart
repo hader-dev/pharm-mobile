@@ -48,24 +48,26 @@ class CartItemModel {
   final String tvaPercentage;
   final String unitPriceHt;
   final String unitPriceTtc;
-  final String customPrice;
   final DateTime createdAt;
   final DateTime updatedAt;
   final String? medicinesCatalogId;
-  final String appliedAmount;
-  final String totalAppliedAmount;
   final String? paraPharmCatalogId;
   final int quantity;
-  final int packageSize;
   final String designation;
   final dynamic lotNumber;
   final dynamic expirationDate;
   final String margin;
-  final String discountAmount;
+  final String discountAmountHt;
+  final int packageSize;
+  final String customPriceHt;
+  final String appliedAmountHt;
+  final String appliedAmountTtc;
+  final String totalAppliedAmountHt;
+  final String totalAppliedAmountTtc;
   final String buyerCompanyId;
   final String sellerCompanyId;
   final int medicineCatalogStockQty;
-  final int parapharmCatalogStockQty;
+  final int paraPharmCatalogStockQty;
   final BaseCompany sellerCompany;
   final ImageModel? image;
   final int maxOrderQuantity;
@@ -74,8 +76,10 @@ class CartItemModel {
   CartItemModel({
     this.image,
     required this.id,
-    required this.totalAppliedAmount,
-    required this.appliedAmount,
+    required this.totalAppliedAmountHt,
+    required this.totalAppliedAmountTtc,
+    required this.appliedAmountHt,
+    required this.appliedAmountTtc,
     required this.maxOrderQuantity,
     required this.minOrderQuantity,
     required this.totalAmountTtc,
@@ -92,14 +96,14 @@ class CartItemModel {
     required this.lotNumber,
     required this.expirationDate,
     required this.margin,
-    required this.discountAmount,
+    required this.discountAmountHt,
     required this.buyerCompanyId,
     required this.sellerCompanyId,
     required this.packageSize,
     this.medicineCatalogStockQty = 0,
-    this.parapharmCatalogStockQty = 0,
+    this.paraPharmCatalogStockQty = 0,
     required this.sellerCompany,
-    this.customPrice = '0',
+    this.customPriceHt = '0',
   });
 
   int get packageQuantity {
@@ -125,7 +129,8 @@ class CartItemModel {
       packageSize: packageSize,
       id: json['id'],
       maxOrderQuantity: maxOrderQuantity,
-      totalAppliedAmount: json['totalAppliedAmount'] ?? "0",
+      totalAppliedAmountHt: json['totalAppliedAmountHt'] ?? "0",
+      totalAppliedAmountTtc: json['totalAppliedAmountTtc'] ?? "0",
       minOrderQuantity: minOrderQuantity,
       totalAmountTtc: json['totalAmountTtc'],
       totalAmountHt: json['totalAmountHt'],
@@ -141,79 +146,89 @@ class CartItemModel {
       lotNumber: json['lotNumber'],
       expirationDate: json['expirationDate'],
       margin: json['margin'],
-      discountAmount: json['discountAmount'],
+      discountAmountHt: json['discountAmountHt'],
       buyerCompanyId: json['buyerCompanyId'],
       sellerCompanyId: json['sellerCompanyId'],
-      appliedAmount: json['appliedAmount'] ?? "0",
+      appliedAmountHt: json['appliedAmountHt'] ?? "0",
+      appliedAmountTtc: json['appliedAmountTtc'] ?? "0",
       medicineCatalogStockQty: json['medicineCatalog']?['actualQuantity'] ?? 0,
-      parapharmCatalogStockQty: json['parapharmCatalog']?['actualQuantity'] ?? 0,
+      paraPharmCatalogStockQty: json['parapharmCatalog']?['actualQuantity'] ?? 0,
       sellerCompany: BaseCompany.fromJson(json['sellerCompany']),
       image: thumbnailImage != null ? ImageModel.fromJson(thumbnailImage) : null,
-      customPrice: json['customPrice'] ?? '0',
+      customPriceHt: json['customPriceHt'] ?? '0',
     );
   }
-  CartItemModel copyWith(
-      {String? id,
-      String? totalAmountTtc,
-      String? totalAmountHt,
-      String? tvaPercentage,
-      String? unitPriceHt,
-      String? unitPriceTtc,
-      DateTime? createdAt,
-      DateTime? updatedAt,
-      String? medicinesCatalogId,
-      dynamic parapharmCatalogId,
-      int? quantity,
-      String? designation,
-      dynamic lotNumber,
-      dynamic expirationDate,
-      String? margin,
-      String? discountAmount,
-      String? buyerCompanyId,
-      String? sellerCompanyId,
-      MedicinesCatalog? medicinesCatalog,
-      dynamic parapharmCatalog,
-      BaseCompany? sellerCompany,
-      String? appliedAmount,
-      String? customPrice,
-      int? packageSize}) {
+  CartItemModel copyWith({
+    String? id,
+    String? totalAmountTtc,
+    String? totalAmountHt,
+    String? tvaPercentage,
+    String? unitPriceHt,
+    String? unitPriceTtc,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    String? medicinesCatalogId,
+    String? paraPharmCatalogId,
+    int? quantity,
+    String? designation,
+    dynamic lotNumber,
+    dynamic expirationDate,
+    String? margin,
+    String? discountAmountHt,
+    int? packageSize,
+    String? customPriceHt,
+    String? appliedAmountHt,
+    String? appliedAmountTtc,
+    String? totalAppliedAmountHt,
+    String? totalAppliedAmountTtc,
+    String? buyerCompanyId,
+    String? sellerCompanyId,
+    int? medicineCatalogStockQty,
+    int? paraPharmCatalogStockQty,
+    BaseCompany? sellerCompany,
+    ImageModel? image,
+    int? maxOrderQuantity,
+    int? minOrderQuantity,
+  }) {
     return CartItemModel(
-        packageSize: packageSize ?? this.packageSize,
-        id: id ?? this.id,
-        totalAmountTtc: totalAmountTtc ?? this.totalAmountTtc,
-        totalAmountHt: totalAmountHt ?? this.totalAmountHt,
-        tvaPercentage: tvaPercentage ?? this.tvaPercentage,
-        unitPriceHt: unitPriceHt ?? this.unitPriceHt,
-        unitPriceTtc: unitPriceTtc ?? this.unitPriceTtc,
-        createdAt: createdAt ?? this.createdAt,
-        updatedAt: updatedAt ?? this.updatedAt,
-        medicinesCatalogId: medicinesCatalogId ?? this.medicinesCatalogId,
-        paraPharmCatalogId: parapharmCatalogId ?? paraPharmCatalogId,
-        quantity: quantity ?? this.quantity,
-        designation: designation ?? this.designation,
-        lotNumber: lotNumber ?? this.lotNumber,
-        expirationDate: expirationDate ?? this.expirationDate,
-        margin: margin ?? this.margin,
-        discountAmount: discountAmount ?? this.discountAmount,
-        buyerCompanyId: buyerCompanyId ?? this.buyerCompanyId,
-        sellerCompanyId: sellerCompanyId ?? this.sellerCompanyId,
-        sellerCompany: sellerCompany ?? this.sellerCompany,
-        maxOrderQuantity: maxOrderQuantity,
-        minOrderQuantity: minOrderQuantity,
-        appliedAmount: appliedAmount ?? this.appliedAmount,
-        totalAppliedAmount: totalAppliedAmount,
-        customPrice: customPrice ?? this.customPrice,
-        image: image);
+      id: id ?? this.id,
+      totalAmountTtc: totalAmountTtc ?? this.totalAmountTtc,
+      totalAmountHt: totalAmountHt ?? this.totalAmountHt,
+      tvaPercentage: tvaPercentage ?? this.tvaPercentage,
+      unitPriceHt: unitPriceHt ?? this.unitPriceHt,
+      unitPriceTtc: unitPriceTtc ?? this.unitPriceTtc,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      medicinesCatalogId: medicinesCatalogId ?? this.medicinesCatalogId,
+      paraPharmCatalogId: paraPharmCatalogId ?? this.paraPharmCatalogId,
+      quantity: quantity ?? this.quantity,
+      designation: designation ?? this.designation,
+      lotNumber: lotNumber ?? this.lotNumber,
+      expirationDate: expirationDate ?? this.expirationDate,
+      margin: margin ?? this.margin,
+      discountAmountHt: discountAmountHt ?? this.discountAmountHt,
+      packageSize: packageSize ?? this.packageSize,
+      customPriceHt: customPriceHt ?? this.customPriceHt,
+      appliedAmountHt: appliedAmountHt ?? this.appliedAmountHt,
+      appliedAmountTtc: appliedAmountTtc ?? this.appliedAmountTtc,
+      totalAppliedAmountHt: totalAppliedAmountHt ?? this.totalAppliedAmountHt,
+      totalAppliedAmountTtc: totalAppliedAmountTtc ?? this.totalAppliedAmountTtc,
+      buyerCompanyId: buyerCompanyId ?? this.buyerCompanyId,
+      sellerCompanyId: sellerCompanyId ?? this.sellerCompanyId,
+      medicineCatalogStockQty: medicineCatalogStockQty ?? this.medicineCatalogStockQty,
+      paraPharmCatalogStockQty: paraPharmCatalogStockQty ?? this.paraPharmCatalogStockQty,
+      sellerCompany: sellerCompany ?? this.sellerCompany,
+      image: image ?? this.image,
+      maxOrderQuantity: maxOrderQuantity ?? this.maxOrderQuantity,
+      minOrderQuantity: minOrderQuantity ?? this.minOrderQuantity,
+    );
   }
 
   Map<String, num> getTotalPrice() {
-    num tAppliedAmount = num.parse(totalAppliedAmount);
-    num tHtPrice = num.parse(appliedAmount);
-
-    num totalHtPrice = (tHtPrice > 0 ? tHtPrice : num.parse(unitPriceHt)) * quantity;
-
-    num totalTTCPrice = tAppliedAmount;
-    return <String, num>{"totalHtPrice": totalHtPrice, "totalTTCPrice": totalTTCPrice};
+    return <String, num>{
+      "totalHtPrice": double.parse(appliedAmountHt) * quantity,
+      "totalTTCPrice": double.parse(appliedAmountTtc) * quantity
+    };
   }
 }
 

@@ -6,8 +6,7 @@ import 'package:hader_pharm_mobile/repositories/remote/order/response/order_resp
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/urls.dart';
 
-Future<OrderResponse> getOrders(
-    ParamsGetOrder params, INetworkService client) async {
+Future<OrderResponse> getOrders(ParamsGetOrder params, INetworkService client) async {
   final Map<String, Object> queryParams = {
     'limit': params.limit.toString(),
     'offset': params.offset.toString(),
@@ -53,12 +52,4 @@ Future<OrderResponse> getOrders(
     debugPrintStack(stackTrace: stack);
     return OrderResponse(totalItems: 0, data: []);
   }
-}
-
-Future<OrderResponse> getMockOrders(
-    Map<String, String> queryParams, INetworkService client) async {
-  return OrderResponse(totalItems: 2, data: [
-    BaseOrderModel.mock(),
-    BaseOrderModel.mock(),
-  ]);
 }

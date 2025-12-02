@@ -84,7 +84,7 @@ class OrderItemWidgetV2 extends StatelessWidget {
                 const ResponsiveGap.s8(),
                 PriceWidget(
                   price: item.unitPriceHt,
-                  overridePrice: item.customPrice,
+                  overridePrice: item.appliedAmountHt,
                   quantity: item.quantity,
                 ),
                 const Spacer(),
@@ -99,7 +99,7 @@ class OrderItemWidgetV2 extends StatelessWidget {
                         style: context.responsiveTextTheme.current.bodyXSmall.copyWith(color: Colors.grey[500]),
                         children: <InlineSpan>[
                           TextSpan(
-                            text: ' ${(item.totalAppliedAmount ?? item.totalAmountHt).formatAsPriceForPrint()}',
+                            text: ' ${(item.totalAppliedAmountHt ?? item.totalAmountHt).formatAsPriceForPrint()}',
                             style: context.responsiveTextTheme.current.body2Medium
                                 .copyWith(color: Colors.black, fontWeight: FontWeight.bold),
                           ),

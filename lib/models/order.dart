@@ -4,6 +4,8 @@ class BaseOrderModel {
   final int status;
   final double totalAmountExclTax;
   final double totalAmountInclTax;
+  final double totalAppliedAmountHt;
+  final double totalAppliedAmountTtc;
   final int? paymentMethod;
   final int? invoiceType;
   final String deliveryAddress;
@@ -23,6 +25,8 @@ class BaseOrderModel {
     required this.status,
     required this.totalAmountExclTax,
     required this.totalAmountInclTax,
+    required this.totalAppliedAmountHt,
+    required this.totalAppliedAmountTtc,
     required this.paymentMethod,
     required this.invoiceType,
     required this.createdAt,
@@ -40,6 +44,8 @@ class BaseOrderModel {
       discount: json['discount'] != null ? double.parse(json['discount']) : 0.0,
       totalAmountExclTax: json['totalAmountHt'] != null ? double.parse(json['totalAmountHt']) : 0.0,
       totalAmountInclTax: json['totalAmountTtc'] != null ? double.parse(json['totalAmountTtc']) : 0.0,
+      totalAppliedAmountHt: json['totalAppliedAmountHt'] != null ? double.parse(json['totalAppliedAmountHt']) : 0.0,
+      totalAppliedAmountTtc: json['totalAppliedAmountTtc'] != null ? double.parse(json['totalAppliedAmountTtc']) : 0.0,
       paymentMethod: json['paymentMethod'],
       deliveryAddress: json['deliveryAddress'],
       invoiceType: json['invoiceType'],
@@ -64,24 +70,10 @@ class BaseOrderModel {
       updatedAt: DateTime.fromMillisecondsSinceEpoch(0),
       discount: 0.0,
       sellerCompanyName: null,
-    );
-  }
-
-  factory BaseOrderModel.mock() {
-    return BaseOrderModel(
-      id: 'order_001',
-      status: 1,
-      displayId: 'order_001',
-      totalAmountExclTax: 1200.50,
-      totalAmountInclTax: 1320.55,
-      paymentMethod: 2,
-      invoiceType: 1,
-      deliveryAddress: '456 Example Ave, Mock City',
-      createdAt: DateTime.now().subtract(Duration(days: 15)),
-      updatedAt: DateTime.now(),
-      discount: 50.00,
-      clientCompanyName: 'Mock Client Co.',
-      sellerCompanyName: 'Mock Seller Co.',
+      clientCompanyName: null,
+      totalAppliedAmountHt: 0.0,
+      totalAppliedAmountTtc: 0.0,
+      totalAppliedAmount: 0.0,
     );
   }
 }
