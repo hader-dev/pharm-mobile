@@ -10,7 +10,7 @@ import 'package:hader_pharm_mobile/repositories/remote/order/response/invoice_re
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/urls.dart';
 
-Future<ResponseInvoice> getInvoiceDetaills(ParamsGetInvoice params, INetworkService client) async {
+Future<ResponseInvoice> getInvoiceDetails(ParamsGetInvoice params, INetworkService client) async {
   var decodedResponse = await client.sendRequest(() => client.get("${Urls.invoice}/${params.orderId}"));
 
   debugPrint("invoice details: $decodedResponse");
