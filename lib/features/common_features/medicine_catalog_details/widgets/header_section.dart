@@ -20,14 +20,10 @@ class HeaderSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    MedicineCatalogModel medicineCatalogData =
-        BlocProvider.of<MedicineDetailsCubit>(context)
-            .state
-            .medicineCatalogData;
+    MedicineCatalogModel medicineCatalogData = BlocProvider.of<MedicineDetailsCubit>(context).state.medicineCatalogData;
     return Padding(
       padding: EdgeInsets.symmetric(
-          vertical: context.responsiveAppSizeTheme.current.p16,
-          horizontal: context.responsiveAppSizeTheme.current.p12),
+          vertical: context.responsiveAppSizeTheme.current.p16, horizontal: context.responsiveAppSizeTheme.current.p12),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,8 +37,7 @@ class HeaderSection extends StatelessWidget {
           ),
           const ResponsiveGap.s12(),
           Text(medicineCatalogData.medicine.dci,
-              style: context.responsiveTextTheme.current.headLine2
-                  .copyWith(fontSize: 23, fontWeight: FontWeight.w600)),
+              style: context.responsiveTextTheme.current.headLine2.copyWith(fontSize: 23, fontWeight: FontWeight.w600)),
           const ResponsiveGap.s12(),
           TrademarkWidgetAlternate(),
         ],
@@ -56,10 +51,7 @@ class TrademarkWidgetAlternate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    MedicineCatalogModel catalogData =
-        BlocProvider.of<MedicineDetailsCubit>(context)
-            .state
-            .medicineCatalogData;
+    MedicineCatalogModel catalogData = BlocProvider.of<MedicineDetailsCubit>(context).state.medicineCatalogData;
 
     return GestureDetector(
       onTap: () {
@@ -69,18 +61,16 @@ class TrademarkWidgetAlternate extends StatelessWidget {
         );
       },
       child: Padding(
-        padding:
-            EdgeInsets.only(right: context.responsiveAppSizeTheme.current.s2),
+        padding: EdgeInsets.only(right: context.responsiveAppSizeTheme.current.s2),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             PriceWidget(
               price: catalogData.unitPriceHt,
               overridePrice: catalogData.computedPrice,
-              mainStyle: context.responsiveTextTheme.current.headLine2.copyWith(
-                  fontWeight: FontWeight.bold, color: AppColors.accent1Shade1),
-              currencyStyle:
-                  context.responsiveTextTheme.current.bodyXXSmall.copyWith(
+              mainStyle: context.responsiveTextTheme.current.headLine2
+                  .copyWith(fontWeight: FontWeight.bold, color: AppColors.accent1Shade1),
+              currencyStyle: context.responsiveTextTheme.current.bodyXXSmall.copyWith(
                 color: AppColors.accent1Shade1,
               ),
             ),
@@ -90,23 +80,26 @@ class TrademarkWidgetAlternate extends StatelessWidget {
                 Container(
                   height: 35,
                   width: 35,
+                  clipBehavior: Clip.antiAlias,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(color: AppColors.bgDisabled, width: 1.5),
                   ),
-                  child:
-                      CachedNetworkImageWithDrawableFallback.withErrorSvgImage(
-                    imageUrl: getItInstance.get<INetworkService>().getFilesPath(
-                        catalogData.company.thumbnailImage?.path ?? ""),
+                  child: CachedNetworkImageWithDrawableFallback.withErrorSvgImage(
+                    imageUrl: getItInstance
+                        .get<INetworkService>()
+                        .getFilesPath(catalogData.company.thumbnailImage?.path ?? ""),
                     fit: BoxFit.cover,
-                    errorImgSize:
-                        context.responsiveAppSizeTheme.current.iconSize14,
+                    errorImgSize: context.responsiveAppSizeTheme.current.iconSize14,
                   ),
                 ),
                 const ResponsiveGap.s8(),
-                Text(catalogData.company.name,
-                    style: context.responsiveTextTheme.current.body3Regular
-                        .copyWith()),
+                Flexible(
+                  child: Text(catalogData.company.name,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                      style: context.responsiveTextTheme.current.body3Regular.copyWith()),
+                ),
               ],
             ),
           ],

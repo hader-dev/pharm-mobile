@@ -19,14 +19,14 @@ import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
-class ParaPharmaWidget2 extends StatelessWidget {
+class ParaPharmaWidgetVertical extends StatelessWidget {
   final BaseParaPharmaCatalogModel paraPharmData;
   final void Function(BaseParaPharmaCatalogModel)? onFavoriteCallback;
   final bool displayTags;
   final bool showQuickAddButton;
   final bool canOrder;
 
-  const ParaPharmaWidget2(
+  const ParaPharmaWidgetVertical(
       {super.key,
       this.displayTags = false,
       this.canOrder = true,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
-import 'package:hader_pharm_mobile/features/common/widgets/medicine_widget_2.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/medicine_widget_horizental.dart';
 import 'package:hader_pharm_mobile/features/common_features/anouncement_details/cubit/announcement_cubit.dart';
 
 class MedicineProductsPage extends StatefulWidget {
@@ -11,8 +11,7 @@ class MedicineProductsPage extends StatefulWidget {
   State<MedicineProductsPage> createState() => _MedicineProductsPageState();
 }
 
-class _MedicineProductsPageState extends State<MedicineProductsPage>
-    with AutomaticKeepAliveClientMixin {
+class _MedicineProductsPageState extends State<MedicineProductsPage> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -48,7 +47,7 @@ class _MedicineProductsPageState extends State<MedicineProductsPage>
                           final medicine = medicines[index];
                           return SizedBox(
                             height: 150,
-                            child: MedicineWidget2(
+                            child: MedicineWidgetHorizontal(
                               hideLikeButton: false,
                               medicineData: medicine,
                               isLiked: medicine.isLiked,

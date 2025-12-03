@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/end_of_load_result_widget.dart';
-import 'package:hader_pharm_mobile/features/common/widgets/para_pharma_widget_1.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/para_pharma_widget_horizontal.dart';
 import 'package:hader_pharm_mobile/features/common_features/anouncement_details/cubit/announcement_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/home.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/market_place.dart';
@@ -17,15 +17,12 @@ class ParapharmaProductsPage extends StatefulWidget {
   State<ParapharmaProductsPage> createState() => _ParapharmaProductsPageState();
 }
 
-class _ParapharmaProductsPageState extends State<ParapharmaProductsPage>
-    with AutomaticKeepAliveClientMixin {
+class _ParapharmaProductsPageState extends State<ParapharmaProductsPage> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    final gCubit = MarketPlaceScreen.marketPlaceScaffoldKey.currentContext!
-        .read<ParaPharmaCubit>();
-    final hCubit =
-        HomeScreen.scaffoldKey.currentContext?.read<ParaPharmaCubit>();
+    final gCubit = MarketPlaceScreen.marketPlaceScaffoldKey.currentContext!.read<ParaPharmaCubit>();
+    final hCubit = HomeScreen.scaffoldKey.currentContext?.read<ParaPharmaCubit>();
 
     return RefreshIndicator(
       onRefresh: () => context.read<AnnouncementCubit>().loadAnnouncement(),
@@ -48,16 +45,14 @@ class _ParapharmaProductsPageState extends State<ParapharmaProductsPage>
                   }
 
                   final bool isLoadingMore = state is LoadingMoreParaPharma;
-                  final bool hasReachedEnd =
-                      state is ParaPharmasLoadLimitReached;
+                  final bool hasReachedEnd = state is ParaPharmasLoadLimitReached;
 
                   return RefreshIndicator(
                     onRefresh: () => cubit.loadAnnouncement(),
                     child: ListView.builder(
                       controller: state.scrollController,
                       physics: const AlwaysScrollableScrollPhysics(),
-                      itemCount: products.length +
-                          (isLoadingMore || hasReachedEnd ? 1 : 0),
+                      itemCount: products.length + (isLoadingMore || hasReachedEnd ? 1 : 0),
                       itemBuilder: (context, index) {
                         if (index < products.length) {
                           final paraPharma = products[index];
@@ -68,22 +63,18 @@ class _ParapharmaProductsPageState extends State<ParapharmaProductsPage>
                                 ? cubit.unlikeParaPharmaCatalog(medicine)
                                 : cubit.likeParaPharmaCatalog(medicine);
 
-                            gCubit.refreshParaPharmaCatalogFavorite(
-                                id, !medicine.isLiked);
-                            hCubit?.refreshParaPharmaCatalogFavorite(
-                                id, !medicine.isLiked);
+                            gCubit.refreshParaPharmaCatalogFavorite(id, !medicine.isLiked);
+                            hCubit?.refreshParaPharmaCatalogFavorite(id, !medicine.isLiked);
                           }
 
-                          return ParaPharmaWidget1(
+                          return ParaPharmaWidgetHorizantal(
                               paraPharmData: paraPharma,
                               isLiked: paraPharma.isLiked,
-                              onFavoriteCallback: (v) =>
-                                  onLikeTapped(v as ParaPharmaCatalogModel));
+                              onFavoriteCallback: (v) => onLikeTapped(v as ParaPharmaCatalogModel));
                         } else {
                           if (isLoadingMore) {
                             return Padding(
-                              padding: EdgeInsets.all(
-                                  context.responsiveAppSizeTheme.current.p16),
+                              padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p16),
                               child: Center(child: CircularProgressIndicator()),
                             );
                           } else if (hasReachedEnd) {

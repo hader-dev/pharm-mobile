@@ -18,7 +18,7 @@ import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
-class ParaPharmaWidget1 extends StatelessWidget {
+class ParaPharmaWidgetHorizantal extends StatelessWidget {
   final BaseParaPharmaCatalogModel paraPharmData;
   final bool canOrder;
   final void Function(BaseParaPharmaCatalogModel)? onFavoriteCallback;
@@ -26,7 +26,7 @@ class ParaPharmaWidget1 extends StatelessWidget {
 
   final bool isLiked;
   final String route;
-  const ParaPharmaWidget1(
+  const ParaPharmaWidgetHorizantal(
       {super.key,
       required this.paraPharmData,
       required this.isLiked,

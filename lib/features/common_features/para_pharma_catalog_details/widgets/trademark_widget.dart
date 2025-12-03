@@ -96,6 +96,7 @@ class TrademarkWidgetAlternate extends StatelessWidget {
                   Container(
                     height: 35,
                     width: 35,
+                    clipBehavior: Clip.antiAlias,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(color: AppColors.bgDisabled, width: 1.5),
@@ -109,7 +110,12 @@ class TrademarkWidgetAlternate extends StatelessWidget {
                     ),
                   ),
                   const ResponsiveGap.s8(),
-                  Text(catalogData.company!.name, style: context.responsiveTextTheme.current.body3Regular.copyWith()),
+                  Flexible(
+                    child: Text(catalogData.company!.name,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                        style: context.responsiveTextTheme.current.body3Regular.copyWith()),
+                  ),
                 ],
               )),
         ],

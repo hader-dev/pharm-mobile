@@ -36,7 +36,7 @@ class ParaPharmaCatalogAppBar extends StatelessWidget implements PreferredSizeWi
         BlocBuilder<ParaPharmaDetailsCubit, ParaPharmaDetailsState>(
           builder: (context, state) {
             final cubit = BlocProvider.of<ParaPharmaDetailsCubit>(context);
-            final gCubit = MarketPlaceScreen.marketPlaceScaffoldKey.currentContext!.read<ParaPharmaCubit>();
+
             final hCubit = HomeScreen.scaffoldKey.currentContext?.read<ParaPharmaCubit>();
 
             final isLiked = cubit.state.paraPharmaCatalogData.isLiked;
@@ -50,12 +50,10 @@ class ParaPharmaCatalogAppBar extends StatelessWidget implements PreferredSizeWi
               onPressed: () {
                 if (isLiked) {
                   cubit.unlikeParaPharma().then((liked) {
-                    gCubit.refreshParaPharmaCatalogFavorite(cubit.state.paraPharmaCatalogData.id, liked);
                     hCubit?.refreshParaPharmaCatalogFavorite(cubit.state.paraPharmaCatalogData.id, liked);
                   });
                 } else {
                   cubit.likeParaPharma().then((liked) {
-                    gCubit.refreshParaPharmaCatalogFavorite(cubit.state.paraPharmaCatalogData.id, liked);
                     hCubit?.refreshParaPharmaCatalogFavorite(cubit.state.paraPharmaCatalogData.id, liked);
                   });
                 }

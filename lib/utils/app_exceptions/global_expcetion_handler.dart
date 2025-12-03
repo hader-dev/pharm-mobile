@@ -12,10 +12,8 @@ import '../enums.dart';
 import 'exceptions.dart';
 
 class GlobalExceptionHandler {
-  static void handle(
-      {dynamic exception, StackTrace? exceptionStackTrace}) async {
+  static void handle({dynamic exception, StackTrace? exceptionStackTrace}) async {
     debugPrintStack(stackTrace: exceptionStackTrace);
-    debugPrint("$exception");
 
     ToastManager toastManager = getItInstance.get<ToastManager>();
     if (exception is SocketException ||
@@ -29,17 +27,14 @@ class GlobalExceptionHandler {
             ].contains(exception.type)) {
       toastManager.showToast(
         type: ToastType.error,
-        message:
-            "Connection problem or timeout. Please check your internet connection.",
+        message: "Connection problem or timeout. Please check your internet connection.",
       );
-    } else if (exception is UnAuthorizedException ||
-        exception is UnAuthenticatedException) {
+    } else if (exception is UnAuthorizedException || exception is UnAuthenticatedException) {
       toastManager.showToast(
         type: ToastType.error,
         message: exception.errorCode != null
             ? ApiErrorCodes.values
-                .firstWhere((e) => e.label == exception.errorCode,
-                    orElse: () => ApiErrorCodes.UNKNOWN)
+                .firstWhere((e) => e.label == exception.errorCode, orElse: () => ApiErrorCodes.UNKNOWN)
                 .errorMessage
             : exception.message,
       );
@@ -52,16 +47,13 @@ class GlobalExceptionHandler {
       toastManager.showToast(
         type: ToastType.error,
         //${exception.message}\n
-        message: exception.errors != null
-            ? exception.errors!.map((e) => e.message).join("\n")
-            : "",
+        message: exception.errors != null ? exception.errors!.map((e) => e.message).join("\n") : "",
       );
     } else {
       if (exception is TemplateException) {
         toastManager.showToast(
           type: ToastType.error,
-          message: (exception).message ??
-              "An unexpected error occurred. Please try again later.",
+          message: (exception).message ?? "An unexpected error occurred. Please try again later.",
         );
       } else {
         toastManager.showToast(

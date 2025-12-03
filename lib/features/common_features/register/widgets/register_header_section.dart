@@ -23,15 +23,13 @@ class RegisterHeaderSection extends StatelessWidget {
           const ResponsiveGap.s24(),
           Text(
             context.translation!.create_account,
-            style: context.responsiveTextTheme.current.headLine1.copyWith(
-                fontSize: context.responsiveAppSizeTheme.current.p24,
-                color: AppColors.accent1Shade1),
+            style: context.responsiveTextTheme.current.headLine1
+                .copyWith(fontSize: context.responsiveAppSizeTheme.current.p24, color: AppColors.accent1Shade1),
           ),
           const ResponsiveGap.s8(),
           Text(
             context.translation!.welcome_back,
-            style: context.responsiveTextTheme.current.body3Regular
-                .copyWith(color: TextColors.ternary.color),
+            style: context.responsiveTextTheme.current.body3Regular.copyWith(color: TextColors.ternary.color),
           ),
           const ResponsiveGap.s24(),
           InkWell(
@@ -42,8 +40,7 @@ class RegisterHeaderSection extends StatelessWidget {
             child: Stack(
               children: [
                 Container(
-                    margin: EdgeInsets.symmetric(
-                        vertical: context.responsiveAppSizeTheme.current.p4),
+                    margin: EdgeInsets.symmetric(vertical: context.responsiveAppSizeTheme.current.p4),
                     clipBehavior: Clip.antiAlias,
                     height: MediaQuery.sizeOf(context).height * 0.2,
                     width: MediaQuery.sizeOf(context).height * 0.2,
@@ -54,13 +51,12 @@ class RegisterHeaderSection extends StatelessWidget {
                     child: state.pickedImage != null
                         ? Image.file(
                             File(state.pickedImage!.path),
-                            fit: BoxFit.fill,
+                            fit: BoxFit.fitWidth,
                           )
                         : Icon(
                             Iconsax.gallery,
                             color: AppColors.accent1Shade1,
-                            size: context
-                                .responsiveAppSizeTheme.current.iconSize25,
+                            size: context.responsiveAppSizeTheme.current.iconSize25,
                           )),
                 Positioned(
                     bottom: context.responsiveAppSizeTheme.current.s4,
@@ -69,9 +65,7 @@ class RegisterHeaderSection extends StatelessWidget {
                       scale: 0.7,
                       child: PrimaryIconButton(
                         icon: Icon(
-                          state.pickedImage != null
-                              ? Iconsax.edit_2
-                              : Iconsax.add,
+                          state.pickedImage != null ? Iconsax.edit_2 : Iconsax.add,
                           color: Colors.white,
                         ),
                         isBordered: true,

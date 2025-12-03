@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/end_of_load_result_widget.dart';
-import 'package:hader_pharm_mobile/features/common/widgets/para_pharma_widget_1.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/para_pharma_widget_horizontal.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_create_order/cubit/create_order_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_marketplace/market_place.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_marketplace/sub_pages/para_pharma/widget/filters_bar.dart';
@@ -83,7 +83,7 @@ class _ParaPharmaProductsPageState extends State<ParaPharmaProductsPage> with Au
                             itemBuilder: (context, index) {
                               if (index < products.length) {
                                 final paraPharma = products[index];
-                                return ParaPharmaWidget1(
+                                return ParaPharmaWidgetHorizantal(
                                   paraPharmData: paraPharma,
                                   onQuickAddCallback: onQuickAddTapped,
                                   isLiked: paraPharma.isLiked,

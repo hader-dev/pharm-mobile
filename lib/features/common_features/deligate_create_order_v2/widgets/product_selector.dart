@@ -8,7 +8,7 @@ import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_bu
 import 'package:hader_pharm_mobile/features/common/decorations/field.dart';
 import 'package:hader_pharm_mobile/features/common/decorations/input.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
-import 'package:hader_pharm_mobile/features/common/widgets/para_pharma_widget_2.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/para_pharma_widget_vertical.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/quantity_section.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_create_order/cubit/create_order_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_create_order/widgets/custom_price_input.dart';
@@ -25,21 +25,18 @@ class OrderProductSelector extends StatelessWidget {
       String filter, List<BaseParaPharmaCatalogModel> values) async {
     return values
         .where((element) =>
-            element.name.toLowerCase().contains(filter.toLowerCase()) ||
-            element.name.toString().contains(filter))
+            element.name.toLowerCase().contains(filter.toLowerCase()) || element.name.toString().contains(filter))
         .toList();
   }
 
-  Widget buildDisplayWidget(
-      BuildContext context, BaseParaPharmaCatalogModel? selectedItem) {
+  Widget buildDisplayWidget(BuildContext context, BaseParaPharmaCatalogModel? selectedItem) {
     return Text(
       selectedItem?.name ?? context.translation!.select_product,
       style: context.responsiveTextTheme.current.body3Regular,
     );
   }
 
-  Widget buildProductCard(
-      BuildContext context, BaseParaPharmaCatalogModel product) {
+  Widget buildProductCard(BuildContext context, BaseParaPharmaCatalogModel product) {
     final cubit = context.read<DeligateCreateOrderCubit>();
     final translation = context.translation!;
 
@@ -48,7 +45,7 @@ class OrderProductSelector extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ParaPharmaWidget2(
+          ParaPharmaWidgetVertical(
             paraPharmData: product,
             displayTags: false,
             showQuickAddButton: false,
@@ -80,8 +77,7 @@ class OrderProductSelector extends StatelessWidget {
               children: [
                 Text(
                   "${cubit.state.totalPrice.toStringAsFixed(2)} ${context.translation!.currency}",
-                  style: context.responsiveTextTheme.current.body2Medium
-                      .copyWith(color: AppColors.accent1Shade1),
+                  style: context.responsiveTextTheme.current.body2Medium.copyWith(color: AppColors.accent1Shade1),
                 ),
                 const Spacer(),
                 Icon(
@@ -103,8 +99,7 @@ class OrderProductSelector extends StatelessWidget {
     );
   }
 
-  bool compareFn(BaseParaPharmaCatalogModel a, BaseParaPharmaCatalogModel b) =>
-      a.id == b.id;
+  bool compareFn(BaseParaPharmaCatalogModel a, BaseParaPharmaCatalogModel b) => a.id == b.id;
 
   @override
   Widget build(BuildContext context) {
@@ -124,26 +119,22 @@ class OrderProductSelector extends StatelessWidget {
                 popupProps: PopupProps.modalBottomSheet(
                   showSearchBox: true,
                   searchFieldProps: TextFieldProps(
-                    decoration: buildInputDecorationCustomFieldStyle(
-                        translation.select_product, FieldState.normal, context),
+                    decoration:
+                        buildInputDecorationCustomFieldStyle(translation.select_product, FieldState.normal, context),
                   ),
                 ),
                 itemAsString: (item) => item.name,
                 dropdownBuilder: buildDisplayWidget,
                 onChanged: (selectedProduct) {
                   if (selectedProduct != null) {
-                    context
-                        .read<DeligateCreateOrderCubit>()
-                        .selectProduct(selectedProduct);
+                    context.read<DeligateCreateOrderCubit>().selectProduct(selectedProduct);
                   }
                 },
                 decoratorProps: DropDownDecoratorProps(
-                  decoration: buildDropdownInputDecoration(
-                      context.translation!.select_product, context),
+                  decoration: buildDropdownInputDecoration(context.translation!.select_product, context),
                 ),
               ),
-              if (state.selectedProduct != null)
-                buildProductCard(context, state.selectedProduct!),
+              if (state.selectedProduct != null) buildProductCard(context, state.selectedProduct!),
             ],
           ),
         );

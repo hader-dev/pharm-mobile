@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart' show getItInstance;
 import 'package:hader_pharm_mobile/config/language_config/resources/app_localizations.dart';
+import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/models/cart_item.dart';
 import 'package:hader_pharm_mobile/models/create_cart_item.dart';
 import 'package:hader_pharm_mobile/models/create_order_model.dart';
@@ -12,6 +13,7 @@ import 'package:hader_pharm_mobile/utils/app_exceptions/exceptions.dart';
 import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler.dart';
 import 'package:hader_pharm_mobile/utils/debounce.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../../config/services/auth/user_manager.dart' show UserManager;
 
@@ -307,7 +309,9 @@ class CartCubit extends Cubit<CartState> {
       emit(state.toPassOrderSuccess());
       return true;
     } catch (e, stack) {
-      debugPrint("$e");
+      GlobalExceptionHandler.handle(
+          exception: RoutingManager.rootNavigatorKey.currentContext!.translation!.feedback_server_error);
+
       debugPrintStack(stackTrace: stack);
       emit(state.toPassOrderError());
       return false;
