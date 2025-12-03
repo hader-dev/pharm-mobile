@@ -52,121 +52,128 @@ class _BaseParaPharmaCatalogDetailsScreenState extends State<BaseParaPharmaCatal
         ? context.responsiveAppSizeTheme.current.deafultQuantityNavbarHeightModifier
         : context.responsiveAppSizeTheme.current.expandedQuantityNavbarHeightModifier;
     return StateProvider(
-      needCartCubit: widget.needCartCubit,
-      tabs: const [],
-      vsync: this,
-      catalogId: widget.paraPharmaCatalogId,
-      child: BlocBuilder<ParaPharmaDetailsCubit, ParaPharmaDetailsState>(
-        builder: (context, state) {
-          if (state is ParaPharmaDetailsLoading) {
-            return Center(child: CircularProgressIndicator());
-          }
-          if (state is ParaPharmaDetailsLoadError) {
-            return const Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                BackButton(
-                  color: AppColors.accent1Shade1,
-                ),
-                Expanded(child: Center(child: EmptyListWidget())),
-              ],
-            );
-          }
-          return Scaffold(
+        needCartCubit: widget.needCartCubit,
+        tabs: const [],
+        vsync: this,
+        catalogId: widget.paraPharmaCatalogId,
+        child: Scaffold(
+            backgroundColor: AppColors.bgWhite,
             appBar: ParaPharmaCatalogAppBar(),
             key: BaseParaPharmaCatalogDetailsScreen.paraPharmaDetailsScaffoldKey,
-            body: SafeArea(
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p16),
-                      child: ConstrainedBox(
-                          constraints:
-                              BoxConstraints(maxHeight: context.responsiveAppSizeTheme.deviceSize.height * 0.45),
-                          child: const ParaPharmaProductPhotoSection()),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                          left: context.responsiveAppSizeTheme.current.p16,
-                          right: context.responsiveAppSizeTheme.current.p16,
-                          bottom: context.responsiveAppSizeTheme.current.p8),
-                      child: Row(
-                        children: [
-                          if (state.paraPharmaCatalogData.category != null)
-                            CustomChip(
-                              label: state.paraPharmaCatalogData.category!.name,
-                              color: AppColors.bgDarken2,
-                            ),
-                          ResponsiveGap.s8(),
-                          if (state.paraPharmaCatalogData.brand != null)
-                            CustomChip(
-                              label: state.paraPharmaCatalogData.brand!.name,
-                              color: AppColors.bgDarken2,
-                            ),
-                        ],
+            resizeToAvoidBottomInset: true,
+            bottomNavigationBar: BlocBuilder<ParaPharmaDetailsCubit, ParaPharmaDetailsState>(
+              builder: (context, state) {
+                return SizedBox(
+                  height: kBottomNavigationBarHeight,
+                  child: widget.canOrder
+                      ? widget.quantitySectionBuilder(state.paraPharmaCatalogData.unitPriceHt)
+                      : const SizedBox.shrink(),
+                );
+              },
+            ),
+            body: SafeArea(child: BlocBuilder<ParaPharmaDetailsCubit, ParaPharmaDetailsState>(
+              builder: (context, state) {
+                if (state is ParaPharmaDetailsLoading) {
+                  return Center(child: CircularProgressIndicator());
+                }
+                if (state is ParaPharmaDetailsLoadError) {
+                  return const Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      BackButton(
+                        color: AppColors.accent1Shade1,
                       ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                          left: context.responsiveAppSizeTheme.current.p16,
-                          right: context.responsiveAppSizeTheme.current.p16,
-                          bottom: context.responsiveAppSizeTheme.current.p8),
-                      child: Text(state.paraPharmaCatalogData.name,
-                          style: context.responsiveTextTheme.current.headLine2
-                              .copyWith(fontSize: 23, fontWeight: FontWeight.w600)),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                          left: context.responsiveAppSizeTheme.current.p16,
-                          right: context.responsiveAppSizeTheme.current.p16,
-                          bottom: context.responsiveAppSizeTheme.current.p10),
-                      child: TrademarkWidgetAlternate(),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                          left: context.responsiveAppSizeTheme.current.p8,
-                          right: context.responsiveAppSizeTheme.current.p8),
-                      child: Html(
-                        data: state.paraPharmaCatalogData.description,
-                        style: {
-                          "body": Style(
-                            fontSize: FontSize(
-                              MediaQuery.of(context).textScaler.scale(
-                                    context.deviceSize.width <= DeviceSizes.largeMobile.width ? 16 : 25,
-                                  ),
-                            ),
-                            lineHeight: LineHeight(1.5),
+                      Expanded(child: Center(child: EmptyListWidget())),
+                    ],
+                  );
+                }
+                return RefreshIndicator(
+                  onRefresh: () =>
+                      context.read<ParaPharmaDetailsCubit>().getParaPharmaCatalogData(widget.paraPharmaCatalogId),
+                  child: SingleChildScrollView(
+                    physics: AlwaysScrollableScrollPhysics(),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p16),
+                          child: ConstrainedBox(
+                              constraints:
+                                  BoxConstraints(maxHeight: context.responsiveAppSizeTheme.deviceSize.height * 0.45),
+                              child: const ParaPharmaProductPhotoSection()),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(
+                              left: context.responsiveAppSizeTheme.current.p16,
+                              right: context.responsiveAppSizeTheme.current.p16,
+                              bottom: context.responsiveAppSizeTheme.current.p8),
+                          child: Row(
+                            children: [
+                              if (state.paraPharmaCatalogData.category != null)
+                                CustomChip(
+                                  label: state.paraPharmaCatalogData.category!.name,
+                                  color: AppColors.bgDarken2,
+                                ),
+                              ResponsiveGap.s8(),
+                              if (state.paraPharmaCatalogData.brand != null)
+                                CustomChip(
+                                  label: state.paraPharmaCatalogData.brand!.name,
+                                  color: AppColors.bgDarken2,
+                                ),
+                            ],
                           ),
-                        },
-                      ),
-                    ),
-                    InfoRowColumn(
-                      data: [
-                        RowColumnDataHolders(
-                            title: context.translation!.brand, value: state.paraPharmaCatalogData.brand!.name),
-                        RowColumnDataHolders(
-                            title: context.translation!.category, value: state.paraPharmaCatalogData.category!.name),
-                        RowColumnDataHolders(
-                            title: context.translation!.packaging, value: state.paraPharmaCatalogData.packaging),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(
+                              left: context.responsiveAppSizeTheme.current.p16,
+                              right: context.responsiveAppSizeTheme.current.p16,
+                              bottom: context.responsiveAppSizeTheme.current.p8),
+                          child: Text(state.paraPharmaCatalogData.name,
+                              style: context.responsiveTextTheme.current.headLine2
+                                  .copyWith(fontSize: 23, fontWeight: FontWeight.w600)),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(
+                              left: context.responsiveAppSizeTheme.current.p16,
+                              right: context.responsiveAppSizeTheme.current.p16,
+                              bottom: context.responsiveAppSizeTheme.current.p10),
+                          child: TrademarkWidgetAlternate(),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(
+                              left: context.responsiveAppSizeTheme.current.p8,
+                              right: context.responsiveAppSizeTheme.current.p8),
+                          child: Html(
+                            data: state.paraPharmaCatalogData.description,
+                            style: {
+                              "body": Style(
+                                fontSize: FontSize(
+                                  MediaQuery.of(context).textScaler.scale(
+                                        context.deviceSize.width <= DeviceSizes.largeMobile.width ? 16 : 25,
+                                      ),
+                                ),
+                                lineHeight: LineHeight(1.5),
+                              ),
+                            },
+                          ),
+                        ),
+                        InfoRowColumn(
+                          data: [
+                            RowColumnDataHolders(
+                                title: context.translation!.brand, value: state.paraPharmaCatalogData.brand!.name),
+                            RowColumnDataHolders(
+                                title: context.translation!.category,
+                                value: state.paraPharmaCatalogData.category!.name),
+                            RowColumnDataHolders(
+                                title: context.translation!.packaging, value: state.paraPharmaCatalogData.packaging),
+                          ],
+                        ),
+                        const ResponsiveGap.s24(),
                       ],
                     ),
-                    const ResponsiveGap.s24(),
-                  ],
-                ),
-              ),
-            ),
-            resizeToAvoidBottomInset: true,
-            bottomNavigationBar: SizedBox(
-              height: kBottomNavigationBarHeight,
-              child: widget.canOrder
-                  ? widget.quantitySectionBuilder(state.paraPharmaCatalogData.unitPriceHt)
-                  : const SizedBox.shrink(),
-            ),
-          );
-        },
-      ),
-    );
+                  ),
+                );
+              },
+            ))));
   }
 }

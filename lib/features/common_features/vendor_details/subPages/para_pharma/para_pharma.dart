@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/search_filter_button.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/end_of_load_result_widget.dart';
-import 'package:hader_pharm_mobile/features/common/widgets/para_pharma_widget_1.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/para_pharma_widget_horizontal.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/search_bar_with_filter.dart';
 import 'package:hader_pharm_mobile/features/common_features/filters/cubit/parapharm/para_medical_filters_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/filters/widgets/pages/para_medical_filters.dart';
@@ -107,7 +107,7 @@ class _ParapharmaPageState extends State<ParapharmaPage> with AutomaticKeepAlive
                         itemBuilder: (context, index) {
                           if (index < paraPharmaProducts.length) {
                             final paraPharma = paraPharmaProducts[index];
-                            return ParaPharmaWidget1(
+                            return ParaPharmaWidgetHorizantal(
                               paraPharmData: paraPharma,
                               onFavoriteCallback: onLikeTapped,
                               isLiked: paraPharma.isLiked,

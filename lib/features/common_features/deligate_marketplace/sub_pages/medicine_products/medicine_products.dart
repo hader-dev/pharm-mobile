@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/end_of_load_result_widget.dart';
-import 'package:hader_pharm_mobile/features/common/widgets/medicine_widget_3.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/medicine_widget_vertical.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_marketplace/market_place.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_marketplace/sub_pages/medicine_products/widget/filters_bar.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/home.dart';
@@ -20,8 +20,7 @@ class MedicineProductsPage extends StatefulWidget {
   State<MedicineProductsPage> createState() => _MedicineProductsPageState();
 }
 
-class _MedicineProductsPageState extends State<MedicineProductsPage>
-    with AutomaticKeepAliveClientMixin {
+class _MedicineProductsPageState extends State<MedicineProductsPage> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     final cubit = BlocProvider.of<MedicineProductsCubit>(context);
@@ -42,30 +41,22 @@ class _MedicineProductsPageState extends State<MedicineProductsPage>
                       return const Center(child: CircularProgressIndicator());
                     }
 
-                    if (state is MedicineProductsLoadingFailed ||
-                        medicines.isEmpty) {
+                    if (state is MedicineProductsLoadingFailed || medicines.isEmpty) {
                       return const Center(child: EmptyListWidget());
                     }
 
                     final bool isLoadingMore = state is MedicineProductsLoading;
-                    final bool hasReachedEnd =
-                        state is MedicinesLoadLimitReached;
+                    final bool hasReachedEnd = state is MedicinesLoadLimitReached;
 
                     void onLikeTapped(BaseMedicineCatalogModel medicine) {
                       final id = medicine.id;
-                      final gCubit = DeligateMarketPlaceScreen
-                          .marketPlaceScaffoldKey.currentContext!
+                      final gCubit = DeligateMarketPlaceScreen.marketPlaceScaffoldKey.currentContext!
                           .read<MedicineProductsCubit>();
-                      final hCubit = HomeScreen.scaffoldKey.currentContext!
-                          .read<MedicineProductsCubit>();
-                      medicine.isLiked
-                          ? cubit.unlikeMedicinesCatalog(id)
-                          : cubit.likeMedicinesCatalog(id);
+                      final hCubit = HomeScreen.scaffoldKey.currentContext!.read<MedicineProductsCubit>();
+                      medicine.isLiked ? cubit.unlikeMedicinesCatalog(id) : cubit.likeMedicinesCatalog(id);
 
-                      gCubit.refreshMedicineCatalogFavorite(
-                          id, !medicine.isLiked);
-                      hCubit.refreshMedicineCatalogFavorite(
-                          id, !medicine.isLiked);
+                      gCubit.refreshMedicineCatalogFavorite(id, !medicine.isLiked);
+                      hCubit.refreshMedicineCatalogFavorite(id, !medicine.isLiked);
                     }
 
                     return RefreshIndicator(
@@ -74,33 +65,25 @@ class _MedicineProductsPageState extends State<MedicineProductsPage>
                         controller: cubit.scrollController,
                         physics: const AlwaysScrollableScrollPhysics(),
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: calculateMarketplaceCrossAxisCount(
-                              context.deviceSize),
-                          crossAxisSpacing: calculateMarketplaceGridSpacing(
-                              context.deviceSize),
-                          mainAxisSpacing: calculateMarketplaceMainAxisSpacing(
-                              context.deviceSize),
-                          childAspectRatio: calculateMarketplaceAspectRatio(
-                              context.deviceSize, context.orientation),
+                          crossAxisCount: calculateMarketplaceCrossAxisCount(context.deviceSize),
+                          crossAxisSpacing: calculateMarketplaceGridSpacing(context.deviceSize),
+                          mainAxisSpacing: calculateMarketplaceMainAxisSpacing(context.deviceSize),
+                          childAspectRatio: calculateMarketplaceAspectRatio(context.deviceSize, context.orientation),
                         ),
-                        itemCount: medicines.length +
-                            (isLoadingMore || hasReachedEnd ? 1 : 0),
+                        itemCount: medicines.length + (isLoadingMore || hasReachedEnd ? 1 : 0),
                         itemBuilder: (context, index) {
                           if (index < medicines.length) {
                             final medicine = medicines[index];
-                            return MedicineWidget3(
+                            return MedicineWidgetVertical(
                               medicineData: medicine,
                               onFavoriteCallback: onLikeTapped,
-                              route:
-                                  RoutingManager.deligateMedicineDetailsScreen,
+                              route: RoutingManager.deligateMedicineDetailsScreen,
                             );
                           } else {
                             if (isLoadingMore) {
                               return Padding(
-                                padding: EdgeInsets.all(
-                                    context.responsiveAppSizeTheme.current.s16),
-                                child:
-                                    Center(child: CircularProgressIndicator()),
+                                padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.s16),
+                                child: Center(child: CircularProgressIndicator()),
                               );
                             } else if (hasReachedEnd) {
                               return const EndOfLoadResultWidget();

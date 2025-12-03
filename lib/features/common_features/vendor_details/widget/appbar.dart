@@ -50,10 +50,12 @@ class VendorDetailsAppBar extends StatelessWidget implements PreferredSizeWidget
               ),
             ),
             const ResponsiveGap.s8(),
-            Text(vendorData.name,
-                overflow: TextOverflow.ellipsis,
-                style: context.responsiveTextTheme.current.headLine4SemiBold
-                    .copyWith(color: AppColors.accent1Shade1, overflow: TextOverflow.ellipsis))
+            Flexible(
+              child: Text(vendorData.name,
+                  overflow: TextOverflow.ellipsis,
+                  style: context.responsiveTextTheme.current.headLine4SemiBold
+                      .copyWith(color: AppColors.accent1Shade1, overflow: TextOverflow.ellipsis)),
+            )
           ]),
         );
       },

@@ -19,69 +19,51 @@ class PharmacyProfilePage extends StatefulWidget {
   State<PharmacyProfilePage> createState() => _PharmacyProfilePageState();
 }
 
-class _PharmacyProfilePageState extends State<PharmacyProfilePage>
-    with AutomaticKeepAliveClientMixin {
+class _PharmacyProfilePageState extends State<PharmacyProfilePage> with AutomaticKeepAliveClientMixin {
   final scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
     super.build(context);
     return Padding(
-      padding: EdgeInsets.symmetric(
-          horizontal: context.responsiveAppSizeTheme.current.p8),
+      padding: EdgeInsets.symmetric(horizontal: context.responsiveAppSizeTheme.current.p8),
       child: Scrollbar(
         controller: scrollController,
         child: Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: context.responsiveAppSizeTheme.current.p8),
+          padding: EdgeInsets.symmetric(horizontal: context.responsiveAppSizeTheme.current.p8),
           child: SingleChildScrollView(
             controller: scrollController,
             physics: const BouncingScrollPhysics(),
-            child: BlocBuilder<CreateCompanyProfileCubit,
-                CreateCompanyProfileState>(
+            child: BlocBuilder<CreateCompanyProfileCubit, CreateCompanyProfileState>(
               builder: (context, state) {
                 return Column(
                   children: [
                     Align(
                         alignment: Alignment.centerLeft,
                         child: Text(context.translation!.logo,
-                            style: context
-                                .responsiveTextTheme.current.body3Medium
+                            style: context.responsiveTextTheme.current.body3Medium
                                 .copyWith(color: TextColors.ternary.color))),
                     Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: context.responsiveAppSizeTheme.current.p24),
+                      padding: EdgeInsets.symmetric(vertical: context.responsiveAppSizeTheme.current.p24),
                       child: InkWell(
                         onTap: () {
-                          BlocProvider.of<CreateCompanyProfileCubit>(context)
-                              .pickGalleryImage();
+                          BlocProvider.of<CreateCompanyProfileCubit>(context).pickGalleryImage();
                         },
                         splashColor: Colors.transparent,
                         child: Stack(
                           children: [
                             Container(
-                                margin: EdgeInsets.symmetric(
-                                    vertical: context
-                                        .responsiveAppSizeTheme.current.p4),
+                                margin: EdgeInsets.symmetric(vertical: context.responsiveAppSizeTheme.current.p4),
                                 clipBehavior: Clip.antiAlias,
                                 height: MediaQuery.sizeOf(context).height * 0.2,
                                 width: MediaQuery.sizeOf(context).height * 0.2,
                                 decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     color: AppColors.bgDarken,
-                                    border:
-                                        Border.all(color: AppColors.bgDarken2)),
-                                child: BlocProvider.of<
-                                                    CreateCompanyProfileCubit>(
-                                                context)
-                                            .pickedImage !=
-                                        null
+                                    border: Border.all(color: AppColors.bgDarken2)),
+                                child: BlocProvider.of<CreateCompanyProfileCubit>(context).pickedImage != null
                                     ? Image.file(
-                                        File(BlocProvider.of<
-                                                    CreateCompanyProfileCubit>(
-                                                context)
-                                            .pickedImage!
-                                            .path),
-                                        fit: BoxFit.fill,
+                                        File(BlocProvider.of<CreateCompanyProfileCubit>(context).pickedImage!.path),
+                                        fit: BoxFit.fitWidth,
                                       )
                                     // : Column(
                                     //     mainAxisAlignment: MainAxisAlignment.center,
@@ -110,23 +92,16 @@ class _PharmacyProfilePageState extends State<PharmacyProfilePage>
                                     : Icon(
                                         Iconsax.gallery,
                                         color: AppColors.accent1Shade1,
-                                        size: context.responsiveAppSizeTheme
-                                            .current.iconSize25,
+                                        size: context.responsiveAppSizeTheme.current.iconSize25,
                                       )),
                             Positioned(
-                                bottom:
-                                    context.responsiveAppSizeTheme.current.s4,
-                                right:
-                                    context.responsiveAppSizeTheme.current.s4 /
-                                        2,
+                                bottom: context.responsiveAppSizeTheme.current.s4,
+                                right: context.responsiveAppSizeTheme.current.s4 / 2,
                                 child: Transform.scale(
                                   scale: 0.7,
                                   child: PrimaryIconButton(
                                     icon: Icon(
-                                      BlocProvider.of<CreateCompanyProfileCubit>(
-                                                      context)
-                                                  .pickedImage !=
-                                              null
+                                      BlocProvider.of<CreateCompanyProfileCubit>(context).pickedImage != null
                                           ? Iconsax.edit_2
                                           : Iconsax.add,
                                       color: Colors.white,
@@ -134,22 +109,14 @@ class _PharmacyProfilePageState extends State<PharmacyProfilePage>
                                     isBordered: true,
                                     borderColor: Colors.white,
                                     onPressed: () {
-                                      BlocProvider.of<
-                                                  CreateCompanyProfileCubit>(
-                                              context)
-                                          .pickGalleryImage();
+                                      BlocProvider.of<CreateCompanyProfileCubit>(context).pickGalleryImage();
                                     },
                                   ),
                                 )),
-                            if (BlocProvider.of<CreateCompanyProfileCubit>(
-                                        context)
-                                    .pickedImage !=
-                                null)
+                            if (BlocProvider.of<CreateCompanyProfileCubit>(context).pickedImage != null)
                               Positioned(
                                 top: context.responsiveAppSizeTheme.current.s4,
-                                right:
-                                    context.responsiveAppSizeTheme.current.s4 /
-                                        2,
+                                right: context.responsiveAppSizeTheme.current.s4 / 2,
                                 child: Transform.scale(
                                   scale: 0.7,
                                   child: PrimaryIconButton(
@@ -161,10 +128,7 @@ class _PharmacyProfilePageState extends State<PharmacyProfilePage>
                                     ),
                                     bgColor: SystemColors.red.primary,
                                     onPressed: () {
-                                      BlocProvider.of<
-                                                  CreateCompanyProfileCubit>(
-                                              context)
-                                          .removeImage();
+                                      BlocProvider.of<CreateCompanyProfileCubit>(context).removeImage();
                                     },
                                   ),
                                 ),
@@ -179,17 +143,12 @@ class _PharmacyProfilePageState extends State<PharmacyProfilePage>
                       state: FieldState.normal,
                       maxLines: 8,
                       validationFunc: () {},
-                      value: BlocProvider.of<CreateCompanyProfileCubit>(context)
-                          .companyData
-                          .description,
+                      value: BlocProvider.of<CreateCompanyProfileCubit>(context).companyData.description,
                       onChanged: (newValue) {
-                        BlocProvider.of<CreateCompanyProfileCubit>(context)
-                            .changeCompanyData(
-                                modifiedData:
-                                    BlocProvider.of<CreateCompanyProfileCubit>(
-                                            context)
-                                        .companyData
-                                        .copyWith(description: newValue));
+                        BlocProvider.of<CreateCompanyProfileCubit>(context).changeCompanyData(
+                            modifiedData: BlocProvider.of<CreateCompanyProfileCubit>(context)
+                                .companyData
+                                .copyWith(description: newValue));
                       },
                     ),
                   ],

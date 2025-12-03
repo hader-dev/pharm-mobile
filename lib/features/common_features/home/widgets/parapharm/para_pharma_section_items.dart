@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hader_pharm_mobile/features/common/widgets/para_pharma_widget_2.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/para_pharma_widget_vertical.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/home.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/market_place.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/cubit/para_pharma_cubit.dart';
@@ -8,8 +8,7 @@ import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../../../config/theme/colors_manager.dart' show TextColors;
-import '../../../../common/shimmers/vertical_product_widget_shimmer.dart'
-    show VerticalProductWidgetShimmer;
+import '../../../../common/shimmers/vertical_product_widget_shimmer.dart' show VerticalProductWidgetShimmer;
 
 class ParaPharmaSectionItems extends StatelessWidget {
   final double minSectionHeight;
@@ -21,8 +20,7 @@ class ParaPharmaSectionItems extends StatelessWidget {
 
     return BlocBuilder<ParaPharmaCubit, ParaPharmaState>(
       builder: (context, state) {
-        ParaPharmaCubit paraPharmaProductsCubit =
-            context.read<ParaPharmaCubit>();
+        ParaPharmaCubit paraPharmaProductsCubit = context.read<ParaPharmaCubit>();
         final items = state.paraPharmaProducts;
 
         if (state is ParaPharmaProductsLoading) {
@@ -46,25 +44,19 @@ class ParaPharmaSectionItems extends StatelessWidget {
           return Center(
               child: Text(context.translation!.no_items_found,
                   textAlign: TextAlign.center,
-                  style:
-                      context.responsiveTextTheme.current.body3Regular.copyWith(
+                  style: context.responsiveTextTheme.current.body3Regular.copyWith(
                     color: TextColors.ternary.color,
                   )));
         }
         void onFavoriteCallback(BaseParaPharmaCatalogModel medicine) {
-          final gCubit = MarketPlaceScreen
-              .marketPlaceScaffoldKey.currentContext!
-              .read<ParaPharmaCubit>();
-          final hCubit =
-              HomeScreen.scaffoldKey.currentContext?.read<ParaPharmaCubit>();
+          final gCubit = MarketPlaceScreen.marketPlaceScaffoldKey.currentContext!.read<ParaPharmaCubit>();
+          final hCubit = HomeScreen.scaffoldKey.currentContext?.read<ParaPharmaCubit>();
           medicine.isLiked
               ? paraPharmaProductsCubit.unlikeParaPharmaCatalog(medicine.id)
               : paraPharmaProductsCubit.likeParaPharmaCatalog(medicine.id);
 
-          gCubit.refreshParaPharmaCatalogFavorite(
-              medicine.id, !medicine.isLiked);
-          hCubit?.refreshParaPharmaCatalogFavorite(
-              medicine.id, !medicine.isLiked);
+          gCubit.refreshParaPharmaCatalogFavorite(medicine.id, !medicine.isLiked);
+          hCubit?.refreshParaPharmaCatalogFavorite(medicine.id, !medicine.isLiked);
         }
 
         return AspectRatio(
@@ -77,9 +69,7 @@ class ParaPharmaSectionItems extends StatelessWidget {
             itemBuilder: (context, index) {
               return SizedBox(
                 width: screenWidth > 768 ? 300 : 250,
-                child: ParaPharmaWidget2(
-                    paraPharmData: items[index],
-                    onFavoriteCallback: onFavoriteCallback),
+                child: ParaPharmaWidgetVertical(paraPharmData: items[index], onFavoriteCallback: onFavoriteCallback),
               );
             },
           ),

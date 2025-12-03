@@ -11,7 +11,7 @@ import 'package:hader_pharm_mobile/features/common/decorations/field.dart';
 import 'package:hader_pharm_mobile/features/common/decorations/input.dart';
 import 'package:hader_pharm_mobile/features/common/image/cached_network_image_with_asset_fallback.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
-import 'package:hader_pharm_mobile/features/common/widgets/para_pharma_widget_2.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/para_pharma_widget_vertical.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/quantity_section.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_create_order/cubit/create_order_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_create_order/widgets/custom_price_input.dart';
@@ -61,7 +61,7 @@ class OrderProductSelector extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ParaPharmaWidget2(
+          ParaPharmaWidgetVertical(
             paraPharmData: product,
             displayTags: false,
             showQuickAddButton: false,

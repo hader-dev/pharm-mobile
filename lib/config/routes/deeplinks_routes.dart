@@ -14,8 +14,7 @@ abstract class DeeplinksRoutes {
       name: deepLinkOrderDetails,
       path: deepLinkOrderDetails,
       builder: (BuildContext context, GoRouterState state) {
-        final orderId =
-            (state.uri.queryParameters['orderId'] ?? state.extra) as String;
+        final orderId = (state.uri.queryParameters['orderId'] ?? state.extra) as String;
         return OrdersDetailsScreen(
           orderId: orderId,
         );

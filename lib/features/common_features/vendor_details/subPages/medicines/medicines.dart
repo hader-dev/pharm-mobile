@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/search_filter_button.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/end_of_load_result_widget.dart';
-import 'package:hader_pharm_mobile/features/common/widgets/medicine_widget_2.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/medicine_widget_horizental.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/search_bar_with_filter.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/medicine_products/cubit/medicine_products_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/medicine_products/widget/search_filter_bottom_sheet.dart';
@@ -95,7 +95,7 @@ class _MedicinesPageState extends State<MedicinesPage> with AutomaticKeepAliveCl
                         shrinkWrap: true,
                         physics: const AlwaysScrollableScrollPhysics(),
                         itemCount: state.medicines.length,
-                        itemBuilder: (context, index) => MedicineWidget2(
+                        itemBuilder: (context, index) => MedicineWidgetHorizontal(
                           medicineData: state.medicines[index],
                           isLiked: state.medicines[index].isLiked,
                           hideLikeButton: false,

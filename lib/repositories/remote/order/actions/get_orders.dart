@@ -11,7 +11,7 @@ Future<OrderResponse> getOrders(ParamsGetOrder params, INetworkService client) a
     'limit': params.limit.toString(),
     'offset': params.offset.toString(),
     'sort[id]': params.sortDirection,
-    if (params.searchQuery != null) 'search[displayId]': params.searchQuery!,
+    if (params.searchQuery != null && params.searchQuery!.isNotEmpty) 'search[displayId]': params.searchQuery!,
   };
 
   if (params.filters.status.isNotEmpty) {

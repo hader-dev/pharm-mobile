@@ -33,7 +33,7 @@ class CancelOrderBottomSheet extends StatelessWidget {
               horizontalPadding: context.responsiveAppSizeTheme.current.p6,
               controller: _reasonController,
               maxLines: 2,
-              maxLength: 10,
+              maxLength: 100,
               validationFunc: (value) {},
               isFilled: false,
               isBorderEnabled: true,

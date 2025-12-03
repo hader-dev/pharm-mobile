@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/end_of_load_result_widget.dart';
-import 'package:hader_pharm_mobile/features/common/widgets/para_pharma_widget_1.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/para_pharma_widget_horizontal.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/market_place.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/cubit/para_pharma_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/cubit/provider.dart';
@@ -30,8 +30,7 @@ class DeligateProductsPage extends StatefulWidget {
   State<DeligateProductsPage> createState() => _DeligateProductsPageState();
 }
 
-class _DeligateProductsPageState extends State<DeligateProductsPage>
-    with AutomaticKeepAliveClientMixin {
+class _DeligateProductsPageState extends State<DeligateProductsPage> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     final cubit = BlocProvider.of<ParaPharmaCubit>(context);
@@ -50,56 +49,42 @@ class _DeligateProductsPageState extends State<DeligateProductsPage>
                   final products = state.paraPharmaProducts;
 
                   final bool isLoadingMore = state is LoadingMoreParaPharma;
-                  final bool hasReachedEnd =
-                      state is ParaPharmasLoadLimitReached;
+                  final bool hasReachedEnd = state is ParaPharmasLoadLimitReached;
 
                   void onLikeTapped(BaseParaPharmaCatalogModel medicine) {
                     final id = medicine.id;
-                    medicine.isLiked
-                        ? cubit.unlikeParaPharmaCatalog(id)
-                        : cubit.likeParaPharmaCatalog(id);
+                    medicine.isLiked ? cubit.unlikeParaPharmaCatalog(id) : cubit.likeParaPharmaCatalog(id);
                   }
 
                   return RefreshIndicator(
                     onRefresh: () => cubit.getParaPharmas(),
-                    child: (state is ParaPharmaProductsLoadingFailed ||
-                            products.isEmpty)
+                    child: (state is ParaPharmaProductsLoadingFailed || products.isEmpty)
                         ? const Center(child: EmptyListWidget())
                         : GridView.builder(
                             controller: state.scrollController,
                             physics: const AlwaysScrollableScrollPhysics(),
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount:
-                                  calculateMarketplaceCrossAxisCount(
-                                      context.deviceSize),
-                              crossAxisSpacing: calculateMarketplaceGridSpacing(
-                                  context.deviceSize),
-                              mainAxisSpacing:
-                                  calculateMarketplaceMainAxisSpacing(
-                                      context.deviceSize),
-                              childAspectRatio: calculateMarketplaceAspectRatio(
-                                  context.deviceSize, context.orientation),
+                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: calculateMarketplaceCrossAxisCount(context.deviceSize),
+                              crossAxisSpacing: calculateMarketplaceGridSpacing(context.deviceSize),
+                              mainAxisSpacing: calculateMarketplaceMainAxisSpacing(context.deviceSize),
+                              childAspectRatio:
+                                  calculateMarketplaceAspectRatio(context.deviceSize, context.orientation),
                             ),
-                            itemCount: products.length +
-                                (isLoadingMore || hasReachedEnd ? 1 : 0),
+                            itemCount: products.length + (isLoadingMore || hasReachedEnd ? 1 : 0),
                             itemBuilder: (context, index) {
                               if (index < products.length) {
                                 final paraPharma = products[index];
-                                return ParaPharmaWidget1(
+                                return ParaPharmaWidgetHorizantal(
                                     paraPharmData: paraPharma,
                                     canOrder: false,
                                     isLiked: paraPharma.isLiked,
-                                    route: RoutingManager
-                                        .deligateParapharmDetailsScreen,
+                                    route: RoutingManager.deligateParapharmDetailsScreen,
                                     onFavoriteCallback: onLikeTapped);
                               } else {
                                 if (isLoadingMore) {
                                   return Padding(
-                                    padding: EdgeInsets.all(context
-                                        .responsiveAppSizeTheme.current.s16),
-                                    child: Center(
-                                        child: CircularProgressIndicator()),
+                                    padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.s16),
+                                    child: Center(child: CircularProgressIndicator()),
                                   );
                                 } else if (hasReachedEnd) {
                                   return const EndOfLoadResultWidget();

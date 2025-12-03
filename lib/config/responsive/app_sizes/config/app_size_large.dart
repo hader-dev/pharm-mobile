@@ -41,5 +41,5 @@ final appSizesLarge = AppSizes(
   iconSize30: 30,
   iconSize48: 48,
   buttonHeight: 40,
-  commonWidgetsRadius: 4,
+  commonWidgetsRadius: 8,
 );

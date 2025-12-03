@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart' show PageController, Curves;
+import 'package:flutter/material.dart' show PageController;
 
 part 'gallery_state.dart';
 
@@ -15,5 +15,11 @@ class GalleryCubit extends Cubit<GalleryState> {
       index,
     );
     emit(SelectedGalleryChanged(selectedGalleryIndex: selectedGalleryIndex));
+  }
+
+  @override
+  Future<void> close() {
+    pageController.dispose();
+    return super.close();
   }
 }

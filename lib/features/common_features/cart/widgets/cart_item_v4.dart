@@ -37,10 +37,11 @@ class CartItemWidgetV4 extends StatelessWidget {
           highlightColor: Colors.transparent,
           hoverColor: Colors.transparent,
           splashColor: Colors.transparent,
-          child: Transform.scale(
-            scale: .95,
-            child: Padding(
-              padding: EdgeInsets.symmetric(vertical: context.responsiveAppSizeTheme.current.p8),
+          child: Padding(
+            padding: EdgeInsets.only(bottom: context.responsiveAppSizeTheme.current.p8),
+            child: Transform.scale(
+              alignment: Alignment.topCenter,
+              scale: .95,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -53,37 +54,35 @@ class CartItemWidgetV4 extends StatelessWidget {
                         height: 90,
                         width: 90,
                         decoration: BoxDecoration(
-                          color: Colors.grey.shade100,
+                          color: const Color.fromARGB(219, 245, 245, 245),
                           border: Border.all(
                             color: const Color.fromARGB(186, 245, 245, 245),
                           ),
                           borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.r6),
                         ),
-                        child: CachedNetworkImageWithDrawableFallback.withErrorAssetImage(
-                            fit: BoxFit.fitWidth,
-                            height: double.infinity,
-                            imageUrl: imageItem,
-                            errorAssetImagePath: DrawableAssetStrings.medicinePlaceHolderImg),
+                        child: CachedNetworkImageWithDrawableFallback.withErrorSvgImage(
+                          fit: BoxFit.fitWidth,
+                          height: double.infinity,
+                          imageUrl: imageItem,
+                        ),
                       ),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Expanded(
-                                  child: Padding(
-                                    padding: EdgeInsets.only(right: context.responsiveAppSizeTheme.current.s16),
-                                    child: Text(
-                                      item.model.designation,
-                                      softWrap: true,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: context.responsiveTextTheme.current.headLine5Medium,
-                                    ),
+                                  child: Text(
+                                    item.model.designation,
+                                    softWrap: true,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: context.responsiveTextTheme.current.headLine5Medium,
                                   ),
                                 ),
                                 Transform.scale(
-                                  alignment: Alignment.centerRight,
+                                  alignment: Alignment.topRight,
                                   scale: .75,
                                   child: PrimaryIconButton(
                                     isBordered: false,
@@ -98,9 +97,7 @@ class CartItemWidgetV4 extends StatelessWidget {
                                 )
                               ],
                             ),
-                            SizedBox(
-                              height: context.responsiveAppSizeTheme.current.p12,
-                            ),
+                            ResponsiveGap.s2(),
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.baseline,
                               textBaseline: TextBaseline.alphabetic,
@@ -125,9 +122,7 @@ class CartItemWidgetV4 extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            SizedBox(
-                              height: context.responsiveAppSizeTheme.current.p10,
-                            ),
+                            ResponsiveGap.s8(),
                             if (double.parse(item.packageQuantityController.text) > 0)
                               Row(
                                 children: [
@@ -139,11 +134,10 @@ class CartItemWidgetV4 extends StatelessWidget {
                                         "${context.translation!.package}${" (${item.packageQuantityController.text})"}",
                                     color: const Color.fromARGB(255, 26, 152, 161).withAlpha(50),
                                   ),
-                                  Spacer()
                                 ],
                               ),
                             ...[
-                              ResponsiveGap.s4(),
+                              ResponsiveGap.s6(),
                               InkWell(
                                 onTap: () => RoutingManager.router
                                     .pushNamed(RoutingManager.vendorDetails, extra: item.model.sellerCompany.id),
@@ -153,9 +147,13 @@ class CartItemWidgetV4 extends StatelessWidget {
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Text(
-                                      item.model.sellerCompany.name,
-                                      style: context.responsiveTextTheme.current.bodySmall,
+                                    ConstrainedBox(
+                                      constraints: BoxConstraints(maxWidth: 100),
+                                      child: Text(
+                                        item.model.sellerCompany.name,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: context.responsiveTextTheme.current.bodySmall,
+                                      ),
                                     ),
                                     Icon(
                                       Icons.keyboard_arrow_right_rounded,

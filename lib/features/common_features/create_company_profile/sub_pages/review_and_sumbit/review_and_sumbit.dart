@@ -18,13 +18,11 @@ class ReviewSubmitPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(
-          horizontal: context.responsiveAppSizeTheme.current.p8),
+      padding: EdgeInsets.symmetric(horizontal: context.responsiveAppSizeTheme.current.p8),
       child: Scrollbar(
         controller: scrollController,
         child: Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: context.responsiveAppSizeTheme.current.p8),
+          padding: EdgeInsets.symmetric(horizontal: context.responsiveAppSizeTheme.current.p8),
           child: SingleChildScrollView(
             controller: scrollController,
             physics: const BouncingScrollPhysics(),
@@ -39,19 +37,12 @@ class ReviewSubmitPage extends StatelessWidget {
                       shape: BoxShape.circle,
                       color: AppColors.bgDarken,
                       border: Border.all(color: AppColors.bgDarken2)),
-                  child: BlocProvider.of<CreateCompanyProfileCubit>(context)
-                              .companyData
-                              .logoPath !=
-                          null
+                  child: BlocProvider.of<CreateCompanyProfileCubit>(context).companyData.logoPath != null
                       ? Image.file(
-                          File(BlocProvider.of<CreateCompanyProfileCubit>(
-                                  context)
-                              .companyData
-                              .logoPath!),
-                          fit: BoxFit.fill,
+                          File(BlocProvider.of<CreateCompanyProfileCubit>(context).companyData.logoPath!),
+                          fit: BoxFit.fitWidth,
                         )
-                      : const Icon(Iconsax.camera,
-                          color: Colors.white, size: 40),
+                      : const Icon(Iconsax.camera, color: Colors.white, size: 40),
                 ),
                 // Container(
                 //   height: 112,
@@ -65,31 +56,23 @@ class ReviewSubmitPage extends StatelessWidget {
                 const ResponsiveGap.s24(),
 
                 // Company Info
-                Text(
-                    BlocProvider.of<CreateCompanyProfileCubit>(context)
-                        .companyData
-                        .companyName,
+                Text(BlocProvider.of<CreateCompanyProfileCubit>(context).companyData.companyName,
                     style: context.responsiveTextTheme.current.headLine2),
 
                 const ResponsiveGap.s4(),
                 Text(
                     CompanyType.values
-                        .where((e) =>
-                            e.id ==
-                            BlocProvider.of<CreateCompanyProfileCubit>(context)
-                                .companyData
-                                .companyType)
+                        .where(
+                            (e) => e.id == BlocProvider.of<CreateCompanyProfileCubit>(context).companyData.companyType)
                         .first
                         .name,
-                    style: context.responsiveTextTheme.current.body1Medium
-                        .copyWith(color: TextColors.ternary.color)),
+                    style: context.responsiveTextTheme.current.body1Medium.copyWith(color: TextColors.ternary.color)),
                 const ResponsiveGap.s12(),
 
                 Text(
                   "${BlocProvider.of<CreateCompanyProfileCubit>(context).companyData.description}.",
                   textAlign: TextAlign.center,
-                  style: context.responsiveTextTheme.current.body2Regular
-                      .copyWith(color: TextColors.ternary.color),
+                  style: context.responsiveTextTheme.current.body2Regular.copyWith(color: TextColors.ternary.color),
                 ),
                 const ResponsiveGap.s24(),
 
@@ -97,27 +80,17 @@ class ReviewSubmitPage extends StatelessWidget {
                 InfoRow(
                     icon: Icons.email,
                     label: context.translation!.email,
-                    dataValue:
-                        BlocProvider.of<CreateCompanyProfileCubit>(context)
-                            .companyData
-                            .email),
+                    dataValue: BlocProvider.of<CreateCompanyProfileCubit>(context).companyData.email),
                 InfoRow(
                     icon: Icons.phone,
                     label: context.translation!.phone_number,
-                    dataValue:
-                        BlocProvider.of<CreateCompanyProfileCubit>(context)
-                            .companyData
-                            .phone),
+                    dataValue: BlocProvider.of<CreateCompanyProfileCubit>(context).companyData.phone),
                 InfoRow(
                     icon: Icons.language,
                     label: context.translation!.website,
-                    dataValue:
-                        BlocProvider.of<CreateCompanyProfileCubit>(context)
-                            .companyData
-                            .website),
+                    dataValue: BlocProvider.of<CreateCompanyProfileCubit>(context).companyData.website),
                 Padding(
-                  padding: EdgeInsets.symmetric(
-                      vertical: context.responsiveAppSizeTheme.current.p16),
+                  padding: EdgeInsets.symmetric(vertical: context.responsiveAppSizeTheme.current.p16),
                   child: Divider(
                     color: StrokeColors.normal.color,
                   ),
@@ -127,22 +100,13 @@ class ReviewSubmitPage extends StatelessWidget {
 
                 InfoRow(
                     label: context.translation!.nis,
-                    dataValue:
-                        BlocProvider.of<CreateCompanyProfileCubit>(context)
-                            .companyData
-                            .nis),
+                    dataValue: BlocProvider.of<CreateCompanyProfileCubit>(context).companyData.nis),
                 InfoRow(
                     label: context.translation!.rc,
-                    dataValue:
-                        BlocProvider.of<CreateCompanyProfileCubit>(context)
-                            .companyData
-                            .rc),
+                    dataValue: BlocProvider.of<CreateCompanyProfileCubit>(context).companyData.rc),
                 InfoRow(
                     label: context.translation!.ai,
-                    dataValue:
-                        BlocProvider.of<CreateCompanyProfileCubit>(context)
-                            .companyData
-                            .ai),
+                    dataValue: BlocProvider.of<CreateCompanyProfileCubit>(context).companyData.ai),
               ],
             ),
           ),

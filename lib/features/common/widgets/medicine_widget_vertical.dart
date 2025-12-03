@@ -20,11 +20,11 @@ import 'package:iconsax/iconsax.dart';
 
 typedef OnFavoriteCallback = void Function(BaseMedicineCatalogModel medicine);
 
-class MedicineWidget3 extends StatelessWidget {
+class MedicineWidgetVertical extends StatelessWidget {
   final BaseMedicineCatalogModel medicineData;
   final OnFavoriteCallback? onFavoriteCallback;
   final String route;
-  const MedicineWidget3(
+  const MedicineWidgetVertical(
       {super.key,
       this.route = RoutingManager.medicineDetailsScreen,
       required this.medicineData,

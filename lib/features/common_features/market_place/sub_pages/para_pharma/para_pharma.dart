@@ -5,7 +5,7 @@ import 'package:hader_pharm_mobile/features/common/shimmers/horizontal_product_w
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/end_of_load_result_widget.dart';
-import 'package:hader_pharm_mobile/features/common/widgets/para_pharma_widget_1.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/para_pharma_widget_horizontal.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/home.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/market_place.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/widgets/quick_add_modal.dart';
@@ -106,7 +106,7 @@ class ParaPharmaProductsPageState extends State<ParaPharmaProductsPage>
                         physics: AlwaysScrollableScrollPhysics(),
                         controller: state.scrollController,
                         children: [
-                          ...state.paraPharmaProducts.map((paraPharma) => ParaPharmaWidget1(
+                          ...state.paraPharmaProducts.map((paraPharma) => ParaPharmaWidgetHorizantal(
                                 paraPharmData: paraPharma,
                                 onFavoriteCallback: onLikeTapped,
                                 onQuickAddCallback: onQuickAddCallback,

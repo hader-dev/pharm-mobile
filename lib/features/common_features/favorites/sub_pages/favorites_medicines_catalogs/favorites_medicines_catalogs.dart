@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
-import 'package:hader_pharm_mobile/features/common/widgets/medicine_widget_2.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/medicine_widget_horizental.dart';
 import 'package:hader_pharm_mobile/features/common_features/favorites/cubit/favorites_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/home.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/market_place.dart';
@@ -48,7 +48,7 @@ class FavoritesMedicinesCatalog extends StatelessWidget {
             itemCount: state.likedMedicinesCatalogs.length,
             itemBuilder: (context, index) => SizedBox(
               height: 150,
-              child: MedicineWidget2(
+              child: MedicineWidgetHorizontal(
                 hideLikeButton: false,
                 onRemoveFromFavorites: () {
                   final id = state.likedMedicinesCatalogs[index].id;
