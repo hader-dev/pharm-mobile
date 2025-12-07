@@ -412,6 +412,6 @@
   "failed_google_signin": "Failed to sign in with Google",
   "getting_info_google": "Getting information from Google",
   "min_qty_to_order": "Min qty to order",
-  "max_qty_to_order": "Max qty to order"
-
+  "max_qty_to_order": "Max qty to order",
+  "unexpected_error": "An unexpected error occurred. Please try again later."
 }

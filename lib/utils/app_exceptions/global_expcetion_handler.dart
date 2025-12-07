@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
+import 'package:hader_pharm_mobile/config/routes/routing_manager.dart' show RoutingManager;
+import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 
 // import 'package:sentry_flutter/sentry_flutter.dart';
@@ -53,12 +55,12 @@ class GlobalExceptionHandler {
       if (exception is TemplateException) {
         toastManager.showToast(
           type: ToastType.error,
-          message: (exception).message ?? "An unexpected error occurred. Please try again later.",
+          message: (exception).message ?? RoutingManager.rootNavigatorKey.currentContext!.translation!.unexpected_error,
         );
       } else {
         toastManager.showToast(
           type: ToastType.error,
-          message: exception,
+          message: RoutingManager.rootNavigatorKey.currentContext!.translation!.unexpected_error,
         );
       }
     }

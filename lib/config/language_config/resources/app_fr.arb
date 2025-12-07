@@ -414,5 +414,6 @@
   "failed_google_signin": "Échec de la connexion avec Google",
   "getting_info_google": "Récupération des informations depuis Google",
   "min_qty_to_order": "Quantité min à commander",
-  "max_qty_to_order": "Quantité max à commander"
+  "max_qty_to_order": "Quantité max à commander",
+  "unexpected_error": "Une erreur inattendue s'est produite. Veuillez réessayer plus tard."
 }
