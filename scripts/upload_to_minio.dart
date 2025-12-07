@@ -1,6 +1,6 @@
 import 'dart:io';
-
-import 'package:flutter/services.dart';
+import 'dart:typed_data';
+import 'dart:ui' as ui;
 import 'package:minio/minio.dart';
 
 Future<void> main(List<String> args) async {
@@ -21,8 +21,8 @@ Future<void> main(List<String> args) async {
   final bucket = args[1];
   final accessKey = args[2];
   final secretKey = args[3];
-  final filePath =
-      "build/app/outputs/apk/${appFlavor ?? "development"}/release/app-${appFlavor ?? "development"}-release.apk";
+  // final filePath = "build/app/outputs/apk/development/release/app-development-release.apk";
+  final filePath = "scripts/hello_world.txt";
 
   final file = File(filePath);
 
