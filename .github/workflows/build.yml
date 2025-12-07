@@ -79,7 +79,7 @@ jobs:
       - name: Upload to Minio
         run: |
           flutter pub add minio
-          dart scripts/upload_to_minio.dart \
+          flutter pub run scripts/upload_to_minio.dart \
             $MINIO_ENDPOINT \
             mobile \
             $MINIO_KEY \
