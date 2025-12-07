@@ -8,77 +8,77 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      # - name: Checkout code
+      #   uses: actions/checkout@v4
 
-      - name: Cache Flutter SDK
-        uses: actions/cache@v3
-        with:
-          path: ~/.flutter
-          key: flutter-sdk-${{ runner.os }}-stable
-          restore-keys: |
-            flutter-sdk-${{ runner.os }}-
+      # - name: Cache Flutter SDK
+      #   uses: actions/cache@v3
+      #   with:
+      #     path: ~/.flutter
+      #     key: flutter-sdk-${{ runner.os }}-stable
+      #     restore-keys: |
+      #       flutter-sdk-${{ runner.os }}-
 
-      - name: Setup Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: '21'
+      # - name: Setup Java
+      #   uses: actions/setup-java@v4
+      #   with:
+      #     distribution: 'temurin'
+      #     java-version: '21'
 
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.35.5'
-          channel: 'stable'
-          cache: false    # disable flutter-action internal caching, we do manual caching below
+      # - name: Setup Flutter
+      #   uses: subosito/flutter-action@v2
+      #   with:
+      #     flutter-version: '3.35.5'
+      #     channel: 'stable'
+      #     cache: false    # disable flutter-action internal caching, we do manual caching below
 
-      - name: Cache Pub packages
-        uses: actions/cache@v3
-        with:
-          path: ~/.pub-cache
-          key: pub-cache-${{ hashFiles('**/pubspec.yaml') }}
-          restore-keys: |
-            pub-cache-
+      # - name: Cache Pub packages
+      #   uses: actions/cache@v3
+      #   with:
+      #     path: ~/.pub-cache
+      #     key: pub-cache-${{ hashFiles('**/pubspec.yaml') }}
+      #     restore-keys: |
+      #       pub-cache-
 
-      - name: Install dependencies
-        run: flutter pub get
+      # - name: Install dependencies
+      #   run: flutter pub get
 
-      - name: Cache Build Output
-        uses: actions/cache@v3
-        with:
-          path: build
-          key: build-cache-${{ hashFiles('**/*.dart', '**/pubspec.yaml') }}
-          restore-keys: |
-            build-cache-
+      # - name: Cache Build Output
+      #   uses: actions/cache@v3
+      #   with:
+      #     path: build
+      #     key: build-cache-${{ hashFiles('**/*.dart', '**/pubspec.yaml') }}
+      #     restore-keys: |
+      #       build-cache-
 
-      - name: Decode Keystore
-        run: |
-          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/app/release-keystore.jks
-        shell: bash
+      # - name: Decode Keystore
+      #   run: |
+      #     echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/app/release-keystore.jks
+      #   shell: bash
 
-      - name: Create key.properties
-        run: |
-          cat <<EOF > android/key.properties
-          storePassword=${{ secrets.KEYSTORE_PASSWORD }}
-          keyPassword=${{ secrets.KEY_PASSWORD }}
-          keyAlias=${{ secrets.KEY_ALIAS }}
-          storeFile=release-keystore.jks
-          EOF
-        shell: bash
+      # - name: Create key.properties
+      #   run: |
+      #     cat <<EOF > android/key.properties
+      #     storePassword=${{ secrets.KEYSTORE_PASSWORD }}
+      #     keyPassword=${{ secrets.KEY_PASSWORD }}
+      #     keyAlias=${{ secrets.KEY_ALIAS }}
+      #     storeFile=release-keystore.jks
+      #     EOF
+      #   shell: bash
 
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
+      # - name: Set up Android SDK
+      #   uses: android-actions/setup-android@v3
 
 
-      - name: Build APK
-        run: flutter build apk --release
+      # - name: Build APK
+      #   run: flutter build apk --flavor development --release
 
-      - name: Build App Bundle
-        run: flutter build appbundle --release
+      # - name: Build App Bundle
+      #   run: flutter build appbundle --release
 
       - name: Upload to Minio
         run: |
-          flutter pub add minio
+          # flutter pub add minio
           dart run scripts/upload_to_minio.dart \
             ${{ secrets.MINIO_ENDPOINT}} \
             mobile \
