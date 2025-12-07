@@ -8,8 +8,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # - name: Checkout code
-      #   uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       # - name: Cache Flutter SDK
       #   uses: actions/cache@v3
@@ -19,18 +19,18 @@ jobs:
       #     restore-keys: |
       #       flutter-sdk-${{ runner.os }}-
 
-      # - name: Setup Java
-      #   uses: actions/setup-java@v4
-      #   with:
-      #     distribution: 'temurin'
-      #     java-version: '21'
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
 
-      # - name: Setup Flutter
-      #   uses: subosito/flutter-action@v2
-      #   with:
-      #     flutter-version: '3.35.5'
-      #     channel: 'stable'
-      #     cache: false    # disable flutter-action internal caching, we do manual caching below
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.35.5'
+          channel: 'stable'
+          cache: false    # disable flutter-action internal caching, we do manual caching below
 
       # - name: Cache Pub packages
       #   uses: actions/cache@v3
@@ -40,8 +40,8 @@ jobs:
       #     restore-keys: |
       #       pub-cache-
 
-      # - name: Install dependencies
-      #   run: flutter pub get
+      - name: Install dependencies
+        run: flutter pub get
 
       # - name: Cache Build Output
       #   uses: actions/cache@v3
@@ -51,23 +51,23 @@ jobs:
       #     restore-keys: |
       #       build-cache-
 
-      # - name: Decode Keystore
-      #   run: |
-      #     echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/app/release-keystore.jks
-      #   shell: bash
+      - name: Decode Keystore
+        run: |
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/app/release-keystore.jks
+        shell: bash
 
-      # - name: Create key.properties
-      #   run: |
-      #     cat <<EOF > android/key.properties
-      #     storePassword=${{ secrets.KEYSTORE_PASSWORD }}
-      #     keyPassword=${{ secrets.KEY_PASSWORD }}
-      #     keyAlias=${{ secrets.KEY_ALIAS }}
-      #     storeFile=release-keystore.jks
-      #     EOF
-      #   shell: bash
+      - name: Create key.properties
+        run: |
+          cat <<EOF > android/key.properties
+          storePassword=${{ secrets.KEYSTORE_PASSWORD }}
+          keyPassword=${{ secrets.KEY_PASSWORD }}
+          keyAlias=${{ secrets.KEY_ALIAS }}
+          storeFile=release-keystore.jks
+          EOF
+        shell: bash
 
-      # - name: Set up Android SDK
-      #   uses: android-actions/setup-android@v3
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
 
 
       # - name: Build APK
