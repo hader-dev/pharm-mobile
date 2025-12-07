@@ -2583,6 +2583,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Max qty to order'**
   String get max_qty_to_order;
+
+  /// No description provided for @unexpected_error.
+  ///
+  /// In en, this message translates to:
+  /// **'An unexpected error occurred. Please try again later.'**
+  String get unexpected_error;
 }
 
 class _AppLocalizationsDelegate

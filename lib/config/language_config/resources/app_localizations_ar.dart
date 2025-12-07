@@ -1302,4 +1302,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get max_qty_to_order => 'الحد الأقصى للطلب';
+
+  @override
+  String get unexpected_error => 'حدث خطأ غير متوقع. يرجى المحاولة لاحقًا.';
 }

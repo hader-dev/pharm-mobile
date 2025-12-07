@@ -411,6 +411,7 @@
   "total_applied_amount": "المبلغ الإجمالي المطبق",
   "failed_google_signin": "فشل تسجيل الدخول باستخدام جوجل",
   "getting_info_google": "جارٍ جلب المعلومات من جوجل",
-  "min_qty_to_order": "الحد الأدنى للطلب",
-  "max_qty_to_order": "الحد الأقصى للطلب"
+ "min_qty_to_order": "الحد الأدنى للطلب",
+ "max_qty_to_order": "الحد الأقصى للطلب",
+ "unexpected_error": "حدث خطأ غير متوقع. يرجى المحاولة لاحقًا."
 }
