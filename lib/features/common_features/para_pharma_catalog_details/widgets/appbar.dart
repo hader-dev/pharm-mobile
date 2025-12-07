@@ -6,14 +6,14 @@ import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/home.dart';
-import 'package:hader_pharm_mobile/features/common_features/market_place/market_place.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/cubit/para_pharma_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/cubit/para_pharma_details_cubit.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
-class ParaPharmaCatalogAppBar extends StatelessWidget implements PreferredSizeWidget {
+class ParaPharmaCatalogAppBar extends StatelessWidget
+    implements PreferredSizeWidget {
   const ParaPharmaCatalogAppBar({super.key});
 
   @override
@@ -26,7 +26,9 @@ class ParaPharmaCatalogAppBar extends StatelessWidget implements PreferredSizeWi
       leading: IconButton(
         iconSize: iconSize,
         icon: Icon(
-          Directionality.of(context) == TextDirection.rtl ? Iconsax.arrow_right_3 : Iconsax.arrow_left_2,
+          Directionality.of(context) == TextDirection.rtl
+              ? Iconsax.arrow_right_3
+              : Iconsax.arrow_left_2,
           color: AppColors.accent1Shade1,
           size: iconSize,
         ),
@@ -37,7 +39,8 @@ class ParaPharmaCatalogAppBar extends StatelessWidget implements PreferredSizeWi
           builder: (context, state) {
             final cubit = BlocProvider.of<ParaPharmaDetailsCubit>(context);
 
-            final hCubit = HomeScreen.scaffoldKey.currentContext?.read<ParaPharmaCubit>();
+            final hCubit =
+                HomeScreen.scaffoldKey.currentContext?.read<ParaPharmaCubit>();
 
             final isLiked = cubit.state.paraPharmaCatalogData.isLiked;
 
@@ -50,11 +53,13 @@ class ParaPharmaCatalogAppBar extends StatelessWidget implements PreferredSizeWi
               onPressed: () {
                 if (isLiked) {
                   cubit.unlikeParaPharma().then((liked) {
-                    hCubit?.refreshParaPharmaCatalogFavorite(cubit.state.paraPharmaCatalogData.id, liked);
+                    hCubit?.refreshParaPharmaCatalogFavorite(
+                        cubit.state.paraPharmaCatalogData.id, liked);
                   });
                 } else {
                   cubit.likeParaPharma().then((liked) {
-                    hCubit?.refreshParaPharmaCatalogFavorite(cubit.state.paraPharmaCatalogData.id, liked);
+                    hCubit?.refreshParaPharmaCatalogFavorite(
+                        cubit.state.paraPharmaCatalogData.id, liked);
                   });
                 }
               },

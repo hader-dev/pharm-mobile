@@ -23,15 +23,18 @@ class PriceWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final defaultMainStyle =
-        context.responsiveTextTheme.current.headLine4SemiBold.copyWith(color: AppColors.accent1Shade1);
+    final defaultMainStyle = context
+        .responsiveTextTheme.current.headLine4SemiBold
+        .copyWith(color: AppColors.accent1Shade1);
 
-    final defaultLinedStyle = context.responsiveTextTheme.current.body3Medium.copyWith(
+    final defaultLinedStyle =
+        context.responsiveTextTheme.current.body3Medium.copyWith(
       decoration: TextDecoration.lineThrough,
       color: Colors.grey,
     );
 
-    final defaultCurrencyStyle = context.responsiveTextTheme.current.bodyXSmall.copyWith(
+    final defaultCurrencyStyle =
+        context.responsiveTextTheme.current.bodyXSmall.copyWith(
       color: AppColors.accent1Shade1,
     );
 
@@ -42,7 +45,8 @@ class PriceWidget extends StatelessWidget {
     final dOverridePrice = overridePrice ?? 0;
     final shouldOverrideWithoutLineThrough = dOverridePrice == price;
 
-    final baseDisplayPrice = !shouldOverrideWithoutLineThrough ? dOverridePrice : price;
+    final baseDisplayPrice =
+        !shouldOverrideWithoutLineThrough ? dOverridePrice : price;
 
     if (shouldOverrideWithoutLineThrough) {
       return Text.rich(
@@ -59,11 +63,13 @@ class PriceWidget extends StatelessWidget {
             if (quantity != null) ...[
               TextSpan(
                 text: ' x $quantity',
-                style: context.responsiveTextTheme.current.bodySmall.copyWith(color: Colors.grey[500]),
+                style: context.responsiveTextTheme.current.bodySmall
+                    .copyWith(color: Colors.grey[500]),
               ),
               TextSpan(
                 text: ' ${context.translation!.qty}',
-                style: context.responsiveTextTheme.current.bodyXSmall.copyWith(fontSize: 8, color: Colors.grey[500]),
+                style: context.responsiveTextTheme.current.bodyXSmall
+                    .copyWith(fontSize: 8, color: Colors.grey[500]),
               ),
             ],
           ],
@@ -100,7 +106,8 @@ class PriceWidget extends StatelessWidget {
             TextSpan(
               children: [
                 TextSpan(
-                  text: baseDisplayPrice.formatAsPriceForPrint(decimalDigits: 1),
+                  text:
+                      baseDisplayPrice.formatAsPriceForPrint(decimalDigits: 1),
                   style: main,
                 ),
                 TextSpan(
@@ -110,12 +117,13 @@ class PriceWidget extends StatelessWidget {
                 if (quantity != null) ...[
                   TextSpan(
                     text: ' x $quantity',
-                    style: context.responsiveTextTheme.current.bodySmall.copyWith(color: Colors.grey[500]),
+                    style: context.responsiveTextTheme.current.bodySmall
+                        .copyWith(color: Colors.grey[500]),
                   ),
                   TextSpan(
                     text: ' ${context.translation!.qty}',
-                    style:
-                        context.responsiveTextTheme.current.bodyXSmall.copyWith(fontSize: 8, color: Colors.grey[500]),
+                    style: context.responsiveTextTheme.current.bodyXSmall
+                        .copyWith(fontSize: 8, color: Colors.grey[500]),
                   ),
                 ]
               ],
@@ -128,19 +136,8 @@ class PriceWidget extends StatelessWidget {
       TextSpan(
         children: [
           TextSpan(
-            text: price.formatAsPriceForPrint(decimalDigits: 1),
-            style: line.copyWith(
-              decoration: TextDecoration.lineThrough,
-              color: Colors.grey,
-            ),
-          ),
-          TextSpan(
-            text: " ${context.translation!.currency}",
-            style: currency.copyWith(
-              decoration: TextDecoration.lineThrough,
-              color: Colors.grey,
-            ),
-          ),
+              text: price.formatAsPriceForPrint(decimalDigits: 1), style: main),
+          TextSpan(text: " ${context.translation!.currency}", style: currency),
         ],
       ),
     );

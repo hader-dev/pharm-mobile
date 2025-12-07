@@ -17,7 +17,7 @@ import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
-class MedicineWidgetHorizontal extends StatelessWidget {
+class MedicineWidget2 extends StatelessWidget {
   final BaseMedicineCatalogModel medicineData;
   final bool hideLikeButton;
   final VoidCallback? onLikeTapped;
@@ -26,7 +26,7 @@ class MedicineWidgetHorizontal extends StatelessWidget {
   final VoidCallback? onRemoveFromFavorites;
   final void Function(BaseMedicineCatalogModel)? onQuickAddCallback;
 
-  const MedicineWidgetHorizontal({
+  const MedicineWidget2({
     super.key,
     required this.medicineData,
     this.onLikeTapped,

@@ -10,7 +10,6 @@ import 'package:hader_pharm_mobile/features/common/image/cached_network_image_wi
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/favorites/cubit/favorites_cubit.dart';
 import 'package:hader_pharm_mobile/models/company.dart';
-import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
@@ -35,8 +34,9 @@ class VendorItem extends StatelessWidget {
     this.hideRemoveButton = true,
     this.onRemoveFromFavorites,
   }) {
-    distributorCategory = DistributorCategory.values
-        .firstWhere((element) => element.id == companyData.distributorCategory, orElse: () => DistributorCategory.Both);
+    distributorCategory = DistributorCategory.values.firstWhere(
+        (element) => element.id == companyData.distributorCategory,
+        orElse: () => DistributorCategory.Both);
   }
 
   Future<void> _makePhoneCall(String phoneNumber) async {
@@ -60,7 +60,8 @@ class VendorItem extends StatelessWidget {
     return InkWell(
       splashColor: Colors.transparent,
       onTap: () {
-        GoRouter.of(context).pushNamed(RoutingManager.vendorDetails, extra: companyData.id);
+        GoRouter.of(context)
+            .pushNamed(RoutingManager.vendorDetails, extra: companyData.id);
       },
       child: BlocBuilder<FavoritesCubit, FavoritesState>(
         builder: (context, state) {
@@ -68,7 +69,8 @@ class VendorItem extends StatelessWidget {
             margin: EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
             padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p12),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.commonWidgetsRadius),
+              borderRadius: BorderRadius.circular(
+                  context.responsiveAppSizeTheme.current.commonWidgetsRadius),
               border: Border.all(color: StrokeColors.normal.color, width: 1),
             ),
             child: Row(
@@ -77,16 +79,20 @@ class VendorItem extends StatelessWidget {
                 Expanded(
                   child: LayoutBuilder(
                     builder: (context, constraints) {
-                      final size = constraints.maxHeight.isFinite ? constraints.maxHeight : constraints.maxWidth;
+                      final size = constraints.maxHeight.isFinite
+                          ? constraints.maxHeight
+                          : constraints.maxWidth;
                       return Center(
                         child: ClipOval(
                           child: SizedBox(
                               width: size,
                               height: size,
-                              child: CachedNetworkImageWithDrawableFallback.withErrorSvgImage(
+                              child: CachedNetworkImageWithDrawableFallback
+                                  .withErrorSvgImage(
                                 imageUrl: getItInstance
                                     .get<INetworkService>()
-                                    .getFilesPath(companyData.thumbnailImage?.path ?? ''),
+                                    .getFilesPath(
+                                        companyData.thumbnailImage?.path ?? ''),
                               )),
                         ),
                       );
@@ -107,7 +113,8 @@ class VendorItem extends StatelessWidget {
                               overflow: TextOverflow.ellipsis,
                               maxLines: 2,
                               softWrap: true,
-                              style: context.responsiveTextTheme.current.headLine3SemiBold,
+                              style: context.responsiveTextTheme.current
+                                  .headLine3SemiBold,
                             ),
                           ),
                           InkWell(
@@ -117,7 +124,8 @@ class VendorItem extends StatelessWidget {
                               child: Icon(
                                 Icons.close,
                                 color: Colors.red,
-                                size: context.responsiveAppSizeTheme.current.iconSize20,
+                                size: context
+                                    .responsiveAppSizeTheme.current.iconSize20,
                               ),
                             ),
                             onTap: () {
@@ -128,65 +136,80 @@ class VendorItem extends StatelessWidget {
                           )
                         ],
                       ),
-                      if (companyData.phone != null || companyData.email != null)
+                      if (companyData.phone != null ||
+                          companyData.email != null)
                         Padding(
                           padding: EdgeInsets.only(
                             top: context.responsiveAppSizeTheme.current.p8,
                             bottom: context.responsiveAppSizeTheme.current.p8,
                           ),
-                          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                            if (companyData.phone != null) ...[
-                              InkWell(
-                                onTap: () {
-                                  _makePhoneCall(companyData.phone!);
-                                },
-                                child: Padding(
-                                  padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p4),
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                        Iconsax.call,
-                                        size: context.responsiveAppSizeTheme.current.iconSize18,
-                                        color: AppColors.accent1Shade1.withAlpha(130),
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                if (companyData.phone != null) ...[
+                                  InkWell(
+                                    onTap: () {
+                                      _makePhoneCall(companyData.phone!);
+                                    },
+                                    child: Padding(
+                                      padding: EdgeInsets.all(context
+                                          .responsiveAppSizeTheme.current.p4),
+                                      child: Row(
+                                        children: [
+                                          Icon(
+                                            Iconsax.call,
+                                            size: context.responsiveAppSizeTheme
+                                                .current.iconSize18,
+                                            color: AppColors.accent1Shade1
+                                                .withAlpha(130),
+                                          ),
+                                          ResponsiveGap.s12(),
+                                          Text(
+                                            companyData.phone!,
+                                            style: context.responsiveTextTheme
+                                                .current.bodySmall
+                                                .copyWith(
+                                                    color: TextColors
+                                                        .primary.color),
+                                          )
+                                        ],
                                       ),
-                                      ResponsiveGap.s12(),
-                                      Text(
-                                        companyData.phone!,
-                                        style: context.responsiveTextTheme.current.bodySmall
-                                            .copyWith(color: TextColors.primary.color),
-                                      )
-                                    ],
+                                    ),
                                   ),
-                                ),
-                              ),
-                              ResponsiveGap.s8()
-                            ],
-                            if (companyData.email != null) ...[
-                              InkWell(
-                                onTap: () {
-                                  _sendMail(companyData.email!);
-                                },
-                                child: Padding(
-                                  padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p4),
-                                  child: Row(
-                                    children: [
-                                      Icon(
-                                        LucideIcons.mailOpen,
-                                        size: context.responsiveAppSizeTheme.current.iconSize18,
-                                        color: AppColors.accent1Shade1.withAlpha(130),
+                                  ResponsiveGap.s8()
+                                ],
+                                if (companyData.email != null) ...[
+                                  InkWell(
+                                    onTap: () {
+                                      _sendMail(companyData.email!);
+                                    },
+                                    child: Padding(
+                                      padding: EdgeInsets.all(context
+                                          .responsiveAppSizeTheme.current.p4),
+                                      child: Row(
+                                        children: [
+                                          Icon(
+                                            LucideIcons.mailOpen,
+                                            size: context.responsiveAppSizeTheme
+                                                .current.iconSize18,
+                                            color: AppColors.accent1Shade1
+                                                .withAlpha(130),
+                                          ),
+                                          ResponsiveGap.s12(),
+                                          Text(
+                                            companyData.email!,
+                                            style: context.responsiveTextTheme
+                                                .current.bodySmall
+                                                .copyWith(
+                                                    color: TextColors
+                                                        .primary.color),
+                                          )
+                                        ],
                                       ),
-                                      ResponsiveGap.s12(),
-                                      Text(
-                                        companyData.email!,
-                                        style: context.responsiveTextTheme.current.bodySmall
-                                            .copyWith(color: TextColors.primary.color),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              )
-                            ]
-                          ]),
+                                    ),
+                                  )
+                                ]
+                              ]),
                         ),
 
                       if (companyData.description != null) ...[
@@ -196,8 +219,8 @@ class VendorItem extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                           maxLines: 3,
                           softWrap: true,
-                          style:
-                              context.responsiveTextTheme.current.bodySmall.copyWith(color: TextColors.ternary.color),
+                          style: context.responsiveTextTheme.current.bodySmall
+                              .copyWith(color: TextColors.ternary.color),
                         ),
                       ],
                       const ResponsiveGap.s12(),
@@ -205,32 +228,58 @@ class VendorItem extends StatelessWidget {
                           ? Row(
                               children: [
                                 CustomChip(
-                                    label: distributorCategory.displayName(context.translation!),
+                                    label: distributorCategory
+                                        .displayName(context.translation!),
                                     labelColor: distributorCategory.color,
-                                    labelStyle: context.responsiveTextTheme.current.bodyXSmall.copyWith(
-                                        fontWeight: context.responsiveTextTheme.current.appFont.appFontBold,
-                                        color: distributorCategory.color),
-                                    color: distributorCategory.color.withAlpha(50)),
+                                    labelStyle: context
+                                        .responsiveTextTheme.current.bodyXSmall
+                                        .copyWith(
+                                            fontWeight: context
+                                                .responsiveTextTheme
+                                                .current
+                                                .appFont
+                                                .appFontBold,
+                                            color: distributorCategory.color),
+                                    color: distributorCategory.color
+                                        .withAlpha(50)),
                                 Spacer()
                               ],
                             )
                           : Row(
                               children: [
                                 CustomChip(
-                                    label: DistributorCategory.Pharmacy.displayName(context.translation!),
+                                    label: DistributorCategory.Pharmacy
+                                        .displayName(context.translation!),
                                     labelColor: distributorCategory.color,
-                                    labelStyle: context.responsiveTextTheme.current.bodyXSmall.copyWith(
-                                        fontWeight: context.responsiveTextTheme.current.appFont.appFontBold,
-                                        color: distributorCategory.color),
-                                    color: distributorCategory.color.withAlpha(50)),
+                                    labelStyle: context
+                                        .responsiveTextTheme.current.bodyXSmall
+                                        .copyWith(
+                                            fontWeight: context
+                                                .responsiveTextTheme
+                                                .current
+                                                .appFont
+                                                .appFontBold,
+                                            color: distributorCategory.color),
+                                    color: distributorCategory.color
+                                        .withAlpha(50)),
                                 ResponsiveGap.s12(),
                                 CustomChip(
-                                    label: DistributorCategory.ParaPharmacy.displayName(context.translation!),
+                                    label: DistributorCategory.ParaPharmacy
+                                        .displayName(context.translation!),
                                     labelColor: distributorCategory.color,
-                                    labelStyle: context.responsiveTextTheme.current.bodyXSmall.copyWith(
-                                        fontWeight: context.responsiveTextTheme.current.appFont.appFontBold,
-                                        color: distributorCategory.color),
-                                    color: distributorCategory.color.withAlpha(50)),
+                                    labelStyle:
+                                        context.responsiveTextTheme.current
+                                            .bodyXSmall
+                                            .copyWith(
+                                                fontWeight: context
+                                                    .responsiveTextTheme
+                                                    .current
+                                                    .appFont
+                                                    .appFontBold,
+                                                color:
+                                                    distributorCategory.color),
+                                    color: distributorCategory.color
+                                        .withAlpha(50)),
                                 Spacer()
                               ],
                             ),
@@ -242,15 +291,19 @@ class VendorItem extends StatelessWidget {
                             Spacer(),
                             Text(
                               'Explore',
-                              style: context.responsiveTextTheme.current.body3Medium.copyWith(
+                              style: context
+                                  .responsiveTextTheme.current.body3Medium
+                                  .copyWith(
                                 color: AppColors.accent1Shade1,
-                                fontWeight: context.responsiveTextTheme.current.appFont.appFontBold,
+                                fontWeight: context.responsiveTextTheme.current
+                                    .appFont.appFontBold,
                               ),
                             ),
                             Icon(
                               Icons.keyboard_arrow_right_sharp,
                               color: AppColors.accent1Shade1,
-                              size: context.responsiveAppSizeTheme.current.iconSize20,
+                              size: context
+                                  .responsiveAppSizeTheme.current.iconSize20,
                             ),
                           ],
                         ),
