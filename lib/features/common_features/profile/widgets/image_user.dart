@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/features/common/image/cached_network_image_with_asset_fallback.dart';
-import 'package:hader_pharm_mobile/utils/assets_strings.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../../config/services/auth/user_manager.dart';
@@ -20,7 +19,9 @@ class _UserImageState extends State<UserImage> {
   @override
   Widget build(BuildContext context) {
     final userImage = getItInstance.get<UserManager>().currentUser.image;
-    final imageUrl = userImage != null ? getItInstance.get<INetworkService>().getFilesPath(userImage.path) : null;
+    final imageUrl = userImage != null
+        ? getItInstance.get<INetworkService>().getFilesPath(userImage.path)
+        : null;
 
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth >= 768;

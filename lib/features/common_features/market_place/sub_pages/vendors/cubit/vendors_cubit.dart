@@ -6,11 +6,10 @@ import 'package:flutter/rendering.dart' show ScrollDirection;
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/vendors/vendors.dart'
     show VendorsPageState;
-import 'package:hader_pharm_mobile/features/common_features/market_place/widgets/tabs_section.dart'
-    show MarketPlaceTabBarSectionState;
 import 'package:hader_pharm_mobile/models/company.dart';
 import 'package:hader_pharm_mobile/repositories/remote/company/company_repository_impl.dart';
-import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler.dart' show GlobalExceptionHandler;
+import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler.dart'
+    show GlobalExceptionHandler;
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 
@@ -42,17 +41,22 @@ class VendorsCubit extends Cubit<VendorsState> {
 
   void _onScroll() {
     if (state.scrollController.position.maxScrollExtent >=
-        MediaQuery.sizeOf(RoutingManager.rootNavigatorKey.currentContext!).height * .6) {
+        MediaQuery.sizeOf(RoutingManager.rootNavigatorKey.currentContext!)
+                .height *
+            .6) {
       if (state.scrollController.position.pixels > 5 &&
-          state.scrollController.position.userScrollDirection == ScrollDirection.reverse) {
+          state.scrollController.position.userScrollDirection ==
+              ScrollDirection.reverse) {
         VendorsPageState.animationController.forward();
       }
       if (state.scrollController.position.pixels > 5 &&
-          state.scrollController.position.userScrollDirection == ScrollDirection.forward) {
+          state.scrollController.position.userScrollDirection ==
+              ScrollDirection.forward) {
         VendorsPageState.animationController.reverse();
       }
     }
-    if (scrollController.position.pixels >= scrollController.position.maxScrollExtent) {
+    if (scrollController.position.pixels >=
+        scrollController.position.maxScrollExtent) {
       if (state.offSet < state.totalVendorsCount) {
         loadMoreVendors();
       } else {
@@ -70,7 +74,8 @@ class VendorsCubit extends Cubit<VendorsState> {
     }
 
     if (newDisplayFilters != state.displayFilters) {
-      emit(state.toScroll(offset: currentOffset, displayFilters: newDisplayFilters));
+      emit(state.toScroll(
+          offset: currentOffset, displayFilters: newDisplayFilters));
     }
   }
 
@@ -85,9 +90,10 @@ class VendorsCubit extends Cubit<VendorsState> {
           offset: offSet,
           searchFilter: state.selectedVendorSearchFilter,
           fields: BaseCompany.baseCompanyFields,
-          distributorCategoryId: state.selectedDistributorTypeFilter == DistributorCategory.Both
-              ? null
-              : state.selectedDistributorTypeFilter?.id,
+          distributorCategoryId:
+              state.selectedDistributorTypeFilter == DistributorCategory.Both
+                  ? null
+                  : state.selectedDistributorTypeFilter?.id,
           companyType: CompanyType.Distributor,
           computeFavorite: true,
           search: searchValue);
@@ -148,9 +154,11 @@ class VendorsCubit extends Cubit<VendorsState> {
     ));
   }
 
-  void searchVendor(String? text) => _debounceFunction(() => fetchVendors(searchValue: text ?? ''));
+  void searchVendor(String? text) =>
+      _debounceFunction(() => fetchVendors(searchValue: text ?? ''));
 
-  Future<void> _debounceFunction(Future<void> Function() func, [int milliseconds = 500]) async {
+  Future<void> _debounceFunction(Future<void> Function() func,
+      [int milliseconds = 500]) async {
     if (_debounce?.isActive ?? false) _debounce?.cancel();
     _debounce = Timer(Duration(milliseconds: milliseconds), () async {
       await func();
