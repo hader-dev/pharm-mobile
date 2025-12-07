@@ -78,7 +78,6 @@ jobs:
 
       - name: Upload to Minio
         run: |
-          dart pub add ui
           dart run scripts/upload_to_minio.dart \
             ${{ secrets.MINIO_ENDPOINT}} \
             mobile \
