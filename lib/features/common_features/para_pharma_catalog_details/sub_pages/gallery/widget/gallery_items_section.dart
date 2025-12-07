@@ -1,13 +1,13 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' show BlocBuilder, ReadContext;
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/features/common/image/cached_network_image_with_asset_fallback.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/sub_pages/gallery/cubit/gallery_cubit.dart'
-    show GalleryCubit, GalleryInitial, GalleryState, SelectedGalleryChanged;
+    show GalleryCubit, GalleryState;
 import 'package:hader_pharm_mobile/models/gallery.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
-import 'package:collection/collection.dart';
 
 class GalleryItemsSection extends StatelessWidget {
   final List<GalleryItem> galleryItems;
@@ -25,16 +25,22 @@ class GalleryItemsSection extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           color: Colors.white54,
-          borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.commonWidgetsRadius),
+          borderRadius: BorderRadius.circular(
+              context.responsiveAppSizeTheme.current.commonWidgetsRadius),
         ),
-        constraints: const BoxConstraints(maxWidth: 45, maxHeight: double.maxFinite),
+        constraints:
+            const BoxConstraints(maxWidth: 45, maxHeight: double.maxFinite),
         child: ListView(
           shrinkWrap: true,
           children: galleryItems
               .mapIndexed((index, item) => InkWell(
-                    onTap: () => context.read<GalleryCubit>().changeSelectedGallery(index),
+                    onTap: () => context
+                        .read<GalleryCubit>()
+                        .changeSelectedGallery(index),
                     child: GalleryItemWidget(
-                        galleryItem: item, isSelected: index == context.read<GalleryCubit>().selectedGalleryIndex),
+                        galleryItem: item,
+                        isSelected: index ==
+                            context.read<GalleryCubit>().selectedGalleryIndex),
                   ))
               .toList(),
         ),
@@ -46,7 +52,8 @@ class GalleryItemsSection extends StatelessWidget {
 class GalleryItemWidget extends StatelessWidget {
   final bool isSelected;
   final GalleryItem galleryItem;
-  const GalleryItemWidget({super.key, required this.galleryItem, this.isSelected = false});
+  const GalleryItemWidget(
+      {super.key, required this.galleryItem, this.isSelected = false});
 
   @override
   Widget build(BuildContext context) {
@@ -57,10 +64,13 @@ class GalleryItemWidget extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           border: Border.all(
-            color: isSelected ? Theme.of(context).primaryColor : Colors.grey.shade300,
+            color: isSelected
+                ? Theme.of(context).primaryColor
+                : Colors.grey.shade300,
             width: isSelected ? 2.5 : 1,
           ),
-          borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.r6),
+          borderRadius:
+              BorderRadius.circular(context.responsiveAppSizeTheme.current.r6),
           color: Colors.white,
           boxShadow: isSelected
               ? [
@@ -73,6 +83,10 @@ class GalleryItemWidget extends StatelessWidget {
               : [],
         ),
         child: CachedNetworkImageWithDrawableFallback.withErrorSvgImage(
-            width: 40, height: 40, imageUrl: getItInstance.get<INetworkService>().getFilesPath(galleryItem.imgPath)));
+            width: 40,
+            height: 40,
+            imageUrl: getItInstance
+                .get<INetworkService>()
+                .getFilesPath(galleryItem.imgPath)));
   }
 }

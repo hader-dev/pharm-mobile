@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hader_pharm_mobile/features/common/spacers/dividers.dart';
-import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field.dart' show CustomTextField;
+import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field.dart'
+    show CustomTextField;
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/cubit/para_pharma_cubit.dart';
 import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
@@ -15,7 +15,6 @@ class FiltersBarV2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final translation = context.translation!;
     final cubit = context.read<ParaPharmaCubit>();
 
     return BlocBuilder<ParaPharmaCubit, ParaPharmaState>(
@@ -34,7 +33,9 @@ class FiltersBarV2 extends StatelessWidget {
                   controller: state.searchController,
                   suffixIcon: state.searchController.text.isNotEmpty
                       ? IconButton(
-                          icon: Icon(Icons.clear, color: context.theme.colorScheme.onSurfaceVariant),
+                          icon: Icon(Icons.clear,
+                              color:
+                                  context.theme.colorScheme.onSurfaceVariant),
                           onPressed: () {
                             state.searchController.clear();
                             cubit.searchParaPharmaCatalog("");
@@ -45,13 +46,17 @@ class FiltersBarV2 extends StatelessWidget {
                     cubit.searchParaPharmaCatalog(value);
                   },
                   hintText: "Search para pharmas ...",
-                  hintTextStyle: context.responsiveTextTheme.current.body1Regular.copyWith(color: Colors.grey),
-                  prefixIcon: Icon(Icons.search, color: context.theme.colorScheme.onSurfaceVariant),
+                  hintTextStyle: context
+                      .responsiveTextTheme.current.body1Regular
+                      .copyWith(color: Colors.grey),
+                  prefixIcon: Icon(Icons.search,
+                      color: context.theme.colorScheme.onSurfaceVariant),
                 ),
               ),
             ),
             Padding(
-              padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p4),
+              padding:
+                  EdgeInsets.all(context.responsiveAppSizeTheme.current.p4),
               child: InkWell(
                 onTap: () {
                   BottomSheetHelper.showCommonBottomSheet(
