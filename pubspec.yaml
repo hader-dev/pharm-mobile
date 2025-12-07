@@ -30,7 +30,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
     #Security & permissions:
   flutter_dotenv: ^6.0.0
   path_provider: any
@@ -127,7 +126,7 @@ dependencies:
   audioplayers: ^6.5.1
   in_app_update: ^4.2.5
   photo_view: ^0.15.0
-
+  minio: ^3.5.8
 
 dev_dependencies:
   flutter_test:
@@ -143,41 +142,41 @@ dev_dependencies:
   path: ^1.9.1
   change_app_package_name: ^1.5.0
   flutter_launcher_icons: ^0.14.4
+  minio: ^3.5.8
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
- 
+
 # The following section is specific to Flutter packages.
 flutter:
   uses-material-design: true
   generate: true
   assets:
-    - assets/fonts/Satoshi_Complete/
-    - assets/images/
-    - assets/sounds/
-    - assets/icons/
-    - assets/icons/new_icons/
-    - assets/json/
-    - assets/json/town/
-    - assets/json/wilaya/
-    - assets/markup/privacy_policy/
-    - .env
+  - assets/fonts/Satoshi_Complete/
+  - assets/images/
+  - assets/sounds/
+  - assets/icons/
+  - assets/icons/new_icons/
+  - assets/json/
+  - assets/json/town/
+  - assets/json/wilaya/
+  - assets/markup/privacy_policy/
+  - .env
 
   fonts:
-    - family: Satoshi
-      fonts:
-        - asset: assets/fonts/Satoshi_Complete/Satoshi-Regular.otf
-        - asset: assets/fonts/Satoshi_Complete/Satoshi-Bold.otf
-          weight: 700
-        - asset: assets/fonts/Satoshi_Complete/Satoshi-Medium.otf
-          weight: 500
-        - asset: assets/fonts/Satoshi_Complete/Satoshi-Light.otf
-          weight: 300
-        # - asset: assets/fonts/Satoshi_Complete/Satoshi-ExtraBold.otf
-        #   weight: 800
-        - asset: assets/fonts/Satoshi_Complete/Satoshi-Black.otf
-          weight: 900
-
+  - family: Satoshi
+    fonts:
+    - asset: assets/fonts/Satoshi_Complete/Satoshi-Regular.otf
+    - asset: assets/fonts/Satoshi_Complete/Satoshi-Bold.otf
+      weight: 700
+    - asset: assets/fonts/Satoshi_Complete/Satoshi-Medium.otf
+      weight: 500
+    - asset: assets/fonts/Satoshi_Complete/Satoshi-Light.otf
+      weight: 300
+    # - asset: assets/fonts/Satoshi_Complete/Satoshi-ExtraBold.otf
+    #   weight: 800
+    - asset: assets/fonts/Satoshi_Complete/Satoshi-Black.otf
+      weight: 900
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
