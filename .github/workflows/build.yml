@@ -78,7 +78,7 @@ jobs:
 
       - name: Upload to Minio
         run: |
-          # flutter pub add minio
+          dart pub add ui
           dart run scripts/upload_to_minio.dart \
             ${{ secrets.MINIO_ENDPOINT}} \
             mobile \
