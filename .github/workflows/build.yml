@@ -79,24 +79,9 @@ jobs:
       - name: Upload to Minio
         run: |
           flutter pub add minio
-          flutter pub run scripts/upload_to_minio.dart \
-            $MINIO_ENDPOINT \
+          dart run scripts/upload_to_minio.dart \
+            ${{ secrets.MINIO_ENDPOINT}} \
             mobile \
-            $MINIO_KEY \
-            $MINIO_SECRET
-            
-
-
-      # - name: Upload APK
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: android-apk
-      #     path: build/app/outputs/flutter-apk/app-release.apk
-
-      # - name: Upload App Bundle
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: android-aab
-      #     path: build/app/outputs/bundle/release/app-release.aab
-
+            ${{ secrets.MINIO_KEY}} \
+            ${{ secrets.MINIO_SECRET}}
 
