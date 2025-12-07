@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/features/common/shimmers/horizontal_product_widget_shimmer.dart'
     show HorizontalProductWidgetShimmer;
-import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/end_of_load_result_widget.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/para_pharma_widget_horizontal.dart';
@@ -30,9 +29,10 @@ class ParaPharmaProductsPageState extends State<ParaPharmaProductsPage>
   @override
   initState() {
     super.initState();
-    animationController = AnimationController(vsync: this, duration: const Duration(milliseconds: 5));
-    animation =
-        Tween<double>(begin: 1, end: 0).animate(animationController.drive(CurveTween(curve: Curves.easeInCubic)));
+    animationController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 5));
+    animation = Tween<double>(begin: 1, end: 0).animate(
+        animationController.drive(CurveTween(curve: Curves.easeInCubic)));
   }
 
   @override
@@ -53,26 +53,37 @@ class ParaPharmaProductsPageState extends State<ParaPharmaProductsPage>
                   return AnimatedOpacity(
                       opacity: (animation.value == 1) ? 1.0 : 0.0,
                       duration: const Duration(milliseconds: 200),
-                      child: (animation.value == 0) ? SizedBox.shrink() : child!);
+                      child:
+                          (animation.value == 0) ? SizedBox.shrink() : child!);
                 },
                 child: FiltersBarV2()),
             Expanded(
               child: BlocBuilder<ParaPharmaCubit, ParaPharmaState>(
                 builder: (context, state) {
-                  final gCubit = MarketPlaceScreen.marketPlaceScaffoldKey.currentContext!.read<ParaPharmaCubit>();
-                  final hCubit = HomeScreen.scaffoldKey.currentContext?.read<ParaPharmaCubit>();
+                  final gCubit = MarketPlaceScreen
+                      .marketPlaceScaffoldKey.currentContext!
+                      .read<ParaPharmaCubit>();
+                  final hCubit = HomeScreen.scaffoldKey.currentContext
+                      ?.read<ParaPharmaCubit>();
 
                   final bool isLoadingMore = state is LoadingMoreParaPharma;
-                  final bool hasReachedEnd = state is ParaPharmasLoadLimitReached;
+                  final bool hasReachedEnd =
+                      state is ParaPharmasLoadLimitReached;
 
-                  void onLikeTapped(BaseParaPharmaCatalogModel parapharmProduct) {
+                  void onLikeTapped(
+                      BaseParaPharmaCatalogModel parapharmProduct) {
                     final id = parapharmProduct.id;
-                    parapharmProduct.isLiked ? cubit.unlikeParaPharmaCatalog(id) : cubit.likeParaPharmaCatalog(id);
-                    gCubit.refreshParaPharmaCatalogFavorite(id, !parapharmProduct.isLiked);
-                    hCubit?.refreshParaPharmaCatalogFavorite(id, !parapharmProduct.isLiked);
+                    parapharmProduct.isLiked
+                        ? cubit.unlikeParaPharmaCatalog(id)
+                        : cubit.likeParaPharmaCatalog(id);
+                    gCubit.refreshParaPharmaCatalogFavorite(
+                        id, !parapharmProduct.isLiked);
+                    hCubit?.refreshParaPharmaCatalogFavorite(
+                        id, !parapharmProduct.isLiked);
                   }
 
-                  void onQuickAddCallback(BaseParaPharmaCatalogModel parapharmProduct) {
+                  void onQuickAddCallback(
+                      BaseParaPharmaCatalogModel parapharmProduct) {
                     BottomSheetHelper.showCommonBottomSheet(
                         initialChildSize: .5,
                         context: context,
@@ -91,7 +102,8 @@ class ParaPharmaProductsPageState extends State<ParaPharmaProductsPage>
                           (_) => HorizontalProductWidgetShimmer(),
                         ));
                   }
-                  if (state is ParaPharmaProductsLoaded && state.paraPharmaProducts.isEmpty) {
+                  if (state is ParaPharmaProductsLoaded &&
+                      state.paraPharmaProducts.isEmpty) {
                     return Center(
                         child: EmptyListWidget(
                       onRefresh: () => cubit.getParaPharmas(),
@@ -106,16 +118,21 @@ class ParaPharmaProductsPageState extends State<ParaPharmaProductsPage>
                         physics: AlwaysScrollableScrollPhysics(),
                         controller: state.scrollController,
                         children: [
-                          ...state.paraPharmaProducts.map((paraPharma) => ParaPharmaWidgetHorizantal(
-                                paraPharmData: paraPharma,
-                                onFavoriteCallback: onLikeTapped,
-                                onQuickAddCallback: onQuickAddCallback,
-                                isLiked: paraPharma.isLiked,
-                              )),
+                          ...state.paraPharmaProducts
+                              .map((paraPharma) => ParaPharmaWidgetHorizantal(
+                                    paraPharmData: paraPharma,
+                                    onFavoriteCallback: onLikeTapped,
+                                    onQuickAddCallback: onQuickAddCallback,
+                                    isLiked: paraPharma.isLiked,
+                                  )),
                           if (isLoadingMore)
                             const Padding(
                               padding: EdgeInsets.all(16.0),
-                              child: Center(child: SizedBox(height: 20, width: 20, child: CircularProgressIndicator())),
+                              child: Center(
+                                  child: SizedBox(
+                                      height: 20,
+                                      width: 20,
+                                      child: CircularProgressIndicator())),
                             ),
                           if (hasReachedEnd) const EndOfLoadResultWidget()
                         ],

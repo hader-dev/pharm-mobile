@@ -161,7 +161,9 @@ flutter:
   - assets/json/town/
   - assets/json/wilaya/
   - assets/markup/privacy_policy/
-  - .env
+  - .env.dev
+  - .env.staging
+  - .env.production
 
   fonts:
   - family: Satoshi

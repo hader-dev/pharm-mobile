@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart' show debugPrint;
+import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class EnvHelper {
@@ -12,7 +14,32 @@ class EnvHelper {
   static const String envGoogleServerClientIdKey = 'GOOGLE_SERVER_CLIENT_ID';
 
   static Future<void> loadAppEnvVars() async {
-    await dotenv.load(fileName: '.env');
+    String definedEnv = appFlavor ?? 'development';
+
+    String envFileName;
+    switch (definedEnv.toLowerCase()) {
+      case 'development':
+        {
+          envFileName = '.env.dev';
+        }
+      case 'production':
+        {
+          envFileName = '.env.production';
+        }
+      case 'staging':
+        {
+          envFileName = '.env.staging';
+        }
+      default:
+        {
+          envFileName = '.env.dev';
+        }
+    }
+
+    // debugPrint('Loading env file: $envFileName');
+    // debugPrint('Current App Flavor : $appFlavor');
+
+    await dotenv.load(fileName: envFileName);
   }
 
   static String getStoredEnvValue<T>(String key) {
