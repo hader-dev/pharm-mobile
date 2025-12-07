@@ -41,7 +41,7 @@ jobs:
       #       pub-cache-
 
       - name: Install dependencies
-        run: dart pub get
+        run: flutter pub get
 
       # - name: Cache Build Output
       #   uses: actions/cache@v3
@@ -79,7 +79,7 @@ jobs:
       - name: Upload to Minio
         run: |
           
-          dart run scripts/upload_to_minio.dart \
+          flutter pub run bin/upload_to_minio.dart \
             ${{ secrets.MINIO_ENDPOINT}} \
             mobile \
             ${{ secrets.MINIO_KEY}} \
