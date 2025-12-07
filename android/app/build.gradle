@@ -54,6 +54,30 @@ android {
         }
     }
 
+    flavorDimensions += "default"
+
+productFlavors {
+    development {
+        dimension = "default"
+        manifestPlaceholders = [appName: "Hader Pharma Dev"]
+        applicationIdSuffix = ""
+    }
+
+    staging {
+        dimension = "default"
+        manifestPlaceholders = [appName: "Hader Pharma Staging"]
+        applicationIdSuffix = ""
+    }
+
+    production {
+        dimension = "default"
+        manifestPlaceholders = [appName: "Hader Pharma"]
+        applicationIdSuffix = ""
+    }
+}
+
+
+
     buildTypes {
         release {
 
