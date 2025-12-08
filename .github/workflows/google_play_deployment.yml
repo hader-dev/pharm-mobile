@@ -1,0 +1,76 @@
+name: Flutter Android Build
+
+on:
+   push:
+    branches:
+      - main
+
+jobs:
+  build-android:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Cache Flutter SDK
+        uses: actions/cache@v3
+        with:
+          path: ~/.flutter
+          key: flutter-sdk-${{ runner.os }}-stable
+          restore-keys: |
+            flutter-sdk-${{ runner.os }}-
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.35.5'
+          channel: 'stable'
+          cache: false    # disable flutter-action internal caching, we do manual caching below
+
+      
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      
+
+      - name: Decode Keystore
+        run: |
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/app/release-keystore.jks
+        shell: bash
+
+      - name: Create key.properties
+        run: |
+          cat <<EOF > android/key.properties
+          storePassword=${{ secrets.KEYSTORE_PASSWORD }}
+          keyPassword=${{ secrets.KEY_PASSWORD }}
+          keyAlias=${{ secrets.KEY_ALIAS }}
+          storeFile=release-keystore.jks
+          EOF
+        shell: bash
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+
+      - name: Build aab Flavor Production
+        run: flutter build aab --flavor production --release --obfuscate --split-debug-info=./debug-info
+      
+      #this step is to upload to google play console in internal track 
+      - name: Upload to google play console
+        uses: r0adkll/upload-google-play@v1
+        with:
+            serviceAccountJsonPlainText: ${{ secrets.GOOGLE_PLAY_CONSOLE_AUTH_KEY }}
+            packageName: com.hader.pharma
+            releaseFiles: app/build/outputs/bundle/release/app-release.aab
+            track: internal
+            status: draft
+            inAppUpdatePriority: 5
+              
