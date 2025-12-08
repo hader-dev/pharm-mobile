@@ -1,3 +1,99 @@
+# name: Flutter Android Build
+
+# on:
+#    workflow_dispatch:
+
+# jobs:
+#   build-android:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
+
+#       # - name: Cache Flutter SDK
+#       #   uses: actions/cache@v3
+#       #   with:
+#       #     path: ~/.flutter
+#       #     key: flutter-sdk-${{ runner.os }}-stable
+#       #     restore-keys: |
+#       #       flutter-sdk-${{ runner.os }}-
+
+#       - name: Setup Java
+#         uses: actions/setup-java@v4
+#         with:
+#           distribution: 'temurin'
+#           java-version: '21'
+
+#       - name: Setup Flutter
+#         uses: subosito/flutter-action@v2
+#         with:
+#           flutter-version: '3.35.5'
+#           channel: 'stable'
+#           cache: false    # disable flutter-action internal caching, we do manual caching below
+
+#       # - name: Cache Pub packages
+#       #   uses: actions/cache@v3
+#       #   with:
+#       #     path: ~/.pub-cache
+#       #     key: pub-cache-${{ hashFiles('**/pubspec.yaml') }}
+#       #     restore-keys: |
+#       #       pub-cache-
+
+#       - name: Install dependencies
+#         run: dart pub get
+
+#       # - name: Cache Build Output
+#       #   uses: actions/cache@v3
+#       #   with:
+#       #     path: build
+#       #     key: build-cache-${{ hashFiles('**/*.dart', '**/pubspec.yaml') }}
+#       #     restore-keys: |
+#       #       build-cache-
+
+#       - name: Decode Keystore
+#         run: |
+#           echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/app/release-keystore.jks
+#         shell: bash
+
+#       - name: Create key.properties
+#         run: |
+#           cat <<EOF > android/key.properties
+#           storePassword=${{ secrets.KEYSTORE_PASSWORD }}
+#           keyPassword=${{ secrets.KEY_PASSWORD }}
+#           keyAlias=${{ secrets.KEY_ALIAS }}
+#           storeFile=release-keystore.jks
+#           EOF
+#         shell: bash
+
+#       - name: Set up Android SDK
+#         uses: android-actions/setup-android@v3
+
+
+#       - name: Build APK Flavor Development
+#         run: flutter build apk --flavor development --release
+#       - name: Build APK Flavor Staging
+#         run: flutter build apk --flavor staging --release
+
+    
+#       - name: Upload to Minio
+#         run: |
+          
+#           dart run scripts/upload_to_minio.dart \
+#             ${{ secrets.MINIO_ENDPOINT}} \
+#             mobile \
+#             ${{ secrets.MINIO_KEY}} \
+#             ${{ secrets.MINIO_SECRET}} \
+#             development
+
+#           dart run scripts/upload_to_minio.dart \
+#             ${{ secrets.MINIO_ENDPOINT}} \
+#             mobile \
+#             ${{ secrets.MINIO_KEY}} \
+#             ${{ secrets.MINIO_SECRET}} \
+#             staging
+
+
 name: Flutter Android Build
 
 on:
@@ -70,33 +166,30 @@ jobs:
         uses: android-actions/setup-android@v3
 
 
-      - name: Build APK
-        run: flutter build apk --release
-
-      - name: Build App Bundle
-        run: flutter build appbundle --release
-
+      - name: Build APK Flavor Development
+        run: flutter build apk --flavor development --release
+      - name: Build APK Flavor Staging
+        run: flutter build apk --flavor staging --release
       - name: Upload to Minio
         run: |
-          flutter pub add minio
-          flutter pub run scripts/upload_to_minio.dart \
-            $MINIO_ENDPOINT \
+
+          dart run scripts/upload_to_minio.dart \
+            ${{ secrets.MINIO_ENDPOINT}} \
             mobile \
-            $MINIO_KEY \
-            $MINIO_SECRET
+            ${{ secrets.MINIO_KEY}} \
+            ${{ secrets.MINIO_SECRET}} \
+            development
+            
+          dart run scripts/upload_to_minio.dart \
+            ${{ secrets.MINIO_ENDPOINT}} \
+            mobile \
+            ${{ secrets.MINIO_KEY}} \
+            ${{ secrets.MINIO_SECRET}} \
+            staging
             
 
 
-      # - name: Upload APK
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: android-apk
-      #     path: build/app/outputs/flutter-apk/app-release.apk
+     
 
-      # - name: Upload App Bundle
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: android-aab
-      #     path: build/app/outputs/bundle/release/app-release.aab
 
 
