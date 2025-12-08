@@ -61,7 +61,7 @@ jobs:
 
 
       - name: Build aab Flavor Production
-        run: flutter build aab --flavor production --release --obfuscate --split-debug-info=./debug-info
+        run: flutter build aab --release --obfuscate --split-debug-info=./debug-info
       
       #this step is to upload to google play console in internal track 
       - name: Upload to google play console
