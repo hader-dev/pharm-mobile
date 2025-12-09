@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' show BlocBuilder, ReadContext;
 import 'package:hader_pharm_mobile/config/di/di.dart';
@@ -30,20 +29,18 @@ class GalleryItemsSection extends StatelessWidget {
         ),
         constraints:
             const BoxConstraints(maxWidth: 45, maxHeight: double.maxFinite),
-        child: ListView(
-          shrinkWrap: true,
-          children: galleryItems
-              .mapIndexed((index, item) => InkWell(
-                    onTap: () => context
-                        .read<GalleryCubit>()
-                        .changeSelectedGallery(index),
-                    child: GalleryItemWidget(
-                        galleryItem: item,
-                        isSelected: index ==
-                            context.read<GalleryCubit>().selectedGalleryIndex),
-                  ))
-              .toList(),
-        ),
+        child: ListView(shrinkWrap: true, children: [
+          for (int index = 0; index < galleryItems.length; index++)
+            InkWell(
+              onTap: () =>
+                  context.read<GalleryCubit>().changeSelectedGallery(index),
+              child: GalleryItemWidget(
+                galleryItem: galleryItems[index],
+                isSelected:
+                    index == context.read<GalleryCubit>().selectedGalleryIndex,
+              ),
+            )
+        ]),
       );
     });
   }
