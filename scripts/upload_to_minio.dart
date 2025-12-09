@@ -1,4 +1,7 @@
+// ignore_for_file: avoid_print
+
 import 'dart:io';
+
 import 'package:minio/minio.dart';
 
 Future<void> main(List<String> args) async {
@@ -15,7 +18,8 @@ Future<void> main(List<String> args) async {
   final accessKey = args[2];
   final secretKey = args[3];
   final appFlavor = args[4];
-  final filePath = "build/app/outputs/apk/$appFlavor/release/app-$appFlavor-release.apk";
+  final filePath =
+      "build/app/outputs/apk/$appFlavor/release/app-$appFlavor-release.apk";
 
   final file = File(filePath);
 

@@ -54,48 +54,6 @@ class FiltersBarV2 extends StatelessWidget {
                     ),
                   ),
                 ),
-
-                //TODO:
-                // Padding(
-                //   padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p4),
-                //   child: InkWell(
-                //     onTap: () {
-                //       BottomSheetHelper.showCommonBottomSheet(
-                //         context: context,
-                //         child: SearchMedicineFilterBottomSheet(),
-                //       );
-                //     },
-                //     child: SizedBox(
-                //       width: context.responsiveAppSizeTheme.current.iconSize25,
-                //       height: context.responsiveAppSizeTheme.current.iconSize25,
-                //       child: Stack(
-                //         clipBehavior: Clip.none,
-                //         children: [
-                //           Icon(
-                //             LucideIcons.filter,
-                //             color: context.theme.colorScheme.onSurfaceVariant,
-                //             size: context.responsiveAppSizeTheme.current.iconSize20,
-                //           ),
-                //           // if (state.filters.createdAtFrom.isNotEmpty ||
-                //           //     state.filters.createdAtTo.isNotEmpty ||
-                //           //     state.filters.status.isNotEmpty)
-                //           //   Positioned(
-                //           //     right: -5,
-                //           //     top: 0,
-                //           //     child: Container(
-                //           //       width: 8,
-                //           //       height: 8,
-                //           //       decoration: BoxDecoration(
-                //           //         color: AppColors.accent1Shade1,
-                //           //         shape: BoxShape.circle,
-                //           //       ),
-                //           //     ),
-                //           //   ),
-                //         ],
-                //       ),
-                //     ),
-                //   ),
-                // ),
               ],
             ),
             Text(
