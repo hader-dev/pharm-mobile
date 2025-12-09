@@ -1,6 +1,5 @@
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
 import 'package:hader_pharm_mobile/repositories/remote/filters/actions/load_filter_medical.dart';
-import 'package:hader_pharm_mobile/repositories/remote/filters/actions/load_filters_para_medical.dart';
 import 'package:hader_pharm_mobile/repositories/remote/filters/params/param_load_para_medical_fitlers.dart';
 import 'package:hader_pharm_mobile/repositories/remote/filters/params/params_load_medical_filters.dart';
 import 'package:hader_pharm_mobile/repositories/remote/filters/responses/response_load_filter.dart';
@@ -13,14 +12,13 @@ class FiltersRepositoryImpl implements IFiltersRepository {
   FiltersRepositoryImpl({required this.client});
 
   @override
-  Future<ResponseLoadFilter> getParaMedicalFilter(
-      ParamLoadParaMedicalFilter params) {
-    return loadFiltersParaMedical(client, params);
+  Future<ResponseLoadFilter> getParaMedicalFilter(ParamLoadParaMedicalFilter params) {
+    throw UnimplementedError();
+    //return loadFiltersParaMedical(client, params);
   }
 
   @override
-  Future<ResponseLoadFilter> getMedicalFilter(
-      ParamLoadMedicalFilter param) async {
+  Future<ResponseLoadFilter> getMedicalFilter(ParamLoadMedicalFilter param) async {
     return loadMedicalFilter(client, param);
   }
 }

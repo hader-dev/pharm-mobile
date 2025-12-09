@@ -23,7 +23,7 @@ class CartCubit extends Cubit<CartState> {
   final CartItemRepository cartItemRepository;
   final OrderRepository ordersRepository;
   final ScrollController scrollController;
-  final DebouncerManager debounceManager = DebouncerManager();
+  final DebounceManager debounceManager = DebounceManager();
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 

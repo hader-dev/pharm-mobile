@@ -7,7 +7,7 @@ sealed class ParaPharmaState {
   final List<BaseParaPharmaCatalogModel> paraPharmaProducts;
   final ParaMedicalFilters filters;
   final double lastOffset;
-  final bool displayFilters;
+
   final TextEditingController searchController;
   final ScrollController scrollController;
 
@@ -18,16 +18,9 @@ sealed class ParaPharmaState {
     required this.totalItemsCount,
     required this.offSet,
     required this.paraPharmaProducts,
-    required this.displayFilters,
     required this.filters,
     required this.selectedParaPharmaSearchFilter,
   });
-
-  bool get hasActiveFilters => filters.isNotEmpty || hasPriceFilters || searchController.text.isNotEmpty;
-
-  bool get hasPriceFilters =>
-      (filters.gteUnitPriceHt != null && filters.gteUnitPriceHt != "0.0") ||
-      (filters.lteUnitPriceHt != null && filters.lteUnitPriceHt != "100000.0");
 
   ParaPharmaInitial toInitial({
     double lastOffset = 0.0,
@@ -44,7 +37,6 @@ sealed class ParaPharmaState {
       totalItemsCount: totalItemsCount,
       offSet: offSet,
       paraPharmaProducts: paraPharmaProducts,
-      displayFilters: displayFilters,
       filters: filters,
       selectedParaPharmaSearchFilter: selectedParaPharmaSearchFilter,
     );
@@ -79,7 +71,6 @@ sealed class ParaPharmaState {
       ParaPharmaProductsScroll.fromState(
         lastOffset: offset,
         state: this,
-        displayFilters: displayFilters,
       );
 
   ParaPharmaSearchFilterChanged toSearchFilterChanged({
@@ -119,7 +110,6 @@ final class ParaPharmaInitial extends ParaPharmaState {
     super.totalItemsCount = 0,
     super.offSet = 0,
     super.paraPharmaProducts = const [],
-    super.displayFilters = true,
     super.filters = const ParaMedicalFilters(),
     super.selectedParaPharmaSearchFilter = SearchParaPharmaFilters.name,
   }) : super(
@@ -135,7 +125,6 @@ final class ParaPharmaProductsLoading extends ParaPharmaState {
           totalItemsCount: state.totalItemsCount,
           offSet: offSet ?? state.offSet,
           paraPharmaProducts: state.paraPharmaProducts,
-          displayFilters: state.displayFilters,
           filters: filters ?? state.filters,
           selectedParaPharmaSearchFilter: state.selectedParaPharmaSearchFilter,
           searchController: state.searchController,
@@ -149,7 +138,6 @@ final class LoadingMoreParaPharma extends ParaPharmaState {
           lastOffset: state.lastOffset,
           totalItemsCount: state.totalItemsCount,
           paraPharmaProducts: state.paraPharmaProducts,
-          displayFilters: state.displayFilters,
           filters: state.filters,
           selectedParaPharmaSearchFilter: state.selectedParaPharmaSearchFilter,
           searchController: state.searchController,
@@ -165,7 +153,6 @@ final class ParaPharmaProductsLoaded extends ParaPharmaState {
   }) : super(
           lastOffset: state.lastOffset,
           offSet: state.offSet,
-          displayFilters: state.displayFilters,
           filters: state.filters,
           selectedParaPharmaSearchFilter: state.selectedParaPharmaSearchFilter,
           searchController: state.searchController,
@@ -180,7 +167,6 @@ final class ParaPharmaProductsLoadingFailed extends ParaPharmaState {
           totalItemsCount: state.totalItemsCount,
           offSet: state.offSet,
           paraPharmaProducts: state.paraPharmaProducts,
-          displayFilters: state.displayFilters,
           filters: state.filters,
           selectedParaPharmaSearchFilter: state.selectedParaPharmaSearchFilter,
           searchController: state.searchController,
@@ -195,7 +181,6 @@ final class ParaPharmasLoadLimitReached extends ParaPharmaState {
           totalItemsCount: state.totalItemsCount,
           offSet: state.offSet,
           paraPharmaProducts: state.paraPharmaProducts,
-          displayFilters: state.displayFilters,
           filters: state.filters,
           selectedParaPharmaSearchFilter: state.selectedParaPharmaSearchFilter,
           searchController: state.searchController,
@@ -214,7 +199,6 @@ final class ParaPharmaSearchFilterChanged extends ParaPharmaState {
           totalItemsCount: state.totalItemsCount,
           offSet: state.offSet,
           paraPharmaProducts: state.paraPharmaProducts,
-          displayFilters: state.displayFilters,
           selectedParaPharmaSearchFilter: selectedParaPharmaSearchFilter ?? state.selectedParaPharmaSearchFilter,
           searchController: state.searchController,
           scrollController: state.scrollController,
@@ -225,7 +209,7 @@ final class ParaPharmaProductsScroll extends ParaPharmaState {
   ParaPharmaProductsScroll.fromState({
     required ParaPharmaState state,
     required super.lastOffset,
-    required super.displayFilters,
+    required,
   }) : super(
           offSet: state.offSet,
           totalItemsCount: state.totalItemsCount,
@@ -250,7 +234,6 @@ final class ParaPharmaLiked extends ParaPharmaState {
           lastOffset: state.lastOffset,
           totalItemsCount: state.totalItemsCount,
           offSet: state.offSet,
-          displayFilters: state.displayFilters,
           filters: state.filters,
           selectedParaPharmaSearchFilter: state.selectedParaPharmaSearchFilter,
           searchController: state.searchController,
@@ -269,7 +252,6 @@ final class ParaPharmaLikeFailed extends ParaPharmaState {
           totalItemsCount: state.totalItemsCount,
           offSet: state.offSet,
           paraPharmaProducts: state.paraPharmaProducts,
-          displayFilters: state.displayFilters,
           filters: state.filters,
           selectedParaPharmaSearchFilter: state.selectedParaPharmaSearchFilter,
           searchController: state.searchController,

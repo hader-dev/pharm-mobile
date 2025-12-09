@@ -17,7 +17,7 @@ part 'orders_details_state.dart';
 
 class OrderDetailsCubit extends Cubit<OrdersDetailsState> {
   final IOrderRepository orderRepository;
-  DebouncerManager debounceManager = DebouncerManager();
+  DebounceManager debounceManager = DebounceManager();
   OrderChangeModel orderChangeModel = OrderChangeModel();
 
   OrderDetailsCubit({

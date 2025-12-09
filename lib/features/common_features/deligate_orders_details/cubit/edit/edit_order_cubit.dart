@@ -17,7 +17,7 @@ class DeligateEditOrderCubit extends Cubit<DeligateEditOrderState> {
   final IParaPharmaRepository parapharmaRepo;
   final IOrderRepository orderRepo;
 
-  DebouncerManager debounceManager = DebouncerManager();
+  DebounceManager debounceManager = DebounceManager();
 
   DeligateEditOrderCubit({
     required this.parapharmaRepo,
@@ -36,8 +36,7 @@ class DeligateEditOrderCubit extends Cubit<DeligateEditOrderState> {
           customPriceController: customPriceController,
         ));
 
-  void searchProducts([String? text]) =>
-      debounceManager.debounce(tag: "search", action: () => getProducts());
+  void searchProducts([String? text]) => debounceManager.debounce(tag: "search", action: () => getProducts());
 
   Future<void> getProducts({int offset = 0}) async {
     try {
@@ -50,8 +49,8 @@ class DeligateEditOrderCubit extends Cubit<DeligateEditOrderState> {
           limit: state.limit,
           offset: state.offSet,
           filters: ParaMedicalFilters(
-            name: searchText.isNotEmpty ? [searchText] : [],
-          ),
+              // name: searchText.isNotEmpty ? [searchText] : [],
+              ),
           includeFavorites: false,
         ),
       );
@@ -85,14 +84,11 @@ class DeligateEditOrderCubit extends Cubit<DeligateEditOrderState> {
     final updatedQuantity = state.quantity + 1;
 
     state.quantityController.text = updatedQuantity.toString();
-    state.packageQuantityController.text =
-        (updatedQuantity ~/ (state.selectedProduct?.packageSize ?? 1))
-            .toString();
+    state.packageQuantityController.text = (updatedQuantity ~/ (state.selectedProduct?.packageSize ?? 1)).toString();
 
     final newState = state.toUpdateSuggestedPrice(
         quantity: updatedQuantity,
-        totalPrice: ((double.tryParse(state.customPriceController.text) ?? 0) *
-            updatedQuantity));
+        totalPrice: ((double.tryParse(state.customPriceController.text) ?? 0) * updatedQuantity));
     emit(newState);
   }
 
@@ -100,14 +96,11 @@ class DeligateEditOrderCubit extends Cubit<DeligateEditOrderState> {
     final updatedQuantity = state.quantity > 1 ? state.quantity - 1 : 1;
 
     state.quantityController.text = updatedQuantity.toString();
-    state.packageQuantityController.text =
-        (updatedQuantity ~/ (state.selectedProduct?.packageSize ?? 1))
-            .toString();
+    state.packageQuantityController.text = (updatedQuantity ~/ (state.selectedProduct?.packageSize ?? 1)).toString();
 
     emit(state.toUpdateSuggestedPrice(
         quantity: updatedQuantity,
-        totalPrice: ((double.tryParse(state.customPriceController.text) ?? 0) *
-            updatedQuantity)));
+        totalPrice: ((double.tryParse(state.customPriceController.text) ?? 0) * updatedQuantity)));
   }
 
   void decrementItemQuantity({
@@ -118,11 +111,9 @@ class DeligateEditOrderCubit extends Cubit<DeligateEditOrderState> {
 
     item.quantityController.text = updatedQuantity.toString();
 
-    item.packageQuantityController.text =
-        (updatedQuantity ~/ (item.model.product.packageSize)).toString();
+    item.packageQuantityController.text = (updatedQuantity ~/ (item.model.product.packageSize)).toString();
 
-    final updatedItem =
-        item.copyWith(model: item.model.copyWith(quantity: updatedQuantity));
+    final updatedItem = item.copyWith(model: item.model.copyWith(quantity: updatedQuantity));
 
     emit(
       state.toProductsUpdated(
@@ -138,11 +129,9 @@ class DeligateEditOrderCubit extends Cubit<DeligateEditOrderState> {
 
     item.quantityController.text = updatedQuantity.toString();
 
-    item.packageQuantityController.text =
-        (updatedQuantity ~/ (item.model.product.packageSize)).toString();
+    item.packageQuantityController.text = (updatedQuantity ~/ (item.model.product.packageSize)).toString();
 
-    final updatedItem =
-        item.copyWith(model: item.model.copyWith(quantity: updatedQuantity));
+    final updatedItem = item.copyWith(model: item.model.copyWith(quantity: updatedQuantity));
 
     emit(
       state.toProductsUpdated(
@@ -160,45 +149,35 @@ class DeligateEditOrderCubit extends Cubit<DeligateEditOrderState> {
   void updateCustomPrice(String? price) {
     final priceValue = state.selectedProduct?.unitPriceHt;
 
-    emit(state.toUpdateSuggestedPrice(
-        price: priceValue, totalPrice: (priceValue ?? 0) * state.quantity));
+    emit(state.toUpdateSuggestedPrice(price: priceValue, totalPrice: (priceValue ?? 0) * state.quantity));
   }
 
-  void updateItemCustomPrice(
-          String? value, DeligateParahparmOrderItemUi item) =>
-      debounceManager.debounce(
-          tag: "price",
-          duration: const Duration(milliseconds: 1000),
-          action: () async {
-            final priceValue = double.tryParse(value ?? '0');
+  void updateItemCustomPrice(String? value, DeligateParahparmOrderItemUi item) => debounceManager.debounce(
+      tag: "price",
+      duration: const Duration(milliseconds: 1000),
+      action: () async {
+        final priceValue = double.tryParse(value ?? '0');
 
-            final updatedItem = item.copyWith(
-                model: item.model.copyWith(suggestedPrice: priceValue));
+        final updatedItem = item.copyWith(model: item.model.copyWith(suggestedPrice: priceValue));
 
-            emit(state.toProductsUpdated(item: updatedItem));
-          });
+        emit(state.toProductsUpdated(item: updatedItem));
+      });
 
   void decrementPackageQuantity() {
-    final currPackageQuantity =
-        int.parse(state.packageQuantityController.text) - 1;
+    final currPackageQuantity = int.parse(state.packageQuantityController.text) - 1;
 
-    final updatedItemQuantity =
-        (currPackageQuantity * (state.selectedProduct?.packageSize ?? 1));
+    final updatedItemQuantity = (currPackageQuantity * (state.selectedProduct?.packageSize ?? 1));
 
-    state.packageQuantityController.text =
-        (currPackageQuantity < 1 ? 1 : currPackageQuantity).toString();
+    state.packageQuantityController.text = (currPackageQuantity < 1 ? 1 : currPackageQuantity).toString();
 
-    state.quantityController.text =
-        (updatedItemQuantity < 1 ? 1 : updatedItemQuantity).toString();
+    state.quantityController.text = (updatedItemQuantity < 1 ? 1 : updatedItemQuantity).toString();
     emit(state.toUpdateSuggestedPrice(quantity: updatedItemQuantity));
   }
 
   void incrementPackageQuantity() {
-    final currPackageQuantity =
-        int.parse(state.packageQuantityController.text) + 1;
+    final currPackageQuantity = int.parse(state.packageQuantityController.text) + 1;
 
-    final updatedItemQuantity =
-        (currPackageQuantity * (state.selectedProduct?.packageSize ?? 1));
+    final updatedItemQuantity = (currPackageQuantity * (state.selectedProduct?.packageSize ?? 1));
 
     state.packageQuantityController.text = currPackageQuantity.toString();
 
@@ -209,8 +188,7 @@ class DeligateEditOrderCubit extends Cubit<DeligateEditOrderState> {
   void updateQuantityPackage(String quantity) {
     final currPackageQuantity = int.parse(quantity);
 
-    final updatedItemQuantity =
-        (currPackageQuantity * (state.selectedProduct?.packageSize ?? 1));
+    final updatedItemQuantity = (currPackageQuantity * (state.selectedProduct?.packageSize ?? 1));
     state.packageQuantityController.text = currPackageQuantity.toString();
 
     state.quantityController.text = updatedItemQuantity.toString();
@@ -222,14 +200,11 @@ class DeligateEditOrderCubit extends Cubit<DeligateEditOrderState> {
 
     state.quantityController.text = updatedQuantity.toString();
 
-    state.packageQuantityController.text =
-        (updatedQuantity ~/ (state.selectedProduct?.packageSize ?? 1))
-            .toString();
+    state.packageQuantityController.text = (updatedQuantity ~/ (state.selectedProduct?.packageSize ?? 1)).toString();
 
     emit(state.toUpdateSuggestedPrice(
         quantity: updatedQuantity,
-        totalPrice: ((double.tryParse(state.customPriceController.text) ?? 0) *
-            updatedQuantity)));
+        totalPrice: ((double.tryParse(state.customPriceController.text) ?? 0) * updatedQuantity)));
   }
 
   void resetSelectedProduct() {

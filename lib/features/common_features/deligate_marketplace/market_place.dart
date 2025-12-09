@@ -12,20 +12,22 @@ class DeligateMarketPlaceScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DeligateMarketPlaceStateProvider(
-      client: GoRouterState.of(context).extra as DeligateClient,
-      child: SafeArea(
-        child: Scaffold(
-          key: marketPlaceScaffoldKey,
-          body: Column(
-            children: [
-              DeligateMarketplaceAppbar(),
-              const DeligateMarketPlaceBody(),
-            ],
-          ),
-          bottomNavigationBar: const DeligateMarketplaceNavBar(),
-        ),
-      ),
-    );
+    return Placeholder();
+
+    //  DeligateMarketPlaceStateProvider(
+    //   client: GoRouterState.of(context).extra as DeligateClient,
+    //   child: SafeArea(
+    //     child: Scaffold(
+    //       key: marketPlaceScaffoldKey,
+    //       body: Column(
+    //         children: [
+    //           DeligateMarketplaceAppbar(),
+    //           const DeligateMarketPlaceBody(),
+    //         ],
+    //       ),
+    //       bottomNavigationBar: const DeligateMarketplaceNavBar(),
+    //     ),
+    //   ),
+    // );
   }
 }

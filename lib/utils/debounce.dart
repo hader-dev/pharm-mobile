@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:ui';
 
-class DebouncerManager {
+class DebounceManager {
   final Map<String, Timer> _timers = {};
 
   void debounce({

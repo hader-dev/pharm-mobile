@@ -5,8 +5,6 @@ import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/end_of_load_result_widget.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/para_pharma_widget_horizontal.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/search_bar_with_filter.dart';
-import 'package:hader_pharm_mobile/features/common_features/filters/cubit/parapharm/para_medical_filters_cubit.dart';
-import 'package:hader_pharm_mobile/features/common_features/filters/widgets/pages/para_medical_filters.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/cubit/para_pharma_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/vendor_details/cubit/providers.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
@@ -25,7 +23,7 @@ class _ParapharmaPageState extends State<ParapharmaPage> with AutomaticKeepAlive
   Widget build(BuildContext context) {
     super.build(context);
     final parapharmCubit = context.read<ParaPharmaCubit>();
-    final filterCubit = context.read<ParaMedicalFiltersCubit>();
+    // final filterCubit = context.read<ParaMedicalFiltersCubit>();
 
     final state = parapharmCubit.state;
 
@@ -48,20 +46,20 @@ class _ParapharmaPageState extends State<ParapharmaPage> with AutomaticKeepAlive
                 searchController: state.searchController,
               ),
             ),
-            BlocBuilder<ParaPharmaCubit, ParaPharmaState>(builder: (context, state) {
-              return SearchFilterButton(
-                  hasActiveFilters: state.hasActiveFilters,
-                  onTap: () {
-                    BottomSheetHelper.showCommonBottomSheet(
-                      context: context,
-                      child: ParaPharmFilterProvider(
-                        parapharmCubit: parapharmCubit,
-                        filterCubit: filterCubit,
-                        child: ParaMedicalFiltersView(),
-                      ),
-                    );
-                  });
-            }),
+            // BlocBuilder<ParaPharmaCubit, ParaPharmaState>(builder: (context, state) {
+            //   return SearchFilterButton(
+            //     //  hasActiveFilters: state.hasActiveFilters,
+            //       onTap: () {
+            //         // BottomSheetHelper.showCommonBottomSheet(
+            //         //   context: context,
+            //         //   child: ParaPharmFilterProvider(
+            //         //     parapharmCubit: parapharmCubit,
+            //         //     filterCubit: filterCubit,
+            //         //     child: ParaMedicalFiltersView(),
+            //         //   ),
+            //         // );
+            //       });
+            // }),
           ],
         ),
         Expanded(

@@ -8,12 +8,7 @@ class ParamLoadMedicalFilter {
   final int limit;
   final String sort;
   final int offset;
-  ParamLoadMedicalFilter(
-      {required this.key,
-      this.query = '',
-      this.limit = 10,
-      this.offset = 0,
-      this.sort = 'ASC'});
+  ParamLoadMedicalFilter({required this.key, this.query = '', this.limit = 10, this.offset = 0, this.sort = 'ASC'});
 }
 
 class FilterParam {
@@ -75,27 +70,27 @@ class ParamsLoadFiltersParaMedical {
   final String locale;
   final JsonStringLoader? jsonStringLoader;
   final String rootPath;
-  final List<ParaMedicalFiltersKeys> filterItems;
+  //final List<ParaMedicalFiltersKeys> filterItems;
 
   ParamsLoadFiltersParaMedical({
     this.locale = "en",
     this.rootPath = "assets/json/filters",
     this.jsonStringLoader,
-    this.filterItems = const [
-      ParaMedicalFiltersKeys.sku,
-      ParaMedicalFiltersKeys.name,
-      ParaMedicalFiltersKeys.description,
-      ParaMedicalFiltersKeys.dosage,
-      ParaMedicalFiltersKeys.status,
-      ParaMedicalFiltersKeys.country,
-      ParaMedicalFiltersKeys.patent,
-      ParaMedicalFiltersKeys.brand,
-      ParaMedicalFiltersKeys.condition,
-      ParaMedicalFiltersKeys.type,
-      ParaMedicalFiltersKeys.stabilityDuration,
-      ParaMedicalFiltersKeys.code,
-      ParaMedicalFiltersKeys.reimbursement,
-      ParaMedicalFiltersKeys.sku,
-    ],
+    // this.filterItems = const [
+    // ParaMedicalFiltersKeys.sku,
+    // ParaMedicalFiltersKeys.name,
+    // ParaMedicalFiltersKeys.description,
+    // ParaMedicalFiltersKeys.dosage,
+    // ParaMedicalFiltersKeys.status,
+    // ParaMedicalFiltersKeys.country,
+    // ParaMedicalFiltersKeys.patent,
+    // ParaMedicalFiltersKeys.brand,
+    // ParaMedicalFiltersKeys.condition,
+    // ParaMedicalFiltersKeys.type,
+    // ParaMedicalFiltersKeys.stabilityDuration,
+    // ParaMedicalFiltersKeys.code,
+    // ParaMedicalFiltersKeys.reimbursement,
+    // ParaMedicalFiltersKeys.sku,
+    // ],
   });
 }

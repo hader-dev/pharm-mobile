@@ -33,7 +33,7 @@ class _MedicineProductsPageState extends State<MedicineProductsPage> with Automa
             padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
             child: Column(
               children: [
-                const FiltersBar(),
+                //const FiltersBar(),
                 Expanded(
                   child: Builder(builder: (context) {
                     final medicines = state.medicines;

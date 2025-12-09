@@ -18,7 +18,7 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
   final ParaPharmaRepository paraPharmaRepository;
   final FavoriteRepository favoriteRepository;
 
-  final DebouncerManager debouncerManager = DebouncerManager();
+  final DebounceManager debouncerManager = DebounceManager();
 
   ParaPharmaCubit(
       {required this.paraPharmaRepository,
@@ -33,14 +33,10 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
   }
 
   Future<void> getParaPharmas(
-      {int offset = 0,
-      String? searchValue,
-      String? companyIdFilter,
-      ParaMedicalFilters? filters}) async {
+      {int offset = 0, String? searchValue, String? companyIdFilter, ParaMedicalFilters? filters}) async {
     try {
       emit(state.toLoading(filters: filters));
-      var paraPharmaCatalogResponse =
-          await paraPharmaRepository.getParaPharmaCatalog(ParamsLoadParapharma(
+      var paraPharmaCatalogResponse = await paraPharmaRepository.getParaPharmaCatalog(ParamsLoadParapharma(
         offset: offset,
         filters: filters ?? state.filters,
         searchQuery: searchValue ?? state.searchController.text,
@@ -48,8 +44,7 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
       ));
 
       emit(state.toLoaded(
-          paraPharmaProducts: paraPharmaCatalogResponse.data,
-          totalItemsCount: paraPharmaCatalogResponse.totalItems));
+          paraPharmaProducts: paraPharmaCatalogResponse.data, totalItemsCount: paraPharmaCatalogResponse.totalItems));
     } catch (e, stack) {
       debugPrintStack(stackTrace: stack);
       GlobalExceptionHandler.handle(exception: e);
@@ -64,16 +59,11 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
         return;
       }
 
-      emit(state.toLoading(
-          offset: state.offSet + PaginationConstants.resultsPerPage));
+      emit(state.toLoading(offset: state.offSet + PaginationConstants.resultsPerPage));
       var medicinesResponse = await paraPharmaRepository.getParaPharmaCatalog(
-          ParamsLoadParapharma(
-              offset: state.offSet,
-              filters: state.filters,
-              searchQuery: state.searchController.text));
+          ParamsLoadParapharma(offset: state.offSet, filters: state.filters, searchQuery: state.searchController.text));
 
-      final updatedProducts =
-          List<BaseParaPharmaCatalogModel>.from(state.paraPharmaProducts);
+      final updatedProducts = List<BaseParaPharmaCatalogModel>.from(state.paraPharmaProducts);
       updatedProducts.addAll(medicinesResponse.data);
 
       emit(state.toLoaded(
@@ -89,8 +79,8 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
     emit(state.toSearchFilterChanged(searchFilter: filter));
   }
 
-  void searchParaPharmaCatalog(String? text) => debouncerManager.debounce(
-      tag: "search", action: () => getParaPharmas(searchValue: text));
+  void searchParaPharmaCatalog(String? text) =>
+      debouncerManager.debounce(tag: "search", action: () => getParaPharmas(searchValue: text));
 
   void resetParaPharmaFilters() {
     getParaPharmas(filters: const ParaMedicalFilters(), searchValue: null);
@@ -109,8 +99,7 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
 
   Future<void> likeParaPharmaCatalog(String paraPharmaCatalogId) async {
     try {
-      await favoriteRepository.likeParaPharmaCatalog(
-          paraPharmaCatalogId: paraPharmaCatalogId);
+      await favoriteRepository.likeParaPharmaCatalog(paraPharmaCatalogId: paraPharmaCatalogId);
 
       emit(state.toLiked(paraPharmaId: paraPharmaCatalogId, isLiked: true));
     } catch (e) {
@@ -121,8 +110,7 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
 
   Future<void> unlikeParaPharmaCatalog(String paraPharmaCatalogId) async {
     try {
-      await favoriteRepository.unLikeParaPharmaCatalog(
-          paraPharmaCatalogId: paraPharmaCatalogId);
+      await favoriteRepository.unLikeParaPharmaCatalog(paraPharmaCatalogId: paraPharmaCatalogId);
       emit(state.toLiked(paraPharmaId: paraPharmaCatalogId, isLiked: false));
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
@@ -132,8 +120,7 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
 
   void _onScroll() {
     state.scrollController.addListener(() async {
-      if (state.scrollController.position.pixels >=
-          state.scrollController.position.maxScrollExtent) {
+      if (state.scrollController.position.pixels >= state.scrollController.position.maxScrollExtent) {
         if (state.offSet < state.totalItemsCount) {
           await loadMoreParaPharmas();
         } else {
@@ -166,8 +153,7 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
     });
   }
 
-  void refreshParaPharmaCatalogFavorite(
-      String paraPharmaCatalogId, bool liked) {
+  void refreshParaPharmaCatalogFavorite(String paraPharmaCatalogId, bool liked) {
     emit(state.toLiked(paraPharmaId: paraPharmaCatalogId, isLiked: liked));
   }
 }

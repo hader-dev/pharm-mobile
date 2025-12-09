@@ -84,7 +84,7 @@ class _VendorDetailsTabBarSectionState extends State<VendorDetailsTabBarSection>
                     scrollController: ScrollController(),
                     searchController: TextEditingController(text: ""),
                     paraPharmaRepository: ParaPharmaRepository(client: getItInstance.get<INetworkService>()))
-                  ..getParaPharmas(filters: ParaMedicalFilters(vendors: [widget.companyId])),
+                  ..getParaPharmas(filters: ParaMedicalFilters()),
               ),
             ],
             child: TabBarView(

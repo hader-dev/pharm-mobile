@@ -23,13 +23,6 @@ sealed class ParaPharmaState {
     required this.selectedParaPharmaSearchFilter,
   });
 
-  bool get hasActiveFilters =>
-      filters.isNotEmpty || hasPriceFilters || searchController.text.isNotEmpty;
-
-  bool get hasPriceFilters =>
-      (filters.gteUnitPriceHt != null && filters.gteUnitPriceHt != "0.0") ||
-      (filters.lteUnitPriceHt != null && filters.lteUnitPriceHt != "100000.0");
-
   ParaPharmaInitial toInitial({
     double lastOffset = 0.0,
     dynamic debounce,
@@ -38,8 +31,7 @@ sealed class ParaPharmaState {
     List<BaseParaPharmaCatalogModel> paraPharmaProducts = const [],
     bool displayFilters = false,
     ParaMedicalFilters filters = const ParaMedicalFilters(),
-    SearchParaPharmaFilters selectedParaPharmaSearchFilter =
-        SearchParaPharmaFilters.name,
+    SearchParaPharmaFilters selectedParaPharmaSearchFilter = SearchParaPharmaFilters.name,
   }) {
     return ParaPharmaInitial(
       lastOffset: lastOffset,
@@ -52,16 +44,13 @@ sealed class ParaPharmaState {
     );
   }
 
-  ParaPharmaProductsLoading toLoading(
-          {int? offset, ParaMedicalFilters? filters}) =>
-      ParaPharmaProductsLoading.fromState(
-          state: this, offSet: offset, filters: filters);
+  ParaPharmaProductsLoading toLoading({int? offset, ParaMedicalFilters? filters}) =>
+      ParaPharmaProductsLoading.fromState(state: this, offSet: offset, filters: filters);
 
   ParaPharmaLikeFailed tolikeFailed({required String paraPharmaId}) =>
       ParaPharmaLikeFailed.fromState(state: this, paraPharmaId: paraPharmaId);
 
-  ParaPharmaLiked toLiked(
-      {required String paraPharmaId, required bool isLiked}) {
+  ParaPharmaLiked toLiked({required String paraPharmaId, required bool isLiked}) {
     final updated = paraPharmaProducts.map((element) {
       if (element.id == paraPharmaId) {
         return element.copyWith(isLiked: isLiked);
@@ -99,8 +88,7 @@ sealed class ParaPharmaState {
         selectedParaPharmaSearchFilter: searchFilter,
       );
 
-  ParaPharmasLoadLimitReached toLoadLimitReached() =>
-      ParaPharmasLoadLimitReached.fromState(state: this);
+  ParaPharmasLoadLimitReached toLoadLimitReached() => ParaPharmasLoadLimitReached.fromState(state: this);
 
   ParaPharmaProductsLoaded toLoaded({
     required List<BaseParaPharmaCatalogModel> paraPharmaProducts,
@@ -112,11 +100,9 @@ sealed class ParaPharmaState {
         totalItemsCount: totalItemsCount,
       );
 
-  ParaPharmaProductsLoadingFailed toLoadingFailed() =>
-      ParaPharmaProductsLoadingFailed.fromState(state: this);
+  ParaPharmaProductsLoadingFailed toLoadingFailed() => ParaPharmaProductsLoadingFailed.fromState(state: this);
 
-  LoadingMoreParaPharma toLoadingMore() =>
-      LoadingMoreParaPharma.fromState(state: this);
+  LoadingMoreParaPharma toLoadingMore() => LoadingMoreParaPharma.fromState(state: this);
 }
 
 final class ParaPharmaInitial extends ParaPharmaState {
@@ -137,10 +123,7 @@ final class ParaPharmaInitial extends ParaPharmaState {
 }
 
 final class ParaPharmaProductsLoading extends ParaPharmaState {
-  ParaPharmaProductsLoading.fromState(
-      {required ParaPharmaState state,
-      int? offSet,
-      ParaMedicalFilters? filters})
+  ParaPharmaProductsLoading.fromState({required ParaPharmaState state, int? offSet, ParaMedicalFilters? filters})
       : super(
           lastOffset: state.lastOffset,
           totalItemsCount: state.totalItemsCount,
@@ -227,8 +210,7 @@ final class ParaPharmaSearchFilterChanged extends ParaPharmaState {
           offSet: state.offSet,
           paraPharmaProducts: state.paraPharmaProducts,
           displayFilters: state.displayFilters,
-          selectedParaPharmaSearchFilter: selectedParaPharmaSearchFilter ??
-              state.selectedParaPharmaSearchFilter,
+          selectedParaPharmaSearchFilter: selectedParaPharmaSearchFilter ?? state.selectedParaPharmaSearchFilter,
           searchController: state.searchController,
           scrollController: state.scrollController,
         );

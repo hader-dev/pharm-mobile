@@ -332,3 +332,10 @@ enum ApiErrorCodes {
   final String errorMessage;
   const ApiErrorCodes(this.label, this.errorMessage);
 }
+
+enum ParaPharmSearchByFields {
+  name,
+  packaging,
+  sku,
+  description,
+}

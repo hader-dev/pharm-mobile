@@ -42,7 +42,7 @@ class _DeligateProductsPageState extends State<DeligateProductsPage> with Automa
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const FiltersBar(),
+            // const FiltersBar(),
             Expanded(
               child: BlocBuilder<ParaPharmaCubit, ParaPharmaState>(
                 builder: (bcontext, state) {
