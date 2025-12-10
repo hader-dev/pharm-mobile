@@ -11,7 +11,6 @@ import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
-import 'package:hader_pharm_mobile/utils/responsive/silver_grid_params.dart';
 
 import 'cubit/para_pharma_cubit.dart';
 
@@ -39,8 +38,6 @@ class _ParaPharmaProductsPageState extends State<ParaPharmaProductsPage>
           Expanded(
             child: BlocBuilder<ParaPharmaCubit, ParaPharmaState>(
               builder: (context, state) {
-                final products = state.paraPharmaProducts;
-
                 final bool isLoadingMore = state is LoadingMoreParaPharma;
                 final bool hasReachedEnd = state is ParaPharmasLoadLimitReached;
 
@@ -57,63 +54,45 @@ class _ParaPharmaProductsPageState extends State<ParaPharmaProductsPage>
                   );
                 }
 
+                if (state is ParaPharmaProductsLoaded &&
+                    state.paraPharmaProducts.isEmpty) {
+                  return Center(
+                      child: EmptyListWidget(
+                    onRefresh: () => cubit.getParaPharmas(),
+                  ));
+                }
+
                 return RefreshIndicator(
                   onRefresh: () => cubit.getParaPharmas(),
-                  child: (state is ParaPharmaProductsLoadingFailed ||
-                          products.isEmpty)
-                      ? LayoutBuilder(
-                          builder: (context, constraints) {
-                            return SingleChildScrollView(
-                              physics: const AlwaysScrollableScrollPhysics(),
-                              child: SizedBox(
-                                height: constraints.maxHeight,
-                                child: const Center(child: EmptyListWidget()),
-                              ),
-                            );
-                          },
-                        )
-                      : GridView.builder(
-                          controller: state.scrollController,
-                          physics: const AlwaysScrollableScrollPhysics(),
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: calculateMarketplaceCrossAxisCount(
-                                context.deviceSize),
-                            crossAxisSpacing: calculateMarketplaceGridSpacing(
-                                context.deviceSize),
-                            mainAxisSpacing:
-                                calculateMarketplaceMainAxisSpacing(
-                                    context.deviceSize),
-                            childAspectRatio: calculateMarketplaceAspectRatio(
-                                context.deviceSize, context.orientation),
+                  child: Scrollbar(
+                    controller: state.scrollController,
+                    child: ListView(
+                      physics: AlwaysScrollableScrollPhysics(),
+                      controller: state.scrollController,
+                      children: [
+                        ...state.paraPharmaProducts
+                            .map((paraPharma) => ParaPharmaWidgetHorizantal(
+                                  paraPharmData: paraPharma,
+                                  onQuickAddCallback: onQuickAddTapped,
+                                  isLiked: paraPharma.isLiked,
+                                  route: RoutingManager
+                                      .deligateParapharmDetailsScreen,
+                                  buyerCompanyId: cubit.buyerCompanyId,
+                                  canOrder: true,
+                                )),
+                        if (isLoadingMore)
+                          const Padding(
+                            padding: EdgeInsets.all(16.0),
+                            child: Center(
+                                child: SizedBox(
+                                    height: 20,
+                                    width: 20,
+                                    child: CircularProgressIndicator())),
                           ),
-                          itemCount: products.length +
-                              (isLoadingMore || hasReachedEnd ? 1 : 0),
-                          itemBuilder: (context, index) {
-                            if (index < products.length) {
-                              final paraPharma = products[index];
-                              return ParaPharmaWidgetHorizantal(
-                                paraPharmData: paraPharma,
-                                onQuickAddCallback: onQuickAddTapped,
-                                isLiked: paraPharma.isLiked,
-                                route: RoutingManager
-                                    .deligateParapharmDetailsScreen,
-                                canOrder: true,
-                              );
-                            } else {
-                              if (isLoadingMore) {
-                                return const Padding(
-                                  padding: EdgeInsets.all(16.0),
-                                  child: Center(
-                                      child: CircularProgressIndicator()),
-                                );
-                              } else if (hasReachedEnd) {
-                                return const EndOfLoadResultWidget();
-                              }
-                            }
-                            return const SizedBox.shrink();
-                          },
-                        ),
+                        if (hasReachedEnd) const EndOfLoadResultWidget()
+                      ],
+                    ),
+                  ),
                 );
               },
             ),

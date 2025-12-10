@@ -8,17 +8,20 @@ class MedicineCatalogDetailsClientScreen extends StatelessWidget {
   final bool disabledPackageQuanity;
   static final GlobalKey<ScaffoldState> medicineDetailsScaffoldKey =
       GlobalKey<ScaffoldState>();
+  final String? buyerCompanyId;
 
   const MedicineCatalogDetailsClientScreen(
       {super.key,
       required this.medicineCatalogId,
       required this.canOrder,
+      this.buyerCompanyId,
       this.disabledPackageQuanity = false});
 
   @override
   Widget build(BuildContext context) {
     return BaseMedicineCatalogDetailsScreen(
       medicineCatalogId: medicineCatalogId,
+      buyerCompanyId: buyerCompanyId,
       canOrder: canOrder,
       needCartCubit: true,
       quantitySectionBuilder: (double price) => ButtonsSectionV2(

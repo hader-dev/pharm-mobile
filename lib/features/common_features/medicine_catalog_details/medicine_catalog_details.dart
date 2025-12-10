@@ -20,6 +20,7 @@ class BaseMedicineCatalogDetailsScreen extends StatefulWidget {
   final bool canOrder;
   final bool needCartCubit;
   final QuantitySectionBuilder quantitySectionBuilder;
+  final String? buyerCompanyId;
 
   static final GlobalKey<ScaffoldState> medicineDetailsScaffoldKey =
       GlobalKey<ScaffoldState>();
@@ -27,6 +28,7 @@ class BaseMedicineCatalogDetailsScreen extends StatefulWidget {
       {super.key,
       required this.medicineCatalogId,
       required this.canOrder,
+      this.buyerCompanyId,
       required this.needCartCubit,
       required this.quantitySectionBuilder,
       this.disabledPackageQuanity = false});
@@ -55,9 +57,11 @@ class _BaseMedicineCatalogDetailsScreenState
             .expandedQuantityNavbarHeightModifier;
 
     return StateProvider(
+      needCartCubit: widget.needCartCubit,
       tabs: const [],
       vsync: this,
       medicineCatalogId: widget.medicineCatalogId,
+      buyerCompanyId: widget.buyerCompanyId,
       child: BlocBuilder<MedicineDetailsCubit, MedicineDetailsState>(
         builder: (context, state) {
           if (state is MedicineDetailsLoading) {

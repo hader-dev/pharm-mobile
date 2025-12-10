@@ -15,23 +15,29 @@ class StateProvider extends StatelessWidget {
   final List<String> tabs;
   final String medicineCatalogId;
   final TickerProvider vsync;
+  final String? buyerCompanyId;
+  final bool needCartCubit;
 
   const StateProvider(
       {super.key,
       required this.child,
       required this.tabs,
+      required this.needCartCubit,
+      this.buyerCompanyId,
       required this.vsync,
       required this.medicineCatalogId});
 
   @override
   Widget build(BuildContext context) {
-    final cartCubit =
-        AppLayout.appLayoutScaffoldKey.currentContext!.read<CartCubit>();
-    final existingCartItem = cartCubit.getItemIfExists(medicineCatalogId);
+    final cartCubit = needCartCubit
+        ? AppLayout.appLayoutScaffoldKey.currentContext?.read<CartCubit>()
+        : null;
+    final existingCartItem = cartCubit?.getItemIfExists(medicineCatalogId);
 
     return MultiBlocProvider(providers: [
       BlocProvider(
         create: (context) => MedicineDetailsCubit(
+          buyerCompanyId: buyerCompanyId,
           shippingAddress: getItInstance.get<UserManager>().currentUser.address,
           packageQuantityController: TextEditingController(
               text: existingCartItem?.model.quantity.toString() ?? '0'),
@@ -46,9 +52,10 @@ class StateProvider extends StatelessWidget {
               FavoriteRepository(client: getItInstance.get<INetworkService>()),
         )..getMedicineCatalogData(medicineCatalogId),
       ),
-      BlocProvider.value(
-          value:
-              AppLayout.appLayoutScaffoldKey.currentContext!.read<CartCubit>()),
+      if (cartCubit != null)
+        BlocProvider.value(
+            value: AppLayout.appLayoutScaffoldKey.currentContext!
+                .read<CartCubit>()),
     ], child: child);
   }
 }

@@ -3,13 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/end_of_load_result_widget.dart';
-import 'package:hader_pharm_mobile/features/common/widgets/medicine_widget_vertical.dart';
+import 'package:hader_pharm_mobile/features/common/widgets/medicine_widget_horizental.dart';
+import 'package:hader_pharm_mobile/features/common_features/deligate_create_order/cubit/create_order_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_marketplace/market_place.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_marketplace/sub_pages/medicine_products/widget/filters_bar.dart';
-import 'package:hader_pharm_mobile/features/common_features/home/home.dart';
+import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/widgets/add_cart_bottom_sheet_manual.dart';
 import 'package:hader_pharm_mobile/models/medicine_catalog.dart';
+import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
-import 'package:hader_pharm_mobile/utils/responsive/silver_grid_params.dart';
 
 import 'cubit/medicine_products_cubit.dart';
 
@@ -46,64 +47,59 @@ class _MedicineProductsPageState extends State<MedicineProductsPage>
                     return const Center(child: EmptyListWidget());
                   }
 
+                  if (state is MedicineProductsLoaded && medicines.isEmpty) {
+                    return Center(
+                        child: EmptyListWidget(
+                      onRefresh: () => cubit.getMedicines(),
+                    ));
+                  }
+
                   final bool isLoadingMore = state is MedicineProductsLoading;
                   final bool hasReachedEnd = state is MedicinesLoadLimitReached;
 
-                  void onLikeTapped(BaseMedicineCatalogModel medicine) {
-                    final id = medicine.id;
-                    final gCubit = DeligateMarketPlaceScreen
-                        .marketPlaceScaffoldKey.currentContext!
-                        .read<MedicineProductsCubit>();
-                    final hCubit = HomeScreen.scaffoldKey.currentContext!
-                        .read<MedicineProductsCubit>();
-                    medicine.isLiked
-                        ? cubit.unlikeMedicinesCatalog(id)
-                        : cubit.likeMedicinesCatalog(id);
-
-                    gCubit.refreshMedicineCatalogFavorite(
-                        id, !medicine.isLiked);
-                    hCubit.refreshMedicineCatalogFavorite(
-                        id, !medicine.isLiked);
+                  void onQuickAddTapped(BaseMedicineCatalogModel product) {
+                    BottomSheetHelper.showCommonBottomSheet(
+                      context: context,
+                      child: AddCartBottomSheetManual(
+                        deligateCreateOrderCubit: DeligateMarketPlaceScreen
+                            .marketPlaceScaffoldKey.currentContext
+                            ?.read<DeligateCreateOrderCubit>(),
+                        product: product,
+                        buyerCompanyId: cubit.buyerCompanyId,
+                      ),
+                    );
                   }
 
                   return RefreshIndicator(
                     onRefresh: () => cubit.getMedicines(),
-                    child: GridView.builder(
+                    child: Scrollbar(
                       controller: cubit.scrollController,
-                      physics: const AlwaysScrollableScrollPhysics(),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: calculateMarketplaceCrossAxisCount(
-                            context.deviceSize),
-                        crossAxisSpacing:
-                            calculateMarketplaceGridSpacing(context.deviceSize),
-                        mainAxisSpacing: calculateMarketplaceMainAxisSpacing(
-                            context.deviceSize),
-                        childAspectRatio: calculateMarketplaceAspectRatio(
-                            context.deviceSize, context.orientation),
+                      child: ListView(
+                        physics: AlwaysScrollableScrollPhysics(),
+                        controller: cubit.scrollController,
+                        children: [
+                          ...state.medicines
+                              .map((medicine) => MedicineWidgetHorizontal(
+                                    medicineData: medicine,
+                                    isLiked: medicine.isLiked,
+                                    onQuickAddCallback: onQuickAddTapped,
+                                    route: RoutingManager
+                                        .deligateMedicineDetailsScreen,
+                                    buyerCompanyId: cubit.buyerCompanyId,
+                                    hideLikeButton: false,
+                                  )),
+                          if (isLoadingMore)
+                            const Padding(
+                              padding: EdgeInsets.all(16.0),
+                              child: Center(
+                                  child: SizedBox(
+                                      height: 20,
+                                      width: 20,
+                                      child: CircularProgressIndicator())),
+                            ),
+                          if (hasReachedEnd) const EndOfLoadResultWidget()
+                        ],
                       ),
-                      itemCount: medicines.length +
-                          (isLoadingMore || hasReachedEnd ? 1 : 0),
-                      itemBuilder: (context, index) {
-                        if (index < medicines.length) {
-                          final medicine = medicines[index];
-                          return MedicineWidgetVertical(
-                            medicineData: medicine,
-                            onFavoriteCallback: onLikeTapped,
-                            route: RoutingManager.deligateMedicineDetailsScreen,
-                          );
-                        } else {
-                          if (isLoadingMore) {
-                            return Padding(
-                              padding: EdgeInsets.all(
-                                  context.responsiveAppSizeTheme.current.s16),
-                              child: Center(child: CircularProgressIndicator()),
-                            );
-                          } else if (hasReachedEnd) {
-                            return const EndOfLoadResultWidget();
-                          }
-                        }
-                        return const SizedBox.shrink();
-                      },
                     ),
                   );
                 }),

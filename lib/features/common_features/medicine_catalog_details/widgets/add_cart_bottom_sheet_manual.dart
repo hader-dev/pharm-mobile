@@ -10,22 +10,26 @@ import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/bottom_sheet_header.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/quantity_section.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_create_order/cubit/create_order_cubit.dart';
+import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/cubit/medicine_details_cubit.dart';
+import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/helpers/add_to_cart_or_deligate_items.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders/cubit/orders_cubit.dart';
-import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/cubit/para_pharma_details_cubit.dart';
-import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/helpers/add_to_cart_or_deligate_items.dart';
-import 'package:hader_pharm_mobile/models/para_pharma.dart';
+import 'package:hader_pharm_mobile/models/medicine_catalog.dart';
 import 'package:hader_pharm_mobile/repositories/remote/favorite/favorite_repository_impl.dart';
+import 'package:hader_pharm_mobile/repositories/remote/medicine_catalog/medicine_catalog_repository_impl.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/order_repository_impl.dart';
-import 'package:hader_pharm_mobile/repositories/remote/parapharm_catalog/para_pharma_catalog_repository_impl.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:hader_pharm_mobile/utils/no_vsync.dart';
 import 'package:iconsax/iconsax.dart' show Iconsax;
 
 class AddCartBottomSheetManual extends StatelessWidget {
   const AddCartBottomSheetManual(
-      {super.key, required this.product, this.deligateCreateOrderCubit});
-  final BaseParaPharmaCatalogModel product;
+      {super.key,
+      this.buyerCompanyId,
+      required this.product,
+      this.deligateCreateOrderCubit});
+  final BaseMedicineCatalogModel product;
   final DeligateCreateOrderCubit? deligateCreateOrderCubit;
+  final String? buyerCompanyId;
 
   final disabledPackageQuantity = true;
 
@@ -40,25 +44,25 @@ class AddCartBottomSheetManual extends StatelessWidget {
               .read<OrdersCubit>(),
         ),
         BlocProvider(
-          create: (context) => ParaPharmaDetailsCubit(
+          create: (context) => MedicineDetailsCubit(
             tabController: TabController(length: 0, vsync: NoVsync()),
             packageQuantityController: TextEditingController(text: '0'),
             quantityController: TextEditingController(text: '1'),
             ordersRepository: OrderRepository(
               client: getItInstance.get<INetworkService>(),
             ),
-            paraPharmaCatalogRepository: ParaPharmaRepository(
+            medicineCatalogRepository: MedicineCatalogRepository(
               client: getItInstance.get<INetworkService>(),
             ),
             favoriteRepository: FavoriteRepository(
               client: getItInstance.get<INetworkService>(),
             ),
-          )..getParaPharmaCatalogData(product.id),
+          )..getMedicineCatalogData(product.id),
         ),
       ],
-      child: BlocBuilder<ParaPharmaDetailsCubit, ParaPharmaDetailsState>(
+      child: BlocBuilder<MedicineDetailsCubit, MedicineDetailsState>(
           builder: (context, state) {
-        final cubit = context.read<ParaPharmaDetailsCubit>();
+        final cubit = context.read<MedicineDetailsCubit>();
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,7 +71,7 @@ class AddCartBottomSheetManual extends StatelessWidget {
             const ResponsiveGap.s12(),
             LabeledInfoWidget(
               label: translation.product,
-              value: product.name,
+              value: product.dci,
             ),
             LabeledInfoWidget(
               label: translation.unit_total_price,

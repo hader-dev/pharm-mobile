@@ -25,11 +25,15 @@ class MedicineWidgetHorizontal extends StatelessWidget {
   final bool hideRemoveButton;
   final VoidCallback? onRemoveFromFavorites;
   final void Function(BaseMedicineCatalogModel)? onQuickAddCallback;
+  final String? buyerCompanyId;
+  final String route;
 
   const MedicineWidgetHorizontal({
     super.key,
     required this.medicineData,
     this.onLikeTapped,
+    this.buyerCompanyId,
+    this.route = RoutingManager.medicineDetailsScreen,
     required this.isLiked,
     this.hideLikeButton = true,
     this.hideRemoveButton = true,
@@ -47,8 +51,11 @@ class MedicineWidgetHorizontal extends StatelessWidget {
         onTap: () {
           final userRole = getItInstance.get<UserManager>().currentUser.role;
           final canOrderBasedOnRole = !userRole.isDelegate;
-          GoRouter.of(context).pushNamed(RoutingManager.medicineDetailsScreen,
-              extra: {"id": medicineData.id, "canOrder": canOrderBasedOnRole});
+          GoRouter.of(context).pushNamed(route, extra: {
+            "id": medicineData.id,
+            "canOrder": canOrderBasedOnRole,
+            "buyerCompanyId": buyerCompanyId,
+          });
         },
         splashColor: Colors.transparent,
         child: Row(

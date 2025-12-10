@@ -20,12 +20,14 @@ class MedicineCatalogRepository extends IMedicineCatalogRepository {
       String sortDirection = 'DESC',
       String? companyId,
       String? searchValue,
+      String? buyerCompanyId,
       MedicalFilters filters = const MedicalFilters()}) async {
     final queryParams = {
       'limit': limit.toString(),
       'offset': offset.toString(),
       'sort[id]': sortDirection,
-      if (searchValue != null && searchValue.isNotEmpty) 'search[dci]': searchValue,
+      if (searchValue != null && searchValue.isNotEmpty)
+        'search[dci]': searchValue,
       'computed[isFavorite]': 'true',
       'include[company][fields][]': [
         'id',
@@ -65,7 +67,8 @@ class MedicineCatalogRepository extends IMedicineCatalogRepository {
       queryParams['search[type]'] = filters.type.first;
     }
     if (filters.stabilityDuration.isNotEmpty) {
-      queryParams['search[stabilityDuration]'] = filters.stabilityDuration.first;
+      queryParams['search[stabilityDuration]'] =
+          filters.stabilityDuration.first;
     }
     if (filters.packagingFormat.isNotEmpty) {
       queryParams['search[packagingFormat]'] = filters.packagingFormat.first;
@@ -81,6 +84,10 @@ class MedicineCatalogRepository extends IMedicineCatalogRepository {
     }
     if (filters.lteUnitPriceHt != null && filters.lteUnitPriceHt!.isNotEmpty) {
       queryParams['lte[unitPriceHt]'] = filters.lteUnitPriceHt!;
+    }
+
+    if (buyerCompanyId != null) {
+      queryParams['deligateBuyerCompany[buyerCompanyId]'] = buyerCompanyId;
     }
 
     if (filters.vendors.isNotEmpty) {
@@ -103,11 +110,19 @@ class MedicineCatalogRepository extends IMedicineCatalogRepository {
   }
 
   @override
-  Future<MedicineCatalogModel> getMedicineCatalogById(String id) async {
+  Future<MedicineCatalogModel> getMedicineCatalogById(
+      String id, String? buyerCompanyId) async {
     try {
-      var decodedResponse = await client.sendRequest(() => client.get("${Urls.medicinesCatalog}/$id", queryParams: {
-            'computed[isFavorite]': 'true',
-          }));
+      final queryParams = {
+        'computed[isFavorite]': 'true',
+      };
+
+      if (buyerCompanyId != null) {
+        queryParams['deligateBuyerCompany[buyerCompanyId]'] = buyerCompanyId;
+      }
+
+      var decodedResponse = await client.sendRequest(() =>
+          client.get("${Urls.medicinesCatalog}/$id", queryParams: queryParams));
       return jsonToMedicineCatalogItem(decodedResponse);
     } catch (e) {
       return MedicineCatalogModel.empty();

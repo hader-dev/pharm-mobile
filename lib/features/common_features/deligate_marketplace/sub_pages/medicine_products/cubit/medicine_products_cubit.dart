@@ -17,15 +17,17 @@ class MedicineProductsCubit extends Cubit<MedicineProductsState> {
   final MedicineCatalogRepository medicineRepository;
   final FavoriteRepository favoriteRepository;
   final ScrollController scrollController;
+  final String buyerCompanyId;
 
   MedicineProductsCubit(
       {required this.medicineRepository,
       required this.favoriteRepository,
       required this.scrollController,
+      required this.buyerCompanyId,
       required TextEditingController searchController})
       : super(MedicineProductsInitial(
           searchController: searchController,
-      )) {
+        )) {
     _onScroll();
   }
   Future<void> getMedicines(
@@ -38,6 +40,7 @@ class MedicineProductsCubit extends Cubit<MedicineProductsState> {
         offset: offset,
         filters: filters ?? state.params,
         companyId: companyIdFilter,
+        buyerCompanyId: buyerCompanyId,
       );
       emit(state.loaded(
           medicines: medicinesResponse.data,
@@ -59,6 +62,7 @@ class MedicineProductsCubit extends Cubit<MedicineProductsState> {
       var medicinesResponse = await medicineRepository.getMedicinesCatalog(
         offset: newOffset,
         filters: state.params,
+        buyerCompanyId: buyerCompanyId,
       );
       final updatedMedicines = [...state.medicines, ...medicinesResponse.data];
       emit(state.loaded(

@@ -9,5 +9,6 @@ abstract class IMedicineCatalogRepository {
       String sortDirection = 'DESC',
       String? searchValue,
       MedicalFilters filters = const MedicalFilters()});
-  Future<MedicineCatalogModel> getMedicineCatalogById(String id);
+  Future<MedicineCatalogModel> getMedicineCatalogById(
+      String id, String? buyerCompanyId);
 }

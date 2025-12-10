@@ -10,11 +10,13 @@ class MedicineCatalogDetailsDeligateScreen extends StatelessWidget {
   final bool disabledPackageQuanity;
   static final GlobalKey<ScaffoldState> medicineDetailsScaffoldKey =
       GlobalKey<ScaffoldState>();
+  final String buyerCompanyId;
 
   const MedicineCatalogDetailsDeligateScreen(
       {super.key,
       required this.medicineCatalogId,
       required this.canOrder,
+      required this.buyerCompanyId,
       this.disabledPackageQuanity = false});
 
   @override
@@ -22,7 +24,8 @@ class MedicineCatalogDetailsDeligateScreen extends StatelessWidget {
     return BaseMedicineCatalogDetailsScreen(
       medicineCatalogId: medicineCatalogId,
       canOrder: canOrder,
-      needCartCubit: true,
+      needCartCubit: false,
+      buyerCompanyId: buyerCompanyId,
       quantitySectionBuilder: (double price) => ButtonsSectionDeligate(
         quantitySectionAlignment: MainAxisAlignment.center,
         onAction: () {

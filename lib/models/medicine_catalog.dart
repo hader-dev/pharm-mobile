@@ -1,4 +1,5 @@
 import 'package:hader_pharm_mobile/models/company.dart';
+import 'package:hader_pharm_mobile/models/gallery.dart';
 import 'package:hader_pharm_mobile/models/image.dart';
 import 'package:hader_pharm_mobile/models/medicine.dart';
 
@@ -30,6 +31,7 @@ class BaseMedicineCatalogModel {
   final BaseCompany? company;
   bool isLiked;
   final double? computedPrice;
+  final Gallery? gallery;
 
   BaseMedicineCatalogModel({
     required this.packageSize,
@@ -59,6 +61,7 @@ class BaseMedicineCatalogModel {
     required this.displayOrder,
     required this.company,
     this.isLiked = false,
+    this.gallery,
   });
 }
 
@@ -98,6 +101,7 @@ class MedicineCatalogModel extends BaseMedicineCatalogModel {
     required this.medicine,
     required super.isLiked,
     required super.packageSize,
+    required gallery,
   }) : super(
           company: company,
         );
@@ -158,6 +162,7 @@ class MedicineCatalogModel extends BaseMedicineCatalogModel {
       company: company ?? this.company,
       medicine: medicine ?? this.medicine,
       isLiked: isLiked ?? this.isLiked,
+      gallery: gallery,
     );
   }
 
@@ -190,6 +195,7 @@ class MedicineCatalogModel extends BaseMedicineCatalogModel {
       company: Company.empty(),
       medicine: Medicine.empty(),
       isLiked: false,
+      gallery: [],
     );
   }
 }
