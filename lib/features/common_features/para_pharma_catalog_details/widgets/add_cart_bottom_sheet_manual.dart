@@ -22,9 +22,14 @@ import 'package:hader_pharm_mobile/utils/no_vsync.dart';
 import 'package:iconsax/iconsax.dart' show Iconsax;
 
 class AddCartBottomSheetManual extends StatelessWidget {
-  const AddCartBottomSheetManual({super.key, required this.product, this.deligateCreateOrderCubit});
+  const AddCartBottomSheetManual(
+      {super.key,
+      required this.product,
+      this.deligateCreateOrderCubit,
+      required this.buyerCompanyId});
   final BaseParaPharmaCatalogModel product;
   final DeligateCreateOrderCubit? deligateCreateOrderCubit;
+  final String buyerCompanyId;
 
   final disabledPackageQuantity = true;
 
@@ -35,10 +40,12 @@ class AddCartBottomSheetManual extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider.value(
-          value: AppLayout.appLayoutScaffoldKey.currentContext!.read<OrdersCubit>(),
+          value: AppLayout.appLayoutScaffoldKey.currentContext!
+              .read<OrdersCubit>(),
         ),
         BlocProvider(
           create: (context) => ParaPharmaDetailsCubit(
+            buyerCompanyId: buyerCompanyId,
             tabController: TabController(length: 0, vsync: NoVsync()),
             packageQuantityController: TextEditingController(text: '0'),
             quantityController: TextEditingController(text: '1'),
@@ -54,7 +61,8 @@ class AddCartBottomSheetManual extends StatelessWidget {
           )..getParaPharmaCatalogData(product.id),
         ),
       ],
-      child: BlocBuilder<ParaPharmaDetailsCubit, ParaPharmaDetailsState>(builder: (context, state) {
+      child: BlocBuilder<ParaPharmaDetailsCubit, ParaPharmaDetailsState>(
+          builder: (context, state) {
         final cubit = context.read<ParaPharmaDetailsCubit>();
 
         return Column(
@@ -68,7 +76,8 @@ class AddCartBottomSheetManual extends StatelessWidget {
             ),
             LabeledInfoWidget(
               label: translation.unit_total_price,
-              value: "${(product.unitPriceHt.toStringAsFixed(2))} ${translation.currency}",
+              value:
+                  "${(product.unitPriceHt.toStringAsFixed(2))} ${translation.currency}",
             ),
             const ResponsiveGap.s12(),
             QuantitySectionModified(
@@ -95,7 +104,8 @@ class AddCartBottomSheetManual extends StatelessWidget {
                 children: [
                   Text(
                     "${(num.parse(state.quantityController.text) * product.unitPriceHt).toStringAsFixed(2)} ${translation.currency}",
-                    style: context.responsiveTextTheme.current.body2Medium.copyWith(color: AppColors.accent1Shade1),
+                    style: context.responsiveTextTheme.current.body2Medium
+                        .copyWith(color: AppColors.accent1Shade1),
                   ),
                   const Spacer(),
                   const Icon(
@@ -109,7 +119,8 @@ class AddCartBottomSheetManual extends StatelessWidget {
             const Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
             const ResponsiveGap.s12(),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: context.responsiveAppSizeTheme.current.p4),
+              padding: EdgeInsets.symmetric(
+                  horizontal: context.responsiveAppSizeTheme.current.p4),
               child: Row(
                 children: [
                   Expanded(
@@ -188,10 +199,12 @@ class InfoWidget extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p12),
       width: double.maxFinite,
-      margin: EdgeInsets.symmetric(vertical: context.responsiveAppSizeTheme.current.p6),
+      margin: EdgeInsets.symmetric(
+          vertical: context.responsiveAppSizeTheme.current.p6),
       decoration: BoxDecoration(
         color: bgColor,
-        borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.commonWidgetsRadius),
+        borderRadius: BorderRadius.circular(
+            context.responsiveAppSizeTheme.current.commonWidgetsRadius),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

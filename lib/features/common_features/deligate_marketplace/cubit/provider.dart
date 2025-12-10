@@ -51,6 +51,7 @@ class DeligateMarketPlaceStateProvider extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => ParaPharmaCubit(
+              buyerCompanyId: client.buyerCompanyId,
               scrollController: ScrollController(),
               favoriteRepository: FavoriteRepository(
                   client: getItInstance.get<INetworkService>()),

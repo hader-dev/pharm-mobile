@@ -17,13 +17,14 @@ part 'para_pharma_state.dart';
 class ParaPharmaCubit extends Cubit<ParaPharmaState> {
   final ParaPharmaRepository paraPharmaRepository;
   final FavoriteRepository favoriteRepository;
-
+  final String buyerCompanyId;
   final DebouncerManager debouncerManager = DebouncerManager();
 
   ParaPharmaCubit(
       {required this.paraPharmaRepository,
       required ScrollController scrollController,
       required TextEditingController searchController,
+      required this.buyerCompanyId,
       required this.favoriteRepository})
       : super(ParaPharmaInitial(
           scrollController: scrollController,
@@ -35,16 +36,18 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
   Future<void> getParaPharmas(
       {int offset = 0,
       String? searchValue,
-      String? companyIdFilter,
       ParaMedicalFilters? filters}) async {
     try {
+      debugPrint(
+        'Loading ParaPharma Catalog with filters: $buyerCompanyId',
+      );
       emit(state.toLoading(filters: filters));
       var paraPharmaCatalogResponse =
           await paraPharmaRepository.getParaPharmaCatalog(ParamsLoadParapharma(
         offset: offset,
         filters: filters ?? state.filters,
         searchQuery: searchValue ?? state.searchController.text,
-        companyId: companyIdFilter,
+        buyerCompanyId: buyerCompanyId,
       ));
 
       emit(state.toLoaded(
@@ -70,6 +73,7 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
           ParamsLoadParapharma(
               offset: state.offSet,
               filters: state.filters,
+              buyerCompanyId: buyerCompanyId,
               searchQuery: state.searchController.text));
 
       final updatedProducts =

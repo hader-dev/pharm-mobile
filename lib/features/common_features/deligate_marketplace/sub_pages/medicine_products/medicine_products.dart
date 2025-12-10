@@ -20,86 +20,98 @@ class MedicineProductsPage extends StatefulWidget {
   State<MedicineProductsPage> createState() => _MedicineProductsPageState();
 }
 
-class _MedicineProductsPageState extends State<MedicineProductsPage> with AutomaticKeepAliveClientMixin {
+class _MedicineProductsPageState extends State<MedicineProductsPage>
+    with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     final cubit = BlocProvider.of<MedicineProductsCubit>(context);
 
     super.build(context);
-    return Scaffold(
-      body: BlocBuilder<MedicineProductsCubit, MedicineProductsState>(
-        builder: (context, state) {
-          return Padding(
-            padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
-            child: Column(
-              children: [
-                const FiltersBar(),
-                Expanded(
-                  child: Builder(builder: (context) {
-                    final medicines = state.medicines;
-                    if (state is MedicineProductsLoading) {
-                      return const Center(child: CircularProgressIndicator());
-                    }
+    return BlocBuilder<MedicineProductsCubit, MedicineProductsState>(
+      builder: (context, state) {
+        return Padding(
+          padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p8),
+          child: Column(
+            children: [
+              const FiltersBar(),
+              Expanded(
+                child: Builder(builder: (context) {
+                  final medicines = state.medicines;
+                  if (state is MedicineProductsLoading) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
 
-                    if (state is MedicineProductsLoadingFailed || medicines.isEmpty) {
-                      return const Center(child: EmptyListWidget());
-                    }
+                  if (state is MedicineProductsLoadingFailed ||
+                      medicines.isEmpty) {
+                    return const Center(child: EmptyListWidget());
+                  }
 
-                    final bool isLoadingMore = state is MedicineProductsLoading;
-                    final bool hasReachedEnd = state is MedicinesLoadLimitReached;
+                  final bool isLoadingMore = state is MedicineProductsLoading;
+                  final bool hasReachedEnd = state is MedicinesLoadLimitReached;
 
-                    void onLikeTapped(BaseMedicineCatalogModel medicine) {
-                      final id = medicine.id;
-                      final gCubit = DeligateMarketPlaceScreen.marketPlaceScaffoldKey.currentContext!
-                          .read<MedicineProductsCubit>();
-                      final hCubit = HomeScreen.scaffoldKey.currentContext!.read<MedicineProductsCubit>();
-                      medicine.isLiked ? cubit.unlikeMedicinesCatalog(id) : cubit.likeMedicinesCatalog(id);
+                  void onLikeTapped(BaseMedicineCatalogModel medicine) {
+                    final id = medicine.id;
+                    final gCubit = DeligateMarketPlaceScreen
+                        .marketPlaceScaffoldKey.currentContext!
+                        .read<MedicineProductsCubit>();
+                    final hCubit = HomeScreen.scaffoldKey.currentContext!
+                        .read<MedicineProductsCubit>();
+                    medicine.isLiked
+                        ? cubit.unlikeMedicinesCatalog(id)
+                        : cubit.likeMedicinesCatalog(id);
 
-                      gCubit.refreshMedicineCatalogFavorite(id, !medicine.isLiked);
-                      hCubit.refreshMedicineCatalogFavorite(id, !medicine.isLiked);
-                    }
+                    gCubit.refreshMedicineCatalogFavorite(
+                        id, !medicine.isLiked);
+                    hCubit.refreshMedicineCatalogFavorite(
+                        id, !medicine.isLiked);
+                  }
 
-                    return RefreshIndicator(
-                      onRefresh: () => cubit.getMedicines(),
-                      child: GridView.builder(
-                        controller: cubit.scrollController,
-                        physics: const AlwaysScrollableScrollPhysics(),
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: calculateMarketplaceCrossAxisCount(context.deviceSize),
-                          crossAxisSpacing: calculateMarketplaceGridSpacing(context.deviceSize),
-                          mainAxisSpacing: calculateMarketplaceMainAxisSpacing(context.deviceSize),
-                          childAspectRatio: calculateMarketplaceAspectRatio(context.deviceSize, context.orientation),
-                        ),
-                        itemCount: medicines.length + (isLoadingMore || hasReachedEnd ? 1 : 0),
-                        itemBuilder: (context, index) {
-                          if (index < medicines.length) {
-                            final medicine = medicines[index];
-                            return MedicineWidgetVertical(
-                              medicineData: medicine,
-                              onFavoriteCallback: onLikeTapped,
-                              route: RoutingManager.deligateMedicineDetailsScreen,
-                            );
-                          } else {
-                            if (isLoadingMore) {
-                              return Padding(
-                                padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.s16),
-                                child: Center(child: CircularProgressIndicator()),
-                              );
-                            } else if (hasReachedEnd) {
-                              return const EndOfLoadResultWidget();
-                            }
-                          }
-                          return const SizedBox.shrink();
-                        },
+                  return RefreshIndicator(
+                    onRefresh: () => cubit.getMedicines(),
+                    child: GridView.builder(
+                      controller: cubit.scrollController,
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: calculateMarketplaceCrossAxisCount(
+                            context.deviceSize),
+                        crossAxisSpacing:
+                            calculateMarketplaceGridSpacing(context.deviceSize),
+                        mainAxisSpacing: calculateMarketplaceMainAxisSpacing(
+                            context.deviceSize),
+                        childAspectRatio: calculateMarketplaceAspectRatio(
+                            context.deviceSize, context.orientation),
                       ),
-                    );
-                  }),
-                )
-              ],
-            ),
-          );
-        },
-      ),
+                      itemCount: medicines.length +
+                          (isLoadingMore || hasReachedEnd ? 1 : 0),
+                      itemBuilder: (context, index) {
+                        if (index < medicines.length) {
+                          final medicine = medicines[index];
+                          return MedicineWidgetVertical(
+                            medicineData: medicine,
+                            onFavoriteCallback: onLikeTapped,
+                            route: RoutingManager.deligateMedicineDetailsScreen,
+                          );
+                        } else {
+                          if (isLoadingMore) {
+                            return Padding(
+                              padding: EdgeInsets.all(
+                                  context.responsiveAppSizeTheme.current.s16),
+                              child: Center(child: CircularProgressIndicator()),
+                            );
+                          } else if (hasReachedEnd) {
+                            return const EndOfLoadResultWidget();
+                          }
+                        }
+                        return const SizedBox.shrink();
+                      },
+                    ),
+                  );
+                }),
+              )
+            ],
+          ),
+        );
+      },
     );
   }
 

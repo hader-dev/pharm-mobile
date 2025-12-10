@@ -8,10 +8,12 @@ class DeligateMarketPlaceTabBarSection extends StatefulWidget {
   const DeligateMarketPlaceTabBarSection({super.key});
 
   @override
-  State<DeligateMarketPlaceTabBarSection> createState() => _DeligateMarketPlaceTabBarSectionState();
+  State<DeligateMarketPlaceTabBarSection> createState() =>
+      _DeligateMarketPlaceTabBarSectionState();
 }
 
-class _DeligateMarketPlaceTabBarSectionState extends State<DeligateMarketPlaceTabBarSection>
+class _DeligateMarketPlaceTabBarSectionState
+    extends State<DeligateMarketPlaceTabBarSection>
     with TickerProviderStateMixin {
   late final TabController tabsController;
   @override
@@ -53,14 +55,14 @@ class _DeligateMarketPlaceTabBarSectionState extends State<DeligateMarketPlaceTa
                   .toList()),
         ),
         Expanded(
-          child: TabBarView(
-            controller: tabsController,
-            children: [
-              ParaPharmaProductsPage(),
-              MedicineProductsPage(),
-            ],
-          ),
-        ),
+              child: TabBarView(
+                controller: tabsController,
+                children: [
+                  ParaPharmaProductsPage(),
+                  MedicineProductsPage(),
+                ],
+              ),
+            ),
       ],
     );
   }

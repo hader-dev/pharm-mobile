@@ -8,12 +8,14 @@ class ParamsLoadParapharma {
   final ParaMedicalFilters filters;
   final int offset;
   final String? companyId;
+  final String? buyerCompanyId;
   final bool includeFavorites;
   final String? searchQuery;
 
   ParamsLoadParapharma(
       {this.limit = 8,
       this.page = 1,
+      this.buyerCompanyId,
       this.companyId,
       this.searchQuery,
       this.offset = 0,

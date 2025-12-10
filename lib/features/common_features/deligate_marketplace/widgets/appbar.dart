@@ -7,7 +7,8 @@ import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 import '../../../../utils/assets_strings.dart' show DrawableAssetStrings;
 
-class DeligateMarketplaceAppbar extends StatelessWidget {
+class DeligateMarketplaceAppbar extends StatelessWidget
+    implements PreferredSizeWidget {
   const DeligateMarketplaceAppbar({
     super.key,
   });
@@ -38,4 +39,7 @@ class DeligateMarketplaceAppbar extends StatelessWidget {
       trailing: [],
     );
   }
+
+  @override
+  Size get preferredSize => Size.fromHeight(kToolbarHeight);
 }

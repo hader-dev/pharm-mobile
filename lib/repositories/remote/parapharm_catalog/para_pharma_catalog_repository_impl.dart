@@ -72,6 +72,11 @@ class ParaPharmaRepository extends IParaPharmaRepository {
       queryParams['filters[companyId]'] = params.filters.vendors.first;
     }
 
+    if ((params.buyerCompanyId != null) && params.buyerCompanyId!.isNotEmpty) {
+      queryParams['deligateBuyerCompany[buyerCompanyId]'] =
+          params.buyerCompanyId!;
+    }
+
     if (params.searchQuery != null && params.searchQuery!.isNotEmpty) {
       queryParams['search[name]'] = params.searchQuery!;
     }
@@ -97,14 +102,21 @@ class ParaPharmaRepository extends IParaPharmaRepository {
   }
 
   @override
-  Future<ParaPharmaCatalogModel> getParaPharmaCatalogById(String id) async {
+  Future<ParaPharmaCatalogModel> getParaPharmaCatalogById(String id,
+      [String? buyerCompanyId]) async {
     try {
+      final queryParams = {
+        'computed[isFavorite]': 'true',
+      };
+
+      if (buyerCompanyId != null) {
+        queryParams['deligateBuyerCompany[buyerCompanyId]'] = buyerCompanyId;
+      }
+
       return await client
           .sendRequest(() => client.get(
                 '${Urls.paraPharamaCatalog}/$id',
-                queryParams: {
-                  'computed[isFavorite]': 'true',
-                },
+                queryParams: queryParams,
               ))
           .then((response) {
         return jsonToParapharmaCatalogueItem(response);
