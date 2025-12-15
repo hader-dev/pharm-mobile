@@ -20,12 +20,11 @@ class StateProvider extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(providers: [
       BlocProvider(
-        create: (context) => HomeCubit(
-            announcementsRepo: PromotionRepository(
-                client: getItInstance.get<INetworkService>()))
-          ..getPromotions(
-            limit: 5,
-          ),
+        create: (context) =>
+            HomeCubit(announcementsRepo: PromotionRepository(client: getItInstance.get<INetworkService>()))
+              ..getPromotions(
+                limit: 5,
+              ),
       ),
       BlocProvider(
         create: (context) => VendorsCubit(
@@ -40,21 +39,17 @@ class StateProvider extends StatelessWidget {
       BlocProvider(
           create: (context) => MedicineProductsCubit(
               scrollController: ScrollController(),
-              favoriteRepository: FavoriteRepository(
-                  client: getItInstance.get<INetworkService>()),
+              favoriteRepository: FavoriteRepository(client: getItInstance.get<INetworkService>()),
               searchController: TextEditingController(text: ""),
-              medicineRepository: MedicineCatalogRepository(
-                  client: getItInstance.get<INetworkService>()))
+              medicineRepository: MedicineCatalogRepository(client: getItInstance.get<INetworkService>()))
             ..getMedicines()),
       BlocProvider(
           create: (context) => ParaPharmaCubit(
               scrollController: ScrollController(),
-              favoriteRepository: FavoriteRepository(
-                  client: getItInstance.get<INetworkService>()),
+              favoriteRepository: FavoriteRepository(client: getItInstance.get<INetworkService>()),
               searchController: TextEditingController(text: ""),
-              paraPharmaRepository: ParaPharmaRepository(
-                  client: getItInstance.get<INetworkService>()))
-            ..getParaPharmas()),
+              paraPharmaRepository: ParaPharmaRepository(client: getItInstance.get<INetworkService>()))
+            ..getParaPharms()),
     ], child: child);
   }
 }

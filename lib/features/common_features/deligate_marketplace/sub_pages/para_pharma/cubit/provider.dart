@@ -5,7 +5,6 @@ import 'package:hader_pharm_mobile/config/services/network/network_interface.dar
 import 'package:hader_pharm_mobile/features/common_features/deligate_marketplace/sub_pages/para_pharma/cubit/para_pharma_cubit.dart';
 // import 'package:hader_pharm_mobile/features/common_features/filters/cubit/parapharm/para_medical_filters_cubit.dart';
 import 'package:hader_pharm_mobile/repositories/remote/favorite/favorite_repository_impl.dart';
-import 'package:hader_pharm_mobile/repositories/remote/filters/filters_repository.dart';
 import 'package:hader_pharm_mobile/repositories/remote/parapharm_catalog/para_pharma_catalog_repository_impl.dart';
 
 class ParapharmaStateProvider extends StatelessWidget {

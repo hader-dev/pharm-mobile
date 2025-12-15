@@ -3,9 +3,9 @@ part of 'para_pharma_cubit.dart';
 sealed class ParaPharmaState {
   final int totalItemsCount;
   final int offSet;
-  final SearchParaPharmaFilters selectedParaPharmaSearchFilter;
+  final ParaPharmSearchByFields selectedParaPharmaSearchFilter;
   final List<BaseParaPharmaCatalogModel> paraPharmaProducts;
-  final ParaMedicalFilters filters;
+  final ParaPharmFilters filters;
   final double lastOffset;
   final bool displayFilters;
   final TextEditingController searchController;
@@ -30,8 +30,8 @@ sealed class ParaPharmaState {
     int offSet = 0,
     List<BaseParaPharmaCatalogModel> paraPharmaProducts = const [],
     bool displayFilters = false,
-    ParaMedicalFilters filters = const ParaMedicalFilters(),
-    SearchParaPharmaFilters selectedParaPharmaSearchFilter = SearchParaPharmaFilters.name,
+    ParaPharmFilters filters = const ParaPharmFilters(),
+    ParaPharmSearchByFields selectedParaPharmaSearchFilter = ParaPharmSearchByFields.name,
   }) {
     return ParaPharmaInitial(
       lastOffset: lastOffset,
@@ -44,7 +44,7 @@ sealed class ParaPharmaState {
     );
   }
 
-  ParaPharmaProductsLoading toLoading({int? offset, ParaMedicalFilters? filters}) =>
+  ParaPharmaProductsLoading toLoading({int? offset, ParaPharmFilters? filters}) =>
       ParaPharmaProductsLoading.fromState(state: this, offSet: offset, filters: filters);
 
   ParaPharmaLikeFailed tolikeFailed({required String paraPharmaId}) =>
@@ -77,9 +77,9 @@ sealed class ParaPharmaState {
       );
 
   ParaPharmaSearchFilterChanged toSearchFilterChanged({
-    SearchParaPharmaFilters? searchFilter,
+    ParaPharmSearchByFields? searchFilter,
     Timer? debounce,
-    ParaMedicalFilters? filters,
+    ParaPharmFilters? filters,
   }) =>
       ParaPharmaSearchFilterChanged.fromState(
         state: this,
@@ -114,8 +114,8 @@ final class ParaPharmaInitial extends ParaPharmaState {
     super.offSet = 0,
     super.paraPharmaProducts = const [],
     super.displayFilters = true,
-    super.filters = const ParaMedicalFilters(),
-    super.selectedParaPharmaSearchFilter = SearchParaPharmaFilters.name,
+    super.filters = const ParaPharmFilters(),
+    super.selectedParaPharmaSearchFilter = ParaPharmSearchByFields.name,
   }) : super(
           searchController: searchController ?? TextEditingController(),
           scrollController: scrollController ?? ScrollController(),
@@ -123,7 +123,7 @@ final class ParaPharmaInitial extends ParaPharmaState {
 }
 
 final class ParaPharmaProductsLoading extends ParaPharmaState {
-  ParaPharmaProductsLoading.fromState({required ParaPharmaState state, int? offSet, ParaMedicalFilters? filters})
+  ParaPharmaProductsLoading.fromState({required ParaPharmaState state, int? offSet, ParaPharmFilters? filters})
       : super(
           lastOffset: state.lastOffset,
           totalItemsCount: state.totalItemsCount,
@@ -203,7 +203,7 @@ final class ParaPharmaSearchFilterChanged extends ParaPharmaState {
       {required ParaPharmaState state,
       required super.filters,
       Timer? debounce,
-      SearchParaPharmaFilters? selectedParaPharmaSearchFilter})
+      ParaPharmSearchByFields? selectedParaPharmaSearchFilter})
       : super(
           lastOffset: state.lastOffset,
           totalItemsCount: state.totalItemsCount,

@@ -74,7 +74,7 @@ class _ParapharmaPageState extends State<ParapharmaPage> with AutomaticKeepAlive
               if (paraPharmaProducts.isEmpty) {
                 return EmptyListWidget(
                   onRefresh: () {
-                    parapharmCubit.getParaPharmas();
+                    parapharmCubit.getParaPharms();
                   },
                 );
               }
@@ -95,7 +95,7 @@ class _ParapharmaPageState extends State<ParapharmaPage> with AutomaticKeepAlive
                   Expanded(
                     child: RefreshIndicator(
                       onRefresh: () {
-                        return parapharmCubit.getParaPharmas();
+                        return parapharmCubit.getParaPharms();
                       },
                       child: ListView.builder(
                         controller: state.scrollController,

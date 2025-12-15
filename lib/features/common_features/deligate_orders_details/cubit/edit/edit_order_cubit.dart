@@ -4,7 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/models/client.dart';
 import 'package:hader_pharm_mobile/models/deligate_order.dart';
-import 'package:hader_pharm_mobile/models/para_medical_filters.dart';
+import 'package:hader_pharm_mobile/models/para_pharm_filters.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/repositories/remote/order/order_repository.dart';
 import 'package:hader_pharm_mobile/repositories/remote/parapharm_catalog/para_pharma_catalog_repository.dart';
@@ -48,7 +48,7 @@ class DeligateEditOrderCubit extends Cubit<DeligateEditOrderState> {
         ParamsLoadParapharma(
           limit: state.limit,
           offset: state.offSet,
-          filters: ParaMedicalFilters(
+          filters: ParaPharmFilters(
               // name: searchText.isNotEmpty ? [searchText] : [],
               ),
           includeFavorites: false,

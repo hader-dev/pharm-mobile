@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:hader_pharm_mobile/models/para_medical_filters.dart';
+import 'package:hader_pharm_mobile/models/para_pharm_filters.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/repositories/remote/favorite/favorite_repository_impl.dart';
 import 'package:hader_pharm_mobile/repositories/remote/parapharm_catalog/para_pharma_catalog_repository_impl.dart';
@@ -33,7 +33,7 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
   }
 
   Future<void> getParaPharmas(
-      {int offset = 0, String? searchValue, String? companyIdFilter, ParaMedicalFilters? filters}) async {
+      {int offset = 0, String? searchValue, String? companyIdFilter, ParaPharmFilters? filters}) async {
     try {
       emit(state.toLoading(filters: filters));
       var paraPharmaCatalogResponse = await paraPharmaRepository.getParaPharmaCatalog(ParamsLoadParapharma(
@@ -75,7 +75,7 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
     }
   }
 
-  void changeParaPharmaSearchFilter(SearchParaPharmaFilters filter) {
+  void changeParaPharmaSearchFilter(ParaPharmSearchByFields filter) {
     emit(state.toSearchFilterChanged(searchFilter: filter));
   }
 
@@ -83,15 +83,15 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
       debouncerManager.debounce(tag: "search", action: () => getParaPharmas(searchValue: text));
 
   void resetParaPharmaFilters() {
-    getParaPharmas(filters: const ParaMedicalFilters(), searchValue: null);
+    getParaPharmas(filters: const ParaPharmFilters(), searchValue: null);
 
     emit(state.toSearchFilterChanged(
       searchFilter: null,
-      filters: const ParaMedicalFilters(),
+      filters: const ParaPharmFilters(),
     ));
   }
 
-  void updatedFilters(ParaMedicalFilters appliedFilters) {
+  void updatedFilters(ParaPharmFilters appliedFilters) {
     emit(state.toSearchFilterChanged(
       filters: appliedFilters,
     ));

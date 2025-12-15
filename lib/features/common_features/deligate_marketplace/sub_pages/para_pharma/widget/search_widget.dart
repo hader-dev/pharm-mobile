@@ -9,6 +9,9 @@ import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../../../../../common/filters/para_pharm/para_pharm_search_filters_bottom_sheet.dart'
+    show ParaPharmSearchFiltersBottomSheet;
+
 class SearchWidget extends StatelessWidget {
   const SearchWidget({super.key});
 
@@ -76,7 +79,7 @@ class SearchWidget extends StatelessWidget {
           onTap: () {
             BottomSheetHelper.showCommonBottomSheet(
               context: context,
-              child: SearchParaPharmFilterBottomSheet(),
+              child: ParaPharmSearchFiltersBottomSheet(),
             );
           },
         ),

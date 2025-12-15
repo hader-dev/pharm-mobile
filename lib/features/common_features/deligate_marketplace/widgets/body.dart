@@ -10,10 +10,11 @@ class DeligateMarketPlaceBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DeligateMarketplaceCubit, DeligateMarketplaceState>(
-        builder: (context, state) {
+    return BlocBuilder<DeligateMarketplaceCubit, DeligateMarketplaceState>(builder: (context, state) {
       if (state.pageIndex == 0) {
-        return const DeligateMarketPlaceTabBarSection();
+        return Placeholder();
+
+        //  const DeligateMarketPlaceTabBarSection();
       }
 
       return DeligateOrderItemsPage();

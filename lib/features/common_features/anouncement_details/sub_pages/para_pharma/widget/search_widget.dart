@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/cubit/para_pharma_cubit.dart';
-import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/widget/search_filter_bottom_sheet.dart';
 import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
@@ -74,10 +73,10 @@ class SearchWidget extends StatelessWidget {
             ),
           ),
           onTap: () {
-            BottomSheetHelper.showCommonBottomSheet(
-              context: context,
-              child: SearchParaPharmFilterBottomSheet(),
-            );
+            // BottomSheetHelper.showCommonBottomSheet(
+            //   context: context,
+            //   child: SearchParaPharmFilterBottomSheet(),
+            // );
           },
         ),
       ],

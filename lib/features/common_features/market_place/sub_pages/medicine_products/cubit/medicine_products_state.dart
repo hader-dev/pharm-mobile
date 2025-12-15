@@ -3,9 +3,9 @@ part of 'medicine_products_cubit.dart';
 sealed class MedicineProductsState {
   final int totalItemsCount;
   final int offSet;
-  final SearchMedicineFilters selectedMedicineSearchFilter;
+
   final List<BaseMedicineCatalogModel> medicines;
-  final MedicalFilters params;
+  final MedicinesFilters filters;
   final Timer? debounce;
   final double lastOffset;
   final bool displayFilters;
@@ -20,16 +20,9 @@ sealed class MedicineProductsState {
     required this.offSet,
     required this.medicines,
     required this.displayFilters,
-    required this.params,
+    required this.filters,
     required this.searchController,
-    required this.selectedMedicineSearchFilter,
   });
-
-  bool get hasActiveFilters => params.isNotEmpty || hasPriceFilters || searchController.text.isNotEmpty;
-
-  bool get hasPriceFilters =>
-      (params.gteUnitPriceHt != null && params.gteUnitPriceHt != "0.0") ||
-      (params.lteUnitPriceHt != null && params.lteUnitPriceHt != "100000.0");
 
   MedicineProductsInitial toInitial({
     double lastOffset = 0.0,
@@ -39,8 +32,8 @@ sealed class MedicineProductsState {
     List<BaseMedicineCatalogModel> medicines = const [],
     bool displayFilters = false,
     ScrollController? scrollController,
-    MedicalFilters params = const MedicalFilters(),
-    SearchMedicineFilters selectedMedicineSearchFilter = SearchMedicineFilters.dci,
+    MedicinesFilters filters = const MedicinesFilters(),
+    SearchMedicineFilters = SearchMedicinesByFields.dci,
   }) {
     return MedicineProductsInitial(
       lastOffset: lastOffset,
@@ -50,9 +43,8 @@ sealed class MedicineProductsState {
       offSet: offSet,
       medicines: medicines,
       displayFilters: displayFilters,
-      params: params,
+      filters: filters,
       scrollController: scrollController ?? ScrollController(),
-      selectedMedicineSearchFilter: selectedMedicineSearchFilter,
     );
   }
 
@@ -92,15 +84,13 @@ sealed class MedicineProductsState {
       );
 
   MedicineSearchFilterChanged toSearchFilterChanged({
-    SearchMedicineFilters? searchFilter,
     Timer? debounce,
-    MedicalFilters? params,
+    MedicinesFilters? filters,
   }) =>
       MedicineSearchFilterChanged.fromState(
         state: this,
-        params: params,
+        filters: filters,
         debounce: debounce,
-        selectedMedicineSearchFilter: searchFilter,
       );
 
   MedicinesLoadLimitReached toLoadLimitReached() => MedicinesLoadLimitReached.fromState(this);
@@ -130,8 +120,7 @@ final class MedicineProductsInitial extends MedicineProductsState {
     super.offSet = 0,
     super.medicines = const [],
     super.displayFilters = true,
-    super.params = const MedicalFilters(),
-    super.selectedMedicineSearchFilter = SearchMedicineFilters.dci,
+    super.filters = const MedicinesFilters(),
   }) : super(scrollController: scrollController ?? ScrollController());
 }
 
@@ -144,8 +133,7 @@ final class MedicineProductsLoading extends MedicineProductsState {
           offSet: offSet ?? state.offSet,
           medicines: state.medicines,
           displayFilters: state.displayFilters,
-          params: state.params,
-          selectedMedicineSearchFilter: state.selectedMedicineSearchFilter,
+          filters: state.filters,
           searchController: state.searchController,
           scrollController: state.scrollController,
         );
@@ -160,8 +148,7 @@ final class LoadingMoreMedicine extends MedicineProductsState {
           offSet: offSet,
           medicines: state.medicines,
           displayFilters: state.displayFilters,
-          params: state.params,
-          selectedMedicineSearchFilter: state.selectedMedicineSearchFilter,
+          filters: state.filters,
           searchController: state.searchController,
           scrollController: state.scrollController,
         );
@@ -175,8 +162,7 @@ final class MedicineProductsLoaded extends MedicineProductsState {
           debounce: state.debounce,
           offSet: state.offSet,
           displayFilters: state.displayFilters,
-          params: state.params,
-          selectedMedicineSearchFilter: state.selectedMedicineSearchFilter,
+          filters: state.filters,
           searchController: state.searchController,
           scrollController: state.scrollController,
         );
@@ -191,8 +177,7 @@ final class MedicineProductsLoadingFailed extends MedicineProductsState {
           offSet: state.offSet,
           medicines: state.medicines,
           displayFilters: state.displayFilters,
-          params: state.params,
-          selectedMedicineSearchFilter: state.selectedMedicineSearchFilter,
+          filters: state.filters,
           searchController: state.searchController,
           scrollController: state.scrollController,
         );
@@ -207,8 +192,7 @@ final class MedicinesLoadLimitReached extends MedicineProductsState {
           offSet: state.offSet,
           medicines: state.medicines,
           displayFilters: state.displayFilters,
-          params: state.params,
-          selectedMedicineSearchFilter: state.selectedMedicineSearchFilter,
+          filters: state.filters,
           searchController: state.searchController,
           scrollController: state.scrollController,
         );
@@ -217,9 +201,8 @@ final class MedicinesLoadLimitReached extends MedicineProductsState {
 final class MedicineSearchFilterChanged extends MedicineProductsState {
   MedicineSearchFilterChanged.fromState({
     required MedicineProductsState state,
-    SearchMedicineFilters? selectedMedicineSearchFilter,
     Timer? debounce,
-    MedicalFilters? params,
+    MedicinesFilters? filters,
   }) : super(
           lastOffset: state.lastOffset,
           debounce: state.debounce,
@@ -227,8 +210,7 @@ final class MedicineSearchFilterChanged extends MedicineProductsState {
           offSet: state.offSet,
           medicines: state.medicines,
           displayFilters: state.displayFilters,
-          params: state.params,
-          selectedMedicineSearchFilter: selectedMedicineSearchFilter ?? state.selectedMedicineSearchFilter,
+          filters: filters ?? state.filters,
           searchController: state.searchController,
           scrollController: state.scrollController,
         );
@@ -244,8 +226,7 @@ final class MedicineProductsScroll extends MedicineProductsState {
           totalItemsCount: state.totalItemsCount,
           offSet: state.offSet,
           medicines: state.medicines,
-          params: state.params,
-          selectedMedicineSearchFilter: state.selectedMedicineSearchFilter,
+          filters: state.filters,
           searchController: state.searchController,
           scrollController: state.scrollController,
         );
@@ -266,8 +247,7 @@ final class MedicineLiked extends MedicineProductsState {
           totalItemsCount: state.totalItemsCount,
           offSet: state.offSet,
           displayFilters: state.displayFilters,
-          params: state.params,
-          selectedMedicineSearchFilter: state.selectedMedicineSearchFilter,
+          filters: state.filters,
           searchController: state.searchController,
           scrollController: state.scrollController,
         );
@@ -286,8 +266,7 @@ final class MedicineLikeFailed extends MedicineProductsState {
           offSet: state.offSet,
           medicines: state.medicines,
           displayFilters: state.displayFilters,
-          params: state.params,
-          selectedMedicineSearchFilter: state.selectedMedicineSearchFilter,
+          filters: state.filters,
           searchController: state.searchController,
           scrollController: state.scrollController,
         );

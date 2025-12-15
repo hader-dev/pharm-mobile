@@ -3,11 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/cubit/para_pharma_cubit.dart';
-import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/widget/search_filter_bottom_sheet.dart';
-import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
+import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart' show BottomSheetHelper;
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
+
+import '../../../../../common/filters/para_pharm/para_pharm_search_filters_bottom_sheet.dart'
+    show ParaPharmSearchFiltersBottomSheet;
 
 class SearchWidget extends StatelessWidget {
   const SearchWidget({super.key});
@@ -78,7 +80,9 @@ class SearchWidget extends StatelessWidget {
           onTap: () {
             BottomSheetHelper.showCommonBottomSheet(
               context: context,
-              child: SearchParaPharmFilterBottomSheet(),
+              child: ParaPharmSearchFiltersBottomSheet(
+                initialFilters: state.filters,
+              ),
             );
           },
         ),

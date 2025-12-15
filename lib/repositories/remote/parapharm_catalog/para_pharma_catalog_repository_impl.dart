@@ -18,6 +18,12 @@ class ParaPharmaRepository extends IParaPharmaRepository {
       'limit': params.limit.toString(),
       'offset': params.offset.toString(),
       'sort[id]': params.sortDirection,
+      if (params.searchQuery != null && params.searchQuery!.isNotEmpty)
+        'search[${params.filters.searchByField.name}]': params.searchQuery!,
+      if (params.filters.minPriceFilter > 0) 'gte[unitPriceHt]': params.filters.minPriceFilter.toString(),
+      if (params.filters.maxPriceFilter > 0) 'lte[unitPriceHt]': params.filters.maxPriceFilter.toString(),
+      if (params.filters.brand != null) 'filters[brandId]': params.filters.brand!.id,
+      if (params.filters.category != null) 'filters[categoryId]': params.filters.category!.id,
       'include[company][fields][]': [
         'id',
         'name',

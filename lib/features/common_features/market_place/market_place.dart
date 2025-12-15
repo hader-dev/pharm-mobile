@@ -9,7 +9,6 @@ import 'package:hader_pharm_mobile/features/common_features/market_place/cubit/m
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/cubit/para_pharma_cubit.dart';
 import 'package:hader_pharm_mobile/repositories/remote/company/company_repository_impl.dart';
 import 'package:hader_pharm_mobile/repositories/remote/favorite/favorite_repository_impl.dart';
-import 'package:hader_pharm_mobile/repositories/remote/filters/filters_repository.dart';
 import 'package:hader_pharm_mobile/repositories/remote/medicine_catalog/medicine_catalog_repository_impl.dart';
 import 'package:hader_pharm_mobile/repositories/remote/parapharm_catalog/para_pharma_catalog_repository_impl.dart';
 
@@ -49,7 +48,7 @@ class MarketPlaceScreen extends StatelessWidget {
               favoriteRepository: FavoriteRepository(client: getItInstance.get<INetworkService>()),
               searchController: TextEditingController(text: ""),
               paraPharmaRepository: ParaPharmaRepository(client: getItInstance.get<INetworkService>()))
-            ..getParaPharmas(),
+            ..getParaPharms(),
         ),
         BlocProvider(
           create: (context) => VendorsCubit(

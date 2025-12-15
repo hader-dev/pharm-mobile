@@ -44,14 +44,14 @@ class _MedicinesPageState extends State<MedicinesPage> with AutomaticKeepAliveCl
                 searchController: cubit.state.searchController,
               ),
             ),
-            BlocBuilder<MedicineProductsCubit, MedicineProductsState>(builder: (context, state) {
-              return SearchFilterButton(
-                hasActiveFilters: state.hasActiveFilters,
-                onTap: () {
-                  BottomSheetHelper.showCommonBottomSheet(context: context, child: SearchMedicineFilterBottomSheet());
-                },
-              );
-            }),
+            // BlocBuilder<MedicineProductsCubit, MedicineProductsState>(builder: (context, state) {
+            //   return SearchFilterButton(
+            //     hasActiveFilters: state.hasActiveFilters,
+            //     onTap: () {
+            //       BottomSheetHelper.showCommonBottomSheet(context: context, child: SearchMedicineFilterBottomSheet());
+            //     },
+            //   );
+            // }),
           ],
         ),
         Expanded(

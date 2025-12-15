@@ -57,7 +57,7 @@ class _DeligateProductsPageState extends State<DeligateProductsPage> with Automa
                   }
 
                   return RefreshIndicator(
-                    onRefresh: () => cubit.getParaPharmas(),
+                    onRefresh: () => cubit.getParaPharms(),
                     child: (state is ParaPharmaProductsLoadingFailed || products.isEmpty)
                         ? const Center(child: EmptyListWidget())
                         : GridView.builder(

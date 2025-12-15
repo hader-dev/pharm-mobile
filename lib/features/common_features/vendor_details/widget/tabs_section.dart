@@ -7,8 +7,8 @@ import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/medicine_products/cubit/medicine_products_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/cubit/para_pharma_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/vendor_details/cubit/vendor_details_cubit.dart';
-import 'package:hader_pharm_mobile/models/medical_filters.dart';
-import 'package:hader_pharm_mobile/models/para_medical_filters.dart';
+// import 'package:hader_pharm_mobile/models/medical_filters.dart';
+import 'package:hader_pharm_mobile/models/para_pharm_filters.dart';
 import 'package:hader_pharm_mobile/repositories/remote/favorite/favorite_repository_impl.dart';
 import 'package:hader_pharm_mobile/repositories/remote/medicine_catalog/medicine_catalog_repository_impl.dart';
 import 'package:hader_pharm_mobile/repositories/remote/parapharm_catalog/para_pharma_catalog_repository_impl.dart';
@@ -71,20 +71,20 @@ class _VendorDetailsTabBarSectionState extends State<VendorDetailsTabBarSection>
           child: MultiBlocProvider(
             providers: [
               BlocProvider(
-                create: (context) => MedicineProductsCubit(
-                    scrollController: ScrollController(),
-                    favoriteRepository: FavoriteRepository(client: getItInstance.get<INetworkService>()),
-                    searchController: TextEditingController(text: ""),
-                    medicineRepository: MedicineCatalogRepository(client: getItInstance.get<INetworkService>()))
-                  ..getMedicines(filters: MedicalFilters(vendors: [widget.companyId])),
-              ),
+                  create: (context) => MedicineProductsCubit(
+                      scrollController: ScrollController(),
+                      favoriteRepository: FavoriteRepository(client: getItInstance.get<INetworkService>()),
+                      searchController: TextEditingController(text: ""),
+                      medicineRepository: MedicineCatalogRepository(client: getItInstance.get<INetworkService>()))
+                  //..getMedicines(filters: MedicalFilters(vendors: [widget.companyId])),
+                  ),
               BlocProvider(
                 create: (context) => ParaPharmaCubit(
                     favoriteRepository: FavoriteRepository(client: getItInstance.get<INetworkService>()),
                     scrollController: ScrollController(),
                     searchController: TextEditingController(text: ""),
                     paraPharmaRepository: ParaPharmaRepository(client: getItInstance.get<INetworkService>()))
-                  ..getParaPharmas(filters: ParaMedicalFilters()),
+                  ..getParaPharms(filters: ParaPharmFilters()),
               ),
             ],
             child: TabBarView(

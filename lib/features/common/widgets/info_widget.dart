@@ -19,7 +19,6 @@ class InfoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: context.responsiveAppSizeTheme.current.p4),
       padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p4),
       width: double.maxFinite,
       decoration: BoxDecoration(

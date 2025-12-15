@@ -6,7 +6,7 @@ import 'package:flutter/rendering.dart' show ScrollDirection;
 import 'package:hader_pharm_mobile/config/routes/routing_manager.dart' show RoutingManager;
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/para_pharma.dart'
     show ParaPharmaProductsPageState;
-import 'package:hader_pharm_mobile/models/para_medical_filters.dart';
+import 'package:hader_pharm_mobile/models/para_pharm_filters.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/repositories/remote/favorite/favorite_repository_impl.dart';
 import 'package:hader_pharm_mobile/repositories/remote/parapharm_catalog/para_pharma_catalog_repository_impl.dart';
@@ -21,7 +21,7 @@ part 'para_pharma_state.dart';
 class ParaPharmaCubit extends Cubit<ParaPharmaState> {
   final ParaPharmaRepository paraPharmaRepository;
   final FavoriteRepository favoriteRepository;
-  final ParaMedicalFilters defaultFilters;
+  ParaPharmFilters appliedFilters;
 
   final DebounceManager debouncerManager = DebounceManager();
   bool _listenerAttached = false;
@@ -30,13 +30,12 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
       {required this.paraPharmaRepository,
       required ScrollController scrollController,
       required TextEditingController searchController,
-      ParaMedicalFilters? filters,
+      ParaPharmFilters? filters,
       required this.favoriteRepository})
-      : defaultFilters = filters ?? const ParaMedicalFilters(),
+      : appliedFilters = filters ?? const ParaPharmFilters(),
         super(ParaPharmaInitial(
           scrollController: scrollController,
           searchController: searchController,
-          filters: filters ?? const ParaMedicalFilters(),
         )) {
     state.scrollController.addListener(() {
       if (state.scrollController.position.maxScrollExtent >=
@@ -64,8 +63,8 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
     return state.scrollController;
   }
 
-  Future<void> getParaPharmas(
-      {int offset = 0, String? searchValue, String? companyIdFilter, ParaMedicalFilters? filters}) async {
+  Future<void> getParaPharms(
+      {int offset = 0, String? searchValue, String? companyIdFilter, ParaPharmFilters? filters}) async {
     try {
       emit(state.toLoading(filters: filters));
 
@@ -108,26 +107,30 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
     }
   }
 
-  void changeParaPharmaSearchFilter(SearchParaPharmaFilters filter) {
-    emit(state.toSearchFilterChanged(searchFilter: filter));
+  void changeParaPharmSearchFilter(ParaPharmFilters filter) {
+    emit(state.toSearchFilterChanged(filters: filter));
   }
 
   void searchParaPharmaCatalog(String? text) =>
-      debouncerManager.debounce(tag: "search", action: () => getParaPharmas(searchValue: text));
+      debouncerManager.debounce(tag: "search", action: () => getParaPharms(searchValue: text));
 
   void resetParaPharmaFilters() {
-    getParaPharmas(filters: defaultFilters, searchValue: null);
+    appliedFilters = const ParaPharmFilters();
 
-    emit(state.toSearchFilterChanged(
-      searchFilter: null,
-      filters: defaultFilters,
-    ));
-  }
+    getParaPharms(filters: appliedFilters, searchValue: null);
 
-  void updatedFilters(ParaMedicalFilters appliedFilters) {
     emit(state.toSearchFilterChanged(
       filters: appliedFilters,
     ));
+  }
+
+  void updatedFilters(ParaPharmFilters appliedFilters) {
+    emit(state.toSearchFilterChanged(
+      filters: appliedFilters,
+    ));
+    getParaPharms(
+      filters: appliedFilters,
+    );
   }
 
   Future<void> likeParaPharmaCatalog(String paraPharmaCatalogId) async {

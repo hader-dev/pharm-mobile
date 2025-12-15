@@ -10,8 +10,6 @@ import 'package:hader_pharm_mobile/config/services/notification/notification_ser
 import 'package:hader_pharm_mobile/config/services/notification/notification_service_port.dart';
 import 'package:hader_pharm_mobile/repositories/remote/configs/config_repository.dart';
 import 'package:hader_pharm_mobile/repositories/remote/configs/configs_repository_impl.dart';
-import 'package:hader_pharm_mobile/repositories/remote/filters/filters_repository.dart';
-import 'package:hader_pharm_mobile/repositories/remote/filters/filters_repository_impl.dart';
 import 'package:hader_pharm_mobile/repositories/remote/notification/notification_repository_impl.dart';
 import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -69,9 +67,6 @@ Future<void> initAppDependencies() async {
   final deeplinksService = DeeplinksService();
   await deeplinksService.init();
   getItInstance.registerLazySingleton<DeeplinksServicePort>(() => deeplinksService);
-
-  final filtersRepository = FiltersRepositoryImpl(client: dioNetworkManager);
-  getItInstance.registerLazySingleton<IFiltersRepository>(() => filtersRepository);
 
   final ConfigRepository configRepository = ConfigRepository(client: dioNetworkManager);
   getItInstance.registerLazySingleton<IConfigRepository>(() => configRepository);

@@ -6,7 +6,8 @@ import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
-import 'search_filter_bottom_sheet.dart';
+import '../../../../../common/filters/para_pharm/para_pharm_search_filters_bottom_sheet.dart'
+    show ParaPharmSearchFiltersBottomSheet;
 
 class FiltersBarV2 extends StatelessWidget {
   const FiltersBarV2({super.key});
@@ -53,7 +54,9 @@ class FiltersBarV2 extends StatelessWidget {
                 onTap: () {
                   BottomSheetHelper.showCommonBottomSheet(
                     context: context,
-                    child: SearchParaPharmFilterBottomSheet(),
+                    child: ParaPharmSearchFiltersBottomSheet(
+                      initialFilters: state.filters,
+                    ),
                   );
                 },
                 // BottomSheetHelper.showCommonBottomSheet(

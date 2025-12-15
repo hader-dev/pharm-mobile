@@ -42,7 +42,7 @@ class AnnouncementDetailsScreen extends StatelessWidget {
               searchController: TextEditingController(text: ""),
               paraPharmaRepository: ParaPharmaRepository(
                   client: getItInstance.get<INetworkService>()))
-            ..getParaPharmas(),
+            ..getParaPharms(),
         ),
         BlocProvider(
             create: (context) => AnnouncementCubit(

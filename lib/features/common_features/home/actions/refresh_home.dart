@@ -8,7 +8,7 @@ import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pag
 Future<void> refreshHome(BuildContext context) async {
   await Future.wait([
     context.read<HomeCubit>().getPromotions(),
-    context.read<ParaPharmaCubit>().getParaPharmas(),
+    context.read<ParaPharmaCubit>().getParaPharms(),
     context.read<MedicineProductsCubit>().getMedicines(),
     context.read<VendorsCubit>().fetchVendors(),
   ]);
