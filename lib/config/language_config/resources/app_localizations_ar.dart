@@ -1311,4 +1311,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get search_select_brand => 'ابحث وحدد العلامة التجارية';
+
+  @override
+  String get search_by => 'البحث حسب';
+
+  @override
+  String get no_brands_found => 'لم يتم العثور على أي علامة تجارية';
+
+  @override
+  String get no_categories_found => 'لم يتم العثور على أي فئة';
 }

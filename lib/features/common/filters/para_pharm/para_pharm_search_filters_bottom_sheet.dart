@@ -64,7 +64,7 @@ class ParaPharmSearchFiltersBottomSheet extends StatelessWidget {
               Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
               const ResponsiveGap.s12(),
               InfoWidget(
-                label: "Search By:",
+                label: context.translation!.search_by,
                 bgColor: AppColors.bgWhite,
                 value: Wrap(
                     direction: Axis.horizontal,

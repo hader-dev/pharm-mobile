@@ -417,5 +417,8 @@
   "max_qty_to_order": "Quantité max à commander",
   "unexpected_error": "Une erreur inattendue s'est produite. Veuillez réessayer plus tard.",
    "search_select_category": "Rechercher et sélectionner une catégorie",
-  "search_select_brand": "Rechercher et sélectionner une marque"
+  "search_select_brand": "Rechercher et sélectionner une marque",
+  "search_by": "Rechercher par",
+   "no_brands_found": "Aucune marque trouvée",
+  "no_categories_found": "Aucune catégorie trouvée"
 }

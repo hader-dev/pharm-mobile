@@ -77,7 +77,8 @@ class _BrandSearchFilterState extends State<BrandSearchFilter> {
                         if (state is ParaPharmFiltersBrandSearchLoaded &&
                             context.read<ParaPharmFiltersCubit>().brands.isEmpty) {
                           return Center(
-                              child: Text("no brands found", style: context.responsiveTextTheme.current.bodySmall));
+                              child: Text(context.translation!.no_brands_found,
+                                  style: context.responsiveTextTheme.current.bodySmall));
                         }
                         return ConstrainedBox(
                           constraints: BoxConstraints(maxHeight: 160),
@@ -89,8 +90,13 @@ class _BrandSearchFilterState extends State<BrandSearchFilter> {
                                   .brands
                                   .map((e) => InkWell(
                                         onTap: () {
-                                          context.read<ParaPharmFiltersCubit>().changeFilters(
-                                              context.read<ParaPharmFiltersCubit>().tempFilters.copyWith(brand: e));
+                                          context.read<ParaPharmFiltersCubit>().changeFilters(context
+                                              .read<ParaPharmFiltersCubit>()
+                                              .tempFilters
+                                              .copyWith(
+                                                  brand: e,
+                                                  category:
+                                                      context.read<ParaPharmFiltersCubit>().tempFilters.category));
                                           context.read<ParaPharmFiltersCubit>().brandSearchController.text = e.name;
                                           _controller.hide();
                                         },
@@ -129,7 +135,8 @@ class _BrandSearchFilterState extends State<BrandSearchFilter> {
                       context.read<ParaPharmFiltersCubit>().brandSearchController.text = '';
                       context.read<ParaPharmFiltersCubit>().searchBrands(searchValue: '');
                       context.read<ParaPharmFiltersCubit>().changeFilters(
-                            context.read<ParaPharmFiltersCubit>().tempFilters.copyWith(brand: null),
+                            context.read<ParaPharmFiltersCubit>().tempFilters.copyWith(
+                                brand: null, category: context.read<ParaPharmFiltersCubit>().tempFilters.category),
                           );
                       _controller.hide();
                     },

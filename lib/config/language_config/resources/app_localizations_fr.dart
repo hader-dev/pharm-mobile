@@ -1335,4 +1335,13 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get search_select_brand => 'Rechercher et sélectionner une marque';
+
+  @override
+  String get search_by => 'Rechercher par';
+
+  @override
+  String get no_brands_found => 'Aucune marque trouvée';
+
+  @override
+  String get no_categories_found => 'Aucune catégorie trouvée';
 }

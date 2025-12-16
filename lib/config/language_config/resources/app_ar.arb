@@ -415,5 +415,8 @@
  "max_qty_to_order": "الحد الأقصى للطلب",
  "unexpected_error": "حدث خطأ غير متوقع. يرجى المحاولة لاحقًا.",
   "search_select_category": "ابحث وحدد الفئة",
-  "search_select_brand": "ابحث وحدد العلامة التجارية"
+  "search_select_brand": "ابحث وحدد العلامة التجارية",
+   "search_by": "البحث حسب",
+   "no_brands_found": "لم يتم العثور على أي علامة تجارية",
+  "no_categories_found": "لم يتم العثور على أي فئة"
 }

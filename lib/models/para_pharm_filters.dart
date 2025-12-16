@@ -46,8 +46,8 @@ class ParaPharmFilters extends Equatable {
       searchByField: searchByField ?? this.searchByField,
       minPriceFilter: minPriceFilter ?? this.minPriceFilter,
       maxPriceFilter: maxPriceFilter ?? this.maxPriceFilter,
-      brand: brand ?? this.brand,
-      category: category ?? this.category,
+      brand: brand,
+      category: category,
     );
   }
 

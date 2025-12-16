@@ -17,7 +17,6 @@ import 'package:iconsax/iconsax.dart';
 import '../../../../models/medicines_filters.dart' show MedicinesFilters;
 import '../../../common_features/market_place/sub_pages/medicine_products/cubit/medicine_products_cubit.dart';
 import 'cubit/medicines_filters_cubit.dart' show MedicinesFiltersCubit, MedicinesFiltersState;
-import '../para_pharm/widget/brand_search_filter.dart' show BrandSearchFilter;
 
 class MedicinesSearchFiltersBottomSheet extends StatelessWidget {
   final MedicinesFilters? initialFilters;
@@ -49,7 +48,7 @@ class MedicinesSearchFiltersBottomSheet extends StatelessWidget {
               Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
               const ResponsiveGap.s12(),
               InfoWidget(
-                label: "Search By:",
+                label: context.translation!.search_by,
                 bgColor: AppColors.bgWhite,
                 value: Wrap(
                     direction: Axis.horizontal,

@@ -77,7 +77,8 @@ class _CategorySearchFilterState extends State<CategorySearchFilter> {
                         if (state is ParaPharmFiltersCategorySearchLoaded &&
                             context.read<ParaPharmFiltersCubit>().categories.isEmpty) {
                           return Center(
-                              child: Text("no categories found", style: context.responsiveTextTheme.current.bodySmall));
+                              child: Text(context.translation!.no_categories_found,
+                                  style: context.responsiveTextTheme.current.bodySmall));
                         }
                         return ConstrainedBox(
                           constraints: BoxConstraints(maxHeight: 160),
@@ -89,8 +90,12 @@ class _CategorySearchFilterState extends State<CategorySearchFilter> {
                                   .categories
                                   .map((e) => InkWell(
                                         onTap: () {
-                                          context.read<ParaPharmFiltersCubit>().changeFilters(
-                                              context.read<ParaPharmFiltersCubit>().tempFilters.copyWith(category: e));
+                                          context.read<ParaPharmFiltersCubit>().changeFilters(context
+                                              .read<ParaPharmFiltersCubit>()
+                                              .tempFilters
+                                              .copyWith(
+                                                  category: e,
+                                                  brand: context.read<ParaPharmFiltersCubit>().tempFilters.brand));
                                           context.read<ParaPharmFiltersCubit>().categorySearchController.text = e.name;
                                           _controller.hide();
                                         },
@@ -129,7 +134,8 @@ class _CategorySearchFilterState extends State<CategorySearchFilter> {
                       context.read<ParaPharmFiltersCubit>().categorySearchController.text = '';
                       context.read<ParaPharmFiltersCubit>().searchCategories(searchValue: '');
                       context.read<ParaPharmFiltersCubit>().changeFilters(
-                            context.read<ParaPharmFiltersCubit>().tempFilters.copyWith(category: null),
+                            context.read<ParaPharmFiltersCubit>().tempFilters.copyWith(
+                                category: null, brand: context.read<ParaPharmFiltersCubit>().tempFilters.brand),
                           );
                       _controller.hide();
                     },

@@ -1314,4 +1314,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get search_select_brand => 'Search & select brand';
+
+  @override
+  String get search_by => 'Search by';
+
+  @override
+  String get no_brands_found => 'No brands found';
+
+  @override
+  String get no_categories_found => 'No categories found';
 }
