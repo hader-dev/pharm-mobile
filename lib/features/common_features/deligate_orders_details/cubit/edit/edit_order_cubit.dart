@@ -28,7 +28,7 @@ class DeligateEditOrderCubit extends Cubit<DeligateEditOrderState> {
     required TextEditingController quantityController,
     required TextEditingController customPriceController,
   }) : super(DeligateOrderInitial(
-          client: DeligateClient.empty(),
+          client: DelegateClient.empty(),
           scrollController: scrollController,
           searchController: searchController,
           quantityController: quantityController,

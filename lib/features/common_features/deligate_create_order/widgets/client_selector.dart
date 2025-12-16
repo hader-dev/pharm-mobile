@@ -5,19 +5,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/features/common/decorations/field.dart';
 import 'package:hader_pharm_mobile/features/common/decorations/input.dart';
-import 'package:hader_pharm_mobile/features/common_features/deligate_clients/cubit/clients_cubit.dart';
+import 'package:hader_pharm_mobile/features/delegate/delegate_clients/cubit/clients_cubit.dart';
 import 'package:hader_pharm_mobile/models/client.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
-typedef DeligateClientValidator = String? Function(DeligateClient? client);
+typedef DeligateClientValidator = String? Function(DelegateClient? client);
 
 class OrderClientSelector extends StatelessWidget {
   final String? selectedClientId;
-  final ValueChanged<DeligateClient?>? onChanged;
+  final ValueChanged<DelegateClient?>? onChanged;
   final DeligateClientValidator? validator;
   final TextStyle? labelTextStyle;
-  final DeligateClient? currentSelection;
+  final DelegateClient? currentSelection;
 
   const OrderClientSelector({
     super.key,
@@ -28,35 +28,29 @@ class OrderClientSelector extends StatelessWidget {
     this.currentSelection,
   });
 
-  FutureOr<List<DeligateClient>> itemsWithSearch(
-      String filter, List<DeligateClient> values) async {
+  FutureOr<List<DelegateClient>> itemsWithSearch(String filter, List<DelegateClient> values) async {
     return values
         .where((element) =>
-            element.buyerCompany.name
-                .toLowerCase()
-                .contains(filter.toLowerCase()) ||
+            element.buyerCompany.name.toLowerCase().contains(filter.toLowerCase()) ||
             element.buyerCompany.name.toString().contains(filter))
         .toList();
   }
 
-  Widget buildDisplayWidget(
-      BuildContext context, DeligateClient? selectedItem) {
+  Widget buildDisplayWidget(BuildContext context, DelegateClient? selectedItem) {
     return Text(
-      selectedItem!.buyerCompany.name.isNotEmpty
-          ? selectedItem.buyerCompany.name
-          : context.translation!.select_client,
+      selectedItem!.buyerCompany.name.isNotEmpty ? selectedItem.buyerCompany.name : context.translation!.select_client,
       style: context.responsiveTextTheme.current.body3Regular,
     );
   }
 
-  bool compareFn(DeligateClient a, DeligateClient b) => a.id == b.id;
+  bool compareFn(DelegateClient a, DelegateClient b) => a.id == b.id;
 
   @override
   Widget build(BuildContext context) {
     final translation = context.translation!;
 
-    return BlocBuilder<DeligateClientsCubit, DeligateClientsState>(
-      builder: (context, state) => DropdownSearch<DeligateClient>(
+    return BlocBuilder<DelegateClientsCubit, DelegateClientsState>(
+      builder: (context, state) => DropdownSearch<DelegateClient>(
         validator: validator,
         selectedItem: currentSelection,
         items: (query, props) async => itemsWithSearch(query, state.clients),
@@ -64,16 +58,14 @@ class OrderClientSelector extends StatelessWidget {
         popupProps: PopupProps.modalBottomSheet(
           showSearchBox: true,
           searchFieldProps: TextFieldProps(
-            decoration: buildInputDecorationCustomFieldStyle(
-                translation.select_client, FieldState.normal, context),
+            decoration: buildInputDecorationCustomFieldStyle(translation.select_client, FieldState.normal, context),
           ),
         ),
         itemAsString: (item) => item.buyerCompany.name,
         dropdownBuilder: buildDisplayWidget,
         onChanged: onChanged?.call,
         decoratorProps: DropDownDecoratorProps(
-          decoration: buildDropdownInputDecoration(
-              context.translation!.select_client, context),
+          decoration: buildDropdownInputDecoration(context.translation!.select_client, context),
         ),
       ),
     );

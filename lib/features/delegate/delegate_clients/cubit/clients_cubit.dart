@@ -9,13 +9,13 @@ import 'package:hader_pharm_mobile/repositories/remote/clients/params/params_my_
 
 part 'clients_state.dart';
 
-class DeligateClientsCubit extends Cubit<DeligateClientsState> {
+class DelegateClientsCubit extends Cubit<DelegateClientsState> {
   final IClientsRepository clientsRepo;
   final ScrollController scrollController;
   final TextEditingController searchController;
   Timer? _debounce;
 
-  DeligateClientsCubit({
+  DelegateClientsCubit({
     required this.clientsRepo,
     required this.scrollController,
     required this.searchController,
@@ -25,8 +25,7 @@ class DeligateClientsCubit extends Cubit<DeligateClientsState> {
 
   void searchClients([String? text]) => _debounceFunction(() => getClients());
 
-  Future<void> _debounceFunction(Future<void> Function() func,
-      [int milliseconds = 500]) async {
+  Future<void> _debounceFunction(Future<void> Function() func, [int milliseconds = 500]) async {
     if (_debounce?.isActive ?? false) _debounce?.cancel();
     _debounce = Timer(Duration(milliseconds: milliseconds), () async {
       await func();
@@ -40,8 +39,8 @@ class DeligateClientsCubit extends Cubit<DeligateClientsState> {
 
       emit(state.loading(offset: offset));
 
-      final response = await clientsRepo.getMyClients(ParamsLoadMyClients(
-          limit: state.limit, offset: state.offSet, searchQuery: searchText));
+      final response = await clientsRepo
+          .getMyClients(ParamsLoadMyClients(limit: state.limit, offset: state.offSet, searchQuery: searchText));
 
       emit(state.loaded(
         clients: response.clients,
@@ -92,8 +91,7 @@ class DeligateClientsCubit extends Cubit<DeligateClientsState> {
 
   void _onScroll() {
     scrollController.addListener(() async {
-      if (scrollController.position.pixels >=
-          scrollController.position.maxScrollExtent) {
+      if (scrollController.position.pixels >= scrollController.position.maxScrollExtent) {
         if (state.offSet < state.totalItemsCount) {
           await loadMoreAnnouncements();
         } else {

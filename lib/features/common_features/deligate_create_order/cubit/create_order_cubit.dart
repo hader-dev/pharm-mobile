@@ -40,7 +40,7 @@ class DeligateCreateOrderCubit extends Cubit<DeligateCreateOrderState> {
     required TextEditingController customPriceController,
     required String shippingAddress,
   }) : super(DeligateOrderInitial(
-          client: DeligateClient.empty(),
+          client: DelegateClient.empty(),
           packageQuantityController: packageQuantityController,
           searchController: searchController,
           quantityController: quantityController,
@@ -255,7 +255,7 @@ class DeligateCreateOrderCubit extends Cubit<DeligateCreateOrderState> {
     );
   }
 
-  void updateClient(DeligateClient client) {
+  void updateClient(DelegateClient client) {
     emit(state.toClientUpdated(client: client));
   }
 
@@ -434,7 +434,7 @@ class DeligateCreateOrderCubit extends Cubit<DeligateCreateOrderState> {
     await submitOrderWithClient(state.client);
   }
 
-  Future<void> submitOrderWithClient(DeligateClient client) async {
+  Future<void> submitOrderWithClient(DelegateClient client) async {
     final context = AppLayout.appLayoutScaffoldKey.currentContext!;
     final translation = context.translation!;
     final messanger = getItInstance.get<ToastManager>();

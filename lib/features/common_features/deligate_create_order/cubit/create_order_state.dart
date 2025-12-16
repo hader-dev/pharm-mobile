@@ -1,7 +1,7 @@
 part of 'create_order_cubit.dart';
 
 abstract class DeligateCreateOrderState extends Equatable {
-  final DeligateClient client;
+  final DelegateClient client;
   final List<BaseParaPharmaCatalogModel> products;
   final List<DeligateParahparmOrderItemUi> orderProducts;
   final String shippingAddress;
@@ -84,8 +84,7 @@ abstract class DeligateCreateOrderState extends Equatable {
         orderNote
       ];
 
-  static double calculateTotalAmountTtc(
-      List<DeligateParahparmOrderItemUi> items) {
+  static double calculateTotalAmountTtc(List<DeligateParahparmOrderItemUi> items) {
     double totalAmount = 0;
     for (var element in items) {
       totalAmount += element.model.getTotalPrice()["totalTTCPrice"]!;
@@ -93,8 +92,7 @@ abstract class DeligateCreateOrderState extends Equatable {
     return totalAmount;
   }
 
-  static double calculateTotalAmountHt(
-      List<DeligateParahparmOrderItemUi> items) {
+  static double calculateTotalAmountHt(List<DeligateParahparmOrderItemUi> items) {
     double totalAmount = 0;
     for (var element in items) {
       totalAmount += element.model.getTotalPrice()["totalHtPrice"]!;
@@ -103,7 +101,7 @@ abstract class DeligateCreateOrderState extends Equatable {
   }
 
   DeligateOrderInitial toInitial({
-    DeligateClient? client,
+    DelegateClient? client,
     bool resetClient = false,
     List<BaseParaPharmaCatalogModel> products = const [],
     bool hasReachedMax = false,
@@ -117,14 +115,12 @@ abstract class DeligateCreateOrderState extends Equatable {
     BaseParaPharmaCatalogModel? selectedProduct,
   }) {
     return DeligateOrderInitial(
-      client: resetClient ? DeligateClient.empty() : client ?? this.client,
+      client: resetClient ? DelegateClient.empty() : client ?? this.client,
       products: products,
       hasReachedMax: hasReachedMax,
       totalItemsCount: totalItemsCount,
-      selectedProduct:
-          resetSelectedProduct ? null : selectedProduct ?? this.selectedProduct,
-      suggestedPrice:
-          resetSuggestedPrice ? null : suggestedPrice ?? this.suggestedPrice,
+      selectedProduct: resetSelectedProduct ? null : selectedProduct ?? this.selectedProduct,
+      suggestedPrice: resetSuggestedPrice ? null : suggestedPrice ?? this.suggestedPrice,
       quantity: quantity,
       orderProducts: [],
       offSet: offSet,
@@ -137,8 +133,7 @@ abstract class DeligateCreateOrderState extends Equatable {
     );
   }
 
-  DeligateOrderUpdateSelectedProduct toUpdateSelectedProduct(
-      {required BaseParaPharmaCatalogModel product}) {
+  DeligateOrderUpdateSelectedProduct toUpdateSelectedProduct({required BaseParaPharmaCatalogModel product}) {
     quantityController.text = '1';
     packageQuantityController.text = '0';
     return DeligateOrderUpdateSelectedProduct.fromState(
@@ -150,8 +145,7 @@ abstract class DeligateCreateOrderState extends Equatable {
     );
   }
 
-  DeligateOrderUpdateSuggestedPrice toUpdateSuggestedPrice(
-      {double? price, double? totalPrice, int? quantity}) {
+  DeligateOrderUpdateSuggestedPrice toUpdateSuggestedPrice({double? price, double? totalPrice, int? quantity}) {
     return DeligateOrderUpdateSuggestedPrice.fromState(
       state: this,
       suggestedPrice: price,
@@ -164,12 +158,9 @@ abstract class DeligateCreateOrderState extends Equatable {
       DeligateOrderLoading.fromState(state: this, offset: offset ?? offSet);
 
   DeligateOrderProductsUpdated toProductsUpdated(
-      {required DeligateParahparmOrderItemUi item,
-      bool removed = false,
-      bool resetSelectedProduct = false}) {
+      {required DeligateParahparmOrderItemUi item, bool removed = false, bool resetSelectedProduct = false}) {
     bool updatedExisting = false;
-    List<DeligateParahparmOrderItemUi> orderProducts =
-        this.orderProducts.map((el) {
+    List<DeligateParahparmOrderItemUi> orderProducts = this.orderProducts.map((el) {
       final exists = !removed && el.model.product.id == item.model.product.id;
 
       if (exists) {
@@ -186,12 +177,10 @@ abstract class DeligateCreateOrderState extends Equatable {
     }
 
     return DeligateOrderProductsUpdated.fromState(
-        state: this,
-        orderProducts: orderProducts,
-        selectedProduct: resetSelectedProduct ? null : item.model.product);
+        state: this, orderProducts: orderProducts, selectedProduct: resetSelectedProduct ? null : item.model.product);
   }
 
-  DeligateOrderClientUpdated toClientUpdated({required DeligateClient client}) {
+  DeligateOrderClientUpdated toClientUpdated({required DelegateClient client}) {
     return DeligateOrderClientUpdated.fromState(state: this, client: client);
   }
 
@@ -207,11 +196,9 @@ abstract class DeligateCreateOrderState extends Equatable {
         totalItemsCount: totalItemsCount ?? this.totalItemsCount,
       );
 
-  DeligateOrderLoadLimitReached toLimitReached() =>
-      DeligateOrderLoadLimitReached.fromState(this);
+  DeligateOrderLoadLimitReached toLimitReached() => DeligateOrderLoadLimitReached.fromState(this);
 
-  DeligateOrderLoadingFailed toFailed(String message) =>
-      DeligateOrderLoadingFailed.fromState(this, message: message);
+  DeligateOrderLoadingFailed toFailed(String message) => DeligateOrderLoadingFailed.fromState(this, message: message);
 
   DeligateCreateOrderState toClearProducts() {
     return DeligateOrderInitial(
@@ -256,18 +243,15 @@ final class DeligateOrderInitial extends DeligateCreateOrderState {
       : super(
             scrollController: scrollController ?? ScrollController(),
             searchController: searchController ?? TextEditingController(),
-            customPriceController:
-                customPriceController ?? TextEditingController(),
+            customPriceController: customPriceController ?? TextEditingController(),
             quantityController: quantityController ?? TextEditingController(),
-            packageQuantityController:
-                packageQuantityController ?? TextEditingController(),
+            packageQuantityController: packageQuantityController ?? TextEditingController(),
             selectedPaymentMethod: selectedPaymentMethod ?? PaymentMethods.cash,
             selectedInvoiceType: selectedInvoiceType ?? InvoiceTypes.proforma);
 }
 
 final class DeligateOrderLoading extends DeligateCreateOrderState {
-  DeligateOrderLoading.fromState(
-      {required DeligateCreateOrderState state, int? offset})
+  DeligateOrderLoading.fromState({required DeligateCreateOrderState state, int? offset})
       : super(
             offSet: offset ?? state.offSet,
             client: state.client,
@@ -323,9 +307,7 @@ final class DeligateOrderClientUpdated extends DeligateCreateOrderState {
 
 final class DeligateOrderProductsUpdated extends DeligateCreateOrderState {
   DeligateOrderProductsUpdated.fromState(
-      {required DeligateCreateOrderState state,
-      required super.orderProducts,
-      required super.selectedProduct})
+      {required DeligateCreateOrderState state, required super.orderProducts, required super.selectedProduct})
       : super(
             hasReachedMax: state.hasReachedMax,
             client: state.client,
@@ -341,18 +323,15 @@ final class DeligateOrderProductsUpdated extends DeligateCreateOrderState {
             customPriceController: state.customPriceController,
             quantityController: state.quantityController,
             packageQuantityController: state.packageQuantityController,
-            totalHtAmount:
-                DeligateCreateOrderState.calculateTotalAmountHt(orderProducts),
-            totalTtcAmount:
-                DeligateCreateOrderState.calculateTotalAmountTtc(orderProducts),
+            totalHtAmount: DeligateCreateOrderState.calculateTotalAmountHt(orderProducts),
+            totalTtcAmount: DeligateCreateOrderState.calculateTotalAmountTtc(orderProducts),
             orderNote: state.orderNote,
             shippingAddress: state.shippingAddress,
             selectedPaymentMethod: state.selectedPaymentMethod,
             selectedInvoiceType: state.selectedInvoiceType);
 }
 
-final class DeligateOrderUpdateSelectedProduct
-    extends DeligateCreateOrderState {
+final class DeligateOrderUpdateSelectedProduct extends DeligateCreateOrderState {
   DeligateOrderUpdateSelectedProduct.fromState(
       {required DeligateCreateOrderState state,
       required super.selectedProduct,
@@ -493,10 +472,8 @@ final class DeligateOrderUpdateMiscs extends DeligateCreateOrderState {
             totalTtcAmount: state.totalTtcAmount,
             orderNote: orderNote ?? state.orderNote,
             shippingAddress: shippingAddress ?? state.shippingAddress,
-            selectedPaymentMethod:
-                selectedPaymentMethod ?? state.selectedPaymentMethod,
-            selectedInvoiceType:
-                selectedInvoiceType ?? state.selectedInvoiceType);
+            selectedPaymentMethod: selectedPaymentMethod ?? state.selectedPaymentMethod,
+            selectedInvoiceType: selectedInvoiceType ?? state.selectedInvoiceType);
 }
 
 final class DeligateOrderLoadingFailed extends DeligateCreateOrderState {

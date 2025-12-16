@@ -1,21 +1,21 @@
 part of 'clients_cubit.dart';
 
-abstract class DeligateClientsState extends Equatable {
-  final List<DeligateClient> clients;
+abstract class DelegateClientsState extends Equatable {
+  final List<DelegateClient> clients;
   final bool hasReachedMax;
   final int totalItemsCount;
   final int offSet;
   final int limit;
 
-  const DeligateClientsState(
+  const DelegateClientsState(
       {required this.clients,
       required this.hasReachedMax,
       required this.totalItemsCount,
       required this.offSet,
       required this.limit});
 
-  DeligateClientsState copyWith({
-    List<DeligateClient>? clients,
+  DelegateClientsState copyWith({
+    List<DelegateClient>? clients,
     bool? hasReachedMax,
     int? totalItemsCount,
     int? offSet,
@@ -31,7 +31,7 @@ abstract class DeligateClientsState extends Equatable {
   }
 
   DeligateClientsInitial initial({
-    List<DeligateClient> clients = const [],
+    List<DelegateClient> clients = const [],
     bool hasReachedMax = false,
     int totalItemsCount = 0,
     int offSet = 0,
@@ -46,11 +46,10 @@ abstract class DeligateClientsState extends Equatable {
     );
   }
 
-  ClientsLoading loading({int? offset}) =>
-      ClientsLoading.fromState(copyWith(offSet: offset ?? offSet));
+  ClientsLoading loading({int? offset}) => ClientsLoading.fromState(copyWith(offSet: offset ?? offSet));
 
   ClientsLoaded loaded({
-    List<DeligateClient>? clients,
+    List<DelegateClient>? clients,
     bool? hasReachedMax,
     int? totalItemsCount,
   }) =>
@@ -62,11 +61,9 @@ abstract class DeligateClientsState extends Equatable {
         ),
       );
 
-  ClientsLoadLimitReached limitReached() =>
-      ClientsLoadLimitReached.fromState(this);
+  ClientsLoadLimitReached limitReached() => ClientsLoadLimitReached.fromState(this);
 
-  ClientsLoadingFailed failed(String message) =>
-      ClientsLoadingFailed.fromState(this, message: message);
+  ClientsLoadingFailed failed(String message) => ClientsLoadingFailed.fromState(this, message: message);
 
   @override
   List<Object?> get props => [
@@ -78,7 +75,7 @@ abstract class DeligateClientsState extends Equatable {
       ];
 }
 
-final class DeligateClientsInitial extends DeligateClientsState {
+final class DeligateClientsInitial extends DelegateClientsState {
   const DeligateClientsInitial({
     super.clients = const [],
     super.hasReachedMax = false,
@@ -88,8 +85,8 @@ final class DeligateClientsInitial extends DeligateClientsState {
   });
 }
 
-final class ClientsLoading extends DeligateClientsState {
-  ClientsLoading.fromState(DeligateClientsState state)
+final class ClientsLoading extends DelegateClientsState {
+  ClientsLoading.fromState(DelegateClientsState state)
       : super(
           clients: state.clients,
           hasReachedMax: state.hasReachedMax,
@@ -99,8 +96,8 @@ final class ClientsLoading extends DeligateClientsState {
         );
 }
 
-final class ClientsLoaded extends DeligateClientsState {
-  ClientsLoaded.fromState(DeligateClientsState state)
+final class ClientsLoaded extends DelegateClientsState {
+  ClientsLoaded.fromState(DelegateClientsState state)
       : super(
           clients: state.clients,
           hasReachedMax: state.hasReachedMax,
@@ -110,8 +107,8 @@ final class ClientsLoaded extends DeligateClientsState {
         );
 }
 
-final class ClientsLoadLimitReached extends DeligateClientsState {
-  ClientsLoadLimitReached.fromState(DeligateClientsState state)
+final class ClientsLoadLimitReached extends DelegateClientsState {
+  ClientsLoadLimitReached.fromState(DelegateClientsState state)
       : super(
           clients: state.clients,
           hasReachedMax: true,
@@ -121,11 +118,11 @@ final class ClientsLoadLimitReached extends DeligateClientsState {
         );
 }
 
-final class ClientsLoadingFailed extends DeligateClientsState {
+final class ClientsLoadingFailed extends DelegateClientsState {
   final String message;
 
   ClientsLoadingFailed.fromState(
-    DeligateClientsState state, {
+    DelegateClientsState state, {
     required this.message,
   }) : super(
           clients: state.clients,

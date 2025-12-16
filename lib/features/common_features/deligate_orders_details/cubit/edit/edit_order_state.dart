@@ -1,7 +1,7 @@
 part of 'edit_order_cubit.dart';
 
 abstract class DeligateEditOrderState {
-  final DeligateClient client;
+  final DelegateClient client;
   final List<BaseParaPharmaCatalogModel> products;
   final List<DeligateParahparmOrderItemUi> orderProducts;
 
@@ -43,7 +43,7 @@ abstract class DeligateEditOrderState {
   }
 
   DeligateOrderInitial toInitial({
-    DeligateClient? client,
+    DelegateClient? client,
     bool resetClient = false,
     List<BaseParaPharmaCatalogModel> products = const [],
     bool hasReachedMax = false,
@@ -61,14 +61,12 @@ abstract class DeligateEditOrderState {
     ScrollController? scrollController,
   }) {
     return DeligateOrderInitial(
-      client: resetClient ? DeligateClient.empty() : client ?? this.client,
+      client: resetClient ? DelegateClient.empty() : client ?? this.client,
       products: products,
       hasReachedMax: hasReachedMax,
       totalItemsCount: totalItemsCount,
-      selectedProduct:
-          resetSelectedProduct ? null : selectedProduct ?? this.selectedProduct,
-      suggestedPrice:
-          resetSuggestedPrice ? null : suggestedPrice ?? this.suggestedPrice,
+      selectedProduct: resetSelectedProduct ? null : selectedProduct ?? this.selectedProduct,
+      suggestedPrice: resetSuggestedPrice ? null : suggestedPrice ?? this.suggestedPrice,
       quantity: quantity,
       orderProducts: [],
       offSet: offSet,
@@ -76,8 +74,7 @@ abstract class DeligateEditOrderState {
     );
   }
 
-  DeligateOrderUpdateSelectedProduct toUpdateSelectedProduct(
-      {required BaseParaPharmaCatalogModel product}) {
+  DeligateOrderUpdateSelectedProduct toUpdateSelectedProduct({required BaseParaPharmaCatalogModel product}) {
     quantityController.text = '1';
     packageQuantityController.text = '0';
 
@@ -89,23 +86,17 @@ abstract class DeligateEditOrderState {
         suggestedPrice: product.unitPriceHt);
   }
 
-  DeligateOrderUpdateSuggestedPrice toUpdateSuggestedPrice(
-      {double? price, double? totalPrice, int? quantity}) {
+  DeligateOrderUpdateSuggestedPrice toUpdateSuggestedPrice({double? price, double? totalPrice, int? quantity}) {
     return DeligateOrderUpdateSuggestedPrice.fromState(
-        state: this,
-        suggestedPrice: price,
-        quantity: quantity,
-        totalPrice: totalPrice);
+        state: this, suggestedPrice: price, quantity: quantity, totalPrice: totalPrice);
   }
 
   DeligateOrderLoading toLoading({int? offset}) =>
       DeligateOrderLoading.fromState(state: this, offSet: offset ?? offSet);
 
-  DeligateOrderProductsUpdated toProductsUpdated(
-      {required DeligateParahparmOrderItemUi item, bool removed = false}) {
+  DeligateOrderProductsUpdated toProductsUpdated({required DeligateParahparmOrderItemUi item, bool removed = false}) {
     bool updatedExisting = false;
-    List<DeligateParahparmOrderItemUi> orderProducts =
-        this.orderProducts.map((el) {
+    List<DeligateParahparmOrderItemUi> orderProducts = this.orderProducts.map((el) {
       final exists = !removed && el.model.product.id == item.model.product.id;
 
       if (exists) {
@@ -121,11 +112,10 @@ abstract class DeligateEditOrderState {
       orderProducts.add(item);
     }
 
-    return DeligateOrderProductsUpdated.fromState(
-        state: this, orderProducts: orderProducts);
+    return DeligateOrderProductsUpdated.fromState(state: this, orderProducts: orderProducts);
   }
 
-  DeligateOrderClientUpdated toClientUpdated({required DeligateClient client}) {
+  DeligateOrderClientUpdated toClientUpdated({required DelegateClient client}) {
     return DeligateOrderClientUpdated.fromState(state: this, client: client);
   }
 
@@ -140,11 +130,9 @@ abstract class DeligateEditOrderState {
           hasReachedMax: hasReachedMax ?? this.hasReachedMax,
           totalItemsCount: totalItemsCount ?? this.totalItemsCount);
 
-  DeligateOrderLoadLimitReached toLimitReached() =>
-      DeligateOrderLoadLimitReached.fromState(this);
+  DeligateOrderLoadLimitReached toLimitReached() => DeligateOrderLoadLimitReached.fromState(this);
 
-  DeligateOrderLoadingFailed toFailed(String message) =>
-      DeligateOrderLoadingFailed.fromState(this, message: message);
+  DeligateOrderLoadingFailed toFailed(String message) => DeligateOrderLoadingFailed.fromState(this, message: message);
 }
 
 final class DeligateOrderInitial extends DeligateEditOrderState {
@@ -168,18 +156,14 @@ final class DeligateOrderInitial extends DeligateEditOrderState {
   }) : super(
           scrollController: scrollController ?? ScrollController(),
           searchController: searchController ?? TextEditingController(),
-          quantityController:
-              quantityController ?? TextEditingController(text: "1"),
-          packageQuantityController:
-              packageQuantityController ?? TextEditingController(text: "1"),
-          customPriceController:
-              customPriceController ?? TextEditingController(),
+          quantityController: quantityController ?? TextEditingController(text: "1"),
+          packageQuantityController: packageQuantityController ?? TextEditingController(text: "1"),
+          customPriceController: customPriceController ?? TextEditingController(),
         );
 }
 
 final class DeligateOrderLoading extends DeligateEditOrderState {
-  DeligateOrderLoading.fromState(
-      {required DeligateEditOrderState state, int? offSet})
+  DeligateOrderLoading.fromState({required DeligateEditOrderState state, int? offSet})
       : super(
           client: state.client,
           selectedProduct: state.selectedProduct,
@@ -294,10 +278,7 @@ final class DeligateOrderResetSelectedProduct extends DeligateEditOrderState {
 
 final class DeligateOrderUpdateSuggestedPrice extends DeligateEditOrderState {
   DeligateOrderUpdateSuggestedPrice.fromState(
-      {required DeligateEditOrderState state,
-      int? quantity,
-      double? totalPrice,
-      double? suggestedPrice})
+      {required DeligateEditOrderState state, int? quantity, double? totalPrice, double? suggestedPrice})
       : super(
           suggestedPrice: suggestedPrice ?? state.suggestedPrice,
           quantity: quantity ?? state.quantity,

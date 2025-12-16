@@ -4,11 +4,11 @@ import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_button.dart';
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field.dart';
-import 'package:hader_pharm_mobile/features/common_features/deligate_create_client/actions/print_credentials.dart';
-import 'package:hader_pharm_mobile/features/common_features/deligate_create_client/cubit/cubit.dart';
-import 'package:hader_pharm_mobile/features/common_features/deligate_create_client/cubit/provider.dart';
-import 'package:hader_pharm_mobile/features/common_features/deligate_create_client/widgets/appbar.dart';
-import 'package:hader_pharm_mobile/features/common_features/deligate_create_client/widgets/client_type_selector.dart';
+import 'package:hader_pharm_mobile/features/delegate/deligate_create_client/actions/print_credentials.dart';
+import 'package:hader_pharm_mobile/features/delegate/deligate_create_client/cubit/cubit.dart';
+import 'package:hader_pharm_mobile/features/delegate/deligate_create_client/cubit/provider.dart';
+import 'package:hader_pharm_mobile/features/delegate/deligate_create_client/widgets/appbar.dart';
+import 'package:hader_pharm_mobile/features/delegate/deligate_create_client/widgets/client_type_selector.dart';
 import 'package:hader_pharm_mobile/features/common_features/wilaya/town.dart';
 import 'package:hader_pharm_mobile/features/common_features/wilaya/wilaya.dart';
 import 'package:hader_pharm_mobile/utils/enums.dart';
@@ -30,15 +30,13 @@ class DeligateCreateClientScreen extends StatelessWidget {
           child: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             child: DeligateCreateClientStateProvider(
-              child: BlocBuilder<DeligateCreateClientCubit,
-                  DeligateCreateClientState>(
+              child: BlocBuilder<DeligateCreateClientCubit, DeligateCreateClientState>(
                 builder: (context, state) {
                   if (state is DeligateClientCreated) {
                     printCredentials(state.email, state.password);
                   }
 
-                  final cubit =
-                      BlocProvider.of<DeligateCreateClientCubit>(context);
+                  final cubit = BlocProvider.of<DeligateCreateClientCubit>(context);
                   return Form(
                     key: cubit.formKeys,
                     child: Column(
@@ -48,8 +46,7 @@ class DeligateCreateClientScreen extends StatelessWidget {
                           label: "${translation.company_name}*",
                           controller: cubit.nameController,
                           state: FieldState.normal,
-                          validationFunc: (value) =>
-                              requiredValidator(value, translation),
+                          validationFunc: (value) => requiredValidator(value, translation),
                         ),
                         ClientTypeSelector(
                           onChanged: (newValue) {
@@ -64,36 +61,31 @@ class DeligateCreateClientScreen extends StatelessWidget {
                           label: "${translation.full_name}*",
                           controller: cubit.fullNameController,
                           state: FieldState.normal,
-                          validationFunc: (value) =>
-                              requiredValidator(value, translation),
+                          validationFunc: (value) => requiredValidator(value, translation),
                         ),
                         CustomTextField(
                           label: "${translation.email}*",
                           controller: cubit.emailController,
                           state: FieldState.normal,
-                          validationFunc: (value) =>
-                              validateIsEmail(value, translation, true),
+                          validationFunc: (value) => validateIsEmail(value, translation, true),
                         ),
                         CustomTextField(
                           label: translation.phone_mobile,
                           controller: cubit.phoneController,
                           state: FieldState.normal,
                           keyBoadType: TextInputType.phone,
-                          validationFunc: (value) =>
-                              validateIsMobileNumber(value, translation),
+                          validationFunc: (value) => validateIsMobileNumber(value, translation),
                         ),
                         CustomTextField(
                           label: translation.full_address,
                           controller: cubit.addressController,
                           state: FieldState.normal,
-                          validationFunc: (value) =>
-                              emptyValidator(value, translation),
+                          validationFunc: (value) => emptyValidator(value, translation),
                         ),
                         WilayaDropdown(),
                         TownDropdown(
                             isRequired: true,
-                            validator: (v) =>
-                                requiredValidator(v?.label, translation),
+                            validator: (v) => requiredValidator(v?.label, translation),
                             onChanged: (newValue) {
                               if (newValue == null) return;
                               cubit.updateState(

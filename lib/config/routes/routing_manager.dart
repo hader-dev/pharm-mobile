@@ -10,7 +10,7 @@ import 'package:hader_pharm_mobile/features/common_features/check_email/check_em
 import 'package:hader_pharm_mobile/features/common_features/check_phone/check_phone.dart';
 import 'package:hader_pharm_mobile/features/common_features/congratulation/congratulation.dart';
 import 'package:hader_pharm_mobile/features/common_features/create_company_profile/create_company_profile.dart';
-import 'package:hader_pharm_mobile/features/common_features/deligate_create_client/deligate_create_client.dart';
+import 'package:hader_pharm_mobile/features/delegate/deligate_create_client/deligate_create_client.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_create_order/deligate_create_order.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_marketplace/market_place.dart';
 import 'package:hader_pharm_mobile/features/common_features/deligate_orders_details/orders_details.dart';

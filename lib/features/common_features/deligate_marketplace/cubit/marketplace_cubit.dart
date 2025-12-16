@@ -13,7 +13,7 @@ class DeligateMarketplaceCubit extends Cubit<DeligateMarketplaceState> {
   final IOrderRepository orderRepo;
 
   DeligateMarketplaceCubit({
-    required DeligateClient client,
+    required DelegateClient client,
     required this.orderRepo,
   }) : super(DeligateMarketplaceInitial(
           client: client,
@@ -29,9 +29,7 @@ class DeligateMarketplaceCubit extends Cubit<DeligateMarketplaceState> {
     final messanger = getItInstance.get<ToastManager>();
 
     if (state.orderProducts.isEmpty || state.client.id.isEmpty) {
-      messanger.showToast(
-          type: ToastType.error,
-          message: translation.feedback_select_client_and_add_items);
+      messanger.showToast(type: ToastType.error, message: translation.feedback_select_client_and_add_items);
       return;
     }
 
@@ -44,12 +42,9 @@ class DeligateMarketplaceCubit extends Cubit<DeligateMarketplaceState> {
         clientId: state.client.buyerCompany.managerUserId!,
         clientCompanyId: state.client.buyerCompany.id,
       ));
-      messanger.showToast(
-          type: ToastType.success,
-          message: translation.order_placed_successfully);
+      messanger.showToast(type: ToastType.success, message: translation.order_placed_successfully);
     } catch (e) {
-      messanger.showToast(
-          type: ToastType.error, message: translation.order_placed_failed);
+      messanger.showToast(type: ToastType.error, message: translation.order_placed_failed);
     }
   }
 }

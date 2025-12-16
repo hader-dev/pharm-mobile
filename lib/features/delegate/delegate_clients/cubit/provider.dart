@@ -3,19 +3,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
-import 'package:hader_pharm_mobile/features/common_features/deligate_clients/cubit/clients_cubit.dart';
+import 'package:hader_pharm_mobile/features/delegate/delegate_clients/cubit/clients_cubit.dart';
 import 'package:hader_pharm_mobile/repositories/remote/clients/clients_repository_impl.dart';
 
-class DeligateClientsStateProvider extends StatelessWidget {
-  const DeligateClientsStateProvider({super.key, required this.child});
+class DelegateClientsStateProvider extends StatelessWidget {
+  const DelegateClientsStateProvider({super.key, required this.child});
   final Widget child;
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) => DeligateClientsCubit(
+        create: (context) => DelegateClientsCubit(
               clientsRepo: ClientRepository(
-                  client: getItInstance.get<INetworkService>(),
-                  userManager: getItInstance.get<UserManager>()),
+                  client: getItInstance.get<INetworkService>(), userManager: getItInstance.get<UserManager>()),
               scrollController: ScrollController(),
               searchController: TextEditingController(),
             )..getClients(),

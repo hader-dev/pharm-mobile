@@ -1,6 +1,6 @@
 import 'package:hader_pharm_mobile/models/company.dart';
 
-class DeligateClient {
+class DelegateClient {
   final String id;
   final DateTime createdAt;
   final DateTime updatedAt;
@@ -13,7 +13,7 @@ class DeligateClient {
   final int status;
   final Company buyerCompany;
 
-  const DeligateClient({
+  const DelegateClient({
     required this.id,
     required this.createdAt,
     required this.updatedAt,
@@ -27,8 +27,8 @@ class DeligateClient {
     required this.buyerCompany,
   });
 
-  factory DeligateClient.empty() {
-    return DeligateClient(
+  factory DelegateClient.empty() {
+    return DelegateClient(
       id: '',
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),

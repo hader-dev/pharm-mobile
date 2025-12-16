@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
-import 'package:hader_pharm_mobile/features/common_features/deligate_clients/cubit/clients_cubit.dart';
-import 'package:hader_pharm_mobile/features/common_features/deligate_clients/cubit/provider.dart';
-import 'package:hader_pharm_mobile/features/common_features/deligate_clients/widgets/add_client_btn.dart';
-import 'package:hader_pharm_mobile/features/common_features/deligate_clients/widgets/deligate_client.widget.dart';
-import 'package:hader_pharm_mobile/features/common_features/deligate_clients/widgets/search_widget.dart';
+import 'package:hader_pharm_mobile/features/delegate/delegate_clients/cubit/clients_cubit.dart';
+import 'package:hader_pharm_mobile/features/delegate/delegate_clients/cubit/provider.dart';
+import 'package:hader_pharm_mobile/features/delegate/delegate_clients/widgets/add_client_btn.dart';
+import 'package:hader_pharm_mobile/features/delegate/delegate_clients/widgets/delegate_client.dart';
+import 'package:hader_pharm_mobile/features/delegate/delegate_clients/widgets/search_widget.dart';
 
 class ClientScreen extends StatelessWidget {
   const ClientScreen({
@@ -14,25 +14,22 @@ class ClientScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DeligateClientsStateProvider(
+    return DelegateClientsStateProvider(
       child: SafeArea(
         child: Scaffold(
           floatingActionButton: const AddClientBtn(),
-          body: BlocBuilder<DeligateClientsCubit, DeligateClientsState>(
-              builder: (context, state) {
+          body: BlocBuilder<DelegateClientsCubit, DelegateClientsState>(builder: (context, state) {
             return Column(
               children: [
                 const ClientDeligateSearchWidget(),
                 if (state.clients.isEmpty)
                   Center(
                     child: RefreshIndicator(
-                      onRefresh: () =>
-                          context.read<DeligateClientsCubit>().getClients(),
+                      onRefresh: () => context.read<DelegateClientsCubit>().getClients(),
                       child: SingleChildScrollView(
                         physics: const AlwaysScrollableScrollPhysics(),
                         child: EmptyListWidget(
-                          onRefresh: () =>
-                              context.read<DeligateClientsCubit>().getClients(),
+                          onRefresh: () => context.read<DelegateClientsCubit>().getClients(),
                         ),
                       ),
                     ),
@@ -40,10 +37,9 @@ class ClientScreen extends StatelessWidget {
                 if (state.clients.isNotEmpty)
                   Expanded(
                     child: RefreshIndicator(
-                      onRefresh: () =>
-                          context.read<DeligateClientsCubit>().getClients(),
+                      onRefresh: () => context.read<DelegateClientsCubit>().getClients(),
                       child: ListView.builder(
-                        itemBuilder: (context, index) => DeligateClientWidget(
+                        itemBuilder: (context, index) => DelegateClientWidget(
                           client: state.clients[index],
                         ),
                         itemCount: state.totalItemsCount,
