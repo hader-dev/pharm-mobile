@@ -1308,4 +1308,10 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get unexpected_error =>
       'An unexpected error occurred. Please try again later.';
+
+  @override
+  String get search_select_category => 'Search & select category';
+
+  @override
+  String get search_select_brand => 'Search & select brand';
 }

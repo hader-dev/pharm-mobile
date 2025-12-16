@@ -2589,6 +2589,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'An unexpected error occurred. Please try again later.'**
   String get unexpected_error;
+
+  /// No description provided for @search_select_category.
+  ///
+  /// In en, this message translates to:
+  /// **'Search & select category'**
+  String get search_select_category;
+
+  /// No description provided for @search_select_brand.
+  ///
+  /// In en, this message translates to:
+  /// **'Search & select brand'**
+  String get search_select_brand;
 }
 
 class _AppLocalizationsDelegate

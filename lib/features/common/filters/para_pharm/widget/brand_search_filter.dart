@@ -139,6 +139,7 @@ class _BrandSearchFilterState extends State<BrandSearchFilter> {
                       color: Colors.grey,
                     ),
                   ),
+            hintText: context.translation!.search_select_brand,
             onChanged: (value) {
               if (value != null && value.isNotEmpty) {
                 _controller.show();

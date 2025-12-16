@@ -139,6 +139,7 @@ class _CategorySearchFilterState extends State<CategorySearchFilter> {
                       color: Colors.grey,
                     ),
                   ),
+            hintText: context.translation!.search_select_category,
             onChanged: (value) {
               if (value != null && value.isNotEmpty) {
                 _controller.show();

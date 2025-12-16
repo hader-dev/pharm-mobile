@@ -1328,4 +1328,11 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get unexpected_error =>
       'Une erreur inattendue s\'est produite. Veuillez réessayer plus tard.';
+
+  @override
+  String get search_select_category =>
+      'Rechercher et sélectionner une catégorie';
+
+  @override
+  String get search_select_brand => 'Rechercher et sélectionner une marque';
 }
