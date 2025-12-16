@@ -73,6 +73,7 @@ class Urls {
   static String get favoritesLikeParaPharmaCatalog => "$favorites$paraPharamaCatalog2";
   static String get favoritesUnLikeParaPharmaCatalog => "$favorites$paraPharamaCatalog2/by-parapharm-catalog-id";
   static String get favoritesCompany => "${favorites}companies";
+  static String get unLikeFavoritesCompany => "$favoritesCompany/by-company-id";
 
   static String get publicFiles => "/files";
 

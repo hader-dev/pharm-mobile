@@ -1,3 +1,5 @@
+import 'dart:convert' show jsonEncode;
+
 import 'package:flutter/foundation.dart';
 import 'package:hader_pharm_mobile/models/cart_item.dart' show CartItemModel;
 
@@ -18,6 +20,8 @@ class CartItemRepository extends ICartItemsRepository {
             Urls.cartItems,
             queryParams: {
               "include[sellerCompany][fields][]": ["id", "name"],
+              "include[parapharmCatalog][_load]": jsonEncode(true),
+              "include[medicineCatalog][_load]": jsonEncode(true),
             },
           ));
 

@@ -29,48 +29,6 @@ class FavoritesCubit extends Cubit<FavoritesState> {
     }
   }
 
-  List<BaseMedicineCatalogModel> getMockMedicines() {
-    return List.generate(
-      5,
-      (index) => BaseMedicineCatalogModel(
-        id: 'mock_medicine_$index',
-        dci: 'Mock Medicine ${index + 1}',
-        unitPriceHt: 150,
-        unitPriceTtc: 150,
-        tvaPercentage: 19,
-        thumbnailImage: null,
-        image: null,
-        createdAt: DateTime.now(),
-        updatedAt: DateTime.now(),
-        companyId: 'mock_company_$index',
-        registrationNumber: 'REG${index}001',
-        sku: 'SKU${index}001',
-        isPrivate: false,
-        margin: '20',
-        stockQuantity: index % 2 == 0 ? 100 : 0,
-        minOrderQuantity: 1,
-        maxOrderQuantity: 100,
-        packageSize: 10,
-        isPsychoactive: false,
-        requiresColdChain: false,
-        isActive: true,
-        isQuota: false,
-        isFeatured: false,
-        displayOrder: index,
-        company: Company(
-          id: 'mock_company_$index',
-          name: 'Mock Pharma Company ${index + 1}',
-          email: 'company$index@example.com',
-          phone: '055512345$index',
-          address: 'Mock Address ${index + 1}',
-          thumbnailImage: null,
-          image: null,
-        ),
-        isLiked: true,
-      ),
-    );
-  }
-
   Future<void> fetchLikedParaPharma() async {
     try {
       emit(state.toLoadingParaPharma());

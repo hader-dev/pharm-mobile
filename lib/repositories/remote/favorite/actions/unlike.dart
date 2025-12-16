@@ -15,6 +15,6 @@ Future<void> unLikeMedicineCatalog({required String medicineCatalogId, required 
 
 Future<void> unLikeVendors({required String vendorId, required INetworkService client}) async {
   await client.sendRequest(() => client.delete(
-        "${Urls.favoritesCompany}/$vendorId",
+        "${Urls.unLikeFavoritesCompany}/$vendorId",
       ));
 }
