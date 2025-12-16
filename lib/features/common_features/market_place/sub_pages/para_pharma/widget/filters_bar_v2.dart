@@ -6,6 +6,7 @@ import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
+import '../../../../../../config/theme/colors_manager.dart' show AppColors;
 import '../../../../../common/filters/para_pharm/para_pharm_search_filters_bottom_sheet.dart'
     show ParaPharmSearchFiltersBottomSheet;
 
@@ -72,21 +73,18 @@ class FiltersBarV2 extends StatelessWidget {
                         color: context.theme.colorScheme.onSurfaceVariant,
                         size: context.responsiveAppSizeTheme.current.iconSize20,
                       ),
-                      // if (state.filters.createdAtFrom.isNotEmpty ||
-                      //     state.filters.createdAtTo.isNotEmpty ||
-                      //     state.filters.status.isNotEmpty)
-                      //   Positioned(
-                      //     right: -5,
-                      //     top: 0,
-                      //     child: Container(
-                      //       width: 8,
-                      //       height: 8,
-                      //       decoration: BoxDecoration(
-                      //         color: AppColors.accent1Shade1,
-                      //         shape: BoxShape.circle,
-                      //       ),
-                      //     ),
-                      //   ),
+                      Positioned(
+                        right: -5,
+                        top: 0,
+                        child: Container(
+                          width: 8,
+                          height: 8,
+                          decoration: BoxDecoration(
+                            color: AppColors.accent1Shade1,
+                            shape: BoxShape.circle,
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
