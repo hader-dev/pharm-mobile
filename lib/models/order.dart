@@ -42,17 +42,26 @@ class BaseOrderModel {
       id: json['id'],
       status: json['status'],
       discount: json['discount'] != null ? double.parse(json['discount']) : 0.0,
-      totalAmountExclTax: json['totalAmountHt'] != null ? double.parse(json['totalAmountHt']) : 0.0,
-      totalAmountInclTax: json['totalAmountTtc'] != null ? double.parse(json['totalAmountTtc']) : 0.0,
-      totalAppliedAmountHt: json['totalAppliedAmountHt'] != null ? double.parse(json['totalAppliedAmountHt']) : 0.0,
-      totalAppliedAmountTtc: json['totalAppliedAmountTtc'] != null ? double.parse(json['totalAppliedAmountTtc']) : 0.0,
+      totalAmountExclTax: json['totalAmountHt'] != null
+          ? double.parse(json['totalAmountHt'])
+          : 0.0,
+      totalAmountInclTax: json['totalAmountTtc'] != null
+          ? double.parse(json['totalAmountTtc'])
+          : 0.0,
+      totalAppliedAmountHt: json['totalAppliedAmountHt'] != null
+          ? double.parse(json['totalAppliedAmountHt'])
+          : 0.0,
+      totalAppliedAmountTtc: json['totalAppliedAmountTtc'] != null
+          ? double.parse(json['totalAppliedAmountTtc'])
+          : 0.0,
       paymentMethod: json['paymentMethod'],
       deliveryAddress: json['deliveryAddress'],
       invoiceType: json['invoiceType'],
       createdAt: DateTime.parse(json['createdAt']),
-      updatedAt: json['updatedAt'] != null ? DateTime.parse(json['updatedAt']) : null,
-      sellerCompanyName: json['sellerCompany']['name'],
-      clientCompanyName: json['clientCompany']['name'],
+      updatedAt:
+          json['updatedAt'] != null ? DateTime.parse(json['updatedAt']) : null,
+      sellerCompanyName: json['sellerCompany']?['name'],
+      clientCompanyName: json['clientCompany']?['name'],
     );
   }
 
