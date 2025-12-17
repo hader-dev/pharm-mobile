@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
-import 'package:hader_pharm_mobile/features/common_features/orders_details/sub_pages/complaints/order_complaints_page.dart';
-import 'package:hader_pharm_mobile/features/common_features/orders_details/sub_pages/order_details.dart';
+import 'package:hader_pharm_mobile/features/common_features/orders_details/sub_pages/complaints/order_complaints_page.dart'
+    show OrderItemsComplaintPage;
+
+import 'package:hader_pharm_mobile/features/delegate/delegate_orders_details/sub_pages/order_overview.dart'
+    show DelegateOrdersOverViewPage;
+
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class OrderDetailsTabBarSection extends StatefulWidget {
@@ -9,12 +13,10 @@ class OrderDetailsTabBarSection extends StatefulWidget {
   final String orderId;
 
   @override
-  State<OrderDetailsTabBarSection> createState() =>
-      _OrderDetailsTabBarSectionState();
+  State<OrderDetailsTabBarSection> createState() => _OrderDetailsTabBarSectionState();
 }
 
-class _OrderDetailsTabBarSectionState extends State<OrderDetailsTabBarSection>
-    with TickerProviderStateMixin {
+class _OrderDetailsTabBarSectionState extends State<OrderDetailsTabBarSection> with TickerProviderStateMixin {
   late final TabController tabsController;
   @override
   void initState() {
@@ -25,10 +27,7 @@ class _OrderDetailsTabBarSectionState extends State<OrderDetailsTabBarSection>
   @override
   Widget build(BuildContext context) {
     final translation = context.translation!;
-    final List<String> tabs = [
-      translation.overview,
-      translation.order_complaint
-    ];
+    final List<String> tabs = [translation.overview, translation.order_complaint];
 
     TextStyle tabTextStyle = context.responsiveTextTheme.current.body3Medium;
 
@@ -61,7 +60,7 @@ class _OrderDetailsTabBarSectionState extends State<OrderDetailsTabBarSection>
           child: TabBarView(
             controller: tabsController,
             children: [
-              OrdersDetailsPage(
+              DelegateOrdersOverViewPage(
                 orderId: widget.orderId,
               ),
               OrderItemsComplaintPage()

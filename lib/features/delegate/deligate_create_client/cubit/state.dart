@@ -1,6 +1,6 @@
 part of 'cubit.dart';
 
-class DeligateCreateClientState extends Equatable {
+class DelegateCreateClientState extends Equatable {
   final String address;
   final String email;
   final String name;
@@ -9,7 +9,7 @@ class DeligateCreateClientState extends Equatable {
   final String fullName;
   final CompanyType companyType;
 
-  const DeligateCreateClientState(
+  const DelegateCreateClientState(
       {required this.address,
       required this.email,
       required this.name,
@@ -18,7 +18,7 @@ class DeligateCreateClientState extends Equatable {
       required this.companyType,
       required this.townId});
 
-  DeligateCreateClientState copyWith(
+  DelegateCreateClientState copyWith(
       {String? address,
       String? email,
       String? password,
@@ -27,7 +27,7 @@ class DeligateCreateClientState extends Equatable {
       String? name,
       int? townId,
       CompanyType? companyType}) {
-    return DeligateCreateClientState(
+    return DelegateCreateClientState(
         address: address ?? this.address,
         email: email ?? this.email,
         name: name ?? this.name,
@@ -57,14 +57,12 @@ class DeligateCreateClientState extends Equatable {
     );
   }
 
-  ClientsLoadingFailed failed(String message) =>
-      ClientsLoadingFailed.fromState(this, message: message);
+  ClientsLoadingFailed failed(String message) => ClientsLoadingFailed.fromState(this, message: message);
 
-  DeligateCreateClientLoading loading() =>
-      DeligateCreateClientLoading.fromState(this);
+  DeligateCreateClientLoading loading() => DeligateCreateClientLoading.fromState(this);
+  DelegateClientCreationLoading creationLoading() => DelegateClientCreationLoading.fromState(this);
 
-  DeligateClientCreated created(
-          {required String password, required String email}) =>
+  DeligateClientCreated created({required String password, required String email}) =>
       DeligateClientCreated.fromState(this, password: password, email: email);
 
   @override
@@ -77,7 +75,7 @@ class DeligateCreateClientState extends Equatable {
       ];
 }
 
-final class DeligateClientsInitial extends DeligateCreateClientState {
+final class DeligateClientsInitial extends DelegateCreateClientState {
   const DeligateClientsInitial({
     super.address = '',
     super.email = '',
@@ -89,7 +87,7 @@ final class DeligateClientsInitial extends DeligateCreateClientState {
   });
 }
 
-final class DeligateClientCreated extends DeligateCreateClientState {
+final class DeligateClientCreated extends DelegateCreateClientState {
   final String password;
 
   const DeligateClientCreated({
@@ -104,7 +102,7 @@ final class DeligateClientCreated extends DeligateCreateClientState {
   });
 
   DeligateClientCreated.fromState(
-    DeligateCreateClientState state, {
+    DelegateCreateClientState state, {
     required this.password,
     required super.email,
   }) : super(
@@ -116,8 +114,31 @@ final class DeligateClientCreated extends DeligateCreateClientState {
             companyType: state.companyType);
 }
 
-final class DeligateCreateClientLoading extends DeligateCreateClientState {
-  DeligateCreateClientLoading.fromState(DeligateCreateClientState state)
+final class DelegateClientCreationLoading extends DelegateCreateClientState {
+  const DelegateClientCreationLoading({
+    super.address = '',
+    super.email = '',
+    super.name = '',
+    super.phone = '',
+    super.fullName = '',
+    super.townId = 20,
+    super.companyType = CompanyType.Pharmacy,
+  });
+
+  DelegateClientCreationLoading.fromState(
+    DelegateCreateClientState state,
+  ) : super(
+            address: state.address,
+            email: state.email,
+            name: state.name,
+            phone: state.phone,
+            townId: state.townId,
+            fullName: state.fullName,
+            companyType: state.companyType);
+}
+
+final class DeligateCreateClientLoading extends DelegateCreateClientState {
+  DeligateCreateClientLoading.fromState(DelegateCreateClientState state)
       : super(
           address: state.address,
           email: state.email,
@@ -133,7 +154,7 @@ final class ClientsLoadingFailed extends DeligateClientsInitial {
   final String message;
 
   ClientsLoadingFailed.fromState(
-    DeligateCreateClientState state, {
+    DelegateCreateClientState state, {
     required this.message,
   }) : super(
           address: state.address,

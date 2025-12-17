@@ -11,9 +11,8 @@ import 'package:hader_pharm_mobile/features/common_features/check_phone/check_ph
 import 'package:hader_pharm_mobile/features/common_features/congratulation/congratulation.dart';
 import 'package:hader_pharm_mobile/features/common_features/create_company_profile/create_company_profile.dart';
 import 'package:hader_pharm_mobile/features/delegate/deligate_create_client/deligate_create_client.dart';
-import 'package:hader_pharm_mobile/features/common_features/deligate_create_order/deligate_create_order.dart';
-import 'package:hader_pharm_mobile/features/common_features/deligate_marketplace/market_place.dart';
-import 'package:hader_pharm_mobile/features/common_features/deligate_orders_details/orders_details.dart';
+import 'package:hader_pharm_mobile/features/delegate/delegate_create_order/deligate_create_order.dart';
+import 'package:hader_pharm_mobile/features/delegate/deligate_marketplace/market_place.dart';
 import 'package:hader_pharm_mobile/features/common_features/edit_company/edit_company_screen.dart';
 import 'package:hader_pharm_mobile/features/common_features/edit_profile/edit_profile.dart';
 import 'package:hader_pharm_mobile/features/common_features/favorites/favorites.dart';
@@ -35,6 +34,8 @@ import 'package:hader_pharm_mobile/features/common_features/register/register.da
 import 'package:hader_pharm_mobile/features/common_features/splash/splash.dart';
 import 'package:hader_pharm_mobile/features/common_features/vendor_details/vendor_details.dart';
 
+import '../../features/delegate/delegate_orders_details/delegate_orders_details.dart' show DelegateOrdersDetailsScreen;
+
 class RoutingManager {
   static List<String> screenStack = [];
 
@@ -54,13 +55,13 @@ class RoutingManager {
   static const String medicineDetailsScreen = '/MedicineDetailsScreen';
   static const String paraPharmaDetailsScreen = '/ParaPharmaDetailsScreen';
   static const String ordersScreen = '/OrdersScreen';
-  static const String deligateOrderDetailsScreen = '/DeligateOrderDetailsScreen';
   static const String onboardingScreen = '/OnboardingScreen';
   static const String profileScreen = '/ProfileScreen';
   static const String changePasswordScreen = 'ChangePasswordScreen';
   static const String favoritesScreen = 'FavoritesScreen';
   static const String vendorDetails = '/VendorDetails';
   static const String ordersDetailsScreen = '/OrdersDetailsScreen';
+  static const String delegateOrderDetailsScreen = '/DelegateOrderDetailsScreen';
   static const String announcementDetailsScreen = '/AnnouncementDetailsScreen';
   static const String allAnnouncementsScreen = '/AllAnnouncementsScreen';
   static const String orderComplaint = '/OrderComplaint';
@@ -70,8 +71,8 @@ class RoutingManager {
   static const String editCompanyScreen = '/EditCompanyScreen';
   static const String notificationsScreen = '/Notifications';
   static const String deligateCreateOrderScreen = '/Deligate/CreateOrder';
-  static const String deligateCreateClientScreen = '/Deligate/CreateClient';
-  static const String deligateMartketPlaceScreen = '/Deligate/MarketPlace';
+  static const String delegateCreateClientScreen = '/Deligate/CreateClient';
+  static const String delegateMarketPlaceScreen = '/Deligate/MarketPlace';
   static const String deligateParapharmDetailsScreen = '/Deligate/ParaPharmaDetailsScreen';
   static const String deligateMedicineDetailsScreen = '/Deligate/MedicineDetailsScreen';
 
@@ -112,8 +113,8 @@ class RoutingManager {
           },
         ),
         GoRoute(
-          name: deligateMartketPlaceScreen,
-          path: deligateMartketPlaceScreen,
+          name: delegateMarketPlaceScreen,
+          path: delegateMarketPlaceScreen,
           builder: (BuildContext context, GoRouterState state) {
             return const DeligateMarketPlaceScreen();
           },
@@ -133,10 +134,10 @@ class RoutingManager {
           },
         ),
         GoRoute(
-          name: deligateCreateClientScreen,
-          path: deligateCreateClientScreen,
+          name: delegateCreateClientScreen,
+          path: delegateCreateClientScreen,
           builder: (BuildContext context, GoRouterState state) {
-            return DeligateCreateClientScreen();
+            return DelegateCreateClientScreen();
           },
         ),
         GoRoute(
@@ -223,19 +224,19 @@ class RoutingManager {
           },
         ),
         GoRoute(
-          name: deligateOrderDetailsScreen,
-          path: deligateOrderDetailsScreen,
+          name: ordersDetailsScreen,
+          path: ordersDetailsScreen,
           builder: (BuildContext context, GoRouterState state) {
-            return DeligateOrdersDetailsScreen(
+            return OrdersDetailsScreen(
               orderId: state.extra as String,
             );
           },
         ),
         GoRoute(
-          name: ordersDetailsScreen,
-          path: ordersDetailsScreen,
+          name: delegateOrderDetailsScreen,
+          path: delegateOrderDetailsScreen,
           builder: (BuildContext context, GoRouterState state) {
-            return OrdersDetailsScreen(
+            return DelegateOrdersDetailsScreen(
               orderId: state.extra as String,
             );
           },

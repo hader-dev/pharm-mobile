@@ -11,7 +11,7 @@ import 'package:hader_pharm_mobile/utils/toast_helper.dart';
 
 part 'state.dart';
 
-class DeligateCreateClientCubit extends Cubit<DeligateCreateClientState> {
+class DelegateCreateClientCubit extends Cubit<DelegateCreateClientState> {
   final IClientsRepository clientsRepo;
   final GlobalKey<FormState> formKeys = GlobalKey<FormState>();
 
@@ -21,7 +21,7 @@ class DeligateCreateClientCubit extends Cubit<DeligateCreateClientState> {
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController fullNameController = TextEditingController();
 
-  DeligateCreateClientCubit({
+  DelegateCreateClientCubit({
     required this.clientsRepo,
   }) : super(const DeligateClientsInitial());
 
@@ -47,7 +47,7 @@ class DeligateCreateClientCubit extends Cubit<DeligateCreateClientState> {
   void submit(AppLocalizations translation) async {
     try {
       if (formKeys.currentState!.validate()) {
-        emit(state.loading());
+        emit(state.creationLoading());
         final res = await clientsRepo.createClient(
           ParamsCreateClient(
               email: emailController.text,
@@ -60,14 +60,12 @@ class DeligateCreateClientCubit extends Cubit<DeligateCreateClientState> {
         );
 
         RoutingManager.router.pop();
-        getItInstance.get<ToastManager>().showToast(
-            type: ToastType.success, message: translation.client_add_success);
+        getItInstance.get<ToastManager>().showToast(type: ToastType.success, message: translation.client_add_success);
 
         emit(state.created(password: res.password, email: res.email));
       }
     } catch (e) {
-      getItInstance.get<ToastManager>().showToast(
-          type: ToastType.error, message: translation.client_add_fail);
+      getItInstance.get<ToastManager>().showToast(type: ToastType.error, message: translation.client_add_fail);
       emit(state.failed(e.toString()));
     }
   }

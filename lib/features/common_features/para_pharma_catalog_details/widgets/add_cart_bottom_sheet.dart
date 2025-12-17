@@ -8,7 +8,7 @@ import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/bottom_sheet_header.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/quantity_section.dart';
 import 'package:hader_pharm_mobile/features/common_features/cart/cubit/cart_cubit.dart';
-import 'package:hader_pharm_mobile/features/common_features/deligate_create_order/cubit/create_order_cubit.dart';
+import 'package:hader_pharm_mobile/features/delegate/delegate_create_order/cubit/create_order_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders/cubit/orders_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/cubit/para_pharma_details_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/helpers/add_to_cart_or_deligate_items.dart';
@@ -27,7 +27,7 @@ class AddCartBottomSheet extends StatelessWidget {
   final ParaPharmaDetailsCubit? cubit;
   final CartCubit? cartCubit;
   final VoidCallback? onAction;
-  final DeligateCreateOrderCubit? deligateCreateOrderCubit;
+  final DelegateCreateOrderCubit? deligateCreateOrderCubit;
   final bool needCartCubit;
 
   final disabledPackageQuantity = true;

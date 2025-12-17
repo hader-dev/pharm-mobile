@@ -8,14 +8,14 @@ import 'package:hader_pharm_mobile/features/common_features/wilaya/cubit/wilaya_
 import 'package:hader_pharm_mobile/repositories/locale/wilaya/wilaya_repository_impl.dart';
 import 'package:hader_pharm_mobile/repositories/remote/clients/clients_repository_impl.dart';
 
-class DeligateCreateClientStateProvider extends StatelessWidget {
-  const DeligateCreateClientStateProvider({super.key, required this.child});
+class DelegateCreateClientStateProvider extends StatelessWidget {
+  const DelegateCreateClientStateProvider({super.key, required this.child});
   final Widget child;
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(providers: [
       BlocProvider(
-        create: (context) => DeligateCreateClientCubit(
+        create: (context) => DelegateCreateClientCubit(
           clientsRepo: ClientRepository(
               client: getItInstance.get<INetworkService>(), userManager: getItInstance.get<UserManager>()),
         ),

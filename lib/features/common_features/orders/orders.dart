@@ -7,7 +7,7 @@ import 'package:hader_pharm_mobile/features/common_features/orders/widget/filter
 
 import '../../common/shimmers/order_widget_shimmer.dart' show OrderWidgetShimmer;
 import 'cubit/orders_cubit.dart';
-import 'widget/order_card.dart';
+import '../../common/widgets/order_card.dart';
 
 class OrdersScreen extends StatefulWidget {
   static final scaffoldKey = GlobalKey<ScaffoldState>();

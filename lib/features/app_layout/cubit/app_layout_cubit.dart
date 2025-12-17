@@ -5,11 +5,11 @@ import 'package:hader_pharm_mobile/features/common_features/cart/cart.dart';
 import 'package:hader_pharm_mobile/features/common_features/cart/widgets/appbar.dart';
 import 'package:hader_pharm_mobile/features/delegate/delegate_clients/delegate_clients.dart';
 import 'package:hader_pharm_mobile/features/delegate/delegate_clients/widgets/appbar.dart';
-import 'package:hader_pharm_mobile/features/common_features/deligate_marketplace/sub_pages/para_pharma/widget/appbar.dart';
-import 'package:hader_pharm_mobile/features/common_features/deligate_orders/deligate_orders.dart';
-import 'package:hader_pharm_mobile/features/common_features/deligate_orders/widgets/appbar.dart';
-import 'package:hader_pharm_mobile/features/common_features/deligate_products/deligate_products.dart';
-import 'package:hader_pharm_mobile/features/common_features/deligate_products/widgets/appbar.dart';
+import 'package:hader_pharm_mobile/features/delegate/deligate_marketplace/sub_pages/para_pharma/widget/appbar.dart';
+import 'package:hader_pharm_mobile/features/delegate/delegate_orders/deligate_orders.dart';
+import 'package:hader_pharm_mobile/features/delegate/delegate_orders/widgets/appbar.dart';
+import 'package:hader_pharm_mobile/features/delegate/deligate_products/deligate_products.dart';
+import 'package:hader_pharm_mobile/features/delegate/deligate_products/widgets/appbar.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/home.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/widgets/appbar.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/market_place.dart';
@@ -53,7 +53,7 @@ class AppLayoutCubit extends Cubit<AppLayoutState> {
 
   AppLayoutCubit({required bool isExtraLargeScreen}) : super(AppLayoutInitial()) {
     UserManager.instance.currentUser.role.isDelegate
-        ? deligateAppScreens(
+        ? delegateAppScreens(
             isExtraLargeScreen: isExtraLargeScreen,
           )
         : clientAppScreens(
@@ -66,7 +66,7 @@ class AppLayoutCubit extends Cubit<AppLayoutState> {
     emit(PageChanged());
   }
 
-  void deligateAppScreens({required bool isExtraLargeScreen}) {
+  void delegateAppScreens({required bool isExtraLargeScreen}) {
     screens = [
       ClientScreen(),
       DeligateOrdersScreen(),
@@ -77,7 +77,7 @@ class AppLayoutCubit extends Cubit<AppLayoutState> {
     ];
 
     appTopBars = [
-      DeligateClientsAppbar(
+      DelegateClientsAppBar(
         isExtraLargeScreen: isExtraLargeScreen,
       ),
       DeligateOrdersAppbar(
