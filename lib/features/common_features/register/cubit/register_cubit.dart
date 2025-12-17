@@ -16,13 +16,15 @@ class RegisterCubit extends Cubit<RegisterState> {
   final UserManager userManager;
   RegisterCubit({required this.userManager}) : super(RegisterInitial());
 
-  void emailRegister(EmailRegisterFormDataModel formData) async {
+  void emailRegister(EmailRegisterFormDataModel formData,
+      [String? token]) async {
     try {
       emit(state.toLoading());
       await userManager.emailSignUp(
           email: formData.email,
           fullName: formData.fullName,
           password: formData.password,
+          token: token,
           userImagePath: state.pickedImage?.path);
       getItInstance.get<ToastManager>().showToast(
           message: RoutingManager.rootNavigatorKey.currentContext!.translation!

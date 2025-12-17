@@ -319,7 +319,10 @@ class RoutingManager {
             name: registerScreen,
             path: registerScreen,
             builder: (BuildContext context, GoRouterState state) {
-              return RegisterScreen();
+              final token = state.uri.queryParameters['token'];
+              return RegisterScreen(
+                token: token,
+              );
             }),
         GoRoute(
             name: checkEmailScreen,
