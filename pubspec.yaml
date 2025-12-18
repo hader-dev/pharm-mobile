@@ -127,6 +127,10 @@ dependencies:
   in_app_update: ^4.2.5
   photo_view: ^0.15.0
   minio: ^3.5.8
+  esc_pos_utils_plus: ^2.0.4
+  thermal_printer: ^1.0.5
+  bluetooth_classic: ^0.0.4
+  flutter_bluetooth_serial: ^0.4.0
 
 dev_dependencies:
   flutter_test:

@@ -5,11 +5,13 @@ import 'package:hader_pharm_mobile/features/common/app_bars/custom_app_bar_v2.da
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders_details/actions/navigate_back.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders_details/cubit/orders_details_cubit.dart';
+import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart' show BottomSheetHelper;
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:lucide_icons/lucide_icons.dart' show LucideIcons;
 
 import '../cubit/order_details/orders_details_cubit.dart' show DelegateOrderDetails2Cubit, DelegateOrdersDetails2State;
+import 'printing_bottom_sheet.dart' show DelegatePrintingBottomSheet;
 
 class DelegateOrderDetailsAppBar extends StatelessWidget implements PreferredSizeWidget {
   const DelegateOrderDetailsAppBar({
@@ -44,6 +46,18 @@ class DelegateOrderDetailsAppBar extends StatelessWidget implements PreferredSiz
         ],
       ),
       trailing: [
+        InkWell(
+          onTap: () {
+            BottomSheetHelper.showCommonBottomSheet(
+                initialChildSize: 0.5, context: context, child: DelegatePrintingBottomSheet());
+          },
+          child: Icon(
+            Iconsax.printer,
+            color: AppColors.accent1Shade1,
+            size: context.responsiveAppSizeTheme.current.iconSize20,
+          ),
+        ),
+        ResponsiveGap.s16(),
         BlocBuilder<DelegateOrderDetails2Cubit, DelegateOrdersDetails2State>(
           builder: (context, state) {
             if (state is OrderDetailsLoading) {
