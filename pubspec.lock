@@ -177,14 +177,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "9.1.0"
-  bluetooth_classic:
+  blue_thermal_printer:
     dependency: "direct main"
     description:
-      name: bluetooth_classic
-      sha256: c92e10fb8f8114a19603c48b02ddfda448b41d6a9cf79eb192f82c6ed3bc0df5
+      name: blue_thermal_printer
+      sha256: "2b8a93f90be335494d2172dbc869c31b95638087f89591b4ad69fd9305eaf80b"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.4"
+    version: "1.2.3"
   bluez:
     dependency: transitive
     description:
@@ -337,6 +337,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.4.0"
+  charset_converter:
+    dependency: transitive
+    description:
+      name: charset_converter
+      sha256: a601f27b78ca86c3d88899d53059786d9c3f3c485b64974e9105c06c2569aef5
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.0"
   checked_yaml:
     dependency: transitive
     description:
@@ -441,14 +449,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.8"
-  dart_ping:
-    dependency: transitive
-    description:
-      name: dart_ping
-      sha256: "2f5418d0a5c64e53486caaac78677b25725b1e13c33c5be834ce874ea18bd24f"
-      url: "https://pub.dev"
-    source: hosted
-    version: "9.0.1"
   dart_style:
     dependency: transitive
     description:
@@ -521,14 +521,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.0.2"
-  enum_to_string:
-    dependency: transitive
-    description:
-      name: enum_to_string
-      sha256: "93b75963d3b0c9f6a90c095b3af153e1feccb79f6f08282d3274ff8d9eea52bc"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.2.1"
   equatable:
     dependency: "direct main"
     description:
@@ -537,8 +529,16 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.7"
-  esc_pos_utils_plus:
+  esc_pos_printer_plus:
     dependency: "direct main"
+    description:
+      name: esc_pos_printer_plus
+      sha256: "76e0d8347fb10b25ad78311fc416a968528a00d18e7bad311fa6c34f4d662d71"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.1"
+  esc_pos_utils_plus:
+    dependency: transitive
     description:
       name: esc_pos_utils_plus
       sha256: "2a22d281cb6f04600ba3ebd607ad8df03a4b2446d814007d22525bab4d50c2ff"
@@ -702,14 +702,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "9.1.1"
-  flutter_bluetooth_serial:
-    dependency: "direct main"
-    description:
-      name: flutter_bluetooth_serial
-      sha256: "85ae82c4099b2b1facdc54e75e1bcfa88dc7f719e55dc886bb0b648cb16636b1"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.4.0"
   flutter_cache_manager:
     dependency: transitive
     description:
@@ -941,14 +933,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.1"
-  gbk_codec:
-    dependency: transitive
-    description:
-      name: gbk_codec
-      sha256: "3af5311fc9393115e3650ae6023862adf998051a804a08fb804f042724999f61"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.4.0"
   geocoding:
     dependency: "direct main"
     description:
@@ -1133,14 +1117,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.0"
-  hex:
-    dependency: transitive
-    description:
-      name: hex
-      sha256: "4e7cd54e4b59ba026432a6be2dd9d96e4c5205725194997193bf871703b82c4a"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.2.0"
   html:
     dependency: transitive
     description:
@@ -1417,10 +1393,10 @@ packages:
     dependency: transitive
     description:
       name: meta
-      sha256: e3641ec5d63ebf0d9b41bd43201a66e3fc79a65db5f61fc181f04cd27aab950c
+      sha256: "23f08335362185a5ea2ad3a4e597f1375e78bce8a040df5c600c8d3552ef2394"
       url: "https://pub.dev"
     source: hosted
-    version: "1.16.0"
+    version: "1.17.0"
   mime:
     dependency: transitive
     description:
@@ -1445,22 +1421,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0"
-  network_info_plus:
-    dependency: transitive
-    description:
-      name: network_info_plus
-      sha256: "4601b815b1c6a46d84839f65cd774a7d999738471d910fae00d813e9e98b04e1"
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.1.0+1"
-  network_info_plus_platform_interface:
-    dependency: transitive
-    description:
-      name: network_info_plus_platform_interface
-      sha256: "881f5029c5edaf19c616c201d3d8b366c5b1384afd5c1da5a49e4345de82fb8b"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.3"
   nm:
     dependency: transitive
     description:
@@ -1669,14 +1629,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.1"
-  ping_discover_network_forked:
-    dependency: transitive
-    description:
-      name: ping_discover_network_forked
-      sha256: d3975c4f3fbaa388f78fb4037ad9c33059d8e2ec0e804ed45e05277d2451fe77
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.1"
   platform:
     dependency: transitive
     description:
@@ -1709,6 +1661,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.0.2"
+  print_bluetooth_thermal:
+    dependency: "direct main"
+    description:
+      name: print_bluetooth_thermal
+      sha256: "17b204a5340174c02acf5f6caf7279b5000344f1f1e1bcd01dbdbf912bce6e46"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.9"
   printing:
     dependency: "direct main"
     description:
@@ -2046,18 +2006,10 @@ packages:
     dependency: transitive
     description:
       name: test_api
-      sha256: "522f00f556e73044315fa4585ec3270f1808a4b186c936e612cab0b565ff1e00"
+      sha256: ab2726c1a94d3176a45960b6234466ec367179b87dd74f1611adb1f3b5fb9d55
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.6"
-  thermal_printer:
-    dependency: "direct main"
-    description:
-      name: thermal_printer
-      sha256: "3e4b31a65b08388a426a4d2467980af9489678a348769bb3ebdccc6c180532e2"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.5"
+    version: "0.7.7"
   timelines_plus:
     dependency: "direct main"
     description:
@@ -2298,6 +2250,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.0"
+  win_ble:
+    dependency: transitive
+    description:
+      name: win_ble
+      sha256: "2a867e13c4b355b101fc2c6e2ac85eeebf965db34eca46856f8b478e93b41e96"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.1"
   xdg_directories:
     dependency: transitive
     description:

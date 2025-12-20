@@ -12,6 +12,10 @@ final class PrintersLoading extends PrintDelegateOrderState {}
 
 final class PrintersLoaded extends PrintDelegateOrderState {}
 
+final class PairedPrintersLoading extends PrintDelegateOrderState {}
+
+final class PairedPrintersLoaded extends PrintDelegateOrderState {}
+
 final class ConnectingPrinter extends PrintDelegateOrderState {}
 
 final class ConnectingPrinterSuccess extends PrintDelegateOrderState {}
