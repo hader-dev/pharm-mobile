@@ -9,15 +9,12 @@ import 'package:hader_pharm_mobile/repositories/remote/favorite/favorite_reposit
 import 'package:hader_pharm_mobile/repositories/remote/order/order_repository_impl.dart';
 import 'package:hader_pharm_mobile/repositories/remote/parapharm_catalog/para_pharma_catalog_repository_impl.dart';
 import 'package:hader_pharm_mobile/utils/app_exceptions/global_expcetion_handler.dart';
-import 'package:hader_pharm_mobile/utils/enums.dart'
-    show InvoiceTypes, PaymentMethods;
+import 'package:hader_pharm_mobile/utils/enums.dart' show InvoiceTypes, PaymentMethods;
 import 'package:share_plus/share_plus.dart';
 
 part 'para_pharma_details_state.dart';
 
 class ParaPharmaDetailsCubit extends Cubit<ParaPharmaDetailsState> {
-  final GlobalKey<FormFieldState<dynamic>> shippingAddressKey = GlobalKey();
-
   final ParaPharmaRepository paraPharmaCatalogRepository;
 
   final OrderRepository ordersRepository;
@@ -42,10 +39,8 @@ class ParaPharmaDetailsCubit extends Cubit<ParaPharmaDetailsState> {
   Future<void> getParaPharmaCatalogData(String id) async {
     try {
       emit(state.toLoading());
-      final paraPharmaCatalogData =
-          await paraPharmaCatalogRepository.getParaPharmaCatalogById(id,buyerCompanyId);
-      state.quantityController.text =
-          paraPharmaCatalogData.minOrderQuantity.toString();
+      final paraPharmaCatalogData = await paraPharmaCatalogRepository.getParaPharmaCatalogById(id, buyerCompanyId);
+      state.quantityController.text = paraPharmaCatalogData.minOrderQuantity.toString();
       emit(state.toLoaded(data: paraPharmaCatalogData));
     } catch (e) {
       debugPrint(e.toString());
@@ -60,8 +55,7 @@ class ParaPharmaDetailsCubit extends Cubit<ParaPharmaDetailsState> {
   Future<bool> likeParaPharma() async {
     if (state.paraPharmaCatalogData.id.isNotEmpty) {
       try {
-        await favoriteRepository.likeParaPharmaCatalog(
-            paraPharmaCatalogId: state.paraPharmaCatalogData.id);
+        await favoriteRepository.likeParaPharmaCatalog(paraPharmaCatalogId: state.paraPharmaCatalogData.id);
 
         emit(state.toLoaded(
             data: state.paraPharmaCatalogData.copyWith(
@@ -81,8 +75,7 @@ class ParaPharmaDetailsCubit extends Cubit<ParaPharmaDetailsState> {
   Future<bool> unlikeParaPharma() async {
     if (state.paraPharmaCatalogData.id.isNotEmpty) {
       try {
-        await favoriteRepository.unLikeParaPharmaCatalog(
-            paraPharmaCatalogId: state.paraPharmaCatalogData.id);
+        await favoriteRepository.unLikeParaPharmaCatalog(paraPharmaCatalogId: state.paraPharmaCatalogData.id);
 
         emit(
           state.toLoaded(
@@ -106,11 +99,9 @@ class ParaPharmaDetailsCubit extends Cubit<ParaPharmaDetailsState> {
       try {
         final product = state.paraPharmaCatalogData;
 
-        final deepLinkUrl =
-            '${DeeplinksService.scheme}://${DeeplinksService.host}/product/parapharma/${product.id}';
+        final deepLinkUrl = '${DeeplinksService.scheme}://${DeeplinksService.host}/product/parapharma/${product.id}';
 
-        await SharePlus.instance
-            .share(ShareParams(uri: Uri.parse(deepLinkUrl)));
+        await SharePlus.instance.share(ShareParams(uri: Uri.parse(deepLinkUrl)));
       } catch (e) {
         GlobalExceptionHandler.handle(exception: e);
       }
@@ -126,9 +117,7 @@ class ParaPharmaDetailsCubit extends Cubit<ParaPharmaDetailsState> {
       final updatedQuantity = int.parse(state.quantityController.text) + 1;
       state.quantityController.text = (updatedQuantity).toString();
 
-      state.packageQuantityController.text =
-          (updatedQuantity ~/ (state.paraPharmaCatalogData.packageSize))
-              .toString();
+      state.packageQuantityController.text = (updatedQuantity ~/ (state.paraPharmaCatalogData.packageSize)).toString();
       emit(state.toQuantityChanged());
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
@@ -142,8 +131,7 @@ class ParaPharmaDetailsCubit extends Cubit<ParaPharmaDetailsState> {
         state.quantityController.text = (updatedQuantity).toString();
 
         state.packageQuantityController.text =
-            (updatedQuantity ~/ (state.paraPharmaCatalogData.packageSize))
-                .toString();
+            (updatedQuantity ~/ (state.paraPharmaCatalogData.packageSize)).toString();
       }
       emit(state.toQuantityChanged());
     } catch (e) {
@@ -152,41 +140,33 @@ class ParaPharmaDetailsCubit extends Cubit<ParaPharmaDetailsState> {
   }
 
   void incrementPackageQuantity() {
-    final currPackageQuantity =
-        int.parse(state.packageQuantityController.text) + 1;
+    final currPackageQuantity = int.parse(state.packageQuantityController.text) + 1;
 
     state.packageQuantityController.text = currPackageQuantity.toString();
-    state.quantityController.text =
-        (currPackageQuantity * (state.paraPharmaCatalogData.packageSize))
-            .toString();
+    state.quantityController.text = (currPackageQuantity * (state.paraPharmaCatalogData.packageSize)).toString();
     emit(state.toQuantityChanged());
   }
 
   void decrementPackageQuantity() {
-    final currPackageQuantity =
-        int.parse(state.packageQuantityController.text) - 1;
+    final currPackageQuantity = int.parse(state.packageQuantityController.text) - 1;
 
-    final updatedItemQuantity =
-        (currPackageQuantity * (state.paraPharmaCatalogData.packageSize));
+    final updatedItemQuantity = (currPackageQuantity * (state.paraPharmaCatalogData.packageSize));
 
-    state.packageQuantityController.text =
-        (currPackageQuantity < 1 ? 1 : currPackageQuantity).toString();
+    state.packageQuantityController.text = (currPackageQuantity < 1 ? 1 : currPackageQuantity).toString();
 
-    state.quantityController.text =
-        (updatedItemQuantity < 1 ? 1 : updatedItemQuantity).toString();
+    state.quantityController.text = (updatedItemQuantity < 1 ? 1 : updatedItemQuantity).toString();
     emit(state.toQuantityChanged());
   }
 
   Future<bool> passQuickOrder() async {
-    if (!(shippingAddressKey.currentState?.validate() ?? false)) {
-      return false;
-    }
     try {
       emit(state.toPassingQuickOrder(
-          state.selectedPaymentMethod, state.selectedInvoiceType));
+        state.selectedPaymentMethod,
+        state.selectedInvoiceType,
+      ));
       await ordersRepository.createQuickOrder(
           orderDetails: CreateQuickOrderModel(
-        deliveryAddress: shippingAddressKey.currentState!.value,
+        deliveryAddress: state.shippingAddress!,
         deliveryTownId: getItInstance.get<UserManager>().currentUser.townId,
         paraPharmaCatalogId: state.paraPharmaCatalogData.id,
         qty: int.parse(state.quantityController.text),
@@ -209,23 +189,24 @@ class ParaPharmaDetailsCubit extends Cubit<ParaPharmaDetailsState> {
   void updateQuantityPackage(String v) {
     final currPackageQuantity = int.parse(v);
 
-    final updatedItemQuantity =
-        (currPackageQuantity * (state.paraPharmaCatalogData.packageSize));
+    final updatedItemQuantity = (currPackageQuantity * (state.paraPharmaCatalogData.packageSize));
 
-    state.packageQuantityController.text =
-        (currPackageQuantity < 1 ? 1 : currPackageQuantity).toString();
+    state.packageQuantityController.text = (currPackageQuantity < 1 ? 1 : currPackageQuantity).toString();
 
-    state.quantityController.text =
-        (updatedItemQuantity < 1 ? 1 : updatedItemQuantity).toString();
+    state.quantityController.text = (updatedItemQuantity < 1 ? 1 : updatedItemQuantity).toString();
     emit(state.toQuantityChanged());
   }
 
+  void changeShippingAddress(String? address) {
+    emit(state.toOrderPramsChanged(state.selectedPaymentMethod, state.selectedInvoiceType, address));
+  }
+
   void changeInvoiceMethod(InvoiceTypes invoiceType) {
-    emit(state.toOrderPramsChanged(state.selectedPaymentMethod, invoiceType));
+    emit(state.toOrderPramsChanged(state.selectedPaymentMethod, invoiceType, state.shippingAddress));
   }
 
   void changePaymentMethod(PaymentMethods paymentMethod) {
-    emit(state.toOrderPramsChanged(paymentMethod, state.selectedInvoiceType));
+    emit(state.toOrderPramsChanged(paymentMethod, state.selectedInvoiceType, state.shippingAddress));
   }
 
   void updateQuantity(String v) {
@@ -233,9 +214,7 @@ class ParaPharmaDetailsCubit extends Cubit<ParaPharmaDetailsState> {
     if (updatedQuantity > 0) {
       state.quantityController.text = (updatedQuantity).toString();
 
-      state.packageQuantityController.text =
-          (updatedQuantity ~/ (state.paraPharmaCatalogData.packageSize))
-              .toString();
+      state.packageQuantityController.text = (updatedQuantity ~/ (state.paraPharmaCatalogData.packageSize)).toString();
     }
     emit(state.toQuantityChanged());
   }
