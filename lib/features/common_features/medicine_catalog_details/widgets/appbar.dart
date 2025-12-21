@@ -13,8 +13,7 @@ import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
-class MedicineCatalogAppBar extends StatelessWidget
-    implements PreferredSizeWidget {
+class MedicineCatalogAppBar extends StatelessWidget implements PreferredSizeWidget {
   const MedicineCatalogAppBar({super.key, this.height, this.width});
 
   final double? height;
@@ -32,9 +31,7 @@ class MedicineCatalogAppBar extends StatelessWidget
       leading: IconButton(
         iconSize: iconSize,
         icon: Icon(
-          Directionality.of(context) == TextDirection.rtl
-              ? Iconsax.arrow_right_3
-              : Iconsax.arrow_left_2,
+          Directionality.of(context) == TextDirection.rtl ? Iconsax.arrow_right_3 : Iconsax.arrow_left_2,
           color: AppColors.accent1Shade1,
           size: context.responsiveAppSizeTheme.current.iconSize25,
         ),
@@ -44,11 +41,8 @@ class MedicineCatalogAppBar extends StatelessWidget
         BlocBuilder<MedicineDetailsCubit, MedicineDetailsState>(
           builder: (context, state) {
             final cubit = BlocProvider.of<MedicineDetailsCubit>(context);
-            final gCubit = MarketPlaceScreen
-                .marketPlaceScaffoldKey.currentContext
-                ?.read<MedicineProductsCubit>();
-            final hCubit = HomeScreen.scaffoldKey.currentContext
-                ?.read<MedicineProductsCubit>();
+            final gCubit = MarketPlaceScreen.marketPlaceScaffoldKey.currentContext?.read<MedicineProductsCubit>();
+            final hCubit = HomeScreen.scaffoldKey.currentContext?.read<MedicineProductsCubit>();
             final isLiked = cubit.state.medicineCatalogData.isLiked;
 
             return IconButton(
@@ -61,17 +55,13 @@ class MedicineCatalogAppBar extends StatelessWidget
               onPressed: () {
                 if (isLiked) {
                   cubit.unlikeMedicine().then((value) {
-                    gCubit?.refreshMedicineCatalogFavorite(
-                        state.medicineCatalogData.id, false);
-                    hCubit?.refreshMedicineCatalogFavorite(
-                        state.medicineCatalogData.id, false);
+                    gCubit?.refreshMedicineCatalogFavorite(state.medicineCatalogData.id, false);
+                    hCubit?.refreshMedicineCatalogFavorite(state.medicineCatalogData.id, false);
                   });
                 } else {
                   cubit.likeMedicine().then((value) {
-                    gCubit?.refreshMedicineCatalogFavorite(
-                        state.medicineCatalogData.id, true);
-                    hCubit?.refreshMedicineCatalogFavorite(
-                        state.medicineCatalogData.id, true);
+                    gCubit?.refreshMedicineCatalogFavorite(state.medicineCatalogData.id, true);
+                    hCubit?.refreshMedicineCatalogFavorite(state.medicineCatalogData.id, true);
                   });
                 }
               },
@@ -83,7 +73,7 @@ class MedicineCatalogAppBar extends StatelessWidget
           icon: Icon(
             LucideIcons.share2,
             color: AppColors.accent1Shade1,
-            size: context.responsiveAppSizeTheme.current.iconSize25,
+            size: context.responsiveAppSizeTheme.current.iconSize20,
           ),
           onPressed: () {
             final cubit = BlocProvider.of<MedicineDetailsCubit>(context);

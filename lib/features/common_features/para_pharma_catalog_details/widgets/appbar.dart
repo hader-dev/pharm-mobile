@@ -12,8 +12,7 @@ import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
-class ParaPharmaCatalogAppBar extends StatelessWidget
-    implements PreferredSizeWidget {
+class ParaPharmaCatalogAppBar extends StatelessWidget implements PreferredSizeWidget {
   const ParaPharmaCatalogAppBar({super.key});
 
   @override
@@ -26,9 +25,7 @@ class ParaPharmaCatalogAppBar extends StatelessWidget
       leading: IconButton(
         iconSize: iconSize,
         icon: Icon(
-          Directionality.of(context) == TextDirection.rtl
-              ? Iconsax.arrow_right_3
-              : Iconsax.arrow_left_2,
+          Directionality.of(context) == TextDirection.rtl ? Iconsax.arrow_right_3 : Iconsax.arrow_left_2,
           color: AppColors.accent1Shade1,
           size: iconSize,
         ),
@@ -39,8 +36,7 @@ class ParaPharmaCatalogAppBar extends StatelessWidget
           builder: (context, state) {
             final cubit = BlocProvider.of<ParaPharmaDetailsCubit>(context);
 
-            final hCubit =
-                HomeScreen.scaffoldKey.currentContext?.read<ParaPharmaCubit>();
+            final hCubit = HomeScreen.scaffoldKey.currentContext?.read<ParaPharmaCubit>();
 
             final isLiked = cubit.state.paraPharmaCatalogData.isLiked;
 
@@ -53,13 +49,11 @@ class ParaPharmaCatalogAppBar extends StatelessWidget
               onPressed: () {
                 if (isLiked) {
                   cubit.unlikeParaPharma().then((liked) {
-                    hCubit?.refreshParaPharmaCatalogFavorite(
-                        cubit.state.paraPharmaCatalogData.id, liked);
+                    hCubit?.refreshParaPharmaCatalogFavorite(cubit.state.paraPharmaCatalogData.id, liked);
                   });
                 } else {
                   cubit.likeParaPharma().then((liked) {
-                    hCubit?.refreshParaPharmaCatalogFavorite(
-                        cubit.state.paraPharmaCatalogData.id, liked);
+                    hCubit?.refreshParaPharmaCatalogFavorite(cubit.state.paraPharmaCatalogData.id, liked);
                   });
                 }
               },
@@ -70,7 +64,7 @@ class ParaPharmaCatalogAppBar extends StatelessWidget
           icon: Icon(
             LucideIcons.share2,
             color: AppColors.accent1Shade1,
-            size: context.responsiveAppSizeTheme.current.iconSize25,
+            size: context.responsiveAppSizeTheme.current.iconSize20,
           ),
           onPressed: () {
             final cubit = BlocProvider.of<ParaPharmaDetailsCubit>(context);

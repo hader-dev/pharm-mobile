@@ -24,20 +24,16 @@ class GalleryItemsSection extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           color: Colors.white54,
-          borderRadius: BorderRadius.circular(
-              context.responsiveAppSizeTheme.current.commonWidgetsRadius),
+          borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.commonWidgetsRadius),
         ),
-        constraints:
-            const BoxConstraints(maxWidth: 45, maxHeight: double.maxFinite),
+        constraints: const BoxConstraints(maxWidth: 45, maxHeight: double.maxFinite),
         child: ListView(shrinkWrap: true, children: [
           for (int index = 0; index < galleryItems.length; index++)
             InkWell(
-              onTap: () =>
-                  context.read<GalleryCubit>().changeSelectedGallery(index),
+              onTap: () => context.read<GalleryCubit>().changeSelectedGallery(index),
               child: GalleryItemWidget(
                 galleryItem: galleryItems[index],
-                isSelected:
-                    index == context.read<GalleryCubit>().selectedGalleryIndex,
+                isSelected: index == context.read<GalleryCubit>().selectedGalleryIndex,
               ),
             )
         ]),
@@ -49,8 +45,7 @@ class GalleryItemsSection extends StatelessWidget {
 class GalleryItemWidget extends StatelessWidget {
   final bool isSelected;
   final GalleryItem galleryItem;
-  const GalleryItemWidget(
-      {super.key, required this.galleryItem, this.isSelected = false});
+  const GalleryItemWidget({super.key, required this.galleryItem, this.isSelected = false});
 
   @override
   Widget build(BuildContext context) {
@@ -61,13 +56,10 @@ class GalleryItemWidget extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           border: Border.all(
-            color: isSelected
-                ? Theme.of(context).primaryColor
-                : Colors.grey.shade300,
+            color: isSelected ? Theme.of(context).primaryColor : Colors.grey.shade300,
             width: isSelected ? 2.5 : 1,
           ),
-          borderRadius:
-              BorderRadius.circular(context.responsiveAppSizeTheme.current.r6),
+          borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.r6),
           color: Colors.white,
           boxShadow: isSelected
               ? [
@@ -82,8 +74,7 @@ class GalleryItemWidget extends StatelessWidget {
         child: CachedNetworkImageWithDrawableFallback.withErrorSvgImage(
             width: 40,
             height: 40,
-            imageUrl: getItInstance
-                .get<INetworkService>()
-                .getFilesPath(galleryItem.imgPath)));
+            fit: BoxFit.fitHeight,
+            imageUrl: getItInstance.get<INetworkService>().getFilesPath(galleryItem.imgPath)));
   }
 }

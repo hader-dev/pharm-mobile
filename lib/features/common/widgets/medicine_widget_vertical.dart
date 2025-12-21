@@ -71,14 +71,14 @@ class MedicineWidgetVertical extends StatelessWidget {
                             shape: BoxShape.circle,
                             border: Border.all(color: AppColors.bgDisabled, width: 1.5),
                             image: DecorationImage(
-                              image: medicineData.company?.thumbnailImage?.path == null
-                                  ? AssetImage(DrawableAssetStrings.companyPlaceHolderImg)
-                                  : NetworkImage(
-                                      getItInstance.get<INetworkService>().getFilesPath(
-                                            medicineData.company!.thumbnailImage!.path,
-                                          ),
-                                    ),
-                            ),
+                                image: medicineData.company?.thumbnailImage?.path == null
+                                    ? AssetImage(DrawableAssetStrings.companyPlaceHolderImg)
+                                    : NetworkImage(
+                                        getItInstance.get<INetworkService>().getFilesPath(
+                                              medicineData.company!.thumbnailImage!.path,
+                                            ),
+                                      ),
+                                fit: BoxFit.fill),
                           ),
                         ),
                         const ResponsiveGap.s4(),

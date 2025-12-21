@@ -136,6 +136,7 @@ class ParaPharmaWidgetVertical extends StatelessWidget {
                                           paraPharmData.company!.thumbnailImage!.path,
                                         ),
                                   ),
+                            fit: BoxFit.fill,
                           ),
                         ),
                       ),
