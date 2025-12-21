@@ -19,7 +19,7 @@ class MedicineProductPhotoSection extends StatelessWidget {
 
     final List<GalleryItem> galleryItems = [
       GalleryItem(imgPath: cubit.state.medicineCatalogData.image?.path ?? ""),
-      ...cubit.state.medicineCatalogData.gallery!.items
+      ...cubit.state.medicineCatalogData.gallery?.items ?? []
     ];
 
     return BlocProvider(
@@ -59,7 +59,7 @@ class MedicineProductPhotoSection extends StatelessWidget {
                               ))
                           .toList());
                 }),
-            if (cubit.state.medicineCatalogData.gallery!.items.isNotEmpty)
+            if ((cubit.state.medicineCatalogData.gallery?.items ?? []).isNotEmpty)
               GalleryItemsSection(galleryItems: galleryItems)
           ],
         ));

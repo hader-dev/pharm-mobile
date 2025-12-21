@@ -55,7 +55,7 @@ class ParaPharmaProductPhotoSection extends StatelessWidget {
                                   height: MediaQuery.of(context).size.width > 768 ? 400 : 320,
                                   imageUrl: getItInstance.get<INetworkService>().getFilesPath(
                                       galleryItems[context.read<GalleryCubit>().selectedGalleryIndex].imgPath),
-                                  fit: BoxFit.cover,
+                                  fit: BoxFit.fitHeight,
                                   errorImgSize: MediaQuery.of(context).size.width > 768 ? 400 * .4 : 320 * .4,
                                   errorMsg: "No Image Available",
                                 ),
