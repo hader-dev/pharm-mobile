@@ -31,7 +31,7 @@ class BlueToothNativeChannelsHelper {
   ) async {
     await AppPermissionsHelper().requestBluetoothPermissions();
     final result = await kotlinChannelInstance.invokeMethod<bool>(
-      'sendData',
+      'sendBitMapData',
       {
         'address': address,
         'data': bytes,
@@ -39,6 +39,27 @@ class BlueToothNativeChannelsHelper {
     );
     return result ?? false;
   }
+
+  // Future<bool> sendImageToPrinter(
+  //   String address,
+  //   Uint8List bytes,
+  // ) async {
+  //   try {
+  //     await AppPermissionsHelper().requestBluetoothPermissions();
+
+  //     final result = await kotlinChannelInstance.invokeMethod<bool>(
+  //       'sendData',
+  //       {
+  //         'address': address,
+  //         'data': bytes,
+  //       },
+  //     );
+  //     return result ?? false;
+  //   } catch (e) {
+  //     print(e.toString());
+  //     return false;
+  //   }
+  // }
 
   Future<void> stopScanDevices() async {
     await kotlinChannelInstance.invokeMethod('stopScan');

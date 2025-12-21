@@ -1,8 +1,5 @@
 package com.hader.pharma
 
-import com.dantsu.escposprinter.EscPosPrinter
-import com.dantsu.escposprinter.EscPosCharsetEncoding
-import com.dantsu.escposprinter.connection.bluetooth.BluetoothPrintersConnections
 import java.nio.charset.Charset
 import android.bluetooth.*
 import android.content.*
@@ -11,11 +8,18 @@ import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
 import java.util.*
+import android.graphics.BitmapFactory
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import java.io.ByteArrayOutputStream
+import android.bluetooth.BluetoothSocket
+import android.util.Base64
+import android.util.Log
+import java.io.IOException
+import java.io.OutputStream
+
 
 class MainActivity : FlutterActivity() {
 
@@ -61,16 +65,31 @@ class MainActivity : FlutterActivity() {
                     "getBoundedDevices" -> {
                         result.success(getBondedBluetoothDevices())
                     }
-                    "sendData" -> {
+//                     "sendData" -> {
+//     val address = call.argument<String>("address")
+//     val bytes =  call.argument<ByteArray>("data")
+
+//     if (address == null || bytes == null) {
+//         result.error("INVALID", "Address or data missing", null)
+//         return@setMethodCallHandler
+//     }
+
+//     val success = sendDataToPairedDevice(address, bytes)
+//     result.success(success)
+// }
+                    "sendBitMapData" -> {
     val address = call.argument<String>("address")
-    val bytes =  call.argument<List<Int>>("data")
+    val bytes =  call.argument<ByteArray>("data")
 
     if (address == null || bytes == null) {
         result.error("INVALID", "Address or data missing", null)
         return@setMethodCallHandler
     }
+    val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
 
-    val success = sendDataToPairedDevice(address, bytes)
+val scaledBitmap = Bitmap.createScaledBitmap(bitmap, 384, 200, false)
+    
+    val success = sendDataToPairedDevice(address, scaledBitmap)
     result.success(success)
 }
 
@@ -145,131 +164,209 @@ class MainActivity : FlutterActivity() {
 }
 
 
+
 private fun sendDataToPairedDevice(
     deviceAddress: String,
-    data: List<Int>
+    img: Bitmap
 ): Boolean {
 
-     val connection = BluetoothPrintersConnections()
-            .getList()
-            ?.firstOrNull { it.device.address == deviceAddress }
-            ?: return false
+    if (bluetoothAdapter == null || !bluetoothAdapter.isEnabled) {
+        return false
+    }
 
-   val printerInstance: EscPosPrinter= EscPosPrinter(
-       connection,
-        203,
-        80f,
-        48,
-        EscPosCharsetEncoding(
-            "PC437",
-            0
-        )
-    )
-    printerInstance.useEscAsteriskCommand(true)
-    printerInstance.printFormattedText( """
-[C]<b>Hello, Printer!</b>
-[L]<u>Underlined Text</u>
-[L]Normal line 4
-[L]Normal line 5
-[L]Normal line 6
-[L]Normal line 7
-[L]Normal line 8
+    val device: BluetoothDevice =
+        bluetoothAdapter.getRemoteDevice(deviceAddress)
+
+    val uuid: UUID =
+        device.uuids?.firstOrNull()?.uuid
+            ?: UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
+
+    var socket: BluetoothSocket? = null
+  
+    return try {
+
+        socket = device.createInsecureRfcommSocketToServiceRecord(uuid)
+
+        bluetoothAdapter.cancelDiscovery()
+        socket.connect()
+        val printerWidth = 576 // 80mm printer width
+val scaledHeight = img.height * printerWidth / img.width
+val scaledBitmap = Bitmap.createScaledBitmap(img, printerWidth, scaledHeight, true)
+printImageBase64(scaledBitmap, scaledBitmap.width, scaledBitmap.height, socket)
+//         val text = "Hello Thermal Printer\nHello Thermal Printer\nHello Thermal Printer\nHello Thermal Printer\nHello Thermal Printer\nHello Thermal Printer\n"
+
+// // Convert text to bytes and then to Base64
+//         val rawBase64Data = Base64.encodeToString(text.toByteArray(Charset.forName("ISO-8859-1")), Base64.DEFAULT)
+//         printRawData(rawBase64Data, socket)
 
 
-""".trimIndent()
-    )
-    return true
+        // val outputStream = socket.outputStream
+
+        // outputStream.write(text.toByteArray(Charset.forName("windows-1256")))
+        // outputStream.flush()
+       
+        true
+    } catch (e: Exception) {
+        e.printStackTrace()
+        false
+    } finally {
+        try {
+         //   socket?.close()
+        } catch (_: Exception) {}
+    }
 }
-// private fun sendDataToPairedDevice(
-//     deviceAddress: String,
-//     data: List<Int>
-// ): Boolean {
 
-//     if (bluetoothAdapter == null || !bluetoothAdapter.isEnabled) {
-//         return false
-//     }
 
-//     val device: BluetoothDevice =
-//         bluetoothAdapter.getRemoteDevice(deviceAddress)
 
-//     val uuid: UUID =
-//         device.uuids?.firstOrNull()?.uuid
-//             ?: UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
+fun printRawData(
+    rawBase64Data: String,
+    mBluetoothSocket: BluetoothSocket?,
+    
+) {
+    synchronized(this) {
+        if (mBluetoothSocket == null || !mBluetoothSocket.isConnected) {
+            throw Exception("bluetooth connection is not built, may be you forgot to connectPrinter")
+            return
+        }
 
-//     var socket: BluetoothSocket? = null
+        val socket = mBluetoothSocket
+        Log.v("Printer", "start to print raw data $rawBase64Data")
 
-//     return try {
-//         socket = device.createRfcommSocketToServiceRecord(uuid)
-//         bluetoothAdapter.cancelDiscovery()
-//         socket.connect()
+        Thread {
+            val bytes = Base64.decode(rawBase64Data, Base64.DEFAULT)
+            var printerOutputStream: OutputStream? = null
 
-//         val outputStream = socket.outputStream
+            // Double-check the connection in the thread
+            synchronized(this) {
+                if (socket == null || !socket.isConnected) {
+                    Log.e("Printer", "Socket disconnected during printing")
+                    return@Thread
+                }
+                try {
+                    printerOutputStream = socket.outputStream
+                } catch (e: IOException) {
+                    Log.e("Printer", "Failed to get output stream: ${e.message}")
+                    return@Thread
+                }
+            }
 
-//         // // ✅ CRITICAL FIX: convert List<Int> → ByteArray
-//         // val byteArray = ByteArray(data.size)
-//         // for (i in data.indices) {
-//         //     byteArray[i] = data[i].toByte()
-//         // }
+            // Write the data safely
+            printerOutputStream?.let { output ->
+                try {
+                    output.write(bytes, 0, bytes.size)
+                    output.flush()
+                    Log.v("Printer", "Successfully printed raw data")
+                } catch (e: IOException) {
+                    Log.e("Printer", "Failed to print data: ${e.message}")
+                    e.printStackTrace()
+                }
+            }
 
-//         outputStream.write(generateTestTicketImage())
-//         outputStream.flush()
+            socket.close()
 
-//         true
-//     } catch (e: Exception) {
-//         e.printStackTrace()
-//         false
-//     } finally {
-//         try {
-//             socket?.close()
-//         } catch (_: Exception) {}
-//     }
-// }
+        }.start()
 
-// fun generateTestTicketImage(): ByteArray {
-//     // Create a bitmap (width depends on printer, e.g., 384 pixels for 80mm paper)
-//     val width = 384
-//     val lineHeight = 40
-//     val lines = 8 // number of lines
-//     val height = lineHeight * lines
-//     val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+    }
+}
 
-//     // Draw on the bitmap
-//     val canvas = Canvas(bitmap)
-//     canvas.drawColor(Color.WHITE) // background white
 
-//     val paint = Paint().apply {
-//         color = Color.BLACK
-//         textSize = 32f
-//         isAntiAlias = true
-//     }
 
-//     var y = lineHeight.toFloat()
+fun printImageBase64(
+    bitmapImage: Bitmap?,
+    imageWidth: Int,
+    imageHeight: Int,
+    mBluetoothSocket: BluetoothSocket?,
+    
+) {
+    val SET_LINE_SPACE_24 = byteArrayOf(0x1B, 0x33, 24)
+val SET_LINE_SPACE_32 = byteArrayOf(0x1B, 0x33, 32)
+val CENTER_ALIGN = byteArrayOf(0x1B, 0x61, 1)
+val SELECT_BIT_IMAGE_MODE = byteArrayOf(0x1B, 0x2A, 33)
+val LINE_FEED = byteArrayOf(0x0A)
 
-//     canvas.drawText("Hello, Printer!", 0f, y, paint)
-//     y += lineHeight
-//     paint.isFakeBoldText = true
-//     canvas.drawText("Bold Text", 0f, y, paint)
-//     paint.isFakeBoldText = false
-//     y += lineHeight
-//     paint.isUnderlineText = true
-//     canvas.drawText("Underlined Text", 0f, y, paint)
-//     paint.isUnderlineText = false
-//     y += lineHeight
-//     canvas.drawText("Normal line 4", 0f, y, paint)
-//     y += lineHeight
-//     canvas.drawText("Normal line 5", 0f, y, paint)
-//     y += lineHeight
-//     canvas.drawText("Normal line 6", 0f, y, paint)
-//     y += lineHeight
-//     canvas.drawText("Normal line 7", 0f, y, paint)
-//     y += lineHeight
-//     canvas.drawText("Normal line 8", 0f, y, paint)
+    if (bitmapImage == null) {
+        throw Exception("image not found")
+        return
+    }
 
-//     // Convert bitmap to byte array (PNG)
-//     val stream = ByteArrayOutputStream()
-//     bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
-//     return stream.toByteArray()
-// }
+    if (mBluetoothSocket == null) {
+        throw Exception("bluetooth connection is not built, may be you forgot to connectPrinter")
+        return
+    }
+
+    try {
+        val pixels: Array<IntArray> = getPixelsSlow(bitmapImage, imageWidth, imageHeight)
+        val outputStream: OutputStream = mBluetoothSocket.outputStream
+
+        // ESC/POS commands
+        outputStream.write(SET_LINE_SPACE_24)
+        outputStream.write(CENTER_ALIGN)
+
+        var y = 0
+        while (y < pixels.size) {
+            outputStream.write(SELECT_BIT_IMAGE_MODE)
+
+            val nL = (pixels[y].size and 0xFF).toByte()
+            val nH = ((pixels[y].size shr 8) and 0xFF).toByte()
+            outputStream.write(byteArrayOf(nL, nH))
+
+            for (x in pixels[y].indices) {
+                outputStream.write(recollectSlice(y, x, pixels))
+            }
+
+            
+            y += 24
+        }
+
+        outputStream.write(SET_LINE_SPACE_32)
+        outputStream.write(LINE_FEED)
+outputStream.write(LINE_FEED)
+outputStream.write(LINE_FEED)
+        outputStream.write(LINE_FEED)
+
+        outputStream.flush()
+    } catch (e: IOException) {
+        Log.e("Printer", "failed to print data", e)
+        e.printStackTrace()
+    }
+}
+
+
+// Helper function: convert Bitmap to pixel array
+fun getPixelsSlow(bitmap: Bitmap, width: Int, height: Int): Array<IntArray> {
+    val scaledBitmap = Bitmap.createScaledBitmap(bitmap, width, height, false)
+    val pixels = Array(scaledBitmap.height) { IntArray(scaledBitmap.width) }
+    for (y in 0 until scaledBitmap.height) {
+        for (x in 0 until scaledBitmap.width) {
+            val pixel = scaledBitmap.getPixel(x, y)
+            pixels[y][x] = if ((pixel and 0xFF) < 128) 1 else 0
+        }
+    }
+    return pixels
+}
+
+// Helper function: slice 24 vertical pixels into 3 bytes
+fun recollectSlice(y: Int, x: Int, pixels: Array<IntArray>): ByteArray {
+    val slice = ByteArray(3)
+
+    for (k in 0..2) {
+        var sliceByte = 0
+        for (b in 0..7) {
+            val yPos = y + k * 8 + b
+            if (yPos < pixels.size) {
+                // Convert to Int, shift, or, then mask to Byte
+                sliceByte = sliceByte or (pixels[yPos][x] shl (7 - b))
+            }
+        }
+        slice[k] = sliceByte.toByte()  // convert Int to Byte
+    }
+
+    return slice
+}
+
+
+
+
 
 
 

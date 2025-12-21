@@ -1,9 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:blue_thermal_printer/blue_thermal_printer.dart' show BluetoothDevice, BlueThermalPrinter;
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart' show Text;
 import 'package:flutter/services.dart';
-import 'package:flutter_thermal_printer/flutter_thermal_printer.dart' show Generator;
 import 'package:flutter_thermal_printer/utils/printer.dart' show Printer;
 import 'package:hader_pharm_mobile/utils/native_code_channels/bt_native_channels.dart'
     show BlueToothNativeChannelsHelper, BluetoothDeviceModel;
@@ -26,17 +23,7 @@ class PrintDelegateOrderCubit extends Cubit<PrintDelegateOrderState> {
   }) : super(PrintOrderInitial());
 
   Future<void> init() async {
-    await turnBLToothOn();
     getPairedPrinters();
-  }
-
-  Future<void> turnBLToothOn() async {
-    bool isBLthoothTurnedOn = await thermalPrintingHelper.turnBLToothOn();
-    if (isBLthoothTurnedOn) {
-      emit(BlueToothTurnedOn());
-    } else {
-      emit(BlueToothTurnedOff());
-    }
   }
 
   void startPrintersScan() async {
@@ -54,38 +41,6 @@ class PrintDelegateOrderCubit extends Cubit<PrintDelegateOrderState> {
     emit(PairedPrintersLoading());
     pairedDevices = await BlueToothNativeChannelsHelper().getBoundedDevices();
 
-    // pairedDevices = await thermalPrintingHelper.startPrintersScan();
-    // thermalPrintingHelper.flutterThermalPrinterPlugin.onStateChanged().listen((state) {
-    //   switch (state) {
-    //     case BlueThermalPrinter.CONNECTED:
-    //       debugPrint("State changed CONNECTED ");
-
-    //       break;
-    //     case BlueThermalPrinter.DISCONNECTED:
-    //       debugPrint("State changed DISCONNECTED ");
-    //       break;
-    //     case BlueThermalPrinter.DISCONNECT_REQUESTED:
-    //       debugPrint("State changed DISCONNECT_REQUESTED ");
-    //       break;
-    //     case BlueThermalPrinter.STATE_TURNING_OFF:
-    //       debugPrint("State changed STATE_TURNING_OFF ");
-    //       break;
-    //     case BlueThermalPrinter.STATE_OFF:
-    //       debugPrint("State changed STATE_OFF ");
-    //       break;
-    //     case BlueThermalPrinter.STATE_ON:
-    //       debugPrint("State changed STATE_ON ");
-    //       break;
-    //     case BlueThermalPrinter.STATE_TURNING_ON:
-    //       debugPrint("State changed STATE_TURNING_ON ");
-    //       break;
-    //     case BlueThermalPrinter.ERROR:
-    //       debugPrint("State changed ERROR ");
-    //       break;
-    //     default:
-    //       break;
-    //   }
-    // });
     emit(PairedPrintersLoaded());
   }
 
@@ -95,7 +50,12 @@ class PrintDelegateOrderCubit extends Cubit<PrintDelegateOrderState> {
   }
 
   void connectPrinter(Printer printer) async {
-    await BlueToothNativeChannelsHelper().sendToPrinter(printer.address!, "hello wolrd".codeUnits);
+    try {
+      final Uint8List imgData = await BLEThermalPrintersHelper.generateJpegFromWidget();
+      BlueToothNativeChannelsHelper().sendToPrinter(printer.address!, imgData);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
     //await thermalPrintingHelper.printTicket(printer);
   }
 
