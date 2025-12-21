@@ -28,6 +28,7 @@ class MakeOrderBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    GlobalKey<FormState> formKey = GlobalKey<FormState>();
     final translation = context.translation!;
 
     return Builder(builder: (context) {
@@ -51,169 +52,173 @@ class MakeOrderBottomSheet extends StatelessWidget {
             builder: (context, state) {
               final cubit = context.read<ParaPharmaDetailsCubit>();
 
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  BottomSheetHeader(title: translation.make_order),
-                  const ResponsiveGap.s12(),
-                  LabeledInfoWidget(
-                    label: translation.product,
-                    value: cubit.state.paraPharmaCatalogData.name,
-                  ),
-                  LabeledInfoWidget(
-                    label: translation.unit_ht_price,
-                    value:
-                        "${(cubit.state.paraPharmaCatalogData.unitPriceHt.toStringAsFixed(2))} ${translation.currency}",
-                  ),
-                  const ResponsiveGap.s12(),
-                  Row(
-                    children: [
-                      Flexible(
-                          child: InfoWidget(
-                              label: translation.min_qty_to_order,
-                              value: Text(
-                                "${cubit.state.paraPharmaCatalogData.minOrderQuantity}",
-                                style: context.responsiveTextTheme.current.body2Medium,
-                              ))),
-                      ResponsiveGap.s8(),
-                      Flexible(
-                          child: InfoWidget(
-                              label: translation.max_qty_to_order,
-                              value: Text(
-                                "${cubit.state.paraPharmaCatalogData.maxOrderQuantity}",
-                                style: context.responsiveTextTheme.current.body2Medium,
-                              ))),
-                    ],
-                  ),
-                  const ResponsiveGap.s12(),
-                  QuantitySectionModified(
-                    maxQuantity: cubit.state.paraPharmaCatalogData.maxOrderQuantity,
-                    minQuantity: cubit.state.paraPharmaCatalogData.minOrderQuantity,
-                    quantityController: cubit.state.quantityController,
-                    packageQuantityController: cubit.state.packageQuantityController,
-                    packageSize: cubit.state.paraPharmaCatalogData.packageSize,
-                    disabledPackageQuantity: true,
-                    decrementPackageQuantity: cubit.decrementPackageQuantity,
-                    incrementPackageQuantity: cubit.incrementPackageQuantity,
-                    incrementQuantity: cubit.incrementQuantity,
-                    decrementQuantity: cubit.decrementQuantity,
-                    onQuantityChanged: cubit.updateQuantity,
-                    onPackageQuantityChanged: cubit.updateQuantityPackage,
-                  ),
-                  const ResponsiveGap.s12(),
-                  InfoWidget(
-                      label: context.translation!.payment_methods,
-                      bgColor: AppColors.bgWhite,
-                      value: PaymentRadioInput(
-                        initialValue: PaymentMethods.cash,
-                        onPaymentMethodChanged: (PaymentMethods paymentMethod) =>
-                            cubit.changePaymentMethod(paymentMethod),
-                        validator: (v) => requiredValidator(v?.name, translation),
-                      )),
-                  InfoWidget(
-                      label: context.translation!.invoice_types,
-                      bgColor: AppColors.bgWhite,
-                      value: InvoiceRadioInput(
-                        initialValue: InvoiceTypes.facture,
-                        onInvoiceTypeChanged: (InvoiceTypes invoiceType) => cubit.changeInvoiceMethod(invoiceType),
-                        validator: (v) => requiredValidator(v?.name, translation),
-                      )),
-                  const ResponsiveGap.s12(),
-                  InfoWidget(
-                      label: "${context.translation!.shipping_address}*",
-                      bgColor: AppColors.bgWhite,
-                      value: CustomTextField(
-                        verticalPadding: 0,
-                        fieldKey: cubit.shippingAddressKey,
-                        horizontalPadding: context.responsiveAppSizeTheme.current.p6,
-                        initValue: UserManager.instance.currentUser.address,
-                        maxLines: 3,
-                        maxLength: 255,
-                        onChanged: (value) => cubit.updateQuantity(value ?? ""),
-                        validationFunc: (value) => requiredValidator(
-                          value,
-                          translation,
-                        ),
-                        isFilled: false,
-                        isBorderEnabled: true,
-                        hintText: context.translation!.shipping_address,
-                        hintTextStyle: context.responsiveTextTheme.current.bodySmall.copyWith(color: Colors.grey),
-                      )),
-                  const ResponsiveGap.s12(),
-                  Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
-                  const ResponsiveGap.s12(),
-                  InfoWidget(
-                    label: translation.total_price,
-                    bgColor: AppColors.accentGreenShade3,
-                    value: Row(
+              return Form(
+                key: formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    BottomSheetHeader(title: translation.make_order),
+                    const ResponsiveGap.s12(),
+                    LabeledInfoWidget(
+                      label: translation.product,
+                      value: cubit.state.paraPharmaCatalogData.name,
+                    ),
+                    LabeledInfoWidget(
+                      label: translation.unit_ht_price,
+                      value:
+                          "${(cubit.state.paraPharmaCatalogData.unitPriceHt.toStringAsFixed(2))} ${translation.currency}",
+                    ),
+                    const ResponsiveGap.s12(),
+                    Row(
                       children: [
-                        Text(
-                          "${(num.parse(cubit.state.quantityController.text.isEmpty ? "0" : cubit.state.quantityController.text) * cubit.state.paraPharmaCatalogData.unitPriceHt).toStringAsFixed(2)} ${translation.currency}",
-                          style:
-                              context.responsiveTextTheme.current.body2Medium.copyWith(color: AppColors.accent1Shade1),
-                        ),
-                        Spacer(),
-                        Icon(
-                          Iconsax.wallet_money,
-                          color: AppColors.accent1Shade1,
-                        ),
+                        Flexible(
+                            child: InfoWidget(
+                                label: translation.min_qty_to_order,
+                                value: Text(
+                                  "${cubit.state.paraPharmaCatalogData.minOrderQuantity}",
+                                  style: context.responsiveTextTheme.current.body2Medium,
+                                ))),
+                        ResponsiveGap.s8(),
+                        Flexible(
+                            child: InfoWidget(
+                                label: translation.max_qty_to_order,
+                                value: Text(
+                                  "${cubit.state.paraPharmaCatalogData.maxOrderQuantity}",
+                                  style: context.responsiveTextTheme.current.body2Medium,
+                                ))),
                       ],
                     ),
-                  ),
-                  const ResponsiveGap.s12(),
-                  const Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
-                  const ResponsiveGap.s12(),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: context.responsiveAppSizeTheme.current.p4),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: PrimaryTextButton(
-                            isOutLined: true,
-                            label: translation.cancel,
-                            spalshColor: AppColors.accent1Shade1.withAlpha(50),
-                            labelColor: AppColors.accent1Shade1,
-                            onTap: () {
-                              context.pop();
-                            },
-                            borderColor: AppColors.accent1Shade1,
+                    const ResponsiveGap.s12(),
+                    QuantitySectionModified(
+                      maxQuantity: cubit.state.paraPharmaCatalogData.maxOrderQuantity,
+                      minQuantity: cubit.state.paraPharmaCatalogData.minOrderQuantity,
+                      quantityController: cubit.state.quantityController,
+                      packageQuantityController: cubit.state.packageQuantityController,
+                      packageSize: cubit.state.paraPharmaCatalogData.packageSize,
+                      disabledPackageQuantity: true,
+                      decrementPackageQuantity: cubit.decrementPackageQuantity,
+                      incrementPackageQuantity: cubit.incrementPackageQuantity,
+                      incrementQuantity: cubit.incrementQuantity,
+                      decrementQuantity: cubit.decrementQuantity,
+                      onQuantityChanged: cubit.updateQuantity,
+                      onPackageQuantityChanged: cubit.updateQuantityPackage,
+                    ),
+                    const ResponsiveGap.s12(),
+                    InfoWidget(
+                        label: context.translation!.payment_methods,
+                        bgColor: AppColors.bgWhite,
+                        value: PaymentRadioInput(
+                          initialValue: PaymentMethods.cash,
+                          onPaymentMethodChanged: (PaymentMethods paymentMethod) =>
+                              cubit.changePaymentMethod(paymentMethod),
+                          validator: (v) => requiredValidator(v?.name, translation),
+                        )),
+                    InfoWidget(
+                        label: context.translation!.invoice_types,
+                        bgColor: AppColors.bgWhite,
+                        value: InvoiceRadioInput(
+                          initialValue: InvoiceTypes.facture,
+                          onInvoiceTypeChanged: (InvoiceTypes invoiceType) => cubit.changeInvoiceMethod(invoiceType),
+                          validator: (v) => requiredValidator(v?.name, translation),
+                        )),
+                    const ResponsiveGap.s12(),
+                    InfoWidget(
+                        label: "${context.translation!.shipping_address}*",
+                        bgColor: AppColors.bgWhite,
+                        value: CustomTextField(
+                          verticalPadding: 0,
+                          horizontalPadding: context.responsiveAppSizeTheme.current.p6,
+                          initValue: cubit.state.shippingAddress,
+                          maxLines: 3,
+                          maxLength: 255,
+                          onChanged: (value) => cubit.changeShippingAddress(value),
+                          validationFunc: (value) => requiredValidator(
+                            value,
+                            translation,
                           ),
-                        ),
-                        const ResponsiveGap.s8(),
-                        Expanded(
-                          flex: 2,
-                          child: PrimaryTextButton(
-                            label: translation.buy_now,
-                            leadingIcon: Iconsax.money4,
-                            isLoading: state is PassingQuickOrder,
-                            onTap: (int.parse(state.quantityController.text.isEmpty
-                                            ? "0"
-                                            : state.quantityController.text) <
-                                        state.paraPharmaCatalogData.minOrderQuantity ||
-                                    state.paraPharmaCatalogData.maxOrderQuantity <
-                                        int.parse(state.quantityController.text.isEmpty
-                                            ? "0"
-                                            : state.quantityController.text))
-                                ? null
-                                : () {
-                                    context
-                                        .read<ParaPharmaDetailsCubit>()
-                                        .passQuickOrder()
-                                        .then((sucess) => getItInstance.get<ToastManager>().showToast(
-                                              message: sucess
-                                                  ? translation.order_placed_successfully
-                                                  : translation.order_placed_failed,
-                                              type: sucess ? ToastType.success : ToastType.error,
-                                            ));
-                                  },
+                          isFilled: false,
+                          isBorderEnabled: true,
+                          hintText: context.translation!.shipping_address,
+                          hintTextStyle: context.responsiveTextTheme.current.bodySmall.copyWith(color: Colors.grey),
+                        )),
+                    const ResponsiveGap.s12(),
+                    Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
+                    const ResponsiveGap.s12(),
+                    InfoWidget(
+                      label: translation.total_price,
+                      bgColor: AppColors.accentGreenShade3,
+                      value: Row(
+                        children: [
+                          Text(
+                            "${(num.parse(cubit.state.quantityController.text.isEmpty ? "0" : cubit.state.quantityController.text) * cubit.state.paraPharmaCatalogData.unitPriceHt).toStringAsFixed(2)} ${translation.currency}",
+                            style: context.responsiveTextTheme.current.body2Medium
+                                .copyWith(color: AppColors.accent1Shade1),
+                          ),
+                          Spacer(),
+                          Icon(
+                            Iconsax.wallet_money,
                             color: AppColors.accent1Shade1,
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  )
-                ],
+                    const ResponsiveGap.s12(),
+                    const Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
+                    const ResponsiveGap.s12(),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: context.responsiveAppSizeTheme.current.p4),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: PrimaryTextButton(
+                              isOutLined: true,
+                              label: translation.cancel,
+                              spalshColor: AppColors.accent1Shade1.withAlpha(50),
+                              labelColor: AppColors.accent1Shade1,
+                              onTap: () {
+                                context.pop();
+                              },
+                              borderColor: AppColors.accent1Shade1,
+                            ),
+                          ),
+                          const ResponsiveGap.s8(),
+                          Expanded(
+                            flex: 2,
+                            child: PrimaryTextButton(
+                              label: translation.buy_now,
+                              leadingIcon: Iconsax.money4,
+                              isLoading: state is PassingQuickOrder,
+                              onTap: (int.parse(state.quantityController.text.isEmpty
+                                              ? "0"
+                                              : state.quantityController.text) <
+                                          state.paraPharmaCatalogData.minOrderQuantity ||
+                                      state.paraPharmaCatalogData.maxOrderQuantity <
+                                          int.parse(state.quantityController.text.isEmpty
+                                              ? "0"
+                                              : state.quantityController.text))
+                                  ? null
+                                  : () {
+                                      if (formKey.currentState!.validate()) {
+                                        context
+                                            .read<ParaPharmaDetailsCubit>()
+                                            .passQuickOrder()
+                                            .then((sucess) => getItInstance.get<ToastManager>().showToast(
+                                                  message: sucess
+                                                      ? translation.order_placed_successfully
+                                                      : translation.order_placed_failed,
+                                                  type: sucess ? ToastType.success : ToastType.error,
+                                                ));
+                                      }
+                                    },
+                              color: AppColors.accent1Shade1,
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               );
             },
           ),
