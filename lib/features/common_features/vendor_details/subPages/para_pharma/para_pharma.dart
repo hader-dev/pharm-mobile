@@ -48,20 +48,20 @@ class _ParapharmaPageState extends State<ParapharmaPage> with AutomaticKeepAlive
                 searchController: state.searchController,
               ),
             ),
-            BlocBuilder<ParaPharmaCubit, ParaPharmaState>(builder: (context, state) {
-              return SearchFilterButton(
-                  hasActiveFilters: state.hasActiveFilters,
-                  onTap: () {
-                    BottomSheetHelper.showCommonBottomSheet(
-                      context: context,
-                      child: ParaPharmFilterProvider(
-                        parapharmCubit: parapharmCubit,
-                        filterCubit: filterCubit,
-                        child: ParaMedicalFiltersView(),
-                      ),
-                    );
-                  });
-            }),
+            // BlocBuilder<ParaPharmaCubit, ParaPharmaState>(builder: (context, state) {
+            //   return SearchFilterButton(
+            //       hasActiveFilters: state.hasActiveFilters,
+            //       onTap: () {
+            //         BottomSheetHelper.showCommonBottomSheet(
+            //           context: context,
+            //           child: ParaPharmFilterProvider(
+            //             parapharmCubit: parapharmCubit,
+            //             filterCubit: filterCubit,
+            //             child: ParaMedicalFiltersView(),
+            //           ),
+            //         );
+            //       });
+            // }),
           ],
         ),
         Expanded(
