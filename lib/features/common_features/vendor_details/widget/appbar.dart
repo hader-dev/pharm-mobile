@@ -46,6 +46,7 @@ class VendorDetailsAppBar extends StatelessWidget implements PreferredSizeWidget
                       ? AssetImage(DrawableAssetStrings.companyPlaceHolderImg)
                       : NetworkImage(getItInstance.get<INetworkService>().getFilesPath(vendorData.image?.path ?? ''))
                           as ImageProvider,
+                  fit: BoxFit.fill,
                 ),
               ),
             ),

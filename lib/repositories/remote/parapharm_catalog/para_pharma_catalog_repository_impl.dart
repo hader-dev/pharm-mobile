@@ -46,14 +46,20 @@ class ParaPharmaRepository extends IParaPharmaRepository {
   }
 
   @override
-  Future<ParaPharmaCatalogModel> getParaPharmaCatalogById(String id) async {
+  Future<ParaPharmaCatalogModel> getParaPharmaCatalogById(String id, [String? buyerCompanyId]) async {
     try {
+      final queryParams = {
+        'computed[isFavorite]': 'true',
+      };
+
+      if (buyerCompanyId != null) {
+        queryParams['deligateBuyerCompany[buyerCompanyId]'] = buyerCompanyId;
+      }
+
       return await client
           .sendRequest(() => client.get(
                 '${Urls.paraPharamaCatalog}/$id',
-                queryParams: {
-                  'computed[isFavorite]': 'true',
-                },
+                queryParams: queryParams,
               ))
           .then((response) {
         return jsonToParapharmaCatalogueItem(response);

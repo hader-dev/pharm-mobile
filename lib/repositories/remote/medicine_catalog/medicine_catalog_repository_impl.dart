@@ -105,11 +105,18 @@ class MedicineCatalogRepository extends IMedicineCatalogRepository {
   }
 
   @override
-  Future<MedicineCatalogModel> getMedicineCatalogById(String id) async {
+  Future<MedicineCatalogModel> getMedicineCatalogById(String id, String? buyerCompanyId) async {
     try {
-      var decodedResponse = await client.sendRequest(() => client.get("${Urls.medicinesCatalog}/$id", queryParams: {
-            'computed[isFavorite]': 'true',
-          }));
+      final queryParams = {
+        'computed[isFavorite]': 'true',
+      };
+
+      if (buyerCompanyId != null) {
+        queryParams['deligateBuyerCompany[buyerCompanyId]'] = buyerCompanyId;
+      }
+
+      var decodedResponse =
+          await client.sendRequest(() => client.get("${Urls.medicinesCatalog}/$id", queryParams: queryParams));
       return jsonToMedicineCatalogItem(decodedResponse);
     } catch (e) {
       return MedicineCatalogModel.empty();

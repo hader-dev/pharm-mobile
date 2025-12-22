@@ -23,7 +23,7 @@ class ParaPharmaWidgetHorizantal extends StatelessWidget {
   final bool canOrder;
   final void Function(BaseParaPharmaCatalogModel)? onFavoriteCallback;
   final void Function(BaseParaPharmaCatalogModel)? onQuickAddCallback;
-
+  final String? buyerCompanyId;
   final bool isLiked;
   final String route;
   const ParaPharmaWidgetHorizantal(
@@ -31,6 +31,7 @@ class ParaPharmaWidgetHorizantal extends StatelessWidget {
       required this.paraPharmData,
       required this.isLiked,
       this.canOrder = true,
+      this.buyerCompanyId,
       this.onQuickAddCallback,
       this.route = RoutingManager.paraPharmaDetailsScreen,
       this.onFavoriteCallback});
@@ -58,8 +59,11 @@ class ParaPharmaWidgetHorizantal extends StatelessWidget {
           final userRole = getItInstance.get<UserManager>().currentUser.role;
           final canOrderBasedOnRole = !userRole.isDelegate;
 
-          GoRouter.of(context)
-              .pushNamed(route, extra: {"id": paraPharmData.id, "canOrder": canOrder || canOrderBasedOnRole});
+          GoRouter.of(context).pushNamed(route, extra: {
+            "id": paraPharmData.id,
+            "buyerCompanyId": buyerCompanyId,
+            "canOrder": canOrder || canOrderBasedOnRole
+          });
         },
         child: Row(
           children: [
@@ -123,6 +127,37 @@ class ParaPharmaWidgetHorizantal extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
+                  Row(children: [
+                    Expanded(
+                        flex: 8,
+                        child: Tooltip(
+                          message: paraPharmData.name,
+                          triggerMode: TooltipTriggerMode.longPress,
+                          child: Text(paraPharmData.name,
+                              softWrap: true,
+                              style: context.responsiveTextTheme.current.headLine4SemiBold
+                                  .copyWith(color: TextColors.primary.color)),
+                        )),
+                    const Spacer(),
+                    if (onQuickAddCallback != null)
+                      Transform.scale(
+                        scale: .88,
+                        child: PrimaryIconButton(
+                          isBordered: false,
+                          bgColor: AppColors.accent1Shade1.withAlpha(20),
+                          onPressed: () {
+                            onQuickAddCallback?.call(paraPharmData);
+                          },
+                          icon: SvgPicture.asset(DrawableAssetStrings.newAddToCartIcon,
+                              height: context.responsiveAppSizeTheme.current.iconSize25,
+                              width: context.responsiveAppSizeTheme.current.iconSize25,
+                              colorFilter: ColorFilter.mode(
+                                AppColors.accent1Shade1,
+                                BlendMode.srcIn,
+                              )),
+                        ),
+                      ),
+                  ]),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     spacing: context.responsiveAppSizeTheme.current.s6,
@@ -141,6 +176,7 @@ class ParaPharmaWidgetHorizantal extends StatelessWidget {
                                           paraPharmData.company!.thumbnailImage!.path,
                                         ),
                                   ),
+                            fit: BoxFit.fill,
                           ),
                         ),
                       ),
@@ -150,38 +186,9 @@ class ParaPharmaWidgetHorizantal extends StatelessWidget {
                             maxLines: 1,
                             style: context.responsiveTextTheme.current.bodyXSmall),
                       ),
-                      const Spacer(),
-                      if (onQuickAddCallback != null)
-                        Transform.scale(
-                          alignment: Alignment.center,
-                          scale: .88,
-                          child: PrimaryIconButton(
-                            isBordered: false,
-                            bgColor: AppColors.accent1Shade1.withAlpha(20),
-                            onPressed: () {
-                              onQuickAddCallback?.call(paraPharmData);
-                            },
-                            icon: SvgPicture.asset(DrawableAssetStrings.newAddToCartIcon,
-                                height: context.responsiveAppSizeTheme.current.iconSize25,
-                                width: context.responsiveAppSizeTheme.current.iconSize25,
-                                colorFilter: ColorFilter.mode(
-                                  AppColors.accent1Shade1,
-                                  BlendMode.srcIn,
-                                )),
-                          ),
-                        ),
                     ],
                   ),
-                  Tooltip(
-                    message: paraPharmData.name,
-                    triggerMode: TooltipTriggerMode.longPress,
-                    child: Text(paraPharmData.name,
-                        softWrap: true,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                        style: context.responsiveTextTheme.current.headLine3SemiBold
-                            .copyWith(color: TextColors.primary.color)),
-                  ),
+                  ResponsiveGap.s4(),
                   PriceWidget(
                     price: paraPharmData.unitPriceHt,
                     overridePrice: paraPharmData.computedPrice,

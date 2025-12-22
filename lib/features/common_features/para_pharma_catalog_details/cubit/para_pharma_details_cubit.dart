@@ -15,12 +15,12 @@ import 'package:share_plus/share_plus.dart';
 part 'para_pharma_details_state.dart';
 
 class ParaPharmaDetailsCubit extends Cubit<ParaPharmaDetailsState> {
-  final GlobalKey<FormFieldState<dynamic>> shippingAddressKey = GlobalKey();
-
   final ParaPharmaRepository paraPharmaCatalogRepository;
 
   final OrderRepository ordersRepository;
   final FavoriteRepository favoriteRepository;
+
+  final String? buyerCompanyId;
 
   ParaPharmaDetailsCubit(
       {required TextEditingController quantityController,
@@ -28,6 +28,7 @@ class ParaPharmaDetailsCubit extends Cubit<ParaPharmaDetailsState> {
       required this.paraPharmaCatalogRepository,
       required TabController tabController,
       required this.favoriteRepository,
+      this.buyerCompanyId,
       required this.ordersRepository})
       : super(ParaPharmaDetailsInitial(
           tabController: tabController,
@@ -38,7 +39,7 @@ class ParaPharmaDetailsCubit extends Cubit<ParaPharmaDetailsState> {
   Future<void> getParaPharmaCatalogData(String id) async {
     try {
       emit(state.toLoading());
-      final paraPharmaCatalogData = await paraPharmaCatalogRepository.getParaPharmaCatalogById(id);
+      final paraPharmaCatalogData = await paraPharmaCatalogRepository.getParaPharmaCatalogById(id, buyerCompanyId);
       state.quantityController.text = paraPharmaCatalogData.minOrderQuantity.toString();
       emit(state.toLoaded(data: paraPharmaCatalogData));
     } catch (e) {
@@ -158,14 +159,14 @@ class ParaPharmaDetailsCubit extends Cubit<ParaPharmaDetailsState> {
   }
 
   Future<bool> passQuickOrder() async {
-    if (!(shippingAddressKey.currentState?.validate() ?? false)) {
-      return false;
-    }
     try {
-      emit(state.toPassingQuickOrder(state.selectedPaymentMethod, state.selectedInvoiceType));
+      emit(state.toPassingQuickOrder(
+        state.selectedPaymentMethod,
+        state.selectedInvoiceType,
+      ));
       await ordersRepository.createQuickOrder(
           orderDetails: CreateQuickOrderModel(
-        deliveryAddress: shippingAddressKey.currentState!.value,
+        deliveryAddress: state.shippingAddress!,
         deliveryTownId: getItInstance.get<UserManager>().currentUser.townId,
         paraPharmaCatalogId: state.paraPharmaCatalogData.id,
         qty: int.parse(state.quantityController.text),
@@ -196,12 +197,16 @@ class ParaPharmaDetailsCubit extends Cubit<ParaPharmaDetailsState> {
     emit(state.toQuantityChanged());
   }
 
+  void changeShippingAddress(String? address) {
+    emit(state.toOrderPramsChanged(state.selectedPaymentMethod, state.selectedInvoiceType, address));
+  }
+
   void changeInvoiceMethod(InvoiceTypes invoiceType) {
-    emit(state.toOrderPramsChanged(state.selectedPaymentMethod, invoiceType));
+    emit(state.toOrderPramsChanged(state.selectedPaymentMethod, invoiceType, state.shippingAddress));
   }
 
   void changePaymentMethod(PaymentMethods paymentMethod) {
-    emit(state.toOrderPramsChanged(paymentMethod, state.selectedInvoiceType));
+    emit(state.toOrderPramsChanged(paymentMethod, state.selectedInvoiceType, state.shippingAddress));
   }
 
   void updateQuantity(String v) {

@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart' show debugPrint;
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -30,14 +29,15 @@ class EnvHelper {
         {
           envFileName = '.env.staging';
         }
+      case 'local':
+        {
+          envFileName = '.env.local';
+        }
       default:
         {
           envFileName = '.env.dev';
         }
     }
-
-    // debugPrint('Loading env file: $envFileName');
-    // debugPrint('Current App Flavor : $appFlavor');
 
     await dotenv.load(fileName: envFileName);
   }

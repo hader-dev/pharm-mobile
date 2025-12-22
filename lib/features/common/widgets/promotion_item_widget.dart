@@ -36,6 +36,7 @@ class PromotionItemWidget extends StatelessWidget {
         );
       },
       child: Container(
+        clipBehavior: Clip.antiAlias,
         margin: EdgeInsets.only(right: context.responsiveAppSizeTheme.current.p8),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.commonWidgetsRadius),
@@ -50,7 +51,7 @@ class PromotionItemWidget extends StatelessWidget {
               height: double.infinity,
               errorStyle: context.responsiveTextTheme.current.bodyXSmall.copyWith(color: Colors.grey.shade400),
               errorMsg: "No Image Available",
-              fit: BoxFit.cover,
+              fit: BoxFit.fill,
             ),
             Container(
               padding: EdgeInsets.symmetric(
@@ -81,14 +82,14 @@ class PromotionItemWidget extends StatelessWidget {
                       shape: BoxShape.circle,
                       border: Border.all(color: AppColors.bgDisabled, width: 1.5),
                       image: DecorationImage(
-                        image: announcement.company?.thumbnailImage != null
-                            ? NetworkImage(
-                                getItInstance.get<INetworkService>().getFilesPath(
-                                      announcement.company?.thumbnailImage?.path ?? "",
-                                    ),
-                              )
-                            : AssetImage(DrawableAssetStrings.companyPlaceHolderImg),
-                      ),
+                          image: announcement.company?.thumbnailImage != null
+                              ? NetworkImage(
+                                  getItInstance.get<INetworkService>().getFilesPath(
+                                        announcement.company?.thumbnailImage?.path ?? "",
+                                      ),
+                                )
+                              : AssetImage(DrawableAssetStrings.companyPlaceHolderImg),
+                          fit: BoxFit.fill),
                     ),
                   ),
                   const ResponsiveGap.s8(),

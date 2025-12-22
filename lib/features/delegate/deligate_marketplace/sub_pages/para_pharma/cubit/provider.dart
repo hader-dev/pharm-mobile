@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
+
 import 'package:hader_pharm_mobile/features/delegate/deligate_marketplace/sub_pages/para_pharma/cubit/para_pharma_cubit.dart';
 // import 'package:hader_pharm_mobile/features/common_features/filters/cubit/parapharm/para_medical_filters_cubit.dart';
+
 import 'package:hader_pharm_mobile/repositories/remote/favorite/favorite_repository_impl.dart';
 import 'package:hader_pharm_mobile/repositories/remote/parapharm_catalog/para_pharma_catalog_repository_impl.dart';
 
 class ParapharmaStateProvider extends StatelessWidget {
   final Widget child;
+  final DeligateClient client;
 
-  const ParapharmaStateProvider({super.key, required this.child});
+  const ParapharmaStateProvider({super.key, required this.child, required this.client});
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +25,7 @@ class ParapharmaStateProvider extends StatelessWidget {
       //),
       BlocProvider(
         create: (context) => ParaPharmaCubit(
+          buyerCompanyId: client.buyerCompanyId,
           scrollController: ScrollController(),
           favoriteRepository: FavoriteRepository(client: getItInstance.get<INetworkService>()),
           searchController: TextEditingController(text: ""),

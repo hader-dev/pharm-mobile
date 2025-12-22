@@ -13,7 +13,8 @@ import 'package:hader_pharm_mobile/utils/validators.dart';
 import 'package:iconsax/iconsax.dart';
 
 class EmailRegisterFormSection extends HookWidget {
-  const EmailRegisterFormSection({super.key});
+  const EmailRegisterFormSection({super.key, this.token});
+  final String? token;
 
   @override
   Widget build(BuildContext context) {
@@ -73,8 +74,8 @@ class EmailRegisterFormSection extends HookWidget {
                 return context.translation!.feedback_field_required;
               }
             },
-            onChanged: (newVal) =>
-                cubit.updateFormData(state.formData.copyWith(password: newVal?.trim())),
+            onChanged: (newVal) => cubit.updateFormData(
+                state.formData.copyWith(password: newVal?.trim())),
           ),
           ResponsiveGap.s4(),
           BlocBuilder<RegisterCubit, RegisterState>(
@@ -116,7 +117,7 @@ class EmailRegisterFormSection extends HookWidget {
             isLoading: context.watch<RegisterCubit>().state is RegisterLoading,
             onTap: () {
               if (state.formKey.currentState!.validate()) {
-                cubit.emailRegister(state.formData);
+                cubit.emailRegister(state.formData, token);
               }
             },
             color: AppColors.accent1Shade1,

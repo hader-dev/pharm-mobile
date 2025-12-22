@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/features/common_features/cart/cart.dart';
 import 'package:hader_pharm_mobile/features/common_features/cart/widgets/appbar.dart';
+
 import 'package:hader_pharm_mobile/features/delegate/delegate_clients/delegate_clients.dart';
 import 'package:hader_pharm_mobile/features/delegate/delegate_clients/widgets/appbar.dart';
 import 'package:hader_pharm_mobile/features/delegate/deligate_marketplace/sub_pages/para_pharma/widget/appbar.dart';
@@ -10,6 +11,7 @@ import 'package:hader_pharm_mobile/features/delegate/delegate_orders/deligate_or
 import 'package:hader_pharm_mobile/features/delegate/delegate_orders/widgets/appbar.dart';
 import 'package:hader_pharm_mobile/features/delegate/deligate_products/deligate_products.dart';
 import 'package:hader_pharm_mobile/features/delegate/deligate_products/widgets/appbar.dart';
+
 import 'package:hader_pharm_mobile/features/common_features/home/home.dart';
 import 'package:hader_pharm_mobile/features/common_features/home/widgets/appbar.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/market_place.dart';
@@ -70,7 +72,6 @@ class AppLayoutCubit extends Cubit<AppLayoutState> {
     screens = [
       ClientScreen(),
       DeligateOrdersScreen(),
-      DeligateProductsScreen(),
       ProfileScreen(
         openedFrom: "",
       ),
@@ -81,9 +82,6 @@ class AppLayoutCubit extends Cubit<AppLayoutState> {
         isExtraLargeScreen: isExtraLargeScreen,
       ),
       DeligateOrdersAppbar(
-        isExtraLargeScreen: isExtraLargeScreen,
-      ),
-      DeligateProductsAppbar(
         isExtraLargeScreen: isExtraLargeScreen,
       ),
       ProfileAppBar(

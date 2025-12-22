@@ -22,9 +22,13 @@ import 'package:hader_pharm_mobile/utils/no_vsync.dart';
 import 'package:iconsax/iconsax.dart' show Iconsax;
 
 class AddCartBottomSheetManual extends StatelessWidget {
-  const AddCartBottomSheetManual({super.key, required this.product, this.deligateCreateOrderCubit});
+  const AddCartBottomSheetManual(
+      {super.key, required this.product, this.deligateCreateOrderCubit, required this.buyerCompanyId});
   final BaseParaPharmaCatalogModel product;
+
   final DelegateCreateOrderCubit? deligateCreateOrderCubit;
+
+  final String buyerCompanyId;
 
   final disabledPackageQuantity = true;
 
@@ -39,6 +43,7 @@ class AddCartBottomSheetManual extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => ParaPharmaDetailsCubit(
+            buyerCompanyId: buyerCompanyId,
             tabController: TabController(length: 0, vsync: NoVsync()),
             packageQuantityController: TextEditingController(text: '0'),
             quantityController: TextEditingController(text: '1'),

@@ -20,24 +20,23 @@ class BaseMedicineCatalogDetailsScreen extends StatefulWidget {
   final bool canOrder;
   final bool needCartCubit;
   final QuantitySectionBuilder quantitySectionBuilder;
+  final String? buyerCompanyId;
 
-  static final GlobalKey<ScaffoldState> medicineDetailsScaffoldKey =
-      GlobalKey<ScaffoldState>();
+  static final GlobalKey<ScaffoldState> medicineDetailsScaffoldKey = GlobalKey<ScaffoldState>();
   const BaseMedicineCatalogDetailsScreen(
       {super.key,
       required this.medicineCatalogId,
       required this.canOrder,
+      this.buyerCompanyId,
       required this.needCartCubit,
       required this.quantitySectionBuilder,
       this.disabledPackageQuanity = false});
 
   @override
-  State<BaseMedicineCatalogDetailsScreen> createState() =>
-      _BaseMedicineCatalogDetailsScreenState();
+  State<BaseMedicineCatalogDetailsScreen> createState() => _BaseMedicineCatalogDetailsScreenState();
 }
 
-class _BaseMedicineCatalogDetailsScreenState
-    extends State<BaseMedicineCatalogDetailsScreen>
+class _BaseMedicineCatalogDetailsScreenState extends State<BaseMedicineCatalogDetailsScreen>
     with TickerProviderStateMixin {
   double bottomNavbarHeightModifier = 1;
 
@@ -49,15 +48,15 @@ class _BaseMedicineCatalogDetailsScreenState
   @override
   Widget build(BuildContext context) {
     bottomNavbarHeightModifier = widget.disabledPackageQuanity
-        ? context
-            .responsiveAppSizeTheme.current.deafultQuantityNavbarHeightModifier
-        : context.responsiveAppSizeTheme.current
-            .expandedQuantityNavbarHeightModifier;
+        ? context.responsiveAppSizeTheme.current.deafultQuantityNavbarHeightModifier
+        : context.responsiveAppSizeTheme.current.expandedQuantityNavbarHeightModifier;
 
     return StateProvider(
+      needCartCubit: widget.needCartCubit,
       tabs: const [],
       vsync: this,
       medicineCatalogId: widget.medicineCatalogId,
+      buyerCompanyId: widget.buyerCompanyId,
       child: BlocBuilder<MedicineDetailsCubit, MedicineDetailsState>(
         builder: (context, state) {
           if (state is MedicineDetailsLoading) {
@@ -83,13 +82,11 @@ class _BaseMedicineCatalogDetailsScreenState
                   children: [
                     const MedicineProductPhotoSection(),
                     const HeaderSection(),
-                    const Divider(
-                        color: AppColors.bgDisabled, thickness: 3.5, height: 1),
+                    const Divider(color: AppColors.bgDisabled, thickness: 3.5, height: 1),
                     const ResponsiveGap.s24(),
                     MedicineOverViewPage(),
                     const ResponsiveGap.s24(),
-                    Divider(
-                        color: AppColors.bgDisabled, thickness: 3.5, height: 1),
+                    Divider(color: AppColors.bgDisabled, thickness: 3.5, height: 1),
                   ],
                 ),
               ),
@@ -97,8 +94,7 @@ class _BaseMedicineCatalogDetailsScreenState
             bottomNavigationBar: SizedBox(
               height: kBottomNavigationBarHeight,
               child: widget.canOrder
-                  ? widget.quantitySectionBuilder(
-                      state.medicineCatalogData.unitPriceHt)
+                  ? widget.quantitySectionBuilder(state.medicineCatalogData.unitPriceHt)
                   : const SizedBox.shrink(),
             ),
           );

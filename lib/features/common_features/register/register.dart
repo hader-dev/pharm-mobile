@@ -15,7 +15,8 @@ import 'widgets/email_register_form_section.dart';
 import 'widgets/register_header_section.dart';
 
 class RegisterScreen extends StatelessWidget {
-  const RegisterScreen({super.key});
+  final String? token;
+  const RegisterScreen({super.key, this.token});
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +50,9 @@ class RegisterScreen extends StatelessWidget {
                       const ResponsiveGap.s4(),
                       const ResponsiveGap.s24(),
                       if (state.selectedTapIndex == 0)
-                        EmailRegisterFormSection(),
+                        EmailRegisterFormSection(
+                          token: token,
+                        ),
                       const ResponsiveGap.s16(),
                       OutLinedTextButton(
                         label: context.translation!.login_existing,

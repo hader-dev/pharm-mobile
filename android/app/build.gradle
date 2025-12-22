@@ -57,6 +57,12 @@ android {
     flavorDimensions += "default"
 
 productFlavors {
+    local {
+        dimension = "default"
+        manifestPlaceholders = [appName: "Hader Pharma Local"]
+        applicationIdSuffix = ""
+    }
+
     development {
         dimension = "default"
         manifestPlaceholders = [appName: "Hader Pharma Dev"]
@@ -74,6 +80,8 @@ productFlavors {
         manifestPlaceholders = [appName: "Hader Pharma"]
         applicationIdSuffix = ""
     }
+
+ 
 }
 
 

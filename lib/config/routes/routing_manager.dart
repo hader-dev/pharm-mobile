@@ -22,6 +22,7 @@ import 'package:hader_pharm_mobile/features/common_features/language/lang_screen
 import 'package:hader_pharm_mobile/features/common_features/leagal_policies/leagal_policies.dart';
 import 'package:hader_pharm_mobile/features/common_features/login/login.dart';
 import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/medicine_catalog_details_client.dart';
+import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/medicine_catalog_details_deligate.dart';
 import 'package:hader_pharm_mobile/features/common_features/notification/notification.dart';
 import 'package:hader_pharm_mobile/features/common_features/onboarding/onboarding.dart' show OnboardingScreen;
 import 'package:hader_pharm_mobile/features/common_features/order_complaint_details/complaint.dart';
@@ -55,6 +56,9 @@ class RoutingManager {
   static const String medicineDetailsScreen = '/MedicineDetailsScreen';
   static const String paraPharmaDetailsScreen = '/ParaPharmaDetailsScreen';
   static const String ordersScreen = '/OrdersScreen';
+
+  static const String deligateOrderDetailsScreen = '/DeligateOrderDetailsScreen';
+
   static const String onboardingScreen = '/OnboardingScreen';
   static const String profileScreen = '/ProfileScreen';
   static const String changePasswordScreen = 'ChangePasswordScreen';
@@ -71,6 +75,7 @@ class RoutingManager {
   static const String editCompanyScreen = '/EditCompanyScreen';
   static const String notificationsScreen = '/Notifications';
   static const String deligateCreateOrderScreen = '/Deligate/CreateOrder';
+
   static const String delegateCreateClientScreen = '/Deligate/CreateClient';
   static const String delegateMarketPlaceScreen = '/Deligate/MarketPlace';
   static const String deligateParapharmDetailsScreen = '/Deligate/ParaPharmaDetailsScreen';
@@ -95,7 +100,9 @@ class RoutingManager {
             final params = state.extra as Map<String, dynamic>;
             final id = params["id"] as String;
             final canOrder = params["canOrder"] as bool;
-            return DeligateParaPharmaCatalogDetailsScreen(paraPharmaCatalogId: id, canOrder: canOrder);
+            final buyerCompanyId = params["buyerCompanyId"] as String;
+            return DeligateParaPharmaCatalogDetailsScreen(
+                paraPharmaCatalogId: id, canOrder: canOrder, buyerCompanyId: buyerCompanyId);
           },
         ),
         GoRoute(
@@ -105,9 +112,12 @@ class RoutingManager {
             final params = state.extra as Map<String, dynamic>;
 
             final canOrder = params["canOrder"] as bool;
+            final buyerCompanyId = params["buyerCompanyId"] as String;
+            final medicineId = params["id"] as String;
 
-            return MedicineCatalogDetailsClientScreen(
-              medicineCatalogId: state.extra as String,
+            return MedicineCatalogDetailsDeligateScreen(
+              medicineCatalogId: medicineId,
+              buyerCompanyId: buyerCompanyId,
               canOrder: canOrder,
             );
           },
@@ -307,7 +317,10 @@ class RoutingManager {
             name: registerScreen,
             path: registerScreen,
             builder: (BuildContext context, GoRouterState state) {
-              return RegisterScreen();
+              final token = state.uri.queryParameters['token'];
+              return RegisterScreen(
+                token: token,
+              );
             }),
         GoRoute(
             name: checkEmailScreen,

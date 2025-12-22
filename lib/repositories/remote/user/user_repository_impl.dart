@@ -46,7 +46,7 @@ class UserRepository implements IUserRepository {
 
   @override
   Future<String> emailSignUp(String email, String fullName, String password,
-      {String? userImagePath}) async {
+      {String? userImagePath, String? token}) async {
     late MultipartFile file;
     if (userImagePath != null) {
       String fileName = userImagePath.split('/').last;
@@ -54,7 +54,6 @@ class UserRepository implements IUserRepository {
       String fileExtension = fileName.split('.').last.toLowerCase();
       String mimeType = getMimeTypeFromExtension(fileExtension);
 
-      debugPrint("SignUp - Image file: $mimeType");
       file = await MultipartFile.fromFile(
         userImagePath,
         filename: fileName,
@@ -65,6 +64,7 @@ class UserRepository implements IUserRepository {
       "email": email,
       "fullName": fullName,
       "password": password,
+      if (token != null) ...{"inviteToken": token},
       if (userImagePath != null) ...{
         'image': file,
       }

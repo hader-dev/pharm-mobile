@@ -41,8 +41,8 @@ class MedicineCatalogAppBar extends StatelessWidget implements PreferredSizeWidg
         BlocBuilder<MedicineDetailsCubit, MedicineDetailsState>(
           builder: (context, state) {
             final cubit = BlocProvider.of<MedicineDetailsCubit>(context);
-            final gCubit = MarketPlaceScreen.marketPlaceScaffoldKey.currentContext!.read<MedicineProductsCubit>();
-            final hCubit = HomeScreen.scaffoldKey.currentContext!.read<MedicineProductsCubit>();
+            final gCubit = MarketPlaceScreen.marketPlaceScaffoldKey.currentContext?.read<MedicineProductsCubit>();
+            final hCubit = HomeScreen.scaffoldKey.currentContext?.read<MedicineProductsCubit>();
             final isLiked = cubit.state.medicineCatalogData.isLiked;
 
             return IconButton(
@@ -53,16 +53,15 @@ class MedicineCatalogAppBar extends StatelessWidget implements PreferredSizeWidg
                 size: context.responsiveAppSizeTheme.current.iconSize25,
               ),
               onPressed: () {
-                debugPrint("isLiked: $isLiked");
                 if (isLiked) {
                   cubit.unlikeMedicine().then((value) {
-                    gCubit.refreshMedicineCatalogFavorite(state.medicineCatalogData.id, false);
-                    hCubit.refreshMedicineCatalogFavorite(state.medicineCatalogData.id, false);
+                    gCubit?.refreshMedicineCatalogFavorite(state.medicineCatalogData.id, false);
+                    hCubit?.refreshMedicineCatalogFavorite(state.medicineCatalogData.id, false);
                   });
                 } else {
                   cubit.likeMedicine().then((value) {
-                    gCubit.refreshMedicineCatalogFavorite(state.medicineCatalogData.id, true);
-                    hCubit.refreshMedicineCatalogFavorite(state.medicineCatalogData.id, true);
+                    gCubit?.refreshMedicineCatalogFavorite(state.medicineCatalogData.id, true);
+                    hCubit?.refreshMedicineCatalogFavorite(state.medicineCatalogData.id, true);
                   });
                 }
               },
@@ -74,7 +73,7 @@ class MedicineCatalogAppBar extends StatelessWidget implements PreferredSizeWidg
           icon: Icon(
             LucideIcons.share2,
             color: AppColors.accent1Shade1,
-            size: context.responsiveAppSizeTheme.current.iconSize25,
+            size: context.responsiveAppSizeTheme.current.iconSize20,
           ),
           onPressed: () {
             final cubit = BlocProvider.of<MedicineDetailsCubit>(context);

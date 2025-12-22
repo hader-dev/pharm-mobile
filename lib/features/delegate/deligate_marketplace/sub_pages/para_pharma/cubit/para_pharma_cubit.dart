@@ -24,6 +24,7 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
       {required this.paraPharmaRepository,
       required ScrollController scrollController,
       required TextEditingController searchController,
+      required this.buyerCompanyId,
       required this.favoriteRepository})
       : super(ParaPharmaInitial(
           scrollController: scrollController,
@@ -35,12 +36,15 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
   Future<void> getParaPharmas(
       {int offset = 0, String? searchValue, String? companyIdFilter, ParaPharmFilters? filters}) async {
     try {
+      debugPrint(
+        'Loading ParaPharma Catalog with filters: $buyerCompanyId',
+      );
       emit(state.toLoading(filters: filters));
       var paraPharmaCatalogResponse = await paraPharmaRepository.getParaPharmaCatalog(ParamsLoadParapharma(
         offset: offset,
         filters: filters ?? state.filters,
         searchQuery: searchValue ?? state.searchController.text,
-        companyId: companyIdFilter,
+        buyerCompanyId: buyerCompanyId,
       ));
 
       emit(state.toLoaded(

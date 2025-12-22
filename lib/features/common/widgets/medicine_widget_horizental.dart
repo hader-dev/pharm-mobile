@@ -25,11 +25,15 @@ class MedicineWidgetHorizontal extends StatelessWidget {
   final bool hideRemoveButton;
   final VoidCallback? onRemoveFromFavorites;
   final void Function(BaseMedicineCatalogModel)? onQuickAddCallback;
+  final String? buyerCompanyId;
+  final String route;
 
   const MedicineWidgetHorizontal({
     super.key,
     required this.medicineData,
     this.onLikeTapped,
+    this.buyerCompanyId,
+    this.route = RoutingManager.medicineDetailsScreen,
     required this.isLiked,
     this.hideLikeButton = true,
     this.hideRemoveButton = true,
@@ -41,27 +45,27 @@ class MedicineWidgetHorizontal extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
-          horizontal: context.responsiveAppSizeTheme.current.p8,
-          vertical: context.responsiveAppSizeTheme.current.p12),
+          horizontal: context.responsiveAppSizeTheme.current.p8, vertical: context.responsiveAppSizeTheme.current.p12),
       child: InkWell(
         onTap: () {
           final userRole = getItInstance.get<UserManager>().currentUser.role;
           final canOrderBasedOnRole = !userRole.isDelegate;
-          GoRouter.of(context).pushNamed(RoutingManager.medicineDetailsScreen,
-              extra: {"id": medicineData.id, "canOrder": canOrderBasedOnRole});
+          GoRouter.of(context).pushNamed(route, extra: {
+            "id": medicineData.id,
+            "canOrder": canOrderBasedOnRole,
+            "buyerCompanyId": buyerCompanyId,
+          });
         },
         splashColor: Colors.transparent,
         child: Row(
           children: [
             Container(
-              margin: EdgeInsets.only(
-                  right: context.responsiveAppSizeTheme.current.p8),
+              margin: EdgeInsets.only(right: context.responsiveAppSizeTheme.current.p8),
               clipBehavior: Clip.antiAlias,
               height: 130,
               width: 130,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(
-                    context.responsiveAppSizeTheme.current.r6),
+                borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.r6),
                 border: medicineData.image != null
                     ? null
                     : Border.all(
@@ -71,18 +75,14 @@ class MedicineWidgetHorizontal extends StatelessWidget {
               child: Stack(
                 children: [
                   CachedNetworkImageWithDrawableFallback.withErrorSvgImage(
-                    imageUrl: getItInstance
-                        .get<INetworkService>()
-                        .getFilesPath(medicineData.image?.path ?? ""),
+                    imageUrl: getItInstance.get<INetworkService>().getFilesPath(medicineData.image?.path ?? ""),
                     width: double.infinity,
                     height: double.infinity,
-                    errorStyle: context.responsiveTextTheme.current.bodyXSmall
-                        .copyWith(color: Colors.grey.shade400),
+                    errorStyle: context.responsiveTextTheme.current.bodyXSmall.copyWith(color: Colors.grey.shade400),
                     errorMsg: "No Image Available",
                     fit: BoxFit.cover,
                   ),
-                  StockAvailableContainerWidget(
-                      isAvailable: medicineData.stockQuantity > 0),
+                  StockAvailableContainerWidget(isAvailable: medicineData.stockQuantity > 0),
                   if (!hideLikeButton)
                     Positioned(
                       right: 0,
@@ -94,8 +94,7 @@ class MedicineWidgetHorizontal extends StatelessWidget {
                           child: Icon(
                             isLiked ? Iconsax.heart5 : Iconsax.heart,
                             color: isLiked ? Colors.red : Colors.grey[400],
-                            size: context
-                                .responsiveAppSizeTheme.current.iconSize20,
+                            size: context.responsiveAppSizeTheme.current.iconSize20,
                           ),
                         ),
                         onTap: () {
@@ -117,8 +116,7 @@ class MedicineWidgetHorizontal extends StatelessWidget {
                       flex: 8,
                       child: Text(medicineData.dci,
                           softWrap: true,
-                          style: context
-                              .responsiveTextTheme.current.headLine4SemiBold
+                          style: context.responsiveTextTheme.current.headLine4SemiBold
                               .copyWith(color: TextColors.primary.color)),
                     ),
                     const Spacer(),
@@ -131,12 +129,9 @@ class MedicineWidgetHorizontal extends StatelessWidget {
                           onPressed: () {
                             onQuickAddCallback?.call(medicineData);
                           },
-                          icon: SvgPicture.asset(
-                              DrawableAssetStrings.newAddToCartIcon,
-                              height: context
-                                  .responsiveAppSizeTheme.current.iconSize25,
-                              width: context
-                                  .responsiveAppSizeTheme.current.iconSize25,
+                          icon: SvgPicture.asset(DrawableAssetStrings.newAddToCartIcon,
+                              height: context.responsiveAppSizeTheme.current.iconSize25,
+                              width: context.responsiveAppSizeTheme.current.iconSize25,
                               colorFilter: ColorFilter.mode(
                                 AppColors.accent1Shade1,
                                 BlendMode.srcIn,
@@ -144,6 +139,7 @@ class MedicineWidgetHorizontal extends StatelessWidget {
                         ),
                       ),
                   ]),
+                  ResponsiveGap.s6(),
                   Row(
                     children: [
                       Container(
@@ -151,22 +147,16 @@ class MedicineWidgetHorizontal extends StatelessWidget {
                         width: 25,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          border: Border.all(
-                              color: AppColors.bgDisabled, width: 1.2),
+                          border: Border.all(color: AppColors.bgDisabled, width: 1.2),
                           image: DecorationImage(
-                            image: medicineData.company?.thumbnailImage?.path ==
-                                    null
-                                ? AssetImage(
-                                    DrawableAssetStrings.companyPlaceHolderImg)
-                                : NetworkImage(
-                                    getItInstance
-                                        .get<INetworkService>()
-                                        .getFilesPath(
-                                          medicineData
-                                              .company!.thumbnailImage!.path,
-                                        ),
-                                  ),
-                          ),
+                              image: medicineData.company?.thumbnailImage?.path == null
+                                  ? AssetImage(DrawableAssetStrings.companyPlaceHolderImg)
+                                  : NetworkImage(
+                                      getItInstance.get<INetworkService>().getFilesPath(
+                                            medicineData.company!.thumbnailImage!.path,
+                                          ),
+                                    ),
+                              fit: BoxFit.fill),
                         ),
                       ),
                       const ResponsiveGap.s4(),
@@ -174,20 +164,17 @@ class MedicineWidgetHorizontal extends StatelessWidget {
                         child: Text(medicineData.company!.name,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
-                            style:
-                                context.responsiveTextTheme.current.bodyXSmall),
+                            style: context.responsiveTextTheme.current.bodyXSmall),
                       ),
                     ],
                   ),
-                  ResponsiveGap.s6(),
+                  ResponsiveGap.s12(),
                   PriceWidget(
                     price: medicineData.unitPriceHt,
                     overridePrice: medicineData.unitPriceHt,
-                    mainStyle: context
-                        .responsiveTextTheme.current.headLine4SemiBold
-                        .copyWith(color: AppColors.accent1Shade1),
-                    currencyStyle: context
-                        .responsiveTextTheme.current.bodyXSmall
+                    mainStyle:
+                        context.responsiveTextTheme.current.headLine4SemiBold.copyWith(color: AppColors.accent1Shade1),
+                    currencyStyle: context.responsiveTextTheme.current.bodyXSmall
                         .copyWith(color: AppColors.accent1Shade1, fontSize: 10),
                   ),
                 ],
