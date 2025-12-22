@@ -22,7 +22,7 @@ class SearchWithFilterBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(left: context.responsiveAppSizeTheme.current.p8),
+      padding: EdgeInsets.symmetric(horizontal: context.responsiveAppSizeTheme.current.p8),
       child: CustomTextField(
         hintText: hintText,
         controller: searchController,
