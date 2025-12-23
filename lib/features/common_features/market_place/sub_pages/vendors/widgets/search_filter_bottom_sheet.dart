@@ -33,7 +33,7 @@ class VendorsSearchFilterBottomSheet extends StatelessWidget {
               Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
               const ResponsiveGap.s12(),
               InfoWidget(
-                  label: context.translation!.filters,
+                  label: context.translation!.search_by,
                   bgColor: AppColors.bgWhite,
                   value: Column(
                     children: SearchVendorFilters.values

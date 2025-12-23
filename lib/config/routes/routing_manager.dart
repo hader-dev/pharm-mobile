@@ -10,10 +10,9 @@ import 'package:hader_pharm_mobile/features/common_features/check_email/check_em
 import 'package:hader_pharm_mobile/features/common_features/check_phone/check_phone.dart';
 import 'package:hader_pharm_mobile/features/common_features/congratulation/congratulation.dart';
 import 'package:hader_pharm_mobile/features/common_features/create_company_profile/create_company_profile.dart';
-import 'package:hader_pharm_mobile/features/common_features/deligate_create_client/deligate_create_client.dart';
-import 'package:hader_pharm_mobile/features/common_features/deligate_create_order/deligate_create_order.dart';
-import 'package:hader_pharm_mobile/features/common_features/deligate_marketplace/market_place.dart';
-import 'package:hader_pharm_mobile/features/common_features/deligate_orders_details/orders_details.dart';
+import 'package:hader_pharm_mobile/features/delegate/deligate_create_client/deligate_create_client.dart';
+import 'package:hader_pharm_mobile/features/delegate/delegate_create_order/deligate_create_order.dart';
+import 'package:hader_pharm_mobile/features/delegate/deligate_marketplace/market_place.dart';
 import 'package:hader_pharm_mobile/features/common_features/edit_company/edit_company_screen.dart';
 import 'package:hader_pharm_mobile/features/common_features/edit_profile/edit_profile.dart';
 import 'package:hader_pharm_mobile/features/common_features/favorites/favorites.dart';
@@ -25,8 +24,7 @@ import 'package:hader_pharm_mobile/features/common_features/login/login.dart';
 import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/medicine_catalog_details_client.dart';
 import 'package:hader_pharm_mobile/features/common_features/medicine_catalog_details/medicine_catalog_details_deligate.dart';
 import 'package:hader_pharm_mobile/features/common_features/notification/notification.dart';
-import 'package:hader_pharm_mobile/features/common_features/onboarding/onboarding.dart'
-    show OnboardingScreen;
+import 'package:hader_pharm_mobile/features/common_features/onboarding/onboarding.dart' show OnboardingScreen;
 import 'package:hader_pharm_mobile/features/common_features/order_complaint_details/complaint.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders/orders.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders_details/orders_details.dart';
@@ -36,6 +34,8 @@ import 'package:hader_pharm_mobile/features/common_features/profile/profile.dart
 import 'package:hader_pharm_mobile/features/common_features/register/register.dart';
 import 'package:hader_pharm_mobile/features/common_features/splash/splash.dart';
 import 'package:hader_pharm_mobile/features/common_features/vendor_details/vendor_details.dart';
+
+import '../../features/delegate/delegate_orders_details/delegate_orders_details.dart' show DelegateOrdersDetailsScreen;
 
 class RoutingManager {
   static List<String> screenStack = [];
@@ -56,14 +56,16 @@ class RoutingManager {
   static const String medicineDetailsScreen = '/MedicineDetailsScreen';
   static const String paraPharmaDetailsScreen = '/ParaPharmaDetailsScreen';
   static const String ordersScreen = '/OrdersScreen';
-  static const String deligateOrderDetailsScreen =
-      '/DeligateOrderDetailsScreen';
+
+  static const String deligateOrderDetailsScreen = '/DeligateOrderDetailsScreen';
+
   static const String onboardingScreen = '/OnboardingScreen';
   static const String profileScreen = '/ProfileScreen';
   static const String changePasswordScreen = 'ChangePasswordScreen';
   static const String favoritesScreen = 'FavoritesScreen';
   static const String vendorDetails = '/VendorDetails';
   static const String ordersDetailsScreen = '/OrdersDetailsScreen';
+  static const String delegateOrderDetailsScreen = '/DelegateOrderDetailsScreen';
   static const String announcementDetailsScreen = '/AnnouncementDetailsScreen';
   static const String allAnnouncementsScreen = '/AllAnnouncementsScreen';
   static const String orderComplaint = '/OrderComplaint';
@@ -73,17 +75,15 @@ class RoutingManager {
   static const String editCompanyScreen = '/EditCompanyScreen';
   static const String notificationsScreen = '/Notifications';
   static const String deligateCreateOrderScreen = '/Deligate/CreateOrder';
-  static const String deligateCreateClientScreen = '/Deligate/CreateClient';
-  static const String deligateMartketPlaceScreen = '/Deligate/MarketPlace';
-  static const String deligateParapharmDetailsScreen =
-      '/Deligate/ParaPharmaDetailsScreen';
-  static const String deligateMedicineDetailsScreen =
-      '/Deligate/MedicineDetailsScreen';
+
+  static const String delegateCreateClientScreen = '/Deligate/CreateClient';
+  static const String delegateMarketPlaceScreen = '/Deligate/MarketPlace';
+  static const String deligateParapharmDetailsScreen = '/Deligate/ParaPharmaDetailsScreen';
+  static const String deligateMedicineDetailsScreen = '/Deligate/MedicineDetailsScreen';
 
   static const String languagesScreen = '/LanguagesScreen';
 
-  static final GlobalKey<NavigatorState> rootNavigatorKey =
-      GlobalKey<NavigatorState>();
+  static final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
 
   static final GoRouter router = GoRouter(
       navigatorKey: rootNavigatorKey,
@@ -102,9 +102,7 @@ class RoutingManager {
             final canOrder = params["canOrder"] as bool;
             final buyerCompanyId = params["buyerCompanyId"] as String;
             return DeligateParaPharmaCatalogDetailsScreen(
-                paraPharmaCatalogId: id,
-                canOrder: canOrder,
-                buyerCompanyId: buyerCompanyId);
+                paraPharmaCatalogId: id, canOrder: canOrder, buyerCompanyId: buyerCompanyId);
           },
         ),
         GoRoute(
@@ -125,8 +123,8 @@ class RoutingManager {
           },
         ),
         GoRoute(
-          name: deligateMartketPlaceScreen,
-          path: deligateMartketPlaceScreen,
+          name: delegateMarketPlaceScreen,
+          path: delegateMarketPlaceScreen,
           builder: (BuildContext context, GoRouterState state) {
             return const DeligateMarketPlaceScreen();
           },
@@ -146,10 +144,10 @@ class RoutingManager {
           },
         ),
         GoRoute(
-          name: deligateCreateClientScreen,
-          path: deligateCreateClientScreen,
+          name: delegateCreateClientScreen,
+          path: delegateCreateClientScreen,
           builder: (BuildContext context, GoRouterState state) {
-            return DeligateCreateClientScreen();
+            return DelegateCreateClientScreen();
           },
         ),
         GoRoute(
@@ -236,19 +234,19 @@ class RoutingManager {
           },
         ),
         GoRoute(
-          name: deligateOrderDetailsScreen,
-          path: deligateOrderDetailsScreen,
+          name: ordersDetailsScreen,
+          path: ordersDetailsScreen,
           builder: (BuildContext context, GoRouterState state) {
-            return DeligateOrdersDetailsScreen(
+            return OrdersDetailsScreen(
               orderId: state.extra as String,
             );
           },
         ),
         GoRoute(
-          name: ordersDetailsScreen,
-          path: ordersDetailsScreen,
+          name: delegateOrderDetailsScreen,
+          path: delegateOrderDetailsScreen,
           builder: (BuildContext context, GoRouterState state) {
-            return OrdersDetailsScreen(
+            return DelegateOrdersDetailsScreen(
               orderId: state.extra as String,
             );
           },
@@ -332,10 +330,8 @@ class RoutingManager {
               return CheckEmailScreen(
                 email: prams["email"],
                 autoRedirect: prams["autoRedirect"] ?? false,
-                redirectTo:
-                    prams["redirectTo"] ?? RoutingManager.congratulationScreen,
-                popInsteadOfPushReplacement:
-                    prams["popInsteadOfPushReplacement"] ?? false,
+                redirectTo: prams["redirectTo"] ?? RoutingManager.congratulationScreen,
+                popInsteadOfPushReplacement: prams["popInsteadOfPushReplacement"] ?? false,
               );
             }),
         GoRoute(
@@ -355,9 +351,8 @@ class RoutingManager {
           path: createCompanyProfile,
           pageBuilder: (context, state) => CustomTransitionPage(
             child: const CreateCompanyProfile(),
-            transitionsBuilder:
-                (context, animation, secondaryAnimation, child) =>
-                    FadeTransition(opacity: animation, child: child),
+            transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+                FadeTransition(opacity: animation, child: child),
           ),
         ),
         GoRoute(
@@ -381,8 +376,7 @@ class RoutingManager {
               final params = state.extra as Map<String, dynamic>;
               final id = params["id"] as String;
               final canOrder = params["canOrder"] as bool;
-              return ClientParaPharmaCatalogDetailsScreen(
-                  paraPharmaCatalogId: id, canOrder: canOrder);
+              return ClientParaPharmaCatalogDetailsScreen(paraPharmaCatalogId: id, canOrder: canOrder);
             }),
         GoRoute(
             name: ordersScreen,
@@ -393,21 +387,9 @@ class RoutingManager {
         ...DeeplinksRoutes.deppLinkRoutes
       ]);
 
-  static Future<void> popUntilPath(
-      BuildContext context, String routePath) async {
-    while (GoRouter.of(context)
-            .routerDelegate
-            .currentConfiguration
-            .matches
-            .last
-            .matchedLocation !=
-        routePath) {
-      debugPrint(GoRouter.of(context)
-          .routerDelegate
-          .currentConfiguration
-          .matches
-          .last
-          .matchedLocation);
+  static Future<void> popUntilPath(BuildContext context, String routePath) async {
+    while (GoRouter.of(context).routerDelegate.currentConfiguration.matches.last.matchedLocation != routePath) {
+      debugPrint(GoRouter.of(context).routerDelegate.currentConfiguration.matches.last.matchedLocation);
       if (!context.canPop()) {
         break;
       }

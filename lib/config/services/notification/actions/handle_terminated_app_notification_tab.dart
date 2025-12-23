@@ -10,7 +10,7 @@ import 'background_notification_tap.dart' show onNotificationTapped;
 this function when the notification is tapped & the app is already killed 
 this function should be high order function
  */
-Future<void> handleTerminatedAppNotificationTab() async {
+Future<void> handleTerminatedAppNotificationTap() async {
   RemoteMessage? notification = await FirebaseMessaging.instance.getInitialMessage();
   if (notification != null) {
     Map<String, dynamic> decodedNotificationPayload = jsonDecode(notification.data["notification"]);

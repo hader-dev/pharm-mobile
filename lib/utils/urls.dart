@@ -4,8 +4,7 @@ class Urls {
   static String get notifications => "/notifications";
   static String get notificationsUnreadCount => "/notifications/count";
   static String get notificationMarkAllRead => "/notifications/mark-all-read";
-  static String notificationMarkRead(String id) =>
-      "/notifications/$id/mark-read";
+  static String notificationMarkRead(String id) => "/notifications/$id/mark-read";
 
   //users endpoint
   static String get users => "/users";
@@ -48,7 +47,8 @@ class Urls {
   static String get orders => "/orders";
   static String get buyNow => "$orders/buy-now";
   //parapharm-brands
-  static String get parapharmBrands => "/parapharm-brands";
+  static String get paraPharmBrands => "/parapharm-brands";
+  static String get paraPharmCategories => "/parapharm-categories";
 
   //Cart Items
   static String get cartItems => "/cart-items";
@@ -68,15 +68,12 @@ class Urls {
 
   static String get parapharms => "/parapharm-categories";
 
-  static String get favoritesLikeMedicineCatalog =>
-      "$favorites$medicinesCatalog1";
-  static String get favoritesUnlikeMedicineCatalog =>
-      "$favorites$medicinesCatalog1/by-medicine-catalog-id";
-  static String get favoritesLikeParaPharmaCatalog =>
-      "$favorites$paraPharamaCatalog2";
-  static String get favoritesUnLikeParaPharmaCatalog =>
-      "$favorites$paraPharamaCatalog2/by-parapharm-catalog-id";
+  static String get favoritesLikeMedicineCatalog => "$favorites$medicinesCatalog1";
+  static String get favoritesUnlikeMedicineCatalog => "$favorites$medicinesCatalog1/by-medicine-catalog-id";
+  static String get favoritesLikeParaPharmaCatalog => "$favorites$paraPharamaCatalog2";
+  static String get favoritesUnLikeParaPharmaCatalog => "$favorites$paraPharamaCatalog2/by-parapharm-catalog-id";
   static String get favoritesCompany => "${favorites}companies";
+  static String get unLikeFavoritesCompany => "$favoritesCompany/by-company-id";
 
   static String get publicFiles => "/files";
 

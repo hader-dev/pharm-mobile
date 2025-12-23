@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart' show Equatable;
 import 'package:hader_pharm_mobile/models/company.dart';
 import 'package:hader_pharm_mobile/models/gallery.dart' show Gallery;
 
@@ -82,11 +83,11 @@ class BaseParaPharmaCatalogModel {
       this.isLiked = false});
 }
 
-class BaseBrand {
+class BaseBrand extends Equatable {
   final String id;
   final String name;
 
-  BaseBrand({
+  const BaseBrand({
     required this.id,
     required this.name,
   });
@@ -97,13 +98,16 @@ class BaseBrand {
       name: json['name'] ?? "",
     );
   }
+
+  @override
+  List<Object?> get props => [id];
 }
 
-class Category {
+class Category extends Equatable {
   final String id;
   final String name;
 
-  Category({
+  const Category({
     required this.id,
     required this.name,
   });
@@ -121,6 +125,9 @@ class Category {
       name: '',
     );
   }
+
+  @override
+  List<Object?> get props => [id];
 }
 
 class ParaPharmaCatalogModel extends BaseParaPharmaCatalogModel {
@@ -267,7 +274,7 @@ class Brand extends BaseBrand {
   final String companyId;
   final dynamic parentId;
 
-  Brand({
+  const Brand({
     required super.id,
     required super.name,
     required this.createdAt,

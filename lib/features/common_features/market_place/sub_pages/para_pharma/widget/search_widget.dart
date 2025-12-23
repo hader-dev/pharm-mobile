@@ -3,11 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/config/theme/colors_manager.dart';
 import 'package:hader_pharm_mobile/features/common/text_fields/custom_text_field.dart';
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/cubit/para_pharma_cubit.dart';
-import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/widget/search_filter_bottom_sheet.dart';
-import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart';
+import 'package:hader_pharm_mobile/utils/bottom_sheet_helper.dart' show BottomSheetHelper;
 import 'package:hader_pharm_mobile/utils/enums.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 import 'package:iconsax/iconsax.dart';
+
+import '../../../../../common/filters/para_pharm/para_pharm_search_filters_bottom_sheet.dart'
+    show ParaPharmSearchFiltersBottomSheet;
 
 class SearchWidget extends StatelessWidget {
   const SearchWidget({super.key});
@@ -19,8 +21,7 @@ class SearchWidget extends StatelessWidget {
       children: [
         Flexible(
           child: Padding(
-            padding: EdgeInsets.only(
-                left: context.responsiveAppSizeTheme.current.p8),
+            padding: EdgeInsets.only(left: context.responsiveAppSizeTheme.current.p8),
             child: CustomTextField(
               hintText: context.translation!.search_by_name_packaging_sku,
               controller: state.searchController,
@@ -34,8 +35,7 @@ class SearchWidget extends StatelessWidget {
               suffixIcon: InkWell(
                 onTap: () {
                   state.searchController.clear();
-                  BlocProvider.of<ParaPharmaCubit>(context)
-                      .searchParaPharmaCatalog(null);
+                  BlocProvider.of<ParaPharmaCubit>(context).searchParaPharmaCatalog(null);
                 },
                 child: Icon(
                   Icons.clear,
@@ -44,8 +44,7 @@ class SearchWidget extends StatelessWidget {
                 ),
               ),
               onChanged: (searchValue) {
-                BlocProvider.of<ParaPharmaCubit>(context)
-                    .searchParaPharmaCatalog(searchValue);
+                BlocProvider.of<ParaPharmaCubit>(context).searchParaPharmaCatalog(searchValue);
               },
               validationFunc: (value) {},
             ),
@@ -53,8 +52,7 @@ class SearchWidget extends StatelessWidget {
         ),
         InkWell(
           child: Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: context.responsiveAppSizeTheme.current.p12),
+            padding: EdgeInsets.symmetric(horizontal: context.responsiveAppSizeTheme.current.p12),
             child: BlocBuilder<ParaPharmaCubit, ParaPharmaState>(
               builder: (context, state) {
                 return Stack(
@@ -64,16 +62,16 @@ class SearchWidget extends StatelessWidget {
                       Iconsax.filter,
                       color: AppColors.accent1Shade1,
                     ),
-                    if (state.filters.isNotEmpty)
-                      Positioned(
-                        top: -4,
-                        right: -4,
-                        child: CircleAvatar(
-                          radius: context.responsiveAppSizeTheme.current
-                              .commonWidgetsRadius,
-                          backgroundColor: Colors.red,
-                        ),
-                      )
+
+                    // Positioned(
+                    //   top: -4,
+                    //   right: -4,
+                    //   child: CircleAvatar(
+                    //     radius: context.responsiveAppSizeTheme.current
+                    //         .commonWidgetsRadius,
+                    //     backgroundColor: Colors.red,
+                    //   ),
+                    // )
                   ],
                 );
               },
@@ -82,7 +80,9 @@ class SearchWidget extends StatelessWidget {
           onTap: () {
             BottomSheetHelper.showCommonBottomSheet(
               context: context,
-              child: SearchParaPharmFilterBottomSheet(),
+              child: ParaPharmSearchFiltersBottomSheet(
+                initialFilters: state.filters,
+              ),
             );
           },
         ),

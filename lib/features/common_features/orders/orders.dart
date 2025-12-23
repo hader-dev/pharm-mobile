@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hader_pharm_mobile/config/di/di.dart';
 import 'package:hader_pharm_mobile/features/app_layout/app_layout.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/empty_list.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/end_of_load_result_widget.dart';
-import 'package:hader_pharm_mobile/features/common_features/filters/cubit/orders/orders_filters_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders/widget/filters_bar.dart';
-import 'package:hader_pharm_mobile/repositories/remote/filters/filters_repository.dart';
 
 import '../../common/shimmers/order_widget_shimmer.dart' show OrderWidgetShimmer;
 import 'cubit/orders_cubit.dart';
-import 'widget/order_card.dart';
+import '../../common/widgets/order_card.dart';
 
 class OrdersScreen extends StatefulWidget {
   static final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -39,11 +36,11 @@ class OrdersScreenState extends State<OrdersScreen> with SingleTickerProviderSta
         BlocProvider.value(
           value: AppLayout.appLayoutScaffoldKey.currentContext!.read<OrdersCubit>(),
         ),
-        BlocProvider(
-          create: (_) => OrdersFiltersCubit(
-            filtersRepository: getItInstance.get<IFiltersRepository>(),
-          ),
-        ),
+        // BlocProvider(
+        //   create: (_) => OrdersFiltersCubit(
+        //     filtersRepository: getItInstance.get<IFiltersRepository>(),
+        //   ),
+        // ),
       ],
       child: Scaffold(
         key: OrdersScreen.scaffoldKey,

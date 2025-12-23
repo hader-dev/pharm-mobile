@@ -13,12 +13,17 @@ class ParaPharmaRepository extends IParaPharmaRepository {
   ParaPharmaRepository({required this.client});
 
   @override
-  Future<ParaPharmaResponse> getParaPharmaCatalog(
-      ParamsLoadParapharma params) async {
+  Future<ParaPharmaResponse> getParaPharmaCatalog(ParamsLoadParapharma params) async {
     final queryParams = {
       'limit': params.limit.toString(),
       'offset': params.offset.toString(),
       'sort[id]': params.sortDirection,
+      if (params.searchQuery != null && params.searchQuery!.isNotEmpty)
+        'search[${params.filters.searchByField.name}]': params.searchQuery!,
+      if (params.filters.minPriceFilter > 0) 'gte[unitPriceHt]': params.filters.minPriceFilter.toString(),
+      if (params.filters.maxPriceFilter > 0) 'lte[unitPriceHt]': params.filters.maxPriceFilter.toString(),
+      if (params.filters.brand != null) 'filters[brandId]': params.filters.brand!.id,
+      if (params.filters.category != null) 'filters[categoryId]': params.filters.category!.id,
       'include[company][fields][]': [
         'id',
         'name',
@@ -29,70 +34,9 @@ class ParaPharmaRepository extends IParaPharmaRepository {
       queryParams['computed[isFavorite]'] = 'true';
     }
 
-    if (params.filters.code.isNotEmpty) {
-      queryParams['search[code]'] = params.filters.code.first;
-    }
-    if (params.filters.dosage.isNotEmpty) {
-      queryParams['search[dosage]'] = params.filters.dosage.first;
-    }
-    if (params.filters.status.isNotEmpty) {
-      queryParams['search[status]'] = params.filters.status.first;
-    }
-    if (params.filters.country.isNotEmpty) {
-      queryParams['search[country]'] = params.filters.country.first;
-    }
-    if (params.filters.patent.isNotEmpty) {
-      queryParams['search[patent]'] = params.filters.patent.first;
-    }
-    if (params.filters.brand.isNotEmpty) {
-      queryParams['search[brand]'] = params.filters.brand.first;
-    }
-    if (params.filters.condition.isNotEmpty) {
-      queryParams['search[condition]'] = params.filters.condition.first;
-    }
-    if (params.filters.type.isNotEmpty) {
-      queryParams['search[type]'] = params.filters.type.first;
-    }
-    if (params.filters.stabilityDuration.isNotEmpty) {
-      queryParams['search[stabilityDuration]'] =
-          params.filters.stabilityDuration.first;
-    }
-    if (params.filters.reimbursement.isNotEmpty) {
-      queryParams['search[reimbursement]'] = params.filters.reimbursement.first;
-    }
-    if (params.filters.sku.isNotEmpty) {
-      queryParams['search[sku]'] = params.filters.sku.first;
-    }
-
-    if (params.filters.name.isNotEmpty) {
-      queryParams['search[name]'] = params.filters.name.first;
-    }
-
-    if (params.filters.vendors.isNotEmpty) {
-      queryParams['filters[companyId]'] = params.filters.vendors.first;
-    }
-
-    if ((params.buyerCompanyId != null) && params.buyerCompanyId!.isNotEmpty) {
-      queryParams['deligateBuyerCompany[buyerCompanyId]'] =
-          params.buyerCompanyId!;
-    }
-
-    if (params.searchQuery != null && params.searchQuery!.isNotEmpty) {
-      queryParams['search[name]'] = params.searchQuery!;
-    }
-
-    if (params.filters.gteUnitPriceHt != null &&
-        params.filters.gteUnitPriceHt!.isNotEmpty) {
-      queryParams['gte[unitPriceHt]'] = params.filters.gteUnitPriceHt!;
-    }
-    if (params.filters.lteUnitPriceHt != null &&
-        params.filters.lteUnitPriceHt!.isNotEmpty) {
-      queryParams['lte[unitPriceHt]'] = params.filters.lteUnitPriceHt!;
-    }
-
     try {
-      var decodedResponse = await client.sendRequest(
-          () => client.get(Urls.paraPharamaCatalog, queryParams: queryParams));
+      var decodedResponse =
+          await client.sendRequest(() => client.get(Urls.paraPharamaCatalog, queryParams: queryParams));
 
       return ParaPharmaResponse.fromJson(decodedResponse);
     } catch (e) {
@@ -102,8 +46,7 @@ class ParaPharmaRepository extends IParaPharmaRepository {
   }
 
   @override
-  Future<ParaPharmaCatalogModel> getParaPharmaCatalogById(String id,
-      [String? buyerCompanyId]) async {
+  Future<ParaPharmaCatalogModel> getParaPharmaCatalogById(String id, [String? buyerCompanyId]) async {
     try {
       final queryParams = {
         'computed[isFavorite]': 'true',

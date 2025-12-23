@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hader_pharm_mobile/config/services/auth/user_manager.dart';
 import 'package:hader_pharm_mobile/config/services/notification/actions/handle_terminated_app_notification_tab.dart'
-    show handleTerminatedAppNotificationTab;
+    show handleTerminatedAppNotificationTap;
 import 'package:hader_pharm_mobile/config/theme/setup_status_bar.dart';
 import 'package:hader_pharm_mobile/features/app_layout/actions/show_new_app_version_dialog.dart';
 import 'package:hader_pharm_mobile/features/app_layout/actions/show_welcome_dialog.dart';
@@ -13,8 +13,7 @@ import 'cubit/app_layout_cubit.dart';
 import 'widgets/app_nav_bar/app_nav_bar.dart';
 
 class AppLayout extends StatefulWidget {
-  static final GlobalKey<ScaffoldState> appLayoutScaffoldKey =
-      GlobalKey<ScaffoldState>();
+  static final GlobalKey<ScaffoldState> appLayoutScaffoldKey = GlobalKey<ScaffoldState>();
 
   const AppLayout({super.key});
 
@@ -26,7 +25,7 @@ class _AppLayoutState extends State<AppLayout> {
   @override
   void initState() {
     super.initState();
-    handleTerminatedAppNotificationTab();
+    handleTerminatedAppNotificationTap();
   }
 
   @override
@@ -47,8 +46,7 @@ class _AppLayoutState extends State<AppLayout> {
           body: SafeArea(
             child: Column(
               children: [
-                BlocProvider.of<AppLayoutCubit>(context).appTopBars[
-                    BlocProvider.of<AppLayoutCubit>(context).pageIndex],
+                BlocProvider.of<AppLayoutCubit>(context).appTopBars[BlocProvider.of<AppLayoutCubit>(context).pageIndex],
                 Expanded(
                   child: IndexedStack(
                     index: BlocProvider.of<AppLayoutCubit>(context).pageIndex,
@@ -63,7 +61,7 @@ class _AppLayoutState extends State<AppLayout> {
     );
 
     return UserManager.instance.currentUser.role.isDelegate
-        ? AppStateDeligateProvider(child: app)
+        ? AppStateDelegateProvider(child: app)
         : AppStateProvider(child: app);
   }
 }

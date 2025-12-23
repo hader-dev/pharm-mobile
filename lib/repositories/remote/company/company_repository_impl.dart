@@ -89,7 +89,7 @@ class CompanyRepository extends ICompanyRepository {
   @override
   Future<List<Brand>> getCompanyBrands({required String companyId}) async {
     var decodedResponse = await client.sendRequest(() => client.get(
-          Urls.parapharmBrands,
+          Urls.paraPharmBrands,
         ));
 
     return (decodedResponse["data"] as List).map((brandItem) => Brand.fromJson(brandItem)).toList();

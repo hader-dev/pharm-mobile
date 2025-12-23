@@ -1,12 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:hader_pharm_mobile/config/services/network/network_interface.dart';
-import 'package:hader_pharm_mobile/models/medical_filters.dart';
 import 'package:hader_pharm_mobile/models/medicine_catalog.dart';
 import 'package:hader_pharm_mobile/repositories/remote/medicine_catalog/mappers/json_to_medicine_catalogue_item.dart';
 import 'package:hader_pharm_mobile/repositories/remote/medicine_catalog/response/medicine_catalog_response.dart';
 import 'package:hader_pharm_mobile/utils/constants.dart';
 import 'package:hader_pharm_mobile/utils/urls.dart';
 
+import '../../../models/medicines_filters.dart' show MedicinesFilters;
 import 'medicine_catalog_repository.dart';
 
 class MedicineCatalogRepository extends IMedicineCatalogRepository {
@@ -20,14 +20,14 @@ class MedicineCatalogRepository extends IMedicineCatalogRepository {
       String sortDirection = 'DESC',
       String? companyId,
       String? searchValue,
-      String? buyerCompanyId,
-      MedicalFilters filters = const MedicalFilters()}) async {
+      MedicinesFilters filters = const MedicinesFilters()}) async {
     final queryParams = {
       'limit': limit.toString(),
       'offset': offset.toString(),
       'sort[id]': sortDirection,
-      if (searchValue != null && searchValue.isNotEmpty)
-        'search[dci]': searchValue,
+      if (searchValue != null && searchValue.isNotEmpty) 'search[${filters.searchByFields.name}]': searchValue,
+      if (filters.minPriceFilter > 0) 'gte[unitPriceHt]': filters.minPriceFilter.toString(),
+      if (filters.maxPriceFilter > 0) 'lte[unitPriceHt]': filters.minPriceFilter.toString(),
       'computed[isFavorite]': 'true',
       'include[company][fields][]': [
         'id',
@@ -35,64 +35,59 @@ class MedicineCatalogRepository extends IMedicineCatalogRepository {
       ],
     };
 
-    if (filters.dci.isNotEmpty) queryParams['search[dci]'] = filters.dci.first;
-    if (filters.code.isNotEmpty) {
-      queryParams['search[code]'] = filters.code.first;
-    }
-    if (filters.dosage.isNotEmpty) {
-      queryParams['search[dosage]'] = filters.dosage.first;
-    }
-    if (filters.form.isNotEmpty) {
-      queryParams['search[form]'] = filters.form.first;
-    }
-    if (filters.status.isNotEmpty) {
-      queryParams['search[status]'] = filters.status.first;
-    }
-    if (filters.registrationDate.isNotEmpty) {
-      queryParams['search[registrationDate]'] = filters.registrationDate.first;
-    }
-    if (filters.country.isNotEmpty) {
-      queryParams['search[country]'] = filters.country.first;
-    }
-    if (filters.patent.isNotEmpty) {
-      queryParams['search[patent]'] = filters.patent.first;
-    }
-    if (filters.brand.isNotEmpty) {
-      queryParams['search[brand]'] = filters.brand.first;
-    }
-    if (filters.condition.isNotEmpty) {
-      queryParams['search[condition]'] = filters.condition.first;
-    }
-    if (filters.type.isNotEmpty) {
-      queryParams['search[type]'] = filters.type.first;
-    }
-    if (filters.stabilityDuration.isNotEmpty) {
-      queryParams['search[stabilityDuration]'] =
-          filters.stabilityDuration.first;
-    }
-    if (filters.packagingFormat.isNotEmpty) {
-      queryParams['search[packagingFormat]'] = filters.packagingFormat.first;
-    }
-    if (filters.reimbursement.isNotEmpty) {
-      queryParams['search[reimbursement]'] = filters.reimbursement.first;
-    }
-    if (filters.sku.isNotEmpty) {
-      queryParams['search[sku]'] = filters.sku.first;
-    }
-    if (filters.gteUnitPriceHt != null && filters.gteUnitPriceHt!.isNotEmpty) {
-      queryParams['gte[unitPriceHt]'] = filters.gteUnitPriceHt!;
-    }
-    if (filters.lteUnitPriceHt != null && filters.lteUnitPriceHt!.isNotEmpty) {
-      queryParams['lte[unitPriceHt]'] = filters.lteUnitPriceHt!;
-    }
+    // if (filters.dci.isNotEmpty) queryParams['search[dci]'] = filters.dci.first;
+    // if (filters.code.isNotEmpty) {
+    //   queryParams['search[code]'] = filters.code.first;
+    // }
+    // if (filters.dosage.isNotEmpty) {
+    //   queryParams['search[dosage]'] = filters.dosage.first;
+    // }
+    // if (filters.form.isNotEmpty) {
+    //   queryParams['search[form]'] = filters.form.first;
+    // }
+    // if (filters.status.isNotEmpty) {
+    //   queryParams['search[status]'] = filters.status.first;
+    // }
+    // if (filters.registrationDate.isNotEmpty) {
+    //   queryParams['search[registrationDate]'] = filters.registrationDate.first;
+    // }
+    // if (filters.country.isNotEmpty) {
+    //   queryParams['search[country]'] = filters.country.first;
+    // }
+    // if (filters.patent.isNotEmpty) {
+    //   queryParams['search[patent]'] = filters.patent.first;
+    // }
+    // if (filters.brand.isNotEmpty) {
+    //   queryParams['search[brand]'] = filters.brand.first;
+    // }
+    // if (filters.condition.isNotEmpty) {
+    //   queryParams['search[condition]'] = filters.condition.first;
+    // }
+    // if (filters.type.isNotEmpty) {
+    //   queryParams['search[type]'] = filters.type.first;
+    // }
+    // if (filters.stabilityDuration.isNotEmpty) {
+    //   queryParams['search[stabilityDuration]'] = filters.stabilityDuration.first;
+    // }
+    // if (filters.packagingFormat.isNotEmpty) {
+    //   queryParams['search[packagingFormat]'] = filters.packagingFormat.first;
+    // }
+    // if (filters.reimbursement.isNotEmpty) {
+    //   queryParams['search[reimbursement]'] = filters.reimbursement.first;
+    // }
+    // if (filters.sku.isNotEmpty) {
+    //   queryParams['search[sku]'] = filters.sku.first;
+    // }
+    // if (filters.gteUnitPriceHt != null && filters.gteUnitPriceHt!.isNotEmpty) {
+    //   queryParams['gte[unitPriceHt]'] = filters.gteUnitPriceHt!;
+    // }
+    // if (filters.lteUnitPriceHt != null && filters.lteUnitPriceHt!.isNotEmpty) {
+    //   queryParams['lte[unitPriceHt]'] = filters.lteUnitPriceHt!;
+    // }
 
-    if (buyerCompanyId != null) {
-      queryParams['deligateBuyerCompany[buyerCompanyId]'] = buyerCompanyId;
-    }
-
-    if (filters.vendors.isNotEmpty) {
-      queryParams['filters[companyId]'] = filters.vendors.first;
-    }
+    // if (filters.vendors.isNotEmpty) {
+    //   queryParams['filters[companyId]'] = filters.vendors.first;
+    // }
 
     try {
       var decodedResponse = await client.sendRequest(() => client.get(
@@ -110,19 +105,11 @@ class MedicineCatalogRepository extends IMedicineCatalogRepository {
   }
 
   @override
-  Future<MedicineCatalogModel> getMedicineCatalogById(
-      String id, String? buyerCompanyId) async {
+  Future<MedicineCatalogModel> getMedicineCatalogById(String id) async {
     try {
-      final queryParams = {
-        'computed[isFavorite]': 'true',
-      };
-
-      if (buyerCompanyId != null) {
-        queryParams['deligateBuyerCompany[buyerCompanyId]'] = buyerCompanyId;
-      }
-
-      var decodedResponse = await client.sendRequest(() =>
-          client.get("${Urls.medicinesCatalog}/$id", queryParams: queryParams));
+      var decodedResponse = await client.sendRequest(() => client.get("${Urls.medicinesCatalog}/$id", queryParams: {
+            'computed[isFavorite]': 'true',
+          }));
       return jsonToMedicineCatalogItem(decodedResponse);
     } catch (e) {
       return MedicineCatalogModel.empty();

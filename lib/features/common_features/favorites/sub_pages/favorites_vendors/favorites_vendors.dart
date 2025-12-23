@@ -45,12 +45,13 @@ class FavoritesVendors extends StatelessWidget {
             itemCount: state.likedVendors.length,
             itemBuilder: (_, index) {
               return VendorItem(
-                companyData: state.likedVendors[index],
-                hideLikeButton: true,
-                hideRemoveButton: false,
-                isLiked: true,
-                onRemoveFromFavorites: () => cubit.unlikeVendor(state.likedVendors[index].id),
-              );
+                  companyData: state.likedVendors[index],
+                  hideLikeButton: true,
+                  hideRemoveButton: false,
+                  isLiked: true,
+                  onRemoveFromFavorites: () {
+                    cubit.unlikeVendor(state.likedVendors[index].id);
+                  });
             },
           ),
         );

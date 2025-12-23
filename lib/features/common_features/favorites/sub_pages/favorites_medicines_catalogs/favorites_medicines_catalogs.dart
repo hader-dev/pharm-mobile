@@ -50,13 +50,13 @@ class FavoritesMedicinesCatalog extends StatelessWidget {
               height: 150,
               child: MedicineWidgetHorizontal(
                 hideLikeButton: false,
-                onRemoveFromFavorites: () {
+                medicineData: state.likedMedicinesCatalogs[index],
+                onLikeTapped: () {
                   final id = state.likedMedicinesCatalogs[index].id;
                   cubit.unlikeMedicine(id);
                   gCubit?.refreshMedicineCatalogFavorite(id, false);
                   hCubit?.refreshMedicineCatalogFavorite(id, false);
                 },
-                medicineData: state.likedMedicinesCatalogs[index],
                 isLiked: true,
               ),
             ),

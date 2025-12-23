@@ -8,8 +8,7 @@ import 'package:hader_pharm_mobile/models/wilaya.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
 class TownDropdown extends StatelessWidget {
-  const TownDropdown(
-      {super.key, this.onChanged, this.isRequired = false, this.validator});
+  const TownDropdown({super.key, this.onChanged, this.isRequired = false, this.validator});
   final OnChangedCallback? onChanged;
   final TownValidator? validator;
   final bool isRequired;
@@ -27,11 +26,9 @@ class TownDropdown extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.only(
-                left: context.responsiveAppSizeTheme.current.p4),
-            child: Text("${context.translation!.town} ${isRequired ? "*" : ""}",
-                style: context.responsiveTextTheme.current.body3Medium
-                    .copyWith(color: TextColors.ternary.color)),
+            padding: EdgeInsets.only(left: context.responsiveAppSizeTheme.current.p4),
+            child: Text("${context.translation!.town}${isRequired ? "*" : ""}",
+                style: context.responsiveTextTheme.current.body3Medium.copyWith(color: TextColors.ternary.color)),
           ),
           const ResponsiveGap.s6(),
           BaseTownDropdown(

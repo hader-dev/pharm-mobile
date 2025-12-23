@@ -28,12 +28,10 @@ class BaseWilayaDropdown extends StatelessWidget {
   final Wilaya? currentSelection;
   final bool isRequired;
 
-  FutureOr<List<Wilaya>> itemsWithSearch(
-      String filter, LoadProps? loadProps) async {
+  FutureOr<List<Wilaya>> itemsWithSearch(String filter, LoadProps? loadProps) async {
     return wilayas
         .where((element) =>
-            element.label.toLowerCase().contains(filter.toLowerCase()) ||
-            element.id.toString().contains(filter))
+            element.label.toLowerCase().contains(filter.toLowerCase()) || element.id.toString().contains(filter))
         .toList();
   }
 
@@ -56,16 +54,15 @@ class BaseWilayaDropdown extends StatelessWidget {
       popupProps: PopupProps.modalBottomSheet(
         showSearchBox: true,
         searchFieldProps: TextFieldProps(
-          decoration: buildInputDecorationCustomFieldStyle(
-              context.translation!.select_wilaya, FieldState.normal, context),
+          decoration:
+              buildInputDecorationCustomFieldStyle(context.translation!.select_wilaya, FieldState.normal, context),
         ),
       ),
       itemAsString: (item) => item.label,
       dropdownBuilder: buildDisplayWidget,
       onChanged: onChanged?.call,
       decoratorProps: DropDownDecoratorProps(
-        decoration: buildDropdownInputDecoration(
-            context.translation!.select_wilaya, context),
+        decoration: buildDropdownInputDecoration(context.translation!.select_wilaya, context),
       ),
     );
   }

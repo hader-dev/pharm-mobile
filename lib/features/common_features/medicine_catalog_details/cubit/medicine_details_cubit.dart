@@ -39,8 +39,7 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
       emit(state.toLoaded(
         state.medicineCatalogData.copyWith(isLiked: true),
       ));
-      await favoriteRepository.likeMedicineCatalog(
-          medicineCatalogId: state.medicineCatalogData.id);
+      await favoriteRepository.likeMedicineCatalog(medicineCatalogId: state.medicineCatalogData.id);
       return true;
     } catch (e) {
       emit(state.toLoaded(state.medicineCatalogData.copyWith(isLiked: false)));
@@ -51,10 +50,8 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
 
   Future<bool> unlikeMedicine() async {
     try {
-      await favoriteRepository.unLikeMedicineCatalog(
-          medicineCatalogId: state.medicineCatalogData.id);
-      emit(state
-          .toToggleLiked(state.medicineCatalogData.copyWith(isLiked: false)));
+      await favoriteRepository.unLikeMedicineCatalog(medicineCatalogId: state.medicineCatalogData.id);
+      emit(state.toToggleLiked(state.medicineCatalogData.copyWith(isLiked: false)));
 
       return false;
     } catch (e) {
@@ -69,10 +66,10 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
   Future<void> getMedicineCatalogData(String id) async {
     try {
       emit(state.toLoading());
-      final medicineCatalogData =
-          await medicineCatalogRepository.getMedicineCatalogById(id,buyerCompanyId);
-      state.quantityController.text =
-          medicineCatalogData.minOrderQuantity.toString();
+      final medicineCatalogData = await medicineCatalogRepository.getMedicineCatalogById(
+        id,
+      );
+      state.quantityController.text = medicineCatalogData.minOrderQuantity.toString();
       emit(state.toLoaded(medicineCatalogData));
     } catch (e) {
       emit(state.toLoadError());
@@ -84,11 +81,9 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
       try {
         final product = state.medicineCatalogData;
 
-        final deepLinkUrl =
-            '${DeeplinksService.scheme}://${DeeplinksService.host}/product/medicine/${product.id}';
+        final deepLinkUrl = '${DeeplinksService.scheme}://${DeeplinksService.host}/product/medicine/${product.id}';
 
-        await SharePlus.instance
-            .share(ShareParams(uri: Uri.parse(deepLinkUrl)));
+        await SharePlus.instance.share(ShareParams(uri: Uri.parse(deepLinkUrl)));
       } catch (e) {
         GlobalExceptionHandler.handle(exception: e);
       }
@@ -103,8 +98,7 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
     final updatedQuantity = int.parse(state.quantityController.text) + 1;
     state.quantityController.text = (updatedQuantity).toString();
 
-    state.packageQuantityController.text =
-        (updatedQuantity ~/ (state.medicineCatalogData.packageSize)).toString();
+    state.packageQuantityController.text = (updatedQuantity ~/ (state.medicineCatalogData.packageSize)).toString();
     emit(state.toQuantityChanged());
   }
 
@@ -113,36 +107,27 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
     if (updatedQuantity > 0) {
       state.quantityController.text = (updatedQuantity).toString();
 
-      state.packageQuantityController.text =
-          (updatedQuantity ~/ (state.medicineCatalogData.packageSize))
-              .toString();
+      state.packageQuantityController.text = (updatedQuantity ~/ (state.medicineCatalogData.packageSize)).toString();
     }
     emit(state.toQuantityChanged());
   }
 
   void incrementPackageQuantity() {
-    final currPackageQuantity =
-        int.parse(state.packageQuantityController.text) + 1;
+    final currPackageQuantity = int.parse(state.packageQuantityController.text) + 1;
 
     state.packageQuantityController.text = currPackageQuantity.toString();
-    state.quantityController.text =
-        (currPackageQuantity * (state.medicineCatalogData.packageSize))
-            .toString();
+    state.quantityController.text = (currPackageQuantity * (state.medicineCatalogData.packageSize)).toString();
     emit(state.toQuantityChanged());
   }
 
   void decrementPackageQuantity() {
-    final currPackageQuantity =
-        int.parse(state.packageQuantityController.text) - 1;
+    final currPackageQuantity = int.parse(state.packageQuantityController.text) - 1;
 
-    final updatedItemQuantity =
-        (currPackageQuantity * (state.medicineCatalogData.packageSize));
+    final updatedItemQuantity = (currPackageQuantity * (state.medicineCatalogData.packageSize));
 
-    state.packageQuantityController.text =
-        (currPackageQuantity < 1 ? 1 : currPackageQuantity).toString();
+    state.packageQuantityController.text = (currPackageQuantity < 1 ? 1 : currPackageQuantity).toString();
 
-    state.quantityController.text =
-        (updatedItemQuantity < 1 ? 1 : updatedItemQuantity).toString();
+    state.quantityController.text = (updatedItemQuantity < 1 ? 1 : updatedItemQuantity).toString();
     emit(state.toQuantityChanged());
   }
 
@@ -176,9 +161,7 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
     if (updatedQuantity > 0) {
       state.quantityController.text = (updatedQuantity).toString();
 
-      state.packageQuantityController.text =
-          (updatedQuantity ~/ (state.medicineCatalogData.packageSize))
-              .toString();
+      state.packageQuantityController.text = (updatedQuantity ~/ (state.medicineCatalogData.packageSize)).toString();
     }
     emit(state.toQuantityChanged());
   }
@@ -186,14 +169,11 @@ class MedicineDetailsCubit extends Cubit<MedicineDetailsState> {
   void updateQuantityPackage(String v) {
     final currPackageQuantity = int.parse(v);
 
-    final updatedItemQuantity =
-        (currPackageQuantity * (state.medicineCatalogData.packageSize));
+    final updatedItemQuantity = (currPackageQuantity * (state.medicineCatalogData.packageSize));
 
-    state.packageQuantityController.text =
-        (currPackageQuantity < 1 ? 1 : currPackageQuantity).toString();
+    state.packageQuantityController.text = (currPackageQuantity < 1 ? 1 : currPackageQuantity).toString();
 
-    state.quantityController.text =
-        (updatedItemQuantity < 1 ? 1 : updatedItemQuantity).toString();
+    state.quantityController.text = (updatedItemQuantity < 1 ? 1 : updatedItemQuantity).toString();
     emit(state.toQuantityChanged());
   }
 }

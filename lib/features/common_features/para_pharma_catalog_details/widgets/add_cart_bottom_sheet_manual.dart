@@ -9,7 +9,7 @@ import 'package:hader_pharm_mobile/features/common/buttons/solid/primary_text_bu
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/bottom_sheet_header.dart';
 import 'package:hader_pharm_mobile/features/common/widgets/quantity_section.dart';
-import 'package:hader_pharm_mobile/features/common_features/deligate_create_order/cubit/create_order_cubit.dart';
+import 'package:hader_pharm_mobile/features/delegate/delegate_create_order/cubit/create_order_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/orders/cubit/orders_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/cubit/para_pharma_details_cubit.dart';
 import 'package:hader_pharm_mobile/features/common_features/para_pharma_catalog_details/helpers/add_to_cart_or_deligate_items.dart';
@@ -23,12 +23,11 @@ import 'package:iconsax/iconsax.dart' show Iconsax;
 
 class AddCartBottomSheetManual extends StatelessWidget {
   const AddCartBottomSheetManual(
-      {super.key,
-      required this.product,
-      this.deligateCreateOrderCubit,
-      required this.buyerCompanyId});
+      {super.key, required this.product, this.deligateCreateOrderCubit, required this.buyerCompanyId});
   final BaseParaPharmaCatalogModel product;
-  final DeligateCreateOrderCubit? deligateCreateOrderCubit;
+
+  final DelegateCreateOrderCubit? deligateCreateOrderCubit;
+
   final String buyerCompanyId;
 
   final disabledPackageQuantity = true;
@@ -40,8 +39,7 @@ class AddCartBottomSheetManual extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider.value(
-          value: AppLayout.appLayoutScaffoldKey.currentContext!
-              .read<OrdersCubit>(),
+          value: AppLayout.appLayoutScaffoldKey.currentContext!.read<OrdersCubit>(),
         ),
         BlocProvider(
           create: (context) => ParaPharmaDetailsCubit(
@@ -61,8 +59,7 @@ class AddCartBottomSheetManual extends StatelessWidget {
           )..getParaPharmaCatalogData(product.id),
         ),
       ],
-      child: BlocBuilder<ParaPharmaDetailsCubit, ParaPharmaDetailsState>(
-          builder: (context, state) {
+      child: BlocBuilder<ParaPharmaDetailsCubit, ParaPharmaDetailsState>(builder: (context, state) {
         final cubit = context.read<ParaPharmaDetailsCubit>();
 
         return Column(
@@ -76,8 +73,7 @@ class AddCartBottomSheetManual extends StatelessWidget {
             ),
             LabeledInfoWidget(
               label: translation.unit_total_price,
-              value:
-                  "${(product.unitPriceHt.toStringAsFixed(2))} ${translation.currency}",
+              value: "${(product.unitPriceHt.toStringAsFixed(2))} ${translation.currency}",
             ),
             const ResponsiveGap.s12(),
             QuantitySectionModified(
@@ -104,8 +100,7 @@ class AddCartBottomSheetManual extends StatelessWidget {
                 children: [
                   Text(
                     "${(num.parse(state.quantityController.text) * product.unitPriceHt).toStringAsFixed(2)} ${translation.currency}",
-                    style: context.responsiveTextTheme.current.body2Medium
-                        .copyWith(color: AppColors.accent1Shade1),
+                    style: context.responsiveTextTheme.current.body2Medium.copyWith(color: AppColors.accent1Shade1),
                   ),
                   const Spacer(),
                   const Icon(
@@ -119,8 +114,7 @@ class AddCartBottomSheetManual extends StatelessWidget {
             const Divider(color: AppColors.bgDisabled, thickness: 1, height: 1),
             const ResponsiveGap.s12(),
             Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: context.responsiveAppSizeTheme.current.p4),
+              padding: EdgeInsets.symmetric(horizontal: context.responsiveAppSizeTheme.current.p4),
               child: Row(
                 children: [
                   Expanded(
@@ -199,12 +193,10 @@ class InfoWidget extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(context.responsiveAppSizeTheme.current.p12),
       width: double.maxFinite,
-      margin: EdgeInsets.symmetric(
-          vertical: context.responsiveAppSizeTheme.current.p6),
+      margin: EdgeInsets.symmetric(vertical: context.responsiveAppSizeTheme.current.p6),
       decoration: BoxDecoration(
         color: bgColor,
-        borderRadius: BorderRadius.circular(
-            context.responsiveAppSizeTheme.current.commonWidgetsRadius),
+        borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.commonWidgetsRadius),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

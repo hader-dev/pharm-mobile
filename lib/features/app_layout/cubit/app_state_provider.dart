@@ -89,9 +89,9 @@ class _AppStateProviderState extends State<AppStateProvider> {
   }
 }
 
-class AppStateDeligateProvider extends StatelessWidget {
+class AppStateDelegateProvider extends StatelessWidget {
   final Widget child;
-  const AppStateDeligateProvider({super.key, required this.child});
+  const AppStateDelegateProvider({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {

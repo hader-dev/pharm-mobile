@@ -18,12 +18,10 @@ class SearchWidget extends StatelessWidget {
       children: [
         Flexible(
           child: Padding(
-            padding: EdgeInsets.only(
-                left: context.responsiveAppSizeTheme.current.p8),
+            padding: EdgeInsets.only(left: context.responsiveAppSizeTheme.current.p8),
             child: CustomTextField(
               hintText: context.translation!.medicines_search_field_hint,
-              controller:
-                  context.read<MedicineProductsCubit>().state.searchController,
+              controller: context.read<MedicineProductsCubit>().state.searchController,
               state: FieldState.normal,
               isEnabled: true,
               prefixIcon: Icon(
@@ -33,13 +31,8 @@ class SearchWidget extends StatelessWidget {
               ),
               suffixIcon: InkWell(
                 onTap: () {
-                  context
-                      .read<MedicineProductsCubit>()
-                      .state
-                      .searchController
-                      .clear();
-                  BlocProvider.of<MedicineProductsCubit>(context)
-                      .searchMedicineCatalog(null);
+                  context.read<MedicineProductsCubit>().state.searchController.clear();
+                  BlocProvider.of<MedicineProductsCubit>(context).searchMedicineCatalog(null);
                 },
                 child: Icon(
                   Icons.clear,
@@ -47,8 +40,7 @@ class SearchWidget extends StatelessWidget {
                 ),
               ),
               onChanged: (searchValue) {
-                BlocProvider.of<MedicineProductsCubit>(context)
-                    .searchMedicineCatalog(searchValue);
+                BlocProvider.of<MedicineProductsCubit>(context).searchMedicineCatalog(searchValue);
               },
               validationFunc: (value) {},
             ),
@@ -56,12 +48,10 @@ class SearchWidget extends StatelessWidget {
         ),
         InkWell(
           child: Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: context.responsiveAppSizeTheme.current.p12),
+            padding: EdgeInsets.symmetric(horizontal: context.responsiveAppSizeTheme.current.p12),
             child: BlocBuilder<MedicineProductsCubit, MedicineProductsState>(
               builder: (context, state) {
-                return BlocBuilder<MedicineProductsCubit,
-                    MedicineProductsState>(
+                return BlocBuilder<MedicineProductsCubit, MedicineProductsState>(
                   builder: (context, state) {
                     return Stack(
                       clipBehavior: Clip.none,
@@ -70,17 +60,17 @@ class SearchWidget extends StatelessWidget {
                           Iconsax.filter,
                           color: AppColors.accent1Shade1,
                         ),
-                        if (state.selectedMedicineSearchFilter !=
-                            SearchMedicineFilters.dci)
-                          Positioned(
-                            top: -4,
-                            right: -4,
-                            child: CircleAvatar(
-                              radius: context.responsiveAppSizeTheme.current
-                                  .commonWidgetsRadius,
-                              backgroundColor: Colors.red,
-                            ),
-                          )
+                        // if (state.selectedMedicineSearchFilter !=
+                        //     SearchMedicineFilters.dci)
+                        //   Positioned(
+                        //     top: -4,
+                        //     right: -4,
+                        //     child: CircleAvatar(
+                        //       radius: context.responsiveAppSizeTheme.current
+                        //           .commonWidgetsRadius,
+                        //       backgroundColor: Colors.red,
+                        //     ),
+                        //   )
                       ],
                     );
                   },
@@ -89,8 +79,7 @@ class SearchWidget extends StatelessWidget {
             ),
           ),
           onTap: () {
-            BottomSheetHelper.showCommonBottomSheet(
-                context: context, child: SearchMedicineFilterBottomSheet());
+            BottomSheetHelper.showCommonBottomSheet(context: context, child: SearchMedicineFilterBottomSheet());
           },
         ),
       ],

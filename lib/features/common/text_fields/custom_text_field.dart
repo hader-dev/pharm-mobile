@@ -14,6 +14,7 @@ class CustomTextField extends StatelessWidget {
   final FieldState state;
   final Function()? onTap;
   final Function(String val)? onSub;
+  final Function()? onEditingComplete;
   final Widget? suffixIcon;
   final Widget? prefixIcon;
   final Function? validationFunc;
@@ -47,6 +48,7 @@ class CustomTextField extends StatelessWidget {
       this.fieldKey,
       this.label = '',
       this.value = '',
+      this.onEditingComplete,
       this.state = FieldState.normal,
       this.onChanged,
       this.onTap,
@@ -97,9 +99,11 @@ class CustomTextField extends StatelessWidget {
           initialValue: initValue,
           validator: (value) => validationFunc?.call(value),
           cursorColor: context.theme.primaryColor,
+          onFieldSubmitted: onSub,
           onChanged: onChanged,
           focusNode: fieldFocusNode,
           keyboardType: keyBoadType,
+          onEditingComplete: onEditingComplete,
           textAlign: textAlign,
           readOnly: isReadOnly,
           onTap: onTap,

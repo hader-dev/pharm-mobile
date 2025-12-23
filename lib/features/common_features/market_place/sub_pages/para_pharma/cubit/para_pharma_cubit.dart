@@ -3,11 +3,10 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart' show ScrollDirection;
-import 'package:hader_pharm_mobile/config/routes/routing_manager.dart'
-    show RoutingManager;
+import 'package:hader_pharm_mobile/config/routes/routing_manager.dart' show RoutingManager;
 import 'package:hader_pharm_mobile/features/common_features/market_place/sub_pages/para_pharma/para_pharma.dart'
     show ParaPharmaProductsPageState;
-import 'package:hader_pharm_mobile/models/para_medical_filters.dart';
+import 'package:hader_pharm_mobile/models/para_pharm_filters.dart';
 import 'package:hader_pharm_mobile/models/para_pharma.dart';
 import 'package:hader_pharm_mobile/repositories/remote/favorite/favorite_repository_impl.dart';
 import 'package:hader_pharm_mobile/repositories/remote/parapharm_catalog/para_pharma_catalog_repository_impl.dart';
@@ -22,41 +21,35 @@ part 'para_pharma_state.dart';
 class ParaPharmaCubit extends Cubit<ParaPharmaState> {
   final ParaPharmaRepository paraPharmaRepository;
   final FavoriteRepository favoriteRepository;
-  final ParaMedicalFilters defaultFilters;
+  ParaPharmFilters appliedFilters;
 
-  final DebouncerManager debouncerManager = DebouncerManager();
+  final DebounceManager debouncerManager = DebounceManager();
   bool _listenerAttached = false;
 
   ParaPharmaCubit(
       {required this.paraPharmaRepository,
       required ScrollController scrollController,
       required TextEditingController searchController,
-      ParaMedicalFilters? filters,
+      ParaPharmFilters? filters,
       required this.favoriteRepository})
-      : defaultFilters = filters ?? const ParaMedicalFilters(),
+      : appliedFilters = filters ?? const ParaPharmFilters(),
         super(ParaPharmaInitial(
           scrollController: scrollController,
           searchController: searchController,
-          filters: filters ?? const ParaMedicalFilters(),
         )) {
     state.scrollController.addListener(() {
       if (state.scrollController.position.maxScrollExtent >=
-          MediaQuery.sizeOf(RoutingManager.rootNavigatorKey.currentContext!)
-                  .height *
-              .6) {
+          MediaQuery.sizeOf(RoutingManager.rootNavigatorKey.currentContext!).height * .6) {
         if (state.scrollController.position.pixels > 5 &&
-            state.scrollController.position.userScrollDirection ==
-                ScrollDirection.reverse) {
+            state.scrollController.position.userScrollDirection == ScrollDirection.reverse) {
           ParaPharmaProductsPageState.animationController.forward();
         }
         if (state.scrollController.position.pixels > 5 &&
-            state.scrollController.position.userScrollDirection ==
-                ScrollDirection.forward) {
+            state.scrollController.position.userScrollDirection == ScrollDirection.forward) {
           ParaPharmaProductsPageState.animationController.reverse();
         }
       }
-      if (state.scrollController.position.pixels >=
-          state.scrollController.position.maxScrollExtent) {
+      if (state.scrollController.position.pixels >= state.scrollController.position.maxScrollExtent) {
         loadMoreParaPharmas();
       }
     });
@@ -70,29 +63,20 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
     return state.scrollController;
   }
 
-  Future<void> getParaPharmas(
-      {int offset = 0,
-      String? searchValue,
-      String? companyIdFilter,
-      ParaMedicalFilters? filters}) async {
+  Future<void> getParaPharms(
+      {int offset = 0, String? searchValue, String? companyIdFilter, ParaPharmFilters? filters}) async {
     try {
       emit(state.toLoading(filters: filters));
 
-      debugPrint(
-          'Loading ParaPharma Catalog with filters: $filters and offset: $companyIdFilter');
-      var paraPharmaCatalogResponse =
-          await paraPharmaRepository.getParaPharmaCatalog(ParamsLoadParapharma(
+      debugPrint('Loading ParaPharma Catalog with filters: $filters and offset: $companyIdFilter');
+      var paraPharmaCatalogResponse = await paraPharmaRepository.getParaPharmaCatalog(ParamsLoadParapharma(
         offset: offset,
         filters: filters ?? state.filters,
         searchQuery: searchValue ?? state.searchController.text,
-        companyId: state.filters.vendors.isEmpty
-            ? companyIdFilter
-            : state.filters.vendors.first,
       ));
 
       emit(state.toLoaded(
-          paraPharmaProducts: paraPharmaCatalogResponse.data,
-          totalItemsCount: paraPharmaCatalogResponse.totalItems));
+          paraPharmaProducts: paraPharmaCatalogResponse.data, totalItemsCount: paraPharmaCatalogResponse.totalItems));
     } catch (e, stack) {
       debugPrintStack(stackTrace: stack);
       GlobalExceptionHandler.handle(exception: e);
@@ -107,19 +91,11 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
         return;
       }
 
-      emit(state
-          .toLoadingMore(state.offSet + PaginationConstants.resultsPerPage));
+      emit(state.toLoadingMore(state.offSet + PaginationConstants.resultsPerPage));
       var medicinesResponse = await paraPharmaRepository.getParaPharmaCatalog(
-          ParamsLoadParapharma(
-              offset: state.offSet,
-              filters: state.filters,
-              companyId: state.filters.vendors.isEmpty
-                  ? null
-                  : state.filters.vendors.first,
-              searchQuery: state.searchController.text));
+          ParamsLoadParapharma(offset: state.offSet, filters: state.filters, searchQuery: state.searchController.text));
 
-      final updatedProducts =
-          List<BaseParaPharmaCatalogModel>.from(state.paraPharmaProducts);
+      final updatedProducts = List<BaseParaPharmaCatalogModel>.from(state.paraPharmaProducts);
       updatedProducts.addAll(medicinesResponse.data);
 
       emit(state.toLoaded(
@@ -131,32 +107,35 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
     }
   }
 
-  void changeParaPharmaSearchFilter(SearchParaPharmaFilters filter) {
-    emit(state.toSearchFilterChanged(searchFilter: filter));
+  void changeParaPharmSearchFilter(ParaPharmFilters filter) {
+    emit(state.toSearchFilterChanged(filters: filter));
   }
 
-  void searchParaPharmaCatalog(String? text) => debouncerManager.debounce(
-      tag: "search", action: () => getParaPharmas(searchValue: text));
+  void searchParaPharmaCatalog(String? text) =>
+      debouncerManager.debounce(tag: "search", action: () => getParaPharms(searchValue: text));
 
   void resetParaPharmaFilters() {
-    getParaPharmas(filters: defaultFilters, searchValue: null);
+    appliedFilters = const ParaPharmFilters();
 
-    emit(state.toSearchFilterChanged(
-      searchFilter: null,
-      filters: defaultFilters,
-    ));
-  }
+    getParaPharms(filters: appliedFilters, searchValue: null);
 
-  void updatedFilters(ParaMedicalFilters appliedFilters) {
     emit(state.toSearchFilterChanged(
       filters: appliedFilters,
     ));
   }
 
+  void updatedFilters(ParaPharmFilters appliedFilters) {
+    emit(state.toSearchFilterChanged(
+      filters: appliedFilters,
+    ));
+    getParaPharms(
+      filters: appliedFilters,
+    );
+  }
+
   Future<void> likeParaPharmaCatalog(String paraPharmaCatalogId) async {
     try {
-      await favoriteRepository.likeParaPharmaCatalog(
-          paraPharmaCatalogId: paraPharmaCatalogId);
+      await favoriteRepository.likeParaPharmaCatalog(paraPharmaCatalogId: paraPharmaCatalogId);
 
       emit(state.toLiked(paraPharmaId: paraPharmaCatalogId, isLiked: true));
     } catch (e) {
@@ -167,8 +146,7 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
 
   Future<void> unlikeParaPharmaCatalog(String paraPharmaCatalogId) async {
     try {
-      await favoriteRepository.unLikeParaPharmaCatalog(
-          paraPharmaCatalogId: paraPharmaCatalogId);
+      await favoriteRepository.unLikeParaPharmaCatalog(paraPharmaCatalogId: paraPharmaCatalogId);
       emit(state.toLiked(paraPharmaId: paraPharmaCatalogId, isLiked: false));
     } catch (e) {
       GlobalExceptionHandler.handle(exception: e);
@@ -179,8 +157,7 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
   void _onScroll() {
     final localScrollController = state.scrollController;
 
-    if (localScrollController.position.pixels >=
-        localScrollController.position.maxScrollExtent) {
+    if (localScrollController.position.pixels >= localScrollController.position.maxScrollExtent) {
       if (state.offSet < state.totalItemsCount) {
         loadMoreParaPharmas();
       } else {
@@ -188,32 +165,31 @@ class ParaPharmaCubit extends Cubit<ParaPharmaState> {
       }
     }
 
-    final currentOffset = localScrollController.offset;
-    final previousOffset = state.lastOffset;
+    // final currentOffset = localScrollController.offset;
+    // final previousOffset = state.lastOffset;
 
-    bool displayFilters = state.displayFilters;
+    // bool displayFilters = state.displayFilters;
 
-    if (currentOffset > previousOffset && displayFilters) {
-      displayFilters = false;
-    } else if (currentOffset < previousOffset && !displayFilters) {
-      displayFilters = true;
-    }
+    // if (currentOffset > previousOffset && displayFilters) {
+    //   displayFilters = false;
+    // } else if (currentOffset < previousOffset && !displayFilters) {
+    //   displayFilters = true;
+    // }
 
-    if (displayFilters != state.displayFilters) {
-      emit(state.toScroll(
-        displayFilters: displayFilters,
-        offset: currentOffset,
-      ));
-    } else {
-      emit(state.toScroll(
-        displayFilters: state.displayFilters,
-        offset: currentOffset,
-      ));
-    }
+    // if (displayFilters != state.displayFilters) {
+    //   emit(state.toScroll(
+    //     displayFilters: displayFilters,
+    //     offset: currentOffset,
+    //   ));
+    // } else {
+    //   emit(state.toScroll(
+    //     displayFilters: state.displayFilters,
+    //     offset: currentOffset,
+    //   ));
+    // }
   }
 
-  void refreshParaPharmaCatalogFavorite(
-      String paraPharmaCatalogId, bool liked) {
+  void refreshParaPharmaCatalogFavorite(String paraPharmaCatalogId, bool liked) {
     emit(state.toLiked(paraPharmaId: paraPharmaCatalogId, isLiked: liked));
   }
 }

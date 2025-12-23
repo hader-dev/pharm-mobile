@@ -159,9 +159,7 @@ enum OrderStatus {
   }
 }
 
-enum SearchMedicineFilters { dci, sku, code }
-
-enum SearchParaPharmaFilters { name, packaging, sku, description }
+enum SearchMedicinesByFields { dci, sku, code }
 
 enum SearchVendorFilters { name, address, phone, email, description }
 
@@ -331,4 +329,11 @@ enum ApiErrorCodes {
   final String label;
   final String errorMessage;
   const ApiErrorCodes(this.label, this.errorMessage);
+}
+
+enum ParaPharmSearchByFields {
+  name,
+  packaging,
+  sku,
+  description,
 }

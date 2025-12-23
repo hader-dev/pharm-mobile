@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hader_pharm_mobile/config/theme/colors_manager.dart' show AppColors;
 import 'package:hader_pharm_mobile/features/common/spacers/responsive_gap.dart';
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
@@ -39,7 +40,7 @@ class CustomChip extends StatelessWidget {
             if (icon != null) ...[
               Icon(
                 icon,
-                color: labelColor,
+                color: isSelected ? AppColors.accent1Shade1 : labelColor,
                 size: context.responsiveAppSizeTheme.current.iconSize20,
               ),
               const ResponsiveGap.s4(),

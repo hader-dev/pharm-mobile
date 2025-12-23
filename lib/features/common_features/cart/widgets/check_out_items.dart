@@ -20,18 +20,20 @@ class CheckOutItemsSection extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(context.responsiveAppSizeTheme.current.commonWidgetsRadius),
       ),
-      child: Padding(
-        padding: EdgeInsets.only(right: context.responsiveAppSizeTheme.current.p8),
-        child: ListView(
-          controller: scrollController,
-          shrinkWrap: true,
-          children: items
-              .map(
-                (item) => CheckOutItemWidget(
-                  item: item,
-                ),
-              )
-              .toList(),
+      child: Scrollbar(
+        child: Padding(
+          padding: EdgeInsets.only(right: context.responsiveAppSizeTheme.current.p8),
+          child: ListView(
+            controller: scrollController,
+            shrinkWrap: true,
+            children: items
+                .map(
+                  (item) => CheckOutItemWidget(
+                    item: item,
+                  ),
+                )
+                .toList(),
+          ),
         ),
       ),
     );
