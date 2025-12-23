@@ -1,8 +1,7 @@
 import 'package:hader_pharm_mobile/utils/enums.dart';
 
-bool canCancelOrder(OrderStatus orderSatus) {
-  return orderSatus == OrderStatus.approved ||
-      orderSatus == OrderStatus.created;
+bool canCancelOrder(OrderStatus orderStatus) {
+  return orderStatus == OrderStatus.created;
 }
 
 bool canCancelOrderByStatusId(int statusId) {

@@ -8,6 +8,8 @@ import 'package:hader_pharm_mobile/features/delegate/delegate_orders_details/sub
 
 import 'package:hader_pharm_mobile/utils/extensions/app_context_helper.dart';
 
+import '../sub_pages/order_details.dart' show OrdersOverViewPage;
+
 class OrderDetailsTabBarSection extends StatefulWidget {
   const OrderDetailsTabBarSection({super.key, required this.orderId});
   final String orderId;
@@ -60,7 +62,7 @@ class _OrderDetailsTabBarSectionState extends State<OrderDetailsTabBarSection> w
           child: TabBarView(
             controller: tabsController,
             children: [
-              DelegateOrdersOverViewPage(
+              OrdersOverViewPage(
                 orderId: widget.orderId,
               ),
               OrderItemsComplaintPage()
