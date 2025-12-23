@@ -24,10 +24,10 @@ import 'package:hader_pharm_mobile/utils/extensions/app_date_helper.dart';
 
 import '../../../common/chips/custom_chip.dart' show CustomChip;
 
-class OrdersDetailsPage extends StatelessWidget {
+class OrdersOverViewPage extends StatelessWidget {
   final String orderId;
   static final GlobalKey<ScaffoldState> ordersDetailsScaffoldKey = GlobalKey<ScaffoldState>();
-  const OrdersDetailsPage({super.key, required this.orderId});
+  const OrdersOverViewPage({super.key, required this.orderId});
   final bool isInvoiceWorkInProgress = true;
 
   @override
