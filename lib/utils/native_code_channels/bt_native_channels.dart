@@ -1,11 +1,8 @@
-import 'package:blue_thermal_printer/blue_thermal_printer.dart' show BluetoothDevice;
 import 'package:flutter/services.dart';
 
-import 'package:flutter_thermal_printer/utils/printer.dart' show ConnectionType, Printer;
 import 'package:hader_pharm_mobile/utils/app_permission_helper.dart' show AppPermissionsHelper;
 import 'package:hader_pharm_mobile/utils/thermal_printer/bt_devices_classifier.dart'
     show BtDevicesClassifier, DeviceType;
-import 'package:hader_pharm_mobile/utils/thermal_printer/esc_pos_printing_helper.dart' show EscPosPrintingHelper;
 
 class BlueToothNativeChannelsHelper {
   static const kotlinChannelInstance = MethodChannel('com.hader.pharma/blueTooth');
@@ -112,10 +109,6 @@ class BluetoothDeviceModel {
       'majorDeviceClass': majorDeviceClass,
       'isConnected': isConnected,
     };
-  }
-
-  BluetoothDevice toPrinterModel() {
-    return BluetoothDevice(name, address);
   }
 
   bool get isPrinter => BtDevicesClassifier.classifyByUuids(uuids) == DeviceType.printer;

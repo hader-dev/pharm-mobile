@@ -60,6 +60,6 @@ class PrintDelegateOrderCubit extends Cubit<PrintDelegateOrderState> {
   }
 
   Future<void> printOrderReceipt(Printer printer) async {
-    EscPosPrintingHelper.print(printer);
+    // EscPosPrintingHelper.print(printer);
   }
 }

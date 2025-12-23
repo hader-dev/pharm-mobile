@@ -29,9 +29,7 @@ class StateProvider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cartCubit = needCartCubit
-        ? AppLayout.appLayoutScaffoldKey.currentContext?.read<CartCubit>()
-        : null;
+    final cartCubit = needCartCubit ? AppLayout.appLayoutScaffoldKey.currentContext?.read<CartCubit>() : null;
     final existingCartItem = cartCubit?.getItemIfExists(medicineCatalogId);
 
     return MultiBlocProvider(providers: [
@@ -39,23 +37,16 @@ class StateProvider extends StatelessWidget {
         create: (context) => MedicineDetailsCubit(
           buyerCompanyId: buyerCompanyId,
           shippingAddress: getItInstance.get<UserManager>().currentUser.address,
-          packageQuantityController: TextEditingController(
-              text: existingCartItem?.model.quantity.toString() ?? '0'),
-          quantityController: TextEditingController(
-              text: existingCartItem?.model.quantity.toString() ?? '1'),
+          packageQuantityController: TextEditingController(text: existingCartItem?.model.quantity.toString() ?? '0'),
+          quantityController: TextEditingController(text: existingCartItem?.model.quantity.toString() ?? '1'),
           tabController: TabController(length: tabs.length, vsync: vsync),
-          ordersRepository:
-              OrderRepository(client: getItInstance.get<INetworkService>()),
-          medicineCatalogRepository: MedicineCatalogRepository(
-              client: getItInstance.get<INetworkService>()),
-          favoriteRepository:
-              FavoriteRepository(client: getItInstance.get<INetworkService>()),
+          ordersRepository: OrderRepository(client: getItInstance.get<INetworkService>()),
+          medicineCatalogRepository: MedicineCatalogRepository(client: getItInstance.get<INetworkService>()),
+          favoriteRepository: FavoriteRepository(client: getItInstance.get<INetworkService>()),
         )..getMedicineCatalogData(medicineCatalogId),
       ),
       if (cartCubit != null)
-        BlocProvider.value(
-            value: AppLayout.appLayoutScaffoldKey.currentContext!
-                .read<CartCubit>()),
+        BlocProvider.value(value: AppLayout.appLayoutScaffoldKey.currentContext!.read<CartCubit>()),
     ], child: child);
   }
 }
